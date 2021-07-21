@@ -1,0 +1,79 @@
+@import 'helpers/spacing';
+@import 'helpers/radius';
+@import 'helpers/text';
+@import 'helpers/z-index';
+@import 'helpers/breakpoints';
+
+$color-brand: #2550aa !default;
+//Body background
+$color-bg: #f5f5f5 !default;
+$color-white: white !default;
+//Font colors
+$color-1: #1f1f1f !default;
+$color-2: #4c4c4c !default;
+$color-3: #7b7b7b !default;
+$color-4: #d8d8d8 !default;
+$color-5: #cccccc !default;
+$color-6: #e6e4e4 !default;
+$color-7: #dfdddd !default;
+$color-8: #a7a7a7 !default;
+$color-9: #555555 !default;
+$color-10: #9CA9BA !default;
+//Buttons
+$color-button-primay-hover: #4168c4 !default;
+$color-button-hover: #edecec !default;
+//Sidebar
+$color-sidebar: #173e91 !default;
+$color-sidebar-link: #5d92ff !default;
+$color-sidebar-link-background: #1b46a2 !default;
+$color-sidebar-divider: #5d92ff !default;
+$color-sidebar-white-overlay: #edecec !default;
+//Input
+$color-error: #df2439 !default;
+$color-error-hover: #f40035 !default;
+// Main box-shadow
+$color-shadow: rgba(0, 0, 0, 0.1) !default;
+// Form
+$color-input-border: #dddddd !default;
+// Table
+$color-is-read: #fffbf2;
+//Info bar
+$color-info-warning-light: rgba(255, 176, 0, 0.26) !default;
+$color-info-alert-light: #ffebed !default;
+$color-info-info-light: #ceebfa !default;
+// Colors hover box
+$color-box-border-hover: #2550aa !default;
+$color-box-bg-hover: #f5f7fc !default;
+//Badge
+$color-accent-1: #9368b3 !default;
+$color-accent-2: #00bd9e !default;
+$color-accent-3: #f99e31 !default;
+$color-accent-4: #24bd9c !default;
+$color-accent-5: #610fb7 !default;
+$color-accent-6: #9363b6 !default;
+$color-accent-7: #f27589 !default;
+//Pallete
+$color-success: #29B662 !default;
+$color-success-light: #e9f8ef !default;
+$color-warning: #ffb000 !default;
+$color-warning-light: #fff7e5 !default;
+$color-alert: #ff3245 !default;
+$color-alert-light: #ffebed !default;
+$color-info: #5d92ff !default;
+$color-info-light: #e5edff !default;
+$color-pending: #7988a0 !default;
+$color-default: black !default;
+$color-facebook: #3a589a !default;
+$color-google: #3e82f7 !default;
+//Sitcher
+$color-switcher: #edecec !default;
+$color-switcher-drawer: #ececec !default;
+// Legend
+$color-legend-success: #29B662;
+$color-legend-warning: #FFB000;
+$color-legend-alert: #FF3245;
+$color-legend-progress: #009fe3;
+$color-legend-default: black;
+$color-legend-info: #2550aa;
+
+$color-carousel-border: #29B662

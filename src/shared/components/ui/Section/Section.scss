@@ -1,0 +1,20 @@
+.section-space--medium {
+  padding: $padding-medium 0;
+}
+
+.section-space--huge {
+  padding: 50px 0;
+}
+
+.layout-width--full {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-bg--default {
+  background: $color-bg;
+}
+
+.section-bg--white {
+  background: $color-white;
+}

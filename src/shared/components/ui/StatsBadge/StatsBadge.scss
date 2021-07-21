@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+
+  &:before {
+    content: '';
+    width: 24px;
+    height: 12px;
+    margin-right: 15px;
+    // background: tomato;
+    margin-top: 9px;
+  }
+
+  &--green {
+    &:before {
+      background: $color-success;
+    }
+  }
+
+  &--yellow {
+    &:before {
+      background: $color-warning;
+    }
+  }
+
+  &--pink {
+    &:before {
+      background: $color-accent-7;
+    }
+  }
+
+  &--description {
+    display: flex;
+    flex-direction: column;
+  }
+}

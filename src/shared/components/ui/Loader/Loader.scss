@@ -1,0 +1,57 @@
+.loader__spin {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 15px;
+  clear: both;
+}
+
+.loader__spin>div {
+  background-color: $color-brand;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  border-radius: 250px;
+  opacity: 0.5;
+
+  -webkit-animation: sk-stretchdelay 1.0s infinite ease-in-out;
+  animation: sk-stretchdelay 1.0s infinite ease-in-out;
+}
+
+.loader__spin .rect2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.loader__spin .rect3 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.loader__spin .rect4 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.loader__spin .rect5 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+@keyframes sk-stretchdelay {
+
+  0%,
+  40%,
+  100% {
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    opacity: 0.5;
+  }
+
+  20% {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    opacity: 1;
+  }
+}

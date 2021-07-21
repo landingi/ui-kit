@@ -1,0 +1,146 @@
+.analyse {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 210px;
+    left: 26px;
+    width: 100px;
+    height: 32px;
+    border-radius: 100%;
+    background-color: rgba(222, 225, 228, 0.4);
+    animation-name: shadowloop;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+  }
+
+  svg {
+    font-size: 42px;
+    margin: 16px;
+    color: #1ec7b8;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 100%;
+    background-color: $color-white;
+    border: 10px solid #dee1e4;
+    overflow: hidden;
+  }
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  span::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 6px;
+    background-color: #dee1e4;
+    transform: rotate(45deg);
+  }
+
+  span::after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    width: 36px;
+    height: 12px;
+    background-color: #dee1e4;
+    transform: rotate(45deg);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .box1 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .box2 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .box1 {
+    animation-name: rowup1;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .box2 {
+    animation-name: rowup2;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .center {
+    animation-name: cloudloop;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+  }
+
+  span {
+    position: relative;
+    left: 112px;
+    top: 60px;
+    animation-name: cloudloop;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+    animation-direction: alternate;
+  }
+
+  @keyframes rowup1 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(50%, 0, 0);
+    }
+  }
+
+  @keyframes rowup2 {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(50%, 0, 0);
+    }
+  }
+
+  @keyframes cloudloop {
+    0% {
+      transform: translate(0, 15px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes shadowloop {
+    0% {
+      transform: translate(0, -35px) scale(1.15, 0.25);
+    }
+    100% {
+      transform: translate(0, -35px) scale(1, 0.25);
+    }
+  }
+}

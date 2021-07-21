@@ -1,0 +1,40 @@
+.limit {
+  position: relative;
+  padding-left: 38px;
+  display: flex;
+  justify-content: flex-start;
+
+  &--icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &--info {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      font-size: 18px;
+
+      &--quantity {
+        font-weight: 600;
+      }
+
+      &--limit {
+        color: $color-3;
+      }
+
+      &--name {
+        font-size: 14px;
+      }
+
+      &--total {
+        position: absolute;
+        font-size: 12px;
+        right: 0;
+        color: $color-8;
+      }
+    }
+  }
+}

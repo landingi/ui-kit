@@ -1,0 +1,24 @@
+.indicator {
+  position: relative;
+
+  i {
+    border-radius: $radius-huge;
+    right: 6px;
+    top: 0;
+  }
+
+  &.is--alert {
+    i {
+      background: $color-alert;
+    }
+  }
+
+  i {
+    color: $color-white;
+    display: block;
+    position: absolute;
+    z-index: $z-index-indicator;
+    min-width: 10px;
+    min-height: 10px;
+  }
+}

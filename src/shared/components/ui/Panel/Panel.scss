@@ -1,0 +1,45 @@
+.panel {
+  box-shadow: 0 2px 4px 0 $color-shadow;
+  background-color: $color-white;
+  margin-bottom: 3px;
+
+  &--background {
+    background-color: $color-brand;
+
+    > span {
+      color: $color-white;
+    }
+  }
+
+  &--padding-default {
+    padding: $padding-x-large;
+  }
+
+  &--padding-tiny {
+    padding: $padding-small 0;
+  }
+
+  &--padding-nolr {
+    padding: $padding-x-large 0 10px;
+  }
+
+  &--padding-none {
+    padding: 0;
+  }
+
+  &--padding-bottom-tiny{
+    padding: 0 0 $padding-small
+  }
+
+  &--padding-input {
+    padding: $padding-x-large $padding-x-large $padding-small $padding-x-large;
+  }
+
+  &--adjust-height {
+    height: 100%;
+  }
+
+  &--shadow-none {
+    box-shadow: none;
+  }
+}

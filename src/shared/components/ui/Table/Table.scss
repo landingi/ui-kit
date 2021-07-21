@@ -1,0 +1,153 @@
+.table {
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 $padding-large 0;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__main {
+    width: 100%;
+  }
+
+  &__border {
+    border: 1px solid $color-input-border;
+  }
+
+  &__thead {
+    &__tr {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 $padding-medium;
+      position: relative;
+
+      &:nth-child(1) {
+        display: none !important;
+      }
+
+      border-bottom: 1px solid $color-input-border;
+    }
+
+    &__th {
+      padding: $padding-medium;
+      font-size: 12px;
+      color: $color-8;
+      font-weight: 600;
+
+      &--actions_crud,
+      &:last-child {
+        min-width: 400px;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  &__tbody {
+    &__tr {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-bottom: 1px solid $color-input-border;
+      padding: 0 $padding-medium;
+      position: relative;
+      background: $color-is-read;
+
+      &:hover {
+        background: $color-bg;
+        z-index: $z-index-hover-table;
+
+        :global {
+          div:not(.Dropdown__dropdown__body) {
+            &:last-child {
+              transition: all 0.3s ease;
+
+              > ul {
+                visibility: visible;
+                display: flex;
+                justify-content: flex-end;
+                background: linear-gradient(90deg, hsla(0, 0%, 96.1%, 0) 0, $color-bg 10%, $color-bg);
+                height: 100%;
+                align-items: center;
+
+                :global .List__list-item--dropdown {
+                  background: $color-white;
+
+                  &:hover {
+                    background: $color-button-hover;
+                  }
+
+                  .Button__link {
+                    color: $color-3;
+
+                    &:hover {
+                      color: $color-1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &--is_read {
+        background: $color-white;
+      }
+
+      &--disabled {
+        color: $color-8;
+
+        :global {
+          .Radio__input__radio div {
+            border-color: $color-5;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    &__td {
+      padding: $padding-medium;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      dl {
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      &:first-child {
+        text-overflow: initial;
+      }
+
+      &:last-child {
+        position: absolute;
+        right: 0px;
+        z-index: 0;
+        transition: all 0.3s ease;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        overflow: initial;
+
+        > ul {
+          padding-right: 15px;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  &__filters {
+    display: flex;
+    padding: $padding-large $padding-x-large $padding-tiny;
+  }
+}

@@ -1,0 +1,27 @@
+.custom-link {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &--inactive {
+        color: $color-5;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    &--dark {
+        color: $color-1;
+
+        &:hover {
+            color: $color-brand;
+        }
+    }
+
+    &--14 {
+        font-size: 14px;
+    }
+
+    &--16 {
+        font-size: 16px;
+    }
+}

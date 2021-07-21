@@ -1,0 +1,49 @@
+.color-number {
+  margin: 0;
+  font-weight: 600;
+
+  &__color {
+    &--success {
+      color: $color-legend-success;
+    }
+
+    &--warning {
+      color: $color-legend-warning;
+    }
+
+    &--alert {
+      color: $color-legend-alert;
+    }
+
+    &--progress,
+    &--info {
+      color: $color-legend-progress;
+    }
+
+    &--default {
+      color: $color-legend-default;
+    }
+  }
+
+  &__size {
+    &--16 {
+      font-size: 16px;
+    }
+
+    &--18 {
+      font-size: 18px;
+    }
+
+    &--32 {
+      font-size: 32px;
+    }
+
+    &--44 {
+      font-size: 44px;
+    }
+
+    &--62 {
+      font-size: 62px;
+    }
+  }
+}

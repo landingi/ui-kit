@@ -1,0 +1,330 @@
+.button {
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+  border: 0;
+  cursor: pointer;
+  line-height: 1;
+  background: $color-white;
+  min-width: 36px;
+  min-height: 36px;
+  position: relative;
+  font-weight: 600;
+  transition: background .5s, box-shadow .5s;
+
+  &:hover {
+    text-decoration: none;
+    color: $color-1;
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: $color-4;
+    color: $color-white;
+
+    svg {
+      color: $color-white;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: not-allowed;
+      background-color: $color-4;
+      color: $color-white;
+
+      svg {
+        color: $color-white;
+      }
+    }
+  }
+
+  &--primary {
+    background: $color-brand;
+    color: $color-white;
+
+    &:active {
+      background-color: $color-brand;
+    }
+
+    svg {
+      color: $color-white;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color-button-primay-hover;
+      color: $color-white;
+      box-shadow: 0 20px 20px -15px rgba(0,0,0,0.2);
+    }
+  }
+
+  &--alert {
+    background: $color-error;
+    color: $color-white;
+
+    &:active {
+      background-color: $color-error;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color-error-hover;
+      color: $color-white;
+    }
+  }
+
+  &--secondary {
+    background: $color-white;
+    color: $color-brand;
+
+    &:active {
+      background-color: $color-4;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-button-hover;
+      color: $color-brand;
+    }
+  }
+
+  &--hide {
+    display: none;
+  }
+
+  &--tiny {
+    padding: 8px 20px;
+    font-size: 12px;
+    min-height: 28px;
+  }
+
+  &--small {
+    padding: 0;
+    font-size: 12px;
+  }
+
+  &--medium {
+    padding: 12px 20px;
+    max-height: 38px;
+    font-size: 14px;
+  }
+
+  &--large {
+    padding: 13px 24px;
+    font-size: 18px;
+  }
+
+  &--fit-width {
+    width: 100%;
+  }
+
+  &--dropdown {
+    padding: $padding-small $padding-medium;
+    color: $color-3;
+    background: transparent;
+
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 $padding-medium 0 $padding-small;
+      color: $color-1;
+    }
+
+    &:hover {
+      background: $color-button-hover;
+      color: $color-1;
+
+      svg {
+        color: $color-1;
+      }
+    }
+  }
+
+  &--dropdown-element {
+    color: $color-2;
+    background: transparent;
+    font-weight: 400;
+    width: 100%;
+    text-align: left;
+    padding: 0 15px;
+
+    svg {
+      color: $color-3;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $color-1;
+
+      svg {
+        color: $color-1;
+      }
+    }
+  }
+
+  &--transparent {
+    color: $color-3;
+    background: transparent;
+
+    &-blue {
+      background: transparent;
+      color: $color-brand;
+
+      &:hover {
+        background: $color-button-hover;
+        color: $color-brand;
+
+        svg {
+          color:$color-brand;
+        }
+      }
+
+      svg {
+        color: $color-brand
+      }
+    }
+
+    &:hover {
+      background: $color-button-hover;
+      color: $color-1;
+
+      svg {
+        color: $color-1;
+      }
+    }
+  }
+
+  &--tabs {
+    background: transparent;
+    border-radius: 0;
+    padding: 10px 20px 10px;
+    min-width: 100px;
+    font-weight: 600;
+    color: inherit;
+  }
+
+  &--icon {
+    padding: 0;
+    min-width: 36px;
+
+    &:after {
+      background: $color-3;
+    }
+
+    svg {
+      color: $color-3;
+    }
+
+    &:hover {
+      background: $color-button-hover;
+
+      svg {
+        color: $color-1;
+      }
+    }
+
+    &:disabled,
+    &[disabled] {
+      cursor: not-allowed;
+      background-color: $color-white;
+      color: $color-4;
+
+      svg {
+        background-color: $color-white;
+        color: $color-4;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        cursor: not-allowed;
+        background-color: $color-white;
+        color: $color-4;
+
+        svg {
+          background-color: $color-white;
+          color: $color-4;
+        }
+      }
+    }
+  }
+
+  &--svg {
+    svg {
+      margin-right: $margin-medium;
+    }
+  }
+
+  &--switcher {
+    max-width: 220px;
+    display: flex;
+    align-items: center;
+    line-height: 18px;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 220px;
+
+    }
+  }
+
+  &--center {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--left {
+    text-align: left;
+  }
+  &--right {
+    text-align: right;
+  }
+
+  &--input {
+    font-size: 14px;
+    min-width: 32px;
+    min-height: 32px;
+
+    svg {
+      margin: 0 !important;
+    }
+  }
+
+  &--action {
+    font-size: 12px;
+    padding: 0;
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
+    min-height: 25px;
+    background: $color-brand;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      color: $color-white;
+    }
+
+    &:hover {
+      background: $color-button-primay-hover
+    }
+  }
+}
+
+.link {
+  color: $color-2;
+  background: transparent;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-3;
+  }
+}

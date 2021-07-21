@@ -1,0 +1,58 @@
+.alert-message {
+  position: relative;
+  padding: $padding-small $padding-medium;
+  line-height: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .alert__message {
+    padding: 0 $padding-medium;
+    text-align: left;
+    flex: 2;
+    margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+    width: 210px;
+  }
+
+  &--alert {
+    background: $color-alert-light;
+    border: 1px solid $color-alert;
+
+    svg {
+      align-items: center;
+      color: $color-alert;
+    }
+  }
+
+  &--warning {
+    background: $color-warning-light;
+    border: 1px solid $color-warning;
+
+    svg {
+      align-items: center;
+      color: $color-warning;
+    }
+  }
+
+  &--success {
+    background: $color-success-light;
+    border: 1px solid $color-success;
+
+    svg {
+      align-items: center;
+      color: $color-success;
+    }
+  }
+
+  &--info {
+    background: $color-info-light;
+    border: 1px solid $color-info;
+
+    svg {
+      align-items: center;
+      color: $color-info;
+    }
+  }
+}

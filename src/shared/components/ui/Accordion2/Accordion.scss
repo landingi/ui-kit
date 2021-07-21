@@ -1,0 +1,39 @@
+.accordion {
+  &__item {
+    margin-bottom: $padding-medium;
+    width: auto;
+    background-color: $color-white;
+    box-shadow: 0px 2px 4px $color-shadow;
+    
+    &--title {
+      cursor: pointer;
+      padding-left: $padding-x-large;
+      padding-right: $padding-huge;
+      height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &--content {
+      padding:  0 $padding-x-large;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all .2s ease-in-out;
+
+      &-open {
+        padding: $padding-x-large;
+        padding-top: $padding-medium;
+        height: max-content;
+        opacity: 1;
+        transition: all .4s ease-out;
+      }
+    }
+  }
+}

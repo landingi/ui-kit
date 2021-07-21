@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 0;
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 15px;
+
+  &__description {
+    font-size: 14px;
+    position: relative;
+
+    &--completed {
+      color: $color-3;
+    }
+
+    &--current {
+      color: $color-1;
+    }
+
+    &--next {
+      color: $color-5;
+    }
+  }
+
+  &:after {
+    content: '';
+    background: $color-input-border;
+    height: 1px;
+    width: 15px;
+    margin-left: 15px;
+    top: 45%;
+  }
+
+  &:last-of-type {
+    &:after {
+      display: none;
+    }
+  }
+}

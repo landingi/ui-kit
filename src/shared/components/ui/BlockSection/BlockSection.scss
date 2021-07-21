@@ -1,0 +1,27 @@
+.block-section {
+  margin: 0 auto;
+  width: 1054px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__panel {
+    width: 1054px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--reverse {
+      flex-direction: row-reverse;
+    }
+
+    &--content {
+      padding: $padding-small $padding-x-huge;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+}

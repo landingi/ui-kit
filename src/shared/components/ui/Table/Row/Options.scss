@@ -1,0 +1,44 @@
+.table {
+  &__selected-options {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 $padding-medium;
+    font-size: 14px;
+    position: absolute;
+    left: 60px;
+    background: $color-white;
+    right: 0;
+    z-index: $z-index-options;
+
+    ul > li > div {
+      margin: 0 5px;
+      border-bottom: none;
+    }
+
+    :global {
+      .Input__input__wrapper {
+        margin: 0 10px;
+      }
+
+      .Dropdown__dropdown__wrapper {
+        color: $color-3;
+        font-weight: 600;
+
+        &:hover,
+        &:focus,
+        &:active {
+          color: $color-1;
+        }
+
+        .List__list-item--dropdown {
+          margin: 0;
+        }
+
+        .Dropdown__dropdown__label {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

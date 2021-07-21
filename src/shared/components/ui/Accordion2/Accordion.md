@@ -1,0 +1,3 @@
+```jsx
+  <Accordion data={help} />
+```

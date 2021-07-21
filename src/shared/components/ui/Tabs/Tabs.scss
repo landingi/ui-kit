@@ -1,0 +1,43 @@
+.tab {
+  cursor: pointer;
+  line-height: 1;
+  color: $color-3;
+  display: block;
+
+  &--active {
+    position: relative;
+    color: $color-brand;
+    font-weight: 600;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 4px;
+      background-color: $color-brand;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      button {
+        color: $color-brand;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid $color-input-border;
+    margin-bottom: 30px;
+  }
+
+  &__panel {
+    background-color: $color-white;
+    padding: $padding-medium 0;
+  }
+}

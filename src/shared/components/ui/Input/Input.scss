@@ -1,0 +1,175 @@
+.input {
+  border: 0;
+  border-bottom: 1px solid $color-input-border;
+  color: $color-1;
+  font-size: 16px;
+  height: 38px;
+  outline: none;
+  line-height: 1;
+  letter-spacing: unset;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+
+    ~ .bar:before,
+    ~ .bar:after {
+      width: 100%;
+    }
+  }
+
+  &.error {
+    border-color: $color-error;
+    border-width: 2px;
+  }
+
+  &::placeholder {
+    color: $color-8;
+    border-style: dotted;
+    border-color: $color-input-border;
+  }
+
+  &:disabled {
+    border-color: $color-8;
+    border-style: dotted;
+    color: $color-input-border;
+    background-color: transparent;
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+}
+
+:global {
+  .form--has-error {
+    input,
+    select {
+      border-color: $color-error;
+      border-width: 2px;
+    }
+
+    input {
+      box-shadow: none;
+    }
+
+    label {
+      color: $color-error;
+    }
+  }
+}
+
+.input__label {
+  font-size: 16px;
+  height: 20px;
+  font-weight: 400;
+  color: $color-3;
+  margin: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  opacity: 0;
+}
+
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 38px;
+  position: relative;
+
+  input:focus ~ label,
+  input:valid ~ label {
+    top: -14px;
+    font-size: 14px;
+  }
+
+  input:disabled ~ .input__label {
+    opacity: 1;
+    top: -14px;
+    font-size: 14px;
+    color: $color-7;
+  }
+
+  input:valid ~ label {
+    opacity: 1;
+  }
+
+  input:invalid ~ label {
+    top: 11px;
+    font-size: 16px;
+  }
+
+  &--focused {
+    input ~ label,
+    input:focus ~ label,
+    input:valid ~ label,
+    input:invalid ~ label {
+      top: -14px;
+      font-size: 14px;
+      opacity: 1;
+    }
+  }
+
+  button {
+    margin-right: $margin-medium;
+  }
+}
+
+::-webkit-input-placeholder {
+  border: 0;
+}
+
+::-moz-placeholder {
+  border: 0;
+}
+
+:-ms-input-placeholder {
+  border: 0;
+}
+
+:-moz-placeholder {
+  border: 0;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before,
+.bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  background: $color-1;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 0;
+}
+
+.bar:after {
+  right: auto;
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+  width: 100%;
+}
+
+:global {
+  .input__tooltip {
+    position: absolute;
+    top: -14px;
+    right: 0;
+  }
+}

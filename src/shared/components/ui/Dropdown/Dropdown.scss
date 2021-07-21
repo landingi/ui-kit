@@ -1,0 +1,170 @@
+.dropdown {
+  position: fixed;
+  z-index: $z-index-dropdown;
+  box-shadow: 0 2px 4px 3px $color-shadow;
+  background: $color-white;
+
+  &__head {
+    padding: 0 $padding-medium;
+
+    >span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    :global {
+
+      .Heading__h4,
+      .Heading__h5 {
+        margin: unset;
+      }
+    }
+  }
+
+  &__wrapper {
+    z-index: 1;
+    color: $color-1;
+    padding: 0 13px;
+    cursor: pointer;
+    line-height: 1;
+    position: relative;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--spaced {
+      justify-content: space-between;
+    }
+
+    svg {
+      color: $color-3;
+      margin: 0 !important;
+    }
+
+    .dropdown__wrapper__icon {
+      visibility: hidden;
+    }
+
+
+    &:hover {
+      background: $color-button-hover;
+
+      .dropdown__wrapper__icon {
+        visibility: visible;
+      }
+
+      svg {
+        color: $color-1;
+      }
+    }
+
+    &--input {
+      border: 0;
+      border-bottom: 1px solid $color-input-border;
+      color: $color-1;
+      font-size: 16px;
+      padding: 0 10px 0 0;
+      outline: none;
+      line-height: 1;
+      border-radius: 0px;
+      margin: 0 10px;
+      position: relative;
+
+      &:focus,
+      &:hover,
+      &:active {
+        outline: none;
+        background-color: transparent;
+
+        &:after {
+          content: "";
+          height: 2px;
+          background: $color-1;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -1px;
+        }
+      }
+    }
+
+    &--as-input {
+      height: 38px;
+      margin: 0;
+
+      :global
+      .Dropdown__dropdown__label {
+        padding: 0;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__body {
+    padding: 20px 0 $padding-small;
+
+    :global {
+      .Label__label {
+        padding: 0 $padding-medium $padding-small;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__label {
+    padding: 0 $padding-medium 0 $padding-medium;
+    font-weight: 400;
+    margin: 0;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: normal;
+
+    &--placeholder {
+      color: $color-8;
+    }
+  }
+
+  &--auto {
+    width: auto;
+  }
+
+  &--mini {
+    width: 80px;
+  }
+
+  &--small {
+    width: 180px;
+  }
+
+  &--medium {
+    width: 220px;
+  }
+
+  &--big {
+    width: 240px;
+  }
+
+  &--large {
+    width: 280px;
+  }
+
+  &--huge {
+    width: 480px;
+  }
+
+  &--extra-huge {
+    width: 720px;
+  }
+
+  &--hidden {
+    overflow: hidden;
+  }
+}

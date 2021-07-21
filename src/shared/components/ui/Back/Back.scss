@@ -1,0 +1,19 @@
+.back {
+  display: flex;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  justify-content: flex-start;
+  color: $color-1;
+  font-size: 16px;
+  position: relative;
+
+  svg {
+    color: $color-3;
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}

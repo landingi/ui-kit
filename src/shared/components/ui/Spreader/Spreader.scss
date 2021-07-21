@@ -1,0 +1,31 @@
+.spreader {
+  display: inline-block;
+}
+
+.spreader--mini {
+  padding: 0 $padding-tiny 0 0;
+}
+
+.spreader--tiny {
+  padding: 0 $padding-tiny;
+}
+
+.spreader--small {
+  padding: 0 $padding-small;
+}
+
+.spreader--medium {
+  padding: 0 $padding-medium;
+}
+
+.spreader--large {
+  padding: 0 $padding-large;
+}
+
+.spreader--big {
+  padding: 0 $margin-big;
+}
+
+.spreader--huge {
+  padding: 0 $padding-huge;
+}

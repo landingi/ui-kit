@@ -1,0 +1,134 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . ."
+    ". . .";
+  margin: 0 7px;
+  width: 300px;
+}
+
+.button_month {
+  color: $color-2;
+  background: $color-white;
+  outline: 0;
+  border: none;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 3px 0;
+  position: relative;
+  height: 30px;
+
+  &--name {
+    color: $color-2;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--marker {
+    position: absolute;
+    top: 1px;
+    height: 28px;
+    width: calc(100%);
+    z-index: 1;
+  }
+
+  &--not-selecting {
+    &:hover {
+      .button_month--marker {
+        border: 1px solid #dee7eb;
+      }
+    }
+  }
+
+  &--selecting {
+    .button_month--marker {
+      border-top: 1px solid #dee7eb;
+      border-bottom: 1px solid #dee7eb;
+    }
+  }
+
+  &--first {
+    padding-left: 4px;
+
+    .button_month--name {
+      font-weight: 600;
+    }
+
+    .button_month--marker {
+      border-left: 1px solid #dee7eb;
+      left: 2px;
+      width: calc(100% - 2px);
+    }
+  }
+
+  &--last {
+    padding-right: 4px;
+
+    .button_month--name {
+      font-weight: 600;
+    }
+
+    .button_month--marker {
+      border-right: 1px solid #dee7eb;
+      right: 2px;
+      width: calc(100% - 2px);
+    }
+  }
+
+  &--selected {
+    .button_month--name {
+      color: $color-1;
+      background: $color-button-hover;
+    }
+
+    &:not(:hover) {
+      .button_month--marker {
+        display: none;
+      }
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+    background: #f8f8f8;
+
+    .button_month--name {
+      color: #aeb9bf;
+    }
+  }
+}
+
+.button_month--first.button_month--last {
+  .button_month--marker {
+    width: calc(100% - 4px);
+
+    border-top: 1px solid #dee7eb;
+    border-bottom: 1px solid #dee7eb;
+  }
+}
+
+.year {
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-1;
+}
+
+.year-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-range-picker > button {
+  display: block;
+  margin: 0 15px 5px auto;
+  width: 100px;
+}

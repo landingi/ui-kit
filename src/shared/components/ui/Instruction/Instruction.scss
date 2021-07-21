@@ -1,0 +1,15 @@
+.instruction {
+  padding: 30px;
+
+  &__step {
+    padding: 0 30px;
+    padding-bottom: 50px;
+    border-left: 1px solid $color-brand;
+    position: relative;
+
+    &:last-child {
+      padding-bottom: 0;
+      border-left: none;
+    }
+  }
+}

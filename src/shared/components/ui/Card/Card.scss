@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+  border-radius: 6px;
+  padding: 16px 20px 16px 40px;
+  background: $color-white;
+  transition: .2s;
+  
+  &--success {
+    border: 1px solid $color-success;
+    &:hover {
+      background: rgba(34,182,98,0.1);
+    }
+  }
+
+  &--warning {
+    border: 1px solid $color-warning;
+    &:hover {
+      background: rgba(255,176,0,0.1);
+    }
+  }
+
+  &--alert {
+    border: 1px solid $color-alert;
+    &:hover {
+      background: rgba(255,50,69,0.1);
+    }
+  }
+}
+
+.container {
+  position: relative;
+}

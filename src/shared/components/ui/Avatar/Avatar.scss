@@ -1,0 +1,44 @@
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-white;
+
+  p {
+    display: block;
+    visibility: hidden;
+    position: relative;
+    width: 11px;
+
+    &:first-letter {
+      visibility: visible;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+  }
+
+  &--blank {
+    background: $color-accent-1;
+  }
+
+  &--tiny {
+    width: 36px;
+    height: 36px;
+
+    img {
+      width: inherit;
+    }
+  }
+  
+  &--medium {
+    width: 42px;
+    height: 42px;
+
+    img {
+      width: inherit;
+    }
+  }
+}

@@ -1,0 +1,4 @@
+```jsx
+<Instruction data={data} />
+
+```

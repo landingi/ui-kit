@@ -1,0 +1,17 @@
+Variants
+
+```jsx
+  <StatsBadge
+    description='word.total.subaccounts'
+    quantity={100} />
+
+  <StatsBadge
+    description='word.active.subaccounts'
+    quantity={30}
+    color='yellow' />
+
+  <StatsBadge
+    description='word.active.subaccounts'
+    quantity={60}
+    color='pink' />
+```

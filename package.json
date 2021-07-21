@@ -1,18 +1,19 @@
 {
-  "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@storybook/addon-actions": "^6.3.4",
-    "@storybook/addon-essentials": "^6.3.4",
-    "@storybook/addon-links": "^6.3.4",
-    "@storybook/react": "^6.3.4",
-    "babel-loader": "^8.2.2",
-    "chromatic": "^5.9.2"
-  },
-  "dependencies": {
-    "storybook": "^6.3.4"
-  }
+    "name": "landingi-ui-kit-documentation",
+    "scripts": {
+        "docz:dev": "docz dev",
+        "docz:build": "docz build",
+        "docz:serve": "docz build && docz serve"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "1.2.34",
+        "@fortawesome/free-solid-svg-icons": "5.15.2",
+        "@fortawesome/react-fontawesome": "0.1.14",
+        "docz": "latest",
+        "gatsby-plugin-sass": "^4.10.0",
+        "node-sass": "^6.0.1",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "classnames": "2.2.6"
+    }
 }

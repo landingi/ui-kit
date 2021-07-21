@@ -1,0 +1,40 @@
+import { Playground, Props } from 'docz'
+import Alert from 'ui/Alert'
+
+# Alert
+
+<Props of={Alert} />
+
+## Basic usage
+
+### Info
+
+<Playground>
+  <Alert type="info">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.
+  </Alert>
+</Playground>
+
+### Success
+
+<Playground>
+  <Alert type="success">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.
+  </Alert>
+</Playground>
+
+### Alert
+
+<Playground>
+  <Alert type="alert">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.
+  </Alert>
+</Playground>
+
+### Warning
+
+<Playground>
+  <Alert type="warning">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.
+  </Alert>
+</Playground>

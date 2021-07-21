@@ -1,0 +1,3 @@
+```js
+<Label> Hello </Label>
+```

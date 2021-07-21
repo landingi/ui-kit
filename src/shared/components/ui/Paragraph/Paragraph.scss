@@ -1,0 +1,82 @@
+.paragraph {
+  margin: 0;
+
+  &-padding {
+    &--medium {
+      padding: 0 0 $padding-medium;
+    }
+
+    &--none {
+      padding: 0;
+    }
+  }
+
+  &-align {
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &-color {
+    &---accent-1 {
+      color: $color-1;
+      line-height: 20px;
+    }
+
+    &--accent-2 {
+      color: $color-3;
+      line-height: 20px;
+    }
+
+    &--accent-3 {
+      color: $color-8;
+      line-height: 20px;
+    }
+
+    &--accent-4 {
+      color: $color-10;
+    }
+
+    &--white {
+      color: $color-white;
+    }
+  }
+
+  &-size {
+    &--10 {
+      font-size: 10px;
+    }
+
+    &--12 {
+      font-size: 12px;
+    }
+
+    &--14 {
+      font-size: 14px;
+    }
+
+    &--16 {
+      font-size: 16px;
+    }
+  }
+
+  &-line {
+    &--18 {
+      line-height: 18px;
+    }
+
+    &--20 {
+      line-height: 20px;
+    }
+  }
+
+  &-weight {
+    &--300 {
+      font-weight: 300;
+    }
+
+    &--400 {
+      font-weight: 400;
+    }
+  }
+}

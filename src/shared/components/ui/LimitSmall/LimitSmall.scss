@@ -1,0 +1,19 @@
+.result__dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: $color-2;
+  font-size: 10px;
+}
+
+.padding__none {
+  padding-top: 0;
+}
+
+.padding__small {
+  padding-top: $padding-small;
+}
+
+.padding__medium {
+  padding-top: $padding-medium;
+}

@@ -1,0 +1,41 @@
+.step__number {
+  margin-right: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: $color-white;
+
+  &--small {
+    top: 0;
+    left: -9px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &--medium {
+    top: 0;
+    left: -11px;
+    width: 22px;
+    height: 22px;
+  }
+
+  &--completed {
+    background: $color-success;
+  }
+
+  &--current {
+    background: $color-brand;
+  }
+
+  &--next {
+    background: $color-5;
+  }
+
+  &--absolute {
+    position: absolute;
+    z-index: 30;
+  }
+}

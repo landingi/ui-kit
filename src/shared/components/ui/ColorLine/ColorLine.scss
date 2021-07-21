@@ -1,0 +1,43 @@
+.color-line {
+  &:before {
+    content: "";
+    width: 15px;
+    height: 10px;
+    position: absolute;
+    left: -25px;
+    top: 6px;
+    border-radius: 250px;
+  }
+
+  &--vertical {
+    &:before {
+      width: 9px;
+      height: 100%;
+      top: 0px;
+    }
+  }
+
+  &--success {
+    &:before {
+      background: $color-success;
+    }
+  }
+
+  &--warning {
+    &:before {
+      background: $color-warning;
+    }
+  }
+
+  &--alert {
+    &:before {
+      background: $color-alert;
+    }
+  }
+
+  &--info {
+    &:before {
+      background: $color-info;
+    }
+  }
+}
