@@ -16,17 +16,13 @@ const cssClass = styles(scss)
  * @param {bool} props.hasLabel - has label
  * @return {object} An object of children element
  */
-const showPassword = ({
-  className,
-  setHidden,
-  hasLabel
-}) => {
+const showPassword = ({ className, setHidden, hasLabel }) => {
   const [icon, setIcon] = useState('eye')
   const [label, setLabel] = useState('word.show')
 
   /**
-  * handleIconSet - set the icon state
-  */
+   * handleIconSet - set the icon state
+   */
   const handleIconSet = useCallback(() => {
     if (icon === 'eye') {
       setIcon('eye-slash')
@@ -41,21 +37,22 @@ const showPassword = ({
 
   return (
     <span
-      className={cssClass(className)}
-      onClick={handleIconSet}>
-      {hasLabel
-        ? <Button
-            variant='switcher-brand'
-            size='tiny'
-            hasIcon>
-            <FontAwesomeIcon icon={icon} />
+className={cssClass(className)}
+onClick={handleIconSet}>
+      {hasLabel ? (
+        <Button
+variant="switcher-brand"
+size="tiny"
+hasIcon>
+          <FontAwesomeIcon icon={icon} />
 
-            <FormattedMessage id={label} />
-          </Button>
-        : <Button
-            variant='icon'>
-            <FontAwesomeIcon icon={icon} />
-          </Button>}
+          <FormattedMessage id={label} />
+        </Button>
+      ) : (
+        <Button variant="icon">
+          <FontAwesomeIcon icon={icon} />
+        </Button>
+      )}
     </span>
   )
 }
@@ -74,10 +71,7 @@ showPassword.propTypes = {
   /**
    * Classname, default `showpassword`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * setHidden, callback to parent element(react-formik)
    */

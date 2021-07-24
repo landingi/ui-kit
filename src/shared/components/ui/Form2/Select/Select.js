@@ -50,8 +50,8 @@ const select = ({
 
         {label && (
           <Label
-            id={name}
-            className={scss.input__label}>
+id={name}
+className={scss.input__label}>
             <FormattedMessage id={`${label}`} />
           </Label>
         )}

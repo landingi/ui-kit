@@ -20,17 +20,22 @@ const cssClass = styles(scss)
  */
 
 const alert = ({ children, className, type }) => {
-  const icon = type === 'success' ? 'check' : (type === 'warning' ? 'exclamation' : (type === 'alert' ? 'exclamation-triangle' : 'info'))
+  const icon =
+    type === 'success'
+      ? 'check'
+      : type === 'warning'
+        ? 'exclamation'
+        : type === 'alert'
+          ? 'exclamation-triangle'
+          : 'info'
 
   return (
     <div className={cssClass(className, `alert-message--${type}`)}>
       <FontAwesomeIcon
-        icon={icon}
-        size="xs" />
+icon={icon}
+size="xs" />
 
-      <div className={scss.alert__message}>
-        {children}
-      </div>
+      <div className={scss.alert__message}>{children}</div>
     </div>
   )
 }
@@ -57,10 +62,7 @@ alert.propTypes = {
   /**
    * Classname, default `alert-message`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * type of notification `info, success, warning, alert`
    */
@@ -68,9 +70,9 @@ alert.propTypes = {
 }
 
 /**
-* The default properties.
-* @type {Object}
-*/
+ * The default properties.
+ * @type {Object}
+ */
 alert.defaultProps = {
   className: 'alert-message',
   type: 'info'

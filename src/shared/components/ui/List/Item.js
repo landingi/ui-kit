@@ -15,13 +15,7 @@ const cssClass = styles(scss)
  * @param {string} props.margin - left margin
  * @return {object} An object of children element
  */
-const listItem = ({
-  children,
-  variant,
-  size,
-  className,
-  margin
-}) => {
+const listItem = ({ children, variant, size, className, margin }) => {
   const elementClasses = cssClass({
     'list-item--menu': variant === 'menu',
     'list-item--dropdown': variant === 'dropdown',
@@ -33,9 +27,7 @@ const listItem = ({
   })
   return (
     <li className={cssClass(className, elementClasses)}>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </li>
   )
 }
@@ -58,7 +50,15 @@ listItem.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['menu', 'dropdown', 'table', 'inline', 'list', 'block', '']),
+  variant: PropTypes.oneOf([
+    'menu',
+    'dropdown',
+    'table',
+    'inline',
+    'list',
+    'block',
+    ''
+  ]),
   /**
    * Size
    */
@@ -66,10 +66,7 @@ listItem.propTypes = {
   /**
    * Classname, default `list__item`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Margin
    */

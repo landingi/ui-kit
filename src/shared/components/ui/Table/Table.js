@@ -124,7 +124,9 @@ const table = ({
             : true
         })
       }
-    }), [])
+    }),
+    []
+  )
 
   /**
    * Default filter column
@@ -149,11 +151,7 @@ const table = ({
     selectedFlatRows,
     setPageSize,
     gotoPage,
-    state: {
-      pageIndex,
-      pageSize,
-      filters
-    },
+    state: { pageIndex, pageSize, filters },
     pageCount
   } = useTable(
     {
@@ -164,13 +162,26 @@ const table = ({
       usePagination,
       initialState: {
         pageIndex: pageIndex || Number(queryStringPage) || 0,
-        pageSize: constantPageLimit || getLocalStorage(`table-${tableName}-pageSize`) || Number(queryStringLimit) || 10,
-        hiddenColumns: usePermissions(userPermissions, READ_ONLY) ? ['selection'] : [],
+        pageSize:
+          constantPageLimit ||
+          getLocalStorage(`table-${tableName}-pageSize`) ||
+          Number(queryStringLimit) ||
+          10,
+        hiddenColumns: usePermissions(userPermissions, READ_ONLY)
+          ? ['selection']
+          : [],
         filters: customFilters || [],
         options: customOptions || [],
         selectedRowIds: checkedRow
       },
-      pageCount: (constantPageLimit && Math.ceil(totalRows / Number(constantPageLimit))) || Math.ceil(totalRows / parseInt(getLocalStorage(`table-${tableName}-pageSize`))) || Math.ceil(totalRows / Number(queryStringLimit)) || Math.ceil(totalRows / 10),
+      pageCount:
+        (constantPageLimit &&
+          Math.ceil(totalRows / Number(constantPageLimit))) ||
+        Math.ceil(
+          totalRows / parseInt(getLocalStorage(`table-${tableName}-pageSize`))
+        ) ||
+        Math.ceil(totalRows / Number(queryStringLimit)) ||
+        Math.ceil(totalRows / 10),
       manualPagination: true,
       manualFilters: true,
       disablePageResetOnDataChange: false,
@@ -202,30 +213,33 @@ const table = ({
      */
     useRowSelect,
     hooks => {
-      hasSelect && (
+      hasSelect &&
         hooks.flatColumns.push(columns => [
           {
             id: 'selection',
-            Header: ({ getToggleAllRowsSelectedProps }) => <Checkbox {...getToggleAllRowsSelectedProps()} />,
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
             Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
           },
           ...columns
         ])
-      )
 
-      hasRadio && (
+      hasRadio &&
         hooks.flatColumns.push(columns => [
           {
             id: 'selection',
             Header: () => <Spreader />,
-            Cell: ({ row, toggleAllRowsSelected }) => (<Radio
-            {...row.getToggleRowSelectedProps()}
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => setRadio(row, toggleAllRowsSelected)} />)
+            Cell: ({ row, toggleAllRowsSelected }) => (
+              <Radio
+                {...row.getToggleRowSelectedProps()}
+                // eslint-disable-next-line react/jsx-no-bind
+                onClick={() => setRadio(row, toggleAllRowsSelected)}
+              />
+            )
           },
           ...columns
         ])
-      )
     }
   )
 
@@ -251,7 +265,10 @@ const table = ({
    * @type {func}
    * @return {func}
    */
-  const deleteRowData = useCallback(() => deleteRow(selectedRowId, tableName), [selectedRowId])
+  const deleteRowData = useCallback(
+    () => deleteRow(selectedRowId, tableName),
+    [selectedRowId]
+  )
 
   /**
    * Handle page size
@@ -263,7 +280,9 @@ const table = ({
     const value = event.target.value
 
     setLocalStorage(`table-${tableName}-pageSize`, Number(value))
-    const getPageSizeFromLocalStorage = getLocalStorage(`table-${tableName}-pageSize`)
+    const getPageSizeFromLocalStorage = getLocalStorage(
+      `table-${tableName}-pageSize`
+    )
 
     if (
       getPageSizeFromLocalStorage === 'undefined' ||
@@ -306,7 +325,8 @@ const table = ({
     }
   }, [fetchData, pageIndex, pageSize, filters])
 
-  const handleRefreshFilter = filter => fetchData({ pageIndex, pageSize, filter })
+  const handleRefreshFilter = filter =>
+    fetchData({ pageIndex, pageSize, filter })
   const handleReference = () => fetchData({ pageIndex, pageSize, filters })
   const handleResetPage = () => gotoPage(0)
 
@@ -343,59 +363,68 @@ const table = ({
   /**
    * Options elements
    */
-  const renderOptions = () => (
-    hasSelectedId > 0 && !hasRadio && (
+  const renderOptions = () =>
+    hasSelectedId > 0 &&
+    !hasRadio && (
       <Options
         options={customOptions}
         handleDelete={deleteRowData}
         selected={selectedRowId}
-        component={optionsComponent} />
+        component={optionsComponent}
+      />
     )
-  )
 
   /**
    * Head element
    */
   const thead = () => (
-  <Fragment>
-    {renderFiltersAbove && <div className={cssClass('table__filters')}>
-      {headerGroups.map(headerGroup => (
-        headerGroup.headers.map(column => (
-          <div
-            key={uuid()}
-            className={cssClass('table__thead__filter')}>
-            <div>
-              {column.canFilter && column.render('Filter')}
-            </div>
-          </div>
-        ))
-      ))}
-    </div>}
+    <Fragment>
+      {renderFiltersAbove && (
+        <div className={cssClass('table__filters')}>
+          {headerGroups.map(headerGroup =>
+            headerGroup.headers.map(column => (
+              <div
+key={uuid()}
+className={cssClass('table__thead__filter')}>
+                <div>{column.canFilter && column.render('Filter')}</div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
 
-  {!hideHeader && <div className={cssClass('table__thead')}>
-      {headerGroups.map(headerGroup => (
-        <div
-          key={uuid()}
-          className={cssClass('table__thead__tr')}
-          {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map(column => (
+      {!hideHeader && (
+        <div className={cssClass('table__thead')}>
+          {headerGroups.map(headerGroup => (
             <div
               key={uuid()}
-              className={cssClass('table__thead__th', `table__thead__th--${column?.class}`)}
-              {...column.getHeaderProps()}>
-              {column.render('Header', columns)}
+              className={cssClass('table__thead__tr')}
+              {...headerGroup.getHeaderGroupProps()}
+            >
+              {headerGroup.headers.map(column => (
+                <div
+                  key={uuid()}
+                  className={cssClass(
+                    'table__thead__th',
+                    `table__thead__th--${column?.class}`
+                  )}
+                  {...column.getHeaderProps()}
+                >
+                  {column.render('Header', columns)}
 
-              <div>
-                {(column.canFilter && !renderFiltersAbove) ? column.render('Filter') : null}
-              </div>
+                  <div>
+                    {column.canFilter && !renderFiltersAbove
+                      ? column.render('Filter')
+                      : null}
+                  </div>
+                </div>
+              ))}
+
+              {renderOptions()}
             </div>
-          )
-          )}
-
-          {renderOptions()}
+          ))}
         </div>
-      ))}
-    </div>}
+      )}
     </Fragment>
   )
 
@@ -404,44 +433,53 @@ const table = ({
    */
   const tbody = () => (
     <div
-      className={cssClass('table__tbody')}
-      {...getTableBodyProps()}>
-        {page.map(row => {
-          const { is_read, isDisabled, tooltip } = row.original
-          const elementClasses = cssClass(
-            (is_read === undefined) || (is_read === true) ? 'table__tbody__tr--is_read' : null,
-            isDisabled && 'table__tbody__tr--disabled'
-          )
+className={cssClass('table__tbody')}
+{...getTableBodyProps()}>
+      {page.map(row => {
+        const { is_read, isDisabled, tooltip } = row.original
+        const elementClasses = cssClass(
+          is_read === undefined || is_read === true
+            ? 'table__tbody__tr--is_read'
+            : null,
+          isDisabled && 'table__tbody__tr--disabled'
+        )
 
-          prepareRow(row)
+        prepareRow(row)
 
-          return (
-            <Tooltip
-              key={uuid()}
-              className={cssClass('table__tbody__tr', elementClasses)}
-              effect='float'
-              content={tooltip}
-              disabled={!tooltip}
-              {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <div
-                    key={uuid()}
-                    className={cssClass('table__tbody__td')}
-                    {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                  </div>
-                ))}
-            </Tooltip>
-          )
-        })}
+        return (
+          <Tooltip
+            key={uuid()}
+            className={cssClass('table__tbody__tr', elementClasses)}
+            effect="float"
+            content={tooltip}
+            disabled={!tooltip}
+            {...row.getRowProps()}
+          >
+            {row.cells.map(cell => (
+              <div
+                key={uuid()}
+                className={cssClass('table__tbody__td')}
+                {...cell.getCellProps()}
+              >
+                {cell.render('Cell')}
+              </div>
+            ))}
+          </Tooltip>
+        )
+      })}
     </div>
   )
 
   const renderTable = () => (
     <div className={cssClass(className)}>
       <div
-        className={hasBorder ? cssClass('table__main', 'table__border') : cssClass('table__main')}
-        {...getTableProps()}>
+        className={
+          hasBorder
+            ? cssClass('table__main', 'table__border')
+            : cssClass('table__main')
+        }
+        {...getTableProps()}
+      >
         {thead()}
 
         {isLoading ? (
@@ -450,20 +488,22 @@ const table = ({
           <Fragment>
             {tbody()}
 
-            {hasPagination
-              ? <ClientPagination
-              goToPage={gotoPage}
-              pageIndex={pageIndex}
-              pageCount={pageCount}
-              activePageLimit={parseInt(pageSize)}
-              pageLimit={handlePageSize}
-              constantPageLimit={constantPageLimit}
+            {hasPagination ? (
+              <ClientPagination
+                goToPage={gotoPage}
+                pageIndex={pageIndex}
+                pageCount={pageCount}
+                activePageLimit={parseInt(pageSize)}
+                pageLimit={handlePageSize}
+                constantPageLimit={constantPageLimit}
               />
-              : null}
+            ) : null}
 
-            {hasBorder && <Spacer space='small' />}
+            {hasBorder && <Spacer space="small" />}
           </Fragment>
-        ) : customMessage}
+        ) : (
+          customMessage
+        )}
       </div>
     </div>
   )
@@ -487,17 +527,12 @@ table.propTypes = {
   /**
    * Columns
    */
-  columns: PropTypes.oneOfType([
-    PropTypes.objectOf,
-    PropTypes.array
-  ]).isRequired,
+  columns: PropTypes.oneOfType([PropTypes.objectOf, PropTypes.array])
+    .isRequired,
   /**
    * Data
    */
-  data: PropTypes.oneOfType([
-    PropTypes.objectOf,
-    PropTypes.array
-  ]).isRequired,
+  data: PropTypes.oneOfType([PropTypes.objectOf, PropTypes.array]).isRequired,
   /**
    * Pagination data
    */
@@ -505,10 +540,7 @@ table.propTypes = {
   /**
    * Classname, default `table__wrapper`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * fetchData
    */

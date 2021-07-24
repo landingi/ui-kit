@@ -19,15 +19,16 @@ const cssClass = styles(scss)
  */
 const Back = ({ className, url, content }) => {
   const location = getLocationPath()
-  const urlMap = location.match('/payments/subscription/cancel') ? '/payments/subscription' : url
+  const urlMap = location.match('/payments/subscription/cancel')
+    ? '/payments/subscription'
+    : url
 
   return (
     <span className={cssClass(className)}>
-      <a
-        href={urlMap}>
+      <a href={urlMap}>
         <Tooltip
-          content={content}
-          placement="bottom">
+content={content}
+placement="bottom">
           <Button variant="icon">
             <FontAwesomeIcon icon="arrow-left" />
           </Button>

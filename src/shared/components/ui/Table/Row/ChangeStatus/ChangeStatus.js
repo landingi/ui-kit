@@ -18,48 +18,44 @@ import { emitTableRefresh } from 'shared/events/table'
  */
 const changeStatus = ({ selected }) => {
   /**
-  * Update status
-  */
+   * Update status
+   */
   const handleStatusUpdate = async status => {
     emitCloseDropdown()
     const id = selected.map(({ order_uuid }) => order_uuid.id)
 
     try {
-      await setOrderStatus(id, status)
-        .then(() => emitTableRefresh())
+      await setOrderStatus(id, status).then(() => emitTableRefresh())
     } catch {}
   }
 
   /**
-  * Render dropdown with predefined statuses
-  */
+   * Render dropdown with predefined statuses
+   */
   const renderStatuses = () => {
     return (
       <List>
-        <ListItem variant='dropdown'>
+        <ListItem variant="dropdown">
           <Button
-            tag="a"
-            onClick={() => handleStatusUpdate('open')}
-          >
-            <FormattedMessage id='status.open' />
+tag="a"
+onClick={() => handleStatusUpdate('open')}>
+            <FormattedMessage id="status.open" />
           </Button>
         </ListItem>
 
-        <ListItem variant='dropdown'>
+        <ListItem variant="dropdown">
           <Button
-            tag="a"
-            onClick={() => handleStatusUpdate('completed')}
-          >
-            <FormattedMessage id='status.completed' />
+tag="a"
+onClick={() => handleStatusUpdate('completed')}>
+            <FormattedMessage id="status.completed" />
           </Button>
         </ListItem>
 
-        <ListItem variant='dropdown'>
+        <ListItem variant="dropdown">
           <Button
-            tag="a"
-            onClick={() => handleStatusUpdate('canceled')}
-          >
-            <FormattedMessage id='status.canceled' />
+tag="a"
+onClick={() => handleStatusUpdate('canceled')}>
+            <FormattedMessage id="status.canceled" />
           </Button>
         </ListItem>
       </List>

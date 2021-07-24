@@ -1,4 +1,7 @@
-import { getQueryStringValue, setQueryStringValue } from 'shared/helpers/queryString'
+import {
+  getQueryStringValue,
+  setQueryStringValue
+} from 'shared/helpers/queryString'
 import { useState, useCallback } from 'react'
 
 const useQueryString = (key, initialValue) => {

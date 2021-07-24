@@ -29,13 +29,16 @@ const paragraph = ({
   weight
 }) => (
   <p
-    className={cssClass(className,
+    className={cssClass(
+      className,
       color ? `${className}-color--${color}` : undefined,
       size ? `${className}-size--${size}` : undefined,
       padding ? `${className}-padding--${padding}` : undefined,
       align ? `${className}-align--${align}` : undefined,
       line ? `${className}-line--${line}` : undefined,
-      weight ? `${className}-weight--${weight}` : undefined)}>
+      weight ? `${className}-weight--${weight}` : undefined
+    )}
+  >
     {children}
   </p>
 )
@@ -58,10 +61,7 @@ paragraph.propTypes = {
   /**
    * Classname, default `section`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Color, default `accent-1`
    */

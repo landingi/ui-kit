@@ -19,12 +19,7 @@ const cssClass = styles(scss)
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
  */
-const tabs = ({
-  initialValue,
-  className,
-  children,
-  ...restProps
-}) => {
+const tabs = ({ initialValue, className, children, ...restProps }) => {
   const [activeTab, changeTab] = useState(initialValue)
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const tabProviderValue = {
@@ -35,8 +30,8 @@ const tabs = ({
   return (
     <TabContext.Provider value={tabProviderValue}>
       <div
-        className={cssClass(className)}
-        {...restProps}>
+className={cssClass(className)}
+{...restProps}>
         {children}
       </div>
     </TabContext.Provider>
@@ -61,10 +56,7 @@ tabs.propTypes = {
   /**
    * Classname, default `tabs__wrapper`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Children elements
    */

@@ -36,11 +36,7 @@ const panel = ({
     'panel--shadow-none': hasShadow === false
   })
 
-  return (
-    <div className={cssClass(className, elementClasses)}>
-        {children}
-    </div>
-  )
+  return <div className={cssClass(className, elementClasses)}>{children}</div>
 }
 
 /**
@@ -61,10 +57,7 @@ panel.propTypes = {
   /**
    * Classname, default `panel`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Variant
    */

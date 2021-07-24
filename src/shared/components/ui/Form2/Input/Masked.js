@@ -98,7 +98,8 @@ maskedInput.propTypes = {
   translate: PropTypes.bool,
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])),
+    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
+  ),
   guide: PropTypes.bool,
   focused: PropTypes.string
 }

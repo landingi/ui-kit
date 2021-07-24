@@ -23,10 +23,8 @@ import Image from 'shared/components/ui/Image'
  * @return {object} An object of styles
  */
 const ModalAnimation = posed.div({
-  enter: {
-  },
-  exit: {
-  }
+  enter: {},
+  exit: {}
 })
 
 /**
@@ -106,78 +104,68 @@ const modal = ({
     <div className={scss.modal__header}>
       {title && <ModalHeader title={title} />}
 
-      {image && (
-        <Image
-          src={image}
-          size="auto"
-          height={20} />
-      )}
+      {image && <Image
+src={image}
+size="auto"
+height={20} />}
 
       <div>
         {isMarkAsSpamVisible && (
-            <Button
-                variant='transparent'
-                onClick={onMarkAsSpam}>
-              <FontAwesomeIcon icon="ban" />
+          <Button
+variant="transparent"
+onClick={onMarkAsSpam}>
+            <FontAwesomeIcon icon="ban" />
 
-              <FormattedMessage id="word.mark-as-spam" />
-            </Button>
+            <FormattedMessage id="word.mark-as-spam" />
+          </Button>
         )}
 
         {isEditable && (
           <Button
-            variant="icon"
-            onClick={onEdit}>
+variant="icon"
+onClick={onEdit}>
             <FontAwesomeIcon icon="pencil-alt" />
           </Button>
         )}
 
         <Spreader spread="tiny" />
 
-        {isClosable && (
-          <Close onClick={onClick} />
-        )}
+        {isClosable && <Close onClick={onClick} />}
       </div>
     </div>
   )
 
   const renderComponent = () => (
     <div className={cssClass('modal__component')}>
-      <div className={cssClass('modal__component--child')}>
-        {component}
-      </div>
+      <div className={cssClass('modal__component--child')}>{component}</div>
 
-      {isClosable && (
-            <Close onClick={onClick} />
-      )}
+      {isClosable && <Close onClick={onClick} />}
     </div>
   )
 
   return (
     <Fragment>
       <PoseGroup
-        animateOnMount
-        flipMove={false}>
+animateOnMount
+flipMove={false}>
         {isActive && (
           <ModalAnimation
-            key='ModalAnimation'
-            className={scss.dialog}>
-            <div className={cssClass(className,
-              {
+key="ModalAnimation"
+className={scss.dialog}>
+            <div
+              className={cssClass(className, {
                 'modal--fullscreen': isFullscreen,
                 'modal--center': isCentered
-              })}>
+              })}
+            >
               {isLoading ? (
                 <div className={scss.modal__body}>
                   <Loader />
                 </div>
               ) : (
                 <Fragment>
-                  {(isClosable || title || image || isEditable) && (
-                    !isComponent
-                      ? renderTitle()
-                      : renderComponent()
-                  )}
+                  {(isClosable || title || image || isEditable) &&
+                    (!isComponent ? renderTitle() : renderComponent())}
 
                   {hasHeaderDivider && (
                     <Fragment>
@@ -185,33 +173,31 @@ const modal = ({
 
                       <Divider />
                     </Fragment>
-
                   )}
 
                   <div className={scss.modal__body}>
                     <div style={overflowStyle}>
-                      <Overflow>
-                        {children}
-                      </Overflow>
+                      <Overflow>{children}</Overflow>
                     </div>
                   </div>
 
                   {hasFooter && (
-                    <ModalFooter
-                      align="right">
+                    <ModalFooter align="right">
                       {hasCustomButton ? (
                         <Button
                           variant="secondary"
                           size="medium"
                           onClick={onClickCustomButton}
-                          isDisabled={isCustomButtonDisabled}>
+                          isDisabled={isCustomButtonDisabled}
+                        >
                           <FormattedMessage id={`${i18Cancel}`} />
                         </Button>
                       ) : (
                         <Button
                           variant="secondary"
                           size="medium"
-                          onClick={onClick}>
+                          onClick={onClick}
+                        >
                           <FormattedMessage id={`${i18Cancel}`} />
                         </Button>
                       )}
@@ -223,11 +209,12 @@ const modal = ({
                         onClick={onAction}
                         isDisabled={isButtonDisabled}
                         isLoading={isButtonLoading}
-                        hasIcon={!!actionIcon}>
+                        hasIcon={!!actionIcon}
+                      >
                         {actionIcon && (
                           <FontAwesomeIcon
-                            icon={actionIcon}
-                            size='xs' />
+icon={actionIcon}
+size="xs" />
                         )}
 
                         <FormattedMessage id={`${i18Action}`} />
@@ -241,8 +228,8 @@ const modal = ({
         )}
       </PoseGroup>
 
-      {isActive && (<Backdrop onClick={onClick} />)}
-    </Fragment >
+      {isActive && <Backdrop onClick={onClick} />}
+    </Fragment>
   )
 }
 
@@ -264,10 +251,7 @@ modal.propTypes = {
   /**
    * Classname, default `modal`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Gets called when the user clicks
    *

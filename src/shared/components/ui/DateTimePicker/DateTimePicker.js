@@ -8,10 +8,7 @@ import scss from './DateTimePicker.scss'
 import { DateRange } from 'react-date-range'
 import Button from 'shared/components/ui/Button'
 import { FormattedMessage } from 'react-intl'
-import {
-  getAgoDate,
-  getTodayDate
-} from 'shared/helpers/data'
+import { getAgoDate, getTodayDate } from 'shared/helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from 'shared/helpers/i18n'
 
@@ -39,8 +36,12 @@ const dateTimePicker = ({ setDate, minDate }) => {
   ])
 
   const addElements = () => {
-    document.querySelector('.rdrNextButton i').classList.add('fas', 'fa-arrow-right')
-    document.querySelector('.rdrPprevButton i').classList.add('fas', 'fa-arrow-left')
+    document
+      .querySelector('.rdrNextButton i')
+      .classList.add('fas', 'fa-arrow-right')
+    document
+      .querySelector('.rdrPprevButton i')
+      .classList.add('fas', 'fa-arrow-left')
     const monthArrow = document.createElement('i')
     const yearArrow = document.createElement('i')
     monthArrow.classList.add('fas', 'fa-caret-down')
@@ -74,8 +75,8 @@ const dateTimePicker = ({ setDate, minDate }) => {
       />
 
       <Button
-        onClick={handleApply}
-        size='tiny'>
+onClick={handleApply}
+size="tiny">
         <FormattedMessage id="word.apply" />
       </Button>
     </div>

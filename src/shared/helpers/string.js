@@ -4,7 +4,8 @@
  * @param {string} string - test string
  * @return {bool} return true or false
  */
-export const hasLowerCase = str => !!(str && str.toUpperCase() !== str && str.length > 0)
+export const hasLowerCase = str =>
+  !!(str && str.toUpperCase() !== str && str.length > 0)
 
 /**
  * hasUpperCase - check if string include any lowercase character
@@ -12,7 +13,8 @@ export const hasLowerCase = str => !!(str && str.toUpperCase() !== str && str.le
  * @param {string} string - test string
  * @return {bool} return true or false
  */
-export const hasUpperCase = str => !!(str && str.toLowerCase() !== str && str.length > 0)
+export const hasUpperCase = str =>
+  !!(str && str.toLowerCase() !== str && str.length > 0)
 
 /**
  * hasNumber - check if string include any lowercase character

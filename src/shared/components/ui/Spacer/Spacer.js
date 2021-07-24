@@ -12,7 +12,9 @@ const cssClass = styles(scss)
  * @param {string} props.space - space size
  * @return {object} An object of children element
  */
-const spacer = ({ className, space }) => <div className={cssClass(className, `spacer--${space}`)} />
+const spacer = ({ className, space }) => (
+  <div className={cssClass(className, `spacer--${space}`)} />
+)
 
 /**
  * Display name
@@ -28,21 +30,11 @@ spacer.propTypes = {
   /**
    * Classname, default `spacer`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Space
    */
-  space: PropTypes.oneOf([
-    'tiny',
-    'small',
-    'medium',
-    'large',
-    'big',
-    'huge'
-  ])
+  space: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'big', 'huge'])
 }
 
 /**

@@ -13,7 +13,7 @@ const cssClass = styles(scss)
  */
 const loader = ({ className }) => (
   <Fragment>
-    <Spacer space='large' />
+    <Spacer space="large" />
 
     <div className={cssClass(className)}>
       <div className={scss.rect1} />
@@ -43,10 +43,7 @@ loader.propTypes = {
   /**
    * Classname, default `loader__spin`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ])
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 /**

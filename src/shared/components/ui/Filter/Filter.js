@@ -17,12 +17,7 @@ import PropTypes from 'prop-types'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-const Filter = ({
-  values,
-  setValue,
-  initialValue,
-  localStorageKey
-}) => {
+const Filter = ({ values, setValue, initialValue, localStorageKey }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
 
@@ -40,21 +35,19 @@ const Filter = ({
 
   return (
     <Dropdown
-      label={filterLabel}
-      size='medium'>
+label={filterLabel}
+size="medium">
       <List>
-        {values.map(({
-          value, label
-        }) => (
+        {values.map(({ value, label }) => (
           <ListItem
-            key={uuid()}
-            variant='dropdown'>
+key={uuid()}
+variant="dropdown">
             <Button
-              tag='a'
-              variant='dropdown'
+              tag="a"
+              variant="dropdown"
               // eslint-disable-next-line react/jsx-no-bind
               onClick={() => setFilter(label, value)}
-              >
+            >
               {label}
             </Button>
           </ListItem>
@@ -77,11 +70,11 @@ Filter.displayName = 'Select in dropdown'
 Filter.propTypes = {
   values: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
-      value: PropTypes.oneOfType([
+      label: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.number
-      ])
+        PropTypes.instanceOf(Object)
+      ]),
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     })
   ).isRequired,
   setValue: PropTypes.func,

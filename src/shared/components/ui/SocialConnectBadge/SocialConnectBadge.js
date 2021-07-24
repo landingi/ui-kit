@@ -21,20 +21,27 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const socialConnectBadge = ({ className, variant, social }) => (
-  <div className={cssClass(className, `social-connect-badge-${social}--${variant}`)}>
+  <div
+    className={cssClass(
+      className,
+      `social-connect-badge-${social}--${variant}`
+    )}
+  >
     <Button
-      size="medium"
-      hasIcon>
+size="medium"
+hasIcon>
       <FontAwesomeIcon icon={['fab', `${social}`]} />
 
       <span>
-        {variant === 'connect' ? <FormattedMessage id='word.connect' /> : <FormattedMessage id='word.disconnect' />}
+        {variant === 'connect' ? (
+          <FormattedMessage id="word.connect" />
+        ) : (
+          <FormattedMessage id="word.disconnect" />
+        )}
 
-        <span>
-          { social }
-        </span>
+        <span>{social}</span>
 
-        <FormattedMessage id='word.account' />
+        <FormattedMessage id="word.account" />
       </span>
     </Button>
   </div>

@@ -34,7 +34,7 @@ const rowOptions = ({
 }) => {
   return (
     <div className={cssClass(className)}>
-      <List variant='inline'>
+      <List variant="inline">
         <ListItem>
           <FormattedMessage
             id="word.table.selected"
@@ -45,8 +45,8 @@ const rowOptions = ({
         </ListItem>
 
         {Component && <Component
-          selectedItems={selected}
-          {...props} />}
+selectedItems={selected}
+{...props} />}
 
         {options.includes(HAS_CHANGE_STATUS) && (
           <ListItem>
@@ -57,13 +57,13 @@ const rowOptions = ({
         {options.includes(HAS_DELETE) && (
           <ListItem>
             <Button
-              onClick={handleDelete}
-              variant='transparent'>
+onClick={handleDelete}
+variant="transparent">
               <FontAwesomeIcon
-                icon='trash-alt'
-                size='sm' />
+icon="trash-alt"
+size="sm" />
 
-              <FormattedMessage id='word.delete' />
+              <FormattedMessage id="word.delete" />
             </Button>
           </ListItem>
         )}
@@ -94,10 +94,7 @@ rowOptions.propTypes = {
   /**
    * Classname, default `table__selected-options`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Handle read
    */

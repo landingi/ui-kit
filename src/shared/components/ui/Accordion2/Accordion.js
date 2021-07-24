@@ -25,7 +25,8 @@ const Accordion = ({ className, data, hasNumber }) => (
           key={uuid()}
           number={hasNumber ? index + 1 : null}
           title={title}
-          content={content} />
+          content={content}
+        />
       )
     })}
   </div>
@@ -45,10 +46,7 @@ Accordion.propTypes = {
   /**
    * Classname
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Data
    */
@@ -56,7 +54,8 @@ Accordion.propTypes = {
     PropTypes.shape({
       title: PropTypes.node.isRequired,
       content: PropTypes.node.isRequired
-    })).isRequired,
+    })
+  ).isRequired,
   /**
    * HasNumber
    */

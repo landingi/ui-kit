@@ -19,18 +19,16 @@ const cssClass = styles(scss)
  * @param {string} props.href - href
  * @param {string} props.label - label to display
  */
-const customLink = ({
-  className,
-  variant,
-  label,
-  href,
-  target,
-  size
-}) => (
+const customLink = ({ className, variant, label, href, target, size }) => (
   <a
     href={href}
     target={target}
-    className={cssClass(className, `custom-link--${variant}`, `custom-link--${size}`)}>
+    className={cssClass(
+      className,
+      `custom-link--${variant}`,
+      `custom-link--${size}`
+    )}
+  >
     {label}
   </a>
 )

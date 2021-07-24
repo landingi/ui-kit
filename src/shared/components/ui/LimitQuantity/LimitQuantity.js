@@ -13,18 +13,13 @@ const cssClass = styles(scss)
  * @param {string} props.quantity - quantity to display
  * @return {object} An object of children element
  */
-const limitQuantity = ({
-  limit,
-  quantity
-}) => (
+const limitQuantity = ({ limit, quantity }) => (
   <div className={cssClass('limit-quantity')}>
     <span>
       {formatNumeric(quantity)}
 
       <span className={cssClass('limit-quantity--limit')}>
-        {limit === -1
-          ? <span> / &#8734;</span>
-          : ` / ${formatNumeric(limit)}`}
+        {limit === -1 ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
       </span>
     </span>
   </div>

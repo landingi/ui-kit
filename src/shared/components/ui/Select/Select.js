@@ -13,22 +13,17 @@ import uuid from 'react-uuid'
  * @param {function} props.onChange - on change handler
  * @return {object} An object of children element
  */
-const select = ({
-  value,
-  data,
-  name,
-  onChange
-}) => (
+const select = ({ value, data, name, onChange }) => (
   <select
-    className={scss.select}
-    onChange={onChange}
-    value={value}
-    name={name}>
-    {data.map((item) => (
+className={scss.select}
+onChange={onChange}
+value={value}
+name={name}>
+    {data.map(item => (
       <Option
-        key={uuid()}
-        value={item.value}
-        label={item.label} />
+key={uuid()}
+value={item.value}
+label={item.label} />
     ))}
   </select>
 )
@@ -47,10 +42,7 @@ select.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * Name
    */

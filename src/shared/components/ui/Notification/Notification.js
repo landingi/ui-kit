@@ -34,21 +34,15 @@ const notification = ({
   <div className={cssClass(className, `notification--${type}`)}>
     <div className={scss.content}>
       <FontAwesomeIcon
-        size='sm'
-        icon={mapIconToClass(type) || 'check'} />
+size="sm"
+icon={mapIconToClass(type) || 'check'} />
 
-      <p className={scss.notification__message}>
-        {children}
-      </p>
+      <p className={scss.notification__message}>{children}</p>
 
-      {isClosable && (
-        <Close onClick={onClick} />
-      )}
+      {isClosable && <Close onClick={onClick} />}
     </div>
 
-    {hasTime && (
-      <span className={scss.time} />
-    )}
+    {hasTime && <span className={scss.time} />}
   </div>
 )
 
@@ -74,10 +68,7 @@ notification.propTypes = {
   /**
    * Classname, default `notification`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    *  type of notification `info, success, warning, alert`
    */

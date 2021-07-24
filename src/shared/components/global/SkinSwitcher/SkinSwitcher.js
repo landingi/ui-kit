@@ -15,20 +15,17 @@ const skinSwitcher = ({ handleChangeSkin, isWhitelabel }) => {
   const handleChangeCallback = useCallback(label => handleChangeSkin(label))
 
   return (
-    <div className='skin-switcher'>
-      <Button
-        onClick={useCallback(() => handleChangeCallback('default'))}>
+    <div className="skin-switcher">
+      <Button onClick={useCallback(() => handleChangeCallback('default'))}>
         <Image src={switcherLogo(isWhitelabel)} />
       </Button>
 
-      <Button
-        onClick={useCallback(() => handleChangeCallback('dark'))}>
-        <Image src='https://images.assets-landingi.com/app-ui/dark.svg' />
+      <Button onClick={useCallback(() => handleChangeCallback('dark'))}>
+        <Image src="https://images.assets-landingi.com/app-ui/dark.svg" />
       </Button>
 
-      <Button
-        onClick={useCallback(() => handleChangeCallback('white'))}>
-        <Image src='https://images.assets-landingi.com/app-ui/light.svg' />
+      <Button onClick={useCallback(() => handleChangeCallback('white'))}>
+        <Image src="https://images.assets-landingi.com/app-ui/light.svg" />
       </Button>
     </div>
   )

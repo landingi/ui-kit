@@ -30,8 +30,10 @@ export const isOutOfViewport = elem => {
   const out = {}
   out.top = elem.top < 0
   out.left = elem.left < 0
-  out.bottom = elem.bottom > (window.innerHeight || document.documentElement.clientHeight)
-  out.right = elem.right > (window.innerWidth || document.documentElement.clientWidth)
+  out.bottom =
+    elem.bottom > (window.innerHeight || document.documentElement.clientHeight)
+  out.right =
+    elem.right > (window.innerWidth || document.documentElement.clientWidth)
   out.any = out.top || out.left || out.bottom || out.right
   out.all = out.top && out.left && out.bottom && out.right
 
@@ -43,7 +45,8 @@ export const isOutOfViewport = elem => {
  * @param {node} element The element
  * @return {object} getBoundingClientRect()
  */
-export const getBoundings = element => element && element.getBoundingClientRect()
+export const getBoundings = element =>
+  element && element.getBoundingClientRect()
 
 /**
  * Element is in view vertically
@@ -61,8 +64,8 @@ export const isInViewVertical = element => {
   if (top > clientHeight) return false
   do {
     rect = getBoundings(parentNode)
-    if ((top <= bottom) === false) return false
-    if ((top + height) <= top) return false
+    if (top <= bottom === false) return false
+    if (top + height <= top) return false
   } while (parentNode !== document.body)
 
   return true

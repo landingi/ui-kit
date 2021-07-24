@@ -59,11 +59,13 @@ const input = ({
   })
 
   const valueProp = {
-    ...(controlledValue ? {
-      value
-    } : {
-      defaultValue: value
-    })
+    ...(controlledValue
+      ? {
+          value
+        }
+      : {
+          defaultValue: value
+        })
   }
 
   return (
@@ -96,8 +98,8 @@ const input = ({
 
       {label && (
         <Label
-          id={name}
-          className={scss.input__label}>
+id={name}
+className={scss.input__label}>
           {translate ? <FormattedMessage id={`${label}`} /> : label}
         </Label>
       )}
@@ -106,10 +108,11 @@ const input = ({
         <Tooltip
           className="input__tooltip"
           placement="bottom"
-          content={tooltip}>
+          content={tooltip}
+        >
           <FontAwesomeIcon
-            color="#2550AA"
-            icon="exclamation-circle" />
+color="#2550AA"
+icon="exclamation-circle" />
         </Tooltip>
       )}
     </div>
@@ -213,7 +216,10 @@ input.propTypes = {
   /**
    * Tooltip content
    */
-  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  tooltip: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   min: PropTypes.number
 }
 

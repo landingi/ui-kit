@@ -20,8 +20,10 @@ const statsBadge = ({ color, quantity, description }) => {
     <div className={cssClass('container', `container--${color}`)}>
       <div className={cssClass('container--description')}>
         <Heading
-          level={2}
-          margin='none'>{quantity}</Heading>
+level={2}
+margin="none">
+          {quantity}
+        </Heading>
 
         <Heading level={5}>
           <FormattedMessage id={description} />

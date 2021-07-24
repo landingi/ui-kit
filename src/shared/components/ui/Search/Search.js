@@ -1,10 +1,4 @@
-import React, {
-  memo,
-  useState,
-  useEffect,
-  useCallback,
-  useRef
-} from 'react'
+import React, { memo, useState, useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -70,7 +64,10 @@ const Search = ({
    * Handle input keyup
    * @type {function}
    */
-  const handleOnKeyUp = useCallback(event => setClearActive(event.target.value), [])
+  const handleOnKeyUp = useCallback(
+    event => setClearActive(event.target.value),
+    []
+  )
 
   /**
    * Handle input key down
@@ -110,9 +107,7 @@ const Search = ({
    * useEffect
    */
   useEffect(() => {
-    autoFocus && variant === 'input' && (
-      inputRef.current.focus()
-    )
+    autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
   const elementClasses = cssClass({
@@ -121,74 +116,70 @@ const Search = ({
   })
 
   return (
-      <Tag onSubmit={handleSubmit}>
-        <div className={cssClass(className, elementClasses, `search--${size}`)}>
-          {variant === 'input' && (
-            (onSubmit || onProtectedSubmit) ? (
-              <div className={scss.search__icon_button}>
-                <Button
-                  variant='icon'
-                  type={onProtectedSubmit ? 'button' : 'submit'}
-                  size='input'
-                  isDisabled={!isClearActive}
-                  onClick={handleProtectedSubmit}>
-                  <FontAwesomeIcon icon="search" />
-                </Button>
-              </div>
-            ) : (
-              <div className={scss.search__icon}>
-                <FontAwesomeIcon
-                  size='sm'
-                  icon='search'
-                />
-              </div>
-            )
-          )}
-
-          {(children && variant === 'button') && (
-            <Input
-              label={intl.formatMessage({ id: label })}
-              name='search'
-              type='text'
-              onChange={onChange}
-              onKeyDown={onKeyDown}
-              autoFocus={autoFocus} />
-          )}
-
-          {variant === 'input' && (
-            <input
-              autoFocus={autoFocus}
-              ref={inputRef}
-              className={scss.search__input}
-              type='text'
-              name='search'
-              placeholder={intl.formatMessage({ id: placeholder })}
-              onChange={onChange}
-              onKeyDown={handleOnKeyDown}
-              onKeyUp={handleOnKeyUp} />
-          )}
-
-          {(isClearActive && variant === 'input') && (
-            <div
-              className={scss.search__clean}
-            >
+    <Tag onSubmit={handleSubmit}>
+      <div className={cssClass(className, elementClasses, `search--${size}`)}>
+        {variant === 'input' &&
+          (onSubmit || onProtectedSubmit ? (
+            <div className={scss.search__icon_button}>
               <Button
-                variant='icon'
-                size='input'
-                onClick={handleCleanOnClick}>
-                <FontAwesomeIcon
-                  size='sm'
-                  icon='times'
-                />
+                variant="icon"
+                type={onProtectedSubmit ? 'button' : 'submit'}
+                size="input"
+                isDisabled={!isClearActive}
+                onClick={handleProtectedSubmit}
+              >
+                <FontAwesomeIcon icon="search" />
               </Button>
             </div>
-          )}
+          ) : (
+            <div className={scss.search__icon}>
+              <FontAwesomeIcon
+size="sm"
+icon="search" />
+            </div>
+          ))}
 
-          {(children && variant === 'button') && (
-            children
-          )}
-        </div>
-      </Tag>
+        {children && variant === 'button' && (
+          <Input
+            label={intl.formatMessage({ id: label })}
+            name="search"
+            type="text"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            autoFocus={autoFocus}
+          />
+        )}
+
+        {variant === 'input' && (
+          <input
+            autoFocus={autoFocus}
+            ref={inputRef}
+            className={scss.search__input}
+            type="text"
+            name="search"
+            placeholder={intl.formatMessage({ id: placeholder })}
+            onChange={onChange}
+            onKeyDown={handleOnKeyDown}
+            onKeyUp={handleOnKeyUp}
+          />
+        )}
+
+        {isClearActive && variant === 'input' && (
+          <div className={scss.search__clean}>
+            <Button
+variant="icon"
+size="input"
+onClick={handleCleanOnClick}>
+              <FontAwesomeIcon
+size="sm"
+icon="times" />
+            </Button>
+          </div>
+        )}
+
+        {children && variant === 'button' && children}
+      </div>
+    </Tag>
   )
 }
 
@@ -248,10 +239,7 @@ Search.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * handle on form submit action
    */

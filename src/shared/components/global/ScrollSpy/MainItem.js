@@ -8,59 +8,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollSpyShape } from 'shared/shapes'
 
 /**
-* MainItem - stateless menu items presentational component
-* @param {object} props - props
-* @param {array} props.item - array of items
-* @param {variant} props.variant - variant
-* @param {function} props.onClick - click handler
-* @return {object} An object of children element
-*/
+ * MainItem - stateless menu items presentational component
+ * @param {object} props - props
+ * @param {array} props.item - array of items
+ * @param {variant} props.variant - variant
+ * @param {function} props.onClick - click handler
+ * @return {object} An object of children element
+ */
 
 const item = ({ item, onClick }) => {
   const { title, icon, children } = item
 
   return (
-    <ListItem
-      variant='menu'>
-      <Button
-        onClick={onClick}>
+    <ListItem variant="menu">
+      <Button onClick={onClick}>
         <FontAwesomeIcon
-          size='1x'
-          icon={icon}
-        />
+size="1x"
+icon={icon} />
 
-        <span>
-          {title}
-        </span>
+        <span>{title}</span>
       </Button>
 
       <div>
-        { children &&
-            children.map(item => (
-              <Item
-                key={uuid()}
-                item={item} />
-            )
-            )}
+        {children && children.map(item => (<Item
+key={uuid()}
+item={item} />))}
       </div>
     </ListItem>
   )
 }
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 item.displayName = 'MainItem'
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 item.propTypes = {
   /**
-  * Menu item
-  */
+   * Menu item
+   */
   item: scrollSpyShape.isRequired,
   /**
    * Gets called on click
@@ -72,9 +63,9 @@ item.propTypes = {
 }
 
 /**
-* The default properties.
-* @type {Object}
-*/
+ * The default properties.
+ * @type {Object}
+ */
 item.defaultProps = {
   onClick: () => null
 }

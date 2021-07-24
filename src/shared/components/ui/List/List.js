@@ -14,12 +14,7 @@ const cssClass = styles(scss)
  * @param {string} props.listStyle - list style
  * @return {object} An object of children element
  */
-const list = ({
-  children,
-  variant,
-  className,
-  listStyle
-}) => {
+const list = ({ children, variant, className, listStyle }) => {
   const elementClasses = cssClass({
     'list--inline': variant === 'inline',
     'list--ordered-decimal': listStyle === 'ordered-decimal',
@@ -56,10 +51,7 @@ list.propTypes = {
   /**
    * Classname, default `list`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Classname, default `list`
    */

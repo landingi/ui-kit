@@ -24,16 +24,16 @@ registerIcons()
  * @return {object} An object of children element
  */
 const ActionsRow = ({ deleteRow, detailsRow, userPermissions }) => (
-  <List variant='inline'>
+  <List variant="inline">
     <ListItem>
       <Button
-        onClick={detailsRow}
-        variant='transparent'>
+onClick={detailsRow}
+variant="transparent">
         <FontAwesomeIcon
-          icon='list-alt'
-          size='sm' />
+icon="list-alt"
+size="sm" />
 
-        <FormattedMessage id='word.details' />
+        <FormattedMessage id="word.details" />
       </Button>
     </ListItem>
 
@@ -41,13 +41,13 @@ const ActionsRow = ({ deleteRow, detailsRow, userPermissions }) => (
       {!usePermissions(userPermissions, READ_ONLY) && (
         <ListItem>
           <Button
-            onClick={deleteRow}
-            variant='transparent'>
+onClick={deleteRow}
+variant="transparent">
             <FontAwesomeIcon
-              icon='trash-alt'
-              size='sm' />
+icon="trash-alt"
+size="sm" />
 
-            <FormattedMessage id='word.delete' />
+            <FormattedMessage id="word.delete" />
           </Button>
         </ListItem>
       )}

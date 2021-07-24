@@ -7,16 +7,16 @@ import scss from './TimingToast.scss'
 import { styles } from 'shared/helpers/css'
 
 /**
-* Exports css classes from SCSS file
-* @return {object} An object of styles
-*/
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
-* Toast Animation, exports React-pose animations
-* @see {@link https://popmotion.io/pose/api/} for further information.
-* @return {object} An object of styles
-*/
+ * Toast Animation, exports React-pose animations
+ * @see {@link https://popmotion.io/pose/api/} for further information.
+ * @return {object} An object of styles
+ */
 const toastProps = {
   open: {
     bottom: 40
@@ -33,11 +33,14 @@ const timingToast = () => {
   const [message, setMessage] = useState('')
   const [type, setType] = useState('success')
 
-  const handleToastToggle = useCallback((message, type) => {
-    setActive(!isActive)
-    message && setMessage(message)
-    type && setType(type)
-  }, [isActive, message, type])
+  const handleToastToggle = useCallback(
+    (message, type) => {
+      setActive(!isActive)
+      message && setMessage(message)
+      type && setType(type)
+    },
+    [isActive, message, type]
+  )
 
   const closeToast = useCallback(() => setActive(false), [isActive])
 
@@ -51,17 +54,22 @@ const timingToast = () => {
 
   return (
     <PoseGroup
-      flipMove={false}
-      animateOnMount>
+flipMove={false}
+animateOnMount>
       <TimingToastAnimation
         pose={isActive ? 'open' : 'closed'}
-        key='toastanimation'
-        className={cssClass('toast', isActive ? 'toast--visible' : 'toast--hidden')}>
+        key="toastanimation"
+        className={cssClass(
+          'toast',
+          isActive ? 'toast--visible' : 'toast--hidden'
+        )}
+      >
         <Notification
           type={type}
           isClosable
           onClick={closeToast}
-          hasTime={isActive}>
+          hasTime={isActive}
+        >
           {message}
         </Notification>
       </TimingToastAnimation>
@@ -72,6 +80,6 @@ const timingToast = () => {
 export default timingToast
 
 /**
-* Display name
-* @type {string}
-*/timingToast.displayName = 'Toast timing'
+ * Display name
+ * @type {string}
+ */ timingToast.displayName = 'Toast timing'

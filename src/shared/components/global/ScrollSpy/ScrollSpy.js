@@ -7,11 +7,11 @@ import { scrollSpyShape } from 'shared/shapes'
 import useScrollSpy from 'shared/helpers/hooks/useScrollSpy'
 
 /**
-* ScrollSpy - stateless presentational component
-* @param {object} props - props
-* @param {array} props.elements - array of items
-* @return {object} An object of children element
-*/
+ * ScrollSpy - stateless presentational component
+ * @param {object} props - props
+ * @param {array} props.elements - array of items
+ * @return {object} An object of children element
+ */
 const scrollSpy = ({ elements }) => {
   const sectionRefs = [useRef(null), useRef(null)]
 
@@ -29,33 +29,32 @@ const scrollSpy = ({ elements }) => {
 
   return (
     <List>
-      {
-        elements.map(item => (
-          <Item
-            key={uuid()}
-            item={item}
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => handleOnClick(item.element)} />
-        ))
-      }
+      {elements.map(item => (
+        <Item
+          key={uuid()}
+          item={item}
+          // eslint-disable-next-line react/jsx-no-bind
+          onClick={() => handleOnClick(item.element)}
+        />
+      ))}
     </List>
   )
 }
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 scrollSpy.displayName = 'ScrollSpy'
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 scrollSpy.propTypes = {
   /**
-  * List of items
-  */
+   * List of items
+   */
   elements: PropTypes.arrayOf(scrollSpyShape).isRequired
 }
 

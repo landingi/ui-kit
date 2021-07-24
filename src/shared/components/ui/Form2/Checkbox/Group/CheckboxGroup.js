@@ -16,13 +16,7 @@ import { FormattedMessage } from 'react-intl'
  * @param {object} props.chidren
  * @return {object} An object of children element
  */
-const checkboxGroup = ({
-  errors,
-  touched,
-  label,
-  name,
-  children
-}) => (
+const checkboxGroup = ({ errors, touched, label, name, children }) => (
   <div className="form-field">
     {label && (
       <Label>

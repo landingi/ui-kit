@@ -14,8 +14,7 @@ const cssClass = styles(scss)
 const card = ({ children, variant }) => (
   <div className={cssClass('card', `card--${variant}`)}>
     <div className={cssClass('container')}>
-      {React.Children.map(children, child =>
-        React.cloneElement(child))}
+      {React.Children.map(children, child => React.cloneElement(child))}
     </div>
   </div>
 )

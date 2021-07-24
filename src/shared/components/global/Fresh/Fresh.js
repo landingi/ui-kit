@@ -16,15 +16,7 @@ import Button from 'shared/components/ui/Button'
  * @param {object} props.intl - react intl formatMessage function
  * @return {object} An object of children element
  */
-const Fresh = ({
-  name,
-  mail,
-  subject,
-  description,
-  variant,
-  size,
-  intl
-}) => {
+const Fresh = ({ name, mail, subject, description, variant, size, intl }) => {
   const isFreshChat = !!window.fcWidget
   const isFreshDesk = !!window.FreshworksWidget
 
@@ -32,13 +24,17 @@ const Fresh = ({
    * open mail
    * @type {function}
    */
-  const handleLimitExceededMail = () => `mailto:${mail}?subject=${intl.formatMessage({ id: subject })}&body=${intl.formatMessage({ id: description })}`
+  const handleLimitExceededMail = () =>
+    `mailto:${mail}?subject=${intl.formatMessage({
+      id: subject
+    })}&body=${intl.formatMessage({ id: description })}`
 
   /**
    * open FreshChat
    * @type {function}
    */
-  const openFreshChat = () => window.fcWidget.open({ replyText: intl.formatMessage({ id: description }) })
+  const openFreshChat = () =>
+    window.fcWidget.open({ replyText: intl.formatMessage({ id: description }) })
 
   /**
    * open FreshDesk
@@ -52,27 +48,25 @@ const Fresh = ({
     })
   }
 
-  return (
-    isFreshChat || isFreshDesk
-      ? <Button
-          onClick={
-            isFreshChat
-              ? openFreshChat
-              : openFreshDesk
-            }
-          variant={variant}
-          size={size}>
-          <FormattedMessage id={name} />
-        </Button>
-      : <Button
-          tag='a'
-          href={handleLimitExceededMail()}
-          target='_blank'
-          variant={variant}
-          size={size}
-          buttonStyle >
-          <FormattedMessage id={name} />
-        </Button>
+  return isFreshChat || isFreshDesk ? (
+    <Button
+      onClick={isFreshChat ? openFreshChat : openFreshDesk}
+      variant={variant}
+      size={size}
+    >
+      <FormattedMessage id={name} />
+    </Button>
+  ) : (
+    <Button
+      tag="a"
+      href={handleLimitExceededMail()}
+      target="_blank"
+      variant={variant}
+      size={size}
+      buttonStyle
+    >
+      <FormattedMessage id={name} />
+    </Button>
   )
 }
 

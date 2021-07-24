@@ -14,9 +14,7 @@ const cssClass = styles(scss)
  */
 const inputError = ({ error, className }) =>
   error ? (
-    <span className={cssClass(className)}>
-      {error}
-    </span>
+    <span className={cssClass(className)}>{error}</span>
   ) : (
     <span className={cssClass(className)} />
   )

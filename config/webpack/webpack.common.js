@@ -1,6 +1,5 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const environmentVariables = require('./webpack.environment.js')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
@@ -44,7 +43,6 @@ module.exports = {
       threads: true,
       cache: true,
       formatter: 'table'
-    }),
-    environmentVariables()
+    })
   ]
 }

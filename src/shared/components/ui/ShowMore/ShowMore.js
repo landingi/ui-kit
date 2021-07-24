@@ -1,8 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-  useEffect
-} from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import scss from './ShowMore.scss'
@@ -19,23 +15,21 @@ import Html from 'shared/components/global/Html'
  * @param {object} props.children - children
  * @return {Object} An object of children element
  */
-const showMore = ({
-  content,
-  intl,
-  extraClassname,
-  children
-}) => {
+const showMore = ({ content, intl, extraClassname, children }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [display, setDisplay] = useState('none')
   const [text, setText] = useState('')
 
-  const handleOnClick = useCallback(event => {
-    event.preventDefault()
+  const handleOnClick = useCallback(
+    event => {
+      event.preventDefault()
 
-    setIsOpen(current => !current)
+      setIsOpen(current => !current)
 
-    setDisplay(display !== 'none' ? 'none' : null)
-  }, [isOpen])
+      setDisplay(display !== 'none' ? 'none' : null)
+    },
+    [isOpen]
+  )
 
   useEffect(() => {
     const text = intl.formatMessage({ id: content })
@@ -45,29 +39,29 @@ const showMore = ({
       : setText(text)
   }, [isOpen])
 
-  return (
-    text
-      ? <div className={scss.container}>
-          <Html
-            value={text}
-            className={extraClassname} />
+  return text ? (
+    <div className={scss.container}>
+      <Html
+value={text}
+className={extraClassname} />
 
-            <button
-              type='button'
-              onClick={handleOnClick}
-              className={scss.button}>
-              {isOpen
-                ? <FormattedMessage id='show.less' />
-                : <FormattedMessage id='show.more' />}
-            </button>
+      <button
+type="button"
+onClick={handleOnClick}
+className={scss.button}>
+        {isOpen ? (
+          <FormattedMessage id="show.less" />
+        ) : (
+          <FormattedMessage id="show.more" />
+        )}
+      </button>
 
-            <Spacer space='small' />
+      <Spacer space="small" />
 
-            {isOpen && children
-              ? (children || null)
-              : null}
-        </div>
-      : <Loader />
+      {isOpen && children ? children || null : null}
+    </div>
+  ) : (
+    <Loader />
   )
 }
 

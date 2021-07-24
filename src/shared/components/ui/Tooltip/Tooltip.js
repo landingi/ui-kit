@@ -34,30 +34,37 @@ const Tooltip = ({
 }) => {
   const tooltipUUID = uuid()
 
-  const showOnClickProps = showOnClick ? {
-    delayHide: 1000,
-    event: 'click',
-    afterShow: () => ReactTooltip.hide()
-  } : {}
+  const showOnClickProps = showOnClick
+    ? {
+        delayHide: 1000,
+        event: 'click',
+        afterShow: () => ReactTooltip.hide()
+      }
+    : {}
 
   return (
     <Fragment>
       <span
-        className={cssClass(className)}
-        data-tip
-        data-for={tooltipUUID}>
+className={cssClass(className)}
+data-tip
+data-for={tooltipUUID}>
         {children}
       </span>
 
       <ReactTooltip
-        className={cssClass('react-tooltip', `react-tooltip-${align}`, `react-tooltip--${size}`)}
-        background='#000'
+        className={cssClass(
+          'react-tooltip',
+          `react-tooltip-${align}`,
+          `react-tooltip--${size}`
+        )}
+        background="#000"
         effect={effect}
         id={tooltipUUID}
         disable={disabled}
         isCapture
         place={placement}
-        {...showOnClickProps}>
+        {...showOnClickProps}
+      >
         {content}
       </ReactTooltip>
     </Fragment>

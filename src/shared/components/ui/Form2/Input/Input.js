@@ -103,7 +103,10 @@ input.propTypes = {
   maxLength: PropTypes.number,
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
-  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  tooltip: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   min: PropTypes.number,
   controlledValue: PropTypes.bool
 }

@@ -42,27 +42,47 @@ const progressBar = ({
 
   return (
     <div className={cssClass('container')}>
-      <span className={cssClass('bar', `bar__${barSize}`, 'bar__background', `bar--${variant}`)} />
+      <span
+        className={cssClass(
+          'bar',
+          `bar__${barSize}`,
+          'bar__background',
+          `bar--${variant}`
+        )}
+      />
 
       <span
-        className={cssClass('bar', `bar__${barSize}`, 'bar__fulfillment', `bar__fulfillment--${barSize}`, `bar--${variant}`)}
-        style={fulfillmentWidth()} />
+        className={cssClass(
+          'bar',
+          `bar__${barSize}`,
+          'bar__fulfillment',
+          `bar__fulfillment--${barSize}`,
+          `bar--${variant}`
+        )}
+        style={fulfillmentWidth()}
+      />
 
-      {limitExceededInfo && limitText &&
-        <span className={cssClass('limit-exceeded__info', `padding__${barSize}`)}>
+      {limitExceededInfo && limitText && (
+        <span
+          className={cssClass('limit-exceeded__info', `padding__${barSize}`)}
+        >
           <FormattedMessage id={limitText} />
-        </span>}
+        </span>
+      )}
 
-      {showColorNumber &&
-        <span className={cssClass('result__color--stats', `padding__${barSize}`)}>
+      {showColorNumber && (
+        <span
+          className={cssClass('result__color--stats', `padding__${barSize}`)}
+        >
           <ColorNumber
-            variant={variant}
-            size={size}>
+variant={variant}
+size={size}>
             {quantity}
           </ColorNumber>
 
           /{limit}
-        </span>}
+        </span>
+      )}
     </div>
   )
 }
@@ -85,7 +105,8 @@ progressBar.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'info']).isRequired,
+  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'info'])
+    .isRequired,
   /**
    * Quantity
    */

@@ -1,10 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  Fragment
-} from 'react'
+import React, { useCallback, useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import Error from 'shared/components/ui/Form2/Error'
@@ -92,94 +87,108 @@ const select = ({
     setInModalPosition(inModal)
   }, [inModal])
 
-  const renderOption = item => hasDescription ? (
-    <Fragment>
+  const renderOption = item =>
+    hasDescription ? (
+      <Fragment>
+        <Button
+          variant="dropdown-element"
+          onClick={() => handleChange(name, item)}
+        >
+          <Heading level={5}>{item?.label}</Heading>
+
+          <Paragraph
+color="accent-2"
+size={12}>
+            {item?.description}
+          </Paragraph>
+        </Button>
+
+        <Divider />
+      </Fragment>
+    ) : (
       <Button
-        variant='dropdown-element'
-        onClick={() => handleChange(name, item)}>
-        <Heading level={5}>{item?.label}</Heading>
-
-        <Paragraph
-          color='accent-2'
-          size={12}>
-          {item?.description}
-        </Paragraph>
+        variant="dropdown-element"
+        onClick={() => handleChange(name, item)}
+      >
+        {item?.label}
       </Button>
+    )
 
-      <Divider />
+  const renderOptions = () => (
+    <Fragment>
+      {emphasisedOptions.map((item, index) => (
+        <ListItem
+className="list-item--dropdown"
+key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
+
+      {!isEmpty(emphasisedOptions) && <Divider />}
+
+      {options.map((item, index) => (
+        <ListItem
+className="list-item--dropdown"
+key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
     </Fragment>
-  ) : (
-    <Button
-      variant='dropdown-element'
-      onClick={() => handleChange(name, item)}>
-      {item?.label}
-    </Button>
-  )
-
-  const renderOptions = () => (<Fragment>
-    {emphasisedOptions.map((item, index) => (<ListItem
-        className='list-item--dropdown'
-        key={index}>
-      {renderOption(item)}
-    </ListItem>))}
-
-    {!isEmpty(emphasisedOptions) && <Divider />}
-
-    {options.map((item, index) => (<ListItem
-        className='list-item--dropdown'
-        key={index}>
-      {renderOption(item)}
-    </ListItem>))}
-  </Fragment>
   )
 
   return (
-    <div className={`form-field form-field--dropdown ${errorClass || valueClass || filledClass}`}>
-      {label && hasLabel && (
-        <Label id={name}>
-          {label}
-        </Label>
-      )}
+    <div
+      className={`form-field form-field--dropdown ${
+        errorClass || valueClass || filledClass
+      }`}
+    >
+      {label && hasLabel && <Label id={name}>{label}</Label>}
 
       <Dropdown
         label={value[name]?.label || label}
         hasInput
         hasFullInputStyle
         asPlaceholder={!value[name]?.label}
-        size='fixed'
-        alignment='spaced'
-        inModal={inModalPosition}>
-        {handleOnSearchChange && <Fragment>
-          <div className={cssClass('search-container')}>
-            <Searcher
-              setSearchPhrase={handleOnSearchChange}
-              placeholder={searchPlaceholder}
-              tag='div'
-              protectedSubmit
-              liveChanges={liveChanges}
-            />
-          </div>
+        size="fixed"
+        alignment="spaced"
+        inModal={inModalPosition}
+      >
+        {handleOnSearchChange && (
+          <Fragment>
+            <div className={cssClass('search-container')}>
+              <Searcher
+                setSearchPhrase={handleOnSearchChange}
+                placeholder={searchPlaceholder}
+                tag="div"
+                protectedSubmit
+                liveChanges={liveChanges}
+              />
+            </div>
 
-          <Divider variant="dropdown" />
-        </Fragment>}
+            <Divider variant="dropdown" />
+          </Fragment>
+        )}
 
         <Overflow>
           <div style={overflowStyle}>
             <List>
-              {!isLoading && isEmptyList && isEmpty(options)
-                ? <Message
-                    title='message.empty.search.results'
-                    message='message.empty.search.results.small'
-                    url='https://images.assets-landingi.com/images/search_empty.svg'
-                    height={41}
-                    titleLevel={5}
-                    messageLevel={6} />
-                : renderOptions()}
+              {!isLoading && isEmptyList && isEmpty(options) ? (
+                <Message
+                  title="message.empty.search.results"
+                  message="message.empty.search.results.small"
+                  url="https://images.assets-landingi.com/images/search_empty.svg"
+                  height={41}
+                  titleLevel={5}
+                  messageLevel={6}
+                />
+              ) : (
+                renderOptions()
+              )}
 
               {isLoading && <Loader />}
             </List>
 
-            <Spacer space='tiny' />
+            <Spacer space="tiny" />
           </div>
         </Overflow>
 
@@ -221,7 +230,10 @@ select.propTypes = {
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
@@ -237,7 +249,10 @@ select.propTypes = {
   overflowStyle: PropTypes.instanceOf(Object),
   emphasisedOptions: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,

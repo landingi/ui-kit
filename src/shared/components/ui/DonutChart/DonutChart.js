@@ -21,12 +21,7 @@ const cssClass = styles(scss)
  * @param {string} props.label
  * @return {object} An object of children element
  */
-const donutChart = ({
-  className,
-  quantity,
-  type,
-  label
-}) => {
+const donutChart = ({ className, quantity, type, label }) => {
   const variant = cssClass({
     success: quantity >= 95,
     info: quantity >= 58 && quantity <= 94,
@@ -37,11 +32,11 @@ const donutChart = ({
   return (
     <Fragment>
       <div className={cssClass(className, `donutChart--${variant}`)}>
-        {quantity}{type === 'percent' && '%'}
+        {quantity}
 
-        <Label>
-          {<FormattedMessage id={label} /> || quantity}
-        </Label>
+        {type === 'percent' && '%'}
+
+        <Label>{<FormattedMessage id={label} /> || quantity}</Label>
 
         <div
           className={cssClass('after--chart')}

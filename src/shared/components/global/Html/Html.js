@@ -11,38 +11,33 @@ const cssClass = styles(scss)
 const html = ({ className, value }) => (
   <span
     className={cssClass(className)}
-    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }} />
+    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }}
+  />
 )
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 html.displayName = 'HTML element'
 
 /**
-* The default properties.
-* @type {Object}
-*/
+ * The default properties.
+ * @type {Object}
+ */
 html.defaultProps = {
   className: 'html'
 }
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 html.propTypes = {
   /**
    * Classname, default `html`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]).isRequired
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 export default html

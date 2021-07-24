@@ -11,22 +11,22 @@ import Spacer from 'shared/components/ui/Spacer'
 const cssClass = styles(scss)
 
 /**
-* Message - stateless presentational component
-* @param {object} props - props
-* @param {string|array} props.className - list of class names, default: `message`
-* @param {string} props.title - title
-* @param {string} props.message - message
-* @param {string} props.url - image/video url
-* @param {number} props.height - height of image/video
-* @param {object} props.children - children element
-* @param {number} props.titleLevel - title font size
-* @param {number} props.messageLevel - message font size
-* @param {bool} props.isVideo - video, default false
-* @param {string} props.multimediaPosition - image/video position before or after content, default `before`
-* @param {bool} props.bold - message title is bold
-* @param {bool} props.withoutMargin - message title without bottom margin
-* @return {object} An object of children element
-*/
+ * Message - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `message`
+ * @param {string} props.title - title
+ * @param {string} props.message - message
+ * @param {string} props.url - image/video url
+ * @param {number} props.height - height of image/video
+ * @param {object} props.children - children element
+ * @param {number} props.titleLevel - title font size
+ * @param {number} props.messageLevel - message font size
+ * @param {bool} props.isVideo - video, default false
+ * @param {string} props.multimediaPosition - image/video position before or after content, default `before`
+ * @param {bool} props.bold - message title is bold
+ * @param {bool} props.withoutMargin - message title without bottom margin
+ * @return {object} An object of children element
+ */
 const message = ({
   children,
   className,
@@ -47,20 +47,22 @@ const message = ({
    */
   const renderMultimedia = () => (
     <div>
-      <Spacer space='small' />
+      <Spacer space="small" />
 
-      {isVideo
-        ? <Fragment>
-            <Vimeo
-              video={url}
-              height={height} />
+      {isVideo ? (
+        <Fragment>
+          <Vimeo
+video={url}
+height={height} />
 
-            <Spacer space='small' />
-          </Fragment>
-        : <Image
-            src={url}
-            size='auto'
-            height={height} />}
+          <Spacer space="small" />
+        </Fragment>
+      ) : (
+        <Image
+src={url}
+size="auto"
+height={height} />
+      )}
     </div>
   )
 
@@ -71,29 +73,32 @@ const message = ({
       {title && (
         <Heading
           level={titleLevel}
-          align='center'
+          align="center"
           bold={bold}
-          margin={withoutMargin ? 'none' : ''}>
+          margin={withoutMargin ? 'none' : ''}
+        >
           <FormattedMessage
             id={`${title}`}
             values={{
               br: <br />
-            }} />
+            }}
+          />
         </Heading>
       )}
 
       {message && (
         <Fragment>
-          <Spacer space='tiny' />
+          <Spacer space="tiny" />
 
           <Heading
-            level={messageLevel}
-            align='center'>
+level={messageLevel}
+align="center">
             <FormattedMessage
               id={`${message}`}
               values={{
                 br: <br />
-              }} />
+              }}
+            />
           </Heading>
         </Fragment>
       )}
@@ -131,10 +136,7 @@ message.propTypes = {
   /**
    * Classname, default `message`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Image/Video height
    */

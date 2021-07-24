@@ -1,8 +1,8 @@
 /**
-* Fontawesome
-* @see { @link https://github.com/FortAwesome/react-fontawesome }
-*
-*/
+ * Fontawesome
+ * @see { @link https://github.com/FortAwesome/react-fontawesome }
+ *
+ */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faBullhorn,

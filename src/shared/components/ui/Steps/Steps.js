@@ -23,14 +23,18 @@ const Steps = ({ data }) => (
 
       return (
         <div
-          className={scss.step}
-          key={uuid()}>
+className={scss.step}
+key={uuid()}>
           <StepNumber
-            step={step}
-            variant={variant} />
+step={step}
+variant={variant} />
 
           <span
-            className={cssClass('step__description', `step__description--${variant}`)}>
+            className={cssClass(
+              'step__description',
+              `step__description--${variant}`
+            )}
+          >
             <FormattedMessage id={description} />
           </span>
         </div>

@@ -34,49 +34,47 @@ const limit = ({
   tooltip
 }) => {
   return (
-  <div className={cssClass(className)}>
-    <div className={cssClass('limit--icon')}>
-      <FontAwesomeIcon
-        icon={icon}
-        size='lg' />
-    </div>
+    <div className={cssClass(className)}>
+      <div className={cssClass('limit--icon')}>
+        <FontAwesomeIcon
+icon={icon}
+size="lg" />
+      </div>
 
-    <div className={cssClass('limit--info')}>
-      <span className={cssClass('info')}>
-        <span className={cssClass('info--quantity')}>
-          {formatNumeric(quantity)}
+      <div className={cssClass('limit--info')}>
+        <span className={cssClass('info')}>
+          <span className={cssClass('info--quantity')}>
+            {formatNumeric(quantity)}
+          </span>
+
+          <span className={cssClass('info--limit')}>
+            {unlimited ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
+          </span>
+
+          {!!total && (
+            <span className={cssClass('info--total')}>
+              <FormattedMessage id="word.total" />:
+
+              <b>{total}</b>
+            </span>
+          )}
         </span>
 
-        <span className={cssClass('info--limit')}>
-          {unlimited
-            ? <span> / &#8734;</span>
-            : ` / ${formatNumeric(limit)}`}
+        <span className={cssClass('info--name')}>
+          <FormattedMessage id={name} />
+
+          {tooltip && (
+            <Fragment>
+              <Spreader spread="tiny" />
+
+              <Tooltip content={<FormattedMessage id={tooltip} />}>
+                <FontAwesomeIcon icon="exclamation-circle" />
+              </Tooltip>
+            </Fragment>
+          )}
         </span>
-
-        {!!total && <span className={cssClass('info--total')}>
-          <FormattedMessage id='word.total' />:
-
-          {' '}
-
-          <b>{total}</b>
-        </span>}
-      </span>
-
-      <span className={cssClass('info--name')}>
-        <FormattedMessage id={name} />
-
-        {tooltip &&
-          <Fragment>
-            <Spreader spread='tiny' />
-
-            <Tooltip content={<FormattedMessage id={tooltip} />}>
-              <FontAwesomeIcon
-                icon="exclamation-circle" />
-            </Tooltip>
-          </Fragment>}
-      </span>
+      </div>
     </div>
-  </div>
   )
 }
 
@@ -94,10 +92,7 @@ limit.propTypes = {
   /**
    * className, default 'limit'
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Icon
    */

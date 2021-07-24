@@ -29,7 +29,7 @@ const cssClass = styles(scss)
  * @param {object} props.intl - intl
  * @param {bool}  props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
-  * @param {strin|number} props.value - value
+ * @param {strin|number} props.value - value
  * @return {object} An object of children element
  */
 
@@ -68,7 +68,11 @@ const maskedInput = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={translate ? intl.formatMessage({ id: `${placeholder || label}` }) : label}
+        placeholder={
+          translate
+            ? intl.formatMessage({ id: `${placeholder || label}` })
+            : label
+        }
         name={name}
         id={name}
         defaultValue={value}
@@ -87,8 +91,8 @@ const maskedInput = ({
 
       {label && (
         <Label
-          id={name}
-          className={scss.input__label}>
+id={name}
+className={scss.input__label}>
           {translate ? <FormattedMessage id={`${label}`} /> : label}
         </Label>
       )}
@@ -188,7 +192,8 @@ maskedInput.propTypes = {
    */
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])),
+    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
+  ),
   /**
    * if it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
    * If it is false no help will be displayed in input.

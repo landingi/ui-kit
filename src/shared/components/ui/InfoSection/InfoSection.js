@@ -15,61 +15,58 @@ import uuid from 'react-uuid'
 const cssClass = styles(scss)
 
 /**
-* Info Section - stateless presentational component
-* @param {object} props - props
-* @param {string|array} props.className - list of class names, default: `info-section`
-* @param {string} props.title - title
-* @param {array} props.list - list of items
-* @param {string} props.url - image url
-* @param {string} props.button - button title
-* @param {func} props.onClick - button action
-* @return {object} An object of children element
-*/
-const InfoSection = ({
-  className,
-  title,
-  list,
-  url,
-  button,
-  onClick
-}) => {
-  const renderList = useMemo(() => (
-    <List listStyle='ordered-check'>
-      {list.map(item => (
-        <ListItem
-          variant='list'
-          key={uuid()}>
-          <Paragraph size={18}>
-            <FormattedMessage id={item} />
-          </Paragraph>
-      </ListItem>))}
-    </List>
-  ), [])
+ * Info Section - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `info-section`
+ * @param {string} props.title - title
+ * @param {array} props.list - list of items
+ * @param {string} props.url - image url
+ * @param {string} props.button - button title
+ * @param {func} props.onClick - button action
+ * @return {object} An object of children element
+ */
+const InfoSection = ({ className, title, list, url, button, onClick }) => {
+  const renderList = useMemo(
+    () => (
+      <List listStyle="ordered-check">
+        {list.map(item => (
+          <ListItem
+variant="list"
+key={uuid()}>
+            <Paragraph size={18}>
+              <FormattedMessage id={item} />
+            </Paragraph>
+          </ListItem>
+        ))}
+      </List>
+    ),
+    []
+  )
 
   return (
     <div className={cssClass(className)}>
       <div>
         <Heading
-          level={1}
-          bold>
+level={1}
+bold>
           <FormattedMessage id={`${title}`} />
         </Heading>
 
         {renderList}
 
-        <Spacer space='medium' />
+        <Spacer space="medium" />
 
         <Button
-          size='large'
-          onClick={onClick}>
+size="large"
+onClick={onClick}>
           <FormattedMessage id={button} />
         </Button>
       </div>
 
       <div>
         <Image
-          src={url}
-          size={526} />
+src={url}
+size={526} />
       </div>
     </div>
   )
@@ -89,10 +86,7 @@ InfoSection.propTypes = {
   /**
    * Classname, default `info-section`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Title
    */

@@ -94,16 +94,18 @@ const button = ({
       title={Tag === 'a' ? title : undefined}
       target={Tag === 'a' ? target : undefined}
       className={
-        Tag === 'button' ? cssClass('button', elementClasses, className) : cssClass(buttonStyle ? ['button', elementClasses] : 'link', className)
+        Tag === 'button'
+          ? cssClass('button', elementClasses, className)
+          : cssClass(
+            buttonStyle ? ['button', elementClasses] : 'link',
+            className
+          )
       }
       onClick={onClick}
     >
       {isLoading && <Spinner />}
 
-      {!isLoading &&
-        <Fragment>
-          {children}
-        </Fragment>}
+      {!isLoading && <Fragment>{children}</Fragment>}
 
       {hasBackgoundRipple && <Ink />}
     </Tag>
@@ -148,7 +150,20 @@ button.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['primary', 'secondary', 'dropdown', 'transparent', 'icon', 'alert', 'clean', 'tabs', 'transparent-blue', 'dropdown-element', 'switcher-brand', 'switcher']),
+  variant: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'dropdown',
+    'transparent',
+    'icon',
+    'alert',
+    'clean',
+    'tabs',
+    'transparent-blue',
+    'dropdown-element',
+    'switcher-brand',
+    'switcher'
+  ]),
   /**
    * Align
    */
@@ -214,14 +229,13 @@ button.defaultProps = {
   variant: 'primary',
   isLoading: false,
   isDisabled: false,
-  onClick: () => { },
+  onClick: () => {},
   hasBackgoundRipple: true,
   hasIcon: false,
   hide: false,
   buttonStyle: false,
   fitWidth: false,
   id: null
-
 }
 
 export default button

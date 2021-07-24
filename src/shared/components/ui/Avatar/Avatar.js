@@ -5,9 +5,9 @@ import scss from './Avatar.scss'
 import Image from 'shared/components/ui/Image'
 
 /**
-* Exports css classes from SCSS file
-* @return {object} An object of styles
-*/
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
@@ -20,14 +20,10 @@ const cssClass = styles(scss)
  * @param {string} props.name - avatar name, default: ''
  * @return {object} An object of children element
  */
-const avatar = ({
-  className,
-  size,
-  variant,
-  src,
-  name
-}) => (
-  <span className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}>
+const avatar = ({ className, size, variant, src, name }) => (
+  <span
+    className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}
+  >
     {variant === 'image' ? <Image src={src} /> : <p>{name}</p>}
   </span>
 )
@@ -46,10 +42,7 @@ avatar.propTypes = {
   /**
    * Classname, default `avatar`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Size
    */

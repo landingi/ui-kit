@@ -6,9 +6,9 @@ import { styles } from 'shared/helpers/css'
 import scss from './Headline.scss'
 
 /**
-* Exports css classes from SCSS file
-* @return {object} An object of styles
-*/
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
@@ -21,39 +21,36 @@ const cssClass = styles(scss)
 const headline = ({ className, title }) => (
   <div className={cssClass(className)}>
     <Heading
-      className='text--truncate'
-      level={1}>
+className="text--truncate"
+level={1}>
       <FormattedMessage id={`${title}`} />
     </Heading>
   </div>
 )
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 headline.displayName = 'Headline'
 
 /**
-* The default properties.
-* @type {Object}
-*/
+ * The default properties.
+ * @type {Object}
+ */
 headline.defaultProps = {
   className: 'page__headline'
 }
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 headline.propTypes = {
   /**
    * Classname, default `page__headline`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Title
    * @param {String}

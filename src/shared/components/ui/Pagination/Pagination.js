@@ -43,31 +43,31 @@ const pagination = ({
           <Fragment>
             <span className={scss.pagination__first}>
               <Button
-                size='small'
-                variant='icon'
-                onClick={handleGoToPage(1)}>
+size="small"
+variant="icon"
+onClick={handleGoToPage(1)}>
                 <FormattedMessage id="pagination.word.first" />
               </Button>
             </span>
 
             {!isEmpty(before_values) && (
               <Button
-                variant='icon'
-                size='small'
-                onClick={handleGoToPage(before_values.prev)}>
-                <FontAwesomeIcon
-                  icon='caret-left'
-                />
+                variant="icon"
+                size="small"
+                onClick={handleGoToPage(before_values.prev)}
+              >
+                <FontAwesomeIcon icon="caret-left" />
               </Button>
             )}
 
-            <List variant='inline'>
+            <List variant="inline">
               {before.map((item, index) => (
                 <ListItem key={index}>
                   <Button
-                    size='small'
-                    variant='icon'
-                    onClick={handleGoToPage(item)}>
+                    size="small"
+                    variant="icon"
+                    onClick={handleGoToPage(item)}
+                  >
                     {item}
                   </Button>
                 </ListItem>
@@ -76,10 +76,11 @@ const pagination = ({
               {current.map((item, index) => (
                 <ListItem
                   key={index}
-                  className={scss.pagination__links__current}>
+                  className={scss.pagination__links__current}
+                >
                   <Button
-                    size='small'
-                    variant='icon'>
+size="small"
+variant="icon">
                     {item}
                   </Button>
                 </ListItem>
@@ -88,9 +89,10 @@ const pagination = ({
               {after.map((item, index) => (
                 <ListItem key={index}>
                   <Button
-                    size='small'
-                    variant='icon'
-                    onClick={handleGoToPage(item)}>
+                    size="small"
+                    variant="icon"
+                    onClick={handleGoToPage(item)}
+                  >
                     {item}
                   </Button>
                 </ListItem>
@@ -98,20 +100,17 @@ const pagination = ({
             </List>
 
             {after_values.and_so && (
-              <span style={{ margin: '0 5px' }}>
-                ...
-              </span>
+              <span style={{ margin: '0 5px' }}>...</span>
             )}
 
             {after_values.next && (
               <Button
-                variant='icon'
-                size='small'
+                variant="icon"
+                size="small"
                 isDisabled={isEmpty(after_values.next)}
-                onClick={handleGoToPage(after_values.next)}>
-                <FontAwesomeIcon
-                  icon='caret-right'
-                />
+                onClick={handleGoToPage(after_values.next)}
+              >
+                <FontAwesomeIcon icon="caret-right" />
               </Button>
             )}
           </Fragment>
@@ -119,8 +118,8 @@ const pagination = ({
       </div>
 
       <PageSize
-        activePageLimit={activePageLimit}
-        onChange={pageLimit} />
+activePageLimit={activePageLimit}
+onChange={pageLimit} />
     </div>
   )
 }
@@ -139,10 +138,7 @@ pagination.propTypes = {
   /**
    * Classname, default `pagination`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    *  Data
    */
@@ -157,10 +153,7 @@ pagination.propTypes = {
   activePageLimit: PropTypes.number.isRequired,
   /** pageLimit
    */
-  pageLimit: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.array
-  ]).isRequired
+  pageLimit: PropTypes.oneOfType([PropTypes.func, PropTypes.array]).isRequired
 }
 
 /**

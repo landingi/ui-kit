@@ -1,10 +1,10 @@
 /**
-* Creates a throttled function that only invokes func at most once per
-* every wait milliseconds
-* @param {function} Func to throttle
-* @param {number} [interval=0] The number of milliseconds to delay
-* @return {function} Returns the new throttled function
-*/
+ * Creates a throttled function that only invokes func at most once per
+ * every wait milliseconds
+ * @param {function} Func to throttle
+ * @param {number} [interval=0] The number of milliseconds to delay
+ * @return {function} Returns the new throttled function
+ */
 export const throttle = (func, interval) => {
   let timeout
   return function (...args) {
@@ -20,13 +20,13 @@ export const throttle = (func, interval) => {
 }
 
 /**
-* Creates a debounced function that delays invoking func until after wait
-* milliseconds have elapsed since the last time the debounced function was
-* invoked
-* @param {function} Func The function to throttle
-* @param {number} [interval=0] The number of milliseconds to delay
-* @return {function} Returns the new debounced function
-*/
+ * Creates a debounced function that delays invoking func until after wait
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked
+ * @param {function} Func The function to throttle
+ * @param {number} [interval=0] The number of milliseconds to delay
+ * @return {function} Returns the new debounced function
+ */
 export const debounce = (func, interval) => {
   let timeout
   return function (...args) {

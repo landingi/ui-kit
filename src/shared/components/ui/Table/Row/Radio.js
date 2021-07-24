@@ -16,30 +16,25 @@ const cssClass = styles(scss)
  * @param {string|array|object} props.rest - rest of props
  * @return {object} An object of children element
  */
-const selectRow = forwardRef(
-  ({
-    indeterminate,
-    ...rest
-  }, ref) => {
-    const defaultRef = useRef()
-    const resolvedRef = ref || defaultRef
+const selectRow = forwardRef(({ indeterminate, ...rest }, ref) => {
+  const defaultRef = useRef()
+  const resolvedRef = ref || defaultRef
 
-    useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
+  useEffect(() => {
+    resolvedRef.current.indeterminate = indeterminate
+  }, [resolvedRef, indeterminate])
 
-    return (
-      <label className={cssClass('input__radio')}>
-        <input
-          type="radio"
-          ref={resolvedRef}
-          {...rest} />
+  return (
+    <label className={cssClass('input__radio')}>
+      <input
+type="radio"
+ref={resolvedRef}
+{...rest} />
 
-        <div />
-      </label>
-    )
-  }
-)
+      <div />
+    </label>
+  )
+})
 
 /**
  * Display name

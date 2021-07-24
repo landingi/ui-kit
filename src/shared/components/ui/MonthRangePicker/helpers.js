@@ -25,8 +25,10 @@ export const monthsArray = [
  * @return {bool} Returns bool
  */
 export const handleRangeMarker = (monthID, endMonth, startMonth) => {
-  const handleMarkerWithBiggerStartMonth = () => endMonth <= monthID && startMonth >= monthID
-  const handleMarkerWithBiggerEndMonth = () => startMonth <= monthID && endMonth >= monthID
+  const handleMarkerWithBiggerStartMonth = () =>
+    endMonth <= monthID && startMonth >= monthID
+  const handleMarkerWithBiggerEndMonth = () =>
+    startMonth <= monthID && endMonth >= monthID
   const handleMarkerWithEqualStartEndMonth = () => monthID === startMonth
 
   switch (true) {
@@ -49,7 +51,8 @@ export const handleRangeMarker = (monthID, endMonth, startMonth) => {
  * @param {date} date
  * @return {string} Returns string
  */
-export const parseDateToMonthID = date => `${date.getFullYear()}${monthsArray[date.getMonth()].code}`
+export const parseDateToMonthID = date =>
+  `${date.getFullYear()}${monthsArray[date.getMonth()].code}`
 
 /**
  * Parse monthID to date object eg. 202103 => 2021-03-01
@@ -57,4 +60,5 @@ export const parseDateToMonthID = date => `${date.getFullYear()}${monthsArray[da
  * @param {string} monthID
  * @return {date} Returns date object
  */
-export const transformMonthToDate = monthID => new Date(`${monthID}`.substring(0, 4), `${monthID}`.substring(4, 6))
+export const transformMonthToDate = monthID =>
+  new Date(`${monthID}`.substring(0, 4), `${monthID}`.substring(4, 6))

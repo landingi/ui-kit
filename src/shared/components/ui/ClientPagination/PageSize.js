@@ -30,7 +30,7 @@ const pageSizeDropdown = [
 ]
 
 /**
-* Page Size - stateless presentational component
+ * Page Size - stateless presentational component
  * @param {object} props - props
  * @param {string|array} props.className - list of class names, default: page-size
  * @param {number} props.activePageLimit - active page limit
@@ -44,7 +44,8 @@ const pageSize = ({ className, activePageLimit, onChange }) => (
       value={activePageLimit}
       name="setPaginationSize"
       data={pageSizeDropdown}
-      onChange={onChange} />
+      onChange={onChange}
+    />
   </div>
 )
 
@@ -62,13 +63,10 @@ pageSize.propTypes = {
   /**
    * Classname, default `per-page`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
-  * activePageLimit active page limit
-  */
+   * activePageLimit active page limit
+   */
   activePageLimit: PropTypes.number,
   /**
    * Gets called when input changes
@@ -82,7 +80,7 @@ pageSize.propTypes = {
 /**
  * The default properties.
  * @type {Object}
-  */
+ */
 pageSize.defaultProps = {
   className: 'page-size',
   activePageLimit: undefined,

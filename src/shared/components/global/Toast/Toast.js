@@ -9,16 +9,16 @@ import scss from './Toast.scss'
 import useToggle from 'shared/helpers/hooks/useToggle'
 
 /**
-* Exports css classes from SCSS file
-* @return {object} An object of styles
-*/
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
-* Toast Animation, exports React-pose animations
-* @see {@link https://popmotion.io/pose/api/} for further information.
-* @return {object} An object of styles
-*/
+ * Toast Animation, exports React-pose animations
+ * @see {@link https://popmotion.io/pose/api/} for further information.
+ * @return {object} An object of styles
+ */
 const toastProps = {
   enter: {
     transition: {
@@ -37,11 +37,11 @@ const toastProps = {
 const ToastAnimation = posed.div(toastProps)
 
 /**
-* Toast stateful container component
-* @param {object} props - props
-* @param {string|array} props.className - list of class names, default: `toast`
-* @return {object} An object of children elements
-*/
+ * Toast stateful container component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `toast`
+ * @return {object} An object of children elements
+ */
 const Toast = ({ className }) => {
   const [isActive, setActive] = useToggle()
   const [message, setMessage] = useState('')
@@ -103,15 +103,15 @@ const Toast = ({ className }) => {
   return (
     isActive && (
       <PoseGroup
-        animateOnMount
-        flipMove={false}>
+animateOnMount
+flipMove={false}>
         <ToastAnimation
-          key='toastanimation'
-          className={cssClass(className)}>
+key="toastanimation"
+className={cssClass(className)}>
           <Notification
-            type={type}
-            isClosable
-            onClick={handleToastToggle}>
+type={type}
+isClosable
+onClick={handleToastToggle}>
             {message}
           </Notification>
         </ToastAnimation>

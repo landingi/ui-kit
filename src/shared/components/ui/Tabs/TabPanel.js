@@ -19,20 +19,15 @@ const cssClass = styles(scss)
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
  */
-const tabPanel = ({
-  name,
-  className,
-  children,
-  ...restProps
-}) => {
+const tabPanel = ({ name, className, children, ...restProps }) => {
   const tabContext = useContext(TabContext)
   const classNames = `${cssClass(className)} Tab--active`
 
   return (
     tabContext.activeTab === name && (
       <div
-        className={classNames}
-        {...restProps}>
+className={classNames}
+{...restProps}>
         {children}
       </div>
     )
@@ -57,10 +52,7 @@ tabPanel.propTypes = {
   /**
    * Classname, default `tab__panel`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Children elements
    */

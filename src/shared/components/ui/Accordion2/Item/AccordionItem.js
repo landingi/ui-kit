@@ -16,12 +16,7 @@ const cssClass = styles(scss)
  * @param {node} props.content - item content
  * @return {object} An object of children element
  */
-const AccordionItem = ({
-  className,
-  number,
-  title,
-  content
-}) => {
+const AccordionItem = ({ className, number, title, content }) => {
   const [isOpen, setOpen] = useState(false)
 
   /**
@@ -33,29 +28,31 @@ const AccordionItem = ({
   return (
     <div className={cssClass(className)}>
       <div
-        className={cssClass('accordion__item--title')}
-        onClick={handleOpen}>
+className={cssClass('accordion__item--title')}
+onClick={handleOpen}>
         <div>
-          {number &&
-            <StepNumber
-              step={number}
-              size='medium' />}
+          {number && <StepNumber
+step={number}
+size="medium" />}
 
           {title}
         </div>
 
         <FontAwesomeIcon
           icon={isOpen ? 'chevron-up' : 'chevron-down'}
-          size="xs" />
+          size="xs"
+        />
       </div>
 
-      <div className={cssClass(
-        'accordion__item--content',
-        isOpen
-          ? 'accordion__item--content-open'
-          : 'accordion__item--content-close'
-      )}>
-          {content}
+      <div
+        className={cssClass(
+          'accordion__item--content',
+          isOpen
+            ? 'accordion__item--content-open'
+            : 'accordion__item--content-close'
+        )}
+      >
+        {content}
       </div>
     </div>
   )
@@ -75,10 +72,7 @@ AccordionItem.propTypes = {
   /**
    * Classname
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Number
    */

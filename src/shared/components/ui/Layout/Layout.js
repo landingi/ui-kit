@@ -37,10 +37,7 @@ layout.propTypes = {
   /**
    * Classname, default `layout`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    *Width default: `full`
    */

@@ -13,13 +13,15 @@ const Accordion = ({ children }) => {
   const openList = useIsOpen([])
 
   return (
-    Array.isArray(children) && children.map((item, index) => (
+    Array.isArray(children) &&
+    children.map((item, index) => (
       <Section
         key={index}
         isOpen={openList.value.includes(index)}
         label={item.props.label}
         // eslint-disable-next-line react/jsx-no-bind
-        handleOnClick={() => openList.set(index)}>
+        handleOnClick={() => openList.set(index)}
+      >
         {item.props.children}
       </Section>
     ))

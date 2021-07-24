@@ -15,14 +15,15 @@ const cssClass = styles(scss)
  * @param {string} props.background - style
  * @return {object} An object of children element
  */
-const section = ({
-  className,
-  children,
-  space,
-  width,
-  background
-}) => (
-  <div className={cssClass(className, `section-space--${space}`, `layout-width--${width}`, `section-bg--${background}`)}>
+const section = ({ className, children, space, width, background }) => (
+  <div
+    className={cssClass(
+      className,
+      `section-space--${space}`,
+      `layout-width--${width}`,
+      `section-bg--${background}`
+    )}
+  >
     {children}
   </div>
 )
@@ -45,10 +46,7 @@ section.propTypes = {
   /**
    * Classname, default `section`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    *Vetical space default: `medium`
    */
