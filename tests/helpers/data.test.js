@@ -21,16 +21,10 @@ describe('Date helpers', () => {
 
   it('should return difference between dates in days', () => {
     expect(
-      calculateDaysInterval(
-        new Date('2021-01-01'),
-        new Date('2021-01-03')
-      )
+      calculateDaysInterval(new Date('2021-01-01'), new Date('2021-01-03'))
     ).toEqual(2)
     expect(
-      calculateDaysInterval(
-        new Date('2020-12-31'),
-        new Date('2021-01-01')
-      )
+      calculateDaysInterval(new Date('2020-12-31'), new Date('2021-01-01'))
     ).toEqual(1)
   })
 

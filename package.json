@@ -16,7 +16,7 @@
     "test:unit": "npm-run-all lint:tests jest-runner",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack/webpack.config.js",
     "bundle": "cross-env NODE_ENV=production webpack --config ./config/webpack/webpack.bundle.js",
-    "format:tests": "prettier --write './tests/**/*.{js}'",
+    "format:tests": "prettier --write {,tests/**/}*.js",
     "format:shared": "prettier --write {,src/**/}*.js",
     "test:coverage": "npm run jest-runner -- --coverage",
     "prepare": "husky install"

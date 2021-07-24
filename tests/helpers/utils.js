@@ -11,11 +11,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
  * @return {object} An object of children element
  */
 export const makeStore = component => (
-    <Provider store={store}>
-        <Router>
-            {component}
-        </Router>
-    </Provider>
+  <Provider store={store}>
+    <Router>{component}</Router>
+  </Provider>
 )
 
 /**
