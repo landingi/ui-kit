@@ -7,11 +7,8 @@ import List from 'shared/components/ui/List'
 import ListItem from 'shared/components/ui/List/Item'
 import { styles } from 'shared/helpers/css'
 import scss from './Options.scss'
-import {
-  HAS_DELETE,
-  HAS_CHANGE_STATUS
-} from 'shared/constants/permissionTypes'
 import ChangeStatus from './ChangeStatus'
+import { HAS_DELETE, HAS_CHANGE_STATUS } from 'shared/constants/permissionTypes'
 
 /**
  * Exports css classes from SCSS file

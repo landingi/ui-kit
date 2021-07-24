@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
+import { emitCloseDropdown } from 'shared/events/dropdown'
 import Button from 'shared/components/ui/Button'
 import Dropdown from 'shared/components/ui/Dropdown'
 import List from 'shared/components/ui/List'
 import ListItem from 'shared/components/ui/List/Item'
-import { emitCloseDropdown } from 'shared/events/dropdown'
 import { setLocalStorage } from 'shared/helpers/storage'
 import PropTypes from 'prop-types'
 

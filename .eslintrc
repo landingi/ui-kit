@@ -1,0 +1,50 @@
+{
+  "parser": "@babel/eslint-parser",
+  "plugins": ["react"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "camelcase": "off",
+    "no-use-before-define": "off",
+    "react/no-set-state": "off",
+    "react/sort-comp": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-sort-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-sort-default-props": "off",
+    "react/state-in-constructor": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-max-depth": "off",
+    "react/forbid-component-props": "off",
+    "react/jsx-fragments": "off",
+    "react/jsx-closing-tag-location": "off",
+    "react/jsx-no-literals": "off",
+    "react/no-did-update-set-state": "off",
+    "react/sort-prop-types": "off",
+    "react/no-array-index-key": "off",
+    "react/no-multi-comp": "off",
+    "react/no-danger": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "multiline-ternary": "off",
+    "array-callback-return": "off"
+  },
+  "extends": ["plugin:react/all", "standard"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

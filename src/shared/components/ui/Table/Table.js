@@ -30,11 +30,6 @@ import { selectedFlatRowsMap } from 'shared/helpers/table'
 import { paginationShape } from 'shared/shapes'
 import useQueryString from 'shared/helpers/hooks/useQueryString'
 import emitter from 'shared/lib/emitter'
-import {
-  TABLE_REFRESH,
-  TABLE_FILTER_REFRESH,
-  TABLE_RESET_PAGE
-} from 'shared/constants/eventTypes'
 import { setLocalStorage, getLocalStorage } from 'shared/helpers/storage'
 import { cancelRequests } from 'shared/services/http/client'
 import { usePermissions } from 'shared/helpers/hooks/usePermissions'
@@ -43,6 +38,11 @@ import { selectFilter } from 'shared/components/ui/Table/Filters'
 import Spacer from 'shared/components/ui/Spacer'
 import Spreader from 'shared/components/ui/Spreader'
 import Tooltip from 'shared/components/ui/Tooltip'
+import {
+  TABLE_REFRESH,
+  TABLE_FILTER_REFRESH,
+  TABLE_RESET_PAGE
+} from 'shared/constants/eventTypes'
 
 /**
  * Exports css classes from SCSS file

@@ -4,8 +4,8 @@ import Button from 'shared/components/ui/Button'
 import Tooltip from 'shared/components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { styles } from 'shared/helpers/css'
-import scss from './Back.scss'
 import { getLocationPath } from 'shared/helpers/url'
+import scss from './Back.scss'
 
 const cssClass = styles(scss)
 

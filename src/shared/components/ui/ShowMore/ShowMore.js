@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import scss from './ShowMore.scss'
 import Loader from 'shared/components/ui/Loader'
-import Html from 'shared/components/global/Html'
 import Spacer from 'shared/components/ui/Spacer'
+import Html from 'shared/components/global/Html'
 
 /**
  * Show more/less - stateful presentational component

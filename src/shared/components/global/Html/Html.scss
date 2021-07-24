@@ -1,0 +1,19 @@
+dl.html {
+  margin: 0;
+}
+
+.paragraph-pageinsider-smart-map {
+  p {
+    margin: 0;
+    padding: 0 0 $padding-medium;
+    color: $color-1;
+    line-height: 20px;
+    font-size: 14px;
+    display: inline-block;
+
+    &:last-child {
+      display: inline;
+      line-height: 18px;
+    }
+  }
+}

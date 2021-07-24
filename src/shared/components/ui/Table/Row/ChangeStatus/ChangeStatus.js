@@ -5,10 +5,10 @@ import Dropdown from 'shared/components/ui/Dropdown'
 import Button from 'shared/components/ui/Button'
 import List from 'shared/components/ui/List'
 import ListItem from 'shared/components/ui/List/Item'
-import { FormattedMessage } from 'react-intl'
-import { emitCloseDropdown } from 'shared/events/dropdown'
-import { emitTableRefresh } from 'shared/events/table'
 import { setOrderStatus } from 'shared/services/api/ecommerce/order'
+import { emitCloseDropdown } from 'shared/events/dropdown'
+import { FormattedMessage } from 'react-intl'
+import { emitTableRefresh } from 'shared/events/table'
 
 /**
  * Change status stateless presentational component

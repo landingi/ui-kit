@@ -4,8 +4,8 @@ import { styles } from 'shared/helpers/css'
 import scss from './Drawer.scss'
 import Header from './Header'
 import Backdrop from 'shared/components/ui/Backdrop'
-import posed, { PoseGroup } from 'react-pose'
 import { DARK, WHITE, DEFAULT, MOBILE } from 'shared/constants/skin'
+import posed, { PoseGroup } from 'react-pose'
 
 /**
  * Drawer Animation, exports React-pose animations

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "shared/*": [
+                "src/shared/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "config",
+        "cypress",
+        "dev",
+        "jest-report",
+        "local"
+    ]
+}
