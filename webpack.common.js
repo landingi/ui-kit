@@ -1,9 +1,19 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   context: path.join(__dirname, 'src'),
+  mode: 'production',
+  bail: true,
+  entry: {
+    components: './client/components/package'
+  },
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name]_[contenthash].js'
+  },
   module: {
     rules: [
       {
@@ -12,7 +22,7 @@ module.exports = {
         use: ['thread-loader', 'babel-loader']
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -37,7 +47,16 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash].css'
+    }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,
       threads: true,

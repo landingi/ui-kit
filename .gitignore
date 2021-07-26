@@ -14,3 +14,4 @@ logs
 .eslintcache
 .dccache
 .pnpm-store
+build
