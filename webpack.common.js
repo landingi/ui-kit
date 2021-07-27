@@ -37,6 +37,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: require('sass'),
               additionalData: '@import "shared/styles/theme.scss";',
               sassOptions: {
                 includePaths: [__dirname, 'src'],
