@@ -14,7 +14,9 @@ const cssClass = styles(scss)
 const card = ({ children, variant }) => (
   <div className={cssClass('card', `card--${variant}`)}>
     <div className={cssClass('container')}>
-      {React.Children.map(children, child => React.cloneElement(child))}
+      {React.Children.map(children, child =>
+        React.cloneElement(child)
+      )}
     </div>
   </div>
 )
@@ -37,7 +39,8 @@ card.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['alert', 'warning', 'success']).isRequired
+  variant: PropTypes.oneOf(['alert', 'warning', 'success'])
+    .isRequired
 }
 
 export default card

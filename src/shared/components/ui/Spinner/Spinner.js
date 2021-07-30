@@ -14,9 +14,7 @@ const cssClass = styles(scss)
  */
 const spinner = ({ className }) => (
   <div className={cssClass(className)}>
-    <FontAwesomeIcon
-icon="spinner"
-spin />
+    <FontAwesomeIcon icon="spinner" spin />
   </div>
 )
 
@@ -34,7 +32,10 @@ spinner.propTypes = {
   /**
    * Classname, default `spinner__spin`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

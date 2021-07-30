@@ -64,7 +64,10 @@ const progressBar = ({
 
       {limitExceededInfo && limitText && (
         <span
-          className={cssClass('limit-exceeded__info', `padding__${barSize}`)}
+          className={cssClass(
+            'limit-exceeded__info',
+            `padding__${barSize}`
+          )}
         >
           <FormattedMessage id={limitText} />
         </span>
@@ -72,14 +75,14 @@ const progressBar = ({
 
       {showColorNumber && (
         <span
-          className={cssClass('result__color--stats', `padding__${barSize}`)}
+          className={cssClass(
+            'result__color--stats',
+            `padding__${barSize}`
+          )}
         >
-          <ColorNumber
-variant={variant}
-size={size}>
+          <ColorNumber variant={variant} size={size}>
             {quantity}
           </ColorNumber>
-
           /{limit}
         </span>
       )}
@@ -105,8 +108,13 @@ progressBar.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'info'])
-    .isRequired,
+  variant: PropTypes.oneOf([
+    'success',
+    'warning',
+    'alert',
+    'progress',
+    'info'
+  ]).isRequired,
   /**
    * Quantity
    */

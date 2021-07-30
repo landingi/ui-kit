@@ -22,7 +22,12 @@ const modalFooter = ({ children, align }) => {
     'modal__footer--align-right': align === 'right'
   })
   return (
-    <div className={cssClass(`${scss.modal__footer}`, elementClasses)}>
+    <div
+      className={cssClass(
+        `${scss.modal__footer}`,
+        elementClasses
+      )}
+    >
       {children}
     </div>
   )

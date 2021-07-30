@@ -4,7 +4,12 @@ import { styles } from 'shared/helpers/css'
 import scss from './Drawer.scss'
 import Header from './Header'
 import Backdrop from 'shared/components/ui/Backdrop'
-import { DARK, WHITE, DEFAULT, MOBILE } from 'shared/constants/skin'
+import {
+  DARK,
+  WHITE,
+  DEFAULT,
+  MOBILE
+} from 'shared/constants/skin'
 import posed, { PoseGroup } from 'react-pose'
 
 /**
@@ -67,17 +72,16 @@ const drawer = ({
 
   return (
     <Fragment>
-      <PoseGroup
-animateOnMount
-flipMove={false}>
+      <PoseGroup animateOnMount flipMove={false}>
         {isActive && (
           <DrawerAnimation
             key="draweranimation"
             className={cssClass(className, elementClasses)}
           >
             <Header
-title={data ? data.title : ''}
-onClick={onClick} />
+              title={data ? data.title : ''}
+              onClick={onClick}
+            />
 
             {children}
           </DrawerAnimation>
@@ -108,12 +112,18 @@ drawer.propTypes = {
    * Data
    */
   data: PropTypes.shape({
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    title: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ])
   }),
   /**
    * Classname, default `drawer`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks
    *

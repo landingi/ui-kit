@@ -19,16 +19,16 @@ const cssClass = styles(scss)
  */
 const Back = ({ className, url, content }) => {
   const location = getLocationPath()
-  const urlMap = location.match('/payments/subscription/cancel')
+  const urlMap = location.match(
+    '/payments/subscription/cancel'
+  )
     ? '/payments/subscription'
     : url
 
   return (
     <span className={cssClass(className)}>
       <a href={urlMap}>
-        <Tooltip
-content={content}
-placement="bottom">
+        <Tooltip content={content} placement="bottom">
           <Button variant="icon">
             <FontAwesomeIcon icon="arrow-left" />
           </Button>
@@ -52,7 +52,10 @@ Back.propTypes = {
   /**
    * Classname, default `back`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Url
    */
@@ -60,7 +63,10 @@ Back.propTypes = {
   /**
    * Content
    */
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
 }
 
 /**

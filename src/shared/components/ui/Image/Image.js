@@ -47,7 +47,10 @@ image.propTypes = {
   /**
    * Size 100, 200 etc
    */
-  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ]),
   /**
    * Height 100, 200 etc
    */

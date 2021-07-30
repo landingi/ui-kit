@@ -33,8 +33,10 @@ const pagination = ({
   const { before_values, values, after_values } = data
   const { before, current, after } = values
 
-  const handleGoToPage = page => useCallback(() => goToPage(page), [])
-  const hidePagination = current[0] === 1 && !after_values.next
+  const handleGoToPage = page =>
+    useCallback(() => goToPage(page), [])
+  const hidePagination =
+    current[0] === 1 && !after_values.next
 
   return (
     <div className={cssClass(className)}>
@@ -43,9 +45,10 @@ const pagination = ({
           <Fragment>
             <span className={scss.pagination__first}>
               <Button
-size="small"
-variant="icon"
-onClick={handleGoToPage(1)}>
+                size="small"
+                variant="icon"
+                onClick={handleGoToPage(1)}
+              >
                 <FormattedMessage id="pagination.word.first" />
               </Button>
             </span>
@@ -76,11 +79,11 @@ onClick={handleGoToPage(1)}>
               {current.map((item, index) => (
                 <ListItem
                   key={index}
-                  className={scss.pagination__links__current}
+                  className={
+                    scss.pagination__links__current
+                  }
                 >
-                  <Button
-size="small"
-variant="icon">
+                  <Button size="small" variant="icon">
                     {item}
                   </Button>
                 </ListItem>
@@ -118,8 +121,9 @@ variant="icon">
       </div>
 
       <PageSize
-activePageLimit={activePageLimit}
-onChange={pageLimit} />
+        activePageLimit={activePageLimit}
+        onChange={pageLimit}
+      />
     </div>
   )
 }
@@ -138,7 +142,10 @@ pagination.propTypes = {
   /**
    * Classname, default `pagination`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    *  Data
    */
@@ -153,7 +160,10 @@ pagination.propTypes = {
   activePageLimit: PropTypes.number.isRequired,
   /** pageLimit
    */
-  pageLimit: PropTypes.oneOfType([PropTypes.func, PropTypes.array]).isRequired
+  pageLimit: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.array
+  ]).isRequired
 }
 
 /**

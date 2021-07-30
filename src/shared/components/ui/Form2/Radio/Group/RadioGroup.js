@@ -14,7 +14,13 @@ import { FormattedMessage } from 'react-intl'
  * @param {object} props.chidlren - children
  * @return {object} An object of children element
  */
-const radioGroup = ({ errors, touched, label, name, children }) => (
+const radioGroup = ({
+  errors,
+  touched,
+  label,
+  name,
+  children
+}) => (
   <div>
     {label && (
       <Label>

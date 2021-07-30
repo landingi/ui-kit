@@ -19,9 +19,7 @@ const cssClass = styles(scss)
  */
 const tabList = ({ className, children, ...restProps }) => {
   return (
-    <div
-className={cssClass(className)}
-{...restProps}>
+    <div className={cssClass(className)} {...restProps}>
       {children}
     </div>
   )
@@ -41,7 +39,10 @@ tabList.propTypes = {
   /**
    * Classname, default `tabs`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Children elements
    */

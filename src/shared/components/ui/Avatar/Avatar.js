@@ -20,11 +20,25 @@ const cssClass = styles(scss)
  * @param {string} props.name - avatar name, default: ''
  * @return {object} An object of children element
  */
-const avatar = ({ className, size, variant, src, name }) => (
+const avatar = ({
+  className,
+  size,
+  variant,
+  src,
+  name
+}) => (
   <span
-    className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}
+    className={cssClass(
+      className,
+      `avatar--${size}`,
+      `avatar--${variant}`
+    )}
   >
-    {variant === 'image' ? <Image src={src} /> : <p>{name}</p>}
+    {variant === 'image' ? (
+      <Image src={src} />
+    ) : (
+      <p>{name}</p>
+    )}
   </span>
 )
 
@@ -42,7 +56,10 @@ avatar.propTypes = {
   /**
    * Classname, default `avatar`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Size
    */

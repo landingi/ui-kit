@@ -22,10 +22,14 @@ const changeStatus = ({ selected }) => {
    */
   const handleStatusUpdate = async status => {
     emitCloseDropdown()
-    const id = selected.map(({ order_uuid }) => order_uuid.id)
+    const id = selected.map(
+      ({ order_uuid }) => order_uuid.id
+    )
 
     try {
-      await setOrderStatus(id, status).then(() => emitTableRefresh())
+      await setOrderStatus(id, status).then(() =>
+        emitTableRefresh()
+      )
     } catch {}
   }
 
@@ -37,24 +41,27 @@ const changeStatus = ({ selected }) => {
       <List>
         <ListItem variant="dropdown">
           <Button
-tag="a"
-onClick={() => handleStatusUpdate('open')}>
+            tag="a"
+            onClick={() => handleStatusUpdate('open')}
+          >
             <FormattedMessage id="status.open" />
           </Button>
         </ListItem>
 
         <ListItem variant="dropdown">
           <Button
-tag="a"
-onClick={() => handleStatusUpdate('completed')}>
+            tag="a"
+            onClick={() => handleStatusUpdate('completed')}
+          >
             <FormattedMessage id="status.completed" />
           </Button>
         </ListItem>
 
         <ListItem variant="dropdown">
           <Button
-tag="a"
-onClick={() => handleStatusUpdate('canceled')}>
+            tag="a"
+            onClick={() => handleStatusUpdate('canceled')}
+          >
             <FormattedMessage id="status.canceled" />
           </Button>
         </ListItem>

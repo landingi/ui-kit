@@ -32,18 +32,16 @@ const overflowTooltip = ({
       <div className={cssClass(className)}>
         <div>{content.slice(0, length).trim() + '...'}</div>
 
-        <Tooltip
-content={content}
-placement={placement}>
+        <Tooltip content={content} placement={placement}>
           {children}
         </Tooltip>
       </div>
     ) : (
       <div className={cssClass(className)}>
-        <Tooltip
-content={content}
-placement={placement}>
-          <div>{content.slice(0, length).trim() + '...'}</div>
+        <Tooltip content={content} placement={placement}>
+          <div>
+            {content.slice(0, length).trim() + '...'}
+          </div>
         </Tooltip>
       </div>
     )
@@ -82,7 +80,10 @@ overflowTooltip.propTypes = {
   /**
    * Classname, default `overflow-tooltip`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

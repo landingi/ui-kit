@@ -7,8 +7,10 @@ import PropTypes from 'prop-types'
  * @param {array} props.requiredPermisions - is an array of required permissions
  * @return {object}
  */
-export const usePermissions = (userPermissions, requiredPermisions) =>
-  userPermissions.includes(requiredPermisions)
+export const usePermissions = (
+  userPermissions,
+  requiredPermisions
+) => userPermissions.includes(requiredPermisions)
 
 /**
  * Display name
@@ -24,7 +26,9 @@ usePermissions.propTypes = {
   /**
    * userPermissions
    */
-  userPermissions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  userPermissions: PropTypes.arrayOf(
+    PropTypes.string.isRequired
+  ).isRequired,
   /**
    * requiredPermisions
    */

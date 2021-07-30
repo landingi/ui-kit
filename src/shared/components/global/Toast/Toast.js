@@ -1,4 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useState
+} from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import emitter from 'shared/lib/emitter'
@@ -66,17 +70,25 @@ const Toast = ({ className }) => {
    * @param {int} timeout - timeout to hide notification
    * @type {function}
    */
-  const handleToastData = (message, type, timeout = 5000) => {
+  const handleToastData = (
+    message,
+    type,
+    timeout = 5000
+  ) => {
     setMessage(message)
     setType(type)
     setHideTimeout(timeout)
   }
 
   const setAutoHideTimer = () => {
-    autoHideTimer = setTimeout(() => handleToastToggle(), hideTimeout)
+    autoHideTimer = setTimeout(
+      () => handleToastToggle(),
+      hideTimeout
+    )
   }
 
-  const clearAutoHideTimer = () => clearTimeout(autoHideTimer)
+  const clearAutoHideTimer = () =>
+    clearTimeout(autoHideTimer)
 
   /**
    * useEffect
@@ -102,16 +114,16 @@ const Toast = ({ className }) => {
 
   return (
     isActive && (
-      <PoseGroup
-animateOnMount
-flipMove={false}>
+      <PoseGroup animateOnMount flipMove={false}>
         <ToastAnimation
-key="toastanimation"
-className={cssClass(className)}>
+          key="toastanimation"
+          className={cssClass(className)}
+        >
           <Notification
-type={type}
-isClosable
-onClick={handleToastToggle}>
+            type={type}
+            isClosable
+            onClick={handleToastToggle}
+          >
             {message}
           </Notification>
         </ToastAnimation>
@@ -134,7 +146,10 @@ Toast.propTypes = {
   /**
    * Classname, default `toast`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

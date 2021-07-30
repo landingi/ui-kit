@@ -45,9 +45,10 @@ const Tooltip = ({
   return (
     <Fragment>
       <span
-className={cssClass(className)}
-data-tip
-data-for={tooltipUUID}>
+        className={cssClass(className)}
+        data-tip
+        data-for={tooltipUUID}
+      >
         {children}
       </span>
 
@@ -83,7 +84,12 @@ Tooltip.propTypes = {
   /**
    * Placement
    */
-  placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
+  placement: PropTypes.oneOf([
+    'top',
+    'left',
+    'right',
+    'bottom'
+  ]),
   /**
    * Placement
    */
@@ -99,7 +105,10 @@ Tooltip.propTypes = {
   /**
    * Tooltip content
    */
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Show tooltip after click, tooltip is hidden after 1 sec
    */

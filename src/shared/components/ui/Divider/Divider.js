@@ -26,7 +26,15 @@ const divider = ({ className, variant, align }) => {
     'divider--vertical': align === 'vertical'
   })
 
-  return <div className={cssClass('divider', className, elementClasses)} />
+  return (
+    <div
+      className={cssClass(
+        'divider',
+        className,
+        elementClasses
+      )}
+    />
+  )
 }
 
 /**
@@ -43,7 +51,10 @@ divider.propTypes = {
   /**
    * Classname, default `divider`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Variant
    */

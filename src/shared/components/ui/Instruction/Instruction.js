@@ -22,12 +22,14 @@ const Instruction = ({ className, data }) => (
   <div className={cssClass(className)}>
     {data.map(({ content }, index) => (
       <div
-key={uuid()}
-className={cssClass('instruction__step')}>
+        key={uuid()}
+        className={cssClass('instruction__step')}
+      >
         <StepNumber
-step={index + 1}
-size="medium"
-absolute />
+          step={index + 1}
+          size="medium"
+          absolute
+        />
 
         {content}
       </div>
@@ -49,7 +51,10 @@ Instruction.propTypes = {
   /**
    * Classname, default `Instruction`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Data
    */

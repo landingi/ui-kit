@@ -33,7 +33,9 @@ const paragraph = ({
       className,
       color ? `${className}-color--${color}` : undefined,
       size ? `${className}-size--${size}` : undefined,
-      padding ? `${className}-padding--${padding}` : undefined,
+      padding
+        ? `${className}-padding--${padding}`
+        : undefined,
       align ? `${className}-align--${align}` : undefined,
       line ? `${className}-line--${line}` : undefined,
       weight ? `${className}-weight--${weight}` : undefined
@@ -61,7 +63,10 @@ paragraph.propTypes = {
   /**
    * Classname, default `section`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Color, default `accent-1`
    */

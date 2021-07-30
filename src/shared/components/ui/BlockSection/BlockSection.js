@@ -45,11 +45,18 @@ const BlockSection = ({
   return (
     <div className={cssClass(className)}>
       <Panel variant="padding-none">
-        <div className={cssClass('block-section__panel', elementClasses)}>
-          <div className={cssClass('block-section__panel--content')}>
-            <Heading
-level={2}
-bold>
+        <div
+          className={cssClass(
+            'block-section__panel',
+            elementClasses
+          )}
+        >
+          <div
+            className={cssClass(
+              'block-section__panel--content'
+            )}
+          >
+            <Heading level={2} bold>
               <FormattedMessage id={`${title}`} />
             </Heading>
 
@@ -69,9 +76,7 @@ bold>
             {list && (
               <List listStyle="ordered-disc">
                 {list.map(item => (
-                  <ListItem
-variant="block"
-key={uuid()}>
+                  <ListItem variant="block" key={uuid()}>
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}
@@ -85,9 +90,7 @@ key={uuid()}>
             </Button>
           </div>
 
-          <Image
-src={url}
-size={527} />
+          <Image src={url} size={527} />
         </div>
       </Panel>
     </div>
@@ -108,7 +111,10 @@ BlockSection.propTypes = {
   /**
    * Classname, default `block-section`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Title
    */

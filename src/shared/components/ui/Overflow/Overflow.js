@@ -38,7 +38,10 @@ overflow.propTypes = {
   /**
    * Classname, default `overflow`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

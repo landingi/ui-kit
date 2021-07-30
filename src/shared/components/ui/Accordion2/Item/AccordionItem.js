@@ -16,24 +16,33 @@ const cssClass = styles(scss)
  * @param {node} props.content - item content
  * @return {object} An object of children element
  */
-const AccordionItem = ({ className, number, title, content }) => {
+const AccordionItem = ({
+  className,
+  number,
+  title,
+  content
+}) => {
   const [isOpen, setOpen] = useState(false)
 
   /**
    * handleOpen - open section
    * @type {function}
    */
-  const handleOpen = useCallback(() => setOpen(!isOpen), [isOpen])
+  const handleOpen = useCallback(
+    () => setOpen(!isOpen),
+    [isOpen]
+  )
 
   return (
     <div className={cssClass(className)}>
       <div
-className={cssClass('accordion__item--title')}
-onClick={handleOpen}>
+        className={cssClass('accordion__item--title')}
+        onClick={handleOpen}
+      >
         <div>
-          {number && <StepNumber
-step={number}
-size="medium" />}
+          {number && (
+            <StepNumber step={number} size="medium" />
+          )}
 
           {title}
         </div>
@@ -72,7 +81,10 @@ AccordionItem.propTypes = {
   /**
    * Classname
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Number
    */

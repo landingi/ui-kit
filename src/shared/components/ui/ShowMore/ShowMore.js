@@ -1,4 +1,8 @@
-import React, { useCallback, useState, useEffect } from 'react'
+import React, {
+  useCallback,
+  useState,
+  useEffect
+} from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import scss from './ShowMore.scss'
@@ -15,7 +19,12 @@ import Html from 'shared/components/global/Html'
  * @param {object} props.children - children
  * @return {Object} An object of children element
  */
-const showMore = ({ content, intl, extraClassname, children }) => {
+const showMore = ({
+  content,
+  intl,
+  extraClassname,
+  children
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [display, setDisplay] = useState('none')
   const [text, setText] = useState('')
@@ -35,20 +44,21 @@ const showMore = ({ content, intl, extraClassname, children }) => {
     const text = intl.formatMessage({ id: content })
 
     !isOpen
-      ? setText(text.replace(/^(.{170}[^\s]*).*/, '$1') + '...')
+      ? setText(
+          text.replace(/^(.{170}[^\s]*).*/, '$1') + '...'
+        )
       : setText(text)
   }, [isOpen])
 
   return text ? (
     <div className={scss.container}>
-      <Html
-value={text}
-className={extraClassname} />
+      <Html value={text} className={extraClassname} />
 
       <button
-type="button"
-onClick={handleOnClick}
-className={scss.button}>
+        type="button"
+        onClick={handleOnClick}
+        className={scss.button}
+      >
         {isOpen ? (
           <FormattedMessage id="show.less" />
         ) : (

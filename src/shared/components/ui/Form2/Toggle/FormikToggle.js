@@ -27,7 +27,11 @@ const formikToggle = ({
   type
 }) => (
   <div className={cssClass('toggle-container', className)}>
-    <label className={cssClass('toggle', { 'toggle--checked': value })}>
+    <label
+      className={cssClass('toggle', {
+        'toggle--checked': value
+      })}
+    >
       <input
         name={name}
         className={cssClass('toggle__checkbox')}
@@ -43,11 +47,14 @@ const formikToggle = ({
 
     {label && (
       <label
-htmlFor={id}
-className={cssClass('toggle__label')}>
+        htmlFor={id}
+        className={cssClass('toggle__label')}
+      >
         <FormattedMessage id={`${label}`} />
 
-        {touched[name] && <InputError error={errors[name]} />}
+        {touched[name] && (
+          <InputError error={errors[name]} />
+        )}
       </label>
     )}
   </div>
@@ -67,7 +74,10 @@ formikToggle.propTypes = {
   /**
    * Classname, default ``
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Type, default `checkbox`
    */
@@ -90,7 +100,10 @@ formikToggle.propTypes = {
     setFieldValue: PropTypes.func
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.objectOf
+  ])
 }
 
 /**

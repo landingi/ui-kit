@@ -29,14 +29,19 @@ const panel = ({
     'panel--padding-default': variant === 'padding-default',
     'panel--padding-tiny': variant === 'padding-tiny',
     'panel--padding-none': variant === 'padding-none',
-    'panel--padding-bottom-tiny': variant === 'padding-bottom-tiny',
+    'panel--padding-bottom-tiny':
+      variant === 'padding-bottom-tiny',
     'panel--padding-input': variant === 'padding-input',
     'panel--adjust-height': adjustHeight === true,
     'panel--background': isBackground === true,
     'panel--shadow-none': hasShadow === false
   })
 
-  return <div className={cssClass(className, elementClasses)}>{children}</div>
+  return (
+    <div className={cssClass(className, elementClasses)}>
+      {children}
+    </div>
+  )
 }
 
 /**
@@ -57,7 +62,10 @@ panel.propTypes = {
   /**
    * Classname, default `panel`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Variant
    */

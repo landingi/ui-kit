@@ -22,12 +22,8 @@ const Steps = ({ data }) => (
       const { variant, description } = item
 
       return (
-        <div
-className={scss.step}
-key={uuid()}>
-          <StepNumber
-step={step}
-variant={variant} />
+        <div className={scss.step} key={uuid()}>
+          <StepNumber step={step} variant={variant} />
 
           <span
             className={cssClass(

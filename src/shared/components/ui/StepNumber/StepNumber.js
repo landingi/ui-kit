@@ -15,7 +15,13 @@ const cssClass = styles(scss)
  * @param {bool} props.absolute - position absolute, default 'false'
  * @return {object} An object of children element
  */
-const StepNumber = ({ className, step, variant, size, absolute }) => {
+const StepNumber = ({
+  className,
+  step,
+  variant,
+  size,
+  absolute
+}) => {
   const elementClasses = cssClass({
     'step__number--completed': variant === 'completed',
     'step__number--current': variant === 'current',
@@ -25,7 +31,11 @@ const StepNumber = ({ className, step, variant, size, absolute }) => {
     'step__number--absolute': absolute === true
   })
 
-  return <span className={cssClass(className, elementClasses)}>{step}</span>
+  return (
+    <span className={cssClass(className, elementClasses)}>
+      {step}
+    </span>
+  )
 }
 
 /**
@@ -42,7 +52,10 @@ StepNumber.propTypes = {
   /**
    * Classname, default `panel`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Step
    */

@@ -19,12 +19,19 @@ const cssClass = styles(scss)
  * @param {function} props.onClick - click handler
  * @return {object} An object of children element
  */
-const indicator = ({ children, className, content, isAlert, onClick }) => {
+const indicator = ({
+  children,
+  className,
+  content,
+  isAlert,
+  onClick
+}) => {
   const hasAlertClass = isAlert ? 'is--alert' : undefined
   return (
     <span
-className={cssClass(className, hasAlertClass)}
-onClick={onClick}>
+      className={cssClass(className, hasAlertClass)}
+      onClick={onClick}
+    >
       <i>{content}</i>
 
       {children}
@@ -54,7 +61,10 @@ indicator.propTypes = {
   /**
    * Classname, default `indicator`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Alert
    */

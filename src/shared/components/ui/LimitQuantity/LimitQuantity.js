@@ -19,7 +19,11 @@ const limitQuantity = ({ limit, quantity }) => (
       {formatNumeric(quantity)}
 
       <span className={cssClass('limit-quantity--limit')}>
-        {limit === -1 ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
+        {limit === -1 ? (
+          <span> / &#8734;</span>
+        ) : (
+          ` / ${formatNumeric(limit)}`
+        )}
       </span>
     </span>
   </div>

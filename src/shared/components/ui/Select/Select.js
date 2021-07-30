@@ -15,15 +15,17 @@ import uuid from 'react-uuid'
  */
 const select = ({ value, data, name, onChange }) => (
   <select
-className={scss.select}
-onChange={onChange}
-value={value}
-name={name}>
+    className={scss.select}
+    onChange={onChange}
+    value={value}
+    name={name}
+  >
     {data.map(item => (
       <Option
-key={uuid()}
-value={item.value}
-label={item.label} />
+        key={uuid()}
+        value={item.value}
+        label={item.label}
+      />
     ))}
   </select>
 )
@@ -42,7 +44,10 @@ select.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   /**
    * Name
    */

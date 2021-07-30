@@ -26,7 +26,9 @@ const checkbox = ({
   className,
   type
 }) => (
-  <div className={cssClass('checkbox-container', className)}>
+  <div
+    className={cssClass('checkbox-container', className)}
+  >
     <label className={cssClass('checkbox__input')}>
       <input
         name={name}
@@ -42,8 +44,9 @@ const checkbox = ({
 
     {label && (
       <label
-htmlFor={id}
-className={cssClass('checkbox__label')}>
+        htmlFor={id}
+        className={cssClass('checkbox__label')}
+      >
         <FormattedMessage id={`${label}`} />
 
         {touched[name] && <Error error={errors[name]} />}
@@ -66,7 +69,10 @@ checkbox.propTypes = {
   /**
    * Classname
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Type, default `checkbox`
    */
@@ -89,7 +95,10 @@ checkbox.propTypes = {
     setFieldValue: PropTypes.func
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.objectOf
+  ])
 }
 
 checkbox.defaultProps = {

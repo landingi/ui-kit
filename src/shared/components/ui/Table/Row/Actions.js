@@ -23,15 +23,15 @@ registerIcons()
  * @param {object} props.userPermissions -  list of permissions
  * @return {object} An object of children element
  */
-const ActionsRow = ({ deleteRow, detailsRow, userPermissions }) => (
+const ActionsRow = ({
+  deleteRow,
+  detailsRow,
+  userPermissions
+}) => (
   <List variant="inline">
     <ListItem>
-      <Button
-onClick={detailsRow}
-variant="transparent">
-        <FontAwesomeIcon
-icon="list-alt"
-size="sm" />
+      <Button onClick={detailsRow} variant="transparent">
+        <FontAwesomeIcon icon="list-alt" size="sm" />
 
         <FormattedMessage id="word.details" />
       </Button>
@@ -40,12 +40,8 @@ size="sm" />
     <Fragment>
       {!usePermissions(userPermissions, READ_ONLY) && (
         <ListItem>
-          <Button
-onClick={deleteRow}
-variant="transparent">
-            <FontAwesomeIcon
-icon="trash-alt"
-size="sm" />
+          <Button onClick={deleteRow} variant="transparent">
+            <FontAwesomeIcon icon="trash-alt" size="sm" />
 
             <FormattedMessage id="word.delete" />
           </Button>
@@ -76,7 +72,9 @@ ActionsRow.propTypes = {
   /**
    * userPermissions
    */
-  userPermissions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  userPermissions: PropTypes.arrayOf(
+    PropTypes.string.isRequired
+  ).isRequired
 }
 
 /**

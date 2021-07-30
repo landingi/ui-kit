@@ -17,31 +17,37 @@ import PropTypes from 'prop-types'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-const Filter = ({ values, setValue, initialValue, localStorageKey }) => {
+const Filter = ({
+  values,
+  setValue,
+  initialValue,
+  localStorageKey
+}) => {
   const findInitialValue = () => {
-    const find = values.find(({ value }) => value === initialValue)
+    const find = values.find(
+      ({ value }) => value === initialValue
+    )
 
     return find.label
   }
 
-  const [filterLabel, setLabel] = useState(findInitialValue())
+  const [filterLabel, setLabel] = useState(
+    findInitialValue()
+  )
 
   const setFilter = (label, value) => {
     setLabel(label)
     setValue(value)
-    localStorageKey && setLocalStorage(localStorageKey, value)
+    localStorageKey &&
+      setLocalStorage(localStorageKey, value)
     emitCloseDropdown()
   }
 
   return (
-    <Dropdown
-label={filterLabel}
-size="medium">
+    <Dropdown label={filterLabel} size="medium">
       <List>
         {values.map(({ value, label }) => (
-          <ListItem
-key={uuid()}
-variant="dropdown">
+          <ListItem key={uuid()} variant="dropdown">
             <Button
               tag="a"
               variant="dropdown"
@@ -74,7 +80,10 @@ Filter.propTypes = {
         PropTypes.string,
         PropTypes.instanceOf(Object)
       ]),
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ])
     })
   ).isRequired,
   setValue: PropTypes.func,

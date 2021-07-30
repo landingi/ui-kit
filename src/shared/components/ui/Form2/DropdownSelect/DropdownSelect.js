@@ -1,5 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useCallback, useEffect, useState, Fragment } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  Fragment
+} from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import Error from 'shared/components/ui/Form2/Error'
@@ -73,10 +78,13 @@ const select = ({
   liveChanges,
   optionalContent
 }) => {
-  const [inModalPosition, setInModalPosition] = useState(false)
+  const [inModalPosition, setInModalPosition] =
+    useState(false)
   const errorClass = errors[name] ? 'form--has-error' : ''
   const valueClass = value[name] ? 'form--has-value' : ''
-  const filledClass = touched[name] ? 'form-field--touched' : ''
+  const filledClass = touched[name]
+    ? 'form-field--touched'
+    : ''
 
   const handleChange = useCallback((name, item) => {
     emitCloseDropdown()
@@ -96,9 +104,7 @@ const select = ({
         >
           <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph
-color="accent-2"
-size={12}>
+          <Paragraph color="accent-2" size={12}>
             {item?.description}
           </Paragraph>
         </Button>
@@ -118,8 +124,9 @@ size={12}>
     <Fragment>
       {emphasisedOptions.map((item, index) => (
         <ListItem
-className="list-item--dropdown"
-key={index}>
+          className="list-item--dropdown"
+          key={index}
+        >
           {renderOption(item)}
         </ListItem>
       ))}
@@ -128,8 +135,9 @@ key={index}>
 
       {options.map((item, index) => (
         <ListItem
-className="list-item--dropdown"
-key={index}>
+          className="list-item--dropdown"
+          key={index}
+        >
           {renderOption(item)}
         </ListItem>
       ))}
@@ -142,7 +150,9 @@ key={index}>
         errorClass || valueClass || filledClass
       }`}
     >
-      {label && hasLabel && <Label id={name}>{label}</Label>}
+      {label && hasLabel && (
+        <Label id={name}>{label}</Label>
+      )}
 
       <Dropdown
         label={value[name]?.label || label}
@@ -172,7 +182,9 @@ key={index}>
         <Overflow>
           <div style={overflowStyle}>
             <List>
-              {!isLoading && isEmptyList && isEmpty(options) ? (
+              {!isLoading &&
+              isEmptyList &&
+              isEmpty(options) ? (
                 <Message
                   title="message.empty.search.results"
                   message="message.empty.search.results.small"
@@ -211,7 +223,10 @@ select.displayName = 'Select in dropdown'
  * @type {Object}
  */
 select.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -225,7 +240,10 @@ select.propTypes = {
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   hasLabel: PropTypes.bool,
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(

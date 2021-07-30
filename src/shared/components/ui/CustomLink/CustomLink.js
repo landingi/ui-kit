@@ -19,7 +19,14 @@ const cssClass = styles(scss)
  * @param {string} props.href - href
  * @param {string} props.label - label to display
  */
-const customLink = ({ className, variant, label, href, target, size }) => (
+const customLink = ({
+  className,
+  variant,
+  label,
+  href,
+  target,
+  size
+}) => (
   <a
     href={href}
     target={target}
@@ -55,7 +62,10 @@ customLink.propTypes = {
   /**
    * Label
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]).isRequired,
   /**
    * Link
    */

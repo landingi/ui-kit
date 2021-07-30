@@ -1,4 +1,10 @@
-import React, { memo, useState, useEffect, useCallback, useRef } from 'react'
+import React, {
+  memo,
+  useState,
+  useEffect,
+  useCallback,
+  useRef
+} from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -100,14 +106,17 @@ const Search = ({
    * @type {function}
    */
   const handleProtectedSubmit = useCallback(event => {
-    onProtectedSubmit && onProtectedSubmit(inputRef.current.value)
+    onProtectedSubmit &&
+      onProtectedSubmit(inputRef.current.value)
   }, [])
 
   /**
    * useEffect
    */
   useEffect(() => {
-    autoFocus && variant === 'input' && inputRef.current.focus()
+    autoFocus &&
+      variant === 'input' &&
+      inputRef.current.focus()
   }, [])
 
   const elementClasses = cssClass({
@@ -117,13 +126,21 @@ const Search = ({
 
   return (
     <Tag onSubmit={handleSubmit}>
-      <div className={cssClass(className, elementClasses, `search--${size}`)}>
+      <div
+        className={cssClass(
+          className,
+          elementClasses,
+          `search--${size}`
+        )}
+      >
         {variant === 'input' &&
           (onSubmit || onProtectedSubmit ? (
             <div className={scss.search__icon_button}>
               <Button
                 variant="icon"
-                type={onProtectedSubmit ? 'button' : 'submit'}
+                type={
+                  onProtectedSubmit ? 'button' : 'submit'
+                }
                 size="input"
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
@@ -133,9 +150,7 @@ const Search = ({
             </div>
           ) : (
             <div className={scss.search__icon}>
-              <FontAwesomeIcon
-size="sm"
-icon="search" />
+              <FontAwesomeIcon size="sm" icon="search" />
             </div>
           ))}
 
@@ -157,7 +172,9 @@ icon="search" />
             className={scss.search__input}
             type="text"
             name="search"
-            placeholder={intl.formatMessage({ id: placeholder })}
+            placeholder={intl.formatMessage({
+              id: placeholder
+            })}
             onChange={onChange}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
@@ -167,12 +184,11 @@ icon="search" />
         {isClearActive && variant === 'input' && (
           <div className={scss.search__clean}>
             <Button
-variant="icon"
-size="input"
-onClick={handleCleanOnClick}>
-              <FontAwesomeIcon
-size="sm"
-icon="times" />
+              variant="icon"
+              size="input"
+              onClick={handleCleanOnClick}
+            >
+              <FontAwesomeIcon size="sm" icon="times" />
             </Button>
           </div>
         )}
@@ -239,7 +255,10 @@ Search.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * handle on form submit action
    */

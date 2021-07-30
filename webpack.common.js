@@ -1,7 +1,9 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
@@ -38,7 +40,8 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
-              additionalData: '@import "shared/styles/theme.scss";',
+              additionalData:
+                '@import "shared/styles/theme.scss";',
               sassOptions: {
                 includePaths: [__dirname, 'src'],
                 outputStyle: 'compressed'
@@ -51,12 +54,15 @@ module.exports = {
     ]
   },
   optimization: {
-    minimizer: [new CssMinimizerPlugin({
-      minimizerOptions: {
-        cache: true,
-        include: /\/build/
-      }
-    }), '...'],
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          cache: true,
+          include: /\/build/
+        }
+      }),
+      '...'
+    ],
     splitChunks: {
       chunks: 'all'
     }

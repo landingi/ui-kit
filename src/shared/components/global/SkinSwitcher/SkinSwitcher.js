@@ -11,20 +11,37 @@ import { switcherLogo } from 'shared/components/global/SideBarV2/helpers/sideBar
  * @param {bool} props.isWhitelabel - is Account whitelabel
  * @return {object} An object of children element
  */
-const skinSwitcher = ({ handleChangeSkin, isWhitelabel }) => {
-  const handleChangeCallback = useCallback(label => handleChangeSkin(label))
+const skinSwitcher = ({
+  handleChangeSkin,
+  isWhitelabel
+}) => {
+  const handleChangeCallback = useCallback(label =>
+    handleChangeSkin(label)
+  )
 
   return (
     <div className="skin-switcher">
-      <Button onClick={useCallback(() => handleChangeCallback('default'))}>
+      <Button
+        onClick={useCallback(() =>
+          handleChangeCallback('default')
+        )}
+      >
         <Image src={switcherLogo(isWhitelabel)} />
       </Button>
 
-      <Button onClick={useCallback(() => handleChangeCallback('dark'))}>
+      <Button
+        onClick={useCallback(() =>
+          handleChangeCallback('dark')
+        )}
+      >
         <Image src="https://images.assets-landingi.com/app-ui/dark.svg" />
       </Button>
 
-      <Button onClick={useCallback(() => handleChangeCallback('white'))}>
+      <Button
+        onClick={useCallback(() =>
+          handleChangeCallback('white')
+        )}
+      >
         <Image src="https://images.assets-landingi.com/app-ui/light.svg" />
       </Button>
     </div>

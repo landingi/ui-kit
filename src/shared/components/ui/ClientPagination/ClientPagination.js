@@ -33,16 +33,18 @@ const pagination = ({
   pageLimit,
   constantPageLimit
 }) => {
-  const handleGoToPage = page => useCallback(() => goToPage(page), [])
+  const handleGoToPage = page =>
+    useCallback(() => goToPage(page), [])
 
   const renderPagination = () =>
     pageCount !== 1 && (
       <Fragment>
         <span className={scss.pagination__first}>
           <Button
-size="small"
-variant="icon"
-onClick={handleGoToPage(0)}>
+            size="small"
+            variant="icon"
+            onClick={handleGoToPage(0)}
+          >
             <FormattedMessage id="pagination.word.first" />
           </Button>
         </span>
@@ -93,9 +95,7 @@ onClick={handleGoToPage(0)}>
             variant="inline"
             className={scss.pagination__links__current}
           >
-            <Button
-size="small"
-variant="icon">
+            <Button size="small" variant="icon">
               {pageIndex + 1}
             </Button>
           </ListItem>
@@ -162,12 +162,15 @@ variant="icon">
 
   return (
     <div className={cssClass(className)}>
-      <div className={scss.pagination__links}>{renderPagination()}</div>
+      <div className={scss.pagination__links}>
+        {renderPagination()}
+      </div>
 
       {constantPageLimit === 0 && (
         <PageSize
-activePageLimit={activePageLimit}
-onChange={pageLimit} />
+          activePageLimit={activePageLimit}
+          onChange={pageLimit}
+        />
       )}
     </div>
   )
@@ -187,7 +190,10 @@ pagination.propTypes = {
   /**
    * Classname, default `pagination`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * goToPage page to go
    */

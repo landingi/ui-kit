@@ -6,8 +6,14 @@
  * @param {number} parentOffsetLeft
  * @return {number} Returns position
  */
-export const centerParent = (parentWidth, childWidth, parentOffsetLeft) => {
-  const calc = Math.floor(parentWidth / 2 - childWidth / 2 + parentOffsetLeft)
+export const centerParent = (
+  parentWidth,
+  childWidth,
+  parentOffsetLeft
+) => {
+  const calc = Math.floor(
+    parentWidth / 2 - childWidth / 2 + parentOffsetLeft
+  )
   return isNaN(calc) ? 0 : calc
 }
 
@@ -31,9 +37,13 @@ export const isOutOfViewport = elem => {
   out.top = elem.top < 0
   out.left = elem.left < 0
   out.bottom =
-    elem.bottom > (window.innerHeight || document.documentElement.clientHeight)
+    elem.bottom >
+    (window.innerHeight ||
+      document.documentElement.clientHeight)
   out.right =
-    elem.right > (window.innerWidth || document.documentElement.clientWidth)
+    elem.right >
+    (window.innerWidth ||
+      document.documentElement.clientWidth)
   out.any = out.top || out.left || out.bottom || out.right
   out.all = out.top && out.left && out.bottom && out.right
 

@@ -69,7 +69,12 @@ const input = ({
   }
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div
+      className={cssClass(
+        scss.input__wrapper,
+        elementClasses
+      )}
+    >
       <input
         className={cssClass(className)}
         onBlur={onBlur}
@@ -78,7 +83,9 @@ const input = ({
         type={type}
         placeholder={
           translate
-            ? intl.formatMessage({ id: `${placeholder || label}` })
+            ? intl.formatMessage({
+                id: `${placeholder || label}`
+              })
             : label
         }
         name={name}
@@ -97,10 +104,12 @@ const input = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label
-id={name}
-className={scss.input__label}>
-          {translate ? <FormattedMessage id={`${label}`} /> : label}
+        <Label id={name} className={scss.input__label}>
+          {translate ? (
+            <FormattedMessage id={`${label}`} />
+          ) : (
+            label
+          )}
         </Label>
       )}
 
@@ -111,8 +120,9 @@ className={scss.input__label}>
           content={tooltip}
         >
           <FontAwesomeIcon
-color="#2550AA"
-icon="exclamation-circle" />
+            color="#2550AA"
+            icon="exclamation-circle"
+          />
         </Tooltip>
       )}
     </div>
@@ -133,7 +143,10 @@ input.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on Input
    *
@@ -162,7 +175,10 @@ input.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Name
    */
@@ -182,7 +198,10 @@ input.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   /**
    * Deafult value
    */

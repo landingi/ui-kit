@@ -34,7 +34,10 @@ dropdownHead.propTypes = {
   /**
    * Classname, default `dropdown__head`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

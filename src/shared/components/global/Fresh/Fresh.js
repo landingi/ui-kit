@@ -16,7 +16,15 @@ import Button from 'shared/components/ui/Button'
  * @param {object} props.intl - react intl formatMessage function
  * @return {object} An object of children element
  */
-const Fresh = ({ name, mail, subject, description, variant, size, intl }) => {
+const Fresh = ({
+  name,
+  mail,
+  subject,
+  description,
+  variant,
+  size,
+  intl
+}) => {
   const isFreshChat = !!window.fcWidget
   const isFreshDesk = !!window.FreshworksWidget
 
@@ -34,7 +42,9 @@ const Fresh = ({ name, mail, subject, description, variant, size, intl }) => {
    * @type {function}
    */
   const openFreshChat = () =>
-    window.fcWidget.open({ replyText: intl.formatMessage({ id: description }) })
+    window.fcWidget.open({
+      replyText: intl.formatMessage({ id: description })
+    })
 
   /**
    * open FreshDesk

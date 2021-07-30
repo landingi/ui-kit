@@ -36,9 +36,7 @@ const limit = ({
   return (
     <div className={cssClass(className)}>
       <div className={cssClass('limit--icon')}>
-        <FontAwesomeIcon
-icon={icon}
-size="lg" />
+        <FontAwesomeIcon icon={icon} size="lg" />
       </div>
 
       <div className={cssClass('limit--info')}>
@@ -48,13 +46,16 @@ size="lg" />
           </span>
 
           <span className={cssClass('info--limit')}>
-            {unlimited ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
+            {unlimited ? (
+              <span> / &#8734;</span>
+            ) : (
+              ` / ${formatNumeric(limit)}`
+            )}
           </span>
 
           {!!total && (
             <span className={cssClass('info--total')}>
               <FormattedMessage id="word.total" />:
-
               <b>{total}</b>
             </span>
           )}
@@ -67,7 +68,9 @@ size="lg" />
             <Fragment>
               <Spreader spread="tiny" />
 
-              <Tooltip content={<FormattedMessage id={tooltip} />}>
+              <Tooltip
+                content={<FormattedMessage id={tooltip} />}
+              >
                 <FontAwesomeIcon icon="exclamation-circle" />
               </Tooltip>
             </Fragment>
@@ -92,7 +95,10 @@ limit.propTypes = {
   /**
    * className, default 'limit'
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Icon
    */

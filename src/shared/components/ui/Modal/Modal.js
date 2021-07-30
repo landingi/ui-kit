@@ -104,16 +104,16 @@ const modal = ({
     <div className={scss.modal__header}>
       {title && <ModalHeader title={title} />}
 
-      {image && <Image
-src={image}
-size="auto"
-height={20} />}
+      {image && (
+        <Image src={image} size="auto" height={20} />
+      )}
 
       <div>
         {isMarkAsSpamVisible && (
           <Button
-variant="transparent"
-onClick={onMarkAsSpam}>
+            variant="transparent"
+            onClick={onMarkAsSpam}
+          >
             <FontAwesomeIcon icon="ban" />
 
             <FormattedMessage id="word.mark-as-spam" />
@@ -121,9 +121,7 @@ onClick={onMarkAsSpam}>
         )}
 
         {isEditable && (
-          <Button
-variant="icon"
-onClick={onEdit}>
+          <Button variant="icon" onClick={onEdit}>
             <FontAwesomeIcon icon="pencil-alt" />
           </Button>
         )}
@@ -137,7 +135,9 @@ onClick={onEdit}>
 
   const renderComponent = () => (
     <div className={cssClass('modal__component')}>
-      <div className={cssClass('modal__component--child')}>{component}</div>
+      <div className={cssClass('modal__component--child')}>
+        {component}
+      </div>
 
       {isClosable && <Close onClick={onClick} />}
     </div>
@@ -145,13 +145,12 @@ onClick={onEdit}>
 
   return (
     <Fragment>
-      <PoseGroup
-animateOnMount
-flipMove={false}>
+      <PoseGroup animateOnMount flipMove={false}>
         {isActive && (
           <ModalAnimation
-key="ModalAnimation"
-className={scss.dialog}>
+            key="ModalAnimation"
+            className={scss.dialog}
+          >
             <div
               className={cssClass(className, {
                 'modal--fullscreen': isFullscreen,
@@ -164,8 +163,13 @@ className={scss.dialog}>
                 </div>
               ) : (
                 <Fragment>
-                  {(isClosable || title || image || isEditable) &&
-                    (!isComponent ? renderTitle() : renderComponent())}
+                  {(isClosable ||
+                    title ||
+                    image ||
+                    isEditable) &&
+                    (!isComponent
+                      ? renderTitle()
+                      : renderComponent())}
 
                   {hasHeaderDivider && (
                     <Fragment>
@@ -188,9 +192,13 @@ className={scss.dialog}>
                           variant="secondary"
                           size="medium"
                           onClick={onClickCustomButton}
-                          isDisabled={isCustomButtonDisabled}
+                          isDisabled={
+                            isCustomButtonDisabled
+                          }
                         >
-                          <FormattedMessage id={`${i18Cancel}`} />
+                          <FormattedMessage
+                            id={`${i18Cancel}`}
+                          />
                         </Button>
                       ) : (
                         <Button
@@ -198,12 +206,16 @@ className={scss.dialog}>
                           size="medium"
                           onClick={onClick}
                         >
-                          <FormattedMessage id={`${i18Cancel}`} />
+                          <FormattedMessage
+                            id={`${i18Cancel}`}
+                          />
                         </Button>
                       )}
 
                       <Button
-                        type={isSubmit ? 'submit' : 'button'}
+                        type={
+                          isSubmit ? 'submit' : 'button'
+                        }
                         variant={actionVariant}
                         size="medium"
                         onClick={onAction}
@@ -213,11 +225,14 @@ className={scss.dialog}>
                       >
                         {actionIcon && (
                           <FontAwesomeIcon
-icon={actionIcon}
-size="xs" />
+                            icon={actionIcon}
+                            size="xs"
+                          />
                         )}
 
-                        <FormattedMessage id={`${i18Action}`} />
+                        <FormattedMessage
+                          id={`${i18Action}`}
+                        />
                       </Button>
                     </ModalFooter>
                   )}
@@ -251,7 +266,10 @@ modal.propTypes = {
   /**
    * Classname, default `modal`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks
    *

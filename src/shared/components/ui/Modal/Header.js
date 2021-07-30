@@ -13,8 +13,9 @@ import Heading from 'shared/components/ui/Heading'
 const modalHeader = ({ title }) => (
   <Heading level={2}>
     <FormattedMessage
-id={`${title}`}
-defaultMessage={`${title}`} />
+      id={`${title}`}
+      defaultMessage={`${title}`}
+    />
   </Heading>
 )
 

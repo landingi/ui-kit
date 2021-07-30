@@ -11,7 +11,9 @@ const cssClass = styles(scss)
 const html = ({ className, value }) => (
   <span
     className={cssClass(className)}
-    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }}
+    dangerouslySetInnerHTML={{
+      __html: DOMPurify.sanitize(value)
+    }}
   />
 )
 /**
@@ -36,8 +38,14 @@ html.propTypes = {
   /**
    * Classname, default `html`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired
 }
 
 export default html

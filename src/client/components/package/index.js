@@ -63,7 +63,10 @@ import Section from 'shared/components/ui/Section'
 import Select from 'shared/components/ui/Select'
 import ShowMore from 'shared/components/ui/ShowMore'
 import ShowPassword from 'shared/components/ui/ShowPassword'
-import { SkeletonCircle, SkeletonLine } from 'shared/components/ui/Skeleton'
+import {
+  SkeletonCircle,
+  SkeletonLine
+} from 'shared/components/ui/Skeleton'
 import SocialConnectBadge from 'shared/components/ui/SocialConnectBadge'
 import Spacer from 'shared/components/ui/Spacer'
 import Spinner from 'shared/components/ui/Spinner'

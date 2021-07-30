@@ -14,9 +14,7 @@ const cssClass = styles(scss)
  */
 
 const backdrop = ({ className, onClick }) => (
-  <div
-className={cssClass(className)}
-onClick={onClick} />
+  <div className={cssClass(className)} onClick={onClick} />
 )
 
 /**
@@ -33,7 +31,10 @@ backdrop.propTypes = {
   /**
    * Classname, default `backdrop`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on backdrop
    *

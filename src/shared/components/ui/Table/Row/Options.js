@@ -8,7 +8,10 @@ import ListItem from 'shared/components/ui/List/Item'
 import { styles } from 'shared/helpers/css'
 import scss from './Options.scss'
 import ChangeStatus from './ChangeStatus'
-import { HAS_DELETE, HAS_CHANGE_STATUS } from 'shared/constants/permissionTypes'
+import {
+  HAS_DELETE,
+  HAS_CHANGE_STATUS
+} from 'shared/constants/permissionTypes'
 
 /**
  * Exports css classes from SCSS file
@@ -44,9 +47,9 @@ const rowOptions = ({
           />
         </ListItem>
 
-        {Component && <Component
-selectedItems={selected}
-{...props} />}
+        {Component && (
+          <Component selectedItems={selected} {...props} />
+        )}
 
         {options.includes(HAS_CHANGE_STATUS) && (
           <ListItem>
@@ -57,11 +60,10 @@ selectedItems={selected}
         {options.includes(HAS_DELETE) && (
           <ListItem>
             <Button
-onClick={handleDelete}
-variant="transparent">
-              <FontAwesomeIcon
-icon="trash-alt"
-size="sm" />
+              onClick={handleDelete}
+              variant="transparent"
+            >
+              <FontAwesomeIcon icon="trash-alt" size="sm" />
 
               <FormattedMessage id="word.delete" />
             </Button>
@@ -86,7 +88,8 @@ rowOptions.propTypes = {
   /**
    * A list of selected rows
    */
-  selected: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selected: PropTypes.arrayOf(PropTypes.shape({}))
+    .isRequired,
   /**
    * A list of options
    */
@@ -94,7 +97,10 @@ rowOptions.propTypes = {
   /**
    * Classname, default `table__selected-options`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Handle read
    */

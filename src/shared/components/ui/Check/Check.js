@@ -15,7 +15,12 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const check = ({ children, positive }) => (
-  <span className={cssClass('check', positive && 'check--positive')}>
+  <span
+    className={cssClass(
+      'check',
+      positive && 'check--positive'
+    )}
+  >
     <FontAwesomeIcon icon={positive ? 'check' : 'times'} />
 
     <Spreader spread="tiny" />

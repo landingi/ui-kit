@@ -4,5 +4,6 @@
   "htmlWhitespaceSensitivity": "strict",
   "arrowParens": "avoid",
   "trailingComma": "none",
-  "proseWrap": "always"
+  "proseWrap": "always",
+  "printWidth": 60
 }

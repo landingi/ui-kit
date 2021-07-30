@@ -38,7 +38,11 @@ const pageSizeDropdown = [
  * @return {object} An object of children element
  */
 
-const pageSize = ({ className, activePageLimit, onChange }) => (
+const pageSize = ({
+  className,
+  activePageLimit,
+  onChange
+}) => (
   <div className={cssClass(className)}>
     <Select
       value={activePageLimit}
@@ -63,7 +67,10 @@ pageSize.propTypes = {
   /**
    * Classname, default `per-page`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * activePageLimit active page limit
    */

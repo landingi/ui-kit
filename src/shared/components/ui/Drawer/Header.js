@@ -16,7 +16,12 @@ const cssClass = styles(scss)
  * @param {Boolean} props.hasClose - show close icon, default: true
  * @return {object} An object of children element
  */
-const header = ({ className, title, onClick, hasClose }) => (
+const header = ({
+  className,
+  title,
+  onClick,
+  hasClose
+}) => (
   <div className={cssClass(className)}>
     <Heading level={2}>{title}</Heading>
 
@@ -38,11 +43,17 @@ header.propTypes = {
   /**
    * Title
    */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired,
   /**
    * Classname, default `drawer__header`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on the account
    * @param {SyntheticEvent} event The react `SyntheticEvent`

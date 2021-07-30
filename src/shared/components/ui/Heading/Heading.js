@@ -37,7 +37,13 @@ const heading = ({
   })
 
   return (
-    <span className={cssClass(className, `h${level}`, elementClasses)}>
+    <span
+      className={cssClass(
+        className,
+        `h${level}`,
+        elementClasses
+      )}
+    >
       {children}
     </span>
   )
@@ -61,11 +67,15 @@ heading.propTypes = {
   /**
    * Classname, default `heading`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Level
    */
-  level: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 'large']).isRequired,
+  level: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 'large'])
+    .isRequired,
   /**
    * Align `left, center, right`
    */

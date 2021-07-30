@@ -48,7 +48,10 @@ analyse.propTypes = {
   /**
    * Classname, default `analyse`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

@@ -15,13 +15,9 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const close = ({ className, onClick }) => (
-  <span
-className={cssClass(className)}
-onClick={onClick}>
+  <span className={cssClass(className)} onClick={onClick}>
     <Button variant="icon">
-      <FontAwesomeIcon
-size="sm"
-icon="times" />
+      <FontAwesomeIcon size="sm" icon="times" />
     </Button>
   </span>
 )
@@ -40,7 +36,10 @@ close.propTypes = {
   /**
    * Classname, default `close`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on close
    *

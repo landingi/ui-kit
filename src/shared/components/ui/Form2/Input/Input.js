@@ -38,7 +38,8 @@ const input = ({
   min,
   controlledValue
 }) => {
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const errorClass =
+    errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
@@ -83,7 +84,10 @@ input.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
@@ -95,7 +99,10 @@ input.propTypes = {
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   placeholder: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,

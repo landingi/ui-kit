@@ -23,11 +23,13 @@ const infoBar = ({ children, className, type }) => {
     type === 'warning'
       ? 'exclamation'
       : type === 'alert'
-        ? 'exclamation-triangle'
-        : 'info'
+      ? 'exclamation-triangle'
+      : 'info'
 
   return (
-    <div className={cssClass(className, `info-bar--${type}`)}>
+    <div
+      className={cssClass(className, `info-bar--${type}`)}
+    >
       <div
         className={cssClass(
           className,
@@ -35,9 +37,7 @@ const infoBar = ({ children, className, type }) => {
           `info-bar--${type}-box`
         )}
       >
-        <FontAwesomeIcon
-icon={icon}
-size="1x" />
+        <FontAwesomeIcon icon={icon} size="1x" />
       </div>
 
       <div className={scss.info__bar}>{children}</div>
@@ -67,7 +67,10 @@ infoBar.propTypes = {
   /**
    * Classname, default `info-bar`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * type of notification `info, success, warning, alert`
    */

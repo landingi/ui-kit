@@ -30,7 +30,10 @@ import { selectedFlatRowsMap } from 'shared/helpers/table'
 import { paginationShape } from 'shared/shapes'
 import useQueryString from 'shared/helpers/hooks/useQueryString'
 import emitter from 'shared/lib/emitter'
-import { setLocalStorage, getLocalStorage } from 'shared/helpers/storage'
+import {
+  setLocalStorage,
+  getLocalStorage
+} from 'shared/helpers/storage'
 import { cancelRequests } from 'shared/services/http/client'
 import { usePermissions } from 'shared/helpers/hooks/usePermissions'
 import { READ_ONLY } from 'shared/constants/permissionTypes'
@@ -106,9 +109,12 @@ const table = ({
    * query string params - a temporary solution, to be removed once we move to SPA
    */
   const [checkedRow, setCheckedRow] = useState({})
-  const [queryStringPage, setPageIndex] = useQueryString('page')
-  const [queryStringLimit, setLimitValue] = useQueryString('limit')
-  const [previousPageIndex, setPreviousPageIndex] = useState(0)
+  const [queryStringPage, setPageIndex] =
+    useQueryString('page')
+  const [queryStringLimit, setLimitValue] =
+    useQueryString('limit')
+  const [previousPageIndex, setPreviousPageIndex] =
+    useState(0)
   /**
    * Default filter type
    */
@@ -119,8 +125,10 @@ const table = ({
           const rowValue = row.values[id]
           return rowValue !== undefined
             ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
+                .toLowerCase()
+                .startsWith(
+                  String(filterValue).toLowerCase()
+                )
             : true
         })
       }
@@ -161,13 +169,17 @@ const table = ({
       filterTypes,
       usePagination,
       initialState: {
-        pageIndex: pageIndex || Number(queryStringPage) || 0,
+        pageIndex:
+          pageIndex || Number(queryStringPage) || 0,
         pageSize:
           constantPageLimit ||
           getLocalStorage(`table-${tableName}-pageSize`) ||
           Number(queryStringLimit) ||
           10,
-        hiddenColumns: usePermissions(userPermissions, READ_ONLY)
+        hiddenColumns: usePermissions(
+          userPermissions,
+          READ_ONLY
+        )
           ? ['selection']
           : [],
         filters: customFilters || [],
@@ -176,9 +188,14 @@ const table = ({
       },
       pageCount:
         (constantPageLimit &&
-          Math.ceil(totalRows / Number(constantPageLimit))) ||
+          Math.ceil(
+            totalRows / Number(constantPageLimit)
+          )) ||
         Math.ceil(
-          totalRows / parseInt(getLocalStorage(`table-${tableName}-pageSize`))
+          totalRows /
+            parseInt(
+              getLocalStorage(`table-${tableName}-pageSize`)
+            )
         ) ||
         Math.ceil(totalRows / Number(queryStringLimit)) ||
         Math.ceil(totalRows / 10),
@@ -218,9 +235,15 @@ const table = ({
           {
             id: 'selection',
             Header: ({ getToggleAllRowsSelectedProps }) => (
-              <Checkbox {...getToggleAllRowsSelectedProps()} />
+              <Checkbox
+                {...getToggleAllRowsSelectedProps()}
+              />
             ),
-            Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+            Cell: ({ row }) => (
+              <Checkbox
+                {...row.getToggleRowSelectedProps()}
+              />
+            )
           },
           ...columns
         ])
@@ -234,7 +257,9 @@ const table = ({
               <Radio
                 {...row.getToggleRowSelectedProps()}
                 // eslint-disable-next-line react/jsx-no-bind
-                onClick={() => setRadio(row, toggleAllRowsSelected)}
+                onClick={() =>
+                  setRadio(row, toggleAllRowsSelected)
+                }
               />
             )
           },
@@ -258,7 +283,9 @@ const table = ({
    * get selected rows data
    * @return {array}
    */
-  const selectedRowId = selectedFlatRowsMap(selectedFlatRows)
+  const selectedRowId = selectedFlatRowsMap(
+    selectedFlatRows
+  )
 
   /**
    * Pass read data to deleteRow prop
@@ -279,7 +306,10 @@ const table = ({
   const handlePageSize = useCallback(event => {
     const value = event.target.value
 
-    setLocalStorage(`table-${tableName}-pageSize`, Number(value))
+    setLocalStorage(
+      `table-${tableName}-pageSize`,
+      Number(value)
+    )
     const getPageSizeFromLocalStorage = getLocalStorage(
       `table-${tableName}-pageSize`
     )
@@ -288,8 +318,14 @@ const table = ({
       getPageSizeFromLocalStorage === 'undefined' ||
       getPageSizeFromLocalStorage === null
     ) {
-      setLimitValue(getLocalStorage(`table-${tableName}-pageSize`))
-      setPageSize(parseInt(getLocalStorage(`table-${tableName}-pageSize`)))
+      setLimitValue(
+        getLocalStorage(`table-${tableName}-pageSize`)
+      )
+      setPageSize(
+        parseInt(
+          getLocalStorage(`table-${tableName}-pageSize`)
+        )
+      )
     }
 
     setLimitValue(getPageSizeFromLocalStorage)
@@ -327,7 +363,8 @@ const table = ({
 
   const handleRefreshFilter = filter =>
     fetchData({ pageIndex, pageSize, filter })
-  const handleReference = () => fetchData({ pageIndex, pageSize, filters })
+  const handleReference = () =>
+    fetchData({ pageIndex, pageSize, filters })
   const handleResetPage = () => gotoPage(0)
 
   useEffect(() => {
@@ -384,9 +421,13 @@ const table = ({
           {headerGroups.map(headerGroup =>
             headerGroup.headers.map(column => (
               <div
-key={uuid()}
-className={cssClass('table__thead__filter')}>
-                <div>{column.canFilter && column.render('Filter')}</div>
+                key={uuid()}
+                className={cssClass('table__thead__filter')}
+              >
+                <div>
+                  {column.canFilter &&
+                    column.render('Filter')}
+                </div>
               </div>
             ))
           )}
@@ -433,10 +474,12 @@ className={cssClass('table__thead__filter')}>
    */
   const tbody = () => (
     <div
-className={cssClass('table__tbody')}
-{...getTableBodyProps()}>
+      className={cssClass('table__tbody')}
+      {...getTableBodyProps()}
+    >
       {page.map(row => {
-        const { is_read, isDisabled, tooltip } = row.original
+        const { is_read, isDisabled, tooltip } =
+          row.original
         const elementClasses = cssClass(
           is_read === undefined || is_read === true
             ? 'table__tbody__tr--is_read'
@@ -449,7 +492,10 @@ className={cssClass('table__tbody')}
         return (
           <Tooltip
             key={uuid()}
-            className={cssClass('table__tbody__tr', elementClasses)}
+            className={cssClass(
+              'table__tbody__tr',
+              elementClasses
+            )}
             effect="float"
             content={tooltip}
             disabled={!tooltip}
@@ -527,12 +573,17 @@ table.propTypes = {
   /**
    * Columns
    */
-  columns: PropTypes.oneOfType([PropTypes.objectOf, PropTypes.array])
-    .isRequired,
+  columns: PropTypes.oneOfType([
+    PropTypes.objectOf,
+    PropTypes.array
+  ]).isRequired,
   /**
    * Data
    */
-  data: PropTypes.oneOfType([PropTypes.objectOf, PropTypes.array]).isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.objectOf,
+    PropTypes.array
+  ]).isRequired,
   /**
    * Pagination data
    */
@@ -540,7 +591,10 @@ table.propTypes = {
   /**
    * Classname, default `table__wrapper`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * fetchData
    */
@@ -568,7 +622,9 @@ table.propTypes = {
   /**
    * userPermissions
    */
-  userPermissions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  userPermissions: PropTypes.arrayOf(
+    PropTypes.string.isRequired
+  ).isRequired,
   /**
    * totalRows
    */

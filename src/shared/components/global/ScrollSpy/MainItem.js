@@ -22,17 +22,16 @@ const item = ({ item, onClick }) => {
   return (
     <ListItem variant="menu">
       <Button onClick={onClick}>
-        <FontAwesomeIcon
-size="1x"
-icon={icon} />
+        <FontAwesomeIcon size="1x" icon={icon} />
 
         <span>{title}</span>
       </Button>
 
       <div>
-        {children && children.map(item => (<Item
-key={uuid()}
-item={item} />))}
+        {children &&
+          children.map(item => (
+            <Item key={uuid()} item={item} />
+          ))}
       </div>
     </ListItem>
   )

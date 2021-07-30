@@ -1,4 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, {
+  useEffect,
+  useState,
+  useCallback
+} from 'react'
 import emitter from 'shared/lib/emitter'
 import { TOGGLE_TIMING_TOAST } from 'shared/constants/eventTypes'
 import Notification from 'shared/components/ui/Notification'
@@ -42,7 +46,10 @@ const timingToast = () => {
     [isActive, message, type]
   )
 
-  const closeToast = useCallback(() => setActive(false), [isActive])
+  const closeToast = useCallback(
+    () => setActive(false),
+    [isActive]
+  )
 
   useEffect(() => {
     emitter.on(TOGGLE_TIMING_TOAST, handleToastToggle)
@@ -53,9 +60,7 @@ const timingToast = () => {
   }, [isActive])
 
   return (
-    <PoseGroup
-flipMove={false}
-animateOnMount>
+    <PoseGroup flipMove={false} animateOnMount>
       <TimingToastAnimation
         pose={isActive ? 'open' : 'closed'}
         key="toastanimation"

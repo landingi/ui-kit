@@ -33,11 +33,17 @@ inputError.propTypes = {
   /**
    * Classname, default `input__error`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Error message
    */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
 }
 
 /**

@@ -1,5 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  useCallback
+} from 'react'
 import { styles } from 'shared/helpers/css'
 import scss from './MonthRangePicker.scss'
 import Spacer from 'shared/components/ui/Spacer'
@@ -24,7 +29,11 @@ const cssClass = styles(scss)
  * @param {date} props.maxDate - maximal date
  * @return {object} An object of children element
  */
-const monthRangePicker = ({ onChange, minDate, maxDate }) => {
+const monthRangePicker = ({
+  onChange,
+  minDate,
+  maxDate
+}) => {
   const minimalDate = parseDateToMonthID(minDate)
   const maximalDate = parseDateToMonthID(maxDate)
 
@@ -32,7 +41,8 @@ const monthRangePicker = ({ onChange, minDate, maxDate }) => {
   const [startMonth, setStartMonth] = useState(null)
   const [endMonth, setEndMonth] = useState(null)
   const [year, setYear] = useState(2021)
-  const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+  const [confirmedEndMonth, setConfirmedEndMonth] =
+    useState(null)
 
   useEffect(() => {
     if (confirmedEndMonth) {
@@ -81,20 +91,32 @@ const monthRangePicker = ({ onChange, minDate, maxDate }) => {
           className={cssClass(
             'button_month',
             !isSelecting && 'button_month--not-selecting',
-            handleRangeMarker(monthID, endMonth, startMonth) &&
-              'button_month--selecting',
-            handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
-              'button_month--selected',
-            monthID < minimalDate && 'button_month--disabled',
-            monthID > maximalDate && 'button_month--disabled',
-            handleFirstMarker(monthID) && 'button_month--first',
-            handleLastMarker(monthID) && 'button_month--last'
+            handleRangeMarker(
+              monthID,
+              endMonth,
+              startMonth
+            ) && 'button_month--selecting',
+            handleRangeMarker(
+              monthID,
+              confirmedEndMonth,
+              startMonth
+            ) && 'button_month--selected',
+            monthID < minimalDate &&
+              'button_month--disabled',
+            monthID > maximalDate &&
+              'button_month--disabled',
+            handleFirstMarker(monthID) &&
+              'button_month--first',
+            handleLastMarker(monthID) &&
+              'button_month--last'
           )}
           onClick={() => handleSelect(monthID)}
           type="button"
           onMouseOver={() => handleHover(monthID)}
         >
-          <span className={cssClass('button_month--marker')} />
+          <span
+            className={cssClass('button_month--marker')}
+          />
 
           <span className={cssClass('button_month--name')}>
             <FormattedMessage id={name} />
@@ -134,7 +156,10 @@ const monthRangePicker = ({ onChange, minDate, maxDate }) => {
         <Button
           variant="icon"
           size="tiny"
-          onClick={useCallback(() => setYear(year - 1), [year])}
+          onClick={useCallback(
+            () => setYear(year - 1),
+            [year]
+          )}
         >
           <FontAwesomeIcon icon="arrow-left" />
         </Button>
@@ -144,7 +169,10 @@ const monthRangePicker = ({ onChange, minDate, maxDate }) => {
         <Button
           variant="icon"
           size="tiny"
-          onClick={useCallback(() => setYear(year + 1), [year])}
+          onClick={useCallback(
+            () => setYear(year + 1),
+            [year]
+          )}
         >
           <FontAwesomeIcon icon="arrow-right" />
         </Button>
@@ -152,7 +180,9 @@ const monthRangePicker = ({ onChange, minDate, maxDate }) => {
 
       <Spacer space="tiny" />
 
-      <div className={cssClass('grid-container')}>{renderMonths()}</div>
+      <div className={cssClass('grid-container')}>
+        {renderMonths()}
+      </div>
     </Fragment>
   )
 }

@@ -33,8 +33,12 @@ const picker = ({ minDate, maxDate, onChange }) => {
       <Spacer space="tiny" />
 
       <Button
-size="tiny"
-onClick={useCallback(() => onChange(range), [range])}>
+        size="tiny"
+        onClick={useCallback(
+          () => onChange(range),
+          [range]
+        )}
+      >
         <FormattedMessage id="word.apply" />
       </Button>
     </div>

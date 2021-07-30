@@ -42,13 +42,16 @@ const reactSelect = ({
   options,
   intl
 }) => {
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const errorClass =
+    errors[name] && touched[name] ? 'form--has-error' : ''
   const filledClass = value[name] ? 'form--has-value' : ''
   const handleChange = value => onChange(name, value.value)
   const handleBlur = () => onBlur(name, true)
 
   return (
-    <div className={`form-field form-rselect ${errorClass} ${filledClass}`}>
+    <div
+      className={`form-field form-rselect ${errorClass} ${filledClass}`}
+    >
       {label && (
         <Label id={name}>
           <FormattedMessage id={`${label}`} />
@@ -64,11 +67,15 @@ const reactSelect = ({
           onBlur={handleBlur}
           value={
             options
-              ? options.find(option => option.value === value[name])
+              ? options.find(
+                  option => option.value === value[name]
+                )
               : value[name]
           }
           key={uuid()}
-          placeholder={intl.formatMessage({ id: `${placeholder || label}` })}
+          placeholder={intl.formatMessage({
+            id: `${placeholder || label}`
+          })}
           classNamePrefix="react-select"
         />
 
@@ -92,7 +99,10 @@ reactSelect.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -105,7 +115,10 @@ reactSelect.propTypes = {
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({

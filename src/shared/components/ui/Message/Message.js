@@ -51,24 +51,21 @@ const message = ({
 
       {isVideo ? (
         <Fragment>
-          <Vimeo
-video={url}
-height={height} />
+          <Vimeo video={url} height={height} />
 
           <Spacer space="small" />
         </Fragment>
       ) : (
-        <Image
-src={url}
-size="auto"
-height={height} />
+        <Image src={url} size="auto" height={height} />
       )}
     </div>
   )
 
   return (
     <div className={cssClass(className)}>
-      {url && multimediaPosition === 'before' && renderMultimedia()}
+      {url &&
+        multimediaPosition === 'before' &&
+        renderMultimedia()}
 
       {title && (
         <Heading
@@ -90,9 +87,7 @@ height={height} />
         <Fragment>
           <Spacer space="tiny" />
 
-          <Heading
-level={messageLevel}
-align="center">
+          <Heading level={messageLevel} align="center">
             <FormattedMessage
               id={`${message}`}
               values={{
@@ -103,7 +98,9 @@ align="center">
         </Fragment>
       )}
 
-      {url && multimediaPosition === 'after' && renderMultimedia()}
+      {url &&
+        multimediaPosition === 'after' &&
+        renderMultimedia()}
 
       {children}
     </div>
@@ -136,7 +133,10 @@ message.propTypes = {
   /**
    * Classname, default `message`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Image/Video height
    */

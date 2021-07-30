@@ -59,7 +59,12 @@ const maskedInput = ({
   })
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div
+      className={cssClass(
+        scss.input__wrapper,
+        elementClasses
+      )}
+    >
       <MaskedInput
         field={field}
         mask={mask}
@@ -70,7 +75,9 @@ const maskedInput = ({
         type={type}
         placeholder={
           translate
-            ? intl.formatMessage({ id: `${placeholder || label}` })
+            ? intl.formatMessage({
+                id: `${placeholder || label}`
+              })
             : label
         }
         name={name}
@@ -90,10 +97,12 @@ const maskedInput = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label
-id={name}
-className={scss.input__label}>
-          {translate ? <FormattedMessage id={`${label}`} /> : label}
+        <Label id={name} className={scss.input__label}>
+          {translate ? (
+            <FormattedMessage id={`${label}`} />
+          ) : (
+            label
+          )}
         </Label>
       )}
     </div>
@@ -116,14 +125,20 @@ maskedInput.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on MaskedInput
    *
@@ -152,7 +167,10 @@ maskedInput.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Name
    */
@@ -172,7 +190,10 @@ maskedInput.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   /**
    * autoFocus
    */
@@ -192,7 +213,10 @@ maskedInput.propTypes = {
    */
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(RegExp)
+    ])
   ),
   /**
    * if it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
