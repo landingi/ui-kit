@@ -16,12 +16,12 @@ const cssClass = styles(scss)
  * @param {node} props.content - item content
  * @return {object} An object of children element
  */
-const AccordionItem = ({
+function AccordionItem({
   className,
   number,
   title,
   content
-}) => {
+}) {
   const [isOpen, setOpen] = useState(false)
 
   /**
@@ -41,7 +41,8 @@ const AccordionItem = ({
       >
         <div>
           {number && (
-            <StepNumber step={number} size="medium" />
+            <StepNumber size="medium"
+step={number} />
           )}
 
           {title}

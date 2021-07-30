@@ -23,15 +23,15 @@ const legend = ({ data, alignment }) => (
   >
     {data.map((item, index) => (
       <span
-        key={index}
         className={cssClass(
           'legend',
           `legend--${item.variant}`
         )}
+        key={index}
       >
         <ColorLine
-          variant={item.variant}
           alignment="horizontal"
+          variant={item.variant}
         />
 
         {item.range}

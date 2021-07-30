@@ -18,24 +18,24 @@ const cssClass = styles(scss)
  * @param {array} props.data - steps data
  * @return {object} An object of children element
  */
-const Instruction = ({ className, data }) => (
-  <div className={cssClass(className)}>
+function Instruction({ className, data }) {
+  return <div className={cssClass(className)}>
     {data.map(({ content }, index) => (
       <div
-        key={uuid()}
         className={cssClass('instruction__step')}
+        key={uuid()}
       >
         <StepNumber
-          step={index + 1}
-          size="medium"
           absolute
+          size="medium"
+          step={index + 1}
         />
 
         {content}
       </div>
     ))}
   </div>
-)
+}
 
 /**
  * Display name

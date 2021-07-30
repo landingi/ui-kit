@@ -46,7 +46,7 @@ const ToastAnimation = posed.div(toastProps)
  * @param {string|array} props.className - list of class names, default: `toast`
  * @return {object} An object of children elements
  */
-const Toast = ({ className }) => {
+function Toast({ className }) {
   const [isActive, setActive] = useToggle()
   const [message, setMessage] = useState('')
   const [type, setType] = useState('success')
@@ -114,15 +114,16 @@ const Toast = ({ className }) => {
 
   return (
     isActive && (
-      <PoseGroup animateOnMount flipMove={false}>
+      <PoseGroup animateOnMount
+flipMove={false}>
         <ToastAnimation
-          key="toastanimation"
           className={cssClass(className)}
+          key="toastanimation"
         >
           <Notification
-            type={type}
             isClosable
             onClick={handleToastToggle}
+            type={type}
           >
             {message}
           </Notification>

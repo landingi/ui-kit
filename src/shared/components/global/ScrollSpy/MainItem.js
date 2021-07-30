@@ -22,7 +22,8 @@ const item = ({ item, onClick }) => {
   return (
     <ListItem variant="menu">
       <Button onClick={onClick}>
-        <FontAwesomeIcon size="1x" icon={icon} />
+        <FontAwesomeIcon icon={icon}
+size="1x" />
 
         <span>{title}</span>
       </Button>
@@ -30,7 +31,8 @@ const item = ({ item, onClick }) => {
       <div>
         {children &&
           children.map(item => (
-            <Item key={uuid()} item={item} />
+            <Item item={item}
+key={uuid()} />
           ))}
       </div>
     </ListItem>

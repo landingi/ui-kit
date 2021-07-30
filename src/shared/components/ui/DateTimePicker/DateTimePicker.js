@@ -66,22 +66,23 @@ const dateTimePicker = ({ setDate, minDate }) => {
   return (
     <div className={cssClass('react-datetimepicker')}>
       <DateRange
-        locale={getLanguage === 'pl' ? pl : enUS}
-        // eslint-disable-next-line react/jsx-no-bind
-        onChange={item => setState([item.selection])}
-        showSelectionPreview
-        moveRangeOnFirstSelection={false}
-        rangeColors={['#EDECEC']}
-        months={1}
-        ranges={state}
-        showDateDisplay={false}
         direction="horizontal"
-        weekStartsOn={1}
+        // eslint-disable-next-line react/jsx-no-bind
+        locale={getLanguage === 'pl' ? pl : enUS}
         maxDate={new Date()}
         minDate={minDate ? new Date(minDate) : undefined}
+        months={1}
+        moveRangeOnFirstSelection={false}
+        onChange={item => setState([item.selection])}
+        rangeColors={['#EDECEC']}
+        ranges={state}
+        showDateDisplay={false}
+        showSelectionPreview
+        weekStartsOn={1}
       />
 
-      <Button onClick={handleApply} size="tiny">
+      <Button onClick={handleApply}
+size="tiny">
         <FormattedMessage id="word.apply" />
       </Button>
     </div>

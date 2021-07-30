@@ -23,33 +23,37 @@ registerIcons()
  * @param {object} props.userPermissions -  list of permissions
  * @return {object} An object of children element
  */
-const ActionsRow = ({
+function ActionsRow({
   deleteRow,
   detailsRow,
   userPermissions
-}) => (
-  <List variant="inline">
+}) {
+  return <List variant="inline">
     <ListItem>
-      <Button onClick={detailsRow} variant="transparent">
-        <FontAwesomeIcon icon="list-alt" size="sm" />
+      <Button onClick={detailsRow}
+variant="transparent">
+        <FontAwesomeIcon icon="list-alt"
+size="sm" />
 
         <FormattedMessage id="word.details" />
       </Button>
     </ListItem>
 
-    <Fragment>
+    <>
       {!usePermissions(userPermissions, READ_ONLY) && (
         <ListItem>
-          <Button onClick={deleteRow} variant="transparent">
-            <FontAwesomeIcon icon="trash-alt" size="sm" />
+          <Button onClick={deleteRow}
+variant="transparent">
+            <FontAwesomeIcon icon="trash-alt"
+size="sm" />
 
             <FormattedMessage id="word.delete" />
           </Button>
         </ListItem>
       )}
-    </Fragment>
+    </>
   </List>
-)
+}
 /**
  * Display name
  * @type {string}

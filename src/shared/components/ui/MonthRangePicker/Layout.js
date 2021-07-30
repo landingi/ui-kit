@@ -25,19 +25,19 @@ const picker = ({ minDate, maxDate, onChange }) => {
       <Spacer space="tiny" />
 
       <MonthRangePicker
-        minDate={minDate}
         maxDate={maxDate}
+        minDate={minDate}
         onChange={setRange}
       />
 
       <Spacer space="tiny" />
 
       <Button
-        size="tiny"
         onClick={useCallback(
           () => onChange(range),
           [range]
         )}
+        size="tiny"
       >
         <FormattedMessage id="word.apply" />
       </Button>

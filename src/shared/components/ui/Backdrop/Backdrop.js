@@ -14,7 +14,8 @@ const cssClass = styles(scss)
  */
 
 const backdrop = ({ className, onClick }) => (
-  <div className={cssClass(className)} onClick={onClick} />
+  <div className={cssClass(className)}
+onClick={onClick} />
 )
 
 /**

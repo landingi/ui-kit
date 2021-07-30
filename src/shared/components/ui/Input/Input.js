@@ -77,10 +77,11 @@ const input = ({
     >
       <input
         className={cssClass(className)}
+        id={name}
+        name={name}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        type={type}
         placeholder={
           translate
             ? intl.formatMessage({
@@ -88,15 +89,14 @@ const input = ({
               })
             : label
         }
-        name={name}
-        id={name}
+        type={type}
         {...valueProp}
-        readOnly={disabled ? readonly : undefined}
-        disabled={!disabled ? undefined : disabled}
         autoFocus={autoFocus}
+        disabled={!disabled ? undefined : disabled}
         maxLength={maxLength}
-        required={required}
         min={min}
+        readOnly={disabled ? readonly : undefined}
+        required={required}
       />
 
       <span className={cssClass('highlight')} />
@@ -104,7 +104,8 @@ const input = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label id={name} className={scss.input__label}>
+        <Label className={scss.input__label}
+id={name}>
           {translate ? (
             <FormattedMessage id={`${label}`} />
           ) : (
@@ -116,8 +117,8 @@ const input = ({
       {tooltip && (
         <Tooltip
           className="input__tooltip"
-          placement="bottom"
           content={tooltip}
+          placement="bottom"
         >
           <FontAwesomeIcon
             color="#2550AA"

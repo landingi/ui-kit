@@ -36,7 +36,8 @@ const limit = ({
   return (
     <div className={cssClass(className)}>
       <div className={cssClass('limit--icon')}>
-        <FontAwesomeIcon icon={icon} size="lg" />
+        <FontAwesomeIcon icon={icon}
+size="lg" />
       </div>
 
       <div className={cssClass('limit--info')}>
@@ -65,7 +66,7 @@ const limit = ({
           <FormattedMessage id={name} />
 
           {tooltip && (
-            <Fragment>
+            <>
               <Spreader spread="tiny" />
 
               <Tooltip
@@ -73,7 +74,7 @@ const limit = ({
               >
                 <FontAwesomeIcon icon="exclamation-circle" />
               </Tooltip>
-            </Fragment>
+            </>
           )}
         </span>
       </div>

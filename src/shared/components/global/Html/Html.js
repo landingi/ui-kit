@@ -11,6 +11,7 @@ const cssClass = styles(scss)
 const html = ({ className, value }) => (
   <span
     className={cssClass(className)}
+    // eslint-disable-next-line react/no-danger
     dangerouslySetInnerHTML={{
       __html: DOMPurify.sanitize(value)
     }}

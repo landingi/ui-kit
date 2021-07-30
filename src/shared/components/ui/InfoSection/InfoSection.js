@@ -25,19 +25,20 @@ const cssClass = styles(scss)
  * @param {func} props.onClick - button action
  * @return {object} An object of children element
  */
-const InfoSection = ({
+function InfoSection({
   className,
   title,
   list,
   url,
   button,
   onClick
-}) => {
+}) {
   const renderList = useMemo(
     () => (
       <List listStyle="ordered-check">
         {list.map(item => (
-          <ListItem variant="list" key={uuid()}>
+          <ListItem key={uuid()}
+variant="list">
             <Paragraph size={18}>
               <FormattedMessage id={item} />
             </Paragraph>
@@ -51,7 +52,8 @@ const InfoSection = ({
   return (
     <div className={cssClass(className)}>
       <div>
-        <Heading level={1} bold>
+        <Heading bold
+level={1}>
           <FormattedMessage id={`${title}`} />
         </Heading>
 
@@ -59,13 +61,15 @@ const InfoSection = ({
 
         <Spacer space="medium" />
 
-        <Button size="large" onClick={onClick}>
+        <Button onClick={onClick}
+size="large">
           <FormattedMessage id={button} />
         </Button>
       </div>
 
       <div>
-        <Image src={url} size={526} />
+        <Image size={526}
+src={url} />
       </div>
     </div>
   )

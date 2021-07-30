@@ -16,7 +16,7 @@ import Button from 'shared/components/ui/Button'
  * @param {object} props.intl - react intl formatMessage function
  * @return {object} An object of children element
  */
-const Fresh = ({
+function Fresh({
   name,
   mail,
   subject,
@@ -24,7 +24,7 @@ const Fresh = ({
   variant,
   size,
   intl
-}) => {
+}) {
   const isFreshChat = !!window.fcWidget
   const isFreshDesk = !!window.FreshworksWidget
 
@@ -61,19 +61,19 @@ const Fresh = ({
   return isFreshChat || isFreshDesk ? (
     <Button
       onClick={isFreshChat ? openFreshChat : openFreshDesk}
-      variant={variant}
       size={size}
+      variant={variant}
     >
       <FormattedMessage id={name} />
     </Button>
   ) : (
     <Button
-      tag="a"
+      buttonStyle
       href={handleLimitExceededMail()}
+      size={size}
+      tag="a"
       target="_blank"
       variant={variant}
-      size={size}
-      buttonStyle
     >
       <FormattedMessage id={name} />
     </Button>

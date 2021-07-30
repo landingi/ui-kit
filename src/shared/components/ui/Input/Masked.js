@@ -66,13 +66,20 @@ const maskedInput = ({
       )}
     >
       <MaskedInput
-        field={field}
-        mask={mask}
+        autoFocus={autoFocus}
         className={cssClass(className)}
+        defaultValue={value}
+        disabled={!disabled ? undefined : disabled}
+        field={field}
+        focused={focused}
+        guide={guide}
+        id={name}
+        mask={mask}
+        maxLength={maxLength}
+        name={name}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        type={type}
         placeholder={
           translate
             ? intl.formatMessage({
@@ -80,16 +87,9 @@ const maskedInput = ({
               })
             : label
         }
-        name={name}
-        id={name}
-        defaultValue={value}
         readOnly={disabled ? readonly : undefined}
-        disabled={!disabled ? undefined : disabled}
-        autoFocus={autoFocus}
-        maxLength={maxLength}
         required
-        guide={guide}
-        focused={focused}
+        type={type}
       />
 
       <span className={cssClass('highlight')} />
@@ -97,7 +97,8 @@ const maskedInput = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label id={name} className={scss.input__label}>
+        <Label className={scss.input__label}
+id={name}>
           {translate ? (
             <FormattedMessage id={`${label}`} />
           ) : (

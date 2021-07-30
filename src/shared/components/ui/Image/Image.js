@@ -17,11 +17,11 @@ const cssClass = styles(scss)
  */
 const image = ({ src, alt, className, size, height }) => (
   <img
-    src={src}
     alt={alt}
-    width={size}
-    height={height}
     className={cssClass(className)}
+    height={height}
+    src={src}
+    width={size}
   />
 )
 

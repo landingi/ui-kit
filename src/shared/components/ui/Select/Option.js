@@ -11,7 +11,8 @@ import PropTypes from 'prop-types'
  */
 
 const option = ({ className, value, label }) => (
-  <option className={className} value={value}>
+  <option className={className}
+value={value}>
     {label}
   </option>
 )

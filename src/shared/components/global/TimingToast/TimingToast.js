@@ -60,20 +60,21 @@ const timingToast = () => {
   }, [isActive])
 
   return (
-    <PoseGroup flipMove={false} animateOnMount>
+    <PoseGroup animateOnMount
+flipMove={false}>
       <TimingToastAnimation
-        pose={isActive ? 'open' : 'closed'}
-        key="toastanimation"
         className={cssClass(
           'toast',
           isActive ? 'toast--visible' : 'toast--hidden'
         )}
+        key="toastanimation"
+        pose={isActive ? 'open' : 'closed'}
       >
         <Notification
-          type={type}
+          hasTime={isActive}
           isClosable
           onClick={closeToast}
-          hasTime={isActive}
+          type={type}
         >
           {message}
         </Notification>

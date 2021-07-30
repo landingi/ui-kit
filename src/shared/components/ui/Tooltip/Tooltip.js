@@ -21,7 +21,7 @@ const cssClass = styles(scss)
  * @param {bool} props.showOnClick - show on click
  * @return {object} An object of children element
  */
-const Tooltip = ({
+function Tooltip({
   className,
   children,
   effect,
@@ -31,7 +31,7 @@ const Tooltip = ({
   placement,
   align,
   size
-}) => {
+}) {
   const tooltipUUID = uuid()
 
   const showOnClickProps = showOnClick
@@ -43,32 +43,32 @@ const Tooltip = ({
     : {}
 
   return (
-    <Fragment>
+    <>
       <span
         className={cssClass(className)}
-        data-tip
         data-for={tooltipUUID}
+        data-tip
       >
         {children}
       </span>
 
       <ReactTooltip
+        background="#000"
         className={cssClass(
           'react-tooltip',
           `react-tooltip-${align}`,
           `react-tooltip--${size}`
         )}
-        background="#000"
+        disable={disabled}
         effect={effect}
         id={tooltipUUID}
-        disable={disabled}
         isCapture
         place={placement}
         {...showOnClickProps}
       >
         {content}
       </ReactTooltip>
-    </Fragment>
+    </>
   )
 }
 

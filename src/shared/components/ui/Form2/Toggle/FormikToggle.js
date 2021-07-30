@@ -33,13 +33,13 @@ const formikToggle = ({
       })}
     >
       <input
-        name={name}
-        className={cssClass('toggle__checkbox')}
         checked={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        type={type}
+        className={cssClass('toggle__checkbox')}
         id={id}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        type={type}
       />
 
       <span className={cssClass('toggle__button')} />
@@ -47,8 +47,8 @@ const formikToggle = ({
 
     {label && (
       <label
-        htmlFor={id}
         className={cssClass('toggle__label')}
+        htmlFor={id}
       >
         <FormattedMessage id={`${label}`} />
 

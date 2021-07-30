@@ -38,14 +38,14 @@ const radio = ({
         )}
 
         <input
-          name={name}
+          checked={id === value}
+          className={cssClass(className)}
           id={id}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
           type={type}
           value={id}
-          checked={id === value}
-          onChange={onChange}
-          onBlur={onBlur}
-          className={cssClass(className)}
         />
 
         <div />

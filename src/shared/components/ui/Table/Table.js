@@ -404,10 +404,10 @@ const table = ({
     hasSelectedId > 0 &&
     !hasRadio && (
       <Options
-        options={customOptions}
-        handleDelete={deleteRowData}
-        selected={selectedRowId}
         component={optionsComponent}
+        handleDelete={deleteRowData}
+        options={customOptions}
+        selected={selectedRowId}
       />
     )
 
@@ -415,14 +415,14 @@ const table = ({
    * Head element
    */
   const thead = () => (
-    <Fragment>
+    <>
       {renderFiltersAbove && (
         <div className={cssClass('table__filters')}>
           {headerGroups.map(headerGroup =>
             headerGroup.headers.map(column => (
               <div
-                key={uuid()}
                 className={cssClass('table__thead__filter')}
+                key={uuid()}
               >
                 <div>
                   {column.canFilter &&
@@ -438,17 +438,17 @@ const table = ({
         <div className={cssClass('table__thead')}>
           {headerGroups.map(headerGroup => (
             <div
-              key={uuid()}
               className={cssClass('table__thead__tr')}
+              key={uuid()}
               {...headerGroup.getHeaderGroupProps()}
             >
               {headerGroup.headers.map(column => (
                 <div
-                  key={uuid()}
                   className={cssClass(
                     'table__thead__th',
                     `table__thead__th--${column?.class}`
                   )}
+                  key={uuid()}
                   {...column.getHeaderProps()}
                 >
                   {column.render('Header', columns)}
@@ -466,7 +466,7 @@ const table = ({
           ))}
         </div>
       )}
-    </Fragment>
+    </>
   )
 
   /**
@@ -491,20 +491,20 @@ const table = ({
 
         return (
           <Tooltip
-            key={uuid()}
             className={cssClass(
               'table__tbody__tr',
               elementClasses
             )}
-            effect="float"
             content={tooltip}
             disabled={!tooltip}
+            effect="float"
+            key={uuid()}
             {...row.getRowProps()}
           >
             {row.cells.map(cell => (
               <div
-                key={uuid()}
                 className={cssClass('table__tbody__td')}
+                key={uuid()}
                 {...cell.getCellProps()}
               >
                 {cell.render('Cell')}
@@ -531,22 +531,22 @@ const table = ({
         {isLoading ? (
           <Loader />
         ) : !isEmpty(data) ? (
-          <Fragment>
+          <>
             {tbody()}
 
             {hasPagination ? (
               <ClientPagination
-                goToPage={gotoPage}
-                pageIndex={pageIndex}
-                pageCount={pageCount}
                 activePageLimit={parseInt(pageSize)}
-                pageLimit={handlePageSize}
                 constantPageLimit={constantPageLimit}
+                goToPage={gotoPage}
+                pageCount={pageCount}
+                pageIndex={pageIndex}
+                pageLimit={handlePageSize}
               />
             ) : null}
 
             {hasBorder && <Spacer space="small" />}
-          </Fragment>
+          </>
         ) : (
           customMessage
         )}

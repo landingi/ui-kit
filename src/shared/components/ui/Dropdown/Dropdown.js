@@ -414,9 +414,9 @@ class Dropdown extends PureComponent {
         placement={tooltipPlacement}
       >
         <span
-          ref={this.containerRef}
-          onClick={this.handleShow}
           className={cssClass('dropdown__wrapper')}
+          onClick={this.handleShow}
+          ref={this.containerRef}
         >
           {icon && this.renderIcon()}
 
@@ -448,8 +448,6 @@ class Dropdown extends PureComponent {
 
     return (
       <span
-        ref={this.containerRef}
-        onClick={this.handleShow}
         className={cssClass(
           'dropdown__wrapper',
           alignment === 'spaced'
@@ -458,6 +456,8 @@ class Dropdown extends PureComponent {
           hasInput && 'dropdown__wrapper--input',
           hasFullInputStyle && 'dropdown__wrapper--as-input'
         )}
+        onClick={this.handleShow}
+        ref={this.containerRef}
       >
         {icon && this.renderIcon()}
 
@@ -497,8 +497,8 @@ class Dropdown extends PureComponent {
         onClick={handleOnClick}
       >
         <NavLink
-          to={link}
           activeClassName="groups--selected"
+          to={link}
         >
           {icon && this.renderIcon()}
 
@@ -512,8 +512,8 @@ class Dropdown extends PureComponent {
             'dropdown__wrapper',
             'dropdown__wrapper__icon'
           )}
-          ref={this.containerRef}
           onClick={this.handleShow}
+          ref={this.containerRef}
         >
           {hasArrow && this.renderArrows(isOpen, arrowType)}
 
@@ -659,7 +659,7 @@ class Dropdown extends PureComponent {
     const { isOpen } = this.state
 
     return (
-      <Fragment>
+      <>
         {tooltip.length > 0
           ? this.renderDropdownWithTooltip()
           : button
@@ -667,7 +667,7 @@ class Dropdown extends PureComponent {
           : this.renderDropdown()}
 
         {isOpen && this.renderDropdownBody()}
-      </Fragment>
+      </>
     )
   }
 }

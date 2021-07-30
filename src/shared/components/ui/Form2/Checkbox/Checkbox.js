@@ -31,12 +31,12 @@ const checkbox = ({
   >
     <label className={cssClass('checkbox__input')}>
       <input
-        name={name}
         checked={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        type={type}
         id={id}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        type={type}
       />
 
       <div />
@@ -44,8 +44,8 @@ const checkbox = ({
 
     {label && (
       <label
-        htmlFor={id}
         className={cssClass('checkbox__label')}
+        htmlFor={id}
       >
         <FormattedMessage id={`${label}`} />
 

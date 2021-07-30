@@ -17,12 +17,12 @@ import PropTypes from 'prop-types'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-const Filter = ({
+function Filter({
   values,
   setValue,
   initialValue,
   localStorageKey
-}) => {
+}) {
   const findInitialValue = () => {
     const find = values.find(
       ({ value }) => value === initialValue
@@ -44,15 +44,17 @@ const Filter = ({
   }
 
   return (
-    <Dropdown label={filterLabel} size="medium">
+    <Dropdown label={filterLabel}
+size="medium">
       <List>
         {values.map(({ value, label }) => (
-          <ListItem key={uuid()} variant="dropdown">
+          <ListItem key={uuid()}
+variant="dropdown">
             <Button
-              tag="a"
-              variant="dropdown"
-              // eslint-disable-next-line react/jsx-no-bind
               onClick={() => setFilter(label, value)}
+              tag="a"
+              // eslint-disable-next-line react/jsx-no-bind
+              variant="dropdown"
             >
               {label}
             </Button>

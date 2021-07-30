@@ -42,12 +42,12 @@ const pagination = ({
     <div className={cssClass(className)}>
       <div className={scss.pagination__links}>
         {!hidePagination && (
-          <Fragment>
+          <>
             <span className={scss.pagination__first}>
               <Button
+                onClick={handleGoToPage(1)}
                 size="small"
                 variant="icon"
-                onClick={handleGoToPage(1)}
               >
                 <FormattedMessage id="pagination.word.first" />
               </Button>
@@ -55,9 +55,9 @@ const pagination = ({
 
             {!isEmpty(before_values) && (
               <Button
-                variant="icon"
-                size="small"
                 onClick={handleGoToPage(before_values.prev)}
+                size="small"
+                variant="icon"
               >
                 <FontAwesomeIcon icon="caret-left" />
               </Button>
@@ -67,9 +67,9 @@ const pagination = ({
               {before.map((item, index) => (
                 <ListItem key={index}>
                   <Button
+                    onClick={handleGoToPage(item)}
                     size="small"
                     variant="icon"
-                    onClick={handleGoToPage(item)}
                   >
                     {item}
                   </Button>
@@ -78,12 +78,13 @@ const pagination = ({
 
               {current.map((item, index) => (
                 <ListItem
-                  key={index}
                   className={
                     scss.pagination__links__current
                   }
+                  key={index}
                 >
-                  <Button size="small" variant="icon">
+                  <Button size="small"
+variant="icon">
                     {item}
                   </Button>
                 </ListItem>
@@ -92,9 +93,9 @@ const pagination = ({
               {after.map((item, index) => (
                 <ListItem key={index}>
                   <Button
+                    onClick={handleGoToPage(item)}
                     size="small"
                     variant="icon"
-                    onClick={handleGoToPage(item)}
                   >
                     {item}
                   </Button>
@@ -108,15 +109,15 @@ const pagination = ({
 
             {after_values.next && (
               <Button
-                variant="icon"
-                size="small"
                 isDisabled={isEmpty(after_values.next)}
                 onClick={handleGoToPage(after_values.next)}
+                size="small"
+                variant="icon"
               >
                 <FontAwesomeIcon icon="caret-right" />
               </Button>
             )}
-          </Fragment>
+          </>
         )}
       </div>
 

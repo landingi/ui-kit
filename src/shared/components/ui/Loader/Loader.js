@@ -12,7 +12,7 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const loader = ({ className }) => (
-  <Fragment>
+  <>
     <Spacer space="large" />
 
     <div className={cssClass(className)}>
@@ -26,7 +26,7 @@ const loader = ({ className }) => (
 
       <div className={scss.rect5} />
     </div>
-  </Fragment>
+  </>
 )
 
 /**

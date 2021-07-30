@@ -61,10 +61,15 @@ const reactSelect = ({
       <div className={scss.input__wrapper}>
         <Select
           className={cssClass(className)}
+          classNamePrefix="react-select"
           id={id}
-          options={options}
-          onChange={handleChange}
+          key={uuid()}
           onBlur={handleBlur}
+          onChange={handleChange}
+          options={options}
+          placeholder={intl.formatMessage({
+            id: `${placeholder || label}`
+          })}
           value={
             options
               ? options.find(
@@ -72,11 +77,6 @@ const reactSelect = ({
                 )
               : value[name]
           }
-          key={uuid()}
-          placeholder={intl.formatMessage({
-            id: `${placeholder || label}`
-          })}
-          classNamePrefix="react-select"
         />
 
         {touched[name] && <Error error={errors[name]} />}

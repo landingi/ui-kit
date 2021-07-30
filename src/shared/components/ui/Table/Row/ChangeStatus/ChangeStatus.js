@@ -41,8 +41,8 @@ const changeStatus = ({ selected }) => {
       <List>
         <ListItem variant="dropdown">
           <Button
-            tag="a"
             onClick={() => handleStatusUpdate('open')}
+            tag="a"
           >
             <FormattedMessage id="status.open" />
           </Button>
@@ -50,8 +50,8 @@ const changeStatus = ({ selected }) => {
 
         <ListItem variant="dropdown">
           <Button
-            tag="a"
             onClick={() => handleStatusUpdate('completed')}
+            tag="a"
           >
             <FormattedMessage id="status.completed" />
           </Button>
@@ -59,8 +59,8 @@ const changeStatus = ({ selected }) => {
 
         <ListItem variant="dropdown">
           <Button
-            tag="a"
             onClick={() => handleStatusUpdate('canceled')}
+            tag="a"
           >
             <FormattedMessage id="status.canceled" />
           </Button>
@@ -71,9 +71,9 @@ const changeStatus = ({ selected }) => {
 
   return (
     <Dropdown
+      icon="circle"
       label={<FormattedMessage id="order.change.status" />}
       size="small"
-      icon="circle"
     >
       {renderStatuses()}
     </Dropdown>

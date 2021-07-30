@@ -105,14 +105,16 @@ const modal = ({
       {title && <ModalHeader title={title} />}
 
       {image && (
-        <Image src={image} size="auto" height={20} />
+        <Image height={20}
+size="auto"
+src={image} />
       )}
 
       <div>
         {isMarkAsSpamVisible && (
           <Button
-            variant="transparent"
             onClick={onMarkAsSpam}
+            variant="transparent"
           >
             <FontAwesomeIcon icon="ban" />
 
@@ -121,7 +123,8 @@ const modal = ({
         )}
 
         {isEditable && (
-          <Button variant="icon" onClick={onEdit}>
+          <Button onClick={onEdit}
+variant="icon">
             <FontAwesomeIcon icon="pencil-alt" />
           </Button>
         )}
@@ -144,12 +147,13 @@ const modal = ({
   )
 
   return (
-    <Fragment>
-      <PoseGroup animateOnMount flipMove={false}>
+    <>
+      <PoseGroup animateOnMount
+flipMove={false}>
         {isActive && (
           <ModalAnimation
-            key="ModalAnimation"
             className={scss.dialog}
+            key="ModalAnimation"
           >
             <div
               className={cssClass(className, {
@@ -162,7 +166,7 @@ const modal = ({
                   <Loader />
                 </div>
               ) : (
-                <Fragment>
+                <>
                   {(isClosable ||
                     title ||
                     image ||
@@ -172,11 +176,11 @@ const modal = ({
                       : renderComponent())}
 
                   {hasHeaderDivider && (
-                    <Fragment>
+                    <>
                       <Spacer space="small" />
 
                       <Divider />
-                    </Fragment>
+                    </>
                   )}
 
                   <div className={scss.modal__body}>
@@ -189,12 +193,12 @@ const modal = ({
                     <ModalFooter align="right">
                       {hasCustomButton ? (
                         <Button
-                          variant="secondary"
-                          size="medium"
-                          onClick={onClickCustomButton}
                           isDisabled={
                             isCustomButtonDisabled
                           }
+                          onClick={onClickCustomButton}
+                          size="medium"
+                          variant="secondary"
                         >
                           <FormattedMessage
                             id={`${i18Cancel}`}
@@ -202,9 +206,9 @@ const modal = ({
                         </Button>
                       ) : (
                         <Button
-                          variant="secondary"
-                          size="medium"
                           onClick={onClick}
+                          size="medium"
+                          variant="secondary"
                         >
                           <FormattedMessage
                             id={`${i18Cancel}`}
@@ -213,15 +217,15 @@ const modal = ({
                       )}
 
                       <Button
+                        hasIcon={!!actionIcon}
+                        isDisabled={isButtonDisabled}
+                        isLoading={isButtonLoading}
+                        onClick={onAction}
+                        size="medium"
                         type={
                           isSubmit ? 'submit' : 'button'
                         }
                         variant={actionVariant}
-                        size="medium"
-                        onClick={onAction}
-                        isDisabled={isButtonDisabled}
-                        isLoading={isButtonLoading}
-                        hasIcon={!!actionIcon}
                       >
                         {actionIcon && (
                           <FontAwesomeIcon
@@ -236,7 +240,7 @@ const modal = ({
                       </Button>
                     </ModalFooter>
                   )}
-                </Fragment>
+                </>
               )}
             </div>
           </ModalAnimation>
@@ -244,7 +248,7 @@ const modal = ({
       </PoseGroup>
 
       {isActive && <Backdrop onClick={onClick} />}
-    </Fragment>
+    </>
   )
 }
 

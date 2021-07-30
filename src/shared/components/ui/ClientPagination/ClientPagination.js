@@ -38,21 +38,21 @@ const pagination = ({
 
   const renderPagination = () =>
     pageCount !== 1 && (
-      <Fragment>
+      <>
         <span className={scss.pagination__first}>
           <Button
+            onClick={handleGoToPage(0)}
             size="small"
             variant="icon"
-            onClick={handleGoToPage(0)}
           >
             <FormattedMessage id="pagination.word.first" />
           </Button>
         </span>
 
         <Button
-          variant="icon"
-          size="small"
           onClick={handleGoToPage(pageIndex - 1)}
+          size="small"
+          variant="icon"
         >
           <FontAwesomeIcon icon="caret-left" />
         </Button>
@@ -61,9 +61,9 @@ const pagination = ({
           <ListItem variant="inline">
             <Button
               hide={pageIndex - 3 < 0}
+              onClick={handleGoToPage(pageIndex - 3)}
               size="small"
               variant="icon"
-              onClick={handleGoToPage(pageIndex - 3)}
             >
               {pageIndex - 2}
             </Button>
@@ -72,9 +72,9 @@ const pagination = ({
           <ListItem variant="inline">
             <Button
               hide={pageIndex - 2 < 0}
+              onClick={handleGoToPage(pageIndex - 2)}
               size="small"
               variant="icon"
-              onClick={handleGoToPage(pageIndex - 2)}
             >
               {pageIndex - 1}
             </Button>
@@ -82,20 +82,21 @@ const pagination = ({
 
           <ListItem variant="inline">
             <Button
-              size="small"
-              variant="icon"
               hide={pageIndex - 1 < 0}
               onClick={handleGoToPage(pageIndex - 1)}
+              size="small"
+              variant="icon"
             >
               {pageIndex}
             </Button>
           </ListItem>
 
           <ListItem
-            variant="inline"
             className={scss.pagination__links__current}
+            variant="inline"
           >
-            <Button size="small" variant="icon">
+            <Button size="small"
+variant="icon">
               {pageIndex + 1}
             </Button>
           </ListItem>
@@ -103,9 +104,9 @@ const pagination = ({
           <ListItem variant="inline">
             <Button
               hide={pageIndex + 2 >= pageCount}
+              onClick={handleGoToPage(pageIndex + 1)}
               size="small"
               variant="icon"
-              onClick={handleGoToPage(pageIndex + 1)}
             >
               {pageIndex + 2}
             </Button>
@@ -114,9 +115,9 @@ const pagination = ({
           <ListItem variant="inline">
             <Button
               hide={pageIndex + 4 !== pageCount}
+              onClick={handleGoToPage(pageIndex + 1)}
               size="small"
               variant="icon"
-              onClick={handleGoToPage(pageIndex + 1)}
             >
               {pageIndex + 3}
             </Button>
@@ -131,9 +132,9 @@ const pagination = ({
           <ListItem variant="inline">
             <Button
               hide={pageIndex >= pageCount - 1}
+              onClick={handleGoToPage(pageCount - 1)}
               size="small"
               variant="icon"
-              onClick={handleGoToPage(pageCount - 1)}
             >
               {pageCount}
             </Button>
@@ -141,23 +142,23 @@ const pagination = ({
         </List>
 
         <Button
-          variant="icon"
-          size="small"
           onClick={handleGoToPage(pageIndex + 1)}
+          size="small"
+          variant="icon"
         >
           <FontAwesomeIcon icon="caret-right" />
         </Button>
 
         <span className={scss.pagination__last}>
           <Button
+            onClick={handleGoToPage(pageCount - 1)}
             size="small"
             variant="icon"
-            onClick={handleGoToPage(pageCount - 1)}
           >
             <FormattedMessage id="pagination.word.last" />
           </Button>
         </span>
-      </Fragment>
+      </>
     )
 
   return (

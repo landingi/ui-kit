@@ -46,9 +46,9 @@ const showPassword = ({
     >
       {hasLabel ? (
         <Button
-          variant="switcher-brand"
-          size="tiny"
           hasIcon
+          size="tiny"
+          variant="switcher-brand"
         >
           <FontAwesomeIcon icon={icon} />
 

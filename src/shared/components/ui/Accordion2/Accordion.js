@@ -15,22 +15,22 @@ const cssClass = styles(scss)
  * @param {bool} props.hasNumber - has number, default `false`
  * @return {object} An object of children element
  */
-const Accordion = ({ className, data, hasNumber }) => (
-  <div className={cssClass(className)}>
+function Accordion({ className, data, hasNumber }) {
+  return <div className={cssClass(className)}>
     {data.map((item, index) => {
       const { title, content } = item
 
       return (
         <AccordionItem
+          content={content}
           key={uuid()}
           number={hasNumber ? index + 1 : null}
           title={title}
-          content={content}
         />
       )
     })}
   </div>
-)
+}
 
 /**
  * Display name

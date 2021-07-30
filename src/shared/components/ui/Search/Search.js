@@ -37,7 +37,7 @@ const cssClass = styles(scss)
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
  * @return {object} An object of children element
  */
-const Search = ({
+function Search({
   className,
   variant,
   onChange,
@@ -51,7 +51,7 @@ const Search = ({
   tag: Tag,
   intl,
   onProtectedSubmit
-}) => {
+}) {
   const [isClearActive, setClearActive] = useState(false)
 
   const inputRef = useRef()
@@ -137,58 +137,60 @@ const Search = ({
           (onSubmit || onProtectedSubmit ? (
             <div className={scss.search__icon_button}>
               <Button
-                variant="icon"
+                isDisabled={!isClearActive}
+                onClick={handleProtectedSubmit}
+                size="input"
                 type={
                   onProtectedSubmit ? 'button' : 'submit'
                 }
-                size="input"
-                isDisabled={!isClearActive}
-                onClick={handleProtectedSubmit}
+                variant="icon"
               >
                 <FontAwesomeIcon icon="search" />
               </Button>
             </div>
           ) : (
             <div className={scss.search__icon}>
-              <FontAwesomeIcon size="sm" icon="search" />
+              <FontAwesomeIcon icon="search"
+size="sm" />
             </div>
           ))}
 
         {children && variant === 'button' && (
           <Input
+            autoFocus={autoFocus}
             label={intl.formatMessage({ id: label })}
             name="search"
-            type="text"
             onChange={onChange}
             onKeyDown={onKeyDown}
-            autoFocus={autoFocus}
+            type="text"
           />
         )}
 
         {variant === 'input' && (
           <input
             autoFocus={autoFocus}
-            ref={inputRef}
             className={scss.search__input}
-            type="text"
             name="search"
-            placeholder={intl.formatMessage({
-              id: placeholder
-            })}
             onChange={onChange}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
+            placeholder={intl.formatMessage({
+              id: placeholder
+            })}
+            ref={inputRef}
+            type="text"
           />
         )}
 
         {isClearActive && variant === 'input' && (
           <div className={scss.search__clean}>
             <Button
-              variant="icon"
-              size="input"
               onClick={handleCleanOnClick}
+              size="input"
+              variant="icon"
             >
-              <FontAwesomeIcon size="sm" icon="times" />
+              <FontAwesomeIcon icon="times"
+size="sm" />
             </Button>
           </div>
         )}

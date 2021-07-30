@@ -58,12 +58,12 @@ const searcher = ({
 
   return (
     <Search
-      placeholder={placeholder}
       onChange={handleOnChange}
-      onSubmit={protectedSubmit ? null : handleOnSubmit}
       onProtectedSubmit={
         protectedSubmit ? handleOnProtectedSubmit : null
       }
+      onSubmit={protectedSubmit ? null : handleOnSubmit}
+      placeholder={placeholder}
       {...rest}
     />
   )

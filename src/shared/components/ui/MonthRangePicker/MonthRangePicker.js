@@ -87,7 +87,6 @@ const monthRangePicker = ({
 
       return (
         <button
-          key={monthID}
           className={cssClass(
             'button_month',
             !isSelecting && 'button_month--not-selecting',
@@ -110,9 +109,10 @@ const monthRangePicker = ({
             handleLastMarker(monthID) &&
               'button_month--last'
           )}
+          key={monthID}
           onClick={() => handleSelect(monthID)}
-          type="button"
           onMouseOver={() => handleHover(monthID)}
+          type="button"
         >
           <span
             className={cssClass('button_month--marker')}
@@ -151,15 +151,15 @@ const monthRangePicker = ({
   }
 
   return (
-    <Fragment>
+    <>
       <div className={cssClass('year-container')}>
         <Button
-          variant="icon"
-          size="tiny"
           onClick={useCallback(
             () => setYear(year - 1),
             [year]
           )}
+          size="tiny"
+          variant="icon"
         >
           <FontAwesomeIcon icon="arrow-left" />
         </Button>
@@ -167,12 +167,12 @@ const monthRangePicker = ({
         <span className={cssClass('year')}>{year}</span>
 
         <Button
-          variant="icon"
-          size="tiny"
           onClick={useCallback(
             () => setYear(year + 1),
             [year]
           )}
+          size="tiny"
+          variant="icon"
         >
           <FontAwesomeIcon icon="arrow-right" />
         </Button>
@@ -183,7 +183,7 @@ const monthRangePicker = ({
       <div className={cssClass('grid-container')}>
         {renderMonths()}
       </div>
-    </Fragment>
+    </>
   )
 }
 

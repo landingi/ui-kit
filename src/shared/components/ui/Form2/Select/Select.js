@@ -39,11 +39,11 @@ const select = ({
       <div className={scss.input__wrapper}>
         <select
           className={cssClass(className)}
-          name={name}
           id={id}
-          value={value}
-          onChange={onChange}
+          name={name}
           onBlur={onBlur}
+          onChange={onChange}
+          value={value}
         >
           {children}
         </select>
@@ -53,7 +53,8 @@ const select = ({
         <span className={cssClass('bar')} />
 
         {label && (
-          <Label id={name} className={scss.input__label}>
+          <Label className={scss.input__label}
+id={name}>
             <FormattedMessage id={`${label}`} />
           </Label>
         )}

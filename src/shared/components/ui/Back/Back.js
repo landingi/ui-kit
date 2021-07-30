@@ -17,7 +17,7 @@ const cssClass = styles(scss)
  * @param {string} props.content - content, default: ''
  * @return {object} An object of children element
  */
-const Back = ({ className, url, content }) => {
+function Back({ className, url, content }) {
   const location = getLocationPath()
   const urlMap = location.match(
     '/payments/subscription/cancel'
@@ -28,7 +28,8 @@ const Back = ({ className, url, content }) => {
   return (
     <span className={cssClass(className)}>
       <a href={urlMap}>
-        <Tooltip content={content} placement="bottom">
+        <Tooltip content={content}
+placement="bottom">
           <Button variant="icon">
             <FontAwesomeIcon icon="arrow-left" />
           </Button>

@@ -42,21 +42,21 @@ const maskedInput = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <MaskedInput
-        field={field}
-        mask={mask}
-        type={type}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
         disabled={disabled}
-        translate={translate}
-        maxLength={maxLength}
-        guide={guide}
+        field={field}
         focused={focused}
+        guide={guide}
+        id={id}
+        label={label}
+        mask={mask}
+        maxLength={maxLength}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        placeholder={placeholder}
+        translate={translate}
+        type={type}
+        value={value}
       />
 
       {touched[name] && <Error error={errors[name]} />}

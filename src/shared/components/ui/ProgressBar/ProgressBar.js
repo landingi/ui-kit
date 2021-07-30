@@ -80,7 +80,8 @@ const progressBar = ({
             `padding__${barSize}`
           )}
         >
-          <ColorNumber variant={variant} size={size}>
+          <ColorNumber size={size}
+variant={variant}>
             {quantity}
           </ColorNumber>
           /{limit}

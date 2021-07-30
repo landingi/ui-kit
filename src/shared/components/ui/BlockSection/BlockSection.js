@@ -28,7 +28,7 @@ const cssClass = styles(scss)
  * @param {array} props.list - list
  * @return {object} An object of children element
  */
-const BlockSection = ({
+function BlockSection({
   className,
   title,
   message,
@@ -37,7 +37,7 @@ const BlockSection = ({
   url,
   reverse,
   list
-}) => {
+}) {
   const elementClasses = cssClass({
     'block-section__panel--reverse': reverse === true
   })
@@ -56,14 +56,15 @@ const BlockSection = ({
               'block-section__panel--content'
             )}
           >
-            <Heading level={2} bold>
+            <Heading bold
+level={2}>
               <FormattedMessage id={`${title}`} />
             </Heading>
 
             <Paragraph
               line={20}
-              weight={400}
               padding={list ? 'none' : 'medium'}
+              weight={400}
             >
               <FormattedMessage
                 id={message}
@@ -76,7 +77,8 @@ const BlockSection = ({
             {list && (
               <List listStyle="ordered-disc">
                 {list.map(item => (
-                  <ListItem variant="block" key={uuid()}>
+                  <ListItem key={uuid()}
+variant="block">
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}
@@ -90,7 +92,8 @@ const BlockSection = ({
             </Button>
           </div>
 
-          <Image src={url} size={527} />
+          <Image size={527}
+src={url} />
         </div>
       </Panel>
     </div>

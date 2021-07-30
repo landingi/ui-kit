@@ -32,7 +32,9 @@ const selectRow = forwardRef(
 
     return (
       <label className={cssClass('input__radio')}>
-        <input type="radio" ref={resolvedRef} {...rest} />
+        <input ref={resolvedRef}
+type="radio"
+{...rest} />
 
         <div />
       </label>

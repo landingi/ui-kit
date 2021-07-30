@@ -20,7 +20,8 @@ const cssClass = styles(scss)
  */
 const headline = ({ className, title }) => (
   <div className={cssClass(className)}>
-    <Heading className="text--truncate" level={1}>
+    <Heading className="text--truncate"
+level={1}>
       <FormattedMessage id={`${title}`} />
     </Heading>
   </div>

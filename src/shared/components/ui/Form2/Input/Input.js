@@ -44,23 +44,23 @@ const input = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <Input
-        type={type}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
-        disabled={disabled}
-        translate={translate}
-        maxLength={maxLength}
         autoFocus={autoFocus}
+        controlledValue={controlledValue}
+        disabled={disabled}
+        focused={focused}
+        id={id}
+        label={label}
+        maxLength={maxLength}
+        min={min}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        placeholder={placeholder}
         required={required}
         tooltip={tooltip}
-        focused={focused}
-        min={min}
-        controlledValue={controlledValue}
+        translate={translate}
+        type={type}
+        value={value}
       />
 
       {touched[name] && <Error error={errors[name]} />}

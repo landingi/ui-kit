@@ -16,11 +16,11 @@ const Accordion = ({ children }) => {
     Array.isArray(children) &&
     children.map((item, index) => (
       <Section
-        key={index}
-        isOpen={openList.value.includes(index)}
-        label={item.props.label}
-        // eslint-disable-next-line react/jsx-no-bind
         handleOnClick={() => openList.set(index)}
+        isOpen={openList.value.includes(index)}
+        key={index}
+        // eslint-disable-next-line react/jsx-no-bind
+        label={item.props.label}
       >
         {item.props.children}
       </Section>

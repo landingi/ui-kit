@@ -71,16 +71,17 @@ const drawer = ({
   })
 
   return (
-    <Fragment>
-      <PoseGroup animateOnMount flipMove={false}>
+    <>
+      <PoseGroup animateOnMount
+flipMove={false}>
         {isActive && (
           <DrawerAnimation
-            key="draweranimation"
             className={cssClass(className, elementClasses)}
+            key="draweranimation"
           >
             <Header
-              title={data ? data.title : ''}
               onClick={onClick}
+              title={data ? data.title : ''}
             />
 
             {children}
@@ -89,7 +90,7 @@ const drawer = ({
       </PoseGroup>
 
       {isActive && <Backdrop onClick={onClick} />}
-    </Fragment>
+    </>
   )
 }
 

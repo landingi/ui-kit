@@ -52,12 +52,13 @@ const showMore = ({
 
   return text ? (
     <div className={scss.container}>
-      <Html value={text} className={extraClassname} />
+      <Html className={extraClassname}
+value={text} />
 
       <button
-        type="button"
-        onClick={handleOnClick}
         className={scss.button}
+        onClick={handleOnClick}
+        type="button"
       >
         {isOpen ? (
           <FormattedMessage id="show.less" />

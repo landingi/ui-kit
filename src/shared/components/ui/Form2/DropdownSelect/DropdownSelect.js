@@ -97,31 +97,32 @@ const select = ({
 
   const renderOption = item =>
     hasDescription ? (
-      <Fragment>
+      <>
         <Button
-          variant="dropdown-element"
           onClick={() => handleChange(name, item)}
+          variant="dropdown-element"
         >
           <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph color="accent-2" size={12}>
+          <Paragraph color="accent-2"
+size={12}>
             {item?.description}
           </Paragraph>
         </Button>
 
         <Divider />
-      </Fragment>
+      </>
     ) : (
       <Button
-        variant="dropdown-element"
         onClick={() => handleChange(name, item)}
+        variant="dropdown-element"
       >
         {item?.label}
       </Button>
     )
 
   const renderOptions = () => (
-    <Fragment>
+    <>
       {emphasisedOptions.map((item, index) => (
         <ListItem
           className="list-item--dropdown"
@@ -141,7 +142,7 @@ const select = ({
           {renderOption(item)}
         </ListItem>
       ))}
-    </Fragment>
+    </>
   )
 
   return (
@@ -155,28 +156,28 @@ const select = ({
       )}
 
       <Dropdown
-        label={value[name]?.label || label}
-        hasInput
-        hasFullInputStyle
-        asPlaceholder={!value[name]?.label}
-        size="fixed"
         alignment="spaced"
+        asPlaceholder={!value[name]?.label}
+        hasFullInputStyle
+        hasInput
         inModal={inModalPosition}
+        label={value[name]?.label || label}
+        size="fixed"
       >
         {handleOnSearchChange && (
-          <Fragment>
+          <>
             <div className={cssClass('search-container')}>
               <Searcher
-                setSearchPhrase={handleOnSearchChange}
-                placeholder={searchPlaceholder}
-                tag="div"
-                protectedSubmit
                 liveChanges={liveChanges}
+                placeholder={searchPlaceholder}
+                protectedSubmit
+                setSearchPhrase={handleOnSearchChange}
+                tag="div"
               />
             </div>
 
             <Divider variant="dropdown" />
-          </Fragment>
+          </>
         )}
 
         <Overflow>
@@ -186,12 +187,12 @@ const select = ({
               isEmptyList &&
               isEmpty(options) ? (
                 <Message
-                  title="message.empty.search.results"
-                  message="message.empty.search.results.small"
-                  url="https://images.assets-landingi.com/images/search_empty.svg"
                   height={41}
-                  titleLevel={5}
+                  message="message.empty.search.results.small"
                   messageLevel={6}
+                  title="message.empty.search.results"
+                  titleLevel={5}
+                  url="https://images.assets-landingi.com/images/search_empty.svg"
                 />
               ) : (
                 renderOptions()

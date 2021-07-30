@@ -50,13 +50,16 @@ const message = ({
       <Spacer space="small" />
 
       {isVideo ? (
-        <Fragment>
-          <Vimeo video={url} height={height} />
+        <>
+          <Vimeo height={height}
+video={url} />
 
           <Spacer space="small" />
-        </Fragment>
+        </>
       ) : (
-        <Image src={url} size="auto" height={height} />
+        <Image height={height}
+size="auto"
+src={url} />
       )}
     </div>
   )
@@ -69,9 +72,9 @@ const message = ({
 
       {title && (
         <Heading
-          level={titleLevel}
           align="center"
           bold={bold}
+          level={titleLevel}
           margin={withoutMargin ? 'none' : ''}
         >
           <FormattedMessage
@@ -84,10 +87,11 @@ const message = ({
       )}
 
       {message && (
-        <Fragment>
+        <>
           <Spacer space="tiny" />
 
-          <Heading level={messageLevel} align="center">
+          <Heading align="center"
+level={messageLevel}>
             <FormattedMessage
               id={`${message}`}
               values={{
@@ -95,7 +99,7 @@ const message = ({
               }}
             />
           </Heading>
-        </Fragment>
+        </>
       )}
 
       {url &&

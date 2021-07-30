@@ -28,13 +28,13 @@ const customLink = ({
   size
 }) => (
   <a
-    href={href}
-    target={target}
     className={cssClass(
       className,
       `custom-link--${variant}`,
       `custom-link--${size}`
     )}
+    href={href}
+    target={target}
   >
     {label}
   </a>

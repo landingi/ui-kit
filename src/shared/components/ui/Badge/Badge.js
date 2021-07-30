@@ -38,12 +38,12 @@ const badge = ({
       disabled={!tooltip || width < 105}
     >
       <span
-        ref={badgeRef}
         className={cssClass(
           className,
           `badge--${type}`,
           isIndicator && 'badge--indicator'
         )}
+        ref={badgeRef}
       >
         <span
           className={cssClass(

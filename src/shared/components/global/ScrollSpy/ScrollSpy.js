@@ -31,8 +31,8 @@ const scrollSpy = ({ elements }) => {
     <List>
       {elements.map(item => (
         <Item
-          key={uuid()}
           item={item}
+          key={uuid()}
           // eslint-disable-next-line react/jsx-no-bind
           onClick={() => handleOnClick(item.element)}
         />

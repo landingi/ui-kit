@@ -45,14 +45,14 @@ const toggle = ({
         })}
       >
         <input
-          name={name}
-          className={cssClass('toggle__checkbox')}
           checked={checked}
-          onChange={onChange}
-          onBlur={onBlur}
-          type="checkbox"
-          id={id}
+          className={cssClass('toggle__checkbox')}
           disabled={disabled}
+          id={id}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
+          type="checkbox"
         />
 
         <span className={cssClass('toggle__button')} />

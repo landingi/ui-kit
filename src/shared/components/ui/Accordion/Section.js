@@ -11,13 +11,13 @@ import scss from './Accordion.scss'
  * @param {string} props.children - content
  * @return {object} An object of children element
  */
-const AccordionSection = ({
+function AccordionSection({
   handleOnClick,
   isOpen,
   label,
   children
-}) => (
-  <div className={scss.accordion}>
+}) {
+  return <div className={scss.accordion}>
     <div
       className={scss.accordion__header}
       onClick={handleOnClick}
@@ -29,7 +29,7 @@ const AccordionSection = ({
       <div className={scss.accordion__text}>{children}</div>
     )}
   </div>
-)
+}
 
 /**
  * Display name

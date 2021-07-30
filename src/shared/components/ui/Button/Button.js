@@ -90,11 +90,6 @@ const button = ({
 
   return (
     <Tag
-      type={Tag === 'button' ? type : undefined}
-      disabled={isDisabled ? 'disabled' : undefined}
-      href={Tag === 'a' ? href : undefined}
-      title={Tag === 'a' ? title : undefined}
-      target={Tag === 'a' ? target : undefined}
       className={
         Tag === 'button'
           ? cssClass('button', elementClasses, className)
@@ -105,11 +100,16 @@ const button = ({
               className
             )
       }
+      disabled={isDisabled ? 'disabled' : undefined}
+      href={Tag === 'a' ? href : undefined}
       onClick={onClick}
+      target={Tag === 'a' ? target : undefined}
+      title={Tag === 'a' ? title : undefined}
+      type={Tag === 'button' ? type : undefined}
     >
       {isLoading && <Spinner />}
 
-      {!isLoading && <Fragment>{children}</Fragment>}
+      {!isLoading && <>{children}</>}
 
       {hasBackgoundRipple && <Ink />}
     </Tag>
