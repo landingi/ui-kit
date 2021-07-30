@@ -1,6 +1,6 @@
 import React from 'react'
 import ShowMore from 'shared/components/ui/ShowMore'
-import { mountWithIntl } from './../../setup/mocks/intl-enzyme-test-helper'
+import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const props = {
   content: 'word.smart-map'

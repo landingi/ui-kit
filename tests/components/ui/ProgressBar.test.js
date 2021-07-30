@@ -4,8 +4,7 @@ import ProgressBar from 'shared/components/ui/ProgressBar'
 
 const progressBarComponent = (<ProgressBar
     quantity={58}
-    variant="success"
-                              />)
+    variant="success" />)
 
 describe('<ProgressBar /> mount', () => {
   let wrapper

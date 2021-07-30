@@ -7,8 +7,7 @@ const {
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
-  context: path.join(__dirname, 'src'),
-  mode: 'production',
+  context: path.resolve(__dirname, 'src'),
   bail: true,
   entry: {
     components: './client/components/package'
