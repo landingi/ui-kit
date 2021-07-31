@@ -4,5 +4,10 @@ const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = merge(common, {
+  mode: 'production',
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
+  },
   plugins: [new BundleAnalyzerPlugin()]
 })
