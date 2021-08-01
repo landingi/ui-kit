@@ -14,13 +14,12 @@
     "lint:tests": "eslint --fix -- ./tests",
     "jest-runner": "jest --colors --maxWorkers=100%",
     "jest-runner:local": "jest --colors --maxWorkers=50% --changedFilesWithAncestor",
-    "test:unit": "npm-run-all lint:tests jest-runner",
+    "test:unit": "yarn run jest-runner",
     "build": "cross-env webpack",
     "bundle": "cross-env webpack --config ./webpack.bundle.js",
     "format:tests": "prettier --write {,tests/**/}*.js",
-    "format:shared": "prettier --write {,src/**/}*.js",
-    "test:coverage": "npm run jest-runner -- --coverage",
-    "pretty-quick": "pretty-quick",
+    "format:src": "prettier --write {,src/**/}*.js",
+    "test:coverage": "yarn run jest-runner -- --coverage",
     "prepare": "husky install",
     "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn run build",
     "ci": "node ./config/packages/package.builder.js production && yarn install --frozen-lockfile && yarn run test:unit && yarn run build"
@@ -133,8 +132,8 @@
     },
     "collectCoverage": false,
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/client/**/*.{js,jsx}",
+      "src/**/*.{js}",
+      "!src/client/**/*.{js}",
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
