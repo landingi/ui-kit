@@ -20,6 +20,7 @@
     "format:tests": "prettier --write {,tests/**/}*.js",
     "format:src": "prettier --write {,src/**/}*.js",
     "test:coverage": "yarn run jest-runner -- --coverage",
+    "pretty-quick": "pretty-quick --staged",
     "prepare": "husky install",
     "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn run build",
     "ci": "node ./config/packages/package.builder.js production && yarn install --frozen-lockfile && yarn run test:unit && yarn run build"

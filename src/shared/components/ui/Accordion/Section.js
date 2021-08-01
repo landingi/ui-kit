@@ -17,18 +17,22 @@ function AccordionSection({
   label,
   children
 }) {
-  return <div className={scss.accordion}>
-    <div
-      className={scss.accordion__header}
-      onClick={handleOnClick}
-    >
-      {label}
-    </div>
+  return (
+    <div className={scss.accordion}>
+      <div
+        className={scss.accordion__header}
+        onClick={handleOnClick}
+      >
+        {label}
+      </div>
 
-    {isOpen && (
-      <div className={scss.accordion__text}>{children}</div>
-    )}
-  </div>
+      {isOpen && (
+        <div className={scss.accordion__text}>
+          {children}
+        </div>
+      )}
+    </div>
+  )
 }
 
 /**

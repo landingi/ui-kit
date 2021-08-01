@@ -5,7 +5,7 @@ const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserPlugin = require("terser-webpack-plugin")
+const TerserPlugin = require('terser-webpack-plugin')
 const srcPath = path.resolve(__dirname, 'src')
 const buildPath = path.resolve(__dirname, 'build')
 
@@ -42,7 +42,8 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
-              additionalData: '@import "shared/styles/theme.scss";',
+              additionalData:
+                '@import "shared/styles/theme.scss";',
               sassOptions: {
                 includePaths: [__dirname, srcPath],
                 outputStyle: 'compressed'
@@ -58,11 +59,11 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          name: "vendors",
+          name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
-          chunks: "all"
+          chunks: 'all'
         }
-      },
+      }
     },
     minimizer: [
       '...',
@@ -76,12 +77,12 @@ module.exports = {
         terserOptions: {
           ecma: 2020,
           format: {
-            comments: false,
-          },
+            comments: false
+          }
         },
-        extractComments: false,
+        extractComments: false
       })
-    ],
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),

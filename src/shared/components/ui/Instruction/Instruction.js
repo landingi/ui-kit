@@ -19,22 +19,24 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 function Instruction({ className, data }) {
-  return <div className={cssClass(className)}>
-    {data.map(({ content }, index) => (
-      <div
-        className={cssClass('instruction__step')}
-        key={uuid()}
-      >
-        <StepNumber
-          absolute
-          size="medium"
-          step={index + 1}
-        />
+  return (
+    <div className={cssClass(className)}>
+      {data.map(({ content }, index) => (
+        <div
+          className={cssClass('instruction__step')}
+          key={uuid()}
+        >
+          <StepNumber
+            absolute
+            size="medium"
+            step={index + 1}
+          />
 
-        {content}
-      </div>
-    ))}
-  </div>
+          {content}
+        </div>
+      ))}
+    </div>
+  )
 }
 
 /**

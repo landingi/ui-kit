@@ -6,37 +6,39 @@ import scss from './Skeleton.scss'
  * @return {object} An object of children element
  */
 export function SkeletonSidebar() {
-  return <div className={scss.sidebarSkeleton}>
-    <div className={scss.item}>
-      <div className={scss.circle} />
+  return (
+    <div className={scss.sidebarSkeleton}>
+      <div className={scss.item}>
+        <div className={scss.circle} />
 
-      <div className={scss.line} />
+        <div className={scss.line} />
+      </div>
+
+      <div className={scss.item}>
+        <div className={scss.circle} />
+
+        <div className={scss.line} />
+      </div>
+
+      <div className={scss.item}>
+        <div className={scss.circle} />
+
+        <div className={scss.line} />
+      </div>
+
+      <div className={scss.item}>
+        <div className={scss.circle} />
+
+        <div className={scss.line} />
+      </div>
+
+      <div className={scss.item}>
+        <div className={scss.circle} />
+
+        <div className={scss.line} />
+      </div>
     </div>
-
-    <div className={scss.item}>
-      <div className={scss.circle} />
-
-      <div className={scss.line} />
-    </div>
-
-    <div className={scss.item}>
-      <div className={scss.circle} />
-
-      <div className={scss.line} />
-    </div>
-
-    <div className={scss.item}>
-      <div className={scss.circle} />
-
-      <div className={scss.line} />
-    </div>
-
-    <div className={scss.item}>
-      <div className={scss.circle} />
-
-      <div className={scss.line} />
-    </div>
-  </div>
+  )
 }
 
 /**
@@ -44,37 +46,39 @@ export function SkeletonSidebar() {
  * @return {object} An object of children element
  */
 export function SkeletonDrawer() {
-  return <div className={scss.drawerSkeleton}>
-    <div className={scss.item}>
-      <div>
-        <div className={scss.circle} />
+  return (
+    <div className={scss.drawerSkeleton}>
+      <div className={scss.item}>
+        <div>
+          <div className={scss.circle} />
+        </div>
+
+        <div className={scss.line} />
+
+        <div className={scss.line} />
       </div>
 
-      <div className={scss.line} />
+      <div className={scss.item}>
+        <div>
+          <div className={scss.circle} />
+        </div>
 
-      <div className={scss.line} />
-    </div>
+        <div className={scss.line} />
 
-    <div className={scss.item}>
-      <div>
-        <div className={scss.circle} />
+        <div className={scss.line} />
       </div>
 
-      <div className={scss.line} />
+      <div className={scss.item}>
+        <div>
+          <div className={scss.circle} />
+        </div>
 
-      <div className={scss.line} />
-    </div>
+        <div className={scss.line} />
 
-    <div className={scss.item}>
-      <div>
-        <div className={scss.circle} />
+        <div className={scss.line} />
       </div>
-
-      <div className={scss.line} />
-
-      <div className={scss.line} />
     </div>
-  </div>
+  )
 }
 
 /**
@@ -82,23 +86,25 @@ export function SkeletonDrawer() {
  * @return {object} An object of children element
  */
 export function SkeletonTable() {
-  return <div className={scss.tableSkeleton}>
-    <div className={scss.item}>
-      <div className={scss.line} />
+  return (
+    <div className={scss.tableSkeleton}>
+      <div className={scss.item}>
+        <div className={scss.line} />
 
-      <div className={scss.line} />
+        <div className={scss.line} />
 
-      <div className={scss.line} />
+        <div className={scss.line} />
+      </div>
+
+      <div className={scss.item}>
+        <div className={scss.line} />
+
+        <div className={scss.line} />
+
+        <div className={scss.line} />
+      </div>
     </div>
-
-    <div className={scss.item}>
-      <div className={scss.line} />
-
-      <div className={scss.line} />
-
-      <div className={scss.line} />
-    </div>
-  </div>
+  )
 }
 
 /**
@@ -106,9 +112,11 @@ export function SkeletonTable() {
  * @return {object} An object of children element
  */
 export function SkeletonLine() {
-  return <div className={scss.sekeleton}>
-    <div className={scss.line} />
-  </div>
+  return (
+    <div className={scss.sekeleton}>
+      <div className={scss.line} />
+    </div>
+  )
 }
 
 /**
@@ -116,7 +124,9 @@ export function SkeletonLine() {
  * @return {object} An object of children element
  */
 export function SkeletonCircle() {
-  return <div className={scss.sekeleton}>
-    <div className={scss.circle} />
-  </div>
+  return (
+    <div className={scss.sekeleton}>
+      <div className={scss.circle} />
+    </div>
+  )
 }

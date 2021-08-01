@@ -16,20 +16,22 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 function Accordion({ className, data, hasNumber }) {
-  return <div className={cssClass(className)}>
-    {data.map((item, index) => {
-      const { title, content } = item
+  return (
+    <div className={cssClass(className)}>
+      {data.map((item, index) => {
+        const { title, content } = item
 
-      return (
-        <AccordionItem
-          content={content}
-          key={uuid()}
-          number={hasNumber ? index + 1 : null}
-          title={title}
-        />
-      )
-    })}
-  </div>
+        return (
+          <AccordionItem
+            content={content}
+            key={uuid()}
+            number={hasNumber ? index + 1 : null}
+            title={title}
+          />
+        )
+      })}
+    </div>
+  )
 }
 
 /**

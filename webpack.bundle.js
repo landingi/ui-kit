@@ -6,8 +6,8 @@ const BundleAnalyzerPlugin =
 module.exports = merge(common, {
   mode: 'production',
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
+    react: 'React',
+    'react-dom': 'ReactDOM'
   },
   plugins: [new BundleAnalyzerPlugin()]
 })
