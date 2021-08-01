@@ -104,7 +104,8 @@ const select = ({
         >
           <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph color="accent-2" size={12}>
+          <Paragraph color="accent-2"
+size={12}>
             {item?.description}
           </Paragraph>
         </Button>

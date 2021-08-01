@@ -114,7 +114,8 @@ function Toast({ className }) {
 
   return (
     isActive && (
-      <PoseGroup animateOnMount flipMove={false}>
+      <PoseGroup animateOnMount
+flipMove={false}>
         <ToastAnimation
           className={cssClass(className)}
           key="toastanimation"

@@ -60,7 +60,8 @@ const timingToast = () => {
   }, [isActive])
 
   return (
-    <PoseGroup animateOnMount flipMove={false}>
+    <PoseGroup animateOnMount
+flipMove={false}>
       <TimingToastAnimation
         className={cssClass(
           'toast',

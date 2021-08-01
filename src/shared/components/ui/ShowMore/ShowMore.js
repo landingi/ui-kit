@@ -52,7 +52,8 @@ const showMore = ({
 
   return text ? (
     <div className={scss.container}>
-      <Html className={extraClassname} value={text} />
+      <Html className={extraClassname}
+value={text} />
 
       <button
         className={scss.button}

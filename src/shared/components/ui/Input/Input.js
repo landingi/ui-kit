@@ -104,7 +104,8 @@ const input = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label className={scss.input__label} id={name}>
+        <Label className={scss.input__label}
+id={name}>
           {translate ? (
             <FormattedMessage id={`${label}`} />
           ) : (
