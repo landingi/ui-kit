@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Section from 'shared/components/ui/Section'
+import Section from '@components/ui/Section'
 
 const props = {
   children: 'placeholder'

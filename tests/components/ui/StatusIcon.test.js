@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import StatusIcon from 'shared/components/ui/StatusIcon'
+import StatusIcon from '@components/ui/StatusIcon'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

@@ -1,6 +1,6 @@
 import React from 'react'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
-import BlockSection from 'shared/components/ui/BlockSection'
+import BlockSection from '@components/ui/BlockSection'
 
 const props = {
   title: 'empty.list.message.domains.section1.title',

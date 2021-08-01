@@ -5,7 +5,7 @@ import scss from './Steps.scss'
 import { stepsShape } from 'shared/shapes'
 import { FormattedMessage } from 'react-intl'
 import uuid from 'react-uuid'
-import StepNumber from 'shared/components/ui/StepNumber'
+import StepNumber from '@components/ui/StepNumber'
 
 const cssClass = styles(scss)
 

@@ -9,7 +9,7 @@ exports.onCreateWebpackConfig = args => {
         'node_modules'
       ],
       alias: {
-        ui: path.resolve(
+        '@components': path.resolve(
           __dirname,
           '../src/shared/components/ui'
         )

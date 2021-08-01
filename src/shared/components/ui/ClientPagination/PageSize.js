@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'shared/components/ui/Select'
+import Select from '@components/ui/Select'
 import { styles } from 'shared/helpers/css'
 import scss from './PageSize.scss'
 

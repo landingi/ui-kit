@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Check from 'shared/components/ui/Check'
+import Check from '@components/ui/Check'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

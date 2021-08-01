@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './Drawer.scss'
 import Header from './Header'
-import Backdrop from 'shared/components/ui/Backdrop'
+import Backdrop from '@components/ui/Backdrop'
 import {
   DARK,
   WHITE,

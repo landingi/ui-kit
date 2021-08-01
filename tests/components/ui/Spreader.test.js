@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Spreader from 'shared/components/ui/Spreader'
+import Spreader from '@components/ui/Spreader'
 
 const spreaderComponent = <Spreader />
 

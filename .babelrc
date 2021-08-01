@@ -11,7 +11,10 @@
       {
         "root": [
           "./src"
-        ]
+        ],
+        "alias": {
+          "@components": "./src/shared/components"
+        }
       }
     ],
     "@babel/plugin-syntax-dynamic-import",

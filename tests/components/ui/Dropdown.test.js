@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Dropdown from 'shared/components/ui/Dropdown'
+import Dropdown from '@components/ui/Dropdown'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

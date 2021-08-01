@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import Button from 'shared/components/ui/Button'
+import Button from '@components/ui/Button'
 
 /**
  * Fresh - stateless presentational component

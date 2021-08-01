@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import Notification from 'shared/components/ui/Notification'
-import Close from 'shared/components/ui/Close'
+import Notification from '@components/ui/Notification'
+import Close from '@components/ui/Close'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

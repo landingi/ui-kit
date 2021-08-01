@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import DateTimePicker from 'shared/components/ui/DateTimePicker'
+import DateTimePicker from '@components/ui/DateTimePicker'
 
 const DateTimepickerComponent = <DateTimePicker />
 

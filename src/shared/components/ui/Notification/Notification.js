@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Notification.scss'
-import Close from 'shared/components/ui/Close'
+import Close from '@components/ui/Close'
 import { mapIconToClass } from 'shared/helpers/data'
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react'
-import Search from 'shared/components/ui/Search'
+import Search from '@components/ui/Search'
 import registerIcons from 'shared/helpers/icons'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 

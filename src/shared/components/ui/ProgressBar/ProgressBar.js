@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './ProgressBar.scss'
-import ColorNumber from 'shared/components/ui/ColorNumber'
+import ColorNumber from '@components/ui/ColorNumber'
 import { FormattedMessage } from 'react-intl'
 
 const cssClass = styles(scss)

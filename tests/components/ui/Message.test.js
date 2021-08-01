@@ -1,5 +1,5 @@
 import React from 'react'
-import Message from 'shared/components/ui/Message'
+import Message from '@components/ui/Message'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const props = {

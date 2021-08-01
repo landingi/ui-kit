@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Drawer from 'shared/components/ui/Drawer'
+import Drawer from '@components/ui/Drawer'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

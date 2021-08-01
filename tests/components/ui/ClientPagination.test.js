@@ -1,5 +1,5 @@
 import React from 'react'
-import ClientPagination from 'shared/components/ui/ClientPagination'
+import ClientPagination from '@components/ui/ClientPagination'
 import registerIcons from 'shared/helpers/icons'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 

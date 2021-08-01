@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import InfoBar from 'shared/components/ui/InfoBar'
+import InfoBar from '@components/ui/InfoBar'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

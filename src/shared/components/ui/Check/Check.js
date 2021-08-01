@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { styles } from 'shared/helpers/css'
 import scss from './Check.scss'
-import Spreader from 'shared/components/ui/Spreader'
+import Spreader from '@components/ui/Spreader'
 
 const cssClass = styles(scss)
 

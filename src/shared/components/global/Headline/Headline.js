@@ -1,5 +1,5 @@
 import React from 'react'
-import Heading from 'shared/components/ui/Heading'
+import Heading from '@components/ui/Heading'
 import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { styles } from 'shared/helpers/css'

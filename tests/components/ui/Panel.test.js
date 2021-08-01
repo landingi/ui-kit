@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Panel from 'shared/components/ui/Panel'
+import Panel from '@components/ui/Panel'
 
 const props = {
   children: 'placeholder'

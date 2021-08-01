@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import ColorLine from 'shared/components/ui/ColorLine'
+import ColorLine from '@components/ui/ColorLine'
 
 const colorLineComponent = <ColorLine variant="success" />
 

@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react'
 import PropTypes from 'prop-types'
-import Search from 'shared/components/ui/Search'
+import Search from '@components/ui/Search'
 import { NO_VALUE } from 'shared/constants/helpers'
 
 /**

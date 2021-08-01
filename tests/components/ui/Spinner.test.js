@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Spinner from 'shared/components/ui/Spinner'
+import Spinner from '@components/ui/Spinner'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

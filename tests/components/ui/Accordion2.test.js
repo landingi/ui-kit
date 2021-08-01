@@ -1,7 +1,7 @@
 import React from 'react'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
-import Accordion from 'shared/components/ui/Accordion2'
-import AccordionItem from 'shared/components/ui/Accordion2/Item/AccordionItem'
+import Accordion from '@components/ui/Accordion2'
+import AccordionItem from '@components/ui/Accordion2/Item/AccordionItem'
 import registerIcons from 'shared/helpers/icons'
 
 registerIcons()

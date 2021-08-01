@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
-import Tooltip from 'shared/components/ui/Tooltip'
+import Tooltip from '@components/ui/Tooltip'
 import scss from './Badge.scss'
 
 /**

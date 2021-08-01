@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './../Accordion.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import StepNumber from 'shared/components/ui/StepNumber'
+import StepNumber from '@components/ui/StepNumber'
 
 const cssClass = styles(scss)
 

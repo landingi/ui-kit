@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Heading from 'shared/components/ui/Heading'
+import Heading from '@components/ui/Heading'
 
 const props = {
   children: 'Heading placeholder',

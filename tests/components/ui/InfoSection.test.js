@@ -1,5 +1,5 @@
 import React from 'react'
-import InfoSection from 'shared/components/ui/InfoSection'
+import InfoSection from '@components/ui/InfoSection'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const props = {

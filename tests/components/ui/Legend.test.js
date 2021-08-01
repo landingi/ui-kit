@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Legend from 'shared/components/ui/Legend'
+import Legend from '@components/ui/Legend'
 
 const props = {
   data: [

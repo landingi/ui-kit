@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './StatsBadge.scss'
-import Heading from 'shared/components/ui/Heading'
+import Heading from '@components/ui/Heading'
 import { FormattedMessage } from 'react-intl'
 
 const cssClass = styles(scss)

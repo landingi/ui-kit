@@ -1,5 +1,5 @@
 import React from 'react'
-import ShowPassword from 'shared/components/ui/ShowPassword'
+import ShowPassword from '@components/ui/ShowPassword'
 import registerIcons from 'shared/helpers/icons'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 import { FormattedMessage } from 'react-intl'

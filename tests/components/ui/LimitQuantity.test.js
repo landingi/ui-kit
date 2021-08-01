@@ -1,5 +1,5 @@
 import React from 'react'
-import LimitQuantity from 'shared/components/ui/LimitQuantity'
+import LimitQuantity from '@components/ui/LimitQuantity'
 import registerIcons from 'shared/helpers/icons'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 

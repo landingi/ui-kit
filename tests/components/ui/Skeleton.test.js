@@ -5,7 +5,7 @@ import {
   SkeletonLine,
   SkeletonSidebar,
   SkeletonDrawer
-} from 'shared/components/ui/Skeleton'
+} from '@components/ui/Skeleton'
 
 const skeletonCircleComponent = <SkeletonCircle />
 const skeletonLineComponent = <SkeletonLine />

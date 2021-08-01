@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Label from 'shared/components/ui/Label'
+import Label from '@components/ui/Label'
 
 const props = {
   children: 'label'

@@ -6,8 +6,8 @@ import React, {
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import scss from './ShowMore.scss'
-import Loader from 'shared/components/ui/Loader'
-import Spacer from 'shared/components/ui/Spacer'
+import Loader from '@components/ui/Loader'
+import Spacer from '@components/ui/Spacer'
 import Html from 'shared/components/global/Html'
 
 /**

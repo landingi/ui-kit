@@ -6,22 +6,24 @@ const {
 } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require("terser-webpack-plugin")
+const srcPath = path.resolve(__dirname, 'src')
+const buildPath = path.resolve(__dirname, 'build')
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  context: srcPath,
   bail: true,
   entry: {
-    components: './client/components/package'
+    components: srcPath
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: buildPath,
     filename: '[name]_[contenthash].js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
+        include: srcPath,
         use: ['thread-loader', 'babel-loader']
       },
       {
@@ -42,7 +44,7 @@ module.exports = {
               implementation: require('sass'),
               additionalData: '@import "shared/styles/theme.scss";',
               sassOptions: {
-                includePaths: [__dirname, 'src'],
+                includePaths: [__dirname, srcPath],
                 outputStyle: 'compressed'
               }
             }
@@ -53,18 +55,13 @@ module.exports = {
     ]
   },
   optimization: {
-    moduleIds: "hashed",
     splitChunks: {
       cacheGroups: {
         vendor: {
           name: "vendors",
           test: /[\\/]node_modules[\\/]/,
           chunks: "all"
-        },
-        common: {
-          test: /[\\/]src[\\/]client[\\/]components[\\/]package[\\/]/,
-          chunks: "all"
-        },
+        }
       },
     },
     minimizer: [

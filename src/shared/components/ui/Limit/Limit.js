@@ -5,8 +5,8 @@ import scss from './Limit.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
 import { formatNumeric } from 'shared/helpers/data'
-import Tooltip from 'shared/components/ui/Tooltip'
-import Spreader from 'shared/components/ui/Spreader'
+import Tooltip from '@components/ui/Tooltip'
+import Spreader from '@components/ui/Spreader'
 
 const cssClass = styles(scss)
 

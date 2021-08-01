@@ -1,5 +1,5 @@
 import React from 'react'
-import FormikToggle from 'shared/components/ui/Form2/Toggle'
+import FormikToggle from '@components/ui/Form2/Toggle'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const onChange = jest.fn()

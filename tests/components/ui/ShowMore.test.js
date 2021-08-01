@@ -1,5 +1,5 @@
 import React from 'react'
-import ShowMore from 'shared/components/ui/ShowMore'
+import ShowMore from '@components/ui/ShowMore'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const props = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Tabs from 'shared/components/ui/Tabs'
-import Button from 'shared/components/ui/Button'
+import Tabs from '@components/ui/Tabs'
+import Button from '@components/ui/Button'
 
 const props = {
   initialValue: 'test'

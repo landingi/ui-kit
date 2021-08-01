@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './SocialConnectBadge.scss'
-import Button from 'shared/components/ui/Button'
+import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
 

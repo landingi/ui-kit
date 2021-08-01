@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './Loader.scss'
-import Spacer from 'shared/components/ui/Spacer'
+import Spacer from '@components/ui/Spacer'
 
 const cssClass = styles(scss)
 /**

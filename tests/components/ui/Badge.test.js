@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Badge from 'shared/components/ui/Badge'
+import Badge from '@components/ui/Badge'
 
 const props = {
   children: 'Badge'
