@@ -41,8 +41,7 @@ function AccordionItem({
       >
         <div>
           {number && (
-            <StepNumber size="medium"
-step={number} />
+            <StepNumber size="medium" step={number} />
           )}
 
           {title}
