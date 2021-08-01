@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "sideEffects": false,
-  "main": ".src/client/components/package",
+  "main": ".src/index.js",
   "description": "Landingi UI-Kit",
   "scripts": {
     "docz:dev": "docz dev",
