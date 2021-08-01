@@ -31,7 +31,8 @@ const socialConnectBadge = ({
       `social-connect-badge-${social}--${variant}`
     )}
   >
-    <Button hasIcon size="medium">
+    <Button hasIcon
+size="medium">
       <FontAwesomeIcon icon={['fab', `${social}`]} />
 
       <span>

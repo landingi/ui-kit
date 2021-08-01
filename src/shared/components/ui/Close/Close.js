@@ -15,9 +15,11 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const close = ({ className, onClick }) => (
-  <span className={cssClass(className)} onClick={onClick}>
+  <span className={cssClass(className)}
+onClick={onClick}>
     <Button variant="icon">
-      <FontAwesomeIcon icon="times" size="sm" />
+      <FontAwesomeIcon icon="times"
+size="sm" />
     </Button>
   </span>
 )

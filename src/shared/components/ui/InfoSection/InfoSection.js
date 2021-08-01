@@ -37,7 +37,8 @@ function InfoSection({
     () => (
       <List listStyle="ordered-check">
         {list.map(item => (
-          <ListItem key={uuid()} variant="list">
+          <ListItem key={uuid()}
+variant="list">
             <Paragraph size={18}>
               <FormattedMessage id={item} />
             </Paragraph>
@@ -51,7 +52,8 @@ function InfoSection({
   return (
     <div className={cssClass(className)}>
       <div>
-        <Heading bold level={1}>
+        <Heading bold
+level={1}>
           <FormattedMessage id={`${title}`} />
         </Heading>
 
@@ -59,13 +61,15 @@ function InfoSection({
 
         <Spacer space="medium" />
 
-        <Button onClick={onClick} size="large">
+        <Button onClick={onClick}
+size="large">
           <FormattedMessage id={button} />
         </Button>
       </div>
 
       <div>
-        <Image size={526} src={url} />
+        <Image size={526}
+src={url} />
       </div>
     </div>
   )

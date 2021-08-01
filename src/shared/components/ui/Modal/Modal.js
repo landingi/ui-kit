@@ -105,7 +105,9 @@ const modal = ({
       {title && <ModalHeader title={title} />}
 
       {image && (
-        <Image height={20} size="auto" src={image} />
+        <Image height={20}
+size="auto"
+src={image} />
       )}
 
       <div>
@@ -121,7 +123,8 @@ const modal = ({
         )}
 
         {isEditable && (
-          <Button onClick={onEdit} variant="icon">
+          <Button onClick={onEdit}
+variant="icon">
             <FontAwesomeIcon icon="pencil-alt" />
           </Button>
         )}
@@ -145,7 +148,8 @@ const modal = ({
 
   return (
     <>
-      <PoseGroup animateOnMount flipMove={false}>
+      <PoseGroup animateOnMount
+flipMove={false}>
         {isActive && (
           <ModalAnimation
             className={scss.dialog}

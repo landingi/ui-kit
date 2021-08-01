@@ -13,7 +13,8 @@ const item = ({ item }) => {
   const { title, url } = item
 
   return (
-    <Button href={url} tag="a">
+    <Button href={url}
+tag="a">
       <span>{title}</span>
     </Button>
   )

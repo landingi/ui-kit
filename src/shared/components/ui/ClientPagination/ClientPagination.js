@@ -95,7 +95,8 @@ const pagination = ({
             className={scss.pagination__links__current}
             variant="inline"
           >
-            <Button size="small" variant="icon">
+            <Button size="small"
+variant="icon">
               {pageIndex + 1}
             </Button>
           </ListItem>

@@ -83,7 +83,8 @@ const pagination = ({
                   }
                   key={index}
                 >
-                  <Button size="small" variant="icon">
+                  <Button size="small"
+variant="icon">
                     {item}
                   </Button>
                 </ListItem>

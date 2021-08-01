@@ -150,7 +150,8 @@ function Search({
             </div>
           ) : (
             <div className={scss.search__icon}>
-              <FontAwesomeIcon icon="search" size="sm" />
+              <FontAwesomeIcon icon="search"
+size="sm" />
             </div>
           ))}
 
@@ -188,7 +189,8 @@ function Search({
               size="input"
               variant="icon"
             >
-              <FontAwesomeIcon icon="times" size="sm" />
+              <FontAwesomeIcon icon="times"
+size="sm" />
             </Button>
           </div>
         )}

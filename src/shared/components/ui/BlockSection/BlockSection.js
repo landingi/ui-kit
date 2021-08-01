@@ -56,7 +56,8 @@ function BlockSection({
               'block-section__panel--content'
             )}
           >
-            <Heading bold level={2}>
+            <Heading bold
+level={2}>
               <FormattedMessage id={`${title}`} />
             </Heading>
 
@@ -76,7 +77,8 @@ function BlockSection({
             {list && (
               <List listStyle="ordered-disc">
                 {list.map(item => (
-                  <ListItem key={uuid()} variant="block">
+                  <ListItem key={uuid()}
+variant="block">
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}
@@ -90,7 +92,8 @@ function BlockSection({
             </Button>
           </div>
 
-          <Image size={527} src={url} />
+          <Image size={527}
+src={url} />
         </div>
       </Panel>
     </div>

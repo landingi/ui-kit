@@ -51,12 +51,15 @@ const message = ({
 
       {isVideo ? (
         <>
-          <Vimeo height={height} video={url} />
+          <Vimeo height={height}
+video={url} />
 
           <Spacer space="small" />
         </>
       ) : (
-        <Image height={height} size="auto" src={url} />
+        <Image height={height}
+size="auto"
+src={url} />
       )}
     </div>
   )
@@ -87,7 +90,8 @@ const message = ({
         <>
           <Spacer space="tiny" />
 
-          <Heading align="center" level={messageLevel}>
+          <Heading align="center"
+level={messageLevel}>
             <FormattedMessage
               id={`${message}`}
               values={{
