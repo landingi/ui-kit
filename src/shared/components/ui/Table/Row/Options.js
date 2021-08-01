@@ -48,8 +48,7 @@ const rowOptions = ({
         </ListItem>
 
         {Component && (
-          <Component selectedItems={selected}
-{...props} />
+          <Component selectedItems={selected} {...props} />
         )}
 
         {options.includes(HAS_CHANGE_STATUS) && (
@@ -64,8 +63,7 @@ const rowOptions = ({
               onClick={handleDelete}
               variant="transparent"
             >
-              <FontAwesomeIcon icon="trash-alt"
-size="sm" />
+              <FontAwesomeIcon icon="trash-alt" size="sm" />
 
               <FormattedMessage id="word.delete" />
             </Button>

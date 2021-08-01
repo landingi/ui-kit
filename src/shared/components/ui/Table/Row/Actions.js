@@ -31,10 +31,8 @@ function ActionsRow({
   return (
     <List variant="inline">
       <ListItem>
-        <Button onClick={detailsRow}
-variant="transparent">
-          <FontAwesomeIcon icon="list-alt"
-size="sm" />
+        <Button onClick={detailsRow} variant="transparent">
+          <FontAwesomeIcon icon="list-alt" size="sm" />
 
           <FormattedMessage id="word.details" />
         </Button>
@@ -47,8 +45,7 @@ size="sm" />
               onClick={deleteRow}
               variant="transparent"
             >
-              <FontAwesomeIcon icon="trash-alt"
-size="sm" />
+              <FontAwesomeIcon icon="trash-alt" size="sm" />
 
               <FormattedMessage id="word.delete" />
             </Button>

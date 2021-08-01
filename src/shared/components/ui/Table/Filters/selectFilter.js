@@ -63,8 +63,7 @@ const selectFilter = table => {
           {filters.map(
             ({ id, value, label }) =>
               id === column.id && (
-                <ListItem key={uuid()}
-variant="dropdown">
+                <ListItem key={uuid()} variant="dropdown">
                   <Button
                     onClick={() =>
                       handleSetFilter(value, label)

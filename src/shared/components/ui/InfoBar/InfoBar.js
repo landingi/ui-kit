@@ -37,8 +37,7 @@ const infoBar = ({ children, className, type }) => {
           `info-bar--${type}-box`
         )}
       >
-        <FontAwesomeIcon icon={icon}
-size="1x" />
+        <FontAwesomeIcon icon={icon} size="1x" />
       </div>
 
       <div className={scss.info__bar}>{children}</div>
