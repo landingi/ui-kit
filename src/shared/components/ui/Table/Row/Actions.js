@@ -28,31 +28,35 @@ function ActionsRow({
   detailsRow,
   userPermissions
 }) {
-  return <List variant="inline">
-    <ListItem>
-      <Button onClick={detailsRow}
+  return (
+    <List variant="inline">
+      <ListItem>
+        <Button onClick={detailsRow}
 variant="transparent">
-        <FontAwesomeIcon icon="list-alt"
+          <FontAwesomeIcon icon="list-alt"
 size="sm" />
 
-        <FormattedMessage id="word.details" />
-      </Button>
-    </ListItem>
+          <FormattedMessage id="word.details" />
+        </Button>
+      </ListItem>
 
-    <>
-      {!usePermissions(userPermissions, READ_ONLY) && (
-        <ListItem>
-          <Button onClick={deleteRow}
-variant="transparent">
-            <FontAwesomeIcon icon="trash-alt"
+      <>
+        {!usePermissions(userPermissions, READ_ONLY) && (
+          <ListItem>
+            <Button
+              onClick={deleteRow}
+              variant="transparent"
+            >
+              <FontAwesomeIcon icon="trash-alt"
 size="sm" />
 
-            <FormattedMessage id="word.delete" />
-          </Button>
-        </ListItem>
-      )}
-    </>
-  </List>
+              <FormattedMessage id="word.delete" />
+            </Button>
+          </ListItem>
+        )}
+      </>
+    </List>
+  )
 }
 /**
  * Display name

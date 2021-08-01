@@ -1,4 +1,7 @@
-import { centerParent, isOutOfViewport } from '@helpers/position'
+import {
+  centerParent,
+  isOutOfViewport
+} from '@helpers/position'
 
 describe('Helpers centerParent', () => {
   it('should return a number', () => {
@@ -48,10 +51,14 @@ describe('Helpers isOutOfViewport', () => {
   })
 
   it('is out of viewport', () => {
-    expect(isOutOfViewport(elemTrue)).toMatchObject(expectedTrue)
+    expect(isOutOfViewport(elemTrue)).toMatchObject(
+      expectedTrue
+    )
   })
 
   it('is in viewport', () => {
-    expect(isOutOfViewport(elemFalse)).toMatchObject(expectedFalse)
+    expect(isOutOfViewport(elemFalse)).toMatchObject(
+      expectedFalse
+    )
   })
 })

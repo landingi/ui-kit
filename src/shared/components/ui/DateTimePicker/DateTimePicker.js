@@ -8,10 +8,7 @@ import scss from './DateTimePicker.scss'
 import { DateRange } from 'react-date-range'
 import Button from '@components/ui/Button'
 import { FormattedMessage } from 'react-intl'
-import {
-  getAgoDate,
-  getTodayDate
-} from '@helpers/data'
+import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from '@helpers/i18n'
 

@@ -8,11 +8,15 @@ import {
 
 describe('Date helpers', () => {
   it('should return today Date', () => {
-    expect(getTodayDate()).toEqual(new Date(new Date().setHours(0, 0, 0, 0)))
+    expect(getTodayDate()).toEqual(
+      new Date(new Date().setHours(0, 0, 0, 0))
+    )
   })
 
   it('should return date object', () => {
-    expect(getDateObject(new Date('1998-04-25T09:15:00'))).toEqual({
+    expect(
+      getDateObject(new Date('1998-04-25T09:15:00'))
+    ).toEqual({
       day: 25,
       month: 'april',
       year: 1998
@@ -21,10 +25,16 @@ describe('Date helpers', () => {
 
   it('should return difference between dates in days', () => {
     expect(
-      calculateDaysInterval(new Date('2021-01-01'), new Date('2021-01-03'))
+      calculateDaysInterval(
+        new Date('2021-01-01'),
+        new Date('2021-01-03')
+      )
     ).toEqual(2)
     expect(
-      calculateDaysInterval(new Date('2020-12-31'), new Date('2021-01-01'))
+      calculateDaysInterval(
+        new Date('2020-12-31'),
+        new Date('2021-01-01')
+      )
     ).toEqual(1)
   })
 
@@ -39,6 +49,8 @@ describe('Date helpers', () => {
     expect(isArrayEqual([], [])).toBe(true)
     expect(isArrayEqual(['a'], ['b', 'a'])).toBe(false)
     expect(isArrayEqual(['a', 'b'], ['b', 'a'])).toBe(true)
-    expect(isArrayEqual(['a', 'b'], ['b', 'a', 'a'])).toBe(false)
+    expect(isArrayEqual(['a', 'b'], ['b', 'a', 'a'])).toBe(
+      false
+    )
   })
 })

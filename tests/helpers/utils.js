@@ -24,7 +24,10 @@ export const makeStore = component => (
  * @param {object} defaultProps - props
  * @return {object} An object of children element
  */
-export const makeMountRender = (Component, defaultProps = {}) => {
+export const makeMountRender = (
+  Component,
+  defaultProps = {}
+) => {
   return (customProps = {}) => {
     const props = {
       ...defaultProps,
@@ -40,4 +43,5 @@ export const makeMountRender = (Component, defaultProps = {}) => {
  * @param {object} reactWrapper - react elements
  * @return {object} An object of children element
  */
-export const snapshotify = reactWrapper => reactWrapper.html()
+export const snapshotify = reactWrapper =>
+  reactWrapper.html()
