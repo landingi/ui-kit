@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Avatar.scss'
-import Image from 'shared/components/ui/Image'
+import Image from '@components/ui/Image'
 
 /**
  * Exports css classes from SCSS file

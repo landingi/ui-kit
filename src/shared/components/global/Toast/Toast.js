@@ -4,13 +4,13 @@ import React, {
   useState
 } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import emitter from 'shared/lib/emitter'
-import { TOGGLE_TOAST } from 'shared/constants/eventTypes'
-import Notification from 'shared/components/ui/Notification'
+import { styles } from '@helpers/css'
+import emitter from '@lib/emitter'
+import { TOGGLE_TOAST } from '@constants/eventTypes'
+import Notification from '@components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './Toast.scss'
-import useToggle from 'shared/helpers/hooks/useToggle'
+import useToggle from '@helpers/hooks/useToggle'
 
 /**
  * Exports css classes from SCSS file

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Instruction.scss'
 import uuid from 'react-uuid'
-import StepNumber from 'shared/components/ui/StepNumber'
+import StepNumber from '@components/ui/StepNumber'
 
 /**
  * Exports css classes from SCSS file

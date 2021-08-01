@@ -3,15 +3,15 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import uuid from 'react-uuid'
-import Button from 'shared/components/ui/Button'
-import Dropdown from 'shared/components/ui/Dropdown'
-import List from 'shared/components/ui/List'
-import ListItem from 'shared/components/ui/List/Item'
-import { emitTableFilterRefresh } from 'shared/events/table'
-import { getLocalStorage } from 'shared/helpers/storage'
+import Button from '@components/ui/Button'
+import Dropdown from '@components/ui/Dropdown'
+import List from '@components/ui/List'
+import ListItem from '@components/ui/List/Item'
+import { emitTableFilterRefresh } from '@events/table'
+import { getLocalStorage } from '@helpers/storage'
 import { FormattedMessage } from 'react-intl'
-import { emitCloseDropdown } from 'shared/events/dropdown'
-import { defaultLabels } from 'shared/helpers/data'
+import { emitCloseDropdown } from '@events/dropdown'
+import { defaultLabels } from '@helpers/data'
 
 /**
  * selectFilter - stateful presentational component

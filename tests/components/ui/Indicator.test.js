@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Indicator from 'shared/components/ui/Indicator'
-import registerIcons from 'shared/helpers/icons'
+import Indicator from '@components/ui/Indicator'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 

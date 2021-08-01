@@ -1,5 +1,5 @@
 import React from 'react'
-import StatsBadge from 'shared/components/ui/StatsBadge'
+import StatsBadge from '@components/ui/StatsBadge'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const statsBadgeComponent = <StatsBadge description='word.statistics' />

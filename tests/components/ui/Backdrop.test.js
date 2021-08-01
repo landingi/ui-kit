@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Backdrop from 'shared/components/ui/Backdrop'
+import Backdrop from '@components/ui/Backdrop'
 
 const onClick = jest.fn()
 

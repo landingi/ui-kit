@@ -6,11 +6,11 @@ import React, {
   useRef
 } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Search.scss'
-import Input from 'shared/components/ui/Input'
-import Button from 'shared/components/ui/Button'
+import Input from '@components/ui/Input'
+import Button from '@components/ui/Button'
 import { injectIntl } from 'react-intl'
 
 /**

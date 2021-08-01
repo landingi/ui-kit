@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "sideEffects": false,
-  "main": ".src/client/components/package",
+  "main": ".src/index.js",
   "description": "Landingi UI-Kit",
   "scripts": {
     "docz:dev": "docz dev",
@@ -148,6 +148,6 @@
   },
   "engines": {
     "node": "14.17.3",
-    "npm": "6.14.13"
+    "npm": "7.20.3"
   }
 }

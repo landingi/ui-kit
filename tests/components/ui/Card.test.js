@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Card from 'shared/components/ui/Card'
-import Paragraph from 'shared/components/ui/Paragraph'
+import Card from '@components/ui/Card'
+import Paragraph from '@components/ui/Paragraph'
 
 const props = {
   children: <Paragraph>
@@ -12,7 +12,7 @@ const props = {
 const cardComponent = (<Card
     {...props}
     variant="success"
-                       />)
+    />)
 
 describe('<Card /> mount', () => {
   let wrapper

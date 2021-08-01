@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Drawer.scss'
-import Heading from 'shared/components/ui/Heading'
-import Close from 'shared/components/ui/Close'
+import Heading from '@components/ui/Heading'
+import Close from '@components/ui/Close'
 
 const cssClass = styles(scss)
 

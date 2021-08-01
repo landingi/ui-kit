@@ -1,5 +1,5 @@
 import React from 'react'
-import Steps from 'shared/components/ui/Steps'
+import Steps from '@components/ui/Steps'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 
 const props = {

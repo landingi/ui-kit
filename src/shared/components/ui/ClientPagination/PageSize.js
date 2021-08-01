@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'shared/components/ui/Select'
-import { styles } from 'shared/helpers/css'
+import Select from '@components/ui/Select'
+import { styles } from '@helpers/css'
 import scss from './PageSize.scss'
 
 const cssClass = styles(scss)

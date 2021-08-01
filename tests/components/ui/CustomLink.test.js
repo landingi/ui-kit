@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import CustomLink from 'shared/components/ui/CustomLink'
-import registerIcons from 'shared/helpers/icons'
+import CustomLink from '@components/ui/CustomLink'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 

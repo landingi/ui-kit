@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Toggle } from 'shared/components/ui/Form2/Toggle'
+import { Toggle } from '@components/ui/Form2/Toggle'
 
 const onChange = jest.fn()
 

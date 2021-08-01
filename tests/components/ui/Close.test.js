@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Close from 'shared/components/ui/Close'
-import registerIcons from 'shared/helpers/icons'
+import Close from '@components/ui/Close'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 

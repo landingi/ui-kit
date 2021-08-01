@@ -2,13 +2,13 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
-import registerIcons from 'shared/helpers/icons'
+import registerIcons from '@helpers/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from 'shared/components/ui/Button'
-import List from 'shared/components/ui/List'
-import ListItem from 'shared/components/ui/List/Item'
-import { usePermissions } from 'shared/helpers/hooks/usePermissions'
-import { READ_ONLY } from 'shared/constants/permissionTypes'
+import Button from '@components/ui/Button'
+import List from '@components/ui/List'
+import ListItem from '@components/ui/List/Item'
+import { usePermissions } from '@helpers/hooks/usePermissions'
+import { READ_ONLY } from '@constants/permissionTypes'
 
 /*
  * Import fontawesome icons

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { cancelRequests } from 'shared/services/http/client'
-import { debounce } from 'shared/helpers/events'
+import { debounce } from '@helpers/events'
 
 /**
  * useInfinityScroll - stateful presentational component

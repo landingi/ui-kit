@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react'
 import uuid from 'react-uuid'
 import PropTypes from 'prop-types'
-import List from 'shared/components/ui/List'
+import List from '@components/ui/List'
 import Item from './MainItem'
-import { scrollSpyShape } from 'shared/shapes'
-import useScrollSpy from 'shared/helpers/hooks/useScrollSpy'
+import { scrollSpyShape } from '@shapes'
+import useScrollSpy from '@helpers/hooks/useScrollSpy'
 
 /**
  * ScrollSpy - stateless presentational component

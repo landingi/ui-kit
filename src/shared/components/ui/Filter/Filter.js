@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
-import { emitCloseDropdown } from 'shared/events/dropdown'
-import Button from 'shared/components/ui/Button'
-import Dropdown from 'shared/components/ui/Dropdown'
-import List from 'shared/components/ui/List'
-import ListItem from 'shared/components/ui/List/Item'
-import { setLocalStorage } from 'shared/helpers/storage'
+import { emitCloseDropdown } from '@events/dropdown'
+import Button from '@components/ui/Button'
+import Dropdown from '@components/ui/Dropdown'
+import List from '@components/ui/List'
+import ListItem from '@components/ui/List/Item'
+import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
 
 /**

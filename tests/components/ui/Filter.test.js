@@ -1,10 +1,10 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Filter from 'shared/components/ui/Filter'
-import Button from 'shared/components/ui/Button'
-import Dropdown from 'shared/components/ui/Dropdown'
-import registerIcons from 'shared/helpers/icons'
-import ListItem from 'shared/components/ui/List/Item'
+import Filter from '@components/ui/Filter'
+import Button from '@components/ui/Button'
+import Dropdown from '@components/ui/Dropdown'
+import registerIcons from '@helpers/icons'
+import ListItem from '@components/ui/List/Item'
 
 registerIcons()
 

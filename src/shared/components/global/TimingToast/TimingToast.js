@@ -3,12 +3,12 @@ import React, {
   useState,
   useCallback
 } from 'react'
-import emitter from 'shared/lib/emitter'
-import { TOGGLE_TIMING_TOAST } from 'shared/constants/eventTypes'
-import Notification from 'shared/components/ui/Notification'
+import emitter from '@lib/emitter'
+import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
+import Notification from '@components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './TimingToast.scss'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 
 /**
  * Exports css classes from SCSS file

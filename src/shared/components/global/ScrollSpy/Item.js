@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'shared/components/ui/Button'
+import Button from '@components/ui/Button'
 import PropTypes from 'prop-types'
 
 /**

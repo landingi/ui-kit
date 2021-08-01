@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from 'shared/components/ui/Form2/Error'
+import Error from '@components/ui/Form2/Error'
 import Select from 'react-select'
 import uuid from 'react-uuid'
 import { injectIntl, FormattedMessage } from 'react-intl'
-import Label from 'shared/components/ui/Label'
-import { styles } from 'shared/helpers/css'
+import Label from '@components/ui/Label'
+import { styles } from '@helpers/css'
 import scss from './reactSelect.scss'
 
 const cssClass = styles(scss)

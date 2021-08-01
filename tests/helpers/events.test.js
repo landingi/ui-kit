@@ -1,4 +1,4 @@
-import { debounce, throttle } from 'shared/helpers/events'
+import { debounce, throttle } from '@helpers/events'
 
 beforeEach(() => {
   jest.useFakeTimers()

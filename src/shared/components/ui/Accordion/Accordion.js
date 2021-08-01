@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import useIsOpen from 'shared/helpers/hooks/useIsOpen'
+import useIsOpen from '@helpers/hooks/useIsOpen'
 import Section from './Section'
 
 /**

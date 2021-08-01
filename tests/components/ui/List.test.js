@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import List from 'shared/components/ui/List'
-import ListItem from 'shared/components/ui/List/Item'
+import List from '@components/ui/List'
+import ListItem from '@components/ui/List/Item'
 
 const props = {
   children: <ListItem variant="inline">

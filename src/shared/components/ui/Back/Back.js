@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from 'shared/components/ui/Button'
-import Tooltip from 'shared/components/ui/Tooltip'
+import Button from '@components/ui/Button'
+import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from 'shared/helpers/css'
-import { getLocationPath } from 'shared/helpers/url'
+import { styles } from '@helpers/css'
+import { getLocationPath } from '@helpers/url'
 import scss from './Back.scss'
 
 const cssClass = styles(scss)

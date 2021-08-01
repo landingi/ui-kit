@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import registerIcons from 'shared/helpers/icons'
-import Modal from 'shared/components/ui/Modal'
-import Backdrop from 'shared/components/ui/Backdrop'
+import registerIcons from '@helpers/icons'
+import Modal from '@components/ui/Modal'
+import Backdrop from '@components/ui/Backdrop'
 
 registerIcons()
 

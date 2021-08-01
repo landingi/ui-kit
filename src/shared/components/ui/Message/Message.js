@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Message.scss'
 import Vimeo from '@u-wave/react-vimeo'
-import Image from 'shared/components/ui/Image'
-import Heading from 'shared/components/ui/Heading'
+import Image from '@components/ui/Image'
+import Heading from '@components/ui/Heading'
 import { FormattedMessage } from 'react-intl'
-import Spacer from 'shared/components/ui/Spacer'
+import Spacer from '@components/ui/Spacer'
 
 const cssClass = styles(scss)
 

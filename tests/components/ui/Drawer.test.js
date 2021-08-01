@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import registerIcons from 'shared/helpers/icons'
-import Drawer from 'shared/components/ui/Drawer'
-import Backdrop from 'shared/components/ui/Backdrop'
+import registerIcons from '@helpers/icons'
+import Drawer from '@components/ui/Drawer'
+import Backdrop from '@components/ui/Backdrop'
 
 registerIcons()
 const props = {

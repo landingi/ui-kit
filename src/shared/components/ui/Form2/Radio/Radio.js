@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import Error from 'shared/components/ui/Form2/Error'
+import { styles } from '@helpers/css'
+import Error from '@components/ui/Form2/Error'
 import { FormattedMessage } from 'react-intl'
 import scss from './Radio.scss'
 

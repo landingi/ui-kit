@@ -1,19 +1,19 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './DateTimePicker.scss'
 /**
  * https://github.com/Adphorus/react-date-range
  */
 import { DateRange } from 'react-date-range'
-import Button from 'shared/components/ui/Button'
+import Button from '@components/ui/Button'
 import { FormattedMessage } from 'react-intl'
 import {
   getAgoDate,
   getTodayDate
-} from 'shared/helpers/data'
+} from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
-import { getLanguage } from 'shared/helpers/i18n'
+import { getLanguage } from '@helpers/i18n'
 
 /**
  * Exports css classes from SCSS file

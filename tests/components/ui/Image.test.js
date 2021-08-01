@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Image from 'shared/components/ui/Image'
+import Image from '@components/ui/Image'
 
 const props = {
   src: 'http://www.laningi.com',

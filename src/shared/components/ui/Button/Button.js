@@ -6,8 +6,8 @@ import React, { Fragment } from 'react'
  */
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import Spinner from 'shared/components/ui/Spinner'
+import { styles } from '@helpers/css'
+import Spinner from '@components/ui/Spinner'
 import scss from './Button.scss'
 
 /**

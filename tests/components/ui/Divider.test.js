@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Divider from 'shared/components/ui/Divider'
+import Divider from '@components/ui/Divider'
 
 const dividerComponent = <Divider />
 

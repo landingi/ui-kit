@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Header from 'shared/components/ui/Drawer/Header'
-import registerIcons from 'shared/helpers/icons'
+import Header from '@components/ui/Drawer/Header'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Instruction from 'shared/components/ui/Instruction'
+import Instruction from '@components/ui/Instruction'
 
 const props = {
   data: [

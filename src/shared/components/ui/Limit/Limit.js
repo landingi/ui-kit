@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Limit.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
-import { formatNumeric } from 'shared/helpers/data'
-import Tooltip from 'shared/components/ui/Tooltip'
-import Spreader from 'shared/components/ui/Spreader'
+import { formatNumeric } from '@helpers/data'
+import Tooltip from '@components/ui/Tooltip'
+import Spreader from '@components/ui/Spreader'
 
 const cssClass = styles(scss)
 

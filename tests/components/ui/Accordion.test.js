@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Accordion from 'shared/components/ui/Accordion'
+import Accordion from '@components/ui/Accordion'
 
 const accordionComponent = (
     <Accordion>

@@ -4,7 +4,7 @@ import {
   calculateDaysInterval,
   formatNumeric,
   isArrayEqual
-} from 'shared/helpers/data'
+} from '@helpers/data'
 
 describe('Date helpers', () => {
   it('should return today Date', () => {

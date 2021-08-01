@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Tooltip from 'shared/components/ui/Tooltip'
+import Tooltip from '@components/ui/Tooltip'
 import ReactTooltip from 'react-tooltip'
 
 jest.mock('react-uuid/uuid', () => () => '00000000-0000-0000-0000-000000000000')

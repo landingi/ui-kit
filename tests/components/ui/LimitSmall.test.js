@@ -1,6 +1,6 @@
 import React from 'react'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
-import LimitSmall from 'shared/components/ui/LimitSmall'
+import LimitSmall from '@components/ui/LimitSmall'
 
 const limitSmallComponent = (<LimitSmall
     limit={20000}

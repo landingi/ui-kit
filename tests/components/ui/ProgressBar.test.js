@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import ProgressBar from 'shared/components/ui/ProgressBar'
+import ProgressBar from '@components/ui/ProgressBar'
 
 const progressBarComponent = (<ProgressBar
     quantity={58}

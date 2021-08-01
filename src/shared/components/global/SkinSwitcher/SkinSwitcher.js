@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import Image from 'shared/components/ui/Image'
-import Button from 'shared/components/ui/Button'
+import Image from '@components/ui/Image'
+import Button from '@components/ui/Button'
 import { switcherLogo } from 'shared/components/global/SideBarV2/helpers/sideBarHelpers'
 
 /**

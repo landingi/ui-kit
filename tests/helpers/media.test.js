@@ -1,6 +1,6 @@
 import '../setup/mocks/matchMedia.mock'
-import { isMediaQuery } from 'shared/helpers/media'
-import { breakpoints } from 'shared/constants/breakpoints'
+import { isMediaQuery } from '@helpers/media'
+import { breakpoints } from '@constants/breakpoints'
 
 describe('Helpers isMediaQuery()', () => {
   it('returns boolean', () => {

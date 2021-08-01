@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Input.scss'
-import Label from 'shared/components/ui/Label'
+import Label from '@components/ui/Label'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import Tooltip from 'shared/components/ui/Tooltip'
+import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const cssClass = styles(scss)
 

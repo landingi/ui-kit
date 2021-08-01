@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import OverflowTooltip from 'shared/components/ui/OverflowTooltip'
-import Tooltip from 'shared/components/ui/Tooltip'
+import OverflowTooltip from '@components/ui/OverflowTooltip'
+import Tooltip from '@components/ui/Tooltip'
 
 const props = {
   content: 'foobar',

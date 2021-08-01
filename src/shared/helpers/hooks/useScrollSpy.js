@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { throttle } from 'shared/helpers/events'
-import { isInViewVertical } from 'shared/helpers/position'
+import { throttle } from '@helpers/events'
+import { isInViewVertical } from '@helpers/position'
 
 export default ({
   activeSectionDefault = 0,

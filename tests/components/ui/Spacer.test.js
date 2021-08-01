@@ -1,5 +1,5 @@
 import React from 'react'
-import Spacer from 'shared/components/ui/Spacer'
+import Spacer from '@components/ui/Spacer'
 import { mount } from 'enzyme'
 
 const spacerComponent = <Spacer />

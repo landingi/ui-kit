@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import scss from './Tooltip.scss'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
