@@ -5,10 +5,10 @@ import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
 import { FormattedMessage } from 'react-intl'
 import PageSize from './PageSize'
-import { paginationShape } from 'shared/shapes'
+import { paginationShape } from '@shapes'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from 'shared/helpers/css'
-import { isEmpty } from 'shared/helpers/data'
+import { styles } from '@helpers/css'
+import { isEmpty } from '@helpers/data'
 import scss from './Pagination.scss'
 
 const cssClass = styles(scss)

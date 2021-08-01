@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './BlockSection.scss'
 import { FormattedMessage } from 'react-intl'
 import Panel from '@components/ui/Panel'

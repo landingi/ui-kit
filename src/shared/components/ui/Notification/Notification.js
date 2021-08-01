@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Notification.scss'
 import Close from '@components/ui/Close'
-import { mapIconToClass } from 'shared/helpers/data'
+import { mapIconToClass } from '@helpers/data'
 
 /**
  * Exports css classes from SCSS file

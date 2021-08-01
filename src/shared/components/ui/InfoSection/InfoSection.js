@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './InfoSection.scss'
 import { FormattedMessage } from 'react-intl'
 import List from '@components/ui/List'

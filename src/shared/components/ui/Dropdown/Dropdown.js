@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {
   centerParent,
   getBoundings
-} from 'shared/helpers/position'
+} from '@helpers/position'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tooltip from '@components/ui/Tooltip'
 import { FormattedMessage } from 'react-intl'
@@ -12,12 +12,12 @@ import { FormattedMessage } from 'react-intl'
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
 import Ink from 'react-ink'
-import { debounce, throttle } from 'shared/helpers/events'
-import { styles } from 'shared/helpers/css'
+import { debounce, throttle } from '@helpers/events'
+import { styles } from '@helpers/css'
 import scss from './Dropdown.scss'
 import { NavLink } from 'react-router-dom'
-import emitter from 'shared/lib/emitter'
-import { CLOSE_DROPDOWN } from 'shared/constants/eventTypes'
+import emitter from '@lib/emitter'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 
 /**
  * Exports css classes from SCSS file

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Loader.scss'
 import Spacer from '@components/ui/Spacer'
 

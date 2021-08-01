@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Close.scss'
 
 const cssClass = styles(scss)

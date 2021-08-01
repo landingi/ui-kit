@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from 'react'
 import PropTypes from 'prop-types'
 import Search from '@components/ui/Search'
-import { NO_VALUE } from 'shared/constants/helpers'
+import { NO_VALUE } from '@constants/helpers'
 
 /**
  * Searcher - stateful presentational component

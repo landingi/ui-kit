@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import { FormattedMessage } from 'react-intl'
 import InputError from '@components/ui/Form2/Error'
 import scss from './Toggle.scss'

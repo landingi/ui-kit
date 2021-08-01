@@ -21,22 +21,22 @@ import {
 import Checkbox from './Row/Checkbox'
 import Radio from './Row/Radio'
 import Options from './Row/Options'
-import { styles } from 'shared/helpers/css'
-import { isEmpty } from 'shared/helpers/data'
+import { styles } from '@helpers/css'
+import { isEmpty } from '@helpers/data'
 import scss from './Table.scss'
 import Loader from '@components/ui/Loader'
 import ClientPagination from '@components/ui/ClientPagination'
-import { selectedFlatRowsMap } from 'shared/helpers/table'
-import { paginationShape } from 'shared/shapes'
-import useQueryString from 'shared/helpers/hooks/useQueryString'
-import emitter from 'shared/lib/emitter'
+import { selectedFlatRowsMap } from '@helpers/table'
+import { paginationShape } from '@shapes'
+import useQueryString from '@helpers/hooks/useQueryString'
+import emitter from '@lib/emitter'
 import {
   setLocalStorage,
   getLocalStorage
-} from 'shared/helpers/storage'
+} from '@helpers/storage'
 import { cancelRequests } from 'shared/services/http/client'
-import { usePermissions } from 'shared/helpers/hooks/usePermissions'
-import { READ_ONLY } from 'shared/constants/permissionTypes'
+import { usePermissions } from '@helpers/hooks/usePermissions'
+import { READ_ONLY } from '@constants/permissionTypes'
 import { selectFilter } from '@components/ui/Table/Filters'
 import Spacer from '@components/ui/Spacer'
 import Spreader from '@components/ui/Spreader'
@@ -45,7 +45,7 @@ import {
   TABLE_REFRESH,
   TABLE_FILTER_REFRESH,
   TABLE_RESET_PAGE
-} from 'shared/constants/eventTypes'
+} from '@constants/eventTypes'
 
 /**
  * Exports css classes from SCSS file

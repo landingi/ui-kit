@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import { legendShape } from 'shared/shapes'
+import { styles } from '@helpers/css'
+import { legendShape } from '@shapes'
 import scss from './Legend.scss'
 import ColorLine from '../ColorLine'
 

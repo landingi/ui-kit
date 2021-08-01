@@ -7,11 +7,11 @@ import Button from '@components/ui/Button'
 import Dropdown from '@components/ui/Dropdown'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-import { emitTableFilterRefresh } from 'shared/events/table'
-import { getLocalStorage } from 'shared/helpers/storage'
+import { emitTableFilterRefresh } from '@events/table'
+import { getLocalStorage } from '@helpers/storage'
 import { FormattedMessage } from 'react-intl'
-import { emitCloseDropdown } from 'shared/events/dropdown'
-import { defaultLabels } from 'shared/helpers/data'
+import { emitCloseDropdown } from '@events/dropdown'
+import { defaultLabels } from '@helpers/data'
 
 /**
  * selectFilter - stateful presentational component

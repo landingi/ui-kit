@@ -13,7 +13,13 @@
           "./src"
         ],
         "alias": {
-          "@components": "./src/shared/components"
+          "@components": "./src/shared/components",
+          "@constants": "./src/shared/constants",
+          "@events": "./src/shared/events",
+          "@helpers": "./src/shared/helpers",
+          "@i18n": "./src/shared/i18n",
+          "@lib": "./src/shared/lib",
+          "@shapes": "./src/shared/shapes"
         }
       }
     ],

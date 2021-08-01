@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './LimitSmall.scss'
 import { FormattedMessage } from 'react-intl'
-import { formatNumeric } from 'shared/helpers/data'
+import { formatNumeric } from '@helpers/data'
 
 const cssClass = styles(scss)
 

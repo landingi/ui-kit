@@ -1,4 +1,4 @@
-import useIsOpen from 'shared/helpers/hooks/useIsOpen'
+import useIsOpen from '@helpers/hooks/useIsOpen'
 import { renderHook, act } from '@testing-library/react-hooks'
 
 test('should use useIsOpen', () => {

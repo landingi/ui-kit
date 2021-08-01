@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/ui/Button'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Options.scss'
 import ChangeStatus from './ChangeStatus'
 import {
   HAS_DELETE,
   HAS_CHANGE_STATUS
-} from 'shared/constants/permissionTypes'
+} from '@constants/permissionTypes'
 
 /**
  * Exports css classes from SCSS file

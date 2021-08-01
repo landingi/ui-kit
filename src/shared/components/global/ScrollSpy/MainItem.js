@@ -5,7 +5,7 @@ import ListItem from '@components/ui/List/Item'
 import Button from '@components/ui/Button'
 import Item from './Item'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { scrollSpyShape } from 'shared/shapes'
+import { scrollSpyShape } from '@shapes'
 
 /**
  * MainItem - stateless menu items presentational component

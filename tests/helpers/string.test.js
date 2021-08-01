@@ -1,4 +1,4 @@
-import { hasLowerCase, hasUpperCase, hasNumber } from 'shared/helpers/string'
+import { hasLowerCase, hasUpperCase, hasNumber } from '@helpers/string'
 
 describe('String helpers', () => {
   it('should check if string contains lowercase', () => {

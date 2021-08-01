@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { usePermissions } from 'shared/helpers/hooks/usePermissions'
+import { usePermissions } from '@helpers/hooks/usePermissions'
 
 test('should use usePermissions', () => {
   const { result } = renderHook(() => usePermissions(['a', 'b', 'c'], 'b'))

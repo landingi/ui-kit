@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Drawer.scss'
 import Header from './Header'
 import Backdrop from '@components/ui/Backdrop'
@@ -9,7 +9,7 @@ import {
   WHITE,
   DEFAULT,
   MOBILE
-} from 'shared/constants/skin'
+} from '@constants/skin'
 import posed, { PoseGroup } from 'react-pose'
 
 /**

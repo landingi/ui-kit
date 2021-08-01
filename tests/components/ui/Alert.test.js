@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Alert from '@components/ui/Alert'
-import registerIcons from 'shared/helpers/icons'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 

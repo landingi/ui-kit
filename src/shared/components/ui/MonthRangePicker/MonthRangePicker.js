@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback
 } from 'react'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './MonthRangePicker.scss'
 import Spacer from '@components/ui/Spacer'
 import Button from '@components/ui/Button'

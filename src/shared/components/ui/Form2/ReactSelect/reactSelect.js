@@ -6,7 +6,7 @@ import Select from 'react-select'
 import uuid from 'react-uuid'
 import { injectIntl, FormattedMessage } from 'react-intl'
 import Label from '@components/ui/Label'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './reactSelect.scss'
 
 const cssClass = styles(scss)

@@ -1,4 +1,4 @@
-import { centerParent, isOutOfViewport } from 'shared/helpers/position'
+import { centerParent, isOutOfViewport } from '@helpers/position'
 
 describe('Helpers centerParent', () => {
   it('should return a number', () => {

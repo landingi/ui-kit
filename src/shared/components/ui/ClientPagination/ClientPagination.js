@@ -6,7 +6,7 @@ import ListItem from '@components/ui/List/Item'
 import { FormattedMessage } from 'react-intl'
 import PageSize from './PageSize'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './ClientPagination.scss'
 
 const cssClass = styles(scss)

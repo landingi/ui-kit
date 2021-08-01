@@ -6,9 +6,9 @@ import Button from '@components/ui/Button'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
 import { setOrderStatus } from 'shared/services/api/ecommerce/order'
-import { emitCloseDropdown } from 'shared/events/dropdown'
+import { emitCloseDropdown } from '@events/dropdown'
 import { FormattedMessage } from 'react-intl'
-import { emitTableRefresh } from 'shared/events/table'
+import { emitTableRefresh } from '@events/table'
 
 /**
  * Change status stateless presentational component

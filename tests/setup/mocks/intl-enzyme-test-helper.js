@@ -5,17 +5,15 @@
  * English-locale intl context around them.
  */
 
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
 import { IntlProvider } from 'react-intl'
 import { mount } from 'enzyme'
 
-const messages = require('../../../src/shared/i18n/en/en.json')
+const messages = require('@i18n/en/en.json')
 const defaultLocale = 'en'
 const locale = defaultLocale
 
-export function mountWithIntl (node) {
-  return mount(node, {
+export const mountWithIntl = node => (
+  mount(node, {
     wrappingComponent: IntlProvider,
     wrappingComponentProps: {
       locale,
@@ -23,4 +21,4 @@ export function mountWithIntl (node) {
       messages
     }
   })
-}
+)

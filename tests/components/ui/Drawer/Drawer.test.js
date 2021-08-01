@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Drawer from '@components/ui/Drawer'
-import registerIcons from 'shared/helpers/icons'
+import registerIcons from '@helpers/icons'
 
 registerIcons()
 
@@ -17,7 +17,7 @@ const props = {
 }
 
 const drawerComponent = (<Drawer {...props}>
-    {props.children}
+  {props.children}
 </Drawer>)
 
 describe('<Drawer/> mount', () => {

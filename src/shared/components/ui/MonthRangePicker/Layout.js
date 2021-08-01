@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Spacer from '@components/ui/Spacer'
 import MonthRangePicker from './MonthRangePicker'
 import Button from '@components/ui/Button'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './MonthRangePicker.scss'
 import { FormattedMessage } from 'react-intl'
 

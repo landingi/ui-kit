@@ -1,7 +1,7 @@
 import React from 'react'
 import moxios from 'moxios'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
-import registerIcons from 'shared/helpers/icons'
+import registerIcons from '@helpers/icons'
 import Table from '@components/ui/Table'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { makeStore } from '../../helpers/utils'

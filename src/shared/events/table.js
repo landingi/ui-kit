@@ -7,8 +7,8 @@ import {
   TABLE_LEADS_INBOX_FILTER,
   TABLE_LEADS_INBOX_FILTER_REFRESH,
   TABLE_RESET_PAGE
-} from 'shared/constants/eventTypes'
-import emitter from 'shared/lib/emitter'
+} from '@constants/eventTypes'
+import emitter from '@lib/emitter'
 
 export const emitTableRefresh = (...args) =>
   emitter.emit(TABLE_REFRESH, ...args)
