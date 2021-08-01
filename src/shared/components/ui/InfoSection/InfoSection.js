@@ -15,61 +15,61 @@ import uuid from 'react-uuid'
 const cssClass = styles(scss)
 
 /**
-* Info Section - stateless presentational component
-* @param {object} props - props
-* @param {string|array} props.className - list of class names, default: `info-section`
-* @param {string} props.title - title
-* @param {array} props.list - list of items
-* @param {string} props.url - image url
-* @param {string} props.button - button title
-* @param {func} props.onClick - button action
-* @return {object} An object of children element
-*/
-const InfoSection = ({
+ * Info Section - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `info-section`
+ * @param {string} props.title - title
+ * @param {array} props.list - list of items
+ * @param {string} props.url - image url
+ * @param {string} props.button - button title
+ * @param {func} props.onClick - button action
+ * @return {object} An object of children element
+ */
+function InfoSection({
   className,
   title,
   list,
   url,
   button,
   onClick
-}) => {
-  const renderList = useMemo(() => (
-    <List listStyle='ordered-check'>
-      {list.map(item => (
-        <ListItem
-          variant='list'
-          key={uuid()}>
-          <Paragraph size={18}>
-            <FormattedMessage id={item} />
-          </Paragraph>
-      </ListItem>))}
-    </List>
-  ), [])
+}) {
+  const renderList = useMemo(
+    () => (
+      <List listStyle="ordered-check">
+        {list.map(item => (
+          <ListItem key={uuid()}
+variant="list">
+            <Paragraph size={18}>
+              <FormattedMessage id={item} />
+            </Paragraph>
+          </ListItem>
+        ))}
+      </List>
+    ),
+    []
+  )
 
   return (
     <div className={cssClass(className)}>
       <div>
-        <Heading
-          level={1}
-          bold>
+        <Heading bold
+level={1}>
           <FormattedMessage id={`${title}`} />
         </Heading>
 
         {renderList}
 
-        <Spacer space='medium' />
+        <Spacer space="medium" />
 
-        <Button
-          size='large'
-          onClick={onClick}>
+        <Button onClick={onClick}
+size="large">
           <FormattedMessage id={button} />
         </Button>
       </div>
 
       <div>
-        <Image
-          src={url}
-          size={526} />
+        <Image size={526}
+src={url} />
       </div>
     </div>
   )

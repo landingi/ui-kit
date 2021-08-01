@@ -4,13 +4,13 @@
  * @param {array|object} parentWidth
  * @return {bool} Returns bool
  */
-export const isEmpty = value => (
+export const isEmpty = value =>
   value === null ||
   value === undefined ||
   // eslint-disable-next-line no-prototype-builtins
   (value.hasOwnProperty('length') && value.length === 0) ||
-  (value.constructor === Object && Object.keys(value).length === 0)
-)
+  (value.constructor === Object &&
+    Object.keys(value).length === 0)
 
 /**
  * Check if variable is iterable
@@ -41,7 +41,10 @@ export const isIterable = obj => {
  * [1,2], [2,3] -> false
  */
 export const isArrayEqual = (arr1, arr2) => {
-  return arr1.length === arr2.length && arr1.reduce((a, b) => a && arr2.includes(b), true)
+  return (
+    arr1.length === arr2.length &&
+    arr1.reduce((a, b) => a && arr2.includes(b), true)
+  )
 }
 
 /**
@@ -51,7 +54,8 @@ export const isArrayEqual = (arr1, arr2) => {
  * @param {Set} b - second Set
  * @return {bool} Returns bool
  */
-export const isSetEqual = (a, b) => a.size === b.size && [...a].every(value => b.has(value))
+export const isSetEqual = (a, b) =>
+  a.size === b.size && [...a].every(value => b.has(value))
 
 /**
  * font icons mapper
@@ -80,9 +84,12 @@ export const mapIconToClass = value => fontIcons[value]
  * @return {string} Returns string
  */
 
-export const queryString = data => Object.entries(data)
-  .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-  .join('&')
+export const queryString = data =>
+  Object.entries(data)
+    .map(
+      ([key, val]) => `${key}=${encodeURIComponent(val)}`
+    )
+    .join('&')
 
 /**
  * Map an object to array of objects
@@ -90,65 +97,72 @@ export const queryString = data => Object.entries(data)
  * @param {object} obj
  * @return {array} Returns string
  */
-export const mapObjectToArrObj = obj => Object.keys(obj)
-  .filter(value => obj[value] != null)
-  .map(key => (
-    {
+export const mapObjectToArrObj = obj =>
+  Object.keys(obj)
+    .filter(value => obj[value] != null)
+    .map(key => ({
       [key]: obj[key]
-    }
-  ))
+    }))
 
 /**
-  * isLastPage - check if last page
-  * @param {number} count - meta total
-  * @param {number} page
-  * @param {number} limit - limit per page
-  * @type {function}
-  */
-export const isLastPage = (count, page, limit) => count !== 0 && Math.ceil(count / limit) === page
+ * isLastPage - check if last page
+ * @param {number} count - meta total
+ * @param {number} page
+ * @param {number} limit - limit per page
+ * @type {function}
+ */
+export const isLastPage = (count, page, limit) =>
+  count !== 0 && Math.ceil(count / limit) === page
 
 /**
-  * getTodayDate - return today date with hour 00:00:00
-  * @type {function}
-*/
-export const getTodayDate = () => new Date(new Date().toDateString())
+ * getTodayDate - return today date with hour 00:00:00
+ * @type {function}
+ */
+export const getTodayDate = () =>
+  new Date(new Date().toDateString())
 
 /**
-  * getAgoDate - return date {number} days ago with hour 00:00:00
-  * @param {number} days - days ago
-  * @type {function}
-  */
+ * getAgoDate - return date {number} days ago with hour 00:00:00
+ * @param {number} days - days ago
+ * @type {function}
+ */
 export const getAgoDate = days => {
   const today = getTodayDate()
 
-  return new Date(new Date(new Date().setDate(today.getDate() - days)).toDateString())
+  return new Date(
+    new Date(
+      new Date().setDate(today.getDate() - days)
+    ).toDateString()
+  )
 }
 
 /**
-  * getTodayDateTimestamp - return today date with hour 00:00:00 as timestamp
-  * @type {function}
-*/
-export const getTodayDateTimestamp = () => getTodayDate().getTime() / 1000
+ * getTodayDateTimestamp - return today date with hour 00:00:00 as timestamp
+ * @type {function}
+ */
+export const getTodayDateTimestamp = () =>
+  getTodayDate().getTime() / 1000
 
 /**
-  * getAgoDateTimestamp - return date {number} days ago with hour 00:00:00 as timestamp
-  * @param {number} days - days ago
-  * @type {function}
-  */
-export const getAgoDateTimestamp = days => getAgoDate(days).getTime() / 1000
+ * getAgoDateTimestamp - return date {number} days ago with hour 00:00:00 as timestamp
+ * @param {number} days - days ago
+ * @type {function}
+ */
+export const getAgoDateTimestamp = days =>
+  getAgoDate(days).getTime() / 1000
 
 /**
-  * getTimestamp - return timestamp from date
-  * @param {number} date - date
-  * @type {function}
-  */
+ * getTimestamp - return timestamp from date
+ * @param {number} date - date
+ * @type {function}
+ */
 export const getTimestamp = date => date.getTime() / 1000
 
 /**
-  * getDateObject - return date as a object {day, month, year}
-  * @param {number} date - date
-  * @type {function}
-  */
+ * getDateObject - return date as a object {day, month, year}
+ * @param {number} date - date
+ * @type {function}
+ */
 export const getDateObject = date => {
   return {
     day: date.getDate(),
@@ -231,26 +245,27 @@ export const defaultLabels = {
  * ex. 10000 => 10 000
  * @return {string}
  */
-export const formatPrice = value => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+export const formatPrice = value =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
 /**
  * groupArrayOfObjectsBy
  * ex groupArrayOfObjectsBy(array, 'keyName')
  * @return {object}
  */
-export const groupArrayOfObjectsBy = (array, key) => (
+export const groupArrayOfObjectsBy = (array, key) =>
   array.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x)
+    ;(rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
   }, {})
-)
 
 /**
  * Format numeric
  * ex. 10000 => 10 000
  * @return {string}
  */
-export const formatNumeric = value => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+export const formatNumeric = value =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
 /**
  * @param {object} startDate
@@ -258,4 +273,7 @@ export const formatNumeric = value => value.toString().replace(/\B(?=(\d{3})+(?!
  *
  * @return {string} difference between given dates in days
  */
-export const calculateDaysInterval = (startDate, endDate) => Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24))
+export const calculateDaysInterval = (startDate, endDate) =>
+  Math.ceil(
+    Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24)
+  )

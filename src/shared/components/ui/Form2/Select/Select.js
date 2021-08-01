@@ -28,18 +28,22 @@ const select = ({
   children
 }) => {
   const errorClass = errors[name] ? 'form--has-error' : ''
-  const filledClass = touched[name] ? 'form-field--touched' : ''
+  const filledClass = touched[name]
+    ? 'form-field--touched'
+    : ''
 
   return (
-    <div className={`form-field ${errorClass || filledClass}`}>
+    <div
+      className={`form-field ${errorClass || filledClass}`}
+    >
       <div className={scss.input__wrapper}>
         <select
           className={cssClass(className)}
-          name={name}
           id={id}
-          value={value}
-          onChange={onChange}
+          name={name}
           onBlur={onBlur}
+          onChange={onChange}
+          value={value}
         >
           {children}
         </select>
@@ -49,9 +53,8 @@ const select = ({
         <span className={cssClass('bar')} />
 
         {label && (
-          <Label
-            id={name}
-            className={scss.input__label}>
+          <Label className={scss.input__label}
+id={name}>
             <FormattedMessage id={`${label}`} />
           </Label>
         )}
@@ -76,7 +79,10 @@ select.propTypes = {
   /**
    * Classname, default `select`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Children elements `option`
    */
@@ -86,7 +92,10 @@ select.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,

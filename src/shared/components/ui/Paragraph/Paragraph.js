@@ -29,13 +29,18 @@ const paragraph = ({
   weight
 }) => (
   <p
-    className={cssClass(className,
+    className={cssClass(
+      className,
       color ? `${className}-color--${color}` : undefined,
       size ? `${className}-size--${size}` : undefined,
-      padding ? `${className}-padding--${padding}` : undefined,
+      padding
+        ? `${className}-padding--${padding}`
+        : undefined,
       align ? `${className}-align--${align}` : undefined,
       line ? `${className}-line--${line}` : undefined,
-      weight ? `${className}-weight--${weight}` : undefined)}>
+      weight ? `${className}-weight--${weight}` : undefined
+    )}
+  >
     {children}
   </p>
 )

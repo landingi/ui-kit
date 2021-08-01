@@ -1,4 +1,9 @@
-import React, { forwardRef, useRef, useEffect, memo } from 'react'
+import React, {
+  forwardRef,
+  useRef,
+  useEffect,
+  memo
+} from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './Checkbox.scss'
@@ -19,12 +24,10 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const selectRow = forwardRef(
-  ({
-    indeterminate,
-    hasSelected,
-    className,
-    ...rest
-  }, ref) => {
+  (
+    { indeterminate, hasSelected, className, ...rest },
+    ref
+  ) => {
     const defaultRef = useRef()
     const resolvedRef = ref || defaultRef
 
@@ -35,9 +38,10 @@ const selectRow = forwardRef(
     return (
       <label className={cssClass('input__checkbox')}>
         <input
-          type="checkbox"
           ref={resolvedRef}
-          {...rest} />
+          type="checkbox"
+          {...rest}
+        />
 
         <div />
       </label>

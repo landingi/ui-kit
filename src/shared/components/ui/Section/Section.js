@@ -22,7 +22,14 @@ const section = ({
   width,
   background
 }) => (
-  <div className={cssClass(className, `section-space--${space}`, `layout-width--${width}`, `section-bg--${background}`)}>
+  <div
+    className={cssClass(
+      className,
+      `section-space--${space}`,
+      `layout-width--${width}`,
+      `section-bg--${background}`
+    )}
+  >
     {children}
   </div>
 )

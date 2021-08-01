@@ -17,9 +17,7 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const overflow = ({ children, className }) => (
-  <div className={cssClass(className)}>
-    {children}
-  </div>
+  <div className={cssClass(className)}>{children}</div>
 )
 
 /**

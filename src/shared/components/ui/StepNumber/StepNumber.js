@@ -15,13 +15,13 @@ const cssClass = styles(scss)
  * @param {bool} props.absolute - position absolute, default 'false'
  * @return {object} An object of children element
  */
-const StepNumber = ({
+function StepNumber({
   className,
   step,
   variant,
   size,
   absolute
-}) => {
+}) {
   const elementClasses = cssClass({
     'step__number--completed': variant === 'completed',
     'step__number--current': variant === 'current',

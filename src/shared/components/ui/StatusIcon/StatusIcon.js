@@ -18,12 +18,20 @@ const cssClass = styles(scss)
  * @param {string} props.size - variant of statusIcon tiny, medium
  */
 const statusIcon = ({ className, variant, size }) => (
-  <div className={cssClass(className, `status-icon--${variant}`, `status-icon--${size}`)}>
-    {variant === 'active' ? <FontAwesomeIcon
-      icon='check'
-      size="xs" /> : <FontAwesomeIcon
-      icon='times'
-      size="xs" />}
+  <div
+    className={cssClass(
+      className,
+      `status-icon--${variant}`,
+      `status-icon--${size}`
+    )}
+  >
+    {variant === 'active' ? (
+      <FontAwesomeIcon icon="check"
+size="xs" />
+    ) : (
+      <FontAwesomeIcon icon="times"
+size="xs" />
+    )}
   </div>
 )
 

@@ -28,9 +28,14 @@ const customLink = ({
   size
 }) => (
   <a
+    className={cssClass(
+      className,
+      `custom-link--${variant}`,
+      `custom-link--${size}`
+    )}
     href={href}
     target={target}
-    className={cssClass(className, `custom-link--${variant}`, `custom-link--${size}`)}>
+  >
     {label}
   </a>
 )
@@ -57,7 +62,10 @@ customLink.propTypes = {
   /**
    * Label
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+  ]).isRequired,
   /**
    * Link
    */

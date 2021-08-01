@@ -30,7 +30,8 @@ const tab = ({
   ...restProps
 }) => {
   const tabContext = useContext(TabContext)
-  const activeTab = tabContext.activeTab === name ? 'Tabs__tab--active' : ''
+  const activeTab =
+    tabContext.activeTab === name ? 'Tabs__tab--active' : ''
   const classNames = `${cssClass(className)} ${activeTab}`
   const [, setTabValue] = useQueryString('tab')
 
@@ -38,26 +39,20 @@ const tab = ({
    * Handle tab click
    * @type {function}
    */
-  const handleClick = useCallback(
-    event => {
-      setTabValue(name)
-      tabContext.changeTab(name)
-      onClick(event)
-    },
-    []
-  )
+  const handleClick = useCallback(event => {
+    setTabValue(name)
+    tabContext.changeTab(name)
+    onClick(event)
+  }, [])
 
   return (
     <span
       className={classNames}
       onClick={handleClick}
-      {...restProps}>
-      <Button
-        variant='tabs'>
-        {children}
-      </Button>
+      {...restProps}
+    >
+      <Button variant="tabs">{children}</Button>
     </span>
-
   )
 }
 

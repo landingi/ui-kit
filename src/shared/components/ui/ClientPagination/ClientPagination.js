@@ -33,137 +33,133 @@ const pagination = ({
   pageLimit,
   constantPageLimit
 }) => {
-  const handleGoToPage = page => useCallback(() => goToPage(page), [])
+  const handleGoToPage = page =>
+    useCallback(() => goToPage(page), [])
 
-  const renderPagination = () => (
+  const renderPagination = () =>
     pageCount !== 1 && (
-      <Fragment>
+      <>
         <span className={scss.pagination__first}>
           <Button
-            size='small'
-            variant='icon'
-            onClick={handleGoToPage(0)}>
+            onClick={handleGoToPage(0)}
+            size="small"
+            variant="icon"
+          >
             <FormattedMessage id="pagination.word.first" />
           </Button>
         </span>
 
         <Button
-          variant='icon'
-          size='small'
-          onClick={handleGoToPage(pageIndex - 1)}>
-          <FontAwesomeIcon
-            icon='caret-left'
-          />
+          onClick={handleGoToPage(pageIndex - 1)}
+          size="small"
+          variant="icon"
+        >
+          <FontAwesomeIcon icon="caret-left" />
         </Button>
 
-        <List variant='inline'>
-          <ListItem
-            variant='inline'>
+        <List variant="inline">
+          <ListItem variant="inline">
             <Button
-              hide={(pageIndex - 3) < 0}
-              size='small'
-              variant='icon'
-              onClick={handleGoToPage(pageIndex - 3)}>
+              hide={pageIndex - 3 < 0}
+              onClick={handleGoToPage(pageIndex - 3)}
+              size="small"
+              variant="icon"
+            >
               {pageIndex - 2}
             </Button>
           </ListItem>
 
-          <ListItem
-            variant='inline'>
+          <ListItem variant="inline">
             <Button
-              hide={(pageIndex - 2) < 0}
-              size='small'
-              variant='icon'
-              onClick={handleGoToPage(pageIndex - 2)}>
+              hide={pageIndex - 2 < 0}
+              onClick={handleGoToPage(pageIndex - 2)}
+              size="small"
+              variant="icon"
+            >
               {pageIndex - 1}
             </Button>
           </ListItem>
 
-          <ListItem
-            variant='inline'>
+          <ListItem variant="inline">
             <Button
-              size='small'
-              variant='icon'
-              hide={(pageIndex - 1) < 0}
-              onClick={handleGoToPage(pageIndex - 1)}>
+              hide={pageIndex - 1 < 0}
+              onClick={handleGoToPage(pageIndex - 1)}
+              size="small"
+              variant="icon"
+            >
               {pageIndex}
             </Button>
           </ListItem>
 
           <ListItem
-            variant='inline'
-            className={scss.pagination__links__current}>
-            <Button
-              size='small'
-              variant='icon'>
+            className={scss.pagination__links__current}
+            variant="inline"
+          >
+            <Button size="small"
+variant="icon">
               {pageIndex + 1}
             </Button>
           </ListItem>
 
-          <ListItem
-            variant='inline'>
+          <ListItem variant="inline">
             <Button
-              hide={(pageIndex + 2) >= pageCount}
-              size='small'
-              variant='icon'
-              onClick={handleGoToPage(pageIndex + 1)}>
+              hide={pageIndex + 2 >= pageCount}
+              onClick={handleGoToPage(pageIndex + 1)}
+              size="small"
+              variant="icon"
+            >
               {pageIndex + 2}
             </Button>
           </ListItem>
 
-          <ListItem
-            variant='inline'>
+          <ListItem variant="inline">
             <Button
-              hide={(pageIndex + 4) !== pageCount}
-              size='small'
-              variant='icon'
-              onClick={handleGoToPage(pageIndex + 1)}>
+              hide={pageIndex + 4 !== pageCount}
+              onClick={handleGoToPage(pageIndex + 1)}
+              size="small"
+              variant="icon"
+            >
               {pageIndex + 3}
             </Button>
           </ListItem>
 
-          {(pageIndex + 4) < pageCount && (
-            <ListItem
-              variant='inline'>
-              <span>
-              ...
-              </span>
+          {pageIndex + 4 < pageCount && (
+            <ListItem variant="inline">
+              <span>...</span>
             </ListItem>
           )}
 
-          <ListItem
-            variant='inline'>
+          <ListItem variant="inline">
             <Button
-              hide={pageIndex >= (pageCount - 1)}
-              size='small'
-              variant='icon'
-              onClick={handleGoToPage(pageCount - 1)}>
+              hide={pageIndex >= pageCount - 1}
+              onClick={handleGoToPage(pageCount - 1)}
+              size="small"
+              variant="icon"
+            >
               {pageCount}
             </Button>
           </ListItem>
-
         </List>
 
         <Button
-          variant='icon'
-          size='small'
-          onClick={handleGoToPage(pageIndex + 1)}>
-          <FontAwesomeIcon
-            icon='caret-right'
-          />
+          onClick={handleGoToPage(pageIndex + 1)}
+          size="small"
+          variant="icon"
+        >
+          <FontAwesomeIcon icon="caret-right" />
         </Button>
 
         <span className={scss.pagination__last}>
           <Button
-            size='small'
-            variant='icon'
-            onClick={handleGoToPage(pageCount - 1)}>
+            onClick={handleGoToPage(pageCount - 1)}
+            size="small"
+            variant="icon"
+          >
             <FormattedMessage id="pagination.word.last" />
           </Button>
         </span>
-      </Fragment>
+      </>
     )
-  )
 
   return (
     <div className={cssClass(className)}>
@@ -171,18 +167,20 @@ const pagination = ({
         {renderPagination()}
       </div>
 
-      {constantPageLimit === 0 &&
+      {constantPageLimit === 0 && (
         <PageSize
           activePageLimit={activePageLimit}
-          onChange={pageLimit} />}
+          onChange={pageLimit}
+        />
+      )}
     </div>
   )
 }
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 pagination.displayName = 'Pagination'
 
 /**
@@ -198,35 +196,35 @@ pagination.propTypes = {
     PropTypes.array
   ]),
   /**
-  * goToPage page to go
-  */
+   * goToPage page to go
+   */
   goToPage: PropTypes.func.isRequired,
   /**
-  * activePageLimit selected page limit
-  */
+   * activePageLimit selected page limit
+   */
   activePageLimit: PropTypes.number.isRequired,
   /**
    * pageLimit
-  */
+   */
   pageLimit: PropTypes.func.isRequired,
   /**
    * pageIndex
-  */
+   */
   pageIndex: PropTypes.number.isRequired,
   /**
    * pageCount
-  */
+   */
   pageCount: PropTypes.number.isRequired,
   /**
    * constantPageLimit
-  */
+   */
   constantPageLimit: PropTypes.number
 }
 
 /**
-* The default properties.
-* @type {Object}
-  */
+ * The default properties.
+ * @type {Object}
+ */
 pagination.defaultProps = {
   className: 'pagination',
   constantPageLimit: 0

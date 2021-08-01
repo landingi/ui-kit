@@ -36,26 +36,27 @@ const maskedInput = ({
 }) => {
   const { name, value, onChange, onBlur } = field
   const { errors, touched } = form
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const errorClass =
+    errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
       <MaskedInput
-        field={field}
-        mask={mask}
-        type={type}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
         disabled={disabled}
-        translate={translate}
-        maxLength={maxLength}
-        guide={guide}
+        field={field}
         focused={focused}
+        guide={guide}
+        id={id}
+        label={label}
+        mask={mask}
+        maxLength={maxLength}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        placeholder={placeholder}
+        translate={translate}
+        type={type}
+        value={value}
       />
 
       {touched[name] && <Error error={errors[name]} />}
@@ -79,7 +80,10 @@ maskedInput.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
@@ -91,14 +95,21 @@ maskedInput.propTypes = {
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   placeholder: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
   translate: PropTypes.bool,
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])),
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(RegExp)
+    ])
+  ),
   guide: PropTypes.bool,
   focused: PropTypes.string
 }

@@ -10,9 +10,7 @@ import scss from './TopBar.scss'
  * @type {function}
  */
 export const topBar = ({ children }) => (
-    <div className={scss.topbardefault}>
-      {children}
-    </div>
+  <div className={scss.topbardefault}>{children}</div>
 )
 
 /**

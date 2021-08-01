@@ -4,8 +4,13 @@ import { styles } from 'shared/helpers/css'
 import scss from './Drawer.scss'
 import Header from './Header'
 import Backdrop from 'shared/components/ui/Backdrop'
+import {
+  DARK,
+  WHITE,
+  DEFAULT,
+  MOBILE
+} from 'shared/constants/skin'
 import posed, { PoseGroup } from 'react-pose'
-import { DARK, WHITE, DEFAULT, MOBILE } from 'shared/constants/skin'
 
 /**
  * Drawer Animation, exports React-pose animations
@@ -66,25 +71,26 @@ const drawer = ({
   })
 
   return (
-    <Fragment>
-      <PoseGroup
-        animateOnMount
-        flipMove={false}>
+    <>
+      <PoseGroup animateOnMount
+flipMove={false}>
         {isActive && (
           <DrawerAnimation
-            key='draweranimation'
-            className={cssClass(className, elementClasses)}>
+            className={cssClass(className, elementClasses)}
+            key="draweranimation"
+          >
             <Header
+              onClick={onClick}
               title={data ? data.title : ''}
-              onClick={onClick} />
+            />
 
             {children}
           </DrawerAnimation>
         )}
       </PoseGroup>
 
-      {isActive && (<Backdrop onClick={onClick} />)}
-    </Fragment>
+      {isActive && <Backdrop onClick={onClick} />}
+    </>
   )
 }
 

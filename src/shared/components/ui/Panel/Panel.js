@@ -29,7 +29,8 @@ const panel = ({
     'panel--padding-default': variant === 'padding-default',
     'panel--padding-tiny': variant === 'padding-tiny',
     'panel--padding-none': variant === 'padding-none',
-    'panel--padding-bottom-tiny': variant === 'padding-bottom-tiny',
+    'panel--padding-bottom-tiny':
+      variant === 'padding-bottom-tiny',
     'panel--padding-input': variant === 'padding-input',
     'panel--adjust-height': adjustHeight === true,
     'panel--background': isBackground === true,
@@ -38,7 +39,7 @@ const panel = ({
 
   return (
     <div className={cssClass(className, elementClasses)}>
-        {children}
+      {children}
     </div>
   )
 }

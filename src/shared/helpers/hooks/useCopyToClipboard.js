@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
 
 /**
-* useCopyToClipboard
-* @param {object} props - props
-* @param {string} props.text - text to copy
-* @return {object}
-*/
+ * useCopyToClipboard
+ * @param {object} props - props
+ * @param {string} props.text - text to copy
+ * @return {object}
+ */
 const useCopyToClipboard = text => {
   const [isCopied, setCopied] = useState(false)
 

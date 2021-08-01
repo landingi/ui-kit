@@ -30,10 +30,9 @@ const indicator = ({
   return (
     <span
       className={cssClass(className, hasAlertClass)}
-      onClick={onClick}>
-      <i>
-        {content}
-      </i>
+      onClick={onClick}
+    >
+      <i>{content}</i>
 
       {children}
     </span>
@@ -87,7 +86,7 @@ indicator.defaultProps = {
   className: 'indicator',
   content: null,
   isAlert: false,
-  onClick: () => { }
+  onClick: () => {}
 }
 
 export default indicator

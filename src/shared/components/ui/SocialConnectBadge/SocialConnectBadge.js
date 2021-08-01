@@ -20,21 +20,31 @@ const cssClass = styles(scss)
  * @param {string} props.social - social of socialConnectBadge google, facebook
  * @return {object} An object of children element
  */
-const socialConnectBadge = ({ className, variant, social }) => (
-  <div className={cssClass(className, `social-connect-badge-${social}--${variant}`)}>
-    <Button
-      size="medium"
-      hasIcon>
+const socialConnectBadge = ({
+  className,
+  variant,
+  social
+}) => (
+  <div
+    className={cssClass(
+      className,
+      `social-connect-badge-${social}--${variant}`
+    )}
+  >
+    <Button hasIcon
+size="medium">
       <FontAwesomeIcon icon={['fab', `${social}`]} />
 
       <span>
-        {variant === 'connect' ? <FormattedMessage id='word.connect' /> : <FormattedMessage id='word.disconnect' />}
+        {variant === 'connect' ? (
+          <FormattedMessage id="word.connect" />
+        ) : (
+          <FormattedMessage id="word.disconnect" />
+        )}
 
-        <span>
-          { social }
-        </span>
+        <span>{social}</span>
 
-        <FormattedMessage id='word.account' />
+        <FormattedMessage id="word.account" />
       </span>
     </Button>
   </div>
@@ -58,7 +68,8 @@ socialConnectBadge.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['connect', 'disconnect']).isRequired,
+  variant: PropTypes.oneOf(['connect', 'disconnect'])
+    .isRequired,
   /**
    * Social
    */

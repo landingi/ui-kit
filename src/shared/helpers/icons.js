@@ -1,8 +1,8 @@
 /**
-* Fontawesome
-* @see { @link https://github.com/FortAwesome/react-fontawesome }
-*
-*/
+ * Fontawesome
+ * @see { @link https://github.com/FortAwesome/react-fontawesome }
+ *
+ */
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faBullhorn,
@@ -106,7 +106,7 @@ import {
   faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons'
 
-export default function registerIcons () {
+export default function registerIcons() {
   library.add(
     faBullhorn,
     faQuestion,

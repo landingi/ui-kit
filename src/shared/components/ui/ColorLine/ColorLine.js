@@ -13,7 +13,13 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const colorLine = ({ variant, alignment }) => (
-  <span className={cssClass('color-line', `color-line--${variant}`, `color-line--${alignment}`)} />
+  <span
+    className={cssClass(
+      'color-line',
+      `color-line--${variant}`,
+      `color-line--${alignment}`
+    )}
+  />
 )
 
 /**
@@ -34,7 +40,12 @@ colorLine.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['alert', 'warning', 'success', 'info']).isRequired
+  variant: PropTypes.oneOf([
+    'alert',
+    'warning',
+    'success',
+    'info'
+  ]).isRequired
 }
 
 /**

@@ -6,24 +6,30 @@ const useIsOpen = initial => {
   return {
     value,
     setValue,
-    set: useCallback(item => setValue(arr => {
-      if (arr.includes(item)) {
-        return []
-      }
-      return [item]
-    })),
-    toggle: useCallback(item => setValue(arr => {
-      if (arr.includes(item)) {
-        return arr.filter(value => value !== item)
-      }
-      return [...arr, item]
-    })),
-    toggleOneElement: useCallback(() => setValue((value) => {
-      if (value) {
-        return false
-      }
-      return true
-    }))
+    set: useCallback(item =>
+      setValue(arr => {
+        if (arr.includes(item)) {
+          return []
+        }
+        return [item]
+      })
+    ),
+    toggle: useCallback(item =>
+      setValue(arr => {
+        if (arr.includes(item)) {
+          return arr.filter(value => value !== item)
+        }
+        return [...arr, item]
+      })
+    ),
+    toggleOneElement: useCallback(() =>
+      setValue(value => {
+        if (value) {
+          return false
+        }
+        return true
+      })
+    )
   }
 }
 

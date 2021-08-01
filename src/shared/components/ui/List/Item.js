@@ -33,9 +33,7 @@ const listItem = ({
   })
   return (
     <li className={cssClass(className, elementClasses)}>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </li>
   )
 }
@@ -58,7 +56,15 @@ listItem.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['menu', 'dropdown', 'table', 'inline', 'list', 'block', '']),
+  variant: PropTypes.oneOf([
+    'menu',
+    'dropdown',
+    'table',
+    'inline',
+    'list',
+    'block',
+    ''
+  ]),
   /**
    * Size
    */

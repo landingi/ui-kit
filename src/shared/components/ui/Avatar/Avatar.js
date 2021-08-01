@@ -5,9 +5,9 @@ import scss from './Avatar.scss'
 import Image from 'shared/components/ui/Image'
 
 /**
-* Exports css classes from SCSS file
-* @return {object} An object of styles
-*/
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
@@ -27,8 +27,18 @@ const avatar = ({
   src,
   name
 }) => (
-  <span className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}>
-    {variant === 'image' ? <Image src={src} /> : <p>{name}</p>}
+  <span
+    className={cssClass(
+      className,
+      `avatar--${size}`,
+      `avatar--${variant}`
+    )}
+  >
+    {variant === 'image' ? (
+      <Image src={src} />
+    ) : (
+      <p>{name}</p>
+    )}
   </span>
 )
 

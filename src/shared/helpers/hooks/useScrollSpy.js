@@ -6,11 +6,13 @@ export default ({
   activeSectionDefault = 0,
   sectionElementRefs = []
 }) => {
-  const [activeSection, setActiveSection] = useState(activeSectionDefault)
+  const [activeSection, setActiveSection] = useState(
+    activeSectionDefault
+  )
   const handle = () => {
     let currentSectionId = activeSection
 
-    sectionElementRefs.map((item) => {
+    sectionElementRefs.map(item => {
       const section = sectionElementRefs[item].current
 
       if (isInViewVertical(section)) {

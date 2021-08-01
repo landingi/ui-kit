@@ -45,26 +45,42 @@ const selectFilter = table => {
   return (
     hasItems() && (
       <Dropdown
-        label={<FormattedMessage id={getLocalStorage(column.id) || defaultLabels[column.id]} />}
-        size={column.id === 'subaccountInfo' ? 'medium' : 'small'}>
+        label={
+          <FormattedMessage
+            id={
+              getLocalStorage(column.id) ||
+              defaultLabels[column.id]
+            }
+          />
+        }
+        size={
+          column.id === 'subaccountInfo'
+            ? 'medium'
+            : 'small'
+        }
+      >
         <List>
-          {filters.map(({
-            id, value, label
-          }) => (id === column.id && (
-            <ListItem
-              key={uuid()}
-              variant='dropdown'>
-              <Button
-                tag="a"
-                variant='dropdown'
-                onClick={() => handleSetFilter(value, label)}>
-                {label || labelSelect}
-              </Button>
-            </ListItem>
-          )))}
+          {filters.map(
+            ({ id, value, label }) =>
+              id === column.id && (
+                <ListItem key={uuid()}
+variant="dropdown">
+                  <Button
+                    onClick={() =>
+                      handleSetFilter(value, label)
+                    }
+                    tag="a"
+                    variant="dropdown"
+                  >
+                    {label || labelSelect}
+                  </Button>
+                </ListItem>
+              )
+          )}
         </List>
       </Dropdown>
-    ))
+    )
+  )
 }
 
 /**

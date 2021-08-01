@@ -1,9 +1,14 @@
-Normal
+import { Playground } from 'docz'
+import Panel from 'ui/Panel'
 
-```js
-<Panel>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper ligula diam. Donec
-  finibus aliquam quam, sit amet aliquam urna ultrices ut. Maecenas semper tincidunt dui, nec auctor
-  mauris viverra nec.
-</Panel>
-```
+# Panel
+
+## Basic usage
+
+### Normal
+
+<Playground>
+  <Panel>
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.
+  </Panel>
+</Playground>

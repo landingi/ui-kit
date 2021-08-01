@@ -10,41 +10,36 @@ import scss from './Tabs.scss'
 const cssClass = styles(scss)
 
 /**
-* tabList - stateless presentational component
-* @param {object} props - props
-* @param {string|array} props.className - list of class names, default: `tab__list`
-* @param {object} props.children - children
-* @param {string|array|object} props.restProps - rest of props
-* @return {object} An object of children element
-*/
-const tabList = ({
-  className,
-  children,
-  ...restProps
-}) => {
+ * tabList - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `tab__list`
+ * @param {object} props.children - children
+ * @param {string|array|object} props.restProps - rest of props
+ * @return {object} An object of children element
+ */
+const tabList = ({ className, children, ...restProps }) => {
   return (
-    <div
-      className={cssClass(className)}
-      {...restProps}>
+    <div className={cssClass(className)}
+{...restProps}>
       {children}
     </div>
   )
 }
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 tabList.displayName = 'TabList'
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 tabList.propTypes = {
   /**
-  * Classname, default `tabs`
-  */
+   * Classname, default `tabs`
+   */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
@@ -60,9 +55,9 @@ tabList.propTypes = {
 }
 
 /**
-* The default properties.
-* @type {Object}
-*/
+ * The default properties.
+ * @type {Object}
+ */
 tabList.defaultProps = {
   className: 'tab__list'
 }

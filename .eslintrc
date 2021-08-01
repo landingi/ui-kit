@@ -1,0 +1,56 @@
+{
+  "parser": "@babel/eslint-parser",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "camelcase": "off",
+    "array-callback-return": "off",
+    "react/sort-comp": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-sort-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-sort-default-props": "off",
+    "react/sort-prop-types": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/forbid-component-props": "off",
+    "react/jsx-max-depth": "off",
+    "react/jsx-no-literals": "off",
+    "react/no-array-index-key": "off",
+    "react/no-multi-comp": "off",
+    "react/jsx-no-bind": "off",
+    "react/state-in-constructor": "off",
+    "react/no-set-state": "off",
+    "no-use-before-define": "off",
+    "react/jsx-max-props-per-line": [
+      2,
+      {
+        "maximum": 1,
+        "when": "always"
+      }
+    ]
+  },
+  "extends": [
+    "plugin:react/all",
+    "standard",
+    "prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

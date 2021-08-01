@@ -18,22 +18,24 @@ const cssClass = styles(scss)
  * @param {array} props.data - steps data
  * @return {object} An object of children element
  */
-const Instruction = ({ className, data }) => (
-  <div className={cssClass(className)}>
+function Instruction({ className, data }) {
+  return <div className={cssClass(className)}>
     {data.map(({ content }, index) => (
       <div
+        className={cssClass('instruction__step')}
         key={uuid()}
-        className={cssClass('instruction__step')}>
+      >
         <StepNumber
+          absolute
+          size="medium"
           step={index + 1}
-          size='medium'
-          absolute />
+        />
 
         {content}
       </div>
     ))}
   </div>
-)
+}
 
 /**
  * Display name
@@ -49,7 +51,10 @@ Instruction.propTypes = {
   /**
    * Classname, default `Instruction`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Data
    */

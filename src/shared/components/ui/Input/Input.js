@@ -59,35 +59,44 @@ const input = ({
   })
 
   const valueProp = {
-    ...(controlledValue ? {
-      value
-    } : {
-      defaultValue: value
-    })
+    ...(controlledValue
+      ? {
+          value
+        }
+      : {
+          defaultValue: value
+        })
   }
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div
+      className={cssClass(
+        scss.input__wrapper,
+        elementClasses
+      )}
+    >
       <input
         className={cssClass(className)}
+        id={name}
+        name={name}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        type={type}
         placeholder={
           translate
-            ? intl.formatMessage({ id: `${placeholder || label}` })
+            ? intl.formatMessage({
+                id: `${placeholder || label}`
+              })
             : label
         }
-        name={name}
-        id={name}
+        type={type}
         {...valueProp}
-        readOnly={disabled ? readonly : undefined}
-        disabled={!disabled ? undefined : disabled}
         autoFocus={autoFocus}
+        disabled={!disabled ? undefined : disabled}
         maxLength={maxLength}
-        required={required}
         min={min}
+        readOnly={disabled ? readonly : undefined}
+        required={required}
       />
 
       <span className={cssClass('highlight')} />
@@ -95,21 +104,26 @@ const input = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label
-          id={name}
-          className={scss.input__label}>
-          {translate ? <FormattedMessage id={`${label}`} /> : label}
+        <Label className={scss.input__label}
+id={name}>
+          {translate ? (
+            <FormattedMessage id={`${label}`} />
+          ) : (
+            label
+          )}
         </Label>
       )}
 
       {tooltip && (
         <Tooltip
           className="input__tooltip"
+          content={tooltip}
           placement="bottom"
-          content={tooltip}>
+        >
           <FontAwesomeIcon
             color="#2550AA"
-            icon="exclamation-circle" />
+            icon="exclamation-circle"
+          />
         </Tooltip>
       )}
     </div>
@@ -130,7 +144,10 @@ input.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on Input
    *
@@ -159,7 +176,10 @@ input.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Name
    */
@@ -179,7 +199,10 @@ input.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   /**
    * Deafult value
    */
@@ -213,7 +236,10 @@ input.propTypes = {
   /**
    * Tooltip content
    */
-  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  tooltip: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   min: PropTypes.number
 }
 

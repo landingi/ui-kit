@@ -29,7 +29,7 @@ const cssClass = styles(scss)
  * @param {object} props.intl - intl
  * @param {bool}  props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
-  * @param {strin|number} props.value - value
+ * @param {strin|number} props.value - value
  * @return {object} An object of children element
  */
 
@@ -59,26 +59,37 @@ const maskedInput = ({
   })
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div
+      className={cssClass(
+        scss.input__wrapper,
+        elementClasses
+      )}
+    >
       <MaskedInput
-        field={field}
-        mask={mask}
+        autoFocus={autoFocus}
         className={cssClass(className)}
+        defaultValue={value}
+        disabled={!disabled ? undefined : disabled}
+        field={field}
+        focused={focused}
+        guide={guide}
+        id={name}
+        mask={mask}
+        maxLength={maxLength}
+        name={name}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        type={type}
-        placeholder={translate ? intl.formatMessage({ id: `${placeholder || label}` }) : label}
-        name={name}
-        id={name}
-        defaultValue={value}
+        placeholder={
+          translate
+            ? intl.formatMessage({
+                id: `${placeholder || label}`
+              })
+            : label
+        }
         readOnly={disabled ? readonly : undefined}
-        disabled={!disabled ? undefined : disabled}
-        autoFocus={autoFocus}
-        maxLength={maxLength}
         required
-        guide={guide}
-        focused={focused}
+        type={type}
       />
 
       <span className={cssClass('highlight')} />
@@ -86,10 +97,13 @@ const maskedInput = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label
-          id={name}
-          className={scss.input__label}>
-          {translate ? <FormattedMessage id={`${label}`} /> : label}
+        <Label className={scss.input__label}
+id={name}>
+          {translate ? (
+            <FormattedMessage id={`${label}`} />
+          ) : (
+            label
+          )}
         </Label>
       )}
     </div>
@@ -112,14 +126,20 @@ maskedInput.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /**
    * Gets called when the user clicks on MaskedInput
    *
@@ -148,7 +168,10 @@ maskedInput.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Name
    */
@@ -168,7 +191,10 @@ maskedInput.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   /**
    * autoFocus
    */
@@ -188,7 +214,11 @@ maskedInput.propTypes = {
    */
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])),
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(RegExp)
+    ])
+  ),
   /**
    * if it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
    * If it is false no help will be displayed in input.

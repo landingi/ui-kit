@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
 import Html from 'shared/components/global/Html'
+import { styles } from 'shared/helpers/css'
 import scss from './Toggle.scss'
 
 const cssClass = styles(scss)
@@ -29,22 +29,30 @@ const toggle = ({
   className,
   disabled
 }) => {
-  const getDisabledClassName = () => checked ? 'toggle--checked-disabled' : 'toggle--disabled'
+  const getDisabledClassName = () =>
+    checked
+      ? 'toggle--checked-disabled'
+      : 'toggle--disabled'
 
   return (
-    <div className={cssClass('toggle-container', className)}>
+    <div
+      className={cssClass('toggle-container', className)}
+    >
       <label
-        className={cssClass('toggle', { 'toggle--checked': checked, [getDisabledClassName()]: disabled })}
+        className={cssClass('toggle', {
+          'toggle--checked': checked,
+          [getDisabledClassName()]: disabled
+        })}
       >
         <input
-          name={name}
-          className={cssClass('toggle__checkbox')}
           checked={checked}
-          onChange={onChange}
-          onBlur={onBlur}
-          type='checkbox'
-          id={id}
+          className={cssClass('toggle__checkbox')}
           disabled={disabled}
+          id={id}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
+          type="checkbox"
         />
 
         <span className={cssClass('toggle__button')} />

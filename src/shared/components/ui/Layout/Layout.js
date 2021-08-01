@@ -14,7 +14,12 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const layout = ({ className, children, width }) => (
-  <div className={cssClass(className, `layout-width--${width}`)}>
+  <div
+    className={cssClass(
+      className,
+      `layout-width--${width}`
+    )}
+  >
     {children}
   </div>
 )

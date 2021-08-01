@@ -1,2 +1,17 @@
 node_modules
 .docz
+npm-debug.log*
+node_modules
+.npm
+coverage/lcov-report
+coverage/coverage-summary.json
+coverage/lcov.info
+.env
+.env.local
+.vscode
+logs
+*.log
+.eslintcache
+.dccache
+.pnpm-store
+build

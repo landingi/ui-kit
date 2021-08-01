@@ -7,11 +7,11 @@ import List from 'shared/components/ui/List'
 import ListItem from 'shared/components/ui/List/Item'
 import { styles } from 'shared/helpers/css'
 import scss from './Options.scss'
+import ChangeStatus from './ChangeStatus'
 import {
   HAS_DELETE,
   HAS_CHANGE_STATUS
 } from 'shared/constants/permissionTypes'
-import ChangeStatus from './ChangeStatus'
 
 /**
  * Exports css classes from SCSS file
@@ -37,7 +37,7 @@ const rowOptions = ({
 }) => {
   return (
     <div className={cssClass(className)}>
-      <List variant='inline'>
+      <List variant="inline">
         <ListItem>
           <FormattedMessage
             id="word.table.selected"
@@ -47,9 +47,10 @@ const rowOptions = ({
           />
         </ListItem>
 
-        {Component && <Component
-          selectedItems={selected}
-          {...props} />}
+        {Component && (
+          <Component selectedItems={selected}
+{...props} />
+        )}
 
         {options.includes(HAS_CHANGE_STATUS) && (
           <ListItem>
@@ -61,12 +62,12 @@ const rowOptions = ({
           <ListItem>
             <Button
               onClick={handleDelete}
-              variant='transparent'>
-              <FontAwesomeIcon
-                icon='trash-alt'
-                size='sm' />
+              variant="transparent"
+            >
+              <FontAwesomeIcon icon="trash-alt"
+size="sm" />
 
-              <FormattedMessage id='word.delete' />
+              <FormattedMessage id="word.delete" />
             </Button>
           </ListItem>
         )}
@@ -89,7 +90,8 @@ rowOptions.propTypes = {
   /**
    * A list of selected rows
    */
-  selected: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selected: PropTypes.arrayOf(PropTypes.shape({}))
+    .isRequired,
   /**
    * A list of options
    */

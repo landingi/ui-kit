@@ -78,10 +78,13 @@ const select = ({
   liveChanges,
   optionalContent
 }) => {
-  const [inModalPosition, setInModalPosition] = useState(false)
+  const [inModalPosition, setInModalPosition] =
+    useState(false)
   const errorClass = errors[name] ? 'form--has-error' : ''
   const valueClass = value[name] ? 'form--has-value' : ''
-  const filledClass = touched[name] ? 'form-field--touched' : ''
+  const filledClass = touched[name]
+    ? 'form-field--touched'
+    : ''
 
   const handleChange = useCallback((name, item) => {
     emitCloseDropdown()
@@ -92,94 +95,113 @@ const select = ({
     setInModalPosition(inModal)
   }, [inModal])
 
-  const renderOption = item => hasDescription ? (
-    <Fragment>
+  const renderOption = item =>
+    hasDescription ? (
+      <>
+        <Button
+          onClick={() => handleChange(name, item)}
+          variant="dropdown-element"
+        >
+          <Heading level={5}>{item?.label}</Heading>
+
+          <Paragraph color="accent-2"
+size={12}>
+            {item?.description}
+          </Paragraph>
+        </Button>
+
+        <Divider />
+      </>
+    ) : (
       <Button
-        variant='dropdown-element'
-        onClick={() => handleChange(name, item)}>
-        <Heading level={5}>{item?.label}</Heading>
-
-        <Paragraph
-          color='accent-2'
-          size={12}>
-          {item?.description}
-        </Paragraph>
+        onClick={() => handleChange(name, item)}
+        variant="dropdown-element"
+      >
+        {item?.label}
       </Button>
+    )
 
-      <Divider />
-    </Fragment>
-  ) : (
-    <Button
-      variant='dropdown-element'
-      onClick={() => handleChange(name, item)}>
-      {item?.label}
-    </Button>
-  )
+  const renderOptions = () => (
+    <>
+      {emphasisedOptions.map((item, index) => (
+        <ListItem
+          className="list-item--dropdown"
+          key={index}
+        >
+          {renderOption(item)}
+        </ListItem>
+      ))}
 
-  const renderOptions = () => (<Fragment>
-    {emphasisedOptions.map((item, index) => (<ListItem
-        className='list-item--dropdown'
-        key={index}>
-      {renderOption(item)}
-    </ListItem>))}
+      {!isEmpty(emphasisedOptions) && <Divider />}
 
-    {!isEmpty(emphasisedOptions) && <Divider />}
-
-    {options.map((item, index) => (<ListItem
-        className='list-item--dropdown'
-        key={index}>
-      {renderOption(item)}
-    </ListItem>))}
-  </Fragment>
+      {options.map((item, index) => (
+        <ListItem
+          className="list-item--dropdown"
+          key={index}
+        >
+          {renderOption(item)}
+        </ListItem>
+      ))}
+    </>
   )
 
   return (
-    <div className={`form-field form-field--dropdown ${errorClass || valueClass || filledClass}`}>
+    <div
+      className={`form-field form-field--dropdown ${
+        errorClass || valueClass || filledClass
+      }`}
+    >
       {label && hasLabel && (
-        <Label id={name}>
-          {label}
-        </Label>
+        <Label id={name}>{label}</Label>
       )}
 
       <Dropdown
-        label={value[name]?.label || label}
-        hasInput
-        hasFullInputStyle
+        alignment="spaced"
         asPlaceholder={!value[name]?.label}
-        size='fixed'
-        alignment='spaced'
-        inModal={inModalPosition}>
-        {handleOnSearchChange && <Fragment>
-          <div className={cssClass('search-container')}>
-            <Searcher
-              setSearchPhrase={handleOnSearchChange}
-              placeholder={searchPlaceholder}
-              tag='div'
-              protectedSubmit
-              liveChanges={liveChanges}
-            />
-          </div>
+        hasFullInputStyle
+        hasInput
+        inModal={inModalPosition}
+        label={value[name]?.label || label}
+        size="fixed"
+      >
+        {handleOnSearchChange && (
+          <>
+            <div className={cssClass('search-container')}>
+              <Searcher
+                liveChanges={liveChanges}
+                placeholder={searchPlaceholder}
+                protectedSubmit
+                setSearchPhrase={handleOnSearchChange}
+                tag="div"
+              />
+            </div>
 
-          <Divider variant="dropdown" />
-        </Fragment>}
+            <Divider variant="dropdown" />
+          </>
+        )}
 
         <Overflow>
           <div style={overflowStyle}>
             <List>
-              {!isLoading && isEmptyList && isEmpty(options)
-                ? <Message
-                    title='message.empty.search.results'
-                    message='message.empty.search.results.small'
-                    url='https://images.assets-landingi.com/images/search_empty.svg'
-                    height={41}
-                    titleLevel={5}
-                    messageLevel={6} />
-                : renderOptions()}
+              {!isLoading &&
+              isEmptyList &&
+              isEmpty(options) ? (
+                <Message
+                  height={41}
+                  message="message.empty.search.results.small"
+                  messageLevel={6}
+                  title="message.empty.search.results"
+                  titleLevel={5}
+                  url="https://images.assets-landingi.com/images/search_empty.svg"
+                />
+              ) : (
+                renderOptions()
+              )}
 
               {isLoading && <Loader />}
             </List>
 
-            <Spacer space='tiny' />
+            <Spacer space="tiny" />
           </div>
         </Overflow>
 
@@ -202,7 +224,10 @@ select.displayName = 'Select in dropdown'
  * @type {Object}
  */
 select.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -216,12 +241,18 @@ select.propTypes = {
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   hasLabel: PropTypes.bool,
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
@@ -237,7 +268,10 @@ select.propTypes = {
   overflowStyle: PropTypes.instanceOf(Object),
   emphasisedOptions: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,

@@ -1,4 +1,9 @@
-import React, { forwardRef, useRef, memo, useEffect } from 'react'
+import React, {
+  forwardRef,
+  useRef,
+  memo,
+  useEffect
+} from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './Radio.scss'
@@ -17,10 +22,7 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const selectRow = forwardRef(
-  ({
-    indeterminate,
-    ...rest
-  }, ref) => {
+  ({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef()
     const resolvedRef = ref || defaultRef
 
@@ -30,10 +32,9 @@ const selectRow = forwardRef(
 
     return (
       <label className={cssClass('input__radio')}>
-        <input
-          type="radio"
-          ref={resolvedRef}
-          {...rest} />
+        <input ref={resolvedRef}
+type="radio"
+{...rest} />
 
         <div />
       </label>

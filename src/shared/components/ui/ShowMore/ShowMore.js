@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import scss from './ShowMore.scss'
 import Loader from 'shared/components/ui/Loader'
-import Html from 'shared/components/global/Html'
 import Spacer from 'shared/components/ui/Spacer'
+import Html from 'shared/components/global/Html'
 
 /**
  * Show more/less - stateful presentational component
@@ -29,45 +29,50 @@ const showMore = ({
   const [display, setDisplay] = useState('none')
   const [text, setText] = useState('')
 
-  const handleOnClick = useCallback(event => {
-    event.preventDefault()
+  const handleOnClick = useCallback(
+    event => {
+      event.preventDefault()
 
-    setIsOpen(current => !current)
+      setIsOpen(current => !current)
 
-    setDisplay(display !== 'none' ? 'none' : null)
-  }, [isOpen])
+      setDisplay(display !== 'none' ? 'none' : null)
+    },
+    [isOpen]
+  )
 
   useEffect(() => {
     const text = intl.formatMessage({ id: content })
 
     !isOpen
-      ? setText(text.replace(/^(.{170}[^\s]*).*/, '$1') + '...')
+      ? setText(
+          text.replace(/^(.{170}[^\s]*).*/, '$1') + '...'
+        )
       : setText(text)
   }, [isOpen])
 
-  return (
-    text
-      ? <div className={scss.container}>
-          <Html
-            value={text}
-            className={extraClassname} />
+  return text ? (
+    <div className={scss.container}>
+      <Html className={extraClassname}
+value={text} />
 
-            <button
-              type='button'
-              onClick={handleOnClick}
-              className={scss.button}>
-              {isOpen
-                ? <FormattedMessage id='show.less' />
-                : <FormattedMessage id='show.more' />}
-            </button>
+      <button
+        className={scss.button}
+        onClick={handleOnClick}
+        type="button"
+      >
+        {isOpen ? (
+          <FormattedMessage id="show.less" />
+        ) : (
+          <FormattedMessage id="show.more" />
+        )}
+      </button>
 
-            <Spacer space='small' />
+      <Spacer space="small" />
 
-            {isOpen && children
-              ? (children || null)
-              : null}
-        </div>
-      : <Loader />
+      {isOpen && children ? children || null : null}
+    </div>
+  ) : (
+    <Loader />
   )
 }
 

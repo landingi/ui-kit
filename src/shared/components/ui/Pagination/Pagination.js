@@ -33,41 +33,44 @@ const pagination = ({
   const { before_values, values, after_values } = data
   const { before, current, after } = values
 
-  const handleGoToPage = page => useCallback(() => goToPage(page), [])
-  const hidePagination = current[0] === 1 && !after_values.next
+  const handleGoToPage = page =>
+    useCallback(() => goToPage(page), [])
+  const hidePagination =
+    current[0] === 1 && !after_values.next
 
   return (
     <div className={cssClass(className)}>
       <div className={scss.pagination__links}>
         {!hidePagination && (
-          <Fragment>
+          <>
             <span className={scss.pagination__first}>
               <Button
-                size='small'
-                variant='icon'
-                onClick={handleGoToPage(1)}>
+                onClick={handleGoToPage(1)}
+                size="small"
+                variant="icon"
+              >
                 <FormattedMessage id="pagination.word.first" />
               </Button>
             </span>
 
             {!isEmpty(before_values) && (
               <Button
-                variant='icon'
-                size='small'
-                onClick={handleGoToPage(before_values.prev)}>
-                <FontAwesomeIcon
-                  icon='caret-left'
-                />
+                onClick={handleGoToPage(before_values.prev)}
+                size="small"
+                variant="icon"
+              >
+                <FontAwesomeIcon icon="caret-left" />
               </Button>
             )}
 
-            <List variant='inline'>
+            <List variant="inline">
               {before.map((item, index) => (
                 <ListItem key={index}>
                   <Button
-                    size='small'
-                    variant='icon'
-                    onClick={handleGoToPage(item)}>
+                    onClick={handleGoToPage(item)}
+                    size="small"
+                    variant="icon"
+                  >
                     {item}
                   </Button>
                 </ListItem>
@@ -75,11 +78,13 @@ const pagination = ({
 
               {current.map((item, index) => (
                 <ListItem
+                  className={
+                    scss.pagination__links__current
+                  }
                   key={index}
-                  className={scss.pagination__links__current}>
-                  <Button
-                    size='small'
-                    variant='icon'>
+                >
+                  <Button size="small"
+variant="icon">
                     {item}
                   </Button>
                 </ListItem>
@@ -88,9 +93,10 @@ const pagination = ({
               {after.map((item, index) => (
                 <ListItem key={index}>
                   <Button
-                    size='small'
-                    variant='icon'
-                    onClick={handleGoToPage(item)}>
+                    onClick={handleGoToPage(item)}
+                    size="small"
+                    variant="icon"
+                  >
                     {item}
                   </Button>
                 </ListItem>
@@ -98,29 +104,27 @@ const pagination = ({
             </List>
 
             {after_values.and_so && (
-              <span style={{ margin: '0 5px' }}>
-                ...
-              </span>
+              <span style={{ margin: '0 5px' }}>...</span>
             )}
 
             {after_values.next && (
               <Button
-                variant='icon'
-                size='small'
                 isDisabled={isEmpty(after_values.next)}
-                onClick={handleGoToPage(after_values.next)}>
-                <FontAwesomeIcon
-                  icon='caret-right'
-                />
+                onClick={handleGoToPage(after_values.next)}
+                size="small"
+                variant="icon"
+              >
+                <FontAwesomeIcon icon="caret-right" />
               </Button>
             )}
-          </Fragment>
+          </>
         )}
       </div>
 
       <PageSize
         activePageLimit={activePageLimit}
-        onChange={pageLimit} />
+        onChange={pageLimit}
+      />
     </div>
   )
 }

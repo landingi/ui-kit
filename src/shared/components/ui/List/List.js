@@ -22,14 +22,17 @@ const list = ({
 }) => {
   const elementClasses = cssClass({
     'list--inline': variant === 'inline',
-    'list--ordered-decimal': listStyle === 'ordered-decimal',
+    'list--ordered-decimal':
+      listStyle === 'ordered-decimal',
     'list--ordered-disc': listStyle === 'ordered-disc',
     'list--ordered-check': listStyle === 'ordered-check'
   })
 
   return (
     <ul className={cssClass(className, elementClasses)}>
-      {React.Children.toArray(children).filter(item => item)}
+      {React.Children.toArray(children).filter(
+        item => item
+      )}
     </ul>
   )
 }

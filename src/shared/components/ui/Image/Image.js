@@ -15,19 +15,13 @@ const cssClass = styles(scss)
  * @param {number} props.height - height of the image
  * @return {object} An object of children element
  */
-const image = ({
-  src,
-  alt,
-  className,
-  size,
-  height
-}) => (
+const image = ({ src, alt, className, size, height }) => (
   <img
-    src={src}
     alt={alt}
-    width={size}
-    height={height}
     className={cssClass(className)}
+    height={height}
+    src={src}
+    width={size}
   />
 )
 

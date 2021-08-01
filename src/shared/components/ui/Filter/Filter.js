@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
+import { emitCloseDropdown } from 'shared/events/dropdown'
 import Button from 'shared/components/ui/Button'
 import Dropdown from 'shared/components/ui/Dropdown'
 import List from 'shared/components/ui/List'
 import ListItem from 'shared/components/ui/List/Item'
-import { emitCloseDropdown } from 'shared/events/dropdown'
 import { setLocalStorage } from 'shared/helpers/storage'
 import PropTypes from 'prop-types'
 
@@ -17,44 +17,45 @@ import PropTypes from 'prop-types'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-const Filter = ({
+function Filter({
   values,
   setValue,
   initialValue,
   localStorageKey
-}) => {
+}) {
   const findInitialValue = () => {
-    const find = values.find(({ value }) => value === initialValue)
+    const find = values.find(
+      ({ value }) => value === initialValue
+    )
 
     return find.label
   }
 
-  const [filterLabel, setLabel] = useState(findInitialValue())
+  const [filterLabel, setLabel] = useState(
+    findInitialValue()
+  )
 
   const setFilter = (label, value) => {
     setLabel(label)
     setValue(value)
-    localStorageKey && setLocalStorage(localStorageKey, value)
+    localStorageKey &&
+      setLocalStorage(localStorageKey, value)
     emitCloseDropdown()
   }
 
   return (
-    <Dropdown
-      label={filterLabel}
-      size='medium'>
+    <Dropdown label={filterLabel}
+size="medium">
       <List>
-        {values.map(({
-          value, label
-        }) => (
-          <ListItem
-            key={uuid()}
-            variant='dropdown'>
+        {values.map(({ value, label }) => (
+          <ListItem key={uuid()}
+variant="dropdown">
             <Button
-              tag='a'
-              variant='dropdown'
-              // eslint-disable-next-line react/jsx-no-bind
               onClick={() => setFilter(label, value)}
-              >
+              tag="a"
+              // eslint-disable-next-line react/jsx-no-bind
+              variant="dropdown"
+            >
               {label}
             </Button>
           </ListItem>
@@ -77,7 +78,10 @@ Filter.displayName = 'Select in dropdown'
 Filter.propTypes = {
   values: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

@@ -38,28 +38,29 @@ const input = ({
   min,
   controlledValue
 }) => {
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const errorClass =
+    errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
       <Input
-        type={type}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
-        disabled={disabled}
-        translate={translate}
-        maxLength={maxLength}
         autoFocus={autoFocus}
+        controlledValue={controlledValue}
+        disabled={disabled}
+        focused={focused}
+        id={id}
+        label={label}
+        maxLength={maxLength}
+        min={min}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        placeholder={placeholder}
         required={required}
         tooltip={tooltip}
-        focused={focused}
-        min={min}
-        controlledValue={controlledValue}
+        translate={translate}
+        type={type}
+        value={value}
       />
 
       {touched[name] && <Error error={errors[name]} />}
@@ -83,7 +84,10 @@ input.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
@@ -95,7 +99,10 @@ input.propTypes = {
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   placeholder: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
@@ -103,7 +110,10 @@ input.propTypes = {
   maxLength: PropTypes.number,
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
-  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
+  tooltip: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   min: PropTypes.number,
   controlledValue: PropTypes.bool
 }

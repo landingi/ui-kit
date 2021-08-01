@@ -19,17 +19,8 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const formikToggle = ({
-  field: {
-    name,
-    value,
-    onChange,
-    onBlur
-  },
-  form: {
-    errors,
-    touched,
-    setFieldValue
-  },
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched, setFieldValue },
   id,
   label,
   className,
@@ -37,27 +28,33 @@ const formikToggle = ({
 }) => (
   <div className={cssClass('toggle-container', className)}>
     <label
-      className={cssClass('toggle', { 'toggle--checked': value })}
+      className={cssClass('toggle', {
+        'toggle--checked': value
+      })}
     >
       <input
-        name={name}
-        className={cssClass('toggle__checkbox')}
         checked={value}
-        onChange={onChange}
+        className={cssClass('toggle__checkbox')}
+        id={id}
+        name={name}
         onBlur={onBlur}
+        onChange={onChange}
         type={type}
-        id={id} />
+      />
 
       <span className={cssClass('toggle__button')} />
     </label>
 
     {label && (
       <label
+        className={cssClass('toggle__label')}
         htmlFor={id}
-        className={cssClass('toggle__label')}>
+      >
         <FormattedMessage id={`${label}`} />
 
-        {touched[name] && <InputError error={errors[name]} />}
+        {touched[name] && (
+          <InputError error={errors[name]} />
+        )}
       </label>
     )}
   </div>

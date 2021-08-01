@@ -1,4 +1,20 @@
-//gatsby-config.js
+// gatsby-config.js
 module.exports = {
-    plugins: ['gatsby-plugin-sass']
+  flags: {
+    FAST_DEV: true
+  },
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        implementation: require('sass'),
+        additionalData:
+          '@import "../src/shared/styles/theme.scss";',
+        sassOptions: {
+          includePaths: [__dirname, '../src'],
+          outputStyle: 'compressed'
+        }
+      }
+    }
+  ]
 }

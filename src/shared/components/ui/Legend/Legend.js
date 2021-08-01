@@ -16,14 +16,23 @@ const cssClass = styles(scss)
  */
 const legend = ({ data, alignment }) => (
   <div
-    className={cssClass('container', `container--${alignment}`)}>
+    className={cssClass(
+      'container',
+      `container--${alignment}`
+    )}
+  >
     {data.map((item, index) => (
       <span
+        className={cssClass(
+          'legend',
+          `legend--${item.variant}`
+        )}
         key={index}
-        className={cssClass('legend', `legend--${item.variant}`)}>
+      >
         <ColorLine
+          alignment="horizontal"
           variant={item.variant}
-          alignment='horizontal' />
+        />
 
         {item.range}
       </span>

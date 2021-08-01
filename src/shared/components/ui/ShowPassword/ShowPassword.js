@@ -25,8 +25,8 @@ const showPassword = ({
   const [label, setLabel] = useState('word.show')
 
   /**
-  * handleIconSet - set the icon state
-  */
+   * handleIconSet - set the icon state
+   */
   const handleIconSet = useCallback(() => {
     if (icon === 'eye') {
       setIcon('eye-slash')
@@ -42,20 +42,23 @@ const showPassword = ({
   return (
     <span
       className={cssClass(className)}
-      onClick={handleIconSet}>
-      {hasLabel
-        ? <Button
-            variant='switcher-brand'
-            size='tiny'
-            hasIcon>
-            <FontAwesomeIcon icon={icon} />
+      onClick={handleIconSet}
+    >
+      {hasLabel ? (
+        <Button
+          hasIcon
+          size="tiny"
+          variant="switcher-brand"
+        >
+          <FontAwesomeIcon icon={icon} />
 
-            <FormattedMessage id={label} />
-          </Button>
-        : <Button
-            variant='icon'>
-            <FontAwesomeIcon icon={icon} />
-          </Button>}
+          <FormattedMessage id={label} />
+        </Button>
+      ) : (
+        <Button variant="icon">
+          <FontAwesomeIcon icon={icon} />
+        </Button>
+      )}
     </span>
   )
 }

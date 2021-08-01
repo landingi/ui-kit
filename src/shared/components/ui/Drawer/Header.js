@@ -22,14 +22,10 @@ const header = ({
   onClick,
   hasClose
 }) => (
-  <div className={cssClass(className)} >
-    <Heading level={2}>
-      {title}
-    </Heading>
+  <div className={cssClass(className)}>
+    <Heading level={2}>{title}</Heading>
 
-    {hasClose && (
-      <Close onClick={onClick} />
-    )}
+    {hasClose && <Close onClick={onClick} />}
   </div>
 )
 

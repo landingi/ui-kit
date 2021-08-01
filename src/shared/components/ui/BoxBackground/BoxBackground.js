@@ -13,7 +13,12 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const boxBackground = ({ children, variant }) => (
-  <span className={cssClass('boxBackground', `boxBackground--${variant}`)}>
+  <span
+    className={cssClass(
+      'boxBackground',
+      `boxBackground--${variant}`
+    )}
+  >
     {children}
   </span>
 )

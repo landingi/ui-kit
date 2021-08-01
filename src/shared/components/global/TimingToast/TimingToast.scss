@@ -1,0 +1,40 @@
+.toast {
+  position: fixed;
+  left: 240px;
+  bottom: 20px;
+  z-index: $z-index-toast;
+  min-width: 300px;
+
+  &--visible {
+    animation: show-toast 5.6s ease;
+    opacity: 0;
+  }
+}
+
+:global
+div.TimingToast__toast {
+  .Notification__notification {
+    border-radius: $radius-tiny !important;
+  }
+}
+
+@keyframes show-toast {
+  0% {
+    opacity: 1;
+  }
+
+  6% {
+    bottom: 40px;
+    opacity: 1;
+  }
+
+  94% {
+    bottom: 40px;
+    opacity: 1;
+  }
+
+  100% {
+    bottom: -100px;
+    opacity: 0;
+  }
+}

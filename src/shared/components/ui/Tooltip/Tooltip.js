@@ -21,7 +21,7 @@ const cssClass = styles(scss)
  * @param {bool} props.showOnClick - show on click
  * @return {object} An object of children element
  */
-const Tooltip = ({
+function Tooltip({
   className,
   children,
   effect,
@@ -31,36 +31,44 @@ const Tooltip = ({
   placement,
   align,
   size
-}) => {
+}) {
   const tooltipUUID = uuid()
 
-  const showOnClickProps = showOnClick ? {
-    delayHide: 1000,
-    event: 'click',
-    afterShow: () => ReactTooltip.hide()
-  } : {}
+  const showOnClickProps = showOnClick
+    ? {
+        delayHide: 1000,
+        event: 'click',
+        afterShow: () => ReactTooltip.hide()
+      }
+    : {}
 
   return (
-    <Fragment>
+    <>
       <span
         className={cssClass(className)}
+        data-for={tooltipUUID}
         data-tip
-        data-for={tooltipUUID}>
+      >
         {children}
       </span>
 
       <ReactTooltip
-        className={cssClass('react-tooltip', `react-tooltip-${align}`, `react-tooltip--${size}`)}
-        background='#000'
+        background="#000"
+        className={cssClass(
+          'react-tooltip',
+          `react-tooltip-${align}`,
+          `react-tooltip--${size}`
+        )}
+        disable={disabled}
         effect={effect}
         id={tooltipUUID}
-        disable={disabled}
         isCapture
         place={placement}
-        {...showOnClickProps}>
+        {...showOnClickProps}
+      >
         {content}
       </ReactTooltip>
-    </Fragment>
+    </>
   )
 }
 
@@ -76,7 +84,12 @@ Tooltip.propTypes = {
   /**
    * Placement
    */
-  placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
+  placement: PropTypes.oneOf([
+    'top',
+    'left',
+    'right',
+    'bottom'
+  ]),
   /**
    * Placement
    */
@@ -92,7 +105,10 @@ Tooltip.propTypes = {
   /**
    * Tooltip content
    */
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   /**
    * Show tooltip after click, tooltip is hidden after 1 sec
    */

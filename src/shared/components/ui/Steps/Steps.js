@@ -15,29 +15,31 @@ const cssClass = styles(scss)
  * @param {object[]} props.data - data
  * @return {object} An object of children element
  */
-const Steps = ({ data }) => (
-  <div className={cssClass('container')}>
+function Steps({ data }) {
+  return <div className={cssClass('container')}>
     {data.map((item, index) => {
       const step = index + 1
       const { variant, description } = item
 
       return (
-        <div
-          className={scss.step}
-          key={uuid()}>
-          <StepNumber
-            step={step}
-            variant={variant} />
+        <div className={scss.step}
+key={uuid()}>
+          <StepNumber step={step}
+variant={variant} />
 
           <span
-            className={cssClass('step__description', `step__description--${variant}`)}>
+            className={cssClass(
+              'step__description',
+              `step__description--${variant}`
+            )}
+          >
             <FormattedMessage id={description} />
           </span>
         </div>
       )
     })}
   </div>
-)
+}
 
 /**
  * Display name

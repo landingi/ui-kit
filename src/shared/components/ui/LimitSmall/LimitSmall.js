@@ -23,7 +23,12 @@ const limitSmall = ({
   limitText
 }) => {
   return (
-    <div className={cssClass('result__dropdown', `padding__${padding}`)}>
+    <div
+      className={cssClass(
+        'result__dropdown',
+        `padding__${padding}`
+      )}
+    >
       <span>
         <FormattedMessage id={limitText} />
       </span>
@@ -31,9 +36,11 @@ const limitSmall = ({
       <span>
         <b>{formatNumeric(quantity)}</b>
 
-        {limit === -1
-          ? <span> / &#8734;</span>
-          : ` / ${formatNumeric(limit)}`}
+        {limit === -1 ? (
+          <span> / &#8734;</span>
+        ) : (
+          ` / ${formatNumeric(limit)}`
+        )}
       </span>
     </div>
   )

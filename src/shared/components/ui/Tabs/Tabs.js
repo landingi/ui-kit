@@ -34,8 +34,7 @@ const tabs = ({
 
   return (
     <TabContext.Provider value={tabProviderValue}>
-      <div
-        className={cssClass(className)}
+      <div className={cssClass(className)}
         {...restProps}>
         {children}
       </div>

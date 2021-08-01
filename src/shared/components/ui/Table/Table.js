@@ -31,11 +31,9 @@ import { paginationShape } from 'shared/shapes'
 import useQueryString from 'shared/helpers/hooks/useQueryString'
 import emitter from 'shared/lib/emitter'
 import {
-  TABLE_REFRESH,
-  TABLE_FILTER_REFRESH,
-  TABLE_RESET_PAGE
-} from 'shared/constants/eventTypes'
-import { setLocalStorage, getLocalStorage } from 'shared/helpers/storage'
+  setLocalStorage,
+  getLocalStorage
+} from 'shared/helpers/storage'
 import { cancelRequests } from 'shared/services/http/client'
 import { usePermissions } from 'shared/helpers/hooks/usePermissions'
 import { READ_ONLY } from 'shared/constants/permissionTypes'
@@ -43,6 +41,11 @@ import { selectFilter } from 'shared/components/ui/Table/Filters'
 import Spacer from 'shared/components/ui/Spacer'
 import Spreader from 'shared/components/ui/Spreader'
 import Tooltip from 'shared/components/ui/Tooltip'
+import {
+  TABLE_REFRESH,
+  TABLE_FILTER_REFRESH,
+  TABLE_RESET_PAGE
+} from 'shared/constants/eventTypes'
 
 /**
  * Exports css classes from SCSS file
@@ -106,9 +109,12 @@ const table = ({
    * query string params - a temporary solution, to be removed once we move to SPA
    */
   const [checkedRow, setCheckedRow] = useState({})
-  const [queryStringPage, setPageIndex] = useQueryString('page')
-  const [queryStringLimit, setLimitValue] = useQueryString('limit')
-  const [previousPageIndex, setPreviousPageIndex] = useState(0)
+  const [queryStringPage, setPageIndex] =
+    useQueryString('page')
+  const [queryStringLimit, setLimitValue] =
+    useQueryString('limit')
+  const [previousPageIndex, setPreviousPageIndex] =
+    useState(0)
   /**
    * Default filter type
    */
@@ -119,12 +125,16 @@ const table = ({
           const rowValue = row.values[id]
           return rowValue !== undefined
             ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
+                .toLowerCase()
+                .startsWith(
+                  String(filterValue).toLowerCase()
+                )
             : true
         })
       }
-    }), [])
+    }),
+    []
+  )
 
   /**
    * Default filter column
@@ -149,11 +159,7 @@ const table = ({
     selectedFlatRows,
     setPageSize,
     gotoPage,
-    state: {
-      pageIndex,
-      pageSize,
-      filters
-    },
+    state: { pageIndex, pageSize, filters },
     pageCount
   } = useTable(
     {
@@ -163,14 +169,36 @@ const table = ({
       filterTypes,
       usePagination,
       initialState: {
-        pageIndex: pageIndex || Number(queryStringPage) || 0,
-        pageSize: constantPageLimit || getLocalStorage(`table-${tableName}-pageSize`) || Number(queryStringLimit) || 10,
-        hiddenColumns: usePermissions(userPermissions, READ_ONLY) ? ['selection'] : [],
+        pageIndex:
+          pageIndex || Number(queryStringPage) || 0,
+        pageSize:
+          constantPageLimit ||
+          getLocalStorage(`table-${tableName}-pageSize`) ||
+          Number(queryStringLimit) ||
+          10,
+        hiddenColumns: usePermissions(
+          userPermissions,
+          READ_ONLY
+        )
+          ? ['selection']
+          : [],
         filters: customFilters || [],
         options: customOptions || [],
         selectedRowIds: checkedRow
       },
-      pageCount: (constantPageLimit && Math.ceil(totalRows / Number(constantPageLimit))) || Math.ceil(totalRows / parseInt(getLocalStorage(`table-${tableName}-pageSize`))) || Math.ceil(totalRows / Number(queryStringLimit)) || Math.ceil(totalRows / 10),
+      pageCount:
+        (constantPageLimit &&
+          Math.ceil(
+            totalRows / Number(constantPageLimit)
+          )) ||
+        Math.ceil(
+          totalRows /
+            parseInt(
+              getLocalStorage(`table-${tableName}-pageSize`)
+            )
+        ) ||
+        Math.ceil(totalRows / Number(queryStringLimit)) ||
+        Math.ceil(totalRows / 10),
       manualPagination: true,
       manualFilters: true,
       disablePageResetOnDataChange: false,
@@ -202,30 +230,41 @@ const table = ({
      */
     useRowSelect,
     hooks => {
-      hasSelect && (
+      hasSelect &&
         hooks.flatColumns.push(columns => [
           {
             id: 'selection',
-            Header: ({ getToggleAllRowsSelectedProps }) => <Checkbox {...getToggleAllRowsSelectedProps()} />,
-            Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox
+                {...getToggleAllRowsSelectedProps()}
+              />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox
+                {...row.getToggleRowSelectedProps()}
+              />
+            )
           },
           ...columns
         ])
-      )
 
-      hasRadio && (
+      hasRadio &&
         hooks.flatColumns.push(columns => [
           {
             id: 'selection',
             Header: () => <Spreader />,
-            Cell: ({ row, toggleAllRowsSelected }) => (<Radio
-            {...row.getToggleRowSelectedProps()}
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => setRadio(row, toggleAllRowsSelected)} />)
+            Cell: ({ row, toggleAllRowsSelected }) => (
+              <Radio
+                {...row.getToggleRowSelectedProps()}
+                // eslint-disable-next-line react/jsx-no-bind
+                onClick={() =>
+                  setRadio(row, toggleAllRowsSelected)
+                }
+              />
+            )
           },
           ...columns
         ])
-      )
     }
   )
 
@@ -244,14 +283,19 @@ const table = ({
    * get selected rows data
    * @return {array}
    */
-  const selectedRowId = selectedFlatRowsMap(selectedFlatRows)
+  const selectedRowId = selectedFlatRowsMap(
+    selectedFlatRows
+  )
 
   /**
    * Pass read data to deleteRow prop
    * @type {func}
    * @return {func}
    */
-  const deleteRowData = useCallback(() => deleteRow(selectedRowId, tableName), [selectedRowId])
+  const deleteRowData = useCallback(
+    () => deleteRow(selectedRowId, tableName),
+    [selectedRowId]
+  )
 
   /**
    * Handle page size
@@ -262,15 +306,26 @@ const table = ({
   const handlePageSize = useCallback(event => {
     const value = event.target.value
 
-    setLocalStorage(`table-${tableName}-pageSize`, Number(value))
-    const getPageSizeFromLocalStorage = getLocalStorage(`table-${tableName}-pageSize`)
+    setLocalStorage(
+      `table-${tableName}-pageSize`,
+      Number(value)
+    )
+    const getPageSizeFromLocalStorage = getLocalStorage(
+      `table-${tableName}-pageSize`
+    )
 
     if (
       getPageSizeFromLocalStorage === 'undefined' ||
       getPageSizeFromLocalStorage === null
     ) {
-      setLimitValue(getLocalStorage(`table-${tableName}-pageSize`))
-      setPageSize(parseInt(getLocalStorage(`table-${tableName}-pageSize`)))
+      setLimitValue(
+        getLocalStorage(`table-${tableName}-pageSize`)
+      )
+      setPageSize(
+        parseInt(
+          getLocalStorage(`table-${tableName}-pageSize`)
+        )
+      )
     }
 
     setLimitValue(getPageSizeFromLocalStorage)
@@ -306,8 +361,10 @@ const table = ({
     }
   }, [fetchData, pageIndex, pageSize, filters])
 
-  const handleRefreshFilter = filter => fetchData({ pageIndex, pageSize, filter })
-  const handleReference = () => fetchData({ pageIndex, pageSize, filters })
+  const handleRefreshFilter = filter =>
+    fetchData({ pageIndex, pageSize, filter })
+  const handleReference = () =>
+    fetchData({ pageIndex, pageSize, filters })
   const handleResetPage = () => gotoPage(0)
 
   useEffect(() => {
@@ -343,60 +400,73 @@ const table = ({
   /**
    * Options elements
    */
-  const renderOptions = () => (
-    hasSelectedId > 0 && !hasRadio && (
+  const renderOptions = () =>
+    hasSelectedId > 0 &&
+    !hasRadio && (
       <Options
-        options={customOptions}
+        component={optionsComponent}
         handleDelete={deleteRowData}
+        options={customOptions}
         selected={selectedRowId}
-        component={optionsComponent} />
+      />
     )
-  )
 
   /**
    * Head element
    */
   const thead = () => (
-  <Fragment>
-    {renderFiltersAbove && <div className={cssClass('table__filters')}>
-      {headerGroups.map(headerGroup => (
-        headerGroup.headers.map(column => (
-          <div
-            key={uuid()}
-            className={cssClass('table__thead__filter')}>
-            <div>
-              {column.canFilter && column.render('Filter')}
-            </div>
-          </div>
-        ))
-      ))}
-    </div>}
-
-  {!hideHeader && <div className={cssClass('table__thead')}>
-      {headerGroups.map(headerGroup => (
-        <div
-          key={uuid()}
-          className={cssClass('table__thead__tr')}
-          {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map(column => (
-            <div
-              key={uuid()}
-              className={cssClass('table__thead__th', `table__thead__th--${column?.class}`)}
-              {...column.getHeaderProps()}>
-              {column.render('Header', columns)}
-
-              <div>
-                {(column.canFilter && !renderFiltersAbove) ? column.render('Filter') : null}
+    <>
+      {renderFiltersAbove && (
+        <div className={cssClass('table__filters')}>
+          {headerGroups.map(headerGroup =>
+            headerGroup.headers.map(column => (
+              <div
+                className={cssClass('table__thead__filter')}
+                key={uuid()}
+              >
+                <div>
+                  {column.canFilter &&
+                    column.render('Filter')}
+                </div>
               </div>
-            </div>
-          )
+            ))
           )}
-
-          {renderOptions()}
         </div>
-      ))}
-    </div>}
-    </Fragment>
+      )}
+
+      {!hideHeader && (
+        <div className={cssClass('table__thead')}>
+          {headerGroups.map(headerGroup => (
+            <div
+              className={cssClass('table__thead__tr')}
+              key={uuid()}
+              {...headerGroup.getHeaderGroupProps()}
+            >
+              {headerGroup.headers.map(column => (
+                <div
+                  className={cssClass(
+                    'table__thead__th',
+                    `table__thead__th--${column?.class}`
+                  )}
+                  key={uuid()}
+                  {...column.getHeaderProps()}
+                >
+                  {column.render('Header', columns)}
+
+                  <div>
+                    {column.canFilter && !renderFiltersAbove
+                      ? column.render('Filter')
+                      : null}
+                  </div>
+                </div>
+              ))}
+
+              {renderOptions()}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   )
 
   /**
@@ -405,65 +475,81 @@ const table = ({
   const tbody = () => (
     <div
       className={cssClass('table__tbody')}
-      {...getTableBodyProps()}>
-        {page.map(row => {
-          const { is_read, isDisabled, tooltip } = row.original
-          const elementClasses = cssClass(
-            (is_read === undefined) || (is_read === true) ? 'table__tbody__tr--is_read' : null,
-            isDisabled && 'table__tbody__tr--disabled'
-          )
+      {...getTableBodyProps()}
+    >
+      {page.map(row => {
+        const { is_read, isDisabled, tooltip } =
+          row.original
+        const elementClasses = cssClass(
+          is_read === undefined || is_read === true
+            ? 'table__tbody__tr--is_read'
+            : null,
+          isDisabled && 'table__tbody__tr--disabled'
+        )
 
-          prepareRow(row)
+        prepareRow(row)
 
-          return (
-            <Tooltip
-              key={uuid()}
-              className={cssClass('table__tbody__tr', elementClasses)}
-              effect='float'
-              content={tooltip}
-              disabled={!tooltip}
-              {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <div
-                    key={uuid()}
-                    className={cssClass('table__tbody__td')}
-                    {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                  </div>
-                ))}
-            </Tooltip>
-          )
-        })}
+        return (
+          <Tooltip
+            className={cssClass(
+              'table__tbody__tr',
+              elementClasses
+            )}
+            content={tooltip}
+            disabled={!tooltip}
+            effect="float"
+            key={uuid()}
+            {...row.getRowProps()}
+          >
+            {row.cells.map(cell => (
+              <div
+                className={cssClass('table__tbody__td')}
+                key={uuid()}
+                {...cell.getCellProps()}
+              >
+                {cell.render('Cell')}
+              </div>
+            ))}
+          </Tooltip>
+        )
+      })}
     </div>
   )
 
   const renderTable = () => (
     <div className={cssClass(className)}>
       <div
-        className={hasBorder ? cssClass('table__main', 'table__border') : cssClass('table__main')}
-        {...getTableProps()}>
+        className={
+          hasBorder
+            ? cssClass('table__main', 'table__border')
+            : cssClass('table__main')
+        }
+        {...getTableProps()}
+      >
         {thead()}
 
         {isLoading ? (
           <Loader />
         ) : !isEmpty(data) ? (
-          <Fragment>
+          <>
             {tbody()}
 
-            {hasPagination
-              ? <ClientPagination
-              goToPage={gotoPage}
-              pageIndex={pageIndex}
-              pageCount={pageCount}
-              activePageLimit={parseInt(pageSize)}
-              pageLimit={handlePageSize}
-              constantPageLimit={constantPageLimit}
+            {hasPagination ? (
+              <ClientPagination
+                activePageLimit={parseInt(pageSize)}
+                constantPageLimit={constantPageLimit}
+                goToPage={gotoPage}
+                pageCount={pageCount}
+                pageIndex={pageIndex}
+                pageLimit={handlePageSize}
               />
-              : null}
+            ) : null}
 
-            {hasBorder && <Spacer space='small' />}
-          </Fragment>
-        ) : customMessage}
+            {hasBorder && <Spacer space="small" />}
+          </>
+        ) : (
+          customMessage
+        )}
       </div>
     </div>
   )
@@ -536,7 +622,9 @@ table.propTypes = {
   /**
    * userPermissions
    */
-  userPermissions: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  userPermissions: PropTypes.arrayOf(
+    PropTypes.string.isRequired
+  ).isRequired,
   /**
    * totalRows
    */

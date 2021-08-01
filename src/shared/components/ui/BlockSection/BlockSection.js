@@ -28,7 +28,7 @@ const cssClass = styles(scss)
  * @param {array} props.list - list
  * @return {object} An object of children element
  */
-const BlockSection = ({
+function BlockSection({
   className,
   title,
   message,
@@ -37,43 +37,53 @@ const BlockSection = ({
   url,
   reverse,
   list
-}) => {
+}) {
   const elementClasses = cssClass({
     'block-section__panel--reverse': reverse === true
   })
 
   return (
     <div className={cssClass(className)}>
-      <Panel variant='padding-none'>
-        <div className={cssClass('block-section__panel', elementClasses)}>
-          <div className={cssClass('block-section__panel--content')}>
-            <Heading
-              level={2}
-              bold>
+      <Panel variant="padding-none">
+        <div
+          className={cssClass(
+            'block-section__panel',
+            elementClasses
+          )}
+        >
+          <div
+            className={cssClass(
+              'block-section__panel--content'
+            )}
+          >
+            <Heading bold
+level={2}>
               <FormattedMessage id={`${title}`} />
             </Heading>
 
             <Paragraph
               line={20}
+              padding={list ? 'none' : 'medium'}
               weight={400}
-              padding={list ? 'none' : 'medium'}>
+            >
               <FormattedMessage
                 id={message}
                 values={{
                   br: <br />
-                }} />
+                }}
+              />
             </Paragraph>
 
-            {list &&
-              <List listStyle='ordered-disc'>
+            {list && (
+              <List listStyle="ordered-disc">
                 {list.map(item => (
-                  <ListItem
-                    variant='block'
-                    key={uuid()}>
+                  <ListItem key={uuid()}
+variant="block">
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}
-              </List>}
+              </List>
+            )}
 
             <Spacer space={list ? 'medium' : 'small'} />
 
@@ -82,9 +92,8 @@ const BlockSection = ({
             </Button>
           </div>
 
-        <Image
-          src={url}
-          size={527} />
+          <Image size={527}
+src={url} />
         </div>
       </Panel>
     </div>
@@ -114,12 +123,12 @@ BlockSection.propTypes = {
    */
   title: PropTypes.string.isRequired,
   /**
-  * Message
-  */
+   * Message
+   */
   message: PropTypes.string.isRequired,
   /**
-  * Button title
-  */
+   * Button title
+   */
   button: PropTypes.string.isRequired,
   /**
    * OnClick is button action
@@ -136,9 +145,7 @@ BlockSection.propTypes = {
   /**
    * List
    */
-  list: PropTypes.arrayOf(
-    PropTypes.string
-  )
+  list: PropTypes.arrayOf(PropTypes.string)
 }
 
 /**

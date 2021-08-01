@@ -19,41 +19,34 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const checkbox = ({
-  field: {
-    name,
-    value,
-    onChange,
-    onBlur
-  },
-  form: {
-    errors,
-    touched,
-    setFieldValue
-  },
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched, setFieldValue },
   id,
   label,
   className,
   type
 }) => (
-  <div className={cssClass('checkbox-container', className)}>
-    <label
-      className={cssClass('checkbox__input')}
-    >
+  <div
+    className={cssClass('checkbox-container', className)}
+  >
+    <label className={cssClass('checkbox__input')}>
       <input
-        name={name}
         checked={value}
-        onChange={onChange}
+        id={id}
+        name={name}
         onBlur={onBlur}
+        onChange={onChange}
         type={type}
-        id={id} />
+      />
 
       <div />
     </label>
 
     {label && (
       <label
+        className={cssClass('checkbox__label')}
         htmlFor={id}
-        className={cssClass('checkbox__label')}>
+      >
         <FormattedMessage id={`${label}`} />
 
         {touched[name] && <Error error={errors[name]} />}
@@ -63,15 +56,15 @@ const checkbox = ({
 )
 
 /**
-* Display name
-* @type {string}
-*/
+ * Display name
+ * @type {string}
+ */
 checkbox.displayName = 'Form2 / Checkbox'
 
 /**
-* The properties.
-* @type {Object}
-*/
+ * The properties.
+ * @type {Object}
+ */
 checkbox.propTypes = {
   /**
    * Classname

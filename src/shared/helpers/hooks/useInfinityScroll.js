@@ -4,18 +4,18 @@ import { cancelRequests } from 'shared/services/http/client'
 import { debounce } from 'shared/helpers/events'
 
 /**
-* useInfinityScroll - stateful presentational component
-* @param {object} props - props
-* @param {string} props.elementId- element to watch
-* @param {string} props.target - api address
-* @param {function} props.updateTarget - function to update target
-* @param {function} props.setLoading - function to set loading state
-* @param {function} props.setData - function to set data state
-* @param {function} props.setMeta - function to set meta total state
-* @param {object[]} props.params - additional api params
-* @param {number} props.limit - limit
-* @return {object} Data from api
-*/
+ * useInfinityScroll - stateful presentational component
+ * @param {object} props - props
+ * @param {string} props.elementId- element to watch
+ * @param {string} props.target - api address
+ * @param {function} props.updateTarget - function to update target
+ * @param {function} props.setLoading - function to set loading state
+ * @param {function} props.setData - function to set data state
+ * @param {function} props.setMeta - function to set meta total state
+ * @param {object[]} props.params - additional api params
+ * @param {number} props.limit - limit
+ * @return {object} Data from api
+ */
 const useInfinityScroll = (
   elementId,
   getTarget,
@@ -31,8 +31,8 @@ const useInfinityScroll = (
   const [page, setPage] = useState(1)
 
   /**
-  * handleScroll - gets the elementId and on scroll triggers setLoadMore to true
-  */
+   * handleScroll - gets the elementId and on scroll triggers setLoadMore to true
+   */
   const handleScroll = debounce(() => {
     const list = document.getElementById(elementId)
     const { scrollHeight, scrollTop, offsetHeight } = list
@@ -43,12 +43,16 @@ const useInfinityScroll = (
   }, 500)
 
   /**
-  * getData - fetch
-  * @param {bool} loadMore - value of setLoadMore state
-  */
+   * getData - fetch
+   * @param {bool} loadMore - value of setLoadMore state
+   */
   const getData = async loadMore => {
     if (loadMore) {
-      const { data, meta } = await getTarget(page, limit, sort)
+      const { data, meta } = await getTarget(
+        page,
+        limit,
+        sort
+      )
 
       setMeta && setMeta(meta)
       setMetaCount(meta.total)
@@ -60,23 +64,28 @@ const useInfinityScroll = (
   }
 
   /**
-    * handleStateUpdate - update the state of data
-    * @param {array[]} data - list of data
-    */
+   * handleStateUpdate - update the state of data
+   * @param {array[]} data - list of data
+   */
   const handleStateUpdate = data => {
-    setData && setState([...state, ...data], setData([...state, ...data]))
+    setData &&
+      setState(
+        [...state, ...data],
+        setData([...state, ...data])
+      )
 
     setState([...state, ...data])
   }
 
   /**
-  * isLastPage- check if last page
-  */
-  const isLastPage = () => metaCount !== 0 && Math.ceil(metaCount / limit) === page
+   * isLastPage- check if last page
+   */
+  const isLastPage = () =>
+    metaCount !== 0 && Math.ceil(metaCount / limit) === page
 
   /**
-  * useEffect hook - triggers getData() when setLoadmore() has been updated
-  */
+   * useEffect hook - triggers getData() when setLoadmore() has been updated
+   */
   useEffect(() => {
     const list = document.getElementById(elementId)
     const { innerHeight } = window
@@ -91,7 +100,11 @@ const useInfinityScroll = (
       return
     }
 
-    if (clientHeight <= innerHeight && clientHeight && !isLastPage()) {
+    if (
+      clientHeight <= innerHeight &&
+      clientHeight &&
+      !isLastPage()
+    ) {
       setLoadMore(true)
       getData(loadMore)
     }
@@ -99,13 +112,17 @@ const useInfinityScroll = (
   }, [loadMore])
 
   /**
-  * useEffect hook - scroll listener
-  */
+   * useEffect hook - scroll listener
+   */
   useEffect(() => {
-    document.getElementById(elementId).addEventListener('scroll', handleScroll)
+    document
+      .getElementById(elementId)
+      .addEventListener('scroll', handleScroll)
 
     return () => {
-      document.getElementById(elementId).removeEventListener('scroll', handleScroll)
+      document
+        .getElementById(elementId)
+        .removeEventListener('scroll', handleScroll)
       cancelRequests()
     }
   }, [])
