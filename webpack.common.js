@@ -7,7 +7,7 @@ const {
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const srcPath = path.resolve(__dirname, 'src')
-const buildPath = path.resolve(__dirname, 'build')
+const distPath = path.resolve(__dirname, 'dist')
 
 module.exports = {
   context: srcPath,
@@ -16,8 +16,10 @@ module.exports = {
     components: srcPath
   },
   output: {
-    path: buildPath,
-    filename: '[name]_[contenthash].js'
+    filename: "index.js",
+    path: distPath,
+    libraryTarget: "umd",
+    library: "landingi-ui-kit"
   },
   module: {
     rules: [
@@ -56,15 +58,6 @@ module.exports = {
     ]
   },
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          name: 'vendors',
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all'
-        }
-      }
-    },
     minimizer: [
       '...',
       new CssMinimizerPlugin({
