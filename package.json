@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "sideEffects": false,
-  "main": "src/index.js",
   "description": "Landingi UI-Kit",
   "files": [
     "./build"
   ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "source": "src/index.js",
   "repository": "git://github.com/landingi/ui-kit",
   "scripts": {
     "docz:dev": "docz dev",
@@ -149,6 +151,18 @@
       "json-summary",
       "text",
       "lcov"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
   "engines": {
