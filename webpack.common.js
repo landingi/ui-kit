@@ -63,7 +63,7 @@ module.exports = {
       new CssMinimizerPlugin({
         minimizerOptions: {
           cache: true,
-          include: /\/build/
+          include: /\/dist/
         }
       }),
       new TerserPlugin({
@@ -80,8 +80,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name]_[contenthash].css',
-      chunkFilename: '[id].css'
+      filename: 'style.css'
     }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,

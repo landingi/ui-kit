@@ -4,11 +4,7 @@
   "private": true,
   "sideEffects": false,
   "description": "Landingi UI-Kit",
-  "files": [
-    "./build"
-  ],
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "source": "src/index.js",
   "repository": "git://github.com/landingi/ui-kit",
   "scripts": {
