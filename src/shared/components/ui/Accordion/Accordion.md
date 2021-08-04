@@ -1,5 +1,5 @@
 import { Playground, Props } from 'docz'
-import Accordion from 'ui/Accordion'
+import Accordion from '@components/ui/Accordion'
 
 <Playground>
   <Accordion>

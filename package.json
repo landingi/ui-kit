@@ -6,7 +6,6 @@
   "description": "Landingi UI-Kit",
   "main": "dist/index.js",
   "source": "src/index.js",
-  "repository": "git://github.com/landingi/ui-kit",
   "scripts": {
     "docz:dev": "docz dev",
     "docz:build": "docz build",
