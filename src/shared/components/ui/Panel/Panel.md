@@ -1,5 +1,5 @@
 import { Playground } from 'docz'
-import Panel from 'ui/Panel'
+import Panel from '@components/ui/Panel'
 
 # Panel
 

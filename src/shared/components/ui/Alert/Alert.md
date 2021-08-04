@@ -1,5 +1,5 @@
 import { Playground, Props } from 'docz'
-import Alert from 'ui/Alert'
+import Alert from '@components/ui/Alert'
 
 # Alert
 

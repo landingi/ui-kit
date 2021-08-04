@@ -6,7 +6,6 @@
   "description": "Landingi UI-Kit",
   "main": "dist/index.js",
   "source": "src/index.js",
-  "repository": "git://github.com/landingi/ui-kit",
   "scripts": {
     "docz:dev": "docz dev",
     "docz:build": "docz build",
@@ -25,7 +24,7 @@
     "pretty-quick": "pretty-quick --staged",
     "prepare": "husky install",
     "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn run build",
-    "ci": "node ./config/packages/package.builder.js production && yarn install --frozen-lockfile && yarn run test:unit && yarn run build"
+    "ci": "node ./config/packages/package.builder.js production && yarn install && yarn run test:unit && yarn run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.35",
