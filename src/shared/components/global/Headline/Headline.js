@@ -11,6 +11,7 @@ import scss from './Headline.scss'
  */
 const cssClass = styles(scss)
 
+
 /**
  * Headline page - stateless presentational component
  * @param {object} props - props
