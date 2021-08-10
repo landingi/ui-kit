@@ -1,4 +1,10 @@
-```jsx
-<Instruction data={data} />
+import { Playground, Props } from 'docz'
+import Instruction from '@components/ui/Instruction'
 
-```
+# Instruction
+
+<Props of={Instruction} />
+
+<Playground>
+    <Instruction data={data} />
+</Playground>

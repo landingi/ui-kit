@@ -1,11 +1,19 @@
-Normal
+import { Playground, Props } from 'docz'
+import Search from '@components/ui/Search'
 
-```jsx
-<Search />
-```
+# Search
 
-Focus
+<Props of={Search} />
 
-```jsx
-<Search autoFocus={true} />
-```
+## Normal
+
+<Playground>
+    <Search />
+</Playground>
+
+## Focus
+
+<Playground>
+    <Search autoFocus={true} />
+</Playground>
+

@@ -1,9 +1,16 @@
-Sizes
+import { Playground, Props } from 'docz'
+import Spreader from '@components/ui/Spreader'
 
-```js static
-<Spreader spread="tiny" />
-<Spreader spread="small" />
-<Spreader spread="medium" />
-<Spreader spread="large" />
-<Spreader spread="huge" />
-```
+# Spreader
+
+<Props of={Spreader} />
+
+## Size
+
+<Playground>
+    <Spreader spread="tiny" />
+    <Spreader spread="small" />
+    <Spreader spread="medium" />
+    <Spreader spread="large" />
+    <Spreader spread="huge" />
+</Playground>

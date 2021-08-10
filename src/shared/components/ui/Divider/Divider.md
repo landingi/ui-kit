@@ -1,29 +1,36 @@
-Normal
+import { Playground, Props } from 'docz'
+import Divider from '@components/ui/Divider'
 
-```js
-<Divider variant="normal" />
-```
+# Divider
 
-Menu
+<Props of={Divider} />
 
-```js
-<Divider variant="menu" />
-```
+## Normal
 
-Dropdown
+<Playground>
+    <Divider variant="normal" />
+</Playground>
 
-```js
-<Divider variant="dropdown" />
-```
+## Menu
 
-Horizontal
+<Playground>
+    <Divider variant="menu" />
+</Playground>
 
-```js
-<Divider variant="horizontal" />
-```
+## Dropdown
 
-Vertical
+<Playground>
+    <Divider variant="dropdown" />
+</Playground>
 
-```js
-<Divider align="vertical" />
-```
+## Horizontal
+
+<Playground>
+    <Divider variant="horizontal" />
+</Playground>
+
+## Vertical
+
+<Playground>
+    <Divider align="vertical" />
+</Playground>

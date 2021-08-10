@@ -1,3 +1,10 @@
-```js
-<Spinner />
-```
+import { Playground, Props } from 'docz'
+import Spinner from '@components/ui/Spinner'
+
+# Spinner
+
+<Props of={Spinner} />
+
+<Playground>
+    <Spinner />
+</Playground>

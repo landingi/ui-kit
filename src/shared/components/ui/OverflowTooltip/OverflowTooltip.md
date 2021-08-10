@@ -1,7 +1,12 @@
-Basic
+import { Playground, Props } from 'docz'
+import OverflowTooltip from '@components/ui/OverflowTooltip'
 
-```jsx
-<OverflowTooltip content='foobar' placement='right' length={3}>
-  <FontAwesomeIcon icon='info-circle' />
-</OverflowTooltip>
-```
+# OverflowTooltip
+
+<Props of={OverflowTooltip} />
+
+<Playground>
+  <OverflowTooltip content='foobar' placement='right' length={3}>
+    <FontAwesomeIcon icon='info-circle' />
+  </OverflowTooltip>
+</Playground>

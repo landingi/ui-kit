@@ -1,8 +1,38 @@
+import { Playground, Props } from 'docz'
+import { SkeletonCircle, SkeletonLine, SkeletonSidebar, SkeletonDrawer } from '@components/ui/Skeleton'
 
-Variants
-```js static
-<SkeletonCircle />
-<SkeletonLine />
-<SkeletonSidebar />
-<SkeletonDrawer />
-```
+# Skeleton
+
+## Circle
+
+<Props of={SkeletonCircle} />
+
+<Playground>
+    <SkeletonCircle />
+</Playground>
+
+## Line
+
+<Props of={SkeletonLine} />
+
+<Playground>
+    <SkeletonLine />
+</Playground>
+
+## SideBar
+
+<Props of={SkeletonSidebar} />
+
+<Playground>
+    <SkeletonLine />
+</Playground>
+
+## Drawer
+
+<Props of={SkeletonDrawer} />
+
+<Playground>
+    <SkeletonDrawer />
+</Playground>
+
+

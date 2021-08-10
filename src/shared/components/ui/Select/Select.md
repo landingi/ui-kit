@@ -1,5 +1,12 @@
-```jsx
-<Select data={
+import { Playground, Props } from 'docz'
+import Select from '@components/ui/Select'
+
+# Select
+
+<Props of={Select} />
+
+<Playground>
+  <Select data={
   [{
     value: 10,
     label: '10'
@@ -9,10 +16,10 @@
     label: '25'
   }]
   } name='selectTest' />
-```
+</Playground>
 
-```jsx
-<Select data={
+<Playground>
+  <Select data={
   [{
     value: 10,
     label: '10'
@@ -22,4 +29,4 @@
     label: '25'
   }]
   } name='selectTestWithValue' value={25}/>
-```
+</Playground>

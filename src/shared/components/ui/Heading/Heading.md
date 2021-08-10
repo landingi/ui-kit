@@ -1,29 +1,32 @@
-```jsx padded
-<Heading level="large">LARGE Vivamus ultrices vulputate metus nec dictum</Heading>
+import { Playground, Props } from 'docz'
+import Heading from '@components/ui/Heading'
 
-<Heading level={1}>H1 Vivamus ultrices vulputate metus nec dictum</Heading>
+# Heading
 
-<Heading level={2}>H2 Vivamus ultrices vulputate metus nec dictum</Heading>
+<Props of={Heading} />
 
-<Heading level={3}>H3 Vivamus ultrices vulputate metus nec dictum</Heading>
+## Size
 
-<Heading level={4}>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+<Playground>
+    <Heading level="large">LARGE Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={1}>H1 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={2}>H2 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={3}>H3 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={4}>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={5}>H5 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={6}>H6 Vivamus ultrices vulputate metus nec dictum</Heading>
+</Playground>
 
-<Heading level={5}>H5 Vivamus ultrices vulputate metus nec dictum</Heading>
+## Alignment
 
-<Heading level={6}>H6 Vivamus ultrices vulputate metus nec dictum</Heading>
-```
+<Playground>
+    <Heading level={4} align='left'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={4} align='center'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+    <Heading level={4} align='right'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+</Playground>
 
-Alignment
+## Bold
 
-```jsx padded
-<Heading level={4} align='left'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
-<Heading level={4} align='center'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
-<Heading level={4} align='right'>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
-```
-
-Bold
-
-```jsx padded
-<Heading level={4} bold>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
-```
+<Playground>
+    <Heading level={4} bold>H4 Vivamus ultrices vulputate metus nec dictum</Heading>
+</Playground>

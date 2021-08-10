@@ -1,119 +1,127 @@
-Pending
+import { Playground, Props } from 'docz'
+import Badge from '@components/ui/Badge'
 
-```jsx
-<Badge type="pending"> awaiting payment </Badge>
-```
+# Avatar
 
-Success
+<Props of={Badge} />
 
-```jsx
-<Badge type="success">paid</Badge>
-```
+## Pending
 
-Warning
+<Playground>
+  <Badge type="pending"> awaiting payment </Badge>
+</Playground>
 
-```jsx
-<Badge type="warning">test</Badge>
-```
 
-Info
+## Success
 
-```jsx
-<Badge type="info">info</Badge>
-```
+<Playground>
+  <Badge type="success">paid</Badge>
+</Playground>
 
-Alert
+## Warning
 
-```jsx
-<Badge type="alert">cancelled payment </Badge>
-```
+<Playground>
+  <Badge type="warning">test</Badge>
+</Playground>
 
-Indicator
+## Info
 
-```jsx
-<Badge type="indicator">cancelled payment </Badge>
-```
+<Playground>
+  <Badge type="info">info</Badge>
+</Playground>
 
-Paid
+## Alert
 
-```jsx
-<Badge type="paid">cancelled payment </Badge>
-```
+<Playground>
+  <Badge type="alert">cancelled payment </Badge>
+</Playground>
 
-Open
+## Indicator
 
-```jsx
-<Badge type="open">cancelled payment </Badge>
-```
+<Playground>
+  <Badge type="indicator">cancelled payment </Badge>
+</Playground>
 
-Canceled
+## Paid
 
-```jsx
-<Badge type="canceled">cancelled payment </Badge>
-```
+<Playground>
+  <Badge type="paid">cancelled payment </Badge>
+</Playground>
 
-Accent 1
+## Open
 
-```jsx
-<Badge type="accent-1">First group</Badge>
-```
+<Playground>
+  <Badge type="open">cancelled payment </Badge>
+</Playground>
 
-Accent 2
+## Canceled
 
-```jsx
-<Badge type="accent-2">Schedule</Badge>
-```
+<Playground>
+  <Badge type="canceled">cancelled payment </Badge>
+</Playground>
 
-Accent 3
+## Accent 1
 
-```jsx
-<Badge type="accent-3">Schedule</Badge>
-```
+<Playground>
+  <Badge type="accent-1">First group</Badge>
+</Playground>
 
-Accent 4
+## Accent 2
 
-```jsx
-<Badge type="accent-4">Schedule</Badge>
-```
+<Playground>
+  <Badge type="accent-2">Schedule</Badge>
+</Playground>
 
-Accent 5
+## Accent 3
 
-```jsx
-<Badge type="accent-5">Schedule</Badge>
-```
+<Playground>
+  <Badge type="accent-3">Schedule</Badge>
+</Playground>
 
-Accent 6
+## Accent 4
 
-```jsx
-<Badge type="accent-6">Schedule</Badge>
-```
+<Playground>
+  <Badge type="accent-4">Schedule</Badge>
+</Playground>
 
-Icon & content
+## Accent 5
 
-```jsx
-<Badge type="accent-2">
-  <FontAwesomeIcon icon={faFolder} />
-  Test
-</Badge>
-```
+<Playground>
+  <Badge type="accent-5">Schedule</Badge>
+</Playground>
 
-Dropdown
+## Accent 6
 
-```jsx
-<Badge type="accent-1">
-  <Dropdown label="Schedule">
-    <List>
-      <ListItem className="list-item--dropdown">
-        <Button tag="a" href="#" title="">
-          Your profile
-        </Button>
-      </ListItem>
-      <ListItem className="list-item--dropdown">
-        <Button tag="a" href="#" title="">
-          Your profile
-        </Button>
-      </ListItem>
-    </List>
-  </Dropdown>
-</Badge>
-```
+<Playground>
+  <Badge type="accent-6">Schedule</Badge>
+</Playground>
+
+# Icon & content
+
+<Playground>
+  <Badge type="accent-2">
+    <FontAwesomeIcon icon={folder} />
+    Test
+  </Badge>
+</Playground>
+
+# Dropdown
+
+<Playground>
+  <Badge type="accent-1">
+    <Dropdown label="Schedule">
+      <List>
+        <ListItem className="list-item--dropdown">
+          <Button tag="a" href="#" title="">
+            Your profile
+          </Button>
+        </ListItem>
+        <ListItem className="list-item--dropdown">
+          <Button tag="a" href="#" title="">
+            Your profile
+          </Button>
+        </ListItem>
+      </List>
+    </Dropdown>
+  </Badge>
+</Playground>

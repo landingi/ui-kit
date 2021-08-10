@@ -1,7 +1,13 @@
-Basic
-<TextOverflow>
-  Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
-  magna aliquam vehicula.
-</TextOverflow>
+import { Playground, Props } from 'docz'
+import TextOverflow from '@components/ui/TextOverflow'
 
-```
+# TextOverflow
+
+<Props of={TextOverflow} />
+
+<Playground>
+  <TextOverflow>
+    Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
+    magna aliquam vehicula.
+  </TextOverflow>
+</Playground>

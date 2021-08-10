@@ -1,0 +1,7 @@
+import { Playground, Props } from 'docz'
+import MonthRangePicker from '@components/ui/MonthRangePicker'
+
+# MonthRangePicker
+
+<Props of={MonthRangePicker} />
+

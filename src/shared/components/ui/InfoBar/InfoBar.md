@@ -1,17 +1,27 @@
-Alert
+import { Playground, Props } from 'docz'
+import InfoBar from '@components/ui/InfoBar'
+import Button from '@components/ui/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-```js
-<InfoBar type="alert">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
-```
+# InfoBar
 
-Info
+<Props of={InfoBar} />
 
-```jsx
-<InfoBar type="info">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
-```
+## Alert
 
-Warning
+<Playground>
+    <InfoBar type="alert">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
+</Playground>
 
-```js
-<InfoBar type="warning">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
-```
+
+## Info
+
+<Playground>
+    <InfoBar type="info">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
+</Playground>
+
+## Warning
+
+<Playground>
+    <InfoBar type="warning">Etiam volutpat lacus tellus, vel convallis sapien tempor.</InfoBar>
+</Playground>
