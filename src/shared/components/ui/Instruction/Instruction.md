@@ -5,6 +5,6 @@ import Instruction from '@components/ui/Instruction'
 
 <Props of={Instruction} />
 
-<Playground>
+<!-- <Playground>
     <Instruction data={data} />
-</Playground>
+</Playground> -->

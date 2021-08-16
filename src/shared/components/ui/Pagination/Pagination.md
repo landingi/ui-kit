@@ -4,4 +4,4 @@ import Pagination from '@components/ui/Pagination'
 
 # Pagination
 
-<Props of={Pagination} />
+<!-- <Props of={Pagination} /> -->

@@ -78,17 +78,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
     <List>
       <ListItem className="list-item--dropdown">
         <Button tag="a" href="#" title="">
-          <FontAwesomeIcon icon={faFlask} /> Labs
+          <FontAwesomeIcon icon='flask' /> Labs
         </Button>
       </ListItem>
       <ListItem className="list-item--dropdown">
         <Button tag="a" href="#" title="">
-          <FontAwesomeIcon icon={faUsers} /> Users
+          <FontAwesomeIcon icon='users' /> Users
         </Button>
       </ListItem>
       <ListItem className="list-item--dropdown">
         <Button tag="a" href="#" title="">
-          <FontAwesomeIcon icon={faClone} />
+          <FontAwesomeIcon icon='clone' />
           Invoices
         </Button>
       </ListItem>
@@ -108,7 +108,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   <List>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faUserCircle} />
+        <FontAwesomeIcon icon='user-circle' />
         Your profile
       </Button>
     </ListItem>
@@ -119,31 +119,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   <List>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faSitemap} />
+        <FontAwesomeIcon icon='site-map' />
         Subaccounts
       </Button>
     </ListItem>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faUserSecret} />
+        <FontAwesomeIcon icon='user-secret' />
         Admins
       </Button>
     </ListItem>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faUsers} />
+        <FontAwesomeIcon icon='users' />
         Users
       </Button>
     </ListItem>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faFlask} />
+        <FontAwesomeIcon icon='flask' />
         Labs
       </Button>
     </ListItem>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faClone} />
+        <FontAwesomeIcon icon='clone' />
         Invoices
       </Button>
     </ListItem>
@@ -152,13 +152,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   <List>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faCreditCard} />
+        <FontAwesomeIcon icon='credit-card' />
         Payments
       </Button>
     </ListItem>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faPercent} />
+        <FontAwesomeIcon icon='percent' />
         Affiliate program
       </Button>
     </ListItem>
@@ -167,7 +167,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   <List>
     <ListItem className="list-item--dropdown">
       <Button tag="a" href="#" title="">
-        <FontAwesomeIcon icon={faSignOutAlt} />
+        <FontAwesomeIcon icon='sign-out-alt' />
         Logout
       </Button>
     </ListItem>

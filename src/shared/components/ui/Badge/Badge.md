@@ -96,15 +96,6 @@ import Badge from '@components/ui/Badge'
   <Badge type="accent-6">Schedule</Badge>
 </Playground>
 
-# Icon & content
-
-<Playground>
-  <Badge type="accent-2">
-    <FontAwesomeIcon icon={folder} />
-    Test
-  </Badge>
-</Playground>
-
 # Dropdown
 
 <Playground>
