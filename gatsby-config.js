@@ -1,7 +1,7 @@
 // gatsby-config.js
 module.exports = {
   flags: {
-    FAST_DFAST_REFRESHEV: true
+    FAST_REFRESH: true
   },
   plugins: [
     {
