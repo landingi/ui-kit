@@ -1,0 +1,7 @@
+import { Playground, Props } from 'docz'
+import ShowPassword from '@components/ui/ShowPassword'
+
+# ShowPassword
+
+<Props of={ShowPassword} />
+

@@ -1,9 +1,25 @@
-Sizes
+import { Playground, Props } from 'docz'
+import Avatar from '@components/ui/Avatar'
 
-```jsx
-<Avatar variant ='blank' size='tiny' name='Kamil' /> 
-<Avatar variant ='blank' size='medium' name='Kamil' /> 
+# Avatar
 
-<Avatar variant ='image' size='tiny' src='https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512'/>
-<Avatar variant ='image' size='medium' src='https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512' />
-```
+<Props of={Avatar} />
+
+## Basic usage
+
+<Playground>
+    <Avatar variant ='blank' size='medium' name='Kamil' />
+</Playground>
+
+## Sizes
+
+<Playground>
+    <Avatar variant ='blank' size='tiny' name='Kamil' />
+    <Avatar variant ='blank' size='medium' name='Kamil' />
+</Playground>
+
+## Custom asset
+
+<Playground>
+    <Avatar variant ='image' size='medium' src='https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512' />
+</Playground>

@@ -1,27 +1,34 @@
-Info
+import { Playground, Props } from 'docz'
+import Notification from '@components/ui/Notification'
 
-```jsx padded
-<Notification type="info">Etiam volutpat lacus tellus, vel convallis sapien tempor. </Notification>
-```
+# Notification
 
-Success
+<Props of={Notification} />
 
-```js
-<Notification type="success">
-  Etiam volutpat lacus tellus, vel convallis sapien tempor.{' '}
-</Notification>
-```
+## Info
 
-Alert
+<Playground>
+  <Notification type="info">Etiam volutpat lacus tellus, vel convallis sapien tempor. </Notification>
+</Playground>
 
-```js
-<Notification type="alert">Etiam volutpat lacus tellus, vel convallis sapien tempor </Notification>
-```
+## Success
 
-Warning
+<Playground>
+  <Notification type="success">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.{' '}
+  </Notification>
+</Playground>
 
-```js
-<Notification type="warning">
-  Etiam volutpat lacus tellus, vel convallis sapien tempor.{' '}
-</Notification>
-```
+## Alert
+
+<Playground>
+  <Notification type="alert">Etiam volutpat lacus tellus, vel convallis sapien tempor </Notification>
+</Playground>
+
+## Warning
+
+<Playground>
+  <Notification type="warning">
+    Etiam volutpat lacus tellus, vel convallis sapien tempor.{' '}
+  </Notification>
+</Playground>

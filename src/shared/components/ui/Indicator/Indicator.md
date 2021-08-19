@@ -1,9 +1,18 @@
-Button
+import { Playground, Props } from 'docz'
+import Indicator from '@components/ui/Indicator'
+import Button from '@components/ui/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-```jsx
-<Indicator isAlert>
-  <Button variant="icon">
-    <FontAwesomeIcon icon="bullhorn" />
-  </Button>
-</Indicator>
-```
+# Indicator
+
+<Props of={Indicator} />
+
+## Small
+
+<Playground>
+  <Indicator isAlert>
+    <Button variant="icon">
+      <FontAwesomeIcon icon="bullhorn" />
+    </Button>
+  </Indicator>
+</Playground>

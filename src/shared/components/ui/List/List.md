@@ -1,16 +1,23 @@
-Normal
+import { Playground, Props } from 'docz'
+import List from '@components/ui/List'
 
-```jsx
-<List>
-  <ListItem>List item</ListItem>
-  <ListItem>List item</ListItem>
-</List>
-```
+# List
 
-Inline
-```jsx
-<List variant='inline'>
-  <ListItem>List item</ListItem>
-  <ListItem>List item</ListItem>
-</List>
-```
+<Props of={List} />
+
+## Normal
+
+<Playground>
+  <List>
+    <ListItem>List item</ListItem>
+    <ListItem>List item</ListItem>
+  </List>
+</Playground>
+
+## Inline
+<Playground>
+  <List variant='inline'>
+    <ListItem>List item</ListItem>
+    <ListItem>List item</ListItem>
+  </List>
+</Playground>

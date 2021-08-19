@@ -1,6 +1,13 @@
-Variants
+import { Playground, Props } from 'docz'
+import StatsBadge from '@components/ui/StatsBadge'
 
-```jsx
+# StatsBadge
+
+<Props of={StatsBadge} />
+
+## Variant
+
+<Playground>
   <StatsBadge
     description='word.total.subaccounts'
     quantity={100} />
@@ -14,4 +21,4 @@ Variants
     description='word.active.subaccounts'
     quantity={60}
     color='pink' />
-```
+</Playground>

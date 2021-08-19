@@ -1,13 +1,23 @@
-Full width
-```jsx
-<Layout>
-children
-</Layout>
-```
+import { Playground, Props } from 'docz'
+import Layout from '@components/ui/Layout'
 
-Large width
-```jsx
-<Layout width='large'>
-children
-</Layout>
-```
+# Layout
+
+<Props of={Layout} />
+
+## Full
+
+<Playground>
+    <Layout>
+        children
+    </Layout>
+</Playground>
+
+## Large
+
+<Playground>
+    <Layout width='large'>
+        children
+    </Layout>
+</Playground>
+

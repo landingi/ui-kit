@@ -1,19 +1,27 @@
-Vertical Alignment
+import { Playground, Props } from 'docz'
+import Legend from '@components/ui/Legend'
 
-```jsx
-  <Legend data= {
+# Layout
+
+<Props of={Legend} />
+
+## Vertical Alignment
+
+<Playground>
+    <Legend data= {
     [{ range: '0 - 19', variant: 'success' },
     { range: '20 - 59', variant: 'warning' },
     { range: '60 - 100', variant: 'alert' }]
   } />
-```
-  
-Horizontal Alignment
-```jsx
-  <Legend alignment='horizontal' data= {
+</Playground>
+
+## Horizontal Alignment
+
+<Playground>
+    <Legend alignment='horizontal' data= {
     [{ range: '0 - 19', variant: 'success' },
     { range: '20 - 59', variant: 'warning' },
     { range: '60 - 100', variant: 'alert' }]
   } />
-```
+</Playground>
 

@@ -1,1 +1,7 @@
+import { Playground, Props } from 'docz'
+import ClientPagination from '@components/ui/ClientPagination'
+
+# Pagination
+
+<Props of={ClientPagination} />
 

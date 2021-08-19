@@ -1,5 +1,13 @@
-Step variant
-```jsx
+import { Playground, Props } from 'docz'
+import Steps from '@components/ui/Steps'
+
+# Steps
+
+<Props of={Steps} />
+
+## Variant
+
+<Playground>
   <Steps data={[
     {
       step: 1,
@@ -17,4 +25,4 @@ Step variant
       description: 'Next step'
     }
   ]} />
-```
+</Playground>

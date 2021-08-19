@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { Fragment } from 'react'
+import React from 'react'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.

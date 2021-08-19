@@ -1,5 +1,13 @@
-Normal
-```jsx
+import { Playground, Props } from 'docz'
+import ProgressBar from '@components/ui/ProgressBar'
+
+# ProgressBar
+
+<Props of={ProgressBar} />
+
+## Normal
+
+<Playground>
   <ProgressBar 
     variant='success' 
     quantity={90} 
@@ -12,28 +20,32 @@ Normal
     variant='alert' 
     quantity={110} 
     limit={100} />
-```
+</Playground>
 
-Exceeded info
-```jsx
+## Exceeded info
+
+<Playground>
   <ProgressBar 
     variant='success'
     quantity={90} 
     limit={100} 
     limitExceededInfo
     limitText='statistics.unique-users'/>
-```
+</Playground>
 
-Limit
-```jsx
+## Limit
+
+<Playground>
   <ProgressBar 
     variant='success'
     quantity={90} 
     limit={100} 
     showColorNumber />
-```
-Limit dropdown
-```jsx
+</Playground>
+
+## Limit dropdown
+
+<Playground>
   <ProgressBar 
     variant='success'
     quantity={90} 
@@ -41,4 +53,4 @@ Limit dropdown
     barSize='small'
     showDropdownResult
     limitText='statistics.unique-users' />
-```
+</Playground>

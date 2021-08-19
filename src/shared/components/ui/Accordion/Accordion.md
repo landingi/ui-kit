@@ -1,6 +1,12 @@
 import { Playground, Props } from 'docz'
 import Accordion from '@components/ui/Accordion'
 
+# Accordion
+
+<Props of={Accordion} />
+
+## Basic usage
+
 <Playground>
   <Accordion>
     <div label='label 1'>

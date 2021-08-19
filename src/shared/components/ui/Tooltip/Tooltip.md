@@ -1,29 +1,22 @@
-Bottom
+import { Playground, Props } from 'docz'
+import Tooltip from '@components/ui/Tooltip'
 
-```js
-<Tooltip content="Bottom tooltip">Bottom tooltip</Tooltip>
-```
+# Tooltip
 
-Left
+<Props of={Tooltip} />
 
-```js
-<Tooltip content="Left tooltip" placement="left">
-  Left tooltip
-</Tooltip>
-```
+<Playground>
+  <Tooltip content="Bottom tooltip">Bottom tooltip</Tooltip>
 
-Right
+  <Tooltip content="Left tooltip" placement="left">
+    Left tooltip
+  </Tooltip>
 
-```js
-<Tooltip content="Right tooltip" placement="right">
-  Right tooltip
-</Tooltip>
-```
+  <Tooltip content="Right tooltip" placement="right">
+    Right tooltip
+  </Tooltip>
 
-Top
-
-```js
-<Tooltip content="Top tooltip" placement="top">
-  Top tooltip
-</Tooltip>
-```
+  <Tooltip content="Top tooltip" placement="top">
+    Top tooltip
+  </Tooltip>
+</Playground>

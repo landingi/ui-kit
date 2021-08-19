@@ -1,14 +1,21 @@
-Variants
+import { Playground, Props } from 'docz'
+import CustomLink from '@components/ui/CustomLink'
 
-```jsx padded
-<CustomLink variant='active' label='active' href='#' />
-<CustomLink variant='inactive' label='iactive' href='#' />
-<CustomLink variant='dark' label='dark' href='#' />
-```
+# CustomLink
 
-Sizes
+<Props of={CustomLink} />
 
-```jsx padded
-<CustomLink variant='active' label='active' href='#'/>
-<CustomLink variant='active' label='active' href='#' size={16} />
-```
+## Variant
+
+<Playground>
+    <CustomLink variant='active' label='active' href='#' />
+    <CustomLink variant='inactive' label='iactive' href='#' />
+    <CustomLink variant='dark' label='dark' href='#' />
+</Playground>
+
+## Size
+
+<Playground>
+    <CustomLink variant='active' label='active' href='#'/>
+    <CustomLink variant='active' label='active' href='#' size={16} />
+</Playground>
