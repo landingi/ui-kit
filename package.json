@@ -1,7 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
   "version": "1.0.0",
-  "private": true,
   "sideEffects": false,
   "description": "Landingi UI-Kit",
   "main": "dist/index.js",
@@ -163,6 +162,6 @@
   },
   "engines": {
     "node": ">=16.9.1",
-    "pnpm": ">=6"
+    "pnpm": ">=6.15.1"
   }
 }

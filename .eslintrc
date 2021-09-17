@@ -32,8 +32,6 @@
     "react/forbid-component-props": "off",
     "multiline-ternary": "off",
     "array-callback-return": "off",
-    "react-hooks/rules-of-hooks": "warn",
-    "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",
     "jsx-quotes": ["error", "prefer-single"],
@@ -52,7 +50,6 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
     "prettier",
     "plugin:prettier/recommended"
   ],
