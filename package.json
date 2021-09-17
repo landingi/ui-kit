@@ -23,7 +23,7 @@
     "pretty-quick": "pretty-quick --staged",
     "prepare": "husky install",
     "build:dev": "node ./config/packages/package.builder.js development && pnpm install && pnpm run build",
-    "ci": "node ./config/packages/package.builder.js production && pnpm install && pnpm run test:unit && pnpm run build"
+    "ci": "node ./config/packages/package.builder.js production && pnpm install && pnpm build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
