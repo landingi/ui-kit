@@ -16,10 +16,10 @@ module.exports = {
     components: srcPath
   },
   output: {
-    filename: "index.js",
+    filename: 'index.js',
     path: distPath,
-    libraryTarget: "umd",
-    library: "landingi-ui-kit"
+    libraryTarget: 'umd',
+    library: 'landingi-ui-kit'
   },
   module: {
     rules: [

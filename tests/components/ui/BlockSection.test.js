@@ -33,11 +33,18 @@ describe('<BlockSection /> mount', () => {
   })
 
   it('has `block-section__panel--reverse` class', () => {
-    expect(wrapper.find('div').at(2).hasClass('block-section__panel--reverse')).toBe(true)
+    expect(
+      wrapper
+        .find('div')
+        .at(2)
+        .hasClass('block-section__panel--reverse')
+    ).toBe(true)
   })
 
   it('expect "Publish it your way"', () => {
-    expect(wrapper.find('span').text()).toEqual('Publish it your way')
+    expect(wrapper.find('span').text()).toEqual(
+      'Publish it your way'
+    )
   })
 
   it('simulate <Button /> click', () => {

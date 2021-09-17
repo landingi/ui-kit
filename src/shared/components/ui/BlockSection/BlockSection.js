@@ -44,7 +44,7 @@ function BlockSection({
 
   return (
     <div className={cssClass(className)}>
-      <Panel variant="padding-none">
+      <Panel variant='padding-none'>
         <div
           className={cssClass(
             'block-section__panel',
@@ -56,8 +56,7 @@ function BlockSection({
               'block-section__panel--content'
             )}
           >
-            <Heading bold
-level={2}>
+            <Heading bold level={2}>
               <FormattedMessage id={`${title}`} />
             </Heading>
 
@@ -75,10 +74,9 @@ level={2}>
             </Paragraph>
 
             {list && (
-              <List listStyle="ordered-disc">
+              <List listStyle='ordered-disc'>
                 {list.map(item => (
-                  <ListItem key={uuid()}
-variant="block">
+                  <ListItem key={uuid()} variant='block'>
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}
@@ -92,8 +90,7 @@ variant="block">
             </Button>
           </div>
 
-          <Image size={527}
-src={url} />
+          <Image size={527} src={url} />
         </div>
       </Panel>
     </div>

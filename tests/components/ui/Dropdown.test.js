@@ -11,9 +11,9 @@ const props = {
   label: 'label'
 }
 
-const dropdownComponent = (<Dropdown {...props}>
-    {props.children}
-</Dropdown>)
+const dropdownComponent = (
+  <Dropdown {...props}>{props.children}</Dropdown>
+)
 
 describe('<Dropdown/> mount', () => {
   let wrapper

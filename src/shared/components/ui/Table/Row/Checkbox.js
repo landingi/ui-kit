@@ -39,7 +39,7 @@ const selectRow = forwardRef(
       <label className={cssClass('input__checkbox')}>
         <input
           ref={resolvedRef}
-          type="checkbox"
+          type='checkbox'
           {...rest}
         />
 

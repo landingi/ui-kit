@@ -35,10 +35,9 @@ function InfoSection({
 }) {
   const renderList = useMemo(
     () => (
-      <List listStyle="ordered-check">
+      <List listStyle='ordered-check'>
         {list.map(item => (
-          <ListItem key={uuid()}
-variant="list">
+          <ListItem key={uuid()} variant='list'>
             <Paragraph size={18}>
               <FormattedMessage id={item} />
             </Paragraph>
@@ -52,24 +51,21 @@ variant="list">
   return (
     <div className={cssClass(className)}>
       <div>
-        <Heading bold
-level={1}>
+        <Heading bold level={1}>
           <FormattedMessage id={`${title}`} />
         </Heading>
 
         {renderList}
 
-        <Spacer space="medium" />
+        <Spacer space='medium' />
 
-        <Button onClick={onClick}
-size="large">
+        <Button onClick={onClick} size='large'>
           <FormattedMessage id={button} />
         </Button>
       </div>
 
       <div>
-        <Image size={526}
-src={url} />
+        <Image size={526} src={url} />
       </div>
     </div>
   )

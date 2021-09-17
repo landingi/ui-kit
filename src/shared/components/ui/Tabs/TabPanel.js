@@ -30,8 +30,7 @@ const tabPanel = ({
 
   return (
     tabContext.activeTab === name && (
-      <div className={classNames}
-{...restProps}>
+      <div className={classNames} {...restProps}>
         {children}
       </div>
     )

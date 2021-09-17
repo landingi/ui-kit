@@ -100,12 +100,11 @@ const select = ({
       <>
         <Button
           onClick={() => handleChange(name, item)}
-          variant="dropdown-element"
+          variant='dropdown-element'
         >
           <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph color="accent-2"
-size={12}>
+          <Paragraph color='accent-2' size={12}>
             {item?.description}
           </Paragraph>
         </Button>
@@ -115,7 +114,7 @@ size={12}>
     ) : (
       <Button
         onClick={() => handleChange(name, item)}
-        variant="dropdown-element"
+        variant='dropdown-element'
       >
         {item?.label}
       </Button>
@@ -125,7 +124,7 @@ size={12}>
     <>
       {emphasisedOptions.map((item, index) => (
         <ListItem
-          className="list-item--dropdown"
+          className='list-item--dropdown'
           key={index}
         >
           {renderOption(item)}
@@ -136,7 +135,7 @@ size={12}>
 
       {options.map((item, index) => (
         <ListItem
-          className="list-item--dropdown"
+          className='list-item--dropdown'
           key={index}
         >
           {renderOption(item)}
@@ -156,13 +155,13 @@ size={12}>
       )}
 
       <Dropdown
-        alignment="spaced"
+        alignment='spaced'
         asPlaceholder={!value[name]?.label}
         hasFullInputStyle
         hasInput
         inModal={inModalPosition}
         label={value[name]?.label || label}
-        size="fixed"
+        size='fixed'
       >
         {handleOnSearchChange && (
           <>
@@ -172,11 +171,11 @@ size={12}>
                 placeholder={searchPlaceholder}
                 protectedSubmit
                 setSearchPhrase={handleOnSearchChange}
-                tag="div"
+                tag='div'
               />
             </div>
 
-            <Divider variant="dropdown" />
+            <Divider variant='dropdown' />
           </>
         )}
 
@@ -188,11 +187,11 @@ size={12}>
               isEmpty(options) ? (
                 <Message
                   height={41}
-                  message="message.empty.search.results.small"
+                  message='message.empty.search.results.small'
                   messageLevel={6}
-                  title="message.empty.search.results"
+                  title='message.empty.search.results'
                   titleLevel={5}
-                  url="https://images.assets-landingi.com/images/search_empty.svg"
+                  url='https://images.assets-landingi.com/images/search_empty.svg'
                 />
               ) : (
                 renderOptions()
@@ -201,7 +200,7 @@ size={12}>
               {isLoading && <Loader />}
             </List>
 
-            <Spacer space="tiny" />
+            <Spacer space='tiny' />
           </div>
         </Overflow>
 

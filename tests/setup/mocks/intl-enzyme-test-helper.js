@@ -12,7 +12,7 @@ const messages = require('@i18n/en/en.json')
 const defaultLocale = 'en'
 const locale = defaultLocale
 
-export const mountWithIntl = node => (
+export const mountWithIntl = node =>
   mount(node, {
     wrappingComponent: IntlProvider,
     wrappingComponentProps: {
@@ -21,4 +21,3 @@ export const mountWithIntl = node => (
       messages
     }
   })
-)

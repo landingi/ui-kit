@@ -41,8 +41,7 @@ function AccordionItem({
       >
         <div>
           {number && (
-            <StepNumber size="medium"
-step={number} />
+            <StepNumber size='medium' step={number} />
           )}
 
           {title}
@@ -50,7 +49,7 @@ step={number} />
 
         <FontAwesomeIcon
           icon={isOpen ? 'chevron-up' : 'chevron-down'}
-          size="xs"
+          size='xs'
         />
       </div>
 

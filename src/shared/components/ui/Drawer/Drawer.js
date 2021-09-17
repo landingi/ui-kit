@@ -72,12 +72,11 @@ const drawer = ({
 
   return (
     <>
-      <PoseGroup animateOnMount
-flipMove={false}>
+      <PoseGroup animateOnMount flipMove={false}>
         {isActive && (
           <DrawerAnimation
             className={cssClass(className, elementClasses)}
-            key="draweranimation"
+            key='draweranimation'
           >
             <Header
               onClick={onClick}

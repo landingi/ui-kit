@@ -23,7 +23,7 @@ const check = ({ children, positive }) => (
   >
     <FontAwesomeIcon icon={positive ? 'check' : 'times'} />
 
-    <Spreader spread="tiny" />
+    <Spreader spread='tiny' />
 
     {children}
   </span>

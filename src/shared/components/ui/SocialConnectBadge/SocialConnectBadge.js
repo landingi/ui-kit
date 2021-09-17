@@ -31,20 +31,19 @@ const socialConnectBadge = ({
       `social-connect-badge-${social}--${variant}`
     )}
   >
-    <Button hasIcon
-size="medium">
+    <Button hasIcon size='medium'>
       <FontAwesomeIcon icon={['fab', `${social}`]} />
 
       <span>
         {variant === 'connect' ? (
-          <FormattedMessage id="word.connect" />
+          <FormattedMessage id='word.connect' />
         ) : (
-          <FormattedMessage id="word.disconnect" />
+          <FormattedMessage id='word.disconnect' />
         )}
 
         <span>{social}</span>
 
-        <FormattedMessage id="word.account" />
+        <FormattedMessage id='word.account' />
       </span>
     </Button>
   </div>

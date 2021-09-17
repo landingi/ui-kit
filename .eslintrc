@@ -17,36 +17,41 @@
   },
   "rules": {
     "camelcase": "off",
-    "array-callback-return": "off",
+    "no-use-before-define": "off",
     "react/sort-comp": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-sort-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-sort-default-props": "off",
+    "react/jsx-max-depth": "off",
+    "react/jsx-fragments": "off",
+    "react/jsx-no-literals": "off",
     "react/sort-prop-types": "off",
     "react/function-component-definition": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/forbid-component-props": "off",
-    "react/jsx-max-depth": "off",
-    "react/jsx-no-literals": "off",
-    "react/no-array-index-key": "off",
-    "react/no-multi-comp": "off",
-    "react/jsx-no-bind": "off",
-    "react/state-in-constructor": "off",
+    "multiline-ternary": "off",
+    "array-callback-return": "off",
     "react/no-set-state": "off",
-    "no-use-before-define": "off",
-    "react/jsx-max-props-per-line": [
-      2,
-      {
-        "maximum": 1,
-        "when": "always"
-      }
-    ]
+    "react/state-in-constructor": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+        "semi": false,
+				"arrowParens": "avoid",
+        "jsxSingleQuote": true,
+        "endOfLine":"auto",
+        "trailingComma" : "none"
+			}
+		]
   },
   "extends": [
-    "plugin:react/all",
-    "standard",
-    "prettier"
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "react": {

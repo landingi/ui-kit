@@ -28,18 +28,26 @@ describe('<Fresh/> mount', () => {
   })
 
   it('button name should be "Extend your limit"', () => {
-    expect(wrapper.find('Button').text()).toEqual('Extend your limit')
+    expect(wrapper.find('Button').text()).toEqual(
+      'Extend your limit'
+    )
   })
 
   it('mail  should be "mailto:success@landingi.com"', () => {
-    expect(wrapper.props().mail).toEqual('mailto:success@landingi.com')
+    expect(wrapper.props().mail).toEqual(
+      'mailto:success@landingi.com'
+    )
   })
 
   it('subject name should be "extend.your.limit.subject"', () => {
-    expect(wrapper.props().subject).toEqual('extend.your.limit.subject')
+    expect(wrapper.props().subject).toEqual(
+      'extend.your.limit.subject'
+    )
   })
 
   it('description name should be "extend.your.limit.description"', () => {
-    expect(wrapper.props().description).toEqual('extend.your.limit.description')
+    expect(wrapper.props().description).toEqual(
+      'extend.your.limit.description'
+    )
   })
 })

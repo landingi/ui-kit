@@ -46,7 +46,7 @@ const pageSize = ({
   <div className={cssClass(className)}>
     <Select
       data={pageSizeDropdown}
-      name="setPaginationSize"
+      name='setPaginationSize'
       onChange={onChange}
       value={activePageLimit}
     />

@@ -5,10 +5,9 @@ import registerIcons from '@helpers/icons'
 
 registerIcons()
 
-const CustomLinkComponent = (<CustomLink
-    href="foo.com"
-    label="active"
-                             />)
+const CustomLinkComponent = (
+  <CustomLink href='foo.com' label='active' />
+)
 
 describe('<CustomLink /> mount', () => {
   let wrapper
@@ -30,25 +29,33 @@ describe('<CustomLink /> mount', () => {
   })
 
   it('has active variant', () => {
-    expect(wrapper.children().hasClass('custom-link--active')).toBe(true)
+    expect(
+      wrapper.children().hasClass('custom-link--active')
+    ).toBe(true)
   })
 
   it('has inactive variant', () => {
     wrapper.setProps({
       variant: 'inactive'
     })
-    expect(wrapper.children().hasClass('custom-link--inactive')).toBe(true)
+    expect(
+      wrapper.children().hasClass('custom-link--inactive')
+    ).toBe(true)
   })
 
   it('has dark variant', () => {
     wrapper.setProps({
       variant: 'dark'
     })
-    expect(wrapper.children().hasClass('custom-link--dark')).toBe(true)
+    expect(
+      wrapper.children().hasClass('custom-link--dark')
+    ).toBe(true)
   })
 
   it('has font-size: 14', () => {
-    expect(wrapper.children().hasClass('custom-link--14')).toBe(true)
+    expect(
+      wrapper.children().hasClass('custom-link--14')
+    ).toBe(true)
   })
 
   it('has font-size: 16', () => {
@@ -56,6 +63,8 @@ describe('<CustomLink /> mount', () => {
       size: 16
     })
 
-    expect(wrapper.children().hasClass('custom-link--16')).toBe(true)
+    expect(
+      wrapper.children().hasClass('custom-link--16')
+    ).toBe(true)
   })
 })

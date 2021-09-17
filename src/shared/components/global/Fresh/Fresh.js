@@ -71,8 +71,8 @@ function Fresh({
       buttonStyle
       href={handleLimitExceededMail()}
       size={size}
-      tag="a"
-      target="_blank"
+      tag='a'
+      target='_blank'
       variant={variant}
     >
       <FormattedMessage id={name} />

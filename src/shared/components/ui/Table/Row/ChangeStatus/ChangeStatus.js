@@ -39,30 +39,30 @@ const changeStatus = ({ selected }) => {
   const renderStatuses = () => {
     return (
       <List>
-        <ListItem variant="dropdown">
+        <ListItem variant='dropdown'>
           <Button
             onClick={() => handleStatusUpdate('open')}
-            tag="a"
+            tag='a'
           >
-            <FormattedMessage id="status.open" />
+            <FormattedMessage id='status.open' />
           </Button>
         </ListItem>
 
-        <ListItem variant="dropdown">
+        <ListItem variant='dropdown'>
           <Button
             onClick={() => handleStatusUpdate('completed')}
-            tag="a"
+            tag='a'
           >
-            <FormattedMessage id="status.completed" />
+            <FormattedMessage id='status.completed' />
           </Button>
         </ListItem>
 
-        <ListItem variant="dropdown">
+        <ListItem variant='dropdown'>
           <Button
             onClick={() => handleStatusUpdate('canceled')}
-            tag="a"
+            tag='a'
           >
-            <FormattedMessage id="status.canceled" />
+            <FormattedMessage id='status.canceled' />
           </Button>
         </ListItem>
       </List>
@@ -71,9 +71,9 @@ const changeStatus = ({ selected }) => {
 
   return (
     <Dropdown
-      icon="circle"
-      label={<FormattedMessage id="order.change.status" />}
-      size="small"
+      icon='circle'
+      label={<FormattedMessage id='order.change.status' />}
+      size='small'
     >
       {renderStatuses()}
     </Dropdown>

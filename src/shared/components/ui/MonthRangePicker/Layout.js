@@ -22,7 +22,7 @@ const picker = ({ minDate, maxDate, onChange }) => {
 
   return (
     <div className={cssClass('month-range-picker')}>
-      <Spacer space="tiny" />
+      <Spacer space='tiny' />
 
       <MonthRangePicker
         maxDate={maxDate}
@@ -30,16 +30,16 @@ const picker = ({ minDate, maxDate, onChange }) => {
         onChange={setRange}
       />
 
-      <Spacer space="tiny" />
+      <Spacer space='tiny' />
 
       <Button
         onClick={useCallback(
           () => onChange(range),
           [range]
         )}
-        size="tiny"
+        size='tiny'
       >
-        <FormattedMessage id="word.apply" />
+        <FormattedMessage id='word.apply' />
       </Button>
     </div>
   )

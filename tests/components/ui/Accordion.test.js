@@ -3,11 +3,9 @@ import { mount } from 'enzyme'
 import Accordion from '@components/ui/Accordion'
 
 const accordionComponent = (
-    <Accordion>
-        <div label="label">
-            children
-        </div>
-    </Accordion>
+  <Accordion>
+    <div label='label'>children</div>
+  </Accordion>
 )
 
 describe('<Accordion/> mount', () => {

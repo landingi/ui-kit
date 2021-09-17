@@ -16,9 +16,9 @@ const props = {
   }
 }
 
-const drawerComponent = (<Drawer {...props}>
-  {props.children}
-</Drawer>)
+const drawerComponent = (
+  <Drawer {...props}>{props.children}</Drawer>
+)
 
 describe('<Drawer/> mount', () => {
   let wrapper

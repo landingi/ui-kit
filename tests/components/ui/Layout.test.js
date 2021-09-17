@@ -6,9 +6,9 @@ const props = {
   children: 'placeholder'
 }
 
-const LayoutComponent = (<Layout {...props}>
-    {props.children}
-</Layout>)
+const LayoutComponent = (
+  <Layout {...props}>{props.children}</Layout>
+)
 
 describe('<Layout/> mount', () => {
   let wrapper
@@ -26,7 +26,9 @@ describe('<Layout/> mount', () => {
   })
 
   it('has `layout` class', () => {
-    expect(wrapper.find('div').hasClass('layout')).toBe(true)
+    expect(wrapper.find('div').hasClass('layout')).toBe(
+      true
+    )
   })
 
   it('should have defined default prop width', () => {
@@ -34,6 +36,8 @@ describe('<Layout/> mount', () => {
   })
 
   it('has `layout-width--full` class', () => {
-    expect(wrapper.find('div').hasClass('layout-width--full')).toBe(true)
+    expect(
+      wrapper.find('div').hasClass('layout-width--full')
+    ).toBe(true)
   })
 })

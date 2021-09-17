@@ -2,12 +2,14 @@ import React from 'react'
 import { mountWithIntl } from '../../setup/mocks/intl-enzyme-test-helper'
 import LimitSmall from '@components/ui/LimitSmall'
 
-const limitSmallComponent = (<LimitSmall
+const limitSmallComponent = (
+  <LimitSmall
     limit={20000}
     limitText='word.unique.visitors'
     padding='none'
     quantity={5}
-                             />)
+  />
+)
 
 describe('<Limit /> mount', () => {
   let wrapper
@@ -25,10 +27,16 @@ describe('<Limit /> mount', () => {
   })
 
   it('has none padding', () => {
-    expect(wrapper.find('.result__dropdown').hasClass('padding__none')).toBe(true)
+    expect(
+      wrapper
+        .find('.result__dropdown')
+        .hasClass('padding__none')
+    ).toBe(true)
   })
 
   it('quantity should be `Unique visitors5 / 20 000`', () => {
-    expect(wrapper.find('.result__dropdown').text()).toEqual('Unique visitors5 / 20 000')
+    expect(
+      wrapper.find('.result__dropdown').text()
+    ).toEqual('Unique visitors5 / 20 000')
   })
 })

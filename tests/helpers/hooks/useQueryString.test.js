@@ -1,8 +1,13 @@
 import useQueryString from '@helpers/hooks/useQueryString'
-import { renderHook, act } from '@testing-library/react-hooks'
+import {
+  renderHook,
+  act
+} from '@testing-library/react-hooks'
 
 test('should use useQueryString', () => {
-  const { result } = renderHook(() => useQueryString('page', 1))
+  const { result } = renderHook(() =>
+    useQueryString('page', 1)
+  )
 
   expect(result.current[0]).toEqual(1)
 

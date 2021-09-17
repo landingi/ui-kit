@@ -104,8 +104,7 @@ const input = ({
       <span className={cssClass('bar')} />
 
       {label && (
-        <Label className={scss.input__label}
-id={name}>
+        <Label className={scss.input__label} id={name}>
           {translate ? (
             <FormattedMessage id={`${label}`} />
           ) : (
@@ -116,13 +115,13 @@ id={name}>
 
       {tooltip && (
         <Tooltip
-          className="input__tooltip"
+          className='input__tooltip'
           content={tooltip}
-          placement="bottom"
+          placement='bottom'
         >
           <FontAwesomeIcon
-            color="#2550AA"
-            icon="exclamation-circle"
+            color='#2550AA'
+            icon='exclamation-circle'
           />
         </Tooltip>
       )}

@@ -5,12 +5,7 @@ import registerIcons from '@helpers/icons'
 
 registerIcons()
 
-const checkComponent = (<Check>
-    {' '}
-    Landingi
-
-    {' '}
-</Check>)
+const checkComponent = <Check> Landingi </Check>
 
 describe('<Check/> mount', () => {
   let wrapper
@@ -28,11 +23,15 @@ describe('<Check/> mount', () => {
   })
 
   it('has `check` class', () => {
-    expect(wrapper.find('span').hasClass('check')).toBe(true)
+    expect(wrapper.find('span').hasClass('check')).toBe(
+      true
+    )
   })
 
   it('has not `check--positive` class', () => {
-    expect(wrapper.find('span').hasClass('check--positive')).toBe(false)
+    expect(
+      wrapper.find('span').hasClass('check--positive')
+    ).toBe(false)
   })
 
   it('has `check--positive` class', () => {
@@ -40,7 +39,9 @@ describe('<Check/> mount', () => {
       positive: true
     })
 
-    expect(wrapper.find('span').hasClass('check--positive')).toBe(true)
+    expect(
+      wrapper.find('span').hasClass('check--positive')
+    ).toBe(true)
   })
 
   it('should have defined default prop positive', () => {
