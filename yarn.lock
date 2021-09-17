@@ -6166,7 +6166,7 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-docz-core@^2.2.0:
+docz-core@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/docz-core/-/docz-core-2.3.0.tgz#c1511b4cd0625bc243576029c3ddb6ffb2cb1d98"
   integrity sha512-5ixNp/fNuI5NauIfVhQYLPxemhLx8Q387vc5jrkeCfpMYvzoGWKnOWqc1L57hOJRIsvwDb1HtXhr/lWHBjYGMw==
@@ -6230,24 +6230,25 @@ docz-utils@^2.3.0:
     unist-util-is "^3.0.0"
     unist-util-visit "^1.4.1"
 
-docz@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/docz/-/docz-2.2.0.tgz#a7d22ce256c437d068bf88ae7b13ca5d581f65ef"
-  integrity sha512-rsxjQABy07dDqq5rus0TBx64FI2DL7KN+11mv394bRFINqC/T0WZTruKzVSGjsodrTBmIGhW47t5iqMB14XQyw==
+docz@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/docz/-/docz-2.3.1.tgz#931cd840e2f9a25691fb7c67fa48d4a6ef1476a3"
+  integrity sha512-HlbLqpizhieqvjD6xxNr6Nj8sk00vnHbLh4wHabXUpOi8ZkILBDSLmnfGzozAgmT+HN18CbszYMXCOlbcr4MXQ==
   dependencies:
     "@emotion/core" "^10.0.16"
     "@mdx-js/react" "^1.0.27"
     array-sort "^1.0.0"
     capitalize "^2.0.0"
-    docz-core "^2.2.0"
+    docz-core "^2.3.0"
     fast-deep-equal "^2.0.1"
     gatsby "^2.13.27"
     gatsby-plugin-eslint "^2.0.5"
     gatsby-plugin-typescript "^2.1.6"
-    gatsby-theme-docz "^2.2.0"
+    gatsby-theme-docz "^2.3.1"
     lodash "^4.17.14"
     marksy "^8.0.0"
     match-sorter "^3.1.1"
+    pascal-case "^3.1.0"
     prop-types "^15.7.2"
     scheduler "^0.15.0"
     ulid "^2.3.0"
@@ -8392,7 +8393,7 @@ gatsby-telemetry@^1.10.2:
     node-fetch "^2.6.1"
     uuid "3.4.0"
 
-gatsby-theme-docz@^2.2.0:
+gatsby-theme-docz@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/gatsby-theme-docz/-/gatsby-theme-docz-2.3.1.tgz#196e91c3794d0237ec512b738f6e84146f87ea4b"
   integrity sha512-26K/W4JkqlRTLjfFZfQQ0ioZiIaXm1Cx6bGp0zWbZgjzCc59K4mohiJ9eK75PcoGD7xe7g1oTjHAFsfjdXv71Q==
@@ -8617,16 +8618,6 @@ get-package-type@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/get-package-type/-/get-package-type-0.1.0.tgz#8de2d803cff44df3bc6c456e6668b36c3926e11a"
   integrity sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==
-
-get-pkg-repo@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/get-pkg-repo/-/get-pkg-repo-4.1.1.tgz#699422f552b71b9f8aa41529ce7923ce7f271d79"
-  integrity sha512-CReGtqeJoY02L5vzok3jX1Le3sxqeAOrCnd75r/M4u4aSBT9KK7KevnpGulsJxP2NOnuIwnWPJ5XcLxTwBFzZg==
-  dependencies:
-    "@hutson/parse-repository-url" "^3.0.0"
-    hosted-git-info "^2.1.4"
-    meow "^7.0.0"
-    through2 "^2.0.0"
 
 get-pkg-repo@^4.1.0:
   version "4.1.2"
@@ -13161,7 +13152,7 @@ pascal-case@^2.0.0:
     camel-case "^3.0.0"
     upper-case-first "^1.1.0"
 
-pascal-case@^3.1.2:
+pascal-case@^3.1.0, pascal-case@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/pascal-case/-/pascal-case-3.1.2.tgz#b48e0ef2b98e205e7c1dae747d0b1508237660eb"
   integrity sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==
