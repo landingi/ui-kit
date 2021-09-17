@@ -81,7 +81,7 @@ import Tabs from '@components/ui/Tabs'
 import TextOverflow from '@components/ui/TextOverflow'
 import Tooltip from '@components/ui/Tooltip'
 
-export default {
+export {
   Accordion,
   Accordion2,
   Alert,
