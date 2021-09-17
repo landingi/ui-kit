@@ -66,7 +66,7 @@ const timingToast = () => {
           'toast',
           isActive ? 'toast--visible' : 'toast--hidden'
         )}
-        key="toastanimation"
+        key='toastanimation'
         pose={isActive ? 'open' : 'closed'}
       >
         <Notification

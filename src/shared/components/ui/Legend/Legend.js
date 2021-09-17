@@ -30,7 +30,7 @@ const legend = ({ data, alignment }) => (
         key={index}
       >
         <ColorLine
-          alignment="horizontal"
+          alignment='horizontal'
           variant={item.variant}
         />
 

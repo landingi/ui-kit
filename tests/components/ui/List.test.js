@@ -4,9 +4,7 @@ import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
 
 const props = {
-  children: <ListItem variant="inline">
-      children
-  </ListItem>
+  children: <ListItem variant='inline'>children</ListItem>
 }
 
 const listComponent = <List {...props} />
@@ -31,6 +29,8 @@ describe('<List/> mount', () => {
   })
 
   it('<ListItem/> has `list__item` class', () => {
-    expect(wrapper.find('li').hasClass('list__item')).toBe(true)
+    expect(wrapper.find('li').hasClass('list__item')).toBe(
+      true
+    )
   })
 })

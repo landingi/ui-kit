@@ -115,13 +115,13 @@ const input = ({
 
       {tooltip && (
         <Tooltip
-          className="input__tooltip"
+          className='input__tooltip'
           content={tooltip}
-          placement="bottom"
+          placement='bottom'
         >
           <FontAwesomeIcon
-            color="#2550AA"
-            icon="exclamation-circle"
+            color='#2550AA'
+            icon='exclamation-circle'
           />
         </Tooltip>
       )}

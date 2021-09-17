@@ -52,7 +52,7 @@ const toggle = ({
           name={name}
           onBlur={onBlur}
           onChange={onChange}
-          type="checkbox"
+          type='checkbox'
         />
 
         <span className={cssClass('toggle__button')} />

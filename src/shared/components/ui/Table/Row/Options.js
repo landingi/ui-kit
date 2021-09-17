@@ -37,10 +37,10 @@ const rowOptions = ({
 }) => {
   return (
     <div className={cssClass(className)}>
-      <List variant="inline">
+      <List variant='inline'>
         <ListItem>
           <FormattedMessage
-            id="word.table.selected"
+            id='word.table.selected'
             values={{
               count: selected.length
             }}
@@ -61,11 +61,11 @@ const rowOptions = ({
           <ListItem>
             <Button
               onClick={handleDelete}
-              variant="transparent"
+              variant='transparent'
             >
-              <FontAwesomeIcon icon="trash-alt" size="sm" />
+              <FontAwesomeIcon icon='trash-alt' size='sm' />
 
-              <FormattedMessage id="word.delete" />
+              <FormattedMessage id='word.delete' />
             </Button>
           </ListItem>
         )}

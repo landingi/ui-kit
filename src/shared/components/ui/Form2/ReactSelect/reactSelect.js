@@ -61,7 +61,7 @@ const reactSelect = ({
       <div className={scss.input__wrapper}>
         <Select
           className={cssClass(className)}
-          classNamePrefix="react-select"
+          classNamePrefix='react-select'
           id={id}
           key={uuid()}
           onBlur={handleBlur}

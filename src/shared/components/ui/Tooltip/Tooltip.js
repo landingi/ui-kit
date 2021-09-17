@@ -53,7 +53,7 @@ function Tooltip({
       </span>
 
       <ReactTooltip
-        background="#000"
+        background='#000'
         className={cssClass(
           'react-tooltip',
           `react-tooltip-${align}`,

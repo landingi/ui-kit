@@ -44,15 +44,15 @@ function Filter({
   }
 
   return (
-    <Dropdown label={filterLabel} size="medium">
+    <Dropdown label={filterLabel} size='medium'>
       <List>
         {values.map(({ value, label }) => (
-          <ListItem key={uuid()} variant="dropdown">
+          <ListItem key={uuid()} variant='dropdown'>
             <Button
               onClick={() => setFilter(label, value)}
-              tag="a"
+              tag='a'
               // eslint-disable-next-line react/jsx-no-bind
-              variant="dropdown"
+              variant='dropdown'
             >
               {label}
             </Button>

@@ -29,12 +29,12 @@ function ActionsRow({
   userPermissions
 }) {
   return (
-    <List variant="inline">
+    <List variant='inline'>
       <ListItem>
-        <Button onClick={detailsRow} variant="transparent">
-          <FontAwesomeIcon icon="list-alt" size="sm" />
+        <Button onClick={detailsRow} variant='transparent'>
+          <FontAwesomeIcon icon='list-alt' size='sm' />
 
-          <FormattedMessage id="word.details" />
+          <FormattedMessage id='word.details' />
         </Button>
       </ListItem>
 
@@ -43,11 +43,11 @@ function ActionsRow({
           <ListItem>
             <Button
               onClick={deleteRow}
-              variant="transparent"
+              variant='transparent'
             >
-              <FontAwesomeIcon icon="trash-alt" size="sm" />
+              <FontAwesomeIcon icon='trash-alt' size='sm' />
 
-              <FormattedMessage id="word.delete" />
+              <FormattedMessage id='word.delete' />
             </Button>
           </ListItem>
         )}

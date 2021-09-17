@@ -24,7 +24,7 @@ const statsBadge = ({ color, quantity, description }) => {
       )}
     >
       <div className={cssClass('container--description')}>
-        <Heading level={2} margin="none">
+        <Heading level={2} margin='none'>
           {quantity}
         </Heading>
 

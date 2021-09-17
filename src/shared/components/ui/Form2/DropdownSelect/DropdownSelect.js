@@ -100,11 +100,11 @@ const select = ({
       <>
         <Button
           onClick={() => handleChange(name, item)}
-          variant="dropdown-element"
+          variant='dropdown-element'
         >
           <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph color="accent-2" size={12}>
+          <Paragraph color='accent-2' size={12}>
             {item?.description}
           </Paragraph>
         </Button>
@@ -114,7 +114,7 @@ const select = ({
     ) : (
       <Button
         onClick={() => handleChange(name, item)}
-        variant="dropdown-element"
+        variant='dropdown-element'
       >
         {item?.label}
       </Button>
@@ -124,7 +124,7 @@ const select = ({
     <>
       {emphasisedOptions.map((item, index) => (
         <ListItem
-          className="list-item--dropdown"
+          className='list-item--dropdown'
           key={index}
         >
           {renderOption(item)}
@@ -135,7 +135,7 @@ const select = ({
 
       {options.map((item, index) => (
         <ListItem
-          className="list-item--dropdown"
+          className='list-item--dropdown'
           key={index}
         >
           {renderOption(item)}
@@ -155,13 +155,13 @@ const select = ({
       )}
 
       <Dropdown
-        alignment="spaced"
+        alignment='spaced'
         asPlaceholder={!value[name]?.label}
         hasFullInputStyle
         hasInput
         inModal={inModalPosition}
         label={value[name]?.label || label}
-        size="fixed"
+        size='fixed'
       >
         {handleOnSearchChange && (
           <>
@@ -171,11 +171,11 @@ const select = ({
                 placeholder={searchPlaceholder}
                 protectedSubmit
                 setSearchPhrase={handleOnSearchChange}
-                tag="div"
+                tag='div'
               />
             </div>
 
-            <Divider variant="dropdown" />
+            <Divider variant='dropdown' />
           </>
         )}
 
@@ -187,11 +187,11 @@ const select = ({
               isEmpty(options) ? (
                 <Message
                   height={41}
-                  message="message.empty.search.results.small"
+                  message='message.empty.search.results.small'
                   messageLevel={6}
-                  title="message.empty.search.results"
+                  title='message.empty.search.results'
                   titleLevel={5}
-                  url="https://images.assets-landingi.com/images/search_empty.svg"
+                  url='https://images.assets-landingi.com/images/search_empty.svg'
                 />
               ) : (
                 renderOptions()
@@ -200,7 +200,7 @@ const select = ({
               {isLoading && <Loader />}
             </List>
 
-            <Spacer space="tiny" />
+            <Spacer space='tiny' />
           </div>
         </Overflow>
 

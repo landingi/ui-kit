@@ -6,7 +6,12 @@ import Button from '@components/ui/Button'
 const props = {
   initialValue: 'test'
 }
-const tabsComponent = <Tabs {...props}> <Button> Test </Button></Tabs>
+const tabsComponent = (
+  <Tabs {...props}>
+    {' '}
+    <Button> Test </Button>
+  </Tabs>
+)
 
 describe('<Tabs/> mount', () => {
   let wrapper

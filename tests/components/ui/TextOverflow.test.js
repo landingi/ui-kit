@@ -6,9 +6,9 @@ const props = {
   children: 'placeholder'
 }
 
-const overflowComponent = (<TextOverflow {...props}>
-    {props.children}
-</TextOverflow>)
+const overflowComponent = (
+  <TextOverflow {...props}>{props.children}</TextOverflow>
+)
 
 describe('<TextOverflow/> mount', () => {
   let wrapper

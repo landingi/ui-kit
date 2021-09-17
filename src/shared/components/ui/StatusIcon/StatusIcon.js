@@ -26,9 +26,9 @@ const statusIcon = ({ className, variant, size }) => (
     )}
   >
     {variant === 'active' ? (
-      <FontAwesomeIcon icon="check" size="xs" />
+      <FontAwesomeIcon icon='check' size='xs' />
     ) : (
-      <FontAwesomeIcon icon="times" size="xs" />
+      <FontAwesomeIcon icon='times' size='xs' />
     )}
   </div>
 )

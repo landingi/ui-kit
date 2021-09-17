@@ -27,13 +27,17 @@ describe('<Avatar /> mount', () => {
     wrapper.setProps({
       variant: 'image'
     })
-    expect(wrapper.find('span').hasClass('avatar--image')).toBe(true)
+    expect(
+      wrapper.find('span').hasClass('avatar--image')
+    ).toBe(true)
   })
 
   it('has medium size', () => {
     wrapper.setProps({
       size: 'medium'
     })
-    expect(wrapper.find('span').hasClass('avatar--medium')).toBe(true)
+    expect(
+      wrapper.find('span').hasClass('avatar--medium')
+    ).toBe(true)
   })
 })

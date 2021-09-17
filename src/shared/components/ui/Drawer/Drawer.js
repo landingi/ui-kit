@@ -76,7 +76,7 @@ const drawer = ({
         {isActive && (
           <DrawerAnimation
             className={cssClass(className, elementClasses)}
-            key="draweranimation"
+            key='draweranimation'
           >
             <Header
               onClick={onClick}

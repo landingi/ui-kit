@@ -37,7 +37,7 @@ const notification = ({
     <div className={scss.content}>
       <FontAwesomeIcon
         icon={mapIconToClass(type) || 'check'}
-        size="sm"
+        size='sm'
       />
 
       <p className={scss.notification__message}>

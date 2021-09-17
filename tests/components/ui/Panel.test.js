@@ -6,9 +6,9 @@ const props = {
   children: 'placeholder'
 }
 
-const PanelComponent = (<Panel {...props}>
-    {props.children}
-</Panel>)
+const PanelComponent = (
+  <Panel {...props}>{props.children}</Panel>
+)
 
 describe('<Panel/> mount', () => {
   let wrapper

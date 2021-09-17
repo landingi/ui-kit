@@ -105,28 +105,28 @@ const modal = ({
       {title && <ModalHeader title={title} />}
 
       {image && (
-        <Image height={20} size="auto" src={image} />
+        <Image height={20} size='auto' src={image} />
       )}
 
       <div>
         {isMarkAsSpamVisible && (
           <Button
             onClick={onMarkAsSpam}
-            variant="transparent"
+            variant='transparent'
           >
-            <FontAwesomeIcon icon="ban" />
+            <FontAwesomeIcon icon='ban' />
 
-            <FormattedMessage id="word.mark-as-spam" />
+            <FormattedMessage id='word.mark-as-spam' />
           </Button>
         )}
 
         {isEditable && (
-          <Button onClick={onEdit} variant="icon">
-            <FontAwesomeIcon icon="pencil-alt" />
+          <Button onClick={onEdit} variant='icon'>
+            <FontAwesomeIcon icon='pencil-alt' />
           </Button>
         )}
 
-        <Spreader spread="tiny" />
+        <Spreader spread='tiny' />
 
         {isClosable && <Close onClick={onClick} />}
       </div>
@@ -149,7 +149,7 @@ const modal = ({
         {isActive && (
           <ModalAnimation
             className={scss.dialog}
-            key="ModalAnimation"
+            key='ModalAnimation'
           >
             <div
               className={cssClass(className, {
@@ -173,7 +173,7 @@ const modal = ({
 
                   {hasHeaderDivider && (
                     <>
-                      <Spacer space="small" />
+                      <Spacer space='small' />
 
                       <Divider />
                     </>
@@ -186,15 +186,15 @@ const modal = ({
                   </div>
 
                   {hasFooter && (
-                    <ModalFooter align="right">
+                    <ModalFooter align='right'>
                       {hasCustomButton ? (
                         <Button
                           isDisabled={
                             isCustomButtonDisabled
                           }
                           onClick={onClickCustomButton}
-                          size="medium"
-                          variant="secondary"
+                          size='medium'
+                          variant='secondary'
                         >
                           <FormattedMessage
                             id={`${i18Cancel}`}
@@ -203,8 +203,8 @@ const modal = ({
                       ) : (
                         <Button
                           onClick={onClick}
-                          size="medium"
-                          variant="secondary"
+                          size='medium'
+                          variant='secondary'
                         >
                           <FormattedMessage
                             id={`${i18Cancel}`}
@@ -217,7 +217,7 @@ const modal = ({
                         isDisabled={isButtonDisabled}
                         isLoading={isButtonLoading}
                         onClick={onAction}
-                        size="medium"
+                        size='medium'
                         type={
                           isSubmit ? 'submit' : 'button'
                         }
@@ -226,7 +226,7 @@ const modal = ({
                         {actionIcon && (
                           <FontAwesomeIcon
                             icon={actionIcon}
-                            size="xs"
+                            size='xs'
                           />
                         )}
 

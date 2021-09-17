@@ -19,15 +19,15 @@ const analyse = ({ className }) => (
     <div className={scss.center}>
       <div className={scss.wrap}>
         <div className={scss.box1}>
-          <FontAwesomeIcon icon="code" />
+          <FontAwesomeIcon icon='code' />
 
-          <FontAwesomeIcon icon="code" />
+          <FontAwesomeIcon icon='code' />
         </div>
 
         <div className={scss.box2}>
-          <FontAwesomeIcon icon="code" />
+          <FontAwesomeIcon icon='code' />
 
-          <FontAwesomeIcon icon="code" />
+          <FontAwesomeIcon icon='code' />
         </div>
       </div>
     </div>

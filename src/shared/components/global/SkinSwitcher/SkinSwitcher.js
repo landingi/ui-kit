@@ -20,7 +20,7 @@ const skinSwitcher = ({
   )
 
   return (
-    <div className="skin-switcher">
+    <div className='skin-switcher'>
       <Button
         onClick={useCallback(() =>
           handleChangeCallback('default')
@@ -34,7 +34,7 @@ const skinSwitcher = ({
           handleChangeCallback('dark')
         )}
       >
-        <Image src="https://images.assets-landingi.com/app-ui/dark.svg" />
+        <Image src='https://images.assets-landingi.com/app-ui/dark.svg' />
       </Button>
 
       <Button
@@ -42,7 +42,7 @@ const skinSwitcher = ({
           handleChangeCallback('white')
         )}
       >
-        <Image src="https://images.assets-landingi.com/app-ui/light.svg" />
+        <Image src='https://images.assets-landingi.com/app-ui/light.svg' />
       </Button>
     </div>
   )

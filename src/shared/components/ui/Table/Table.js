@@ -497,7 +497,7 @@ const table = ({
             )}
             content={tooltip}
             disabled={!tooltip}
-            effect="float"
+            effect='float'
             key={uuid()}
             {...row.getRowProps()}
           >
@@ -545,7 +545,7 @@ const table = ({
               />
             ) : null}
 
-            {hasBorder && <Spacer space="small" />}
+            {hasBorder && <Spacer space='small' />}
           </>
         ) : (
           customMessage

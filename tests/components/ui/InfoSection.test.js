@@ -32,23 +32,33 @@ describe('<InfoSection /> mount', () => {
   })
 
   it('has `info-section` class', () => {
-    expect(wrapper.find('div').first().hasClass('info-section')).toBe(true)
+    expect(
+      wrapper.find('div').first().hasClass('info-section')
+    ).toBe(true)
   })
 
   it('expect "Let your landing page go live!"', () => {
-    expect(wrapper.find('span').text()).toEqual('Let your landing page go live!')
+    expect(wrapper.find('span').text()).toEqual(
+      'Let your landing page go live!'
+    )
   })
 
   it('expect "Add a domain in a few easy steps"', () => {
-    expect(wrapper.find('div').at(2).text()).toEqual('Add a domain in a few easy steps')
+    expect(wrapper.find('div').at(2).text()).toEqual(
+      'Add a domain in a few easy steps'
+    )
   })
 
   it('expect "Get a free SSL certificate"', () => {
-    expect(wrapper.find('div').at(3).text()).toEqual('Get a free SSL certificate')
+    expect(wrapper.find('div').at(3).text()).toEqual(
+      'Get a free SSL certificate'
+    )
   })
 
   it('expect "Take advantage of multiple publishing options"', () => {
-    expect(wrapper.find('div').at(4).text()).toEqual('Take advantage of multiple publishing options')
+    expect(wrapper.find('div').at(4).text()).toEqual(
+      'Take advantage of multiple publishing options'
+    )
   })
 
   it('simulate <Button /> click', () => {

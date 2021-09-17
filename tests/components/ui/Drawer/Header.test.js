@@ -14,9 +14,9 @@ const props = {
   title: 'Some title'
 }
 
-const drawerComponent = (<Header {...props}>
-    {props.children}
-</Header>)
+const drawerComponent = (
+  <Header {...props}>{props.children}</Header>
+)
 
 let wrapper
 

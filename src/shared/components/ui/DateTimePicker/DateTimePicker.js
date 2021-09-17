@@ -63,7 +63,7 @@ const dateTimePicker = ({ setDate, minDate }) => {
   return (
     <div className={cssClass('react-datetimepicker')}>
       <DateRange
-        direction="horizontal"
+        direction='horizontal'
         // eslint-disable-next-line react/jsx-no-bind
         locale={getLanguage === 'pl' ? pl : enUS}
         maxDate={new Date()}
@@ -78,8 +78,8 @@ const dateTimePicker = ({ setDate, minDate }) => {
         weekStartsOn={1}
       />
 
-      <Button onClick={handleApply} size="tiny">
-        <FormattedMessage id="word.apply" />
+      <Button onClick={handleApply} size='tiny'>
+        <FormattedMessage id='word.apply' />
       </Button>
     </div>
   )

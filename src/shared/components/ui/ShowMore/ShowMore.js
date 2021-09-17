@@ -57,16 +57,16 @@ const showMore = ({
       <button
         className={scss.button}
         onClick={handleOnClick}
-        type="button"
+        type='button'
       >
         {isOpen ? (
-          <FormattedMessage id="show.less" />
+          <FormattedMessage id='show.less' />
         ) : (
-          <FormattedMessage id="show.more" />
+          <FormattedMessage id='show.more' />
         )}
       </button>
 
-      <Spacer space="small" />
+      <Spacer space='small' />
 
       {isOpen && children ? children || null : null}
     </div>

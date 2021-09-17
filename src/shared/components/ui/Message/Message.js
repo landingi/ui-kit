@@ -47,16 +47,16 @@ const message = ({
    */
   const renderMultimedia = () => (
     <div>
-      <Spacer space="small" />
+      <Spacer space='small' />
 
       {isVideo ? (
         <>
           <Vimeo height={height} video={url} />
 
-          <Spacer space="small" />
+          <Spacer space='small' />
         </>
       ) : (
-        <Image height={height} size="auto" src={url} />
+        <Image height={height} size='auto' src={url} />
       )}
     </div>
   )
@@ -69,7 +69,7 @@ const message = ({
 
       {title && (
         <Heading
-          align="center"
+          align='center'
           bold={bold}
           level={titleLevel}
           margin={withoutMargin ? 'none' : ''}
@@ -85,9 +85,9 @@ const message = ({
 
       {message && (
         <>
-          <Spacer space="tiny" />
+          <Spacer space='tiny' />
 
-          <Heading align="center" level={messageLevel}>
+          <Heading align='center' level={messageLevel}>
             <FormattedMessage
               id={`${message}`}
               values={{

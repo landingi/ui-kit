@@ -40,7 +40,9 @@ describe('<Toggle /> mount', () => {
       name: 'name-test'
     })
 
-    expect(wrapper.find('input').prop('name')).toBe('name-test')
+    expect(wrapper.find('input').prop('name')).toBe(
+      'name-test'
+    )
   })
 
   it('should set the set custom attributes on the input', () => {

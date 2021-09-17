@@ -34,10 +34,14 @@ describe('<Indicator/> mount', () => {
     wrapper.setProps({
       isAlert: true
     })
-    expect(wrapper.find('span').hasClass('is--alert')).toBe(true)
+    expect(wrapper.find('span').hasClass('is--alert')).toBe(
+      true
+    )
   })
 
   it('is not alert', () => {
-    expect(wrapper.find('span').hasClass('is--alert')).toBe(false)
+    expect(wrapper.find('span').hasClass('is--alert')).toBe(
+      false
+    )
   })
 })

@@ -41,9 +41,9 @@ describe('<Table /> mount', () => {
 
   beforeEach(() => {
     moxios.install()
-    wrapper = mountWithIntl(makeStore(<Router>
-        {component}
-                                      </Router>))
+    wrapper = mountWithIntl(
+      makeStore(<Router>{component}</Router>)
+    )
   })
 
   afterEach(() => {

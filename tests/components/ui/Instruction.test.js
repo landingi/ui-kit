@@ -5,14 +5,10 @@ import Instruction from '@components/ui/Instruction'
 const props = {
   data: [
     {
-      content: <div key={1}>
-          Treść 1
-      </div>
+      content: <div key={1}>Treść 1</div>
     },
     {
-      content: <div key={2}>
-          Treść 2
-      </div>
+      content: <div key={2}>Treść 2</div>
     }
   ]
 }
@@ -35,10 +31,14 @@ describe('<Instruction /> mount', () => {
   })
 
   it('Expect "1Treść1" text', () => {
-    expect(wrapper.find('div.instruction__step').at(0).text()).toEqual('1Treść 1')
+    expect(
+      wrapper.find('div.instruction__step').at(0).text()
+    ).toEqual('1Treść 1')
   })
 
   it('Expect "2Treść2" text', () => {
-    expect(wrapper.find('div.instruction__step').at(1).text()).toEqual('2Treść 2')
+    expect(
+      wrapper.find('div.instruction__step').at(1).text()
+    ).toEqual('2Treść 2')
   })
 })
