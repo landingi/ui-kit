@@ -35,7 +35,7 @@ exports.onCreateWebpackConfig = args => {
         '@shapes': path.resolve(
           __dirname,
           '../src/shared/shapes'
-        ),
+        )
       }
     }
   })

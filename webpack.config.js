@@ -7,7 +7,7 @@ const {
 module.exports = merge(common, {
   mode: 'production',
   externals: {
-    'react': 'react',
+    react: 'react',
     'react-dom': 'react-dom',
     'react-router-dom': 'react-router-dom'
   },

@@ -11,7 +11,6 @@ import scss from './Headline.scss'
  */
 const cssClass = styles(scss)
 
-
 /**
  * Headline page - stateless presentational component
  * @param {object} props - props
@@ -21,8 +20,7 @@ const cssClass = styles(scss)
  */
 const headline = ({ className, title }) => (
   <div className={cssClass(className)}>
-    <Heading className="text--truncate"
-level={1}>
+    <Heading className="text--truncate" level={1}>
       <FormattedMessage id={`${title}`} />
     </Heading>
   </div>

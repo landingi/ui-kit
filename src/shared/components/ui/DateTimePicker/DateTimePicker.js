@@ -78,8 +78,7 @@ const dateTimePicker = ({ setDate, minDate }) => {
         weekStartsOn={1}
       />
 
-      <Button onClick={handleApply}
-size="tiny">
+      <Button onClick={handleApply} size="tiny">
         <FormattedMessage id="word.apply" />
       </Button>
     </div>
