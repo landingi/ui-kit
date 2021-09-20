@@ -25,10 +25,6 @@
         "build:dev": "node ./config/packages/package.builder.js development && pnpm install && pnpm run build",
         "ci": "node ./config/packages/package.builder.js production && pnpm install && pnpm build"
     },
-    "peerDependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
-    },
     "devDependencies": {
         "@fortawesome/fontawesome-svg-core": "1.2.36",
         "@fortawesome/free-solid-svg-icons": "5.15.4",
