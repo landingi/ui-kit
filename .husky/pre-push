@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-#pnpm lint:all && pnpm test:unit
+#yarn lint:all && yarn test:unit

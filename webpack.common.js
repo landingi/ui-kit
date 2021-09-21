@@ -8,6 +8,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const srcPath = path.resolve(__dirname, 'src')
 const distPath = path.resolve(__dirname, 'dist')
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   context: srcPath,
@@ -16,10 +17,10 @@ module.exports = {
     components: srcPath
   },
   output: {
-    filename: 'index.js',
+    filename: 'landingi-ui-kit.js',
     path: distPath,
-    libraryTarget: 'umd',
-    library: 'landingi-ui-kit'
+    library: 'landingi-ui-kit',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -73,14 +74,15 @@ module.exports = {
             comments: false
           }
         },
-        extractComments: false
+        extractComments: true
       })
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: devMode ? "[name].css" : "[name].[contenthash].css",
+      chunkFilename: devMode ? "[id].css" : "[id].[contenthash].css",
     }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,

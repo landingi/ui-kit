@@ -1,10 +1,13 @@
 {
-  "parser": "@babel/eslint-parser",
+  "parser": "@babel-eslint-parser",
   "plugins": [
-    "react"
+    "react",
+    "react-hooks",
+    "sort-imports-es6-autofix"
   ],
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "jest": true
   },
@@ -16,25 +19,7 @@
     }
   },
   "rules": {
-    "camelcase": "off",
-    "no-use-before-define": "off",
-    "react/sort-comp": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-sort-props": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-sort-default-props": "off",
-    "react/jsx-max-depth": "off",
-    "react/jsx-fragments": "off",
-    "react/jsx-no-literals": "off",
-    "react/sort-prop-types": "off",
-    "react/function-component-definition": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/forbid-component-props": "off",
-    "multiline-ternary": "off",
-    "array-callback-return": "off",
-    "react/no-set-state": "off",
-    "react/state-in-constructor": "off",
-    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-quotes": [2, "prefer-single"],
     "prettier/prettier": [
 			"error",
 			{
@@ -48,8 +33,9 @@
 		]
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
+    "eslint:all",
+    "plugin:react/all",
+    "plugin:react-hooks/recommended",
     "prettier",
     "plugin:prettier/recommended"
   ],
