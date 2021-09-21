@@ -1,5 +1,4 @@
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const {
   CleanWebpackPlugin
@@ -32,7 +31,6 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -48,8 +46,7 @@ module.exports = {
               additionalData:
                 '@import "shared/styles/theme.scss";',
               sassOptions: {
-                includePaths: [__dirname, srcPath],
-                outputStyle: 'compressed'
+                includePaths: [__dirname, srcPath]
               }
             }
           },
@@ -80,10 +77,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: devMode ? "[name].css" : "[name].[contenthash].css",
-      chunkFilename: devMode ? "[id].css" : "[id].[contenthash].css",
-    }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,
       threads: true,
