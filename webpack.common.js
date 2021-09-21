@@ -19,7 +19,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: distPath,
-    library: 'landingi-ui-kit',
+    library: '@landingi/landingi-ui-kit',
     libraryTarget: 'umd'
   },
   module: {
