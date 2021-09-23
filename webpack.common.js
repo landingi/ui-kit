@@ -1,36 +1,39 @@
 const path = require('path')
+const glob = require("glob")
 const ESLintPlugin = require('eslint-webpack-plugin')
 const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const srcPath = path.resolve(__dirname, 'src')
-const distPath = path.resolve(__dirname, 'dist')
-const devMode = process.env.NODE_ENV !== "production";
+const entry = glob.sync('./src/shared/components/**/*.js').reduce((acc, path) => {
+    const entry = path.replace(/^.*[\\\/]/, '').replace('.js','');
+    acc[entry] = path;
+    return acc;
+  }, {})
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
-  context: srcPath,
   bail: true,
-  entry: {
-    components: srcPath
-  },
+  entry,
   output: {
-    filename: 'index.js',
-    path: distPath,
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
     library: '@landingi/landingi-ui-kit',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    pathinfo: false
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: srcPath,
+        include: path.resolve(__dirname, 'src'),
         use: ['thread-loader', 'babel-loader']
       },
       {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -42,11 +45,9 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('sass'),
-              additionalData:
-                '@import "shared/styles/theme.scss";',
+              additionalData: '@import "shared/styles/theme.scss";',
               sassOptions: {
-                includePaths: [__dirname, srcPath]
+                includePaths: [__dirname, 'src']
               }
             }
           },
@@ -56,27 +57,40 @@ module.exports = {
     ]
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: '[name].bundle.js',
+          chunks: 'all',
+        },
+      },
+    },
     minimizer: [
       '...',
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
       new CssMinimizerPlugin({
         minimizerOptions: {
           cache: true,
-          include: /\/dist/
+          include: /\/dist/,
+          minify: true
         }
-      }),
-      new TerserPlugin({
-        terserOptions: {
-          ecma: 2020,
-          format: {
-            comments: false
-          }
-        },
-        extractComments: true
       })
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name][id].css'
+    }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,
       threads: true,
