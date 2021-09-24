@@ -1,10 +1,9 @@
 {
     "name": "@landingi/landingi-ui-kit",
     "version": "1.0.0",
-    "sideEffects": false,
     "description": "Landingi UI-Kit",
-    "main": "dist",
-    "source": "src/index.js",
+    "main": "dist/main.js",
+    "private": true,
     "scripts": {
         "docz:dev": "docz dev",
         "docz:build": "docz build",

@@ -39,7 +39,7 @@ const cssClass = styles(scss)
  * @param {string} props.id - element id
  * @return {object} An object of children elements
  */
-const button = ({
+const Button = ({
   className,
   tag: Tag,
   title,
@@ -120,13 +120,13 @@ const button = ({
  * Display name
  * @type {string}
  */
-button.displayName = 'Button'
+Button.displayName = 'Button'
 
 /**
  * The properties.
  * @type {Object}
  */
-button.propTypes = {
+Button.propTypes = {
   /**
    * The tag or component to be used e.g. button, a, Link
    */
@@ -241,7 +241,7 @@ button.propTypes = {
  * The default properties.
  * @type {Object}
  */
-button.defaultProps = {
+Button.defaultProps = {
   tag: 'button',
   title: undefined,
   type: 'button',
@@ -262,4 +262,4 @@ button.defaultProps = {
   id: null
 }
 
-export default button
+export default Button
