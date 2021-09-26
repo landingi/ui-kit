@@ -5,12 +5,11 @@ const {
 } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
   bail: true,
-  entry: './src/index.js',
-  devtool: 'inline-source-map',
+  cache: true,
+  entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
