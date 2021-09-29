@@ -4,7 +4,3 @@ import Instruction from '@components/ui/Instruction'
 # Instruction
 
 <Props of={Instruction} />
-
-<!-- <Playground>
-    <Instruction data={data} />
-</Playground> -->
