@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 <Props of={Indicator} />
 
-## Small
-
 <Playground>
   <Indicator isAlert>
     <Button variant="icon">
