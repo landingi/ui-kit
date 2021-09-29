@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Limit.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
 import { formatNumeric } from '@helpers/data'
-import Tooltip from '@components/ui/Tooltip'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import Spreader from '@components/ui/Spreader'
+import Tooltip from '@components/ui/Tooltip'
+import scss from './Limit.scss'
 
 const cssClass = styles(scss),
   /**
@@ -104,30 +104,36 @@ limit.propTypes = {
    * Icon
    */
   icon: PropTypes.string.isRequired,
-  /**
-   * Quantity
-   */
-  quantity: PropTypes.number.isRequired,
+
   /**
    * Limit
    */
   limit: PropTypes.number.isRequired,
+
   /**
    * Name
    */
   name: PropTypes.string.isRequired,
+
+  /**
+   * Quantity
+   */
+  quantity: PropTypes.number.isRequired,
+
+  /**
+   * Tooltip
+   */
+  tooltip: PropTypes.string,
+
   /**
    * Total
    */
   total: PropTypes.number,
+
   /**
    * Unlimited
    */
-  unlimited: PropTypes.bool,
-  /**
-   * Tooltip
-   */
-  tooltip: PropTypes.string
+  unlimited: PropTypes.bool
 }
 
 /**
@@ -136,9 +142,9 @@ limit.propTypes = {
  */
 limit.defaultProps = {
   className: 'limit',
+  tooltip: '',
   total: 0,
-  unlimited: false,
-  tooltip: ''
+  unlimited: false
 }
 
 export default limit

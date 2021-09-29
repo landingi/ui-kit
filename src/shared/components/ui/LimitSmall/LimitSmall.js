@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './LimitSmall.scss'
 import { FormattedMessage } from 'react-intl'
 import { formatNumeric } from '@helpers/data'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './LimitSmall.scss'
 
 const cssClass = styles(scss),
   /**
@@ -57,21 +57,24 @@ limitSmall.displayName = 'Limit Small'
  */
 limitSmall.propTypes = {
   /**
-   * Top padding
-   */
-  padding: PropTypes.string,
-  /**
    * Quantity
    */
   limit: PropTypes.number.isRequired,
-  /**
-   * Quantity
-   */
-  quantity: PropTypes.number.isRequired,
+
   /**
    * LimitText
    */
-  limitText: PropTypes.string.isRequired
+  limitText: PropTypes.string.isRequired,
+
+  /**
+   * Top padding
+   */
+  padding: PropTypes.string,
+
+  /**
+   * Quantity
+   */
+  quantity: PropTypes.number.isRequired
 }
 
 /**

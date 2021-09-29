@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { memo } from 'react'
 import scss from './Image.scss'
 
 const cssClass = styles(scss),
@@ -43,6 +43,12 @@ image.propTypes = {
    * Classname, default `null`
    */
   className: PropTypes.string,
+
+  /**
+   * Height 100, 200 etc
+   */
+  height: PropTypes.number,
+
   /**
    * Size 100, 200 etc
    */
@@ -50,10 +56,6 @@ image.propTypes = {
     PropTypes.number,
     PropTypes.string
   ]),
-  /**
-   * Height 100, 200 etc
-   */
-  height: PropTypes.number,
   /**
    * Asset url
    */
@@ -68,10 +70,10 @@ image.propTypes = {
  * @type {Object}
  */
 image.defaultProps = {
+  alt: null,
   className: null,
-  size: null,
   height: null,
-  alt: null
+  size: null
 }
 
 export default memo(image)

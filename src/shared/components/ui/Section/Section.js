@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Section.scss'
 
 const cssClass = styles(scss),
@@ -45,9 +45,15 @@ section.displayName = 'Section'
  */
 section.propTypes = {
   /**
+   *Background: `white`
+   */
+  background: PropTypes.string,
+
+  /**
    * Children elements
    */
   children: PropTypes.node.isRequired,
+
   /**
    * Classname, default `section`
    */
@@ -55,18 +61,16 @@ section.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
    *Vetical space default: `medium`
    */
   space: PropTypes.string,
+
   /**
    *Width default: `medium`
    */
-  width: PropTypes.string,
-  /**
-   *Background: `white`
-   */
-  background: PropTypes.string
+  width: PropTypes.string
 }
 
 /**
@@ -74,10 +78,10 @@ section.propTypes = {
  * @type {Object}
  */
 section.defaultProps = {
+  background: 'default',
   className: 'section',
   space: 'medium',
-  width: 'full',
-  background: 'default'
+  width: 'full'
 }
 
 export default section

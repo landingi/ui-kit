@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './ProgressBar.scss'
-import ColorNumber from '@components/ui/ColorNumber'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import ColorNumber from '@components/ui/ColorNumber'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './ProgressBar.scss'
 
 const cssClass = styles(scss),
   /**
@@ -103,6 +103,37 @@ progressBar.propTypes = {
    * BarSize
    */
   barSize: PropTypes.string,
+
+  /**
+   * Limit
+   */
+  limit: PropTypes.number.isRequired,
+
+  /**
+   * LimitExceededInfo
+   */
+  limitExceededInfo: PropTypes.bool,
+
+  /**
+   * LimitText
+   */
+  limitText: PropTypes.string,
+
+  /**
+   * Quantity
+   */
+  quantity: PropTypes.number.isRequired,
+
+  /**
+   * ShowColorNumber
+   */
+  showColorNumber: PropTypes.bool,
+
+  /**
+   * Size
+   */
+  size: PropTypes.number,
+
   /**
    * Variant
    */
@@ -112,31 +143,7 @@ progressBar.propTypes = {
     'alert',
     'progress',
     'info'
-  ]).isRequired,
-  /**
-   * Quantity
-   */
-  quantity: PropTypes.number.isRequired,
-  /**
-   * Limit
-   */
-  limit: PropTypes.number.isRequired,
-  /**
-   * LimitExceededInfo
-   */
-  limitExceededInfo: PropTypes.bool,
-  /**
-   * ShowColorNumber
-   */
-  showColorNumber: PropTypes.bool,
-  /**
-   * LimitText
-   */
-  limitText: PropTypes.string,
-  /**
-   * Size
-   */
-  size: PropTypes.number
+  ]).isRequired
 }
 
 /**
@@ -146,10 +153,10 @@ progressBar.propTypes = {
 progressBar.defaultProps = {
   barSize: 'medium',
   limit: 100,
-  size: 32,
   limitExceededInfo: false,
+  limitText: '',
   showColorNumber: false,
-  limitText: ''
+  size: 32
 }
 
 export default progressBar

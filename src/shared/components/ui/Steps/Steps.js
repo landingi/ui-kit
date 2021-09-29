@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Steps.scss'
-import { stepsShape } from '@shapes'
 import { FormattedMessage } from 'react-intl'
-import uuid from 'react-uuid'
+import { stepsShape } from '@shapes'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import StepNumber from '@components/ui/StepNumber'
+import scss from './Steps.scss'
+import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
 

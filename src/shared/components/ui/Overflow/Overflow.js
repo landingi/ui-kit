@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Overflow.scss'
 
 /**
@@ -48,8 +48,8 @@ overflow.propTypes = {
  * @type {Object}
  */
 overflow.defaultProps = {
-  className: 'overflow',
-  children: null
+  children: null,
+  className: 'overflow'
 }
 
 export default overflow

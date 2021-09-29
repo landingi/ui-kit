@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Error from '@components/ui/Form2/Error'
 import Input from '@components/ui/Input'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Input - stateless presentational component
@@ -79,17 +79,23 @@ input.displayName = 'Input'
  * @type {Object}
  */
 input.propTypes = {
+  autoFocus: PropTypes.bool,
+
+  controlledValue: PropTypes.bool,
+
+  disabled: PropTypes.bool,
+
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    ])
   }).isRequired,
   /**
    * Form
@@ -103,19 +109,16 @@ input.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-  translate: PropTypes.bool,
   maxLength: PropTypes.number,
-  autoFocus: PropTypes.bool,
+  min: PropTypes.number,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   tooltip: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]),
-  min: PropTypes.number,
-  controlledValue: PropTypes.bool
+  translate: PropTypes.bool,
+  type: PropTypes.string
 }
 
 /**
@@ -123,16 +126,16 @@ input.propTypes = {
  * @type {Object}
  */
 input.defaultProps = {
-  label: '',
-  placeholder: '',
-  type: 'text',
-  disabled: false,
-  translate: true,
-  maxLength: 524288,
   autoFocus: false,
+  controlledValue: false,
+  disabled: false,
+  label: '',
+  maxLength: 524288,
+  placeholder: '',
   required: true,
   tooltip: '',
-  controlledValue: false
+  translate: true,
+  type: 'text'
 }
 
 export default input

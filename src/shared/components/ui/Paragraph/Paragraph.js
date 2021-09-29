@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Paragraph.scss'
 
 const cssClass = styles(scss),
@@ -58,9 +58,15 @@ paragraph.displayName = 'Paragraph'
  */
 paragraph.propTypes = {
   /**
+   * Align, default `undefined`
+   */
+  align: PropTypes.string,
+
+  /**
    * Children elements
    */
   children: PropTypes.node.isRequired,
+
   /**
    * Classname, default `section`
    */
@@ -68,26 +74,26 @@ paragraph.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
    * Color, default `accent-1`
    */
   color: PropTypes.string,
-  /**
-   * Size, default `14`
-   */
-  size: PropTypes.number,
-  /**
-   * Align, default `undefined`
-   */
-  align: PropTypes.string,
-  /**
-   * Padding, default `medium`
-   */
-  padding: PropTypes.string,
+
   /**
    * Line, default `medium`
    */
   line: PropTypes.number,
+
+  /**
+   * Padding, default `medium`
+   */
+  padding: PropTypes.string,
+
+  /**
+   * Size, default `14`
+   */
+  size: PropTypes.number,
   /**
    * Weight, default `300`
    */
@@ -99,12 +105,12 @@ paragraph.propTypes = {
  * @type {Object}
  */
 paragraph.defaultProps = {
+  align: undefined,
   className: 'paragraph',
   color: 'accent-1',
-  size: 14,
-  align: undefined,
-  padding: 'medium',
   line: 18,
+  padding: 'medium',
+  size: 14,
   weight: 400
 }
 

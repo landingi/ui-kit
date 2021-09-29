@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Error from '@components/ui/Form2/Error'
 import MaskedInput from '@components/ui/Input/Masked'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Masked Input - stateless presentational component
@@ -75,18 +75,22 @@ maskedInput.displayName = 'Input masked'
  * @type {Object}
  */
 maskedInput.propTypes = {
+  disabled: PropTypes.bool,
+
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    ])
   }).isRequired,
+
+  focused: PropTypes.string,
   /**
    * Form
    */
@@ -94,24 +98,22 @@ maskedInput.propTypes = {
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
+  guide: PropTypes.bool,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-  translate: PropTypes.bool,
-  maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.instanceOf(RegExp)
     ])
   ),
-  guide: PropTypes.bool,
-  focused: PropTypes.string
+  maxLength: PropTypes.number,
+  placeholder: PropTypes.string,
+  translate: PropTypes.bool,
+  type: PropTypes.string
 }
 
 /**
@@ -119,15 +121,15 @@ maskedInput.propTypes = {
  * @type {Object}
  */
 maskedInput.defaultProps = {
-  label: '',
-  placeholder: '',
-  type: 'text',
   disabled: false,
-  translate: true,
-  maxLength: 524288,
-  mask: [],
+  focused: 'false',
   guide: false,
-  focused: 'false'
+  label: '',
+  mask: [],
+  maxLength: 524288,
+  placeholder: '',
+  translate: true,
+  type: 'text'
 }
 
 export default maskedInput

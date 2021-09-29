@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form2/Error'
-import { FormattedMessage } from 'react-intl'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Radio.scss'
 
 const cssClass = styles(scss),
@@ -73,22 +73,20 @@ radio.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * Type, default `radio`
-   */
-  type: PropTypes.string,
+
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool
-    ]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    ])
   }).isRequired,
+
   /**
    * Form
    */
@@ -96,8 +94,14 @@ radio.propTypes = {
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
+
   id: PropTypes.string.isRequired,
-  label: PropTypes.string
+
+  label: PropTypes.string,
+  /**
+   * Type, default `radio`
+   */
+  type: PropTypes.string
 }
 
 /**
@@ -106,8 +110,8 @@ radio.propTypes = {
  */
 radio.defaultProps = {
   className: 'input__radio',
-  type: 'radio',
-  label: ''
+  label: '',
+  type: 'radio'
 }
 
 export default radio

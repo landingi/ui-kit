@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './ColorNumber.scss'
 
 const cssClass = styles(scss),
@@ -40,6 +40,12 @@ colorNumber.propTypes = {
    * Children elements
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Size, default `18`
+   */
+  size: PropTypes.oneOf([16, 18, 32, 44, 62]),
+
   /**
    * Color
    */
@@ -50,11 +56,7 @@ colorNumber.propTypes = {
     'default',
     'progress',
     'info'
-  ]).isRequired,
-  /**
-   * Size, default `18`
-   */
-  size: PropTypes.oneOf([16, 18, 32, 44, 62])
+  ]).isRequired
 }
 
 /**

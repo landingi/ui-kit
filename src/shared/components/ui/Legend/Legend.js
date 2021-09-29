@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { legendShape } from '@shapes'
-import scss from './Legend.scss'
+import { styles } from '@helpers/css'
 import ColorLine from '../ColorLine'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Legend.scss'
 
 const cssClass = styles(scss),
   /**

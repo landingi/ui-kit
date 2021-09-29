@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Option from './Option'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Select.scss'
 import uuid from 'react-uuid'
 
@@ -42,27 +42,30 @@ select.displayName = 'Select'
  */
 select.propTypes = {
   /**
-   * Value
+   * Data elements
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+
   /**
    * Name
    */
   name: PropTypes.string.isRequired,
-  /**
-   * Data elements
-   */
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+
   /**
    * Gets called when input changes
    *
    * @param {SyntheticEvent} event The react `SyntheticEvent`
    * @param {Object} All props
    */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+
+  /**
+   * Value
+   */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
 }
 
 /**
@@ -70,8 +73,8 @@ select.propTypes = {
  * @type {Object}
  */
 select.defaultProps = {
-  value: undefined,
-  onChange: () => null
+  onChange: () => null,
+  value: undefined
 }
 
 export default select

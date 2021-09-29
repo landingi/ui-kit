@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './StatsBadge.scss'
-import Heading from '@components/ui/Heading'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Heading from '@components/ui/Heading'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './StatsBadge.scss'
 
 const cssClass = styles(scss),
   /**
@@ -50,14 +50,16 @@ statsBadge.propTypes = {
    * Badge color
    */
   color: PropTypes.oneOf(['green', 'yellow', 'pink']),
-  /**
-   * Quantity
-   */
-  quantity: PropTypes.number,
+
   /**
    * Description
    */
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+
+  /**
+   * Quantity
+   */
+  quantity: PropTypes.number
 }
 
 /**

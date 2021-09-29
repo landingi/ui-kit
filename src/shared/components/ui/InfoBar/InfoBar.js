@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './InfoBar.scss'
 
 /**

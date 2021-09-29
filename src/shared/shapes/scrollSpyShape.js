@@ -5,9 +5,9 @@ const childrenShape = PropTypes.shape({
     url: PropTypes.string.isRequired
   }),
   shape = PropTypes.shape({
+    children: PropTypes.arrayOf(childrenShape),
     icon: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    children: PropTypes.arrayOf(childrenShape)
+    title: PropTypes.string.isRequired
   })
 
 export default shape

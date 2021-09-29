@@ -1,7 +1,7 @@
-import React from 'react'
-import { styles } from '@helpers/css'
-import scss from './Logo.scss'
 import { isSafari } from '@helpers/browser'
+import { styles } from '@helpers/css'
+import React from 'react'
+import scss from './Logo.scss'
 
 /**
  * Exports css classes from SCSS file

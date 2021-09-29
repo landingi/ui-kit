@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
-import Spacer from '@components/ui/Spacer'
-import MonthRangePicker from './MonthRangePicker'
-import Button from '@components/ui/Button'
-import { styles } from '@helpers/css'
-import scss from './MonthRangePicker.scss'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import MonthRangePicker from './MonthRangePicker'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState } from 'react'
+import Spacer from '@components/ui/Spacer'
+import scss from './MonthRangePicker.scss'
 
 const cssClass = styles(scss),
   /**
@@ -58,13 +58,14 @@ picker.displayName = 'Month Picker Layout Wrapper'
  */
 picker.propTypes = {
   /**
-   * OnChange callback
-   */
-  onChange: PropTypes.func,
-  /**
    * Date
    */
-  minDate: PropTypes.instanceOf(Date).isRequired
+  minDate: PropTypes.instanceOf(Date).isRequired,
+
+  /**
+   * OnChange callback
+   */
+  onChange: PropTypes.func
 }
 
 /**

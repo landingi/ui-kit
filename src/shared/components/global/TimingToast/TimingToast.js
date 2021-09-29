@@ -1,14 +1,14 @@
+import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
+import { styles } from '@helpers/css'
+import Notification from '@components/ui/Notification'
 import React, {
   useCallback,
   useEffect,
   useState
 } from 'react'
 import emitter from '@lib/emitter'
-import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
-import Notification from '@components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './TimingToast.scss'
-import { styles } from '@helpers/css'
 
 /**
  * Exports css classes from SCSS file
@@ -21,11 +21,11 @@ const cssClass = styles(scss),
    * @return {object} An object of styles
    */
   toastProps = {
-    open: {
-      bottom: 40
-    },
     closed: {
       bottom: -100
+    },
+    open: {
+      bottom: 40
     }
   },
   TimingToastAnimation = posed.div(toastProps),

@@ -1,7 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import useIsOpen from '@helpers/hooks/useIsOpen'
+import React from 'react'
 import Section from './Section'
+import useIsOpen from '@helpers/hooks/useIsOpen'
 
 /**
  * Accordion - stateful presentational component

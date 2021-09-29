@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Avatar.scss'
 import Image from '@components/ui/Image'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Avatar.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -53,22 +53,26 @@ avatar.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   * Name
+   */
+  name: PropTypes.string,
+
   /**
    * Size
    */
   size: PropTypes.oneOf(['tiny', 'medium']),
-  /**
-   * Variant
-   */
-  variant: PropTypes.oneOf(['image', 'blank']),
+
   /**
    * Src
    */
   src: PropTypes.string,
+
   /**
-   * Name
+   * Variant
    */
-  name: PropTypes.string
+  variant: PropTypes.oneOf(['image', 'blank'])
 }
 
 /**
@@ -77,10 +81,10 @@ avatar.propTypes = {
  */
 avatar.defaultProps = {
   className: 'avatar',
+  name: '',
   size: 'medium',
-  variant: 'blank',
   src: '',
-  name: ''
+  variant: 'blank'
 }
 
 export default avatar

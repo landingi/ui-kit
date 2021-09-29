@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Drawer.scss'
-import Heading from '@components/ui/Heading'
 import Close from '@components/ui/Close'
+import Heading from '@components/ui/Heading'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Drawer.scss'
 
 const cssClass = styles(scss),
   /**
@@ -35,31 +35,34 @@ header.displayName = 'Drawer.Header'
  */
 header.propTypes = {
   /**
-   * Title
-   */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]).isRequired,
-  /**
    * Classname, default `drawer__header`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   * Show close icon
+   *
+   * @param {Boolean}
+   */
+  hasClose: PropTypes.bool,
+
   /**
    * Gets called when the user clicks on the account
    * @param {SyntheticEvent} event The react `SyntheticEvent`
    * @param {Object} All props
    */
   onClick: PropTypes.func,
+
   /**
-   * Show close icon
-   *
-   * @param {Boolean}
+   * Title
    */
-  hasClose: PropTypes.bool
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired
 }
 
 /**
@@ -68,8 +71,8 @@ header.propTypes = {
  */
 header.defaultProps = {
   className: 'drawer__header',
-  onClick: () => null,
-  hasClose: true
+  hasClose: true,
+  onClick: () => null
 }
 
 export default header

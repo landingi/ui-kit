@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
 import Tooltip from '@components/ui/Tooltip'
 import scss from './Badge.scss'
 
@@ -78,10 +78,12 @@ badge.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Type
+   * Indicator (border-radius: 50px)
    */
-  type: PropTypes.string,
+  isIndicator: PropTypes.bool,
+
   /**
    * Tooltip
    */
@@ -89,10 +91,11 @@ badge.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
+
   /**
-   * Indicator (border-radius: 50px)
+   * Type
    */
-  isIndicator: PropTypes.bool
+  type: PropTypes.string
 }
 
 /**
@@ -101,9 +104,9 @@ badge.propTypes = {
  */
 badge.defaultProps = {
   className: 'badge',
-  type: 'primary',
+  isIndicator: false,
   tooltip: null,
-  isIndicator: false
+  type: 'primary'
 }
 
 export default badge

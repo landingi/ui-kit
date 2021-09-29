@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import scss from './Notification.scss'
-import Close from '@components/ui/Close'
 import { mapIconToClass } from '@helpers/data'
+import { styles } from '@helpers/css'
+import Close from '@components/ui/Close'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Notification.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -79,6 +79,25 @@ notification.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   *  HasTime
+   */
+  hasTime: PropTypes.bool,
+
+  /**
+   *  IsClosable
+   */
+  isClosable: PropTypes.bool,
+
+  /**
+   * Gets called when the user clicks on backdrop
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onClick: PropTypes.func,
+
   /**
    *  Type of notification `info, success, warning, alert`
    */
@@ -87,22 +106,7 @@ notification.propTypes = {
     'success',
     'warning',
     'alert'
-  ]),
-  /**
-   *  IsClosable
-   */
-  isClosable: PropTypes.bool,
-  /**
-   *  HasTime
-   */
-  hasTime: PropTypes.bool,
-  /**
-   * Gets called when the user clicks on backdrop
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
-  onClick: PropTypes.func
+  ])
 }
 
 /**
@@ -111,10 +115,10 @@ notification.propTypes = {
  */
 notification.defaultProps = {
   className: 'notification',
-  type: 'info',
+  hasTime: false,
   isClosable: false,
   onClick: () => null,
-  hasTime: false
+  type: 'info'
 }
 
 export default notification

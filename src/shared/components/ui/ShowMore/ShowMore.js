@@ -1,14 +1,14 @@
+import { FormattedMessage, injectIntl } from 'react-intl'
+import Html from 'shared/components/global/Html'
+import Loader from '@components/ui/Loader'
+import PropTypes from 'prop-types'
 import React, {
   useCallback,
   useEffect,
   useState
 } from 'react'
-import PropTypes from 'prop-types'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import scss from './ShowMore.scss'
-import Loader from '@components/ui/Loader'
 import Spacer from '@components/ui/Spacer'
-import Html from 'shared/components/global/Html'
+import scss from './ShowMore.scss'
 
 /**
  * Show more/less - stateful presentational component
@@ -86,23 +86,26 @@ showMore.displayName = 'Show more/less'
  */
 showMore.propTypes = {
   /**
+   * Children elements
+   */
+  children: PropTypes.node,
+
+  /**
    * Content
    */
   content: PropTypes.string.isRequired,
+
   /**
    * Extraclassname
    */
   extraClassname: PropTypes.string,
+
   /**
    * Intl from react-intl
    */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * Children elements
-   */
-  children: PropTypes.node
+  }).isRequired
 }
 
 /**

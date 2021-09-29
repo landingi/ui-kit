@@ -1,30 +1,30 @@
 /* eslint-disable react/jsx-no-bind */
+import { emitCloseDropdown } from '@events/dropdown'
+import { isEmpty } from '@helpers/data'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import Divider from '@components/ui/Divider'
+import Dropdown from '@components/ui/Dropdown'
+import Error from '@components/ui/Form2/Error'
+import Heading from '@components/ui/Heading'
+import List from '@components/ui/List'
+import ListItem from '@components/ui/List/Item'
+import Loader from '@components/ui/Loader'
+import Message from '@components/ui/Message/Message'
+import Overflow from '@components/ui/Overflow'
+import PropTypes from 'prop-types'
 import React, {
   Fragment,
   useCallback,
   useEffect,
   useState
 } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
-import scss from './Select.scss'
-import Message from '@components/ui/Message/Message'
-import List from '@components/ui/List'
-import ListItem from '@components/ui/List/Item'
-import Dropdown from '@components/ui/Dropdown'
-import Heading from '@components/ui/Heading'
-import Button from '@components/ui/Button'
-import Overflow from '@components/ui/Overflow'
-import Divider from '@components/ui/Divider'
-import Loader from '@components/ui/Loader'
-import { emitCloseDropdown } from '@events/dropdown'
-import { isEmpty } from '@helpers/data'
-import Spacer from '@components/ui/Spacer'
 import Searcher from 'shared/components/global/Searcher'
+import Spacer from '@components/ui/Spacer'
+import scss from './Select.scss'
 
-import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
+import Paragraph from '@components/ui/Paragraph'
 const cssClass = styles(scss),
   /**
    * Select - stateless presentational component
@@ -224,44 +224,6 @@ select.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.instanceOf(Object),
-    PropTypes.number,
-    PropTypes.bool
-  ]),
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  errors: PropTypes.objectOf(PropTypes.string),
-  touched: PropTypes.instanceOf(Object),
-  id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Object)
-  ]),
-  hasLabel: PropTypes.bool,
-  placeholder: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.instanceOf(Object)
-      ]),
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.bool,
-        PropTypes.object
-      ])
-    })
-  ).isRequired,
-  handleOnSearchChange: PropTypes.func,
-  searchPlaceholder: PropTypes.string,
-  inModal: PropTypes.bool,
-  hasDescription: PropTypes.bool,
-  overflowStyle: PropTypes.instanceOf(Object),
   emphasisedOptions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.oneOfType([
@@ -276,8 +238,46 @@ select.propTypes = {
       ])
     })
   ),
+  errors: PropTypes.objectOf(PropTypes.string),
+  handleOnSearchChange: PropTypes.func,
+  hasDescription: PropTypes.bool,
+  hasLabel: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  inModal: PropTypes.bool,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]),
   liveChanges: PropTypes.bool,
-  optionalContent: PropTypes.node
+  name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  optionalContent: PropTypes.node,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Object)
+      ]),
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool,
+        PropTypes.object
+      ])
+    })
+  ).isRequired,
+  overflowStyle: PropTypes.instanceOf(Object),
+  placeholder: PropTypes.string,
+  searchPlaceholder: PropTypes.string,
+  touched: PropTypes.instanceOf(Object),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.instanceOf(Object),
+    PropTypes.number,
+    PropTypes.bool
+  ])
 }
 
 /**
@@ -286,26 +286,26 @@ select.propTypes = {
  */
 select.defaultProps = {
   className: '',
-  label: '',
-  placeholder: '',
-  onChange: () => null,
-  handleOnSearchChange: null,
-  onBlur: () => null,
-  errors: {},
-  touched: {},
-  hasLabel: true,
-  value: null,
-  searchPlaceholder: '',
-  inModal: false,
-  empty: '',
-  img: '',
-  isLoading: false,
-  isEmptyList: false,
-  hasDescription: false,
-  overflowStyle: {},
   emphasisedOptions: [],
+  empty: '',
+  errors: {},
+  handleOnSearchChange: null,
+  hasDescription: false,
+  hasLabel: true,
+  img: '',
+  inModal: false,
+  isEmptyList: false,
+  isLoading: false,
+  label: '',
   liveChanges: false,
-  optionalContent: null
+  onBlur: () => null,
+  onChange: () => null,
+  optionalContent: null,
+  overflowStyle: {},
+  placeholder: '',
+  searchPlaceholder: '',
+  touched: {},
+  value: null
 }
 
 export default select

@@ -1,21 +1,21 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Modal.scss'
-import Backdrop from '@components/ui/Backdrop'
-import Close from '@components/ui/Close'
-import Spreader from '@components/ui/Spreader'
-import Overflow from '@components/ui/Overflow'
-import Divider from '@components/ui/Divider'
-import Spacer from '@components/ui/Spacer'
-import ModalHeader from './Header'
-import ModalFooter from './Footer'
-import Button from '@components/ui/Button'
-import { FormattedMessage } from 'react-intl'
-import posed, { PoseGroup } from 'react-pose'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Loader from '@components/ui/Loader'
+import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Backdrop from '@components/ui/Backdrop'
+import Button from '@components/ui/Button'
+import Close from '@components/ui/Close'
+import Divider from '@components/ui/Divider'
 import Image from '@components/ui/Image'
+import Loader from '@components/ui/Loader'
+import ModalFooter from './Footer'
+import ModalHeader from './Header'
+import Overflow from '@components/ui/Overflow'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import Spacer from '@components/ui/Spacer'
+import Spreader from '@components/ui/Spreader'
+import posed, { PoseGroup } from 'react-pose'
+import scss from './Modal.scss'
 
 /**
  * Modal Animation, exports React-pose animations
@@ -152,8 +152,8 @@ const ModalAnimation = posed.div({
             >
               <div
                 className={cssClass(className, {
-                  'modal--fullscreen': isFullscreen,
-                  'modal--center': isCentered
+                  'modal--center': isCentered,
+                  'modal--fullscreen': isFullscreen
                 })}
               >
                 {isLoading ? (
@@ -259,9 +259,20 @@ modal.displayName = 'Modal'
  */
 modal.propTypes = {
   /**
+   * ActionButtonIcon action button icon
+   */
+  actionIcon: PropTypes.string,
+
+  /**
+   * ActionVariant action button variant
+   */
+  actionVariant: PropTypes.string,
+
+  /**
    * Children elements
    */
   children: PropTypes.node,
+
   /**
    * Classname, default `modal`
    */
@@ -269,13 +280,82 @@ modal.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Component
    */
-  onClick: PropTypes.func,
+  component: PropTypes.node,
+
+  /**
+   * HasCustomButton - custom button
+   */
+  hasCustomButton: PropTypes.bool,
+
+  /**
+   * HasFooter
+   */
+  hasFooter: PropTypes.bool,
+
+  /**
+   * HasHeaderDivider
+   */
+  hasHeaderDivider: PropTypes.bool,
+
+  /**
+   * I18Action button translation
+   */
+  i18Action: PropTypes.string,
+
+  /**
+   * I18Cancel button translation
+   */
+  i18Cancel: PropTypes.string,
+
+  /**
+   * Image
+   */
+  image: PropTypes.string,
+
+  /**
+   * IsActive, active state
+   */
+  isActive: PropTypes.bool.isRequired,
+
+  /**
+   * IsButtonDisabled is action button disabled
+   */
+  isButtonDisabled: PropTypes.bool,
+
+  /**
+   * IsButtonLoading ha action button loading state
+   */
+  isButtonLoading: PropTypes.bool,
+
+  /**
+   * IsCentered - makes text in modal centered
+   */
+  isCentered: PropTypes.bool,
+
+  /**
+   * IsClosable
+   */
+  isClosable: PropTypes.bool,
+
+  /**
+   * IsComponent is intead of title
+   */
+  isComponent: PropTypes.bool,
+
+  /**
+   * IsCustomButtonDisabled is action button disabled
+   */
+  isCustomButtonDisabled: PropTypes.bool,
+
+  /**
+   * IsEditable
+   */
+  isEditable: PropTypes.bool,
+
   /**
    * Gets called when the user clicks
    *
@@ -283,106 +363,54 @@ modal.propTypes = {
    * @param {Object} All props
    */
   onAction: PropTypes.func,
-  /**
-   * IsActive, active state
-   */
-  isActive: PropTypes.bool.isRequired,
-  /**
-   * IsClosable
-   */
-  isClosable: PropTypes.bool,
-  /**
-   * IsButtonDisabled is action button disabled
-   */
-  isButtonDisabled: PropTypes.bool,
-  /**
-   * IsButtonLoading ha action button loading state
-   */
-  isButtonLoading: PropTypes.bool,
-  /**
-   * Title
-   */
-  title: PropTypes.string,
-  /**
-   * Image
-   */
-  image: PropTypes.string,
-  /**
-   * HasFooter
-   */
-  hasFooter: PropTypes.bool,
-  /**
-   * I18Action button translation
-   */
-  i18Action: PropTypes.string,
-  /**
-   * I18Cancel button translation
-   */
-  i18Cancel: PropTypes.string,
-  /**
-   * HasHeaderDivider
-   */
-  hasHeaderDivider: PropTypes.bool,
-  /**
-   * ActionVariant action button variant
-   */
-  actionVariant: PropTypes.string,
-  /**
-   * IsLoading
-   */
-  isLoading: PropTypes.bool,
-  /**
-   * ActionButtonIcon action button icon
-   */
-  actionIcon: PropTypes.string,
-  /**
-   * OverflowStyle
-   */
-  overflowStyle: PropTypes.instanceOf(Object),
+
   /**
    * IsFullscreen - makes modal fullscreen size
    */
   isFullscreen: PropTypes.bool,
+
   /**
-   * IsCentered - makes text in modal centered
+   * Gets called when the user clicks
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
    */
-  isCentered: PropTypes.bool,
+  onClick: PropTypes.func,
+
   /**
-   * OnEdit
+   * IsLoading
    */
-  onEdit: PropTypes.func,
-  /**
-   * OnMarkAsSpam
-   */
-  onMarkAsSpam: PropTypes.func,
-  /**
-   * IsEditable
-   */
-  isEditable: PropTypes.bool,
-  /**
-   * HasCustomButton - custom button
-   */
-  hasCustomButton: PropTypes.bool,
-  /**
-   * IsCustomButtonDisabled is action button disabled
-   */
-  isCustomButtonDisabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+
   /**
    * IsMarkAsSpamVisible is "mark as spam" button visible
    */
   isMarkAsSpamVisible: PropTypes.bool,
-  /**
-   * IsComponent is intead of title
-   */
-  isComponent: PropTypes.bool,
-  /**
-   * Component
-   */
-  component: PropTypes.node,
+
   /**
    * IsSubmit
    */
-  isSubmit: PropTypes.bool
+  isSubmit: PropTypes.bool,
+
+  /**
+   * Title
+   */
+  title: PropTypes.string,
+
+  /**
+   * OnEdit
+   */
+  onEdit: PropTypes.func,
+
+  /**
+   * OnMarkAsSpam
+   */
+  onMarkAsSpam: PropTypes.func,
+
+  /**
+   * OverflowStyle
+   */
+  overflowStyle: PropTypes.instanceOf(Object)
 }
 
 /**
@@ -390,37 +418,37 @@ modal.propTypes = {
  * @type {Object}
  */
 modal.defaultProps = {
-  className: 'modal',
+  actionIcon: null,
+  actionVariant: 'primary',
   children: null,
-  isClosable: true,
-  isButtonDisabled: false,
-  isButtonLoading: false,
-  onClick: () => null,
-  onAction: () => null,
-  title: '',
-  image: '',
+  className: 'modal',
+  component: null,
+  hasCustomButton: false,
   hasFooter: false,
+  hasHeaderDivider: false,
   i18Action: 'word.save',
   i18Cancel: 'word.cancel',
-  hasHeaderDivider: false,
+  image: '',
+  isButtonDisabled: false,
+  isButtonLoading: false,
+  isCentered: false,
+  isClosable: true,
+  isComponent: false,
+  isCustomButtonDisabled: false,
+  isEditable: false,
+  isFullscreen: false,
   isLoading: false,
-  actionVariant: 'primary',
-  actionIcon: null,
+  isMarkAsSpamVisible: false,
+  isSubmit: false,
+  onAction: () => null,
+  onClick: () => null,
+  onEdit: () => null,
+  onMarkAsSpam: () => null,
   overflowStyle: {
     maxHeight: '80vh',
     overflowY: 'auto'
   },
-  isFullscreen: false,
-  isCentered: false,
-  isEditable: false,
-  hasCustomButton: false,
-  onEdit: () => null,
-  onMarkAsSpam: () => null,
-  isCustomButtonDisabled: false,
-  isMarkAsSpamVisible: false,
-  isComponent: false,
-  component: null,
-  isSubmit: false
+  title: ''
 }
 
 export default modal

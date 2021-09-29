@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Panel.scss'
 
 const cssClass = styles(scss),
@@ -24,16 +24,16 @@ const cssClass = styles(scss),
     hasShadow
   }) => {
     const elementClasses = cssClass({
-      'panel--padding-nolr': variant === 'padding-nolr',
-      'panel--padding-default':
-        variant === 'padding-default',
-      'panel--padding-tiny': variant === 'padding-tiny',
-      'panel--padding-none': variant === 'padding-none',
-      'panel--padding-bottom-tiny':
-        variant === 'padding-bottom-tiny',
-      'panel--padding-input': variant === 'padding-input',
       'panel--adjust-height': adjustHeight === true,
       'panel--background': isBackground === true,
+      'panel--padding-bottom-tiny':
+        variant === 'padding-bottom-tiny',
+      'panel--padding-default':
+        variant === 'padding-default',
+      'panel--padding-input': variant === 'padding-input',
+      'panel--padding-nolr': variant === 'padding-nolr',
+      'panel--padding-none': variant === 'padding-none',
+      'panel--padding-tiny': variant === 'padding-tiny',
       'panel--shadow-none': hasShadow === false
     })
 
@@ -56,9 +56,15 @@ panel.displayName = 'Panel'
  */
 panel.propTypes = {
   /**
+   * Adjust panel height to container height
+   */
+  adjustHeight: PropTypes.bool,
+
+  /**
    * Children elements
    */
   children: PropTypes.node.isRequired,
+
   /**
    * Classname, default `panel`
    */
@@ -66,6 +72,17 @@ panel.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   * HasShadow add shadows
+   */
+  hasShadow: PropTypes.bool,
+
+  /**
+   * IsBackground add background
+   */
+  isBackground: PropTypes.bool,
+
   /**
    * Variant
    */
@@ -77,19 +94,7 @@ panel.propTypes = {
     'padding-bottom-tiny',
     'padding-input',
     'padding-huge'
-  ]),
-  /**
-   * Adjust panel height to container height
-   */
-  adjustHeight: PropTypes.bool,
-  /**
-   * IsBackground add background
-   */
-  isBackground: PropTypes.bool,
-  /**
-   * HasShadow add shadows
-   */
-  hasShadow: PropTypes.bool
+  ])
 }
 
 /**
@@ -97,11 +102,11 @@ panel.propTypes = {
  * @type {Object}
  */
 panel.defaultProps = {
-  className: 'panel',
-  variant: 'padding-default',
   adjustHeight: false,
+  className: 'panel',
+  hasShadow: true,
   isBackground: false,
-  hasShadow: true
+  variant: 'padding-default'
 }
 
 export default panel

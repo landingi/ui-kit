@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
-import TabContext from './TabContext'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import TabContext from './TabContext'
 import scss from './Tabs.scss'
 
 /**
@@ -48,9 +48,14 @@ tabPanel.displayName = 'TabPanel'
  */
 tabPanel.propTypes = {
   /**
-   * Name
+   * Children elements
    */
-  name: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+
   /**
    * Classname, default `tab__panel`
    */
@@ -58,14 +63,11 @@ tabPanel.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Children elements
+   * Name
    */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired
+  name: PropTypes.string.isRequired
 }
 
 /**

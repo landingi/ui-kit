@@ -63,10 +63,10 @@ export const isSetEqual = (a, b) =>
  * @return {object}
  */
 const fontIcons = {
-  success: 'check',
-  warning: 'exclamation',
+  alert: 'times',
   info: 'info',
-  alert: 'times'
+  success: 'check',
+  warning: 'exclamation'
 }
 
 /**
@@ -179,6 +179,8 @@ export const getDateObject = date => {
 const months = {
     0: 'january',
     1: 'february',
+    10: 'november',
+    11: 'december',
     2: 'march',
     3: 'april',
     4: 'may',
@@ -186,9 +188,7 @@ const months = {
     6: 'july',
     7: 'august',
     8: 'september',
-    9: 'october',
-    10: 'november',
-    11: 'december'
+    9: 'october'
   },
   /**
    * Maps number to month
@@ -233,8 +233,8 @@ export const isRootDomain = domain => {
  * @return {string}
  */
 export const defaultLabels = {
-  landing_info: '-created_at',
   all_types: '2',
+  landing_info: '-created_at',
   product_info: 'created_at'
 }
 

@@ -1,10 +1,10 @@
-import React, { useCallback, useContext } from 'react'
-import PropTypes from 'prop-types'
-import TabContext from './TabContext'
-import Button from '@components/ui/Button'
-import useQueryString from '@helpers/hooks/useQueryString'
 import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React, { useCallback, useContext } from 'react'
+import TabContext from './TabContext'
 import scss from './Tabs.scss'
+import useQueryString from '@helpers/hooks/useQueryString'
 
 /**
  * Exports css classes from SCSS file
@@ -68,16 +68,14 @@ tab.displayName = 'Tab'
  */
 tab.propTypes = {
   /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Children elements
    */
-  onClick: PropTypes.func,
-  /**
-   * Name
-   */
-  name: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+
   /**
    * Classname, default `tab`
    */
@@ -85,14 +83,19 @@ tab.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Children elements
+   * Name
    */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Gets called when the user clicks
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onClick: PropTypes.func
 }
 
 /**

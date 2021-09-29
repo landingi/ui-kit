@@ -1,11 +1,11 @@
-import React from 'react'
-import uuid from 'react-uuid'
-import PropTypes from 'prop-types'
-import ListItem from '@components/ui/List/Item'
-import Button from '@components/ui/Button'
-import Item from './Item'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollSpyShape } from '@shapes'
+import Button from '@components/ui/Button'
+import Item from './Item'
+import ListItem from '@components/ui/List/Item'
+import PropTypes from 'prop-types'
+import React from 'react'
+import uuid from 'react-uuid'
 
 /**
  * MainItem - stateless menu items presentational component

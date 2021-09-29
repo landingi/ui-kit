@@ -24,13 +24,14 @@ usePermissions.displayName = 'usePermissions'
  */
 usePermissions.propTypes = {
   /**
+   * RequiredPermisions
+   */
+  requiredPermisions: PropTypes.string.isRequired,
+
+  /**
    * UserPermissions
    */
   userPermissions: PropTypes.arrayOf(
     PropTypes.string.isRequired
-  ).isRequired,
-  /**
-   * RequiredPermisions
-   */
-  requiredPermisions: PropTypes.string.isRequired
+  ).isRequired
 }

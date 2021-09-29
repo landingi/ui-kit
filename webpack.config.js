@@ -7,10 +7,10 @@ const {
 module.exports = merge(common, {
   mode: 'production',
   externals: {
-    "react-router": "react-router",
-    "react-router-dom": "react-router-dom",
-    "react": "react",
-    "react-dom": "react-dom"
+    'react-router': 'react-router',
+    'react-router-dom': 'react-router-dom',
+    react: 'react',
+    'react-dom': 'react-dom'
   },
   plugins: [new CleanWebpackPlugin()]
 })

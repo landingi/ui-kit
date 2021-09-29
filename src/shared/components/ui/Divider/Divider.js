@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Divider.scss'
 
 /**
@@ -18,10 +18,10 @@ const cssClass = styles(scss),
    */
   divider = ({ className, variant, align }) => {
     const elementClasses = cssClass({
-      'divider--normal': variant === 'normal',
-      'divider--menu': variant === 'menu',
       'divider--dropdown': variant === 'dropdown',
       'divider--horizontal': variant === 'horizontal',
+      'divider--menu': variant === 'menu',
+      'divider--normal': variant === 'normal',
       'divider--vertical': align === 'vertical'
     })
 
@@ -48,20 +48,22 @@ divider.displayName = 'Divider'
  */
 divider.propTypes = {
   /**
+   * Align
+   */
+  align: PropTypes.string,
+
+  /**
    * Classname, default `divider`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
    * Variant
    */
-  variant: PropTypes.string,
-  /**
-   * Align
-   */
-  align: PropTypes.string
+  variant: PropTypes.string
 }
 
 /**
@@ -69,9 +71,9 @@ divider.propTypes = {
  * @type {Object}
  */
 divider.defaultProps = {
+  align: '',
   className: 'divider',
-  variant: 'normal',
-  align: ''
+  variant: 'normal'
 }
 
 export default divider

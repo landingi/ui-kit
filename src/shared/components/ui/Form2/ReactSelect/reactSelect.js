@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react'
-import PropTypes from 'prop-types'
-import Error from '@components/ui/Form2/Error'
-import Select from 'react-select'
-import uuid from 'react-uuid'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import Label from '@components/ui/Label'
 import { styles } from '@helpers/css'
+import Error from '@components/ui/Form2/Error'
+import Label from '@components/ui/Label'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Select from 'react-select'
 import scss from './reactSelect.scss'
+import uuid from 'react-uuid'
 
 const cssClass = styles(scss),
   /**
@@ -104,23 +104,26 @@ reactSelect.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.number,
-    PropTypes.bool
-  ]),
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
   errors: PropTypes.objectOf(PropTypes.string),
-  touched: PropTypes.instanceOf(Object),
   id: PropTypes.string.isRequired,
+  /**
+   * Intl from react-intl
+   */
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
-  placeholder: PropTypes.string,
+
+  name: PropTypes.string.isRequired,
+
+  onBlur: PropTypes.func,
+
+  onChange: PropTypes.func,
+
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -131,12 +134,17 @@ reactSelect.propTypes = {
       ])
     })
   ).isRequired,
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired
+
+  placeholder: PropTypes.string,
+
+  touched: PropTypes.instanceOf(Object),
+
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.bool
+  ])
 }
 
 /**
@@ -145,11 +153,11 @@ reactSelect.propTypes = {
  */
 reactSelect.defaultProps = {
   className: 'react-select-container',
-  label: '',
-  placeholder: '',
-  onChange: () => null,
-  onBlur: () => null,
   errors: {},
+  label: '',
+  onBlur: () => null,
+  onChange: () => null,
+  placeholder: '',
   touched: {},
   value: null
 }

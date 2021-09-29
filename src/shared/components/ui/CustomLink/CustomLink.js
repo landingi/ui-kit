@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './CustomLink.scss'
 
 /**
@@ -54,10 +54,12 @@ customLink.propTypes = {
    * Classname, default `custom-link`
    */
   className: PropTypes.string,
+
   /**
-   * Variant, default 'active'
+   * Link
    */
-  variant: PropTypes.oneOf(['active', 'inactive', 'dark']),
+  href: PropTypes.string.isRequired,
+
   /**
    * Label
    */
@@ -65,18 +67,21 @@ customLink.propTypes = {
     PropTypes.string,
     PropTypes.node
   ]).isRequired,
+
   /**
-   * Link
+   * Font size
    */
-  href: PropTypes.string.isRequired,
+  size: PropTypes.number,
+
   /**
    * Target
    */
   target: PropTypes.string,
+
   /**
-   * Font size
+   * Variant, default 'active'
    */
-  size: PropTypes.number
+  variant: PropTypes.oneOf(['active', 'inactive', 'dark'])
 }
 
 /**
@@ -85,9 +90,9 @@ customLink.propTypes = {
  */
 customLink.defaultProps = {
   className: 'custom-link',
-  variant: 'active',
+  size: 14,
   target: '_self',
-  size: 14
+  variant: 'active'
 }
 
 export default customLink

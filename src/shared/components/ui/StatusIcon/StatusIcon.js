@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './StatusIcon.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './StatusIcon.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -47,14 +47,16 @@ statusIcon.propTypes = {
    * Classname, default `status-icon`
    */
   className: PropTypes.string,
-  /**
-   * Variant, default 'active'
-   */
-  variant: PropTypes.oneOf(['active', 'inactive']),
+
   /**
    * Size, default 'medium'
    */
-  size: PropTypes.oneOf(['tiny', 'medium'])
+  size: PropTypes.oneOf(['tiny', 'medium']),
+
+  /**
+   * Variant, default 'active'
+   */
+  variant: PropTypes.oneOf(['active', 'inactive'])
 }
 
 /**
@@ -63,8 +65,8 @@ statusIcon.propTypes = {
  */
 statusIcon.defaultProps = {
   className: 'status-icon',
-  variant: 'active',
-  size: 'medium'
+  size: 'medium',
+  variant: 'active'
 }
 
 export default statusIcon

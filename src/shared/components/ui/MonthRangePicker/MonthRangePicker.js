@@ -1,23 +1,23 @@
 /* eslint-disable react/jsx-no-bind */
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
-import { styles } from '@helpers/css'
-import scss from './MonthRangePicker.scss'
-import Spacer from '@components/ui/Spacer'
-import Button from '@components/ui/Button'
-import { endOfMonth, startOfMonth } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
+import { endOfMonth, startOfMonth } from 'date-fns'
 import {
   handleRangeMarker,
   monthsArray,
   parseDateToMonthID,
   transformMonthToDate
 } from './helpers'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useState
+} from 'react'
+import Spacer from '@components/ui/Spacer'
+import scss from './MonthRangePicker.scss'
 
 const cssClass = styles(scss),
   /**
@@ -41,15 +41,15 @@ const cssClass = styles(scss),
     useEffect(() => {
       if (confirmedEndMonth) {
         onChange({
-          startDate: startOfMonth(
-            confirmedEndMonth > startMonth
-              ? transformMonthToDate(startMonth)
-              : transformMonthToDate(confirmedEndMonth)
-          ),
           endDate: endOfMonth(
             confirmedEndMonth > startMonth
               ? transformMonthToDate(confirmedEndMonth)
               : transformMonthToDate(startMonth)
+          ),
+          startDate: startOfMonth(
+            confirmedEndMonth > startMonth
+              ? transformMonthToDate(startMonth)
+              : transformMonthToDate(confirmedEndMonth)
           )
         })
       }

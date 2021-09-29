@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Loader.scss'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
+import scss from './Loader.scss'
 
 const cssClass = styles(scss),
   /**

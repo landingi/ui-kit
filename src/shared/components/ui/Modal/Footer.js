@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Modal.scss'
 
 /**
@@ -44,13 +44,14 @@ modalFooter.displayName = 'Modal.Footer'
  */
 modalFooter.propTypes = {
   /**
-   * Children elements
-   */
-  children: PropTypes.node.isRequired,
-  /**
    * Align
    */
-  align: PropTypes.oneOf(['left', 'center', 'right'])
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+
+  /**
+   * Children elements
+   */
+  children: PropTypes.node.isRequired
 }
 
 /**

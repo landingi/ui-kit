@@ -1,7 +1,7 @@
-import React, { memo, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import Search from '@components/ui/Search'
 import { NO_VALUE } from '@constants/helpers'
+import PropTypes from 'prop-types'
+import React, { memo, useCallback } from 'react'
+import Search from '@components/ui/Search'
 
 /**
  * Searcher - stateful presentational component
@@ -77,15 +77,19 @@ searcher.displayName = 'Searcher'
  * @type {Object}
  */
 searcher.propTypes = {
+  liveChanges: PropTypes.bool,
+
+  placeholder: PropTypes.string,
+
+  protectedSubmit: PropTypes.bool,
+
+  searchFunction: PropTypes.func,
+
+  setSearchPhrase: PropTypes.func,
   /**
    * Search result setter
    */
-  setSearchResult: PropTypes.func,
-  setSearchPhrase: PropTypes.func,
-  searchFunction: PropTypes.func,
-  placeholder: PropTypes.string,
-  protectedSubmit: PropTypes.bool,
-  liveChanges: PropTypes.bool
+  setSearchResult: PropTypes.func
 }
 
 /**
@@ -93,12 +97,12 @@ searcher.propTypes = {
  * @type {Object}
  */
 searcher.defaultProps = {
-  setSearchResult: () => null,
-  setSearchPhrase: null,
-  searchFunction: () => null,
+  liveChanges: false,
   placeholder: 'word.search',
   protectedSubmit: false,
-  liveChanges: false
+  searchFunction: () => null,
+  setSearchPhrase: null,
+  setSearchResult: () => null
 }
 
 export default memo(searcher)

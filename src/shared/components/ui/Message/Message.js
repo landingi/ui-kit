@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Message.scss'
-import Vimeo from '@u-wave/react-vimeo'
-import Image from '@components/ui/Image'
-import Heading from '@components/ui/Heading'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Heading from '@components/ui/Heading'
+import Image from '@components/ui/Image'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
+import Vimeo from '@u-wave/react-vimeo'
+import scss from './Message.scss'
 
 const cssClass = styles(scss),
   /**
@@ -118,17 +118,15 @@ message.displayName = 'Message'
  */
 message.propTypes = {
   /**
-   * Title elements
+   * Bold
    */
-  title: PropTypes.string,
+  bold: PropTypes.bool,
+
   /**
-   * Message elements
+   * Children element
    */
-  message: PropTypes.string,
-  /**
-   * Image/Video url
-   */
-  url: PropTypes.string,
+  children: PropTypes.node,
+
   /**
    * Classname, default `message`
    */
@@ -136,34 +134,46 @@ message.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
    * Image/Video height
    */
   height: PropTypes.number,
-  /**
-   * Children element
-   */
-  children: PropTypes.node,
-  /**
-   * Title font size
-   */
-  titleLevel: PropTypes.number,
-  /**
-   * Message font size
-   */
-  messageLevel: PropTypes.number,
+
   /**
    * Video
    */
   isVideo: PropTypes.bool,
+
+  /**
+   * Message elements
+   */
+  message: PropTypes.string,
+
+  /**
+   * Message font size
+   */
+  messageLevel: PropTypes.number,
+
   /**
    * MultimediaPosition
    */
   multimediaPosition: PropTypes.oneOf(['before', 'after']),
+
   /**
-   * Bold
+   * Title elements
    */
-  bold: PropTypes.bool,
+  title: PropTypes.string,
+
+  /**
+   * Title font size
+   */
+  titleLevel: PropTypes.number,
+
+  /**
+   * Image/Video url
+   */
+  url: PropTypes.string,
   /**
    * WithoutMargin
    */
@@ -175,17 +185,17 @@ message.propTypes = {
  * @type {Object}
  */
 message.defaultProps = {
-  className: 'message',
-  title: undefined,
-  message: undefined,
-  url: undefined,
-  height: 220,
-  children: null,
-  titleLevel: 1,
-  messageLevel: 3,
-  isVideo: false,
-  multimediaPosition: 'before',
   bold: false,
+  children: null,
+  className: 'message',
+  height: 220,
+  isVideo: false,
+  message: undefined,
+  messageLevel: 3,
+  multimediaPosition: 'before',
+  title: undefined,
+  titleLevel: 1,
+  url: undefined,
   withoutMargin: false
 }
 

@@ -3,7 +3,8 @@
   "plugins": [
     "react",
     "react-hooks",
-    "sort-imports-es6-autofix"
+    "sort-imports-es6-autofix",
+    "sort-keys-fix"
   ],
   "env": {
     "browser": true,
@@ -19,7 +20,36 @@
     }
   },
   "rules": {
-    "jsx-quotes": [2, "prefer-single"],
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }],
+    "camelcase": "off",
+    "no-use-before-define": "off",
+    "react/sort-comp": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-sort-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-sort-default-props": "off",
+    "react/jsx-max-depth": "off",
+    "react/jsx-fragments": "off",
+    "react/jsx-no-literals": "off",
+    "react/sort-prop-types": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/forbid-component-props": "off",
+    "multiline-ternary": "off",
+    "array-callback-return": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/no-set-state": "off",
+    "react/state-in-constructor": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "react/prop-types": "off",
+    "no-empty": "off",
     "prettier/prettier": [
 			"error",
 			{
@@ -33,8 +63,8 @@
 		]
   },
   "extends": [
-    "eslint:all",
-    "plugin:react/all",
+    "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "prettier",
     "plugin:prettier/recommended"

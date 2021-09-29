@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Tabs.scss'
 
 /**
@@ -36,20 +36,21 @@ tabList.displayName = 'TabList'
  */
 tabList.propTypes = {
   /**
-   * Classname, default `tabs`
-   */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  /**
    * Children elements
    */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
     PropTypes.func
-  ]).isRequired
+  ]).isRequired,
+
+  /**
+   * Classname, default `tabs`
+   */
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 }
 
 /**

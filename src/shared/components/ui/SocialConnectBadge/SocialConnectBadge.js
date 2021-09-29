@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './SocialConnectBadge.scss'
-import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './SocialConnectBadge.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -59,15 +59,18 @@ socialConnectBadge.propTypes = {
    * Classname, default `socialConnectBadge`
    */
   className: PropTypes.string,
+
+  /**
+   * Social
+   */
+  social: PropTypes.oneOf(['google', 'facebook'])
+    .isRequired,
+
   /**
    * Variant
    */
   variant: PropTypes.oneOf(['connect', 'disconnect'])
-    .isRequired,
-  /**
-   * Social
-   */
-  social: PropTypes.oneOf(['google', 'facebook']).isRequired
+    .isRequired
 }
 
 /**

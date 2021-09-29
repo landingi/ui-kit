@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { memo } from 'react'
 import scss from './Label.scss'
 
 const cssClass = styles(scss),

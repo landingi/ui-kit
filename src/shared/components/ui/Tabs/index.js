@@ -1,6 +1,6 @@
-import Tabs from './Tabs'
-import TabList from './TabList'
 import Tab from './Tab'
+import TabList from './TabList'
 import TabPanel from './TabPanel'
+import Tabs from './Tabs'
 
-export default { Tabs, TabList, Tab, TabPanel }
+export default { Tab, TabList, TabPanel, Tabs }

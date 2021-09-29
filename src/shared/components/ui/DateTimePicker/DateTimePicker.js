@@ -1,16 +1,16 @@
-import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState } from 'react'
 import scss from './DateTimePicker.scss'
 /**
  * https://github.com/Adphorus/react-date-range
  */
 import { DateRange } from 'react-date-range'
-import Button from '@components/ui/Button'
 import { FormattedMessage } from 'react-intl'
-import { getAgoDate, getTodayDate } from '@helpers/data'
 import { enUS, pl } from 'date-fns/locale'
+import { getAgoDate, getTodayDate } from '@helpers/data'
 import { getLanguage } from '@helpers/i18n'
+import Button from '@components/ui/Button'
 
 /**
  * Exports css classes from SCSS file
@@ -28,9 +28,9 @@ const cssClass = styles(scss),
   dateTimePicker = ({ setDate, minDate }) => {
     const [state, setState] = useState([
         {
-          startDate: getAgoDate(7),
           endDate: getTodayDate(),
-          key: 'selection'
+          key: 'selection',
+          startDate: getAgoDate(7)
         }
       ]),
       addElements = () => {
@@ -94,8 +94,8 @@ dateTimePicker.displayName = 'Date time picker'
  * @type {Object}
  */
 dateTimePicker.propTypes = {
-  setDate: PropTypes.func.isRequired,
-  minDate: PropTypes.string
+  minDate: PropTypes.string,
+  setDate: PropTypes.func.isRequired
 }
 
 /**

@@ -1,23 +1,23 @@
-import React, { Fragment, PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormattedMessage } from 'react-intl'
 import {
   centerParent,
   getBoundings
 } from '@helpers/position'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
+import React, { Fragment, PureComponent } from 'react'
 import Tooltip from '@components/ui/Tooltip'
-import { FormattedMessage } from 'react-intl'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
-import Ink from 'react-ink'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import { NavLink } from 'react-router-dom'
 import { debounce, throttle } from '@helpers/events'
 import { styles } from '@helpers/css'
-import scss from './Dropdown.scss'
-import { NavLink } from 'react-router-dom'
+import Ink from 'react-ink'
 import emitter from '@lib/emitter'
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import scss from './Dropdown.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -78,27 +78,27 @@ class Dropdown extends PureComponent {
    * @type {Object}
    */
   static defaultProps = {
-    offset: 5,
-    className: 'dropdown',
-    icon: null,
-    label: null,
-    tooltip: '',
-    tooltipPlacement: '',
-    size: 'medium',
-    hasArrow: true,
-    arrowType: 'caret',
     alignment: 'center',
-    dropdownPlacement: 'left',
-    button: false,
-    handleOnClick: () => null,
-    handleOnOpen: () => null,
-    handleOnClose: () => null,
-    link: '',
-    renderAsSmaller: false,
-    hasInput: false,
-    hasFullInputStyle: false,
+    arrowType: 'caret',
     asPlaceholder: false,
-    inModal: false
+    button: false,
+    className: 'dropdown',
+    dropdownPlacement: 'left',
+    handleOnClick: () => null,
+    handleOnClose: () => null,
+    handleOnOpen: () => null,
+    hasArrow: true,
+    hasFullInputStyle: false,
+    hasInput: false,
+    icon: null,
+    inModal: false,
+    label: null,
+    link: '',
+    offset: 5,
+    renderAsSmaller: false,
+    size: 'medium',
+    tooltip: '',
+    tooltipPlacement: ''
   }
 
   /**
@@ -106,7 +106,30 @@ class Dropdown extends PureComponent {
    * @type {Object}
    */
   static propTypes = {
+    /**
+     * Alignment, default `center`
+     */
+    alignment: PropTypes.oneOf(['center', 'spaced']),
+
+    /**
+     * Arrow type, default `caret`
+     */
+    arrowType: PropTypes.oneOf(['caret', 'dots']),
+
+    /**
+     * As Placeholder
+     * default: false
+     * label is styled as input placeholder
+     */
+    asPlaceholder: PropTypes.bool,
+
+    /**
+     * Button, default `false`
+     */
+    button: PropTypes.bool,
+
     children: PropTypes.node.isRequired,
+
     /**
      * Classname, default `dropdown`
      */
@@ -114,18 +137,56 @@ class Dropdown extends PureComponent {
       PropTypes.string,
       PropTypes.array
     ]),
+
+    /**
+     * Dropdown placement, default `left`
+     */
+    dropdownPlacement: PropTypes.oneOf(['left', 'right']),
+
+    /**
+     * Handle on click
+     */
+    handleOnClick: PropTypes.func,
+
+    /**
+     * OnClose callback
+     */
+    handleOnClose: PropTypes.func,
+
+    /**
+     * HandleOnOpen
+     */
+    handleOnOpen: PropTypes.func,
+
+    /**
+     * Has arrow, default `false`
+     */
+    hasArrow: PropTypes.bool,
+
+    /**
+     * Has Input full Input style
+     * default: false
+     * when its enabled dropdown looks like select in forms
+     */
+    hasFullInputStyle: PropTypes.bool,
+
+    /**
+     * Has Input style
+     * default: false
+     */
+    hasInput: PropTypes.bool,
+
     /**
      * Icon
      */
     icon: PropTypes.string,
+
     /**
-     * Tooltip
+     * In Modal
+     * default: false
      */
-    tooltip: PropTypes.string,
-    /**
-     * Tooltip placement
-     */
-    tooltipPlacement: PropTypes.string,
+    inModal: PropTypes.bool,
+
     /**
      * Label
      */
@@ -133,10 +194,29 @@ class Dropdown extends PureComponent {
       PropTypes.string,
       PropTypes.object
     ]),
+
+    /**
+     * Navlink
+     */
+    link: PropTypes.string,
+
     /**
      * Offset, default `5`
      */
     offset: PropTypes.number,
+
+    /**
+     * Tooltip
+     */
+    tooltip: PropTypes.string,
+
+    /**
+     * Render as smaller - when dropdown is too wide, it's left edge is off screen,
+     * with this prop it will be render like a 240px width
+     * default: false
+     */
+    renderAsSmaller: PropTypes.bool,
+
     /**
      * Size
      */
@@ -151,70 +231,11 @@ class Dropdown extends PureComponent {
       'auto',
       'fixed'
     ]),
+
     /**
-     * Has arrow, default `false`
+     * Tooltip placement
      */
-    hasArrow: PropTypes.bool,
-    /**
-     * Arrow type, default `caret`
-     */
-    arrowType: PropTypes.oneOf(['caret', 'dots']),
-    /**
-     * Alignment, default `center`
-     */
-    alignment: PropTypes.oneOf(['center', 'spaced']),
-    /**
-     * Dropdown placement, default `left`
-     */
-    dropdownPlacement: PropTypes.oneOf(['left', 'right']),
-    /**
-     * Button, default `false`
-     */
-    button: PropTypes.bool,
-    /**
-     * Handle on click
-     */
-    handleOnClick: PropTypes.func,
-    /**
-     * HandleOnOpen
-     */
-    handleOnOpen: PropTypes.func,
-    /**
-     * OnClose callback
-     */
-    handleOnClose: PropTypes.func,
-    /**
-     * Navlink
-     */
-    link: PropTypes.string,
-    /**
-     * Render as smaller - when dropdown is too wide, it's left edge is off screen,
-     * with this prop it will be render like a 240px width
-     * default: false
-     */
-    renderAsSmaller: PropTypes.bool,
-    /**
-     * Has Input style
-     * default: false
-     */
-    hasInput: PropTypes.bool,
-    /**
-     * Has Input full Input style
-     * default: false
-     * when its enabled dropdown looks like select in forms
-     */
-    hasFullInputStyle: PropTypes.bool,
-    /**
-     * As Placeholder
-     * default: false
-     * label is styled as input placeholder
-     */
-    asPlaceholder: PropTypes.bool,
-    /**
-     * In Modal
-     * default: false
-     */
-    inModal: PropTypes.bool
+    tooltipPlacement: PropTypes.string
   }
 
   /**
@@ -527,13 +548,13 @@ class Dropdown extends PureComponent {
     const { children, className, size } = this.props,
       { style } = this.state,
       elementClasses = cssClass({
-        'dropdown--mini': size === 'mini',
-        'dropdown--small': size === 'small',
-        'dropdown--medium': size === 'medium',
-        'dropdown--large': size === 'large',
-        'dropdown--huge': size === 'huge',
+        'dropdown--auto': size === 'auto',
         'dropdown--extra-huge': size === 'extra-huge',
-        'dropdown--auto': size === 'auto'
+        'dropdown--huge': size === 'huge',
+        'dropdown--large': size === 'large',
+        'dropdown--medium': size === 'medium',
+        'dropdown--mini': size === 'mini',
+        'dropdown--small': size === 'small'
       })
 
     return (

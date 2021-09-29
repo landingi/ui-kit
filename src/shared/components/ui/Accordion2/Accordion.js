@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Accordion.scss'
 import AccordionItem from './Item/AccordionItem'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Accordion.scss'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
@@ -57,8 +57,8 @@ Accordion.propTypes = {
    */
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.node.isRequired,
-      content: PropTypes.node.isRequired
+      content: PropTypes.node.isRequired,
+      title: PropTypes.node.isRequired
     })
   ).isRequired,
   /**

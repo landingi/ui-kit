@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Select from '@components/ui/Select'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Select from '@components/ui/Select'
 import scss from './PageSize.scss'
 
 const cssClass = styles(scss),
@@ -11,20 +11,20 @@ const cssClass = styles(scss),
    */
   pageSizeDropdown = [
     {
-      value: 10,
-      label: '10'
+      label: '10',
+      value: 10
     },
     {
-      value: 25,
-      label: '25'
+      label: '25',
+      value: 25
     },
     {
-      value: 50,
-      label: '50'
+      label: '50',
+      value: 50
     },
     {
-      value: 100,
-      label: '100'
+      label: '100',
+      value: 100
     }
   ],
   /**
@@ -59,16 +59,17 @@ pageSize.displayName = 'Page size'
  */
 pageSize.propTypes = {
   /**
+   * ActivePageLimit active page limit
+   */
+  activePageLimit: PropTypes.number,
+
+  /**
    * Classname, default `per-page`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * ActivePageLimit active page limit
-   */
-  activePageLimit: PropTypes.number,
   /**
    * Gets called when input changes
    *
@@ -83,8 +84,8 @@ pageSize.propTypes = {
  * @type {Object}
  */
 pageSize.defaultProps = {
-  className: 'page-size',
   activePageLimit: undefined,
+  className: 'page-size',
   onChange: () => null
 }
 

@@ -4,8 +4,6 @@ const useIsOpen = initial => {
   const [value, setValue] = useState(initial)
 
   return {
-    value,
-    setValue,
     set: useCallback(item =>
       setValue(arr => {
         if (arr.includes(item)) {
@@ -14,6 +12,7 @@ const useIsOpen = initial => {
         return [item]
       })
     ),
+    setValue,
     toggle: useCallback(item =>
       setValue(arr => {
         if (arr.includes(item)) {
@@ -29,7 +28,8 @@ const useIsOpen = initial => {
         }
         return true
       })
-    )
+    ),
+    value
   }
 }
 

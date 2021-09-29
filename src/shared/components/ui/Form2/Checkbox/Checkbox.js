@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
 import Error from '@components/ui/Form2/Error'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Checkbox.scss'
 
 const cssClass = styles(scss),
@@ -72,38 +72,42 @@ checkbox.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * Type, default `checkbox`
-   */
-  type: PropTypes.string,
+
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.bool,
+    onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    value: PropTypes.bool
   }).isRequired,
+
   /**
    * Form
    */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
-    touched: PropTypes.instanceOf(Object),
-    setFieldValue: PropTypes.func
+    setFieldValue: PropTypes.func,
+    touched: PropTypes.instanceOf(Object)
   }).isRequired,
+
   id: PropTypes.string.isRequired,
+
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.objectOf
-  ])
+  ]),
+  /**
+   * Type, default `checkbox`
+   */
+  type: PropTypes.string
 }
 
 checkbox.defaultProps = {
   className: '',
-  type: 'checkbox',
-  label: ''
+  label: '',
+  type: 'checkbox'
 }
 
 export default checkbox

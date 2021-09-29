@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import { cancelRequests } from 'shared/services/http/client'
 import { debounce } from '@helpers/events'
+import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * UseInfinityScroll - stateful presentational component
@@ -142,38 +142,46 @@ useInfinityScroll.propTypes = {
    * ElementId
    */
   elementId: PropTypes.string,
-  /**
-   * Target
-   */
-  target: PropTypes.string,
-  /**
-   * UpdateTarget
-   */
-  updateTarget: PropTypes.func,
-  /**
-   * SetLoading
-   */
-  setLoading: PropTypes.func,
-  /**
-   * SetData
-   */
-  setData: PropTypes.func,
-  /**
-   * SetMeta
-   */
-  setMeta: PropTypes.func,
-  /**
-   * Params
-   */
-  params: PropTypes.arrayOf().isRequired,
+
   /**
    * Limit
    */
   limit: PropTypes.number,
+
+  /**
+   * Params
+   */
+  params: PropTypes.arrayOf().isRequired,
+
+  /**
+   * SetData
+   */
+  setData: PropTypes.func,
+
+  /**
+   * SetLoading
+   */
+  setLoading: PropTypes.func,
+
+  /**
+   * SetMeta
+   */
+  setMeta: PropTypes.func,
+
   /**
    * Sort
    */
-  sort: PropTypes.string
+  sort: PropTypes.string,
+
+  /**
+   * Target
+   */
+  target: PropTypes.string,
+
+  /**
+   * UpdateTarget
+   */
+  updateTarget: PropTypes.func
 }
 
 /**
@@ -181,13 +189,13 @@ useInfinityScroll.propTypes = {
  * @type {Object}
  */
 useInfinityScroll.defaultProps = {
-  updateTarget: () => null,
-  setLoading: () => null,
-  setData: () => null,
-  setMeta: () => null,
-  params: [],
   limit: 15,
-  sort: '-created_at_utc'
+  params: [],
+  setData: () => null,
+  setLoading: () => null,
+  setMeta: () => null,
+  sort: '-created_at_utc',
+  updateTarget: () => null
 }
 
 export default useInfinityScroll

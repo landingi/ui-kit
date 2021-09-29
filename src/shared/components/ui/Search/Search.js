@@ -1,3 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { injectIntl } from 'react-intl'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import Input from '@components/ui/Input'
+import PropTypes from 'prop-types'
 import React, {
   memo,
   useCallback,
@@ -5,13 +11,7 @@ import React, {
   useRef,
   useState
 } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Search.scss'
-import Input from '@components/ui/Input'
-import Button from '@components/ui/Button'
-import { injectIntl } from 'react-intl'
 
 /**
  * Exports css classes from SCSS file
@@ -114,8 +114,8 @@ function Search({
   }, [])
 
   const elementClasses = cssClass({
-    'search--input': variant === 'input',
-    'search--button': variant === 'button'
+    'search--button': variant === 'button',
+    'search--input': variant === 'input'
   })
 
   return (
@@ -205,47 +205,53 @@ Search.displayName = 'Search'
  */
 Search.propTypes = {
   /**
-   * Classname, default `search`
+   * AutoFocus
    */
-  className: PropTypes.string,
+  autoFocus: PropTypes.bool,
+
   /**
    * Children elements
    */
   children: PropTypes.node,
+
   /**
-   * Gets called when input changes
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Classname, default `search`
    */
-  onChange: PropTypes.func,
-  /**
-   * Gets called when input changes
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
-  onKeyDown: PropTypes.func,
-  /**
-   *  Size of search input `small, medium, large`
-   */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * AutoFocus
-   */
-  autoFocus: PropTypes.bool,
-  /**
-   * Variant
-   */
-  variant: PropTypes.oneOf(['input', 'button']),
+  className: PropTypes.string,
+
   /**
    * Intl from react-intl
    */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
+
   /**
    * Label
    */
   label: PropTypes.string,
+
+  /**
+   * Gets called when input changes
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Gets called when input changes
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onKeyDown: PropTypes.func,
+
+  onProtectedSubmit: PropTypes.func,
+
+  /**
+   * Handle on form submit action
+   */
+  onSubmit: PropTypes.func,
+
   /**
    * Placeholder
    */
@@ -253,15 +259,21 @@ Search.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
+
   /**
-   * Handle on form submit action
+   *  Size of search input `small, medium, large`
    */
-  onSubmit: PropTypes.func,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+
   /**
    * Tag, default: 'form'
    */
   tag: PropTypes.string,
-  onProtectedSubmit: PropTypes.func
+
+  /**
+   * Variant
+   */
+  variant: PropTypes.oneOf(['input', 'button'])
 }
 
 /**
@@ -269,18 +281,18 @@ Search.propTypes = {
  * @type {Object}
  */
 Search.defaultProps = {
-  className: 'search',
-  size: 'medium',
   autoFocus: false,
+  children: null,
+  className: 'search',
+  label: null,
   onChange: () => null,
   onKeyDown: () => null,
-  children: null,
-  variant: 'input',
-  label: null,
-  placeholder: 'word.search',
+  onProtectedSubmit: null,
   onSubmit: null,
+  placeholder: 'word.search',
+  size: 'medium',
   tag: 'form',
-  onProtectedSubmit: null
+  variant: 'input'
 }
 
 export default memo(injectIntl(Search))

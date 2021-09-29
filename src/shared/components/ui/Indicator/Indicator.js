@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Indicator.scss'
 
 /**
@@ -53,10 +53,7 @@ indicator.propTypes = {
    * Children elements
    */
   children: PropTypes.node.isRequired,
-  /**
-   * Content
-   */
-  content: PropTypes.string,
+
   /**
    * Classname, default `indicator`
    */
@@ -64,6 +61,11 @@ indicator.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   * Content
+   */
+  content: PropTypes.string,
   /**
    * Alert
    */

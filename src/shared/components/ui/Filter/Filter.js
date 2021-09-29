@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import uuid from 'react-uuid'
 import { emitCloseDropdown } from '@events/dropdown'
+import { setLocalStorage } from '@helpers/storage'
 import Button from '@components/ui/Button'
 import Dropdown from '@components/ui/Dropdown'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import uuid from 'react-uuid'
 
 /**
  * Filter - stateful presentational component
@@ -70,6 +70,9 @@ Filter.displayName = 'Select in dropdown'
  * @type {Object}
  */
 Filter.propTypes = {
+  initialValue: PropTypes.string,
+  localStorageKey: PropTypes.string,
+  setValue: PropTypes.func,
   values: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.oneOfType([
@@ -81,10 +84,7 @@ Filter.propTypes = {
         PropTypes.number
       ])
     })
-  ).isRequired,
-  setValue: PropTypes.func,
-  initialValue: PropTypes.string,
-  localStorageKey: PropTypes.string
+  ).isRequired
 }
 
 /**
@@ -92,9 +92,9 @@ Filter.propTypes = {
  * @type {Object}
  */
 Filter.defaultProps = {
-  setValue: () => null,
   initialValue: null,
-  localStorageKey: null
+  localStorageKey: null,
+  setValue: () => null
 }
 
 export default Filter

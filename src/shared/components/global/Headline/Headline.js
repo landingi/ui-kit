@@ -1,8 +1,8 @@
-import React from 'react'
-import Heading from '@components/ui/Heading'
-import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
+import Heading from '@components/ui/Heading'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Headline.scss'
 
 /**

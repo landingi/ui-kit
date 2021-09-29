@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './List.scss'
 
 const cssClass = styles(scss),
@@ -22,13 +22,13 @@ const cssClass = styles(scss),
     margin
   }) => {
     const elementClasses = cssClass({
-      'list-item--menu': variant === 'menu',
-      'list-item--dropdown': variant === 'dropdown',
-      'list-item--table': variant === 'table',
-      'list-item--list': variant === 'list',
       'list-item--block': variant === 'block',
+      'list-item--dropdown': variant === 'dropdown',
+      'list-item--list': variant === 'list',
+      'list-item--margin': margin,
+      'list-item--menu': variant === 'menu',
       'list-item--small': size === 'small',
-      'list-item--margin': margin
+      'list-item--table': variant === 'table'
     })
     return (
       <li className={cssClass(className, elementClasses)}>
@@ -52,6 +52,25 @@ listItem.propTypes = {
    * Children element
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Classname, default `list__item`
+   */
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
+
+  /**
+   * Margin
+   */
+  margin: PropTypes.bool,
+
+  /**
+   * Size
+   */
+  size: PropTypes.string,
+
   /**
    * Variant
    */
@@ -63,22 +82,7 @@ listItem.propTypes = {
     'list',
     'block',
     ''
-  ]),
-  /**
-   * Size
-   */
-  size: PropTypes.string,
-  /**
-   * Classname, default `list__item`
-   */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  /**
-   * Margin
-   */
-  margin: PropTypes.bool
+  ])
 }
 
 /**
@@ -87,9 +91,9 @@ listItem.propTypes = {
  */
 listItem.defaultProps = {
   className: 'list__item',
-  variant: '',
+  margin: false,
   size: '',
-  margin: false
+  variant: ''
 }
 
 export default listItem

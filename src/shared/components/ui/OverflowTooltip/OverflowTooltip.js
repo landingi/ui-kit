@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './OverflowTooltip.scss'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Tooltip from '../Tooltip'
+import scss from './OverflowTooltip.scss'
 
 /**
  * Exports css classes from SCSS file
@@ -63,28 +63,32 @@ overflowTooltip.displayName = 'OverflowTooltip'
  */
 overflowTooltip.propTypes = {
   /**
-   * Content to overflow
-   */
-  content: PropTypes.string.isRequired,
-  /**
-   * Length
-   */
-  length: PropTypes.number,
-  /**
-   * Placement
-   */
-  placement: PropTypes.string,
-  /**
    * Children elements
    */
   children: PropTypes.node,
+
   /**
    * Classname, default `overflow-tooltip`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
-  ])
+  ]),
+
+  /**
+   * Content to overflow
+   */
+  content: PropTypes.string.isRequired,
+
+  /**
+   * Length
+   */
+  length: PropTypes.number,
+
+  /**
+   * Placement
+   */
+  placement: PropTypes.string
 }
 
 /**
@@ -93,9 +97,9 @@ overflowTooltip.propTypes = {
  */
 overflowTooltip.defaultProps = {
   children: null,
+  className: 'overflow-tooltip',
   length: 20,
-  placement: 'right',
-  className: 'overflow-tooltip'
+  placement: 'right'
 }
 
 export default overflowTooltip

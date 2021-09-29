@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Input.scss'
-import Label from '@components/ui/Label'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import { styles } from '@helpers/css'
+import Label from '@components/ui/Label'
 import MaskedInput from 'react-text-mask'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Input.scss'
 
 const cssClass = styles(scss),
   /**
@@ -120,17 +120,10 @@ maskedInput.displayName = 'Masked Input'
  */
 maskedInput.propTypes = {
   /**
-   * Field
+   * AutoFocus
    */
-  field: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
-  }).isRequired,
+  autoFocus: PropTypes.bool,
+
   /**
    * Classname, default `input`
    */
@@ -138,20 +131,65 @@ maskedInput.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Gets called when the user clicks on MaskedInput
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Diabled
    */
-  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+
   /**
-   * Gets called when the user clicks on MaskedInput
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Field
    */
-  onKeyDown: PropTypes.func,
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }).isRequired,
+
+  /**
+   * Is focused, focused, keep label by default on top
+   */
+  focused: PropTypes.string,
+
+  /**
+   * If it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
+   * If it is false no help will be displayed in input.
+   */
+  guide: PropTypes.bool,
+
+  /**
+   * Intl from react-intl
+   */
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+
+  /**
+   * Label
+   */
+  label: PropTypes.string,
+
+  mask: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(RegExp)
+    ])
+  ),
+
+  /**
+   * Max length of input
+   */
+  maxLength: PropTypes.number,
+
+  /**
+   * Name
+   */
+  name: PropTypes.string,
+
   /**
    * Gets called on blur
    *
@@ -159,10 +197,23 @@ maskedInput.propTypes = {
    * @param {Object} All props
    */
   onBlur: PropTypes.func,
+
   /**
-   * Type, default `text`, `number`, `textarea`
+   * Gets called when the user clicks on MaskedInput
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
    */
-  type: PropTypes.string,
+  onChange: PropTypes.func,
+
+  /**
+   * Gets called when the user clicks on MaskedInput
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onKeyDown: PropTypes.func,
+
   /**
    * Placeholder
    */
@@ -170,62 +221,29 @@ maskedInput.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
-  /**
-   * Name
-   */
-  name: PropTypes.string,
-  /**
-   * Diabled
-   */
-  disabled: PropTypes.bool,
+
   /**
    * Readonly
    */
   readonly: PropTypes.bool,
+
   /**
-   * Label
+   * If label/placeholder should be tranlated by intl
    */
-  label: PropTypes.string,
+  translate: PropTypes.bool,
+
+  /**
+   * Type, default `text`, `number`, `textarea`
+   */
+  type: PropTypes.string,
+
   /**
    * Value
    */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]),
-  /**
-   * AutoFocus
-   */
-  autoFocus: PropTypes.bool,
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * If label/placeholder should be tranlated by intl
-   */
-  translate: PropTypes.bool,
-  /**
-   * Max length of input
-   */
-  maxLength: PropTypes.number,
-  mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(RegExp)
-    ])
-  ),
-  /**
-   * If it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
-   * If it is false no help will be displayed in input.
-   */
-  guide: PropTypes.bool,
-  /**
-   * Is focused, focused, keep label by default on top
-   */
-  focused: PropTypes.string
+  ])
 }
 
 /**
@@ -233,23 +251,23 @@ maskedInput.propTypes = {
  * @type {Object}
  */
 maskedInput.defaultProps = {
+  autoFocus: false,
   className: 'input',
+  disabled: false,
+  focused: 'false',
+  guide: false,
+  label: null,
+  mask: [],
+  maxLength: 524288,
+  name: null,
+  onBlur: () => null,
   onChange: () => null,
   onKeyDown: () => null,
-  onBlur: () => null,
-  type: 'text',
   placeholder: '',
-  name: null,
-  disabled: false,
   readonly: false,
-  label: null,
-  value: null,
-  autoFocus: false,
   translate: true,
-  maxLength: 524288,
-  mask: [],
-  guide: false,
-  focused: 'false'
+  type: 'text',
+  value: null
 }
 
 export default injectIntl(maskedInput)

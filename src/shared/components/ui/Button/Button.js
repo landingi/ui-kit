@@ -4,9 +4,9 @@ import React from 'react'
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
+import { styles } from '@helpers/css'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Spinner from '@components/ui/Spinner'
 import scss from './Button.scss'
 
@@ -36,31 +36,31 @@ function Button({
   fitWidth
 }) {
   const elementClasses = cssClass({
-    'button--primary': variant === 'primary',
-    'button--secondary': variant === 'secondary',
+    'button--action': variant === 'action',
+    'button--alert': variant === 'alert',
+    'button--center': align === 'center',
     'button--dropdown': variant === 'dropdown',
+    'button--dropdown-element':
+      variant === 'dropdown-element',
+    'button--fit-width': fitWidth === true,
+    'button--hide': hide === true,
+    'button--icon': variant === 'icon',
+    'button--input': size === 'input',
+    'button--large': size === 'large',
+    'button--left': align === 'left',
+    'button--medium': size === 'medium',
+    'button--primary': variant === 'primary',
+    'button--right': align === 'right',
+    'button--secondary': variant === 'secondary',
+    'button--small': size === 'small',
+    'button--svg': hasIcon === true,
+    'button--switcher-brand': variant === 'switcher-brand',
+    'button--tabs': variant === 'tabs',
+    'button--tiny': size === 'tiny',
     'button--transparent': variant === 'transparent',
     'button--transparent-blue':
       variant === 'transparent-blue',
-    'button--dropdown-element':
-      variant === 'dropdown-element',
-    'dropdown button--switcher': variant === 'switcher',
-    'button--switcher-brand': variant === 'switcher-brand',
-    'button--tabs': variant === 'tabs',
-    'button--alert': variant === 'alert',
-    'button--icon': variant === 'icon',
-    'button--action': variant === 'action',
-    'button--tiny': size === 'tiny',
-    'button--small': size === 'small',
-    'button--medium': size === 'medium',
-    'button--large': size === 'large',
-    'button--input': size === 'input',
-    'button--center': align === 'center',
-    'button--left': align === 'left',
-    'button--right': align === 'right',
-    'button--svg': hasIcon === true,
-    'button--hide': hide === true,
-    'button--fit-width': fitWidth === true
+    'dropdown button--switcher': variant === 'switcher'
   })
 
   return (
@@ -103,36 +103,71 @@ Button.displayName = 'Button'
  */
 Button.propTypes = {
   /**
-   * The tag or component to be used e.g. button, a, Link
+   * Align
    */
-  tag: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+
+  /**
+   * Enable button variants style for links
+   */
+  buttonStyle: PropTypes.bool,
+
   /**
    * The text for the button
    */
   children: PropTypes.node.isRequired,
+
   /**
-   * The type of the button
+   * Classname, default `button`
    */
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * Link title
-   */
-  title: PropTypes.oneOfType([
+  className: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.object
+    PropTypes.array
   ]),
+
   /**
-   * The target for the button
+   * Has background ripple effect
    */
-  target: PropTypes.oneOf([
-    '_self',
-    '_blank',
-    '_parent',
-    '_top'
-  ]),
+  hasBackgoundRipple: PropTypes.bool,
+
+  /**
+   * Has icon
+   */
+  hasIcon: PropTypes.bool,
+
+  /**
+   * Hide
+   */
+  hide: PropTypes.bool,
+
+  /**
+   * Link
+   */
+  href: PropTypes.string,
+
+  /**
+   * Element id
+   */
+  id: PropTypes.string,
+
+  /**
+   * Disabled button
+   */
+  isDisabled: PropTypes.bool,
+
+  /**
+   * Loading button
+   */
+  isLoading: PropTypes.bool,
+
+  /**
+   * Gets called when the user clicks on the button
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props of this Button
+   */
+  onClick: PropTypes.func,
+
   /**
    * Size
    */
@@ -143,6 +178,38 @@ Button.propTypes = {
     'large',
     'input'
   ]),
+
+  /**
+   * The tag or component to be used e.g. button, a, Link
+   */
+  tag: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ]),
+
+  /**
+   * The target for the button
+   */
+  target: PropTypes.oneOf([
+    '_self',
+    '_blank',
+    '_parent',
+    '_top'
+  ]),
+
+  /**
+   * Link title
+   */
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
+
+  /**
+   * The type of the button
+   */
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+
   /**
    * Variant
    */
@@ -159,57 +226,7 @@ Button.propTypes = {
     'dropdown-element',
     'switcher-brand',
     'switcher'
-  ]),
-  /**
-   * Align
-   */
-  align: PropTypes.oneOf(['left', 'center', 'right']),
-  /**
-   * Classname, default `button`
-   */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  /**
-   * Link
-   */
-  href: PropTypes.string,
-  /**
-   * Disabled button
-   */
-  isDisabled: PropTypes.bool,
-  /**
-   * Loading button
-   */
-  isLoading: PropTypes.bool,
-  /**
-   * Gets called when the user clicks on the button
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props of this Button
-   */
-  onClick: PropTypes.func,
-  /**
-   * Has background ripple effect
-   */
-  hasBackgoundRipple: PropTypes.bool,
-  /**
-   * Has icon
-   */
-  hasIcon: PropTypes.bool,
-  /**
-   * Hide
-   */
-  hide: PropTypes.bool,
-  /**
-   * Enable button variants style for links
-   */
-  buttonStyle: PropTypes.bool,
-  /**
-   * Element id
-   */
-  id: PropTypes.string
+  ])
 }
 
 /**
@@ -217,24 +234,24 @@ Button.propTypes = {
  * @type {Object}
  */
 Button.defaultProps = {
-  tag: 'button',
-  title: undefined,
-  type: 'button',
-  href: undefined,
-  target: undefined,
-  className: 'button',
-  size: 'medium',
   align: null,
-  variant: 'primary',
-  isLoading: false,
-  isDisabled: false,
-  onClick: () => {},
+  buttonStyle: false,
+  className: 'button',
+  fitWidth: false,
   hasBackgoundRipple: true,
   hasIcon: false,
   hide: false,
-  buttonStyle: false,
-  fitWidth: false,
-  id: null
+  href: undefined,
+  id: null,
+  isDisabled: false,
+  isLoading: false,
+  onClick: () => {},
+  size: 'medium',
+  tag: 'button',
+  target: undefined,
+  title: undefined,
+  type: 'button',
+  variant: 'primary'
 }
 
 export default Button

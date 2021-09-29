@@ -3,7 +3,6 @@
  * @see { @link https://github.com/FortAwesome/react-fontawesome }
  *
  */
-import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAddressCard,
   faAngleDown,
@@ -105,6 +104,7 @@ import {
   faWindowRestore,
   faWrench
 } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
 
 export default function registerIcons() {
   library.add(

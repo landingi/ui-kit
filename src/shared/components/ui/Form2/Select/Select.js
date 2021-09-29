@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form2/Error'
 import Label from '@components/ui/Label'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Select.scss'
-import { FormattedMessage } from 'react-intl'
 
 const cssClass = styles(scss),
   /**
@@ -79,6 +79,11 @@ select.displayName = 'Select'
  */
 select.propTypes = {
   /**
+   * Children elements `option`
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
    * Classname, default `select`
    */
   className: PropTypes.oneOfType([
@@ -86,20 +91,16 @@ select.propTypes = {
     PropTypes.array
   ]),
   /**
-   * Children elements `option`
-   */
-  children: PropTypes.node.isRequired,
-  /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    ])
   }).isRequired,
   /**
    * Form

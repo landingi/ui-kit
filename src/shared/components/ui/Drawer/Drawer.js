@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Drawer.scss'
-import Header from './Header'
-import Backdrop from '@components/ui/Backdrop'
 import {
   DARK,
   DEFAULT,
   MOBILE,
   WHITE
 } from '@constants/skin'
+import { styles } from '@helpers/css'
+import Backdrop from '@components/ui/Backdrop'
+import Header from './Header'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import posed, { PoseGroup } from 'react-pose'
+import scss from './Drawer.scss'
 
 /**
  * Drawer Animation, exports React-pose animations
@@ -19,18 +19,18 @@ import posed, { PoseGroup } from 'react-pose'
  */
 const DrawerAnimation = posed.div({
     enter: {
-      top: 0,
       left: 340,
+      top: 0,
       transition: {
-        ease: [0.82, 0.085, 0.395, 0.895],
-        duration: 500
+        duration: 500,
+        ease: [0.82, 0.085, 0.395, 0.895]
       }
     },
     exit: {
       left: 0,
       transition: {
-        ease: [0.82, 0.085, 0.395, 0.895],
-        duration: 500
+        duration: 500,
+        ease: [0.82, 0.085, 0.395, 0.895]
       }
     }
   }),
@@ -61,11 +61,11 @@ const DrawerAnimation = posed.div({
     skin
   }) => {
     const elementClasses = cssClass({
-      'drawer--small': type === 'small',
-      'drawer--medium': type === 'medium',
-      'drawer--white': skin === WHITE || skin === MOBILE,
       'drawer--dark': skin === DARK,
-      'drawer--default': skin === DEFAULT
+      'drawer--default': skin === DEFAULT,
+      'drawer--medium': type === 'medium',
+      'drawer--small': type === 'small',
+      'drawer--white': skin === WHITE || skin === MOBILE
     })
 
     return (
@@ -109,6 +109,15 @@ drawer.propTypes = {
    * Children elements
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Classname, default `drawer`
+   */
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
+
   /**
    * Data
    */
@@ -118,13 +127,12 @@ drawer.propTypes = {
       PropTypes.object
     ])
   }),
+
   /**
-   * Classname, default `drawer`
+   * IsActive, active state
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  isActive: PropTypes.bool.isRequired,
+
   /**
    * Gets called when the user clicks
    *
@@ -132,18 +140,16 @@ drawer.propTypes = {
    * @param {Object} All props
    */
   onClick: PropTypes.func,
-  /**
-   * IsActive, active state
-   */
-  isActive: PropTypes.bool.isRequired,
-  /**
-   * Type of drawer
-   */
-  type: PropTypes.string,
+
   /**
    * Skin, determines which skin color it should use
    */
-  skin: PropTypes.string
+  skin: PropTypes.string,
+
+  /**
+   * Type of drawer
+   */
+  type: PropTypes.string
 }
 
 /**
@@ -152,10 +158,10 @@ drawer.propTypes = {
  */
 drawer.defaultProps = {
   className: 'drawer',
+  data: null,
   onClick: () => null,
-  type: '',
   skin: WHITE,
-  data: null
+  type: ''
 }
 
 export default drawer

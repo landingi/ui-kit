@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Html from 'shared/components/global/Html'
 import { styles } from '@helpers/css'
+import Html from 'shared/components/global/Html'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Toggle.scss'
 
 const cssClass = styles(scss),
@@ -77,6 +77,7 @@ toggle.displayName = 'Toggle'
  * @type {Object}
  */
 toggle.propTypes = {
+  checked: PropTypes.bool.isRequired,
   /**
    * Classname, default ''
    */
@@ -84,16 +85,15 @@ toggle.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  name: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
+  disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.objectOf
   ]),
-  disabled: PropTypes.bool
+  name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func.isRequired
 }
 
 /**
@@ -102,9 +102,9 @@ toggle.propTypes = {
  */
 toggle.defaultProps = {
   className: '',
+  disabled: false,
   label: '',
-  onBlur: () => null,
-  disabled: false
+  onBlur: () => null
 }
 
 export { toggle as Toggle }

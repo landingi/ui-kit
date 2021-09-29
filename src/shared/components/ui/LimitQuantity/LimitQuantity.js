@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './LimitQuantity.scss'
 import { formatNumeric } from '@helpers/data'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './LimitQuantity.scss'
 
 const cssClass = styles(scss),
   /**

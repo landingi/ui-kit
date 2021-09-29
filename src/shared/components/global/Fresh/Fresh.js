@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import React from 'react'
-import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Fresh - stateless presentational component
@@ -50,8 +50,10 @@ function Fresh({
     openFreshDesk = () => {
       FreshworksWidget('open')
       FreshworksWidget('prefill', 'ticketForm', {
-        subject: intl.formatMessage({ id: subject }),
-        description: intl.formatMessage({ id: description })
+        description: intl.formatMessage({
+          id: description
+        }),
+        subject: intl.formatMessage({ id: subject })
       })
     }
 
@@ -89,35 +91,41 @@ Fresh.displayName = 'Fresh'
  */
 Fresh.propTypes = {
   /**
-   * Name
-   */
-  name: PropTypes.string.isRequired,
-  /**
-   * Mail
-   */
-  mail: PropTypes.string,
-  /**
-   * Subject
-   */
-  subject: PropTypes.string,
-  /**
    * Description
    */
   description: PropTypes.string,
-  /**
-   * Variant
-   */
-  variant: PropTypes.string,
-  /**
-   * Size
-   */
-  size: PropTypes.string,
+
   /**
    * Intl from react-intl
    */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+
+  /**
+   * Mail
+   */
+  mail: PropTypes.string,
+
+  /**
+   * Name
+   */
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Size
+   */
+  size: PropTypes.string,
+
+  /**
+   * Subject
+   */
+  subject: PropTypes.string,
+
+  /**
+   * Variant
+   */
+  variant: PropTypes.string
 }
 
 /**
@@ -125,11 +133,11 @@ Fresh.propTypes = {
  * @type {Object}
  */
 Fresh.defaultProps = {
-  mail: ' ',
-  subject: 'word.fresh.component.empty.content',
   description: 'word.fresh.component.empty.content',
-  variant: 'primary',
-  size: 'medium'
+  mail: ' ',
+  size: 'medium',
+  subject: 'word.fresh.component.empty.content',
+  variant: 'primary'
 }
 
 export default injectIntl(Fresh)

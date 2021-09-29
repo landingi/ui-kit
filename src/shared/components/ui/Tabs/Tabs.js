@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import TabContext from './TabContext'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import TabContext from './TabContext'
 import scss from './Tabs.scss'
 
 /**
@@ -52,9 +52,14 @@ tabs.displayName = 'Tabs'
  */
 tabs.propTypes = {
   /**
-   * Initial value
+   * Children elements
    */
-  initialValue: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+
   /**
    * Classname, default `tabs__wrapper`
    */
@@ -62,14 +67,11 @@ tabs.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Children elements
+   * Initial value
    */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired
+  initialValue: PropTypes.string.isRequired
 }
 
 /**

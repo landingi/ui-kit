@@ -1,14 +1,14 @@
-import React, { Fragment, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormattedMessage } from 'react-intl'
+import { isEmpty } from '@helpers/data'
+import { paginationShape } from '@shapes'
+import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-import { FormattedMessage } from 'react-intl'
 import PageSize from './PageSize'
-import { paginationShape } from '@shapes'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
-import { isEmpty } from '@helpers/data'
+import PropTypes from 'prop-types'
+import React, { Fragment, useCallback } from 'react'
 import scss from './Pagination.scss'
 
 const cssClass = styles(scss),
@@ -142,24 +142,27 @@ pagination.displayName = 'Pagination'
  */
 pagination.propTypes = {
   /**
+   * ActivePageLimit selected page limit
+   */
+  activePageLimit: PropTypes.number.isRequired,
+
+  /**
    * Classname, default `pagination`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
    *  Data
    */
   data: PropTypes.shape(paginationShape).isRequired,
+
   /**
    * GoToPage page to go
    */
   goToPage: PropTypes.func.isRequired,
-  /**
-   * ActivePageLimit selected page limit
-   */
-  activePageLimit: PropTypes.number.isRequired,
   /**
    * PageLimit
    */

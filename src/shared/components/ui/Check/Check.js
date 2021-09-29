@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { styles } from '@helpers/css'
-import scss from './Check.scss'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Spreader from '@components/ui/Spreader'
+import scss from './Check.scss'
 
 const cssClass = styles(scss),
   /**
