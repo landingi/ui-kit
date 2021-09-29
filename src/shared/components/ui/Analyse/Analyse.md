@@ -1,5 +1,0 @@
-Analyse
-
-```jsx padded
-<Analyse />
-```
