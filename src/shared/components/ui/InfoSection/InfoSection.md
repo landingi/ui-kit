@@ -1,6 +1,6 @@
 import { Playground, Props } from 'docz'
 import InfoSection from '@components/ui/InfoSection'
-import { IntlProvider, FormattedMessage } from 'react-intl'
+import { IntlProvider } from 'react-intl'
 import { getMessages } from '@helpers/i18n'
 
 # InfoSection
