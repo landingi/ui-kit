@@ -1,28 +1,33 @@
 import { Playground, Props } from 'docz'
 import Steps from '@components/ui/Steps'
+import { IntlProvider } from 'react-intl'
+import { getMessages } from '@helpers/i18n'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 # Steps
 
 <Props of={Steps} />
 
-## Variant
-
 <Playground>
-  <Steps data={[
-    {
-      step: 1,
-      variant: 'completed',
-      description: 'Completed step'
-    },
-    {
-      step: 2,
-      variant: 'current',
-      description: 'Current step'
-    },
-    {
-      step: 3,
-      variant: 'next',
-      description: 'Next step'
-    }
-  ]} />
+  <IntlProvider
+    locale='en'
+    messages={getMessages['en']}>
+      <Steps data={[
+        {
+          step: 1,
+          variant: 'completed',
+          description: 'Completed step'
+        },
+        {
+          step: 2,
+          variant: 'current',
+          description: 'Current step'
+        },
+        {
+          step: 3,
+          variant: 'next',
+          description: 'Next step'
+        }
+      ]} />
+  </IntlProvider>
 </Playground>

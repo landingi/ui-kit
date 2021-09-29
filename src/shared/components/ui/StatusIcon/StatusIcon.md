@@ -1,5 +1,6 @@
 import { Playground, Props } from 'docz'
 import StatusIcon from '@components/ui/StatusIcon'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 # StatusIcon
 
