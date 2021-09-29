@@ -1,11 +1,9 @@
-import { Playground } from 'docz'
+import { Playground, Props } from 'docz'
 import Panel from '@components/ui/Panel'
 
 # Panel
 
-## Basic usage
-
-### Normal
+<Props of={Panel} />
 
 <Playground>
   <Panel>

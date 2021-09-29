@@ -1,5 +1,8 @@
 import { Playground, Props } from 'docz'
 import ProgressBar from '@components/ui/ProgressBar'
+import { IntlProvider } from 'react-intl'
+import { getMessages } from '@helpers/i18n'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 # ProgressBar
 
@@ -25,12 +28,16 @@ import ProgressBar from '@components/ui/ProgressBar'
 ## Exceeded info
 
 <Playground>
-  <ProgressBar 
-    variant='success'
-    quantity={90} 
-    limit={100} 
-    limitExceededInfo
-    limitText='statistics.unique-users'/>
+ <IntlProvider
+    locale='en'
+    messages={getMessages['en']}>
+      <ProgressBar
+        variant='success'
+        quantity={90}
+        limit={100}
+        limitExceededInfo
+        limitText='statistics.unique-users'/>
+  </IntlProvider>
 </Playground>
 
 ## Limit
