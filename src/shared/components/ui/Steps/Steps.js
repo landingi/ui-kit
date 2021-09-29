@@ -19,8 +19,8 @@ function Steps({ data }) {
   return (
     <div className={cssClass('container')}>
       {data.map((item, index) => {
-        const step = index + 1
-        const { variant, description } = item
+        const step = index + 1,
+          { variant, description } = item
 
         return (
           <div className={scss.step} key={uuid()}>

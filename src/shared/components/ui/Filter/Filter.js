@@ -24,24 +24,20 @@ function Filter({
   localStorageKey
 }) {
   const findInitialValue = () => {
-    const find = values.find(
-      ({ value }) => value === initialValue
-    )
+      const find = values.find(
+        ({ value }) => value === initialValue
+      )
 
-    return find.label
-  }
-
-  const [filterLabel, setLabel] = useState(
-    findInitialValue()
-  )
-
-  const setFilter = (label, value) => {
-    setLabel(label)
-    setValue(value)
-    localStorageKey &&
-      setLocalStorage(localStorageKey, value)
-    emitCloseDropdown()
-  }
+      return find.label
+    },
+    [filterLabel, setLabel] = useState(findInitialValue()),
+    setFilter = (label, value) => {
+      setLabel(label)
+      setValue(value)
+      localStorageKey &&
+        setLocalStorage(localStorageKey, value)
+      emitCloseDropdown()
+    }
 
   return (
     <Dropdown label={filterLabel} size='medium'>

@@ -3,35 +3,34 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Label.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Label - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `label`
- * @param {string} props.id - input id
- * @param {bool} props.isToogle - is toogle label
- * @param {bool} props.toogle - toogle change
- * @return {object} An object of children element
- */
-const label = memo(
-  ({ children, className, id, isToogle, toogle }) => (
-    <label
-      className={cssClass(
-        className,
-        isToogle
-          ? toogle
-            ? 'label--active'
-            : 'label--inactive'
-          : 'label--normal'
-      )}
-      id={id}
-    >
-      {children}
-    </label>
+const cssClass = styles(scss),
+  /**
+   * Label - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: `label`
+   * @param {string} props.id - input id
+   * @param {bool} props.isToogle - is toogle label
+   * @param {bool} props.toogle - toogle change
+   * @return {object} An object of children element
+   */
+  label = memo(
+    ({ children, className, id, isToogle, toogle }) => (
+      <label
+        className={cssClass(
+          className,
+          isToogle
+            ? toogle
+              ? 'label--active'
+              : 'label--inactive'
+            : 'label--normal'
+        )}
+        id={id}
+      >
+        {children}
+      </label>
+    )
   )
-)
 
 /**
  * Display name
@@ -56,15 +55,15 @@ label.propTypes = {
     PropTypes.array
   ]),
   /**
-   * id
+   * Id
    */
   id: PropTypes.string,
   /**
-   * isToogle
+   * IsToogle
    */
   isToogle: PropTypes.bool,
   /**
-   * toogle
+   * Toogle
    */
   toogle: PropTypes.bool
 }

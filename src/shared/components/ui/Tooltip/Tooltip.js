@@ -32,15 +32,14 @@ function Tooltip({
   align,
   size
 }) {
-  const tooltipUUID = uuid()
-
-  const showOnClickProps = showOnClick
-    ? {
-        delayHide: 1000,
-        event: 'click',
-        afterShow: () => ReactTooltip.hide()
-      }
-    : {}
+  const tooltipUUID = uuid(),
+    showOnClickProps = showOnClick
+      ? {
+          delayHide: 1000,
+          event: 'click',
+          afterShow: () => ReactTooltip.hide()
+        }
+      : {}
 
   return (
     <>

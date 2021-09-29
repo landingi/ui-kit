@@ -5,55 +5,54 @@ import { FormattedMessage } from 'react-intl'
 import Error from '@components/ui/Form2/Error'
 import scss from './Checkbox.scss'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Checkbox - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: ''
+   * @param {object} props.field - react-formik field properties
+   * @param {object} props.form - react-formik form properties
+   * @param {string} props.id - id of the element
+   * @param {string} props.label - label, default: ''
+   * @param {string} props.type - type of element, default: 'checkbox'
+   * @return {object} An object of children element
+   */
+  checkbox = ({
+    field: { name, value, onChange, onBlur },
+    form: { errors, touched, setFieldValue },
+    id,
+    label,
+    className,
+    type
+  }) => (
+    <div
+      className={cssClass('checkbox-container', className)}
+    >
+      <label className={cssClass('checkbox__input')}>
+        <input
+          checked={value}
+          id={id}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
+          type={type}
+        />
 
-/**
- * Checkbox - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: ''
- * @param {object} props.field - react-formik field properties
- * @param {object} props.form - react-formik form properties
- * @param {string} props.id - id of the element
- * @param {string} props.label - label, default: ''
- * @param {string} props.type - type of element, default: 'checkbox'
- * @return {object} An object of children element
- */
-const checkbox = ({
-  field: { name, value, onChange, onBlur },
-  form: { errors, touched, setFieldValue },
-  id,
-  label,
-  className,
-  type
-}) => (
-  <div
-    className={cssClass('checkbox-container', className)}
-  >
-    <label className={cssClass('checkbox__input')}>
-      <input
-        checked={value}
-        id={id}
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        type={type}
-      />
-
-      <div />
-    </label>
-
-    {label && (
-      <label
-        className={cssClass('checkbox__label')}
-        htmlFor={id}
-      >
-        <FormattedMessage id={`${label}`} />
-
-        {touched[name] && <Error error={errors[name]} />}
+        <div />
       </label>
-    )}
-  </div>
-)
+
+      {label && (
+        <label
+          className={cssClass('checkbox__label')}
+          htmlFor={id}
+        >
+          <FormattedMessage id={`${label}`} />
+
+          {touched[name] && <Error error={errors[name]} />}
+        </label>
+      )}
+    </div>
+  )
 
 /**
  * Display name

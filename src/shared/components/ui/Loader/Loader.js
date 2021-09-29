@@ -4,30 +4,30 @@ import { styles } from '@helpers/css'
 import scss from './Loader.scss'
 import Spacer from '@components/ui/Spacer'
 
-const cssClass = styles(scss)
-/**
- * Loader - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `loader__spin`
- * @return {object} An object of children element
- */
-const loader = ({ className }) => (
-  <>
-    <Spacer space='large' />
+const cssClass = styles(scss),
+  /**
+   * Loader - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: `loader__spin`
+   * @return {object} An object of children element
+   */
+  loader = ({ className }) => (
+    <>
+      <Spacer space='large' />
 
-    <div className={cssClass(className)}>
-      <div className={scss.rect1} />
+      <div className={cssClass(className)}>
+        <div className={scss.rect1} />
 
-      <div className={scss.rect2} />
+        <div className={scss.rect2} />
 
-      <div className={scss.rect3} />
+        <div className={scss.rect3} />
 
-      <div className={scss.rect4} />
+        <div className={scss.rect4} />
 
-      <div className={scss.rect5} />
-    </div>
-  </>
-)
+        <div className={scss.rect5} />
+      </div>
+    </>
+  )
 
 /**
  * Display name

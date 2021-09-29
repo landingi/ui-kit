@@ -2,7 +2,8 @@
   "parser": "@babel/eslint-parser",
   "plugins": [
     "react",
-    "react-hooks"
+    "react-hooks",
+    "sort-imports-es6-autofix"
   ],
   "env": {
     "browser": true,

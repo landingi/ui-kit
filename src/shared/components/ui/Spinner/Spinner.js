@@ -4,19 +4,18 @@ import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Spinner.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Spinner - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `spinner__spin`
- * @return {object} An object of children element
- */
-const spinner = ({ className }) => (
-  <div className={cssClass(className)}>
-    <FontAwesomeIcon icon='spinner' spin />
-  </div>
-)
+const cssClass = styles(scss),
+  /**
+   * Spinner - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: `spinner__spin`
+   * @return {object} An object of children element
+   */
+  spinner = ({ className }) => (
+    <div className={cssClass(className)}>
+      <FontAwesomeIcon icon='spinner' spin />
+    </div>
+  )
 
 /**
  * Display name

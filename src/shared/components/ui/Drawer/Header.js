@@ -5,29 +5,23 @@ import scss from './Drawer.scss'
 import Heading from '@components/ui/Heading'
 import Close from '@components/ui/Close'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Drawer header - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: drawer__header
+   * @param {string} props.title - title
+   * @param {function} props.onClick - click handler
+   * @param {Boolean} props.hasClose - show close icon, default: true
+   * @return {object} An object of children element
+   */
+  header = ({ className, title, onClick, hasClose }) => (
+    <div className={cssClass(className)}>
+      <Heading level={2}>{title}</Heading>
 
-/**
- * Drawer header - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: drawer__header
- * @param {string} props.title - title
- * @param {function} props.onClick - click handler
- * @param {Boolean} props.hasClose - show close icon, default: true
- * @return {object} An object of children element
- */
-const header = ({
-  className,
-  title,
-  onClick,
-  hasClose
-}) => (
-  <div className={cssClass(className)}>
-    <Heading level={2}>{title}</Heading>
-
-    {hasClose && <Close onClick={onClick} />}
-  </div>
-)
+      {hasClose && <Close onClick={onClick} />}
+    </div>
+  )
 
 /**
  * Display name

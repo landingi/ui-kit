@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './../Accordion.scss'
@@ -22,16 +22,15 @@ function AccordionItem({
   title,
   content
 }) {
-  const [isOpen, setOpen] = useState(false)
-
-  /**
-   * handleOpen - open section
-   * @type {function}
-   */
-  const handleOpen = useCallback(
-    () => setOpen(!isOpen),
-    [isOpen]
-  )
+  const [isOpen, setOpen] = useState(false),
+    /**
+     * HandleOpen - open section
+     * @type {function}
+     */
+    handleOpen = useCallback(
+      () => setOpen(!isOpen),
+      [isOpen]
+    )
 
   return (
     <div className={cssClass(className)}>

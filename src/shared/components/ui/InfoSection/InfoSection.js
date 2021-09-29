@@ -106,7 +106,7 @@ InfoSection.propTypes = {
    */
   button: PropTypes.string.isRequired,
   /**
-   * onChange is button action
+   * OnChange is button action
    */
   onClick: PropTypes.func
 }

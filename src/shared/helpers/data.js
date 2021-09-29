@@ -58,7 +58,7 @@ export const isSetEqual = (a, b) =>
   a.size === b.size && [...a].every(value => b.has(value))
 
 /**
- * font icons mapper
+ * Font icons mapper
  * @const fontIcons
  * @return {object}
  */
@@ -105,7 +105,7 @@ export const mapObjectToArrObj = obj =>
     }))
 
 /**
- * isLastPage - check if last page
+ * IsLastPage - check if last page
  * @param {number} count - meta total
  * @param {number} page
  * @param {number} limit - limit per page
@@ -115,14 +115,14 @@ export const isLastPage = (count, page, limit) =>
   count !== 0 && Math.ceil(count / limit) === page
 
 /**
- * getTodayDate - return today date with hour 00:00:00
+ * GetTodayDate - return today date with hour 00:00:00
  * @type {function}
  */
 export const getTodayDate = () =>
   new Date(new Date().toDateString())
 
 /**
- * getAgoDate - return date {number} days ago with hour 00:00:00
+ * GetAgoDate - return date {number} days ago with hour 00:00:00
  * @param {number} days - days ago
  * @type {function}
  */
@@ -137,14 +137,14 @@ export const getAgoDate = days => {
 }
 
 /**
- * getTodayDateTimestamp - return today date with hour 00:00:00 as timestamp
+ * GetTodayDateTimestamp - return today date with hour 00:00:00 as timestamp
  * @type {function}
  */
 export const getTodayDateTimestamp = () =>
   getTodayDate().getTime() / 1000
 
 /**
- * getAgoDateTimestamp - return date {number} days ago with hour 00:00:00 as timestamp
+ * GetAgoDateTimestamp - return date {number} days ago with hour 00:00:00 as timestamp
  * @param {number} days - days ago
  * @type {function}
  */
@@ -152,14 +152,14 @@ export const getAgoDateTimestamp = days =>
   getAgoDate(days).getTime() / 1000
 
 /**
- * getTimestamp - return timestamp from date
+ * GetTimestamp - return timestamp from date
  * @param {number} date - date
  * @type {function}
  */
 export const getTimestamp = date => date.getTime() / 1000
 
 /**
- * getDateObject - return date as a object {day, month, year}
+ * GetDateObject - return date as a object {day, month, year}
  * @param {number} date - date
  * @type {function}
  */
@@ -177,38 +177,36 @@ export const getDateObject = date => {
  * @return {object}
  */
 const months = {
-  0: 'january',
-  1: 'february',
-  2: 'march',
-  3: 'april',
-  4: 'may',
-  5: 'june',
-  6: 'july',
-  7: 'august',
-  8: 'september',
-  9: 'october',
-  10: 'november',
-  11: 'december'
-}
-
-/**
- * Maps number to month
- * @function mapNumberToMonth
- * @param {number} value
- * @return {string} Returns string
- */
-const mapNumberToMonth = value => months[value]
-
-/**
- * lead origin types mapper
- * @const filterType
- * @return {object}
- */
-const leadTypes = {
-  'all.campaigns': null,
-  'landings.campaigns': 'landing',
-  'popups.campaigns': 'popup'
-}
+    0: 'january',
+    1: 'february',
+    2: 'march',
+    3: 'april',
+    4: 'may',
+    5: 'june',
+    6: 'july',
+    7: 'august',
+    8: 'september',
+    9: 'october',
+    10: 'november',
+    11: 'december'
+  },
+  /**
+   * Maps number to month
+   * @function mapNumberToMonth
+   * @param {number} value
+   * @return {string} Returns string
+   */
+  mapNumberToMonth = value => months[value],
+  /**
+   * Lead origin types mapper
+   * @const filterType
+   * @return {object}
+   */
+  leadTypes = {
+    'all.campaigns': null,
+    'landings.campaigns': 'landing',
+    'popups.campaigns': 'popup'
+  }
 
 /**
  * Maps lead type to filter
@@ -249,7 +247,7 @@ export const formatPrice = value =>
   value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
 /**
- * groupArrayOfObjectsBy
+ * GroupArrayOfObjectsBy
  * ex groupArrayOfObjectsBy(array, 'keyName')
  * @return {object}
  */

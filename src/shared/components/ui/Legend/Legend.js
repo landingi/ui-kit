@@ -5,40 +5,39 @@ import { legendShape } from '@shapes'
 import scss from './Legend.scss'
 import ColorLine from '../ColorLine'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Legend - stateless presentational component
+   * @param {object} props - props
+   * @param {object[]} props.data - data
+   * @param {string} props.alignment - alignment
+   * @return {object} An object of children element
+   */
+  legend = ({ data, alignment }) => (
+    <div
+      className={cssClass(
+        'container',
+        `container--${alignment}`
+      )}
+    >
+      {data.map((item, index) => (
+        <span
+          className={cssClass(
+            'legend',
+            `legend--${item.variant}`
+          )}
+          key={index}
+        >
+          <ColorLine
+            alignment='horizontal'
+            variant={item.variant}
+          />
 
-/**
- * Legend - stateless presentational component
- * @param {object} props - props
- * @param {object[]} props.data - data
- * @param {string} props.alignment - alignment
- * @return {object} An object of children element
- */
-const legend = ({ data, alignment }) => (
-  <div
-    className={cssClass(
-      'container',
-      `container--${alignment}`
-    )}
-  >
-    {data.map((item, index) => (
-      <span
-        className={cssClass(
-          'legend',
-          `legend--${item.variant}`
-        )}
-        key={index}
-      >
-        <ColorLine
-          alignment='horizontal'
-          variant={item.variant}
-        />
-
-        {item.range}
-      </span>
-    ))}
-  </div>
-)
+          {item.range}
+        </span>
+      ))}
+    </div>
+  )
 
 /**
  * Display name

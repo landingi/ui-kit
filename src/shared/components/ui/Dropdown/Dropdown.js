@@ -65,6 +65,7 @@ class Dropdown extends PureComponent {
    * @return {object}
    */
   containerRef = React.createRef()
+
   /**
    * Ref dropdown
    * @type {function}
@@ -175,11 +176,11 @@ class Dropdown extends PureComponent {
      */
     handleOnClick: PropTypes.func,
     /**
-     * handleOnOpen
+     * HandleOnOpen
      */
     handleOnOpen: PropTypes.func,
     /**
-     * onClose callback
+     * OnClose callback
      */
     handleOnClose: PropTypes.func,
     /**
@@ -204,13 +205,13 @@ class Dropdown extends PureComponent {
      */
     hasFullInputStyle: PropTypes.bool,
     /**
-     * as Placeholder
+     * As Placeholder
      * default: false
      * label is styled as input placeholder
      */
     asPlaceholder: PropTypes.bool,
     /**
-     * in Modal
+     * In Modal
      * default: false
      */
     inModal: PropTypes.bool
@@ -234,8 +235,8 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   handleShow = event => {
-    const { handleOnOpen } = this.props
-    const { isOpen } = this.state
+    const { handleOnOpen } = this.props,
+      { isOpen } = this.state
 
     event.stopPropagation()
 
@@ -289,20 +290,17 @@ class Dropdown extends PureComponent {
    */
   handlePosition = () => {
     const {
-      offset,
-      dropdownPlacement,
-      renderAsSmaller,
-      size,
-      inModal
-    } = this.props
-
-    const container = getBoundings(
-      this.containerRef.current
-    )
-    const dropdown = getBoundings(this.dropdownRef.current)
-    const renderAbove =
-      window.innerHeight <=
-      dropdown?.height + container?.top + offset
+        offset,
+        dropdownPlacement,
+        renderAsSmaller,
+        size,
+        inModal
+      } = this.props,
+      container = getBoundings(this.containerRef.current),
+      dropdown = getBoundings(this.dropdownRef.current),
+      renderAbove =
+        window.innerHeight <=
+        dropdown?.height + container?.top + offset
 
     if (inModal) {
       this.setState({
@@ -311,74 +309,72 @@ class Dropdown extends PureComponent {
           width: container?.width
         }
       })
+    } else if (size === 'fixed') {
+      this.setState({
+        style: {
+          left: container?.left,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset,
+          width: container?.width
+        }
+      })
+    } else if (size === 'huge') {
+      this.setState({
+        style: {
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(
+                      container?.width,
+                      480,
+                      container?.left
+                    )
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 150
+              : centerParent(
+                  container?.width,
+                  dropdown?.width,
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
+        }
+      })
     } else {
-      if (size === 'fixed') {
-        this.setState({
-          style: {
-            left: container?.left,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset,
-            width: container?.width
-          }
-        })
-      } else if (size === 'huge') {
-        this.setState({
-          style: {
-            left:
-              dropdownPlacement === 'left'
-                ? (renderAsSmaller
-                    ? centerParent(
-                        container?.width,
-                        480,
-                        container?.left
-                      )
-                    : centerParent(
-                        container?.width,
-                        dropdown?.width,
-                        container?.left
-                      )) - 150
-                : centerParent(
-                    container?.width,
-                    dropdown?.width,
-                    container?.left
-                  ) -
-                  100 +
+      this.setState({
+        style: {
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(
+                      container?.width,
+                      240,
+                      container?.left
+                    )
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 40
+              : centerParent(
+                  container?.width,
                   dropdown?.width,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset
-          }
-        })
-      } else {
-        this.setState({
-          style: {
-            left:
-              dropdownPlacement === 'left'
-                ? (renderAsSmaller
-                    ? centerParent(
-                        container?.width,
-                        240,
-                        container?.left
-                      )
-                    : centerParent(
-                        container?.width,
-                        dropdown?.width,
-                        container?.left
-                      )) - 40
-                : centerParent(
-                    container?.width,
-                    dropdown?.width,
-                    container?.left
-                  ) -
-                  100 +
-                  dropdown?.width,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset
-          }
-        })
-      }
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
+        }
+      })
     }
   }
 
@@ -400,13 +396,13 @@ class Dropdown extends PureComponent {
    */
   renderDropdownWithTooltip = () => {
     const {
-      icon,
-      tooltip,
-      tooltipPlacement,
-      hasArrow,
-      arrowType
-    } = this.props
-    const { isOpen } = this.state
+        icon,
+        tooltip,
+        tooltipPlacement,
+        hasArrow,
+        arrowType
+      } = this.props,
+      { isOpen } = this.state
 
     return (
       <Tooltip
@@ -436,15 +432,15 @@ class Dropdown extends PureComponent {
    */
   renderDropdown = () => {
     const {
-      label,
-      icon,
-      hasArrow,
-      arrowType,
-      alignment,
-      hasInput,
-      hasFullInputStyle
-    } = this.props
-    const { isOpen } = this.state
+        label,
+        icon,
+        hasArrow,
+        arrowType,
+        alignment,
+        hasInput,
+        hasFullInputStyle
+      } = this.props,
+      { isOpen } = this.state
 
     return (
       <span
@@ -476,15 +472,15 @@ class Dropdown extends PureComponent {
    */
   renderDropdownWithButton = () => {
     const {
-      label,
-      icon,
-      hasArrow,
-      arrowType,
-      alignment,
-      handleOnClick,
-      link
-    } = this.props
-    const { isOpen } = this.state
+        label,
+        icon,
+        hasArrow,
+        arrowType,
+        alignment,
+        handleOnClick,
+        link
+      } = this.props,
+      { isOpen } = this.state
 
     return (
       <span
@@ -528,18 +524,17 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownBody = () => {
-    const { children, className, size } = this.props
-    const { style } = this.state
-
-    const elementClasses = cssClass({
-      'dropdown--mini': size === 'mini',
-      'dropdown--small': size === 'small',
-      'dropdown--medium': size === 'medium',
-      'dropdown--large': size === 'large',
-      'dropdown--huge': size === 'huge',
-      'dropdown--extra-huge': size === 'extra-huge',
-      'dropdown--auto': size === 'auto'
-    })
+    const { children, className, size } = this.props,
+      { style } = this.state,
+      elementClasses = cssClass({
+        'dropdown--mini': size === 'mini',
+        'dropdown--small': size === 'small',
+        'dropdown--medium': size === 'medium',
+        'dropdown--large': size === 'large',
+        'dropdown--huge': size === 'huge',
+        'dropdown--extra-huge': size === 'extra-huge',
+        'dropdown--auto': size === 'auto'
+      })
 
     return (
       <div
@@ -655,8 +650,8 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   render() {
-    const { tooltip, button } = this.props
-    const { isOpen } = this.state
+    const { tooltip, button } = this.props,
+      { isOpen } = this.state
 
     return (
       <>

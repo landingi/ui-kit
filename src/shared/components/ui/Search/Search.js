@@ -1,9 +1,9 @@
 import React, {
   memo,
-  useState,
-  useEffect,
   useCallback,
-  useRef
+  useEffect,
+  useRef,
+  useState
 } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
@@ -52,66 +52,60 @@ function Search({
   intl,
   onProtectedSubmit
 }) {
-  const [isClearActive, setClearActive] = useState(false)
+  const [isClearActive, setClearActive] = useState(false),
+    inputRef = useRef(),
+    /**
+     * Handle input clean
+     * @type {function}
+     */
+    handleCleanOnClick = useCallback(() => {
+      inputRef.current.value = ''
+      setClearActive(false)
+      onChange()
+    }, []),
+    /**
+     * Handle input keyup
+     * @type {function}
+     */
+    handleOnKeyUp = useCallback(
+      event => setClearActive(event.target.value),
+      []
+    ),
+    /**
+     * Handle input key down
+     * @type {function}
+     */
+    handleOnKeyDown = useCallback(event => {
+      if (event.key === 'Enter' && !onSubmit) {
+        event.preventDefault()
 
-  const inputRef = useRef()
-
-  /**
-   * Handle input clean
-   * @type {function}
-   */
-  const handleCleanOnClick = useCallback(() => {
-    inputRef.current.value = ''
-    setClearActive(false)
-    onChange()
-  }, [])
-
-  /**
-   * Handle input keyup
-   * @type {function}
-   */
-  const handleOnKeyUp = useCallback(
-    event => setClearActive(event.target.value),
-    []
-  )
-
-  /**
-   * Handle input key down
-   * @type {function}
-   */
-  const handleOnKeyDown = useCallback(event => {
-    if (event.key === 'Enter' && !onSubmit) {
+        handleProtectedSubmit(inputRef.current.value)
+      }
+    }, []),
+    /**
+     * Handle on form submit
+     * @type {function}
+     */
+    handleSubmit = useCallback(event => {
       event.preventDefault()
 
-      handleProtectedSubmit(inputRef.current.value)
-    }
-  }, [])
+      if (onSubmit) {
+        onSubmit(inputRef.current.value)
+      } else {
+        onChange()
+      }
+    }, []),
+    /**
+     * Handle on form submit
+     * @type {function}
+     */
+    handleProtectedSubmit = useCallback(event => {
+      onProtectedSubmit &&
+        onProtectedSubmit(inputRef.current.value)
+    }, [])
 
   /**
-   * Handle on form submit
-   * @type {function}
-   */
-  const handleSubmit = useCallback(event => {
-    event.preventDefault()
-
-    if (onSubmit) {
-      onSubmit(inputRef.current.value)
-    } else {
-      onChange()
-    }
-  }, [])
-
-  /**
-   * Handle on form submit
-   * @type {function}
-   */
-  const handleProtectedSubmit = useCallback(event => {
-    onProtectedSubmit &&
-      onProtectedSubmit(inputRef.current.value)
-  }, [])
-
-  /**
-   * useEffect
+   * UseEffect
    */
   useEffect(() => {
     autoFocus &&
@@ -231,7 +225,7 @@ Search.propTypes = {
    */
   onKeyDown: PropTypes.func,
   /**
-   *  size of search input `small, medium, large`
+   *  Size of search input `small, medium, large`
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   /**
@@ -260,7 +254,7 @@ Search.propTypes = {
     PropTypes.object
   ]),
   /**
-   * handle on form submit action
+   * Handle on form submit action
    */
   onSubmit: PropTypes.func,
   /**

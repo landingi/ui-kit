@@ -3,46 +3,46 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Panel.scss'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Panel - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: 'panel'
+   * @param {object} props.children - children
+   * @param {string} props.variant - variant, default 'padding-default'
+   * @param {bool} props.adjustHeight - adjust panel height to container height
+   * @param {bool} props.isBackground - add background
+   * @param {bool} props.hasShadow - panel shadow, default true
+   * @return {object} An object of children element
+   */
+  panel = ({
+    className,
+    children,
+    variant,
+    adjustHeight,
+    isBackground,
+    hasShadow
+  }) => {
+    const elementClasses = cssClass({
+      'panel--padding-nolr': variant === 'padding-nolr',
+      'panel--padding-default':
+        variant === 'padding-default',
+      'panel--padding-tiny': variant === 'padding-tiny',
+      'panel--padding-none': variant === 'padding-none',
+      'panel--padding-bottom-tiny':
+        variant === 'padding-bottom-tiny',
+      'panel--padding-input': variant === 'padding-input',
+      'panel--adjust-height': adjustHeight === true,
+      'panel--background': isBackground === true,
+      'panel--shadow-none': hasShadow === false
+    })
 
-/**
- * Panel - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: 'panel'
- * @param {object} props.children - children
- * @param {string} props.variant - variant, default 'padding-default'
- * @param {bool} props.adjustHeight - adjust panel height to container height
- * @param {bool} props.isBackground - add background
- * @param {bool} props.hasShadow - panel shadow, default true
- * @return {object} An object of children element
- */
-const panel = ({
-  className,
-  children,
-  variant,
-  adjustHeight,
-  isBackground,
-  hasShadow
-}) => {
-  const elementClasses = cssClass({
-    'panel--padding-nolr': variant === 'padding-nolr',
-    'panel--padding-default': variant === 'padding-default',
-    'panel--padding-tiny': variant === 'padding-tiny',
-    'panel--padding-none': variant === 'padding-none',
-    'panel--padding-bottom-tiny':
-      variant === 'padding-bottom-tiny',
-    'panel--padding-input': variant === 'padding-input',
-    'panel--adjust-height': adjustHeight === true,
-    'panel--background': isBackground === true,
-    'panel--shadow-none': hasShadow === false
-  })
-
-  return (
-    <div className={cssClass(className, elementClasses)}>
-      {children}
-    </div>
-  )
-}
+    return (
+      <div className={cssClass(className, elementClasses)}>
+        {children}
+      </div>
+    )
+  }
 
 /**
  * Display name
@@ -83,11 +83,11 @@ panel.propTypes = {
    */
   adjustHeight: PropTypes.bool,
   /**
-   * isBackground add background
+   * IsBackground add background
    */
   isBackground: PropTypes.bool,
   /**
-   * hasShadow add shadows
+   * HasShadow add shadows
    */
   hasShadow: PropTypes.bool
 }

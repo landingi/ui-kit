@@ -7,18 +7,17 @@ import scss from './TextOverflow.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
-
-/**
- * Text overflow - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - childrens
- * @param {string|array} props.className - list of class names, default: overflow
- * @return {object} An object of children element
- */
-const overflow = ({ children, className }) => (
-  <div className={cssClass(className)}>{children}</div>
-)
+const cssClass = styles(scss),
+  /**
+   * Text overflow - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - childrens
+   * @param {string|array} props.className - list of class names, default: overflow
+   * @return {object} An object of children element
+   */
+  overflow = ({ children, className }) => (
+    <div className={cssClass(className)}>{children}</div>
+  )
 
 /**
  * Display name

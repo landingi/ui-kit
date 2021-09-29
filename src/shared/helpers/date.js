@@ -1,4 +1,4 @@
-import { parse, isDate } from 'date-fns'
+import { isDate, parse } from 'date-fns'
 
 export const dateTimeFormat = (date, locale) =>
   new Intl.DateTimeFormat(locale).format(date)

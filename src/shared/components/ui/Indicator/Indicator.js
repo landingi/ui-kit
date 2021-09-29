@@ -7,37 +7,36 @@ import scss from './Indicator.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Indicator - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.content - content
+   * @param {boolean} props.isAlert - is alert
+   * @param {string|array} props.className - list of class names, default: `indicator`
+   * @param {function} props.onClick - click handler
+   * @return {object} An object of children element
+   */
+  indicator = ({
+    children,
+    className,
+    content,
+    isAlert,
+    onClick
+  }) => {
+    const hasAlertClass = isAlert ? 'is--alert' : undefined
+    return (
+      <span
+        className={cssClass(className, hasAlertClass)}
+        onClick={onClick}
+      >
+        <i>{content}</i>
 
-/**
- * Indicator - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.content - content
- * @param {boolean} props.isAlert - is alert
- * @param {string|array} props.className - list of class names, default: `indicator`
- * @param {function} props.onClick - click handler
- * @return {object} An object of children element
- */
-const indicator = ({
-  children,
-  className,
-  content,
-  isAlert,
-  onClick
-}) => {
-  const hasAlertClass = isAlert ? 'is--alert' : undefined
-  return (
-    <span
-      className={cssClass(className, hasAlertClass)}
-      onClick={onClick}
-    >
-      <i>{content}</i>
-
-      {children}
-    </span>
-  )
-}
+        {children}
+      </span>
+    )
+  }
 
 /**
  * Display name

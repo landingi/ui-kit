@@ -8,4 +8,6 @@ const messages = {
 
 export const getMessages = messages
 
-export const getLanguage = (typeof document !== `undefined`) &&  document.documentElement.lang
+export const getLanguage =
+  typeof document !== `undefined` &&
+  document.documentElement.lang

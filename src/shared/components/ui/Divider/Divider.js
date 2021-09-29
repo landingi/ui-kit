@@ -7,35 +7,34 @@ import scss from './Divider.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Divider - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - a list of class names, default: `divider`
+   * @param {string} props.variant - variant `normal, menu, dropdown, horizontal`
+   * @param {string} props.align - align `vertical`
+   * @return {object} An object of children element
+   */
+  divider = ({ className, variant, align }) => {
+    const elementClasses = cssClass({
+      'divider--normal': variant === 'normal',
+      'divider--menu': variant === 'menu',
+      'divider--dropdown': variant === 'dropdown',
+      'divider--horizontal': variant === 'horizontal',
+      'divider--vertical': align === 'vertical'
+    })
 
-/**
- * Divider - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - a list of class names, default: `divider`
- * @param {string} props.variant - variant `normal, menu, dropdown, horizontal`
- * @param {string} props.align - align `vertical`
- * @return {object} An object of children element
- */
-const divider = ({ className, variant, align }) => {
-  const elementClasses = cssClass({
-    'divider--normal': variant === 'normal',
-    'divider--menu': variant === 'menu',
-    'divider--dropdown': variant === 'dropdown',
-    'divider--horizontal': variant === 'horizontal',
-    'divider--vertical': align === 'vertical'
-  })
-
-  return (
-    <div
-      className={cssClass(
-        'divider',
-        className,
-        elementClasses
-      )}
-    />
-  )
-}
+    return (
+      <div
+        className={cssClass(
+          'divider',
+          className,
+          elementClasses
+        )}
+      />
+    )
+  }
 
 /**
  * Display name

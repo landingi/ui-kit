@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Search from '@components/ui/Search'
 import { NO_VALUE } from '@constants/helpers'
@@ -24,37 +24,34 @@ const searcher = ({
   ...rest
 }) => {
   const search = async value => {
-    try {
-      const response = await searchFunction(value)
+      try {
+        const response = await searchFunction(value)
 
-      setSearchResult(response)
-    } catch {}
-  }
+        setSearchResult(response)
+      } catch {}
+    },
+    handleOnChange = useCallback(event => {
+      let value
+      !event ? (value = '') : (value = event.target.value)
 
-  const handleOnChange = useCallback(event => {
-    let value
-    !event ? (value = '') : (value = event.target.value)
-
-    if (setSearchPhrase) {
-      !value && setSearchPhrase('')
-      value && liveChanges && setSearchPhrase(value)
-    } else {
-      !value && setSearchResult(NO_VALUE)
-    }
-  })
-
-  const handleOnSubmit = useCallback(event => {
-    if (setSearchPhrase) {
-      setSearchPhrase(event)
-    } else {
-      search(event)
-    }
-  })
-
-  const handleOnProtectedSubmit = useCallback(
-    event => setSearchPhrase(event),
-    []
-  )
+      if (setSearchPhrase) {
+        !value && setSearchPhrase('')
+        value && liveChanges && setSearchPhrase(value)
+      } else {
+        !value && setSearchResult(NO_VALUE)
+      }
+    }),
+    handleOnSubmit = useCallback(event => {
+      if (setSearchPhrase) {
+        setSearchPhrase(event)
+      } else {
+        search(event)
+      }
+    }),
+    handleOnProtectedSubmit = useCallback(
+      event => setSearchPhrase(event),
+      []
+    )
 
   return (
     <Search

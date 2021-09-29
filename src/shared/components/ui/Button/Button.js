@@ -14,32 +14,7 @@ import scss from './Button.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
-
-/**
- * Button - stateless presentational component
- * @param {object} props - props
- * @param {string} props.tag - Tag: button or a
- * @param {string} props.title - link title
- * @param {string} props.target - Target: _self, _blank, _parent, _top
- * @param {string} props.type - Type: button, reset, submit
- * @param {string} props.href - Link
- * @param {string} props.size - Size `tiny, medium, large`
- * @param {string} props.variant - Variant, default: 'primary'
- * @param {string} props.align - Align `left, center, right`
- * @param {string|array} props.className - a custom list of class names, default: `button`
- * @param {object} props.children - children
- * @param {bool} props.isLoading - loader status, default: false
- * @param {bool} props.isDisabled - disabled status, default: false
- * @param {function} props.onClick - click handler
- * @param {bool} props.hasBackgoundRipple - background ripple effect, default: true
- * @param {bool} props.hasIcon - has icon, default: false
- * @param {bool} props.hide - Hide, default: false
- * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false',
- * @param {string} props.id - element id
- * @return {object} An object of children elements
- */
-const Button = ({
+function Button({
   className,
   tag: Tag,
   title,
@@ -59,7 +34,7 @@ const Button = ({
   buttonStyle,
   id,
   fitWidth
-}) => {
+}) {
   const elementClasses = cssClass({
     'button--primary': variant === 'primary',
     'button--secondary': variant === 'secondary',

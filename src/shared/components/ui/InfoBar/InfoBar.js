@@ -8,42 +8,41 @@ import scss from './InfoBar.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Info Bar - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: `info-bar`
+   * @param {string} props.type - type of info bar `info, success, warning, alert`
+   * @return {object} An object of children element
+   */
+  infoBar = ({ children, className, type }) => {
+    const icon =
+      type === 'warning'
+        ? 'exclamation'
+        : type === 'alert'
+        ? 'exclamation-triangle'
+        : 'info'
 
-/**
- * Info Bar - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `info-bar`
- * @param {string} props.type - type of info bar `info, success, warning, alert`
- * @return {object} An object of children element
- */
-const infoBar = ({ children, className, type }) => {
-  const icon =
-    type === 'warning'
-      ? 'exclamation'
-      : type === 'alert'
-      ? 'exclamation-triangle'
-      : 'info'
-
-  return (
-    <div
-      className={cssClass(className, `info-bar--${type}`)}
-    >
+    return (
       <div
-        className={cssClass(
-          className,
-          'info-bar--box',
-          `info-bar--${type}-box`
-        )}
+        className={cssClass(className, `info-bar--${type}`)}
       >
-        <FontAwesomeIcon icon={icon} size='1x' />
-      </div>
+        <div
+          className={cssClass(
+            className,
+            'info-bar--box',
+            `info-bar--${type}-box`
+          )}
+        >
+          <FontAwesomeIcon icon={icon} size='1x' />
+        </div>
 
-      <div className={scss.info__bar}>{children}</div>
-    </div>
-  )
-}
+        <div className={scss.info__bar}>{children}</div>
+      </div>
+    )
+  }
 
 /**
  * Display name
@@ -72,7 +71,7 @@ infoBar.propTypes = {
     PropTypes.array
   ]),
   /**
-   * type of notification `info, success, warning, alert`
+   * Type of notification `info, success, warning, alert`
    */
   type: PropTypes.oneOf(['warning', 'info', 'alert'])
 }

@@ -5,36 +5,35 @@ import scss from './StatsBadge.scss'
 import Heading from '@components/ui/Heading'
 import { FormattedMessage } from 'react-intl'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * StatsBadge - stateless presentational component
+   * @param {object} props - props
+   * @param {string} props.color - badge color
+   * @param {number} props.quantity - quantity
+   * @param {string} props.description - description
+   * @return {object} An object of children element
+   */
+  statsBadge = ({ color, quantity, description }) => {
+    return (
+      <div
+        className={cssClass(
+          'container',
+          `container--${color}`
+        )}
+      >
+        <div className={cssClass('container--description')}>
+          <Heading level={2} margin='none'>
+            {quantity}
+          </Heading>
 
-/**
- * StatsBadge - stateless presentational component
- * @param {object} props - props
- * @param {string} props.color - badge color
- * @param {number} props.quantity - quantity
- * @param {string} props.description - description
- * @return {object} An object of children element
- */
-const statsBadge = ({ color, quantity, description }) => {
-  return (
-    <div
-      className={cssClass(
-        'container',
-        `container--${color}`
-      )}
-    >
-      <div className={cssClass('container--description')}>
-        <Heading level={2} margin='none'>
-          {quantity}
-        </Heading>
-
-        <Heading level={5}>
-          <FormattedMessage id={description} />
-        </Heading>
+          <Heading level={5}>
+            <FormattedMessage id={description} />
+          </Heading>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 
 /**
  * Display name

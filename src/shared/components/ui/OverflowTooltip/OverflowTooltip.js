@@ -8,47 +8,48 @@ import Tooltip from '../Tooltip'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * OverflowTooltip - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.content - content to overflow
+   * @param {object} props.placement - tooltip placement
+   * @param {object} props.length - max content length to overflow if it is exceeded
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: overflow-tooltip
+   * @return {object} An object of children element
+   */
+  overflowTooltip = ({
+    content,
+    placement,
+    length,
+    children,
+    className
+  }) => {
+    if (content?.length > length) {
+      return children ? (
+        <div className={cssClass(className)}>
+          <div>{`${content
+            .slice(0, length)
+            .trim()}...`}</div>
 
-/**
- * OverflowTooltip - stateless presentational component
- * @param {object} props - props
- * @param {object} props.content - content to overflow
- * @param {object} props.placement - tooltip placement
- * @param {object} props.length - max content length to overflow if it is exceeded
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: overflow-tooltip
- * @return {object} An object of children element
- */
-const overflowTooltip = ({
-  content,
-  placement,
-  length,
-  children,
-  className
-}) => {
-  if (content?.length > length) {
-    return children ? (
-      <div className={cssClass(className)}>
-        <div>{content.slice(0, length).trim() + '...'}</div>
+          <Tooltip content={content} placement={placement}>
+            {children}
+          </Tooltip>
+        </div>
+      ) : (
+        <div className={cssClass(className)}>
+          <Tooltip content={content} placement={placement}>
+            <div>
+              {`${content.slice(0, length).trim()}...`}
+            </div>
+          </Tooltip>
+        </div>
+      )
+    }
 
-        <Tooltip content={content} placement={placement}>
-          {children}
-        </Tooltip>
-      </div>
-    ) : (
-      <div className={cssClass(className)}>
-        <Tooltip content={content} placement={placement}>
-          <div>
-            {content.slice(0, length).trim() + '...'}
-          </div>
-        </Tooltip>
-      </div>
-    )
+    return <div>{content}</div>
   }
-
-  return <div>{content}</div>
-}
 
 /**
  * Display name
@@ -62,15 +63,15 @@ overflowTooltip.displayName = 'OverflowTooltip'
  */
 overflowTooltip.propTypes = {
   /**
-   * content to overflow
+   * Content to overflow
    */
   content: PropTypes.string.isRequired,
   /**
-   * length
+   * Length
    */
   length: PropTypes.number,
   /**
-   * placement
+   * Placement
    */
   placement: PropTypes.string,
   /**

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { throttle } from '@helpers/events'
 import { isInViewVertical } from '@helpers/position'
 
@@ -7,21 +7,21 @@ export default ({
   sectionElementRefs = []
 }) => {
   const [activeSection, setActiveSection] = useState(
-    activeSectionDefault
-  )
-  const handle = () => {
-    let currentSectionId = activeSection
+      activeSectionDefault
+    ),
+    handle = () => {
+      let currentSectionId = activeSection
 
-    sectionElementRefs.map(item => {
-      const section = sectionElementRefs[item].current
+      sectionElementRefs.map(item => {
+        const section = sectionElementRefs[item].current
 
-      if (isInViewVertical(section)) {
-        currentSectionId = item
-      }
-    })
+        if (isInViewVertical(section)) {
+          currentSectionId = item
+        }
+      })
 
-    setActiveSection(currentSectionId)
-  }
+      setActiveSection(currentSectionId)
+    }
 
   useEffect(() => {
     window.addEventListener('scroll', throttle(handle, 500))

@@ -3,47 +3,48 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Paragraph.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Paragraph - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: paragraph
- * @param {object} props.children - children
- * @param {string} props.color - color
- * @param {number} props.size - size
- * @param {string} props.align - align
- * @param {string} props.padding - padding
- * @param {number} props.line - line height
- * @param {number} props.weight - font weight
- * @return {object} An object of children element
- */
-const paragraph = ({
-  className,
-  children,
-  color,
-  size,
-  align,
-  padding,
-  line,
-  weight
-}) => (
-  <p
-    className={cssClass(
-      className,
-      color ? `${className}-color--${color}` : undefined,
-      size ? `${className}-size--${size}` : undefined,
-      padding
-        ? `${className}-padding--${padding}`
-        : undefined,
-      align ? `${className}-align--${align}` : undefined,
-      line ? `${className}-line--${line}` : undefined,
-      weight ? `${className}-weight--${weight}` : undefined
-    )}
-  >
-    {children}
-  </p>
-)
+const cssClass = styles(scss),
+  /**
+   * Paragraph - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: paragraph
+   * @param {object} props.children - children
+   * @param {string} props.color - color
+   * @param {number} props.size - size
+   * @param {string} props.align - align
+   * @param {string} props.padding - padding
+   * @param {number} props.line - line height
+   * @param {number} props.weight - font weight
+   * @return {object} An object of children element
+   */
+  paragraph = ({
+    className,
+    children,
+    color,
+    size,
+    align,
+    padding,
+    line,
+    weight
+  }) => (
+    <p
+      className={cssClass(
+        className,
+        color ? `${className}-color--${color}` : undefined,
+        size ? `${className}-size--${size}` : undefined,
+        padding
+          ? `${className}-padding--${padding}`
+          : undefined,
+        align ? `${className}-align--${align}` : undefined,
+        line ? `${className}-line--${line}` : undefined,
+        weight
+          ? `${className}-weight--${weight}`
+          : undefined
+      )}
+    >
+      {children}
+    </p>
+  )
 
 /**
  * Display name
@@ -84,11 +85,11 @@ paragraph.propTypes = {
    */
   padding: PropTypes.string,
   /**
-   * line, default `medium`
+   * Line, default `medium`
    */
   line: PropTypes.number,
   /**
-   * weight, default `300`
+   * Weight, default `300`
    */
   weight: PropTypes.number
 }

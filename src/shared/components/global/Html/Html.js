@@ -4,19 +4,17 @@ import { styles } from '@helpers/css'
 import scss from './Html.scss'
 import createDOMPurify from 'dompurify'
 
-const DOMPurify = createDOMPurify(window)
-
-const cssClass = styles(scss)
-
-const html = ({ className, value }) => (
-  <span
-    className={cssClass(className)}
-    // eslint-disable-next-line react/no-danger
-    dangerouslySetInnerHTML={{
-      __html: DOMPurify.sanitize(value)
-    }}
-  />
-)
+const DOMPurify = createDOMPurify(window),
+  cssClass = styles(scss),
+  html = ({ className, value }) => (
+    <span
+      className={cssClass(className)}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{
+        __html: DOMPurify.sanitize(value)
+      }}
+    />
+  )
 /**
  * Display name
  * @type {string}

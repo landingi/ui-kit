@@ -1,7 +1,7 @@
 import React, {
   useCallback,
-  useState,
-  useEffect
+  useEffect,
+  useState
 } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage, injectIntl } from 'react-intl'
@@ -25,27 +25,26 @@ const showMore = ({
   extraClassname,
   children
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [display, setDisplay] = useState('none')
-  const [text, setText] = useState('')
+  const [isOpen, setIsOpen] = useState(false),
+    [display, setDisplay] = useState('none'),
+    [text, setText] = useState(''),
+    handleOnClick = useCallback(
+      event => {
+        event.preventDefault()
 
-  const handleOnClick = useCallback(
-    event => {
-      event.preventDefault()
+        setIsOpen(current => !current)
 
-      setIsOpen(current => !current)
-
-      setDisplay(display !== 'none' ? 'none' : null)
-    },
-    [isOpen]
-  )
+        setDisplay(display !== 'none' ? 'none' : null)
+      },
+      [isOpen]
+    )
 
   useEffect(() => {
     const text = intl.formatMessage({ id: content })
 
     !isOpen
       ? setText(
-          text.replace(/^(.{170}[^\s]*).*/, '$1') + '...'
+          `${text.replace(/^(.{170}[^\s]*).*/, '$1')}...`
         )
       : setText(text)
   }, [isOpen])

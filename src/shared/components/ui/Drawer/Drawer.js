@@ -6,9 +6,9 @@ import Header from './Header'
 import Backdrop from '@components/ui/Backdrop'
 import {
   DARK,
-  WHITE,
   DEFAULT,
-  MOBILE
+  MOBILE,
+  WHITE
 } from '@constants/skin'
 import posed, { PoseGroup } from 'react-pose'
 
@@ -18,80 +18,81 @@ import posed, { PoseGroup } from 'react-pose'
  * @return {object} An object of styles
  */
 const DrawerAnimation = posed.div({
-  enter: {
-    top: 0,
-    left: 340,
-    transition: {
-      ease: [0.82, 0.085, 0.395, 0.895],
-      duration: 500
+    enter: {
+      top: 0,
+      left: 340,
+      transition: {
+        ease: [0.82, 0.085, 0.395, 0.895],
+        duration: 500
+      }
+    },
+    exit: {
+      left: 0,
+      transition: {
+        ease: [0.82, 0.085, 0.395, 0.895],
+        duration: 500
+      }
     }
-  },
-  exit: {
-    left: 0,
-    transition: {
-      ease: [0.82, 0.085, 0.395, 0.895],
-      duration: 500
-    }
+  }),
+  /**
+   * Exports css classes from SCSS file
+   * @return {object} An object of styles
+   */
+  cssClass = styles(scss),
+  /**
+   * Drawer - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: drawer
+   * @param {function} props.onClick - onClick handler
+   * @param {boolean} props.isActive - active state
+   * @param {object} props.data - data
+   * @param {string} props.type - type od drawer, dafult: ''
+   * @param {string} props.skin - determines which skin color it should use, default: WHITE,
+   * @return {object} An object of children element
+   */
+  drawer = ({
+    children,
+    className,
+    onClick,
+    isActive,
+    data,
+    type,
+    skin
+  }) => {
+    const elementClasses = cssClass({
+      'drawer--small': type === 'small',
+      'drawer--medium': type === 'medium',
+      'drawer--white': skin === WHITE || skin === MOBILE,
+      'drawer--dark': skin === DARK,
+      'drawer--default': skin === DEFAULT
+    })
+
+    return (
+      <>
+        <PoseGroup animateOnMount flipMove={false}>
+          {isActive && (
+            <DrawerAnimation
+              className={cssClass(
+                className,
+                elementClasses
+              )}
+              key='draweranimation'
+            >
+              <Header
+                onClick={onClick}
+                title={data ? data.title : ''}
+              />
+
+              {children}
+            </DrawerAnimation>
+          )}
+        </PoseGroup>
+
+        {isActive && <Backdrop onClick={onClick} />}
+      </>
+    )
   }
-})
-
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss)
-
-/**
- * Drawer - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: drawer
- * @param {function} props.onClick - onClick handler
- * @param {boolean} props.isActive - active state
- * @param {object} props.data - data
- * @param {string} props.type - type od drawer, dafult: ''
- * @param {string} props.skin - determines which skin color it should use, default: WHITE,
- * @return {object} An object of children element
- */
-const drawer = ({
-  children,
-  className,
-  onClick,
-  isActive,
-  data,
-  type,
-  skin
-}) => {
-  const elementClasses = cssClass({
-    'drawer--small': type === 'small',
-    'drawer--medium': type === 'medium',
-    'drawer--white': skin === WHITE || skin === MOBILE,
-    'drawer--dark': skin === DARK,
-    'drawer--default': skin === DEFAULT
-  })
-
-  return (
-    <>
-      <PoseGroup animateOnMount flipMove={false}>
-        {isActive && (
-          <DrawerAnimation
-            className={cssClass(className, elementClasses)}
-            key='draweranimation'
-          >
-            <Header
-              onClick={onClick}
-              title={data ? data.title : ''}
-            />
-
-            {children}
-          </DrawerAnimation>
-        )}
-      </PoseGroup>
-
-      {isActive && <Backdrop onClick={onClick} />}
-    </>
-  )
-}
 
 /**
  * Display name
@@ -132,15 +133,15 @@ drawer.propTypes = {
    */
   onClick: PropTypes.func,
   /**
-   * isActive, active state
+   * IsActive, active state
    */
   isActive: PropTypes.bool.isRequired,
   /**
-   * type of drawer
+   * Type of drawer
    */
   type: PropTypes.string,
   /**
-   * skin, determines which skin color it should use
+   * Skin, determines which skin color it should use
    */
   skin: PropTypes.string
 }

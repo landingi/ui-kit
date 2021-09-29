@@ -34,10 +34,10 @@ const maskedInput = ({
   guide,
   focused
 }) => {
-  const { name, value, onChange, onBlur } = field
-  const { errors, touched } = form
-  const errorClass =
-    errors[name] && touched[name] ? 'form--has-error' : ''
+  const { name, value, onChange, onBlur } = field,
+    { errors, touched } = form,
+    errorClass =
+      errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>

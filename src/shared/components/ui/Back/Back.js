@@ -18,12 +18,10 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 function Back({ className, url, content }) {
-  const location = getLocationPath()
-  const urlMap = location.match(
-    '/payments/subscription/cancel'
-  )
-    ? '/payments/subscription'
-    : url
+  const location = getLocationPath(),
+    urlMap = location.match('/payments/subscription/cancel')
+      ? '/payments/subscription'
+      : url
 
   return (
     <span className={cssClass(className)}>

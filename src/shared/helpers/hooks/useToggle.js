@@ -1,16 +1,16 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 /**
- * useToggle - stateful presentational component
+ * UseToggle - stateful presentational component
  * @param {object} props - props
  * @param {bool} props.initialValue - default value of the state `true`
  * @return {object}
  */
 const useToggle = (initialValue = false) => {
-  const [value, setValue] = useState(initialValue)
-  const toggle = useCallback(() => {
-    setValue(data => !data)
-  }, [])
+  const [value, setValue] = useState(initialValue),
+    toggle = useCallback(() => {
+      setValue(data => !data)
+    }, [])
 
   return [value, toggle]
 }

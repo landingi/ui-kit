@@ -47,22 +47,22 @@ AccordionSection.displayName = 'Accordion Section'
  */
 AccordionSection.propTypes = {
   /**
-   * determine if section should be open, default 'false'
+   * Determine if section should be open, default 'false'
    */
   isOpen: PropTypes.bool,
   /**
-   * label
+   * Label
    */
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]).isRequired,
   /**
-   * content
+   * Content
    */
   children: PropTypes.string.isRequired,
   /**
-   * handle click event on label
+   * Handle click event on label
    */
   handleOnClick: PropTypes.func.isRequired
 }

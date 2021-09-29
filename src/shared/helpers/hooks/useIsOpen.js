@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 const useIsOpen = initial => {
   const [value, setValue] = useState(initial)

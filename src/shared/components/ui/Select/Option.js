@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
- * select option - stateless presentational component
+ * Select option - stateless presentational component
  * @param {object} props - props
  * @param {string} props.className - list of class names, default: select__option
  * @param {string|number} props.value - click handler

@@ -10,46 +10,48 @@ import { mapIconToClass } from '@helpers/data'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Notification - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: `notification`
+   * @param {string} props.type - type of notification `info, success, warning, alert`
+   * @param {bool} props.isClosable - show close
+   * @param {bool} props.onClick - gets called when the user clicks on backdrop
+   * @param {bool} props.hasTime - hasTime
+   * @return {object} An object of children element
+   */
+  notification = ({
+    children,
+    className,
+    type,
+    isClosable,
+    onClick,
+    hasTime
+  }) => (
+    <div
+      className={cssClass(
+        className,
+        `notification--${type}`
+      )}
+    >
+      <div className={scss.content}>
+        <FontAwesomeIcon
+          icon={mapIconToClass(type) || 'check'}
+          size='sm'
+        />
 
-/**
- * Notification - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `notification`
- * @param {string} props.type - type of notification `info, success, warning, alert`
- * @param {bool} props.isClosable - show close
- * @param {bool} props.onClick - gets called when the user clicks on backdrop
- * @param {bool} props.hasTime - hasTime
- * @return {object} An object of children element
- */
-const notification = ({
-  children,
-  className,
-  type,
-  isClosable,
-  onClick,
-  hasTime
-}) => (
-  <div
-    className={cssClass(className, `notification--${type}`)}
-  >
-    <div className={scss.content}>
-      <FontAwesomeIcon
-        icon={mapIconToClass(type) || 'check'}
-        size='sm'
-      />
+        <p className={scss.notification__message}>
+          {children}
+        </p>
 
-      <p className={scss.notification__message}>
-        {children}
-      </p>
+        {isClosable && <Close onClick={onClick} />}
+      </div>
 
-      {isClosable && <Close onClick={onClick} />}
+      {hasTime && <span className={scss.time} />}
     </div>
-
-    {hasTime && <span className={scss.time} />}
-  </div>
-)
+  )
 
 /**
  * Display name
@@ -78,7 +80,7 @@ notification.propTypes = {
     PropTypes.array
   ]),
   /**
-   *  type of notification `info, success, warning, alert`
+   *  Type of notification `info, success, warning, alert`
    */
   type: PropTypes.oneOf([
     'info',
@@ -87,11 +89,11 @@ notification.propTypes = {
     'alert'
   ]),
   /**
-   *  isClosable
+   *  IsClosable
    */
   isClosable: PropTypes.bool,
   /**
-   *  hasTime
+   *  HasTime
    */
   hasTime: PropTypes.bool,
   /**

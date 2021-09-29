@@ -3,19 +3,21 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Backdrop.scss'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Backdrop - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: backdrop
+   * @param {function} props.onClick - click handler
+   * @return {object} An object of children element
+   */
 
-/**
- * Backdrop - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: backdrop
- * @param {function} props.onClick - click handler
- * @return {object} An object of children element
- */
-
-const backdrop = ({ className, onClick }) => (
-  <div className={cssClass(className)} onClick={onClick} />
-)
+  backdrop = ({ className, onClick }) => (
+    <div
+      className={cssClass(className)}
+      onClick={onClick}
+    />
+  )
 
 /**
  * Display name

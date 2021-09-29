@@ -25,38 +25,35 @@ function Fresh({
   size,
   intl
 }) {
-  const isFreshChat = !!window.fcWidget
-  const isFreshDesk = !!window.FreshworksWidget
-
-  /**
-   * open mail
-   * @type {function}
-   */
-  const handleLimitExceededMail = () =>
-    `mailto:${mail}?subject=${intl.formatMessage({
-      id: subject
-    })}&body=${intl.formatMessage({ id: description })}`
-
-  /**
-   * open FreshChat
-   * @type {function}
-   */
-  const openFreshChat = () =>
-    window.fcWidget.open({
-      replyText: intl.formatMessage({ id: description })
-    })
-
-  /**
-   * open FreshDesk
-   * @type {function}
-   */
-  const openFreshDesk = () => {
-    FreshworksWidget('open')
-    FreshworksWidget('prefill', 'ticketForm', {
-      subject: intl.formatMessage({ id: subject }),
-      description: intl.formatMessage({ id: description })
-    })
-  }
+  const isFreshChat = Boolean(window.fcWidget),
+    isFreshDesk = Boolean(window.FreshworksWidget),
+    /**
+     * Open mail
+     * @type {function}
+     */
+    handleLimitExceededMail = () =>
+      `mailto:${mail}?subject=${intl.formatMessage({
+        id: subject
+      })}&body=${intl.formatMessage({ id: description })}`,
+    /**
+     * Open FreshChat
+     * @type {function}
+     */
+    openFreshChat = () =>
+      window.fcWidget.open({
+        replyText: intl.formatMessage({ id: description })
+      }),
+    /**
+     * Open FreshDesk
+     * @type {function}
+     */
+    openFreshDesk = () => {
+      FreshworksWidget('open')
+      FreshworksWidget('prefill', 'ticketForm', {
+        subject: intl.formatMessage({ id: subject }),
+        description: intl.formatMessage({ id: description })
+      })
+    }
 
   return isFreshChat || isFreshDesk ? (
     <Button

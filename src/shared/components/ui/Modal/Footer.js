@@ -7,31 +7,30 @@ import scss from './Modal.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Modal Footer - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string} props.align - alignment
+   * @return {object} An object of children element
+   */
 
-/**
- * Modal Footer - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string} props.align - alignment
- * @return {object} An object of children element
- */
-
-const modalFooter = ({ children, align }) => {
-  const elementClasses = cssClass({
-    'modal__footer--align-right': align === 'right'
-  })
-  return (
-    <div
-      className={cssClass(
-        `${scss.modal__footer}`,
-        elementClasses
-      )}
-    >
-      {children}
-    </div>
-  )
-}
+  modalFooter = ({ children, align }) => {
+    const elementClasses = cssClass({
+      'modal__footer--align-right': align === 'right'
+    })
+    return (
+      <div
+        className={cssClass(
+          `${scss.modal__footer}`,
+          elementClasses
+        )}
+      >
+        {children}
+      </div>
+    )
+  }
 
 /**
  * Display name

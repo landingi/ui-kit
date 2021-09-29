@@ -10,44 +10,39 @@ import { FormattedMessage } from 'react-intl'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Social connect badge - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: `social-connect-badge`
+   * @param {string} props.variant - variant of socialConnectBadge connect, disconnect
+   * @param {string} props.social - social of socialConnectBadge google, facebook
+   * @return {object} An object of children element
+   */
+  socialConnectBadge = ({ className, variant, social }) => (
+    <div
+      className={cssClass(
+        className,
+        `social-connect-badge-${social}--${variant}`
+      )}
+    >
+      <Button hasIcon size='medium'>
+        <FontAwesomeIcon icon={['fab', `${social}`]} />
 
-/**
- * Social connect badge - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `social-connect-badge`
- * @param {string} props.variant - variant of socialConnectBadge connect, disconnect
- * @param {string} props.social - social of socialConnectBadge google, facebook
- * @return {object} An object of children element
- */
-const socialConnectBadge = ({
-  className,
-  variant,
-  social
-}) => (
-  <div
-    className={cssClass(
-      className,
-      `social-connect-badge-${social}--${variant}`
-    )}
-  >
-    <Button hasIcon size='medium'>
-      <FontAwesomeIcon icon={['fab', `${social}`]} />
+        <span>
+          {variant === 'connect' ? (
+            <FormattedMessage id='word.connect' />
+          ) : (
+            <FormattedMessage id='word.disconnect' />
+          )}
 
-      <span>
-        {variant === 'connect' ? (
-          <FormattedMessage id='word.connect' />
-        ) : (
-          <FormattedMessage id='word.disconnect' />
-        )}
+          <span>{social}</span>
 
-        <span>{social}</span>
-
-        <FormattedMessage id='word.account' />
-      </span>
-    </Button>
-  </div>
-)
+          <FormattedMessage id='word.account' />
+        </span>
+      </Button>
+    </div>
+  )
 
 /**
  * Display name
