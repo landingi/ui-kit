@@ -1,4 +1,3 @@
-export { default as Fresh } from '@components/global/Fresh'
 export { default as Headline } from '@components/global/Headline'
 export { default as Html } from '@components/global/Html'
 export { LongLogo } from '@components/global/Logo'
