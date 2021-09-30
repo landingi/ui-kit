@@ -5,12 +5,12 @@
   priority: "NORMAL"
   fetch_all_refs: true
   fail_on_prepare_env_warning: true
-  actions:
   trigger_conditions:
   - trigger_condition: "VAR_CONTAINS"
     trigger_variable_value: "[deploy]"
     trigger_variable_key: "BUDDY_EXECUTION_REVISION_MESSAGE"
-  - action: "Execute: yarn run build"
+  actions:
+  - action: "Execute: yarn run cd"
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
@@ -19,7 +19,7 @@
     setup_commands:
     - "yarn install"
     execute_commands:
-    - "yarn run build"
+    - "yarn run cd"
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CD"
     type: "SLACK"
