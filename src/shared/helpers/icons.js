@@ -102,8 +102,7 @@ import {
   faUsers,
   faWindowMaximize,
   faWindowRestore,
-  faWrench,
-  faSearch
+  faWrench
 } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -210,7 +209,6 @@ export default function registerIcons() {
     faHeart,
     faChevronUp,
     faChevronDown,
-    faExternalLinkAlt,
-    faSearch
+    faExternalLinkAlt
   )
 }
