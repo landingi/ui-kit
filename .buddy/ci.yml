@@ -11,17 +11,14 @@
   clone_depth: 1
   actions:
   - action: "Execute: yarn run ci"
+    cache_base_image: true
     type: "BUILD"
-    working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
     setup_commands:
     - "yarn install"
     execute_commands:
     - "yarn run ci"
-    volume_mappings:
-    - "/:/buddy/ui-kit"
-    cache_base_image: true
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CI execution"
     type: "SLACK"

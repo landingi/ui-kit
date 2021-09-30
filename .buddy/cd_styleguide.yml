@@ -11,13 +11,11 @@
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
+    cache_base_image: true
     setup_commands:
     - "yarn install"
     execute_commands:
     - "yarn run docz:build"
-    volume_mappings:
-    - "/:/buddy/ui-kit"
-    cache_base_image: true
     shell: "SH"
   - action: "Wait for approval"
     type: "WAIT_FOR_APPLY"
