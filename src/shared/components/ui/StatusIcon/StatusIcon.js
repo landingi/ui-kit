@@ -25,9 +25,9 @@ const cssClass = styles(scss),
       )}
     >
       {variant === 'active' ? (
-        <FontAwesomeIcon icon='check' size='xs' />
+        <FontAwesomeIcon icon="check" size="xs" />
       ) : (
-        <FontAwesomeIcon icon='times' size='xs' />
+        <FontAwesomeIcon icon="times" size="xs" />
       )}
     </div>
   )

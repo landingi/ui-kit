@@ -3,7 +3,7 @@ import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import StepNumber from '@components/ui/StepNumber'
-import scss from './../Accordion.scss'
+import scss from '@components/ui/Accordion2/Accordion.scss'
 
 const cssClass = styles(scss)
 
@@ -40,7 +40,7 @@ function AccordionItem({
       >
         <div>
           {number && (
-            <StepNumber size='medium' step={number} />
+            <StepNumber size="medium" step={number} />
           )}
 
           {title}
@@ -48,7 +48,7 @@ function AccordionItem({
 
         <FontAwesomeIcon
           icon={isOpen ? 'chevron-up' : 'chevron-down'}
-          size='xs'
+          size="xs"
         />
       </div>
 

@@ -1,0 +1,29 @@
+{
+  "automock": false,
+  "errorOnDeprecated": true,
+  "setupFiles": [
+    "<rootDir>/config/tests/jest/setup/setupTests.js",
+    "<rootDir>/config/tests/jest/setup/mocks/matchMedia.mock"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/config/tests/jest/setup/",
+    "jest-prop-type-error"
+  ],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/tests/jest/setup/mocks/fileMock.js",
+    "\\.(scss|css)$": "identity-obj-proxy"
+  },
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*.{js}",
+    "!src/client/**/*.{js}",
+    "!**/node_modules/**"
+  ],
+  "testEnvironment": "jsdom",
+  "testRunner": "jest-jasmine2",
+  "coverageReporters": [
+    "json-summary",
+    "text",
+    "lcov"
+  ]
+}

@@ -51,7 +51,7 @@ const cssClass = styles(scss),
         onClick={handleClick}
         {...restProps}
       >
-        <Button variant='tabs'>{children}</Button>
+        <Button variant="tabs">{children}</Button>
       </span>
     )
   }

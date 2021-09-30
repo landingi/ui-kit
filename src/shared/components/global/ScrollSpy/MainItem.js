@@ -20,9 +20,9 @@ const item = ({ item, onClick }) => {
   const { title, icon, children } = item
 
   return (
-    <ListItem variant='menu'>
+    <ListItem variant="menu">
       <Button onClick={onClick}>
-        <FontAwesomeIcon icon={icon} size='1x' />
+        <FontAwesomeIcon icon={icon} size="1x" />
 
         <span>{title}</span>
       </Button>

@@ -28,7 +28,7 @@ function Instruction({ className, data }) {
         >
           <StepNumber
             absolute
-            size='medium'
+            size="medium"
             step={index + 1}
           />
 

@@ -13,17 +13,18 @@ import uuid from 'react-uuid'
  * @return {object} An object of children element
  */
 const scrollSpy = ({ elements }) => {
-  const sectionRefs = [useRef(null), useRef(null)],
-    // eslint-disable-next-line no-unused-vars
-    activeSection = useScrollSpy({
-      sectionElementRefs: sectionRefs
-    }),
-    handleOnClick = useCallback(id => {
-      id.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
+  const sectionRefs = [useRef(null), useRef(null)]
+  // eslint-disable-next-line no-unused-vars
+  const activeSection = useScrollSpy({
+    sectionElementRefs: sectionRefs
+  })
+
+  const handleOnClick = useCallback(id => {
+    id.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     })
+  })
 
   return (
     <List>

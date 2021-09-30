@@ -44,10 +44,10 @@ const cssClass = styles(scss),
               <span className={scss.pagination__first}>
                 <Button
                   onClick={handleGoToPage(1)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
-                  <FormattedMessage id='pagination.word.first' />
+                  <FormattedMessage id="pagination.word.first" />
                 </Button>
               </span>
 
@@ -56,20 +56,20 @@ const cssClass = styles(scss),
                   onClick={handleGoToPage(
                     before_values.prev
                   )}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
-                  <FontAwesomeIcon icon='caret-left' />
+                  <FontAwesomeIcon icon="caret-left" />
                 </Button>
               )}
 
-              <List variant='inline'>
+              <List variant="inline">
                 {before.map((item, index) => (
                   <ListItem key={index}>
                     <Button
                       onClick={handleGoToPage(item)}
-                      size='small'
-                      variant='icon'
+                      size="small"
+                      variant="icon"
                     >
                       {item}
                     </Button>
@@ -83,7 +83,7 @@ const cssClass = styles(scss),
                     }
                     key={index}
                   >
-                    <Button size='small' variant='icon'>
+                    <Button size="small" variant="icon">
                       {item}
                     </Button>
                   </ListItem>
@@ -93,8 +93,8 @@ const cssClass = styles(scss),
                   <ListItem key={index}>
                     <Button
                       onClick={handleGoToPage(item)}
-                      size='small'
-                      variant='icon'
+                      size="small"
+                      variant="icon"
                     >
                       {item}
                     </Button>
@@ -112,10 +112,10 @@ const cssClass = styles(scss),
                   onClick={handleGoToPage(
                     after_values.next
                   )}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
-                  <FontAwesomeIcon icon='caret-right' />
+                  <FontAwesomeIcon icon="caret-right" />
                 </Button>
               )}
             </>

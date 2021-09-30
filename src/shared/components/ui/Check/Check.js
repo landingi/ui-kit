@@ -24,7 +24,7 @@ const cssClass = styles(scss),
         icon={positive ? 'check' : 'times'}
       />
 
-      <Spreader spread='tiny' />
+      <Spreader spread="tiny" />
 
       {children}
     </span>

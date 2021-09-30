@@ -104,7 +104,7 @@ const cssClass = styles(scss),
               key={monthID}
               onClick={() => handleSelect(monthID)}
               onMouseOver={() => handleHover(monthID)}
-              type='button'
+              type="button"
             >
               <span
                 className={cssClass('button_month--marker')}
@@ -152,10 +152,10 @@ const cssClass = styles(scss),
               () => setYear(year - 1),
               [year]
             )}
-            size='tiny'
-            variant='icon'
+            size="tiny"
+            variant="icon"
           >
-            <FontAwesomeIcon icon='arrow-left' />
+            <FontAwesomeIcon icon="arrow-left" />
           </Button>
 
           <span className={cssClass('year')}>{year}</span>
@@ -165,14 +165,14 @@ const cssClass = styles(scss),
               () => setYear(year + 1),
               [year]
             )}
-            size='tiny'
-            variant='icon'
+            size="tiny"
+            variant="icon"
           >
-            <FontAwesomeIcon icon='arrow-right' />
+            <FontAwesomeIcon icon="arrow-right" />
           </Button>
         </div>
 
-        <Spacer space='tiny' />
+        <Spacer space="tiny" />
 
         <div className={cssClass('grid-container')}>
           {renderMonths()}

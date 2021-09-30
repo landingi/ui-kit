@@ -10,7 +10,8 @@ module.exports = merge(common, {
     'react-router': 'react-router',
     'react-router-dom': 'react-router-dom',
     react: 'react',
-    'react-dom': 'react-dom'
+    'react-dom': 'react-dom',
+    'react-redux': 'react-redux'
   },
   plugins: [new CleanWebpackPlugin()]
 })

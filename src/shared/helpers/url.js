@@ -92,7 +92,7 @@ export const getSettingsPagesUrls = url => {
 
 export const generateSectionName = url => {
   if (url === '/profile')
-    return <FormattedMessage id='word.your-profile' />
+    return <FormattedMessage id="word.your-profile" />
 }
 
 /**

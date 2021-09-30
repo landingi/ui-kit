@@ -40,50 +40,50 @@ const cssClass = styles(scss),
             <span className={scss.pagination__first}>
               <Button
                 onClick={handleGoToPage(0)}
-                size='small'
-                variant='icon'
+                size="small"
+                variant="icon"
               >
-                <FormattedMessage id='pagination.word.first' />
+                <FormattedMessage id="pagination.word.first" />
               </Button>
             </span>
 
             <Button
               onClick={handleGoToPage(pageIndex - 1)}
-              size='small'
-              variant='icon'
+              size="small"
+              variant="icon"
             >
-              <FontAwesomeIcon icon='caret-left' />
+              <FontAwesomeIcon icon="caret-left" />
             </Button>
 
-            <List variant='inline'>
-              <ListItem variant='inline'>
+            <List variant="inline">
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex - 3 < 0}
                   onClick={handleGoToPage(pageIndex - 3)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageIndex - 2}
                 </Button>
               </ListItem>
 
-              <ListItem variant='inline'>
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex - 2 < 0}
                   onClick={handleGoToPage(pageIndex - 2)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageIndex - 1}
                 </Button>
               </ListItem>
 
-              <ListItem variant='inline'>
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex - 1 < 0}
                   onClick={handleGoToPage(pageIndex - 1)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageIndex}
                 </Button>
@@ -91,47 +91,47 @@ const cssClass = styles(scss),
 
               <ListItem
                 className={scss.pagination__links__current}
-                variant='inline'
+                variant="inline"
               >
-                <Button size='small' variant='icon'>
+                <Button size="small" variant="icon">
                   {pageIndex + 1}
                 </Button>
               </ListItem>
 
-              <ListItem variant='inline'>
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex + 2 >= pageCount}
                   onClick={handleGoToPage(pageIndex + 1)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageIndex + 2}
                 </Button>
               </ListItem>
 
-              <ListItem variant='inline'>
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex + 4 !== pageCount}
                   onClick={handleGoToPage(pageIndex + 1)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageIndex + 3}
                 </Button>
               </ListItem>
 
               {pageIndex + 4 < pageCount && (
-                <ListItem variant='inline'>
+                <ListItem variant="inline">
                   <span>...</span>
                 </ListItem>
               )}
 
-              <ListItem variant='inline'>
+              <ListItem variant="inline">
                 <Button
                   hide={pageIndex >= pageCount - 1}
                   onClick={handleGoToPage(pageCount - 1)}
-                  size='small'
-                  variant='icon'
+                  size="small"
+                  variant="icon"
                 >
                   {pageCount}
                 </Button>
@@ -140,19 +140,19 @@ const cssClass = styles(scss),
 
             <Button
               onClick={handleGoToPage(pageIndex + 1)}
-              size='small'
-              variant='icon'
+              size="small"
+              variant="icon"
             >
-              <FontAwesomeIcon icon='caret-right' />
+              <FontAwesomeIcon icon="caret-right" />
             </Button>
 
             <span className={scss.pagination__last}>
               <Button
                 onClick={handleGoToPage(pageCount - 1)}
-                size='small'
-                variant='icon'
+                size="small"
+                variant="icon"
               >
-                <FormattedMessage id='pagination.word.last' />
+                <FormattedMessage id="pagination.word.last" />
               </Button>
             </span>
           </>

@@ -1,15 +1,9 @@
 {
     "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@components": [
-                "src/shared/components"
-            ]
-        }
+        "baseUrl": "./"
     },
     "exclude": [
         "node_modules",
-        "config",
         "cypress",
         "dev",
         "jest-report",

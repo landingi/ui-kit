@@ -29,7 +29,7 @@ const cssClass = styles(scss),
           key={index}
         >
           <ColorLine
-            alignment='horizontal'
+            alignment="horizontal"
             variant={item.variant}
           />
 

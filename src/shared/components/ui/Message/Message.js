@@ -3,7 +3,7 @@ import { styles } from '@helpers/css'
 import Heading from '@components/ui/Heading'
 import Image from '@components/ui/Image'
 import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Spacer from '@components/ui/Spacer'
 import Vimeo from '@u-wave/react-vimeo'
 import scss from './Message.scss'
@@ -46,16 +46,16 @@ const cssClass = styles(scss),
      */
     const renderMultimedia = () => (
       <div>
-        <Spacer space='small' />
+        <Spacer space="small" />
 
         {isVideo ? (
           <>
             <Vimeo height={height} video={url} />
 
-            <Spacer space='small' />
+            <Spacer space="small" />
           </>
         ) : (
-          <Image height={height} size='auto' src={url} />
+          <Image height={height} size="auto" src={url} />
         )}
       </div>
     )
@@ -68,7 +68,7 @@ const cssClass = styles(scss),
 
         {title && (
           <Heading
-            align='center'
+            align="center"
             bold={bold}
             level={titleLevel}
             margin={withoutMargin ? 'none' : ''}
@@ -84,9 +84,9 @@ const cssClass = styles(scss),
 
         {message && (
           <>
-            <Spacer space='tiny' />
+            <Spacer space="tiny" />
 
-            <Heading align='center' level={messageLevel}>
+            <Heading align="center" level={messageLevel}>
               <FormattedMessage
                 id={`${message}`}
                 values={{

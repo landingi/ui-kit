@@ -514,7 +514,7 @@ class Dropdown extends PureComponent {
         onClick={handleOnClick}
       >
         <NavLink
-          activeClassName='groups--selected'
+          activeClassName="groups--selected"
           to={link}
         >
           {icon && this.renderIcon()}
@@ -606,12 +606,12 @@ class Dropdown extends PureComponent {
   renderArrows = (isOpen, arrowType) =>
     arrowType === 'caret' ? (
       isOpen ? (
-        <FontAwesomeIcon icon='caret-up' />
+        <FontAwesomeIcon icon="caret-up" />
       ) : (
-        <FontAwesomeIcon icon='caret-down' />
+        <FontAwesomeIcon icon="caret-down" />
       )
     ) : (
-      <FontAwesomeIcon icon='ellipsis-v' />
+      <FontAwesomeIcon icon="ellipsis-v" />
     )
 
   /**

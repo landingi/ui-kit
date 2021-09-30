@@ -35,7 +35,7 @@ const cssClass = styles(scss),
           `alert-message--${type}`
         )}
       >
-        <FontAwesomeIcon icon={icon} size='xs' />
+        <FontAwesomeIcon icon={icon} size="xs" />
 
         <div className={scss.alert__message}>
           {children}

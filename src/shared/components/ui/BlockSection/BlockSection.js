@@ -44,7 +44,7 @@ function BlockSection({
 
   return (
     <div className={cssClass(className)}>
-      <Panel variant='padding-none'>
+      <Panel variant="padding-none">
         <div
           className={cssClass(
             'block-section__panel',
@@ -74,9 +74,9 @@ function BlockSection({
             </Paragraph>
 
             {list && (
-              <List listStyle='ordered-disc'>
+              <List listStyle="ordered-disc">
                 {list.map(item => (
-                  <ListItem key={uuid()} variant='block'>
+                  <ListItem key={uuid()} variant="block">
                     <FormattedMessage id={item} />
                   </ListItem>
                 ))}

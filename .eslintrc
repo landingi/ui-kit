@@ -2,9 +2,7 @@
   "parser": "@babel/eslint-parser",
   "plugins": [
     "react",
-    "react-hooks",
-    "sort-imports-es6-autofix",
-    "sort-keys-fix"
+    "react-hooks"
   ],
   "env": {
     "browser": true,
@@ -20,11 +18,6 @@
     }
   },
   "rules": {
-    "sort-imports-es6-autofix/sort-imports-es6": [2, {
-      "ignoreCase": false,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-    }],
     "camelcase": "off",
     "no-use-before-define": "off",
     "react/sort-comp": "off",
@@ -41,7 +34,7 @@
     "react/forbid-component-props": "off",
     "multiline-ternary": "off",
     "array-callback-return": "off",
-    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",

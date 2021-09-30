@@ -15,8 +15,8 @@ const cssClass = styles(scss),
    */
   close = ({ className, onClick }) => (
     <span className={cssClass(className)} onClick={onClick}>
-      <Button variant='icon'>
-        <FontAwesomeIcon icon='times' size='sm' />
+      <Button variant="icon">
+        <FontAwesomeIcon icon="times" size="sm" />
       </Button>
     </span>
   )
