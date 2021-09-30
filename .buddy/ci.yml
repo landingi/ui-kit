@@ -22,6 +22,7 @@
     - "yarn run test"
     shell: "SH"
   - action: "Run CD"
+    wait: true,
     type: "RUN_NEXT_PIPELINE"
     comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
     revision: "INHERIT"

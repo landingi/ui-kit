@@ -42,5 +42,6 @@
     type: "RUN_NEXT_PIPELINE"
     comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
     revision: "INHERIT"
+    wait: true,
     next_project_name: "ui-kit"
     next_pipeline_name: "CD Docs"
