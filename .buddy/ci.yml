@@ -32,7 +32,6 @@
     integration_hash: "5f4a2f2529a8af7df406ac85"
   - action: "Run CD Styleguide"
     type: "RUN_NEXT_PIPELINE"
-    disabled: true
     wait: true
     comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
     revision: "INHERIT"
