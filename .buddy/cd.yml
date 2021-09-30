@@ -10,7 +10,7 @@
   - trigger_condition: "VAR_CONTAINS"
     trigger_variable_value: "[deploy]"
     trigger_variable_key: "BUDDY_EXECUTION_REVISION_MESSAGE"
-  - action: "Execute: yarn run ci"
+  - action: "Execute: yarn run build"
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
@@ -19,7 +19,7 @@
     setup_commands:
     - "yarn install"
     execute_commands:
-    - "yarn run ci"
+    - "yarn run build"
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CD"
     type: "SLACK"
