@@ -35,7 +35,7 @@ const cssClass = styles(scss),
     return (
       <div className={cssClass(className)}>
         <div className={cssClass('limit--icon')}>
-          <FontAwesomeIcon icon={icon} size="lg" />
+          <FontAwesomeIcon icon={icon} size='lg' />
         </div>
 
         <div className={cssClass('limit--info')}>
@@ -54,7 +54,7 @@ const cssClass = styles(scss),
 
             {Boolean(total) && (
               <span className={cssClass('info--total')}>
-                <FormattedMessage id="word.total" />:
+                <FormattedMessage id='word.total' />:
                 <b>{total}</b>
               </span>
             )}
@@ -65,14 +65,14 @@ const cssClass = styles(scss),
 
             {tooltip && (
               <>
-                <Spreader spread="tiny" />
+                <Spreader spread='tiny' />
 
                 <Tooltip
                   content={
                     <FormattedMessage id={tooltip} />
                   }
                 >
-                  <FontAwesomeIcon icon="exclamation-circle" />
+                  <FontAwesomeIcon icon='exclamation-circle' />
                 </Tooltip>
               </>
             )}

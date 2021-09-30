@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import ColorLine from '@components/ui/ColorLine'
 
-const colorLineComponent = <ColorLine variant="success" />
+const colorLineComponent = <ColorLine variant='success' />
 
 describe('<ColorLine /> mount', () => {
   let wrapper

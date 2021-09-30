@@ -29,12 +29,12 @@ const Accordion = ({ children }) => {
             item.props.hasExpand && openList.toggle(index)
           }
         >
-          <Spacer space="tiny" />
+          <Spacer space='tiny' />
 
           {item.props.children}
         </AccordionSection>
 
-        <Spacer space="tiny" />
+        <Spacer space='tiny' />
       </Fragment>
     ))
   )

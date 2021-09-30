@@ -23,7 +23,7 @@ const checkboxGroup = ({
   name,
   children
 }) => (
-  <div className="form-field">
+  <div className='form-field'>
     {label && (
       <Label>
         <FormattedMessage id={`${label}`} />

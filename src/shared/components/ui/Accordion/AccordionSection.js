@@ -35,27 +35,27 @@ const AccordionSection = ({
       <div>
         {hasExpand &&
           (arrowLabel ? (
-            <Button variant={variant} size="small">
+            <Button variant={variant} size='small'>
               <span
                 className={cssClass(
                   'accordion__header-arrow'
                 )}
               >
                 {isOpen ? (
-                  <FontAwesomeIcon icon="chevron-up" />
+                  <FontAwesomeIcon icon='chevron-up' />
                 ) : (
-                  <FontAwesomeIcon icon="chevron-down" />
+                  <FontAwesomeIcon icon='chevron-down' />
                 )}
 
                 {arrowLabel}
               </span>
             </Button>
           ) : isOpen ? (
-            <FontAwesomeIcon size="xs" icon="chevron-up" />
+            <FontAwesomeIcon size='xs' icon='chevron-up' />
           ) : (
             <FontAwesomeIcon
-              size="xs"
-              icon="chevron-down"
+              size='xs'
+              icon='chevron-down'
             />
           ))}
       </div>

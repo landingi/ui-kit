@@ -3,7 +3,7 @@ import StatsBadge from '@components/ui/StatsBadge'
 import { mountWithIntl } from '@jestutils'
 
 const statsBadgeComponent = (
-  <StatsBadge description="word.statistics" />
+  <StatsBadge description='word.statistics' />
 )
 
 describe('<StatsBadge /> mount', () => {

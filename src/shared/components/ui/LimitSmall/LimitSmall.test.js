@@ -5,8 +5,8 @@ import LimitSmall from '@components/ui/LimitSmall'
 const limitSmallComponent = (
   <LimitSmall
     limit={20000}
-    limitText="word.unique.visitors"
-    padding="none"
+    limitText='word.unique.visitors'
+    padding='none'
     quantity={5}
   />
 )

@@ -34,7 +34,7 @@
     "react/forbid-component-props": "off",
     "multiline-ternary": "off",
     "array-callback-return": "off",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",

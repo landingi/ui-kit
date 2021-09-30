@@ -13,7 +13,7 @@ const cssClass = styles(scss),
    */
   loader = ({ className }) => (
     <>
-      <Spacer space="large" />
+      <Spacer space='large' />
 
       <div className={cssClass(className)}>
         <div className={scss.rect1} />

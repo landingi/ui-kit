@@ -6,7 +6,7 @@ import registerIcons from '@helpers/icons'
 registerIcons()
 
 const CustomLinkComponent = (
-  <CustomLink href="foo.com" label="active" />
+  <CustomLink href='foo.com' label='active' />
 )
 
 describe('<CustomLink /> mount', () => {

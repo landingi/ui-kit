@@ -7,7 +7,7 @@ const props = {
   children: <Paragraph>children</Paragraph>
 }
 
-const cardComponent = <Card {...props} variant="success" />
+const cardComponent = <Card {...props} variant='success' />
 
 describe('<Card /> mount', () => {
   let wrapper

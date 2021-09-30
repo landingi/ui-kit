@@ -133,18 +133,18 @@ function Search({
               <Button
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
-                size="input"
+                size='input'
                 type={
                   onProtectedSubmit ? 'button' : 'submit'
                 }
-                variant="icon"
+                variant='icon'
               >
-                <FontAwesomeIcon icon="search" />
+                <FontAwesomeIcon icon='search' />
               </Button>
             </div>
           ) : (
             <div className={scss.search__icon}>
-              <FontAwesomeIcon icon="search" size="sm" />
+              <FontAwesomeIcon icon='search' size='sm' />
             </div>
           ))}
 
@@ -152,10 +152,10 @@ function Search({
           <Input
             autoFocus={autoFocus}
             label={intl.formatMessage({ id: label })}
-            name="search"
+            name='search'
             onChange={onChange}
             onKeyDown={onKeyDown}
-            type="text"
+            type='text'
           />
         )}
 
@@ -163,7 +163,7 @@ function Search({
           <input
             autoFocus={autoFocus}
             className={scss.search__input}
-            name="search"
+            name='search'
             onChange={onChange}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
@@ -171,7 +171,7 @@ function Search({
               id: placeholder
             })}
             ref={inputRef}
-            type="text"
+            type='text'
           />
         )}
 
@@ -179,10 +179,10 @@ function Search({
           <div className={scss.search__clean}>
             <Button
               onClick={handleCleanOnClick}
-              size="input"
-              variant="icon"
+              size='input'
+              variant='icon'
             >
-              <FontAwesomeIcon icon="times" size="sm" />
+              <FontAwesomeIcon icon='times' size='sm' />
             </Button>
           </div>
         )}

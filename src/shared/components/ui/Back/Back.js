@@ -26,9 +26,9 @@ function Back({ className, url, content }) {
   return (
     <span className={cssClass(className)}>
       <a href={urlMap}>
-        <Tooltip content={content} placement="bottom">
-          <Button variant="icon">
-            <FontAwesomeIcon icon="arrow-left" />
+        <Tooltip content={content} placement='bottom'>
+          <Button variant='icon'>
+            <FontAwesomeIcon icon='arrow-left' />
           </Button>
         </Tooltip>
       </a>

@@ -45,15 +45,15 @@ const showPassword = ({
       {hasLabel ? (
         <Button
           hasIcon
-          size="tiny"
-          variant="switcher-brand"
+          size='tiny'
+          variant='switcher-brand'
         >
           <FontAwesomeIcon icon={icon} />
 
           <FormattedMessage id={label} />
         </Button>
       ) : (
-        <Button variant="icon">
+        <Button variant='icon'>
           <FontAwesomeIcon icon={icon} />
         </Button>
       )}

@@ -4,7 +4,7 @@ import Accordion from '@components/ui/Accordion'
 
 const accordionComponent = (
   <Accordion>
-    <div label="label">children</div>
+    <div label='label'>children</div>
   </Accordion>
 )
 

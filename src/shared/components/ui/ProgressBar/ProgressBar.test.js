@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import ProgressBar from '@components/ui/ProgressBar'
 
 const progressBarComponent = (
-  <ProgressBar quantity={58} variant="success" />
+  <ProgressBar quantity={58} variant='success' />
 )
 
 describe('<ProgressBar /> mount', () => {

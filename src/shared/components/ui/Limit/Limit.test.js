@@ -8,11 +8,11 @@ registerIcons()
 
 const limitsComponent = (
   <Limit
-    icon="users"
+    icon='users'
     limit={30000}
-    name="word.custom.domains"
+    name='word.custom.domains'
     quantity={100}
-    tooltip="word.custom.domains.tooltip"
+    tooltip='word.custom.domains.tooltip'
   />
 )
 

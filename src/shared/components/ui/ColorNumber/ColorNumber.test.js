@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import ColorNumber from '@components/ui/ColorNumber'
 
 const colorNumberComponent = (
-  <ColorNumber variant="success">5</ColorNumber>
+  <ColorNumber variant='success'>5</ColorNumber>
 )
 
 describe('<ColorNumber /> mount', () => {

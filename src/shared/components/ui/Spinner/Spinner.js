@@ -13,7 +13,7 @@ const cssClass = styles(scss),
    */
   spinner = ({ className }) => (
     <div className={cssClass(className)}>
-      <FontAwesomeIcon icon="spinner" spin />
+      <FontAwesomeIcon icon='spinner' spin />
     </div>
   )
 

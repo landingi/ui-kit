@@ -107,7 +107,7 @@ function Toast({ className }) {
       <PoseGroup animateOnMount flipMove={false}>
         <ToastAnimation
           className={cssClass(className)}
-          key="toastanimation"
+          key='toastanimation'
         >
           <Notification
             isClosable

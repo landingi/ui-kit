@@ -77,7 +77,7 @@ const DrawerAnimation = posed.div({
                 className,
                 elementClasses
               )}
-              key="draweranimation"
+              key='draweranimation'
             >
               <Header
                 onClick={onClick}
