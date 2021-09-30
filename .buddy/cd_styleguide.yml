@@ -1,4 +1,4 @@
-- pipeline: "CD"
+- pipeline: "CD Styleguide"
   on: "CLICK"
   refs:
   - "(^((?!master$).)*$)"
