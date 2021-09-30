@@ -25,14 +25,3 @@ import Image from '@components/ui/Image'
     src="https://images.assets-landingi.com/REiQ5YQl/logo_sygnet.svg"
   />
 </Playground>
-
-## Clickable
-
-<Playground>
-  <Image
-    alt="Landingi"
-    size={100}
-    className="image--clickable"
-    src="https://images.assets-landingi.com/REiQ5YQl/logo_sygnet.svg"
-  />
-</Playground>

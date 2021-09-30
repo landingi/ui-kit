@@ -2,19 +2,19 @@ import {
   getQueryStringValue,
   setQueryStringValue
 } from '@helpers/queryString'
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 const useQueryString = (key, initialValue) => {
   const [value, setValue] = useState(
-    getQueryStringValue(key) || initialValue
-  )
-  const onSetValue = useCallback(
-    newValue => {
-      setValue(newValue)
-      setQueryStringValue(key, newValue)
-    },
-    [key]
-  )
+      getQueryStringValue(key) || initialValue
+    ),
+    onSetValue = useCallback(
+      newValue => {
+        setValue(newValue)
+        setQueryStringValue(key, newValue)
+      },
+      [key]
+    )
 
   return [value, onSetValue]
 }

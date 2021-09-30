@@ -1,14 +1,14 @@
+import { FormattedMessage, injectIntl } from 'react-intl'
+import Html from 'shared/components/global/Html'
+import Loader from '@components/ui/Loader'
+import PropTypes from 'prop-types'
 import React, {
   useCallback,
-  useState,
-  useEffect
+  useEffect,
+  useState
 } from 'react'
-import PropTypes from 'prop-types'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import scss from './ShowMore.scss'
-import Loader from '@components/ui/Loader'
 import Spacer from '@components/ui/Spacer'
-import Html from 'shared/components/global/Html'
+import scss from './ShowMore.scss'
 
 /**
  * Show more/less - stateful presentational component
@@ -25,27 +25,26 @@ const showMore = ({
   extraClassname,
   children
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [display, setDisplay] = useState('none')
-  const [text, setText] = useState('')
+  const [isOpen, setIsOpen] = useState(false),
+    [display, setDisplay] = useState('none'),
+    [text, setText] = useState(''),
+    handleOnClick = useCallback(
+      event => {
+        event.preventDefault()
 
-  const handleOnClick = useCallback(
-    event => {
-      event.preventDefault()
+        setIsOpen(current => !current)
 
-      setIsOpen(current => !current)
-
-      setDisplay(display !== 'none' ? 'none' : null)
-    },
-    [isOpen]
-  )
+        setDisplay(display !== 'none' ? 'none' : null)
+      },
+      [isOpen]
+    )
 
   useEffect(() => {
     const text = intl.formatMessage({ id: content })
 
     !isOpen
       ? setText(
-          text.replace(/^(.{170}[^\s]*).*/, '$1') + '...'
+          `${text.replace(/^(.{170}[^\s]*).*/, '$1')}...`
         )
       : setText(text)
   }, [isOpen])
@@ -87,23 +86,26 @@ showMore.displayName = 'Show more/less'
  */
 showMore.propTypes = {
   /**
+   * Children elements
+   */
+  children: PropTypes.node,
+
+  /**
    * Content
    */
   content: PropTypes.string.isRequired,
+
   /**
    * Extraclassname
    */
   extraClassname: PropTypes.string,
+
   /**
    * Intl from react-intl
    */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * Children elements
-   */
-  children: PropTypes.node
+  }).isRequired
 }
 
 /**

@@ -25,7 +25,8 @@ export const centerParent = (
  * @property {bool} bottom - bottom
  * @property {bool} any - any
  * @property {bool} all - all
- * */
+ *
+ */
 
 /**
  * Check if an element is out of viewport
@@ -65,9 +66,9 @@ export const getBoundings = element =>
  */
 export const isInViewVertical = element => {
   let rect = getBoundings(element)
-  const { top, bottom, height } = rect
-  const parentNode = element.parentNode
-  const clientHeight = document.documentElement.clientHeight
+  const { top, bottom, height } = rect,
+    { parentNode } = element,
+    { clientHeight } = document.documentElement
 
   if (rect.bottom < 0) return false
 

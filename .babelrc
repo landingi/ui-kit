@@ -19,7 +19,10 @@
           "@helpers": "./src/shared/helpers",
           "@i18n": "./src/shared/i18n",
           "@lib": "./src/shared/lib",
-          "@shapes": "./src/shared/shapes"
+          "@shapes": "./src/shared/shapes",
+          "@store": "./src/shared/store",
+          "@jestutils": "./config/tests/jest/utils.js",
+          "@jestmocks": "./config/tests/jest/setup"
         }
       }
     ],

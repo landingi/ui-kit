@@ -1,12 +1,11 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react'
+import React, { Fragment } from 'react'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
+import { styles } from '@helpers/css'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Spinner from '@components/ui/Spinner'
 import scss from './Button.scss'
 
@@ -37,9 +36,10 @@ const cssClass = styles(scss)
  * @param {bool} props.hide - Hide, default: false
  * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false',
  * @param {string} props.id - element id
+ * @param {bool} props.isRounded
  * @return {object} An object of children elements
  */
-const Button = ({
+const button = ({
   className,
   tag: Tag,
   title,
@@ -58,7 +58,8 @@ const Button = ({
   hide,
   buttonStyle,
   id,
-  fitWidth
+  fitWidth,
+  isRounded
 }) => {
   const elementClasses = cssClass({
     'button--primary': variant === 'primary',
@@ -85,11 +86,17 @@ const Button = ({
     'button--right': align === 'right',
     'button--svg': hasIcon === true,
     'button--hide': hide === true,
-    'button--fit-width': fitWidth === true
+    'button--fit-width': fitWidth === true,
+    'button--rounded': isRounded === true
   })
 
   return (
     <Tag
+      type={Tag === 'button' ? type : undefined}
+      disabled={isDisabled ? 'disabled' : undefined}
+      href={Tag === 'a' ? href : undefined}
+      title={Tag === 'a' ? title : undefined}
+      target={Tag === 'a' ? target : undefined}
       className={
         Tag === 'button'
           ? cssClass('button', elementClasses, className)
@@ -100,16 +107,12 @@ const Button = ({
               className
             )
       }
-      disabled={isDisabled ? 'disabled' : undefined}
-      href={Tag === 'a' ? href : undefined}
+      id={id}
       onClick={onClick}
-      target={Tag === 'a' ? target : undefined}
-      title={Tag === 'a' ? title : undefined}
-      type={Tag === 'button' ? type : undefined}
     >
       {isLoading && <Spinner />}
 
-      {!isLoading && <>{children}</>}
+      {!isLoading && <Fragment>{children}</Fragment>}
 
       {hasBackgoundRipple && <Ink />}
     </Tag>
@@ -120,13 +123,13 @@ const Button = ({
  * Display name
  * @type {string}
  */
-Button.displayName = 'Button'
+button.displayName = 'Button'
 
 /**
  * The properties.
  * @type {Object}
  */
-Button.propTypes = {
+button.propTypes = {
   /**
    * The tag or component to be used e.g. button, a, Link
    */
@@ -234,14 +237,18 @@ Button.propTypes = {
   /**
    * Element id
    */
-  id: PropTypes.string
+  id: PropTypes.string,
+  /**
+   *Rounded style
+   */
+  isRounded: PropTypes.bool
 }
 
 /**
  * The default properties.
  * @type {Object}
  */
-Button.defaultProps = {
+button.defaultProps = {
   tag: 'button',
   title: undefined,
   type: 'button',
@@ -259,7 +266,8 @@ Button.defaultProps = {
   hide: false,
   buttonStyle: false,
   fitWidth: false,
-  id: null
+  id: null,
+  isRounded: false
 }
 
-export default Button
+export default button

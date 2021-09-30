@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 
+import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import scss from './Tooltip.scss'
-import { styles } from '@helpers/css'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
@@ -32,15 +32,14 @@ function Tooltip({
   align,
   size
 }) {
-  const tooltipUUID = uuid()
-
-  const showOnClickProps = showOnClick
-    ? {
-        delayHide: 1000,
-        event: 'click',
-        afterShow: () => ReactTooltip.hide()
-      }
-    : {}
+  const tooltipUUID = uuid(),
+    showOnClickProps = showOnClick
+      ? {
+          afterShow: () => ReactTooltip.hide(),
+          delayHide: 1000,
+          event: 'click'
+        }
+      : {}
 
   return (
     <>
@@ -78,9 +77,38 @@ function Tooltip({
  */
 Tooltip.propTypes = {
   /**
+   * Placement
+   */
+  align: PropTypes.oneOf(['center', 'left', 'right']),
+
+  /**
+   * Children element
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Custom classname
+   */
+  className: PropTypes.string,
+
+  /**
+   * Tooltip content
+   */
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
+
+  /**
+   * Disable toolip
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Behaviour of tooltip
    */
   effect: PropTypes.oneOf(['solid', 'float']),
+
   /**
    * Placement
    */
@@ -90,37 +118,16 @@ Tooltip.propTypes = {
     'right',
     'bottom'
   ]),
-  /**
-   * Placement
-   */
-  align: PropTypes.oneOf(['center', 'left', 'right']),
-  /**
-   * Placement
-   */
-  size: PropTypes.oneOf(['tiny', 'small', 'medium']),
-  /**
-   * Children element
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Tooltip content
-   */
-  content: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+
   /**
    * Show tooltip after click, tooltip is hidden after 1 sec
    */
   showOnClick: PropTypes.bool,
+
   /**
-   * Disable toolip
+   * Placement
    */
-  disabled: PropTypes.bool,
-  /**
-   * Custom classname
-   */
-  className: PropTypes.string
+  size: PropTypes.oneOf(['tiny', 'small', 'medium'])
 }
 
 /**
@@ -128,13 +135,13 @@ Tooltip.propTypes = {
  * @type {Object}
  */
 Tooltip.defaultProps = {
+  align: 'left',
+  className: '',
+  content: '',
+  disabled: false,
   effect: 'solid',
   placement: 'bottom',
-  content: '',
   showOnClick: false,
-  disabled: false,
-  className: '',
-  align: 'left',
   size: 'medium'
 }
 

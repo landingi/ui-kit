@@ -95,24 +95,3 @@ import Badge from '@components/ui/Badge'
 <Playground>
   <Badge type="accent-6">Schedule</Badge>
 </Playground>
-
-# Dropdown
-
-<Playground>
-  <Badge type="accent-1">
-    <Dropdown label="Schedule">
-      <List>
-        <ListItem className="list-item--dropdown">
-          <Button tag="a" href="#" title="">
-            Your profile
-          </Button>
-        </ListItem>
-        <ListItem className="list-item--dropdown">
-          <Button tag="a" href="#" title="">
-            Your profile
-          </Button>
-        </ListItem>
-      </List>
-    </Dropdown>
-  </Badge>
-</Playground>

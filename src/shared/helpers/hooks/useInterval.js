@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * useInterval
+ * UseInterval
  * @param {function} callback - callback function to call when the useInterval is called
  * @param {number} delay - delay of setInterval
  */

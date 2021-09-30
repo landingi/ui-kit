@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
-import PropTypes from 'prop-types'
+import { FormattedMessage } from 'react-intl'
 import Error from '@components/ui/Form2/Error'
 import Label from '@components/ui/Label'
-import { FormattedMessage } from 'react-intl'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Checkbox Group  - stateless presentational component
@@ -50,12 +50,14 @@ checkboxGroup.propTypes = {
    * The text for the button
    */
   children: PropTypes.node.isRequired,
+
+  label: PropTypes.string,
+
+  name: PropTypes.string.isRequired,
   /**
    * Form
    */
-  touched: PropTypes.instanceOf(Object).isRequired,
-  label: PropTypes.string,
-  name: PropTypes.string.isRequired
+  touched: PropTypes.instanceOf(Object).isRequired
 }
 
 /**

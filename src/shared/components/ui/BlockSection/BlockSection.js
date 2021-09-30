@@ -1,16 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './BlockSection.scss'
 import { FormattedMessage } from 'react-intl'
-import Panel from '@components/ui/Panel'
-import Heading from '@components/ui/Heading'
-import Paragraph from '@components/ui/Paragraph'
-import Image from '@components/ui/Image'
+import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
-import Spacer from '@components/ui/Spacer'
+import Heading from '@components/ui/Heading'
+import Image from '@components/ui/Image'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
+import Panel from '@components/ui/Panel'
+import Paragraph from '@components/ui/Paragraph'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Spacer from '@components/ui/Spacer'
+import scss from './BlockSection.scss'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
@@ -109,40 +109,47 @@ BlockSection.displayName = 'Block Section'
  */
 BlockSection.propTypes = {
   /**
+   * Button title
+   */
+  button: PropTypes.string.isRequired,
+
+  /**
    * Classname, default `block-section`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Title
+   * List
    */
-  title: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(PropTypes.string),
+
   /**
    * Message
    */
   message: PropTypes.string.isRequired,
-  /**
-   * Button title
-   */
-  button: PropTypes.string.isRequired,
+
   /**
    * OnClick is button action
    */
   onClick: PropTypes.func,
-  /**
-   * Url image
-   */
-  url: PropTypes.string.isRequired,
+
   /**
    * Reverse column
    */
   reverse: PropTypes.bool,
+
   /**
-   * List
+   * Title
    */
-  list: PropTypes.arrayOf(PropTypes.string)
+  title: PropTypes.string.isRequired,
+
+  /**
+   * Url image
+   */
+  url: PropTypes.string.isRequired
 }
 
 /**
@@ -151,9 +158,9 @@ BlockSection.propTypes = {
  */
 BlockSection.defaultProps = {
   className: 'block-section',
-  reverse: false,
+  list: null,
   onClick: () => null,
-  list: null
+  reverse: false
 }
 
 export default BlockSection

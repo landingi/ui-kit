@@ -1,30 +1,29 @@
-import React from 'react'
-import Heading from '@components/ui/Heading'
-import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
+import Heading from '@components/ui/Heading'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Headline.scss'
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
-
-/**
- * Headline page - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: page__headline
- * @param {string} props.title - data
- * @return {object} An object of children element
- */
-const headline = ({ className, title }) => (
-  <div className={cssClass(className)}>
-    <Heading className='text--truncate' level={1}>
-      <FormattedMessage id={`${title}`} />
-    </Heading>
-  </div>
-)
+const cssClass = styles(scss),
+  /**
+   * Headline page - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: page__headline
+   * @param {string} props.title - data
+   * @return {object} An object of children element
+   */
+  headline = ({ className, title }) => (
+    <div className={cssClass(className)}>
+      <Heading className='text--truncate' level={1}>
+        <FormattedMessage id={`${title}`} />
+      </Heading>
+    </div>
+  )
 
 /**
  * Display name

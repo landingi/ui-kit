@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import Heading from '@components/ui/Heading'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Modal Header - stateless presentational component

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 /**
- * usePermission - stateful presentational component
+ * UsePermission - stateful presentational component
  * @param {object} props - props
  * @param {array} props.userPermissions - is an array of permissions set for current user
  * @param {array} props.requiredPermisions - is an array of required permissions
@@ -24,13 +24,14 @@ usePermissions.displayName = 'usePermissions'
  */
 usePermissions.propTypes = {
   /**
-   * userPermissions
+   * RequiredPermisions
+   */
+  requiredPermisions: PropTypes.string.isRequired,
+
+  /**
+   * UserPermissions
    */
   userPermissions: PropTypes.arrayOf(
     PropTypes.string.isRequired
-  ).isRequired,
-  /**
-   * requiredPermisions
-   */
-  requiredPermisions: PropTypes.string.isRequired
+  ).isRequired
 }

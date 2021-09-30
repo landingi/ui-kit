@@ -1,27 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './BoxBackground.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Box Background - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children element
- * @param {string} props.variant - variant
- * @return {object} An object of children element
- */
-const boxBackground = ({ children, variant }) => (
-  <span
-    className={cssClass(
-      'boxBackground',
-      `boxBackground--${variant}`
-    )}
-  >
-    {children}
-  </span>
-)
+const cssClass = styles(scss),
+  /**
+   * Box Background - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children element
+   * @param {string} props.variant - variant
+   * @return {object} An object of children element
+   */
+  boxBackground = ({ children, variant }) => (
+    <span
+      className={cssClass(
+        'boxBackground',
+        `boxBackground--${variant}`
+      )}
+    >
+      {children}
+    </span>
+  )
 
 /**
  * Display name

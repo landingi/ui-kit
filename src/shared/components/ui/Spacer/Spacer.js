@@ -1,22 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Spacer.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Spacer - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `spacer`
- * @param {string} props.space - space size
- * @return {object} An object of children element
- */
-const spacer = ({ className, space }) => (
-  <div
-    className={cssClass(className, `spacer--${space}`)}
-  />
-)
+const cssClass = styles(scss),
+  /**
+   * Spacer - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: `spacer`
+   * @param {string} props.space - space size
+   * @return {object} An object of children element
+   */
+  spacer = ({ className, space }) => (
+    <div
+      className={cssClass(className, `spacer--${space}`)}
+    />
+  )
 
 /**
  * Display name

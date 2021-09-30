@@ -9,7 +9,7 @@ import scss from './TopBar.scss'
  * @return {object} An object of children element
  * @type {function}
  */
-const topBar = ({ children }) => (
+export const topBar = ({ children }) => (
   <div className={scss.topbardefault}>{children}</div>
 )
 

@@ -1,6 +1,6 @@
-import React from 'react'
 import Button from '@components/ui/Button'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * Item - stateless menu items presentational component

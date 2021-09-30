@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Button from '@components/ui/Button'
-import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
 import { getLocationPath } from '@helpers/url'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Tooltip from '@components/ui/Tooltip'
 import scss from './Back.scss'
 
 const cssClass = styles(scss)
@@ -18,12 +18,10 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 function Back({ className, url, content }) {
-  const location = getLocationPath()
-  const urlMap = location.match(
-    '/payments/subscription/cancel'
-  )
-    ? '/payments/subscription'
-    : url
+  const location = getLocationPath(),
+    urlMap = location.match('/payments/subscription/cancel')
+      ? '/payments/subscription'
+      : url
 
   return (
     <span className={cssClass(className)}>
@@ -56,17 +54,19 @@ Back.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * Url
-   */
-  url: PropTypes.string,
+
   /**
    * Content
    */
   content: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
-  ])
+  ]),
+
+  /**
+   * Url
+   */
+  url: PropTypes.string
 }
 
 /**
@@ -75,8 +75,8 @@ Back.propTypes = {
  */
 Back.defaultProps = {
   className: 'back',
-  url: '',
-  content: ''
+  content: '',
+  url: ''
 }
 
 export default Back

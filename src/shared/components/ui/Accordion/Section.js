@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './Accordion.scss'
 
 /**
@@ -47,24 +47,27 @@ AccordionSection.displayName = 'Accordion Section'
  */
 AccordionSection.propTypes = {
   /**
-   * determine if section should be open, default 'false'
+   * Content
+   */
+  children: PropTypes.string.isRequired,
+
+  /**
+   * Handle click event on label
+   */
+  handleOnClick: PropTypes.func.isRequired,
+
+  /**
+   * Determine if section should be open, default 'false'
    */
   isOpen: PropTypes.bool,
+
   /**
-   * label
+   * Label
    */
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Object)
-  ]).isRequired,
-  /**
-   * content
-   */
-  children: PropTypes.string.isRequired,
-  /**
-   * handle click event on label
-   */
-  handleOnClick: PropTypes.func.isRequired
+  ]).isRequired
 }
 
 /**

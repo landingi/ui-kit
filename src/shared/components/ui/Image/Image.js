@@ -1,29 +1,28 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { memo } from 'react'
 import scss from './Image.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Image - stateless presentational component
- * @param {object} props - props
- * @param {string} props.src - src url
- * @param {string} props.alt - alt text
- * @param {string|array} props.className - list of class names
- * @param {number|string} props.size - width of the image
- * @param {number} props.height - height of the image
- * @return {object} An object of children element
- */
-const image = ({ src, alt, className, size, height }) => (
-  <img
-    alt={alt}
-    className={cssClass(className)}
-    height={height}
-    src={src}
-    width={size}
-  />
-)
+const cssClass = styles(scss),
+  /**
+   * Image - stateless presentational component
+   * @param {object} props - props
+   * @param {string} props.src - src url
+   * @param {string} props.alt - alt text
+   * @param {string|array} props.className - list of class names
+   * @param {number|string} props.size - width of the image
+   * @param {number} props.height - height of the image
+   * @return {object} An object of children element
+   */
+  image = ({ src, alt, className, size, height }) => (
+    <img
+      alt={alt}
+      className={cssClass(className)}
+      height={height}
+      src={src}
+      width={size}
+    />
+  )
 
 /**
  * Display name
@@ -44,6 +43,12 @@ image.propTypes = {
    * Classname, default `null`
    */
   className: PropTypes.string,
+
+  /**
+   * Height 100, 200 etc
+   */
+  height: PropTypes.number,
+
   /**
    * Size 100, 200 etc
    */
@@ -51,10 +56,6 @@ image.propTypes = {
     PropTypes.number,
     PropTypes.string
   ]),
-  /**
-   * Height 100, 200 etc
-   */
-  height: PropTypes.number,
   /**
    * Asset url
    */
@@ -69,10 +70,10 @@ image.propTypes = {
  * @type {Object}
  */
 image.defaultProps = {
+  alt: null,
   className: null,
-  size: null,
   height: null,
-  alt: null
+  size: null
 }
 
 export default memo(image)

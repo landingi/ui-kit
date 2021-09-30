@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
 import Tooltip from '@components/ui/Tooltip'
 import scss from './Badge.scss'
 
@@ -8,54 +8,53 @@ import scss from './Badge.scss'
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Badge - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: `badge`
+   * @param {string} props.type - type of badge primary, secondary, warning, alert
+   * @param {string|object} props.tooltip - tooltip content, default: null
+   * @param {bool} props.isIndicator - has indicator, default: false
+   * @return {object} An object of children element
+   */
+  badge = ({
+    children,
+    className,
+    type,
+    tooltip,
+    isIndicator
+  }) => {
+    const badgeRef = useRef(),
+      width = badgeRef.current
+        ? badgeRef.current.offsetWidth
+        : 0
 
-/**
- * Badge - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `badge`
- * @param {string} props.type - type of badge primary, secondary, warning, alert
- * @param {string|object} props.tooltip - tooltip content, default: null
- * @param {bool} props.isIndicator - has indicator, default: false
- * @return {object} An object of children element
- */
-const badge = ({
-  children,
-  className,
-  type,
-  tooltip,
-  isIndicator
-}) => {
-  const badgeRef = useRef()
-  const width = badgeRef.current
-    ? badgeRef.current.offsetWidth
-    : 0
-
-  return (
-    <Tooltip
-      content={tooltip}
-      disabled={!tooltip || width < 105}
-    >
-      <span
-        className={cssClass(
-          className,
-          `badge--${type}`,
-          isIndicator && 'badge--indicator'
-        )}
-        ref={badgeRef}
+    return (
+      <Tooltip
+        content={tooltip}
+        disabled={!tooltip || width < 105}
       >
         <span
           className={cssClass(
-            tooltip ? 'badge-tooltip' : null
+            className,
+            `badge--${type}`,
+            isIndicator && 'badge--indicator'
           )}
+          ref={badgeRef}
         >
-          {children}
+          <span
+            className={cssClass(
+              tooltip ? 'badge-tooltip' : null
+            )}
+          >
+            {children}
+          </span>
         </span>
-      </span>
-    </Tooltip>
-  )
-}
+      </Tooltip>
+    )
+  }
 
 /**
  * Display name
@@ -79,10 +78,12 @@ badge.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Type
+   * Indicator (border-radius: 50px)
    */
-  type: PropTypes.string,
+  isIndicator: PropTypes.bool,
+
   /**
    * Tooltip
    */
@@ -90,10 +91,11 @@ badge.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
+
   /**
-   * Indicator (border-radius: 50px)
+   * Type
    */
-  isIndicator: PropTypes.bool
+  type: PropTypes.string
 }
 
 /**
@@ -102,9 +104,9 @@ badge.propTypes = {
  */
 badge.defaultProps = {
   className: 'badge',
-  type: 'primary',
+  isIndicator: false,
   tooltip: null,
-  isIndicator: false
+  type: 'primary'
 }
 
 export default badge

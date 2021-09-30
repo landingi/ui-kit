@@ -1,55 +1,57 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import scss from './Notification.scss'
-import Close from '@components/ui/Close'
 import { mapIconToClass } from '@helpers/data'
+import { styles } from '@helpers/css'
+import Close from '@components/ui/Close'
+import PropTypes from 'prop-types'
+import React from 'react'
+import scss from './Notification.scss'
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Notification - stateless presentational component
+   * @param {object} props - props
+   * @param {object} props.children - children
+   * @param {string|array} props.className - list of class names, default: `notification`
+   * @param {string} props.type - type of notification `info, success, warning, alert`
+   * @param {bool} props.isClosable - show close
+   * @param {bool} props.onClick - gets called when the user clicks on backdrop
+   * @param {bool} props.hasTime - hasTime
+   * @return {object} An object of children element
+   */
+  notification = ({
+    children,
+    className,
+    type,
+    isClosable,
+    onClick,
+    hasTime
+  }) => (
+    <div
+      className={cssClass(
+        className,
+        `notification--${type}`
+      )}
+    >
+      <div className={scss.content}>
+        <FontAwesomeIcon
+          icon={mapIconToClass(type) || 'check'}
+          size='sm'
+        />
 
-/**
- * Notification - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `notification`
- * @param {string} props.type - type of notification `info, success, warning, alert`
- * @param {bool} props.isClosable - show close
- * @param {bool} props.onClick - gets called when the user clicks on backdrop
- * @param {bool} props.hasTime - hasTime
- * @return {object} An object of children element
- */
-const notification = ({
-  children,
-  className,
-  type,
-  isClosable,
-  onClick,
-  hasTime
-}) => (
-  <div
-    className={cssClass(className, `notification--${type}`)}
-  >
-    <div className={scss.content}>
-      <FontAwesomeIcon
-        icon={mapIconToClass(type) || 'check'}
-        size='sm'
-      />
+        <p className={scss.notification__message}>
+          {children}
+        </p>
 
-      <p className={scss.notification__message}>
-        {children}
-      </p>
+        {isClosable && <Close onClick={onClick} />}
+      </div>
 
-      {isClosable && <Close onClick={onClick} />}
+      {hasTime && <span className={scss.time} />}
     </div>
-
-    {hasTime && <span className={scss.time} />}
-  </div>
-)
+  )
 
 /**
  * Display name
@@ -77,30 +79,34 @@ notification.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   *  type of notification `info, success, warning, alert`
-   */
-  type: PropTypes.oneOf([
-    'info',
-    'success',
-    'warning',
-    'alert'
-  ]),
-  /**
-   *  isClosable
-   */
-  isClosable: PropTypes.bool,
-  /**
-   *  hasTime
+   *  HasTime
    */
   hasTime: PropTypes.bool,
+
+  /**
+   *  IsClosable
+   */
+  isClosable: PropTypes.bool,
+
   /**
    * Gets called when the user clicks on backdrop
    *
    * @param {SyntheticEvent} event The react `SyntheticEvent`
    * @param {Object} All props
    */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+
+  /**
+   *  Type of notification `info, success, warning, alert`
+   */
+  type: PropTypes.oneOf([
+    'info',
+    'success',
+    'warning',
+    'alert'
+  ])
 }
 
 /**
@@ -109,10 +115,10 @@ notification.propTypes = {
  */
 notification.defaultProps = {
   className: 'notification',
-  type: 'info',
+  hasTime: false,
   isClosable: false,
   onClick: () => null,
-  hasTime: false
+  type: 'info'
 }
 
 export default notification

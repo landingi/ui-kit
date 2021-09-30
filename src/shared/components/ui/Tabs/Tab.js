@@ -1,60 +1,60 @@
-import React, { useContext, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import TabContext from './TabContext'
-import Button from '@components/ui/Button'
-import useQueryString from '@helpers/hooks/useQueryString'
 import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React, { useCallback, useContext } from 'react'
+import TabContext from './TabContext'
 import scss from './Tabs.scss'
+import useQueryString from '@helpers/hooks/useQueryString'
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
-
-/**
- * tab - stateless presentational component
- * @param {object} props - props
- * @param {string} props.name - name
- * @param {string|array} props.className - list of class names, default: `tab`
- * @param {function} props.onClick - onClick handler
- * @param {object} props.children - children
- * @param {string|array|object} props.restProps - rest of props
- * @return {object} An object of children element
- */
-const tab = ({
-  name,
-  className,
-  onClick,
-  children,
-  ...restProps
-}) => {
-  const tabContext = useContext(TabContext)
-  const activeTab =
-    tabContext.activeTab === name ? 'Tabs__tab--active' : ''
-  const classNames = `${cssClass(className)} ${activeTab}`
-  const [, setTabValue] = useQueryString('tab')
-
+const cssClass = styles(scss),
   /**
-   * Handle tab click
-   * @type {function}
+   * Tab - stateless presentational component
+   * @param {object} props - props
+   * @param {string} props.name - name
+   * @param {string|array} props.className - list of class names, default: `tab`
+   * @param {function} props.onClick - onClick handler
+   * @param {object} props.children - children
+   * @param {string|array|object} props.restProps - rest of props
+   * @return {object} An object of children element
    */
-  const handleClick = useCallback(event => {
-    setTabValue(name)
-    tabContext.changeTab(name)
-    onClick(event)
-  }, [])
+  tab = ({
+    name,
+    className,
+    onClick,
+    children,
+    ...restProps
+  }) => {
+    const tabContext = useContext(TabContext),
+      activeTab =
+        tabContext.activeTab === name
+          ? 'Tabs__tab--active'
+          : '',
+      classNames = `${cssClass(className)} ${activeTab}`,
+      [, setTabValue] = useQueryString('tab'),
+      /**
+       * Handle tab click
+       * @type {function}
+       */
+      handleClick = useCallback(event => {
+        setTabValue(name)
+        tabContext.changeTab(name)
+        onClick(event)
+      }, [])
 
-  return (
-    <span
-      className={classNames}
-      onClick={handleClick}
-      {...restProps}
-    >
-      <Button variant='tabs'>{children}</Button>
-    </span>
-  )
-}
+    return (
+      <span
+        className={classNames}
+        onClick={handleClick}
+        {...restProps}
+      >
+        <Button variant='tabs'>{children}</Button>
+      </span>
+    )
+  }
 
 /**
  * Display name
@@ -68,16 +68,14 @@ tab.displayName = 'Tab'
  */
 tab.propTypes = {
   /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Children elements
    */
-  onClick: PropTypes.func,
-  /**
-   * name
-   */
-  name: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+
   /**
    * Classname, default `tab`
    */
@@ -85,14 +83,19 @@ tab.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Children elements
+   * Name
    */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Gets called when the user clicks
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onClick: PropTypes.func
 }
 
 /**

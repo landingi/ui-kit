@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import useIsOpen from '@helpers/hooks/useIsOpen'
-import Section from './Section'
+import useIsOpen from 'shared/helpers/hooks/useIsOpen'
+import AccordionSection from './AccordionSection'
+import Spacer from 'shared/components/ui/Spacer'
 
 /**
  * Accordion - stateful presentational component
@@ -15,15 +16,26 @@ const Accordion = ({ children }) => {
   return (
     Array.isArray(children) &&
     children.map((item, index) => (
-      <Section
-        handleOnClick={() => openList.set(index)}
-        isOpen={openList.value.includes(index)}
-        key={index}
-        // eslint-disable-next-line react/jsx-no-bind
-        label={item.props.label}
-      >
-        {item.props.children}
-      </Section>
+      <Fragment key={index}>
+        <AccordionSection
+          key={index}
+          isOpen={openList.value.includes(index)}
+          label={item.props.label}
+          arrowLabel={item.props.arrowLabel}
+          variant={item.props.variant}
+          hasExpand={item.props.hasExpand}
+          // eslint-disable-next-line react/jsx-no-bind
+          handleOnClick={() =>
+            item.props.hasExpand && openList.toggle(index)
+          }
+        >
+          <Spacer space='tiny' />
+
+          {item.props.children}
+        </AccordionSection>
+
+        <Spacer space='tiny' />
+      </Fragment>
     ))
   )
 }
@@ -42,7 +54,7 @@ Accordion.propTypes = {
   /**
    * Content
    */
-  children: PropTypes.instanceOf(Object).isRequired
+  children: PropTypes.node.isRequired
 }
 
 export default Accordion

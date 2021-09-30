@@ -1,133 +1,131 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Input.scss'
-import Label from '@components/ui/Label'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-const cssClass = styles(scss)
+import { FormattedMessage, injectIntl } from 'react-intl'
+import { styles } from '@helpers/css'
+import Label from '@components/ui/Label'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Tooltip from '@components/ui/Tooltip'
+import scss from './Input.scss'
+const cssClass = styles(scss),
+  /**
+   * Input - stateless presentational component
+   * @param {object} props - props
+   * @param {string|array} props.className - list of class names, default: input
+   * @param {function} props.onChange - click handler
+   * @param {function} props.onKeyDown - key down handler
+   * @param {function} props.onBlur - blur handler
+   * @param {string} props.type - type
+   * @param {string|object} props.placeholder - placeholder
+   * @param {string} props.name - name
+   * @param {boolean} props.disabled - disabled
+   * @param {boolean} props.readonly - readonly
+   * @param {string} props.label - label
+   * @param {bool} props.autoFocus - autoFocus
+   * @param {string} props.focused - focused, keep label by default on top
+   * @param {object} props.intl - intl
+   * @param {bool} props.translate - true if placeholder/label is an id for translation
+   * @param {number} props.maxLength - max length of input
+   * @param {string|object} props.tooltip - tooltip
+   * @param {strin|number} props.value - value
+   * @param {bool} props.required - required
+   * @param {bool} props.controlledValue - enable to control input value manually
+   * @return {object} An object of children element
+   */
+  input = ({
+    className,
+    onChange,
+    onKeyDown,
+    onBlur,
+    type,
+    placeholder,
+    name,
+    disabled,
+    readonly,
+    label,
+    value,
+    autoFocus,
+    intl,
+    translate,
+    maxLength,
+    required,
+    focused,
+    tooltip,
+    min,
+    controlledValue
+  }) => {
+    const elementClasses = cssClass({
+        'input__wrapper--focused': focused === 'true'
+      }),
+      valueProp = {
+        ...(controlledValue
+          ? {
+              value
+            }
+          : {
+              defaultValue: value
+            })
+      }
 
-/**
- * Input - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: input
- * @param {function} props.onChange - click handler
- * @param {function} props.onKeyDown - key down handler
- * @param {function} props.onBlur - blur handler
- * @param {string} props.type - type
- * @param {string|object} props.placeholder - placeholder
- * @param {string} props.name - name
- * @param {boolean} props.disabled - disabled
- * @param {boolean} props.readonly - readonly
- * @param {string} props.label - label
- * @param {bool} props.autoFocus - autoFocus
- * @param {string} props.focused - focused, keep label by default on top
- * @param {object} props.intl - intl
- * @param {bool} props.translate - true if placeholder/label is an id for translation
- * @param {number} props.maxLength - max length of input
- * @param {string|object} props.tooltip - tooltip
- * @param {strin|number} props.value - value
- * @param {bool} props.required - required
- * @param {bool} props.controlledValue - enable to control input value manually
- * @return {object} An object of children element
- */
-const input = ({
-  className,
-  onChange,
-  onKeyDown,
-  onBlur,
-  type,
-  placeholder,
-  name,
-  disabled,
-  readonly,
-  label,
-  value,
-  autoFocus,
-  intl,
-  translate,
-  maxLength,
-  required,
-  focused,
-  tooltip,
-  min,
-  controlledValue
-}) => {
-  const elementClasses = cssClass({
-    'input__wrapper--focused': focused === 'true'
-  })
+    return (
+      <div
+        className={cssClass(
+          scss.input__wrapper,
+          elementClasses
+        )}
+      >
+        <input
+          className={cssClass(className)}
+          id={name}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder={
+            translate
+              ? intl.formatMessage({
+                  id: `${placeholder || label}`
+                })
+              : label
+          }
+          type={type}
+          {...valueProp}
+          autoFocus={autoFocus}
+          disabled={!disabled ? undefined : disabled}
+          maxLength={maxLength}
+          min={min}
+          readOnly={disabled ? readonly : undefined}
+          required={required}
+        />
 
-  const valueProp = {
-    ...(controlledValue
-      ? {
-          value
-        }
-      : {
-          defaultValue: value
-        })
+        <span className={cssClass('highlight')} />
+
+        <span className={cssClass('bar')} />
+
+        {label && (
+          <Label className={scss.input__label} id={name}>
+            {translate ? (
+              <FormattedMessage id={`${label}`} />
+            ) : (
+              label
+            )}
+          </Label>
+        )}
+
+        {tooltip && (
+          <Tooltip
+            className='input__tooltip'
+            content={tooltip}
+            placement='bottom'
+          >
+            <FontAwesomeIcon
+              color='#2550AA'
+              icon='exclamation-circle'
+            />
+          </Tooltip>
+        )}
+      </div>
+    )
   }
-
-  return (
-    <div
-      className={cssClass(
-        scss.input__wrapper,
-        elementClasses
-      )}
-    >
-      <input
-        className={cssClass(className)}
-        id={name}
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        placeholder={
-          translate
-            ? intl.formatMessage({
-                id: `${placeholder || label}`
-              })
-            : label
-        }
-        type={type}
-        {...valueProp}
-        autoFocus={autoFocus}
-        disabled={!disabled ? undefined : disabled}
-        maxLength={maxLength}
-        min={min}
-        readOnly={disabled ? readonly : undefined}
-        required={required}
-      />
-
-      <span className={cssClass('highlight')} />
-
-      <span className={cssClass('bar')} />
-
-      {label && (
-        <Label className={scss.input__label} id={name}>
-          {translate ? (
-            <FormattedMessage id={`${label}`} />
-          ) : (
-            label
-          )}
-        </Label>
-      )}
-
-      {tooltip && (
-        <Tooltip
-          className='input__tooltip'
-          content={tooltip}
-          placement='bottom'
-        >
-          <FontAwesomeIcon
-            color='#2550AA'
-            icon='exclamation-circle'
-          />
-        </Tooltip>
-      )}
-    </div>
-  )
-}
 
 /**
  * Display name
@@ -141,26 +139,57 @@ input.displayName = 'Input'
  */
 input.propTypes = {
   /**
+   * AutoFocus
+   */
+  autoFocus: PropTypes.bool,
+
+  /**
    * Classname, default `input`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Gets called when the user clicks on Input
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Deafult value
    */
-  onChange: PropTypes.func,
+  controlledValue: PropTypes.bool,
+
   /**
-   * Gets called when the user clicks on Input
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
+   * Diabled
    */
-  onKeyDown: PropTypes.func,
+  disabled: PropTypes.bool,
+
+  /**
+   * Is focused, focused, keep label by default on top
+   */
+  focused: PropTypes.string,
+
+  /**
+   * Intl from react-intl
+   */
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+
+  /**
+   * Label
+   */
+  label: PropTypes.string,
+
+  /**
+   * Max length of input
+   */
+  maxLength: PropTypes.number,
+
+  min: PropTypes.number,
+
+  /**
+   * Name
+   */
+  name: PropTypes.string,
+
   /**
    * Gets called on blur
    *
@@ -168,10 +197,23 @@ input.propTypes = {
    * @param {Object} All props
    */
   onBlur: PropTypes.func,
+
   /**
-   * Type, default `text`, `number`, `textarea`
+   * Gets called when the user clicks on Input
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
    */
-  type: PropTypes.string,
+  onChange: PropTypes.func,
+
+  /**
+   * Gets called when the user clicks on Input
+   *
+   * @param {SyntheticEvent} event The react `SyntheticEvent`
+   * @param {Object} All props
+   */
+  onKeyDown: PropTypes.func,
+
   /**
    * Placeholder
    */
@@ -179,59 +221,17 @@ input.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
-  /**
-   * Name
-   */
-  name: PropTypes.string,
-  /**
-   * Diabled
-   */
-  disabled: PropTypes.bool,
+
   /**
    * Readonly
    */
   readonly: PropTypes.bool,
+
   /**
-   * Label
-   */
-  label: PropTypes.string,
-  /**
-   * Value
-   */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  /**
-   * Deafult value
-   */
-  controlledValue: PropTypes.bool,
-  /**
-   * autoFocus
-   */
-  autoFocus: PropTypes.bool,
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * if label/placeholder should be tranlated by intl
-   */
-  translate: PropTypes.bool,
-  /**
-   * max length of input
-   */
-  maxLength: PropTypes.number,
-  /**
-   * required
+   * Required
    */
   required: PropTypes.bool,
-  /**
-   * is focused, focused, keep label by default on top
-   */
-  focused: PropTypes.string,
+
   /**
    * Tooltip content
    */
@@ -239,7 +239,24 @@ input.propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]),
-  min: PropTypes.number
+
+  /**
+   * If label/placeholder should be tranlated by intl
+   */
+  translate: PropTypes.bool,
+
+  /**
+   * Type, default `text`, `number`, `textarea`
+   */
+  type: PropTypes.string,
+
+  /**
+   * Value
+   */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
 }
 
 /**
@@ -247,24 +264,24 @@ input.propTypes = {
  * @type {Object}
  */
 input.defaultProps = {
+  autoFocus: false,
   className: 'input',
+  controlledValue: false,
+  disabled: false,
+  focused: 'false',
+  label: null,
+  maxLength: 524288,
+  name: null,
+  onBlur: () => null,
   onChange: () => null,
   onKeyDown: () => null,
-  onBlur: () => null,
-  type: 'text',
   placeholder: '',
-  name: null,
-  disabled: false,
   readonly: false,
-  label: null,
-  value: null,
-  controlledValue: false,
-  autoFocus: false,
-  translate: true,
-  maxLength: 524288,
   required: true,
-  focused: 'false',
-  tooltip: ''
+  tooltip: '',
+  translate: true,
+  type: 'text',
+  value: null
 }
 
 export default injectIntl(input)

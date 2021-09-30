@@ -8,6 +8,10 @@ import TextOverflow from '@components/ui/TextOverflow'
 <Playground>
   <TextOverflow>
     Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
+    magna aliquam vehicula. Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
+    magna aliquam vehicula. Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
+    magna aliquam vehicula.
+    Cras quis nulla ultrices, aliquet tortor non, feugiat nulla. Mauris faucibus nulla lobortis
     magna aliquam vehicula.
   </TextOverflow>
 </Playground>

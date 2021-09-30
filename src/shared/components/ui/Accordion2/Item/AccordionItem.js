@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './../Accordion.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState } from 'react'
 import StepNumber from '@components/ui/StepNumber'
+import scss from '@components/ui/Accordion2/Accordion.scss'
 
 const cssClass = styles(scss)
 
@@ -22,16 +22,15 @@ function AccordionItem({
   title,
   content
 }) {
-  const [isOpen, setOpen] = useState(false)
-
-  /**
-   * handleOpen - open section
-   * @type {function}
-   */
-  const handleOpen = useCallback(
-    () => setOpen(!isOpen),
-    [isOpen]
-  )
+  const [isOpen, setOpen] = useState(false),
+    /**
+     * HandleOpen - open section
+     * @type {function}
+     */
+    handleOpen = useCallback(
+      () => setOpen(!isOpen),
+      [isOpen]
+    )
 
   return (
     <div className={cssClass(className)}>
@@ -85,18 +84,21 @@ AccordionItem.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
+  /**
+   * Content
+   */
+  content: PropTypes.node.isRequired,
+
   /**
    * Number
    */
   number: PropTypes.number,
+
   /**
    * Title
    */
-  title: PropTypes.node.isRequired,
-  /**
-   * Content
-   */
-  content: PropTypes.node.isRequired
+  title: PropTypes.node.isRequired
 }
 
 /**

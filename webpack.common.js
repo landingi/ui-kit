@@ -38,7 +38,8 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              additionalData: '@import "shared/styles/theme.scss";',
+              additionalData:
+                '@import "shared/styles/theme.scss";',
               sassOptions: {
                 includePaths: [__dirname, 'src']
               }

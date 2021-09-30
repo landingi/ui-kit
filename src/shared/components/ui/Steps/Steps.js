@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Steps.scss'
-import { stepsShape } from '@shapes'
 import { FormattedMessage } from 'react-intl'
-import uuid from 'react-uuid'
+import { stepsShape } from '@shapes'
+import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import StepNumber from '@components/ui/StepNumber'
+import scss from './Steps.scss'
+import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
 
@@ -19,8 +19,8 @@ function Steps({ data }) {
   return (
     <div className={cssClass('container')}>
       {data.map((item, index) => {
-        const step = index + 1
-        const { variant, description } = item
+        const step = index + 1,
+          { variant, description } = item
 
         return (
           <div className={scss.step} key={uuid()}>

@@ -1,26 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './ColorLine.scss'
 
-const cssClass = styles(scss)
-
-/**
- * Color line - stateless presentational component
- * @param {object} props - props
- * @param {string} props.variant - variant
- * @param {string} props.alignment - alignment
- * @return {object} An object of children element
- */
-const colorLine = ({ variant, alignment }) => (
-  <span
-    className={cssClass(
-      'color-line',
-      `color-line--${variant}`,
-      `color-line--${alignment}`
-    )}
-  />
-)
+const cssClass = styles(scss),
+  /**
+   * Color line - stateless presentational component
+   * @param {object} props - props
+   * @param {string} props.variant - variant
+   * @param {string} props.alignment - alignment
+   * @return {object} An object of children element
+   */
+  colorLine = ({ variant, alignment }) => (
+    <span
+      className={cssClass(
+        'color-line',
+        `color-line--${variant}`,
+        `color-line--${alignment}`
+      )}
+    />
+  )
 
 /**
  * Display name

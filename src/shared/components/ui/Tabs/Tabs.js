@@ -1,45 +1,44 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import TabContext from './TabContext'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import TabContext from './TabContext'
 import scss from './Tabs.scss'
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Tabs - stateless presentational component
+   * @param {object} props - props
+   * @param {string} props.initialValue - initial value
+   * @param {string|array} props.className - list of class names, default: `tabs__wrapper`
+   * @param {object} props.children - children
+   * @param {string|array|object} props.restProps - rest of props
+   * @return {object} An object of children element
+   */
+  tabs = ({
+    initialValue,
+    className,
+    children,
+    ...restProps
+  }) => {
+    const [activeTab, changeTab] = useState(initialValue),
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      tabProviderValue = {
+        activeTab,
+        changeTab
+      }
 
-/**
- * tabs - stateless presentational component
- * @param {object} props - props
- * @param {string} props.initialValue - initial value
- * @param {string|array} props.className - list of class names, default: `tabs__wrapper`
- * @param {object} props.children - children
- * @param {string|array|object} props.restProps - rest of props
- * @return {object} An object of children element
- */
-const tabs = ({
-  initialValue,
-  className,
-  children,
-  ...restProps
-}) => {
-  const [activeTab, changeTab] = useState(initialValue)
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const tabProviderValue = {
-    activeTab,
-    changeTab
+    return (
+      <TabContext.Provider value={tabProviderValue}>
+        <div className={cssClass(className)} {...restProps}>
+          {children}
+        </div>
+      </TabContext.Provider>
+    )
   }
-
-  return (
-    <TabContext.Provider value={tabProviderValue}>
-      <div className={cssClass(className)} {...restProps}>
-        {children}
-      </div>
-    </TabContext.Provider>
-  )
-}
 
 /**
  * Display name
@@ -53,9 +52,14 @@ tabs.displayName = 'Tabs'
  */
 tabs.propTypes = {
   /**
-   * Initial value
+   * Children elements
    */
-  initialValue: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
+
   /**
    * Classname, default `tabs__wrapper`
    */
@@ -63,14 +67,11 @@ tabs.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
+
   /**
-   * Children elements
+   * Initial value
    */
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired
+  initialValue: PropTypes.string.isRequired
 }
 
 /**

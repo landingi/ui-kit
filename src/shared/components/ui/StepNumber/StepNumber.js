@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
+import PropTypes from 'prop-types'
+import React from 'react'
 import scss from './StepNumber.scss'
 
 const cssClass = styles(scss)
@@ -23,12 +23,12 @@ function StepNumber({
   absolute
 }) {
   const elementClasses = cssClass({
+    'step__number--absolute': absolute === true,
     'step__number--completed': variant === 'completed',
     'step__number--current': variant === 'current',
-    'step__number--next': variant === 'next',
-    'step__number--small': size === 'small',
     'step__number--medium': size === 'medium',
-    'step__number--absolute': absolute === true
+    'step__number--next': variant === 'next',
+    'step__number--small': size === 'small'
   })
 
   return (
@@ -50,28 +50,32 @@ StepNumber.displayName = 'Step Number'
  */
 StepNumber.propTypes = {
   /**
+   * Absolute
+   */
+  absolute: PropTypes.bool,
+
+  /**
    * Classname, default `panel`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * Step
-   */
-  step: PropTypes.number.isRequired,
-  /**
-   * Step
-   */
-  variant: PropTypes.string,
+
   /**
    * Size
    */
   size: PropTypes.string,
+
   /**
-   * Absolute
+   * Step
    */
-  absolute: PropTypes.bool
+  step: PropTypes.number.isRequired,
+
+  /**
+   * Step
+   */
+  variant: PropTypes.string
 }
 
 /**
@@ -79,10 +83,10 @@ StepNumber.propTypes = {
  * @type {Object}
  */
 StepNumber.defaultProps = {
+  absolute: false,
   className: 'step__number',
-  variant: 'current',
   size: 'small',
-  absolute: false
+  variant: 'current'
 }
 
 export default StepNumber

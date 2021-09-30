@@ -1,5 +1,5 @@
-import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import React from 'react'
 
 const list = [
   '/settings',
@@ -96,46 +96,45 @@ export const generateSectionName = url => {
 }
 
 /**
- * handleClickOnBack - go back
+ * HandleClickOnBack - go back
  * @return {function} history.back()
  */
 export const handleClickOnBack = () => history.back()
 
 /**
- * handleActiveUrl
+ * HandleActiveUrl
  * @return {function}
  */
 export const handleActiveUrl = data => {
-  const includesPath = getLocationPath()
-  const hasDashboard = !!document.getElementById(
-    'agencyDashboardClient'
-  )
-  const filter = data.map(item => {
-    const url = new URL(item.url).pathname
-    const helperPath = includesPath.split('/')[1]
-    const helperUrl = item.url.split('/')[3]
+  const includesPath = getLocationPath(),
+    hasDashboard = Boolean(
+      document.getElementById('agencyDashboardClient')
+    ),
+    filter = data.map(item => {
+      const url = new URL(item.url).pathname,
+        helperPath = includesPath.split('/')[1],
+        helperUrl = item.url.split('/')[3],
+        isActive =
+          includesPath.includes(url) ||
+          (helperPath === 'dashboard' &&
+            helperUrl === 'landings') ||
+          (helperPath === 'welcome' &&
+            url === '/agency/dashboard') ||
+          (helperPath === 'welcome' &&
+            !hasDashboard &&
+            url === '/landings')
 
-    const isActive =
-      includesPath.includes(url) ||
-      (helperPath === 'dashboard' &&
-        helperUrl === 'landings') ||
-      (helperPath === 'welcome' &&
-        url === '/agency/dashboard') ||
-      (helperPath === 'welcome' &&
-        !hasDashboard &&
-        url === '/landings')
-
-    return {
-      ...item,
-      isActive
-    }
-  })
+      return {
+        ...item,
+        isActive
+      }
+    })
 
   return filter
 }
 
 /**
- * replace url in browser, but not refresh page
+ * Replace url in browser, but not refresh page
  */
 export const replaceUrl = (url, state = {}, title = '') =>
   window.history.pushState(state, title, url)

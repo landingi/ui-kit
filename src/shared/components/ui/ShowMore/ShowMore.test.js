@@ -1,0 +1,25 @@
+import React from 'react'
+import ShowMore from '@components/ui/ShowMore'
+import { mountWithIntl } from '@jestutils'
+
+const props = {
+  content: 'word.smart-map'
+}
+
+const showMoreComponent = <ShowMore {...props} />
+
+describe('<ShowMore/> mount', () => {
+  let wrapper
+
+  beforeEach(() => {
+    wrapper = mountWithIntl(showMoreComponent)
+  })
+
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
+  it('is mounted', () => {
+    expect(wrapper.exists()).toBe(true)
+  })
+})

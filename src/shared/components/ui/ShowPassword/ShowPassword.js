@@ -1,13 +1,12 @@
-import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
-import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState } from 'react'
 import scss from './ShowPassword.scss'
 
 const cssClass = styles(scss)
-
 /**
  * ShowPassword - statefull presentational component
  * @param {object} props - props
@@ -23,9 +22,8 @@ const showPassword = ({
 }) => {
   const [icon, setIcon] = useState('eye')
   const [label, setLabel] = useState('word.show')
-
   /**
-   * handleIconSet - set the icon state
+   * HandleIconSet - set the icon state
    */
   const handleIconSet = useCallback(() => {
     if (icon === 'eye') {
@@ -81,14 +79,16 @@ showPassword.propTypes = {
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * setHidden, callback to parent element(react-formik)
-   */
-  setHidden: PropTypes.func,
+
   /**
    * Label
    */
-  hasLabel: PropTypes.bool
+  hasLabel: PropTypes.bool,
+
+  /**
+   * SetHidden, callback to parent element(react-formik)
+   */
+  setHidden: PropTypes.func
 }
 
 /**
@@ -97,8 +97,8 @@ showPassword.propTypes = {
  */
 showPassword.defaultProps = {
   className: 'showpassword',
-  setHidden: () => null,
-  hasLabel: false
+  hasLabel: false,
+  setHidden: () => null
 }
 
 export default showPassword

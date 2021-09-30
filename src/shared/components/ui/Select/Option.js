@@ -1,8 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
- * select option - stateless presentational component
+ * Select option - stateless presentational component
  * @param {object} props - props
  * @param {string} props.className - list of class names, default: select__option
  * @param {string|number} props.value - click handler
@@ -31,17 +31,19 @@ option.propTypes = {
    * Classname, default `select__option`
    */
   className: PropTypes.string,
+
+  /**
+   * Label
+   */
+  label: PropTypes.string.isRequired,
+
   /**
    * Value
    */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired,
-  /**
-   * Label
-   */
-  label: PropTypes.string.isRequired
+  ]).isRequired
 }
 /**
  * The default properties.

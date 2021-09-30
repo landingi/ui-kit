@@ -1,33 +1,34 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { styles } from '@helpers/css'
-import scss from './Check.scss'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Spreader from '@components/ui/Spreader'
+import scss from './Check.scss'
 
-const cssClass = styles(scss)
+const cssClass = styles(scss),
+  /**
+   * Check - stateless presentational component
+   * @param {object} props - props
+   * @param {bool} positive - positive
+   * @param {object} children - children
+   * @return {object} An object of children element
+   */
+  check = ({ children, positive }) => (
+    <span
+      className={cssClass(
+        'check',
+        positive && 'check--positive'
+      )}
+    >
+      <FontAwesomeIcon
+        icon={positive ? 'check' : 'times'}
+      />
 
-/**
- * Check - stateless presentational component
- * @param {object} props - props
- * @param {bool} positive - positive
- * @param {object} children - children
- * @return {object} An object of children element
- */
-const check = ({ children, positive }) => (
-  <span
-    className={cssClass(
-      'check',
-      positive && 'check--positive'
-    )}
-  >
-    <FontAwesomeIcon icon={positive ? 'check' : 'times'} />
+      <Spreader spread='tiny' />
 
-    <Spreader spread='tiny' />
-
-    {children}
-  </span>
-)
+      {children}
+    </span>
+  )
 
 /**
  * Display name
@@ -41,7 +42,7 @@ check.displayName = 'Check'
  */
 check.propTypes = {
   /**
-   * positive
+   * Positive
    */
   positive: PropTypes.bool
 }

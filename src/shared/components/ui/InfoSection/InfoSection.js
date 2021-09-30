@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './InfoSection.scss'
 import { FormattedMessage } from 'react-intl'
+import { styles } from '@helpers/css'
+import Button from '@components/ui/Button'
+import Heading from '@components/ui/Heading'
+import Image from '@components/ui/Image'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-import Heading from '@components/ui/Heading'
 import Paragraph from '@components/ui/Paragraph'
-import Image from '@components/ui/Image'
+import PropTypes from 'prop-types'
+import React, { useMemo } from 'react'
 import Spacer from '@components/ui/Spacer'
-import Button from '@components/ui/Button'
+import scss from './InfoSection.scss'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
@@ -83,32 +83,37 @@ InfoSection.displayName = 'Info Section'
  */
 InfoSection.propTypes = {
   /**
+   * Button title
+   */
+  button: PropTypes.string.isRequired,
+
+  /**
    * Classname, default `info-section`
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array
   ]),
-  /**
-   * Title
-   */
-  title: PropTypes.string.isRequired,
+
   /**
    * List of items
    */
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+  /**
+   * OnChange is button action
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Title
+   */
+  title: PropTypes.string.isRequired,
+
   /**
    * Image url
    */
-  url: PropTypes.string.isRequired,
-  /**
-   * Button title
-   */
-  button: PropTypes.string.isRequired,
-  /**
-   * onChange is button action
-   */
-  onClick: PropTypes.func
+  url: PropTypes.string.isRequired
 }
 
 /**
