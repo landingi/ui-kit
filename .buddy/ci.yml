@@ -23,7 +23,6 @@
     shell: "SH"
   - action: "Run CD"
     type: "RUN_NEXT_PIPELINE"
-    wait: true
     comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
     revision: "INHERIT"
     next_project_name: "ui-kit"
