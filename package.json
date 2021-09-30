@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "docz:build": " ./node_modules/.bin/docz build",
     "docz:serve": "docz build && docz serve",
     "lint": "eslint --fix -- ./src",
     "test:local": "jest --colors --changedFilesWithAncestor",
