@@ -11,6 +11,8 @@
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
+    setup_commands:
+    - "yarn install"
     execute_commands:
     - "yarn run docz:build"
     volume_mappings:
