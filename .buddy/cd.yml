@@ -1,8 +1,9 @@
-- pipeline: "Docs"
+- pipeline: "CD"
   on: "CLICK"
   refs:
   - "(^((?!master$).)*$)"
   priority: "NORMAL"
+  fetch_all_refs: true
   fail_on_prepare_env_warning: true
   actions:
   - action: "Execute: yarn run docz:build"
