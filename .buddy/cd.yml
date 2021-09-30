@@ -3,8 +3,10 @@
   refs:
   - "(^((?!master$).)*$)"
   priority: "NORMAL"
+  ignore_fail_on_project_status: true
   fetch_all_refs: true
   fail_on_prepare_env_warning: true
+  clone_depth: 1
   trigger_conditions:
   - trigger_condition: "VAR_CONTAINS"
     trigger_variable_value: "[deploy]"

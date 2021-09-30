@@ -3,8 +3,10 @@
   refs:
   - "(^((?!master$).)*$)"
   priority: "NORMAL"
+  ignore_fail_on_project_status: true
   fetch_all_refs: true
   fail_on_prepare_env_warning: true
+  clone_depth: 1
   actions:
   - action: "Execute: yarn run docz:build"
     type: "BUILD"
@@ -12,10 +14,10 @@
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: true
-    setup_commands:
-    - "yarn install"
     execute_commands:
     - "yarn run docz:build"
+    setup_commands:
+    - "yarn install"
     shell: "SH"
   - action: "Upload files to AWS S3/styleguide.landingi.com"
     type: "AMAZON_S3"
