@@ -10,7 +10,7 @@ const data = [
         url: 'http://landingi.com'
       }
     ],
-    icon: 'bullhorn',
+    icon: 'search',
     title: 'Parent title'
   }
 ]
