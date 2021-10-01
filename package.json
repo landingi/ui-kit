@@ -11,7 +11,6 @@
         "lint": "eslint --fix -- ./src",
         "test:local": "jest --colors --changedFilesWithAncestor",
         "test": "jest --colors",
-        "publish": "yarn lint && yarn test && yarn build",
         "build": "cross-env webpack",
         "bundle": "cross-env webpack --config webpack.bundle.js",
         "format": "prettier --write {,src/**/}*.js",
