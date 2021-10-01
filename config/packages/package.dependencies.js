@@ -23,7 +23,7 @@ module.exports = {
     "tiny-emitter": "2.1.0",
     "@babel/runtime": "7.15.4"
   },
-  docsDependencies: {
+  documentationDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.15",

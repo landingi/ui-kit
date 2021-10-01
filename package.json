@@ -20,7 +20,8 @@
         "prepare": "husky install",
         "build:local": "node ./config/packages/package.builder.js production && yarn install && yarn build",
         "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn build",
-        "cd": "node ./config/packages/package.builder.js production && yarn build"
+        "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
+        "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn build"
     },
     "devDependencies": {
         "@babel/core": "7.15.5",

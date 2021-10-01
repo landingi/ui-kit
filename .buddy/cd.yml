@@ -22,7 +22,7 @@
     - "yarn global add codecov"
     - "yarn install"
     execute_commands:
-    - "yarn cd"
+    - "yarn cd:ui"
     - "yarn test:coverage"
     - "codecov"
     shell: "SH"
