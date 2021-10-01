@@ -15,6 +15,7 @@
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: true
     setup_commands:
+    - "yarn global add gatsby-cli"
     - "yarn install"
     execute_commands:
     - "yarn cd:docs"

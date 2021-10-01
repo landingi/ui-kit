@@ -20,7 +20,6 @@
     cache_base_image: true
     setup_commands:
     - "yarn global add codecov"
-    - "yarn global add gatsby-cli"
     - "yarn install"
     execute_commands:
     - "yarn cd:ui"
