@@ -31,10 +31,7 @@ spinner.propTypes = {
   /**
    * Classname, default `spinner__spin`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ])
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 /**

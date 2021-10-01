@@ -32,10 +32,7 @@ const cssClass = styles(scss),
         <Spacer space='tiny' />
 
         <Button
-          onClick={useCallback(
-            () => onChange(range),
-            [range]
-          )}
+          onClick={useCallback(() => onChange(range), [range])}
           size='tiny'
         >
           <FormattedMessage id='word.apply' />

@@ -21,17 +21,9 @@ const cssClass = styles(scss),
    */
   avatar = ({ className, size, variant, src, name }) => (
     <span
-      className={cssClass(
-        className,
-        `avatar--${size}`,
-        `avatar--${variant}`
-      )}
+      className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}
     >
-      {variant === 'image' ? (
-        <Image src={src} />
-      ) : (
-        <p>{name}</p>
-      )}
+      {variant === 'image' ? <Image src={src} /> : <p>{name}</p>}
     </span>
   )
 
@@ -49,10 +41,7 @@ avatar.propTypes = {
   /**
    * Classname, default `avatar`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Name

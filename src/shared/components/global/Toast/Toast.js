@@ -2,11 +2,7 @@ import { TOGGLE_TOAST } from '@constants/eventTypes'
 import { styles } from '@helpers/css'
 import Notification from '@components/ui/Notification'
 import PropTypes from 'prop-types'
-import React, {
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import emitter from '@lib/emitter'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './Toast.scss'
@@ -73,10 +69,7 @@ function Toast({ className }) {
       setHideTimeout(timeout)
     },
     setAutoHideTimer = () => {
-      autoHideTimer = setTimeout(
-        () => handleToastToggle(),
-        hideTimeout
-      )
+      autoHideTimer = setTimeout(() => handleToastToggle(), hideTimeout)
     },
     clearAutoHideTimer = () => clearTimeout(autoHideTimer)
 
@@ -105,15 +98,8 @@ function Toast({ className }) {
   return (
     isActive && (
       <PoseGroup animateOnMount flipMove={false}>
-        <ToastAnimation
-          className={cssClass(className)}
-          key='toastanimation'
-        >
-          <Notification
-            isClosable
-            onClick={handleToastToggle}
-            type={type}
-          >
+        <ToastAnimation className={cssClass(className)} key='toastanimation'>
+          <Notification isClosable onClick={handleToastToggle} type={type}>
             {message}
           </Notification>
         </ToastAnimation>
@@ -136,10 +122,7 @@ Toast.propTypes = {
   /**
    * Classname, default `toast`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ])
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 /**

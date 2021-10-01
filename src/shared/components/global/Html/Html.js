@@ -37,14 +37,8 @@ html.propTypes = {
   /**
    * Classname, default `html`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]).isRequired
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 export default html

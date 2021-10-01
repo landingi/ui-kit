@@ -47,10 +47,7 @@ headline.propTypes = {
   /**
    * Classname, default `page__headline`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Title
    * @param {String}

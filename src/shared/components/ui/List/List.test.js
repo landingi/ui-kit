@@ -29,8 +29,6 @@ describe('<List/> mount', () => {
   })
 
   it('<ListItem/> has `list__item` class', () => {
-    expect(wrapper.find('li').hasClass('list__item')).toBe(
-      true
-    )
+    expect(wrapper.find('li').hasClass('list__item')).toBe(true)
   })
 })

@@ -19,23 +19,12 @@ const cssClass = styles(scss),
    * @param {bool} props.isIndicator - has indicator, default: false
    * @return {object} An object of children element
    */
-  badge = ({
-    children,
-    className,
-    type,
-    tooltip,
-    isIndicator
-  }) => {
+  badge = ({ children, className, type, tooltip, isIndicator }) => {
     const badgeRef = useRef(),
-      width = badgeRef.current
-        ? badgeRef.current.offsetWidth
-        : 0
+      width = badgeRef.current ? badgeRef.current.offsetWidth : 0
 
     return (
-      <Tooltip
-        content={tooltip}
-        disabled={!tooltip || width < 105}
-      >
+      <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
         <span
           className={cssClass(
             className,
@@ -44,11 +33,7 @@ const cssClass = styles(scss),
           )}
           ref={badgeRef}
         >
-          <span
-            className={cssClass(
-              tooltip ? 'badge-tooltip' : null
-            )}
-          >
+          <span className={cssClass(tooltip ? 'badge-tooltip' : null)}>
             {children}
           </span>
         </span>
@@ -74,10 +59,7 @@ badge.propTypes = {
   /**
    * Classname, default `badge`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Indicator (border-radius: 50px)
@@ -87,10 +69,7 @@ badge.propTypes = {
   /**
    * Tooltip
    */
-  tooltip: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    * Type

@@ -26,19 +26,11 @@ const cssClass = styles(scss),
     className,
     children
   }) => {
-    const errorClass = errors[name]
-        ? 'form--has-error'
-        : '',
-      filledClass = touched[name]
-        ? 'form-field--touched'
-        : ''
+    const errorClass = errors[name] ? 'form--has-error' : '',
+      filledClass = touched[name] ? 'form-field--touched' : ''
 
     return (
-      <div
-        className={`form-field ${
-          errorClass || filledClass
-        }`}
-      >
+      <div className={`form-field ${errorClass || filledClass}`}>
         <div className={scss.input__wrapper}>
           <select
             className={cssClass(className)}
@@ -86,10 +78,7 @@ select.propTypes = {
   /**
    * Classname, default `select`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Field
    */
@@ -97,10 +86,7 @@ select.propTypes = {
     name: PropTypes.string.isRequired,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }).isRequired,
   /**
    * Form

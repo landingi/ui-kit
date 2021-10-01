@@ -16,15 +16,7 @@ const cssClass = styles(scss),
    * @param {string} props.color - text color
    * @return {object} An object of children element
    */
-  heading = ({
-    children,
-    level,
-    align,
-    className,
-    margin,
-    bold,
-    color
-  }) => {
+  heading = ({ children, level, align, className, margin, bold, color }) => {
     const elementClasses = cssClass({
       'heading--bold': bold,
       'heading--center': align === 'center',
@@ -36,13 +28,7 @@ const cssClass = styles(scss),
     })
 
     return (
-      <span
-        className={cssClass(
-          className,
-          `h${level}`,
-          elementClasses
-        )}
-      >
+      <span className={cssClass(className, `h${level}`, elementClasses)}>
         {children}
       </span>
     )
@@ -77,10 +63,7 @@ heading.propTypes = {
   /**
    * Classname, default `heading`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Color - text color
@@ -90,8 +73,7 @@ heading.propTypes = {
   /**
    * Level
    */
-  level: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 'large'])
-    .isRequired,
+  level: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 'large']).isRequired,
 
   /**
    *Margin - bottom

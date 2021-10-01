@@ -15,11 +15,7 @@ const cssClass = styles(scss)
  * @param {bool} props.hasLabel - has label
  * @return {object} An object of children element
  */
-const showPassword = ({
-  className,
-  setHidden,
-  hasLabel
-}) => {
+const showPassword = ({ className, setHidden, hasLabel }) => {
   const [icon, setIcon] = useState('eye')
   const [label, setLabel] = useState('word.show')
   /**
@@ -38,16 +34,9 @@ const showPassword = ({
   })
 
   return (
-    <span
-      className={cssClass(className)}
-      onClick={handleIconSet}
-    >
+    <span className={cssClass(className)} onClick={handleIconSet}>
       {hasLabel ? (
-        <Button
-          hasIcon
-          size='tiny'
-          variant='switcher-brand'
-        >
+        <Button hasIcon size='tiny' variant='switcher-brand'>
           <FontAwesomeIcon icon={icon} />
 
           <FormattedMessage id={label} />
@@ -75,10 +64,7 @@ showPassword.propTypes = {
   /**
    * Classname, default `showpassword`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Label

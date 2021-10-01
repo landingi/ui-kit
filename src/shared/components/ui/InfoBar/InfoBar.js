@@ -26,9 +26,7 @@ const cssClass = styles(scss),
         : 'info'
 
     return (
-      <div
-        className={cssClass(className, `info-bar--${type}`)}
-      >
+      <div className={cssClass(className, `info-bar--${type}`)}>
         <div
           className={cssClass(
             className,
@@ -66,10 +64,7 @@ infoBar.propTypes = {
   /**
    * Classname, default `info-bar`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Type of notification `info, success, warning, alert`
    */

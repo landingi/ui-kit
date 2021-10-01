@@ -29,14 +29,10 @@ const cssClass = styles(scss),
     disabled
   }) => {
     const getDisabledClassName = () =>
-      checked
-        ? 'toggle--checked-disabled'
-        : 'toggle--disabled'
+      checked ? 'toggle--checked-disabled' : 'toggle--disabled'
 
     return (
-      <div
-        className={cssClass('toggle-container', className)}
-      >
+      <div className={cssClass('toggle-container', className)}>
         <label
           className={cssClass('toggle', {
             'toggle--checked': checked,
@@ -81,16 +77,10 @@ toggle.propTypes = {
   /**
    * Classname, default ''
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.objectOf
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired

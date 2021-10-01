@@ -43,11 +43,7 @@ function Tooltip({
 
   return (
     <>
-      <span
-        className={cssClass(className)}
-        data-for={tooltipUUID}
-        data-tip
-      >
+      <span className={cssClass(className)} data-for={tooltipUUID} data-tip>
         {children}
       </span>
 
@@ -94,10 +90,7 @@ Tooltip.propTypes = {
   /**
    * Tooltip content
    */
-  content: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    * Disable toolip
@@ -112,12 +105,7 @@ Tooltip.propTypes = {
   /**
    * Placement
    */
-  placement: PropTypes.oneOf([
-    'top',
-    'left',
-    'right',
-    'bottom'
-  ]),
+  placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
 
   /**
    * Show tooltip after click, tooltip is hidden after 1 sec

@@ -13,12 +13,7 @@ import Loader from '@components/ui/Loader'
 import Message from '@components/ui/Message/Message'
 import Overflow from '@components/ui/Overflow'
 import PropTypes from 'prop-types'
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import Searcher from 'shared/components/global/Searcher'
 import Spacer from '@components/ui/Spacer'
 import scss from './Select.scss'
@@ -77,13 +72,10 @@ const cssClass = styles(scss),
     liveChanges,
     optionalContent
   }) => {
-    const [inModalPosition, setInModalPosition] =
-        useState(false),
+    const [inModalPosition, setInModalPosition] = useState(false),
       errorClass = errors[name] ? 'form--has-error' : '',
       valueClass = value[name] ? 'form--has-value' : '',
-      filledClass = touched[name]
-        ? 'form-field--touched'
-        : '',
+      filledClass = touched[name] ? 'form-field--touched' : '',
       handleChange = useCallback((name, item) => {
         emitCloseDropdown()
         onChange(name, item)
@@ -120,10 +112,7 @@ const cssClass = styles(scss),
       renderOptions = () => (
         <>
           {emphasisedOptions.map((item, index) => (
-            <ListItem
-              className='list-item--dropdown'
-              key={index}
-            >
+            <ListItem className='list-item--dropdown' key={index}>
               {renderOption(item)}
             </ListItem>
           ))}
@@ -131,10 +120,7 @@ const cssClass = styles(scss),
           {!isEmpty(emphasisedOptions) && <Divider />}
 
           {options.map((item, index) => (
-            <ListItem
-              className='list-item--dropdown'
-              key={index}
-            >
+            <ListItem className='list-item--dropdown' key={index}>
               {renderOption(item)}
             </ListItem>
           ))}
@@ -147,9 +133,7 @@ const cssClass = styles(scss),
           errorClass || valueClass || filledClass
         }`}
       >
-        {label && hasLabel && (
-          <Label id={name}>{label}</Label>
-        )}
+        {label && hasLabel && <Label id={name}>{label}</Label>}
 
         <Dropdown
           alignment='spaced'
@@ -179,9 +163,7 @@ const cssClass = styles(scss),
           <Overflow>
             <div style={overflowStyle}>
               <List>
-                {!isLoading &&
-                isEmptyList &&
-                isEmpty(options) ? (
+                {!isLoading && isEmptyList && isEmpty(options) ? (
                   <Message
                     height={41}
                     message='message.empty.search.results.small'
@@ -220,10 +202,7 @@ select.displayName = 'Select in dropdown'
  * @type {Object}
  */
 select.propTypes = {
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   emphasisedOptions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.oneOfType([
@@ -244,10 +223,7 @@ select.propTypes = {
   hasLabel: PropTypes.bool,
   id: PropTypes.string.isRequired,
   inModal: PropTypes.bool,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Object)
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]),
   liveChanges: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,

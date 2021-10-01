@@ -36,8 +36,7 @@ const maskedInput = ({
 }) => {
   const { name, value, onChange, onBlur } = field,
     { errors, touched } = form,
-    errorClass =
-      errors[name] && touched[name] ? 'form--has-error' : ''
+    errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
@@ -84,10 +83,7 @@ maskedInput.propTypes = {
     name: PropTypes.string.isRequired,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }).isRequired,
 
   focused: PropTypes.string,
@@ -100,15 +96,9 @@ maskedInput.propTypes = {
   }).isRequired,
   guide: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(RegExp)
-    ])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
   ),
   maxLength: PropTypes.number,
   placeholder: PropTypes.string,

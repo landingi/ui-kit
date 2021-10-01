@@ -37,10 +37,7 @@ header.propTypes = {
   /**
    * Classname, default `drawer__header`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Show close icon
@@ -59,10 +56,7 @@ header.propTypes = {
   /**
    * Title
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]).isRequired
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 /**

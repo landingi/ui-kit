@@ -64,9 +64,7 @@ describe('<Steps /> mount', () => {
 
   it('has one next variant', () => {
     expect(
-      wrapper
-        .find('span.step__number--next')
-        .hasClass('step__number--next')
+      wrapper.find('span.step__number--next').hasClass('step__number--next')
     ).toBe(true)
     expect(
       wrapper

@@ -46,11 +46,7 @@ const useInfinityScroll = (
      */
     getData = async loadMore => {
       if (loadMore) {
-        const { data, meta } = await getTarget(
-          page,
-          limit,
-          sort
-        )
+        const { data, meta } = await getTarget(page, limit, sort)
 
         setMeta && setMeta(meta)
         setMetaCount(meta.total)
@@ -65,20 +61,14 @@ const useInfinityScroll = (
      * @param {array[]} data - list of data
      */
     handleStateUpdate = data => {
-      setData &&
-        setState(
-          [...state, ...data],
-          setData([...state, ...data])
-        )
+      setData && setState([...state, ...data], setData([...state, ...data]))
 
       setState([...state, ...data])
     },
     /**
      * IsLastPage- check if last page
      */
-    isLastPage = () =>
-      metaCount !== 0 &&
-      Math.ceil(metaCount / limit) === page
+    isLastPage = () => metaCount !== 0 && Math.ceil(metaCount / limit) === page
 
   /**
    * UseEffect hook - triggers getData() when setLoadmore() has been updated
@@ -97,11 +87,7 @@ const useInfinityScroll = (
       return
     }
 
-    if (
-      clientHeight <= innerHeight &&
-      clientHeight &&
-      !isLastPage()
-    ) {
+    if (clientHeight <= innerHeight && clientHeight && !isLastPage()) {
       setLoadMore(true)
       getData(loadMore)
     }
@@ -112,9 +98,7 @@ const useInfinityScroll = (
    * UseEffect hook - scroll listener
    */
   useEffect(() => {
-    document
-      .getElementById(elementId)
-      .addEventListener('scroll', handleScroll)
+    document.getElementById(elementId).addEventListener('scroll', handleScroll)
 
     return () => {
       document

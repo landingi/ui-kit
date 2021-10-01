@@ -52,10 +52,7 @@ image.propTypes = {
   /**
    * Size 100, 200 etc
    */
-  size: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * Asset url
    */

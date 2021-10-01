@@ -61,9 +61,7 @@ describe('<Notification/> mount', () => {
       type: 'alert'
     })
     expect(
-      wrapper
-        .find('div.notification--alert')
-        .hasClass('notification--alert')
+      wrapper.find('div.notification--alert').hasClass('notification--alert')
     ).toBe(true)
   })
 
@@ -72,9 +70,7 @@ describe('<Notification/> mount', () => {
       type: 'info'
     })
     expect(
-      wrapper
-        .find('div.notification--info')
-        .hasClass('notification--info')
+      wrapper.find('div.notification--info').hasClass('notification--info')
     ).toBe(true)
   })
 

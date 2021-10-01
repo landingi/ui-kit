@@ -67,12 +67,7 @@ const cssClass = styles(scss),
       }
 
     return (
-      <div
-        className={cssClass(
-          scss.input__wrapper,
-          elementClasses
-        )}
-      >
+      <div className={cssClass(scss.input__wrapper, elementClasses)}>
         <input
           className={cssClass(className)}
           id={name}
@@ -103,11 +98,7 @@ const cssClass = styles(scss),
 
         {label && (
           <Label className={scss.input__label} id={name}>
-            {translate ? (
-              <FormattedMessage id={`${label}`} />
-            ) : (
-              label
-            )}
+            {translate ? <FormattedMessage id={`${label}`} /> : label}
           </Label>
         )}
 
@@ -117,10 +108,7 @@ const cssClass = styles(scss),
             content={tooltip}
             placement='bottom'
           >
-            <FontAwesomeIcon
-              color='#2550AA'
-              icon='exclamation-circle'
-            />
+            <FontAwesomeIcon color='#2550AA' icon='exclamation-circle' />
           </Tooltip>
         )}
       </div>
@@ -146,10 +134,7 @@ input.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Deafult value
@@ -217,10 +202,7 @@ input.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    * Readonly
@@ -253,10 +235,7 @@ input.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 /**

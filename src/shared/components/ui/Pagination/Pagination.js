@@ -22,19 +22,11 @@ const cssClass = styles(scss),
    * @param {number} props.pageLimit - page limit
    * @return {object} An object of children element
    */
-  pagination = ({
-    className,
-    data,
-    goToPage,
-    activePageLimit,
-    pageLimit
-  }) => {
+  pagination = ({ className, data, goToPage, activePageLimit, pageLimit }) => {
     const { before_values, values, after_values } = data,
       { before, current, after } = values,
-      handleGoToPage = page =>
-        useCallback(() => goToPage(page), []),
-      hidePagination =
-        current[0] === 1 && !after_values.next
+      handleGoToPage = page => useCallback(() => goToPage(page), []),
+      hidePagination = current[0] === 1 && !after_values.next
 
     return (
       <div className={cssClass(className)}>
@@ -42,20 +34,14 @@ const cssClass = styles(scss),
           {!hidePagination && (
             <>
               <span className={scss.pagination__first}>
-                <Button
-                  onClick={handleGoToPage(1)}
-                  size='small'
-                  variant='icon'
-                >
+                <Button onClick={handleGoToPage(1)} size='small' variant='icon'>
                   <FormattedMessage id='pagination.word.first' />
                 </Button>
               </span>
 
               {!isEmpty(before_values) && (
                 <Button
-                  onClick={handleGoToPage(
-                    before_values.prev
-                  )}
+                  onClick={handleGoToPage(before_values.prev)}
                   size='small'
                   variant='icon'
                 >
@@ -78,9 +64,7 @@ const cssClass = styles(scss),
 
                 {current.map((item, index) => (
                   <ListItem
-                    className={
-                      scss.pagination__links__current
-                    }
+                    className={scss.pagination__links__current}
                     key={index}
                   >
                     <Button size='small' variant='icon'>
@@ -109,9 +93,7 @@ const cssClass = styles(scss),
               {after_values.next && (
                 <Button
                   isDisabled={isEmpty(after_values.next)}
-                  onClick={handleGoToPage(
-                    after_values.next
-                  )}
+                  onClick={handleGoToPage(after_values.next)}
                   size='small'
                   variant='icon'
                 >
@@ -122,10 +104,7 @@ const cssClass = styles(scss),
           )}
         </div>
 
-        <PageSize
-          activePageLimit={activePageLimit}
-          onChange={pageLimit}
-        />
+        <PageSize activePageLimit={activePageLimit} onChange={pageLimit} />
       </div>
     )
   }
@@ -149,10 +128,7 @@ pagination.propTypes = {
   /**
    * Classname, default `pagination`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    *  Data
@@ -166,10 +142,7 @@ pagination.propTypes = {
   /**
    * PageLimit
    */
-  pageLimit: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.array
-  ]).isRequired
+  pageLimit: PropTypes.oneOfType([PropTypes.func, PropTypes.array]).isRequired
 }
 
 /**

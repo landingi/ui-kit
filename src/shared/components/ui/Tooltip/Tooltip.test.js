@@ -3,10 +3,7 @@ import { mount } from 'enzyme'
 import Tooltip from '@components/ui/Tooltip'
 import ReactTooltip from 'react-tooltip'
 
-jest.mock(
-  'react-uuid/uuid',
-  () => () => '00000000-0000-0000-0000-000000000000'
-)
+jest.mock('react-uuid/uuid', () => () => '00000000-0000-0000-0000-000000000000')
 
 const props = {
   placement: 'bottom',
@@ -15,9 +12,7 @@ const props = {
   className: 'custom'
 }
 
-const tooltipComponent = (
-  <Tooltip {...props}>{props.children}</Tooltip>
-)
+const tooltipComponent = <Tooltip {...props}>{props.children}</Tooltip>
 
 describe('<Tooltip/> mount', () => {
   let wrapper
@@ -39,15 +34,11 @@ describe('<Tooltip/> mount', () => {
   })
 
   it('has wrapper component', () => {
-    expect(wrapper.find('span').hasClass('custom')).toBe(
-      true
-    )
+    expect(wrapper.find('span').hasClass('custom')).toBe(true)
   })
 
   it('has wrapper component with tip attribute', () => {
-    expect(wrapper.find('span').props()['data-tip']).toBe(
-      true
-    )
+    expect(wrapper.find('span').props()['data-tip']).toBe(true)
   })
 
   it('has wrapper component with `for` attribute', () => {

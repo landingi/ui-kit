@@ -37,8 +37,6 @@ describe('<ShowPassword/> mount', () => {
       hasLabel: true
     })
 
-    expect(wrapper.find(FormattedMessage).text()).toEqual(
-      'Show'
-    )
+    expect(wrapper.find(FormattedMessage).text()).toEqual('Show')
   })
 })

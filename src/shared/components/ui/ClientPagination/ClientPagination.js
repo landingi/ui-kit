@@ -32,17 +32,12 @@ const cssClass = styles(scss),
     pageLimit,
     constantPageLimit
   }) => {
-    const handleGoToPage = page =>
-        useCallback(() => goToPage(page), []),
+    const handleGoToPage = page => useCallback(() => goToPage(page), []),
       renderPagination = () =>
         pageCount !== 1 && (
           <>
             <span className={scss.pagination__first}>
-              <Button
-                onClick={handleGoToPage(0)}
-                size='small'
-                variant='icon'
-              >
+              <Button onClick={handleGoToPage(0)} size='small' variant='icon'>
                 <FormattedMessage id='pagination.word.first' />
               </Button>
             </span>
@@ -160,15 +155,10 @@ const cssClass = styles(scss),
 
     return (
       <div className={cssClass(className)}>
-        <div className={scss.pagination__links}>
-          {renderPagination()}
-        </div>
+        <div className={scss.pagination__links}>{renderPagination()}</div>
 
         {constantPageLimit === 0 && (
-          <PageSize
-            activePageLimit={activePageLimit}
-            onChange={pageLimit}
-          />
+          <PageSize activePageLimit={activePageLimit} onChange={pageLimit} />
         )}
       </div>
     )
@@ -193,10 +183,7 @@ pagination.propTypes = {
   /**
    * Classname, default `pagination`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * ConstantPageLimit

@@ -66,10 +66,8 @@ const button = ({
     'button--secondary': variant === 'secondary',
     'button--dropdown': variant === 'dropdown',
     'button--transparent': variant === 'transparent',
-    'button--transparent-blue':
-      variant === 'transparent-blue',
-    'button--dropdown-element':
-      variant === 'dropdown-element',
+    'button--transparent-blue': variant === 'transparent-blue',
+    'button--dropdown-element': variant === 'dropdown-element',
     'dropdown button--switcher': variant === 'switcher',
     'button--switcher-brand': variant === 'switcher-brand',
     'button--tabs': variant === 'tabs',
@@ -101,9 +99,7 @@ const button = ({
         Tag === 'button'
           ? cssClass('button', elementClasses, className)
           : cssClass(
-              buttonStyle
-                ? ['button', elementClasses]
-                : 'link',
+              buttonStyle ? ['button', elementClasses] : 'link',
               className
             )
       }
@@ -133,10 +129,7 @@ button.propTypes = {
   /**
    * The tag or component to be used e.g. button, a, Link
    */
-  tag: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /**
    * The text for the button
    */
@@ -148,29 +141,15 @@ button.propTypes = {
   /**
    * Link title
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * The target for the button
    */
-  target: PropTypes.oneOf([
-    '_self',
-    '_blank',
-    '_parent',
-    '_top'
-  ]),
+  target: PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
   /**
    * Size
    */
-  size: PropTypes.oneOf([
-    'tiny',
-    'small',
-    'medium',
-    'large',
-    'input'
-  ]),
+  size: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'input']),
   /**
    * Variant
    */
@@ -195,10 +174,7 @@ button.propTypes = {
   /**
    * Classname, default `button`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Link
    */

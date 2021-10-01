@@ -15,19 +15,9 @@ const cssClass = styles(scss),
    * @param {string} props.limitText - limit type info
    * @return {object} An object of children element
    */
-  limitSmall = ({
-    padding,
-    limit,
-    quantity,
-    limitText
-  }) => {
+  limitSmall = ({ padding, limit, quantity, limitText }) => {
     return (
-      <div
-        className={cssClass(
-          'result__dropdown',
-          `padding__${padding}`
-        )}
-      >
+      <div className={cssClass('result__dropdown', `padding__${padding}`)}>
         <span>
           <FormattedMessage id={limitText} />
         </span>

@@ -48,10 +48,7 @@ Accordion.propTypes = {
   /**
    * Classname
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Data
    */

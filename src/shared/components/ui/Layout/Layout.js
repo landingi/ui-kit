@@ -13,12 +13,7 @@ const cssClass = styles(scss),
    * @return {object} An object of children element
    */
   layout = ({ className, children, width }) => (
-    <div
-      className={cssClass(
-        className,
-        `layout-width--${width}`
-      )}
-    >
+    <div className={cssClass(className, `layout-width--${width}`)}>
       {children}
     </div>
   )
@@ -41,10 +36,7 @@ layout.propTypes = {
   /**
    * Classname, default `layout`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    *Width default: `full`
    */

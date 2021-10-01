@@ -4,8 +4,6 @@ import { breakpoints } from '@constants/breakpoints'
 
 describe('Helpers isMediaQuery()', () => {
   it('returns boolean', () => {
-    expect(typeof isMediaQuery(breakpoints.mobile)).toBe(
-      'boolean'
-    )
+    expect(typeof isMediaQuery(breakpoints.mobile)).toBe('boolean')
   })
 })

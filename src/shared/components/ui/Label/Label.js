@@ -14,23 +14,21 @@ const cssClass = styles(scss),
    * @param {bool} props.toogle - toogle change
    * @return {object} An object of children element
    */
-  label = memo(
-    ({ children, className, id, isToogle, toogle }) => (
-      <label
-        className={cssClass(
-          className,
-          isToogle
-            ? toogle
-              ? 'label--active'
-              : 'label--inactive'
-            : 'label--normal'
-        )}
-        id={id}
-      >
-        {children}
-      </label>
-    )
-  )
+  label = memo(({ children, className, id, isToogle, toogle }) => (
+    <label
+      className={cssClass(
+        className,
+        isToogle
+          ? toogle
+            ? 'label--active'
+            : 'label--inactive'
+          : 'label--normal'
+      )}
+      id={id}
+    >
+      {children}
+    </label>
+  ))
 
 /**
  * Display name
@@ -50,10 +48,7 @@ label.propTypes = {
   /**
    * Classname, default `label`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Id
    */

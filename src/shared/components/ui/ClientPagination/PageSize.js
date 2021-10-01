@@ -66,10 +66,7 @@ pageSize.propTypes = {
   /**
    * Classname, default `per-page`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Gets called when input changes
    *

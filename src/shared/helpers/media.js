@@ -18,8 +18,5 @@ export const isScreenSizeBetweenBreakpoints = (
 ) => {
   if (leftBreakpoint > rightBreakpoint) return false
 
-  return (
-    !isMediaQuery(leftBreakpoint) &&
-    isMediaQuery(rightBreakpoint)
-  )
+  return !isMediaQuery(leftBreakpoint) && isMediaQuery(rightBreakpoint)
 }

@@ -25,14 +25,7 @@ const cssClass = styles(scss)
  * @param {func} props.onClick - button action
  * @return {object} An object of children element
  */
-function InfoSection({
-  className,
-  title,
-  list,
-  url,
-  button,
-  onClick
-}) {
+function InfoSection({ className, title, list, url, button, onClick }) {
   const renderList = useMemo(
     () => (
       <List listStyle='ordered-check'>
@@ -90,10 +83,7 @@ InfoSection.propTypes = {
   /**
    * Classname, default `info-section`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * List of items

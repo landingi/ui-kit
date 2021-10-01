@@ -32,9 +32,7 @@ describe('<InfoSection /> mount', () => {
   })
 
   it('has `info-section` class', () => {
-    expect(
-      wrapper.find('div').first().hasClass('info-section')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('info-section')).toBe(true)
   })
 
   it('expect "Let your landing page go live!"', () => {

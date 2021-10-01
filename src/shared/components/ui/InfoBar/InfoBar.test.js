@@ -9,9 +9,7 @@ const props = {
   children: 'Info Bar'
 }
 
-const infoBarComponent = (
-  <InfoBar {...props}>{props.children}</InfoBar>
-)
+const infoBarComponent = <InfoBar {...props}>{props.children}</InfoBar>
 
 describe('<InfoBar /> mount', () => {
   let wrapper
@@ -37,9 +35,7 @@ describe('<InfoBar /> mount', () => {
       type: 'alert'
     })
     expect(
-      wrapper
-        .find('div.info-bar--alert')
-        .hasClass('info-bar--alert')
+      wrapper.find('div.info-bar--alert').hasClass('info-bar--alert')
     ).toBe(true)
   })
 
@@ -47,11 +43,9 @@ describe('<InfoBar /> mount', () => {
     wrapper.setProps({
       type: 'info'
     })
-    expect(
-      wrapper
-        .find('div.info-bar--info')
-        .hasClass('info-bar--info')
-    ).toBe(true)
+    expect(wrapper.find('div.info-bar--info').hasClass('info-bar--info')).toBe(
+      true
+    )
   })
 
   it('is warning', () => {
@@ -59,9 +53,7 @@ describe('<InfoBar /> mount', () => {
       type: 'warning'
     })
     expect(
-      wrapper
-        .find('div.info-bar--warning')
-        .hasClass('info-bar--warning')
+      wrapper.find('div.info-bar--warning').hasClass('info-bar--warning')
     ).toBe(true)
   })
 })

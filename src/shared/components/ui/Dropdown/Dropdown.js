@@ -1,9 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormattedMessage } from 'react-intl'
-import {
-  centerParent,
-  getBoundings
-} from '@helpers/position'
+import { centerParent, getBoundings } from '@helpers/position'
 import PropTypes from 'prop-types'
 import React, { Fragment, PureComponent } from 'react'
 import Tooltip from '@components/ui/Tooltip'
@@ -133,10 +130,7 @@ class Dropdown extends PureComponent {
     /**
      * Classname, default `dropdown`
      */
-    className: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array
-    ]),
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
     /**
      * Dropdown placement, default `left`
@@ -190,10 +184,7 @@ class Dropdown extends PureComponent {
     /**
      * Label
      */
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object
-    ]),
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
     /**
      * Navlink
@@ -310,18 +301,12 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   handlePosition = () => {
-    const {
-        offset,
-        dropdownPlacement,
-        renderAsSmaller,
-        size,
-        inModal
-      } = this.props,
+    const { offset, dropdownPlacement, renderAsSmaller, size, inModal } =
+        this.props,
       container = getBoundings(this.containerRef.current),
       dropdown = getBoundings(this.dropdownRef.current),
       renderAbove =
-        window.innerHeight <=
-        dropdown?.height + container?.top + offset
+        window.innerHeight <= dropdown?.height + container?.top + offset
 
     if (inModal) {
       this.setState({
@@ -346,11 +331,7 @@ class Dropdown extends PureComponent {
           left:
             dropdownPlacement === 'left'
               ? (renderAsSmaller
-                  ? centerParent(
-                      container?.width,
-                      480,
-                      container?.left
-                    )
+                  ? centerParent(container?.width, 480, container?.left)
                   : centerParent(
                       container?.width,
                       dropdown?.width,
@@ -374,11 +355,7 @@ class Dropdown extends PureComponent {
           left:
             dropdownPlacement === 'left'
               ? (renderAsSmaller
-                  ? centerParent(
-                      container?.width,
-                      240,
-                      container?.left
-                    )
+                  ? centerParent(container?.width, 240, container?.left)
                   : centerParent(
                       container?.width,
                       dropdown?.width,
@@ -416,13 +393,7 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownWithTooltip = () => {
-    const {
-        icon,
-        tooltip,
-        tooltipPlacement,
-        hasArrow,
-        arrowType
-      } = this.props,
+    const { icon, tooltip, tooltipPlacement, hasArrow, arrowType } = this.props,
       { isOpen } = this.state
 
     return (
@@ -492,15 +463,8 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownWithButton = () => {
-    const {
-        label,
-        icon,
-        hasArrow,
-        arrowType,
-        alignment,
-        handleOnClick,
-        link
-      } = this.props,
+    const { label, icon, hasArrow, arrowType, alignment, handleOnClick, link } =
+        this.props,
       { isOpen } = this.state
 
     return (
@@ -513,10 +477,7 @@ class Dropdown extends PureComponent {
         )}
         onClick={handleOnClick}
       >
-        <NavLink
-          activeClassName='groups--selected'
-          to={link}
-        >
+        <NavLink activeClassName='groups--selected' to={link}>
           {icon && this.renderIcon()}
 
           {label && this.renderLabel()}
@@ -525,10 +486,7 @@ class Dropdown extends PureComponent {
         </NavLink>
 
         <span
-          className={cssClass(
-            'dropdown__wrapper',
-            'dropdown__wrapper__icon'
-          )}
+          className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
           onClick={this.handleShow}
           ref={this.containerRef}
         >
@@ -563,9 +521,7 @@ class Dropdown extends PureComponent {
         ref={this.dropdownRef}
         style={style}
       >
-        <div className={cssClass('dropdown__body')}>
-          {children}
-        </div>
+        <div className={cssClass('dropdown__body')}>{children}</div>
       </div>
     )
   }
@@ -638,14 +594,8 @@ class Dropdown extends PureComponent {
    */
   componentDidMount() {
     window.addEventListener('mousedown', this.handleClose)
-    window.addEventListener(
-      'scroll',
-      throttle(this.handleClose, 500)
-    )
-    window.addEventListener(
-      'resize',
-      debounce(this.handleResize, 100)
-    )
+    window.addEventListener('scroll', throttle(this.handleClose, 500))
+    window.addEventListener('resize', debounce(this.handleResize, 100))
 
     emitter.on(CLOSE_DROPDOWN, this.makeClose)
   }
@@ -656,10 +606,7 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   componentWillUnmount() {
-    window.removeEventListener(
-      'mousedown',
-      this.handleClose
-    )
+    window.removeEventListener('mousedown', this.handleClose)
     window.removeEventListener('scroll', this.handleClose)
     window.removeEventListener('resize', this.handleResize)
 

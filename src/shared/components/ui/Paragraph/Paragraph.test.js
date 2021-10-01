@@ -6,9 +6,7 @@ const props = {
   children: 'placeholder'
 }
 
-const paragraphComponent = (
-  <Paragraph {...props}>{props.children}</Paragraph>
-)
+const paragraphComponent = <Paragraph {...props}>{props.children}</Paragraph>
 
 describe('<Paragraph/> mount', () => {
   let wrapper

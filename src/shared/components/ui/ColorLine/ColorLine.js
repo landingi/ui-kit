@@ -39,12 +39,7 @@ colorLine.propTypes = {
   /**
    * Variant
    */
-  variant: PropTypes.oneOf([
-    'alert',
-    'warning',
-    'success',
-    'info'
-  ]).isRequired
+  variant: PropTypes.oneOf(['alert', 'warning', 'success', 'info']).isRequired
 }
 
 /**

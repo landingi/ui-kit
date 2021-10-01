@@ -5,9 +5,7 @@ import { mountWithIntl } from '@jestutils'
 
 registerIcons()
 
-const limitComponent = (
-  <LimitQuantity limit={1000} quantity={100} />
-)
+const limitComponent = <LimitQuantity limit={1000} quantity={100} />
 
 describe('<LimitQuantity /> mount', () => {
   let wrapper
@@ -25,23 +23,17 @@ describe('<LimitQuantity /> mount', () => {
   })
 
   it('limit should be ` / 30 000`', () => {
-    expect(
-      wrapper.find('.limit-quantity--limit').text()
-    ).toEqual(' / 1 000')
+    expect(wrapper.find('.limit-quantity--limit').text()).toEqual(' / 1 000')
   })
 
   it('limit should be infinity', () => {
     wrapper.setProps({
       limit: -1
     })
-    expect(
-      wrapper.find('.limit-quantity--limit').text()
-    ).toEqual(' / ∞')
+    expect(wrapper.find('.limit-quantity--limit').text()).toEqual(' / ∞')
   })
 
   it('quantity should be `100`', () => {
-    expect(wrapper.find('.limit-quantity').text()).toEqual(
-      '100 / 1 000'
-    )
+    expect(wrapper.find('.limit-quantity').text()).toEqual('100 / 1 000')
   })
 })

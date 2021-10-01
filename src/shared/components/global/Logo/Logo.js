@@ -38,9 +38,7 @@ function LongLogo() {
         />
 
         <rect
-          className={cssClass(
-            isSafari ? 'rectangle_safari' : 'rectangle'
-          )}
+          className={cssClass(isSafari ? 'rectangle_safari' : 'rectangle')}
           fill='#2550AA'
           height='20.1'
           transform='matrix(.7071 -.7071 .7071 .7071 -5.3426 11.257)'
@@ -71,9 +69,7 @@ function ShortLogo() {
         xmlns='http://www.w3.org/2000/svg'
       >
         <rect
-          className={cssClass(
-            isSafari ? 'rectangle_safari' : 'rectangle'
-          )}
+          className={cssClass(isSafari ? 'rectangle_safari' : 'rectangle')}
           fill='#2550AA'
           height='20.1'
           transform='matrix(.7071 -.7071 .7071 .7071 -5.3426 11.257)'

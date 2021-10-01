@@ -1,8 +1,6 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -38,8 +36,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              additionalData:
-                '@import "shared/styles/theme.scss";',
+              additionalData: '@import "shared/styles/theme.scss";',
               sassOptions: {
                 includePaths: [__dirname, 'src']
               }

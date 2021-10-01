@@ -4,13 +4,7 @@ import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Input from '@components/ui/Input'
 import PropTypes from 'prop-types'
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import scss from './Search.scss'
 
 /**
@@ -100,17 +94,14 @@ function Search({
      * @type {function}
      */
     handleProtectedSubmit = useCallback(event => {
-      onProtectedSubmit &&
-        onProtectedSubmit(inputRef.current.value)
+      onProtectedSubmit && onProtectedSubmit(inputRef.current.value)
     }, [])
 
   /**
    * UseEffect
    */
   useEffect(() => {
-    autoFocus &&
-      variant === 'input' &&
-      inputRef.current.focus()
+    autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
   const elementClasses = cssClass({
@@ -120,13 +111,7 @@ function Search({
 
   return (
     <Tag onSubmit={handleSubmit}>
-      <div
-        className={cssClass(
-          className,
-          elementClasses,
-          `search--${size}`
-        )}
-      >
+      <div className={cssClass(className, elementClasses, `search--${size}`)}>
         {variant === 'input' &&
           (onSubmit || onProtectedSubmit ? (
             <div className={scss.search__icon_button}>
@@ -134,9 +119,7 @@ function Search({
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
                 size='input'
-                type={
-                  onProtectedSubmit ? 'button' : 'submit'
-                }
+                type={onProtectedSubmit ? 'button' : 'submit'}
                 variant='icon'
               >
                 <FontAwesomeIcon icon='search' />
@@ -177,11 +160,7 @@ function Search({
 
         {isClearActive && variant === 'input' && (
           <div className={scss.search__clean}>
-            <Button
-              onClick={handleCleanOnClick}
-              size='input'
-              variant='icon'
-            >
+            <Button onClick={handleCleanOnClick} size='input' variant='icon'>
               <FontAwesomeIcon icon='times' size='sm' />
             </Button>
           </div>
@@ -255,10 +234,7 @@ Search.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    *  Size of search input `small, medium, large`

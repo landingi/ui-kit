@@ -17,16 +17,13 @@ const cssClass = styles(scss),
     const elementClasses = cssClass({
       'list--inline': variant === 'inline',
       'list--ordered-check': listStyle === 'ordered-check',
-      'list--ordered-decimal':
-        listStyle === 'ordered-decimal',
+      'list--ordered-decimal': listStyle === 'ordered-decimal',
       'list--ordered-disc': listStyle === 'ordered-disc'
     })
 
     return (
       <ul className={cssClass(className, elementClasses)}>
-        {React.Children.toArray(children).filter(
-          item => item
-        )}
+        {React.Children.toArray(children).filter(item => item)}
       </ul>
     )
   }
@@ -50,10 +47,7 @@ list.propTypes = {
   /**
    * Classname, default `list`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Classname, default `list`

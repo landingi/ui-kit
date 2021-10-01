@@ -102,16 +102,11 @@ const ModalAnimation = posed.div({
         <div className={scss.modal__header}>
           {title && <ModalHeader title={title} />}
 
-          {image && (
-            <Image height={20} size='auto' src={image} />
-          )}
+          {image && <Image height={20} size='auto' src={image} />}
 
           <div>
             {isMarkAsSpamVisible && (
-              <Button
-                onClick={onMarkAsSpam}
-                variant='transparent'
-              >
+              <Button onClick={onMarkAsSpam} variant='transparent'>
                 <FontAwesomeIcon icon='ban' />
 
                 <FormattedMessage id='word.mark-as-spam' />
@@ -132,11 +127,7 @@ const ModalAnimation = posed.div({
       ),
       renderComponent = () => (
         <div className={cssClass('modal__component')}>
-          <div
-            className={cssClass('modal__component--child')}
-          >
-            {component}
-          </div>
+          <div className={cssClass('modal__component--child')}>{component}</div>
 
           {isClosable && <Close onClick={onClick} />}
         </div>
@@ -146,10 +137,7 @@ const ModalAnimation = posed.div({
       <>
         <PoseGroup animateOnMount flipMove={false}>
           {isActive && (
-            <ModalAnimation
-              className={scss.dialog}
-              key='ModalAnimation'
-            >
+            <ModalAnimation className={scss.dialog} key='ModalAnimation'>
               <div
                 className={cssClass(className, {
                   'modal--center': isCentered,
@@ -162,13 +150,8 @@ const ModalAnimation = posed.div({
                   </div>
                 ) : (
                   <>
-                    {(isClosable ||
-                      title ||
-                      image ||
-                      isEditable) &&
-                      (!isComponent
-                        ? renderTitle()
-                        : renderComponent())}
+                    {(isClosable || title || image || isEditable) &&
+                      (!isComponent ? renderTitle() : renderComponent())}
 
                     {hasHeaderDivider && (
                       <>
@@ -188,16 +171,12 @@ const ModalAnimation = posed.div({
                       <ModalFooter align='right'>
                         {hasCustomButton ? (
                           <Button
-                            isDisabled={
-                              isCustomButtonDisabled
-                            }
+                            isDisabled={isCustomButtonDisabled}
                             onClick={onClickCustomButton}
                             size='medium'
                             variant='secondary'
                           >
-                            <FormattedMessage
-                              id={`${i18Cancel}`}
-                            />
+                            <FormattedMessage id={`${i18Cancel}`} />
                           </Button>
                         ) : (
                           <Button
@@ -205,9 +184,7 @@ const ModalAnimation = posed.div({
                             size='medium'
                             variant='secondary'
                           >
-                            <FormattedMessage
-                              id={`${i18Cancel}`}
-                            />
+                            <FormattedMessage id={`${i18Cancel}`} />
                           </Button>
                         )}
 
@@ -217,21 +194,14 @@ const ModalAnimation = posed.div({
                           isLoading={isButtonLoading}
                           onClick={onAction}
                           size='medium'
-                          type={
-                            isSubmit ? 'submit' : 'button'
-                          }
+                          type={isSubmit ? 'submit' : 'button'}
                           variant={actionVariant}
                         >
                           {actionIcon && (
-                            <FontAwesomeIcon
-                              icon={actionIcon}
-                              size='xs'
-                            />
+                            <FontAwesomeIcon icon={actionIcon} size='xs' />
                           )}
 
-                          <FormattedMessage
-                            id={`${i18Action}`}
-                          />
+                          <FormattedMessage id={`${i18Action}`} />
                         </Button>
                       </ModalFooter>
                     )}
@@ -276,10 +246,7 @@ modal.propTypes = {
   /**
    * Classname, default `modal`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Component

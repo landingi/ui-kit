@@ -2,13 +2,8 @@ import { isInViewVertical } from '@helpers/position'
 import { throttle } from '@helpers/events'
 import { useEffect, useState } from 'react'
 
-export default ({
-  activeSectionDefault = 0,
-  sectionElementRefs = []
-}) => {
-  const [activeSection, setActiveSection] = useState(
-      activeSectionDefault
-    ),
+export default ({ activeSectionDefault = 0, sectionElementRefs = [] }) => {
+  const [activeSection, setActiveSection] = useState(activeSectionDefault),
     handle = () => {
       let currentSectionId = activeSection
 
