@@ -18,9 +18,8 @@
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: true
-    setup_commands:
-    - "yarn install"
     execute_commands:
+    - "yarn install"
     - "yarn run cd"
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CD"
