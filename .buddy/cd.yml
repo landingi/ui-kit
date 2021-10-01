@@ -16,7 +16,7 @@
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
-    docker_image_tag: "16.9.1-alpine3.14"
+    docker_image_tag: "16.10.0"
     cache_base_image: true
     setup_commands:
     - "yarn global add codecov"
