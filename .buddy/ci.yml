@@ -18,8 +18,8 @@
     setup_commands:
     - "yarn install"
     execute_commands:
-    - "yarn run lint"
-    - "yarn run test"
+    - "yarn lint"
+    - "yarn test --ci"
     shell: "SH"
   - action: "Run CD"
     type: "RUN_NEXT_PIPELINE"

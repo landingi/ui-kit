@@ -15,7 +15,7 @@
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: false
     execute_commands:
-    - "yarn run docz:build"
+    - "yarn docz:build"
     setup_commands:
     - "yarn install"
     shell: "SH"

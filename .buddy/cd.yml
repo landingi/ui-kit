@@ -12,15 +12,19 @@
     trigger_variable_value: "[deploy]"
     trigger_variable_key: "BUDDY_EXECUTION_REVISION_MESSAGE"
   actions:
-  - action: "Execute: yarn run cd"
+  - action: "Execute: yarn run cd and codecov"
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: true
-    execute_commands:
+    setup_commands:
+    - "yarn install codecov -g"
     - "yarn install"
-    - "yarn run cd"
+    execute_commands:
+    - "yarn cd"
+    - "yarn test:coverage"
+    - "codecov"
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CD"
     type: "SLACK"

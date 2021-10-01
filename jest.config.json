@@ -1,6 +1,11 @@
 {
   "automock": false,
   "maxWorkers": "50%",
+  "maxConcurrency": 30,
+  "displayName": {
+    "name": "UI-KIT",
+    "color": "magenta"
+  },
   "errorOnDeprecated": true,
   "setupFiles": [
     "<rootDir>/config/tests/jest/setup/setupTests.js",
@@ -20,11 +25,11 @@
     "!src/client/**/*.{js}",
     "!**/node_modules/**"
   ],
-  "testEnvironment": "jsdom",
-  "testRunner": "jest-jasmine2",
   "coverageReporters": [
     "json-summary",
     "text",
     "lcov"
-  ]
+  ],
+  "testEnvironment": "jsdom",
+  "testRunner": "jest-jasmine2"
 }
