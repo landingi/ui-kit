@@ -28,10 +28,7 @@ const item = ({ item, onClick }) => {
       </Button>
 
       <div>
-        {children &&
-          children.map(item => (
-            <Item item={item} key={uuid()} />
-          ))}
+        {children && children.map(item => <Item item={item} key={uuid()} />)}
       </div>
     </ListItem>
   )

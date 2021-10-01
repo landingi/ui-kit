@@ -21,9 +21,7 @@ describe('<ColorLine /> mount', () => {
 
   it('has verical align', () => {
     expect(wrapper.prop('alignment')).toBe('vertical')
-    expect(
-      wrapper.find('span').hasClass('color-line--vertical')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('color-line--vertical')).toBe(true)
   })
 
   it('has horizontal align', () => {
@@ -31,34 +29,24 @@ describe('<ColorLine /> mount', () => {
       alignment: 'horizontal'
     })
     expect(wrapper.prop('alignment')).toBe('horizontal')
-    expect(
-      wrapper
-        .find('span')
-        .hasClass('color-line--horizontal')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('color-line--horizontal')).toBe(true)
   })
 
   it('has success variant', () => {
-    expect(
-      wrapper.find('span').hasClass('color-line--success')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('color-line--success')).toBe(true)
   })
 
   it('has warning variant', () => {
     wrapper.setProps({
       variant: 'warning'
     })
-    expect(
-      wrapper.find('span').hasClass('color-line--warning')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('color-line--warning')).toBe(true)
   })
 
   it('has alert variant', () => {
     wrapper.setProps({
       variant: 'alert'
     })
-    expect(
-      wrapper.find('span').hasClass('color-line--alert')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('color-line--alert')).toBe(true)
   })
 })

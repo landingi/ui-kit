@@ -58,12 +58,7 @@ const cssClass = styles(scss),
     })
 
     return (
-      <div
-        className={cssClass(
-          scss.input__wrapper,
-          elementClasses
-        )}
-      >
+      <div className={cssClass(scss.input__wrapper, elementClasses)}>
         <MaskedInput
           autoFocus={autoFocus}
           className={cssClass(className)}
@@ -97,11 +92,7 @@ const cssClass = styles(scss),
 
         {label && (
           <Label className={scss.input__label} id={name}>
-            {translate ? (
-              <FormattedMessage id={`${label}`} />
-            ) : (
-              label
-            )}
+            {translate ? <FormattedMessage id={`${label}`} /> : label}
           </Label>
         )}
       </div>
@@ -127,10 +118,7 @@ maskedInput.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Diabled
@@ -144,10 +132,7 @@ maskedInput.propTypes = {
     name: PropTypes.string.isRequired,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }).isRequired,
 
   /**
@@ -174,10 +159,7 @@ maskedInput.propTypes = {
   label: PropTypes.string,
 
   mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(RegExp)
-    ])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
   ),
 
   /**
@@ -217,10 +199,7 @@ maskedInput.propTypes = {
   /**
    * Placeholder
    */
-  placeholder: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    * Readonly
@@ -240,10 +219,7 @@ maskedInput.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 /**

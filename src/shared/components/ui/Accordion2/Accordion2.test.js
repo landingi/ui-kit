@@ -26,9 +26,7 @@ const propsAccordionItem = {
 }
 
 const accordionComponent = <Accordion {...propsAccordion} />
-const accordionItemComponent = (
-  <AccordionItem {...propsAccordionItem} />
-)
+const accordionItemComponent = <AccordionItem {...propsAccordionItem} />
 
 describe('<Accordion /> mount', () => {
   let wrapper
@@ -70,20 +68,14 @@ describe('<AccordionItem /> mount', () => {
   })
 
   it('has `accordion__item--content-close` class', () => {
-    expect(
-      wrapper.hasClass('accordion__item--content-close')
-    ).toBe(false)
+    expect(wrapper.hasClass('accordion__item--content-close')).toBe(false)
   })
 
   it('has `accordion__item--content-open` class', () => {
-    wrapper
-      .find('.accordion__item--title')
-      .simulate('click')
+    wrapper.find('.accordion__item--title').simulate('click')
 
     wrapper.update()
 
-    expect(
-      wrapper.hasClass('accordion__item--content-open')
-    ).toBe(false)
+    expect(wrapper.hasClass('accordion__item--content-open')).toBe(false)
   })
 })

@@ -11,9 +11,7 @@ const props = {
 }
 
 const overflowComponent = (
-  <OverflowTooltip {...props}>
-    {props.children}
-  </OverflowTooltip>
+  <OverflowTooltip {...props}>{props.children}</OverflowTooltip>
 )
 
 describe('<OverflowTooltip/> mount', () => {
@@ -46,19 +44,12 @@ describe('<OverflowTooltip/> mount', () => {
     })
 
     expect(
-      wrapper
-        .find('.overflow-tooltip div div')
-        .first()
-        .text() +
+      wrapper.find('.overflow-tooltip div div').first().text() +
         wrapper.find('.overflow-tooltip span').text()
     ).toEqual('foo...child')
     expect(wrapper.find(Tooltip).length).toBe(1)
-    expect(wrapper.find(Tooltip).props().content).toEqual(
-      props.content
-    )
-    expect(wrapper.find(Tooltip).props().align).toEqual(
-      props.placement
-    )
+    expect(wrapper.find(Tooltip).props().content).toEqual(props.content)
+    expect(wrapper.find(Tooltip).props().align).toEqual(props.placement)
   })
 
   it('renders only trimmed text if there are no children', () => {
@@ -67,15 +58,9 @@ describe('<OverflowTooltip/> mount', () => {
       children: null
     })
 
-    expect(
-      wrapper.find('.overflow-tooltip span').text()
-    ).toEqual('foo...')
+    expect(wrapper.find('.overflow-tooltip span').text()).toEqual('foo...')
     expect(wrapper.find(Tooltip).length).toBe(1)
-    expect(wrapper.find(Tooltip).props().content).toEqual(
-      props.content
-    )
-    expect(wrapper.find(Tooltip).props().align).toEqual(
-      props.placement
-    )
+    expect(wrapper.find(Tooltip).props().content).toEqual(props.content)
+    expect(wrapper.find(Tooltip).props().align).toEqual(props.placement)
   })
 })

@@ -21,9 +21,7 @@ const props = {
   onClick: onClick
 }
 
-const buttonComponent = (
-  <Button {...props}>{props.children}</Button>
-)
+const buttonComponent = <Button {...props}>{props.children}</Button>
 
 describe('<Button/> mount', () => {
   let wrapper
@@ -49,9 +47,7 @@ describe('<Button/> mount', () => {
       isLoading: true
     })
 
-    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(
-      true
-    )
+    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(true)
   })
 
   it('when prop isLoading is false, spinner is not visible', () => {
@@ -59,9 +55,7 @@ describe('<Button/> mount', () => {
       isLoading: false
     })
 
-    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(
-      false
-    )
+    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(false)
   })
 
   it('renders text', () => {
@@ -103,18 +97,14 @@ describe('<Button/> mount as a link', () => {
     wrapper.setProps({
       title: 'Title test'
     })
-    expect(wrapper.children().prop('title')).toBe(
-      'Title test'
-    )
+    expect(wrapper.children().prop('title')).toBe('Title test')
   })
 
   it('has href', () => {
     wrapper.setProps({
       href: 'http://wwww.google.com'
     })
-    expect(wrapper.children().prop('href')).toBe(
-      'http://wwww.google.com'
-    )
+    expect(wrapper.children().prop('href')).toBe('http://wwww.google.com')
   })
 
   it('has target', () => {
@@ -125,8 +115,6 @@ describe('<Button/> mount as a link', () => {
   })
 
   it('is target false', () => {
-    expect(wrapper.children().prop('target')).toBe(
-      undefined
-    )
+    expect(wrapper.children().prop('target')).toBe(undefined)
   })
 })

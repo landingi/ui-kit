@@ -26,21 +26,14 @@ const AccordionSection = ({
   hasExpand
 }) => (
   <div className={scss.accordion}>
-    <div
-      className={scss.accordion__header}
-      onClick={handleOnClick}
-    >
+    <div className={scss.accordion__header} onClick={handleOnClick}>
       <div>{label}</div>
 
       <div>
         {hasExpand &&
           (arrowLabel ? (
             <Button variant={variant} size='small'>
-              <span
-                className={cssClass(
-                  'accordion__header-arrow'
-                )}
-              >
+              <span className={cssClass('accordion__header-arrow')}>
                 {isOpen ? (
                   <FontAwesomeIcon icon='chevron-up' />
                 ) : (
@@ -53,17 +46,12 @@ const AccordionSection = ({
           ) : isOpen ? (
             <FontAwesomeIcon size='xs' icon='chevron-up' />
           ) : (
-            <FontAwesomeIcon
-              size='xs'
-              icon='chevron-down'
-            />
+            <FontAwesomeIcon size='xs' icon='chevron-down' />
           ))}
       </div>
     </div>
 
-    {isOpen && (
-      <div className={scss.accordion__text}>{children}</div>
-    )}
+    {isOpen && <div className={scss.accordion__text}>{children}</div>}
   </div>
 )
 
@@ -85,10 +73,7 @@ AccordionSection.propTypes = {
   /**
    * has Expand
    */
-  hasExpand: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  hasExpand: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   /**
    * label
    */
@@ -108,10 +93,7 @@ AccordionSection.propTypes = {
   /**
    * arrowLabel
    */
-  arrowLabel: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node
-  ]),
+  arrowLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * button variant
    */

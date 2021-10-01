@@ -45,17 +45,8 @@ function BlockSection({
   return (
     <div className={cssClass(className)}>
       <Panel variant='padding-none'>
-        <div
-          className={cssClass(
-            'block-section__panel',
-            elementClasses
-          )}
-        >
-          <div
-            className={cssClass(
-              'block-section__panel--content'
-            )}
-          >
+        <div className={cssClass('block-section__panel', elementClasses)}>
+          <div className={cssClass('block-section__panel--content')}>
             <Heading bold level={2}>
               <FormattedMessage id={`${title}`} />
             </Heading>
@@ -116,10 +107,7 @@ BlockSection.propTypes = {
   /**
    * Classname, default `block-section`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * List

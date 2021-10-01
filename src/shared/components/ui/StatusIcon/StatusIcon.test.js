@@ -30,17 +30,13 @@ describe('<StatusIcon /> mount', () => {
     wrapper.setProps({
       variant: 'active'
     })
-    expect(
-      wrapper.children().hasClass('status-icon--active')
-    ).toBe(true)
+    expect(wrapper.children().hasClass('status-icon--active')).toBe(true)
   })
 
   it('has tiny size', () => {
     wrapper.setProps({
       size: 'tiny'
     })
-    expect(
-      wrapper.children().hasClass('status-icon--tiny')
-    ).toBe(true)
+    expect(wrapper.children().hasClass('status-icon--tiny')).toBe(true)
   })
 })

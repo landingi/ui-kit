@@ -27,8 +27,6 @@ describe('<Message/> mount', () => {
   })
 
   it('has `message` class', () => {
-    expect(
-      wrapper.find('div').first().hasClass('message')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('message')).toBe(true)
   })
 })

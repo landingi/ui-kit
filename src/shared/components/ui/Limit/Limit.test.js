@@ -36,24 +36,16 @@ describe('<Limit /> mount', () => {
   })
 
   it('limit should be ` / 30 000`', () => {
-    expect(wrapper.find('.info--limit').text()).toEqual(
-      ' / 30 000'
-    )
+    expect(wrapper.find('.info--limit').text()).toEqual(' / 30 000')
   })
 
   it('quantity should be `100`', () => {
-    expect(wrapper.find('.info--quantity').text()).toEqual(
-      '100'
-    )
+    expect(wrapper.find('.info--quantity').text()).toEqual('100')
   })
 
   it('name should be `Custom domains`', () => {
     expect(
-      wrapper
-        .find('.info--name')
-        .find(FormattedMessage)
-        .first()
-        .text()
+      wrapper.find('.info--name').find(FormattedMessage).first().text()
     ).toEqual('Custom domains')
   })
 

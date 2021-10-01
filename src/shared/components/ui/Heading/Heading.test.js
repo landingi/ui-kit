@@ -7,9 +7,7 @@ const props = {
   level: 1
 }
 
-const headingComponent = (
-  <Heading {...props}>{props.children}</Heading>
-)
+const headingComponent = <Heading {...props}>{props.children}</Heading>
 
 describe('<Heading/> mount', () => {
   let wrapper

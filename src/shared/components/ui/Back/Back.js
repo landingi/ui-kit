@@ -50,18 +50,12 @@ Back.propTypes = {
   /**
    * Classname, default `back`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Content
    */
-  content: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /**
    * Url

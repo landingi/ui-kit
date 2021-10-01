@@ -1,0 +1,49 @@
+- pipeline: "CD"
+  on: "CLICK"
+  refs:
+  - "(^((?!master$).)*$)"
+  priority: "NORMAL"
+  ignore_fail_on_project_status: true
+  fetch_all_refs: true
+  fail_on_prepare_env_warning: true
+  clone_depth: 1
+  trigger_conditions:
+  - trigger_condition: "VAR_CONTAINS"
+    trigger_variable_value: "[deploy]"
+    trigger_variable_key: "BUDDY_EXECUTION_REVISION_MESSAGE"
+  actions:
+  - action: "Execute: yarn run cd and codecov"
+    type: "BUILD"
+    working_directory: "/buddy/ui-kit"
+    docker_image_name: "library/node"
+    docker_image_tag: "16.10.0"
+    cache_base_image: true
+    setup_commands:
+    - "yarn global add codecov"
+    - "yarn install"
+    execute_commands:
+    - "yarn cd:ui"
+    - "yarn test:coverage"
+    - "codecov"
+    shell: "SH"
+  - action: "Send notification to tech-frontend channel on success CD"
+    type: "SLACK"
+    content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME> CD has been successfully completed"
+    blocks: "[{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Successful execution:* <$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>\"},{\"type\":\"mrkdwn\",\"text\":\"*Pipeline:* <$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>\"},{\"type\":\"mrkdwn\",\"text\":\"*Branch:* $BUDDY_EXECUTION_BRANCH\"},{\"type\":\"mrkdwn\",\"text\":\"*Project:* <$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>\"}]}]"
+    channel: "C010BBETC3E"
+    channel_name: "tech-frontend"
+    integration_hash: "5f4a2f2529a8af7df406ac85"
+  - action: "Send notification to tech-deploy channel"
+    type: "SLACK"
+    trigger_time: "ON_FAILURE"
+    content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME> CD build has been failed"
+    blocks: "[{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Failed execution:* <$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>\"},{\"type\":\"mrkdwn\",\"text\":\"*Pipeline:* <$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>\"},{\"type\":\"mrkdwn\",\"text\":\"*Branch:* $BUDDY_EXECUTION_BRANCH\"},{\"type\":\"mrkdwn\",\"text\":\"*Project:* <$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>\"}]}]"
+    channel: "C01ASVBDV9A"
+    channel_name: "tech-deploy"
+    integration_hash: "5f4a2f2529a8af7df406ac85"
+  - action: "Run CD Docs"
+    type: "RUN_NEXT_PIPELINE"
+    comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
+    revision: "INHERIT"
+    next_project_name: "ui-kit"
+    next_pipeline_name: "CD Docs"

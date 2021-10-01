@@ -41,18 +41,13 @@ const cssClass = styles(scss),
     options,
     intl
   }) => {
-    const errorClass =
-        errors[name] && touched[name]
-          ? 'form--has-error'
-          : '',
+    const errorClass = errors[name] && touched[name] ? 'form--has-error' : '',
       filledClass = value[name] ? 'form--has-value' : '',
       handleChange = value => onChange(name, value.value),
       handleBlur = () => onBlur(name, true)
 
     return (
-      <div
-        className={`form-field form-rselect ${errorClass} ${filledClass}`}
-      >
+      <div className={`form-field form-rselect ${errorClass} ${filledClass}`}>
         {label && (
           <Label id={name}>
             <FormattedMessage id={`${label}`} />
@@ -73,9 +68,7 @@ const cssClass = styles(scss),
             })}
             value={
               options
-                ? options.find(
-                    option => option.value === value[name]
-                  )
+                ? options.find(option => option.value === value[name])
                 : value[name]
             }
           />
@@ -100,10 +93,7 @@ reactSelect.propTypes = {
   /**
    * Classname, default `input`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   errors: PropTypes.objectOf(PropTypes.string),
   id: PropTypes.string.isRequired,
   /**
@@ -113,10 +103,7 @@ reactSelect.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
 
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   name: PropTypes.string.isRequired,
 

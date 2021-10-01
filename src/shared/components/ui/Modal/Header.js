@@ -12,10 +12,7 @@ import React from 'react'
 
 const modalHeader = ({ title }) => (
   <Heading level={2}>
-    <FormattedMessage
-      defaultMessage={`${title}`}
-      id={`${title}`}
-    />
+    <FormattedMessage defaultMessage={`${title}`} id={`${title}`} />
   </Heading>
 )
 

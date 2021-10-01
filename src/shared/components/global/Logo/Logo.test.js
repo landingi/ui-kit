@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  ShortLogo,
-  LongLogo
-} from '@components/global/Logo'
+import { ShortLogo, LongLogo } from '@components/global/Logo'
 import { mount } from 'enzyme'
 
 const component = <ShortLogo />

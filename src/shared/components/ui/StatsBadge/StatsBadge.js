@@ -16,12 +16,7 @@ const cssClass = styles(scss),
    */
   statsBadge = ({ color, quantity, description }) => {
     return (
-      <div
-        className={cssClass(
-          'container',
-          `container--${color}`
-        )}
-      >
+      <div className={cssClass('container', `container--${color}`)}>
         <div className={cssClass('container--description')}>
           <Heading level={2} margin='none'>
             {quantity}

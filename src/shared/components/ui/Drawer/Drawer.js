@@ -1,9 +1,4 @@
-import {
-  DARK,
-  DEFAULT,
-  MOBILE,
-  WHITE
-} from '@constants/skin'
+import { DARK, DEFAULT, MOBILE, WHITE } from '@constants/skin'
 import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
 import Header from './Header'
@@ -51,15 +46,7 @@ const DrawerAnimation = posed.div({
    * @param {string} props.skin - determines which skin color it should use, default: WHITE,
    * @return {object} An object of children element
    */
-  drawer = ({
-    children,
-    className,
-    onClick,
-    isActive,
-    data,
-    type,
-    skin
-  }) => {
+  drawer = ({ children, className, onClick, isActive, data, type, skin }) => {
     const elementClasses = cssClass({
       'drawer--dark': skin === DARK,
       'drawer--default': skin === DEFAULT,
@@ -73,16 +60,10 @@ const DrawerAnimation = posed.div({
         <PoseGroup animateOnMount flipMove={false}>
           {isActive && (
             <DrawerAnimation
-              className={cssClass(
-                className,
-                elementClasses
-              )}
+              className={cssClass(className, elementClasses)}
               key='draweranimation'
             >
-              <Header
-                onClick={onClick}
-                title={data ? data.title : ''}
-              />
+              <Header onClick={onClick} title={data ? data.title : ''} />
 
               {children}
             </DrawerAnimation>
@@ -113,19 +94,13 @@ drawer.propTypes = {
   /**
    * Classname, default `drawer`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Data
    */
   data: PropTypes.shape({
-    title: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object
-    ])
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   }),
 
   /**

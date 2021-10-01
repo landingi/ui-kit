@@ -10,12 +10,7 @@ import {
 } from './helpers'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import Spacer from '@components/ui/Spacer'
 import scss from './MonthRangePicker.scss'
 
@@ -35,8 +30,7 @@ const cssClass = styles(scss),
       [startMonth, setStartMonth] = useState(null),
       [endMonth, setEndMonth] = useState(null),
       [year, setYear] = useState(2021),
-      [confirmedEndMonth, setConfirmedEndMonth] =
-        useState(null)
+      [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
 
     useEffect(() => {
       if (confirmedEndMonth) {
@@ -80,39 +74,24 @@ const cssClass = styles(scss),
             <button
               className={cssClass(
                 'button_month',
-                !isSelecting &&
-                  'button_month--not-selecting',
-                handleRangeMarker(
-                  monthID,
-                  endMonth,
-                  startMonth
-                ) && 'button_month--selecting',
-                handleRangeMarker(
-                  monthID,
-                  confirmedEndMonth,
-                  startMonth
-                ) && 'button_month--selected',
-                monthID < minimalDate &&
-                  'button_month--disabled',
-                monthID > maximalDate &&
-                  'button_month--disabled',
-                handleFirstMarker(monthID) &&
-                  'button_month--first',
-                handleLastMarker(monthID) &&
-                  'button_month--last'
+                !isSelecting && 'button_month--not-selecting',
+                handleRangeMarker(monthID, endMonth, startMonth) &&
+                  'button_month--selecting',
+                handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
+                  'button_month--selected',
+                monthID < minimalDate && 'button_month--disabled',
+                monthID > maximalDate && 'button_month--disabled',
+                handleFirstMarker(monthID) && 'button_month--first',
+                handleLastMarker(monthID) && 'button_month--last'
               )}
               key={monthID}
               onClick={() => handleSelect(monthID)}
               onMouseOver={() => handleHover(monthID)}
               type='button'
             >
-              <span
-                className={cssClass('button_month--marker')}
-              />
+              <span className={cssClass('button_month--marker')} />
 
-              <span
-                className={cssClass('button_month--name')}
-              >
+              <span className={cssClass('button_month--name')}>
                 <FormattedMessage id={name} />
               </span>
             </button>
@@ -120,8 +99,7 @@ const cssClass = styles(scss),
         })
       },
       handleFirstMarker = monthID => {
-        const currentEndMonth =
-          confirmedEndMonth || endMonth
+        const currentEndMonth = confirmedEndMonth || endMonth
 
         if (!startMonth) {
           return false
@@ -136,8 +114,7 @@ const cssClass = styles(scss),
           : currentEndMonth === monthID
       },
       handleLastMarker = monthID => {
-        const currentEndMonth =
-          confirmedEndMonth || endMonth
+        const currentEndMonth = confirmedEndMonth || endMonth
 
         return currentEndMonth < startMonth
           ? startMonth === monthID
@@ -148,10 +125,7 @@ const cssClass = styles(scss),
       <>
         <div className={cssClass('year-container')}>
           <Button
-            onClick={useCallback(
-              () => setYear(year - 1),
-              [year]
-            )}
+            onClick={useCallback(() => setYear(year - 1), [year])}
             size='tiny'
             variant='icon'
           >
@@ -161,10 +135,7 @@ const cssClass = styles(scss),
           <span className={cssClass('year')}>{year}</span>
 
           <Button
-            onClick={useCallback(
-              () => setYear(year + 1),
-              [year]
-            )}
+            onClick={useCallback(() => setYear(year + 1), [year])}
             size='tiny'
             variant='icon'
           >
@@ -174,9 +145,7 @@ const cssClass = styles(scss),
 
         <Spacer space='tiny' />
 
-        <div className={cssClass('grid-container')}>
-          {renderMonths()}
-        </div>
+        <div className={cssClass('grid-container')}>{renderMonths()}</div>
       </>
     )
   }

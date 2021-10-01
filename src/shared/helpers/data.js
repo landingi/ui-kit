@@ -9,8 +9,7 @@ export const isEmpty = value =>
   value === undefined ||
   // eslint-disable-next-line no-prototype-builtins
   (value.hasOwnProperty('length') && value.length === 0) ||
-  (value.constructor === Object &&
-    Object.keys(value).length === 0)
+  (value.constructor === Object && Object.keys(value).length === 0)
 
 /**
  * Check if variable is iterable
@@ -86,9 +85,7 @@ export const mapIconToClass = value => fontIcons[value]
 
 export const queryString = data =>
   Object.entries(data)
-    .map(
-      ([key, val]) => `${key}=${encodeURIComponent(val)}`
-    )
+    .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
     .join('&')
 
 /**
@@ -118,8 +115,7 @@ export const isLastPage = (count, page, limit) =>
  * GetTodayDate - return today date with hour 00:00:00
  * @type {function}
  */
-export const getTodayDate = () =>
-  new Date(new Date().toDateString())
+export const getTodayDate = () => new Date(new Date().toDateString())
 
 /**
  * GetAgoDate - return date {number} days ago with hour 00:00:00
@@ -130,9 +126,7 @@ export const getAgoDate = days => {
   const today = getTodayDate()
 
   return new Date(
-    new Date(
-      new Date().setDate(today.getDate() - days)
-    ).toDateString()
+    new Date(new Date().setDate(today.getDate() - days)).toDateString()
   )
 }
 
@@ -140,16 +134,14 @@ export const getAgoDate = days => {
  * GetTodayDateTimestamp - return today date with hour 00:00:00 as timestamp
  * @type {function}
  */
-export const getTodayDateTimestamp = () =>
-  getTodayDate().getTime() / 1000
+export const getTodayDateTimestamp = () => getTodayDate().getTime() / 1000
 
 /**
  * GetAgoDateTimestamp - return date {number} days ago with hour 00:00:00 as timestamp
  * @param {number} days - days ago
  * @type {function}
  */
-export const getAgoDateTimestamp = days =>
-  getAgoDate(days).getTime() / 1000
+export const getAgoDateTimestamp = days => getAgoDate(days).getTime() / 1000
 
 /**
  * GetTimestamp - return timestamp from date
@@ -272,6 +264,4 @@ export const formatNumeric = value =>
  * @return {string} difference between given dates in days
  */
 export const calculateDaysInterval = (startDate, endDate) =>
-  Math.ceil(
-    Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24)
-  )
+  Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24))

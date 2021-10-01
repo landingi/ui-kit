@@ -19,19 +19,11 @@ const cssClass = styles(scss),
    * @param {string|array} props.className - list of class names, default: overflow-tooltip
    * @return {object} An object of children element
    */
-  overflowTooltip = ({
-    content,
-    placement,
-    length,
-    children,
-    className
-  }) => {
+  overflowTooltip = ({ content, placement, length, children, className }) => {
     if (content?.length > length) {
       return children ? (
         <div className={cssClass(className)}>
-          <div>{`${content
-            .slice(0, length)
-            .trim()}...`}</div>
+          <div>{`${content.slice(0, length).trim()}...`}</div>
 
           <Tooltip content={content} placement={placement}>
             {children}
@@ -40,9 +32,7 @@ const cssClass = styles(scss),
       ) : (
         <div className={cssClass(className)}>
           <Tooltip content={content} placement={placement}>
-            <div>
-              {`${content.slice(0, length).trim()}...`}
-            </div>
+            <div>{`${content.slice(0, length).trim()}...`}</div>
           </Tooltip>
         </div>
       )
@@ -70,10 +60,7 @@ overflowTooltip.propTypes = {
   /**
    * Classname, default `overflow-tooltip`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Content to overflow

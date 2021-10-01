@@ -35,10 +35,7 @@ close.propTypes = {
   /**
    * Classname, default `close`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Gets called when the user clicks on close
    *

@@ -25,9 +25,7 @@ const cssClass = styles(scss),
     className,
     type
   }) => (
-    <div
-      className={cssClass('toggle-container', className)}
-    >
+    <div className={cssClass('toggle-container', className)}>
       <label
         className={cssClass('toggle', {
           'toggle--checked': value
@@ -47,15 +45,10 @@ const cssClass = styles(scss),
       </label>
 
       {label && (
-        <label
-          className={cssClass('toggle__label')}
-          htmlFor={id}
-        >
+        <label className={cssClass('toggle__label')} htmlFor={id}>
           <FormattedMessage id={`${label}`} />
 
-          {touched[name] && (
-            <InputError error={errors[name]} />
-          )}
+          {touched[name] && <InputError error={errors[name]} />}
         </label>
       )}
     </div>
@@ -75,10 +68,7 @@ formikToggle.propTypes = {
   /**
    * Classname, default ``
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Field
@@ -101,10 +91,7 @@ formikToggle.propTypes = {
 
   id: PropTypes.string.isRequired,
 
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.objectOf
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
   /**
    * Type, default `checkbox`
    */

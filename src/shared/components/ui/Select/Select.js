@@ -14,18 +14,9 @@ import uuid from 'react-uuid'
  * @return {object} An object of children element
  */
 const select = ({ value, data, name, onChange }) => (
-  <select
-    className={scss.select}
-    name={name}
-    onChange={onChange}
-    value={value}
-  >
+  <select className={scss.select} name={name} onChange={onChange} value={value}>
     {data.map(item => (
-      <Option
-        key={uuid()}
-        label={item.label}
-        value={item.value}
-      />
+      <Option key={uuid()} label={item.label} value={item.value} />
     ))}
   </select>
 )
@@ -62,10 +53,7 @@ select.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 /**

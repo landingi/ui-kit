@@ -26,10 +26,8 @@ const cssClass = styles(scss),
     const elementClasses = cssClass({
       'panel--adjust-height': adjustHeight === true,
       'panel--background': isBackground === true,
-      'panel--padding-bottom-tiny':
-        variant === 'padding-bottom-tiny',
-      'panel--padding-default':
-        variant === 'padding-default',
+      'panel--padding-bottom-tiny': variant === 'padding-bottom-tiny',
+      'panel--padding-default': variant === 'padding-default',
       'panel--padding-input': variant === 'padding-input',
       'panel--padding-nolr': variant === 'padding-nolr',
       'panel--padding-none': variant === 'padding-none',
@@ -37,11 +35,7 @@ const cssClass = styles(scss),
       'panel--shadow-none': hasShadow === false
     })
 
-    return (
-      <div className={cssClass(className, elementClasses)}>
-        {children}
-      </div>
-    )
+    return <div className={cssClass(className, elementClasses)}>{children}</div>
   }
 
 /**
@@ -68,10 +62,7 @@ panel.propTypes = {
   /**
    * Classname, default `panel`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * HasShadow add shadows

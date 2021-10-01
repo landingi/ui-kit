@@ -11,26 +11,14 @@ import scss from './Accordion.scss'
  * @param {string} props.children - content
  * @return {object} An object of children element
  */
-function AccordionSection({
-  handleOnClick,
-  isOpen,
-  label,
-  children
-}) {
+function AccordionSection({ handleOnClick, isOpen, label, children }) {
   return (
     <div className={scss.accordion}>
-      <div
-        className={scss.accordion__header}
-        onClick={handleOnClick}
-      >
+      <div className={scss.accordion__header} onClick={handleOnClick}>
         {label}
       </div>
 
-      {isOpen && (
-        <div className={scss.accordion__text}>
-          {children}
-        </div>
-      )}
+      {isOpen && <div className={scss.accordion__text}>{children}</div>}
     </div>
   )
 }
@@ -64,10 +52,8 @@ AccordionSection.propTypes = {
   /**
    * Label
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Object)
-  ]).isRequired
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])
+    .isRequired
 }
 
 /**

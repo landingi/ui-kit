@@ -69,10 +69,7 @@ radio.propTypes = {
   /**
    * Classname, default `input__radio`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Field
@@ -81,10 +78,7 @@ radio.propTypes = {
     name: PropTypes.string.isRequired,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool
-    ])
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
   }).isRequired,
 
   /**

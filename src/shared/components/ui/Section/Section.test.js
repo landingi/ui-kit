@@ -6,9 +6,7 @@ const props = {
   children: 'placeholder'
 }
 
-const sectionComponent = (
-  <Section {...props}>{props.children}</Section>
-)
+const sectionComponent = <Section {...props}>{props.children}</Section>
 
 describe('<Section/> mount', () => {
   let wrapper

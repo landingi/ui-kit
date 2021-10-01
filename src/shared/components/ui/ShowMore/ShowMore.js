@@ -2,11 +2,7 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import Html from 'shared/components/global/Html'
 import Loader from '@components/ui/Loader'
 import PropTypes from 'prop-types'
-import React, {
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Spacer from '@components/ui/Spacer'
 import scss from './ShowMore.scss'
 
@@ -19,12 +15,7 @@ import scss from './ShowMore.scss'
  * @param {object} props.children - children
  * @return {Object} An object of children element
  */
-const showMore = ({
-  content,
-  intl,
-  extraClassname,
-  children
-}) => {
+const showMore = ({ content, intl, extraClassname, children }) => {
   const [isOpen, setIsOpen] = useState(false),
     [display, setDisplay] = useState('none'),
     [text, setText] = useState(''),
@@ -43,9 +34,7 @@ const showMore = ({
     const text = intl.formatMessage({ id: content })
 
     !isOpen
-      ? setText(
-          `${text.replace(/^(.{170}[^\s]*).*/, '$1')}...`
-        )
+      ? setText(`${text.replace(/^(.{170}[^\s]*).*/, '$1')}...`)
       : setText(text)
   }, [isOpen])
 
@@ -53,11 +42,7 @@ const showMore = ({
     <div className={scss.container}>
       <Html className={extraClassname} value={text} />
 
-      <button
-        className={scss.button}
-        onClick={handleOnClick}
-        type='button'
-      >
+      <button className={scss.button} onClick={handleOnClick} type='button'>
         {isOpen ? (
           <FormattedMessage id='show.less' />
         ) : (

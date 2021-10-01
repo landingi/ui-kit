@@ -31,55 +31,43 @@ describe('<Badge/> mount', () => {
     wrapper.setProps({
       type: 'alert'
     })
-    expect(
-      wrapper
-        .find('span.badge--alert')
-        .hasClass('badge--alert')
-    ).toBe(true)
+    expect(wrapper.find('span.badge--alert').hasClass('badge--alert')).toBe(
+      true
+    )
   })
 
   it('is info', () => {
     wrapper.setProps({
       type: 'info'
     })
-    expect(
-      wrapper
-        .find('span.badge--info')
-        .hasClass('badge--info')
-    ).toBe(true)
+    expect(wrapper.find('span.badge--info').hasClass('badge--info')).toBe(true)
   })
 
   it('is success', () => {
     wrapper.setProps({
       type: 'success'
     })
-    expect(
-      wrapper
-        .find('span.badge--success')
-        .hasClass('badge--success')
-    ).toBe(true)
+    expect(wrapper.find('span.badge--success').hasClass('badge--success')).toBe(
+      true
+    )
   })
 
   it('is pending', () => {
     wrapper.setProps({
       type: 'pending'
     })
-    expect(
-      wrapper
-        .find('span.badge--pending')
-        .hasClass('badge--pending')
-    ).toBe(true)
+    expect(wrapper.find('span.badge--pending').hasClass('badge--pending')).toBe(
+      true
+    )
   })
 
   it('is warning', () => {
     wrapper.setProps({
       type: 'warning'
     })
-    expect(
-      wrapper
-        .find('span.badge--warning')
-        .hasClass('badge--warning')
-    ).toBe(true)
+    expect(wrapper.find('span.badge--warning').hasClass('badge--warning')).toBe(
+      true
+    )
   })
 
   it('is accent-1', () => {
@@ -87,9 +75,7 @@ describe('<Badge/> mount', () => {
       type: 'accent-1'
     })
     expect(
-      wrapper
-        .find('span.badge--accent-1')
-        .hasClass('badge--accent-1')
+      wrapper.find('span.badge--accent-1').hasClass('badge--accent-1')
     ).toBe(true)
   })
 
@@ -98,9 +84,7 @@ describe('<Badge/> mount', () => {
       type: 'accent-2'
     })
     expect(
-      wrapper
-        .find('span.badge--accent-2')
-        .hasClass('badge--accent-2')
+      wrapper.find('span.badge--accent-2').hasClass('badge--accent-2')
     ).toBe(true)
   })
 })

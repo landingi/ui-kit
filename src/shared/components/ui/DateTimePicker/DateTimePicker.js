@@ -44,12 +44,8 @@ const cssClass = styles(scss),
           yearArrow = document.createElement('i')
         monthArrow.classList.add('fas', 'fa-caret-down')
         yearArrow.classList.add('fas', 'fa-caret-down')
-        document
-          .querySelector('.rdrMonthPicker')
-          .append(monthArrow)
-        document
-          .querySelector('.rdrYearPicker')
-          .append(yearArrow)
+        document.querySelector('.rdrMonthPicker').append(monthArrow)
+        document.querySelector('.rdrYearPicker').append(yearArrow)
       }
 
     React.useEffect(() => {

@@ -29,9 +29,7 @@ describe('<Legend/> mount', () => {
 
   it('has verical align', () => {
     expect(wrapper.prop('alignment')).toBe('vertical')
-    expect(
-      wrapper.find('div').hasClass('container--vertical')
-    ).toBe(true)
+    expect(wrapper.find('div').hasClass('container--vertical')).toBe(true)
   })
 
   it('has horizontal align', () => {
@@ -39,32 +37,24 @@ describe('<Legend/> mount', () => {
       alignment: 'horizontal'
     })
     expect(wrapper.prop('alignment')).toBe('horizontal')
-    expect(
-      wrapper.find('div').hasClass('container--horizontal')
-    ).toBe(true)
+    expect(wrapper.find('div').hasClass('container--horizontal')).toBe(true)
   })
 
   it('has one success variant', () => {
     expect(
-      wrapper
-        .find('span.legend--success')
-        .hasClass('legend--success')
+      wrapper.find('span.legend--success').hasClass('legend--success')
     ).toBe(true)
   })
 
   it('has one warning variant', () => {
     expect(
-      wrapper
-        .find('span.legend--warning')
-        .hasClass('legend--warning')
+      wrapper.find('span.legend--warning').hasClass('legend--warning')
     ).toBe(true)
   })
 
   it('has one alert variant', () => {
-    expect(
-      wrapper
-        .find('span.legend--alert')
-        .hasClass('legend--alert')
-    ).toBe(true)
+    expect(wrapper.find('span.legend--alert').hasClass('legend--alert')).toBe(
+      true
+    )
   })
 })

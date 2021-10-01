@@ -63,14 +63,12 @@ socialConnectBadge.propTypes = {
   /**
    * Social
    */
-  social: PropTypes.oneOf(['google', 'facebook'])
-    .isRequired,
+  social: PropTypes.oneOf(['google', 'facebook']).isRequired,
 
   /**
    * Variant
    */
-  variant: PropTypes.oneOf(['connect', 'disconnect'])
-    .isRequired
+  variant: PropTypes.oneOf(['connect', 'disconnect']).isRequired
 }
 
 /**

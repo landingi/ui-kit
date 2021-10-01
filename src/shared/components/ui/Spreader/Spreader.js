@@ -12,9 +12,7 @@ const cssClass = styles(scss),
    * @return {object} An object of children element
    */
   spreader = ({ className, spread }) => (
-    <div
-      className={cssClass(className, `spreader--${spread}`)}
-    />
+    <div className={cssClass(className, `spreader--${spread}`)} />
   )
 
 /**
@@ -31,10 +29,7 @@ spreader.propTypes = {
   /**
    * Classname, default `spreader`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Spread
    */

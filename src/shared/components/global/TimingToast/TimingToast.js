@@ -1,11 +1,7 @@
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { styles } from '@helpers/css'
 import Notification from '@components/ui/Notification'
-import React, {
-  useCallback,
-  useEffect,
-  useState
-} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import emitter from '@lib/emitter'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './TimingToast.scss'
@@ -41,10 +37,7 @@ const cssClass = styles(scss),
         },
         [isActive, message, type]
       ),
-      closeToast = useCallback(
-        () => setActive(false),
-        [isActive]
-      )
+      closeToast = useCallback(() => setActive(false), [isActive])
 
     useEffect(() => {
       emitter.on(TOGGLE_TIMING_TOAST, handleToastToggle)

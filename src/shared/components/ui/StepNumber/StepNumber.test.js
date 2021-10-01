@@ -31,24 +31,14 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--complete" class', () => {
-    expect(
-      wrapper
-        .find('span')
-        .hasClass('step__number--completed')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('step__number--completed')).toBe(true)
   })
 
   it('Expect "step__number--medium" class', () => {
-    expect(
-      wrapper.find('span').hasClass('step__number--medium')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('step__number--medium')).toBe(true)
   })
 
   it('Expect "step__number--absolute" class', () => {
-    expect(
-      wrapper
-        .find('span')
-        .hasClass('step__number--absolute')
-    ).toBe(true)
+    expect(wrapper.find('span').hasClass('step__number--absolute')).toBe(true)
   })
 })

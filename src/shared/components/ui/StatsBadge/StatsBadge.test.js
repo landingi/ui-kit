@@ -2,9 +2,7 @@ import React from 'react'
 import StatsBadge from '@components/ui/StatsBadge'
 import { mountWithIntl } from '@jestutils'
 
-const statsBadgeComponent = (
-  <StatsBadge description='word.statistics' />
-)
+const statsBadgeComponent = <StatsBadge description='word.statistics' />
 
 describe('<StatsBadge /> mount', () => {
   let wrapper
@@ -23,11 +21,7 @@ describe('<StatsBadge /> mount', () => {
 
   it('has green color', () => {
     expect(wrapper.prop('color')).toBe('green')
-    expect(
-      wrapper
-        .find('.container')
-        .hasClass('container--green')
-    ).toBe(true)
+    expect(wrapper.find('.container').hasClass('container--green')).toBe(true)
   })
 
   it('has yellow color', () => {
@@ -35,11 +29,7 @@ describe('<StatsBadge /> mount', () => {
       color: 'yellow'
     })
 
-    expect(
-      wrapper
-        .find('.container')
-        .hasClass('container--yellow')
-    ).toBe(true)
+    expect(wrapper.find('.container').hasClass('container--yellow')).toBe(true)
   })
 
   it('has description box', () => {
@@ -47,9 +37,7 @@ describe('<StatsBadge /> mount', () => {
       variant: 'alert'
     })
     expect(
-      wrapper
-        .find('.container--description')
-        .hasClass('container--description')
+      wrapper.find('.container--description').hasClass('container--description')
     ).toBe(true)
   })
 })

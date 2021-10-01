@@ -40,10 +40,7 @@ option.propTypes = {
   /**
    * Value
    */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 }
 /**
  * The default properties.

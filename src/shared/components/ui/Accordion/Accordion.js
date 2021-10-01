@@ -25,9 +25,7 @@ const Accordion = ({ children }) => {
           variant={item.props.variant}
           hasExpand={item.props.hasExpand}
           // eslint-disable-next-line react/jsx-no-bind
-          handleOnClick={() =>
-            item.props.hasExpand && openList.toggle(index)
-          }
+          handleOnClick={() => item.props.hasExpand && openList.toggle(index)}
         >
           <Spacer space='tiny' />
 

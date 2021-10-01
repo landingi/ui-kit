@@ -22,15 +22,8 @@ function Instruction({ className, data }) {
   return (
     <div className={cssClass(className)}>
       {data.map(({ content }, index) => (
-        <div
-          className={cssClass('instruction__step')}
-          key={uuid()}
-        >
-          <StepNumber
-            absolute
-            size='medium'
-            step={index + 1}
-          />
+        <div className={cssClass('instruction__step')} key={uuid()}>
+          <StepNumber absolute size='medium' step={index + 1} />
 
           {content}
         </div>
@@ -53,10 +46,7 @@ Instruction.propTypes = {
   /**
    * Classname, default `Instruction`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
    * Data
    */

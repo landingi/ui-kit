@@ -21,18 +21,9 @@ const cssClass = styles(scss),
    * @param {string|array|object} props.restProps - rest of props
    * @return {object} An object of children element
    */
-  tab = ({
-    name,
-    className,
-    onClick,
-    children,
-    ...restProps
-  }) => {
+  tab = ({ name, className, onClick, children, ...restProps }) => {
     const tabContext = useContext(TabContext),
-      activeTab =
-        tabContext.activeTab === name
-          ? 'Tabs__tab--active'
-          : '',
+      activeTab = tabContext.activeTab === name ? 'Tabs__tab--active' : '',
       classNames = `${cssClass(className)} ${activeTab}`,
       [, setTabValue] = useQueryString('tab'),
       /**
@@ -46,11 +37,7 @@ const cssClass = styles(scss),
       }, [])
 
     return (
-      <span
-        className={classNames}
-        onClick={handleClick}
-        {...restProps}
-      >
+      <span className={classNames} onClick={handleClick} {...restProps}>
         <Button variant='tabs'>{children}</Button>
       </span>
     )
@@ -79,10 +66,7 @@ tab.propTypes = {
   /**
    * Classname, default `tab`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Name

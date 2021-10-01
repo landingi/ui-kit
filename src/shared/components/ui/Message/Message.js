@@ -62,9 +62,7 @@ const cssClass = styles(scss),
 
     return (
       <div className={cssClass(className)}>
-        {url &&
-          multimediaPosition === 'before' &&
-          renderMultimedia()}
+        {url && multimediaPosition === 'before' && renderMultimedia()}
 
         {title && (
           <Heading
@@ -97,9 +95,7 @@ const cssClass = styles(scss),
           </>
         )}
 
-        {url &&
-          multimediaPosition === 'after' &&
-          renderMultimedia()}
+        {url && multimediaPosition === 'after' && renderMultimedia()}
 
         {children}
       </div>
@@ -130,10 +126,7 @@ message.propTypes = {
   /**
    * Classname, default `message`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * Image/Video height

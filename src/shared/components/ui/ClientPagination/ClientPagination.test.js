@@ -13,9 +13,7 @@ const props = {
   pageCount: 15
 }
 
-const clientPaginationComponent = (
-  <ClientPagination {...props} />
-)
+const clientPaginationComponent = <ClientPagination {...props} />
 
 describe('<Client Pagination/> mount', () => {
   let wrapper
@@ -38,14 +36,10 @@ describe('<Client Pagination/> mount', () => {
 
   it('has `first` and `last` buttons', () => {
     expect(
-      wrapper
-        .find('span.pagination__first')
-        .hasClass('pagination__first')
+      wrapper.find('span.pagination__first').hasClass('pagination__first')
     ).toBe(true)
     expect(
-      wrapper
-        .find('span.pagination__last')
-        .hasClass('pagination__last')
+      wrapper.find('span.pagination__last').hasClass('pagination__last')
     ).toBe(true)
   })
 })

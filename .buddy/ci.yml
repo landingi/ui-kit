@@ -10,7 +10,7 @@
   fail_on_prepare_env_warning: true
   clone_depth: 1
   actions:
-  - action: "Execute: yarn run ci"
+  - action: "Execute: yarn run lint and tests"
     cache_base_image: true
     type: "BUILD"
     docker_image_name: "library/node"
@@ -18,19 +18,12 @@
     setup_commands:
     - "yarn install"
     execute_commands:
-    - "yarn run ci"
+    - "yarn lint"
+    - "yarn test --ci"
     shell: "SH"
-  - action: "Send notification to tech-frontend channel on success CI execution"
-    type: "SLACK"
-    content: "[#$BUDDY_EXECUTION_ID] $BUDDY_PIPELINE_NAME execution by <$BUDDY_INVOKER_URL|$BUDDY_INVOKER_NAME> | UI-Kit has been updated"
-    blocks: "[{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Successful execution:* <$BUDDY_EXECUTION_URL|Execution #$BUDDY_EXECUTION_ID $BUDDY_EXECUTION_COMMENT>\"},{\"type\":\"mrkdwn\",\"text\":\"*Pipeline:* <$BUDDY_PIPELINE_URL|$BUDDY_PIPELINE_NAME>\"},{\"type\":\"mrkdwn\",\"text\":\"*Branch:* $BUDDY_EXECUTION_BRANCH\"},{\"type\":\"mrkdwn\",\"text\":\"*Project:* <$BUDDY_PROJECT_URL|$BUDDY_PROJECT_NAME>\"}]}]"
-    channel: "C010BBETC3E"
-    channel_name: "tech-frontend"
-    integration_hash: "5f4a2f2529a8af7df406ac85"
-  - action: "Run CD Styleguide"
+  - action: "Run CD"
     type: "RUN_NEXT_PIPELINE"
-    wait: true
     comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
     revision: "INHERIT"
     next_project_name: "ui-kit"
-    next_pipeline_name: "CD Styleguide"
+    next_pipeline_name: "CD"

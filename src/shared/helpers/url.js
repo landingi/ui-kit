@@ -46,8 +46,7 @@ export const handleOnClickAnnouncement = () =>
  * Get window location pathname
  * @return {string}
  */
-export const getLocationPath = () =>
-  window.location.pathname
+export const getLocationPath = () => window.location.pathname
 
 /**
  * Get window location href
@@ -91,8 +90,7 @@ export const getSettingsPagesUrls = url => {
  */
 
 export const generateSectionName = url => {
-  if (url === '/profile')
-    return <FormattedMessage id='word.your-profile' />
+  if (url === '/profile') return <FormattedMessage id='word.your-profile' />
 }
 
 /**
@@ -107,22 +105,16 @@ export const handleClickOnBack = () => history.back()
  */
 export const handleActiveUrl = data => {
   const includesPath = getLocationPath(),
-    hasDashboard = Boolean(
-      document.getElementById('agencyDashboardClient')
-    ),
+    hasDashboard = Boolean(document.getElementById('agencyDashboardClient')),
     filter = data.map(item => {
       const url = new URL(item.url).pathname,
         helperPath = includesPath.split('/')[1],
         helperUrl = item.url.split('/')[3],
         isActive =
           includesPath.includes(url) ||
-          (helperPath === 'dashboard' &&
-            helperUrl === 'landings') ||
-          (helperPath === 'welcome' &&
-            url === '/agency/dashboard') ||
-          (helperPath === 'welcome' &&
-            !hasDashboard &&
-            url === '/landings')
+          (helperPath === 'dashboard' && helperUrl === 'landings') ||
+          (helperPath === 'welcome' && url === '/agency/dashboard') ||
+          (helperPath === 'welcome' && !hasDashboard && url === '/landings')
 
       return {
         ...item,

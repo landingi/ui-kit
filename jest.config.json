@@ -1,5 +1,11 @@
 {
   "automock": false,
+  "maxWorkers": "50%",
+  "maxConcurrency": 30,
+  "displayName": {
+    "name": "UI-KIT",
+    "color": "magenta"
+  },
   "errorOnDeprecated": true,
   "setupFiles": [
     "<rootDir>/config/tests/jest/setup/setupTests.js",
@@ -13,17 +19,17 @@
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/tests/jest/setup/mocks/fileMock.js",
     "\\.(scss|css)$": "identity-obj-proxy"
   },
-  "collectCoverage": true,
+  "collectCoverage": false,
   "collectCoverageFrom": [
     "src/**/*.{js}",
     "!src/client/**/*.{js}",
     "!**/node_modules/**"
   ],
-  "testEnvironment": "jsdom",
-  "testRunner": "jest-jasmine2",
   "coverageReporters": [
     "json-summary",
     "text",
     "lcov"
-  ]
+  ],
+  "testEnvironment": "jsdom",
+  "testRunner": "jest-jasmine2"
 }

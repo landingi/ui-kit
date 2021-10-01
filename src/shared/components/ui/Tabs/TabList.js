@@ -47,10 +47,7 @@ tabList.propTypes = {
   /**
    * Classname, default `tabs`
    */
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array
-  ])
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 /**

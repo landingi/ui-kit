@@ -9,9 +9,7 @@ const props = {
   children: 'Alert'
 }
 
-const alertComponent = (
-  <Alert {...props}>{props.children}</Alert>
-)
+const alertComponent = <Alert {...props}>{props.children}</Alert>
 
 describe('<Alert /> mount', () => {
   let wrapper
@@ -36,47 +34,35 @@ describe('<Alert /> mount', () => {
     wrapper.setProps({
       type: 'alert'
     })
-    expect(
-      wrapper
-        .find('div')
-        .first()
-        .hasClass('alert-message--alert')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('alert-message--alert')).toBe(
+      true
+    )
   })
 
   it('is info', () => {
     wrapper.setProps({
       type: 'info'
     })
-    expect(
-      wrapper
-        .find('div')
-        .first()
-        .hasClass('alert-message--info')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('alert-message--info')).toBe(
+      true
+    )
   })
 
   it('is success', () => {
     wrapper.setProps({
       type: 'success'
     })
-    expect(
-      wrapper
-        .find('div')
-        .first()
-        .hasClass('alert-message--success')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('alert-message--success')).toBe(
+      true
+    )
   })
 
   it('is warning', () => {
     wrapper.setProps({
       type: 'warning'
     })
-    expect(
-      wrapper
-        .find('div')
-        .first()
-        .hasClass('alert-message--warning')
-    ).toBe(true)
+    expect(wrapper.find('div').first().hasClass('alert-message--warning')).toBe(
+      true
+    )
   })
 })

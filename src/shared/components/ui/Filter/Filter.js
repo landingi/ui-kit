@@ -17,16 +17,9 @@ import uuid from 'react-uuid'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-function Filter({
-  values,
-  setValue,
-  initialValue,
-  localStorageKey
-}) {
+function Filter({ values, setValue, initialValue, localStorageKey }) {
   const findInitialValue = () => {
-      const find = values.find(
-        ({ value }) => value === initialValue
-      )
+      const find = values.find(({ value }) => value === initialValue)
 
       return find.label
     },
@@ -34,8 +27,7 @@ function Filter({
     setFilter = (label, value) => {
       setLabel(label)
       setValue(value)
-      localStorageKey &&
-        setLocalStorage(localStorageKey, value)
+      localStorageKey && setLocalStorage(localStorageKey, value)
       emitCloseDropdown()
     }
 
@@ -79,10 +71,7 @@ Filter.propTypes = {
         PropTypes.string,
         PropTypes.instanceOf(Object)
       ]),
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-      ])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     })
   ).isRequired
 }

@@ -48,17 +48,12 @@ const searcher = ({
         search(event)
       }
     }),
-    handleOnProtectedSubmit = useCallback(
-      event => setSearchPhrase(event),
-      []
-    )
+    handleOnProtectedSubmit = useCallback(event => setSearchPhrase(event), [])
 
   return (
     <Search
       onChange={handleOnChange}
-      onProtectedSubmit={
-        protectedSubmit ? handleOnProtectedSubmit : null
-      }
+      onProtectedSubmit={protectedSubmit ? handleOnProtectedSubmit : null}
       onSubmit={protectedSubmit ? null : handleOnSubmit}
       placeholder={placeholder}
       {...rest}
