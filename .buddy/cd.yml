@@ -19,7 +19,7 @@
     docker_image_tag: "16.9.1-alpine3.14"
     cache_base_image: true
     setup_commands:
-    - "yarn install codecov -g"
+    - "yarn global add codecov"
     - "yarn install"
     execute_commands:
     - "yarn cd"
