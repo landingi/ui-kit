@@ -17,6 +17,7 @@
         "test:coverage": "yarn test --coverage",
         "pretty-quick": "pretty-quick --staged",
         "prepare": "husky install",
+        "preinstall": "npx only-allow yarn",
         "build:local": "node ./config/packages/package.builder.js production && yarn install && yarn build",
         "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn build",
         "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
