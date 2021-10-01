@@ -1,5 +1,6 @@
 {
   "automock": false,
+  "maxWorkers": "50%",
   "errorOnDeprecated": true,
   "setupFiles": [
     "<rootDir>/config/tests/jest/setup/setupTests.js",
