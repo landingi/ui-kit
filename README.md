@@ -17,22 +17,6 @@ yarn global add gatsby-cli
 yarn install
 ```
 
-### Development
-
-- `yarn docz:dev` - development and watch
-- `yarn docz:build` - build
-- `yarn docz:serve` - buid and serve local server
-
-#### CI
-
-Every push triggers CI pipeline. For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/ci.yml`
-
-#### CD
-
-In order to deploy you have to add `[deploy]` tag to you commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`. Once you push it, `Buddy` will execute the CI, CD and CD Docs pipelines.
-
-For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/*.yml`
-
 #### Add a New component
 
 1. Create a folder inside `shared/components/*`
@@ -64,11 +48,25 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 6. Run `yarn docz:dev` and open `http://localhost:3000`
 
-7. In order to deploy it you have to add a `[deploy]` tag to you commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`.
+7. In order to deploy it you have to add a `[deploy]` tag to your commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`.
 
 8. Push it
 
+### Development
 
+- `yarn docz:dev` - development and watch
+- `yarn docz:build` - build
+- `yarn docz:serve` - buid and serve local server
+
+#### CI
+
+Every push triggers CI pipeline. For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/ci.yml`
+
+#### CD
+
+In order to deploy you have to add `[deploy]` tag to your commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`. Once you push it, `Buddy` will execute the CI, CD and CD Docs pipelines.
+
+For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/*.yml`
 
 ### Folder structure
 
