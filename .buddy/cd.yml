@@ -19,7 +19,6 @@
     docker_image_tag: "14.18.0-alpine3.14"
     cache_base_image: true
     setup_commands:
-    - "npm install yarn -g"
     - "yarn global add codecov"
     - "yarn install"
     execute_commands:
