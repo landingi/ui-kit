@@ -20,8 +20,8 @@
     cache_base_image: true
     setup_commands:
     - "yarn global add codecov"
-    - "yarn install"
     execute_commands:
+    - "yarn install"
     - "yarn cd:ui"
     - "yarn test:coverage"
     - "codecov"
