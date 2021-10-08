@@ -14,7 +14,7 @@
     cache_base_image: true
     type: "BUILD"
     docker_image_name: "library/node"
-    docker_image_tag: "16.9.1-alpine3.14"
+    docker_image_tag: "14.18.0-alpine3.14"
     setup_commands:
     - "yarn install"
     execute_commands:
