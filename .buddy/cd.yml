@@ -18,13 +18,10 @@
     docker_image_name: "library/node"
     docker_image_tag: "14.18.0-alpine3.14"
     cache_base_image: true
-    setup_commands:
-    - "yarn global add codecov"
     execute_commands:
     - "yarn install"
     - "yarn cd:ui"
     - "yarn test:coverage"
-    - "codecov"
     shell: "SH"
   - action: "Send notification to tech-frontend channel on success CD"
     type: "SLACK"
