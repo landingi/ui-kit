@@ -1,102 +1,102 @@
-import { FormattedMessage } from 'react-intl'
-import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import { FormattedMessage } from 'react-intl'
+import Error from 'shared/components/ui/Form2/Error'
 import scss from './Checkbox.scss'
+import { getDeepValue } from 'shared/helpers/data'
 
-const cssClass = styles(scss),
-  /**
-   * Checkbox - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: ''
-   * @param {object} props.field - react-formik field properties
-   * @param {object} props.form - react-formik form properties
-   * @param {string} props.id - id of the element
-   * @param {string} props.label - label, default: ''
-   * @param {string} props.type - type of element, default: 'checkbox'
-   * @return {object} An object of children element
-   */
-  checkbox = ({
-    field: { name, value, onChange, onBlur },
-    form: { errors, touched, setFieldValue },
-    id,
-    label,
-    className,
-    type
-  }) => (
+const cssClass = styles(scss)
+
+/**
+ * Checkbox - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: ''
+ * @param {object} props.field - react-formik field properties
+ * @param {object} props.form - react-formik form properties
+ * @param {string} props.id - id of the element
+ * @param {string} props.label - label, default: ''
+ * @param {string} props.type - type of element, default: 'checkbox'
+ * @return {object} An object of children element
+ */
+const Checkbox = ({
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched /*setFieldValue  [UNUSED_VARIABLE]*/ },
+  id,
+  label,
+  className,
+  type
+}) => {
+  const error = getDeepValue(errors, name)
+  const isTouched = getDeepValue(touched, name)
+
+  return (
     <div className={cssClass('checkbox-container', className)}>
       <label className={cssClass('checkbox__input')}>
         <input
-          checked={value}
-          id={id}
           name={name}
-          onBlur={onBlur}
+          checked={value}
           onChange={onChange}
+          onBlur={onBlur}
           type={type}
+          id={id}
         />
-
         <div />
       </label>
-
       {label && (
-        <label className={cssClass('checkbox__label')} htmlFor={id}>
+        <label htmlFor={id} className={cssClass('checkbox__label')}>
           <FormattedMessage id={`${label}`} />
-
-          {touched[name] && <Error error={errors[name]} />}
+          {isTouched && <Error error={error} />}
         </label>
       )}
     </div>
   )
+}
 
 /**
  * Display name
  * @type {string}
  */
-checkbox.displayName = 'Form2 / Checkbox'
+Checkbox.displayName = 'Form2 / Checkbox'
 
 /**
  * The properties.
  * @type {Object}
  */
-checkbox.propTypes = {
+Checkbox.propTypes = {
   /**
    * Classname
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
+  /**
+   * Type, default `checkbox`
+   */
+  type: PropTypes.string,
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.bool
+    onBlur: PropTypes.func
   }).isRequired,
-
   /**
    * Form
    */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
-    setFieldValue: PropTypes.func,
-    touched: PropTypes.instanceOf(Object)
+    touched: PropTypes.instanceOf(Object),
+    setFieldValue: PropTypes.func
   }).isRequired,
-
   id: PropTypes.string.isRequired,
-
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
-  /**
-   * Type, default `checkbox`
-   */
-  type: PropTypes.string
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
 }
 
-checkbox.defaultProps = {
+Checkbox.defaultProps = {
   className: '',
-  label: '',
-  type: 'checkbox'
+  type: 'checkbox',
+  label: ''
 }
 
-export default checkbox
+export default Checkbox

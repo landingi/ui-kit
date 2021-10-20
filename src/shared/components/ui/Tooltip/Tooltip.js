@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react'
-
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
-import ReactTooltip from 'react-tooltip'
 import scss from './Tooltip.scss'
 import uuid from 'react-uuid'
+import ReactTooltip from 'react-tooltip'
+import { styles } from 'shared/helpers/css'
 
 const cssClass = styles(scss)
 
@@ -15,13 +14,12 @@ const cssClass = styles(scss)
  * @param {string} props.placement - placement, default `bottom`
  * @param {string} props.align - align, default `left`
  * @param {string} props.effect - bahaviour of tooltip
- * @param {string} props.size - width
  * @param {string|object} props.content - content
  * @param {bool} props.disabled - disabled
  * @param {bool} props.showOnClick - show on click
  * @return {object} An object of children element
  */
-function Tooltip({
+const Tooltip = ({
   className,
   children,
   effect,
@@ -29,41 +27,37 @@ function Tooltip({
   disabled,
   showOnClick,
   placement,
-  align,
-  size
-}) {
-  const tooltipUUID = uuid(),
-    showOnClickProps = showOnClick
-      ? {
-          afterShow: () => ReactTooltip.hide(),
-          delayHide: 1000,
-          event: 'click'
-        }
-      : {}
+  align
+}) => {
+  const tooltipUUID = uuid()
+
+  const showOnClickProps = showOnClick
+    ? {
+        delayHide: 1000,
+        event: 'click',
+        afterShow: () => ReactTooltip.hide()
+      }
+    : {}
 
   return (
-    <>
-      <span className={cssClass(className)} data-for={tooltipUUID} data-tip>
+    <Fragment>
+      <span className={cssClass(className)} data-tip data-for={tooltipUUID}>
         {children}
       </span>
 
       <ReactTooltip
+        className={cssClass('react-tooltip', `react-tooltip-${align}`)}
         background='#000'
-        className={cssClass(
-          'react-tooltip',
-          `react-tooltip-${align}`,
-          `react-tooltip--${size}`
-        )}
-        disable={disabled}
         effect={effect}
         id={tooltipUUID}
+        disable={disabled}
         isCapture
         place={placement}
         {...showOnClickProps}
       >
         {content}
       </ReactTooltip>
-    </>
+    </Fragment>
   )
 }
 
@@ -73,49 +67,37 @@ function Tooltip({
  */
 Tooltip.propTypes = {
   /**
-   * Placement
-   */
-  align: PropTypes.oneOf(['center', 'left', 'right']),
-
-  /**
-   * Children element
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * Custom classname
-   */
-  className: PropTypes.string,
-
-  /**
-   * Tooltip content
-   */
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-
-  /**
-   * Disable toolip
-   */
-  disabled: PropTypes.bool,
-
-  /**
    * Behaviour of tooltip
    */
   effect: PropTypes.oneOf(['solid', 'float']),
-
   /**
    * Placement
    */
   placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
-
+  /**
+   * Placement
+   */
+  align: PropTypes.oneOf(['center', 'left', 'right']),
+  /**
+   * Children element
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Tooltip content
+   */
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Show tooltip after click, tooltip is hidden after 1 sec
    */
   showOnClick: PropTypes.bool,
-
   /**
-   * Placement
+   * Disable toolip
    */
-  size: PropTypes.oneOf(['tiny', 'small', 'medium'])
+  disabled: PropTypes.bool,
+  /**
+   * Custom classname
+   */
+  className: PropTypes.string
 }
 
 /**
@@ -123,14 +105,13 @@ Tooltip.propTypes = {
  * @type {Object}
  */
 Tooltip.defaultProps = {
-  align: 'left',
-  className: '',
-  content: '',
-  disabled: false,
   effect: 'solid',
   placement: 'bottom',
+  content: '',
   showOnClick: false,
-  size: 'medium'
+  disabled: false,
+  className: '',
+  align: 'left'
 }
 
 export default Tooltip

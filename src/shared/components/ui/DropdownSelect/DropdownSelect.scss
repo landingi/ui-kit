@@ -23,6 +23,12 @@
       opacity: 0;
     }
   }
+
+  .form-field--disabled {
+    .Label__label {
+      color: $color-input-border;
+    }
+  }
 }
 
 .search-container {

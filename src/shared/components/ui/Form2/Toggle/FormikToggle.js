@@ -1,58 +1,52 @@
-import { FormattedMessage } from 'react-intl'
-import { styles } from '@helpers/css'
-import InputError from '@components/ui/Form2/Error'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import { FormattedMessage } from 'react-intl'
+import InputError from '../InputError'
 import scss from './Toggle.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Formik toogle - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: ''
-   * @param {string} props.type - input type checkbox or radio, default: checkbox
-   * @param {object} props.field - Field
-   * @param {object} props.form - Form
-   * @param {string} props.id - id
-   * @param {string} props.label - label, dafult: ''
-   * @return {object} An object of children element
-   */
-  formikToggle = ({
-    field: { name, value, onChange, onBlur },
-    form: { errors, touched, setFieldValue },
-    id,
-    label,
-    className,
-    type
-  }) => (
-    <div className={cssClass('toggle-container', className)}>
-      <label
-        className={cssClass('toggle', {
-          'toggle--checked': value
-        })}
-      >
-        <input
-          checked={value}
-          className={cssClass('toggle__checkbox')}
-          id={id}
-          name={name}
-          onBlur={onBlur}
-          onChange={onChange}
-          type={type}
-        />
+const cssClass = styles(scss)
 
-        <span className={cssClass('toggle__button')} />
+/**
+ * formik toogle - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: ''
+ * @param {string} props.type - input type checkbox or radio, default: checkbox
+ * @param {object} props.field - Field
+ * @param {object} props.form - Form
+ * @param {string} props.id - id
+ * @param {string} props.label - label, dafult: ''
+ * @return {object} An object of children element
+ */
+const formikToggle = ({
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched /*setFieldValue [UNUSED_VARIABLE]*/ },
+  id,
+  label,
+  className,
+  type
+}) => (
+  <div className={cssClass('toggle-container', className)}>
+    <label className={cssClass('toggle', { 'toggle--checked': value })}>
+      <input
+        name={name}
+        className={cssClass('toggle__checkbox')}
+        checked={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        type={type}
+        id={id}
+      />
+      <span className={cssClass('toggle__button')} />
+    </label>
+    {label && (
+      <label htmlFor={id} className={cssClass('toggle__label')}>
+        <FormattedMessage id={`${label}`} />
+        {touched[name] && <InputError error={errors[name]} />}
       </label>
-
-      {label && (
-        <label className={cssClass('toggle__label')} htmlFor={id}>
-          <FormattedMessage id={`${label}`} />
-
-          {touched[name] && <InputError error={errors[name]} />}
-        </label>
-      )}
-    </div>
-  )
+    )}
+  </div>
+)
 
 /**
  * Display name
@@ -69,33 +63,29 @@ formikToggle.propTypes = {
    * Classname, default ``
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
+  /**
+   * Type, default `checkbox`
+   */
+  type: PropTypes.string,
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.bool
+    onBlur: PropTypes.func
   }).isRequired,
-
   /**
    * Form
    */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
-    setFieldValue: PropTypes.func,
-    touched: PropTypes.instanceOf(Object)
+    touched: PropTypes.instanceOf(Object),
+    setFieldValue: PropTypes.func
   }).isRequired,
-
   id: PropTypes.string.isRequired,
-
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
-  /**
-   * Type, default `checkbox`
-   */
-  type: PropTypes.string
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
 }
 
 /**
@@ -104,8 +94,8 @@ formikToggle.propTypes = {
  */
 formikToggle.defaultProps = {
   className: '',
-  label: '',
-  type: 'checkbox'
+  type: 'checkbox',
+  label: ''
 }
 
 export default formikToggle

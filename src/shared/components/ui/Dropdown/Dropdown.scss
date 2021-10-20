@@ -29,7 +29,7 @@
     cursor: pointer;
     line-height: 1;
     position: relative;
-    min-width: 36px;
+    min-width: 10px;
     min-height: 36px;
     display: flex;
     align-items: center;
@@ -101,10 +101,35 @@
         font-size: 16px;
       }
     }
+
+    &--input--disabled {
+      border-bottom: 1px dotted $color-8;
+      color: $color-input-border;
+      cursor: not-allowed;
+
+      :global
+      .Dropdown__dropdown__label{
+        cursor: not-allowed;
+      }
+
+      &:hover {
+        svg {
+          color: $color-3
+        }
+      }
+
+      &:focus,
+      &:hover,
+      &:active {
+        &:after {
+          display: none;
+        }
+      }
+    }
   }
 
   &__body {
-    padding: 20px 0 $padding-small;
+    padding: $padding-medium 0 $padding-small;
 
     :global {
       .Label__label {

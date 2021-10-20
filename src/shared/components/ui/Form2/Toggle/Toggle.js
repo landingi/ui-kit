@@ -1,66 +1,65 @@
-import { styles } from '@helpers/css'
-import Html from 'shared/components/global/Html'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import Html from 'shared/components/global/Html'
 import scss from './Toggle.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Toggle - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: ''
-   * @param {string} props.name - name
-   * @param {bool} props.checked - checked
-   * @param {func} props.onChange - onChange
-   * @param {func} props.onBlur - onBlur
-   * @param {string} props.id - id
-   * @param {string} props.label - label, default: ''
-   * @param {bool} props.disabled - disabled, default: false
-   * @return {object} An object of children element
-   */
-  toggle = ({
-    name,
-    checked,
-    onChange,
-    onBlur,
-    id,
-    label,
-    className,
-    disabled
-  }) => {
-    const getDisabledClassName = () =>
-      checked ? 'toggle--checked-disabled' : 'toggle--disabled'
+const cssClass = styles(scss)
 
-    return (
-      <div className={cssClass('toggle-container', className)}>
-        <label
-          className={cssClass('toggle', {
-            'toggle--checked': checked,
-            [getDisabledClassName()]: disabled
-          })}
-        >
-          <input
-            checked={checked}
-            className={cssClass('toggle__checkbox')}
-            disabled={disabled}
-            id={id}
-            name={name}
-            onBlur={onBlur}
-            onChange={onChange}
-            type='checkbox'
-          />
+/**
+ * toggle - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: ''
+ * @param {string} props.name - name
+ * @param {bool} props.checked - checked
+ * @param {func} props.onChange - onChange
+ * @param {func} props.onBlur - onBlur
+ * @param {string} props.id - id
+ * @param {string} props.label - label, default: ''
+ * @param {bool} props.disabled - disabled, default: false
+ * @return {object} An object of children element
+ */
+const toggle = ({
+  name,
+  checked,
+  onChange,
+  onBlur,
+  id,
+  label,
+  className,
+  disabled
+}) => {
+  const getDisabledClassName = () =>
+    checked ? 'toggle--checked-disabled' : 'toggle--disabled'
 
-          <span className={cssClass('toggle__button')} />
+  return (
+    <div className={cssClass('toggle-container', className)}>
+      <label
+        className={cssClass('toggle', {
+          'toggle--checked': checked,
+          [getDisabledClassName()]: disabled
+        })}
+      >
+        <input
+          name={name}
+          className={cssClass('toggle__checkbox')}
+          checked={checked}
+          onChange={onChange}
+          onBlur={onBlur}
+          type='checkbox'
+          id={id}
+          disabled={disabled}
+        />
+        <span className={cssClass('toggle__button')} />
+      </label>
+      {label && (
+        <label htmlFor={id}>
+          <Html value={label} />
         </label>
-
-        {label && (
-          <label htmlFor={id}>
-            <Html value={label} />
-          </label>
-        )}
-      </div>
-    )
-  }
+      )}
+    </div>
+  )
+}
 
 /**
  * Display name
@@ -73,17 +72,17 @@ toggle.displayName = 'Toggle'
  * @type {Object}
  */
 toggle.propTypes = {
-  checked: PropTypes.bool.isRequired,
   /**
    * Classname, default ''
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  disabled: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
-  name: PropTypes.string.isRequired,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func.isRequired
+  disabled: PropTypes.bool
 }
 
 /**
@@ -92,9 +91,9 @@ toggle.propTypes = {
  */
 toggle.defaultProps = {
   className: '',
-  disabled: false,
   label: '',
-  onBlur: () => null
+  onBlur: () => null,
+  disabled: false
 }
 
 export { toggle as Toggle }

@@ -1,63 +1,60 @@
-import { FormattedMessage } from 'react-intl'
-import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
-import Label from '@components/ui/Label'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import Error from 'shared/components/ui/Form2/Error'
+import Label from 'shared/components/ui/Label'
 import scss from './Select.scss'
+import { FormattedMessage } from 'react-intl'
 
-const cssClass = styles(scss),
-  /**
-   * Select - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.field - react-formik field properties
-   * @param {object} props.form - react-formik form properties
-   * @param {string} props.id - id of element
-   * @param {string} props.label - label
-   * @param {string|array} props.className - list of class names, default: `select-form`
-   * @param {object} props.chidren - children
-   * @return {object} An object of children element
-   */
-  select = ({
-    field: { name, value, onChange, onBlur },
-    form: { errors, touched },
-    id,
-    label,
-    className,
-    children
-  }) => {
-    const errorClass = errors[name] ? 'form--has-error' : '',
-      filledClass = touched[name] ? 'form-field--touched' : ''
+const cssClass = styles(scss)
 
-    return (
-      <div className={`form-field ${errorClass || filledClass}`}>
-        <div className={scss.input__wrapper}>
-          <select
-            className={cssClass(className)}
-            id={id}
-            name={name}
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-          >
-            {children}
-          </select>
+/**
+ * Select - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.field - react-formik field properties
+ * @param {object} props.form - react-formik form properties
+ * @param {string} props.id - id of element
+ * @param {string} props.label - label
+ * @param {string|array} props.className - list of class names, default: `select-form`
+ * @param {object} props.chidren - children
+ * @return {object} An object of children element
+ */
+const select = ({
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched },
+  id,
+  label,
+  className,
+  children
+}) => {
+  const errorClass = errors[name] ? 'form--has-error' : ''
+  const filledClass = touched[name] ? 'form-field--touched' : ''
 
-          <span className={cssClass('highlight')} />
-
-          <span className={cssClass('bar')} />
-
-          {label && (
-            <Label className={scss.input__label} id={name}>
-              <FormattedMessage id={`${label}`} />
-            </Label>
-          )}
-        </div>
-
-        <Error error={errors[name]} />
+  return (
+    <div className={`form-field ${errorClass || filledClass}`}>
+      <div className={scss.input__wrapper}>
+        <select
+          className={cssClass(className)}
+          name={name}
+          id={id}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+        >
+          {children}
+        </select>
+        <span className={cssClass('highlight')} />
+        <span className={cssClass('bar')} />
+        {label && (
+          <Label id={name} className={scss.input__label}>
+            <FormattedMessage id={`${label}`} />
+          </Label>
+        )}
       </div>
-    )
-  }
+      <Error error={errors[name]} />
+    </div>
+  )
+}
 
 /**
  * Display name
@@ -71,22 +68,21 @@ select.displayName = 'Select'
  */
 select.propTypes = {
   /**
-   * Children elements `option`
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
    * Classname, default `select`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  /**
+   * Children elements `option`
+   */
+  children: PropTypes.node.isRequired,
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    onBlur: PropTypes.func
   }).isRequired,
   /**
    * Form
@@ -96,7 +92,7 @@ select.propTypes = {
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])
 }
 
 /**

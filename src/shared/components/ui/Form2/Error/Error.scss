@@ -7,13 +7,6 @@
       padding: 0 0 5px;
     }
 
-    label {
-      position: absolute;
-      top: 20px;
-      left: 0;
-      transition: opacity .3s, top .3s;
-    }
-
     .input {
       &__error {
         color: $color-error;

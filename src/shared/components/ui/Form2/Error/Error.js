@@ -1,22 +1,23 @@
-import { styles } from '@helpers/css'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
 import scss from './Error.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Form input error - stateless presentational component
-   * @param {object} props - props
-   * @param {string} props.error - error message
-   * @param {string|array} props.className - list of class names, default: input__error
-   * @return {object} An object of children element
-   */
-  inputError = ({ error, className }) =>
-    error ? (
-      <span className={cssClass(className)}>{error}</span>
-    ) : (
-      <span className={cssClass(className)} />
-    )
+const cssClass = styles(scss)
+
+/**
+ * Form input error - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.error - error message
+ * @param {string|array} props.className - list of class names, default: input__error
+ * @return {object} An object of children element
+ */
+const inputError = ({ error, className }) =>
+  error ? (
+    <span className={cssClass(className)}>{error}</span>
+  ) : (
+    <span className={cssClass(className)} />
+  )
 
 /**
  * Display name

@@ -1,52 +1,9 @@
-.input {
-  border: 0;
-  border-bottom: 1px solid $color-input-border;
-  color: $color-1;
-  font-size: 16px;
-  height: 38px;
-  outline: none;
-  line-height: 1;
-  letter-spacing: unset;
-  padding: 0;
-
-  &:focus {
-    outline: none;
-
-    ~ .bar:before,
-    ~ .bar:after {
-      width: 100%;
-    }
-  }
-
-  &.error {
-    border-color: $color-error;
-    border-width: 2px;
-  }
-
-  &::placeholder {
-    color: $color-8;
-    border-style: dotted;
-    border-color: $color-input-border;
-  }
-
-  &:disabled {
-    border-color: $color-8;
-    border-style: dotted;
-    color: $color-input-border;
-    background-color: transparent;
-  }
-
-  &--transparent {
-    background-color: transparent;
-  }
-}
-
 :global {
   .form--has-error {
     input,
     select {
-      border-color: $color-error;
-      border-width: 2px;
+      border-color: $color-error !important;
+      border-width: 2px !important;
     }
 
     input {
@@ -86,13 +43,6 @@
     font-size: 14px;
   }
 
-  input:disabled ~ .input__label {
-    opacity: 1;
-    top: -14px;
-    font-size: 14px;
-    color: $color-7;
-  }
-
   input:valid ~ label {
     opacity: 1;
   }
@@ -100,6 +50,10 @@
   input:invalid ~ label {
     top: 11px;
     font-size: 16px;
+  }
+
+  input:invalid:focus {
+    box-shadow: none;
   }
 
   &--focused {
@@ -115,6 +69,69 @@
 
   button {
     margin-right: $margin-medium;
+  }
+
+  .input {
+    border: 0;
+    border-bottom: 1px solid $color-input-border;
+    color: $color-1;
+    font-size: 16px;
+    height: 38px;
+    outline: none;
+    line-height: 1;
+    letter-spacing: unset;
+    padding: 0;
+    box-shadow: none;
+    width: auto;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+
+      ~ .bar:before,
+      ~ .bar:after {
+        width: 100%;
+      }
+    }
+
+    &.error {
+      border-color: $color-error;
+      border-width: 2px;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: $color-8;
+      border-style: dotted;
+      border-color: $color-input-border;
+    }
+
+    &:disabled {
+      border-color: $color-8;
+      border-style: dotted;
+      color: $color-input-border;
+      background-color: transparent;
+    }
+
+    &--transparent {
+      background-color: transparent;
+    }
+
+    &--grayed-placeholder {
+      color: $color-3;
+    }
+
+    &--hidden-arrows {
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type=number]{
+        -moz-appearance: textfield;
+      }
+    }
   }
 }
 

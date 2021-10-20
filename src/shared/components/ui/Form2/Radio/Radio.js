@@ -1,111 +1,107 @@
-import { FormattedMessage } from 'react-intl'
-import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import Error from 'shared/components/ui/Form2/Error'
+import { FormattedMessage } from 'react-intl'
 import scss from './Radio.scss'
+import { getDeepValue } from 'shared/helpers/data'
 
-const cssClass = styles(scss),
-  /**
-   * Radio - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.field - react-formik field properties
-   * @param {object} props.form - react-formik form properties
-   * @param {string} props.id - id of the element
-   * @param {string} props.label - label
-   * @param {string|array} props.className - list of class names, default: input__radio
-   * @param {string} props.type - type of element `text, number etc`
-   * @return {object} An object of children element
-   */
-  radio = ({
-    field: { name, value, onChange, onBlur },
-    form: { errors, touched },
-    id,
-    label,
-    className,
-    type
-  }) => {
-    const errorClass = errors[name] ? 'form--has-error' : ''
+const cssClass = styles(scss)
 
-    return (
-      <div className={`form-field ${errorClass}`}>
-        <label className={cssClass(className)}>
-          {label && (
-            <label htmlFor={id}>
-              <FormattedMessage id={`${label}`} />
-            </label>
-          )}
+/**
+ * Radio - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.field - react-formik field properties
+ * @param {object} props.form - react-formik form properties
+ * @param {string} props.id - id of the element
+ * @param {string} props.label - label
+ * @param {string|array} props.className - list of class names, default: input__radio
+ * @param {string} props.type - type of element `text, number etc`
+ * @return {object} An object of children element
+ */
+const Radio = ({
+  field: { name, value, onChange, onBlur },
+  form: { errors /*touched [UNUSED_VARIABLE]*/ },
+  id,
+  label,
+  className,
+  type
+}) => {
+  const error = getDeepValue(errors, name)
+  const errorClass = error ? 'form--has-error' : ''
 
-          <input
-            checked={id === value}
-            className={cssClass(className)}
-            id={id}
-            name={name}
-            onBlur={onBlur}
-            onChange={onChange}
-            type={type}
-            value={id}
-          />
-
-          <div />
-
-          <Error error={errors[name]} />
-        </label>
-      </div>
-    )
-  }
+  return (
+    <div className={`form-field ${errorClass}`}>
+      <label className={cssClass(className)}>
+        {label && (
+          <label htmlFor={id}>
+            <FormattedMessage id={`${label}`} />
+          </label>
+        )}
+        <input
+          name={name}
+          id={id}
+          type={type}
+          value={id}
+          checked={id === value}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={cssClass(className)}
+        />
+        <div />
+        <Error error={error} />
+      </label>
+    </div>
+  )
+}
 
 /**
  * Display name
  * @type {string}
  */
-radio.displayName = 'radio'
+Radio.displayName = 'radio'
 
 /**
  * The properties.
  * @type {Object}
  */
-radio.propTypes = {
+Radio.propTypes = {
   /**
    * Classname, default `input__radio`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
+  /**
+   * Type, default `radio`
+   */
+  type: PropTypes.string,
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    onBlur: PropTypes.func
   }).isRequired,
-
   /**
    * Form
    */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
-  }).isRequired,
-
+  }),
   id: PropTypes.string.isRequired,
-
-  label: PropTypes.string,
-  /**
-   * Type, default `radio`
-   */
-  type: PropTypes.string
+  label: PropTypes.string
 }
 
 /**
  * The default properties.
  * @type {Object}
  */
-radio.defaultProps = {
+Radio.defaultProps = {
   className: 'input__radio',
-  label: '',
-  type: 'radio'
+  type: 'radio',
+  label: ''
 }
 
-export default radio
+export default Radio

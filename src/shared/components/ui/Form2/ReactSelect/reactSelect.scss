@@ -3,13 +3,12 @@
     label {
       padding: 0;
     }
+  }
 
-    &.form--has-value {
-      .Label__label {
-        top: -10px;
-        opacity: 1;
-        z-index: $z-index-label;
-      }
+  .form--has-value {
+    .Label__label {
+      top: -14px;
+      opacity: 1;
     }
   }
 
@@ -19,14 +18,9 @@
         color: $color-8;
       }
 
-      &__single-value {
-        padding: 5px 0;
-      }
-
       &__control {
         border: 0;
         border-bottom: 1px solid $color-input-border;
-        height: 38px;
         color: $color-1;
         font-size: 16px;
         padding: 0;
@@ -69,7 +63,6 @@
         border-radius: $radius-tiny;
         color: $color-1;
         display: block;
-        z-index: $z-index-options;
       }
 
       &__multi-value {

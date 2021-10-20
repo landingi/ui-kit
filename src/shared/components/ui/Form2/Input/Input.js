@@ -1,7 +1,8 @@
-import Error from '@components/ui/Form2/Error'
-import Input from '@components/ui/Input'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import Error from 'shared/components/ui/Form2/Error'
+import InputComponent from 'shared/components/ui/Input'
+import { getDeepValue } from 'shared/helpers/data'
 
 /**
  * Input - stateless presentational component
@@ -16,12 +17,13 @@ import React from 'react'
  * @param {number} props.maxLength - max length of input
  * @param {bool} props.autoFocus - autoFocus
  * @param {string|object} props.tooltip - tooltip
- * @param {bool} props.focused - focused, keep label by default on top
+ * @param {string} props.focused - focused, keep label by default on top
  * @param {bool} props.disabled - disabled
  * @param {bool} props.required - required
+ * @param {string} props.background - color of background `white, transparent', default: white
  * @return {object} An object of children element
  */
-const input = ({
+const Input = ({
   field: { name, value, onChange, onBlur },
   form: { errors, touched },
   id,
@@ -35,34 +37,33 @@ const input = ({
   required,
   tooltip,
   focused,
-  min,
-  controlledValue
+  background
 }) => {
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const error = getDeepValue(errors, name)
+  const isTouched = getDeepValue(touched, name)
+  const errorClass = error && isTouched ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
-      <Input
-        autoFocus={autoFocus}
-        controlledValue={controlledValue}
-        disabled={disabled}
-        focused={focused}
-        id={id}
-        label={label}
-        maxLength={maxLength}
-        min={min}
+      <InputComponent
+        type={type}
         name={name}
-        onBlur={onBlur}
+        id={id}
+        value={value}
         onChange={onChange}
+        onBlur={onBlur}
+        label={label}
         placeholder={placeholder}
+        disabled={disabled}
+        translate={translate}
+        maxLength={maxLength}
+        autoFocus={autoFocus}
         required={required}
         tooltip={tooltip}
-        translate={translate}
-        type={type}
-        value={value}
+        focused={focused}
+        background={background}
       />
-
-      {touched[name] && <Error error={errors[name]} />}
+      {isTouched && <Error error={error} />}
     </div>
   )
 }
@@ -71,27 +72,21 @@ const input = ({
  * Display name
  * @type {string}
  */
-input.displayName = 'Input'
+Input.displayName = 'Input'
 
 /**
  * The properties.
  * @type {Object}
  */
-input.propTypes = {
-  autoFocus: PropTypes.bool,
-
-  controlledValue: PropTypes.bool,
-
-  disabled: PropTypes.bool,
-
+Input.propTypes = {
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    onBlur: PropTypes.func
   }).isRequired,
   /**
    * Form
@@ -102,33 +97,37 @@ input.propTypes = {
   }).isRequired,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  maxLength: PropTypes.number,
-  min: PropTypes.number,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  translate: PropTypes.bool,
+  maxLength: PropTypes.number,
+  autoFocus: PropTypes.bool,
   required: PropTypes.bool,
   tooltip: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]),
-  translate: PropTypes.bool,
-  type: PropTypes.string
+  background: PropTypes.oneOf(['white', 'transparent']),
+  focused: PropTypes.string
 }
 
 /**
  * The default properties.
  * @type {Object}
  */
-input.defaultProps = {
-  autoFocus: false,
-  controlledValue: false,
-  disabled: false,
+Input.defaultProps = {
   label: '',
-  maxLength: 524288,
   placeholder: '',
+  type: 'text',
+  disabled: false,
+  translate: true,
+  maxLength: 524288,
+  autoFocus: false,
   required: true,
   tooltip: '',
-  translate: true,
-  type: 'text'
+  background: 'white',
+  focused: 'false'
 }
 
-export default input
+export default Input

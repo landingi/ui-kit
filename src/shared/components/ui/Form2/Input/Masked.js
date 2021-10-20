@@ -1,7 +1,7 @@
-import Error from '@components/ui/Form2/Error'
-import MaskedInput from '@components/ui/Input/Masked'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import Error from 'shared/components/ui/Form2/Error'
+import MaskedInput from 'shared/components/ui/Input/Masked'
 
 /**
  * Masked Input - stateless presentational component
@@ -34,30 +34,29 @@ const maskedInput = ({
   guide,
   focused
 }) => {
-  const { name, value, onChange, onBlur } = field,
-    { errors, touched } = form,
-    errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+  const { name, value, onChange, onBlur } = field
+  const { errors, touched } = form
+  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
     <div className={`form-field ${errorClass}`}>
       <MaskedInput
-        disabled={disabled}
         field={field}
-        focused={focused}
-        guide={guide}
-        id={id}
-        label={label}
         mask={mask}
-        maxLength={maxLength}
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        placeholder={placeholder}
-        translate={translate}
         type={type}
+        name={name}
+        id={id}
         value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        label={label}
+        placeholder={placeholder}
+        disabled={disabled}
+        translate={translate}
+        maxLength={maxLength}
+        guide={guide}
+        focused={focused}
       />
-
       {touched[name] && <Error error={errors[name]} />}
     </div>
   )
@@ -74,19 +73,15 @@ maskedInput.displayName = 'Input masked'
  * @type {Object}
  */
 maskedInput.propTypes = {
-  disabled: PropTypes.bool,
-
   /**
    * Field
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    onBlur: PropTypes.func
   }).isRequired,
-
-  focused: PropTypes.string,
   /**
    * Form
    */
@@ -94,16 +89,18 @@ maskedInput.propTypes = {
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
   }).isRequired,
-  guide: PropTypes.bool,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  translate: PropTypes.bool,
+  maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
   ),
-  maxLength: PropTypes.number,
-  placeholder: PropTypes.string,
-  translate: PropTypes.bool,
-  type: PropTypes.string
+  guide: PropTypes.bool,
+  focused: PropTypes.string
 }
 
 /**
@@ -111,15 +108,15 @@ maskedInput.propTypes = {
  * @type {Object}
  */
 maskedInput.defaultProps = {
-  disabled: false,
-  focused: 'false',
-  guide: false,
   label: '',
-  mask: [],
-  maxLength: 524288,
   placeholder: '',
+  type: 'text',
+  disabled: false,
   translate: true,
-  type: 'text'
+  maxLength: 524288,
+  mask: [],
+  guide: false,
+  focused: 'false'
 }
 
 export default maskedInput

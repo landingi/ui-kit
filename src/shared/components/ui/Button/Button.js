@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { Fragment } from 'react'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
-import { styles } from '@helpers/css'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import Spinner from '@components/ui/Spinner'
+import { styles } from 'shared/helpers/css'
+import Spinner from 'shared/components/ui/Spinner'
 import scss from './Button.scss'
 
 /**
@@ -34,9 +35,7 @@ const cssClass = styles(scss)
  * @param {bool} props.hasBackgoundRipple - background ripple effect, default: true
  * @param {bool} props.hasIcon - has icon, default: false
  * @param {bool} props.hide - Hide, default: false
- * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false',
- * @param {string} props.id - element id
- * @param {bool} props.isRounded
+ * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false'
  * @return {object} An object of children elements
  */
 const button = ({
@@ -57,9 +56,7 @@ const button = ({
   hasIcon,
   hide,
   buttonStyle,
-  id,
-  fitWidth,
-  isRounded
+  fitWidth
 }) => {
   const elementClasses = cssClass({
     'button--primary': variant === 'primary',
@@ -69,11 +66,14 @@ const button = ({
     'button--transparent-blue': variant === 'transparent-blue',
     'button--dropdown-element': variant === 'dropdown-element',
     'dropdown button--switcher': variant === 'switcher',
-    'button--switcher-brand': variant === 'switcher-brand',
     'button--tabs': variant === 'tabs',
     'button--alert': variant === 'alert',
     'button--icon': variant === 'icon',
+    'button--white': variant === 'white',
+    'button--black': variant === 'black',
     'button--action': variant === 'action',
+    'button--publish': variant === 'publish',
+    'button--mini': size === 'mini',
     'button--tiny': size === 'tiny',
     'button--small': size === 'small',
     'button--medium': size === 'medium',
@@ -84,8 +84,7 @@ const button = ({
     'button--right': align === 'right',
     'button--svg': hasIcon === true,
     'button--hide': hide === true,
-    'button--fit-width': fitWidth === true,
-    'button--rounded': isRounded === true
+    'button--fit-width': fitWidth === true
   })
 
   return (
@@ -103,7 +102,6 @@ const button = ({
               className
             )
       }
-      id={id}
       onClick={onClick}
     >
       {isLoading && <Spinner />}
@@ -149,7 +147,7 @@ button.propTypes = {
   /**
    * Size
    */
-  size: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'input']),
+  size: PropTypes.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'input']),
   /**
    * Variant
    */
@@ -164,8 +162,10 @@ button.propTypes = {
     'tabs',
     'transparent-blue',
     'dropdown-element',
-    'switcher-brand',
-    'switcher'
+    'action',
+    'white',
+    'black',
+    'publish'
   ]),
   /**
    * Align
@@ -211,13 +211,9 @@ button.propTypes = {
    */
   buttonStyle: PropTypes.bool,
   /**
-   * Element id
+   * Set width to 100%
    */
-  id: PropTypes.string,
-  /**
-   *Rounded style
-   */
-  isRounded: PropTypes.bool
+  fitWidth: PropTypes.bool
 }
 
 /**
@@ -241,9 +237,7 @@ button.defaultProps = {
   hasIcon: false,
   hide: false,
   buttonStyle: false,
-  fitWidth: false,
-  id: null,
-  isRounded: false
+  fitWidth: false
 }
 
 export default button

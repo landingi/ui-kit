@@ -33,11 +33,9 @@
     display: flex;
     justify-content: flex-start;
     border-bottom: 2px solid $color-input-border;
-    margin-bottom: 30px;
   }
 
   &__panel {
     background-color: $color-white;
-    padding: $padding-medium 0;
   }
 }
