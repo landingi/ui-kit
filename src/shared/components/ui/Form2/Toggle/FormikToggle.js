@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import { FormattedMessage } from 'react-intl'
-import InputError from '../InputError'
+import Error from '@components/ui/Form2/Error'
 import scss from './Toggle.scss'
 
 const cssClass = styles(scss)
@@ -42,7 +42,7 @@ const formikToggle = ({
     {label && (
       <label htmlFor={id} className={cssClass('toggle__label')}>
         <FormattedMessage id={`${label}`} />
-        {touched[name] && <InputError error={errors[name]} />}
+        {touched[name] && <Error error={errors[name]} />}
       </label>
     )}
   </div>
