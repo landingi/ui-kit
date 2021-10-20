@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 import PropTypes from 'prop-types'
-import useIsOpen from 'shared/helpers/hooks/useIsOpen'
+import useIsOpen from '@helpers/hooks/useIsOpen'
 import { FormattedMessage } from 'react-intl'
 import scss from './ShowMore.scss'
 

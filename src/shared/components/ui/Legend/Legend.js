@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import { legendShape } from 'shared/shapes'
 import scss from './Legend.scss'
 import ColorLine from '../ColorLine'

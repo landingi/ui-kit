@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import scss from './Tooltip.scss'
 import uuid from 'react-uuid'
 import ReactTooltip from 'react-tooltip'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 
 const cssClass = styles(scss)
 

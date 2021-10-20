@@ -2,8 +2,8 @@ import React, { useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import TabContext from './TabContext'
 import Button from '@components/ui/Button'
-import useQueryString from 'shared/helpers/hooks/useQueryString'
-import { styles } from 'shared/helpers/css'
+import useQueryString from '@helpers/hooks/useQueryString'
+import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
 /**

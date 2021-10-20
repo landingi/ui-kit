@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import css from './fonts/css/editor-icons.css'
 import scss from './Icon.scss'
 

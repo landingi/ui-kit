@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import TabContext from './TabContext'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
 /**

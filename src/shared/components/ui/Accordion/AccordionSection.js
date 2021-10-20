@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import scss from './Accordion.scss'
 import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 
 const cssClass = styles(scss)
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Modal.scss'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
