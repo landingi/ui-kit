@@ -19,6 +19,5 @@ export default {
   Radio,
   RadioGroup,
   ReactSelect,
-  Select,
   Toggle
 }

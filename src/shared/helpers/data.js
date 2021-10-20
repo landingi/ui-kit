@@ -266,7 +266,7 @@ export const formatNumeric = value =>
 export const calculateDaysInterval = (startDate, endDate) =>
   Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24))
 
-  /**
+/**
  * Days mapper
  * @const days
  * @return {object}
