@@ -165,7 +165,8 @@ button.propTypes = {
     'action',
     'white',
     'black',
-    'publish'
+    'publish',
+    'switcher-brand'
   ]),
   /**
    * Align
