@@ -19,7 +19,7 @@ yarn install
 
 #### Add a New component
 
-1. Create a folder inside `shared/components/*`
+1. Create a folder inside `@components/*`
 2. Create `*.md` file and rest of the `js` files
 3. In the `*.md` file add the following code:
 

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { styles } from 'shared/helpers/css'
 import scss from './InfinityScroll.scss'
-import Loader from 'shared/components/ui/Loader'
+import Loader from '@components/ui/Loader'
 import PropTypes from 'prop-types'
 
 const cssClass = styles(scss)

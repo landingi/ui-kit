@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import { FormattedMessage } from 'react-intl'
-import Error from 'shared/components/ui/Form2/Error'
+import Error from '@components/ui/Form2/Error'
 import scss from './Checkbox.scss'
 import { getDeepValue } from 'shared/helpers/data'
 

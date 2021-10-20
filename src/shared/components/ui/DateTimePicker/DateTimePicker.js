@@ -6,7 +6,7 @@ import scss from './DateTimePicker.scss'
  * https://github.com/Adphorus/react-date-range
  */
 import { DateRange, Calendar } from 'react-date-range'
-import Button from 'shared/components/ui/Button'
+import Button from '@components/ui/Button'
 import { FormattedMessage } from 'react-intl'
 import { getAgoDate, getTodayDate } from 'shared/helpers/data'
 import { pl, enUS } from 'date-fns/locale'

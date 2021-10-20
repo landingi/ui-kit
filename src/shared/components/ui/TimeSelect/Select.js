@@ -9,10 +9,10 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimePicker from 'react-time-picker'
-import DropdownSelect from 'shared/components/ui/DropdownSelect'
+import DropdownSelect from '@components/ui/DropdownSelect'
 import { styles } from 'shared/helpers/css'
 import { getLanguage } from 'shared/helpers/i18n'
-import Spreader from 'shared/components/ui/Spreader'
+import Spreader from '@components/ui/Spreader'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,

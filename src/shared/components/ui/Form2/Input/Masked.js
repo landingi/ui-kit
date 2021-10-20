@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from 'shared/components/ui/Form2/Error'
-import MaskedInput from 'shared/components/ui/Input/Masked'
+import Error from '@components/ui/Form2/Error'
+import MaskedInput from '@components/ui/Input/Masked'
 
 /**
  * Masked Input - stateless presentational component

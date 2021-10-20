@@ -2,7 +2,7 @@ import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { centerParent, getBoundings } from 'shared/helpers/position'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Tooltip from 'shared/components/ui/Tooltip'
+import Tooltip from '@components/ui/Tooltip'
 import { FormattedMessage } from 'react-intl'
 /**
  * Add the Material Design ripple effect to React component

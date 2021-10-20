@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
-import Html from 'shared/components/global/Html'
+import Html from '@components/global/Html'
 import scss from './Toggle.scss'
 
 const cssClass = styles(scss)

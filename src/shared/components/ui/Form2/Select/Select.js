@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
-import Error from 'shared/components/ui/Form2/Error'
-import Label from 'shared/components/ui/Label'
+import Error from '@components/ui/Form2/Error'
+import Label from '@components/ui/Label'
 import scss from './Select.scss'
 import { FormattedMessage } from 'react-intl'
 
