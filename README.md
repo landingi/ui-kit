@@ -1,5 +1,13 @@
 # ui-kit
 
+## Coverage
+Unit tests
+
+![](coverage/badge-branches.svg)
+![](coverage/badge-functions.svg)
+![](coverage/badge-lines.svg)
+![](coverage/badge-statements.svg)
+
 ## Getting Started
 
 Landingi UI-kit is a set of react components used in the `landingi-app` and `application`.
