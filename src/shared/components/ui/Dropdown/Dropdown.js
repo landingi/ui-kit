@@ -13,8 +13,8 @@ import { debounce, throttle } from '@helpers/events'
 import { styles } from '@helpers/css'
 import scss from './Dropdown.scss'
 import { NavLink } from 'react-router-dom'
-import { CLOSE_DROPDOWN } from 'shared/constants/eventTypes'
-import emitter from 'shared/lib/emitter'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import emitter from '@lib/emitter'
 
 /**
  * Exports css classes from SCSS file
