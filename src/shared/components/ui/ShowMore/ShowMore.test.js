@@ -1,9 +1,11 @@
 import React from 'react'
 import ShowMore from '@components/ui/ShowMore'
+import Button from '@components/ui/Button'
 import { mountWithIntl } from '@jestutils'
 
 const props = {
-  content: 'word.smart-map'
+  content: 'word.smart-map',
+  children: <Button>Test</Button>
 }
 
 const showMoreComponent = <ShowMore {...props} />

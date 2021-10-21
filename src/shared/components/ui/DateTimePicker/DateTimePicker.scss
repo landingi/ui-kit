@@ -99,6 +99,7 @@
 
       .fas {
         color: $color-3;
+        font-size: 13px;
       }
   
       &:hover {
@@ -335,7 +336,6 @@
     .rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after {
       content: '';
       border: 1px solid currentColor;
-      border-radius: 1.333em;
       position: absolute;
       top: -2px;
       bottom: -2px;

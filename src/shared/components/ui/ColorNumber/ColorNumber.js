@@ -1,29 +1,30 @@
-import { styles } from '@helpers/css'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from '@helpers/css'
 import scss from './ColorNumber.scss'
 
-const cssClass = styles(scss),
-  /**
-   * ColorNumber - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.children - children
-   * @param {string} props.color - color
-   * @param {number} props.size - size
-   * @return {object} An object of children element
-   */
+const cssClass = styles(scss)
 
-  colorNumber = ({ children, variant, size }) => (
-    <span
-      className={cssClass(
-        'color-number',
-        `color-number__color--${variant}`,
-        `color-number__size--${size}`
-      )}
-    >
-      {children}
-    </span>
-  )
+/**
+ * colorNumber - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string} props.color - color
+ * @param {number} props.size - size
+ * @return {object} An object of children element
+ */
+
+const colorNumber = ({ children, variant, size }) => (
+  <span
+    className={cssClass(
+      'color-number',
+      `color-number__color--${variant}`,
+      `color-number__size--${size}`
+    )}
+  >
+    {children}
+  </span>
+)
 
 /**
  * Display name
@@ -40,12 +41,6 @@ colorNumber.propTypes = {
    * Children elements
    */
   children: PropTypes.node.isRequired,
-
-  /**
-   * Size, default `18`
-   */
-  size: PropTypes.oneOf([16, 18, 32, 44, 62]),
-
   /**
    * Color
    */
@@ -55,8 +50,14 @@ colorNumber.propTypes = {
     'success',
     'default',
     'progress',
-    'info'
-  ]).isRequired
+    'info',
+    'brand',
+    'white'
+  ]).isRequired,
+  /**
+   * Size, default `18`
+   */
+  size: PropTypes.oneOf([10, 12, 16, 18, 32, 44, 62])
 }
 
 /**

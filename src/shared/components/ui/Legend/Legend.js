@@ -1,32 +1,33 @@
-import { legendShape } from '@shapes'
-import { styles } from '@helpers/css'
-import ColorLine from '../ColorLine'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { styles } from '@helpers/css'
+import { legendShape } from '@shapes'
 import scss from './Legend.scss'
+import ColorLine from '../ColorLine'
 
-const cssClass = styles(scss),
-  /**
-   * Legend - stateless presentational component
-   * @param {object} props - props
-   * @param {object[]} props.data - data
-   * @param {string} props.alignment - alignment
-   * @return {object} An object of children element
-   */
-  legend = ({ data, alignment }) => (
-    <div className={cssClass('container', `container--${alignment}`)}>
-      {data.map((item, index) => (
-        <span
-          className={cssClass('legend', `legend--${item.variant}`)}
-          key={index}
-        >
-          <ColorLine alignment='horizontal' variant={item.variant} />
+const cssClass = styles(scss)
 
-          {item.range}
-        </span>
-      ))}
-    </div>
-  )
+/**
+ * Legend - stateless presentational component
+ * @param {object} props - props
+ * @param {object[]} props.data - data
+ * @param {string} props.alignment - alignment
+ * @return {object} An object of children element
+ */
+const legend = ({ data, alignment }) => (
+  <div className={cssClass('container', `container--${alignment}`)}>
+    {data.map((item, index) => (
+      <span
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
+        className={cssClass('legend', `legend--${item.variant}`)}
+      >
+        <ColorLine variant={item.variant} alignment='horizontal' />
+        {item.range}
+      </span>
+    ))}
+  </div>
+)
 
 /**
  * Display name

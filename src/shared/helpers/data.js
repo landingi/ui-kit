@@ -265,3 +265,43 @@ export const formatNumeric = value =>
  */
 export const calculateDaysInterval = (startDate, endDate) =>
   Math.ceil(Math.abs(startDate - endDate) / (1000 * 60 * 60 * 24))
+
+/**
+ * Days mapper
+ * @const days
+ * @return {object}
+ */
+export const days = {
+  0: 'monday',
+  1: 'tuesday',
+  2: 'wednesday',
+  3: 'thursday',
+  4: 'friday',
+  5: 'saturday',
+  6: 'sunday'
+}
+
+/**
+ * Maps number to day
+ * @function mapNumberToDay
+ * @param {number} value
+ * @return {string} Returns string
+ */
+export const mapNumberToDay = value => days[value]
+
+/**
+ * Access a deep value inside a object
+ * Works by passing a path like "foo.bar.xyz"
+ */
+export const getDeepValue = (obj, path) =>
+  path.split('.').reduce((r, val) => (r ? r[val] : undefined), obj)
+
+/**
+ * Convert time string 'HH:MM' to seconds
+ */
+export const convertTimeToSeconds = timeStr => {
+  const [hours, minutes] = timeStr.split(':')
+  const totalSeconds = parseInt(hours) * 60 * 60 + parseInt(minutes) * 60
+
+  return totalSeconds
+}

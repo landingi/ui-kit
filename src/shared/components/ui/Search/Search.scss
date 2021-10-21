@@ -17,8 +17,8 @@
       left: 0;
       right: 0;
       height: 100%;
-      width: 100%;
-
+      width: calc(100% - 80px);
+      box-shadow: none;
 
     &::placeholder {
       color: $color-8;
@@ -41,7 +41,7 @@
       position: absolute;
       left: $margin-medium;
 
-      svg {
+      i {
         color: $color-8
       }
     }
@@ -66,6 +66,21 @@
 .search--small {
   height: 28px;
   font-size: 12px;
+
+  .search__input {
+    font-size: 12px;
+    padding: 0 36px 0 34px;
+    width: calc(100% - 70px);
+  }
+
+  :global {
+    .Button__button--input {
+      max-width: 22px;
+      max-height: 22px;
+      min-width: 22px;
+      min-height: 22px;
+    }
+  }
 }
 
 .search--medium {
@@ -76,4 +91,8 @@
 .search--large {
   height: 44px;
   font-size: 16px;
+}
+
+form {
+  margin: 0;
 }

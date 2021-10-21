@@ -1,20 +1,20 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
-import { centerParent, getBoundings } from '@helpers/position'
-import PropTypes from 'prop-types'
 import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { centerParent, getBoundings } from '@helpers/position'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tooltip from '@components/ui/Tooltip'
+import { FormattedMessage } from 'react-intl'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
  */
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
-import { NavLink } from 'react-router-dom'
+import Ink from 'react-ink'
 import { debounce, throttle } from '@helpers/events'
 import { styles } from '@helpers/css'
-import Ink from 'react-ink'
-import emitter from '@lib/emitter'
 import scss from './Dropdown.scss'
+import { NavLink } from 'react-router-dom'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import emitter from '@lib/emitter'
 
 /**
  * Exports css classes from SCSS file
@@ -32,6 +32,7 @@ const cssClass = styles(scss)
  * @param {string} props.tooltip - Tooltip
  * @param {string} props.tooltipPlacement - Tooltip placement
  * @param {number} props.offset - Offset
+ * @param {number} props.leftOffset - horizontal offset
  * @param {string} props.size - Size
  * @param {bool} props.hasArrow - Has arrow
  * @param {string} props.arrowType - Arrow type
@@ -46,7 +47,8 @@ const cssClass = styles(scss)
  * @param {bool} props.hasInput - Has Input style, default: false
  * @param {bool} props.hasFullInputStyle - Has Input full Input style, default: false
  * @param {bool} props.asPlaceholder - as Placeholder, default: false
- * @param {bool} props.inModal - in Modal, default: false
+ * @param {bool} props.inModalName - name of wrapping modal
+ * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
  * @return {object} An object of children element
  */
 class Dropdown extends PureComponent {
@@ -62,7 +64,6 @@ class Dropdown extends PureComponent {
    * @return {object}
    */
   containerRef = React.createRef()
-
   /**
    * Ref dropdown
    * @type {function}
@@ -75,27 +76,30 @@ class Dropdown extends PureComponent {
    * @type {Object}
    */
   static defaultProps = {
-    alignment: 'center',
-    arrowType: 'caret',
-    asPlaceholder: false,
-    button: false,
-    className: 'dropdown',
-    dropdownPlacement: 'left',
-    handleOnClick: () => null,
-    handleOnClose: () => null,
-    handleOnOpen: () => null,
-    hasArrow: true,
-    hasFullInputStyle: false,
-    hasInput: false,
-    icon: null,
-    inModal: false,
-    label: null,
-    link: '',
     offset: 5,
-    renderAsSmaller: false,
-    size: 'medium',
+    leftOffset: 0,
+    className: 'dropdown',
+    icon: null,
+    label: null,
     tooltip: '',
-    tooltipPlacement: ''
+    tooltipPlacement: '',
+    size: 'medium',
+    hasArrow: true,
+    arrowType: 'caret',
+    alignment: 'center',
+    dropdownPlacement: 'left',
+    button: false,
+    handleOnClick: () => null,
+    handleOnOpen: () => null,
+    handleOnClose: () => null,
+    link: '',
+    renderAsSmaller: false,
+    hasInput: false,
+    hasFullInputStyle: false,
+    asPlaceholder: false,
+    inModalName: null,
+    custom: null,
+    isOpenDisabled: false
   }
 
   /**
@@ -103,111 +107,35 @@ class Dropdown extends PureComponent {
    * @type {Object}
    */
   static propTypes = {
-    /**
-     * Alignment, default `center`
-     */
-    alignment: PropTypes.oneOf(['center', 'spaced']),
-
-    /**
-     * Arrow type, default `caret`
-     */
-    arrowType: PropTypes.oneOf(['caret', 'dots']),
-
-    /**
-     * As Placeholder
-     * default: false
-     * label is styled as input placeholder
-     */
-    asPlaceholder: PropTypes.bool,
-
-    /**
-     * Button, default `false`
-     */
-    button: PropTypes.bool,
-
     children: PropTypes.node.isRequired,
-
     /**
      * Classname, default `dropdown`
      */
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-    /**
-     * Dropdown placement, default `left`
-     */
-    dropdownPlacement: PropTypes.oneOf(['left', 'right']),
-
-    /**
-     * Handle on click
-     */
-    handleOnClick: PropTypes.func,
-
-    /**
-     * OnClose callback
-     */
-    handleOnClose: PropTypes.func,
-
-    /**
-     * HandleOnOpen
-     */
-    handleOnOpen: PropTypes.func,
-
-    /**
-     * Has arrow, default `false`
-     */
-    hasArrow: PropTypes.bool,
-
-    /**
-     * Has Input full Input style
-     * default: false
-     * when its enabled dropdown looks like select in forms
-     */
-    hasFullInputStyle: PropTypes.bool,
-
-    /**
-     * Has Input style
-     * default: false
-     */
-    hasInput: PropTypes.bool,
-
     /**
      * Icon
      */
     icon: PropTypes.string,
-
-    /**
-     * In Modal
-     * default: false
-     */
-    inModal: PropTypes.bool,
-
-    /**
-     * Label
-     */
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-
-    /**
-     * Navlink
-     */
-    link: PropTypes.string,
-
-    /**
-     * Offset, default `5`
-     */
-    offset: PropTypes.number,
-
     /**
      * Tooltip
      */
     tooltip: PropTypes.string,
-
     /**
-     * Render as smaller - when dropdown is too wide, it's left edge is off screen,
-     * with this prop it will be render like a 240px width
-     * default: false
+     * Tooltip placement
      */
-    renderAsSmaller: PropTypes.bool,
-
+    tooltipPlacement: PropTypes.string,
+    /**
+     * Label
+     */
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    /**
+     * Offset, default `5`
+     */
+    offset: PropTypes.number,
+    /**
+     * Horizontal offset, default `0`
+     */
+    leftOffset: PropTypes.number,
     /**
      * Size
      */
@@ -222,11 +150,77 @@ class Dropdown extends PureComponent {
       'auto',
       'fixed'
     ]),
-
     /**
-     * Tooltip placement
+     * Has arrow, default `false`
      */
-    tooltipPlacement: PropTypes.string
+    hasArrow: PropTypes.bool,
+    /**
+     * Arrow type, default `caret`
+     */
+    arrowType: PropTypes.oneOf(['caret', 'dots']),
+    /**
+     * Alignment, default `center`
+     */
+    alignment: PropTypes.oneOf(['center', 'spaced']),
+    /**
+     * Dropdown placement, default `left`
+     */
+    dropdownPlacement: PropTypes.oneOf(['left', 'right']),
+    /**
+     * Button, default `false`
+     */
+    button: PropTypes.bool,
+    /**
+     * Handle on click
+     */
+    handleOnClick: PropTypes.func,
+    /**
+     * handleOnOpen
+     */
+    handleOnOpen: PropTypes.func,
+    /**
+     * onClose callback
+     */
+    handleOnClose: PropTypes.func,
+    /**
+     * Navlink
+     */
+    link: PropTypes.string,
+    /**
+     * Render as smaller - when dropdown is too wide, it's left edge is off screen,
+     * with this prop it will be render like a 240px width
+     * default: false
+     */
+    renderAsSmaller: PropTypes.bool,
+    /**
+     * Has Input style
+     * default: false
+     */
+    hasInput: PropTypes.bool,
+    /**
+     * Has Input full Input style
+     * default: false
+     * when its enabled dropdown looks like select in forms
+     */
+    hasFullInputStyle: PropTypes.bool,
+    /**
+     * as Placeholder
+     * default: false
+     * label is styled as input placeholder
+     */
+    asPlaceholder: PropTypes.bool,
+    /**
+     * in Modal name
+     * default: null
+     */
+    inModalName: PropTypes.string,
+    custom: PropTypes.instanceOf(Object),
+    /**
+     * Is disabled opening
+     * default: false
+     * when it's enabled dropdown can't be open
+     */
+    isOpenDisabled: PropTypes.bool
   }
 
   /**
@@ -247,10 +241,12 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   handleShow = event => {
-    const { handleOnOpen } = this.props,
-      { isOpen } = this.state
+    const { handleOnOpen, isOpenDisabled } = this.props
+    const { isOpen } = this.state
 
     event.stopPropagation()
+
+    if (isOpenDisabled) return
 
     !isOpen && handleOnOpen()
 
@@ -301,78 +297,71 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   handlePosition = () => {
-    const { offset, dropdownPlacement, renderAsSmaller, size, inModal } =
-        this.props,
-      container = getBoundings(this.containerRef.current),
-      dropdown = getBoundings(this.dropdownRef.current),
-      renderAbove =
-        window.innerHeight <= dropdown?.height + container?.top + offset
+    const {
+      offset,
+      dropdownPlacement,
+      renderAsSmaller,
+      size,
+      leftOffset,
+      inModalName
+    } = this.props
 
-    if (inModal) {
+    const container = getBoundings(this.containerRef.current)
+    const dropdown = getBoundings(this.dropdownRef.current)
+    const renderAbove =
+      window.innerHeight <= dropdown.height + container.top + offset
+
+    if (inModalName) {
+      const modal = document.getElementsByClassName(inModalName)[0]
+      const modalWidth = modal?.offsetWidth || 600
+      const modalHeight = modal?.offsetHeight || 600
+
       this.setState({
         style: {
-          marginTop: 10,
-          width: container?.width
-        }
-      })
-    } else if (size === 'fixed') {
-      this.setState({
-        style: {
-          left: container?.left,
+          left: container.left - (window.innerWidth - modalWidth) / 2,
           top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset,
-          width: container?.width
-        }
-      })
-    } else if (size === 'huge') {
-      this.setState({
-        style: {
-          left:
-            dropdownPlacement === 'left'
-              ? (renderAsSmaller
-                  ? centerParent(container?.width, 480, container?.left)
-                  : centerParent(
-                      container?.width,
-                      dropdown?.width,
-                      container?.left
-                    )) - 150
-              : centerParent(
-                  container?.width,
-                  dropdown?.width,
-                  container?.left
-                ) -
-                100 +
-                dropdown?.width,
-          top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset
+            ? container.top - dropdown.height
+            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         }
       })
     } else {
-      this.setState({
-        style: {
-          left:
-            dropdownPlacement === 'left'
-              ? (renderAsSmaller
-                  ? centerParent(container?.width, 240, container?.left)
-                  : centerParent(
-                      container?.width,
-                      dropdown?.width,
-                      container?.left
-                    )) - 40
-              : centerParent(
-                  container?.width,
-                  dropdown?.width,
-                  container?.left
-                ) -
-                100 +
-                dropdown?.width,
-          top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset
-        }
-      })
+      if (size === 'fixed') {
+        this.setState({
+          style: {
+            left: container.left,
+            top: renderAbove
+              ? container.top - dropdown.height
+              : container.bottom + offset,
+            width: container.width
+          }
+        })
+      } else {
+        this.setState({
+          style: {
+            left:
+              dropdownPlacement === 'left'
+                ? (renderAsSmaller
+                    ? centerParent(container.width, 240, container.left)
+                    : centerParent(
+                        container.width,
+                        dropdown.width,
+                        container.left
+                      )) -
+                  40 +
+                  leftOffset
+                : centerParent(
+                    container.width,
+                    dropdown.width,
+                    container.left
+                  ) -
+                  100 +
+                  dropdown.width,
+            top: renderAbove
+              ? container.top - dropdown.height
+              : container.bottom + offset
+          }
+        })
+      }
     }
   }
 
@@ -393,8 +382,8 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownWithTooltip = () => {
-    const { icon, tooltip, tooltipPlacement, hasArrow, arrowType } = this.props,
-      { isOpen } = this.state
+    const { icon, tooltip, tooltipPlacement, hasArrow, arrowType } = this.props
+    const { isOpen } = this.state
 
     return (
       <Tooltip
@@ -402,9 +391,9 @@ class Dropdown extends PureComponent {
         placement={tooltipPlacement}
       >
         <span
-          className={cssClass('dropdown__wrapper')}
-          onClick={this.handleShow}
           ref={this.containerRef}
+          onClick={this.handleShow}
+          className={cssClass('dropdown__wrapper')}
         >
           {icon && this.renderIcon()}
 
@@ -424,34 +413,40 @@ class Dropdown extends PureComponent {
    */
   renderDropdown = () => {
     const {
-        label,
-        icon,
-        hasArrow,
-        arrowType,
-        alignment,
-        hasInput,
-        hasFullInputStyle
-      } = this.props,
-      { isOpen } = this.state
+      label,
+      icon,
+      hasArrow,
+      arrowType,
+      alignment,
+      hasInput,
+      hasFullInputStyle,
+      custom,
+      isOpenDisabled
+    } = this.props
+    const { isOpen } = this.state
 
     return (
       <span
+        ref={this.containerRef}
+        onClick={this.handleShow}
         className={cssClass(
-          'dropdown__wrapper',
+          !custom && 'dropdown__wrapper',
+          isOpenDisabled && 'dropdown__wrapper--disabled',
           alignment === 'spaced'
             ? 'dropdown__wrapper--spaced'
             : 'dropdown__wrapper--center',
           hasInput && 'dropdown__wrapper--input',
-          hasFullInputStyle && 'dropdown__wrapper--as-input'
+          hasFullInputStyle && 'dropdown__wrapper--as-input',
+          hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
         )}
-        onClick={this.handleShow}
-        ref={this.containerRef}
       >
+        {custom && custom}
+
         {icon && this.renderIcon()}
 
         {label && this.renderLabel()}
 
-        {!hasInput && <Ink />}
+        {!hasInput && !custom && <Ink />}
 
         {hasArrow && this.renderArrows(isOpen, arrowType)}
       </span>
@@ -464,8 +459,8 @@ class Dropdown extends PureComponent {
    */
   renderDropdownWithButton = () => {
     const { label, icon, hasArrow, arrowType, alignment, handleOnClick, link } =
-        this.props,
-      { isOpen } = this.state
+      this.props
+    const { isOpen } = this.state
 
     return (
       <span
@@ -477,7 +472,7 @@ class Dropdown extends PureComponent {
         )}
         onClick={handleOnClick}
       >
-        <NavLink activeClassName='groups--selected' to={link}>
+        <NavLink to={link} activeClassName='groups--selected'>
           {icon && this.renderIcon()}
 
           {label && this.renderLabel()}
@@ -487,11 +482,10 @@ class Dropdown extends PureComponent {
 
         <span
           className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
-          onClick={this.handleShow}
           ref={this.containerRef}
+          onClick={this.handleShow}
         >
           {hasArrow && this.renderArrows(isOpen, arrowType)}
-
           <Ink />
         </span>
       </span>
@@ -503,17 +497,18 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownBody = () => {
-    const { children, className, size } = this.props,
-      { style } = this.state,
-      elementClasses = cssClass({
-        'dropdown--auto': size === 'auto',
-        'dropdown--extra-huge': size === 'extra-huge',
-        'dropdown--huge': size === 'huge',
-        'dropdown--large': size === 'large',
-        'dropdown--medium': size === 'medium',
-        'dropdown--mini': size === 'mini',
-        'dropdown--small': size === 'small'
-      })
+    const { children, className, size } = this.props
+    const { style } = this.state
+
+    const elementClasses = cssClass({
+      'dropdown--mini': size === 'mini',
+      'dropdown--small': size === 'small',
+      'dropdown--medium': size === 'medium',
+      'dropdown--large': size === 'large',
+      'dropdown--huge': size === 'huge',
+      'dropdown--extra-huge': size === 'extra-huge',
+      'dropdown--auto': size === 'auto'
+    })
 
     return (
       <div
@@ -618,19 +613,18 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   render() {
-    const { tooltip, button } = this.props,
-      { isOpen } = this.state
+    const { tooltip, button } = this.props
+    const { isOpen } = this.state
 
     return (
-      <>
+      <Fragment>
         {tooltip.length > 0
           ? this.renderDropdownWithTooltip()
           : button
           ? this.renderDropdownWithButton()
           : this.renderDropdown()}
-
         {isOpen && this.renderDropdownBody()}
-      </>
+      </Fragment>
     )
   }
 }

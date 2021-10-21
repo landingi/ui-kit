@@ -1,0 +1,90 @@
+.label {
+    margin-right: 34px;
+}
+
+.time-select {
+    width: 145px;
+
+    &--small {
+        width: 100px;
+    }
+}
+
+.clock-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 45px;
+}
+
+.time-picker {
+    input {
+        color: $color-1;
+        padding: 4px 0;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        border:none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+        border:none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    &--disabled {
+        input {
+            color: $color-input-border;
+        }
+    }
+
+}
+:global {
+    .react-time-picker {
+        position: relative;
+
+        &__inputGroup{
+            &__leadingZero {
+                line-height: 1.5;
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
+
+        &__clock {
+            position: absolute;
+        }
+    }
+
+    .Dropdown {
+        &__dropdown{
+            &__wrapper {
+                svg[data-icon="clock"] {
+                    color: $color-1;
+                }
+
+                &--input {
+                    padding: 0
+                }
+
+            }
+        }
+    }
+
+    .dropdown {
+        &__wrapper{
+            &--disabled {
+                svg[data-icon="clock"] {
+                    color: $color-input-border
+                }
+            }
+        }
+    }
+}

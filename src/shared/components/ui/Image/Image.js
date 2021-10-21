@@ -40,7 +40,7 @@ image.propTypes = {
    */
   alt: PropTypes.string,
   /**
-   * Classname, default `null`
+   * ClassName, default `null`
    */
   className: PropTypes.string,
 

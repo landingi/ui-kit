@@ -1,61 +1,71 @@
-import { FormattedMessage, injectIntl } from 'react-intl'
-import Html from 'shared/components/global/Html'
-import Loader from '@components/ui/Loader'
+import React, {
+  Fragment,
+  useLayoutEffect,
+  useRef,
+  useCallback,
+  useState
+} from 'react'
 import PropTypes from 'prop-types'
-import React, { useCallback, useEffect, useState } from 'react'
-import Spacer from '@components/ui/Spacer'
+import useIsOpen from '@helpers/hooks/useIsOpen'
+import { FormattedMessage } from 'react-intl'
 import scss from './ShowMore.scss'
 
 /**
  * Show more/less - stateful presentational component
- * @param {Object} props - props
- * @param {String} props.content - content to display
- * @param {Object} props.intl - react-intl object
- * @param {Object} props.extraClassname
- * @param {object} props.children - children
- * @return {Object} An object of children element
+ * @param {object} props - props
+ * @param {number} props.height - container height
+ * @param {object} props.children - content to display
+ * @return {object} An object of children element
  */
-const showMore = ({ content, intl, extraClassname, children }) => {
-  const [isOpen, setIsOpen] = useState(false),
-    [display, setDisplay] = useState('none'),
-    [text, setText] = useState(''),
-    handleOnClick = useCallback(
-      event => {
-        event.preventDefault()
+const ShowMore = ({ height, children }) => {
+  const isOpen = useIsOpen(false)
+  const [sectionHeight, setSectionHeight] = useState(height)
+  const [isButtonDisplay, setButtonDisplay] = useState(false)
+  const content = useRef(null)
 
-        setIsOpen(current => !current)
+  useLayoutEffect(() => {
+    const offsetHeight = content.current.offsetHeight
 
-        setDisplay(display !== 'none' ? 'none' : null)
-      },
-      [isOpen]
-    )
+    content.current.offsetHeight > height
+      ? setButtonDisplay(true)
+      : setButtonDisplay(false)
+    sectionHeight > offsetHeight
+      ? isOpen.setValue(false)
+      : isOpen.setValue(true)
 
-  useEffect(() => {
-    const text = intl.formatMessage({ id: content })
+    return () => {
+      isOpen.setValue(false)
+    }
+  }, [])
 
-    !isOpen
-      ? setText(`${text.replace(/^(.{170}[^\s]*).*/, '$1')}...`)
-      : setText(text)
-  }, [isOpen])
+  const handleOnClick = useCallback(event => {
+    event.preventDefault()
+    isOpen.toggleOneElement()
 
-  return text ? (
-    <div className={scss.container}>
-      <Html className={extraClassname} value={text} />
+    const offsetHeight = isOpen.value ? undefined : height
+    setSectionHeight(offsetHeight)
+  })
 
-      <button className={scss.button} onClick={handleOnClick} type='button'>
-        {isOpen ? (
-          <FormattedMessage id='show.less' />
-        ) : (
-          <FormattedMessage id='show.more' />
-        )}
-      </button>
-
-      <Spacer space='small' />
-
-      {isOpen && children ? children || null : null}
-    </div>
-  ) : (
-    <Loader />
+  return (
+    <Fragment>
+      <div
+        style={{
+          maxHeight: sectionHeight
+        }}
+        className={scss.container}
+      >
+        <div ref={content}>{children}</div>
+      </div>
+      {isButtonDisplay && (
+        <button type='button' onClick={handleOnClick} className={scss.button}>
+          {isOpen.value ? (
+            <FormattedMessage id='show.more' />
+          ) : (
+            <FormattedMessage id='show.less' />
+          )}
+        </button>
+      )}
+    </Fragment>
   )
 }
 
@@ -63,42 +73,29 @@ const showMore = ({ content, intl, extraClassname, children }) => {
  * Display name
  * @type {string}
  */
-showMore.displayName = 'Show more/less'
+ShowMore.displayName = 'Show more/less'
 
 /**
  * The properties.
  * @type {Object}
  */
-showMore.propTypes = {
+ShowMore.propTypes = {
   /**
-   * Children elements
+   * Height
    */
-  children: PropTypes.node,
-
+  height: PropTypes.number,
   /**
    * Content
    */
-  content: PropTypes.string.isRequired,
-
-  /**
-   * Extraclassname
-   */
-  extraClassname: PropTypes.string,
-
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  children: PropTypes.instanceOf(Object).isRequired
 }
 
 /**
- * Default props.
+ * The default properties.
  * @type {Object}
  */
-showMore.defaultProps = {
-  children: null
+ShowMore.defaultProps = {
+  height: 100
 }
 
-export default injectIntl(showMore)
+export default ShowMore

@@ -1,86 +1,69 @@
-import { FormattedMessage } from 'react-intl'
-import { styles } from '@helpers/css'
-import ColorNumber from '@components/ui/ColorNumber'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { styles } from '@helpers/css'
 import scss from './ProgressBar.scss'
+import ColorNumber from '@components/ui/ColorNumber'
 
-const cssClass = styles(scss),
-  /**
-   * Progress Bar - stateless presentational component
-   * @param {object} props - props
-   * @param {string} props.barSize - bar size, default 'medium'
-   * @param {string} props.variant - color variant
-   * @param {string} props.quantity - quantity to display
-   * @param {number} props.limit - limit to display
-   * @param {bool} props.limitExceededInfo - limit exceeded info, default: false
-   * @param {bool} props.showColorNumber - should show limit as an ColorNumber, default: false
-   * @param {string} props.limitText - limit type or limit exceeded info, default: ''
-   * @param {number} props.size - size
-   * @return {object} An object of children element
-   */
-  progressBar = ({
-    barSize,
-    size,
-    limit,
-    variant,
-    quantity,
-    limitExceededInfo,
-    showColorNumber,
-    limitText
-  }) => {
-    const fulfillmentWidth = () => {
-      if (quantity === 0) {
-        return { minWidth: 0 }
-      } else if (quantity > limit) {
-        return { width: '100%' }
-      }
-      return { width: `${(quantity / limit) * 100}%` }
-    }
+const cssClass = styles(scss)
 
-    return (
-      <div className={cssClass('container')}>
-        <span
-          className={cssClass(
-            'bar',
-            `bar__${barSize}`,
-            'bar__background',
-            `bar--${variant}`
-          )}
-        />
-
-        <span
-          className={cssClass(
-            'bar',
-            `bar__${barSize}`,
-            'bar__fulfillment',
-            `bar__fulfillment--${barSize}`,
-            `bar--${variant}`
-          )}
-          style={fulfillmentWidth()}
-        />
-
-        {limitExceededInfo && limitText && (
-          <span
-            className={cssClass('limit-exceeded__info', `padding__${barSize}`)}
-          >
-            <FormattedMessage id={limitText} />
-          </span>
+/**
+ * Progress Bar - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.quantity - quantity to display
+ * @param {number} props.limit - limit to display
+ * @param {string} props.variant - variant
+ * @param {bool} props.limitExceededInfo - TODO
+ * @param {bool} props.showColorNumber - should show limit as an ColoroNumber, deafult: false
+ * @param {number} props.size - size
+ * @return {object} An object of children element
+ */
+const progressBar = ({
+  size,
+  limit,
+  variant,
+  quantity,
+  limitExceededInfo,
+  showColorNumber,
+  border,
+  withoutAnimation
+}) => (
+  <Fragment>
+    <div className={cssClass('container', border && 'container--bordered')}>
+      <span
+        className={cssClass(
+          'bar',
+          'bar__background',
+          `bar--${variant}`,
+          border && `bar__border--${border}`
         )}
-
-        {showColorNumber && (
-          <span
-            className={cssClass('result__color--stats', `padding__${barSize}`)}
-          >
-            <ColorNumber size={size} variant={variant}>
-              {quantity}
-            </ColorNumber>
-            /{limit}
-          </span>
+      />
+      <span
+        className={cssClass(
+          'bar',
+          'bar__fulfillment',
+          `bar--${variant}`,
+          border && 'bar__fulfillment--bordered',
+          withoutAnimation && 'bar__fulfillment--no-animation'
         )}
-      </div>
-    )
-  }
+        style={{ width: `${(quantity / limit) * 100}%` }}
+      />
+    </div>
+    {limitExceededInfo && (
+      <span className={cssClass('limit-exceeded__info')}>
+        limitExceededInfo
+      </span>
+    )}
+
+    {showColorNumber && (
+      <span className={cssClass('max-result')}>
+        <ColorNumber variant={variant} size={size}>
+          {quantity}
+        </ColorNumber>
+        /{limit}
+      </span>
+    )}
+  </Fragment>
+)
 
 /**
  * Display name
@@ -94,45 +77,39 @@ progressBar.displayName = 'Progress Bar'
  */
 progressBar.propTypes = {
   /**
-   * BarSize
+   * Variant
    */
-  barSize: PropTypes.string,
-
-  /**
-   * Limit
-   */
-  limit: PropTypes.number.isRequired,
-
-  /**
-   * LimitExceededInfo
-   */
-  limitExceededInfo: PropTypes.bool,
-
-  /**
-   * LimitText
-   */
-  limitText: PropTypes.string,
-
+  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'brand'])
+    .isRequired,
   /**
    * Quantity
    */
   quantity: PropTypes.number.isRequired,
-
   /**
-   * ShowColorNumber
+   * Limit
    */
-  showColorNumber: PropTypes.bool,
-
+  limit: PropTypes.number,
   /**
    * Size
    */
   size: PropTypes.number,
-
   /**
-   * Variant
+   * Border
    */
-  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'info'])
-    .isRequired
+  border: PropTypes.oneOf(['white', 'grey']),
+  /**
+   * Limit exceeded info
+   * TODO: add translation or put translation in prop
+   */
+  limitExceededInfo: PropTypes.bool,
+  /**
+   * should show color numbers, default: false
+   */
+  showColorNumber: PropTypes.bool,
+  /**
+   * block animation
+   */
+  withoutAnimation: PropTypes.bool
 }
 
 /**
@@ -140,12 +117,12 @@ progressBar.propTypes = {
  * @type {Object}
  */
 progressBar.defaultProps = {
-  barSize: 'medium',
   limit: 100,
+  size: 32,
   limitExceededInfo: false,
-  limitText: '',
   showColorNumber: false,
-  size: 32
+  border: null,
+  withoutAnimation: false
 }
 
 export default progressBar

@@ -1,5 +1,13 @@
 # ui-kit
 
+## Coverage
+Unit tests
+
+![img](coverage/badge-branches.svg)
+![img](coverage/badge-functions.svg)
+![img](coverage/badge-lines.svg)
+![img](coverage/badge-statements.svg)
+
 ## Getting Started
 
 Landingi UI-kit is a set of react components used in the `landingi-app` and `application`.
@@ -19,7 +27,7 @@ yarn install
 
 #### Add a New component
 
-1. Create a folder inside `shared/components/*`
+1. Create a folder inside `src/shared/components/*`
 2. Create `*.md` file and rest of the `js` files
 3. In the `*.md` file add the following code:
 
@@ -60,13 +68,13 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 #### CI
 
-Every push triggers CI pipeline. For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/ci.yml`
+Every push triggers CI pipeline. For more information please have a look at Project UI-kit in the Buddy website or check `.buddy/ci.yml`
 
 #### CD
 
 In order to deploy you have to add `[deploy]` tag to your commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`. Once you push it, `Buddy` will execute the CI, CD and CD Docs pipelines.
 
-For more information please have a look at Projet UI-kit in the Buddy website or check `.buddy/*.yml`
+For more information please have a look at Project UI-kit in the Buddy website or check `.buddy/*.yml`
 
 ### Folder structure
 

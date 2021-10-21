@@ -1,0 +1,17 @@
+.background {
+  background-image: linear-gradient(45deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.05) 75%,rgba(0,0,0,.05)),
+    linear-gradient(45deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.05) 75%,rgba(0,0,0,.05));
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+  background-repeat: repeat;
+  display: inline-flex;
+  border: 1px solid $color-7;
+}
+
+.image {
+  width: 140px;
+  height: 140px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}

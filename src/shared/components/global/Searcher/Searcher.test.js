@@ -1,6 +1,9 @@
 import React from 'react'
 import Searcher from '@components/global/Searcher'
 import { mountWithIntl } from '@jestutils'
+import registerIcons from '@helpers/icons'
+
+registerIcons()
 
 const component = <Searcher />
 

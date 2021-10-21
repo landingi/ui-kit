@@ -1,3 +1,9 @@
-```js
-<Back content="Back" url='https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512' />
-```
+import { Playground, Props } from 'docz'
+import Back from '@components/ui/Back'
+
+# Back
+
+<Props of={Back} />
+
+## Basic usage
+

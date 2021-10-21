@@ -48,7 +48,7 @@ Back.displayName = 'Back'
  */
 Back.propTypes = {
   /**
-   * Classname, default `back`
+   * ClassName, default `back`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 

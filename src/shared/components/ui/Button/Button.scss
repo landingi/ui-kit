@@ -23,7 +23,7 @@
     background-color: $color-4;
     color: $color-white;
 
-    svg {
+    svg, i {
       color: $color-white;
     }
 
@@ -34,7 +34,7 @@
       background-color: $color-4;
       color: $color-white;
 
-      svg {
+      svg, i {
         color: $color-white;
       }
     }
@@ -48,7 +48,7 @@
       background-color: $color-brand;
     }
 
-    svg {
+    svg, i {
       color: $color-white;
     }
 
@@ -95,6 +95,18 @@
     display: none;
   }
 
+  &--mini {
+    font-size: 12px;
+    padding: 0;
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
+    min-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &--tiny {
     padding: 8px 20px;
     font-size: 12px;
@@ -137,7 +149,7 @@
       background: $color-button-hover;
       color: $color-1;
 
-      svg {
+      svg, i {
         color: $color-1;
       }
     }
@@ -151,7 +163,7 @@
     text-align: left;
     padding: 0 15px;
 
-    svg {
+    svg, i {
       color: $color-3;
     }
 
@@ -160,7 +172,7 @@
     &:active {
       color: $color-1;
 
-      svg {
+      svg, i {
         color: $color-1;
       }
     }
@@ -178,12 +190,12 @@
         background: $color-button-hover;
         color: $color-brand;
 
-        svg {
+        svg, i {
           color:$color-brand;
         }
       }
 
-      svg {
+      svg, i {
         color: $color-brand
       }
     }
@@ -192,9 +204,34 @@
       background: $color-button-hover;
       color: $color-1;
 
-      svg {
+      svg, i {
         color: $color-1;
       }
+    }
+  }
+
+  &--white {
+    color: $color-white;
+    background: transparent;
+
+    svg, i {
+      color: $color-white;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &--black {
+    color: $color-1;
+
+    svg, i {
+      color: $color-1;
+    }
+
+    &:hover {
+      background-color: $color-button-hover;
     }
   }
 
@@ -215,14 +252,14 @@
       background: $color-3;
     }
 
-    svg {
+    svg, i {
       color: $color-3;
     }
 
     &:hover {
       background: $color-button-hover;
 
-      svg {
+      svg, i {
         color: $color-1;
       }
     }
@@ -233,7 +270,7 @@
       background-color: $color-white;
       color: $color-4;
 
-      svg {
+      svg, i {
         background-color: $color-white;
         color: $color-4;
       }
@@ -245,7 +282,7 @@
         background-color: $color-white;
         color: $color-4;
 
-        svg {
+        svg, i {
           background-color: $color-white;
           color: $color-4;
         }
@@ -254,7 +291,7 @@
   }
 
   &--svg {
-    svg {
+    svg, i {
       margin-right: $margin-medium;
     }
   }
@@ -291,7 +328,7 @@
     min-width: 32px;
     min-height: 32px;
 
-    svg {
+    svg, i  {
       margin: 0 !important;
     }
   }
@@ -308,12 +345,37 @@
     justify-content: center;
     align-items: center;
 
-    svg {
+    svg, i {
       color: $color-white;
     }
 
     &:hover {
       background: $color-button-primay-hover
+    }
+  }
+
+  &--publish {
+    background: $color-publish;
+    color: $color-white;
+    font-weight: 400;
+
+    svg, i {
+      color: $color-white;
+    }
+
+    &:hover {
+      background: $color-publish-hover;
+      color: $color-white;
+    }
+
+    &:disabled {
+      background-color: $color-publish-disabled;
+      color: $color-11;
+      pointer-events: none;
+
+      svg, i {
+        color: $color-11;
+      }
     }
   }
 }

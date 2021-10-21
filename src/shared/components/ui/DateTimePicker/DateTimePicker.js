@@ -1,105 +1,138 @@
-import { styles } from '@helpers/css'
+import React, { Fragment, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import React, { useCallback, useState } from 'react'
+import { styles } from '@helpers/css'
 import scss from './DateTimePicker.scss'
 /**
  * https://github.com/Adphorus/react-date-range
  */
-import { DateRange } from 'react-date-range'
-import { FormattedMessage } from 'react-intl'
-import { enUS, pl } from 'date-fns/locale'
-import { getAgoDate, getTodayDate } from '@helpers/data'
-import { getLanguage } from '@helpers/i18n'
+import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
+import { FormattedMessage } from 'react-intl'
+import { getAgoDate, getTodayDate } from '@helpers/data'
+import { pl, enUS } from 'date-fns/locale'
+import { getLanguage } from '@helpers/i18n'
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
-const cssClass = styles(scss),
-  /**
-   * Date Time Picker - stateless presentational component
-   * this component is a wrapper for react-date-range calendar
-   * we modify ui and add handler to confirm date pick
-   * @param {object} props - props
-   * @param {function} props.setDate - date handler
-   * @param {string} props.minDate - defines minimum date - disabled earlier dates
-   */
-  dateTimePicker = ({ setDate, minDate }) => {
-    const [state, setState] = useState([
-        {
-          endDate: getTodayDate(),
-          key: 'selection',
-          startDate: getAgoDate(7)
-        }
-      ]),
-      addElements = () => {
-        document
-          .querySelector('.rdrNextButton i')
-          .classList.add('fas', 'fa-arrow-right')
-        document
-          .querySelector('.rdrPprevButton i')
-          .classList.add('fas', 'fa-arrow-left')
-        const monthArrow = document.createElement('i'),
-          yearArrow = document.createElement('i')
-        monthArrow.classList.add('fas', 'fa-caret-down')
-        yearArrow.classList.add('fas', 'fa-caret-down')
-        document.querySelector('.rdrMonthPicker').append(monthArrow)
-        document.querySelector('.rdrYearPicker').append(yearArrow)
-      }
+const cssClass = styles(scss)
 
-    React.useEffect(() => {
-      addElements()
-    }, [])
+/**
+ * Date Time Picker - stateless presentational component
+ * this component is a wrapper for react-date-range calendar
+ * we modify ui and add handler to confirm date pick
+ * @param {object} props - props
+ * @param {function} props.setDate - date handler
+ * @param {string} props.minDate - defines minimum date - disabled earlier dates
+ * @param {bool} props.oneDatePicker - should render picker for one date - disabled date ranges
+ * @param {date} props.selectedDateCalendar - defines choosen date for calendar
+ * @param {bool} props.showMonthAndYearPickers - should render select list for month and year
+ */
+const DateTimePicker = ({
+  setDate,
+  minDate,
+  oneDatePicker,
+  selectedDateCalendar,
+  showMonthAndYearPickers
+}) => {
+  const [state, setState] = useState([
+    {
+      startDate: getAgoDate(7),
+      endDate: getTodayDate(),
+      key: 'selection'
+    }
+  ])
 
-    const handleApply = useCallback(() => setDate(...state))
+  const addElements = () => {
+    document
+      .querySelector('.rdrNextButton i')
+      .classList.add('fas', 'fa-arrow-right')
+    document
+      .querySelector('.rdrPprevButton i')
+      .classList.add('fas', 'fa-arrow-left')
 
-    return (
-      <div className={cssClass('react-datetimepicker')}>
-        <DateRange
-          direction='horizontal'
-          // eslint-disable-next-line react/jsx-no-bind
-          locale={getLanguage === 'pl' ? pl : enUS}
-          maxDate={new Date()}
-          minDate={minDate ? new Date(minDate) : undefined}
-          months={1}
-          moveRangeOnFirstSelection={false}
-          onChange={item => setState([item.selection])}
-          rangeColors={['#EDECEC']}
-          ranges={state}
-          showDateDisplay={false}
-          showSelectionPreview
-          weekStartsOn={1}
-        />
-
-        <Button onClick={handleApply} size='tiny'>
-          <FormattedMessage id='word.apply' />
-        </Button>
-      </div>
-    )
+    if (showMonthAndYearPickers) {
+      const monthArrow = document.createElement('i')
+      const yearArrow = document.createElement('i')
+      monthArrow.classList.add('fas', 'fa-caret-down')
+      yearArrow.classList.add('fas', 'fa-caret-down')
+      document.querySelector('.rdrMonthPicker').append(monthArrow)
+      document.querySelector('.rdrYearPicker').append(yearArrow)
+    }
   }
+
+  React.useEffect(() => {
+    addElements()
+  }, [])
+
+  const handleApply = useCallback(() => setDate(...state))
+
+  return (
+    <div className={cssClass('react-datetimepicker')}>
+      {oneDatePicker ? (
+        <Calendar
+          date={selectedDateCalendar || new Date()}
+          locale={getLanguage === 'pl' ? pl : enUS}
+          minDate={minDate ? new Date(minDate) : undefined}
+          onChange={setDate}
+          color={'#EDECEC'}
+          showMonthAndYearPickers={showMonthAndYearPickers}
+          direction='horizontal'
+        />
+      ) : (
+        <Fragment>
+          <DateRange
+            locale={getLanguage === 'pl' ? pl : enUS}
+            // eslint-disable-next-line react/jsx-no-bind
+            onChange={item => setState([item.selection])}
+            showSelectionPreview
+            moveRangeOnFirstSelection={false}
+            rangeColors={['#EDECEC']}
+            months={1}
+            ranges={state}
+            showDateDisplay={false}
+            direction='horizontal'
+            weekStartsOn={1}
+            maxDate={new Date()}
+            minDate={minDate ? new Date(minDate) : undefined}
+            showMonthAndYearPickers={showMonthAndYearPickers}
+          />
+          <Button onClick={handleApply} size='tiny'>
+            <FormattedMessage id='word.apply' />
+          </Button>
+        </Fragment>
+      )}
+    </div>
+  )
+}
 
 /**
  * Display name
  * @type {string}
  */
-dateTimePicker.displayName = 'Date time picker'
+DateTimePicker.displayName = 'Date time picker'
 
 /**
  * The properties.
  * @type {Object}
  */
-dateTimePicker.propTypes = {
+DateTimePicker.propTypes = {
+  setDate: PropTypes.func.isRequired,
   minDate: PropTypes.string,
-  setDate: PropTypes.func.isRequired
+  oneDatePicker: PropTypes.bool,
+  selectedDateCalendar: PropTypes.instanceOf(Date),
+  showMonthAndYearPickers: PropTypes.bool
 }
 
 /**
  * The default properties.
  * @type {Object}
  */
-dateTimePicker.defaultProps = {
-  minDate: null
+DateTimePicker.defaultProps = {
+  minDate: null,
+  oneDatePicker: false,
+  showMonthAndYearPickers: true
 }
 
-export default dateTimePicker
+export default DateTimePicker

@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { injectIntl } from 'react-intl'
-import { styles } from '@helpers/css'
-import Button from '@components/ui/Button'
-import Input from '@components/ui/Input'
+import React, { memo, useState, useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { styles } from '@helpers/css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Search.scss'
+import Input from '@components/ui/Input'
+import Button from '@components/ui/Button'
+import { injectIntl } from 'react-intl'
 
 /**
  * Exports css classes from SCSS file
@@ -31,7 +31,7 @@ const cssClass = styles(scss)
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
  * @return {object} An object of children element
  */
-function Search({
+const Search = ({
   className,
   variant,
   onChange,
@@ -45,68 +45,74 @@ function Search({
   tag: Tag,
   intl,
   onProtectedSubmit
-}) {
-  const [isClearActive, setClearActive] = useState(false),
-    inputRef = useRef(),
-    /**
-     * Handle input clean
-     * @type {function}
-     */
-    handleCleanOnClick = useCallback(() => {
-      inputRef.current.value = ''
-      setClearActive(false)
-      onChange()
-    }, []),
-    /**
-     * Handle input keyup
-     * @type {function}
-     */
-    handleOnKeyUp = useCallback(
-      event => setClearActive(event.target.value),
-      []
-    ),
-    /**
-     * Handle input key down
-     * @type {function}
-     */
-    handleOnKeyDown = useCallback(event => {
-      if (event.key === 'Enter' && !onSubmit) {
-        event.preventDefault()
+}) => {
+  const [isClearActive, setClearActive] = useState(false)
 
-        handleProtectedSubmit(inputRef.current.value)
-      }
-    }, []),
-    /**
-     * Handle on form submit
-     * @type {function}
-     */
-    handleSubmit = useCallback(event => {
-      event.preventDefault()
-
-      if (onSubmit) {
-        onSubmit(inputRef.current.value)
-      } else {
-        onChange()
-      }
-    }, []),
-    /**
-     * Handle on form submit
-     * @type {function}
-     */
-    handleProtectedSubmit = useCallback(event => {
-      onProtectedSubmit && onProtectedSubmit(inputRef.current.value)
-    }, [])
+  const inputRef = useRef()
 
   /**
-   * UseEffect
+   * Handle input clean
+   * @type {function}
+   */
+  const handleCleanOnClick = useCallback(() => {
+    inputRef.current.value = ''
+    setClearActive(false)
+    onChange()
+  }, [])
+
+  /**
+   * Handle input keyup
+   * @type {function}
+   */
+  const handleOnKeyUp = useCallback(
+    event => setClearActive(event.target.value),
+    []
+  )
+
+  /**
+   * Handle input key down
+   * @type {function}
+   */
+  const handleOnKeyDown = useCallback(event => {
+    if (event.key === 'Enter' && !onSubmit) {
+      event.preventDefault()
+
+      handleProtectedSubmit(inputRef.current.value)
+    }
+  }, [])
+
+  /**
+   * Handle on form submit
+   * @type {function}
+   */
+  const handleSubmit = useCallback(event => {
+    event.preventDefault()
+
+    if (onSubmit) {
+      onSubmit(inputRef.current.value)
+    } else {
+      onChange()
+    }
+  }, [])
+
+  /**
+   * Handle on form submit
+   * @type {function}
+   */
+  const handleProtectedSubmit = useCallback(() => {
+    onProtectedSubmit && onProtectedSubmit(inputRef.current.value)
+  }, [])
+
+  /**
+   * useEffect
    */
   useEffect(() => {
     autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
   const elementClasses = cssClass({
-    'search--button': variant === 'button',
-    'search--input': variant === 'input'
+    'search--input': variant === 'input',
+    'search--button': variant === 'button'
   })
 
   return (
@@ -116,52 +122,50 @@ function Search({
           (onSubmit || onProtectedSubmit ? (
             <div className={scss.search__icon_button}>
               <Button
+                variant='icon'
+                type={onProtectedSubmit ? 'button' : 'submit'}
+                size='input'
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
-                size='input'
-                type={onProtectedSubmit ? 'button' : 'submit'}
-                variant='icon'
               >
                 <FontAwesomeIcon icon='search' />
               </Button>
             </div>
           ) : (
             <div className={scss.search__icon}>
-              <FontAwesomeIcon icon='search' size='sm' />
+              <FontAwesomeIcon size='sm' icon='search' />
             </div>
           ))}
 
         {children && variant === 'button' && (
           <Input
-            autoFocus={autoFocus}
             label={intl.formatMessage({ id: label })}
             name='search'
+            type='text'
             onChange={onChange}
             onKeyDown={onKeyDown}
-            type='text'
+            autoFocus={autoFocus}
           />
         )}
 
         {variant === 'input' && (
           <input
             autoFocus={autoFocus}
+            ref={inputRef}
             className={scss.search__input}
+            type='text'
             name='search'
+            placeholder={intl.formatMessage({ id: placeholder })}
             onChange={onChange}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
-            placeholder={intl.formatMessage({
-              id: placeholder
-            })}
-            ref={inputRef}
-            type='text'
           />
         )}
 
         {isClearActive && variant === 'input' && (
           <div className={scss.search__clean}>
-            <Button onClick={handleCleanOnClick} size='input' variant='icon'>
-              <FontAwesomeIcon icon='times' size='sm' />
+            <Button variant='icon' size='input' onClick={handleCleanOnClick}>
+              <FontAwesomeIcon size='sm' icon='times' />
             </Button>
           </div>
         )}
@@ -184,72 +188,60 @@ Search.displayName = 'Search'
  */
 Search.propTypes = {
   /**
-   * AutoFocus
+   * Classname, default `search`
    */
-  autoFocus: PropTypes.bool,
-
+  className: PropTypes.string,
   /**
    * Children elements
    */
   children: PropTypes.node,
-
-  /**
-   * Classname, default `search`
-   */
-  className: PropTypes.string,
-
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-
-  /**
-   * Label
-   */
-  label: PropTypes.string,
-
   /**
    * Gets called when input changes
    * @param {SyntheticEvent} event The react `SyntheticEvent`
    * @param {Object} All props
    */
   onChange: PropTypes.func,
-
   /**
    * Gets called when input changes
    * @param {SyntheticEvent} event The react `SyntheticEvent`
    * @param {Object} All props
    */
   onKeyDown: PropTypes.func,
-
-  onProtectedSubmit: PropTypes.func,
-
   /**
-   * Handle on form submit action
+   *  size of search input `small, medium, large`
    */
-  onSubmit: PropTypes.func,
-
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * AutoFocus
+   */
+  autoFocus: PropTypes.bool,
+  /**
+   * Variant
+   */
+  variant: PropTypes.oneOf(['input', 'button']),
+  /**
+   * Intl from react-intl
+   */
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+  /**
+   * Label
+   */
+  label: PropTypes.string,
   /**
    * Placeholder
    */
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-
   /**
-   *  Size of search input `small, medium, large`
+   * handle on form submit action
    */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-
+  onSubmit: PropTypes.func,
   /**
    * Tag, default: 'form'
    */
   tag: PropTypes.string,
-
-  /**
-   * Variant
-   */
-  variant: PropTypes.oneOf(['input', 'button'])
+  onProtectedSubmit: PropTypes.func
 }
 
 /**
@@ -257,18 +249,18 @@ Search.propTypes = {
  * @type {Object}
  */
 Search.defaultProps = {
-  autoFocus: false,
-  children: null,
   className: 'search',
-  label: null,
+  size: 'medium',
+  autoFocus: false,
   onChange: () => null,
   onKeyDown: () => null,
-  onProtectedSubmit: null,
-  onSubmit: null,
+  children: null,
+  variant: 'input',
+  label: null,
   placeholder: 'word.search',
-  size: 'medium',
+  onSubmit: null,
   tag: 'form',
-  variant: 'input'
+  onProtectedSubmit: null
 }
 
 export default memo(injectIntl(Search))

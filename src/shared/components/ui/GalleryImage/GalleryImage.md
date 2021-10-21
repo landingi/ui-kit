@@ -1,0 +1,6 @@
+import { Playground, Props } from 'docz'
+import GalleryImage from '@components/ui/GalleryImage'
+
+# Heading
+
+<Props of={GalleryImage} />

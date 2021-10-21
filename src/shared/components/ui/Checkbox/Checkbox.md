@@ -1,0 +1,6 @@
+import { Playground, Props } from 'docz'
+import Checkbox from '@components/ui/Checkbox'
+
+# Checkbox
+
+<Props of={Checkbox} />

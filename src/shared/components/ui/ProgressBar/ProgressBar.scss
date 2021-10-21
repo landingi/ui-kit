@@ -1,14 +1,7 @@
 .bar {
+  height: 12px;
 	position: absolute;
   border-radius: 250px;
-
-  &__small {
-    height: 6px;
-  }
-
-  &__medium {
-    height: 12px;
-  }
 
   &__background {
     width: 100%;
@@ -16,15 +9,16 @@
   }
 
   &__fulfillment {
-    -webkit-animation: fill 1s ease-out;
-    animation: fill 1s ease-out;
+    animation: fill 2s ease-out;
 
-    &--small {
-      min-width: 6px;
+    &--bordered {
+      top: 3px;
+      left: 3px;
+      height: 10px;
     }
-  
-    &--medium {
-      min-width: 12px;
+
+    &--no-animation {
+      animation: none;
     }
   }
 
@@ -40,18 +34,41 @@
     background-color: $color-alert;
   }
 
-  &--progress,
-  &--info {
+  &--progress {
     background-color: $color-info;
   }
 
+  &--brand {
+    background-color: $color-brand;
+  }
+
+  &__border {
+    &--white {
+      border: 3px solid $color-white;
+      background-color: $color-white;
+      opacity: 1;
+      height: 10px;
+    }
+
+    &--grey {
+      border: 3px solid $color-10;
+      background-color: $color-10;
+      opacity: 1;
+      height: 10px;
+    }
+  }
 }
 
 .container {
   position: relative;
+  margin-bottom: 15px;
+
+  &--bordered {
+    margin-right: 6px;
+  }
 }
 
-.result__color--stats {
+.max-result {
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
@@ -66,14 +83,6 @@
   color: $color-2;
 }
 
-.padding__small {
-  padding-top: $padding-small;
-}
-
-.padding__medium {
-  padding-top: $padding-medium;
-}
-
 @keyframes fill {
-  0% { width: 0px; } 
+  0% { width: 0px; }
 }
