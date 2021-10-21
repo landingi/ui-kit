@@ -4,19 +4,19 @@ import React from 'react'
 import createDOMPurify from 'dompurify'
 import scss from './Html.scss'
 
-const isBrowser = typeof window !== "undefined"
+const isBrowser = typeof window !== 'undefined'
 
 const DOMPurify = isBrowser && createDOMPurify(window)
 const cssClass = styles(scss)
 const html = ({ className, value }) => (
-    <span
-      className={cssClass(className)}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(value)
-      }}
-    />
-  )
+  <span
+    className={cssClass(className)}
+    // eslint-disable-next-line react/no-danger
+    dangerouslySetInnerHTML={{
+      __html: DOMPurify.sanitize(value)
+    }}
+  />
+)
 /**
  * Display name
  * @type {string}
@@ -37,7 +37,7 @@ html.defaultProps = {
  */
 html.propTypes = {
   /**
-   * Classname, default `html`
+   * Class Name, default `html`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
