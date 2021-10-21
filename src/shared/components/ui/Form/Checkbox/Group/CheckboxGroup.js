@@ -1,21 +1,23 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from '@components/ui/Form2/Error'
+import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
 import { FormattedMessage } from 'react-intl'
 
 /**
- * Radio Group  - stateless presentational component
+ * Checkbox Group  - stateless presentational component
  * @param {object} props - props
  * @param {object} props.errors - element errors list
  * @param {object} props.touched - element touched list
- * @param {string} props.label - label
+ * @param {string} props.label - label, default: ''
  * @param {string} props.name - element name
- * @param {object} props.chidlren - children
+ * @param {string|array} props.className - list of class names, default: input__checkboxgroup
+ * @param {object} props.chidren
  * @return {object} An object of children element
  */
-const radioGroup = ({ errors, touched, label, name, children }) => (
-  <div>
+const checkboxGroup = ({ errors, touched, label, name, children }) => (
+  <div className='form-field'>
     {label && (
       <Label>
         <FormattedMessage id={`${label}`} />
@@ -29,13 +31,13 @@ const radioGroup = ({ errors, touched, label, name, children }) => (
  * Display name
  * @type {string}
  */
-radioGroup.displayName = 'Radio Group'
+checkboxGroup.displayName = 'Checkbox Group'
 
 /**
  * The properties.
  * @type {Object}
  */
-radioGroup.propTypes = {
+checkboxGroup.propTypes = {
   /**
    * The text for the button
    */
@@ -44,7 +46,6 @@ radioGroup.propTypes = {
    * Form
    */
   touched: PropTypes.instanceOf(Object).isRequired,
-  errors: PropTypes.instanceOf(Object).isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired
 }
@@ -53,8 +54,8 @@ radioGroup.propTypes = {
  * The default properties.
  * @type {Object}
  */
-radioGroup.defaultProps = {
+checkboxGroup.defaultProps = {
   label: ''
 }
 
-export default radioGroup
+export default checkboxGroup

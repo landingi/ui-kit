@@ -42,7 +42,7 @@ export const isOutOfViewport = elem => {
 }
 
 /**
- * Element boundings
+ * Element bounding
  * @param {node} element The element
  * @return {object} getBoundingClientRect()
  */

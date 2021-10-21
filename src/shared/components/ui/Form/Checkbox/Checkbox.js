@@ -1,56 +1,54 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
 import { FormattedMessage } from 'react-intl'
-import scss from './Radio.scss'
+import Error from '@components/ui/Form/Error'
+import scss from './Checkbox.scss'
 import { getDeepValue } from '@helpers/data'
 
 const cssClass = styles(scss)
 
 /**
- * Radio - stateless presentational component
+ * Checkbox - stateless presentational component
  * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: ''
  * @param {object} props.field - react-formik field properties
  * @param {object} props.form - react-formik form properties
  * @param {string} props.id - id of the element
- * @param {string} props.label - label
- * @param {string|array} props.className - list of class names, default: input__radio
- * @param {string} props.type - type of element `text, number etc`
+ * @param {string} props.label - label, default: ''
+ * @param {string} props.type - type of element, default: 'checkbox'
  * @return {object} An object of children element
  */
-const Radio = ({
+const Checkbox = ({
   field: { name, value, onChange, onBlur },
-  form: { errors /*touched [UNUSED_VARIABLE]*/ },
+  form: { errors, touched /*setFieldValue  [UNUSED_VARIABLE]*/ },
   id,
   label,
   className,
   type
 }) => {
   const error = getDeepValue(errors, name)
-  const errorClass = error ? 'form--has-error' : ''
+  const isTouched = getDeepValue(touched, name)
 
   return (
-    <div className={`form-field ${errorClass}`}>
-      <label className={cssClass(className)}>
-        {label && (
-          <label htmlFor={id}>
-            <FormattedMessage id={`${label}`} />
-          </label>
-        )}
+    <div className={cssClass('checkbox-container', className)}>
+      <label className={cssClass('checkbox__input')}>
         <input
           name={name}
-          id={id}
-          type={type}
-          value={id}
-          checked={id === value}
+          checked={value}
           onChange={onChange}
           onBlur={onBlur}
-          className={cssClass(className)}
+          type={type}
+          id={id}
         />
         <div />
-        <Error error={error} />
       </label>
+      {label && (
+        <label htmlFor={id} className={cssClass('checkbox__label')}>
+          <FormattedMessage id={`${label}`} />
+          {isTouched && <Error error={error} />}
+        </label>
+      )}
     </div>
   )
 }
@@ -59,19 +57,19 @@ const Radio = ({
  * Display name
  * @type {string}
  */
-Radio.displayName = 'radio'
+Checkbox.displayName = 'Form2 / Checkbox'
 
 /**
  * The properties.
  * @type {Object}
  */
-Radio.propTypes = {
+Checkbox.propTypes = {
   /**
-   * Classname, default `input__radio`
+   * Classname
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
-   * Type, default `radio`
+   * Type, default `checkbox`
    */
   type: PropTypes.string,
   /**
@@ -79,7 +77,7 @@ Radio.propTypes = {
    */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    value: PropTypes.bool,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
@@ -88,20 +86,17 @@ Radio.propTypes = {
    */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
-    touched: PropTypes.instanceOf(Object)
-  }),
+    touched: PropTypes.instanceOf(Object),
+    setFieldValue: PropTypes.func
+  }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-Radio.defaultProps = {
-  className: 'input__radio',
-  type: 'radio',
+Checkbox.defaultProps = {
+  className: '',
+  type: 'checkbox',
   label: ''
 }
 
-export default Radio
+export default Checkbox

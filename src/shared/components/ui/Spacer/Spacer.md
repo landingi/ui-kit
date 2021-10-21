@@ -4,12 +4,3 @@ import Spacer from '@components/ui/Spacer'
 # Spacer
 
 <Props of={Spacer} />
-
-<Playground>
-    <Spacer space="tiny" />
-    <Spacer space="small" />
-    <Spacer space="medium" />
-    <Spacer space="large" />
-    <Spacer space="huge" />
-</Playground>
-

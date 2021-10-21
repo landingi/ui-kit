@@ -4,6 +4,3 @@ import ProgressBar from '@components/ui/ProgressBar'
 # Progress Bar
 
 <Props of={ProgressBar} />
-
-<Playground>
-</Playground>

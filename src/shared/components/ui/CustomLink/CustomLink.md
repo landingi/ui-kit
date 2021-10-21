@@ -9,7 +9,7 @@ import CustomLink from '@components/ui/CustomLink'
 
 <Playground>
     <CustomLink variant='active' label='active' href='#' />
-    <CustomLink variant='inactive' label='iactive' href='#' />
+    <CustomLink variant='inactive' label='inactive' href='#' />
     <CustomLink variant='dark' label='dark' href='#' />
 </Playground>
 

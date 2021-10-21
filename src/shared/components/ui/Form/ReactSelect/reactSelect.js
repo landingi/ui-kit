@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from '@components/ui/Form2/Error'
+import Error from '@components/ui/Form/Error'
 import Select from 'react-select'
 import uuid from 'react-uuid'
 import { injectIntl, FormattedMessage } from 'react-intl'

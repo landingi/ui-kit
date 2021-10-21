@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
+import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
 import scss from './Select.scss'
 import { FormattedMessage } from 'react-intl'

@@ -1,4 +1,1 @@
-```jsx
-<Icon icon='icon-file' />
-```
-
+# Icon

@@ -1,0 +1,6 @@
+import { Playground, Props } from 'docz'
+import Error from '@components/ui/Form/Error'
+
+# Error
+
+<Props of={Error} />

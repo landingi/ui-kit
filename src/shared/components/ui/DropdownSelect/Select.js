@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import Error from '@components/ui/Form2/Error'
+import Error from '@components/ui/Form/Error'
 import Message from '@components/ui/Message/Message'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
