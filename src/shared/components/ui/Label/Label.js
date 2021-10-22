@@ -59,8 +59,8 @@ label.propTypes = {
    */
   isToggle: PropTypes.bool,
   /**
- * Toggle
- */
+   * Toggle
+   */
   toggle: PropTypes.bool
 }
 
