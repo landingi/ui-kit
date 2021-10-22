@@ -9,7 +9,7 @@ import Search from '@components/ui/Search'
  * @param {function} props.setSearchResult - search result setter
  * @param {function} props.searchFunction - search function
  * @param {function} props.setSearchPhrase - search phrase function
- * @param {string} props.placeholder - placeholder
+ * @param {object} props.i18n - translations
  * @param {bool} props.protectedSubmit - protectedSubmit
  * @param {bool} props.liveChanges - search by entering characters
  * @return {object} An object of children element
@@ -18,44 +18,47 @@ const searcher = ({
   setSearchResult,
   searchFunction,
   setSearchPhrase,
-  placeholder,
+  i18n,
   protectedSubmit,
   liveChanges,
   ...rest
 }) => {
   const search = async value => {
-      try {
-        const response = await searchFunction(value)
+    try {
+      const response = await searchFunction(value)
 
-        setSearchResult(response)
-      } catch {}
-    },
-    handleOnChange = useCallback(event => {
-      let value
-      !event ? (value = '') : (value = event.target.value)
+      setSearchResult(response)
+    } catch {}
+  }
 
-      if (setSearchPhrase) {
-        !value && setSearchPhrase('')
-        value && liveChanges && setSearchPhrase(value)
-      } else {
-        !value && setSearchResult(NO_VALUE)
-      }
-    }),
-    handleOnSubmit = useCallback(event => {
-      if (setSearchPhrase) {
-        setSearchPhrase(event)
-      } else {
-        search(event)
-      }
-    }),
-    handleOnProtectedSubmit = useCallback(event => setSearchPhrase(event), [])
+  const handleOnChange = useCallback(event => {
+    let value
+    !event ? (value = '') : (value = event.target.value)
+
+    if (setSearchPhrase) {
+      !value && setSearchPhrase('')
+      value && liveChanges && setSearchPhrase(value)
+    } else {
+      !value && setSearchResult(NO_VALUE)
+    }
+  })
+
+  const handleOnSubmit = useCallback(event => {
+    if (setSearchPhrase) {
+      setSearchPhrase(event)
+    } else {
+      search(event)
+    }
+  })
+
+  const handleOnProtectedSubmit = useCallback(event => setSearchPhrase(event), [])
 
   return (
     <Search
       onChange={handleOnChange}
       onProtectedSubmit={protectedSubmit ? handleOnProtectedSubmit : null}
       onSubmit={protectedSubmit ? null : handleOnSubmit}
-      placeholder={placeholder}
+      i18n={i18n.placeholder}
       {...rest}
     />
   )
@@ -73,17 +76,10 @@ searcher.displayName = 'Searcher'
  */
 searcher.propTypes = {
   liveChanges: PropTypes.bool,
-
   placeholder: PropTypes.string,
-
   protectedSubmit: PropTypes.bool,
-
   searchFunction: PropTypes.func,
-
   setSearchPhrase: PropTypes.func,
-  /**
-   * Search result setter
-   */
   setSearchResult: PropTypes.func
 }
 
@@ -93,10 +89,12 @@ searcher.propTypes = {
  */
 searcher.defaultProps = {
   liveChanges: false,
-  placeholder: 'word.search',
+  i18n: {
+    placeholder: null
+  },
   protectedSubmit: false,
-  searchFunction: () => null,
   setSearchPhrase: null,
+  searchFunction: () => null,
   setSearchResult: () => null
 }
 

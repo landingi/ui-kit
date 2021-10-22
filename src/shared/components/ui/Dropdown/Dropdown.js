@@ -81,7 +81,7 @@ class Dropdown extends PureComponent {
     icon: null,
     label: null,
     i18n: {
-      tooltip: ''
+      tooltip: null
     },
     tooltipPlacement: '',
     size: 'medium',
@@ -265,6 +265,7 @@ class Dropdown extends PureComponent {
    */
   handleClose = event => {
     const { handleOnClose } = this.props
+
     event.stopPropagation()
 
     if (
