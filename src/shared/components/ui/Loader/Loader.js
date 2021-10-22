@@ -1,6 +1,6 @@
 import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Spacer from '@components/ui/Spacer'
 import scss from './Loader.scss'
 
@@ -41,7 +41,7 @@ loader.displayName = 'Loader'
  */
 loader.propTypes = {
   /**
-   * Classname, default `loader__spin`
+   * ClassName, default `loader__spin`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }

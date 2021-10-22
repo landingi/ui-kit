@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './List.scss'
 
-const cssClass = styles(scss),
+  const cssClass = styles(scss)
   /**
    * List item - stateless presentational component
    * @param {object} props - props
@@ -14,7 +14,7 @@ const cssClass = styles(scss),
    * @param {string} props.margin - left margin
    * @return {object} An object of children element
    */
-  listItem = ({ children, variant, size, className, margin }) => {
+  const listItem = ({ children, variant, size, className, margin }) => {
     const elementClasses = cssClass({
       'list-item--block': variant === 'block',
       'list-item--dropdown': variant === 'dropdown',
@@ -48,7 +48,7 @@ listItem.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Classname, default `list__item`
+   * ClassName, default `list__item`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 

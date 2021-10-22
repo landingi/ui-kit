@@ -3,32 +3,33 @@ import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 import scss from './Label.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Label - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.children - children
-   * @param {string|array} props.className - list of class names, default: `label`
-   * @param {string} props.id - input id
-   * @param {bool} props.isToogle - is toogle label
-   * @param {bool} props.toogle - toogle change
-   * @return {object} An object of children element
-   */
-  label = memo(({ children, className, id, isToogle, toogle }) => (
-    <label
-      className={cssClass(
-        className,
-        isToogle
-          ? toogle
-            ? 'label--active'
-            : 'label--inactive'
-          : 'label--normal'
-      )}
-      id={id}
-    >
-      {children}
-    </label>
-  ))
+const cssClass = styles(scss)
+
+/**
+ * Label - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string|array} props.className - list of class names, default: `label`
+ * @param {string} props.id - input id
+ * @param {bool} props.isToggle - is toggle label
+ * @param {bool} props.toggle - toggle change
+ * @return {object} An object of children element
+ */
+const label = memo(({ children, className, id, isToggle, toggle }) => (
+  <label
+    className={cssClass(
+      className,
+      isToggle
+        ? toggle
+          ? 'label--active'
+          : 'label--inactive'
+        : 'label--normal'
+    )}
+    id={id}
+  >
+    {children}
+  </label>
+))
 
 /**
  * Display name
@@ -46,7 +47,7 @@ label.propTypes = {
    */
   children: PropTypes.node.isRequired,
   /**
-   * Classname, default `label`
+   * ClassName, default `label`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
@@ -54,13 +55,13 @@ label.propTypes = {
    */
   id: PropTypes.string,
   /**
-   * IsToogle
+   * isToggle
    */
-  isToogle: PropTypes.bool,
+  isToggle: PropTypes.bool,
   /**
-   * Toogle
-   */
-  toogle: PropTypes.bool
+ * Toggle
+ */
+  toggle: PropTypes.bool
 }
 
 /**
@@ -70,8 +71,8 @@ label.propTypes = {
 label.defaultProps = {
   className: 'label',
   id: null,
-  isToogle: false,
-  toogle: false
+  isToggle: false,
+  toggle: false
 }
 
 export default label

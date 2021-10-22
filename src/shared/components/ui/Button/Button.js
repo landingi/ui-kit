@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { Fragment } from 'react'
 /**
  * Add the Material Design ripple effect to React component
@@ -173,7 +172,7 @@ button.propTypes = {
    */
   align: PropTypes.oneOf(['left', 'center', 'right']),
   /**
-   * Classname, default `button`
+   * ClassName, default `button`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
@@ -233,12 +232,12 @@ button.defaultProps = {
   variant: 'primary',
   isLoading: false,
   isDisabled: false,
-  onClick: () => {},
   hasBackgoundRipple: true,
   hasIcon: false,
   hide: false,
   buttonStyle: false,
-  fitWidth: false
+  fitWidth: false,
+  onClick: () => {}
 }
 
 export default button
