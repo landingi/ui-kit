@@ -387,10 +387,7 @@ class Dropdown extends PureComponent {
     const { isOpen } = this.state
 
     return (
-      <Tooltip
-        content={i18n.tooltip}
-        placement={tooltipPlacement}
-      >
+      <Tooltip content={i18n.tooltip} placement={tooltipPlacement}>
         <span
           ref={this.containerRef}
           onClick={this.handleShow}
@@ -614,12 +611,12 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   render() {
-    const { tooltip, button } = this.props
+    const { i18n, button } = this.props
     const { isOpen } = this.state
 
     return (
       <Fragment>
-        {tooltip.length > 0
+        {i18n.tooltip
           ? this.renderDropdownWithTooltip()
           : button
           ? this.renderDropdownWithButton()
