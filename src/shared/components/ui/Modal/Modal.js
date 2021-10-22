@@ -87,7 +87,7 @@ const modal = ({
 }) => {
   const renderTitle = () => (
     <div className={scss.modal__header}>
-      {i18n.title && <ModalHeader title={title} />}
+      {i18n.title && <ModalHeader title={i18n.title} />}
 
       {image && <Image height={20} size='auto' src={image} />}
 
@@ -137,7 +137,7 @@ const modal = ({
               </div>
             ) : (
               <Fragment>
-                {(isClosable || title || image || isEditable) &&
+                {(isClosable || i18n.title || image || isEditable) &&
                   (!isComponent ? renderTitle() : renderComponent())}
 
                 {hasHeaderDivider && (
