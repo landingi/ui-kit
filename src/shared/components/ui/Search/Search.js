@@ -242,14 +242,14 @@ Search.defaultProps = {
   children: null,
   variant: 'input',
   i18n: {
-    placeholder,
+    placeholder: null,
     label: null
   },
   onSubmit: null,
   onProtectedSubmit: null,
   autoFocus: false,
   onChange: () => null,
-  onKeyDown: () => null,
+  onKeyDown: () => null
 }
 
 export default memo(Search)

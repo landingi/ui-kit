@@ -51,7 +51,10 @@ const searcher = ({
     }
   })
 
-  const handleOnProtectedSubmit = useCallback(event => setSearchPhrase(event), [])
+  const handleOnProtectedSubmit = useCallback(
+    event => setSearchPhrase(event),
+    []
+  )
 
   return (
     <Search
@@ -90,7 +93,7 @@ searcher.propTypes = {
 searcher.defaultProps = {
   liveChanges: false,
   i18n: {
-    placeholder: null
+    placeholder: ''
   },
   protectedSubmit: false,
   setSearchPhrase: null,
