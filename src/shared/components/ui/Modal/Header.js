@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import Heading from '@components/ui/Heading'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -12,7 +11,7 @@ import React from 'react'
 
 const modalHeader = ({ title }) => (
   <Heading level={2}>
-    <FormattedMessage defaultMessage={`${title}`} id={`${title}`} />
+    {title}
   </Heading>
 )
 
