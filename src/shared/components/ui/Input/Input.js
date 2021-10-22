@@ -87,7 +87,7 @@ const input = ({
 
       {i18n?.label && (
         <Label id={name} className={scss.input__label}>
-          {i18n.label }
+          {i18n.label}
         </Label>
       )}
 
@@ -226,7 +226,7 @@ input.defaultProps = {
   },
   onChange: () => null,
   onKeyDown: () => null,
-  onBlur: () => null,
+  onBlur: () => null
 }
 
 export default input
