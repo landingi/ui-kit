@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 const cssClass = styles(scss)
 
 /**
- * infinityscroll - stateless presentational component
+ * InfinityScroll - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - content to display
  * @param {func} props.loadMore - callback function, invoked when loader is seen
@@ -44,6 +44,7 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
   useEffect(() => {
     if (shouldFetch === true) {
       loadMore()
+
       setShouldFetch(false)
     }
   }, [shouldFetch])
@@ -82,8 +83,8 @@ InfinityScroll.propTypes = {
  * @type {Object}
  */
 InfinityScroll.defaultProps = {
-  loadMore: () => null,
-  isLastPage: false
+  isLastPage: false,
+  loadMore: () => null
 }
 
 export default InfinityScroll

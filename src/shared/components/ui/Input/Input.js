@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Input.scss'
 import Label from '@components/ui/Label'
-import { FormattedMessage, injectIntl } from 'react-intl'
 import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const cssClass = styles(scss)
@@ -20,14 +19,12 @@ const cssClass = styles(scss)
  * @param {string} props.name - name
  * @param {boolean} props.disabled - disabled
  * @param {boolean} props.readonly - readonly
- * @param {string} props.label - label
+ * @param {object} props.i18n - label
  * @param {bool} props.autoFocus - autoFocus
  * @param {string} props.focused - focused, keep label by default on top
- * @param {object} props.intl - intl
- * @param {bool} props.translate - true if placeholder/label is an id for translation
  * @param {number} props.maxLength - max length of input
  * @param {string|object} props.tooltip - tooltip
- * @param {strin|number} props.value - value
+ * @param {string|number} props.value - value
  * @param {number} props.min - min value when type is number
  * @param {number} props.max - max value when type is number
  * @param {bool} props.required - required
@@ -41,15 +38,12 @@ const input = ({
   onKeyDown,
   onBlur,
   type,
-  placeholder,
   name,
   disabled,
   readonly,
-  label,
+  i18n,
   value,
   autoFocus,
-  intl,
-  translate,
   maxLength,
   required,
   focused,
@@ -76,11 +70,7 @@ const input = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={
-          translate
-            ? intl.formatMessage({ id: `${placeholder || label}` })
-            : label
-        }
+        placeholder={i18n.label || i18n.placeholder}
         name={name}
         id={name}
         defaultValue={value}
@@ -92,12 +82,15 @@ const input = ({
         {...(type === 'number' ? { min, max } : {})}
       />
       <span className={cssClass('highlight')} />
+
       <span className={cssClass('bar')} />
-      {label && (
+
+      {i18n?.label && (
         <Label id={name} className={scss.input__label}>
-          {translate ? <FormattedMessage id={`${label}`} /> : label}
+          {i18n.label }
         </Label>
       )}
+
       {tooltip && (
         <Tooltip
           className='input__tooltip'
@@ -123,7 +116,7 @@ input.displayName = 'Input'
  */
 input.propTypes = {
   /**
-   * Classname, default `input`
+   * ClassName, default `input`
    */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /**
@@ -152,25 +145,17 @@ input.propTypes = {
    */
   type: PropTypes.string,
   /**
-   * Placeholder
-   */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
    * Name
    */
   name: PropTypes.string,
   /**
-   * Diabled
+   * Disabled
    */
   disabled: PropTypes.bool,
   /**
    * Readonly
    */
   readonly: PropTypes.bool,
-  /**
-   * Label
-   */
-  label: PropTypes.string,
   /**
    * Value
    */
@@ -179,16 +164,6 @@ input.propTypes = {
    * autoFocus
    */
   autoFocus: PropTypes.bool,
-  /**
-   * Intl from react-intl
-   */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * if label/placeholder should be tranlated by intl
-   */
-  translate: PropTypes.bool,
   /**
    * max length of input
    */
@@ -232,24 +207,26 @@ input.propTypes = {
  */
 input.defaultProps = {
   className: 'input',
-  onChange: () => null,
-  onKeyDown: () => null,
-  onBlur: () => null,
   type: 'text',
-  placeholder: '',
   name: null,
   disabled: false,
   readonly: false,
-  label: null,
   value: null,
   autoFocus: false,
   translate: true,
   maxLength: 524288,
   required: true,
+  hideArrows: false,
   focused: 'false',
   tooltip: '',
   background: 'white',
-  hideArrows: false
+  i18n: {
+    label: null,
+    placeholder: null
+  },
+  onChange: () => null,
+  onKeyDown: () => null,
+  onBlur: () => null,
 }
 
-export default injectIntl(input)
+export default input

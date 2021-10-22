@@ -37,7 +37,6 @@ const Search = ({
   autoFocus,
   children,
   size,
-  label,
   onSubmit,
   i18n,
   tag: Tag,
@@ -53,6 +52,7 @@ const Search = ({
    */
   const handleCleanOnClick = useCallback(() => {
     inputRef.current.value = ''
+
     setClearActive(false)
     onChange()
   }, [])
