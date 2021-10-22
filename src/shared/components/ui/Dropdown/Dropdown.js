@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { centerParent, getBoundings } from '@helpers/position'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tooltip from '@components/ui/Tooltip'
-import { FormattedMessage } from 'react-intl'
 /**
  * Add the Material Design ripple effect to React component
  * @see {@link https://github.com/vigetlabs/react-ink} for further information.
@@ -29,18 +28,18 @@ const cssClass = styles(scss)
  * @param {string|array} props.className - list of class names, default: `dropdown`
  * @param {string} props.icon - Icon
  * @param {string} props.label - Label
- * @param {string} props.tooltip - Tooltip
+ * @param {object} props.i18n - translations
  * @param {string} props.tooltipPlacement - Tooltip placement
  * @param {number} props.offset - Offset
  * @param {number} props.leftOffset - horizontal offset
  * @param {string} props.size - Size
  * @param {bool} props.hasArrow - Has arrow
  * @param {string} props.arrowType - Arrow type
- * @param {string} props.dropdownPlacement - Dropdown placment
+ * @param {string} props.dropdownPlacement - Dropdown placement
  * @param {bool} props.button - button, default: `false`
  * @param {function} props.handleOnClick - handleOnClick function, when button is `true`
  * @param {function} props.handleOnOpen - on click event
- * @param {string} props.link - navlink
+ * @param {string} props.link - nav link
  * @param {string} props.alignment - Alignment, default `center`
  * @param {function} props.handleOnClose - on click event
  * @param {bool} props.renderAsSmaller - when dropdown is too wide, it's left edge is off screen, default: false
@@ -81,7 +80,9 @@ class Dropdown extends PureComponent {
     className: 'dropdown',
     icon: null,
     label: null,
-    tooltip: '',
+    i18n: {
+      tooltip: ''
+    },
     tooltipPlacement: '',
     size: 'medium',
     hasArrow: true,
@@ -109,7 +110,7 @@ class Dropdown extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     /**
-     * Classname, default `dropdown`
+     * ClassName, default `dropdown`
      */
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     /**
@@ -117,9 +118,9 @@ class Dropdown extends PureComponent {
      */
     icon: PropTypes.string,
     /**
-     * Tooltip
+     * Translations
      */
-    tooltip: PropTypes.string,
+    i18n: PropTypes.instanceOf(Object),
     /**
      * Tooltip placement
      */
@@ -183,7 +184,7 @@ class Dropdown extends PureComponent {
      */
     handleOnClose: PropTypes.func,
     /**
-     * Navlink
+     * NavLink
      */
     link: PropTypes.string,
     /**
@@ -382,12 +383,12 @@ class Dropdown extends PureComponent {
    * @type {function}
    */
   renderDropdownWithTooltip = () => {
-    const { icon, tooltip, tooltipPlacement, hasArrow, arrowType } = this.props
+    const { icon, i18n, tooltipPlacement, hasArrow, arrowType } = this.props
     const { isOpen } = this.state
 
     return (
       <Tooltip
-        content={<FormattedMessage id={`${tooltip}`} />}
+        content={i18n.tooltip}
         placement={tooltipPlacement}
       >
         <span

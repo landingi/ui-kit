@@ -9,11 +9,7 @@ import React from 'react'
  * @return {object} An object of children element
  */
 
-const modalHeader = ({ title }) => (
-  <Heading level={2}>
-    {title}
-  </Heading>
-)
+const modalHeader = ({ title }) => <Heading level={2}>{title}</Heading>
 
 /**
  * Display name

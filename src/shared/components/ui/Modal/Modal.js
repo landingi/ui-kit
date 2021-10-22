@@ -16,189 +16,187 @@ import Spacer from '@components/ui/Spacer'
 import Spreader from '@components/ui/Spreader'
 import scss from './Modal.scss'
 
-  /**
-   * Exports css classes from SCSS file
-   * @return {object} An object of styles
-   */
-  const cssClass = styles(scss)
+/**
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
+const cssClass = styles(scss)
 
-  /**
-   * Modal - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.children - children
-   * @param {string|array} props.className - list of class names, default: modal
-   * @param {function} props.onClick - onClick handler
-   * @param {function} props.onAction - onAction click handler
-   * @param {boolean} props.isActive - active state
-   * @param {boolean} props.isClosable - close state
-   * @param {boolean} props.isButtonDisabled - is action button in footer disabled
-   * @param {boolean} props.isButtonLoading - is action button in footer has loading state
-   * @param {boolean} props.isMarkAsSpamVisible - is "mark as spam" button visible
-   * @param {object} props.image - image in header
-   * @param {boolean} props.hasFooter - has footer
-   * @param {boolean} props.hasHeaderDivider - has header divider
-   * @param {string} props.actionVariant - button action variant
-   * @param {bool} props.isLoading - is loading
-   * @param {string} props.actionIcon - footer action button icon
-   * @param {object} props.overflowStyle - overflowStyle
-   * @param {bool} props.isFullscreen - makes modal fullscreen size
-   * @param {bool} props.isCentered - makes text in modal centered
-   * @param {bool} props.isEditable - isEditable
-   * @param {func} props.onEdit - onEdit
-   * @param {bool} props.hasCustomButton - secondary button
-   * @param {func} props.onClickCustomButton - secondary button with custom callback
-   * @param {bool} props.isCustomButtonDisabled - is custom button in footer disabled
-   * @param {func} props.onMarkAsSpam - handle "mark as spam" click
-   * @param {bool} props.isComponent - component instead of title
-   * @param {object} props.component - component
-   * @param {object} props.i18n - translations
-   * @param {bool} props.isSubmit - modal button is submit type
-   * @return {object} An object of children element
-   */
-  const modal = ({
-    children,
-    className,
-    onClick,
-    onAction,
-    isActive,
-    isClosable,
-    isButtonDisabled,
-    isButtonLoading,
-    isMarkAsSpamVisible,
-    image,
-    hasFooter,
-    hasHeaderDivider,
-    actionVariant,
-    isLoading,
-    actionIcon,
-    overflowStyle,
-    isFullscreen,
-    isCentered,
-    isEditable,
-    onEdit,
-    hasCustomButton,
-    onClickCustomButton,
-    isCustomButtonDisabled,
-    onMarkAsSpam,
-    isComponent,
-    component,
-    isSubmit,
-    i18n
-  }) => {
-    const renderTitle = () => (
-      <div className={scss.modal__header}>
-        {i18n.title && <ModalHeader title={title} />}
+/**
+ * Modal - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string|array} props.className - list of class names, default: modal
+ * @param {function} props.onClick - onClick handler
+ * @param {function} props.onAction - onAction click handler
+ * @param {boolean} props.isActive - active state
+ * @param {boolean} props.isClosable - close state
+ * @param {boolean} props.isButtonDisabled - is action button in footer disabled
+ * @param {boolean} props.isButtonLoading - is action button in footer has loading state
+ * @param {boolean} props.isMarkAsSpamVisible - is "mark as spam" button visible
+ * @param {object} props.image - image in header
+ * @param {boolean} props.hasFooter - has footer
+ * @param {boolean} props.hasHeaderDivider - has header divider
+ * @param {string} props.actionVariant - button action variant
+ * @param {bool} props.isLoading - is loading
+ * @param {string} props.actionIcon - footer action button icon
+ * @param {object} props.overflowStyle - overflowStyle
+ * @param {bool} props.isFullscreen - makes modal fullscreen size
+ * @param {bool} props.isCentered - makes text in modal centered
+ * @param {bool} props.isEditable - isEditable
+ * @param {func} props.onEdit - onEdit
+ * @param {bool} props.hasCustomButton - secondary button
+ * @param {func} props.onClickCustomButton - secondary button with custom callback
+ * @param {bool} props.isCustomButtonDisabled - is custom button in footer disabled
+ * @param {func} props.onMarkAsSpam - handle "mark as spam" click
+ * @param {bool} props.isComponent - component instead of title
+ * @param {object} props.component - component
+ * @param {object} props.i18n - translations
+ * @param {bool} props.isSubmit - modal button is submit type
+ * @return {object} An object of children element
+ */
+const modal = ({
+  children,
+  className,
+  onClick,
+  onAction,
+  isActive,
+  isClosable,
+  isButtonDisabled,
+  isButtonLoading,
+  isMarkAsSpamVisible,
+  image,
+  hasFooter,
+  hasHeaderDivider,
+  actionVariant,
+  isLoading,
+  actionIcon,
+  overflowStyle,
+  isFullscreen,
+  isCentered,
+  isEditable,
+  onEdit,
+  hasCustomButton,
+  onClickCustomButton,
+  isCustomButtonDisabled,
+  onMarkAsSpam,
+  isComponent,
+  component,
+  isSubmit,
+  i18n
+}) => {
+  const renderTitle = () => (
+    <div className={scss.modal__header}>
+      {i18n.title && <ModalHeader title={title} />}
 
-        {image && <Image height={20} size='auto' src={image} />}
+      {image && <Image height={20} size='auto' src={image} />}
 
-        <div>
-          {isMarkAsSpamVisible && (
-            <Button onClick={onMarkAsSpam} variant='transparent'>
-              <FontAwesomeIcon icon='ban' />
+      <div>
+        {isMarkAsSpamVisible && (
+          <Button onClick={onMarkAsSpam} variant='transparent'>
+            <FontAwesomeIcon icon='ban' />
 
-              <FormattedMessage id='word.mark-as-spam' />
-            </Button>
-          )}
+            <FormattedMessage id='word.mark-as-spam' />
+          </Button>
+        )}
 
-          {isEditable && (
-            <Button onClick={onEdit} variant='icon'>
-              <FontAwesomeIcon icon='pencil-alt' />
-            </Button>
-          )}
+        {isEditable && (
+          <Button onClick={onEdit} variant='icon'>
+            <FontAwesomeIcon icon='pencil-alt' />
+          </Button>
+        )}
 
-          <Spreader spread='tiny' />
-
-          {isClosable && <Close onClick={onClick} />}
-        </div>
-      </div>
-    )
-
-    const renderComponent = () => (
-      <div className={cssClass('modal__component')}>
-        <div className={cssClass('modal__component--child')}>
-          {component}
-        </div>
+        <Spreader spread='tiny' />
 
         {isClosable && <Close onClick={onClick} />}
       </div>
-    )
+    </div>
+  )
 
-    return (
-      <Fragment>
-        {isActive && (
-          <div className={scss.dialog}>
-            <div
-              className={cssClass(className, {
-                'modal--center': isCentered,
-                'modal--fullscreen': isFullscreen
-              })}
-            >
-              {isLoading ? (
+  const renderComponent = () => (
+    <div className={cssClass('modal__component')}>
+      <div className={cssClass('modal__component--child')}>{component}</div>
+
+      {isClosable && <Close onClick={onClick} />}
+    </div>
+  )
+
+  return (
+    <Fragment>
+      {isActive && (
+        <div className={scss.dialog}>
+          <div
+            className={cssClass(className, {
+              'modal--center': isCentered,
+              'modal--fullscreen': isFullscreen
+            })}
+          >
+            {isLoading ? (
+              <div className={scss.modal__body}>
+                <Loader />
+              </div>
+            ) : (
+              <Fragment>
+                {(isClosable || title || image || isEditable) &&
+                  (!isComponent ? renderTitle() : renderComponent())}
+
+                {hasHeaderDivider && (
+                  <Fragment>
+                    <Spacer space='small' />
+
+                    <Divider />
+                  </Fragment>
+                )}
+
                 <div className={scss.modal__body}>
-                  <Loader />
-                </div>
-              ) : (
-                <Fragment>
-                  {(isClosable || title || image || isEditable) &&
-                    (!isComponent ? renderTitle() : renderComponent())}
-
-                  {hasHeaderDivider && (
-                    <Fragment>
-                      <Spacer space='small' />
-
-                      <Divider />
-                    </Fragment>
-                  )}
-
-                  <div className={scss.modal__body}>
-                    <div style={overflowStyle}>
-                      <Overflow>{children}</Overflow>
-                    </div>
+                  <div style={overflowStyle}>
+                    <Overflow>{children}</Overflow>
                   </div>
+                </div>
 
-                  {hasFooter && (
-                    <ModalFooter align='right'>
-                      {hasCustomButton ? (
-                        <Button
-                          isDisabled={isCustomButtonDisabled}
-                          onClick={onClickCustomButton}
-                          size='medium'
-                          variant='secondary'
-                        >
-                          {i18n.cancel}
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={onClick}
-                          size='medium'
-                          variant='secondary'
-                        >
-                          {i18n.cancel}
-                        </Button>
+                {hasFooter && (
+                  <ModalFooter align='right'>
+                    {hasCustomButton ? (
+                      <Button
+                        isDisabled={isCustomButtonDisabled}
+                        onClick={onClickCustomButton}
+                        size='medium'
+                        variant='secondary'
+                      >
+                        {i18n.cancel}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={onClick}
+                        size='medium'
+                        variant='secondary'
+                      >
+                        {i18n.cancel}
+                      </Button>
+                    )}
+
+                    <Button
+                      hasIcon={Boolean(actionIcon)}
+                      isDisabled={isButtonDisabled}
+                      isLoading={isButtonLoading}
+                      onClick={onAction}
+                      size='medium'
+                      type={isSubmit ? 'submit' : 'button'}
+                      variant={actionVariant}
+                    >
+                      {actionIcon && (
+                        <FontAwesomeIcon icon={actionIcon} size='xs' />
                       )}
 
-                      <Button
-                        hasIcon={Boolean(actionIcon)}
-                        isDisabled={isButtonDisabled}
-                        isLoading={isButtonLoading}
-                        onClick={onAction}
-                        size='medium'
-                        type={isSubmit ? 'submit' : 'button'}
-                        variant={actionVariant}
-                      >
-                        {actionIcon && (
-                          <FontAwesomeIcon icon={actionIcon} size='xs' />
-                        )}
-
-                        {i18n.action}
-                      </Button>
-                    </ModalFooter>
-                  )}
-                </Fragment>
-              )}
-            </div>
+                      {i18n.action}
+                    </Button>
+                  </ModalFooter>
+                )}
+              </Fragment>
+            )}
           </div>
-        )}
+        </div>
+      )}
       {isActive && <Backdrop onClick={onClick} />}
     </Fragment>
   )
@@ -389,7 +387,7 @@ modal.defaultProps = {
     overflowY: 'auto'
   },
   i18n: {
-    title:'',
+    title: '',
     cancel: '',
     action: ''
   }
