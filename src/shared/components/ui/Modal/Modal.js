@@ -83,7 +83,9 @@ const modal = ({
   isComponent,
   component,
   isSubmit,
-  i18n
+  i18n,
+  size,
+  isPage
 }) => {
   const renderTitle = () => (
     <div className={scss.modal__header}>
@@ -127,7 +129,7 @@ const modal = ({
         <div className={scss.dialog}>
           <div
             className={cssClass(className, {
-              'modal--fullscreen':isFullscreen,
+              'modal--fullscreen': isFullscreen,
               'modal--big': size === 'big',
               'modal--center': isCentered,
               'modal--page': isPage
