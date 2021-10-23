@@ -47,13 +47,7 @@ TabPanel.propTypes = {
    * name
    */
   name: PropTypes.string.isRequired,
-  /**
-   * Classname, default `tab__panel`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements
-   */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
