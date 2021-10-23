@@ -28,9 +28,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: {
-                localIdentName: '[name]__[local]'
-              }
+              modules: true
             }
           },
           {
