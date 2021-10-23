@@ -127,8 +127,10 @@ const modal = ({
         <div className={scss.dialog}>
           <div
             className={cssClass(className, {
+              'modal--fullscreen':isFullscreen,
+              'modal--big': size === 'big',
               'modal--center': isCentered,
-              'modal--fullscreen': isFullscreen
+              'modal--page': isPage
             })}
           >
             {isLoading ? (
