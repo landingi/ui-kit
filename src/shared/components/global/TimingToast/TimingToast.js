@@ -27,7 +27,7 @@ const TimingToastAnimation = posed.div(toastProps)
 const TimingToast = () => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('info')
 
   const handleToastToggle = useCallback(
     (message, type) => {
