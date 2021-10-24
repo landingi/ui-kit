@@ -109,7 +109,7 @@ ReactSelect.propTypes = {
   }).isRequired
 }
 
-reactSelect.defaultProps = {
+ReactSelect.defaultProps = {
   className: 'react-select-container',
   label: '',
   placeholder: '',
