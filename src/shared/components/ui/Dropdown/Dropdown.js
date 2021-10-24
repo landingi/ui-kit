@@ -160,10 +160,7 @@ const Dropdown = ({
 
   const renderDropdownWithTooltip = () => {
     return (
-      <Tooltip
-        content={tooltip}
-        placement={tooltipPlacement}
-      >
+      <Tooltip content={tooltip} placement={tooltipPlacement}>
         <span
           ref={containerRef}
           onClick={handleShow}

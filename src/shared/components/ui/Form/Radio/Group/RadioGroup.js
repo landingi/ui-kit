@@ -15,11 +15,7 @@ import Label from '@components/ui/Label'
  */
 const RadioGroup = ({ errors, touched, label, name, children }) => (
   <div>
-    {label && (
-      <Label>
-        {label}
-      </Label>
-    )}
+    {label && <Label>{label}</Label>}
     {children}
     {touched[name] && <Error error={errors[name]} />}
   </div>

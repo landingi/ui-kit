@@ -22,9 +22,7 @@ const StatsBadge = ({ color, quantity, description }) => {
           {quantity}
         </Heading>
 
-        <Heading level={5}>
-          {description}
-        </Heading>
+        <Heading level={5}>{description}</Heading>
       </div>
     </div>
   )

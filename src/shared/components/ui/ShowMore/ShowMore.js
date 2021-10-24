@@ -58,11 +58,7 @@ const ShowMore = ({ height, children, i18n }) => {
       </div>
       {isButtonDisplay && (
         <button type='button' onClick={handleOnClick} className={scss.button}>
-          {isOpen.value ? (
-            `${i18n.more}`
-          ) : (
-            `${i18n.less}`
-          )}
+          {isOpen.value ? `${i18n.more}` : `${i18n.less}`}
         </button>
       )}
     </Fragment>
@@ -79,8 +75,8 @@ ShowMore.propTypes = {
 ShowMore.defaultProps = {
   height: 100,
   i18n: {
-    less: "word.less",
-    more: "word.more"
+    less: 'word.less',
+    more: 'word.more'
   }
 }
 

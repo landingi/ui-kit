@@ -22,7 +22,14 @@ const cssClass = styles(scss)
  * @param {object} props.i18n
  * @return {object} An object of children element
  */
-const Pagination = ({ className, data, goToPage, activePageLimit, pageLimit, i18n }) => {
+const Pagination = ({
+  className,
+  data,
+  goToPage,
+  activePageLimit,
+  pageLimit,
+  i18n
+}) => {
   const { before_values, values, after_values } = data,
     { before, current, after } = values,
     handleGoToPage = page => useCallback(() => goToPage(page), []),

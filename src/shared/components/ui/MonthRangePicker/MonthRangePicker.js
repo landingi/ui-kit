@@ -90,9 +90,7 @@ const cssClass = styles(scss),
             >
               <span className={cssClass('button_month--marker')} />
 
-              <span className={cssClass('button_month--name')}>
-                {name}
-              </span>
+              <span className={cssClass('button_month--name')}>{name}</span>
             </button>
           )
         })

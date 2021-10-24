@@ -30,9 +30,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
       <List listStyle='ordered-check'>
         {list.map(item => (
           <ListItem key={uuid()} variant='list'>
-            <Paragraph size={18}>
-              {item}
-            </Paragraph>
+            <Paragraph size={18}>{item}</Paragraph>
           </ListItem>
         ))}
       </List>

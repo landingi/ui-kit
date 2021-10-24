@@ -17,11 +17,7 @@ import Label from '@components/ui/Label'
  */
 const CheckboxGroup = ({ errors, touched, label, name, children }) => (
   <div className='form-field'>
-    {label && (
-      <Label>
-        {label}
-      </Label>
-    )}
+    {label && <Label>{label}</Label>}
     {children}
     {touched[name] && <Error error={errors[name]} />}
   </div>

@@ -32,11 +32,7 @@ const Radio = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <label className={cssClass(className)}>
-        {label && (
-          <label htmlFor={id}>
-            {label}
-          </label>
-        )}
+        {label && <label htmlFor={id}>{label}</label>}
         <input
           name={name}
           id={id}

@@ -76,9 +76,7 @@ function BlockSection({
 
             <Spacer space={list ? 'medium' : 'small'} />
 
-            <Button onClick={onClick}>
-              {button}
-            </Button>
+            <Button onClick={onClick}>{button}</Button>
           </div>
 
           <Image size={527} src={url} />

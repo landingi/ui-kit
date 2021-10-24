@@ -18,9 +18,7 @@ const cssClass = styles(scss)
 const LimitSmall = ({ padding, limit, quantity, limitText }) => {
   return (
     <div className={cssClass('result__dropdown', `padding__${padding}`)}>
-      <span>
-        {limitText}
-      </span>
+      <span>{limitText}</span>
 
       <span>
         <b>{formatNumeric(quantity)}</b>

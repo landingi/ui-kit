@@ -31,10 +31,7 @@ const Picker = ({ minDate, maxDate, onChange }) => {
 
       <Spacer space='tiny' />
 
-      <Button
-        onClick={useCallback(() => onChange(range), [range])}
-        size='tiny'
-      >
+      <Button onClick={useCallback(() => onChange(range), [range])} size='tiny'>
         {i18n.apply}
       </Button>
     </div>
