@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
-import { FormattedMessage } from 'react-intl'
 import scss from './Radio.scss'
 import { getDeepValue } from '@helpers/data'
 
@@ -35,7 +34,7 @@ const Radio = ({
       <label className={cssClass(className)}>
         {label && (
           <label htmlFor={id}>
-            <FormattedMessage id={`${label}`} />
+            {label}
           </label>
         )}
         <input

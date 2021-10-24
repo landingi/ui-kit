@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import { FormattedMessage } from 'react-intl'
 import Error from '@components/ui/Form/Error'
 import scss from './Checkbox.scss'
 import { getDeepValue } from '@helpers/data'
@@ -45,7 +44,7 @@ const Checkbox = ({
       </label>
       {label && (
         <label htmlFor={id} className={cssClass('checkbox__label')}>
-          <FormattedMessage id={`${label}`} />
+          {label}
           {isTouched && <Error error={error} />}
         </label>
       )}

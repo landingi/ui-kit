@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
-import { FormattedMessage } from 'react-intl'
 
 /**
  * Radio Group  - stateless presentational component
@@ -18,7 +17,7 @@ const RadioGroup = ({ errors, touched, label, name, children }) => (
   <div>
     {label && (
       <Label>
-        <FormattedMessage id={`${label}`} />
+        {label}
       </Label>
     )}
     {children}

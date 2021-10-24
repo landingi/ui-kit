@@ -10,7 +10,6 @@ import { styles } from 'shared/helpers/css'
 import scss from './Dropdown.scss'
 import { centerParent, getBoundings } from 'shared/helpers/position'
 import Tooltip from 'shared/components/ui/Tooltip'
-import { FormattedMessage } from 'react-intl'
 import Ink from 'react-ink'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -162,7 +161,7 @@ const Dropdown = ({
   const renderDropdownWithTooltip = () => {
     return (
       <Tooltip
-        content={<FormattedMessage id={`${tooltip}`} />}
+        content={tooltip}
         placement={tooltipPlacement}
       >
         <span

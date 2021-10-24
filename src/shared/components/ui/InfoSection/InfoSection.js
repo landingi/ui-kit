@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
@@ -32,7 +31,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
         {list.map(item => (
           <ListItem key={uuid()} variant='list'>
             <Paragraph size={18}>
-              <FormattedMessage id={item} />
+              {item}
             </Paragraph>
           </ListItem>
         ))}
@@ -45,7 +44,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
     <div className={cssClass(className)}>
       <div>
         <Heading bold level={1}>
-          <FormattedMessage id={`${title}`} />
+          {title}
         </Heading>
 
         {renderList}
@@ -53,7 +52,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
         <Spacer space='medium' />
 
         <Button onClick={onClick} size='large'>
-          <FormattedMessage id={button} />
+          {button}
         </Button>
       </div>
 

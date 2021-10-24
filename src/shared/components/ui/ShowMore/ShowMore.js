@@ -7,17 +7,17 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import useIsOpen from '@helpers/hooks/useIsOpen'
-import { FormattedMessage } from 'react-intl'
 import scss from './ShowMore.scss'
 
 /**
  * Show more/less - stateful presentational component
- * @param {object} props - props
- * @param {number} props.height - container height
- * @param {object} props.children - content to display
+ * @param {object} props
+ * @param {number} props.height
+ * @param {object} props.children
+ * @param {object} props.i18n
  * @return {object} An object of children element
  */
-const ShowMore = ({ height, children }) => {
+const ShowMore = ({ height, children, i18n }) => {
   const isOpen = useIsOpen(false)
   const [sectionHeight, setSectionHeight] = useState(height)
   const [isButtonDisplay, setButtonDisplay] = useState(false)
@@ -59,9 +59,9 @@ const ShowMore = ({ height, children }) => {
       {isButtonDisplay && (
         <button type='button' onClick={handleOnClick} className={scss.button}>
           {isOpen.value ? (
-            <FormattedMessage id='show.more' />
+            `${i18n.more}`
           ) : (
-            <FormattedMessage id='show.less' />
+            `${i18n.less}`
           )}
         </button>
       )}
@@ -69,25 +69,19 @@ const ShowMore = ({ height, children }) => {
   )
 }
 
-ShowMore.displayName = 'Show more/less'
+ShowMore.displayName = 'ShowMore'
 
 ShowMore.propTypes = {
-  /**
-   * Height
-   */
   height: PropTypes.number,
-  /**
-   * Content
-   */
   children: PropTypes.instanceOf(Object).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 ShowMore.defaultProps = {
-  height: 100
+  height: 100,
+  i18n: {
+    less: "word.less",
+    more: "word.more"
+  }
 }
 
 export default ShowMore

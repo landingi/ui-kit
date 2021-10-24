@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import MonthRangePicker from './MonthRangePicker'
@@ -7,60 +6,53 @@ import React, { useCallback, useState } from 'react'
 import Spacer from '@components/ui/Spacer'
 import scss from './MonthRangePicker.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Picker - statefull presentational component
-   * @param {object} props - props
-   * @param {func} props.onChange - called on date confirm
-   * @param {date} props.minDate - minimal date
-   * @param {date} props.maxDate - maximal date
-   * @return {object} An object of children element
-   */
-  picker = ({ minDate, maxDate, onChange }) => {
-    const [range, setRange] = useState(null)
+const cssClass = styles(scss)
 
-    return (
-      <div className={cssClass('month-range-picker')}>
-        <Spacer space='tiny' />
+/**
+ * Picker - stateful presentational component
+ * @param {object} props - props
+ * @param {func} props.onChange - called on date confirm
+ * @param {date} props.minDate - minimal date
+ * @param {date} props.maxDate - maximal date
+ * @return {object} An object of children element
+ */
+const Picker = ({ minDate, maxDate, onChange }) => {
+  const [range, setRange] = useState(null)
 
-        <MonthRangePicker
-          maxDate={maxDate}
-          minDate={minDate}
-          onChange={setRange}
-        />
+  return (
+    <div className={cssClass('month-range-picker')}>
+      <Spacer space='tiny' />
 
-        <Spacer space='tiny' />
+      <MonthRangePicker
+        maxDate={maxDate}
+        minDate={minDate}
+        onChange={setRange}
+      />
 
-        <Button
-          onClick={useCallback(() => onChange(range), [range])}
-          size='tiny'
-        >
-          <FormattedMessage id='word.apply' />
-        </Button>
-      </div>
-    )
-  }
+      <Spacer space='tiny' />
 
-export default picker
+      <Button
+        onClick={useCallback(() => onChange(range), [range])}
+        size='tiny'
+      >
+        {i18n.apply}
+      </Button>
+    </div>
+  )
+}
 
-picker.displayName = 'Month Picker Layout Wrapper'
+Picker.displayName = 'Month Picker Layout Wrapper'
 
-picker.propTypes = {
-  /**
-   * Date
-   */
+Picker.propTypes = {
   minDate: PropTypes.instanceOf(Date).isRequired,
-
-  /**
-   * OnChange callback
-   */
   onChange: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-picker.defaultProps = {
-  onChange: () => null
+Picker.defaultProps = {
+  onChange: () => null,
+  i18n: {
+    apply: 'word.apply'
+  }
 }
+
+export default Picker

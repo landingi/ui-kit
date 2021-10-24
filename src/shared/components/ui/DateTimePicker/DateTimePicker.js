@@ -4,7 +4,6 @@ import { styles } from '@helpers/css'
 import scss from './DateTimePicker.scss'
 import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
-import { FormattedMessage } from 'react-intl'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from '@helpers/i18n'
@@ -92,7 +91,7 @@ const DateTimePicker = ({
             showMonthAndYearPickers={showMonthAndYearPickers}
           />
           <Button onClick={handleApply} size='tiny'>
-            <FormattedMessage id='word.apply' />
+            {i18n.apply}
           </Button>
         </Fragment>
       )}
@@ -113,7 +112,10 @@ DateTimePicker.propTypes = {
 DateTimePicker.defaultProps = {
   minDate: null,
   oneDatePicker: false,
-  showMonthAndYearPickers: true
+  showMonthAndYearPickers: true,
+  i18n: {
+    apply: ''
+  }
 }
 
 export default DateTimePicker

@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
@@ -48,7 +47,7 @@ function BlockSection({
         <div className={cssClass('block-section__panel', elementClasses)}>
           <div className={cssClass('block-section__panel--content')}>
             <Heading bold level={2}>
-              <FormattedMessage id={`${title}`} />
+              {title}
             </Heading>
 
             <Paragraph
@@ -56,19 +55,20 @@ function BlockSection({
               padding={list ? 'none' : 'medium'}
               weight={400}
             >
-              <FormattedMessage
+              {message}
+              {/* <FormattedMessage
                 id={message}
                 values={{
                   br: <br />
                 }}
-              />
+              /> */}
             </Paragraph>
 
             {list && (
               <List listStyle='ordered-disc'>
                 {list.map(item => (
                   <ListItem key={uuid()} variant='block'>
-                    <FormattedMessage id={item} />
+                    {item}
                   </ListItem>
                 ))}
               </List>
@@ -77,7 +77,7 @@ function BlockSection({
             <Spacer space={list ? 'medium' : 'small'} />
 
             <Button onClick={onClick}>
-              <FormattedMessage id={button} />
+              {button}
             </Button>
           </div>
 

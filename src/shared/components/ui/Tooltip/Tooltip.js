@@ -29,7 +29,7 @@ const Tooltip = ({
   placement,
   align
 }) => {
-  const tooltipUUID = uuid.v5()
+  const tooltipUUID = uuid()
 
   const showOnClickProps = showOnClick
     ? {

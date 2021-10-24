@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { formatNumeric } from '@helpers/data'
 import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
@@ -51,19 +50,19 @@ const Limit = ({
 
           {Boolean(total) && (
             <span className={cssClass('info--total')}>
-              <FormattedMessage id='word.total' />:<b>{total}</b>
+              {i18n.total}:<b>{total}</b>
             </span>
           )}
         </span>
 
         <span className={cssClass('info--name')}>
-          <FormattedMessage id={name} />
+          {name}
 
           {tooltip && (
             <Fragment>
               <Spreader spread='tiny' />
 
-              <Tooltip content={<FormattedMessage id={tooltip} />}>
+              <Tooltip content={tooltip}>
                 <FontAwesomeIcon icon='exclamation-circle' />
               </Tooltip>
             </Fragment>

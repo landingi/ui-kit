@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { endOfMonth, startOfMonth } from 'date-fns'
 import {
   handleRangeMarker,
@@ -16,7 +15,7 @@ import scss from './MonthRangePicker.scss'
 
 const cssClass = styles(scss),
   /**
-   * MonthRangePicker - statefull component
+   * MonthRangePicker - stateful component
    * @param {object} props - props
    * @param {func} props.onChange - called on date confirm
    * @param {date} props.minDate - minimal date
@@ -92,7 +91,7 @@ const cssClass = styles(scss),
               <span className={cssClass('button_month--marker')} />
 
               <span className={cssClass('button_month--name')}>
-                <FormattedMessage id={name} />
+                {name}
               </span>
             </button>
           )
@@ -122,7 +121,7 @@ const cssClass = styles(scss),
       }
 
     return (
-      <>
+      <Fragment>
         <div className={cssClass('year-container')}>
           <Button
             onClick={useCallback(() => setYear(year - 1), [year])}
@@ -146,7 +145,7 @@ const cssClass = styles(scss),
         <Spacer space='tiny' />
 
         <div className={cssClass('grid-container')}>{renderMonths()}</div>
-      </>
+      </Fragment>
     )
   }
 

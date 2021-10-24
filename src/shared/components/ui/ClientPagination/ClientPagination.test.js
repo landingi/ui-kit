@@ -1,5 +1,4 @@
 import React from 'react'
-
 import ClientPagination from '@components/ui/ClientPagination'
 import registerIcons from '@helpers/icons'
 import { mountWithIntl } from '@jestutils'

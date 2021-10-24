@@ -1,6 +1,5 @@
 import { Playground, Props } from 'docz'
 import Steps from '@components/ui/Steps'
-import { IntlProvider } from 'react-intl'
 import { getMessages } from '@helpers/i18n'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

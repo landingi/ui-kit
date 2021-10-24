@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import List from '@components/ui/List'
@@ -20,6 +19,7 @@ const cssClass = styles(scss)
  * @param {number} props.pageCount - page count
  * @param {number} props.activePageLimit - selected page limit
  * @param {number} props.pageLimit - page limit
+ * @param {object} props.i18n
  * @param {number} props.constantPageLimit - option to increase the number of items on the page
  * @return {object} An object of children element
  */
@@ -30,7 +30,8 @@ const Pagination = ({
   pageCount,
   activePageLimit,
   pageLimit,
-  constantPageLimit
+  constantPageLimit,
+  i18n
 }) => {
   const handleGoToPage = page => useCallback(() => goToPage(page), []),
     renderPagination = () =>
@@ -38,7 +39,7 @@ const Pagination = ({
         <>
           <span className={scss.pagination__first}>
             <Button onClick={handleGoToPage(0)} size='small' variant='icon'>
-              <FormattedMessage id='pagination.word.first' />
+              {i18n.first}
             </Button>
           </span>
 
@@ -147,7 +148,7 @@ const Pagination = ({
               size='small'
               variant='icon'
             >
-              <FormattedMessage id='pagination.word.last' />
+              {i18n.last}
             </Button>
           </span>
         </>
@@ -178,7 +179,11 @@ Pagination.propTypes = {
 
 Pagination.defaultProps = {
   className: 'pagination',
-  constantPageLimit: 0
+  constantPageLimit: 0,
+  i18n: {
+    first: 'word.first',
+    last: 'word.last'
+  }
 }
 
 export default Pagination

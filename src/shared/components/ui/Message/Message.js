@@ -1,9 +1,8 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Heading from '@components/ui/Heading'
 import Image from '@components/ui/Image'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
 import Vimeo from '@u-wave/react-vimeo'
 import scss from './Message.scss'
@@ -50,11 +49,11 @@ const Message = ({
       <Spacer space='small' />
 
       {isVideo ? (
-        <>
+        <Fragment>
           <Vimeo height={height} video={url} />
 
           <Spacer space='small' />
-        </>
+        </Fragment>
       ) : (
         <Image height={height} size='auto' src={url} />
       )}
@@ -72,12 +71,13 @@ const Message = ({
           level={titleLevel}
           margin={withoutMargin ? 'none' : ''}
         >
-          <FormattedMessage
+          {title}
+          {/* <FormattedMessage
             id={`${title}`}
             values={{
               br: <br />
             }}
-          />
+          /> */}
         </Heading>
       )}
 
@@ -86,12 +86,13 @@ const Message = ({
           <Spacer space='tiny' />
 
           <Heading align='center' level={messageLevel}>
-            <FormattedMessage
+            {message}
+            {/* <FormattedMessage
               id={`${message}`}
               values={{
                 br: <br />
               }}
-            />
+            /> */}
           </Heading>
         </>
       )}

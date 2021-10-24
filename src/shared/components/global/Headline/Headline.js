@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Heading from '@components/ui/Heading'
 import PropTypes from 'prop-types'
@@ -17,7 +16,7 @@ const cssClass = styles(scss)
 const Headline = ({ className, title }) => (
   <div className={cssClass(className)}>
     <Heading className='text--truncate' level={1}>
-      <FormattedMessage id={`${title}`} />
+      {title}
     </Heading>
   </div>
 )

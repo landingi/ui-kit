@@ -3,7 +3,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
-import { FormattedMessage } from 'react-intl'
 
 /**
  * Checkbox Group  - stateless presentational component
@@ -20,7 +19,7 @@ const CheckboxGroup = ({ errors, touched, label, name, children }) => (
   <div className='form-field'>
     {label && (
       <Label>
-        <FormattedMessage id={`${label}`} />
+        {label}
       </Label>
     )}
     {children}

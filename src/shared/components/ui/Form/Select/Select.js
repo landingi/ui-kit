@@ -4,7 +4,6 @@ import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
 import scss from './Select.scss'
-import { FormattedMessage } from 'react-intl'
 
 const cssClass = styles(scss)
 
@@ -47,7 +46,7 @@ const Select = ({
         <span className={cssClass('bar')} />
         {label && (
           <Label id={name} className={scss.input__label}>
-            <FormattedMessage id={`${label}`} />
+            {label}
           </Label>
         )}
       </div>

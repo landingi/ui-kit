@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { formatNumeric } from '@helpers/data'
 import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
@@ -20,7 +19,7 @@ const LimitSmall = ({ padding, limit, quantity, limitText }) => {
   return (
     <div className={cssClass('result__dropdown', `padding__${padding}`)}>
       <span>
-        <FormattedMessage id={limitText} />
+        {limitText}
       </span>
 
       <span>

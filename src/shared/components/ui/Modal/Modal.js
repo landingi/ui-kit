@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
 import Button from '@components/ui/Button'
@@ -94,7 +93,7 @@ const Modal = ({
           <Button onClick={onMarkAsSpam} variant='transparent'>
             <FontAwesomeIcon icon='ban' />
 
-            <FormattedMessage id='word.mark-as-spam' />
+            {i18n.markasspam}
           </Button>
         )}
 
@@ -363,7 +362,8 @@ Modal.defaultProps = {
   i18n: {
     title: '',
     cancel: '',
-    action: ''
+    action: '',
+    markasspam: ''
   },
   hasCustomButton: false,
   hasFooter: false,
