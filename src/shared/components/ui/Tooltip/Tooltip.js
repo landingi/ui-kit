@@ -13,7 +13,7 @@ const cssClass = styles(scss)
  * @param {object} props.children - children
  * @param {string} props.placement - placement, default `bottom`
  * @param {string} props.align - align, default `left`
- * @param {string} props.effect - bahaviour of tooltip
+ * @param {string} props.effect - behaviour of tooltip
  * @param {string|object} props.content - content
  * @param {bool} props.disabled - disabled
  * @param {bool} props.showOnClick - show on click
@@ -29,7 +29,7 @@ const Tooltip = ({
   placement,
   align
 }) => {
-  const tooltipUUID = uuid()
+  const tooltipUUID = uuid.v5()
 
   const showOnClickProps = showOnClick
     ? {
@@ -62,44 +62,16 @@ const Tooltip = ({
 }
 
 Tooltip.propTypes = {
-  /**
-   * Behaviour of tooltip
-   */
   effect: PropTypes.oneOf(['solid', 'float']),
-  /**
-   * Placement
-   */
   placement: PropTypes.oneOf(['top', 'left', 'right', 'bottom']),
-  /**
-   * Placement
-   */
   align: PropTypes.oneOf(['center', 'left', 'right']),
-  /**
-   * Children element
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Tooltip content
-   */
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Show tooltip after click, tooltip is hidden after 1 sec
-   */
   showOnClick: PropTypes.bool,
-  /**
-   * Disable toolip
-   */
   disabled: PropTypes.bool,
-  /**
-   * Custom classname
-   */
   className: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Tooltip.defaultProps = {
   effect: 'solid',
   placement: 'bottom',

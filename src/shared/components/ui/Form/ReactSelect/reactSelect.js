@@ -48,11 +48,7 @@ const ReactSelect = ({
 
   return (
     <div className={`form-field form-rselect ${errorClass} ${filledClass}`}>
-      {label && (
-        <Label id={name}>
-          {label}
-        </Label>
-      )}
+      {label && <Label id={name}>{label}</Label>}
       <div className={scss.input__wrapper}>
         <Select
           className={cssClass(className)}
