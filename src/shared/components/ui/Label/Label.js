@@ -34,7 +34,6 @@ const Label = memo(({ children, className, id, isToggle, toggle }) => (
 Label.displayName = 'Label'
 
 Label.propTypes = {
-
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   id: PropTypes.string,
@@ -42,11 +41,11 @@ Label.propTypes = {
   toggle: PropTypes.bool
 }
 
-label.defaultProps = {
+Label.defaultProps = {
   className: 'label',
   id: null,
   isToggle: false,
   toggle: false
 }
 
-export default label
+export default Label

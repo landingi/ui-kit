@@ -37,6 +37,7 @@ describe('<Drawer/> global mount', () => {
     wrapper.setProps({
       isActive: true
     })
+
     expect(wrapper.find(Backdrop).exists()).toBe(true)
   })
 })

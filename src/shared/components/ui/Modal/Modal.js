@@ -349,7 +349,7 @@ Modal.propTypes = {
  * The default properties.
  * @type {Object}
  */
-modal.defaultProps = {
+Modal.defaultProps = {
   image: '',
   actionIcon: null,
   actionVariant: 'primary',

@@ -29,8 +29,8 @@ ColorLine.propTypes = {
   variant: PropTypes.oneOf(['alert', 'warning', 'success', 'info']).isRequired
 }
 
-colorLine.defaultProps = {
+ColorLine.defaultProps = {
   alignment: 'vertical'
 }
 
-export default colorLine
+export default ColorLine

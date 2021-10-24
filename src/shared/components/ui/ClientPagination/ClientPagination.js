@@ -177,9 +177,9 @@ Pagination.propTypes = {
   pageLimit: PropTypes.func.isRequired
 }
 
-pagination.defaultProps = {
+Pagination.defaultProps = {
   className: 'pagination',
   constantPageLimit: 0
 }
 
-export default pagination
+export default Pagination

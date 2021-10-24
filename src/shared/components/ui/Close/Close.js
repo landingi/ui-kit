@@ -29,9 +29,9 @@ Close.propTypes = {
   onClick: PropTypes.func
 }
 
-close.defaultProps = {
+Close.defaultProps = {
   className: 'close',
   onClick: () => null
 }
 
-export default close
+export default Close

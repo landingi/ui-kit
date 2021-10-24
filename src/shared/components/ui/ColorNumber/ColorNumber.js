@@ -42,8 +42,8 @@ ColorNumber.propTypes = {
   size: PropTypes.oneOf([10, 12, 16, 18, 32, 44, 62])
 }
 
-colorNumber.defaultProps = {
+ColorNumber.defaultProps = {
   size: 18
 }
 
-export default colorNumber
+export default ColorNumber
