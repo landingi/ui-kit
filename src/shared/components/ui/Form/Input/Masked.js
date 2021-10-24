@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from '@components/ui/Form2/Error'
+import Error from '@components/ui/Form/Error'
 import MaskedInput from '@components/ui/Input/Masked'
 
 /**
