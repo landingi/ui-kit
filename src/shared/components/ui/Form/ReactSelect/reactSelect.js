@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Select from 'react-select'
 import uuid from 'react-uuid'
-import { injectIntl, FormattedMessage } from 'react-intl'
 import Label from '@components/ui/Label'
 import { styles } from '@helpers/css'
 import scss from './ReactSelect.scss'
@@ -51,7 +50,7 @@ const ReactSelect = ({
     <div className={`form-field form-rselect ${errorClass} ${filledClass}`}>
       {label && (
         <Label id={name}>
-          <FormattedMessage id={`${label}`} />
+          {label}
         </Label>
       )}
       <div className={scss.input__wrapper}>
@@ -67,7 +66,7 @@ const ReactSelect = ({
               : value[name]
           }
           key={uuid()}
-          placeholder={intl.formatMessage({ id: `${placeholder || label}` })}
+          placeholder={placeholder || label}
           classNamePrefix='react-select'
         />
         {touched[name] && <Error error={errors[name]} />}
@@ -120,4 +119,4 @@ ReactSelect.defaultProps = {
   onBlur: () => null
 }
 
-export default injectIntl(ReactSelect)
+export default ReactSelect
