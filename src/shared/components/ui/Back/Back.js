@@ -36,37 +36,14 @@ function Back({ className, url, content }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Back.displayName = 'Back'
 
-/**
- * The properties.
- * @type {Object}
- */
 Back.propTypes = {
-  /**
-   * ClassName, default `back`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Content
-   */
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-
-  /**
-   * Url
-   */
   url: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Back.defaultProps = {
   className: 'back',
   content: '',

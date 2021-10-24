@@ -16,10 +16,6 @@ import Spacer from '@components/ui/Spacer'
 import Spreader from '@components/ui/Spreader'
 import scss from './Modal.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -55,7 +51,7 @@ const cssClass = styles(scss)
  * @param {bool} props.isSubmit - modal button is submit type
  * @return {object} An object of children element
  */
-const modal = ({
+const Modal = ({
   children,
   className,
   onClick,
@@ -206,17 +202,9 @@ const modal = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-modal.displayName = 'Modal'
+Modal.displayName = 'Modal'
 
-/**
- * The properties.
- * @type {Object}
- */
-modal.propTypes = {
+Modal.propTypes = {
   /**
    * ActionButtonIcon action button icon
    */
@@ -362,15 +350,24 @@ modal.propTypes = {
  * @type {Object}
  */
 modal.defaultProps = {
+  image: '',
   actionIcon: null,
   actionVariant: 'primary',
   children: null,
   className: 'modal',
   component: null,
+  overflowStyle: {
+    maxHeight: '80vh',
+    overflowY: 'auto'
+  },
+  i18n: {
+    title: '',
+    cancel: '',
+    action: ''
+  },
   hasCustomButton: false,
   hasFooter: false,
   hasHeaderDivider: false,
-  image: '',
   isButtonDisabled: false,
   isButtonLoading: false,
   isCentered: false,
@@ -385,16 +382,7 @@ modal.defaultProps = {
   onAction: () => null,
   onClick: () => null,
   onEdit: () => null,
-  onMarkAsSpam: () => null,
-  overflowStyle: {
-    maxHeight: '80vh',
-    overflowY: 'auto'
-  },
-  i18n: {
-    title: '',
-    cancel: '',
-    action: ''
-  }
+  onMarkAsSpam: () => null
 }
 
-export default modal
+export default Modal

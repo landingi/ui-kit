@@ -27,16 +27,10 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
+
 section.displayName = 'Section'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 section.propTypes = {
   /**
    *Background: `white`

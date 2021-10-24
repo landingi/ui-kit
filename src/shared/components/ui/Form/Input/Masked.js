@@ -12,7 +12,7 @@ import MaskedInput from '@components/ui/Input/Masked'
  * @param {string} props.label - label
  * @param {string} props.placeholder - placeholder
  * @param {string} props.type - type of element `text, number etc`
- * @param {bool} props.translate - if label should be tranlated by intl
+ * @param {bool} props.translate - if label should be translated by intl
  * @param {number} props.maxLength - maxLength
  * @param {disabled} props.disabled - disabled
  * @param {array} props.mask - mask applied to input
@@ -20,7 +20,7 @@ import MaskedInput from '@components/ui/Input/Masked'
  * @param {string} props.focused - focused, keep label by default on top
  * @return {object} An object of children element
  */
-const maskedInput = ({
+const MaskedInput = ({
   field,
   form,
   id,
@@ -62,29 +62,16 @@ const maskedInput = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-maskedInput.displayName = 'Input masked'
 
-/**
- * The properties.
- * @type {Object}
- */
-maskedInput.propTypes = {
-  /**
-   * Field
-   */
+MaskedInput.displayName = 'MaskedInput'
+
+MaskedInput.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
@@ -103,20 +90,16 @@ maskedInput.propTypes = {
   focused: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-maskedInput.defaultProps = {
+MaskedInput.defaultProps = {
   label: '',
   placeholder: '',
   type: 'text',
-  disabled: false,
-  translate: true,
   maxLength: 524288,
   mask: [],
+  disabled: false,
+  translate: true,
   guide: false,
   focused: 'false'
 }
 
-export default maskedInput
+export default MaskedInput

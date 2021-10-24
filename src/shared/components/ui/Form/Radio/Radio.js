@@ -55,37 +55,17 @@ const Radio = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Radio.displayName = 'radio'
 
-/**
- * The properties.
- * @type {Object}
- */
 Radio.propTypes = {
-  /**
-   * Classname, default `input__radio`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Type, default `radio`
-   */
   type: PropTypes.string,
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
@@ -94,10 +74,6 @@ Radio.propTypes = {
   label: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Radio.defaultProps = {
   className: 'input__radio',
   type: 'radio',

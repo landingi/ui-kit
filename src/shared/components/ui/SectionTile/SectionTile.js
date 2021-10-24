@@ -37,16 +37,10 @@ const sectionTile = ({
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
+
 sectionTile.displayName = 'Section Tile'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 sectionTile.propTypes = {
   /**
    * Thumbnail url

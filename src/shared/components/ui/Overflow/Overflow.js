@@ -19,16 +19,10 @@ const cssClass = styles(scss),
     <div className={cssClass(className)}>{children}</div>
   )
 
-/**
- * Display name
- * @type {string}
- */
+
 overflow.displayName = 'Overflow'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 overflow.propTypes = {
   /**
    * Children elements

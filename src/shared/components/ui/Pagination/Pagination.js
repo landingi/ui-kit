@@ -109,16 +109,10 @@ const cssClass = styles(scss),
     )
   }
 
-/**
- * Display name
- * @type {string}
- */
+
 pagination.displayName = 'Pagination'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 pagination.propTypes = {
   /**
    * ActivePageLimit selected page limit

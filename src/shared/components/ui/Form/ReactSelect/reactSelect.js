@@ -28,7 +28,7 @@ const cssClass = styles(scss)
  * @param {object} props.intl - react intl formatMessage function
  * @return {object} An object of children element
  */
-const reactSelect = ({
+const ReactSelect = ({
   className,
   name,
   value,
@@ -76,20 +76,9 @@ const reactSelect = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-reactSelect.displayName = 'React Select'
+ReactSelect.displayName = 'ReactSelect'
 
-/**
- * The properties.
- * @type {Object}
- */
-reactSelect.propTypes = {
-  /**
-   * Classname, default `input`
-   */
+ReactSelect.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
@@ -115,27 +104,20 @@ reactSelect.propTypes = {
       ])
     })
   ).isRequired,
-  /**
-   * Intl from react-intl
-   */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 reactSelect.defaultProps = {
   className: 'react-select-container',
   label: '',
   placeholder: '',
-  onChange: () => null,
-  onBlur: () => null,
   errors: {},
   touched: {},
-  value: null
+  value: null,
+  onChange: () => null,
+  onBlur: () => null
 }
 
-export default injectIntl(reactSelect)
+export default injectIntl(ReactSelect)

@@ -50,16 +50,10 @@ const showPassword = ({ className, setHidden, hasLabel }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 showPassword.displayName = 'ShowPassword'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 showPassword.propTypes = {
   /**
    * Classname, default `showpassword`

@@ -4,28 +4,16 @@ import React from 'react'
 
 /**
  * Modal Header - stateless presentational component
- * @param {object} props - props
- * @param {object} props.title - title
+ * @param {object} props
+ * @param {object} props.title
  * @return {object} An object of children element
  */
+const ModalHeader = ({ title }) => <Heading level={2}>{title}</Heading>
 
-const modalHeader = ({ title }) => <Heading level={2}>{title}</Heading>
+ModalHeader.displayName = 'ModalHeader'
 
-/**
- * Display name
- * @type {string}
- */
-modalHeader.displayName = 'Modal.Header'
-
-/**
- * The properties.
- * @type {Object}
- */
-modalHeader.propTypes = {
-  /**
-   * Title elements
-   */
+ModalHeader.propTypes = {
   title: PropTypes.string.isRequired
 }
 
-export default modalHeader
+export default ModalHeader

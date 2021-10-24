@@ -9,44 +9,26 @@ const cssClass = styles(scss)
  * Form input error - stateless presentational component
  * @param {object} props - props
  * @param {string} props.error - error message
- * @param {string|array} props.className - list of class names, default: input__error
+ * @param {string|array} props.className
  * @return {object} An object of children element
  */
-const inputError = ({ error, className }) =>
+const Error = ({ error, className }) =>
   error ? (
     <span className={cssClass(className)}>{error}</span>
   ) : (
     <span className={cssClass(className)} />
   )
 
-/**
- * Display name
- * @type {string}
- */
-inputError.displayName = 'Input Error'
+Error.displayName = 'Error'
 
-/**
- * The properties.
- * @type {Object}
- */
-inputError.propTypes = {
-  /**
-   * Classname, default `input__error`
-   */
+Error.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Error message
-   */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-inputError.defaultProps = {
+Error.defaultProps = {
   className: 'input__error',
   error: ''
 }
 
-export default inputError
+export default Error

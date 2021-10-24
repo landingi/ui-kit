@@ -8,7 +8,6 @@ import React from 'react'
  * @param {object} props.item - array of items
  * @return {object} An object of children element
  */
-
 const item = ({ item }) => {
   const { title, url } = item
 
@@ -19,20 +18,9 @@ const item = ({ item }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 item.displayName = 'Item'
 
-/**
- * The properties.
- * @type {Object}
- */
 item.propTypes = {
-  /**
-   * Menu item
-   */
   item: PropTypes.shape({
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired

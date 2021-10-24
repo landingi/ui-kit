@@ -3,10 +3,6 @@ import { styles } from '@helpers/css'
 import React from 'react'
 import scss from './Logo.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -88,17 +84,8 @@ function ShortLogo() {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 LongLogo.displayName = 'Logo long'
 ShortLogo.displayName = 'Logo short'
-
-/**
- * The default properties.
- * @type {Object}
- */
 LongLogo.defaultProps = {
   className: 'logo Logo__logo__animated'
 }

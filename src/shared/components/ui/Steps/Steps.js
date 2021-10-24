@@ -41,16 +41,10 @@ function Steps({ data }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 Steps.displayName = 'Steps'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 Steps.propTypes = {
   /**
    * Data

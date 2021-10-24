@@ -62,26 +62,14 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-InfinityScroll.displayName = 'Infinity Scroll'
+InfinityScroll.displayName = 'InfinityScroll'
 
-/**
- * The properties.
- * @type {Object}
- */
 InfinityScroll.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   loadMore: PropTypes.func,
   isLastPage: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 InfinityScroll.defaultProps = {
   isLastPage: false,
   loadMore: () => null

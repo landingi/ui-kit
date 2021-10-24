@@ -15,7 +15,7 @@ const cssClass = styles(scss)
  * @param {bool} props.toggle - toggle change
  * @return {object} An object of children element
  */
-const label = memo(({ children, className, id, isToggle, toggle }) => (
+const Label = memo(({ children, className, id, isToggle, toggle }) => (
   <label
     className={cssClass(
       className,
@@ -31,43 +31,17 @@ const label = memo(({ children, className, id, isToggle, toggle }) => (
   </label>
 ))
 
-/**
- * Display name
- * @type {string}
- */
-label.displayName = 'Label'
+Label.displayName = 'Label'
 
-/**
- * The properties.
- * @type {Object}
- */
-label.propTypes = {
-  /**
-   * Children element
-   */
+Label.propTypes = {
+
   children: PropTypes.node.isRequired,
-  /**
-   * ClassName, default `label`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Id
-   */
   id: PropTypes.string,
-  /**
-   * isToggle
-   */
   isToggle: PropTypes.bool,
-  /**
-   * Toggle
-   */
   toggle: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 label.defaultProps = {
   className: 'label',
   id: null,

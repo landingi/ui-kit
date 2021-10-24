@@ -5,50 +5,30 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './Close.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Close - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: close
-   * @param {function} props.onClick - click handler
-   * @return {object} An object of children element
-   */
-  close = ({ className, onClick }) => (
-    <span className={cssClass(className)} onClick={onClick}>
-      <Button variant='icon'>
-        <FontAwesomeIcon icon='times' size='sm' />
-      </Button>
-    </span>
-  )
+const cssClass = styles(scss)
 
 /**
- * Display name
- * @type {string}
+ * Close - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: close
+ * @param {function} props.onClick - click handler
+ * @return {object} An object of children element
  */
-close.displayName = 'Close'
+const Close = ({ className, onClick }) => (
+  <span className={cssClass(className)} onClick={onClick}>
+    <Button variant='icon'>
+      <FontAwesomeIcon icon='times' size='sm' />
+    </Button>
+  </span>
+)
 
-/**
- * The properties.
- * @type {Object}
- */
-close.propTypes = {
-  /**
-   * Classname, default `close`
-   */
+Close.displayName = 'Close'
+
+Close.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Gets called when the user clicks on close
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onClick: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 close.defaultProps = {
   className: 'close',
   onClick: () => null

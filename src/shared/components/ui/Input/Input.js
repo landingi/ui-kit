@@ -32,7 +32,7 @@ const cssClass = styles(scss)
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
  * @return {object} An object of children element
  */
-const input = ({
+const Input = ({
   className,
   onChange,
   onKeyDown,
@@ -104,129 +104,54 @@ const input = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-input.displayName = 'Input'
+Input.displayName = 'Input'
 
-/**
- * The properties.
- * @type {Object}
- */
-input.propTypes = {
-  /**
-   * ClassName, default `input`
-   */
+Input.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Gets called when the user clicks on Input
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onChange: PropTypes.func,
-  /**
-   * Gets called when the user clicks on Input
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onKeyDown: PropTypes.func,
-  /**
-   * Gets called on blur
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onBlur: PropTypes.func,
-  /**
-   * Type, default `text`, `number`, `textarea`
-   */
   type: PropTypes.string,
-  /**
-   * Name
-   */
   name: PropTypes.string,
-  /**
-   * Disabled
-   */
   disabled: PropTypes.bool,
-  /**
-   * Readonly
-   */
   readonly: PropTypes.bool,
-  /**
-   * Value
-   */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
-   * autoFocus
-   */
   autoFocus: PropTypes.bool,
-  /**
-   * max length of input
-   */
   maxLength: PropTypes.number,
-  /**
-   * required
-   */
   required: PropTypes.bool,
-  /**
-   * is focused, focused, keep label by default on top
-   */
   focused: PropTypes.string,
-  /**
-   * min value of number in input
-   */
   min: PropTypes.number,
-  /**
-   * max value of number in input
-   */
   max: PropTypes.number,
-  /**
-   * Tooltip content
-   */
   tooltip: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]),
-  /**
-   * Input background
-   */
   background: PropTypes.oneOf(['white', 'transparent']),
-  /**
-   * hide arrows inc/dec in input type number
-   */
   hideArrows: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-input.defaultProps = {
+Input.defaultProps = {
   className: 'input',
   type: 'text',
-  name: null,
-  disabled: false,
-  readonly: false,
-  value: null,
-  autoFocus: false,
-  translate: true,
-  maxLength: 524288,
-  required: true,
-  hideArrows: false,
   focused: 'false',
   tooltip: '',
   background: 'white',
+  maxLength: 524288,
   i18n: {
     label: null,
     placeholder: null
   },
+  name: null,
+  value: null,
+  disabled: false,
+  readonly: false,
+  autoFocus: false,
+  translate: true,
+  required: true,
+  hideArrows: false,
   onChange: () => null,
   onKeyDown: () => null,
   onBlur: () => null
 }
 
-export default input
+export default Input

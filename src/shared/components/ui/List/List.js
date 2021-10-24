@@ -14,7 +14,7 @@ const cssClass = styles(scss)
  * @param {string} props.listStyle - list style
  * @return {object} An object of children element
  */
-const list = ({ children, variant, className, listStyle }) => {
+const List = ({ children, variant, className, listStyle }) => {
   const elementClasses = cssClass({
     'list--inline': variant === 'inline',
     'list--ordered-check': listStyle === 'ordered-check',
@@ -29,46 +29,19 @@ const list = ({ children, variant, className, listStyle }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-list.displayName = 'List'
+List.displayName = 'List'
 
-/**
- * The properties.
- * @type {Object}
- */
-list.propTypes = {
-  /**
-   * Children element
-   */
+List.propTypes = {
   children: PropTypes.node.isRequired,
-
-  /**
-   * ClassName, default `list`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * ClassName, default `list`
-   */
   listStyle: PropTypes.string,
-
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf(['inline'])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-list.defaultProps = {
+List.defaultProps = {
   className: 'list',
   listStyle: '',
   variant: null
 }
 
-export default list
+export default List

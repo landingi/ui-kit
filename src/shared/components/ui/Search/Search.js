@@ -173,16 +173,10 @@ const Search = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 Search.displayName = 'Search'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 Search.propTypes = {
   /**
    * ClassName, default `search`

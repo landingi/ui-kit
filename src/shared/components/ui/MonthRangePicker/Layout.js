@@ -43,16 +43,10 @@ const cssClass = styles(scss),
 
 export default picker
 
-/**
- * Display name
- * @type {string}
- */
+
 picker.displayName = 'Month Picker Layout Wrapper'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 picker.propTypes = {
   /**
    * Date

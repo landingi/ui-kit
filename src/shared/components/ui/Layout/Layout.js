@@ -3,53 +3,33 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './Layout.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Layout - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: layout
-   * @param {object} props.children - children
-   * @param {string} props.width - width
-   * @return {object} An object of children element
-   */
-  layout = ({ className, children, width }) => (
-    <div className={cssClass(className, `layout-width--${width}`)}>
-      {children}
-    </div>
-  )
+const cssClass = styles(scss)
 
 /**
- * Display name
- * @type {string}
+ * Layout - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: layout
+ * @param {object} props.children - children
+ * @param {string} props.width - width
+ * @return {object} An object of children element
  */
-layout.displayName = 'Layout'
+const Layout = ({ className, children, width }) => (
+  <div className={cssClass(className, `layout-width--${width}`)}>
+    {children}
+  </div>
+)
 
-/**
- * The properties.
- * @type {Object}
- */
-layout.propTypes = {
-  /**
-   * Children elements
-   */
+Layout.displayName = 'Layout'
+
+Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Classname, default `layout`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   *Width default: `full`
-   */
   width: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-layout.defaultProps = {
+Layout.defaultProps = {
   className: 'layout',
   width: 'full'
 }
 
-export default layout
+export default Layout

@@ -11,7 +11,7 @@ const cssClass = styles(scss)
  * @param {string} props.variant - variant
  * @return {object} An object of children element
  */
-const card = ({ children, variant }) => (
+const Card = ({ children, variant }) => (
   <div className={cssClass('card', `card--${variant}`)}>
     <div className={cssClass('container')}>
       {React.Children.map(children, child => React.cloneElement(child))}
@@ -19,25 +19,11 @@ const card = ({ children, variant }) => (
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
-card.displayName = 'Card'
+Card.displayName = 'Card'
 
-/**
- * The properties.
- * @type {Object}
- */
-card.propTypes = {
-  /**
-   * Children element
-   */
+Card.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf(['alert', 'warning', 'success']).isRequired
 }
 
-export default card
+export default Card

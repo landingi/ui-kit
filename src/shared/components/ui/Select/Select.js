@@ -21,16 +21,10 @@ const select = ({ value, data, name, onChange }) => (
   </select>
 )
 
-/**
- * Display name
- * @type {string}
- */
+
 select.displayName = 'Select'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 select.propTypes = {
   /**
    * Data elements

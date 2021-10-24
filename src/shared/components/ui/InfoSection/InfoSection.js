@@ -64,52 +64,17 @@ function InfoSection({ className, title, list, url, button, onClick }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-InfoSection.displayName = 'Info Section'
+InfoSection.displayName = 'InfoSection'
 
-/**
- * The properties.
- * @type {Object}
- */
 InfoSection.propTypes = {
-  /**
-   * Button title
-   */
   button: PropTypes.string.isRequired,
-
-  /**
-   * Classname, default `info-section`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * List of items
-   */
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-  /**
-   * OnChange is button action
-   */
   onClick: PropTypes.func,
-
-  /**
-   * Title
-   */
   title: PropTypes.string.isRequired,
-
-  /**
-   * Image url
-   */
   url: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 InfoSection.defaultProps = {
   className: 'info-section',
   onClick: () => null

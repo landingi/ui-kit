@@ -30,16 +30,10 @@ const cssClass = styles(scss),
     )
   }
 
-/**
- * Display name
- * @type {string}
- */
+
 statsBadge.displayName = 'Stats Badge'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 statsBadge.propTypes = {
   /**
    * Badge color

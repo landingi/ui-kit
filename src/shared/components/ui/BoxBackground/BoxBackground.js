@@ -3,39 +3,26 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './BoxBackground.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Box Background - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.children - children element
-   * @param {string} props.variant - variant
-   * @return {object} An object of children element
-   */
-  boxBackground = ({ children, variant }) => (
-    <span className={cssClass('boxBackground', `boxBackground--${variant}`)}>
-      {children}
-    </span>
-  )
+const cssClass = styles(scss)
 
 /**
- * Display name
- * @type {string}
+ * Box Background - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children element
+ * @param {string} props.variant - variant
+ * @return {object} An object of children element
  */
-boxBackground.displayName = 'Box background'
+const BoxBackground = ({ children, variant }) => (
+  <span className={cssClass('boxBackground', `boxBackground--${variant}`)}>
+    {children}
+  </span>
+)
 
-/**
- * The properties.
- * @type {Object}
- */
-boxBackground.propTypes = {
-  /**
-   * Children element
-   */
+BoxBackground.displayName = 'BoxBackground'
+
+BoxBackground.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Variant
-   */
   variant: PropTypes.string.isRequired
 }
 
-export default boxBackground
+export default BoxBackground

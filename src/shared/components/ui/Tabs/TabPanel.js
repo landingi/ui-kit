@@ -32,16 +32,10 @@ const TabPanel = ({ name, className, children, ...restProps }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 TabPanel.displayName = 'TabPanel'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 TabPanel.propTypes = {
   /**
    * name

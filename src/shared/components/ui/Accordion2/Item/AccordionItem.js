@@ -8,7 +8,7 @@ import scss from '@components/ui/Accordion2/Accordion.scss'
 const cssClass = styles(scss)
 
 /**
- * Accordion - statefull presentational component
+ * Accordion - stateful presentational component
  * @param {object} props - props
  * @param {string|array} props.className - list of class names, default: `accordion__item`
  * @param {number} props.number - item number
@@ -53,42 +53,16 @@ function AccordionItem({ className, number, title, content }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 AccordionItem.displayName = 'Accordion Item'
 
-/**
- * The properties.
- * @type {Object}
- */
 AccordionItem.propTypes = {
-  /**
-   * Classname
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Content
-   */
   content: PropTypes.node.isRequired,
-
-  /**
-   * Number
-   */
   number: PropTypes.number,
-
-  /**
-   * Title
-   */
   title: PropTypes.node.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 AccordionItem.defaultProps = {
   className: 'accordion__item',
   number: null

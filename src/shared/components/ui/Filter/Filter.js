@@ -12,7 +12,7 @@ import uuid from 'react-uuid'
  * Filter - stateful presentational component
  * @param {object} props - props
  * @param {array} props.values - values to choose
- * @param {function} props.setValue - parent compnent filter setter
+ * @param {function} props.setValue - parent component filter setter
  * @param {string | object} props.initialValue - initial value
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
@@ -51,16 +51,8 @@ function Filter({ values, setValue, initialValue, localStorageKey }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-Filter.displayName = 'Select in dropdown'
+Filter.displayName = 'SelectFilter'
 
-/**
- * The properties.
- * @type {Object}
- */
 Filter.propTypes = {
   initialValue: PropTypes.string,
   localStorageKey: PropTypes.string,
@@ -76,10 +68,6 @@ Filter.propTypes = {
   ).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Filter.defaultProps = {
   initialValue: null,
   localStorageKey: null,

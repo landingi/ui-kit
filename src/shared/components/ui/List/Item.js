@@ -4,8 +4,9 @@ import React from 'react'
 import scss from './List.scss'
 
 const cssClass = styles(scss)
+
 /**
- * List item - stateless presentational component
+ * ListItem - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
  * @param {string} props.variant - Variant `menu, dropdown, table`
@@ -14,7 +15,7 @@ const cssClass = styles(scss)
  * @param {string} props.margin - left margin
  * @return {object} An object of children element
  */
-const listItem = ({ children, variant, size, className, margin }) => {
+const ListItem = ({ children, variant, size, className, margin }) => {
   const elementClasses = cssClass({
     'list-item--block': variant === 'block',
     'list-item--dropdown': variant === 'dropdown',
@@ -31,40 +32,13 @@ const listItem = ({ children, variant, size, className, margin }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-listItem.displayName = 'List item'
+ListItem.displayName = 'ListItem'
 
-/**
- * The properties.
- * @type {Object}
- */
-listItem.propTypes = {
-  /**
-   * Children element
-   */
+ListItem.propTypes = {
   children: PropTypes.node.isRequired,
-
-  /**
-   * ClassName, default `list__item`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Margin
-   */
   margin: PropTypes.bool,
-
-  /**
-   * Size
-   */
   size: PropTypes.string,
-
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf([
     'menu',
     'dropdown',
@@ -76,15 +50,11 @@ listItem.propTypes = {
   ])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-listItem.defaultProps = {
+ListItem.defaultProps = {
   className: 'list__item',
   margin: false,
   size: '',
   variant: ''
 }
 
-export default listItem
+export default ListItem

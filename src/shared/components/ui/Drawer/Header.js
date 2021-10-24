@@ -23,16 +23,10 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
+
 header.displayName = 'Drawer.Header'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 header.propTypes = {
   /**
    * Classname, default `drawer__header`

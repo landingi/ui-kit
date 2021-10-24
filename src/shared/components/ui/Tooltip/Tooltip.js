@@ -61,10 +61,7 @@ const Tooltip = ({
   )
 }
 
-/**
- * The properties.
- * @type {Object}
- */
+
 Tooltip.propTypes = {
   /**
    * Behaviour of tooltip

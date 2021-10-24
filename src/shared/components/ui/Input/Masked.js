@@ -95,16 +95,10 @@ const maskedInput = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 maskedInput.displayName = 'Masked Input'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 maskedInput.propTypes = {
   /**
    * Field

@@ -69,16 +69,10 @@ const ShowMore = ({ height, children }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 ShowMore.displayName = 'Show more/less'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 ShowMore.propTypes = {
   /**
    * Height

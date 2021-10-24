@@ -38,20 +38,10 @@ const Accordion = ({ children }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 Accordion.displayName = 'Accordion'
 
-/**
- * The properties.
- * @type {Object}
- */
 Accordion.propTypes = {
-  /**
-   * Content
-   */
   children: PropTypes.node.isRequired
 }
 

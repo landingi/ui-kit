@@ -1,504 +1,241 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  Fragment
+} from 'react'
 import PropTypes from 'prop-types'
-import { centerParent, getBoundings } from '@helpers/position'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Tooltip from '@components/ui/Tooltip'
-/**
- * Add the Material Design ripple effect to React component
- * @see {@link https://github.com/vigetlabs/react-ink} for further information.
- */
-import Ink from 'react-ink'
-import { debounce, throttle } from '@helpers/events'
-import { styles } from '@helpers/css'
+import { styles } from 'shared/helpers/css'
 import scss from './Dropdown.scss'
+import { centerParent, getBoundings } from 'shared/helpers/position'
+import Tooltip from 'shared/components/ui/Tooltip'
+import { FormattedMessage } from 'react-intl'
+import Ink from 'react-ink'
 import { NavLink } from 'react-router-dom'
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
-import emitter from '@lib/emitter'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { debounce, throttle } from 'shared/helpers/events'
+import { CLOSE_DROPDOWN } from 'shared/constants/eventTypes'
+import emitter from 'shared/lib/emitter'
+import { isEmpty } from 'shared/helpers/data'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
- * Dropdown - stateful presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `dropdown`
- * @param {string} props.icon - Icon
- * @param {string} props.label - Label
- * @param {object} props.i18n - translations
- * @param {string} props.tooltipPlacement - Tooltip placement
- * @param {number} props.offset - Offset
- * @param {number} props.leftOffset - horizontal offset
- * @param {string} props.size - Size
- * @param {bool} props.hasArrow - Has arrow
- * @param {string} props.arrowType - Arrow type
- * @param {string} props.dropdownPlacement - Dropdown placement
- * @param {bool} props.button - button, default: `false`
- * @param {function} props.handleOnClick - handleOnClick function, when button is `true`
- * @param {function} props.handleOnOpen - on click event
- * @param {string} props.link - nav link
- * @param {string} props.alignment - Alignment, default `center`
- * @param {function} props.handleOnClose - on click event
- * @param {bool} props.renderAsSmaller - when dropdown is too wide, it's left edge is off screen, default: false
- * @param {bool} props.hasInput - Has Input style, default: false
- * @param {bool} props.hasFullInputStyle - Has Input full Input style, default: false
- * @param {bool} props.asPlaceholder - as Placeholder, default: false
- * @param {bool} props.inModalName - name of wrapping modal
- * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
+ * Dropdown - stateless presentational component
  * @return {object} An object of children element
  */
-class Dropdown extends PureComponent {
-  /**
-   * Display name
-   * @type {string}
-   */
-  displayName = 'Dropdown'
+const Dropdown = ({
+  children,
+  className,
+  icon,
+  tooltip,
+  tooltipPlacement,
+  label,
+  offset,
+  size,
+  hasArrow,
+  arrowType,
+  alignment,
+  dropdownPlacement,
+  button,
+  handleOnClick,
+  handleOnOpen,
+  handleOnClose,
+  link,
+  renderAsSmaller,
+  hasInput,
+  hasFullInputStyle,
+  asPlaceholder,
+  inModal
+}) => {
+  const [style, setStyle] = useState({})
+  const [isOpen, setIsOpen] = useState(false)
 
-  /**
-   * Ref container
-   * @type {function}
-   * @return {object}
-   */
-  containerRef = React.createRef()
-  /**
-   * Ref dropdown
-   * @type {function}
-   * @return {object}
-   */
-  dropdownRef = React.createRef()
+  const containerRef = useRef(null)
+  const dropdownRef = useRef(null)
 
-  /**
-   * The default properties.
-   * @type {Object}
-   */
-  static defaultProps = {
-    offset: 5,
-    leftOffset: 0,
-    className: 'dropdown',
-    icon: null,
-    label: null,
-    i18n: {
-      tooltip: null
+  const handleShow = useCallback(
+    event => {
+      event.stopPropagation()
+
+      !isOpen && handleOnOpen()
+
+      setIsOpen(isOpen => !isOpen)
     },
-    tooltipPlacement: '',
-    size: 'medium',
-    hasArrow: true,
-    arrowType: 'caret',
-    alignment: 'center',
-    dropdownPlacement: 'left',
-    button: false,
-    handleOnClick: () => null,
-    handleOnOpen: () => null,
-    handleOnClose: () => null,
-    link: '',
-    renderAsSmaller: false,
-    hasInput: false,
-    hasFullInputStyle: false,
-    asPlaceholder: false,
-    inModalName: null,
-    custom: null,
-    isOpenDisabled: false
+    [isOpen]
+  )
+
+  const handleClose = useCallback(
+    event => {
+      event.stopPropagation()
+
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsOpen(isOpen => !isOpen)
+        handleOnClose()
+      }
+    },
+    [isOpen, containerRef, dropdownRef]
+  )
+
+  const makeClose = () => {
+    setIsOpen(false)
   }
 
-  /**
-   * The properties.
-   * @type {Object}
-   */
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    /**
-     * ClassName, default `dropdown`
-     */
-    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    /**
-     * Icon
-     */
-    icon: PropTypes.string,
-    /**
-     * Translations
-     */
-    i18n: PropTypes.instanceOf(Object),
-    /**
-     * Tooltip placement
-     */
-    tooltipPlacement: PropTypes.string,
-    /**
-     * Label
-     */
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    /**
-     * Offset, default `5`
-     */
-    offset: PropTypes.number,
-    /**
-     * Horizontal offset, default `0`
-     */
-    leftOffset: PropTypes.number,
-    /**
-     * Size
-     */
-    size: PropTypes.oneOf([
-      'mini',
-      'small',
-      'medium',
-      'big',
-      'large',
-      'huge',
-      'extra-huge',
-      'auto',
-      'fixed'
-    ]),
-    /**
-     * Has arrow, default `false`
-     */
-    hasArrow: PropTypes.bool,
-    /**
-     * Arrow type, default `caret`
-     */
-    arrowType: PropTypes.oneOf(['caret', 'dots']),
-    /**
-     * Alignment, default `center`
-     */
-    alignment: PropTypes.oneOf(['center', 'spaced']),
-    /**
-     * Dropdown placement, default `left`
-     */
-    dropdownPlacement: PropTypes.oneOf(['left', 'right']),
-    /**
-     * Button, default `false`
-     */
-    button: PropTypes.bool,
-    /**
-     * Handle on click
-     */
-    handleOnClick: PropTypes.func,
-    /**
-     * handleOnOpen
-     */
-    handleOnOpen: PropTypes.func,
-    /**
-     * onClose callback
-     */
-    handleOnClose: PropTypes.func,
-    /**
-     * NavLink
-     */
-    link: PropTypes.string,
-    /**
-     * Render as smaller - when dropdown is too wide, it's left edge is off screen,
-     * with this prop it will be render like a 240px width
-     * default: false
-     */
-    renderAsSmaller: PropTypes.bool,
-    /**
-     * Has Input style
-     * default: false
-     */
-    hasInput: PropTypes.bool,
-    /**
-     * Has Input full Input style
-     * default: false
-     * when its enabled dropdown looks like select in forms
-     */
-    hasFullInputStyle: PropTypes.bool,
-    /**
-     * as Placeholder
-     * default: false
-     * label is styled as input placeholder
-     */
-    asPlaceholder: PropTypes.bool,
-    /**
-     * in Modal name
-     * default: null
-     */
-    inModalName: PropTypes.string,
-    custom: PropTypes.instanceOf(Object),
-    /**
-     * Is disabled opening
-     * default: false
-     * when it's enabled dropdown can't be open
-     */
-    isOpenDisabled: PropTypes.bool
-  }
-
-  /**
-   * State
-   * @type {object}
-   * @return {object}
-   */
-  state = {
-    isOpen: false,
-    style: {}
-  }
-
-  /**
-   * Called on show
-   *
-   * Toggles the isOpen state of the dropdown
-   * @param {MouseEvent} event
-   * @type {function}
-   */
-  handleShow = event => {
-    const { handleOnOpen, isOpenDisabled } = this.props
-    const { isOpen } = this.state
-
-    event.stopPropagation()
-
-    if (isOpenDisabled) return
-
-    !isOpen && handleOnOpen()
-
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen
-    }))
-  }
-
-  /**
-   * Called on close
-   *
-   * Toggles the isOpen state of the dropdown
-   * @param {MouseEvent} event
-   * @type {function}
-   */
-  handleClose = event => {
-    const { handleOnClose } = this.props
-
-    event.stopPropagation()
-
-    if (
-      this.containerRef.current &&
-      !this.containerRef.current.contains(event.target) &&
-      this.dropdownRef.current &&
-      !this.dropdownRef.current.contains(event.target)
-    ) {
-      this.setState(prevState => ({
-        isOpen: !prevState.isOpen
-      }))
-      handleOnClose()
-    }
-  }
-
-  /**
-   * Called to trigger close on event
-   *
-   * @type {function}
-   */
-  makeClose = () => {
-    this.setState(() => ({
-      isOpen: false
-    }))
-  }
-
-  /**
-   * Handles the position of the dropdown
-   *
-   * Set offset left & top
-   * @type {function}
-   */
-  handlePosition = () => {
-    const {
-      offset,
-      dropdownPlacement,
-      renderAsSmaller,
-      size,
-      leftOffset,
-      inModalName
-    } = this.props
-
-    const container = getBoundings(this.containerRef.current)
-    const dropdown = getBoundings(this.dropdownRef.current)
+  const handlePosition = () => {
+    const container = getBoundings(containerRef.current)
+    const dropdown = getBoundings(dropdownRef.current)
     const renderAbove =
-      window.innerHeight <= dropdown.height + container.top + offset
+      window.innerHeight <= dropdown?.height + container?.top + offset
 
-    if (inModalName) {
-      const modal = document.getElementsByClassName(inModalName)[0]
-      const modalWidth = modal?.offsetWidth || 600
-      const modalHeight = modal?.offsetHeight || 600
-
-      this.setState({
-        style: {
-          left: container.left - (window.innerWidth - modalWidth) / 2,
-          top: renderAbove
-            ? container.top - dropdown.height
-            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
-        }
+    if (inModal) {
+      setStyle({
+        marginTop: 10,
+        width: container?.width
       })
     } else {
       if (size === 'fixed') {
-        this.setState({
-          style: {
-            left: container.left,
-            top: renderAbove
-              ? container.top - dropdown.height
-              : container.bottom + offset,
-            width: container.width
-          }
+        setStyle({
+          left: container?.left,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset,
+          width: container?.width
+        })
+      } else if (size === 'huge') {
+        setStyle({
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(container?.width, 480, container?.left)
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 150
+              : centerParent(
+                  container?.width,
+                  dropdown?.width,
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
         })
       } else {
-        this.setState({
-          style: {
-            left:
-              dropdownPlacement === 'left'
-                ? (renderAsSmaller
-                    ? centerParent(container.width, 240, container.left)
-                    : centerParent(
-                        container.width,
-                        dropdown.width,
-                        container.left
-                      )) -
-                  40 +
-                  leftOffset
-                : centerParent(
-                    container.width,
-                    dropdown.width,
-                    container.left
-                  ) -
-                  100 +
-                  dropdown.width,
-            top: renderAbove
-              ? container.top - dropdown.height
-              : container.bottom + offset
-          }
+        setStyle({
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(container?.width, 240, container?.left)
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 40
+              : centerParent(
+                  container?.width,
+                  dropdown?.width,
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
         })
       }
     }
   }
 
-  /**
-   * Called while resizing.
-   *
-   * Toggles the collapse state of the sidebar
-   * @type {function}
-   */
-  handleResize = () => {
-    const { isOpen } = this.state
-
-    if (isOpen) this.handlePosition()
+  const handleResize = () => {
+    if (isOpen) handlePosition()
   }
 
-  /**
-   * Render dropdown with tooltip
-   * @type {function}
-   */
-  renderDropdownWithTooltip = () => {
-    const { icon, i18n, tooltipPlacement, hasArrow, arrowType } = this.props
-    const { isOpen } = this.state
-
+  const renderDropdownWithTooltip = () => {
     return (
-      <Tooltip content={i18n.tooltip} placement={tooltipPlacement}>
+      <Tooltip
+        content={<FormattedMessage id={`${tooltip}`} />}
+        placement={tooltipPlacement}
+      >
         <span
-          ref={this.containerRef}
-          onClick={this.handleShow}
+          ref={containerRef}
+          onClick={handleShow}
           className={cssClass('dropdown__wrapper')}
         >
-          {icon && this.renderIcon()}
+          {icon && renderIcon()}
 
-          {this.renderLabel()}
+          {renderLabel()}
 
           <Ink />
 
-          {hasArrow && this.renderArrows(isOpen, arrowType)}
+          {hasArrow && renderArrows(isOpen, arrowType)}
         </span>
       </Tooltip>
     )
   }
 
-  /**
-   * Render dropdown
-   * @type {function}
-   */
-  renderDropdown = () => {
-    const {
-      label,
-      icon,
-      hasArrow,
-      arrowType,
-      alignment,
-      hasInput,
-      hasFullInputStyle,
-      custom,
-      isOpenDisabled
-    } = this.props
-    const { isOpen } = this.state
+  const renderDropdown = () => (
+    <span
+      ref={containerRef}
+      onClick={handleShow}
+      className={cssClass(
+        'dropdown__wrapper',
+        alignment === 'spaced'
+          ? 'dropdown__wrapper--spaced'
+          : 'dropdown__wrapper--center',
+        hasInput && 'dropdown__wrapper--input',
+        hasFullInputStyle && 'dropdown__wrapper--as-input'
+      )}
+    >
+      {icon && renderIcon()}
 
-    return (
+      {label && renderLabel()}
+
+      {!hasInput && <Ink />}
+
+      {hasArrow && renderArrows(isOpen, arrowType)}
+    </span>
+  )
+
+  const renderDropdownWithButton = () => (
+    <span
+      className={cssClass(
+        'dropdown__wrapper',
+        alignment === 'spaced'
+          ? 'dropdown__wrapper--spaced'
+          : 'dropdown__wrapper--center'
+      )}
+      onClick={handleOnClick}
+    >
+      <NavLink to={link} activeClassName='groups--selected'>
+        {icon && renderIcon()}
+
+        {label && renderLabel()}
+
+        <Ink />
+      </NavLink>
+
       <span
-        ref={this.containerRef}
-        onClick={this.handleShow}
-        className={cssClass(
-          !custom && 'dropdown__wrapper',
-          isOpenDisabled && 'dropdown__wrapper--disabled',
-          alignment === 'spaced'
-            ? 'dropdown__wrapper--spaced'
-            : 'dropdown__wrapper--center',
-          hasInput && 'dropdown__wrapper--input',
-          hasFullInputStyle && 'dropdown__wrapper--as-input',
-          hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
-        )}
+        className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
+        ref={containerRef}
+        onClick={handleShow}
       >
-        {custom && custom}
+        {hasArrow && renderArrows(isOpen, arrowType)}
 
-        {icon && this.renderIcon()}
-
-        {label && this.renderLabel()}
-
-        {!hasInput && !custom && <Ink />}
-
-        {hasArrow && this.renderArrows(isOpen, arrowType)}
+        <Ink />
       </span>
-    )
-  }
+    </span>
+  )
 
-  /**
-   * Render dropdown with button and react-router <NavLink/>
-   * @type {function}
-   */
-  renderDropdownWithButton = () => {
-    const { label, icon, hasArrow, arrowType, alignment, handleOnClick, link } =
-      this.props
-    const { isOpen } = this.state
-
-    return (
-      <span
-        className={cssClass(
-          'dropdown__wrapper',
-          alignment === 'spaced'
-            ? 'dropdown__wrapper--spaced'
-            : 'dropdown__wrapper--center'
-        )}
-        onClick={handleOnClick}
-      >
-        <NavLink to={link} activeClassName='groups--selected'>
-          {icon && this.renderIcon()}
-
-          {label && this.renderLabel()}
-
-          <Ink />
-        </NavLink>
-
-        <span
-          className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
-          ref={this.containerRef}
-          onClick={this.handleShow}
-        >
-          {hasArrow && this.renderArrows(isOpen, arrowType)}
-          <Ink />
-        </span>
-      </span>
-    )
-  }
-
-  /**
-   * Render dropdown body
-   * @type {function}
-   */
-  renderDropdownBody = () => {
-    const { children, className, size } = this.props
-    const { style } = this.state
-
+  const renderDropdownBody = () => {
     const elementClasses = cssClass({
       'dropdown--mini': size === 'mini',
       'dropdown--small': size === 'small',
@@ -506,13 +243,14 @@ class Dropdown extends PureComponent {
       'dropdown--large': size === 'large',
       'dropdown--huge': size === 'huge',
       'dropdown--extra-huge': size === 'extra-huge',
-      'dropdown--auto': size === 'auto'
+      'dropdown--auto': size === 'auto',
+      'dropdown--hidden': isEmpty(style)
     })
 
     return (
       <div
         className={cssClass(className, elementClasses)}
-        ref={this.dropdownRef}
+        ref={dropdownRef}
         style={style}
       >
         <div className={cssClass('dropdown__body')}>{children}</div>
@@ -520,40 +258,20 @@ class Dropdown extends PureComponent {
     )
   }
 
-  /**
-   * Render icon
-   * @type {function}
-   */
-  renderIcon = () => {
-    const { icon } = this.props
+  const renderIcon = () => <FontAwesomeIcon icon={icon} />
 
-    return <FontAwesomeIcon icon={icon} />
-  }
+  const renderLabel = () => (
+    <span
+      className={cssClass(
+        'dropdown__label',
+        asPlaceholder && 'dropdown__label--placeholder'
+      )}
+    >
+      {label}
+    </span>
+  )
 
-  /**
-   * Render label
-   * @type {function}
-   */
-  renderLabel = () => {
-    const { label, asPlaceholder } = this.props
-
-    return (
-      <span
-        className={cssClass(
-          'dropdown__label',
-          asPlaceholder && 'dropdown__label--placeholder'
-        )}
-      >
-        {label}
-      </span>
-    )
-  }
-
-  /**
-   * Render arrows
-   * @type {function}
-   */
-  renderArrows = (isOpen, arrowType) =>
+  const renderArrows = (isOpen, arrowType) =>
     arrowType === 'caret' ? (
       isOpen ? (
         <FontAwesomeIcon icon='caret-up' />
@@ -564,68 +282,114 @@ class Dropdown extends PureComponent {
       <FontAwesomeIcon icon='ellipsis-v' />
     )
 
-  /**
-   * A react lifecycle method called when the component did update.
-   * It handles the position
-   * @type {function}
-   */
-  componentDidUpdate(prevProps, prevState) {
-    const { isOpen } = this.state
+  useEffect(() => {
+    window.addEventListener('mousedown', handleClose)
+    window.addEventListener('scroll', throttle(handleClose, 500))
+    window.addEventListener('resize', debounce(handleResize, 100))
+    emitter.on(CLOSE_DROPDOWN, makeClose)
 
-    if (
-      prevState.isOpen !== isOpen &&
-      this.containerRef.current &&
-      this.dropdownRef.current
-    ) {
-      this.handlePosition()
+    return () => {
+      window.removeEventListener('mousedown', handleClose)
+      window.removeEventListener('scroll', handleClose)
+      window.removeEventListener('resize', handleResize)
+
+      emitter.off(CLOSE_DROPDOWN, makeClose)
     }
-  }
+  }, [])
 
+  useEffect(() => {
+    if (containerRef.current && dropdownRef.current) {
+      handlePosition()
+    }
+  }, [isOpen])
+
+  return (
+    <Fragment>
+      {tooltip.length > 0
+        ? renderDropdownWithTooltip()
+        : button
+        ? renderDropdownWithButton()
+        : renderDropdown()}
+
+      {isOpen && renderDropdownBody()}
+    </Fragment>
+  )
+}
+
+Dropdown.displayName = 'Dropdown'
+
+Dropdown.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  icon: PropTypes.string,
+  tooltip: PropTypes.string,
+  tooltipPlacement: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  offset: PropTypes.number,
+  size: PropTypes.oneOf([
+    'mini',
+    'small',
+    'medium',
+    'big',
+    'large',
+    'huge',
+    'extra-huge',
+    'auto',
+    'fixed'
+  ]),
+  hasArrow: PropTypes.bool,
+  arrowType: PropTypes.oneOf(['caret', 'dots']),
+  alignment: PropTypes.oneOf(['center', 'spaced']),
+  dropdownPlacement: PropTypes.oneOf(['left', 'right']),
+  button: PropTypes.bool,
+  handleOnClick: PropTypes.func,
+  handleOnOpen: PropTypes.func,
+  handleOnClose: PropTypes.func,
+  link: PropTypes.string,
   /**
-   * A react lifecycle method called when the component did mount.
-   * It adds event listeners on resize and DOMContentLoaded after mounting.
-   * @type {function}
+   * Render as smaller - when dropdown is too wide, it's left edge is off screen,
+   * with this prop it will be render like a 240px width
+   * default: false
    */
-  componentDidMount() {
-    window.addEventListener('mousedown', this.handleClose)
-    window.addEventListener('scroll', throttle(this.handleClose, 500))
-    window.addEventListener('resize', debounce(this.handleResize, 100))
-
-    emitter.on(CLOSE_DROPDOWN, this.makeClose)
-  }
-
+  renderAsSmaller: PropTypes.bool,
+  hasInput: PropTypes.bool,
   /**
-   * A react lifecycle method called when the component will unmount.
-   * Removes event listeners on resize and mousedown after unmount.
-   * @type {function}
+   * Has Input full Input style
+   * default: false
+   * when its enabled dropdown looks like select in forms
    */
-  componentWillUnmount() {
-    window.removeEventListener('mousedown', this.handleClose)
-    window.removeEventListener('scroll', this.handleClose)
-    window.removeEventListener('resize', this.handleResize)
-
-    emitter.off(CLOSE_DROPDOWN, this.makeClose)
-  }
-
+  hasFullInputStyle: PropTypes.bool,
   /**
-   * The render function
-   * @type {function}
+   * as Placeholder
+   * default: false
+   * label is styled as input placeholder
    */
-  render() {
-    const { i18n, button } = this.props
-    const { isOpen } = this.state
+  asPlaceholder: PropTypes.bool,
+  inModal: PropTypes.bool
+}
 
-    return (
-      <Fragment>
-        {i18n.tooltip
-          ? this.renderDropdownWithTooltip()
-          : button
-          ? this.renderDropdownWithButton()
-          : this.renderDropdown()}
-        {isOpen && this.renderDropdownBody()}
-      </Fragment>
-    )
-  }
+Dropdown.defaultProps = {
+  offset: 5,
+  className: 'dropdown',
+  icon: null,
+  label: null,
+  tooltip: '',
+  tooltipPlacement: '',
+  size: 'medium',
+  hasArrow: true,
+  arrowType: 'caret',
+  alignment: 'center',
+  dropdownPlacement: 'left',
+  handleOnClick: () => null,
+  handleOnOpen: () => null,
+  handleOnClose: () => null,
+  link: '',
+  renderAsSmaller: false,
+  hasInput: false,
+  hasFullInputStyle: false,
+  asPlaceholder: false,
+  inModal: false,
+  button: false
 }
 
 export default Dropdown

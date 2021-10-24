@@ -14,7 +14,7 @@ import { FormattedMessage } from 'react-intl'
  * @param {object} props.children - children
  * @return {object} An object of children element
  */
-const radioGroup = ({ errors, touched, label, name, children }) => (
+const RadioGroup = ({ errors, touched, label, name, children }) => (
   <div>
     {label && (
       <Label>
@@ -25,36 +25,19 @@ const radioGroup = ({ errors, touched, label, name, children }) => (
     {touched[name] && <Error error={errors[name]} />}
   </div>
 )
-/**
- * Display name
- * @type {string}
- */
-radioGroup.displayName = 'Radio Group'
 
-/**
- * The properties.
- * @type {Object}
- */
-radioGroup.propTypes = {
-  /**
-   * The text for the button
-   */
+RadioGroup.displayName = 'RadioGroup'
+
+RadioGroup.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Form
-   */
   touched: PropTypes.instanceOf(Object).isRequired,
   errors: PropTypes.instanceOf(Object).isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-radioGroup.defaultProps = {
+RadioGroup.defaultProps = {
   label: ''
 }
 
-export default radioGroup
+export default RadioGroup

@@ -44,16 +44,10 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
+
 socialConnectBadge.displayName = 'Social connect badge'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 socialConnectBadge.propTypes = {
   /**
    * Classname, default `socialConnectBadge`

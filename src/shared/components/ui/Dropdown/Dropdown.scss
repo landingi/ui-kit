@@ -7,14 +7,13 @@
   &__head {
     padding: 0 $padding-medium;
 
-    >span {
+    > span {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     :global {
-
       .Heading__h4,
       .Heading__h5 {
         margin: unset;
@@ -29,7 +28,7 @@
     cursor: pointer;
     line-height: 1;
     position: relative;
-    min-width: 10px;
+    min-width: 36px;
     min-height: 36px;
     display: flex;
     align-items: center;
@@ -47,7 +46,6 @@
     .dropdown__wrapper__icon {
       visibility: hidden;
     }
-
 
     &:hover {
       background: $color-button-hover;
@@ -80,7 +78,7 @@
         background-color: transparent;
 
         &:after {
-          content: "";
+          content: '';
           height: 2px;
           background: $color-1;
           position: absolute;
@@ -95,41 +93,15 @@
       height: 38px;
       margin: 0;
 
-      :global
-      .Dropdown__dropdown__label {
+      :global .Dropdown__dropdown__label {
         padding: 0;
         font-size: 16px;
-      }
-    }
-
-    &--input--disabled {
-      border-bottom: 1px dotted $color-8;
-      color: $color-input-border;
-      cursor: not-allowed;
-
-      :global
-      .Dropdown__dropdown__label{
-        cursor: not-allowed;
-      }
-
-      &:hover {
-        svg {
-          color: $color-3
-        }
-      }
-
-      &:focus,
-      &:hover,
-      &:active {
-        &:after {
-          display: none;
-        }
       }
     }
   }
 
   &__body {
-    padding: $padding-medium 0 $padding-small;
+    padding: 20px 0 $padding-small;
 
     :global {
       .Label__label {
@@ -191,5 +163,9 @@
 
   &--hidden {
     overflow: hidden;
+  }
+
+  &--hidden {
+    opacity: 0;
   }
 }

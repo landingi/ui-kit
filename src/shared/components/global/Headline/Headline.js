@@ -5,54 +5,33 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './Headline.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss),
-  /**
-   * Headline page - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: page__headline
-   * @param {string} props.title - data
-   * @return {object} An object of children element
-   */
-  headline = ({ className, title }) => (
-    <div className={cssClass(className)}>
-      <Heading className='text--truncate' level={1}>
-        <FormattedMessage id={`${title}`} />
-      </Heading>
-    </div>
-  )
+const cssClass = styles(scss)
 
 /**
- * Display name
- * @type {string}
+ * Headline page - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: page__headline
+ * @param {string} props.title - data
+ * @return {object} An object of children element
  */
-headline.displayName = 'Headline'
+const Headline = ({ className, title }) => (
+  <div className={cssClass(className)}>
+    <Heading className='text--truncate' level={1}>
+      <FormattedMessage id={`${title}`} />
+    </Heading>
+  </div>
+)
 
-/**
- * The default properties.
- * @type {Object}
- */
-headline.defaultProps = {
+Headline.displayName = 'Headline'
+
+Headline.defaultProps = {
   className: 'page__headline'
 }
 
-/**
- * The properties.
- * @type {Object}
- */
-headline.propTypes = {
-  /**
-   * Classname, default `page__headline`
-   */
+
+Headline.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Title
-   * @param {String}
-   */
   title: PropTypes.string.isRequired
 }
 
-export default headline
+export default Headline

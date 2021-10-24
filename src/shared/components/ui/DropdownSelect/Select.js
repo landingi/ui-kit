@@ -48,7 +48,7 @@ const cssClass = styles(scss)
  * @param {func} props.dropdownLabel
  * @param {func} props.className - wrapper custom styles
  * @param {func} props.customValue - allow use custom value which is not in options
- * @param {func} props.formikKey - name on formik 'nasted' keys
+ * @param {func} props.formikKey - name on formik 'nested' keys
  * @param {string} props.translate - translate key when items in dropdown use react-intl
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
@@ -274,16 +274,10 @@ const Select = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 Select.displayName = 'Select dropdown'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
@@ -324,33 +318,29 @@ Select.propTypes = {
   searchInOptions: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Select.defaultProps = {
   label: '',
-  onChange: () => null,
-  handleOnSearchChange: null,
-  onBlur: () => null,
-  errors: {},
-  touched: {},
-  value: null,
   searchPlaceholder: '',
   inModalName: '',
-  isLoading: false,
-  isEmptyList: false,
-  hasDescription: false,
+  className: '',
+  errors: {},
+  touched: {},
   overflowStyle: {},
   emphasisedOptions: [],
+  handleOnSearchChange: null,
+  value: null,
   liveChanges: false,
   optionalContent: null,
   dropdownLabel: null,
-  className: '',
   customValue: false,
   alwaysShowLabel: false,
   isOpenDisabled: false,
-  searchInOptions: false
+  searchInOptions: false,
+  isLoading: false,
+  isEmptyList: false,
+  hasDescription: false,
+  onBlur: () => null,
+  onChange: () => null
 }
 
 export default Select

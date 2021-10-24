@@ -12,7 +12,7 @@ import uuid from 'react-uuid'
  * @param {array} props.elements - array of items
  * @return {object} An object of children element
  */
-const scrollSpy = ({ elements }) => {
+const ScrollSpy = ({ elements }) => {
   const sectionRefs = [useRef(null), useRef(null)]
   // eslint-disable-next-line no-unused-vars
   const activeSection = useScrollSpy({
@@ -40,21 +40,10 @@ const scrollSpy = ({ elements }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-scrollSpy.displayName = 'ScrollSpy'
+ScrollSpy.displayName = 'ScrollSpy'
 
-/**
- * The properties.
- * @type {Object}
- */
-scrollSpy.propTypes = {
-  /**
-   * List of items
-   */
+ScrollSpy.propTypes = {
   elements: PropTypes.arrayOf(scrollSpyShape).isRequired
 }
 
-export default scrollSpy
+export default ScrollSpy

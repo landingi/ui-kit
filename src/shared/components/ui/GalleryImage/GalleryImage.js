@@ -6,14 +6,14 @@ import scss from './GalleryImage.scss'
 const cssClass = styles(scss)
 
 /**
- * galleryImage - stateless presentational component
+ * GalleryImage - stateless presentational component
  * @param {object} props - props
  * @param {string} props.src - src url
  * @param {func} props.onClick - onClick handler function
  * @param {func} props.onDoubleClick - on double click handler function
  * @return {object} An object of children element
  */
-const galleryImage = ({ src, onClick, onDoubleClick }) => (
+const GalleryImage = ({ src, onClick, onDoubleClick }) => (
   <div
     className={cssClass('background')}
     onClick={onClick}
@@ -26,29 +26,17 @@ const galleryImage = ({ src, onClick, onDoubleClick }) => (
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
-galleryImage.displayName = 'Gallery Image'
+GalleryImage.displayName = 'GalleryImage'
 
-/**
- * The properties.
- * @type {Object}
- */
-galleryImage.propTypes = {
+GalleryImage.propTypes = {
   src: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   onDoubleClick: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-galleryImage.defaultProps = {
+GalleryImage.defaultProps = {
   onClick: () => null,
   onDoubleClick: () => null
 }
 
-export default galleryImage
+export default GalleryImage

@@ -11,7 +11,7 @@ const cssClass = styles(scss)
  * @param {func} props.onChange - onChange handler
  * @param {func} props.className - custom styles
  * @param {func} props.disabled - disable checkbox
- * @param {func} props.formikKey - forkim key
+ * @param {func} props.formikKey - formik key
  * @return {object} An object of children element
  */
 const Checkbox = ({ onChange, className, checked, disabled, formikKey }) => (
@@ -27,16 +27,8 @@ const Checkbox = ({ onChange, className, checked, disabled, formikKey }) => (
   </label>
 )
 
-/**
- * Display name
- * @type {string}
- */
-Checkbox.displayName = 'Checkbox Component'
+Checkbox.displayName = 'Checkbox'
 
-/**
- * The properties.
- * @type {Object}
- */
 Checkbox.propTypes = {
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool.isRequired,

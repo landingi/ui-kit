@@ -14,7 +14,7 @@ import Search from '@components/ui/Search'
  * @param {bool} props.liveChanges - search by entering characters
  * @return {object} An object of children element
  */
-const searcher = ({
+const Searcher = ({
   setSearchResult,
   searchFunction,
   setSearchPhrase,
@@ -67,17 +67,9 @@ const searcher = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-searcher.displayName = 'Searcher'
+Searcher.displayName = 'Searcher'
 
-/**
- * The properties.
- * @type {Object}
- */
-searcher.propTypes = {
+Searcher.propTypes = {
   liveChanges: PropTypes.bool,
   placeholder: PropTypes.string,
   protectedSubmit: PropTypes.bool,
@@ -86,14 +78,10 @@ searcher.propTypes = {
   setSearchResult: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-searcher.defaultProps = {
+Searcher.defaultProps = {
   liveChanges: false,
   i18n: {
-    placeholder: ''
+    placeholder: 'null'
   },
   protectedSubmit: false,
   setSearchPhrase: null,
@@ -101,4 +89,4 @@ searcher.defaultProps = {
   setSearchResult: () => null
 }
 
-export default memo(searcher)
+export default memo(Searcher)

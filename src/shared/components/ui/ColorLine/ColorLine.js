@@ -3,50 +3,34 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './ColorLine.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Color line - stateless presentational component
-   * @param {object} props - props
-   * @param {string} props.variant - variant
-   * @param {string} props.alignment - alignment
-   * @return {object} An object of children element
-   */
-  colorLine = ({ variant, alignment }) => (
-    <span
-      className={cssClass(
-        'color-line',
-        `color-line--${variant}`,
-        `color-line--${alignment}`
-      )}
-    />
-  )
+const cssClass = styles(scss)
 
 /**
- * Display name
- * @type {string}
+ * Color line - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.variant - variant
+ * @param {string} props.alignment - alignment
+ * @return {object} An object of children element
  */
-colorLine.displayName = 'Color line'
+const ColorLine = ({ variant, alignment }) => (
+  <span
+    className={cssClass(
+      'color-line',
+      `color-line--${variant}`,
+      `color-line--${alignment}`
+    )}
+  />
+)
 
-/**
- * The properties.
- * @type {Object}
- */
-colorLine.propTypes = {
-  /**
-   * Alignment
-   */
+ColorLine.displayName = 'ColorLine'
+
+ColorLine.propTypes = {
   alignment: PropTypes.oneOf(['vertical', 'horizontal']),
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf(['alert', 'warning', 'success', 'info']).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 colorLine.defaultProps = {
   alignment: 'vertical'
 }
+
 export default colorLine

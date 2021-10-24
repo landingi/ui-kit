@@ -34,40 +34,19 @@ function Accordion({ className, data, hasNumber }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Accordion.displayName = 'Accordion'
 
-/**
- * The properties.
- * @type {Object}
- */
 Accordion.propTypes = {
-  /**
-   * Classname
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Data
-   */
   data: PropTypes.arrayOf(
     PropTypes.shape({
       content: PropTypes.node.isRequired,
       title: PropTypes.node.isRequired
     })
   ).isRequired,
-  /**
-   * HasNumber
-   */
   hasNumber: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Accordion.defaultProps = {
   className: 'accordion',
   hasNumber: false

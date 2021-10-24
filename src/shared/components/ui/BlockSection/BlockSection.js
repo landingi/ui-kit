@@ -88,62 +88,21 @@ function BlockSection({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
+
 BlockSection.displayName = 'Block Section'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 BlockSection.propTypes = {
-  /**
-   * Button title
-   */
   button: PropTypes.string.isRequired,
-
-  /**
-   * Classname, default `block-section`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * List
-   */
   list: PropTypes.arrayOf(PropTypes.string),
-
-  /**
-   * Message
-   */
   message: PropTypes.string.isRequired,
-
-  /**
-   * OnClick is button action
-   */
   onClick: PropTypes.func,
-
-  /**
-   * Reverse column
-   */
   reverse: PropTypes.bool,
-
-  /**
-   * Title
-   */
   title: PropTypes.string.isRequired,
-
-  /**
-   * Url image
-   */
   url: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 BlockSection.defaultProps = {
   className: 'block-section',
   list: null,

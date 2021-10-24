@@ -47,16 +47,10 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
+
 pageSize.displayName = 'Page Size'
 
-/**
- * The properties.
- * @type {Object}
- */
+
 pageSize.propTypes = {
   /**
    * ActivePageLimit active page limit

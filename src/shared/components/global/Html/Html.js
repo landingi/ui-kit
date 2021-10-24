@@ -7,8 +7,10 @@ import scss from './Html.scss'
 const isBrowser = typeof window !== 'undefined'
 
 const DOMPurify = isBrowser && createDOMPurify(window)
+
 const cssClass = styles(scss)
-const html = ({ className, value }) => (
+
+const Html = ({ className, value }) => (
   <span
     className={cssClass(className)}
     // eslint-disable-next-line react/no-danger
@@ -17,30 +19,16 @@ const html = ({ className, value }) => (
     }}
   />
 )
-/**
- * Display name
- * @type {string}
- */
-html.displayName = 'HTML element'
 
-/**
- * The default properties.
- * @type {Object}
- */
-html.defaultProps = {
+Html.displayName = 'HTML element'
+
+Html.defaultProps = {
   className: 'html'
 }
 
-/**
- * The properties.
- * @type {Object}
- */
-html.propTypes = {
-  /**
-   * Class Name, default `html`
-   */
+Html.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
-export default html
+export default Html
