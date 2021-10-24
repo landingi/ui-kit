@@ -111,9 +111,7 @@ const useInfinityScroll = (
   return state
 }
 
-
 useInfinityScroll.displayName = 'useInfinityScroll'
-
 
 useInfinityScroll.propTypes = {
   /**

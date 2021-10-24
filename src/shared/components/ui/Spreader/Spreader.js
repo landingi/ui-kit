@@ -15,9 +15,7 @@ const cssClass = styles(scss),
     <div className={cssClass(className, `spreader--${spread}`)} />
   )
 
-
 spreader.displayName = 'Spreader'
-
 
 spreader.propTypes = {
   /**

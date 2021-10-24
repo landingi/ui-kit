@@ -41,9 +41,7 @@ function Steps({ data }) {
   )
 }
 
-
 Steps.displayName = 'Steps'
-
 
 Steps.propTypes = {
   /**

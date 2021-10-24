@@ -16,9 +16,7 @@ const option = ({ className, value, label }) => (
   </option>
 )
 
-
 option.displayName = 'select.option'
-
 
 option.propTypes = {
   /**

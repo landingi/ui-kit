@@ -17,7 +17,15 @@ const cssClass = styles(scss)
  * @param {string} props.color - text color
  * @return {object} An object of children element
  */
-const Heading = ({ children, level, align, className, margin, bold, color }) => {
+const Heading = ({
+  children,
+  level,
+  align,
+  className,
+  margin,
+  bold,
+  color
+}) => {
   const elementClasses = cssClass({
     'heading--bold': bold,
     'heading--center': align === 'center',

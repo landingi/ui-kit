@@ -37,9 +37,7 @@ const sectionTile = ({
   </div>
 )
 
-
 sectionTile.displayName = 'Section Tile'
-
 
 sectionTile.propTypes = {
   /**

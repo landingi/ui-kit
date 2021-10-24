@@ -173,9 +173,7 @@ const Search = ({
   )
 }
 
-
 Search.displayName = 'Search'
-
 
 Search.propTypes = {
   /**

@@ -55,7 +55,6 @@ const AccordionSection = ({
   </div>
 )
 
-
 AccordionSection.displayName = 'AccordionSection'
 
 AccordionSection.propTypes = {

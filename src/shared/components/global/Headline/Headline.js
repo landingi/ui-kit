@@ -28,7 +28,6 @@ Headline.defaultProps = {
   className: 'page__headline'
 }
 
-
 Headline.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   title: PropTypes.string.isRequired

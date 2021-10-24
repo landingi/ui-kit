@@ -61,7 +61,6 @@ const Tooltip = ({
   )
 }
 
-
 Tooltip.propTypes = {
   /**
    * Behaviour of tooltip

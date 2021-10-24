@@ -40,9 +40,7 @@ const paragraph = ({
   </p>
 )
 
-
 paragraph.displayName = 'Paragraph'
-
 
 paragraph.propTypes = {
   /**

@@ -95,9 +95,7 @@ const maskedInput = ({
   )
 }
 
-
 maskedInput.displayName = 'Masked Input'
-
 
 maskedInput.propTypes = {
   /**

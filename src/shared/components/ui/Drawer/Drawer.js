@@ -39,7 +39,15 @@ const cssClass = styles(scss)
  * @param {string} props.skin - determines which skin color it should use, default: WHITE,
  * @return {object} An object of children element
  */
-const Drawer = ({ children, className, onClick, isActive, data, type, skin }) => {
+const Drawer = ({
+  children,
+  className,
+  onClick,
+  isActive,
+  data,
+  type,
+  skin
+}) => {
   const elementClasses = cssClass({
     'drawer--dark': skin === DARK,
     'drawer--default': skin === DEFAULT,

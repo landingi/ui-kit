@@ -50,9 +50,7 @@ const showPassword = ({ className, setHidden, hasLabel }) => {
   )
 }
 
-
 showPassword.displayName = 'ShowPassword'
-
 
 showPassword.propTypes = {
   /**

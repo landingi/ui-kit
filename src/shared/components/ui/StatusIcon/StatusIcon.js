@@ -32,9 +32,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 statusIcon.displayName = 'Status Icon'
-
 
 statusIcon.propTypes = {
   /**

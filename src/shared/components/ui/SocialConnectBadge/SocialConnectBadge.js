@@ -44,9 +44,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 socialConnectBadge.displayName = 'Social connect badge'
-
 
 socialConnectBadge.propTypes = {
   /**

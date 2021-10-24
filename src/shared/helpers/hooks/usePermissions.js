@@ -10,9 +10,7 @@ import PropTypes from 'prop-types'
 export const usePermissions = (userPermissions, requiredPermisions) =>
   userPermissions.includes(requiredPermisions)
 
-
 usePermissions.displayName = 'usePermissions'
-
 
 usePermissions.propTypes = {
   /**

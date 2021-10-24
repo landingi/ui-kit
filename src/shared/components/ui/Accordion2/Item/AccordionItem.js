@@ -53,7 +53,6 @@ function AccordionItem({ className, number, title, content }) {
   )
 }
 
-
 AccordionItem.displayName = 'Accordion Item'
 
 AccordionItem.propTypes = {

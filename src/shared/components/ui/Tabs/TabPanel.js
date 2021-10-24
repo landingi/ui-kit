@@ -32,9 +32,7 @@ const TabPanel = ({ name, className, children, ...restProps }) => {
   )
 }
 
-
 TabPanel.displayName = 'TabPanel'
-
 
 TabPanel.propTypes = {
   /**

@@ -21,9 +21,7 @@ const select = ({ value, data, name, onChange }) => (
   </select>
 )
 
-
 select.displayName = 'Select'
-
 
 select.propTypes = {
   /**

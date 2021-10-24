@@ -38,7 +38,6 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
   )
 }
 
-
 Badge.displayName = 'Badge'
 
 Badge.propTypes = {

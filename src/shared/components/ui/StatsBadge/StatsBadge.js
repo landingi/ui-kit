@@ -30,9 +30,7 @@ const cssClass = styles(scss),
     )
   }
 
-
 statsBadge.displayName = 'Stats Badge'
-
 
 statsBadge.propTypes = {
   /**

@@ -274,9 +274,7 @@ const Select = ({
   )
 }
 
-
 Select.displayName = 'Select dropdown'
-
 
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

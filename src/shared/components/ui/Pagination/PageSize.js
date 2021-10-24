@@ -47,9 +47,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 pageSize.displayName = 'Page Size'
-
 
 pageSize.propTypes = {
   /**

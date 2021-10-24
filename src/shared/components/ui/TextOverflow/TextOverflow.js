@@ -19,9 +19,7 @@ const cssClass = styles(scss),
     <div className={cssClass(className)}>{children}</div>
   )
 
-
 overflow.displayName = 'Overflow'
-
 
 overflow.propTypes = {
   /**

@@ -65,9 +65,7 @@ const progressBar = ({
   </Fragment>
 )
 
-
 progressBar.displayName = 'Progress Bar'
-
 
 progressBar.propTypes = {
   /**

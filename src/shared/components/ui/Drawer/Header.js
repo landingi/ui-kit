@@ -23,9 +23,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 header.displayName = 'Drawer.Header'
-
 
 header.propTypes = {
   /**

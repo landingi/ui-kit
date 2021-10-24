@@ -26,11 +26,7 @@ const LimitSmall = ({ padding, limit, quantity, limitText }) => {
       <span>
         <b>{formatNumeric(quantity)}</b>
 
-        {limit === -1 ? (
-          <span> / &#8734;</span>
-        ) : (
-          ` / ${formatNumeric(limit)}`
-        )}
+        {limit === -1 ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
       </span>
     </div>
   )

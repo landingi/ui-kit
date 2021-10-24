@@ -20,7 +20,7 @@ import MaskedInput from '@components/ui/Input/Masked'
  * @param {string} props.focused - focused, keep label by default on top
  * @return {object} An object of children element
  */
-const MaskedInput = ({
+const Masked = ({
   field,
   form,
   id,
@@ -62,10 +62,9 @@ const MaskedInput = ({
   )
 }
 
+Masked.displayName = 'Masked'
 
-MaskedInput.displayName = 'MaskedInput'
-
-MaskedInput.propTypes = {
+Masked.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -90,7 +89,7 @@ MaskedInput.propTypes = {
   focused: PropTypes.string
 }
 
-MaskedInput.defaultProps = {
+Masked.defaultProps = {
   label: '',
   placeholder: '',
   type: 'text',
@@ -102,4 +101,4 @@ MaskedInput.defaultProps = {
   focused: 'false'
 }
 
-export default MaskedInput
+export default Masked

@@ -164,7 +164,6 @@ const Pagination = ({
   )
 }
 
-
 Pagination.displayName = 'Pagination'
 
 Pagination.propTypes = {

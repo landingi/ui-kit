@@ -38,7 +38,6 @@ const Accordion = ({ children }) => {
   )
 }
 
-
 Accordion.displayName = 'Accordion'
 
 Accordion.propTypes = {

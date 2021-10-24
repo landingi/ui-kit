@@ -109,9 +109,7 @@ const cssClass = styles(scss),
     )
   }
 
-
 pagination.displayName = 'Pagination'
-
 
 pagination.propTypes = {
   /**

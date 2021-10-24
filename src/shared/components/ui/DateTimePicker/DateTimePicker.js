@@ -100,7 +100,6 @@ const DateTimePicker = ({
   )
 }
 
-
 DateTimePicker.displayName = 'DateTimePicker'
 
 DateTimePicker.propTypes = {

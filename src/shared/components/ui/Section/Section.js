@@ -27,9 +27,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 section.displayName = 'Section'
-
 
 section.propTypes = {
   /**

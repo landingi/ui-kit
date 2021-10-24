@@ -46,11 +46,7 @@ const Limit = ({
           </span>
 
           <span className={cssClass('info--limit')}>
-            {unlimited ? (
-              <span> / &#8734;</span>
-            ) : (
-              ` / ${formatNumeric(limit)}`
-            )}
+            {unlimited ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
           </span>
 
           {Boolean(total) && (
@@ -77,7 +73,6 @@ const Limit = ({
     </div>
   )
 }
-
 
 Limit.displayName = 'Limit'
 

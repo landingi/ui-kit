@@ -38,9 +38,7 @@ const cssClass = styles(scss),
     return <div className={cssClass(className, elementClasses)}>{children}</div>
   }
 
-
 panel.displayName = 'Panel'
-
 
 panel.propTypes = {
   /**

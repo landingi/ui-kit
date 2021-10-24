@@ -88,9 +88,7 @@ function BlockSection({
   )
 }
 
-
 BlockSection.displayName = 'Block Section'
-
 
 BlockSection.propTypes = {
   button: PropTypes.string.isRequired,

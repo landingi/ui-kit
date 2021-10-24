@@ -17,9 +17,7 @@ const cssClass = styles(scss),
     </div>
   )
 
-
 spinner.displayName = 'Spinner'
-
 
 spinner.propTypes = {
   /**

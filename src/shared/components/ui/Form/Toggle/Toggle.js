@@ -61,9 +61,7 @@ const toggle = ({
   )
 }
 
-
 toggle.displayName = 'Toggle'
-
 
 toggle.propTypes = {
   /**

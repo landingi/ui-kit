@@ -69,9 +69,7 @@ const ShowMore = ({ height, children }) => {
   )
 }
 
-
 ShowMore.displayName = 'Show more/less'
-
 
 ShowMore.propTypes = {
   /**

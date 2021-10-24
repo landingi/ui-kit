@@ -24,7 +24,6 @@ const Check = ({ children, positive }) => (
   </span>
 )
 
-
 Check.displayName = 'Check'
 
 Check.propTypes = {
