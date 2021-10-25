@@ -1,1 +1,1 @@
-export { default } from './ReactSelect'
+export { default } from './reactSelect'
