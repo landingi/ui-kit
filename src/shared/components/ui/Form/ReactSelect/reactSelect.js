@@ -6,7 +6,7 @@ import Select from 'react-select'
 import uuid from 'react-uuid'
 import Label from '@components/ui/Label'
 import { styles } from '@helpers/css'
-import scss from './ReactSelect.scss'
+import scss from './reactSelect.scss'
 
 const cssClass = styles(scss)
 
