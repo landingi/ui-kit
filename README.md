@@ -16,14 +16,15 @@ Getting started is simple. Just add a `@landingi/landingi-ui-kit` to your depend
 ### Requirements
 
 - [npm](https://www.npmjs.com/get-npm) >=7.0.0
-- [Node.js](https://nodejs.org/en/download/) >=16.9.1
+- [Node.js](https://nodejs.org/en/download/) 14.8.0
 
 ### Quick Start
 
-```
-yarn global add gatsby-cli
-yarn install
-```
+If you don't have installed Yarn execute:
+
+`npm install --global yarn`
+
+`yarn`
 
 #### Add a New component
 
@@ -64,7 +65,7 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 - `yarn docz:dev` - development and watch
 - `yarn docz:build` - build
-- `yarn docz:serve` - buid and serve local server
+- `yarn docz:serve` - build and serve local server
 
 #### CI
 
