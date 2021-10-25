@@ -111,16 +111,8 @@ const useInfinityScroll = (
   return state
 }
 
-/**
- * Display name
- * @type {string}
- */
 useInfinityScroll.displayName = 'useInfinityScroll'
 
-/**
- * The properties.
- * @type {Object}
- */
 useInfinityScroll.propTypes = {
   /**
    * ElementId

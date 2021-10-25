@@ -41,16 +41,8 @@ const cssClass = styles(scss),
     return <div>{content}</div>
   }
 
-/**
- * Display name
- * @type {string}
- */
 overflowTooltip.displayName = 'OverflowTooltip'
 
-/**
- * The properties.
- * @type {Object}
- */
 overflowTooltip.propTypes = {
   /**
    * Children elements

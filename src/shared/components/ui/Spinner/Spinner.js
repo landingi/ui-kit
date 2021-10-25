@@ -17,16 +17,8 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
 spinner.displayName = 'Spinner'
 
-/**
- * The properties.
- * @type {Object}
- */
 spinner.propTypes = {
   /**
    * Classname, default `spinner__spin`

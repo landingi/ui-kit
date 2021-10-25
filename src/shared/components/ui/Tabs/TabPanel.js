@@ -32,28 +32,14 @@ const TabPanel = ({ name, className, children, ...restProps }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 TabPanel.displayName = 'TabPanel'
 
-/**
- * The properties.
- * @type {Object}
- */
 TabPanel.propTypes = {
   /**
    * name
    */
   name: PropTypes.string.isRequired,
-  /**
-   * Classname, default `tab__panel`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements
-   */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,

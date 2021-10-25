@@ -55,55 +55,22 @@ const AccordionSection = ({
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
 AccordionSection.displayName = 'AccordionSection'
 
-/**
- * The properties.
- * @type {Object}
- */
 AccordionSection.propTypes = {
-  /**
-   * determine if section should be open, default 'false'
-   */
   isOpen: PropTypes.bool,
-  /**
-   * has Expand
-   */
   hasExpand: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  /**
-   * label
-   */
   label: PropTypes.node.isRequired,
-  /**
-   * content
-   */
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf,
     PropTypes.node
   ]),
-  /**
-   * handle click event on label
-   */
   handleOnClick: PropTypes.func.isRequired,
-  /**
-   * arrowLabel
-   */
   arrowLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /**
-   * button variant
-   */
   variant: PropTypes.oneOf(['icon', 'secondary'])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 AccordionSection.defaultProps = {
   isOpen: false,
   arrowLabel: '',

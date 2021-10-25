@@ -29,6 +29,7 @@ describe('<Notification/> shallow', () => {
 
   it('calls function passed as onClick prop on `<Close />` click event`', () => {
     wrapper.find(Close).simulate('click')
+
     expect(mockFn).toHaveBeenCalled()
   })
 })

@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { stepsShape } from '@shapes'
 import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
@@ -32,7 +31,7 @@ function Steps({ data }) {
                 `step__description--${variant}`
               )}
             >
-              <FormattedMessage id={description} />
+              {description}
             </span>
           </div>
         )
@@ -41,20 +40,9 @@ function Steps({ data }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Steps.displayName = 'Steps'
 
-/**
- * The properties.
- * @type {Object}
- */
 Steps.propTypes = {
-  /**
-   * Data
-   */
   data: PropTypes.arrayOf(stepsShape).isRequired
 }
 

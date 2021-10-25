@@ -39,7 +39,9 @@ describe('<BlockSection /> mount', () => {
   })
 
   it('expect "Publish it your way"', () => {
-    expect(wrapper.find('span').text()).toEqual('Publish it your way')
+    expect(wrapper.find('span').text()).toEqual(
+      'empty.list.message.domains.section1.title'
+    )
   })
 
   it('simulate <Button /> click', () => {

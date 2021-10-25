@@ -1,19 +1,10 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { Fragment } from 'react'
-/**
- * Add the Material Design ripple effect to React component
- * @see {@link https://github.com/vigetlabs/react-ink} for further information.
- */
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import Spinner from '@components/ui/Spinner'
 import scss from './Button.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -38,7 +29,7 @@ const cssClass = styles(scss)
  * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false'
  * @return {object} An object of children elements
  */
-const button = ({
+const Button = ({
   className,
   tag: Tag,
   title,
@@ -113,44 +104,15 @@ const button = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-button.displayName = 'Button'
+Button.displayName = 'Button'
 
-/**
- * The properties.
- * @type {Object}
- */
-button.propTypes = {
-  /**
-   * The tag or component to be used e.g. button, a, Link
-   */
+Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * The text for the button
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * The type of the button
-   */
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  /**
-   * Link title
-   */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * The target for the button
-   */
   target: PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
-  /**
-   * Size
-   */
   size: PropTypes.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'input']),
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf([
     'primary',
     'secondary',
@@ -168,60 +130,20 @@ button.propTypes = {
     'publish',
     'switcher-brand'
   ]),
-  /**
-   * Align
-   */
   align: PropTypes.oneOf(['left', 'center', 'right']),
-  /**
-   * Classname, default `button`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Link
-   */
   href: PropTypes.string,
-  /**
-   * Disabled button
-   */
   isDisabled: PropTypes.bool,
-  /**
-   * Loading button
-   */
   isLoading: PropTypes.bool,
-  /**
-   * Gets called when the user clicks on the button
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props of this Button
-   */
   onClick: PropTypes.func,
-  /**
-   * Has background ripple effect
-   */
   hasBackgoundRipple: PropTypes.bool,
-  /**
-   * Has icon
-   */
   hasIcon: PropTypes.bool,
-  /**
-   * Hide
-   */
   hide: PropTypes.bool,
-  /**
-   * Enable button variants style for links
-   */
   buttonStyle: PropTypes.bool,
-  /**
-   * Set width to 100%
-   */
   fitWidth: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-button.defaultProps = {
+Button.defaultProps = {
   tag: 'button',
   title: undefined,
   type: 'button',
@@ -233,12 +155,12 @@ button.defaultProps = {
   variant: 'primary',
   isLoading: false,
   isDisabled: false,
-  onClick: () => {},
   hasBackgoundRipple: true,
   hasIcon: false,
   hide: false,
   buttonStyle: false,
-  fitWidth: false
+  fitWidth: false,
+  onClick: () => {}
 }
 
-export default button
+export default Button

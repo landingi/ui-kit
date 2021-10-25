@@ -6,15 +6,14 @@ import scss from './ColorNumber.scss'
 const cssClass = styles(scss)
 
 /**
- * colorNumber - stateless presentational component
+ * ColorNumber - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
  * @param {string} props.color - color
  * @param {number} props.size - size
  * @return {object} An object of children element
  */
-
-const colorNumber = ({ children, variant, size }) => (
+const ColorNumber = ({ children, variant, size }) => (
   <span
     className={cssClass(
       'color-number',
@@ -26,24 +25,10 @@ const colorNumber = ({ children, variant, size }) => (
   </span>
 )
 
-/**
- * Display name
- * @type {string}
- */
-colorNumber.displayName = 'ColorNumber'
+ColorNumber.displayName = 'ColorNumber'
 
-/**
- * The properties.
- * @type {Object}
- */
-colorNumber.propTypes = {
-  /**
-   * Children elements
-   */
+ColorNumber.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Color
-   */
   variant: PropTypes.oneOf([
     'alert',
     'warning',
@@ -54,18 +39,11 @@ colorNumber.propTypes = {
     'brand',
     'white'
   ]).isRequired,
-  /**
-   * Size, default `18`
-   */
   size: PropTypes.oneOf([10, 12, 16, 18, 32, 44, 62])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-colorNumber.defaultProps = {
+ColorNumber.defaultProps = {
   size: 18
 }
 
-export default colorNumber
+export default ColorNumber

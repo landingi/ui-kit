@@ -1,80 +1,80 @@
-import { TOGGLE_TOAST } from '@constants/eventTypes'
-import { styles } from '@helpers/css'
-import Notification from '@components/ui/Notification'
-import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
-import emitter from '@lib/emitter'
+import PropTypes from 'prop-types'
+import { styles } from 'shared/helpers/css'
+import emitter from 'shared/lib/emitter'
+import { TOGGLE_TOAST } from 'shared/constants/eventTypes'
+import Notification from 'shared/components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
 import scss from './Toast.scss'
-import useToggle from '@helpers/hooks/useToggle'
+
+const cssClass = styles(scss)
 
 /**
- * Exports css classes from SCSS file
+ * Toast Animation, exports React-pose animations
+ * @see {@link https://popmotion.io/pose/api/} for further information.
  * @return {object} An object of styles
  */
-const cssClass = styles(scss),
-  /**
-   * Toast Animation, exports React-pose animations
-   * @see {@link https://popmotion.io/pose/api/} for further information.
-   * @return {object} An object of styles
-   */
-  toastProps = {
-    enter: {
-      transition: {
-        bottom: 40,
-        duration: 1000
-      }
-    },
-    exit: {
-      transition: {
-        bottom: -100,
-        duration: 500
-      }
+const toastProps = {
+  enter: {
+    transition: {
+      bottom: 40,
+      duration: 1000
     }
   },
-  ToastAnimation = posed.div(toastProps)
+  exit: {
+    transition: {
+      bottom: -100,
+      duration: 500
+    }
+  }
+}
+
+const ToastAnimation = posed.div(toastProps)
 
 /**
  * Toast stateful container component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `toast`
+ * @param {object} props
+ * @param {string|array} props.className
  * @return {object} An object of children elements
  */
-function Toast({ className }) {
-  const [isActive, setActive] = useToggle(),
-    [message, setMessage] = useState(''),
-    [type, setType] = useState('success'),
-    [hideTimeout, setHideTimeout] = useState(5000)
+const Toast = ({ className }) => {
+  const [isActive, setActive] = useState(false)
+  const [message, setMessage] = useState('')
+  const [type, setType] = useState('success')
+  const [hideTimeout, setHideTimeout] = useState(5000)
   let autoHideTimer = 100
 
   /**
-   * HandleToastToggle
+   * handleToastToggle
    * Updates state isActive
    * @type {function}
    */
   const handleToastToggle = useCallback(() => {
-      setActive()
-    }),
-    /**
-     * HandleToastData
-     * get notification value
-     * @param {string} message - message of notification
-     * @param {string} type - type of notification
-     * @param {int} timeout - timeout to hide notification
-     * @type {function}
-     */
-    handleToastData = (message, type, timeout = 5000) => {
-      setMessage(message)
-      setType(type)
-      setHideTimeout(timeout)
-    },
-    setAutoHideTimer = () => {
-      autoHideTimer = setTimeout(() => handleToastToggle(), hideTimeout)
-    },
-    clearAutoHideTimer = () => clearTimeout(autoHideTimer)
+    setActive(!isActive)
+  })
 
   /**
-   * UseEffect
+   * handleToastData
+   * get notification value
+   * @param {string} message - message of notification
+   * @param {string} type - type of notification
+   * @param {int} timeout - timeout to hide notification
+   * @type {function}
+   */
+  const handleToastData = (message, type, timeout = 5000) => {
+    setMessage(message)
+    setType(type)
+    setHideTimeout(timeout)
+  }
+
+  const setAutoHideTimer = () => {
+    autoHideTimer = setTimeout(() => setActive(false), hideTimeout)
+  }
+
+  const clearAutoHideTimer = () => clearTimeout(autoHideTimer)
+
+  /**
+   * useEffect
    */
   useEffect(() => {
     emitter.on(TOGGLE_TOAST, handleToastToggle)
@@ -98,8 +98,8 @@ function Toast({ className }) {
   return (
     isActive && (
       <PoseGroup animateOnMount flipMove={false}>
-        <ToastAnimation className={cssClass(className)} key='toastanimation'>
-          <Notification isClosable onClick={handleToastToggle} type={type}>
+        <ToastAnimation key='toastanimation' className={cssClass(className)}>
+          <Notification type={type} isClosable onClick={handleToastToggle}>
             {message}
           </Notification>
         </ToastAnimation>
@@ -108,27 +108,12 @@ function Toast({ className }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Toast.displayName = 'Toast'
 
-/**
- * The properties.
- * @type {Object}
- */
 Toast.propTypes = {
-  /**
-   * Classname, default `toast`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Toast.defaultProps = {
   className: 'toast'
 }

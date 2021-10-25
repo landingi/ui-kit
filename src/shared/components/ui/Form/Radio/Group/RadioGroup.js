@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
-import { FormattedMessage } from 'react-intl'
 
 /**
  * Radio Group  - stateless presentational component
@@ -14,47 +13,26 @@ import { FormattedMessage } from 'react-intl'
  * @param {object} props.children - children
  * @return {object} An object of children element
  */
-const radioGroup = ({ errors, touched, label, name, children }) => (
+const RadioGroup = ({ errors, touched, label, name, children }) => (
   <div>
-    {label && (
-      <Label>
-        <FormattedMessage id={`${label}`} />
-      </Label>
-    )}
+    {label && <Label>{label}</Label>}
     {children}
     {touched[name] && <Error error={errors[name]} />}
   </div>
 )
-/**
- * Display name
- * @type {string}
- */
-radioGroup.displayName = 'Radio Group'
 
-/**
- * The properties.
- * @type {Object}
- */
-radioGroup.propTypes = {
-  /**
-   * The text for the button
-   */
+RadioGroup.displayName = 'RadioGroup'
+
+RadioGroup.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Form
-   */
   touched: PropTypes.instanceOf(Object).isRequired,
   errors: PropTypes.instanceOf(Object).isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-radioGroup.defaultProps = {
+RadioGroup.defaultProps = {
   label: ''
 }
 
-export default radioGroup
+export default RadioGroup

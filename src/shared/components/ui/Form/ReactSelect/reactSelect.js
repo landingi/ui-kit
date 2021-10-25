@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Select from 'react-select'
 import uuid from 'react-uuid'
-import { injectIntl, FormattedMessage } from 'react-intl'
 import Label from '@components/ui/Label'
 import { styles } from '@helpers/css'
 import scss from './reactSelect.scss'
@@ -28,7 +27,7 @@ const cssClass = styles(scss)
  * @param {object} props.intl - react intl formatMessage function
  * @return {object} An object of children element
  */
-const reactSelect = ({
+const ReactSelect = ({
   className,
   name,
   value,
@@ -49,11 +48,7 @@ const reactSelect = ({
 
   return (
     <div className={`form-field form-rselect ${errorClass} ${filledClass}`}>
-      {label && (
-        <Label id={name}>
-          <FormattedMessage id={`${label}`} />
-        </Label>
-      )}
+      {label && <Label id={name}>{label}</Label>}
       <div className={scss.input__wrapper}>
         <Select
           className={cssClass(className)}
@@ -67,7 +62,7 @@ const reactSelect = ({
               : value[name]
           }
           key={uuid()}
-          placeholder={intl.formatMessage({ id: `${placeholder || label}` })}
+          placeholder={placeholder || label}
           classNamePrefix='react-select'
         />
         {touched[name] && <Error error={errors[name]} />}
@@ -76,20 +71,9 @@ const reactSelect = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-reactSelect.displayName = 'React Select'
+ReactSelect.displayName = 'ReactSelect'
 
-/**
- * The properties.
- * @type {Object}
- */
-reactSelect.propTypes = {
-  /**
-   * Classname, default `input`
-   */
+ReactSelect.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
@@ -115,27 +99,20 @@ reactSelect.propTypes = {
       ])
     })
   ).isRequired,
-  /**
-   * Intl from react-intl
-   */
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-reactSelect.defaultProps = {
+ReactSelect.defaultProps = {
   className: 'react-select-container',
   label: '',
   placeholder: '',
-  onChange: () => null,
-  onBlur: () => null,
   errors: {},
   touched: {},
-  value: null
+  value: null,
+  onChange: () => null,
+  onBlur: () => null
 }
 
-export default injectIntl(reactSelect)
+export default ReactSelect

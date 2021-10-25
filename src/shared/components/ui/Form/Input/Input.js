@@ -68,29 +68,15 @@ const Input = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Input.displayName = 'Input'
 
-/**
- * The properties.
- * @type {Object}
- */
 Input.propTypes = {
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
@@ -112,10 +98,6 @@ Input.propTypes = {
   focused: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Input.defaultProps = {
   label: '',
   placeholder: '',

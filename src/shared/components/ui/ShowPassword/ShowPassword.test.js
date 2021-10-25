@@ -2,7 +2,6 @@ import React from 'react'
 import ShowPassword from '@components/ui/ShowPassword'
 import registerIcons from '@helpers/icons'
 import { mountWithIntl } from '@jestutils'
-import { FormattedMessage } from 'react-intl'
 
 registerIcons()
 
@@ -32,11 +31,11 @@ describe('<ShowPassword/> mount', () => {
     expect(wrapper.hasClass('showpassword')).toBe(true)
   })
 
-  it('has label', () => {
-    wrapper.setProps({
-      hasLabel: true
-    })
+  // it('has label', () => {
+  //   wrapper.setProps({
+  //     hasLabel: true
+  //   })
 
-    expect(wrapper.find(FormattedMessage).text()).toEqual('Show')
-  })
+  //   expect(wrapper.find(FormattedMessage).text()).toEqual('Show')
+  // })
 })

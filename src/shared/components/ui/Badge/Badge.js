@@ -4,10 +4,6 @@ import { styles } from '@helpers/css'
 import Tooltip from '@components/ui/Tooltip'
 import scss from './Badge.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -42,43 +38,16 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Badge.displayName = 'Badge'
 
-/**
- * The properties.
- * @type {Object}
- */
 Badge.propTypes = {
-  /**
-   * Children elements
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Classname, default `badge`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Type
-   */
   type: PropTypes.string,
-  /**
-   * Tooltip
-   */
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Indicator (border-radius: 50px)
-   */
   isIndicator: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Badge.defaultProps = {
   className: 'badge',
   type: 'primary',

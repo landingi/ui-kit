@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import PropTypes from 'prop-types'
@@ -8,16 +7,17 @@ import scss from './ShowPassword.scss'
 
 const cssClass = styles(scss)
 /**
- * ShowPassword - statefull presentational component
+ * ShowPassword - stateful presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: showpassword
- * @param {bool} props.setHidden - callback to parent element
- * @param {bool} props.hasLabel - has label
+ * @param {string|array} props.className
+ * @param {bool} props.setHidden
+ * @param {bool} props.hasLabel
  * @return {object} An object of children element
  */
-const showPassword = ({ className, setHidden, hasLabel }) => {
+const ShowPassword = ({ className, setHidden, hasLabel }) => {
   const [icon, setIcon] = useState('eye')
   const [label, setLabel] = useState('word.show')
+
   /**
    * HandleIconSet - set the icon state
    */
@@ -38,8 +38,7 @@ const showPassword = ({ className, setHidden, hasLabel }) => {
       {hasLabel ? (
         <Button hasIcon size='tiny' variant='switcher-brand'>
           <FontAwesomeIcon icon={icon} />
-
-          <FormattedMessage id={label} />
+          {label}
         </Button>
       ) : (
         <Button variant='icon'>
@@ -50,41 +49,18 @@ const showPassword = ({ className, setHidden, hasLabel }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-showPassword.displayName = 'ShowPassword'
+ShowPassword.displayName = 'ShowPassword'
 
-/**
- * The properties.
- * @type {Object}
- */
-showPassword.propTypes = {
-  /**
-   * Classname, default `showpassword`
-   */
+ShowPassword.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Label
-   */
   hasLabel: PropTypes.bool,
-
-  /**
-   * SetHidden, callback to parent element(react-formik)
-   */
   setHidden: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-showPassword.defaultProps = {
+ShowPassword.defaultProps = {
   className: 'showpassword',
   hasLabel: false,
   setHidden: () => null
 }
 
-export default showPassword
+export default ShowPassword

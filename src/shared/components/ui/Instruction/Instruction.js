@@ -5,10 +5,6 @@ import StepNumber from '@components/ui/StepNumber'
 import scss from './Instruction.scss'
 import uuid from 'react-uuid'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -32,24 +28,10 @@ function Instruction({ className, data }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Instruction.displayName = 'Instruction'
 
-/**
- * The properties.
- * @type {Object}
- */
 Instruction.propTypes = {
-  /**
-   * Classname, default `Instruction`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Data
-   */
   data: PropTypes.arrayOf(
     PropTypes.shape({
       content: PropTypes.node.isRequired
@@ -57,10 +39,6 @@ Instruction.propTypes = {
   ).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Instruction.defaultProps = {
   className: 'instruction'
 }

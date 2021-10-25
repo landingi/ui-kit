@@ -38,16 +38,8 @@ const cssClass = styles(scss),
     return <div className={cssClass(className, elementClasses)}>{children}</div>
   }
 
-/**
- * Display name
- * @type {string}
- */
 panel.displayName = 'Panel'
 
-/**
- * The properties.
- * @type {Object}
- */
 panel.propTypes = {
   /**
    * Adjust panel height to container height

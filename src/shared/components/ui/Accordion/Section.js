@@ -5,8 +5,8 @@ import scss from './Accordion.scss'
 /**
  * Accordion Section - stateless presentational component
  * @param {object} props - props
- * @param {function} props.handleOnClick - handle click event
- * @param {boolean} props.isOpen - determine if section should be open, dafault: false
+ * @param {function} props.handleOnClick - callback
+ * @param {boolean} props.isOpen - determine if section should be open
  * @param {string} props.label - label
  * @param {string} props.children - content
  * @return {object} An object of children element
@@ -23,43 +23,16 @@ function AccordionSection({ handleOnClick, isOpen, label, children }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 AccordionSection.displayName = 'Accordion Section'
 
-/**
- * The properties.
- * @type {Object}
- */
 AccordionSection.propTypes = {
-  /**
-   * Content
-   */
   children: PropTypes.string.isRequired,
-
-  /**
-   * Handle click event on label
-   */
   handleOnClick: PropTypes.func.isRequired,
-
-  /**
-   * Determine if section should be open, default 'false'
-   */
   isOpen: PropTypes.bool,
-
-  /**
-   * Label
-   */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])
     .isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 AccordionSection.defaultProps = {
   isOpen: false
 }

@@ -37,25 +37,25 @@ describe('<InfoSection /> mount', () => {
 
   it('expect "Let your landing page go live!"', () => {
     expect(wrapper.find('span').text()).toEqual(
-      'Let your landing page go live!'
+      'empty.list.message.domains.title'
     )
   })
 
   it('expect "Add a domain in a few easy steps"', () => {
     expect(wrapper.find('div').at(2).text()).toEqual(
-      'Add a domain in a few easy steps'
+      'empty.list.message.domains.item1'
     )
   })
 
   it('expect "Get a free SSL certificate"', () => {
     expect(wrapper.find('div').at(3).text()).toEqual(
-      'Get a free SSL certificate'
+      'empty.list.message.domains.item2'
     )
   })
 
   it('expect "Take advantage of multiple publishing options"', () => {
     expect(wrapper.find('div').at(4).text()).toEqual(
-      'Take advantage of multiple publishing options'
+      'empty.list.message.domains.item3'
     )
   })
 

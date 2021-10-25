@@ -16,16 +16,8 @@ const spacer = ({ className, space }) => (
   <div className={cssClass(className, `spacer--${space}`)} />
 )
 
-/**
- * Display name
- * @type {string}
- */
 spacer.displayName = 'Spacer'
 
-/**
- * The properties.
- * @type {Object}
- */
 spacer.propTypes = {
   /**
    * Classname, default `spacer`

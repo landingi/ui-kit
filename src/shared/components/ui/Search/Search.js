@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import scss from './Search.scss'
 import Input from '@components/ui/Input'
 import Button from '@components/ui/Button'
-import { injectIntl } from 'react-intl'
 
 /**
  * Exports css classes from SCSS file
@@ -25,9 +24,8 @@ const cssClass = styles(scss)
  * @param {string} props.size - size of search field `small, medium, large`
  * @param {string} props.label - input label
  * @param {func} props.onSubmit - handle action on form submit
- * @param {string|object} props.placeholder - placeholder
+ * @param {object} props.i18n - translations
  * @param {string} props.tag - tag
- * @param {func} props.intl - intl
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
  * @return {object} An object of children element
  */
@@ -39,11 +37,9 @@ const Search = ({
   autoFocus,
   children,
   size,
-  label,
   onSubmit,
-  placeholder,
+  i18n,
   tag: Tag,
-  intl,
   onProtectedSubmit
 }) => {
   const [isClearActive, setClearActive] = useState(false)
@@ -56,6 +52,7 @@ const Search = ({
    */
   const handleCleanOnClick = useCallback(() => {
     inputRef.current.value = ''
+
     setClearActive(false)
     onChange()
   }, [])
@@ -139,7 +136,7 @@ const Search = ({
 
         {children && variant === 'button' && (
           <Input
-            label={intl.formatMessage({ id: label })}
+            label={i18n.label}
             name='search'
             type='text'
             onChange={onChange}
@@ -155,7 +152,7 @@ const Search = ({
             className={scss.search__input}
             type='text'
             name='search'
-            placeholder={intl.formatMessage({ id: placeholder })}
+            placeholder={i18n.placeholder}
             onChange={onChange}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
@@ -176,19 +173,11 @@ const Search = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Search.displayName = 'Search'
 
-/**
- * The properties.
- * @type {Object}
- */
 Search.propTypes = {
   /**
-   * Classname, default `search`
+   * ClassName, default `search`
    */
   className: PropTypes.string,
   /**
@@ -220,19 +209,9 @@ Search.propTypes = {
    */
   variant: PropTypes.oneOf(['input', 'button']),
   /**
-   * Intl from react-intl
+   * i18n
    */
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  /**
-   * Label
-   */
-  label: PropTypes.string,
-  /**
-   * Placeholder
-   */
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * handle on form submit action
    */
@@ -250,17 +229,19 @@ Search.propTypes = {
  */
 Search.defaultProps = {
   className: 'search',
+  tag: 'form',
   size: 'medium',
-  autoFocus: false,
-  onChange: () => null,
-  onKeyDown: () => null,
   children: null,
   variant: 'input',
-  label: null,
-  placeholder: 'word.search',
+  i18n: {
+    placeholder: null,
+    label: null
+  },
   onSubmit: null,
-  tag: 'form',
-  onProtectedSubmit: null
+  onProtectedSubmit: null,
+  autoFocus: false,
+  onChange: () => null,
+  onKeyDown: () => null
 }
 
-export default memo(injectIntl(Search))
+export default memo(Search)

@@ -40,16 +40,8 @@ const paragraph = ({
   </p>
 )
 
-/**
- * Display name
- * @type {string}
- */
 paragraph.displayName = 'Paragraph'
 
-/**
- * The properties.
- * @type {Object}
- */
 paragraph.propTypes = {
   /**
    * Children elements

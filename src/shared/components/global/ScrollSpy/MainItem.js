@@ -16,7 +16,7 @@ import uuid from 'react-uuid'
  * @return {object} An object of children element
  */
 
-const item = ({ item, onClick }) => {
+const MainItem = ({ item, onClick }) => {
   const { title, icon, children } = item
 
   return (
@@ -34,36 +34,15 @@ const item = ({ item, onClick }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-item.displayName = 'MainItem'
+MainItem.displayName = 'MainItem'
 
-/**
- * The properties.
- * @type {Object}
- */
-item.propTypes = {
-  /**
-   * Menu item
-   */
+MainItem.propTypes = {
   item: scrollSpyShape.isRequired,
-  /**
-   * Gets called on click
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onClick: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-item.defaultProps = {
+MainItem.defaultProps = {
   onClick: () => null
 }
 
-export default item
+export default MainItem

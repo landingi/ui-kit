@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import { FormattedMessage } from 'react-intl'
 import Error from '@components/ui/Form/Error'
 import scss from './Checkbox.scss'
 import { getDeepValue } from '@helpers/data'
@@ -45,7 +44,7 @@ const Checkbox = ({
       </label>
       {label && (
         <label htmlFor={id} className={cssClass('checkbox__label')}>
-          <FormattedMessage id={`${label}`} />
+          {label}
           {isTouched && <Error error={error} />}
         </label>
       )}
@@ -53,37 +52,17 @@ const Checkbox = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-Checkbox.displayName = 'Form2 / Checkbox'
+Checkbox.displayName = 'FormCheckbox'
 
-/**
- * The properties.
- * @type {Object}
- */
 Checkbox.propTypes = {
-  /**
-   * Classname
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Type, default `checkbox`
-   */
   type: PropTypes.string,
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.bool,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object),
@@ -95,8 +74,8 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
   className: '',
-  type: 'checkbox',
-  label: ''
+  label: '',
+  type: 'checkbox'
 }
 
 export default Checkbox

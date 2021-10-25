@@ -2,20 +2,12 @@ import React, { Fragment, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './DateTimePicker.scss'
-/**
- * https://github.com/Adphorus/react-date-range
- */
 import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
-import { FormattedMessage } from 'react-intl'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from '@helpers/i18n'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -26,7 +18,7 @@ const cssClass = styles(scss)
  * @param {function} props.setDate - date handler
  * @param {string} props.minDate - defines minimum date - disabled earlier dates
  * @param {bool} props.oneDatePicker - should render picker for one date - disabled date ranges
- * @param {date} props.selectedDateCalendar - defines choosen date for calendar
+ * @param {date} props.selectedDateCalendar - defines selected date for calendar
  * @param {bool} props.showMonthAndYearPickers - should render select list for month and year
  */
 const DateTimePicker = ({
@@ -99,7 +91,7 @@ const DateTimePicker = ({
             showMonthAndYearPickers={showMonthAndYearPickers}
           />
           <Button onClick={handleApply} size='tiny'>
-            <FormattedMessage id='word.apply' />
+            {i18n.apply}
           </Button>
         </Fragment>
       )}
@@ -107,16 +99,8 @@ const DateTimePicker = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-DateTimePicker.displayName = 'Date time picker'
+DateTimePicker.displayName = 'DateTimePicker'
 
-/**
- * The properties.
- * @type {Object}
- */
 DateTimePicker.propTypes = {
   setDate: PropTypes.func.isRequired,
   minDate: PropTypes.string,
@@ -125,14 +109,13 @@ DateTimePicker.propTypes = {
   showMonthAndYearPickers: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 DateTimePicker.defaultProps = {
   minDate: null,
   oneDatePicker: false,
-  showMonthAndYearPickers: true
+  showMonthAndYearPickers: true,
+  i18n: {
+    apply: ''
+  }
 }
 
 export default DateTimePicker

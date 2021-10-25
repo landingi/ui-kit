@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
-import { FormattedMessage } from 'react-intl'
 import scss from './Radio.scss'
 import { getDeepValue } from '@helpers/data'
 
@@ -33,11 +32,7 @@ const Radio = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <label className={cssClass(className)}>
-        {label && (
-          <label htmlFor={id}>
-            <FormattedMessage id={`${label}`} />
-          </label>
-        )}
+        {label && <label htmlFor={id}>{label}</label>}
         <input
           name={name}
           id={id}
@@ -55,37 +50,17 @@ const Radio = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Radio.displayName = 'radio'
 
-/**
- * The properties.
- * @type {Object}
- */
 Radio.propTypes = {
-  /**
-   * Classname, default `input__radio`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Type, default `radio`
-   */
   type: PropTypes.string,
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
@@ -94,10 +69,6 @@ Radio.propTypes = {
   label: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Radio.defaultProps = {
   className: 'input__radio',
   type: 'radio',

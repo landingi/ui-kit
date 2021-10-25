@@ -4,10 +4,6 @@ import TabContext from './TabContext'
 import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -35,28 +31,11 @@ const Tabs = ({ initialValue, className, children, ...restProps }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Tabs.displayName = 'Tabs'
 
-/**
- * The properties.
- * @type {Object}
- */
 Tabs.propTypes = {
-  /**
-   * Initial value
-   */
   initialValue: PropTypes.string.isRequired,
-  /**
-   * Classname, default `tabs__wrapper`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements
-   */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
@@ -64,10 +43,6 @@ Tabs.propTypes = {
   ]).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Tabs.defaultProps = {
   className: 'tabs__wrapper'
 }

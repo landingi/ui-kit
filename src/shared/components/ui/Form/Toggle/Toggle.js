@@ -61,16 +61,8 @@ const toggle = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 toggle.displayName = 'Toggle'
 
-/**
- * The properties.
- * @type {Object}
- */
 toggle.propTypes = {
   /**
    * Classname, default ''

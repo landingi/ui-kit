@@ -6,10 +6,6 @@ import useQueryString from '@helpers/hooks/useQueryString'
 import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -45,35 +41,12 @@ const Tab = ({ name, className, onClick, children, ...restProps }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Tab.displayName = 'Tab'
 
-/**
- * The properties.
- * @type {Object}
- */
 Tab.propTypes = {
-  /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onClick: PropTypes.func,
-  /**
-   * name
-   */
   name: PropTypes.string.isRequired,
-  /**
-   * Classname, default `tab`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements
-   */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
@@ -81,10 +54,6 @@ Tab.propTypes = {
   ]).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Tab.defaultProps = {
   className: 'tab',
   onClick: () => null

@@ -16,16 +16,8 @@ const option = ({ className, value, label }) => (
   </option>
 )
 
-/**
- * Display name
- * @type {string}
- */
 option.displayName = 'select.option'
 
-/**
- * The properties.
- * @type {Object}
- */
 option.propTypes = {
   /**
    * Classname, default `select__option`

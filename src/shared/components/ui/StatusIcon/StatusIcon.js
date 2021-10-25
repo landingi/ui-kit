@@ -32,16 +32,8 @@ const cssClass = styles(scss),
     </div>
   )
 
-/**
- * Display name
- * @type {string}
- */
 statusIcon.displayName = 'Status Icon'
 
-/**
- * The properties.
- * @type {Object}
- */
 statusIcon.propTypes = {
   /**
    * Classname, default `status-icon`

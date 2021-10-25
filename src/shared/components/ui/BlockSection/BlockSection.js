@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
@@ -48,7 +47,7 @@ function BlockSection({
         <div className={cssClass('block-section__panel', elementClasses)}>
           <div className={cssClass('block-section__panel--content')}>
             <Heading bold level={2}>
-              <FormattedMessage id={`${title}`} />
+              {title}
             </Heading>
 
             <Paragraph
@@ -56,19 +55,20 @@ function BlockSection({
               padding={list ? 'none' : 'medium'}
               weight={400}
             >
-              <FormattedMessage
+              {message}
+              {/* <FormattedMessage
                 id={message}
                 values={{
                   br: <br />
                 }}
-              />
+              /> */}
             </Paragraph>
 
             {list && (
               <List listStyle='ordered-disc'>
                 {list.map(item => (
                   <ListItem key={uuid()} variant='block'>
-                    <FormattedMessage id={item} />
+                    {item}
                   </ListItem>
                 ))}
               </List>
@@ -76,9 +76,7 @@ function BlockSection({
 
             <Spacer space={list ? 'medium' : 'small'} />
 
-            <Button onClick={onClick}>
-              <FormattedMessage id={button} />
-            </Button>
+            <Button onClick={onClick}>{button}</Button>
           </div>
 
           <Image size={527} src={url} />
@@ -88,62 +86,19 @@ function BlockSection({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 BlockSection.displayName = 'Block Section'
 
-/**
- * The properties.
- * @type {Object}
- */
 BlockSection.propTypes = {
-  /**
-   * Button title
-   */
   button: PropTypes.string.isRequired,
-
-  /**
-   * Classname, default `block-section`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * List
-   */
   list: PropTypes.arrayOf(PropTypes.string),
-
-  /**
-   * Message
-   */
   message: PropTypes.string.isRequired,
-
-  /**
-   * OnClick is button action
-   */
   onClick: PropTypes.func,
-
-  /**
-   * Reverse column
-   */
   reverse: PropTypes.bool,
-
-  /**
-   * Title
-   */
   title: PropTypes.string.isRequired,
-
-  /**
-   * Url image
-   */
   url: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 BlockSection.defaultProps = {
   className: 'block-section',
   list: null,

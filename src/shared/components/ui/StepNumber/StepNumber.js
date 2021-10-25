@@ -28,16 +28,8 @@ function StepNumber({ className, step, variant, size, absolute }) {
   return <span className={cssClass(className, elementClasses)}>{step}</span>
 }
 
-/**
- * Display name
- * @type {string}
- */
 StepNumber.displayName = 'Step Number'
 
-/**
- * The properties.
- * @type {Object}
- */
 StepNumber.propTypes = {
   /**
    * Absolute

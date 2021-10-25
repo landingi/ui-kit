@@ -16,16 +16,8 @@ const dropdownHead = ({ children, className }) => (
   <div className={cssClass(className)}>{children}</div>
 )
 
-/**
- * Display name
- * @type {string}
- */
 dropdownHead.displayName = 'Dropdown.Head'
 
-/**
- * The properties.
- * @type {Object}
- */
 dropdownHead.propTypes = {
   /**
    * Children element

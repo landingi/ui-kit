@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
@@ -31,9 +30,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
       <List listStyle='ordered-check'>
         {list.map(item => (
           <ListItem key={uuid()} variant='list'>
-            <Paragraph size={18}>
-              <FormattedMessage id={item} />
-            </Paragraph>
+            <Paragraph size={18}>{item}</Paragraph>
           </ListItem>
         ))}
       </List>
@@ -45,7 +42,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
     <div className={cssClass(className)}>
       <div>
         <Heading bold level={1}>
-          <FormattedMessage id={`${title}`} />
+          {title}
         </Heading>
 
         {renderList}
@@ -53,7 +50,7 @@ function InfoSection({ className, title, list, url, button, onClick }) {
         <Spacer space='medium' />
 
         <Button onClick={onClick} size='large'>
-          <FormattedMessage id={button} />
+          {button}
         </Button>
       </div>
 
@@ -64,52 +61,17 @@ function InfoSection({ className, title, list, url, button, onClick }) {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-InfoSection.displayName = 'Info Section'
+InfoSection.displayName = 'InfoSection'
 
-/**
- * The properties.
- * @type {Object}
- */
 InfoSection.propTypes = {
-  /**
-   * Button title
-   */
   button: PropTypes.string.isRequired,
-
-  /**
-   * Classname, default `info-section`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * List of items
-   */
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-  /**
-   * OnChange is button action
-   */
   onClick: PropTypes.func,
-
-  /**
-   * Title
-   */
   title: PropTypes.string.isRequired,
-
-  /**
-   * Image url
-   */
   url: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 InfoSection.defaultProps = {
   className: 'info-section',
   onClick: () => null

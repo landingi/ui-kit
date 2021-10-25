@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import List from '@components/ui/List'
@@ -9,215 +8,182 @@ import PropTypes from 'prop-types'
 import React, { Fragment, useCallback } from 'react'
 import scss from './ClientPagination.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Pagination - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: pagination
-   * @param {number} props.goToPage - page number
-   * @param {number} props.pageIndex - active page index
-   * @param {number} props.pageCount - page count
-   * @param {number} props.activePageLimit - selected page limit
-   * @param {number} props.pageLimit - page limit
-   * @param {number} props.constantPageLimit - option to increase the number of items on the page
-   * @return {object} An object of children element
-   */
+const cssClass = styles(scss)
 
-  pagination = ({
-    className,
-    goToPage,
-    pageIndex,
-    pageCount,
-    activePageLimit,
-    pageLimit,
-    constantPageLimit
-  }) => {
-    const handleGoToPage = page => useCallback(() => goToPage(page), []),
-      renderPagination = () =>
-        pageCount !== 1 && (
-          <>
-            <span className={scss.pagination__first}>
-              <Button onClick={handleGoToPage(0)} size='small' variant='icon'>
-                <FormattedMessage id='pagination.word.first' />
-              </Button>
-            </span>
-
-            <Button
-              onClick={handleGoToPage(pageIndex - 1)}
-              size='small'
-              variant='icon'
-            >
-              <FontAwesomeIcon icon='caret-left' />
+/**
+ * Pagination - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: pagination
+ * @param {number} props.goToPage - page number
+ * @param {number} props.pageIndex - active page index
+ * @param {number} props.pageCount - page count
+ * @param {number} props.activePageLimit - selected page limit
+ * @param {number} props.pageLimit - page limit
+ * @param {object} props.i18n
+ * @param {number} props.constantPageLimit - option to increase the number of items on the page
+ * @return {object} An object of children element
+ */
+const Pagination = ({
+  className,
+  goToPage,
+  pageIndex,
+  pageCount,
+  activePageLimit,
+  pageLimit,
+  constantPageLimit,
+  i18n
+}) => {
+  const handleGoToPage = page => useCallback(() => goToPage(page), []),
+    renderPagination = () =>
+      pageCount !== 1 && (
+        <>
+          <span className={scss.pagination__first}>
+            <Button onClick={handleGoToPage(0)} size='small' variant='icon'>
+              {i18n.first}
             </Button>
+          </span>
 
-            <List variant='inline'>
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex - 3 < 0}
-                  onClick={handleGoToPage(pageIndex - 3)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageIndex - 2}
-                </Button>
-              </ListItem>
+          <Button
+            onClick={handleGoToPage(pageIndex - 1)}
+            size='small'
+            variant='icon'
+          >
+            <FontAwesomeIcon icon='caret-left' />
+          </Button>
 
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex - 2 < 0}
-                  onClick={handleGoToPage(pageIndex - 2)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageIndex - 1}
-                </Button>
-              </ListItem>
-
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex - 1 < 0}
-                  onClick={handleGoToPage(pageIndex - 1)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageIndex}
-                </Button>
-              </ListItem>
-
-              <ListItem
-                className={scss.pagination__links__current}
-                variant='inline'
-              >
-                <Button size='small' variant='icon'>
-                  {pageIndex + 1}
-                </Button>
-              </ListItem>
-
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex + 2 >= pageCount}
-                  onClick={handleGoToPage(pageIndex + 1)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageIndex + 2}
-                </Button>
-              </ListItem>
-
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex + 4 !== pageCount}
-                  onClick={handleGoToPage(pageIndex + 1)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageIndex + 3}
-                </Button>
-              </ListItem>
-
-              {pageIndex + 4 < pageCount && (
-                <ListItem variant='inline'>
-                  <span>...</span>
-                </ListItem>
-              )}
-
-              <ListItem variant='inline'>
-                <Button
-                  hide={pageIndex >= pageCount - 1}
-                  onClick={handleGoToPage(pageCount - 1)}
-                  size='small'
-                  variant='icon'
-                >
-                  {pageCount}
-                </Button>
-              </ListItem>
-            </List>
-
-            <Button
-              onClick={handleGoToPage(pageIndex + 1)}
-              size='small'
-              variant='icon'
-            >
-              <FontAwesomeIcon icon='caret-right' />
-            </Button>
-
-            <span className={scss.pagination__last}>
+          <List variant='inline'>
+            <ListItem variant='inline'>
               <Button
+                hide={pageIndex - 3 < 0}
+                onClick={handleGoToPage(pageIndex - 3)}
+                size='small'
+                variant='icon'
+              >
+                {pageIndex - 2}
+              </Button>
+            </ListItem>
+
+            <ListItem variant='inline'>
+              <Button
+                hide={pageIndex - 2 < 0}
+                onClick={handleGoToPage(pageIndex - 2)}
+                size='small'
+                variant='icon'
+              >
+                {pageIndex - 1}
+              </Button>
+            </ListItem>
+
+            <ListItem variant='inline'>
+              <Button
+                hide={pageIndex - 1 < 0}
+                onClick={handleGoToPage(pageIndex - 1)}
+                size='small'
+                variant='icon'
+              >
+                {pageIndex}
+              </Button>
+            </ListItem>
+
+            <ListItem
+              className={scss.pagination__links__current}
+              variant='inline'
+            >
+              <Button size='small' variant='icon'>
+                {pageIndex + 1}
+              </Button>
+            </ListItem>
+
+            <ListItem variant='inline'>
+              <Button
+                hide={pageIndex + 2 >= pageCount}
+                onClick={handleGoToPage(pageIndex + 1)}
+                size='small'
+                variant='icon'
+              >
+                {pageIndex + 2}
+              </Button>
+            </ListItem>
+
+            <ListItem variant='inline'>
+              <Button
+                hide={pageIndex + 4 !== pageCount}
+                onClick={handleGoToPage(pageIndex + 1)}
+                size='small'
+                variant='icon'
+              >
+                {pageIndex + 3}
+              </Button>
+            </ListItem>
+
+            {pageIndex + 4 < pageCount && (
+              <ListItem variant='inline'>
+                <span>...</span>
+              </ListItem>
+            )}
+
+            <ListItem variant='inline'>
+              <Button
+                hide={pageIndex >= pageCount - 1}
                 onClick={handleGoToPage(pageCount - 1)}
                 size='small'
                 variant='icon'
               >
-                <FormattedMessage id='pagination.word.last' />
+                {pageCount}
               </Button>
-            </span>
-          </>
-        )
+            </ListItem>
+          </List>
 
-    return (
-      <div className={cssClass(className)}>
-        <div className={scss.pagination__links}>{renderPagination()}</div>
+          <Button
+            onClick={handleGoToPage(pageIndex + 1)}
+            size='small'
+            variant='icon'
+          >
+            <FontAwesomeIcon icon='caret-right' />
+          </Button>
 
-        {constantPageLimit === 0 && (
-          <PageSize activePageLimit={activePageLimit} onChange={pageLimit} />
-        )}
-      </div>
-    )
-  }
+          <span className={scss.pagination__last}>
+            <Button
+              onClick={handleGoToPage(pageCount - 1)}
+              size='small'
+              variant='icon'
+            >
+              {i18n.last}
+            </Button>
+          </span>
+        </>
+      )
 
-/**
- * Display name
- * @type {string}
- */
-pagination.displayName = 'Pagination'
+  return (
+    <div className={cssClass(className)}>
+      <div className={scss.pagination__links}>{renderPagination()}</div>
 
-/**
- * The properties.
- * @type {Object}
- */
-pagination.propTypes = {
-  /**
-   * ActivePageLimit selected page limit
-   */
+      {constantPageLimit === 0 && (
+        <PageSize activePageLimit={activePageLimit} onChange={pageLimit} />
+      )}
+    </div>
+  )
+}
+
+Pagination.displayName = 'Pagination'
+
+Pagination.propTypes = {
   activePageLimit: PropTypes.number.isRequired,
-
-  /**
-   * Classname, default `pagination`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * ConstantPageLimit
-   */
   constantPageLimit: PropTypes.number,
-
-  /**
-   * GoToPage page to go
-   */
   goToPage: PropTypes.func.isRequired,
-
-  /**
-   * PageCount
-   */
   pageCount: PropTypes.number.isRequired,
-
-  /**
-   * PageIndex
-   */
   pageIndex: PropTypes.number.isRequired,
-
-  /**
-   * PageLimit
-   */
   pageLimit: PropTypes.func.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-pagination.defaultProps = {
+Pagination.defaultProps = {
   className: 'pagination',
-  constantPageLimit: 0
+  constantPageLimit: 0,
+  i18n: {
+    first: 'word.first',
+    last: 'word.last'
+  }
 }
 
-export default pagination
+export default Pagination

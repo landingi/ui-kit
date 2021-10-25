@@ -148,16 +148,8 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
 
 export default TimeSelect
 
-/**
- * Display name
- * @type {string}
- */
 TimeSelect.displayName = 'Time Select'
 
-/**
- * The properties.
- * @type {Object}
- */
 TimeSelect.propTypes = {
   /**
    * Value

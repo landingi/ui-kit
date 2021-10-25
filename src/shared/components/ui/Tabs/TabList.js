@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 const cssClass = styles(scss)
 
 /**
@@ -25,24 +21,10 @@ const tabList = ({ className, children, ...restProps }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 tabList.displayName = 'TabList'
 
-/**
- * The properties.
- * @type {Object}
- */
 tabList.propTypes = {
-  /**
-   * Classname, default `tabs`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements
-   */
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
@@ -50,10 +32,6 @@ tabList.propTypes = {
   ]).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 tabList.defaultProps = {
   className: 'tab__list'
 }

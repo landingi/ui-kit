@@ -1,24 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import { FormattedMessage } from 'react-intl'
 import Error from '@components/ui/Form/Error'
 import scss from './Toggle.scss'
 
 const cssClass = styles(scss)
 
 /**
- * formik toogle - stateless presentational component
+ * Formik toggle - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: ''
- * @param {string} props.type - input type checkbox or radio, default: checkbox
- * @param {object} props.field - Field
- * @param {object} props.form - Form
- * @param {string} props.id - id
- * @param {string} props.label - label, dafult: ''
+ * @param {string|array} props.className
+ * @param {string} props.type
+ * @param {object} props.field
+ * @param {object} props.form
+ * @param {string} props.id
+ * @param {string} props.label
  * @return {object} An object of children element
  */
-const formikToggle = ({
+const FormikToggle = ({
   field: { name, value, onChange, onBlur },
   form: { errors, touched /*setFieldValue [UNUSED_VARIABLE]*/ },
   id,
@@ -41,44 +40,24 @@ const formikToggle = ({
     </label>
     {label && (
       <label htmlFor={id} className={cssClass('toggle__label')}>
-        <FormattedMessage id={`${label}`} />
+        {label}
         {touched[name] && <Error error={errors[name]} />}
       </label>
     )}
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
-formikToggle.displayName = 'Formik Toggle'
+FormikToggle.displayName = 'FormikToggle'
 
-/**
- * The properties.
- * @type {Object}
- */
-formikToggle.propTypes = {
-  /**
-   * Classname, default ``
-   */
+FormikToggle.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Type, default `checkbox`
-   */
   type: PropTypes.string,
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.bool,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object),
@@ -88,14 +67,10 @@ formikToggle.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-formikToggle.defaultProps = {
+FormikToggle.defaultProps = {
   className: '',
   type: 'checkbox',
   label: ''
 }
 
-export default formikToggle
+export default FormikToggle

@@ -1,6 +1,5 @@
 import { Playground, Props } from 'docz'
 import InfoSection from '@components/ui/InfoSection'
-import { IntlProvider } from 'react-intl'
 import { getMessages } from '@helpers/i18n'
 
 # InfoSection
@@ -8,17 +7,13 @@ import { getMessages } from '@helpers/i18n'
 <Props of={InfoSection} />
 
 <Playground>
-  <IntlProvider
-    locale='en'
-    messages={getMessages['en']}>
-      <InfoSection
-        title='empty.list.message.fonts.title'
-        url='https://images.assets-landingi.com/images/empty-pages/Fonts/fonts_empty.png'
-        list={[
-        'empty.list.message.fonts.item1',
-        'empty.list.message.fonts.item2',
-        'empty.list.message.fonts.item3'
-      ]}
-      button='empty.list.message.fonts.button' />
-  </IntlProvider>
+  <InfoSection
+    title='empty.list.message.fonts.title'
+    url='https://images.assets-landingi.com/images/empty-pages/Fonts/fonts_empty.png'
+    list={[
+    'empty.list.message.fonts.item1',
+    'empty.list.message.fonts.item2',
+    'empty.list.message.fonts.item3'
+  ]}
+  button='empty.list.message.fonts.button' />
 </Playground>

@@ -3,59 +3,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
-import { FormattedMessage } from 'react-intl'
 
 /**
  * Checkbox Group  - stateless presentational component
  * @param {object} props - props
- * @param {object} props.errors - element errors list
- * @param {object} props.touched - element touched list
- * @param {string} props.label - label, default: ''
- * @param {string} props.name - element name
- * @param {string|array} props.className - list of class names, default: input__checkboxgroup
- * @param {object} props.chidren
+ * @param {object} props.errors
+ * @param {object} props.touched
+ * @param {string} props.label
+ * @param {string} props.name
+ * @param {string|array} props.className
+ * @param {object} props.children
  * @return {object} An object of children element
  */
-const checkboxGroup = ({ errors, touched, label, name, children }) => (
+const CheckboxGroup = ({ errors, touched, label, name, children }) => (
   <div className='form-field'>
-    {label && (
-      <Label>
-        <FormattedMessage id={`${label}`} />
-      </Label>
-    )}
+    {label && <Label>{label}</Label>}
     {children}
     {touched[name] && <Error error={errors[name]} />}
   </div>
 )
-/**
- * Display name
- * @type {string}
- */
-checkboxGroup.displayName = 'Checkbox Group'
 
-/**
- * The properties.
- * @type {Object}
- */
-checkboxGroup.propTypes = {
-  /**
-   * The text for the button
-   */
+CheckboxGroup.displayName = 'CheckboxGroup'
+
+CheckboxGroup.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Form
-   */
   touched: PropTypes.instanceOf(Object).isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-checkboxGroup.defaultProps = {
+CheckboxGroup.defaultProps = {
   label: ''
 }
 
-export default checkboxGroup
+export default CheckboxGroup

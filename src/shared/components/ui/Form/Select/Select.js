@@ -4,7 +4,6 @@ import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
 import Label from '@components/ui/Label'
 import scss from './Select.scss'
-import { FormattedMessage } from 'react-intl'
 
 const cssClass = styles(scss)
 
@@ -16,10 +15,10 @@ const cssClass = styles(scss)
  * @param {string} props.id - id of element
  * @param {string} props.label - label
  * @param {string|array} props.className - list of class names, default: `select-form`
- * @param {object} props.chidren - children
+ * @param {object} props.children - children
  * @return {object} An object of children element
  */
-const select = ({
+const Select = ({
   field: { name, value, onChange, onBlur },
   form: { errors, touched },
   id,
@@ -47,7 +46,7 @@ const select = ({
         <span className={cssClass('bar')} />
         {label && (
           <Label id={name} className={scss.input__label}>
-            <FormattedMessage id={`${label}`} />
+            {label}
           </Label>
         )}
       </div>
@@ -56,37 +55,17 @@ const select = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-select.displayName = 'Select'
+Select.displayName = 'Select'
 
-/**
- * The properties.
- * @type {Object}
- */
-select.propTypes = {
-  /**
-   * Classname, default `select`
-   */
+Select.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Children elements `option`
-   */
   children: PropTypes.node.isRequired,
-  /**
-   * Field
-   */
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
   }).isRequired,
-  /**
-   * Form
-   */
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
@@ -95,13 +74,9 @@ select.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-select.defaultProps = {
+Select.defaultProps = {
   className: 'select-form',
   label: ''
 }
 
-export default select
+export default Select

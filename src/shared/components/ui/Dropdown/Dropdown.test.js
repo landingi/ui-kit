@@ -30,7 +30,9 @@ describe('<Dropdown/> mount', () => {
 
   it('on `click` state `isOpen` set to true', () => {
     wrapper.simulate('click')
-    expect(wrapper.state('isOpen')).toBe(true)
+    wrapper.update()
+
+    expect(wrapper.find('.dropdown__body').length).toBe(1)
   })
 
   it('has `dropdown` class', () => {

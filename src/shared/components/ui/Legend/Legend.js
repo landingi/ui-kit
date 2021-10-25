@@ -14,7 +14,7 @@ const cssClass = styles(scss)
  * @param {string} props.alignment - alignment
  * @return {object} An object of children element
  */
-const legend = ({ data, alignment }) => (
+const Legend = ({ data, alignment }) => (
   <div className={cssClass('container', `container--${alignment}`)}>
     {data.map((item, index) => (
       <span
@@ -29,33 +29,15 @@ const legend = ({ data, alignment }) => (
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
-legend.displayName = 'Legend'
+Legend.displayName = 'Legend'
 
-/**
- * The properties.
- * @type {Object}
- */
-legend.propTypes = {
-  /**
-   * Alignment
-   */
+Legend.propTypes = {
   alignment: PropTypes.oneOf(['vertical', 'horizontal']),
-  /**
-   * Data
-   */
   data: PropTypes.arrayOf(legendShape).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-legend.defaultProps = {
+Legend.defaultProps = {
   alignment: 'vertical'
 }
 
-export default legend
+export default Legend

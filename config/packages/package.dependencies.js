@@ -14,14 +14,14 @@ module.exports = {
     "react-date-range": "1.4.0",
     "react-ink": "6.5.1",
     "react-input-range": "1.3.0",
-    "react-intl": "5.20.10",
     "react-select": "4.3.1",
     "react-text-mask": "5.4.3",
     "react-tooltip": "4.2.21",
     "react-uuid": "1.0.2",
     "simple-flexbox": "2.3.3",
     "tiny-emitter": "2.1.0",
-    "@babel/runtime": "7.15.4"
+    "@babel/runtime": "7.15.4",
+    "react-time-picker": "4.4.3"
   },
   documentationDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
@@ -38,7 +38,6 @@ module.exports = {
     "react-date-range": "1.4.0",
     "react-ink": "6.5.1",
     "react-input-range": "1.3.0",
-    "react-intl": "5.20.10",
     "react-select": "4.3.1",
     "react-text-mask": "5.4.3",
     "react-tooltip": "4.2.21",
@@ -65,7 +64,6 @@ module.exports = {
     "react-date-range": "1.4.0",
     "react-ink": "6.5.1",
     "react-input-range": "1.3.0",
-    "react-intl": "5.20.10",
     "react-select": "4.3.1",
     "react-text-mask": "5.4.3",
     "react-tooltip": "4.2.21",

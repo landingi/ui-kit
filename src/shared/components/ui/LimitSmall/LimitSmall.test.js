@@ -32,9 +32,9 @@ describe('<Limit /> mount', () => {
     )
   })
 
-  it('quantity should be `Unique visitors5 / 20 000`', () => {
+  it('quantity should be `word.unique.visitors 5 / 20 000`', () => {
     expect(wrapper.find('.result__dropdown').text()).toEqual(
-      'Unique visitors5 / 20 000'
+      'word.unique.visitors5 / 20 000'
     )
   })
 })
