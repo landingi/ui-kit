@@ -8,11 +8,6 @@ import { act } from 'react-dom/test-utils'
 
 registerIcons()
 
-// const setIsActive = jest.fn()
-// const setMessage = jest.fn()
-// const setHideTimeout = jest.fn()
-// const setType = jest.fn()
-
 const component = (
   <Toast>
     <Notification>Children</Notification>
