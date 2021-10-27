@@ -47,7 +47,8 @@ const Dropdown = ({
   hasFullInputStyle,
   asPlaceholder,
   inModalName,
-  custom
+  custom,
+  isOpenDisabled
 }) => {
   const [style, setStyle] = useState({})
   const [isOpen, setIsOpen] = useState(false)
