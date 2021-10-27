@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import Error from '@components/ui/Form/Error'
+// import Error from '@components/ui/Form/Error'
 import scss from './Radio.scss'
 import { getDeepValue } from '@helpers/data'
 
@@ -44,7 +44,7 @@ const Radio = ({
           className={cssClass(className)}
         />
         <div />
-        <Error error={error} />
+        {/* <Error error={error} /> */}
       </label>
     </div>
   )

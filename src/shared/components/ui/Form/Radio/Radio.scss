@@ -6,9 +6,9 @@
     cursor: pointer;
     font-size: 14px;
     margin: 0;
-    // line-height: 24px;
-    // opacity: 1;
-    // height: 0;
+    line-height: 24px;
+    opacity: 1;
+    height: 0;
 
     label {
       font-weight: 400;
@@ -16,10 +16,10 @@
       font-size: 14px;
       color: $color-2;
       cursor: pointer;
-      // top: unset !important;
-      // left: unset !important;
-      // opacity: 1 !important;
-      // pointer-events: none;
+      top: unset !important;
+      left: unset !important;
+      opacity: 1 !important;
+      pointer-events: none;
     }
 
     &:checked {
@@ -62,7 +62,7 @@
     }
 
     div {
-      // box-sizing: border-box;
+      box-sizing: border-box;
       position: absolute;
       top: 2px;
       left: 0;
