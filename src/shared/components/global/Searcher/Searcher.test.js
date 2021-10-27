@@ -6,7 +6,7 @@ import registerIcons from '@helpers/icons'
 registerIcons()
 
 const mockedSearchFunction = jest.fn()
-const mockedSetSearchResult= jest.fn()
+const mockedSetSearchResult = jest.fn()
 
 const props = {
   searchFunction: mockedSearchFunction,
@@ -16,7 +16,7 @@ const props = {
     placeholder: 'null'
   },
   protectedSubmit: false,
-  setSearchPhrase: null,
+  setSearchPhrase: null
 }
 
 const component = <Searcher {...props} />

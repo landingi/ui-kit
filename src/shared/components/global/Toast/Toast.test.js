@@ -59,5 +59,3 @@ describe('<Toast/> mount', () => {
     expect(wrapper.find(Notification).exists()).toBe(true)
   })
 })
-
-
