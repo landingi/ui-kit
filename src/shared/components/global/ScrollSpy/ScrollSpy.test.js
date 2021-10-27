@@ -6,12 +6,6 @@ import registerIcons from '@helpers/icons'
 registerIcons()
 
 const mockedOnClick = jest.fn()
-const scrollDown = () => {
-  document.querySelector('.bottom').scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-  })
-}
 
 const data = [
   {
