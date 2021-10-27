@@ -15,14 +15,25 @@ const cssClass = styles(scss)
  * @param {string} props.href - href
  * @param {string} props.label - label to display
  */
-const CustomLink = ({ className, variant, label, href, target, size }) => (
+const CustomLink = ({
+  className,
+  variant,
+  label,
+  href,
+  target,
+  size,
+  underlined,
+  onClick
+}) => (
   <a
     className={cssClass(
       className,
       `custom-link--${variant}`,
-      `custom-link--${size}`
+      `custom-link--${size}`,
+      underlined && 'custom-link--underlined'
     )}
     href={href}
+    onClick={onClick}
     target={target}
   >
     {label}
@@ -33,18 +44,22 @@ CustomLink.displayName = 'CustomLink'
 
 CustomLink.propTypes = {
   className: PropTypes.string,
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  size: PropTypes.number,
+  size: PropTypes.oneOf([10, 12, 14, 16]),
   target: PropTypes.string,
-  variant: PropTypes.oneOf(['active', 'inactive', 'dark'])
+  variant: PropTypes.oneOf(['active', 'inactive', 'dark']),
+  onClick: PropTypes.func,
 }
 
 CustomLink.defaultProps = {
   className: 'custom-link',
   size: 14,
   target: '_self',
-  variant: 'active'
+  variant: 'active',
+  underlined: false.valueOf,
+  href: null,
+  onClick: () => null
 }
 
 export default CustomLink
