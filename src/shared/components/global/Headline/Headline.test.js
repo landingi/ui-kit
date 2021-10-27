@@ -23,7 +23,7 @@ describe('<Headline/> mount', () => {
     expect(wrapper.find('div').text()).toMatch(/Headline title/i)
   })
 
-it('has class name page__headline', () => {
+  it('has class name page__headline', () => {
     expect(wrapper.find('div').hasClass('page__headline')).toBe(true)
   })
 })
