@@ -57,7 +57,7 @@ CustomLink.defaultProps = {
   size: 14,
   target: '_self',
   variant: 'active',
-  underlined: false.valueOf,
+  underlined: false,
   href: null,
   onClick: () => null
 }
