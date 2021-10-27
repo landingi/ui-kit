@@ -8,11 +8,7 @@ import { act } from 'react-dom/test-utils'
 
 registerIcons()
 
-const component = (
-  <Toast>
-    <Notification>Children</Notification>
-  </Toast>
-)
+const component = <Toast />
 
 describe('<Toast/> mount', () => {
   let wrapper
@@ -51,6 +47,16 @@ describe('<Toast/> mount', () => {
     wrapper.update()
 
     expect(wrapper.find(Toast).hasClass('toast')).toBe(true)
+  })
+
+  it('has Notification', async () => {
+    await act(async () => {
+      emitToastToggle()
+    })
+
+    wrapper.update()
+
+    expect(wrapper.find(Notification).exists()).toBe(true)
   })
 })
 
