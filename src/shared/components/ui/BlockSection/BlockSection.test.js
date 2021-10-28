@@ -2,13 +2,14 @@ import React from 'react'
 import { mountWithIntl } from '@jestutils'
 import BlockSection from '@components/ui/BlockSection'
 
+const onClickMock = jest.fn()
 const props = {
   title: 'empty.list.message.domains.section1.title',
   message: 'empty.list.message.domains.section1.message',
   button: 'empty.list.message.domains.section.button',
   url: '/assets/img/empty/domains/domain_empty_section1.png',
-  onClick: () => null,
-  reverse: true
+  onClick: onClickMock,
+  reverse: false
 }
 
 const blockSectionComponent = <BlockSection {...props} />
@@ -32,7 +33,19 @@ describe('<BlockSection /> mount', () => {
     expect(wrapper.hasClass('block-section')).toBe(true)
   })
 
-  it('has `block-section__panel--reverse` class', () => {
+  it('has not `block-section__panel--reverse` class when reverse is set to false', () => {
+    expect(
+      wrapper.find('div').at(2).hasClass('block-section__panel--reverse')
+    ).toBe(false)
+  })
+
+  it('has `block-section__panel--reverse` class on reverse true', () => {
+    wrapper.setProps({
+      reverse: true
+    })
+
+    wrapper.update()
+
     expect(
       wrapper.find('div').at(2).hasClass('block-section__panel--reverse')
     ).toBe(true)
@@ -44,10 +57,19 @@ describe('<BlockSection /> mount', () => {
     )
   })
 
-  it('simulate <Button /> click', () => {
-    const mockCallBack = jest.fn()
-    wrapper.find('Button').simulate('click')
+  it('should have defined default prop onClick', () => {
+    expect(wrapper.props().onClick).toBeDefined()
+  })
 
-    expect(mockCallBack.mock.calls.length).toEqual(0)
+  it('should have defined default prop className with value set to block-section', () => {
+    expect(wrapper.props().className).toEqual('block-section')
+  })
+
+  it('should have defined default prop list with value set to null', () => {
+    expect(wrapper.props().list).toEqual(null)
+  })
+
+  it('should have defined default prop reverse with value set to false', () => {
+    expect(wrapper.props().reverse).toEqual(false)
   })
 })
