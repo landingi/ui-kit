@@ -48,7 +48,7 @@ const cssClass = styles(scss)
  * @param {func} props.dropdownLabel
  * @param {func} props.className - wrapper custom styles
  * @param {func} props.customValue - allow use custom value which is not in options
- * @param {func} props.formikKey - name on formik 'nested' keys
+ * @param {func} props.formikKey - name on formik 'nasted' keys
  * @param {string} props.translate - translate key when items in dropdown use react-intl
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
@@ -83,7 +83,7 @@ const Select = ({
 }) => {
   const errorClass = errors[formikKey] ? 'form--has-error' : ''
   // eslint-disable-next-line prettier/prettier
-  const valueClass = value || alwaysShowLabel ? 'form--has-value' : ''
+  const valueClass = (value || alwaysShowLabel) ? 'form--has-value' : ''
   const filledClass = touched[formikKey] ? 'form-field--touched' : ''
   const disabledClass = isOpenDisabled ? 'form-field--disabled' : ''
 
@@ -189,9 +189,8 @@ const Select = ({
   return (
     <div
       className={cssClass([
-        `form-field form-field--dropdown ${
-          errorClass || valueClass || filledClass
-        }`,
+        `form-field form-field--dropdown
+        ${errorClass || valueClass || filledClass}`,
         disabledClass,
         className
       ])}
@@ -274,8 +273,16 @@ const Select = ({
   )
 }
 
+/**
+ * Display name
+ * @type {string}
+ */
 Select.displayName = 'Select dropdown'
 
+/**
+ * The properties.
+ * @type {Object}
+ */
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
@@ -316,29 +323,33 @@ Select.propTypes = {
   searchInOptions: PropTypes.bool
 }
 
+/**
+ * The default properties.
+ * @type {Object}
+ */
 Select.defaultProps = {
   label: '',
-  searchPlaceholder: '',
-  inModalName: '',
-  className: '',
+  onChange: () => null,
+  handleOnSearchChange: null,
+  onBlur: () => null,
   errors: {},
   touched: {},
-  overflowStyle: {},
-  emphasisedOptions: [],
-  handleOnSearchChange: null,
   value: null,
-  liveChanges: false,
-  optionalContent: null,
-  dropdownLabel: null,
-  customValue: false,
-  alwaysShowLabel: false,
-  isOpenDisabled: false,
-  searchInOptions: false,
+  searchPlaceholder: '',
+  inModalName: '',
   isLoading: false,
   isEmptyList: false,
   hasDescription: false,
-  onBlur: () => null,
-  onChange: () => null
+  overflowStyle: {},
+  emphasisedOptions: [],
+  liveChanges: false,
+  optionalContent: null,
+  dropdownLabel: null,
+  className: '',
+  customValue: false,
+  alwaysShowLabel: false,
+  isOpenDisabled: false,
+  searchInOptions: false
 }
 
 export default Select
