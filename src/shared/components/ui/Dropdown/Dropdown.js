@@ -178,15 +178,19 @@ const Dropdown = ({
     )
   }
 
-  const renderDropdown = () => (
-    <span
+  const renderDropdown = () => {
+
+    const alignmentClasses = cssClass({
+      'dropdown__wrapper--center': alignment === 'center',
+      'dropdown__wrapper--spaced': alignment === 'spaced',
+      'dropdown__wrapper--end': alignment === 'end'
+    })
+    return <span
       ref={containerRef}
       onClick={handleShow}
       className={cssClass(
         'dropdown__wrapper',
-        alignment === 'spaced'
-          ? 'dropdown__wrapper--spaced'
-          : 'dropdown__wrapper--center',
+        alignmentClasses,
         hasInput && 'dropdown__wrapper--input',
         hasFullInputStyle && 'dropdown__wrapper--as-input'
       )}
@@ -199,7 +203,7 @@ const Dropdown = ({
 
       {hasArrow && renderArrows(isOpen, arrowType)}
     </span>
-  )
+  }
 
   const renderDropdownWithButton = () => (
     <span
