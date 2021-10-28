@@ -10,8 +10,8 @@
     }
   }
 
-  .form-field--dropdown.form--has-value {
-    label {
+  .form--has-value {
+    .Label__label {
       top: 0px;
       font-size: 14px;
     }
