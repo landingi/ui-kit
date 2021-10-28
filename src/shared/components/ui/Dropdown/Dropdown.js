@@ -26,298 +26,303 @@ const cssClass = styles(scss)
  * Dropdown - stateless presentational component
  * @return {object} An object of children element
  */
-const Dropdown = forwardRef(({
-  children,
-  className,
-  icon,
-  tooltip,
-  tooltipPlacement,
-  label,
-  offset,
-  size,
-  hasArrow,
-  arrowType,
-  alignment,
-  dropdownPlacement,
-  button,
-  handleOnClick,
-  handleOnOpen,
-  handleOnClose,
-  link,
-  renderAsSmaller,
-  hasInput,
-  hasFullInputStyle,
-  asPlaceholder,
-  inModal
-}, ref) => {
-  const [style, setStyle] = useState({})
-  const [isOpen, setIsOpen] = useState(false)
-
-  const containerRef = useRef(null)
-  const dropdownRef = useRef(null)
-
-  const handleShow = useCallback(
-    event => {
-      event.stopPropagation()
-
-      !isOpen && handleOnOpen()
-
-      setIsOpen(isOpen => !isOpen)
+const Dropdown = forwardRef(
+  (
+    {
+      children,
+      className,
+      icon,
+      tooltip,
+      tooltipPlacement,
+      label,
+      offset,
+      size,
+      hasArrow,
+      arrowType,
+      alignment,
+      dropdownPlacement,
+      button,
+      handleOnClick,
+      handleOnOpen,
+      handleOnClose,
+      link,
+      renderAsSmaller,
+      hasInput,
+      hasFullInputStyle,
+      asPlaceholder,
+      inModal
     },
-    [isOpen]
-  )
+    ref
+  ) => {
+    const [style, setStyle] = useState({})
+    const [isOpen, setIsOpen] = useState(false)
 
-  const handleClose = useCallback(
-    event => {
-      event.stopPropagation()
+    const containerRef = useRef(null)
+    const dropdownRef = useRef(null)
 
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target) &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+    const handleShow = useCallback(
+      event => {
+        event.stopPropagation()
+
+        !isOpen && handleOnOpen()
+
         setIsOpen(isOpen => !isOpen)
-        handleOnClose()
-      }
-    },
-    [isOpen, containerRef, dropdownRef]
-  )
+      },
+      [isOpen]
+    )
 
-  const makeClose = () => {
-    setIsOpen(false)
-  }
+    const handleClose = useCallback(
+      event => {
+        event.stopPropagation()
 
-  const handlePosition = () => {
-    const container = getBoundings(containerRef.current)
-    const dropdown = getBoundings(dropdownRef.current)
-    const renderAbove =
-      window.innerHeight <= dropdown?.height + container?.top + offset
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(event.target) &&
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target)
+        ) {
+          setIsOpen(isOpen => !isOpen)
+          handleOnClose()
+        }
+      },
+      [isOpen, containerRef, dropdownRef]
+    )
 
-    if (inModal) {
-      setStyle({
-        marginTop: 10,
-        width: container?.width
-      })
-    } else {
-      if (size === 'fixed') {
+    const makeClose = () => {
+      setIsOpen(false)
+    }
+
+    const handlePosition = () => {
+      const container = getBoundings(containerRef.current)
+      const dropdown = getBoundings(dropdownRef.current)
+      const renderAbove =
+        window.innerHeight <= dropdown?.height + container?.top + offset
+
+      if (inModal) {
         setStyle({
-          left: container?.left,
-          top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset,
+          marginTop: 10,
           width: container?.width
         })
-      } else if (size === 'huge') {
-        setStyle({
-          left:
-            dropdownPlacement === 'left'
-              ? (renderAsSmaller
-                  ? centerParent(container?.width, 480, container?.left)
-                  : centerParent(
-                      container?.width,
-                      dropdown?.width,
-                      container?.left
-                    )) - 150
-              : centerParent(
-                  container?.width,
-                  dropdown?.width,
-                  container?.left
-                ) -
-                100 +
-                dropdown?.width,
-          top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset
-        })
       } else {
-        setStyle({
-          left:
-            dropdownPlacement === 'left'
-              ? (renderAsSmaller
-                  ? centerParent(container?.width, 240, container?.left)
-                  : centerParent(
-                      container?.width,
-                      dropdown?.width,
-                      container?.left
-                    )) - 40
-              : centerParent(
-                  container?.width,
+        if (size === 'fixed') {
+          setStyle({
+            left: container?.left,
+            top: renderAbove
+              ? container?.top - dropdown?.height
+              : container?.bottom + offset,
+            width: container?.width
+          })
+        } else if (size === 'huge') {
+          setStyle({
+            left:
+              dropdownPlacement === 'left'
+                ? (renderAsSmaller
+                    ? centerParent(container?.width, 480, container?.left)
+                    : centerParent(
+                        container?.width,
+                        dropdown?.width,
+                        container?.left
+                      )) - 150
+                : centerParent(
+                    container?.width,
+                    dropdown?.width,
+                    container?.left
+                  ) -
+                  100 +
                   dropdown?.width,
-                  container?.left
-                ) -
-                100 +
-                dropdown?.width,
-          top: renderAbove
-            ? container?.top - dropdown?.height
-            : container?.bottom + offset
-        })
+            top: renderAbove
+              ? container?.top - dropdown?.height
+              : container?.bottom + offset
+          })
+        } else {
+          setStyle({
+            left:
+              dropdownPlacement === 'left'
+                ? (renderAsSmaller
+                    ? centerParent(container?.width, 240, container?.left)
+                    : centerParent(
+                        container?.width,
+                        dropdown?.width,
+                        container?.left
+                      )) - 40
+                : centerParent(
+                    container?.width,
+                    dropdown?.width,
+                    container?.left
+                  ) -
+                  100 +
+                  dropdown?.width,
+            top: renderAbove
+              ? container?.top - dropdown?.height
+              : container?.bottom + offset
+          })
+        }
       }
     }
-  }
 
-  const handleResize = () => {
-    if (isOpen) handlePosition()
-  }
+    const handleResize = () => {
+      if (isOpen) handlePosition()
+    }
 
-  const renderDropdownWithTooltip = () => {
-    return (
-      <Tooltip content={tooltip} placement={tooltipPlacement}>
+    const renderDropdownWithTooltip = () => {
+      return (
+        <Tooltip content={tooltip} placement={tooltipPlacement}>
+          <span
+            ref={composeRefs(ref, containerRef)}
+            onClick={handleShow}
+            className={cssClass('dropdown__wrapper')}
+          >
+            {icon && renderIcon()}
+
+            {renderLabel()}
+
+            <Ink />
+
+            {hasArrow && renderArrows(isOpen, arrowType)}
+          </span>
+        </Tooltip>
+      )
+    }
+
+    const renderDropdown = () => {
+      const alignmentClasses = cssClass({
+        'dropdown__wrapper--center': alignment === 'center',
+        'dropdown__wrapper--spaced': alignment === 'spaced',
+        'dropdown__wrapper--end': alignment === 'end'
+      })
+      return (
         <span
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          className={cssClass('dropdown__wrapper')}
+          className={cssClass(
+            'dropdown__wrapper',
+            alignmentClasses,
+            hasInput && 'dropdown__wrapper--input',
+            hasFullInputStyle && 'dropdown__wrapper--as-input'
+          )}
         >
           {icon && renderIcon()}
 
-          {renderLabel()}
+          {label && renderLabel()}
 
-          <Ink />
+          {!hasInput && <Ink />}
 
           {hasArrow && renderArrows(isOpen, arrowType)}
         </span>
-      </Tooltip>
-    )
-  }
+      )
+    }
 
-  const renderDropdown = () => {
-    const alignmentClasses = cssClass({
-      'dropdown__wrapper--center': alignment === 'center',
-      'dropdown__wrapper--spaced': alignment === 'spaced',
-      'dropdown__wrapper--end': alignment === 'end'
-    })
-    return (
+    const renderDropdownWithButton = () => (
       <span
-        ref={composeRefs(ref, containerRef)}
-        onClick={handleShow}
         className={cssClass(
           'dropdown__wrapper',
-          alignmentClasses,
-          hasInput && 'dropdown__wrapper--input',
-          hasFullInputStyle && 'dropdown__wrapper--as-input'
+          alignment === 'spaced'
+            ? 'dropdown__wrapper--spaced'
+            : 'dropdown__wrapper--center'
+        )}
+        onClick={handleOnClick}
+      >
+        <NavLink to={link} activeClassName='groups--selected'>
+          {icon && renderIcon()}
+
+          {label && renderLabel()}
+
+          <Ink />
+        </NavLink>
+
+        <span
+          className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
+          ref={composeRefs(ref, containerRef)}
+          onClick={handleShow}
+        >
+          {hasArrow && renderArrows(isOpen, arrowType)}
+
+          <Ink />
+        </span>
+      </span>
+    )
+
+    const renderDropdownBody = () => {
+      const elementClasses = cssClass({
+        'dropdown--mini': size === 'mini',
+        'dropdown--small': size === 'small',
+        'dropdown--medium': size === 'medium',
+        'dropdown--large': size === 'large',
+        'dropdown--huge': size === 'huge',
+        'dropdown--extra-huge': size === 'extra-huge',
+        'dropdown--auto': size === 'auto',
+        'dropdown--hidden': isEmpty(style)
+      })
+
+      return (
+        <div
+          className={cssClass(className, elementClasses)}
+          ref={dropdownRef}
+          style={style}
+        >
+          <div className={cssClass('dropdown__body')}>{children}</div>
+        </div>
+      )
+    }
+
+    const renderIcon = () => <FontAwesomeIcon icon={icon} />
+
+    const renderLabel = () => (
+      <span
+        className={cssClass(
+          'dropdown__label',
+          asPlaceholder && 'dropdown__label--placeholder'
         )}
       >
-        {icon && renderIcon()}
-
-        {label && renderLabel()}
-
-        {!hasInput && <Ink />}
-
-        {hasArrow && renderArrows(isOpen, arrowType)}
+        {label}
       </span>
     )
-  }
 
-  const renderDropdownWithButton = () => (
-    <span
-      className={cssClass(
-        'dropdown__wrapper',
-        alignment === 'spaced'
-          ? 'dropdown__wrapper--spaced'
-          : 'dropdown__wrapper--center'
-      )}
-      onClick={handleOnClick}
-    >
-      <NavLink to={link} activeClassName='groups--selected'>
-        {icon && renderIcon()}
+    const renderArrows = (isOpen, arrowType) =>
+      arrowType === 'caret' ? (
+        isOpen ? (
+          <FontAwesomeIcon icon='caret-up' />
+        ) : (
+          <FontAwesomeIcon icon='caret-down' />
+        )
+      ) : (
+        <FontAwesomeIcon icon='ellipsis-v' />
+      )
 
-        {label && renderLabel()}
+    useEffect(() => {
+      window.addEventListener('mousedown', handleClose)
+      window.addEventListener('scroll', throttle(handleClose, 500))
+      window.addEventListener('resize', debounce(handleResize, 100))
+      emitter.on(CLOSE_DROPDOWN, makeClose)
 
-        <Ink />
-      </NavLink>
+      return () => {
+        window.removeEventListener('mousedown', handleClose)
+        window.removeEventListener('scroll', handleClose)
+        window.removeEventListener('resize', handleResize)
 
-      <span
-        className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
-        ref={composeRefs(ref, containerRef)}
-        onClick={handleShow}
-      >
-        {hasArrow && renderArrows(isOpen, arrowType)}
+        emitter.off(CLOSE_DROPDOWN, makeClose)
+      }
+    }, [])
 
-        <Ink />
-      </span>
-    </span>
-  )
-
-  const renderDropdownBody = () => {
-    const elementClasses = cssClass({
-      'dropdown--mini': size === 'mini',
-      'dropdown--small': size === 'small',
-      'dropdown--medium': size === 'medium',
-      'dropdown--large': size === 'large',
-      'dropdown--huge': size === 'huge',
-      'dropdown--extra-huge': size === 'extra-huge',
-      'dropdown--auto': size === 'auto',
-      'dropdown--hidden': isEmpty(style)
-    })
+    useEffect(() => {
+      if (containerRef.current && dropdownRef.current) {
+        handlePosition()
+      }
+    }, [isOpen])
 
     return (
-      <div
-        className={cssClass(className, elementClasses)}
-        ref={dropdownRef}
-        style={style}
-      >
-        <div className={cssClass('dropdown__body')}>{children}</div>
-      </div>
+      <Fragment>
+        {tooltip.length > 0
+          ? renderDropdownWithTooltip()
+          : button
+          ? renderDropdownWithButton()
+          : renderDropdown()}
+
+        {isOpen && renderDropdownBody()}
+      </Fragment>
     )
   }
-
-  const renderIcon = () => <FontAwesomeIcon icon={icon} />
-
-  const renderLabel = () => (
-    <span
-      className={cssClass(
-        'dropdown__label',
-        asPlaceholder && 'dropdown__label--placeholder'
-      )}
-    >
-      {label}
-    </span>
-  )
-
-  const renderArrows = (isOpen, arrowType) =>
-    arrowType === 'caret' ? (
-      isOpen ? (
-        <FontAwesomeIcon icon='caret-up' />
-      ) : (
-        <FontAwesomeIcon icon='caret-down' />
-      )
-    ) : (
-      <FontAwesomeIcon icon='ellipsis-v' />
-    )
-
-  useEffect(() => {
-    window.addEventListener('mousedown', handleClose)
-    window.addEventListener('scroll', throttle(handleClose, 500))
-    window.addEventListener('resize', debounce(handleResize, 100))
-    emitter.on(CLOSE_DROPDOWN, makeClose)
-
-    return () => {
-      window.removeEventListener('mousedown', handleClose)
-      window.removeEventListener('scroll', handleClose)
-      window.removeEventListener('resize', handleResize)
-
-      emitter.off(CLOSE_DROPDOWN, makeClose)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (containerRef.current && dropdownRef.current) {
-      handlePosition()
-    }
-  }, [isOpen])
-
-  return (
-    <Fragment>
-      {tooltip.length > 0
-        ? renderDropdownWithTooltip()
-        : button
-        ? renderDropdownWithButton()
-        : renderDropdown()}
-
-      {isOpen && renderDropdownBody()}
-    </Fragment>
-  )
-})
+)
 
 Dropdown.displayName = 'Dropdown'
 
