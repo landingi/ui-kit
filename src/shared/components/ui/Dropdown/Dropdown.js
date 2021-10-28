@@ -179,30 +179,31 @@ const Dropdown = ({
   }
 
   const renderDropdown = () => {
-
     const alignmentClasses = cssClass({
       'dropdown__wrapper--center': alignment === 'center',
       'dropdown__wrapper--spaced': alignment === 'spaced',
       'dropdown__wrapper--end': alignment === 'end'
     })
-    return <span
-      ref={containerRef}
-      onClick={handleShow}
-      className={cssClass(
-        'dropdown__wrapper',
-        alignmentClasses,
-        hasInput && 'dropdown__wrapper--input',
-        hasFullInputStyle && 'dropdown__wrapper--as-input'
-      )}
-    >
-      {icon && renderIcon()}
+    return (
+      <span
+        ref={containerRef}
+        onClick={handleShow}
+        className={cssClass(
+          'dropdown__wrapper',
+          alignmentClasses,
+          hasInput && 'dropdown__wrapper--input',
+          hasFullInputStyle && 'dropdown__wrapper--as-input'
+        )}
+      >
+        {icon && renderIcon()}
 
-      {label && renderLabel()}
+        {label && renderLabel()}
 
-      {!hasInput && <Ink />}
+        {!hasInput && <Ink />}
 
-      {hasArrow && renderArrows(isOpen, arrowType)}
-    </span>
+        {hasArrow && renderArrows(isOpen, arrowType)}
+      </span>
+    )
   }
 
   const renderDropdownWithButton = () => (
