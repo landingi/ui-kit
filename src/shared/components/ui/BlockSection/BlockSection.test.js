@@ -89,12 +89,12 @@ describe('<BlockSection /> mount', () => {
 
   it('when prop list exists the paragraph should not have padding', () => {
     wrapper.setProps({
-      list:[
-        'empty.list.message.domains.section1.message.item1'
-      ]
+      list: ['empty.list.message.domains.section1.message.item1']
     })
 
-    expect(wrapper.find('p').at(0).hasClass('paragraph-padding--none')).toBe(true)
+    expect(wrapper.find('p').at(0).hasClass('paragraph-padding--none')).toBe(
+      true
+    )
   })
 
   it('when prop list is empty the paragraph should have medium padding', () => {
@@ -102,6 +102,8 @@ describe('<BlockSection /> mount', () => {
       list: null
     })
 
-    expect(wrapper.find('p').at(0).hasClass('paragraph-padding--medium')).toBe(true)
+    expect(wrapper.find('p').at(0).hasClass('paragraph-padding--medium')).toBe(
+      true
+    )
   })
 })

@@ -115,7 +115,6 @@ describe('<Badge/> mount', () => {
 
     expect(wrapper.find('Badge').prop('content')).toBe(null)
     expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-
   })
 
   it('Tooltip is disabled when width < 105', () => {
@@ -125,7 +124,6 @@ describe('<Badge/> mount', () => {
 
     expect(wrapper.find('Badge').prop('content')).toBe(undefined)
     expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-
   })
 
   it('Tooltip is visible', () => {
@@ -134,7 +132,5 @@ describe('<Badge/> mount', () => {
     })
 
     expect(wrapper.find('Badge').prop('content')).toBe('some content')
-
   })
-
 })

@@ -111,9 +111,15 @@ describe('<Input /> mount', () => {
       tooltip: 'some tooltip content'
     })
 
-    expect(wrapper.find('Tooltip').prop('content')).toEqual('some tooltip content')
-    expect(wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('color')).toEqual('#2550AA')
-    expect(wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('icon')).toEqual('exclamation-circle')
+    expect(wrapper.find('Tooltip').prop('content')).toEqual(
+      'some tooltip content'
+    )
+    expect(
+      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('color')
+    ).toEqual('#2550AA')
+    expect(
+      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('icon')
+    ).toEqual('exclamation-circle')
   })
 
   it('has no tooltip', () => {
