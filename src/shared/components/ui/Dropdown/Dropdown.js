@@ -3,7 +3,8 @@ import React, {
   useState,
   useCallback,
   useEffect,
-  Fragment
+  Fragment,
+  forwardRef
 } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
@@ -17,6 +18,7 @@ import { debounce, throttle } from 'shared/helpers/events'
 import { CLOSE_DROPDOWN } from 'shared/constants/eventTypes'
 import emitter from 'shared/lib/emitter'
 import { isEmpty } from 'shared/helpers/data'
+import { composeRefs } from '@helpers/ref'
 
 const cssClass = styles(scss)
 
@@ -24,7 +26,7 @@ const cssClass = styles(scss)
  * Dropdown - stateless presentational component
  * @return {object} An object of children element
  */
-const Dropdown = ({
+const Dropdown = forwardRef(({
   children,
   className,
   icon,
@@ -47,7 +49,7 @@ const Dropdown = ({
   hasFullInputStyle,
   asPlaceholder,
   inModal
-}) => {
+}, ref) => {
   const [style, setStyle] = useState({})
   const [isOpen, setIsOpen] = useState(false)
 
@@ -162,7 +164,7 @@ const Dropdown = ({
     return (
       <Tooltip content={tooltip} placement={tooltipPlacement}>
         <span
-          ref={containerRef}
+          ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
           className={cssClass('dropdown__wrapper')}
         >
@@ -186,7 +188,7 @@ const Dropdown = ({
     })
     return (
       <span
-        ref={containerRef}
+        ref={composeRefs(ref, containerRef)}
         onClick={handleShow}
         className={cssClass(
           'dropdown__wrapper',
@@ -226,7 +228,7 @@ const Dropdown = ({
 
       <span
         className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
-        ref={containerRef}
+        ref={composeRefs(ref, containerRef)}
         onClick={handleShow}
       >
         {hasArrow && renderArrows(isOpen, arrowType)}
@@ -315,7 +317,7 @@ const Dropdown = ({
       {isOpen && renderDropdownBody()}
     </Fragment>
   )
-}
+})
 
 Dropdown.displayName = 'Dropdown'
 
