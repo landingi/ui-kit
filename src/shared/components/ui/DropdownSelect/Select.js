@@ -208,7 +208,6 @@ const Select = ({
         size='fixed'
         alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
-        inModal={inModal}
         isOpenDisabled={isOpenDisabled}
       >
         {handleOnSearchChange && (
