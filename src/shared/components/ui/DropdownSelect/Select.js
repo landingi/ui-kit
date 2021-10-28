@@ -208,6 +208,7 @@ const Select = ({
         size='fixed'
         alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
+        ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
       >
         {handleOnSearchChange && (
@@ -294,7 +295,6 @@ Select.propTypes = {
   handleOnSearchChange: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   inModalName: PropTypes.string,
-  inModal: PropTypes.bool,
   isLoading: PropTypes.bool,
   isEmptyList: PropTypes.bool,
   hasDescription: PropTypes.bool,
