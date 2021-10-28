@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  Fragment,
-  useRef,
-  useEffect,
-  useState
-} from 'react'
+import React, { useCallback, Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
@@ -83,7 +77,7 @@ const Select = ({
 }) => {
   const errorClass = errors[formikKey] ? 'form--has-error' : ''
   // eslint-disable-next-line prettier/prettier
-  const valueClass = value || alwaysShowLabel ? 'form--has-value' : ''
+  const valueClass = (value || alwaysShowLabel) ? 'form--has-value' : ''
   const filledClass = touched[formikKey] ? 'form-field--touched' : ''
   const disabledClass = isOpenDisabled ? 'form-field--disabled' : ''
 
@@ -116,16 +110,6 @@ const Select = ({
   })
 
   const dropdownRef = useRef(null)
-  /**
-   * autosize width for dropdown
-   */
-  const [dropdownWidth, setDropdownWidth] = useState(null)
-
-  useEffect(() => {
-    console.log('dropdownRef', dropdownRef)
-    const labelWidth = dropdownRef.current?.containerRef.current.clientWidth
-    if (labelWidth) setDropdownWidth(labelWidth)
-  }, [dropdownRef.current])
 
   const renderOption = item =>
     hasDescription ? (
@@ -190,11 +174,13 @@ const Select = ({
   return (
     <div
       className={cssClass([
-        `form-field form-field--dropdown
-        ${errorClass || valueClass || filledClass}`,
+        `form-field form-field--dropdown ${
+          errorClass || valueClass || filledClass
+        }`,
         disabledClass,
         className
       ])}
+      ref={dropdownRef}
     >
       {label && <Label id={label}>{label}</Label>}
 
@@ -208,7 +194,6 @@ const Select = ({
         size='fixed'
         alignment='spaced'
         inModalName={inModalName}
-        ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
       >
         {handleOnSearchChange && (
@@ -241,7 +226,7 @@ const Select = ({
         <Overflow>
           <div
             style={{
-              minWidth: dropdownWidth,
+              minWidth: dropdownRef.current?.clientWidth,
               ...overflowStyle
             }}
           >
