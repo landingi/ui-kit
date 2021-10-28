@@ -87,4 +87,42 @@ describe('<Badge/> mount', () => {
       wrapper.find('span.badge--accent-2').hasClass('badge--accent-2')
     ).toBe(true)
   })
+
+  it('when is indicator should have badge--indicator', () => {
+    wrapper.setProps({
+      isIndicator: true
+    })
+
+    expect(wrapper.find('span.badge').hasClass('badge--indicator')).toBe(true)
+  })
+
+  it('Tooltip is disabled when prop content is empty', () => {
+    wrapper.setProps({
+      content: null
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe(null)
+    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
+
+  })
+
+  it('Tooltip is disabled when width < 105', () => {
+    wrapper.setProps({
+      width: 104
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe(undefined)
+    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
+
+  })
+
+  it('Tooltip is visible', () => {
+    wrapper.setProps({
+      content: 'some content'
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe('some content')
+
+  })
+
 })
