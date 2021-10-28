@@ -83,7 +83,7 @@ const Select = ({
 }) => {
   const errorClass = errors[formikKey] ? 'form--has-error' : ''
   // eslint-disable-next-line prettier/prettier
-  const valueClass = (value || alwaysShowLabel) ? 'form--has-value' : ''
+  const valueClass = value || alwaysShowLabel ? 'form--has-value' : ''
   const filledClass = touched[formikKey] ? 'form-field--touched' : ''
   const disabledClass = isOpenDisabled ? 'form-field--disabled' : ''
 
@@ -122,6 +122,7 @@ const Select = ({
   const [dropdownWidth, setDropdownWidth] = useState(null)
 
   useEffect(() => {
+    console.log('dropdownRef', dropdownRef)
     const labelWidth = dropdownRef.current?.containerRef.current.clientWidth
     if (labelWidth) setDropdownWidth(labelWidth)
   }, [dropdownRef.current])
