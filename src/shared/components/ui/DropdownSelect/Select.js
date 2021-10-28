@@ -77,7 +77,7 @@ const Select = ({
 }) => {
   const errorClass = errors[formikKey] ? 'form--has-error' : ''
   // eslint-disable-next-line prettier/prettier
-  const valueClass = (value || alwaysShowLabel) ? 'form--has-value' : ''
+  const valueClass = value || alwaysShowLabel ? 'form--has-value' : ''
   const filledClass = touched[formikKey] ? 'form-field--touched' : ''
   const disabledClass = isOpenDisabled ? 'form-field--disabled' : ''
 
