@@ -1,7 +1,6 @@
 import React from 'react'
 import { mountWithIntl } from '@jestutils'
 import BlockSection from '@components/ui/BlockSection'
-import Paragraph from '@components/ui/Paragraph'
 
 const onClickMock = jest.fn()
 const props = {
@@ -78,10 +77,14 @@ describe('<BlockSection /> mount', () => {
     expect(wrapper.props().reverse).toEqual(false)
   })
 
-  it('simulate <Button /> click', () => {
+  it('onClick callback have not been called', () => {
+    expect(wrapper.props().onClick).toHaveBeenCalledTimes(0)
+  })
+
+  it('onClick callback have been called once', () => {
     wrapper.find('Button').simulate('click')
 
-    expect(onClickMock).toHaveBeenCalledTimes(1)
+    expect(wrapper.props().onClick).toHaveBeenCalledTimes(1)
   })
 
   it('when prop list exists the paragraph should not have padding', () => {
