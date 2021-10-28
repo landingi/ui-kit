@@ -44,14 +44,6 @@ describe('<Checkbox /> mount', () => {
     expect(wrapper.props().checked).toBeDefined()
   })
 
-  // it('has `ab-testing` class', () => {
-  //   expect(wrapper.find('i').hasClass('ab-testing')).toBe(true)
-  // })
-
-  // it('has `icon--default` class when color is default', () => {
-  //   expect(wrapper.find('i').hasClass('icon--default')).toBe(true)
-  // })
-
   it('input has the name of formikKey prop', () => {
     wrapper.setProps({
       formikKey: 'test-key'
