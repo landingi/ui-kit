@@ -66,7 +66,6 @@ const Select = ({
   handleOnSearchChange,
   searchPlaceholder,
   inModalName,
-  inModal,
   isLoading,
   isEmptyList,
   hasDescription,
@@ -210,7 +209,6 @@ const Select = ({
         alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
         inModal={inModal}
-        ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
       >
         {handleOnSearchChange && (
@@ -323,7 +321,6 @@ Select.defaultProps = {
   label: '',
   searchPlaceholder: '',
   inModalName: '',
-  inModal: false,
   className: '',
   errors: {},
   touched: {},
