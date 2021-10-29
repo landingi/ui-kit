@@ -88,7 +88,9 @@ describe('<Modal /> global mount', () => {
       hasFooter: true
     })
 
-    expect(wrapper.find('div.modal__footer').prop('className')).toEqual('modal__footer modal__footer--align-right')
+    expect(wrapper.find('div.modal__footer').prop('className')).toEqual(
+      'modal__footer modal__footer--align-right'
+    )
   })
 
   it('has loader when isLoading se to true', () => {
@@ -118,7 +120,9 @@ describe('<Modal /> global mount', () => {
       image: 'http://www.landingi.com/logo.png'
     })
 
-    expect(wrapper.find('Image').prop('src')).toEqual('http://www.landingi.com/logo.png')
+    expect(wrapper.find('Image').prop('src')).toEqual(
+      'http://www.landingi.com/logo.png'
+    )
   })
 
   it('has button mark as spam in the header and triggers onMarkAsSpam callback', () => {
@@ -127,7 +131,9 @@ describe('<Modal /> global mount', () => {
       onMarkAsSpam: jest.fn()
     })
 
-    expect(wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')).toEqual('ban')
+    expect(
+      wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')
+    ).toEqual('ban')
 
     wrapper.find('Button').at(0).simulate('click')
 
@@ -140,7 +146,9 @@ describe('<Modal /> global mount', () => {
       onEdit: jest.fn()
     })
 
-    expect(wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')).toEqual('pencil-alt')
+    expect(
+      wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')
+    ).toEqual('pencil-alt')
 
     wrapper.find('Button').at(0).simulate('click')
 
@@ -153,7 +161,9 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('div.modal__component').exists()).toBe(true)
-    expect(wrapper.find('div.modal__component').hasClass('modal__component')).toBe(true)
+    expect(
+      wrapper.find('div.modal__component').hasClass('modal__component')
+    ).toBe(true)
   })
 
   it('has header divider', () => {
@@ -189,7 +199,9 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(wrapper.find('div.modal__footer').find('Button').at(1).prop('type')).toEqual('submit')
+    expect(
+      wrapper.find('div.modal__footer').find('Button').at(1).prop('type')
+    ).toEqual('submit')
   })
 
   it('should have button type button when isSubmit set to false', () => {
@@ -199,7 +211,9 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(wrapper.find('div.modal__footer').find('Button').at(1).prop('type')).toEqual('button')
+    expect(
+      wrapper.find('div.modal__footer').find('Button').at(1).prop('type')
+    ).toEqual('button')
   })
 
   it('should have action icon in the action button', () => {
@@ -210,6 +224,13 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(wrapper.find('div.modal__footer').find('Button').at(1).find('FontAwesomeIcon').prop('icon')).toEqual('times')
+    expect(
+      wrapper
+        .find('div.modal__footer')
+        .find('Button')
+        .at(1)
+        .find('FontAwesomeIcon')
+        .prop('icon')
+    ).toEqual('times')
   })
 })

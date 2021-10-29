@@ -5,7 +5,7 @@ import registerIcons from '@helpers/icons'
 
 registerIcons()
 
-const mockedOnChange= jest.fn()
+const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
 const mockedOnBlur = jest.fn()
 
@@ -37,7 +37,9 @@ describe('<Input /> mount', () => {
   })
 
   it('calls function passed as onChange prop on click event', () => {
-    wrapper.find('input').simulate('change', { target: { name: 'input-name', value: 'test' } })
+    wrapper
+      .find('input')
+      .simulate('change', { target: { name: 'input-name', value: 'test' } })
 
     expect(mockedOnChange).toHaveBeenCalled()
   })
@@ -176,7 +178,9 @@ describe('<Input /> mount', () => {
       }
     })
 
-    expect(wrapper.find('label').prop('className')).toEqual('input__label label--normal')
+    expect(wrapper.find('label').prop('className')).toEqual(
+      'input__label label--normal'
+    )
   })
 
   it('should not display label when i18n.label is null', () => {

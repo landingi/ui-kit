@@ -45,7 +45,9 @@ describe('<SectionTile/> mount', () => {
 
   it('has class name section-tile', () => {
     expect(wrapper.find('div.section-tile').exists()).toBe(true)
-    expect(wrapper.find('div.section-tile').hasClass('section-tile--active')).toBe(false)
+    expect(
+      wrapper.find('div.section-tile').hasClass('section-tile--active')
+    ).toBe(false)
   })
 
   it('should have `section-tile--active` when isActive', () => {
@@ -53,6 +55,8 @@ describe('<SectionTile/> mount', () => {
       isActive: true
     })
 
-    expect(wrapper.find('div.section-tile').hasClass('section-tile--active')).toBe(true)
+    expect(
+      wrapper.find('div.section-tile').hasClass('section-tile--active')
+    ).toBe(true)
   })
 })
