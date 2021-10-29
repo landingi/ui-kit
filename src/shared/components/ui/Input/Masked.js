@@ -157,4 +157,4 @@ Masked.defaultProps = {
   focused: 'false'
 }
 
-export default maskedInput
+export default Masked

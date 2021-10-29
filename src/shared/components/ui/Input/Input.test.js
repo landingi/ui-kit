@@ -5,10 +5,14 @@ import registerIcons from '@helpers/icons'
 
 registerIcons()
 
+const mockedOnChange= jest.fn()
+const mockedOnKeyDown = jest.fn()
+const mockedOnBlur = jest.fn()
+
 const props = {
-  onChange: jest.fn(),
-  onKeyDown: () => jest.fn(),
-  onBlur: () => jest.fn()
+  onChange: mockedOnChange,
+  onKeyDown: mockedOnKeyDown,
+  onBlur: mockedOnBlur
 }
 
 const component = <Input {...props} />
@@ -30,6 +34,24 @@ describe('<Input /> mount', () => {
 
   it('has `input__wrapper` class', () => {
     expect(wrapper.find('div').hasClass('input__wrapper')).toBe(true)
+  })
+
+  it('calls function passed as onChange prop on click event', () => {
+    wrapper.find('input').simulate('change', { target: { name: 'input-name', value: 'test' } })
+
+    expect(mockedOnChange).toHaveBeenCalled()
+  })
+
+  it('calls function passed as onKeyDown prop on click event', () => {
+    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+
+    expect(mockedOnKeyDown).toHaveBeenCalled()
+  })
+
+  it('calls function passed as onBlur prop on click event', () => {
+    wrapper.find('input').simulate('blur')
+
+    expect(mockedOnBlur).toHaveBeenCalled()
   })
 
   it('should have defined default prop onChange', () => {
@@ -128,5 +150,53 @@ describe('<Input /> mount', () => {
     })
 
     expect(wrapper.find('Tooltip').exists()).toBe(false)
+  })
+
+  it('should be readonly when is disabled', () => {
+    wrapper.setProps({
+      disabled: true,
+      readonly: true
+    })
+
+    expect(wrapper.find('input').prop('readOnly')).toBe(true)
+  })
+
+  it('should be disabled', () => {
+    wrapper.setProps({
+      disabled: true
+    })
+
+    expect(wrapper.find('input').prop('disabled')).toBe(true)
+  })
+
+  it('should display label when has i18n.label', () => {
+    wrapper.setProps({
+      i18n: {
+        label: 'I am your label'
+      }
+    })
+
+    expect(wrapper.find('label').prop('className')).toEqual('input__label label--normal')
+  })
+
+  it('should not display label when i18n.label is null', () => {
+    wrapper.setProps({
+      i18n: {
+        label: null
+      }
+    })
+
+    expect(wrapper.find('label').exists()).toBe(false)
+  })
+
+  it('should have min and max when type is number', () => {
+    wrapper.setProps({
+      type: 'number',
+      min: 1,
+      max: 10
+    })
+
+    expect(wrapper.find('input').prop('min')).toEqual(1)
+    expect(wrapper.find('input').prop('max')).toEqual(10)
   })
 })
