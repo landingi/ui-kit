@@ -128,7 +128,11 @@ Pagination.propTypes = {
 }
 
 Pagination.defaultProps = {
-  className: 'pagination'
+  className: 'pagination',
+  i18n: {
+    first: 1,
+    last: ''
+  }
 }
 
 export default Pagination
