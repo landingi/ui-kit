@@ -50,7 +50,7 @@ const Dropdown = forwardRef(
       hasInput,
       hasFullInputStyle,
       asPlaceholder,
-      inModal
+      inModalName
     },
     ref
   ) => {
