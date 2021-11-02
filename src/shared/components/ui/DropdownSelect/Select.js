@@ -192,7 +192,7 @@ const Select = ({
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
         size='fixed'
-        alignment='spaced'
+        alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
         isOpenDisabled={isOpenDisabled}
       >

@@ -87,4 +87,50 @@ describe('<Badge/> mount', () => {
       wrapper.find('span.badge--accent-2').hasClass('badge--accent-2')
     ).toBe(true)
   })
+
+  it('when is indicator should have class badge--indicator', () => {
+    wrapper.setProps({
+      isIndicator: true
+    })
+
+    expect(wrapper.find('span.badge').hasClass('badge--indicator')).toBe(true)
+  })
+
+  it('when the tooltip prop has not value the children span should not have badge-tooltip class', () => {
+    expect(wrapper.find('span').at(2).hasClass('badge-tooltip')).toBe(false)
+  })
+
+  it('when the tooltip prop has value the children span should have badge-tooltip class', () => {
+    wrapper.setProps({
+      tooltip: 'tooltip'
+    })
+
+    expect(wrapper.find('span').at(2).hasClass('badge-tooltip')).toBe(true)
+  })
+
+  it('Tooltip is disabled when prop content is empty', () => {
+    wrapper.setProps({
+      content: null
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe(null)
+    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
+  })
+
+  it('Tooltip is disabled when width < 105', () => {
+    wrapper.setProps({
+      width: 104
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe(undefined)
+    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
+  })
+
+  it('Tooltip is visible', () => {
+    wrapper.setProps({
+      content: 'some content'
+    })
+
+    expect(wrapper.find('Badge').prop('content')).toBe('some content')
+  })
 })
