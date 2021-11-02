@@ -110,6 +110,15 @@ const Select = ({
   })
 
   const dropdownRef = useRef(null)
+  /**
+   * autosize width for dropdown
+   */
+  const [dropdownWidth, setDropdownWidth] = useState(null)
+
+  useEffect(() => {
+    const labelWidth = dropdownRef.current?.containerRef.current.clientWidth
+    if (labelWidth) setDropdownWidth(labelWidth)
+  }, [dropdownRef.current])
 
   const renderOption = item =>
     hasDescription ? (
@@ -180,7 +189,6 @@ const Select = ({
         disabledClass,
         className
       ])}
-      ref={dropdownRef}
     >
       {label && <Label id={label}>{label}</Label>}
 
@@ -194,6 +202,7 @@ const Select = ({
         size='fixed'
         alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
+        ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
       >
         {handleOnSearchChange && (
@@ -226,7 +235,7 @@ const Select = ({
         <Overflow>
           <div
             style={{
-              minWidth: dropdownRef.current?.clientWidth,
+              minWidth: dropdownWidth,
               ...overflowStyle
             }}
           >
@@ -315,19 +324,14 @@ Select.propTypes = {
  */
 Select.defaultProps = {
   label: '',
-  onChange: () => null,
-  handleOnSearchChange: null,
-  onBlur: () => null,
-  errors: {},
-  touched: {},
-  value: null,
   searchPlaceholder: '',
   inModalName: '',
-  isLoading: false,
-  isEmptyList: false,
-  hasDescription: false,
+  errors: {},
+  touched: {},
   overflowStyle: {},
   emphasisedOptions: [],
+  handleOnSearchChange: null,
+  value: null,
   liveChanges: false,
   optionalContent: null,
   dropdownLabel: null,
@@ -335,7 +339,12 @@ Select.defaultProps = {
   customValue: false,
   alwaysShowLabel: false,
   isOpenDisabled: false,
-  searchInOptions: false
+  searchInOptions: false,
+  isLoading: false,
+  isEmptyList: false,
+  hasDescription: false,
+  onBlur: () => null,
+  onChange: () => null
 }
 
 export default Select

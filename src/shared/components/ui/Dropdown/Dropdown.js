@@ -50,7 +50,9 @@ const Dropdown = forwardRef(
       hasInput,
       hasFullInputStyle,
       asPlaceholder,
-      inModalName
+      inModalName,
+      custom,
+      isOpenDisabled
     },
     ref
   ) => {
@@ -63,6 +65,8 @@ const Dropdown = forwardRef(
     const handleShow = useCallback(
       event => {
         event.stopPropagation()
+
+        if (isOpenDisabled) return
 
         !isOpen && handleOnOpen()
 
@@ -92,22 +96,22 @@ const Dropdown = forwardRef(
       setIsOpen(false)
     }
 
-    if (inModalName) {
-      const modal = document.getElementsByClassName(inModalName)[0]
-      const modalWidth = modal?.offsetWidth || 600
-      const modalHeight = modal?.offsetHeight || 600
+    const handlePosition = () => {
+      const container = getBoundings(containerRef.current)
+      const dropdown = getBoundings(dropdownRef.current)
+      const renderAbove =
+        window.innerHeight <= dropdown?.height + container?.top + offset
 
-      setStyle({
-        left: container.left - (window.innerWidth - modalWidth) / 2,
-        top: renderAbove
-          ? container.top - dropdown.height
-          : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
-      })
-    } else {
-      if (size === 'fixed') {
+      if (inModalName) {
+        const modal = document.getElementsByClassName(inModalName)[0]
+        const modalWidth = modal?.offsetWidth || 600
+        const modalHeight = modal?.offsetHeight || 600
+
         setStyle({
-          marginTop: 10,
-          width: container?.width
+          left: container.left - (window.innerWidth - modalWidth) / 2,
+          top: renderAbove
+            ? container.top - dropdown.height
+            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
       } else {
         if (size === 'fixed') {
@@ -201,17 +205,21 @@ const Dropdown = forwardRef(
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
           className={cssClass(
-            'dropdown__wrapper',
+            !custom && 'dropdown__wrapper',
+            isOpenDisabled && 'dropdown__wrapper--disabled',
             alignmentClasses,
             hasInput && 'dropdown__wrapper--input',
-            hasFullInputStyle && 'dropdown__wrapper--as-input'
+            hasFullInputStyle && 'dropdown__wrapper--as-input',
+            hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
           )}
         >
+          {custom && custom}
+
           {icon && renderIcon()}
 
           {label && renderLabel()}
 
-          {!hasInput && <Ink />}
+          {!hasInput && !custom && <Ink />}
 
           {hasArrow && renderArrows(isOpen, arrowType)}
         </span>
