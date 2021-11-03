@@ -65,11 +65,7 @@ const Masked = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={
-          translate
-            ? placeholder || label
-            : label
-        }
+        placeholder={translate ? placeholder || label : label}
         name={name}
         id={name}
         defaultValue={value}

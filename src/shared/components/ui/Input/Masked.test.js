@@ -42,7 +42,6 @@ describe('<Masked /> mount', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-
   it('default prop `onChange` should be null', () => {
     const result = Masked.defaultProps.onChange()
 
