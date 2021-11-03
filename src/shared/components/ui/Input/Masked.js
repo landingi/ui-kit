@@ -25,7 +25,6 @@ const cssClass = styles(scss)
  * @param {number} props.maxLength - max length of input
  * @param {bool} props.translate - true if placeholder/label is an id for translation
  * @param {object} props.field - formik field
- * @param {object} props.intl - intl
  * @param {bool}  props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
  * @param {string|number} props.value - value
@@ -45,7 +44,6 @@ const Masked = ({
   label,
   value,
   autoFocus,
-  intl,
   translate,
   maxLength,
   mask,
@@ -69,7 +67,7 @@ const Masked = ({
         type={type}
         placeholder={
           translate
-            ? intl.formatMessage({ id: `${placeholder || label}` })
+            ? placeholder || label
             : label
         }
         name={name}

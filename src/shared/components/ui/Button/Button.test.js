@@ -3,6 +3,7 @@ import { mount } from 'enzyme'
 import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import registerIcons from '@helpers/icons'
+import { object } from 'prop-types'
 
 registerIcons()
 
@@ -40,6 +41,13 @@ describe('<Button/> mount', () => {
 
   it('has `button` class', () => {
     expect(wrapper.hasClass('button')).toBe(true)
+  })
+
+
+  it('default prop `onClick` should be undefined', () => {
+    const result = Button.defaultProps.onClick()
+
+    expect(result).toBe(undefined)
   })
 
   it('when prop isLoading is true, spinner is visible', () => {
