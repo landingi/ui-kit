@@ -17,6 +17,18 @@
         }
     }
 
+    &--underlined {
+        text-decoration: underline;
+    }
+
+    &--10 {
+        font-size: 10px;
+    }
+
+    &--12 {
+        font-size: 12px;
+    }
+
     &--14 {
         font-size: 14px;
     }

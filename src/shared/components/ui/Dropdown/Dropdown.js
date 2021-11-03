@@ -50,7 +50,9 @@ const Dropdown = forwardRef(
       hasInput,
       hasFullInputStyle,
       asPlaceholder,
-      inModal
+      inModalName,
+      custom,
+      isOpenDisabled
     },
     ref
   ) => {
@@ -63,6 +65,8 @@ const Dropdown = forwardRef(
     const handleShow = useCallback(
       event => {
         event.stopPropagation()
+
+        if (isOpenDisabled) return
 
         !isOpen && handleOnOpen()
 
@@ -98,10 +102,16 @@ const Dropdown = forwardRef(
       const renderAbove =
         window.innerHeight <= dropdown?.height + container?.top + offset
 
-      if (inModal) {
+      if (inModalName) {
+        const modal = document.getElementsByClassName(inModalName)[0]
+        const modalWidth = modal?.offsetWidth || 600
+        const modalHeight = modal?.offsetHeight || 600
+
         setStyle({
-          marginTop: 10,
-          width: container?.width
+          left: container.left - (window.innerWidth - modalWidth) / 2,
+          top: renderAbove
+            ? container.top - dropdown.height
+            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
       } else {
         if (size === 'fixed') {
@@ -195,17 +205,21 @@ const Dropdown = forwardRef(
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
           className={cssClass(
-            'dropdown__wrapper',
+            !custom && 'dropdown__wrapper',
+            isOpenDisabled && 'dropdown__wrapper--disabled',
             alignmentClasses,
             hasInput && 'dropdown__wrapper--input',
-            hasFullInputStyle && 'dropdown__wrapper--as-input'
+            hasFullInputStyle && 'dropdown__wrapper--as-input',
+            hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
           )}
         >
+          {custom && custom}
+
           {icon && renderIcon()}
 
           {label && renderLabel()}
 
-          {!hasInput && <Ink />}
+          {!hasInput && !custom && <Ink />}
 
           {hasArrow && renderArrows(isOpen, arrowType)}
         </span>
@@ -373,7 +387,9 @@ Dropdown.propTypes = {
    * label is styled as input placeholder
    */
   asPlaceholder: PropTypes.bool,
-  inModal: PropTypes.bool
+  inModalName: PropTypes.string,
+  custom: PropTypes.instanceOf(Object),
+  isOpenDisabled: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
@@ -397,7 +413,9 @@ Dropdown.defaultProps = {
   hasFullInputStyle: false,
   asPlaceholder: false,
   inModal: false,
-  button: false
+  button: false,
+  custom: null,
+  isOpenDisabled: false
 }
 
 export default Dropdown
