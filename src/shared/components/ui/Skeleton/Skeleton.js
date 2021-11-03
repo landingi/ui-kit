@@ -82,32 +82,6 @@ export function SkeletonDrawer() {
 }
 
 /**
- * Skeleton table - stateless presentational component
- * @return {object} An object of children element
- */
-export function SkeletonTable() {
-  return (
-    <div className={scss.tableSkeleton}>
-      <div className={scss.item}>
-        <div className={scss.line} />
-
-        <div className={scss.line} />
-
-        <div className={scss.line} />
-      </div>
-
-      <div className={scss.item}>
-        <div className={scss.line} />
-
-        <div className={scss.line} />
-
-        <div className={scss.line} />
-      </div>
-    </div>
-  )
-}
-
-/**
  * Skeleton line - stateless presentational component
  * @return {object} An object of children element
  */

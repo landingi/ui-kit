@@ -33,14 +33,4 @@ describe('<TimingToast/> mount', () => {
 
     expect(wrapper.find(TimingToast).exists()).toBe(true)
   })
-
-  it('has class name toast', async () => {
-    await act(async () => {
-      emitToastToggle()
-    })
-
-    wrapper.update()
-
-    expect(wrapper.find(Toast).hasClass('toast')).toBe(true)
-  })
 })
