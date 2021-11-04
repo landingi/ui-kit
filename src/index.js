@@ -9,6 +9,7 @@ export { default as Toast } from '@components/global/Toast'
 
 export { default as Accordion } from '@components/ui/Accordion'
 export { default as Accordion2 } from '@components/ui/Accordion2'
+
 export { default as Alert } from '@components/ui/Alert'
 export { default as Avatar } from '@components/ui/Avatar'
 export { default as Button } from '@components/ui/Button'
@@ -23,8 +24,10 @@ export { default as ColorNumber } from '@components/ui/ColorNumber'
 export { default as CustomLink } from '@components/ui/CustomLink'
 export { default as DateTimePicker } from '@components/ui/DateTimePicker'
 export { default as Divider } from '@components/ui/Divider'
+
 export { default as Dropdown } from '@components/ui/Dropdown'
 export { default as DropdownSelect } from '@components/ui/DropdownSelect'
+
 export { default as Filter } from '@components/ui/Filter'
 export { default as GalleryImage } from '@components/ui/GalleryImage'
 export { default as Form } from '@components/ui/Form'
@@ -70,8 +73,7 @@ export {
   SkeletonCircle,
   SkeletonDrawer,
   SkeletonLine,
-  SkeletonSidebar,
-  SkeletonTable
+  SkeletonSidebar
 } from '@components/ui/Skeleton'
 export { default as Spacer } from '@components/ui/Spacer'
 export { default as Spinner } from '@components/ui/Spinner'
