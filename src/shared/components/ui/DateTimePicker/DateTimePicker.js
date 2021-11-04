@@ -67,10 +67,10 @@ const DateTimePicker = ({
       {oneDatePicker ? (
         <Calendar
           date={selectedDateCalendar || new Date()}
+          onChange={setDate}
           locale={getLanguage === 'pl' ? pl : enUS}
           minDate={minDate ? new Date(minDate) : undefined}
           maxDate={maxDate}
-          onChange={setDate}
           color={'#EDECEC'}
           showMonthAndYearPickers={showMonthAndYearPickers}
           direction='horizontal'
