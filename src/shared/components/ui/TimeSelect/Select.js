@@ -24,7 +24,7 @@ const cssClass = styles(scss)
  * @param {object} props - props
  * @param {string} props.value - current selected time
  * @param {function} props.onChange - funct to change time
- * @param {string} props.formikKey - name on formik 'nasted' keys
+ * @param {string} props.formikKey - name on formik 'nested' keys
  * @param {string} props.label - label
  * @param {bool} props.disabled - when it's true, time can't be select, default: false
  * @return {object} An object of children element
