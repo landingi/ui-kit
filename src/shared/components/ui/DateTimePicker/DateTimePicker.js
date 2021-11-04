@@ -17,6 +17,7 @@ const cssClass = styles(scss)
  * @param {object} props - props
  * @param {function} props.setDate - date handler
  * @param {string} props.minDate - defines minimum date - disabled earlier dates
+ * @param {object} props.i18n
  * @param {date} props.maxDate - defines maximum date - disabled later dates (Calendar)
  * @param {bool} props.oneDatePicker - should render picker for one date - disabled date ranges
  * @param {date} props.selectedDateCalendar - defines selected date for calendar
@@ -28,7 +29,8 @@ const DateTimePicker = ({
   maxDate,
   oneDatePicker,
   selectedDateCalendar,
-  showMonthAndYearPickers
+  showMonthAndYearPickers,
+  i18n
 }) => {
   const [state, setState] = useState([
     {
