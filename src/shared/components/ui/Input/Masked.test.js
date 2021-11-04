@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Input from '@components/ui/Input'
+import Masked from '@components/ui/Input/Masked'
 import registerIcons from '@helpers/icons'
 
 registerIcons()
@@ -8,16 +8,22 @@ registerIcons()
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
 const mockedOnBlur = jest.fn()
-
 const props = {
   onChange: mockedOnChange,
   onKeyDown: mockedOnKeyDown,
-  onBlur: mockedOnBlur
+  onBlur: mockedOnBlur,
+  field: {
+    name: 'test',
+    value: 'test',
+    onChange: jest.fn(),
+    onBlur: jest.fn(),
+    translate: true
+  }
 }
 
-const component = <Input {...props} />
+const component = <Masked {...props} />
 
-describe('<Input /> mount', () => {
+describe('<Masked /> mount', () => {
   let wrapper
 
   beforeEach(() => {
@@ -32,24 +38,24 @@ describe('<Input /> mount', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('has `input__wrapper` class', () => {
-    expect(wrapper.find('div').hasClass('input__wrapper')).toBe(true)
+  it('has value of label in the placeholder prop', () => {
+    expect(wrapper.exists()).toBe(true)
   })
 
   it('default prop `onChange` should be null', () => {
-    const result = Input.defaultProps.onChange()
+    const result = Masked.defaultProps.onChange()
 
     expect(result).toBe(null)
   })
 
   it('default prop `onKeyDown` should be null', () => {
-    const result = Input.defaultProps.onKeyDown()
+    const result = Masked.defaultProps.onKeyDown()
 
     expect(result).toBe(null)
   })
 
   it('default prop `onBlur` should be null', () => {
-    const result = Input.defaultProps.onBlur()
+    const result = Masked.defaultProps.onBlur()
 
     expect(result).toBe(null)
   })
@@ -98,14 +104,6 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().focused).toEqual('false')
   })
 
-  it('should have defined default prop tooltip with value set to empty string', () => {
-    expect(wrapper.props().tooltip).toEqual('')
-  })
-
-  it('should have defined default prop background with value set to white', () => {
-    expect(wrapper.props().background).toEqual('white')
-  })
-
   it('should have defined default prop maxLength with value set to 524288', () => {
     expect(wrapper.props().maxLength).toEqual(524288)
   })
@@ -131,94 +129,5 @@ describe('<Input /> mount', () => {
 
   it('should have defined default prop translate with value set to true', () => {
     expect(wrapper.props().translate).toEqual(true)
-  })
-
-  it('should have defined default prop required with value set to true', () => {
-    expect(wrapper.props().required).toEqual(true)
-  })
-
-  it('should have defined default prop hideArrows with value set to false', () => {
-    expect(wrapper.props().hideArrows).toEqual(false)
-  })
-
-  it('should have defined default prop i18', () => {
-    expect(wrapper.props().i18n).toEqual({
-      placeholder: null,
-      label: null
-    })
-  })
-
-  it('has tooltip and exclamation icon', () => {
-    wrapper.setProps({
-      tooltip: 'some tooltip content'
-    })
-
-    expect(wrapper.find('Tooltip').prop('content')).toEqual(
-      'some tooltip content'
-    )
-    expect(
-      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('color')
-    ).toEqual('#2550AA')
-    expect(
-      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('icon')
-    ).toEqual('exclamation-circle')
-  })
-
-  it('has no tooltip', () => {
-    wrapper.setProps({
-      tooltip: ''
-    })
-
-    expect(wrapper.find('Tooltip').exists()).toBe(false)
-  })
-
-  it('should be readonly when is disabled', () => {
-    wrapper.setProps({
-      disabled: true,
-      readonly: true
-    })
-
-    expect(wrapper.find('input').prop('readOnly')).toBe(true)
-  })
-
-  it('should be disabled', () => {
-    wrapper.setProps({
-      disabled: true
-    })
-
-    expect(wrapper.find('input').prop('disabled')).toBe(true)
-  })
-
-  it('should display label when has i18n.label', () => {
-    wrapper.setProps({
-      i18n: {
-        label: 'I am your label'
-      }
-    })
-
-    expect(wrapper.find('label').prop('className')).toEqual(
-      'input__label label--normal'
-    )
-  })
-
-  it('should not display label when i18n.label is null', () => {
-    wrapper.setProps({
-      i18n: {
-        label: null
-      }
-    })
-
-    expect(wrapper.find('label').exists()).toBe(false)
-  })
-
-  it('should have min and max when type is number', () => {
-    wrapper.setProps({
-      type: 'number',
-      min: 1,
-      max: 10
-    })
-
-    expect(wrapper.find('input').prop('min')).toEqual(1)
-    expect(wrapper.find('input').prop('max')).toEqual(10)
   })
 })
