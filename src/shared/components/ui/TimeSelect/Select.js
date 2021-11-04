@@ -89,6 +89,7 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
   return (
     <Row vertical='end'>
       <DropdownSelect
+        className={timeSelectClasses}
         overflowStyle={{ maxHeight: 180 }}
         inModalName='Counter__Modal'
         alwaysShowLabel
@@ -97,7 +98,6 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
         options={isAmPmType ? TIME_FORMAT_EN : TIME_FORMAT_PL}
         value={isAmPmType ? convertTimeFrom24to12(value) : value}
         onChange={handleTimeChange}
-        className={timeSelectClasses}
         customValue
         isOpenDisabled={disabled}
       />
