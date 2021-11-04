@@ -361,7 +361,7 @@ Dropdown.propTypes = {
   ]),
   hasArrow: PropTypes.bool,
   arrowType: PropTypes.oneOf(['caret', 'dots']),
-  alignment: PropTypes.oneOf(['center', 'spaced']),
+  alignment: PropTypes.oneOf(['center', 'spaced', 'end']),
   dropdownPlacement: PropTypes.oneOf(['left', 'right']),
   button: PropTypes.bool,
   handleOnClick: PropTypes.func,

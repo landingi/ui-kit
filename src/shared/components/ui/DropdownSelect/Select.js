@@ -1,4 +1,4 @@
-import React, { useCallback, Fragment, useRef, useState } from 'react'
+import React, { useCallback, Fragment, useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
@@ -116,7 +116,7 @@ const Select = ({
   const [dropdownWidth, setDropdownWidth] = useState(null)
 
   useEffect(() => {
-    const labelWidth = dropdownRef.current?.containerRef.current.clientWidth
+    const labelWidth = dropdownRef.current?.containerRef?.current.clientWidth
     if (labelWidth) setDropdownWidth(labelWidth)
   }, [dropdownRef.current])
 
@@ -268,16 +268,8 @@ const Select = ({
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 Select.displayName = 'Select dropdown'
 
-/**
- * The properties.
- * @type {Object}
- */
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
@@ -318,10 +310,6 @@ Select.propTypes = {
   searchInOptions: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Select.defaultProps = {
   label: '',
   searchPlaceholder: '',
