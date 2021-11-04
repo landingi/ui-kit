@@ -25,6 +25,23 @@ export const processTime = (time, clockType) => {
 
   return time
 }
+
+/**
+ * Convert string time value in 24 hour format to 12 hour format
+ * eg. '23:30' => '11:30'
+ * @param {string} time24
+ * @returns {string} an string with formated hour
+ */
+export const convertTimeFrom24to12 = time24 => {
+  const [sHours, minutes] = time24.match(/([0-9]{1,2}):([0-9]{2})/).slice(1)
+  let hours = +sHours % 12 || 12
+
+  if (hours < 10) {
+    hours = `0${hours}`
+  }
+
+  return `${hours}:${minutes}`
+}
 /**
  * check if current time is am or pm if clocl time is am/pm non 0-23
  */

@@ -21,7 +21,7 @@ module.exports = {
     "simple-flexbox": "2.3.3",
     "tiny-emitter": "2.1.0",
     "@babel/runtime": "7.15.4",
-    "react-time-picker": "4.4.3"
+    "react-advanced-time-input": "1.2.0",
   },
   documentationDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
@@ -47,7 +47,7 @@ module.exports = {
     "@babel/runtime": "7.15.4",
     "docz": "2.3.1",
     "gatsby-plugin-sass": "4.14.0",
-    "react-time-picker": "4.4.3"
+    "react-advanced-time-input": "1.2.0",
   },
   testingDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
@@ -72,6 +72,6 @@ module.exports = {
     "tiny-emitter": "2.1.0",
     "yup": "0.32.9",
     "@babel/runtime": "7.15.4",
-    "react-time-picker": "4.4.3"
+    "react-advanced-time-input": "1.2.0",
   }
 }
