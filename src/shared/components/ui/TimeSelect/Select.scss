@@ -18,8 +18,10 @@
 
     input {
         color: $color-1;
-        padding: 4px 0 4px 10px;
         width: 50px !important;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 10px;      
     }
 
     input::-webkit-outer-spin-button,
@@ -61,7 +63,6 @@
                 &--input {
                     padding: 0
                 }
-
             }
         }
     }
