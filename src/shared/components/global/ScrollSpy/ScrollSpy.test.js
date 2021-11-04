@@ -5,6 +5,8 @@ import registerIcons from '@helpers/icons'
 
 registerIcons()
 
+const mockedOnClick = jest.fn()
+
 const data = [
   {
     children: [
@@ -17,7 +19,7 @@ const data = [
     title: 'Parent title'
   }
 ]
-const component = <ScrollSpy elements={data} />
+const component = <ScrollSpy elements={data} onClick={mockedOnClick} />
 
 describe('<ScrollSpy/> mount', () => {
   let wrapper
@@ -32,5 +34,9 @@ describe('<ScrollSpy/> mount', () => {
 
   it('is mounted', () => {
     expect(wrapper.exists()).toBe(true)
+  })
+
+  it('should have defined default prop onClick', () => {
+    expect(wrapper.props().onClick).toBeDefined()
   })
 })

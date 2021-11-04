@@ -2,8 +2,8 @@ import React, {
   useCallback,
   Fragment,
   useRef,
-  useEffect,
-  useState
+  useState,
+  useEffect
 } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
@@ -48,7 +48,7 @@ const cssClass = styles(scss)
  * @param {func} props.dropdownLabel
  * @param {func} props.className - wrapper custom styles
  * @param {func} props.customValue - allow use custom value which is not in options
- * @param {func} props.formikKey - name on formik 'nested' keys
+ * @param {func} props.formikKey - name on formik 'nasted' keys
  * @param {string} props.translate - translate key when items in dropdown use react-intl
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
@@ -122,7 +122,7 @@ const Select = ({
   const [dropdownWidth, setDropdownWidth] = useState(null)
 
   useEffect(() => {
-    const labelWidth = dropdownRef.current?.containerRef.current.clientWidth
+    const labelWidth = dropdownRef.current?.containerRef?.current.clientWidth
     if (labelWidth) setDropdownWidth(labelWidth)
   }, [dropdownRef.current])
 
@@ -206,7 +206,7 @@ const Select = ({
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
         size='fixed'
-        alignment='spaced'
+        alignment={valueClass ? 'spaced' : 'end'}
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
@@ -320,7 +320,6 @@ Select.defaultProps = {
   label: '',
   searchPlaceholder: '',
   inModalName: '',
-  className: '',
   errors: {},
   touched: {},
   overflowStyle: {},
@@ -330,6 +329,7 @@ Select.defaultProps = {
   liveChanges: false,
   optionalContent: null,
   dropdownLabel: null,
+  className: '',
   customValue: false,
   alwaysShowLabel: false,
   isOpenDisabled: false,

@@ -71,11 +71,13 @@ Searcher.displayName = 'Searcher'
 
 Searcher.propTypes = {
   liveChanges: PropTypes.bool,
-  placeholder: PropTypes.string,
   protectedSubmit: PropTypes.bool,
-  searchFunction: PropTypes.func,
   setSearchPhrase: PropTypes.func,
-  setSearchResult: PropTypes.func
+  searchFunction: PropTypes.func,
+  setSearchResult: PropTypes.func,
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string
+  })
 }
 
 Searcher.defaultProps = {
@@ -84,7 +86,7 @@ Searcher.defaultProps = {
     placeholder: 'null'
   },
   protectedSubmit: false,
-  setSearchPhrase: null,
+  setSearchPhrase: () => null,
   searchFunction: () => null,
   setSearchResult: () => null
 }

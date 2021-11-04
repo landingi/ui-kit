@@ -42,6 +42,12 @@ describe('<Button/> mount', () => {
     expect(wrapper.hasClass('button')).toBe(true)
   })
 
+  it('default prop `onClick` should be undefined', () => {
+    const result = Button.defaultProps.onClick()
+
+    expect(result).toBe(undefined)
+  })
+
   it('when prop isLoading is true, spinner is visible', () => {
     wrapper.setProps({
       isLoading: true

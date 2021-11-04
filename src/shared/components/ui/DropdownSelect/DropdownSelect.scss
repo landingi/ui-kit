@@ -12,15 +12,17 @@
 
   .form--has-value {
     .Label__label {
-      top: -17px;
-      opacity: 1;
-      z-index: 1;
+      top: 0px;
+      font-size: 14px;
     }
   }
 
   .form-field--dropdown {
     label {
-      opacity: 0;
+      position: relative;
+      top: 35px;
+      left: 0px;
+      font-size: 16px;
     }
   }
 
