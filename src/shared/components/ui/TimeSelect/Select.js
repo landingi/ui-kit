@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
-import DropdownSelect from 'shared/components/ui/DropdownSelect'
-import { styles } from 'shared/helpers/css'
-import { getLanguage } from 'shared/helpers/i18n'
-import Spreader from 'shared/components/ui/Spreader'
+import DropdownSelect from '@components/ui/DropdownSelect'
+import { styles } from '@helpers/css'
+import { getLanguage } from '@helpers/i18n'
+import Spreader from '@components/ui/Spreader'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,
@@ -122,16 +122,9 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
 
 export default TimeSelect
 
-/**
- * Display name
- * @type {string}
- */
+
 TimeSelect.displayName = 'Time Select'
 
-/**
- * The properties.
- * @type {Object}
- */
 TimeSelect.propTypes = {
   /**
    * Value
