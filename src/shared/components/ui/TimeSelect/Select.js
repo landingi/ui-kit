@@ -1,28 +1,20 @@
-import React, {
-  Fragment,
-  useCallback,
-  useState,
-  useRef,
-  useEffect
-} from 'react'
+import React, { Fragment, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
-import TimePicker from 'react-time-picker'
-import DropdownSelect from '@components/ui/DropdownSelect'
-import { styles } from '@helpers/css'
-import { getLanguage } from '@helpers/i18n'
-import Spreader from '@components/ui/Spreader'
+import TimeInput from 'react-advanced-time-input'
+import DropdownSelect from 'shared/components/ui/DropdownSelect'
+import { styles } from 'shared/helpers/css'
+import { getLanguage } from 'shared/helpers/i18n'
+import Spreader from 'shared/components/ui/Spreader'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,
   CLOCK_OPTIONS,
-  MIN_TIME_EN,
-  MAX_TIME_EN,
-  MIN_TIME_PL,
-  MAX_TIME_PL
+  MAX_HOUR_EN,
+  MAX_HOUR_PL
 } from './constants'
-import { isAmOrPm, processTime } from './helpers'
+import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import scss from './Select.scss'
 
 const cssClass = styles(scss)
@@ -48,8 +40,6 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
     'time-select--small': isAmPmType
   })
 
-  const timePickerRef = useRef(null)
-
   const [clockType, setClockType] = useState(isAmOrPm(value, isAmPmType))
 
   /**
@@ -66,50 +56,34 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
     [formikKey, clockType]
   )
 
+  const handleTimeInputChange = (event, newTime) => {
+    if (formikKey) {
+      onChange(formikKey, processTime(newTime, clockType))
+    } else {
+      onChange(processTime(newTime, clockType))
+    }
+  }
+
   const handleClockChange = useCallback(type => {
     handleTimeChange(value, type)
     setClockType(type)
   })
-
-  useEffect(() => {
-    const { wrapper: timePickerWrapper } = timePickerRef.current
-
-    const preventDeletingValues = event => {
-      if (['Backspace', 'Delete'].includes(event.key)) {
-        event.preventDefault()
-      }
-    }
-
-    timePickerWrapper.addEventListener('keydown', preventDeletingValues)
-
-    return () =>
-      timePickerWrapper.removeEventListener('keydown', preventDeletingValues)
-  }, [])
 
   /**
    * render label with custom time input
    */
   const renderDropdownLabel = useCallback(
     selectedValue => (
-      <Row className={cssClass('label')} vertical='center'>
+      <Row className={cssClass(timePickerClasses)} vertical='center'>
         <FontAwesomeIcon icon='clock' className={cssClass('clock-icon')} />
-        <TimePicker
-          ref={timePickerRef}
-          format={isAmPmType ? 'hh:mm' : 'HH:mm'}
-          className={timePickerClasses}
-          clockIcon={null}
-          clearIcon={null}
-          isOpen={false}
-          openClockOnFocus={false}
-          onChange={handleTimeChange}
+        <TimeInput
+          onChange={handleTimeInputChange}
           value={selectedValue?.value}
-          disabled={disabled}
-          minTime={isAmPmType ? MIN_TIME_EN : MIN_TIME_PL}
-          maxTime={isAmPmType ? MAX_TIME_EN : MAX_TIME_PL}
+          maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
         />
       </Row>
     ),
-    [disabled]
+    [disabled, value, isAmPmType]
   )
 
   return (
@@ -120,8 +94,8 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
         alwaysShowLabel
         label={label}
         dropdownLabel={renderDropdownLabel}
-        options={getLanguage === 'pl' ? TIME_FORMAT_PL : TIME_FORMAT_EN}
-        value={value}
+        options={isAmPmType ? TIME_FORMAT_EN : TIME_FORMAT_PL}
+        value={isAmPmType ? convertTimeFrom24to12(value) : value}
         onChange={handleTimeChange}
         className={timeSelectClasses}
         customValue
@@ -148,8 +122,16 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
 
 export default TimeSelect
 
+/**
+ * Display name
+ * @type {string}
+ */
 TimeSelect.displayName = 'Time Select'
 
+/**
+ * The properties.
+ * @type {Object}
+ */
 TimeSelect.propTypes = {
   /**
    * Value

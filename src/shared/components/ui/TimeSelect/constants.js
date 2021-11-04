@@ -46,8 +46,7 @@ export const TIME_FORMAT_PL = [
   { label: '22:00', value: '22:00' },
   { label: '22:30', value: '22:30' },
   { label: '23:00', value: '23:00' },
-  { label: '23:30', value: '23:30' },
-  { label: '23:59', value: '23:59' }
+  { label: '23:30', value: '23:30' }
 ]
 
 export const TIME_FORMAT_EN = [
@@ -74,8 +73,7 @@ export const TIME_FORMAT_EN = [
   { label: '10:00', value: '10:00' },
   { label: '10:30', value: '10:30' },
   { label: '11:00', value: '11:00' },
-  { label: '11:30', value: '11:30' },
-  { label: '11:59', value: '11:59' }
+  { label: '11:30', value: '11:30' }
 ]
 
 export const AM = 'AM'
@@ -86,8 +84,5 @@ export const CLOCK_OPTIONS = [
   { value: PM, label: PM }
 ]
 
-export const MIN_TIME_PL = '00:00'
-export const MAX_TIME_PL = '23:59'
-
-export const MIN_TIME_EN = '01:00'
-export const MAX_TIME_EN = '12:59'
+export const MAX_HOUR_PL = 23
+export const MAX_HOUR_EN = 12
