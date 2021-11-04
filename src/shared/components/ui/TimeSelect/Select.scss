@@ -41,6 +41,7 @@
     &--disabled {
         input {
             color: $color-input-border;
+            -webkit-text-fill-color: $color-input-border;
         }
     }
     
