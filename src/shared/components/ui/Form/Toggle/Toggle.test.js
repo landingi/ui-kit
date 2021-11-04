@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import {Toggle} from '@components/ui/Form/Toggle/Toggle'
+import { Toggle } from '@components/ui/Form/Toggle/Toggle'
 import registerIcons from '@helpers/icons'
 import { jsxEmptyExpression } from '@babel/types'
 

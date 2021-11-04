@@ -46,11 +46,15 @@ describe('<Checkbox /> mount', () => {
   })
 
   it('has class `checkbox-container`', () => {
-    expect(wrapper.find('div.checkbox-container').hasClass('checkbox-container')).toBe(true)
+    expect(
+      wrapper.find('div.checkbox-container').hasClass('checkbox-container')
+    ).toBe(true)
   })
 
   it('has label with class `checkbox__input`', () => {
-    expect(wrapper.find('label.checkbox__input').hasClass('checkbox__input')).toBe(true)
+    expect(
+      wrapper.find('label.checkbox__input').hasClass('checkbox__input')
+    ).toBe(true)
   })
 
   it('has label below input with class `checkbox__label`', () => {
@@ -58,7 +62,11 @@ describe('<Checkbox /> mount', () => {
       label: 'jestem sobie labelem'
     })
 
-    expect(wrapper.find('label.checkbox__label').hasClass('checkbox__label')).toBe(true)
-    expect(wrapper.find('label.checkbox__label').text()).toEqual(wrapper.prop('label'))
+    expect(
+      wrapper.find('label.checkbox__label').hasClass('checkbox__label')
+    ).toBe(true)
+    expect(wrapper.find('label.checkbox__label').text()).toEqual(
+      wrapper.prop('label')
+    )
   })
 })

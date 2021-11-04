@@ -47,7 +47,9 @@ describe('<Select /> mount', () => {
   })
 
   it('has wrapper with class `input__wrapper`', () => {
-    expect(wrapper.find('div.input__wrapper').hasClass('input__wrapper')).toBe(true)
+    expect(wrapper.find('div.input__wrapper').hasClass('input__wrapper')).toBe(
+      true
+    )
   })
 
   it('has label below input with class `input__label`', () => {
@@ -55,7 +57,11 @@ describe('<Select /> mount', () => {
       label: 'jestem sobie labelem'
     })
 
-    expect(wrapper.find('label.input__label').hasClass('input__label')).toBe(true)
-    expect(wrapper.find('label.input__label').text()).toEqual(wrapper.prop('label'))
+    expect(wrapper.find('label.input__label').hasClass('input__label')).toBe(
+      true
+    )
+    expect(wrapper.find('label.input__label').text()).toEqual(
+      wrapper.prop('label')
+    )
   })
 })
