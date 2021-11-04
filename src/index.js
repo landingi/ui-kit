@@ -9,6 +9,7 @@ export { default as Toast } from '@components/global/Toast'
 
 export { default as Accordion } from '@components/ui/Accordion'
 export { default as Accordion2 } from '@components/ui/Accordion2'
+
 export { default as Alert } from '@components/ui/Alert'
 export { default as Avatar } from '@components/ui/Avatar'
 export { default as Button } from '@components/ui/Button'
