@@ -71,7 +71,7 @@ export {
   SkeletonCircle,
   SkeletonDrawer,
   SkeletonLine,
-  SkeletonSidebar,
+  SkeletonSidebar
 } from '@components/ui/Skeleton'
 export { default as Spacer } from '@components/ui/Spacer'
 export { default as Spinner } from '@components/ui/Spinner'
