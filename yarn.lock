@@ -14575,7 +14575,7 @@ react-ace@^7.0.2:
     lodash.isequal "^4.5.0"
     prop-types "^15.7.2"
 
-react-advanced-time-input@^1.2.0:
+react-advanced-time-input@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-advanced-time-input/-/react-advanced-time-input-1.2.0.tgz#457c10d057a478d4e7e9c43aecfac653442c5b48"
   integrity sha512-NkUKRXf8yRRKWuWpXCa+iyafoiaiU/jYdMmc/cBxbsUYB9PVWud7vEgPsP7P5I1/+cr+/+tfbu4998pgYamh8w==
