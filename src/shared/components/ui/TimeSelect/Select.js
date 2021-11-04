@@ -23,7 +23,7 @@ const cssClass = styles(scss)
  * Time Select - stateless component for selecting time
  * @param {object} props - props
  * @param {string} props.value - current selected time
- * @param {function} props.onChange - funct to change time
+ * @param {function} props.onChange - function to change time
  * @param {string} props.formikKey - name on formik 'nested' keys
  * @param {string} props.label - label
  * @param {bool} props.disabled - when it's true, time can't be select, default: false
