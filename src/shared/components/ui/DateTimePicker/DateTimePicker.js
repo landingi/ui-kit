@@ -17,6 +17,7 @@ const cssClass = styles(scss)
  * @param {object} props - props
  * @param {function} props.setDate - date handler
  * @param {string} props.minDate - defines minimum date - disabled earlier dates
+ * @param {date} props.maxDate - defines maximum date - disabled later dates (Calendar)
  * @param {bool} props.oneDatePicker - should render picker for one date - disabled date ranges
  * @param {date} props.selectedDateCalendar - defines selected date for calendar
  * @param {bool} props.showMonthAndYearPickers - should render select list for month and year
@@ -24,6 +25,7 @@ const cssClass = styles(scss)
 const DateTimePicker = ({
   setDate,
   minDate,
+  maxDate,
   oneDatePicker,
   selectedDateCalendar,
   showMonthAndYearPickers
@@ -67,6 +69,7 @@ const DateTimePicker = ({
           date={selectedDateCalendar || new Date()}
           locale={getLanguage === 'pl' ? pl : enUS}
           minDate={minDate ? new Date(minDate) : undefined}
+          maxDate={maxDate}
           onChange={setDate}
           color={'#EDECEC'}
           showMonthAndYearPickers={showMonthAndYearPickers}
@@ -104,6 +107,7 @@ DateTimePicker.displayName = 'DateTimePicker'
 DateTimePicker.propTypes = {
   setDate: PropTypes.func.isRequired,
   minDate: PropTypes.string,
+  maxDate: PropTypes.instanceOf(Date),
   oneDatePicker: PropTypes.bool,
   selectedDateCalendar: PropTypes.instanceOf(Date),
   showMonthAndYearPickers: PropTypes.bool
@@ -111,6 +115,7 @@ DateTimePicker.propTypes = {
 
 DateTimePicker.defaultProps = {
   minDate: null,
+  maxDate: undefined,
   oneDatePicker: false,
   showMonthAndYearPickers: true,
   i18n: {
