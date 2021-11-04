@@ -9,7 +9,7 @@ const props = {
   handleOnClick: jest.fn(),
   label: 'Test Label'
 }
-const component = <AccordionSection {...props }/>
+const component = <AccordionSection {...props} />
 
 describe('<AccordionSection /> mount', () => {
   let wrapper
@@ -27,9 +27,7 @@ describe('<AccordionSection /> mount', () => {
   })
 
   it('calls function passed as handleOnClick prop on click event', () => {
-    wrapper
-      .find('div.accordion__header')
-      .simulate('click')
+    wrapper.find('div.accordion__header').simulate('click')
 
     expect(wrapper.prop('handleOnClick')).toHaveBeenCalled()
   })
@@ -39,8 +37,12 @@ describe('<AccordionSection /> mount', () => {
       label: 'label content'
     })
 
-    expect(wrapper.find('div.accordion__header').hasClass('accordion__header')).toBe(true)
-    expect(wrapper.find('div.accordion__header').text()).toEqual(wrapper.prop('label'))
+    expect(
+      wrapper.find('div.accordion__header').hasClass('accordion__header')
+    ).toBe(true)
+    expect(wrapper.find('div.accordion__header').text()).toEqual(
+      wrapper.prop('label')
+    )
   })
 
   it('has children', () => {
@@ -49,8 +51,12 @@ describe('<AccordionSection /> mount', () => {
       children: 'children content'
     })
 
-    expect(wrapper.find('div.accordion__text').hasClass('accordion__text')).toBe(true)
-    expect(wrapper.find('div.accordion__text').text()).toEqual(wrapper.prop('children'))
+    expect(
+      wrapper.find('div.accordion__text').hasClass('accordion__text')
+    ).toBe(true)
+    expect(wrapper.find('div.accordion__text').text()).toEqual(
+      wrapper.prop('children')
+    )
   })
 
   it('has label next to the arrow', () => {
@@ -60,8 +66,14 @@ describe('<AccordionSection /> mount', () => {
       arrowLabel: 'I am just an arrow label'
     })
 
-    expect(wrapper.find('span.accordion__header-arrow').hasClass('accordion__header-arrow')).toBe(true)
-    expect(wrapper.find('span.accordion__header-arrow').text()).toEqual(wrapper.prop('arrowLabel'))
+    expect(
+      wrapper
+        .find('span.accordion__header-arrow')
+        .hasClass('accordion__header-arrow')
+    ).toBe(true)
+    expect(wrapper.find('span.accordion__header-arrow').text()).toEqual(
+      wrapper.prop('arrowLabel')
+    )
   })
 
   it('when is open it has icon chevron up', () => {
@@ -83,5 +95,4 @@ describe('<AccordionSection /> mount', () => {
 
     expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('chevron-down')
   })
-
 })

@@ -77,9 +77,6 @@ Searcher.propTypes = {
   setSearchResult: PropTypes.func,
   i18n: PropTypes.shape({
     placeholder: PropTypes.string
-  }),
-  i18n: PropTypes.shape({
-      placeholder: PropTypes.string
   })
 }
 

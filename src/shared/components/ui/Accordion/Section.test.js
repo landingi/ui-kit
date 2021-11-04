@@ -10,7 +10,7 @@ const props = {
   label: 'Test Label',
   children: 'I am just children element'
 }
-const component = <Section {...props }/>
+const component = <Section {...props} />
 
 describe('<Section /> mount', () => {
   let wrapper
@@ -28,9 +28,7 @@ describe('<Section /> mount', () => {
   })
 
   it('calls function passed as handleOnClick prop on click event', () => {
-    wrapper
-      .find('div.accordion__header')
-      .simulate('click')
+    wrapper.find('div.accordion__header').simulate('click')
 
     expect(wrapper.prop('handleOnClick')).toHaveBeenCalled()
   })
@@ -40,8 +38,12 @@ describe('<Section /> mount', () => {
       label: 'label content'
     })
 
-    expect(wrapper.find('div.accordion__header').hasClass('accordion__header')).toBe(true)
-    expect(wrapper.find('div.accordion__header').text()).toEqual(wrapper.prop('label'))
+    expect(
+      wrapper.find('div.accordion__header').hasClass('accordion__header')
+    ).toBe(true)
+    expect(wrapper.find('div.accordion__header').text()).toEqual(
+      wrapper.prop('label')
+    )
   })
 
   it('has children', () => {
@@ -50,7 +52,11 @@ describe('<Section /> mount', () => {
       children: 'children content'
     })
 
-    expect(wrapper.find('div.accordion__text').hasClass('accordion__text')).toBe(true)
-    expect(wrapper.find('div.accordion__text').text()).toEqual(wrapper.prop('children'))
+    expect(
+      wrapper.find('div.accordion__text').hasClass('accordion__text')
+    ).toBe(true)
+    expect(wrapper.find('div.accordion__text').text()).toEqual(
+      wrapper.prop('children')
+    )
   })
 })

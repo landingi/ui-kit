@@ -7,13 +7,15 @@ registerIcons()
 
 const props = {
   children: 'children',
-  options: [{
-    label: 'jestem label',
-    value: 'jestem value'
-  }]
+  options: [
+    {
+      label: 'jestem label',
+      value: 'jestem value'
+    }
+  ]
 }
 
-const dropdownComponent = <DropdownSelect {...props }/>
+const dropdownComponent = <DropdownSelect {...props} />
 
 describe('<DropdownSelect /> mount', () => {
   let wrapper
