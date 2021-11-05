@@ -65,7 +65,7 @@ const Input = ({
   })
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div className={cssClass('input__wrapper', elementClasses)}>
       <input
         className={cssClass(className, inputClasses)}
         onBlur={onBlur}
@@ -89,7 +89,7 @@ const Input = ({
       <span className={cssClass('bar')} />
 
       {i18n?.label && (
-        <Label id={name} className={scss.input__label}>
+        <Label id={name} className={cssClass('input__label')}>
           {i18n.label}
         </Label>
       )}

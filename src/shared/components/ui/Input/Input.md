@@ -7,6 +7,12 @@ import Input from '@components/ui/Input'
 
 <Playground>
   <Input
-    placeholder='Just placeholder'
-    type="text" />
+    i18n={{placeholder:'Test placeholder',label:'Test label'}}
+    type="text"
+  />
+  <Input
+    i18n={{placeholder:'Test placeholder',label:'Test label'}}
+    type="text"
+    alwaysShowLabel
+  />
 </Playground>

@@ -36,7 +36,8 @@ const Input = ({
   required,
   tooltip,
   focused,
-  background
+  background,
+  alwaysShowLabel
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
