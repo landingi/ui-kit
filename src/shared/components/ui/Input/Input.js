@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Input.scss'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import scss from './Input.scss'
 const cssClass = styles(scss)
 
 /**
@@ -15,11 +15,10 @@ const cssClass = styles(scss)
  * @param {function} props.onKeyDown - key down handler
  * @param {function} props.onBlur - blur handler
  * @param {string} props.type - type
- * @param {string|object} props.placeholder - placeholder
  * @param {string} props.name - name
  * @param {boolean} props.disabled - disabled
  * @param {boolean} props.readonly - readonly
- * @param {object} props.i18n - label
+ * @param {object} props.i18n - object of translation
  * @param {bool} props.autoFocus - autoFocus
  * @param {string} props.focused - focused, keep label by default on top
  * @param {number} props.maxLength - max length of input
@@ -74,6 +73,7 @@ const Input = ({
         name={name}
         id={name}
         defaultValue={value}
+        value={value}
         readOnly={disabled ? readonly : undefined}
         disabled={!disabled ? undefined : disabled}
         autoFocus={autoFocus}
