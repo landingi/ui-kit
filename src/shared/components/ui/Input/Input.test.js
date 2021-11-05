@@ -114,8 +114,8 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().name).toEqual(null)
   })
 
-  it('should have defined default prop value with value set to null', () => {
-    expect(wrapper.props().value).toEqual(null)
+  it('should have defined default prop value with value set to undefined', () => {
+    expect(wrapper.props().value).toEqual(undefined)
   })
   it('should have defined default prop disabled with value set to false', () => {
     expect(wrapper.props().disabled).toEqual(false)
