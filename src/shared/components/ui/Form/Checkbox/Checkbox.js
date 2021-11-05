@@ -52,7 +52,7 @@ const Checkbox = ({
   )
 }
 
-Checkbox.displayName = 'FormCheckbox'
+Checkbox.displayName = 'Checkbox'
 
 Checkbox.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),

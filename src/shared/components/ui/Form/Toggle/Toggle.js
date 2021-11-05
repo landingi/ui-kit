@@ -12,6 +12,7 @@ const cssClass = styles(scss)
  * @param {string|array} props.className - list of class names, default: ''
  * @param {string} props.name - name
  * @param {bool} props.checked - checked
+ * @param {string} props.type
  * @param {func} props.onChange - onChange
  * @param {func} props.onBlur - onBlur
  * @param {string} props.id - id
@@ -27,7 +28,8 @@ const toggle = ({
   id,
   label,
   className,
-  disabled
+  disabled,
+  type
 }) => {
   const getDisabledClassName = () =>
     checked ? 'toggle--checked-disabled' : 'toggle--disabled'
@@ -64,11 +66,9 @@ const toggle = ({
 toggle.displayName = 'Toggle'
 
 toggle.propTypes = {
-  /**
-   * Classname, default ''
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
+  type: PropTypes.string,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
@@ -82,6 +82,7 @@ toggle.propTypes = {
  * @type {Object}
  */
 toggle.defaultProps = {
+  type: 'checkbox',
   className: '',
   label: '',
   onBlur: () => null,

@@ -5,12 +5,7 @@ import { mountWithIntl } from '@jestutils'
 
 registerIcons()
 
-const props = {
-  className: 'showpassword',
-  setHidden: () => null
-}
-
-const component = <ShowPassword {...props} />
+const component = <ShowPassword />
 
 describe('<ShowPassword/> mount', () => {
   let wrapper
@@ -31,11 +26,18 @@ describe('<ShowPassword/> mount', () => {
     expect(wrapper.hasClass('showpassword')).toBe(true)
   })
 
-  // it('has label', () => {
-  //   wrapper.setProps({
-  //     hasLabel: true
-  //   })
+  it('default prop `setHidden` should be undefined', () => {
+    const result = ShowPassword.defaultProps.setHidden()
 
-  //   expect(wrapper.find(FormattedMessage).text()).toEqual('Show')
-  // })
+    expect(result).toBe(null)
+  })
+
+  it('has label show and eye icon', () => {
+    wrapper.setProps({
+      hasLabel: true
+    })
+
+    expect(wrapper.find('Button').text()).toEqual('word.show')
+    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('eye')
+  })
 })
