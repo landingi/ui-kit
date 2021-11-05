@@ -29,6 +29,7 @@ const cssClass = styles(scss)
  * @param {bool} props.required - required
  * @param {string} props.background - Color of background `white, transparent', default: white
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
+ * @param {bool} props.alwaysShowLabel - always show label on top
  * @return {object} An object of children element
  */
 const Input = ({
@@ -50,10 +51,12 @@ const Input = ({
   min,
   max,
   background,
-  hideArrows
+  hideArrows,
+  alwaysShowLabel
 }) => {
   const elementClasses = cssClass({
-    'input__wrapper--focused': focused === 'true'
+    'input__wrapper--focused': focused === 'true',
+    'input__wrapper--show-label': alwaysShowLabel
   })
 
   const inputClasses = cssClass({
@@ -69,7 +72,7 @@ const Input = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={i18n.label || i18n.placeholder}
+        placeholder={i18n.placeholder}
         name={name}
         id={name}
         defaultValue={value}
@@ -146,7 +149,6 @@ Input.defaultProps = {
   disabled: false,
   readonly: false,
   autoFocus: false,
-  translate: true,
   required: true,
   hideArrows: false,
   onChange: () => null,

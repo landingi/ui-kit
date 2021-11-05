@@ -56,6 +56,16 @@
     box-shadow: none;
   }
 
+  &--show-label {
+    input ~ label {
+      top: -14px;
+      font-size: 14px;
+    }
+
+    input ~ label {
+      opacity: 1;
+    }
+  }
   &--focused {
     input ~ label,
     input:focus ~ label,
