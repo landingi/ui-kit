@@ -129,10 +129,6 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().autoFocus).toEqual(false)
   })
 
-  it('should have defined default prop translate with value set to true', () => {
-    expect(wrapper.props().translate).toEqual(true)
-  })
-
   it('should have defined default prop required with value set to true', () => {
     expect(wrapper.props().required).toEqual(true)
   })
