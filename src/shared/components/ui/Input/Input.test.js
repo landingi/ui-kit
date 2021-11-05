@@ -114,8 +114,8 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().name).toEqual(null)
   })
 
-  it('should have defined default prop value with value set to null', () => {
-    expect(wrapper.props().value).toEqual(null)
+  it('should have defined default prop value with value set to undefined', () => {
+    expect(wrapper.props().value).toEqual(undefined)
   })
   it('should have defined default prop disabled with value set to false', () => {
     expect(wrapper.props().disabled).toEqual(false)
@@ -127,10 +127,6 @@ describe('<Input /> mount', () => {
 
   it('should have defined default prop autoFocus with value set to false', () => {
     expect(wrapper.props().autoFocus).toEqual(false)
-  })
-
-  it('should have defined default prop translate with value set to true', () => {
-    expect(wrapper.props().translate).toEqual(true)
   })
 
   it('should have defined default prop required with value set to true', () => {
@@ -220,5 +216,23 @@ describe('<Input /> mount', () => {
 
     expect(wrapper.find('input').prop('min')).toEqual(1)
     expect(wrapper.find('input').prop('max')).toEqual(10)
+  })
+
+  it('should not have --show-label when alwaysShowLabel is set on false', () => {
+    wrapper.setProps({
+      alwaysShowLabel: false
+    })
+
+    expect(wrapper.find('div').prop('className')).toEqual('input__wrapper')
+  })
+
+  it('should have --show-label when alwaysShowLabel is set on true', () => {
+    wrapper.setProps({
+      alwaysShowLabel: true
+    })
+
+    expect(wrapper.find('div').prop('className')).toEqual(
+      'input__wrapper input__wrapper--show-label'
+    )
   })
 })

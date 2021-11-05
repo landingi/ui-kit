@@ -13,7 +13,6 @@ import { getDeepValue } from '@helpers/data'
  * @param {string} props.label - label
  * @param {string} props.placeholder - placeholder
  * @param {string} props.type - type of element `text, number etc`
- * @param {bool} props.translate - if label should be translated by intl
  * @param {number} props.maxLength - max length of input
  * @param {bool} props.autoFocus - autoFocus
  * @param {string|object} props.tooltip - tooltip
@@ -21,23 +20,24 @@ import { getDeepValue } from '@helpers/data'
  * @param {bool} props.disabled - disabled
  * @param {bool} props.required - required
  * @param {string} props.background - color of background `white, transparent', default: white
+ * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {object} props.i18n - object of translation
  * @return {object} An object of children element
  */
 const Input = ({
   field: { name, value, onChange, onBlur },
   form: { errors, touched },
   id,
-  label,
-  placeholder,
+  i18n,
   type,
   disabled,
-  translate,
   maxLength,
   autoFocus,
   required,
   tooltip,
   focused,
-  background
+  background,
+  alwaysShowLabel
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -52,16 +52,15 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
+        i18n={i18n}
         disabled={disabled}
-        translate={translate}
         maxLength={maxLength}
         autoFocus={autoFocus}
         required={required}
         tooltip={tooltip}
         focused={focused}
         background={background}
+        alwaysShowLabel={alwaysShowLabel}
       />
       {isTouched && <Error error={error} />}
     </div>
@@ -86,7 +85,6 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
   disabled: PropTypes.bool,
-  translate: PropTypes.bool,
   maxLength: PropTypes.number,
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
@@ -95,7 +93,12 @@ Input.propTypes = {
     PropTypes.instanceOf(Object)
   ]),
   background: PropTypes.oneOf(['white', 'transparent']),
-  focused: PropTypes.string
+  focused: PropTypes.string,
+  alwaysShowLabel: PropTypes.bool,
+  i18n: PropTypes.shape({
+    label: PropTypes.string,
+    placeholder: PropTypes.string
+  })
 }
 
 Input.defaultProps = {
@@ -103,13 +106,17 @@ Input.defaultProps = {
   placeholder: '',
   type: 'text',
   disabled: false,
-  translate: true,
   maxLength: 524288,
   autoFocus: false,
   required: true,
   tooltip: '',
   background: 'white',
-  focused: 'false'
+  focused: 'false',
+  alwaysShowLabel: false,
+  i18n: {
+    label: null,
+    placeholder: null
+  }
 }
 
 export default Input

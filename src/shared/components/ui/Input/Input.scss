@@ -56,6 +56,17 @@
     box-shadow: none;
   }
 
+  &--show-label {
+    input ~ label,
+    input:focus ~ label,
+    input:valid ~ label,
+    input:invalid ~ label  {
+      top: -14px;
+      font-size: 14px;
+      opacity: 1;
+    }
+  }
+
   &--focused {
     input ~ label,
     input:focus ~ label,

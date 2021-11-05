@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './Input.scss'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import scss from './Input.scss'
 const cssClass = styles(scss)
 
 /**
@@ -15,11 +15,10 @@ const cssClass = styles(scss)
  * @param {function} props.onKeyDown - key down handler
  * @param {function} props.onBlur - blur handler
  * @param {string} props.type - type
- * @param {string|object} props.placeholder - placeholder
  * @param {string} props.name - name
  * @param {boolean} props.disabled - disabled
  * @param {boolean} props.readonly - readonly
- * @param {object} props.i18n - label
+ * @param {object} props.i18n - object of translation
  * @param {bool} props.autoFocus - autoFocus
  * @param {string} props.focused - focused, keep label by default on top
  * @param {number} props.maxLength - max length of input
@@ -30,6 +29,7 @@ const cssClass = styles(scss)
  * @param {bool} props.required - required
  * @param {string} props.background - Color of background `white, transparent', default: white
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
+ * @param {bool} props.alwaysShowLabel - always show label on top
  * @return {object} An object of children element
  */
 const Input = ({
@@ -51,10 +51,12 @@ const Input = ({
   min,
   max,
   background,
-  hideArrows
+  hideArrows,
+  alwaysShowLabel
 }) => {
   const elementClasses = cssClass({
-    'input__wrapper--focused': focused === 'true'
+    'input__wrapper--focused': focused === 'true',
+    'input__wrapper--show-label': alwaysShowLabel
   })
 
   const inputClasses = cssClass({
@@ -63,17 +65,17 @@ const Input = ({
   })
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
+    <div className={cssClass('input__wrapper', elementClasses)}>
       <input
         className={cssClass(className, inputClasses)}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={i18n.label || i18n.placeholder}
+        placeholder={i18n.placeholder}
         name={name}
         id={name}
-        defaultValue={value}
+        value={value}
         readOnly={disabled ? readonly : undefined}
         disabled={!disabled ? undefined : disabled}
         autoFocus={autoFocus}
@@ -86,7 +88,7 @@ const Input = ({
       <span className={cssClass('bar')} />
 
       {i18n?.label && (
-        <Label id={name} className={scss.input__label}>
+        <Label id={name} className={cssClass('input__label')}>
           {i18n.label}
         </Label>
       )}
@@ -127,7 +129,11 @@ Input.propTypes = {
     PropTypes.instanceOf(Object)
   ]),
   background: PropTypes.oneOf(['white', 'transparent']),
-  hideArrows: PropTypes.bool
+  hideArrows: PropTypes.bool,
+  i18n: PropTypes.shape({
+    label: PropTypes.string,
+    placeholder: PropTypes.string
+  })
 }
 
 Input.defaultProps = {
@@ -142,11 +148,10 @@ Input.defaultProps = {
     placeholder: null
   },
   name: null,
-  value: null,
+  value: undefined,
   disabled: false,
   readonly: false,
   autoFocus: false,
-  translate: true,
   required: true,
   hideArrows: false,
   onChange: () => null,
