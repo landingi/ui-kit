@@ -75,7 +75,6 @@ const Input = ({
         placeholder={i18n.placeholder}
         name={name}
         id={name}
-        defaultValue={value}
         value={value}
         readOnly={disabled ? readonly : undefined}
         disabled={!disabled ? undefined : disabled}
@@ -130,7 +129,11 @@ Input.propTypes = {
     PropTypes.instanceOf(Object)
   ]),
   background: PropTypes.oneOf(['white', 'transparent']),
-  hideArrows: PropTypes.bool
+  hideArrows: PropTypes.bool,
+  i18n: PropTypes.shape({
+    label: PropTypes.string,
+    placeholder: PropTypes.string
+  })
 }
 
 Input.defaultProps = {
@@ -145,7 +148,7 @@ Input.defaultProps = {
     placeholder: null
   },
   name: null,
-  value: null,
+  value: undefined,
   disabled: false,
   readonly: false,
   autoFocus: false,

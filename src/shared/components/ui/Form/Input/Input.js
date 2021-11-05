@@ -21,14 +21,14 @@ import { getDeepValue } from '@helpers/data'
  * @param {bool} props.required - required
  * @param {string} props.background - color of background `white, transparent', default: white
  * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {object} props.i18n - object of translation
  * @return {object} An object of children element
  */
 const Input = ({
   field: { name, value, onChange, onBlur },
   form: { errors, touched },
   id,
-  label,
-  placeholder,
+  i18n,
   type,
   disabled,
   maxLength,
@@ -52,7 +52,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        i18n={{ placeholder, label }}
+        i18n={i18n}
         disabled={disabled}
         maxLength={maxLength}
         autoFocus={autoFocus}
@@ -94,7 +94,11 @@ Input.propTypes = {
   ]),
   background: PropTypes.oneOf(['white', 'transparent']),
   focused: PropTypes.string,
-  alwaysShowLabel: PropTypes.bool
+  alwaysShowLabel: PropTypes.bool,
+  i18n: PropTypes.shape({
+    label: PropTypes.string,
+    placeholder: PropTypes.string
+  })
 }
 
 Input.defaultProps = {
@@ -108,7 +112,11 @@ Input.defaultProps = {
   tooltip: '',
   background: 'white',
   focused: 'false',
-  alwaysShowLabel: false
+  alwaysShowLabel: false,
+  i18n: {
+    label: null,
+    placeholder: null
+  }
 }
 
 export default Input
