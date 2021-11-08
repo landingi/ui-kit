@@ -29,7 +29,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]'
+                localIdentName: '[name]__[local]'
               }
             }
           },
@@ -61,7 +61,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'app-uikit.css'
+      filename: 'app-uikit.module.css'
     }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,
