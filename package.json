@@ -1,8 +1,8 @@
 {
     "name": "@landingi/landingi-ui-kit",
-    "version": "1.1.14",
+    "version": "1.1.23",
     "description": "Landingi UI-Kit",
-    "main": "dist/main.js",
+    "main": "dist/app-uikit.js",
     "private": true,
     "scripts": {
         "docz:dev": "yarn docz dev",
