@@ -61,7 +61,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'app-uikit.module.css'
+      filename: 'app-uikit.css'
     }),
     new ESLintPlugin({
       lintDirtyModulesOnly: true,
