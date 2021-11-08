@@ -10,7 +10,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'app-uikit.js',
     library: '@landingi/landingi_ui_kit',
     libraryTarget: 'umd'
   },
