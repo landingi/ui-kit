@@ -124,6 +124,8 @@ const Select = ({
   useEffect(() => {
     const labelWidth = dropdownRef.current?.clientWidth
 
+    console.log('dropdownRef', dropdownRef)
+
     if (labelWidth) setDropdownWidth(labelWidth)
   }, [dropdownRef.current])
 
