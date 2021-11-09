@@ -278,8 +278,8 @@ const Select = ({
 Select.displayName = 'Select dropdown'
 
 Select.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onBlur: PropTypes.func,
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
