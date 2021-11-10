@@ -44,7 +44,7 @@ describe('<Accordion /> mount', () => {
   })
 
   it('has `accordion` class', () => {
-    expect(wrapper.hasClass('accordion')).toBe(true)
+    expect(wrapper.find('div').at(0).hasClass('accordion')).toBe(true)
   })
 })
 

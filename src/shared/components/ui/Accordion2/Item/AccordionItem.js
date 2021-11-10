@@ -79,7 +79,7 @@ AccordionItem.propTypes = {
   /**
    * Size
    */
-  size: PropTypes.oneOf(['small', 'medium']).isRequired
+  size: PropTypes.oneOf(['small', 'medium'])
 }
 
 /**
@@ -87,7 +87,8 @@ AccordionItem.propTypes = {
  * @type {Object}
  */
 AccordionItem.defaultProps = {
-  className: 'accordion__item'
+  className: 'accordion__item',
+  size: 'medium'
 }
 
 export default AccordionItem
