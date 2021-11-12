@@ -32,6 +32,7 @@ const cssClass = styles(scss)
  * @param {object} props.image - image in header
  * @param {boolean} props.hasFooter - has footer
  * @param {boolean} props.hasHeaderDivider - has header divider
+ * @param {boolean} props.hasFooterDivider - has header divider
  * @param {string} props.actionVariant - button action variant
  * @param {bool} props.isLoading - is loading
  * @param {string} props.actionIcon - footer action button icon
@@ -63,6 +64,7 @@ const Modal = ({
   image,
   hasFooter,
   hasHeaderDivider,
+  hasFooterDivider,
   actionVariant,
   isLoading,
   actionIcon,
@@ -152,6 +154,14 @@ const Modal = ({
                     <Overflow>{children}</Overflow>
                   </div>
                 </div>
+
+                {hasFooterDivider && (
+                  <div className={'Modal__modal__footer-divider'}>
+                    <Divider />
+
+                    <Spacer space='small' />
+                  </div>
+                )}
 
                 {hasFooter && (
                   <ModalFooter align='right'>
@@ -243,6 +253,10 @@ Modal.propTypes = {
    * HasHeaderDivider
    */
   hasHeaderDivider: PropTypes.bool,
+  /**
+   * HasHeaderDivider
+   */
+  hasFooterDivider: PropTypes.bool,
   /**
    * Image
    */
@@ -368,6 +382,7 @@ Modal.defaultProps = {
   hasCustomButton: false,
   hasFooter: false,
   hasHeaderDivider: false,
+  hasFooterDivider: false,
   isButtonDisabled: false,
   isButtonLoading: false,
   isCentered: false,

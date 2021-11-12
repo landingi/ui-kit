@@ -33,6 +33,10 @@
     padding: 30px 40px;
   }
 
+  &__footer-divider {
+    padding: 0 $padding-big
+  }
+
   &__footer {
     display: flex;
     align-items: center;
