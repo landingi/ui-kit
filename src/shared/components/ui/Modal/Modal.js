@@ -253,10 +253,12 @@ Modal.propTypes = {
    * HasHeaderDivider
    */
   hasHeaderDivider: PropTypes.bool,
+
   /**
    * HasHeaderDivider
    */
   hasFooterDivider: PropTypes.bool,
+  
   /**
    * Image
    */
