@@ -9,7 +9,8 @@ registerIcons()
 const props = {
   isActive: true,
   onClick: onClick,
-  children: 'children'
+  children: 'children',
+  i18n: {}
 }
 const modalComponent = <Modal {...props} />
 
@@ -52,12 +53,6 @@ describe('<Modal /> global mount', () => {
 
   it('default prop `onEdit` should be null', () => {
     const result = Modal.defaultProps.onEdit()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onMarkAsSpam` should be null', () => {
-    const result = Modal.defaultProps.onMarkAsSpam()
 
     expect(result).toBe(null)
   })
@@ -175,6 +170,22 @@ describe('<Modal /> global mount', () => {
   })
 
   it('has not header divider', () => {
+    wrapper.setProps({
+      hasHeaderDivider: false
+    })
+
+    expect(wrapper.find('Divider').exists()).toBe(false)
+  })
+
+  it('has footer divider', () => {
+    wrapper.setProps({
+      hasFooterDivider: true
+    })
+
+    expect(wrapper.find('Divider').exists()).toBe(true)
+  })
+
+  it('has not footer divider', () => {
     wrapper.setProps({
       hasHeaderDivider: false
     })
