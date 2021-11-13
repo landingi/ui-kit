@@ -116,16 +116,19 @@ const Select = ({
   })
 
   const dropdownRef = useRef(null)
+  const containerRef = useRef(null)
   /**
    * autosize width for dropdown
    */
   const [dropdownWidth, setDropdownWidth] = useState(null)
 
   useEffect(() => {
-    const labelWidth = dropdownRef.current?.containerRef?.current.clientWidth
+    const labelWidth = containerRef.current?.clientWidth
+
+    console.log('containerRef', containerRef)
 
     if (labelWidth) setDropdownWidth(labelWidth)
-  }, [dropdownRef.current])
+  }, [containerRef.current])
 
   const renderOption = item =>
     hasDescription ? (
@@ -196,6 +199,7 @@ const Select = ({
         disabledClass,
         className
       ])}
+      ref={containerRef}
     >
       {label && <Label id={label}>{label}</Label>}
 
