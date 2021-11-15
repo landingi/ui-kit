@@ -195,7 +195,7 @@ const modal = ({
                           size='medium'
                           onClick={onClick}
                         >
-                          {i18n.action}
+                          {i18n.cancel}
                         </Button>
                       )}
                       <Button
