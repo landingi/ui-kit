@@ -65,6 +65,8 @@ const Input = ({
     'input--hidden-arrows': hideArrows
   })
 
+  const renderDefault = defaultValue && !value
+
   return (
     <div className={cssClass('input__wrapper', elementClasses)}>
       <input
@@ -82,8 +84,8 @@ const Input = ({
         autoFocus={autoFocus}
         maxLength={maxLength}
         required={required}
-        defaultValue={defaultValue}
         {...(type === 'number' ? { min, max } : {})}
+        {...(renderDefault ? { defaultValue } : {})}
       />
       <span className={cssClass('highlight')} />
 
