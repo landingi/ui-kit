@@ -52,7 +52,8 @@ const Input = ({
   max,
   background,
   hideArrows,
-  alwaysShowLabel
+  alwaysShowLabel,
+  defaultValue
 }) => {
   const elementClasses = cssClass({
     'input__wrapper--focused': focused === 'true',
@@ -81,6 +82,7 @@ const Input = ({
         autoFocus={autoFocus}
         maxLength={maxLength}
         required={required}
+        defaultValue={defaultValue}
         {...(type === 'number' ? { min, max } : {})}
       />
       <span className={cssClass('highlight')} />
@@ -133,7 +135,8 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string
-  })
+  }),
+  defaultValue: PropTypes.string
 }
 
 Input.defaultProps = {
@@ -156,7 +159,8 @@ Input.defaultProps = {
   hideArrows: false,
   onChange: () => null,
   onKeyDown: () => null,
-  onBlur: () => null
+  onBlur: () => null,
+  defaultValue: null
 }
 
 export default Input
