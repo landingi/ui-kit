@@ -125,7 +125,7 @@ const Search = ({
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
               >
-                <FontAwesomeIcon icon='search' color='a7a7a7' />
+                <FontAwesomeIcon icon='search' />
               </Button>
             </div>
           ) : (
