@@ -40,7 +40,6 @@
     "react/state-in-constructor": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "no-unused-vars": "off",
-    "no-undef": "off",
     "react/prop-types": "off",
     "no-empty": "off",
     "prettier/prettier": [

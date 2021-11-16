@@ -21,10 +21,8 @@ const cssClass = styles(scss)
  * @param {object} props.errors - element errors list
  * @param {object} props.touched - element touched list
  * @param {string} props.id - id of the element
- * @param {string} props.label - label
- * @param {string} props.placeholder - placeholder
  * @param {array} props.options - list of options
- * @param {object} props.intl - react intl formatMessage function
+ * @param {object} props.i18n - object of translations
  * @return {object} An object of children element
  */
 const ReactSelect = ({
@@ -36,10 +34,8 @@ const ReactSelect = ({
   errors,
   touched,
   id,
-  label,
-  placeholder,
   options,
-  intl
+  i18n: { label, placeholder }
 }) => {
   const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
   const filledClass = value[name] ? 'form--has-value' : ''
@@ -99,9 +95,10 @@ ReactSelect.propTypes = {
       ])
     })
   ).isRequired,
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string,
+    label: PropTypes.string
+  })
 }
 
 ReactSelect.defaultProps = {
@@ -112,7 +109,8 @@ ReactSelect.defaultProps = {
   touched: {},
   value: null,
   onChange: () => null,
-  onBlur: () => null
+  onBlur: () => null,
+  i18n: {}
 }
 
 export default ReactSelect
