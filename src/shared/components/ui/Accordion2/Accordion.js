@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
+import { styles } from '@helpers/css'
 import scss from './Accordion.scss'
 import AccordionItem from './Item/AccordionItem'
 import uuid from 'react-uuid'
@@ -33,44 +33,20 @@ const Accordion = ({ className, data, hasNumber, size }) => (
   </div>
 )
 
-/**
- * Display name
- * @type {string}
- */
 Accordion.displayName = 'Accordion'
 
-/**
- * The properties.
- * @type {Object}
- */
 Accordion.propTypes = {
-  /**
-   * Classname
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Data
-   */
   data: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.node.isRequired,
       content: PropTypes.node.isRequired
     })
   ).isRequired,
-  /**
-   * HasNumber
-   */
   hasNumber: PropTypes.bool,
-  /**
-   * Size
-   */
   size: PropTypes.oneOf(['small', 'medium'])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Accordion.defaultProps = {
   className: 'accordion',
   hasNumber: false,

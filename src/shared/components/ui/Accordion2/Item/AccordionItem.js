@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from 'shared/helpers/css'
 import scss from './../Accordion.scss'
-import Icon from 'shared/components/ui/Icon'
+import Icon from '@components/ui/Icon'
 
 const cssClass = styles(scss)
 
@@ -53,39 +53,15 @@ const AccordionItem = ({ className, title, content, size }) => {
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
 AccordionItem.displayName = 'Accordion Item'
 
-/**
- * The properties.
- * @type {Object}
- */
 AccordionItem.propTypes = {
-  /**
-   * Classname
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Title
-   */
   title: PropTypes.node.isRequired,
-  /**
-   * Content
-   */
   content: PropTypes.node.isRequired,
-  /**
-   * Size
-   */
   size: PropTypes.oneOf(['small', 'medium'])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 AccordionItem.defaultProps = {
   className: 'accordion__item',
   size: 'medium'
