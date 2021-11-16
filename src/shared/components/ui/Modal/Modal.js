@@ -1,20 +1,34 @@
+import React, { Fragment } from 'react'
+import posed, { PoseGroup } from 'react-pose'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
-import Button from '@components/ui/Button'
 import Close from '@components/ui/Close'
-import Divider from '@components/ui/Divider'
-import Image from '@components/ui/Image'
-import Loader from '@components/ui/Loader'
-import ModalFooter from './Footer'
-import ModalHeader from './Header'
-import Overflow from '@components/ui/Overflow'
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
-import Spacer from '@components/ui/Spacer'
 import Spreader from '@components/ui/Spreader'
+import Overflow from '@components/ui/Overflow'
+import Divider from '@components/ui/Divider'
+import Spacer from '@components/ui/Spacer'
+import Button from '@components/ui/Button'
+import Loader from '@components/ui/Loader'
+import Image from '@components/ui/Image'
+import ModalHeader from './Header'
+import ModalFooter from './Footer'
 import scss from './Modal.scss'
+/**
+ * Modal Animation, exports React-pose animations
+ * @see {@link https://popmotion.io/pose/api/} for further information.
+ * @return {object} An object of styles
+ */
+const ModalAnimation = posed.div({
+  enter: {},
+  exit: {}
+})
 
+/**
+ * Exports css classes from SCSS file
+ * @return {object} An object of styles
+ */
 const cssClass = styles(scss)
 
 /**
@@ -32,25 +46,27 @@ const cssClass = styles(scss)
  * @param {object} props.image - image in header
  * @param {boolean} props.hasFooter - has footer
  * @param {boolean} props.hasHeaderDivider - has header divider
+ * @param {boolean} props.hasFooterDivider - has footer divider
  * @param {string} props.actionVariant - button action variant
  * @param {bool} props.isLoading - is loading
  * @param {string} props.actionIcon - footer action button icon
  * @param {object} props.overflowStyle - overflowStyle
- * @param {bool} props.isFullscreen - makes modal fullscreen size
  * @param {bool} props.isCentered - makes text in modal centered
  * @param {bool} props.isEditable - isEditable
  * @param {func} props.onEdit - onEdit
  * @param {bool} props.hasCustomButton - secondary button
  * @param {func} props.onClickCustomButton - secondary button with custom callback
- * @param {bool} props.isCustomButtonDisabled - is custom button in footer disabled
+ * @param {bool} props.isCustomButtonDisabled - is cunstom button in footer disabled
  * @param {func} props.onMarkAsSpam - handle "mark as spam" click
+ * @param {bool} props.isPage - is page
+ * @param {string} props.size - modal size, one of: medium, x-medium, big, fullscreen
+ * @param {string} props.i18n - objest of translations
  * @param {bool} props.isComponent - component instead of title
  * @param {object} props.component - component
- * @param {object} props.i18n - translations
  * @param {bool} props.isSubmit - modal button is submit type
  * @return {object} An object of children element
  */
-const Modal = ({
+const modal = ({
   children,
   className,
   onClick,
@@ -63,11 +79,11 @@ const Modal = ({
   image,
   hasFooter,
   hasHeaderDivider,
+  hasFooterDivider,
   actionVariant,
   isLoading,
   actionIcon,
   overflowStyle,
-  isFullscreen,
   isCentered,
   isEditable,
   onEdit,
@@ -75,30 +91,31 @@ const Modal = ({
   onClickCustomButton,
   isCustomButtonDisabled,
   onMarkAsSpam,
+  size,
+  isPage,
+  disableOverflow,
+  i18n,
   isComponent,
   component,
-  isSubmit,
-  i18n,
-  size,
-  isPage
+  isSubmit
 }) => {
   const renderTitle = () => (
     <div className={scss.modal__header}>
       {i18n.title && <ModalHeader title={i18n.title} />}
 
-      {image && <Image height={20} size='auto' src={image} />}
+      {image && <Image src={image} size='auto' height={20} />}
 
       <div>
         {isMarkAsSpamVisible && (
-          <Button onClick={onMarkAsSpam} variant='transparent'>
+          <Button variant='transparent' onClick={onMarkAsSpam}>
             <FontAwesomeIcon icon='ban' />
 
-            {i18n.markasspam}
+            {i18n.markSpam}
           </Button>
         )}
 
         {isEditable && (
-          <Button onClick={onEdit} variant='icon'>
+          <Button variant='icon' onClick={onEdit}>
             <FontAwesomeIcon icon='pencil-alt' />
           </Button>
         )}
@@ -120,269 +137,169 @@ const Modal = ({
 
   return (
     <Fragment>
-      {isActive && (
-        <div className={scss.dialog}>
-          <div
-            className={cssClass(className, {
-              'modal--fullscreen': isFullscreen,
-              'modal--big': size === 'big',
-              'modal--center': isCentered,
-              'modal--page': isPage
-            })}
-          >
-            {isLoading ? (
-              <div className={scss.modal__body}>
-                <Loader />
-              </div>
-            ) : (
-              <Fragment>
-                {(isClosable || i18n.title || image || isEditable) &&
-                  (!isComponent ? renderTitle() : renderComponent())}
-
-                {hasHeaderDivider && (
-                  <Fragment>
-                    <Spacer space='small' />
-
-                    <Divider />
-                  </Fragment>
-                )}
-
+      <PoseGroup animateOnMount flipMove={false}>
+        {isActive && (
+          <ModalAnimation key='ModalAnimation' className={scss.dialog}>
+            <div
+              className={cssClass(className, {
+                'modal--fullscreen': size === 'fullscreen',
+                'modal--big': size === 'big',
+                'modal--x-medium': size === 'x-medium',
+                'modal--center': isCentered,
+                'modal--page': isPage
+              })}
+            >
+              {isLoading ? (
                 <div className={scss.modal__body}>
-                  <div style={overflowStyle}>
-                    <Overflow>{children}</Overflow>
-                  </div>
+                  <Loader />
                 </div>
-
-                {hasFooter && (
-                  <ModalFooter align='right'>
-                    {hasCustomButton ? (
-                      <Button
-                        isDisabled={isCustomButtonDisabled}
-                        onClick={onClickCustomButton}
-                        size='medium'
-                        variant='secondary'
-                      >
-                        {i18n.cancel}
-                      </Button>
+              ) : (
+                <Fragment>
+                  {(isClosable || i18n.title || image || isEditable) &&
+                    (!isComponent ? renderTitle() : renderComponent())}
+                  {hasHeaderDivider && (
+                    <Fragment>
+                      <Spacer space='small' />
+                      <Divider />
+                    </Fragment>
+                  )}
+                  <div className={scss.modal__body}>
+                    {disableOverflow ? (
+                      children
                     ) : (
-                      <Button
-                        onClick={onClick}
-                        size='medium'
-                        variant='secondary'
-                      >
-                        {i18n.cancel}
-                      </Button>
+                      <div style={overflowStyle}>
+                        <Overflow>{children}</Overflow>
+                      </div>
                     )}
-
-                    <Button
-                      hasIcon={Boolean(actionIcon)}
-                      isDisabled={isButtonDisabled}
-                      isLoading={isButtonLoading}
-                      onClick={onAction}
-                      size='medium'
-                      type={isSubmit ? 'submit' : 'button'}
-                      variant={actionVariant}
-                    >
-                      {actionIcon && (
-                        <FontAwesomeIcon icon={actionIcon} size='xs' />
+                  </div>
+                  {hasFooterDivider && (
+                    <div className={'Modal__modal__footer-divider'}>
+                      <Divider />
+                      <Spacer space='small' />
+                    </div>
+                  )}
+                  {hasFooter && (
+                    <ModalFooter align='right'>
+                      {hasCustomButton ? (
+                        <Button
+                          variant='secondary'
+                          size='medium'
+                          onClick={onClickCustomButton}
+                          isDisabled={isCustomButtonDisabled}
+                        >
+                          {i18n.cancel}
+                        </Button>
+                      ) : (
+                        <Button
+                          variant='secondary'
+                          size='medium'
+                          onClick={onClick}
+                        >
+                          {i18n.cancel}
+                        </Button>
                       )}
-
-                      {i18n.action}
-                    </Button>
-                  </ModalFooter>
-                )}
-              </Fragment>
-            )}
-          </div>
-        </div>
-      )}
+                      <Button
+                        type={isSubmit ? 'submit' : 'button'}
+                        variant={actionVariant}
+                        size='medium'
+                        onClick={onAction}
+                        isDisabled={isButtonDisabled}
+                        isLoading={isButtonLoading}
+                        hasIcon={!!actionIcon}
+                      >
+                        {actionIcon && (
+                          <FontAwesomeIcon icon={actionIcon} size='xs' />
+                        )}
+                        {i18n.action}
+                      </Button>
+                    </ModalFooter>
+                  )}
+                </Fragment>
+              )}
+            </div>
+          </ModalAnimation>
+        )}
+      </PoseGroup>
       {isActive && <Backdrop onClick={onClick} />}
     </Fragment>
   )
 }
 
-Modal.displayName = 'Modal'
+modal.displayName = 'Modal'
 
-Modal.propTypes = {
-  /**
-   * ActionButtonIcon action button icon
-   */
-  actionIcon: PropTypes.string,
-
-  /**
-   * ActionVariant action button variant
-   */
-  actionVariant: PropTypes.string,
-
-  /**
-   * Children elements
-   */
+modal.propTypes = {
   children: PropTypes.node,
-
-  /**
-   * ClassName, default `modal`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Component
-   */
-  component: PropTypes.node,
-
-  /**
-   * HasCustomButton - custom button
-   */
-  hasCustomButton: PropTypes.bool,
-
-  /**
-   * HasFooter
-   */
-  hasFooter: PropTypes.bool,
-
-  /**
-   * HasHeaderDivider
-   */
-  hasHeaderDivider: PropTypes.bool,
-  /**
-   * Image
-   */
-  image: PropTypes.string,
-
-  /**
-   * IsActive, active state
-   */
-  isActive: PropTypes.bool.isRequired,
-
-  /**
-   * IsButtonDisabled is action button disabled
-   */
-  isButtonDisabled: PropTypes.bool,
-
-  /**
-   * IsButtonLoading ha action button loading state
-   */
-  isButtonLoading: PropTypes.bool,
-
-  /**
-   * IsCentered - makes text in modal centered
-   */
-  isCentered: PropTypes.bool,
-
-  /**
-   * IsClosable
-   */
-  isClosable: PropTypes.bool,
-
-  /**
-   * IsComponent is instead of title
-   */
-  isComponent: PropTypes.bool,
-
-  /**
-   * IsCustomButtonDisabled is action button disabled
-   */
-  isCustomButtonDisabled: PropTypes.bool,
-
-  /**
-   * IsEditable
-   */
-  isEditable: PropTypes.bool,
-
-  /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
-  onAction: PropTypes.func,
-
-  /**
-   * IsFullscreen - makes modal fullscreen size
-   */
-  isFullscreen: PropTypes.bool,
-
-  /**
-   * Gets called when the user clicks
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onClick: PropTypes.func,
-
-  /**
-   * IsLoading
-   */
+  onAction: PropTypes.func,
+  isActive: PropTypes.bool.isRequired,
+  isClosable: PropTypes.bool,
+  isButtonDisabled: PropTypes.bool,
+  isButtonLoading: PropTypes.bool,
+  image: PropTypes.string,
+  hasFooter: PropTypes.bool,
+  hasHeaderDivider: PropTypes.bool,
+  hasFooterDivider: PropTypes.bool,
+  actionVariant: PropTypes.string,
   isLoading: PropTypes.bool,
-
-  /**
-   * IsMarkAsSpamVisible is "mark as spam" button visible
-   */
-  isMarkAsSpamVisible: PropTypes.bool,
-
-  /**
-   * IsSubmit
-   */
-  isSubmit: PropTypes.bool,
-  /**
-   * OnEdit
-   */
-  onEdit: PropTypes.func,
-
-  /**
-   * OnMarkAsSpam
-   */
-  onMarkAsSpam: PropTypes.func,
-
-  /**
-   * OverflowStyle
-   */
+  actionIcon: PropTypes.string,
   overflowStyle: PropTypes.instanceOf(Object),
-
-  /**
-   * i18n translations
-   */
-  i18n: PropTypes.instanceOf(Object)
+  isCentered: PropTypes.bool,
+  onEdit: PropTypes.func,
+  onMarkAsSpam: PropTypes.func,
+  isEditable: PropTypes.bool,
+  hasCustomButton: PropTypes.bool,
+  isCustomButtonDisabled: PropTypes.bool,
+  isMarkAsSpamVisible: PropTypes.bool,
+  size: PropTypes.oneOf(['medium', 'x-medium', 'big', 'fullscreen']),
+  isPage: PropTypes.bool,
+  i18n: PropTypes.shape({
+    title: PropTypes.string,
+    action: PropTypes.string,
+    cancel: PropTypes.string,
+    markSpam: PropTypes.string
+  }),
+  isComponent: PropTypes.bool,
+  component: PropTypes.node,
+  isSubmit: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-Modal.defaultProps = {
-  image: '',
-  actionIcon: null,
-  actionVariant: 'primary',
-  children: null,
+modal.defaultProps = {
   className: 'modal',
-  component: null,
+  children: null,
+  isClosable: true,
+  isButtonDisabled: false,
+  isButtonLoading: false,
+  onClick: () => null,
+  onAction: () => null,
+  image: '',
+  hasFooter: false,
+  hasHeaderDivider: false,
+  hasFooterDivider: false,
+  isLoading: false,
+  actionVariant: 'primary',
+  actionIcon: null,
   overflowStyle: {
     maxHeight: '80vh',
     overflowY: 'auto'
   },
-  i18n: {
-    title: '',
-    cancel: '',
-    action: '',
-    markasspam: ''
-  },
-  hasCustomButton: false,
-  hasFooter: false,
-  hasHeaderDivider: false,
-  isButtonDisabled: false,
-  isButtonLoading: false,
   isCentered: false,
-  isClosable: true,
-  isComponent: false,
-  isCustomButtonDisabled: false,
   isEditable: false,
-  isFullscreen: false,
-  isLoading: false,
+  hasCustomButton: false,
+  isCustomButtonDisabled: false,
   isMarkAsSpamVisible: false,
-  isSubmit: false,
-  onAction: () => null,
-  onClick: () => null,
+  size: 'medium',
+  isPage: false,
+  i18n: PropTypes.shape({
+    title: null,
+    action: null,
+    cancel: null,
+    markSpam: null
+  }),
   onEdit: () => null,
-  onMarkAsSpam: () => null
+  isComponent: false,
+  component: null,
+  isSubmit: false
 }
 
-export default Modal
+export default modal

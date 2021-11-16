@@ -14,9 +14,10 @@ const cssClass = styles(scss)
  * @param {func} props.onChange - called on date confirm
  * @param {date} props.minDate - minimal date
  * @param {date} props.maxDate - maximal date
+ * @param {date} props.i18n - object of translations
  * @return {object} An object of children element
  */
-const Picker = ({ minDate, maxDate, onChange }) => {
+const Picker = ({ minDate, maxDate, onChange, i18n }) => {
   const [range, setRange] = useState(null)
 
   return (
@@ -42,14 +43,13 @@ Picker.displayName = 'Month Picker Layout Wrapper'
 
 Picker.propTypes = {
   minDate: PropTypes.instanceOf(Date).isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  i18n: PropTypes.shape({ apply: PropTypes.string })
 }
 
 Picker.defaultProps = {
   onChange: () => null,
-  i18n: {
-    apply: 'word.apply'
-  }
+  i18n: {}
 }
 
 export default Picker

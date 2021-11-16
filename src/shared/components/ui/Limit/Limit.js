@@ -20,6 +20,7 @@ const cssClass = styles(scss)
  * @param {number} props.total - show total number
  * @param {bool} props.unlimited - hide '/limit'
  * @param {string} props.tooltip - info tooltip
+ * @param {date} props.i18n - object of translations
  * @return {object} An object of children element
  */
 const Limit = ({
@@ -30,7 +31,8 @@ const Limit = ({
   quantity,
   name,
   unlimited,
-  tooltip
+  tooltip,
+  i18n
 }) => {
   return (
     <div className={cssClass(className)}>
@@ -83,14 +85,18 @@ Limit.propTypes = {
   quantity: PropTypes.number.isRequired,
   tooltip: PropTypes.string,
   total: PropTypes.number,
-  unlimited: PropTypes.bool
+  unlimited: PropTypes.bool,
+  i18n: PropTypes.shape({
+    total: PropTypes.string
+  })
 }
 
 Limit.defaultProps = {
   className: 'limit',
   tooltip: '',
   total: 0,
-  unlimited: false
+  unlimited: false,
+  i18n: {}
 }
 
 export default Limit

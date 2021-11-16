@@ -54,6 +54,7 @@ const cssClass = styles(scss)
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
  * @param {string} props.alwaysShowLabel - always show label on top
  * @param {string} props.searchInOptions - alow user to search item in options list
+ * @param {string} props.i18n - object of translations
  * @return {object} An object of children element
  */
 const Select = ({
@@ -64,7 +65,6 @@ const Select = ({
   label,
   options,
   handleOnSearchChange,
-  searchPlaceholder,
   inModalName,
   isLoading,
   isEmptyList,
@@ -79,7 +79,8 @@ const Select = ({
   formikKey,
   alwaysShowLabel,
   isOpenDisabled,
-  searchInOptions
+  searchInOptions,
+  i18n
 }) => {
   const errorClass = errors[formikKey] ? 'form--has-error' : ''
   // eslint-disable-next-line prettier/prettier
@@ -116,16 +117,17 @@ const Select = ({
   })
 
   const dropdownRef = useRef(null)
+  const containerRef = useRef(null)
   /**
    * autosize width for dropdown
    */
   const [dropdownWidth, setDropdownWidth] = useState(null)
 
   useEffect(() => {
-    const labelWidth = dropdownRef.current?.containerRef?.current.clientWidth
+    const labelWidth = containerRef.current?.clientWidth
 
     if (labelWidth) setDropdownWidth(labelWidth)
-  }, [dropdownRef.current])
+  }, [containerRef.current])
 
   const renderOption = item =>
     hasDescription ? (
@@ -196,6 +198,7 @@ const Select = ({
         disabledClass,
         className
       ])}
+      ref={containerRef}
     >
       {label && <Label id={label}>{label}</Label>}
 
@@ -217,7 +220,7 @@ const Select = ({
             <div className={cssClass('search-container')}>
               <Searcher
                 setSearchPhrase={handleOnSearchChange}
-                placeholder={searchPlaceholder}
+                i18n={{ placeholder: i18n.placeholder }}
                 tag='div'
                 protectedSubmit
                 liveChanges={liveChanges}
@@ -231,7 +234,7 @@ const Select = ({
             <div className={cssClass('search-container')}>
               <Search
                 onChange={handleSearchOptionsChange}
-                placeholder='word.search'
+                i18n={{ placeholder: i18n.placeholder }}
                 tag='div'
               />
             </div>
@@ -284,7 +287,6 @@ Select.propTypes = {
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -294,7 +296,6 @@ Select.propTypes = {
     })
   ).isRequired,
   handleOnSearchChange: PropTypes.func,
-  searchPlaceholder: PropTypes.string,
   inModalName: PropTypes.string,
   isLoading: PropTypes.bool,
   isEmptyList: PropTypes.bool,
@@ -314,7 +315,10 @@ Select.propTypes = {
   formikKey: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
   isOpenDisabled: PropTypes.bool,
-  searchInOptions: PropTypes.bool
+  searchInOptions: PropTypes.bool,
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string
+  })
 }
 
 Select.defaultProps = {

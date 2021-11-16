@@ -1,8 +1,8 @@
-import { styles } from '@helpers/css'
-import AccordionItem from './Item/AccordionItem'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { styles } from '@helpers/css'
 import scss from './Accordion.scss'
+import AccordionItem from './Item/AccordionItem'
 import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
@@ -15,24 +15,23 @@ const cssClass = styles(scss)
  * @param {bool} props.hasNumber - has number, default `false`
  * @return {object} An object of children element
  */
-function Accordion({ className, data, hasNumber }) {
-  return (
-    <div className={cssClass(className)}>
-      {data.map((item, index) => {
-        const { title, content } = item
+const Accordion = ({ className, data, hasNumber, size }) => (
+  <div className={cssClass(className)}>
+    {data.map((item, index) => {
+      const { title, content } = item
 
-        return (
-          <AccordionItem
-            content={content}
-            key={uuid()}
-            number={hasNumber ? index + 1 : null}
-            title={title}
-          />
-        )
-      })}
-    </div>
-  )
-}
+      return (
+        <AccordionItem
+          key={uuid()}
+          number={hasNumber ? index + 1 : null}
+          title={title}
+          size={size}
+          content={content}
+        />
+      )
+    })}
+  </div>
+)
 
 Accordion.displayName = 'Accordion'
 
@@ -40,16 +39,18 @@ Accordion.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      content: PropTypes.node.isRequired,
-      title: PropTypes.node.isRequired
+      title: PropTypes.node.isRequired,
+      content: PropTypes.node.isRequired
     })
   ).isRequired,
-  hasNumber: PropTypes.bool
+  hasNumber: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'medium'])
 }
 
 Accordion.defaultProps = {
   className: 'accordion',
-  hasNumber: false
+  hasNumber: false,
+  size: 'medium'
 }
 
-export default Accordion
+export default memo(Accordion)

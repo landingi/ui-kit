@@ -24,7 +24,7 @@ const cssClass = styles(scss)
  * @param {string} props.size - size of search field `small, medium, large`
  * @param {string} props.label - input label
  * @param {func} props.onSubmit - handle action on form submit
- * @param {object} props.i18n - translations
+ * @param {object} props.i18n - object of translations
  * @param {string} props.tag - tag
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
  * @return {object} An object of children element
@@ -176,57 +176,22 @@ const Search = ({
 Search.displayName = 'Search'
 
 Search.propTypes = {
-  /**
-   * ClassName, default `search`
-   */
   className: PropTypes.string,
-  /**
-   * Children elements
-   */
   children: PropTypes.node,
-  /**
-   * Gets called when input changes
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onChange: PropTypes.func,
-  /**
-   * Gets called when input changes
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onKeyDown: PropTypes.func,
-  /**
-   *  size of search input `small, medium, large`
-   */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * AutoFocus
-   */
   autoFocus: PropTypes.bool,
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf(['input', 'button']),
-  /**
-   * i18n
-   */
-  i18n: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * handle on form submit action
-   */
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string,
+    label: PropTypes.label
+  }),
   onSubmit: PropTypes.func,
-  /**
-   * Tag, default: 'form'
-   */
   tag: PropTypes.string,
   onProtectedSubmit: PropTypes.func
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Search.defaultProps = {
   className: 'search',
   tag: 'form',

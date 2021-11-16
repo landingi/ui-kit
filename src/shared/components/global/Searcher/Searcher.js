@@ -83,7 +83,7 @@ Searcher.propTypes = {
 Searcher.defaultProps = {
   liveChanges: false,
   i18n: {
-    placeholder: 'null'
+    placeholder: ''
   },
   protectedSubmit: false,
   setSearchPhrase: () => null,

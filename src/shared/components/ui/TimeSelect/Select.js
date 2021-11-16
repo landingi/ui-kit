@@ -125,30 +125,10 @@ export default TimeSelect
 TimeSelect.displayName = 'Time Select'
 
 TimeSelect.propTypes = {
-  /**
-   * Value
-   * @param {String}
-   */
   value: PropTypes.string,
-  /**
-   * Label
-   * @param {String}
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * OnChange
-   * @param {Function}
-   */
   onChange: PropTypes.func.isRequired,
-  /**
-   * Formik Key
-   * @param {string}
-   */
   formikKey: PropTypes.string,
-  /**
-   * Disabled
-   * @param {bool}
-   */
   disabled: PropTypes.bool
 }
 
