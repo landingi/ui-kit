@@ -12,7 +12,7 @@
     trigger_variable_value: "[deploy]"
     trigger_variable_key: "BUDDY_EXECUTION_REVISION_MESSAGE"
   actions:
-  - action: "Execute: yarn run cd and codecov"
+  - action: "Execute: yarn run cd"
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
@@ -38,9 +38,3 @@
     channel: "C01ASVBDV9A"
     channel_name: "tech-deploy"
     integration_hash: "5f4a2f2529a8af7df406ac85"
-  - action: "Run CD Docs"
-    type: "RUN_NEXT_PIPELINE"
-    comment: "Triggered by $BUDDY_PIPELINE_NAME execution #$BUDDY_EXECUTION_ID"
-    revision: "INHERIT"
-    next_project_name: "ui-kit"
-    next_pipeline_name: "CD Docs"
