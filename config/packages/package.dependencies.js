@@ -22,6 +22,7 @@ module.exports = {
     "tiny-emitter": "2.1.0",
     "@babel/runtime": "7.15.4",
     "react-advanced-time-input": "1.2.0",
+    "react-color": "2.19.3",
   },
   documentationDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
@@ -48,6 +49,7 @@ module.exports = {
     "docz": "2.3.1",
     "gatsby-plugin-sass": "4.14.0",
     "react-advanced-time-input": "1.2.0",
+    "react-color": "2.19.3",
   },
   testingDependencies: {
     "@fortawesome/fontawesome-svg-core": "1.2.36",
@@ -73,5 +75,6 @@ module.exports = {
     "yup": "0.32.9",
     "@babel/runtime": "7.15.4",
     "react-advanced-time-input": "1.2.0",
+    "react-color": "2.19.3",
   }
 }
