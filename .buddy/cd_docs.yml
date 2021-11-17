@@ -1,7 +1,9 @@
 - pipeline: "CD Docs"
-  on: "CLICK"
-  refs:
-  - "(^((?!master$).)*$)"
+  on: "EVENT"
+  events:
+  - type: "PUSH"
+    refs:
+    - "(^((?!master$).)*$)"
   priority: "NORMAL"
   ignore_fail_on_project_status: true
   fetch_all_refs: true
