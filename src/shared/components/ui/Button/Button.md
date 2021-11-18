@@ -27,7 +27,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 <Playground>
   <Button variant="secondary" size="tiny">Secondary button</Button>
-  <Button variant="secondary" size="medium">Secondary button</Button>
+  <Button variant="secondary" disabled size="medium">Secondary button</Button>
   <Button variant="secondary" size="large">Secondary button</Button>
 
   <br /><br />
