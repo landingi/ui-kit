@@ -12,6 +12,7 @@ const props = {
   onChange: mockedOnChange,
   onKeyDown: mockedOnKeyDown,
   onBlur: mockedOnBlur,
+  id: 'id inputa',
   field: {
     name: 'test',
     value: 'test',
