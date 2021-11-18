@@ -29,5 +29,6 @@
     "lcov"
   ],
   "testEnvironment": "jsdom",
-  "testRunner": "jest-jasmine2"
+  "testRunner": "jest-jasmine2",
+  "testTimeout": 15000
 }
