@@ -1,9 +1,9 @@
 import {
   getTodayDate,
   getDateObject,
-  calculateDaysInterval,
   formatNumeric,
-  isArrayEqual
+  isLastPage,
+  queryString
 } from '@helpers/data'
 
 describe('Date helpers', () => {
@@ -19,15 +19,6 @@ describe('Date helpers', () => {
     })
   })
 
-  it('should return difference between dates in days', () => {
-    expect(
-      calculateDaysInterval(new Date('2021-01-01'), new Date('2021-01-03'))
-    ).toEqual(2)
-    expect(
-      calculateDaysInterval(new Date('2020-12-31'), new Date('2021-01-01'))
-    ).toEqual(1)
-  })
-
   it('should format number', () => {
     expect(formatNumeric(10000)).toEqual('10 000')
     expect(formatNumeric(100)).toEqual('100')
@@ -35,10 +26,26 @@ describe('Date helpers', () => {
     expect(formatNumeric(5789)).toEqual('5 789')
   })
 
-  it('should compare array equality', () => {
-    expect(isArrayEqual([], [])).toBe(true)
-    expect(isArrayEqual(['a'], ['b', 'a'])).toBe(false)
-    expect(isArrayEqual(['a', 'b'], ['b', 'a'])).toBe(true)
-    expect(isArrayEqual(['a', 'b'], ['b', 'a', 'a'])).toBe(false)
+  it('should return false when count of last page is 0', () => {
+    expect(isLastPage(0, 1, 10)).toEqual(false)
+  })
+
+  it('should return false when count divided by limit is not equal to page', () => {
+    expect(isLastPage(10, 2, 10)).toEqual(false)
+  })
+
+  it('should return true if it is last page', () => {
+    expect(isLastPage(10, 1, 10)).toEqual(true)
+  })
+
+  it('should return proper encoded query string', () => {
+    const obj = {
+      a: 'jestem wartoscia a',
+      b: 'jestem wartoscia b'
+    }
+
+    expect(queryString(obj)).toEqual(
+      'a=jestem%20wartoscia%20a&b=jestem%20wartoscia%20b'
+    )
   })
 })

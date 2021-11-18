@@ -8,7 +8,11 @@ import { act } from 'react-dom/test-utils'
 
 registerIcons()
 
-const component = <Toast />
+const props = {
+  message: 'jestem tekstem do komponentu Notification'
+}
+
+const component = <Toast {...props} />
 
 describe('<Toast/> mount', () => {
   let wrapper

@@ -3,14 +3,17 @@ import { mount } from 'enzyme'
 import registerIcons from '@helpers/icons'
 import Modal from '@components/ui/Modal'
 import Backdrop from '@components/ui/Backdrop'
+import Button from '@components/ui/Button'
 
 registerIcons()
 
 const props = {
   isActive: true,
   onClick: onClick,
-  children: 'children',
-  i18n: {}
+  children: <Button> Jestem przyciskiem</Button>,
+  i18n: {
+    cancel: 'cancel'
+  }
 }
 const modalComponent = <Modal {...props} />
 

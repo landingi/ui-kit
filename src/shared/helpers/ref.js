@@ -13,6 +13,7 @@ export const composeRefs = (...args) => {
 
       if (typeof arg === 'function') {
         arg(ref)
+
         return
       }
 

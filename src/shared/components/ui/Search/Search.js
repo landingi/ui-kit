@@ -185,7 +185,7 @@ Search.propTypes = {
   variant: PropTypes.oneOf(['input', 'button']),
   i18n: PropTypes.shape({
     placeholder: PropTypes.string,
-    label: PropTypes.label
+    label: PropTypes.string
   }),
   onSubmit: PropTypes.func,
   tag: PropTypes.string,

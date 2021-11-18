@@ -13,7 +13,7 @@ const props = {
   setSearchResult: mockedSetSearchResult,
   liveChanges: false,
   i18n: {
-    placeholder: 'null'
+    placeholder: 'jestem placeholderem'
   },
   protectedSubmit: false,
   setSearchPhrase: null
@@ -50,7 +50,7 @@ describe('<Searcher/> mount', () => {
 
   it('should have defined default prop i18', () => {
     expect(wrapper.props().i18n).toEqual({
-      placeholder: 'null'
+      placeholder: 'jestem placeholderem'
     })
   })
 

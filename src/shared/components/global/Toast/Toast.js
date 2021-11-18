@@ -99,7 +99,7 @@ const Toast = ({ className }) => {
     isActive && (
       <PoseGroup animateOnMount flipMove={false}>
         <ToastAnimation key='toastanimation' className={cssClass(className)}>
-          <Notification type={type} isClosable onClick={handleToastToggle}>
+          <Notification type={type} onClick={handleToastToggle} isClosable>
             {message}
           </Notification>
         </ToastAnimation>
