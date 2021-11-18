@@ -27,10 +27,12 @@ const Check = ({ children, positive }) => (
 Check.displayName = 'Check'
 
 Check.propTypes = {
+  children: PropTypes.node,
   positive: PropTypes.bool
 }
 
 Check.defaultProps = {
+  children: null,
   positive: false
 }
 

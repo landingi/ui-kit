@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { endOfMonth, startOfMonth } from 'date-fns'
 import {
@@ -9,142 +11,147 @@ import {
 } from './helpers'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import Spacer from '@components/ui/Spacer'
 import scss from './MonthRangePicker.scss'
 
-const cssClass = styles(scss),
-  /**
-   * MonthRangePicker - stateful component
-   * @param {object} props - props
-   * @param {func} props.onChange - called on date confirm
-   * @param {date} props.minDate - minimal date
-   * @param {date} props.maxDate - maximal date
-   * @return {object} An object of children element
-   */
-  monthRangePicker = ({ onChange, minDate, maxDate }) => {
-    const minimalDate = parseDateToMonthID(minDate),
-      maximalDate = parseDateToMonthID(maxDate),
-      [isSelecting, setSelecting] = useState(false),
-      [startMonth, setStartMonth] = useState(null),
-      [endMonth, setEndMonth] = useState(null),
-      [year, setYear] = useState(2021),
-      [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+const cssClass = styles(scss)
+/**
+ * MonthRangePicker - stateful component
+ * @param {object} props - props
+ * @param {func} props.onChange - called on date confirm
+ * @param {date} props.minDate - minimal date
+ * @param {date} props.maxDate - maximal date
+ * @return {object} An object of children element
+ */
+const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
+  const minimalDate = parseDateToMonthID(minDate),
+    maximalDate = parseDateToMonthID(maxDate),
+    [isSelecting, setSelecting] = useState(false),
+    [startMonth, setStartMonth] = useState(null),
+    [endMonth, setEndMonth] = useState(null),
+    [year, setYear] = useState(2021),
+    [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
 
-    useEffect(() => {
-      if (confirmedEndMonth) {
-        onChange({
-          endDate: endOfMonth(
-            confirmedEndMonth > startMonth
-              ? transformMonthToDate(confirmedEndMonth)
-              : transformMonthToDate(startMonth)
-          ),
-          startDate: startOfMonth(
-            confirmedEndMonth > startMonth
-              ? transformMonthToDate(startMonth)
-              : transformMonthToDate(confirmedEndMonth)
-          )
-        })
+  useEffect(() => {
+    if (confirmedEndMonth) {
+      onChange({
+        endDate: endOfMonth(
+          confirmedEndMonth > startMonth
+            ? transformMonthToDate(confirmedEndMonth)
+            : transformMonthToDate(startMonth)
+        ),
+        startDate: startOfMonth(
+          confirmedEndMonth > startMonth
+            ? transformMonthToDate(startMonth)
+            : transformMonthToDate(confirmedEndMonth)
+        )
+      })
+    }
+  }, [confirmedEndMonth])
+
+  const handleSelect = monthID => {
+      if (isSelecting) {
+        setSelecting(false)
+        setConfirmedEndMonth(monthID)
+        setEndMonth(null)
+      } else {
+        setSelecting(true)
+        setStartMonth(monthID)
+        setConfirmedEndMonth(null)
       }
-    }, [confirmedEndMonth])
+    },
+    handleHover = monthID => {
+      isSelecting && setEndMonth(monthID)
+    },
+    constructMonthID = monthIndex => {
+      return parseInt(`${year}${monthIndex}`)
+    },
+    renderMonths = () => {
+      return monthsArray.map(({ code, name }) => {
+        const monthID = constructMonthID(code)
 
-    const handleSelect = monthID => {
-        if (isSelecting) {
-          setSelecting(false)
-          setConfirmedEndMonth(monthID)
-          setEndMonth(null)
-        } else {
-          setSelecting(true)
-          setStartMonth(monthID)
-          setConfirmedEndMonth(null)
-        }
-      },
-      handleHover = monthID => {
-        isSelecting && setEndMonth(monthID)
-      },
-      constructMonthID = monthIndex => {
-        return parseInt(`${year}${monthIndex}`)
-      },
-      renderMonths = () => {
-        return monthsArray.map(({ code, name }) => {
-          const monthID = constructMonthID(code)
+        return (
+          <button
+            className={cssClass(
+              'button_month',
+              !isSelecting && 'button_month--not-selecting',
+              handleRangeMarker(monthID, endMonth, startMonth) &&
+                'button_month--selecting',
+              handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
+                'button_month--selected',
+              monthID < minimalDate && 'button_month--disabled',
+              monthID > maximalDate && 'button_month--disabled',
+              handleFirstMarker(monthID) && 'button_month--first',
+              handleLastMarker(monthID) && 'button_month--last'
+            )}
+            key={monthID}
+            onClick={() => handleSelect(monthID)}
+            onMouseOver={() => handleHover(monthID)}
+            type='button'
+          >
+            <span className={cssClass('button_month--marker')} />
 
-          return (
-            <button
-              className={cssClass(
-                'button_month',
-                !isSelecting && 'button_month--not-selecting',
-                handleRangeMarker(monthID, endMonth, startMonth) &&
-                  'button_month--selecting',
-                handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
-                  'button_month--selected',
-                monthID < minimalDate && 'button_month--disabled',
-                monthID > maximalDate && 'button_month--disabled',
-                handleFirstMarker(monthID) && 'button_month--first',
-                handleLastMarker(monthID) && 'button_month--last'
-              )}
-              key={monthID}
-              onClick={() => handleSelect(monthID)}
-              onMouseOver={() => handleHover(monthID)}
-              type='button'
-            >
-              <span className={cssClass('button_month--marker')} />
+            <span className={cssClass('button_month--name')}>{name}</span>
+          </button>
+        )
+      })
+    },
+    handleFirstMarker = monthID => {
+      const currentEndMonth = confirmedEndMonth || endMonth
 
-              <span className={cssClass('button_month--name')}>{name}</span>
-            </button>
-          )
-        })
-      },
-      handleFirstMarker = monthID => {
-        const currentEndMonth = confirmedEndMonth || endMonth
-
-        if (!startMonth) {
-          return false
-        }
-
-        if (!currentEndMonth) {
-          return startMonth === monthID
-        }
-
-        return currentEndMonth > startMonth
-          ? startMonth === monthID
-          : currentEndMonth === monthID
-      },
-      handleLastMarker = monthID => {
-        const currentEndMonth = confirmedEndMonth || endMonth
-
-        return currentEndMonth < startMonth
-          ? startMonth === monthID
-          : currentEndMonth === monthID
+      if (!startMonth) {
+        return false
       }
 
-    return (
-      <Fragment>
-        <div className={cssClass('year-container')}>
-          <Button
-            onClick={useCallback(() => setYear(year - 1), [year])}
-            size='tiny'
-            variant='icon'
-          >
-            <FontAwesomeIcon icon='arrow-left' />
-          </Button>
+      if (!currentEndMonth) {
+        return startMonth === monthID
+      }
 
-          <span className={cssClass('year')}>{year}</span>
+      return currentEndMonth > startMonth
+        ? startMonth === monthID
+        : currentEndMonth === monthID
+    },
+    handleLastMarker = monthID => {
+      const currentEndMonth = confirmedEndMonth || endMonth
 
-          <Button
-            onClick={useCallback(() => setYear(year + 1), [year])}
-            size='tiny'
-            variant='icon'
-          >
-            <FontAwesomeIcon icon='arrow-right' />
-          </Button>
-        </div>
+      return currentEndMonth < startMonth
+        ? startMonth === monthID
+        : currentEndMonth === monthID
+    }
 
-        <Spacer space='tiny' />
+  return (
+    <Fragment>
+      <div className={cssClass('year-container')}>
+        <Button
+          onClick={useCallback(() => setYear(year - 1), [year])}
+          size='tiny'
+          variant='icon'
+        >
+          <FontAwesomeIcon icon='arrow-left' />
+        </Button>
 
-        <div className={cssClass('grid-container')}>{renderMonths()}</div>
-      </Fragment>
-    )
-  }
+        <span className={cssClass('year')}>{year}</span>
 
-export default monthRangePicker
+        <Button
+          onClick={useCallback(() => setYear(year + 1), [year])}
+          size='tiny'
+          variant='icon'
+        >
+          <FontAwesomeIcon icon='arrow-right' />
+        </Button>
+      </div>
+
+      <Spacer space='tiny' />
+
+      <div className={cssClass('grid-container')}>{renderMonths()}</div>
+    </Fragment>
+  )
+}
+
+MonthRangePicker.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  minDate: PropTypes.instanceOf(Date).isRequired,
+  maxDate: PropTypes.instanceOf(Date).isRequired
+}
+
+export default MonthRangePicker

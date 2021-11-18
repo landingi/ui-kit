@@ -24,11 +24,9 @@ const Searcher = ({
   ...rest
 }) => {
   const search = async value => {
-    try {
-      const response = await searchFunction(value)
+    const response = await searchFunction(value)
 
-      setSearchResult(response)
-    } catch {}
+    setSearchResult(response)
   }
 
   const handleOnChange = useCallback(event => {
