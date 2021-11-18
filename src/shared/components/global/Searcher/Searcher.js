@@ -61,7 +61,7 @@ const Searcher = ({
       onChange={handleOnChange}
       onProtectedSubmit={protectedSubmit ? handleOnProtectedSubmit : null}
       onSubmit={protectedSubmit ? null : handleOnSubmit}
-      i18n={i18n.placeholder}
+      i18n={i18n}
       {...rest}
     />
   )

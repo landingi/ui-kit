@@ -11,7 +11,9 @@ const props = {
   isActive: true,
   onClick: onClick,
   children: <Button> Jestem przyciskiem</Button>,
-  i18n: {}
+  i18n: {
+    cancel: 'cancel'
+  }
 }
 const modalComponent = <Modal {...props} />
 

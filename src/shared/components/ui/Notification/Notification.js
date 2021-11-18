@@ -47,7 +47,7 @@ Notification.propTypes = {
     PropTypes.node,
     PropTypes.string,
     PropTypes.func
-  ]).isRequired,
+  ]),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   hasTime: PropTypes.bool,
   isClosable: PropTypes.bool,
