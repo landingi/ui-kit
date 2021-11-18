@@ -28,7 +28,6 @@ describe('Date helpers', () => {
 
   it('should return false when count of last page is 0', () => {
     expect(isLastPage(0, 1, 10)).toEqual(false)
-    // expect(isLastPage(10, 1, 10)).toEqual('10 000')
   })
 
   it('should return false when count divided by limit is not equal to page', () => {
