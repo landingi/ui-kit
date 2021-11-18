@@ -25,4 +25,10 @@ describe('<Spinner/> mount', () => {
   it('has `spinner__spin` class', () => {
     expect(wrapper.hasClass('spinner__spin')).toBe(true)
   })
+
+  it('default prop `classname` should be spinner__spin', () => {
+    const result = Spinner.defaultProps.className
+
+    expect(result).toBe('spinner__spin')
+  })
 })
