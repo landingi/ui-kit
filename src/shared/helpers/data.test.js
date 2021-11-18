@@ -2,7 +2,8 @@ import {
   getTodayDate,
   getDateObject,
   formatNumeric,
-  isLastPage
+  isLastPage,
+  queryString
 } from '@helpers/data'
 
 describe('Date helpers', () => {
@@ -32,10 +33,20 @@ describe('Date helpers', () => {
 
   it('should return false when count divided by limit is not equal to page', () => {
     expect(isLastPage(10, 2, 10)).toEqual(false)
-    // expect(isLastPage(10, 1, 10)).toEqual('10 000')
   })
 
   it('should return true if it is last page', () => {
     expect(isLastPage(10, 1, 10)).toEqual(true)
+  })
+
+  it('should return proper encoded query string', () => {
+    const obj = {
+      a: 'jestem wartoscia a',
+      b: 'jestem wartoscia b'
+    }
+
+    expect(queryString(obj)).toEqual(
+      'a=jestem%20wartoscia%20a&b=jestem%20wartoscia%20b'
+    )
   })
 })
