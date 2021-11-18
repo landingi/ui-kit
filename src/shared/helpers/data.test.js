@@ -1,4 +1,9 @@
-import { getTodayDate, getDateObject, formatNumeric } from '@helpers/data'
+import {
+  getTodayDate,
+  getDateObject,
+  formatNumeric,
+  isLastPage
+} from '@helpers/data'
 
 describe('Date helpers', () => {
   it('should return today Date', () => {
@@ -18,5 +23,19 @@ describe('Date helpers', () => {
     expect(formatNumeric(100)).toEqual('100')
     expect(formatNumeric(1000000)).toEqual('1 000 000')
     expect(formatNumeric(5789)).toEqual('5 789')
+  })
+
+  it('should return false when count of last page is 0', () => {
+    expect(isLastPage(0, 1, 10)).toEqual(false)
+    // expect(isLastPage(10, 1, 10)).toEqual('10 000')
+  })
+
+  it('should return false when count divided by limit is not equal to page', () => {
+    expect(isLastPage(10, 2, 10)).toEqual(false)
+    // expect(isLastPage(10, 1, 10)).toEqual('10 000')
+  })
+
+  it('should return true if it is last page', () => {
+    expect(isLastPage(10, 1, 10)).toEqual(true)
   })
 })
