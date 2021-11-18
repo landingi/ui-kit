@@ -89,6 +89,17 @@
       background-color: $color-button-hover;
       color: $color-brand;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: $color-4;
+
+      &:hover {
+        background-color: transparent;
+        color: $color-4;
+      }
+    }
   }
 
   &--hide {
