@@ -7,13 +7,13 @@ import { styles } from '@helpers/css'
 import scss from './ColorPicker.scss'
 import Paragraph from '@components/ui/Paragraph'
 import Button from '@components/ui/Button'
-import { hexToRgba, rgbTohex } from './helpers'
+import { convertColorToObj, hexToRgba, rgbTohex } from './helpers'
 
 const cssClass = styles(scss)
 
 /**
  * Color picker - statefull component
- * @param {string} colorValue - color value to display in hex format eg. '#333'
+ * @param {string} colorValue - color value to display in hex | rgb | rgba eg '#333' | 'rgb(255,21,34) |'rgba(31,22,34,0.5)
  * @param {object} i18n - an object of translations for label, clear button
  * @param {array} favoriteColors - an array of objects favorite colors eg. [{id: '1', color: #333}]
  * @param {function} onColorChange - on color change handler get object with changed color in callback eg. {hex: color, alpha(opacity): 0-1}
@@ -36,7 +36,7 @@ const ColorPicker = ({
   const pickerRef = useRef(null)
   const colorPaletteRef = useRef(null)
 
-  const rgbaColor = hexToRgba(colorValue, alpha)
+  const rgbaColor = convertColorToObj(colorValue)
   const { r, g, b, a } = rgbaColor
   const hasAnyFavoriteColor = favoriteColors.length >= 1
 
@@ -50,12 +50,14 @@ const ColorPicker = ({
   const removeMarkedFavColor = useCallback(() => setSelectedFavColor(''), [])
 
   const handleColorChange = color => {
+    console.log(color)
     const {
       hex,
       rgb: { a = 1 }
     } = color
+
     setAlpha(a)
-    onColorChange({ hex, alpha: a })
+    onColorChange({ hex , alpha: a })
   }
 
   const handleSelectingFavColor = ({ target }) => {
