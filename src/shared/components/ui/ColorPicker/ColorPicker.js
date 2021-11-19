@@ -7,7 +7,7 @@ import { styles } from '@helpers/css'
 import scss from './ColorPicker.scss'
 import Paragraph from '@components/ui/Paragraph'
 import Button from '@components/ui/Button'
-import { convertColorToObj, hexToRgba, rgbTohex } from './helpers'
+import { convertColorToObj, rgbTohex } from './helpers'
 
 const cssClass = styles(scss)
 
@@ -57,7 +57,7 @@ const ColorPicker = ({
     } = color
 
     setAlpha(a)
-    onColorChange({ hex , alpha: a })
+    onColorChange({ hex, alpha: a })
   }
 
   const handleSelectingFavColor = ({ target }) => {

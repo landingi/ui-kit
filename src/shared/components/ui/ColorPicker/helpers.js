@@ -40,22 +40,26 @@ export const rgbTohex = rgb =>
     .map(n => parseInt(n, 10).toString(16).padStart(2, '0'))
     .join('')}`
 
-
 /**
- * 
+ *
  * @param {string} color in hex or rgb/rgba format eg. "#333" or rgb(211,222,222)/"rgba(255,211,30,0.5)"
  * @returns {object} an object of red, green, blue, opacity integers
  */
 export const convertColorToObj = color => {
   const isHexColor = /^#[0-9A-F]{6}$/i.test(color)
-  const isRGBOrRGBAColor = /^rgb(a?)[(]\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*(?:,\s*([\d.]+)\s*)?[)]$/i.test(color)
+  const isRGBOrRGBAColor =
+    /^rgb(a?)[(]\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*(?:,\s*([\d.]+)\s*)?[)]$/i.test(
+      color
+    )
 
   if (isHexColor) {
     return hexToRgba(color)
   }
 
   if (isRGBOrRGBAColor) {
-    const [red,green,blue,alpha = 1] = color.substring(str.indexOf('(') +1, str.length -1).split(', ');
+    const [red, green, blue, alpha = 1] = color
+      .substring(color.indexOf('(') + 1, color.length - 1)
+      .split(', ')
 
     return {
       r: red,
