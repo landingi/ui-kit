@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -66,36 +65,37 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
     constructMonthID = monthIndex => {
       return parseInt(`${year}${monthIndex}`)
     },
-    renderMonths = () => {
-      return monthsArray.map(({ code, name }) => {
-        const monthID = constructMonthID(code)
+    renderMonths = monthsArray.map(({ code, name }) => {
+      const monthID = constructMonthID(code)
 
-        return (
-          <button
-            className={cssClass(
-              'button_month',
-              !isSelecting && 'button_month--not-selecting',
-              handleRangeMarker(monthID, endMonth, startMonth) &&
-                'button_month--selecting',
-              handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
-                'button_month--selected',
-              monthID < minimalDate && 'button_month--disabled',
-              monthID > maximalDate && 'button_month--disabled',
-              handleFirstMarker(monthID) && 'button_month--first',
-              handleLastMarker(monthID) && 'button_month--last'
-            )}
-            key={monthID}
-            onClick={() => handleSelect(monthID)}
-            onMouseOver={() => handleHover(monthID)}
-            type='button'
-          >
-            <span className={cssClass('button_month--marker')} />
-
-            <span className={cssClass('button_month--name')}>{name}</span>
-          </button>
+      const btnClasses = () =>
+        cssClass(
+          'button_month',
+          !isSelecting && 'button_month--not-selecting',
+          handleRangeMarker(monthID, endMonth, startMonth) &&
+            'button_month--selecting',
+          handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
+            'button_month--selected',
+          monthID < minimalDate && 'button_month--disabled',
+          monthID > maximalDate && 'button_month--disabled',
+          handleFirstMarker(monthID) && 'button_month--first',
+          handleLastMarker(monthID) && 'button_month--last'
         )
-      })
-    },
+
+      return (
+        <button
+          className={btnClasses()}
+          key={monthID}
+          onClick={() => handleSelect(monthID)}
+          onMouseOver={() => handleHover(monthID)}
+          type='button'
+        >
+          <span className={cssClass('button_month--marker')} />
+
+          <span className={cssClass('button_month--name')}>{name}</span>
+        </button>
+      )
+    }),
     handleFirstMarker = monthID => {
       const currentEndMonth = confirmedEndMonth || endMonth
 
