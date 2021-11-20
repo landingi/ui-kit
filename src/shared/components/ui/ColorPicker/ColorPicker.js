@@ -66,10 +66,10 @@ const ColorPicker = ({
     handleColorChange({ rgb: rgbObj })
   }
 
-  const handleAddFavorite = () =>
-    onClickFavoriteHandler(
-      hexRegex.test(colorValue) ? colorValue : rgbTohex(colorValue)
-    )
+  const handleAddFavorite = () => {
+    const isHexColor = hexRegex.test(colorValue)
+    onClickFavoriteHandler(isHexColor ? colorValue : rgbTohex(colorValue))
+  }
 
   const handleDeleteFavColor = () => onClickDeleteHandler(selectedFavColor)
 

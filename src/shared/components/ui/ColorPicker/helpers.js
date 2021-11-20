@@ -1,4 +1,4 @@
-export const hexRegex = /^#[0-9A-F]{6}$/i
+export const hexRegex = /#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?/i
 export const rgbOrRgbaRegex =
   /^rgb(a?)[(]\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*(?:,\s*([\d.]+)\s*)?[)]$/i
 
@@ -18,7 +18,7 @@ export const hexToRgba = (hex, toString = false, alpha = 1) => {
   const red = parseInt(hex.slice(1, 3), 16)
   const green = parseInt(hex.slice(3, 5), 16)
   const blue = parseInt(hex.slice(5, 7), 16)
-  const rgbaString = `rgba(${red},${green},${blue},${alpha})`
+  const rgbaString = `rgba(${red}, ${green}, ${blue}, ${alpha})`
   const rgbaObj = {
     r: red,
     g: green,
@@ -35,16 +35,23 @@ export const hexToRgba = (hex, toString = false, alpha = 1) => {
  * @param {string} rgb
  * @returns {string}
  */
-export const rgbTohex = rgb =>
-  '#' +
-  rgb
-    .match(/[0-9|.]+/g)
-    .map((x, i) =>
-      i === 3
-        ? parseInt(255 * parseFloat(x)).toString(16)
-        : parseInt(x).toString(16)
-    )
-    .join('')
+export const rgbTohex = rgb => {
+  const isValidRgbString = rgbOrRgbaRegex.test(rgb)
+
+  if (!isValidRgbString) {
+    throw new Error('Invalid format of rgb/rgba string!')
+  }
+
+  const [red, green, blue] = rgb
+    .slice(rgb.indexOf('(') + 1, rgb.indexOf(')'))
+    .split(', ')
+
+  const hexString = `#${[red, green, blue]
+    .map(colorNum => colorNum.toString(16).padStart(2, '0'))
+    .join('')}`
+
+  return hexString
+}
 
 /**
  *
@@ -61,7 +68,7 @@ export const convertColorToObj = color => {
 
   if (isRGBOrRGBAColor) {
     const [red, green, blue, alpha = 1] = color
-      .substring(color.indexOf('(') + 1, color.length - 1)
+      .slice(color.indexOf('(') + 1, color.indexOf(')'))
       .split(', ')
 
     return {
