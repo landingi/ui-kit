@@ -45,10 +45,8 @@ export const rgbTohex = rgb => {
   const [red, green, blue] = rgb
     .slice(rgb.indexOf('(') + 1, rgb.indexOf(')'))
     .split(', ')
-
-  const hexString = `#${[red, green, blue]
-    .map(colorNum => colorNum.toString(16).padStart(2, '0'))
-    .join('')}`
+  const rgbNum = (red << 16) | (green << 8) | (blue << 0)
+  const hexString = `#${(0x1000000 + rgbNum).toString(16).slice(1)}`
 
   return hexString
 }
