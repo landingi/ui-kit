@@ -105,8 +105,8 @@
   }
 
   &--input--disabled {
-    border-bottom: 1px dotted $color-8;
     color: $color-input-border;
+    border-bottom: 1px dotted $color-8;
     cursor: not-allowed;
 
     :global
