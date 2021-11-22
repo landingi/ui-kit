@@ -1,5 +1,6 @@
 import { Playground, Props } from 'docz'
 import Tooltip from '@components/ui/Tooltip'
+import Spreader from '@components/ui/Spreader'
 
 # Tooltip
 
@@ -8,13 +9,19 @@ import Tooltip from '@components/ui/Tooltip'
 <Playground>
   <Tooltip content="Bottom tooltip">Bottom tooltip</Tooltip>
 
+  <Spreader />
+
   <Tooltip content="Left tooltip" placement="left">
     Left tooltip
   </Tooltip>
 
+  <Spreader />
+
   <Tooltip content="Right tooltip" placement="right">
     Right tooltip
   </Tooltip>
+
+  <Spreader />
 
   <Tooltip content="Top tooltip" placement="top">
     Top tooltip

@@ -1,12 +1,9 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import scss from './Tooltip.scss'
 import uuid from 'react-uuid'
 import ReactTooltip from 'react-tooltip'
-import { styles } from '@helpers/css'
-
-const cssClass = styles(scss)
-
+import styles from './Tooltip.module.scss'
+console.log(styles)
 /**
  * Tooltip - stateless presentational component
  * @param {object} props - props
@@ -41,12 +38,12 @@ const Tooltip = ({
 
   return (
     <Fragment>
-      <span className={cssClass(className)} data-tip data-for={tooltipUUID}>
+      <span className={className} data-tip data-for={tooltipUUID}>
         {children}
       </span>
 
       <ReactTooltip
-        className={cssClass('react-tooltip', `react-tooltip-${align}`)}
+        className={`${styles.reactTooltip} react-tooltip-${align}`}
         background='#000'
         effect={effect}
         id={tooltipUUID}
