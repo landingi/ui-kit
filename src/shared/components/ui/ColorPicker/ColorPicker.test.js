@@ -4,7 +4,7 @@ import registerIcons from '@helpers/icons'
 import ColorPicker from './ColorPicker'
 import Button from '@components/ui/Button'
 import { act } from 'react-dom/test-utils'
-import { hexToRgba } from './helpers'
+import { convertColorToObj } from './helpers'
 
 registerIcons()
 HTMLCanvasElement.prototype.getContext = () => {}
@@ -51,7 +51,7 @@ describe('<ColorPicker/> mount', () => {
   })
 
   it('should render preview color box contains color matched with formated colorValue prop', () => {
-    const { r, g, b, a } = hexToRgba(wrapper.prop('colorValue'), 1)
+    const { r, g, b, a } = convertColorToObj(wrapper.prop('colorValue'))
     const rgbaColorString = `rgba(${r}, ${g}, ${b}, ${a})`
 
     expect(
@@ -157,7 +157,7 @@ describe('<ColorPicker/> mount', () => {
 
     await wrapper.find('Chrome').invoke('onChange')(newColor)
 
-    expect(onColorChange).toBeCalledWith({ hex: newColor.hex, alpha: 1 })
+    expect(onColorChange).toBeCalledWith('rgba(50, 20, 18, 1)')
   })
 
   it('onColorChange should return default black color with alpha 0 when clear button has been clicked', () => {
@@ -166,6 +166,6 @@ describe('<ColorPicker/> mount', () => {
 
     wrapper.find(Button).at(0).simulate('click')
 
-    expect(onColorChange).toBeCalledWith({ hex: '#000000', alpha: 0 })
+    expect(onColorChange).toBeCalledWith('rgba(0, 0, 0, 0)')
   })
 })

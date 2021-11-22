@@ -7,16 +7,16 @@ import { styles } from '@helpers/css'
 import scss from './ColorPicker.scss'
 import Paragraph from '@components/ui/Paragraph'
 import Button from '@components/ui/Button'
-import { hexToRgba, rgbTohex } from './helpers'
+import { convertColorToObj, rgbTohex, hexRegex } from './helpers'
 
 const cssClass = styles(scss)
 
 /**
  * Color picker - statefull component
- * @param {string} colorValue - color value to display in hex format eg. '#333'
+ * @param {string} colorValue - color value to display in hex | rgb | rgba eg '#333' | 'rgb(255,21,34) |'rgba(31,22,34,0.5)
  * @param {object} i18n - an object of translations for label, clear button
  * @param {array} favoriteColors - an array of objects favorite colors eg. [{id: '1', color: #333}]
- * @param {function} onColorChange - on color change handler get object with changed color in callback eg. {hex: color, alpha(opacity): 0-1}
+ * @param {function} onColorChange - on color change handler get object with changed color in callback
  * @param {object} colorPanelHandlers - an object of handler functions, functions get value in callback eg.
  * onClickFavoriteHandler - string selected color value in hex format eg. '#213'
  * onClickDeleteHandler - an object with id and color to delete
@@ -31,12 +31,11 @@ const ColorPicker = ({
 }) => {
   const [isPickerDisplayed, setPickerDisplay] = useState(false)
   const [selectedFavColor, setSelectedFavColor] = useState(null)
-  const [alpha, setAlpha] = useState(1)
 
   const pickerRef = useRef(null)
   const colorPaletteRef = useRef(null)
 
-  const rgbaColor = hexToRgba(colorValue, alpha)
+  const rgbaColor = convertColorToObj(colorValue)
   const { r, g, b, a } = rgbaColor
   const hasAnyFavoriteColor = favoriteColors.length >= 1
 
@@ -51,28 +50,31 @@ const ColorPicker = ({
 
   const handleColorChange = color => {
     const {
-      hex,
-      rgb: { a = 1 }
+      rgb: { r, g, b, a = 1 }
     } = color
-    setAlpha(a)
-    onColorChange({ hex, alpha: a })
+    const rgbaString = `rgba(${r}, ${g}, ${b}, ${a})`
+    onColorChange(rgbaString)
   }
 
   const handleSelectingFavColor = ({ target }) => {
     const id = target.getAttribute('data-key')
     const { backgroundColor } = target.style
-    const color = rgbTohex(backgroundColor)
+    const hexColor = rgbTohex(backgroundColor)
+    const rgbObj = convertColorToObj(backgroundColor)
 
-    setSelectedFavColor({ id, color })
-    handleColorChange({ hex: color, rgb: { a: 1 } })
+    setSelectedFavColor({ id, color: hexColor })
+    handleColorChange({ rgb: rgbObj })
   }
 
-  const handleAddFavorite = () => onClickFavoriteHandler(colorValue)
+  const handleAddFavorite = () => {
+    const isHexColor = hexRegex.test(colorValue)
+    onClickFavoriteHandler(isHexColor ? colorValue : rgbTohex(colorValue))
+  }
 
   const handleDeleteFavColor = () => onClickDeleteHandler(selectedFavColor)
 
   const handleClear = () => {
-    handleColorChange({ hex: '#000000', rgb: { a: 0 } })
+    handleColorChange({ rgb: { r: 0, g: 0, b: 0, a: 0 } })
     handleCloseColorPicker()
   }
 
