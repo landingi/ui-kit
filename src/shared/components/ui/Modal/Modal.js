@@ -6,7 +6,6 @@ import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
 import Spreader from '@components/ui/Spreader'
-import Overflow from '@components/ui/Overflow'
 import Divider from '@components/ui/Divider'
 import Spacer from '@components/ui/Spacer'
 import Button from '@components/ui/Button'
@@ -165,11 +164,9 @@ const modal = ({
                   )}
                   <div className={scss.modal__body}>
                     {disableOverflow ? (
-                      children
+                      { children }
                     ) : (
-                      <div style={overflowStyle}>
-                        <Overflow>{children}</Overflow>
-                      </div>
+                      <div style={overflowStyle}>{children}</div>
                     )}
                   </div>
                   {hasFooterDivider && (
@@ -281,7 +278,8 @@ modal.defaultProps = {
   actionIcon: null,
   overflowStyle: {
     maxHeight: '80vh',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    overflowX: 'hidden'
   },
   isCentered: false,
   isEditable: false,
