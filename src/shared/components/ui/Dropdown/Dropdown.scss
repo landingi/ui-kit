@@ -104,6 +104,31 @@
     }
   }
 
+  &--input--disabled {
+    border-bottom: 1px dotted $color-8;
+    color: $color-input-border;
+    cursor: not-allowed;
+
+    :global
+    .Dropdown__dropdown__label{
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      svg {
+        color: $color-3
+      }
+    }
+
+    &:focus,
+    &:hover,
+    &:active {
+      &:after {
+        display: none;
+      }
+    }
+  }
+
   &__body {
     padding: 20px 0 $padding-small;
 
