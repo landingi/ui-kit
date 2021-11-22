@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import uuid from 'react-uuid'
 import ReactTooltip from 'react-tooltip'
 import styles from './Tooltip.module.scss'
-console.log(styles)
+
 /**
  * Tooltip - stateless presentational component
  * @param {object} props - props

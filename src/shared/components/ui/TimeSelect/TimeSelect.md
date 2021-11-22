@@ -1,6 +1,12 @@
 import { Playground, Props } from 'docz'
-import Select from '@components/ui/TimeSelect'
+import TimeSelect from '@components/ui/TimeSelect'
 
 # Time Select
 
-<Props of={Select} />
+<Props of={TimeSelect} />
+
+<Props of={TimeSelect} />
+
+<Playground>
+  <TimeSelect label="Time" value="12:00" onChange={value => console.log(value)} />
+</Playground>
