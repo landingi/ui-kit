@@ -72,7 +72,7 @@ const Dropdown = forwardRef(
 
         setIsOpen(isOpen => !isOpen)
       },
-      [isOpen]
+      [isOpen, isOpenDisabled]
     )
 
     const handleClose = useCallback(
