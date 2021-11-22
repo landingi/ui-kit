@@ -41,11 +41,10 @@
     }
 
     &--disabled {
-        cursor: not-allowed;
-        
         input {
             color: $color-input-border;
             -webkit-text-fill-color: $color-input-border;
+            cursor: not-allowed;
         }
     }
     
