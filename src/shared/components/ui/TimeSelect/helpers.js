@@ -9,7 +9,8 @@ export const processTime = (time, clockType) => {
     const hoursNum = Number(hours)
 
     if (clockType === AM && hoursNum >= 12) {
-      return `${Number(hoursNum) - 12}:${minutes}`
+      const hh = Number(hoursNum) - 12 === 0 ? '00' : Number(hoursNum) - 12
+      return `${hh}:${minutes}`
     }
 
     if (clockType === PM && hoursNum < 12) {
@@ -17,7 +18,7 @@ export const processTime = (time, clockType) => {
     }
 
     if (clockType === PM && hoursNum === 12) {
-      return `${12}:${minutes}`
+      return `12:${minutes}`
     }
 
     return time
