@@ -29,6 +29,7 @@
   .form-field--disabled {
     .Label__label {
       color: $color-input-border;
+      cursor: not-allowed;
     }
   }
 }
