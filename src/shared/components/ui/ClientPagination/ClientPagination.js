@@ -33,7 +33,7 @@ const Pagination = ({
   constantPageLimit,
   i18n
 }) => {
-  const handleGoToPage = page => useCallback(() => goToPage(page), []),
+  const handleGoToPage = useCallback(page => goToPage(page), [goToPage]),
     renderPagination = () =>
       pageCount !== 1 && (
         <>
@@ -174,16 +174,17 @@ Pagination.propTypes = {
   goToPage: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
   pageIndex: PropTypes.number.isRequired,
-  pageLimit: PropTypes.func.isRequired
+  pageLimit: PropTypes.func.isRequired,
+  i18n: PropTypes.shape({
+    first: PropTypes.string,
+    last: PropTypes.string
+  })
 }
 
 Pagination.defaultProps = {
   className: 'pagination',
   constantPageLimit: 0,
-  i18n: {
-    first: 'word.first',
-    last: 'word.last'
-  }
+  i18n: {}
 }
 
 export default Pagination
