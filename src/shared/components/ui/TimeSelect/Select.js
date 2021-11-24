@@ -135,7 +135,7 @@ TimeSelect.propTypes = {
 }
 
 TimeSelect.defaultProps = {
-  value: null,
+  value: '12:00',
   formikKey: null,
   disabled: false
 }

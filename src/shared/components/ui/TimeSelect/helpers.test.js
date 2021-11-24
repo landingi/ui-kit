@@ -19,7 +19,7 @@ describe('Test processTime', () => {
   })
 })
 
-describe('Test isAmOrPm', () => {
+describe('Test convertTimeFrom24to12', () => {
   it('Return converted time', () => {
     expect(convertTimeFrom24to12('12:23')).toBe('12:23')
     expect(convertTimeFrom24to12('00:23')).toBe('12:23')
@@ -28,9 +28,15 @@ describe('Test isAmOrPm', () => {
 })
 
 describe('Test isAmOrPm', () => {
-  it('Return converted time', () => {
+  it('Return null when in 00-24 clock', () => {
     expect(isAmOrPm('12:23', false)).toBe(null)
+  })
+  it('Return AM when time is < 12', () => {
     expect(isAmOrPm('00:23', true)).toBe(AM)
+    expect(isAmOrPm('11:23', true)).toBe(AM)
+  })
+  it('Return PM when time is >= 12', () => {
     expect(isAmOrPm('16:23', true)).toBe(PM)
+    expect(isAmOrPm('23:23', true)).toBe(PM)
   })
 })
