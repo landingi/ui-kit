@@ -211,6 +211,7 @@ export default function registerIcons() {
     faHeart,
     faChevronUp,
     faChevronDown,
-    faExternalLinkAlt
+    faExternalLinkAlt,
+    faClock
   )
 }

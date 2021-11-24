@@ -1,6 +1,21 @@
 {
     "compilerOptions": {
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "paths": {
+            "shared/*": [
+                "src/shared/*"
+            ],
+            "@components/*": ["./src/shared/components/*"],
+            "@constants/*": ["./src/shared/constants/*"],
+            "@events/*": ["./src/shared/events/*"],
+            "@helpers/*": ["./src/shared/helpers/*"],
+            "@i18n/*": ["./src/shared/i18n/*"],
+            "@lib/*": ["./src/shared/lib/*"],
+            "@shapes/*": ["./src/shared/shapes/*"],
+            "@store/*": ["./src/shared/store/*"],
+            "@jestutils": ["./config/tests/jest/utils.js"],
+            "@jestmocks/*": ["./config/tests/jest/setup/*"]
+        }
     },
     "exclude": [
         "node_modules",
@@ -8,5 +23,5 @@
         "dev",
         "jest-report",
         "local"
-    ]
+    ],
 }

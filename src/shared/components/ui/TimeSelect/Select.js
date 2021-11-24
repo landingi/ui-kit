@@ -127,7 +127,7 @@ export default TimeSelect
 TimeSelect.displayName = 'Time Select'
 
 TimeSelect.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   formikKey: PropTypes.string,
@@ -135,6 +135,7 @@ TimeSelect.propTypes = {
 }
 
 TimeSelect.defaultProps = {
+  value: '12:00',
   formikKey: null,
   disabled: false
 }
