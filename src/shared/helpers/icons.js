@@ -103,8 +103,7 @@ import {
   faUsers,
   faWindowMaximize,
   faWindowRestore,
-  faWrench,
-  faClock
+  faWrench
 } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
