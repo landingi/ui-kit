@@ -1,4 +1,7 @@
-import React, { useState as useStateMock } from 'react'
+import React, {
+  useState as useStateMock,
+  useCallback as useCallbackMock
+} from 'react'
 import { mount } from 'enzyme'
 import DateTimePicker from '@components/ui/DateTimePicker'
 import Button from '@components/ui/Button'
@@ -25,7 +28,8 @@ const rangePickerProps = {
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
-  useState: jest.fn()
+  useState: jest.fn(),
+  useCallback: jest.fn()
 }))
 
 const initialRange = [
@@ -51,6 +55,7 @@ describe('<DateTimePicker /> mount as Calendar', () => {
 
   beforeEach(() => {
     useStateMock.mockImplementation(() => [initialRange, mockSetState])
+    useCallbackMock.mockImplementation(() => mockSetState)
     wrapper = mount(DateTimepickerComponent, {
       attachTo: window.domNode
     })
@@ -117,6 +122,7 @@ describe('<DateTimePicker /> mount as DateRange', () => {
 
   beforeEach(() => {
     useStateMock.mockImplementation(() => [initialRange, mockSetState])
+    useCallbackMock.mockImplementation(() => mockSetState)
     wrapper = mount(RangeDatePickerComponent, {
       attachTo: window.domNode
     })
@@ -168,5 +174,11 @@ describe('<DateTimePicker /> mount as DateRange', () => {
 
     expect(mockSetState).toBeCalledTimes(1)
     expect(mockSetState).toBeCalledWith([selection])
+  })
+
+  it('after apply changes on clicking apply button setDate handler should be called with date range from state', async () => {
+    await wrapper.find(Button).invoke('onClick')(initialRange)
+
+    expect(mockSetState).toBeCalledWith(initialRange)
   })
 })
