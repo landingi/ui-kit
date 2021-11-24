@@ -153,7 +153,6 @@ describe('<DateTimePicker /> mount as DateRange', () => {
 
   it('should contains minDate equal passed minDate as prop', () => {
     const { minDate } = rangePickerProps
-
     expect(wrapper.find(DateRange).prop('minDate')).toEqual(new Date(minDate))
   })
 
