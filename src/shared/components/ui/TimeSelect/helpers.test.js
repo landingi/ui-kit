@@ -1,4 +1,4 @@
-import { processTime, convertTimeFrom24to12 } from './helpers'
+import { processTime, convertTimeFrom24to12, isAmOrPm } from './helpers'
 import { AM, PM } from './constants'
 
 describe('Test processTime', () => {
@@ -19,9 +19,18 @@ describe('Test processTime', () => {
   })
 })
 
-describe('Test convertTimeFrom24to12', () => {
+describe('Test isAmOrPm', () => {
   it('Return converted time', () => {
     expect(convertTimeFrom24to12('12:23')).toBe('12:23')
     expect(convertTimeFrom24to12('00:23')).toBe('12:23')
+    expect(convertTimeFrom24to12('16:23')).toBe('04:23')
+  })
+})
+
+describe('Test isAmOrPm', () => {
+  it('Return converted time', () => {
+    expect(isAmOrPm('12:23', false)).toBe(null)
+    expect(isAmOrPm('00:23', true)).toBe(AM)
+    expect(isAmOrPm('16:23', true)).toBe(PM)
   })
 })

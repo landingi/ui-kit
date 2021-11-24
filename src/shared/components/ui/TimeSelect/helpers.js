@@ -44,7 +44,7 @@ export const convertTimeFrom24to12 = time24 => {
   return `${hours}:${minutes}`
 }
 /**
- * check if current time is am or pm if clocl time is am/pm non 0-23
+ * check if current time is am or pm if clock time is am/pm
  */
 export const isAmOrPm = (time, isAmPmType) => {
   const [hours] = time.split(':')
