@@ -2,7 +2,6 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { Toggle } from '@components/ui/Form/Toggle/Toggle'
 import registerIcons from '@helpers/icons'
-import { jsxEmptyExpression } from '@babel/types'
 
 registerIcons()
 
@@ -38,17 +37,9 @@ describe('<Toggle /> mount', () => {
     expect(wrapper.prop('label')).toEqual('')
   })
 
-  it('has default prop `type` with value checkbox', () => {
-    expect(wrapper.prop('type')).toEqual('checkbox')
-  })
-
   it('default prop `onBlur` should be undefined', () => {
     const result = Toggle.defaultProps.onBlur()
 
     expect(result).toBe(null)
-  })
-
-  it('has default prop `type` with value checkbox', () => {
-    expect(wrapper.prop('type')).toEqual('checkbox')
   })
 })
