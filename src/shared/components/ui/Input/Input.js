@@ -138,7 +138,8 @@ Input.propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string
   }),
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
+  alwaysShowLabel: PropTypes.bool
 }
 
 Input.defaultProps = {
@@ -162,7 +163,8 @@ Input.defaultProps = {
   onChange: () => null,
   onKeyDown: () => null,
   onBlur: () => null,
-  defaultValue: null
+  defaultValue: null,
+  alwaysShowLabel: false
 }
 
 export default Input

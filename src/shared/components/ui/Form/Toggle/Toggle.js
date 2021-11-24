@@ -28,8 +28,7 @@ const toggle = ({
   id,
   label,
   className,
-  disabled,
-  type
+  disabled
 }) => {
   const getDisabledClassName = () =>
     checked ? 'toggle--checked-disabled' : 'toggle--disabled'
@@ -68,7 +67,6 @@ toggle.displayName = 'Toggle'
 toggle.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
-  type: PropTypes.string,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
@@ -77,12 +75,7 @@ toggle.propTypes = {
   disabled: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 toggle.defaultProps = {
-  type: 'checkbox',
   className: '',
   label: '',
   onBlur: () => null,

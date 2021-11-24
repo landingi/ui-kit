@@ -112,7 +112,10 @@ DateTimePicker.propTypes = {
   maxDate: PropTypes.instanceOf(Date),
   oneDatePicker: PropTypes.bool,
   selectedDateCalendar: PropTypes.instanceOf(Date),
-  showMonthAndYearPickers: PropTypes.bool
+  showMonthAndYearPickers: PropTypes.bool,
+  i18n: PropTypes.shape({
+    apply: PropTypes.string
+  })
 }
 
 DateTimePicker.defaultProps = {
@@ -120,9 +123,7 @@ DateTimePicker.defaultProps = {
   maxDate: undefined,
   oneDatePicker: false,
   showMonthAndYearPickers: true,
-  i18n: {
-    apply: ''
-  }
+  i18n: {}
 }
 
 export default DateTimePicker

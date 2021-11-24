@@ -31,36 +31,13 @@ function StepNumber({ className, step, variant, size, absolute }) {
 StepNumber.displayName = 'Step Number'
 
 StepNumber.propTypes = {
-  /**
-   * Absolute
-   */
   absolute: PropTypes.bool,
-
-  /**
-   * Classname, default `panel`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * Size
-   */
   size: PropTypes.string,
-
-  /**
-   * Step
-   */
   step: PropTypes.number.isRequired,
-
-  /**
-   * Step
-   */
   variant: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 StepNumber.defaultProps = {
   absolute: false,
   className: 'step__number',
