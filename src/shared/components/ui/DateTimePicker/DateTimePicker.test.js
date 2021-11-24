@@ -178,7 +178,6 @@ describe('<DateTimePicker /> mount as DateRange', () => {
 
   it('after apply changes on clicking apply button setDate handler should be called with date range from state', async () => {
     await wrapper.find(Button).invoke('onClick')(initialRange)
-
     expect(mockSetState).toBeCalledWith(initialRange)
   })
 })
