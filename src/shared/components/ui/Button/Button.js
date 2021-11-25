@@ -108,7 +108,7 @@ Button.displayName = 'Button'
 
 Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   target: PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
