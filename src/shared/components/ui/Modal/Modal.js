@@ -164,7 +164,7 @@ const modal = ({
                   )}
                   <div className={scss.modal__body}>
                     {disableOverflow ? (
-                      { children }
+                      children
                     ) : (
                       <div style={overflowStyle}>{children}</div>
                     )}
