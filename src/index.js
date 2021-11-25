@@ -4,8 +4,10 @@ export { LongLogo } from '@components/global/Logo'
 export { ShortLogo } from '@components/global/Logo'
 export { default as ScrollSpy } from '@components/global/ScrollSpy'
 export { default as Searcher } from '@components/global/Searcher'
+
 export { default as TimingToast } from '@components/global/TimingToast'
 export { default as Toast } from '@components/global/Toast'
+export { emitToastToggle, emitTimingToastToggle } from '@events/toast'
 
 export { default as Accordion } from '@components/ui/Accordion'
 export { default as Accordion2 } from '@components/ui/Accordion2'
