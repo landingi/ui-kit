@@ -1,4 +1,4 @@
-import React, { useCallback as useCallbackMock } from 'react'
+import React, { useCallback as useCallbackMock, useEffect } from 'react'
 import { mount } from 'enzyme'
 import registerIcons from '@helpers/icons'
 import MonthRangePicker from '@components/ui/MonthRangePicker/MonthRangePicker'
@@ -27,6 +27,7 @@ describe('<MonthRangePicker/> mount', () => {
 
   beforeEach(() => {
     useCallbackMock.mockImplementation(() => setYearMock)
+    useEffect.mockImplementation(() => props.onChange)
     wrapper = mount(MonthRangePickerComponent)
   })
 
@@ -55,7 +56,7 @@ describe('<MonthRangePicker/> mount', () => {
     expect(setYearMock).toBeCalledTimes(1)
   })
 
-  it('month should has first and last style after click and remove after second click', async () => {
+  it('month should has first and last style after click', async () => {
     wrapper.find('div.grid-container').find('button').last().simulate('click')
     const decemberBtn = wrapper.find('div.grid-container').find('button').last()
 
