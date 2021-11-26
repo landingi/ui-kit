@@ -9,7 +9,7 @@ import Spacer from '@components/ui/Spacer'
 registerIcons()
 
 const props = {
-  onchange: jest.fn(),
+  onChange: jest.fn(),
   minDate: new Date(2021, 10, 11),
   maxDate: new Date(2022, 10, 11),
   i18n: {
@@ -57,13 +57,31 @@ describe('<MonthRangePickerLayout/> mount', () => {
     expect(wrapper.find(Button).at(2).text()).toEqual(apply)
   })
 
-  it('should render MonthRangePicker with minDate, maxDate, onChange props', () => {
+  it('should render MonthRangePicker with minDate, maxDate props passed to wrapper', () => {
     const MonthRangePickerComponent = wrapper.find(MonthRangePicker)
-    const { onChange, minDate, maxDate } = props
 
     expect(MonthRangePickerComponent.exists()).toBe(true)
-    expect(MonthRangePickerComponent.props('maxDate')).toEqual(maxDate)
-    expect(MonthRangePickerComponent.props('minDate')).toEqual(minDate)
-    expect(MonthRangePickerComponent.props('onChange')).toEqual(onChange)
+    expect(MonthRangePickerComponent.prop('minDate')).toEqual(
+      wrapper.prop('minDate')
+    )
+    expect(MonthRangePickerComponent.prop('maxDate')).toEqual(
+      wrapper.prop('maxDate')
+    )
+  })
+
+  it('on click button apply range should be called with onChange function', async () => {
+    const { onChange } = props
+    const ButtonApply = wrapper.find(Button).at(2)
+
+    await ButtonApply.invoke('onClick')(selectedRangeMock)
+
+    expect(onChange).toBeCalledTimes(1)
+    expect(onChange).toBeCalledWith(selectedRangeMock)
+  })
+
+  it('default prop onChange should be null', () => {
+    const result = MonthRangePickerLayout.defaultProps.onChange()
+
+    expect(result).toBe(null)
   })
 })
