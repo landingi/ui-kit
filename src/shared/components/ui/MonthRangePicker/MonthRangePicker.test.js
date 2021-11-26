@@ -58,6 +58,7 @@ describe('<MonthRangePicker/> mount', () => {
 
   it('month should has first and last style after click', async () => {
     wrapper.find('div.grid-container').find('button').last().simulate('click')
+
     const decemberBtn = wrapper.find('div.grid-container').find('button').last()
 
     expect(decemberBtn.hasClass('button_month--last')).toBe(true)
