@@ -224,6 +224,7 @@ const Select = ({
                 tag='div'
                 protectedSubmit
                 liveChanges={liveChanges}
+                autoFocus
               />
             </div>
             <Divider variant='dropdown' />

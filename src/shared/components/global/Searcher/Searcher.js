@@ -12,6 +12,7 @@ import Search from '@components/ui/Search'
  * @param {object} props.i18n - translations
  * @param {bool} props.protectedSubmit - protectedSubmit
  * @param {bool} props.liveChanges - search by entering characters
+ * @param {bool} props.autoFocus - auto focus on search
  * @return {object} An object of children element
  */
 const Searcher = ({
@@ -21,6 +22,7 @@ const Searcher = ({
   i18n,
   protectedSubmit,
   liveChanges,
+  autoFocus,
   ...rest
 }) => {
   const search = async value => {
@@ -60,6 +62,7 @@ const Searcher = ({
       onProtectedSubmit={protectedSubmit ? handleOnProtectedSubmit : null}
       onSubmit={protectedSubmit ? null : handleOnSubmit}
       i18n={i18n}
+      autoFocus={autoFocus}
       {...rest}
     />
   )
@@ -75,7 +78,8 @@ Searcher.propTypes = {
   setSearchResult: PropTypes.func,
   i18n: PropTypes.shape({
     placeholder: PropTypes.string
-  })
+  }),
+  autoFocus: PropTypes.bool
 }
 
 Searcher.defaultProps = {
@@ -86,7 +90,8 @@ Searcher.defaultProps = {
   protectedSubmit: false,
   setSearchPhrase: () => null,
   searchFunction: () => null,
-  setSearchResult: () => null
+  setSearchResult: () => null,
+  autoFocus: false
 }
 
 export default memo(Searcher)
