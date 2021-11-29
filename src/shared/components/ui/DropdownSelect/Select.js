@@ -224,7 +224,6 @@ const Select = ({
                 tag='div'
                 protectedSubmit
                 liveChanges={liveChanges}
-                autoFocus
               />
             </div>
             <Divider variant='dropdown' />
@@ -237,6 +236,7 @@ const Select = ({
                 onChange={handleSearchOptionsChange}
                 i18n={{ placeholder: i18n.placeholder }}
                 tag='div'
+                autoFocus
               />
             </div>
             <Divider variant='dropdown' />
