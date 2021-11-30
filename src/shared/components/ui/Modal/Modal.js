@@ -58,7 +58,7 @@ const cssClass = styles(scss)
  * @param {bool} props.isCustomButtonDisabled - is cunstom button in footer disabled
  * @param {func} props.onMarkAsSpam - handle "mark as spam" click
  * @param {bool} props.isPage - is page
- * @param {string} props.size - modal size, one of: medium, x-medium, big, fullscreen
+ * @param {string} props.size - modal size, one of: small(default, 780px), medium(880px), big(1080px), fullscreen
  * @param {string} props.i18n - objest of translations
  * @param {bool} props.isComponent - component instead of title
  * @param {object} props.component - component
@@ -286,7 +286,7 @@ modal.defaultProps = {
   hasCustomButton: false,
   isCustomButtonDisabled: false,
   isMarkAsSpamVisible: false,
-  size: 'medium',
+  size: null,
   isPage: false,
   i18n: PropTypes.shape({
     title: null,
