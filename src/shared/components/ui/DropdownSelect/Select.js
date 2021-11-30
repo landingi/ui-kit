@@ -160,6 +160,11 @@ const Select = ({
     setSearchValue(event?.target.value)
   }
 
+  /**
+   * Clear value in search / searcher
+   */
+  const clearSearchValue = useCallback(() => setSearchValue(''), [])
+
   const renderOptions = () => (
     <Fragment>
       {emphasisedOptions.map((item, index) => (
@@ -214,6 +219,9 @@ const Select = ({
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
+        handleOnClose={
+          (handleOnSearchChange || searchInOptions) && clearSearchValue
+        }
       >
         {handleOnSearchChange && (
           <Fragment>
