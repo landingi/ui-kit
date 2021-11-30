@@ -219,9 +219,7 @@ const Select = ({
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
-        handleOnClose={
-          (handleOnSearchChange || searchInOptions) && clearSearchValue
-        }
+        handleOnClose={clearSearchValue}
       >
         {handleOnSearchChange && (
           <Fragment>
