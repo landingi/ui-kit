@@ -160,6 +160,11 @@ const Select = ({
     setSearchValue(event?.target.value)
   }
 
+  /**
+   * Clear value in search / searcher
+   */
+  const clearSearchValue = useCallback(() => setSearchValue(''), [])
+
   const renderOptions = () => (
     <Fragment>
       {emphasisedOptions.map((item, index) => (
@@ -214,6 +219,7 @@ const Select = ({
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
+        handleOnClose={clearSearchValue}
       >
         {handleOnSearchChange && (
           <Fragment>
@@ -236,6 +242,7 @@ const Select = ({
                 onChange={handleSearchOptionsChange}
                 i18n={{ placeholder: i18n.placeholder }}
                 tag='div'
+                autoFocus
               />
             </div>
             <Divider variant='dropdown' />
