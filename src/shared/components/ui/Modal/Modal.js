@@ -143,7 +143,7 @@ const modal = ({
               className={cssClass(className, {
                 'modal--fullscreen': size === 'fullscreen',
                 'modal--big': size === 'big',
-                'modal--x-medium': size === 'x-medium',
+                'modal--medium': size === 'medium',
                 'modal--center': isCentered,
                 'modal--page': isPage
               })}
@@ -248,7 +248,7 @@ modal.propTypes = {
   hasCustomButton: PropTypes.bool,
   isCustomButtonDisabled: PropTypes.bool,
   isMarkAsSpamVisible: PropTypes.bool,
-  size: PropTypes.oneOf(['medium', 'x-medium', 'big', 'fullscreen']),
+  size: PropTypes.oneOf(['medium', 'big', 'fullscreen']),
   isPage: PropTypes.bool,
   i18n: PropTypes.shape({
     title: PropTypes.string,

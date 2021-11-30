@@ -62,6 +62,10 @@
     border-radius: 0;
   }
 
+  &--medium {
+    width: 880px;
+  }
+
   &--big {
     width: 1080px;
   }
@@ -98,10 +102,6 @@
         }
       }
     }
-  }
-
-  &--medium {
-    max-width: 600px;
   }
 
   &--center {
