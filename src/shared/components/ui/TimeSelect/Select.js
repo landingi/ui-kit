@@ -16,8 +16,6 @@ import {
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import styles from './Select.module.scss'
 
-console.log(styles)
-
 /**
  * Time Select - stateless component for selecting time
  * @param {object} props - props

@@ -1,5 +1,6 @@
 import { Playground, Props } from 'docz'
 import Input from '@components/ui/Input'
+import Spacer from '@components/ui/Spacer'
 
 # Input
 
@@ -10,6 +11,9 @@ import Input from '@components/ui/Input'
     i18n={{placeholder:'Test placeholder',label:'Test label'}}
     type="text"
   />
+
+  <Spacer />
+
   <Input
     i18n={{placeholder:'Test placeholder',label:'Test label'}}
     type="text"
