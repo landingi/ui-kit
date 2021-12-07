@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Input.module.scss'
 
-console.log('styles', styles)
-
 /**
  * Input - stateless presentational component
  * @param {object} props - props
@@ -67,8 +65,6 @@ const Input = ({
     [styles['input--transparent']]: background === 'transparent',
     [styles['input--hidden-arrows']]: hideArrows
   })
-
-  console.log({ wrapperStyles, inputStyles })
 
   const renderDefault = defaultValue && !value
 

@@ -7,5 +7,5 @@ export const useStyles = styles => {
     }
   }
 
-  return classes
+  return classes.trim()
 }
