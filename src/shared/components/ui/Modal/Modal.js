@@ -6,7 +6,6 @@ import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
 import Spreader from '@components/ui/Spreader'
-import Overflow from '@components/ui/Overflow'
 import Divider from '@components/ui/Divider'
 import Spacer from '@components/ui/Spacer'
 import Button from '@components/ui/Button'
@@ -59,7 +58,7 @@ const cssClass = styles(scss)
  * @param {bool} props.isCustomButtonDisabled - is cunstom button in footer disabled
  * @param {func} props.onMarkAsSpam - handle "mark as spam" click
  * @param {bool} props.isPage - is page
- * @param {string} props.size - modal size, one of: medium, x-medium, big, fullscreen
+ * @param {string} props.size - modal size, one of: small(default, 780px), medium(880px), big(1080px), fullscreen
  * @param {string} props.i18n - objest of translations
  * @param {bool} props.isComponent - component instead of title
  * @param {object} props.component - component
@@ -144,7 +143,7 @@ const modal = ({
               className={cssClass(className, {
                 'modal--fullscreen': size === 'fullscreen',
                 'modal--big': size === 'big',
-                'modal--x-medium': size === 'x-medium',
+                'modal--medium': size === 'medium',
                 'modal--center': isCentered,
                 'modal--page': isPage
               })}
@@ -167,9 +166,7 @@ const modal = ({
                     {disableOverflow ? (
                       children
                     ) : (
-                      <div style={overflowStyle}>
-                        <Overflow>{children}</Overflow>
-                      </div>
+                      <div style={overflowStyle}>{children}</div>
                     )}
                   </div>
                   {hasFooterDivider && (
@@ -251,7 +248,7 @@ modal.propTypes = {
   hasCustomButton: PropTypes.bool,
   isCustomButtonDisabled: PropTypes.bool,
   isMarkAsSpamVisible: PropTypes.bool,
-  size: PropTypes.oneOf(['medium', 'x-medium', 'big', 'fullscreen']),
+  size: PropTypes.oneOf(['medium', 'big', 'fullscreen']),
   isPage: PropTypes.bool,
   i18n: PropTypes.shape({
     title: PropTypes.string,
@@ -281,14 +278,15 @@ modal.defaultProps = {
   actionIcon: null,
   overflowStyle: {
     maxHeight: '80vh',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    overflowX: 'hidden'
   },
   isCentered: false,
   isEditable: false,
   hasCustomButton: false,
   isCustomButtonDisabled: false,
   isMarkAsSpamVisible: false,
-  size: 'medium',
+  size: null,
   isPage: false,
   i18n: PropTypes.shape({
     title: null,

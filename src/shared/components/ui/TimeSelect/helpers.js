@@ -9,7 +9,8 @@ export const processTime = (time, clockType) => {
     const hoursNum = Number(hours)
 
     if (clockType === AM && hoursNum >= 12) {
-      return `${Number(hoursNum) - 12}:${minutes}`
+      const hh = Number(hoursNum) - 12 === 0 ? '00' : Number(hoursNum) - 12
+      return `${hh}:${minutes}`
     }
 
     if (clockType === PM && hoursNum < 12) {
@@ -17,7 +18,7 @@ export const processTime = (time, clockType) => {
     }
 
     if (clockType === PM && hoursNum === 12) {
-      return `${12}:${minutes}`
+      return `12:${minutes}`
     }
 
     return time
@@ -43,7 +44,7 @@ export const convertTimeFrom24to12 = time24 => {
   return `${hours}:${minutes}`
 }
 /**
- * check if current time is am or pm if clocl time is am/pm non 0-23
+ * check if current time is am or pm if clock time is am/pm
  */
 export const isAmOrPm = (time, isAmPmType) => {
   const [hours] = time.split(':')

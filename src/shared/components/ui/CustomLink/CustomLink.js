@@ -49,7 +49,8 @@ CustomLink.propTypes = {
   size: PropTypes.oneOf([10, 12, 14, 16]),
   target: PropTypes.string,
   variant: PropTypes.oneOf(['active', 'inactive', 'dark']),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  underlined: PropTypes.bool
 }
 
 CustomLink.defaultProps = {

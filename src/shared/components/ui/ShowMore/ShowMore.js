@@ -69,15 +69,16 @@ ShowMore.displayName = 'ShowMore'
 
 ShowMore.propTypes = {
   height: PropTypes.number,
-  children: PropTypes.instanceOf(Object).isRequired
+  children: PropTypes.instanceOf(Object).isRequired,
+  i18n: PropTypes.shape({
+    less: PropTypes.string,
+    more: PropTypes.string
+  })
 }
 
 ShowMore.defaultProps = {
   height: 100,
-  i18n: {
-    less: 'word.less',
-    more: 'word.more'
-  }
+  i18n: {}
 }
 
 export default ShowMore

@@ -43,6 +43,7 @@ Picker.displayName = 'Month Picker Layout Wrapper'
 
 Picker.propTypes = {
   minDate: PropTypes.instanceOf(Date).isRequired,
+  maxDate: PropTypes.instanceOf(Date).isRequired,
   onChange: PropTypes.func,
   i18n: PropTypes.shape({ apply: PropTypes.string })
 }

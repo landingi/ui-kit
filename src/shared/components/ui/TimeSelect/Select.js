@@ -54,6 +54,8 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
   )
 
   const handleTimeInputChange = (event, newTime) => {
+    if (disabled) return
+
     if (formikKey) {
       onChange(formikKey, processTime(newTime, clockType))
     } else {
@@ -130,7 +132,7 @@ TimeSelect.propTypes = {
 }
 
 TimeSelect.defaultProps = {
-  value: null,
+  value: '12:00',
   formikKey: null,
   disabled: false
 }

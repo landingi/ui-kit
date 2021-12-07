@@ -193,6 +193,10 @@
     color: $color-3;
     background: transparent;
 
+    svg, i {
+      color: $color-3;
+    }
+
     &-blue {
       background: transparent;
       color: $color-brand;
@@ -303,7 +307,7 @@
 
   &--svg {
     svg, i {
-      margin-right: $margin-medium;
+      margin-right: $margin-small;
     }
   }
 

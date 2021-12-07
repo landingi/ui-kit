@@ -5,8 +5,6 @@ import TimeSelect from '@components/ui/TimeSelect'
 
 <Props of={TimeSelect} />
 
-<Props of={TimeSelect} />
-
 <Playground>
   <TimeSelect label="Time" value="12:00" onChange={value => console.log(value)} />
 </Playground>
