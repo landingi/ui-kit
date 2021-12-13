@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import scss from './textarea.scss'
+import scss from './Textarea.scss'
 
 const cssClass = styles(scss)
 
