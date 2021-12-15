@@ -149,7 +149,11 @@ const modal = ({
               })}
             >
               {isLoading ? (
-                <div className={scss.modal__body}>
+                <div
+                  className={cssClass('modal__body', {
+                    hasFooter: 'modal__body--has-footer'
+                  })}
+                >
                   <Loader />
                 </div>
               ) : (
@@ -162,7 +166,11 @@ const modal = ({
                       <Divider />
                     </Fragment>
                   )}
-                  <div className={scss.modal__body}>
+                  <div
+                    className={cssClass('modal__body', {
+                      hasFooter: 'modal__body--has-footer'
+                    })}
+                  >
                     {disableOverflow ? (
                       children
                     ) : (
@@ -172,44 +180,47 @@ const modal = ({
                   {hasFooterDivider && (
                     <div className={'Modal__modal__footer-divider'}>
                       <Divider />
-                      <Spacer space='small' />
                     </div>
                   )}
                   {hasFooter && (
-                    <ModalFooter align='right'>
-                      {hasCustomButton ? (
-                        <Button
-                          variant='secondary'
-                          size='medium'
-                          onClick={onClickCustomButton}
-                          isDisabled={isCustomButtonDisabled}
-                        >
-                          {i18n.cancel}
-                        </Button>
-                      ) : (
-                        <Button
-                          variant='secondary'
-                          size='medium'
-                          onClick={onClick}
-                        >
-                          {i18n.cancel}
-                        </Button>
-                      )}
-                      <Button
-                        type={isSubmit ? 'submit' : 'button'}
-                        variant={actionVariant}
-                        size='medium'
-                        onClick={onAction}
-                        isDisabled={isButtonDisabled}
-                        isLoading={isButtonLoading}
-                        hasIcon={!!actionIcon}
-                      >
-                        {actionIcon && (
-                          <FontAwesomeIcon icon={actionIcon} size='xs' />
+                    <Fragment>
+                      <Spacer space='small' />
+
+                      <ModalFooter align='right'>
+                        {hasCustomButton ? (
+                          <Button
+                            variant='secondary'
+                            size='medium'
+                            onClick={onClickCustomButton}
+                            isDisabled={isCustomButtonDisabled}
+                          >
+                            {i18n.cancel}
+                          </Button>
+                        ) : (
+                          <Button
+                            variant='secondary'
+                            size='medium'
+                            onClick={onClick}
+                          >
+                            {i18n.cancel}
+                          </Button>
                         )}
-                        {i18n.action}
-                      </Button>
-                    </ModalFooter>
+                        <Button
+                          type={isSubmit ? 'submit' : 'button'}
+                          variant={actionVariant}
+                          size='medium'
+                          onClick={onAction}
+                          isDisabled={isButtonDisabled}
+                          isLoading={isButtonLoading}
+                          hasIcon={!!actionIcon}
+                        >
+                          {actionIcon && (
+                            <FontAwesomeIcon icon={actionIcon} size='xs' />
+                          )}
+                          {i18n.action}
+                        </Button>
+                      </ModalFooter>
+                    </Fragment>
                   )}
                 </Fragment>
               )}
