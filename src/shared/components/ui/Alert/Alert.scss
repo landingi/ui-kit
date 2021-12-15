@@ -4,7 +4,8 @@
   line-height: 1;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  color: $color-1;
 
   .alert__message {
     padding: 0 $padding-medium;
