@@ -149,11 +149,7 @@ const modal = ({
               })}
             >
               {isLoading ? (
-                <div
-                  className={cssClass('modal__body', {
-                    hasFooter: 'modal__body--has-footer'
-                  })}
-                >
+                <div className={scss.modal__body}>
                   <Loader />
                 </div>
               ) : (
@@ -168,7 +164,7 @@ const modal = ({
                   )}
                   <div
                     className={cssClass('modal__body', {
-                      hasFooter: 'modal__body--has-footer'
+                      'modal__body--has-footer': hasFooter
                     })}
                   >
                     {disableOverflow ? (
