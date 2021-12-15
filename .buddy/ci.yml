@@ -14,11 +14,14 @@
     cache_base_image: true
     type: "BUILD"
     docker_image_name: "library/node"
-    docker_image_tag: "14.18.0-alpine3.14"
+    docker_image_tag: "14.18.0"
+    setup_commands:
+    - "npm install -g codecov"
     execute_commands:
     - "yarn install"
     - "yarn lint"
-    - "yarn test --ci"
+    - "yarn test:coverage --ci"
+    - "codecov -t $CODECOV_TOKEN -F UI-KIT"
     shell: "SH"
   - action: "Run CD"
     type: "RUN_NEXT_PIPELINE"
