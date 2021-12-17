@@ -1,17 +1,17 @@
 # ui-kit
 
 ## Coverage
+
 Unit tests
 
-![img](coverage/badge-branches.svg)
-![img](coverage/badge-functions.svg)
-![img](coverage/badge-lines.svg)
-![img](coverage/badge-statements.svg)
+![img](coverage/badge-branches.svg) ![img](coverage/badge-functions.svg)
+![img](coverage/badge-lines.svg) ![img](coverage/badge-statements.svg)
 
 ## Getting Started
 
-Landingi UI-kit is a set of react components used in the `landingi-app` and `application`.
-Getting started is simple. Just add a `@landingi/landingi-ui-kit` to your dependencies in `package.json`.
+Landingi UI-kit is a set of react components used in the `landingi-app` and
+`application`. Getting started is simple. Just add a `@landingi/landingi-ui-kit`
+to your dependencies in `package.json`.
 
 ### Requirements
 
@@ -31,8 +31,8 @@ then to install project pacakges run in the project root:
 #### Add a New component
 
 1. Create a folder inside `src/shared/components/*`
-2. Create `*.md` file and rest of the `js` files
-3. In the `*.md` file add the following code:
+2. Create `*.mdx` file and rest of the `js` files
+3. In the `*.mdx` file add the following code:
 
 ```
 import { Playground, Props } from 'docz'
@@ -59,7 +59,8 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 6. Run `yarn docz:dev` and open `http://localhost:3000`
 
-7. In order to deploy it you have to add a `[deploy]` tag to your commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`.
+7. In order to deploy it you have to add a `[deploy]` tag to your commit
+   message, an example: `[FRONT-123][deploy]I am just a fancy commit message`.
 
 8. Push it
 
@@ -69,17 +70,44 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 - `yarn docz:build` - build
 - `yarn docz:serve` - build and serve local server
 
+### Recommended Development flow
+
+- install this two vsc extensions: "MDX", "VSCode MDX"
+- add this line to your settings.json
+
+```
+"eslint.options": {
+    "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
+  },
+  "eslint.validate": [
+    "markdown",
+    "mdx",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
+```
+
 #### CI
 
-Every push triggers CI pipeline. For more information please have a look at Project UI-kit in the Buddy website or check `.buddy/ci.yml`
+Every push triggers CI pipeline. For more information please have a look at
+Project UI-kit in the Buddy website or check `.buddy/ci.yml`
 
 #### CD
 
-In order to deploy you have to add `[deploy]` tag to your commit message, an example: `[FRONT-123][deploy]I am just a fancy commit message`. Once you push it, `Buddy` will execute the CI, CD.
+In order to deploy you have to add `[deploy]` tag to your commit message, an
+example: `[FRONT-123][deploy]I am just a fancy commit message`. Once you push
+it, `Buddy` will execute the CI, CD.
 
-For more information please have a look at Project UI-kit in the Buddy website or check `.buddy/cd.yml`
+For more information please have a look at Project UI-kit in the Buddy website
+or check `.buddy/cd.yml`
 
 #### CD Documentation
-In order to deploy you have to add `[docs]` tag to your commit message, an example: `[FRONT-123][deploy][docs]I am just a fancy commit message`. Once you push it, `Buddy` will execute the CI, CD and the CD related to documentation
 
-For more information please have a look at Project UI-kit in the Buddy website or check `.buddy/cd_docs.yml`
+In order to deploy you have to add `[docs]` tag to your commit message, an
+example: `[FRONT-123][deploy][docs]I am just a fancy commit message`. Once you
+push it, `Buddy` will execute the CI, CD and the CD related to documentation
+
+For more information please have a look at Project UI-kit in the Buddy website
+or check `.buddy/cd_docs.yml`

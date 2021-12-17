@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import useIsOpen from '@helpers/hooks/useIsOpen'
-import AccordionSection from './AccordionSection'
 import Spacer from '@components/ui/Spacer'
+import AccordionSection from './AccordionSection'
 
 /**
  * Accordion - stateful presentational component
