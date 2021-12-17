@@ -1,6 +1,10 @@
 # ui-kit
 
 ## Coverage
+<<<<<<< HEAD
+=======
+[![codecov](https://codecov.io/gh/landingi/ui-kit/branch/master/graph/badge.svg?token=CZteQ5htwH)](https://codecov.io/gh/landingi/ui-kit)
+>>>>>>> master
 
 Unit tests
 
