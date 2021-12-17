@@ -1,6 +1,0 @@
-import { Playground, Props } from 'docz'
-import Spacer from '@components/ui/Spacer'
-
-# Spacer
-
-<Props of={Spacer} />

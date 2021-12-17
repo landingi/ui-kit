@@ -1,8 +1,0 @@
-import { Props } from 'docz'
-import Backdrop from '@components/ui/Backdrop'
-
-# Backdrop
-
-<Props of={Backdrop} />
-
-
