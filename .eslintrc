@@ -35,7 +35,8 @@
     "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",
-    "jsx-quotes": ["error", "prefer-single"]
+    "jsx-quotes": ["error", "prefer-single"],
+    "mdx/no-unused-expressions": "off"
   },
   "extends": [
     "eslint:recommended",
