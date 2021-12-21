@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
+import { styles } from '@helpers/css'
 import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
 import {
@@ -14,7 +15,9 @@ import {
   MAX_HOUR_PL
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
-import styles from './Select.module.scss'
+import scss from './Select.scss'
+
+const cssClass = styles(scss)
 
 /**
  * Time Select - stateless component for selecting time
@@ -29,13 +32,13 @@ import styles from './Select.module.scss'
 const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
   const isAmPmType = getLanguage !== 'pl'
 
-  const timePickerClasses = `${styles['time-select']} ${
-    disabled ? styles['time-picker--disabled'] : ''
-  }`
+  const timePickerClasses = cssClass('time-picker', {
+    'time-picker--disabled': disabled
+  })
 
-  const timeSelectClasses = `${styles['time-select']} ${
-    isAmPmType ? styles['time-select--small'] : ''
-  }`
+  const timeSelectClasses = cssClass('time-select', {
+    'time-select--small': isAmPmType
+  })
 
   const [clockType, setClockType] = useState(isAmOrPm(value, isAmPmType))
 
@@ -73,8 +76,8 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
    */
   const renderDropdownLabel = useCallback(
     selectedValue => (
-      <Row className={timePickerClasses} vertical='center'>
-        <FontAwesomeIcon icon='clock' />
+      <Row className={cssClass(timePickerClasses)} vertical='center'>
+        <FontAwesomeIcon icon='clock' className={cssClass('clock-icon')} />
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}
@@ -110,7 +113,7 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
             options={CLOCK_OPTIONS}
             value={clockType}
             onChange={handleClockChange}
-            className={styles['clock-select']}
+            className={cssClass('clock-select')}
             isOpenDisabled={disabled}
           />
         </Fragment>
