@@ -1,9 +1,6 @@
 {
   "parser": "@babel/eslint-parser",
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["react", "react-hooks"],
   "env": {
     "browser": true,
     "node": true,
@@ -38,29 +35,27 @@
     "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",
-    "jsx-quotes": ["error", "prefer-single"],
-    "prettier/prettier": [
-			"error",
-			{
-				"singleQuote": true,
-        "semi": false,
-				"arrowParens": "avoid",
-        "jsxSingleQuote": true,
-        "endOfLine":"auto",
-        "trailingComma" : "none"
-			}
-		]
+    "jsx-quotes": ["error", "prefer-single"]
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "prettier",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:mdx/recommended"
   ],
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "mdx/code-blocks": true,
+    "mdx/language-mapper": {}
+  },
+  "overrides": [
+    {
+      "files": ["*.mdx", "*.md"],
+      "parser": "eslint-mdx"
     }
-  }
+  ]
 }

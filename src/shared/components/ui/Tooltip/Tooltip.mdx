@@ -1,0 +1,23 @@
+import { Playground, Props } from 'docz'
+import Tooltip from '@components/ui/Tooltip'
+import Spacer from '@components/ui/Spacer'
+
+# Tooltip
+
+<Props of={Tooltip} />
+
+<Playground>
+  <Tooltip content='Bottom tooltip'>Bottom tooltip</Tooltip>
+  <Spacer />
+  <Tooltip content='Left tooltip' placement='left'>
+    Left tooltip
+  </Tooltip>
+  <Spacer />
+  <Tooltip content='Right tooltip' placement='right'>
+    Right tooltip
+  </Tooltip>
+  <Spacer />
+  <Tooltip content='Top tooltip' placement='top'>
+    Top tooltip
+  </Tooltip>
+</Playground>
