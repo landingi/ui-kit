@@ -60,8 +60,6 @@ const Input = ({
     [styles['input__wrapper--show-label']]: alwaysShowLabel
   })
   console.log(styles)
-  console.log(styles['input__wrapper--show-label'], alwaysShowLabel)
-
   const inputStyles = useStyles({
     [className]: true,
     [styles['input--transparent']]: background === 'transparent',
