@@ -54,7 +54,7 @@
   },
   "overrides": [
     {
-      "files": ["*.mdx", "*.md"],
+      "files": ["*.mdx"],
       "parser": "eslint-mdx"
     }
   ]
