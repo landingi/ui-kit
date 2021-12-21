@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import scss from './Input.scss'
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Input.module.scss'
 
 /**
  * Input - stateless presentational component
@@ -55,22 +54,26 @@ const Input = ({
   alwaysShowLabel,
   defaultValue
 }) => {
-  const elementClasses = cssClass({
-    'input__wrapper--focused': focused === 'true',
-    'input__wrapper--show-label': alwaysShowLabel
+  const wrapperStyles = useStyles({
+    [styles['input__wrapper']]: true,
+    [styles['input__wrapper--focused']]: focused === 'true',
+    [styles['input__wrapper--show-label']]: alwaysShowLabel
   })
+  console.log(styles)
+  console.log(styles['input__wrapper--show-label'], alwaysShowLabel)
 
-  const inputClasses = cssClass({
-    'input--transparent': background === 'transparent',
-    'input--hidden-arrows': hideArrows
+  const inputStyles = useStyles({
+    [className]: true,
+    [styles['input--transparent']]: background === 'transparent',
+    [styles['input--hidden-arrows']]: hideArrows
   })
 
   const renderDefault = defaultValue && !value
 
   return (
-    <div className={cssClass('input__wrapper', elementClasses)}>
+    <div className={wrapperStyles}>
       <input
-        className={cssClass(className, inputClasses)}
+        className={inputStyles}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
@@ -87,12 +90,12 @@ const Input = ({
         {...(type === 'number' ? { min, max } : {})}
         {...(renderDefault ? { defaultValue } : {})}
       />
-      <span className={cssClass('highlight')} />
+      <span className={styles['highlight']} />
 
-      <span className={cssClass('bar')} />
+      <span className={styles['bar']} />
 
       {i18n?.label && (
-        <Label id={name} className={cssClass('input__label')}>
+        <Label id={name} className={styles['input__label']}>
           {i18n.label}
         </Label>
       )}
@@ -143,7 +146,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  className: 'input',
+  className: styles['input'],
   type: 'text',
   focused: 'false',
   tooltip: '',
