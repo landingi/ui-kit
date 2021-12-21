@@ -91,7 +91,7 @@
     "react-text-mask": "5.4.3",
     "react-tooltip": "4.2.21",
     "react-uuid": "1.0.2",
-    "remark-preset-prettier": "^1.0.0",
+    "remark-preset-prettier": "1.0.0",
     "sass": "1.42.0",
     "sass-loader": "12.1.0",
     "simple-flexbox": "2.3.3",
