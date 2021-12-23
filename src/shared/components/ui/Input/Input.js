@@ -59,7 +59,7 @@ const Input = ({
     [styles['input__wrapper--focused']]: focused === 'true',
     [styles['input__wrapper--show-label']]: alwaysShowLabel
   })
-  console.log(styles)
+
   const inputStyles = useStyles({
     [className]: true,
     [styles['input--transparent']]: background === 'transparent',

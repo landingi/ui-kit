@@ -36,7 +36,8 @@
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",
     "jsx-quotes": ["error", "prefer-single"],
-    "mdx/no-unused-expressions": "off"
+    "mdx/no-unused-expressions": "off",
+    "no-console": "warn"
   },
   "extends": [
     "eslint:recommended",
