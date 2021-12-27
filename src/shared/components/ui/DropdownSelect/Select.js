@@ -261,7 +261,7 @@ const Select = ({
                 <Message
                   title={i18n.emptySearchMessageTitle}
                   message={i18n.emptySearchMessage}
-                  image='https://images.assets-landingi.com/images/search_empty.svg'
+                  url='https://images.assets-landingi.com/images/search_empty.svg'
                   height={41}
                   titleLevel={5}
                   messageLevel={6}
