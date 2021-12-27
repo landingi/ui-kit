@@ -259,8 +259,8 @@ const Select = ({
             <List>
               {!isLoading && isEmptyList && isEmpty(options) ? (
                 <Message
-                  title='message.empty.search.results'
-                  message='message.empty.search.results.small'
+                  title={i18n.emptySearchMessageTitle}
+                  message={i18n.emptySearchMessage}
                   image='https://images.assets-landingi.com/images/search_empty.svg'
                   height={41}
                   titleLevel={5}
@@ -324,7 +324,9 @@ Select.propTypes = {
   isOpenDisabled: PropTypes.bool,
   searchInOptions: PropTypes.bool,
   i18n: PropTypes.shape({
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    emptySearchMessageTitle: PropTypes.string,
+    emptySearchMessage: PropTypes.string
   })
 }
 
