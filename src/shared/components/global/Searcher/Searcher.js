@@ -29,17 +29,20 @@ const Searcher = ({
     setSearchResult(response)
   }
 
-  const handleOnChange = useCallback(event => {
-    let value
-    !event ? (value = '') : (value = event.target.value)
+  const handleOnChange = useCallback(
+    event => {
+      let value
+      !event ? (value = '') : (value = event.target.value)
 
-    if (setSearchPhrase) {
-      !value && setSearchPhrase('')
-      value && liveChanges && setSearchPhrase(value)
-    } else {
-      !value && setSearchResult(NO_VALUE)
-    }
-  })
+      if (setSearchPhrase) {
+        !value && setSearchPhrase('')
+        value && liveChanges && setSearchPhrase(value)
+      } else {
+        !value && setSearchResult(NO_VALUE)
+      }
+    },
+    [liveChanges]
+  )
 
   const handleOnSubmit = useCallback(event => {
     if (setSearchPhrase) {
@@ -47,7 +50,7 @@ const Searcher = ({
     } else {
       search(event)
     }
-  })
+  }, [])
 
   const handleOnProtectedSubmit = useCallback(
     event => setSearchPhrase(event),
