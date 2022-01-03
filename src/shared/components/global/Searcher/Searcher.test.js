@@ -8,6 +8,11 @@ registerIcons()
 const mockedSearchFunction = jest.fn()
 const mockedSetSearchResult = jest.fn()
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useCallback: jest.fn()
+}))
+
 const props = {
   searchFunction: mockedSearchFunction,
   setSearchResult: mockedSetSearchResult,

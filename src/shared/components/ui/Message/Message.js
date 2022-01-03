@@ -72,12 +72,6 @@ const Message = ({
           margin={withoutMargin ? 'none' : ''}
         >
           {title}
-          {/* <FormattedMessage
-            id={`${title}`}
-            values={{
-              br: <br />
-            }}
-          /> */}
         </Heading>
       )}
 
@@ -87,12 +81,6 @@ const Message = ({
 
           <Heading align='center' level={messageLevel}>
             {message}
-            {/* <FormattedMessage
-              id={`${message}`}
-              values={{
-                br: <br />
-              }}
-            /> */}
           </Heading>
         </>
       )}
