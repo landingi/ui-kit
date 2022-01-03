@@ -1,4 +1,4 @@
-import { Playground, Props } from 'docz'
+import { Playground, Props } from 'docz' 
 import DropdownSelect from '@components/ui/DropdownSelect'
 
 <Props of={DropdownSelect} />
@@ -12,5 +12,19 @@ import DropdownSelect from '@components/ui/DropdownSelect'
     options={[{label: 'test1',value: 'test1'}, {label: 'test2',value: 'test2'}]}
     label="Custom label for dropdown"
     onChange={() => {}}
+  />
+</Playground>
+
+<Playground>
+  <DropdownSelect
+    value=''
+    options={[]}
+    handleOnSearchChange
+    isEmptyList
+    i18n={{
+      placeholder: 'Search',
+      emptySearchMessageTitle: 'Empty message',
+      emptySearchMessage: 'No found results'
+    }}
   />
 </Playground>
