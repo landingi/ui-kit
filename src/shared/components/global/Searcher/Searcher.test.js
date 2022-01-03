@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback as useCallbackMock } from 'react'
 import Searcher from '@components/global/Searcher'
 import { mountWithIntl } from '@jestutils'
 import registerIcons from '@helpers/icons'
@@ -30,6 +30,7 @@ describe('<Searcher/> mount', () => {
   let wrapper
 
   beforeEach(() => {
+    useCallbackMock.mockImplementation(() => props.setSearchPhrase)
     wrapper = mountWithIntl(component)
   })
 
