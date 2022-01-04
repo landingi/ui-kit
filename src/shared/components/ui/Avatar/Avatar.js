@@ -1,28 +1,33 @@
-import { styles } from '@helpers/css'
 import Image from '@components/ui/Image'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Avatar.scss'
+import styles from './Avatar.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
+const renderVariant = (variant, src, name) =>
+  variant === 'image' ? <Image src={src} /> : <p>{name}</p>
 
 /**
  * Avatar - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `avatar`
- * @param {string} props.size - size of avatar tiny, medium, default: 'medium'
- * @param {string} props.variant - variant of avatar image, default: 'blank'
- * @param {string} props.src - source of avatar image, default: ''
- * @param {string} props.name - avatar name, default: ''
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.size - size of avatar
+ * @param {string} props.variant - variant of avatar image
+ * @param {string} props.src - source of avatar image
+ * @param {string} props.name - avatar name
  * @return {object} An object of children element
  */
-const Avatar = ({ className, size, variant, src, name }) => (
-  <span
-    className={cssClass(className, `avatar--${size}`, `avatar--${variant}`)}
-  >
-    {variant === 'image' ? <Image src={src} /> : <p>{name}</p>}
-  </span>
-)
+const Avatar = ({ className, size, variant, src, name }) => {
+  const avatarStyles = useStyles({
+    [className]: true,
+    [styles[`avatar--${size}`]]: size,
+    [styles[`avatar--${variant}`]]: variant
+  })
+
+  return (
+    <span className={avatarStyles}>{renderVariant(variant, src, name)}</span>
+  )
+}
 
 Avatar.displayName = 'Avatar'
 
@@ -35,10 +40,10 @@ Avatar.propTypes = {
 }
 
 Avatar.defaultProps = {
-  className: 'avatar',
-  name: '',
+  className: styles['avatar'],
+  name: null,
   size: 'medium',
-  src: '',
+  src: null,
   variant: 'blank'
 }
 
