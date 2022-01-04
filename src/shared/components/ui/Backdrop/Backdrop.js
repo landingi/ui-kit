@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Backdrop.module.scss'
 
-console.log('styles', styles)
 /**
  * Backdrop - stateless presentational component
  * @param {object} props - props
