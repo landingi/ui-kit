@@ -43,7 +43,17 @@ Badge.displayName = 'Badge'
 Badge.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  type: PropTypes.oneOf(['primary', 'secondary', 'warning', 'alert']),
+  type: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'warning',
+    'alert',
+    'pending',
+    'success',
+    'info',
+    'accent-1',
+    'accent-2'
+  ]),
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isIndicator: PropTypes.bool
 }
