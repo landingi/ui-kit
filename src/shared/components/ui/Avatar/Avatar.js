@@ -43,7 +43,7 @@ Avatar.defaultProps = {
   className: styles['avatar'],
   name: null,
   size: 'medium',
-  src: null,
+  src: '',
   variant: 'blank'
 }
 
