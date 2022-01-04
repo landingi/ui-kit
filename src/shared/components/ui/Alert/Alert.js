@@ -1,34 +1,37 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Alert.scss'
+import styles from './Alert.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
+const icons = {
+  success: 'check',
+  warning: 'exclamation',
+  alert: 'exclamation-triangle',
+  info: 'info'
+}
+
+const getIcon = type => icons[type]
 
 /**
  * Alert - stateless presentational component
  * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `alert-message`
- * @param {string} props.type - type of alert message `info, success, warning, alert`
+ * @param {node|string|object} props.children - children
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.type - type of alert message
  * @return {object} An object of children element
  */
 const Alert = ({ children, className, type }) => {
-  const icon =
-    type === 'success'
-      ? 'check'
-      : type === 'warning'
-      ? 'exclamation'
-      : type === 'alert'
-      ? 'exclamation-triangle'
-      : 'info'
+  const alertStyles = useStyles({
+    [className]: true,
+    [styles[`alert-message--${type}`]]: type
+  })
 
   return (
-    <div className={cssClass(className, `alert-message--${type}`)}>
-      <FontAwesomeIcon icon={icon} size='xs' />
+    <div className={alertStyles}>
+      <FontAwesomeIcon icon={getIcon(type)} size='xs' />
 
-      <div className={scss.alert__message}>{children}</div>
+      <div className={styles.alert__message}>{children}</div>
     </div>
   )
 }
@@ -42,11 +45,11 @@ Alert.propTypes = {
     PropTypes.func
   ]).isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  type: PropTypes.string
+  type: PropTypes.oneOf(['info', 'success', 'warning', 'alert'])
 }
 
 Alert.defaultProps = {
-  className: 'alert-message',
+  className: styles['alert-message'],
   type: 'info'
 }
 
