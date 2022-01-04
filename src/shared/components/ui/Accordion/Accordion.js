@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import useIsOpen from '@helpers/hooks/useIsOpen'
-import AccordionSection from './AccordionSection'
 import Spacer from '@components/ui/Spacer'
+import AccordionSection from './AccordionSection'
 
 /**
  * Accordion - stateful presentational component
@@ -24,7 +24,6 @@ const Accordion = ({ children }) => {
           arrowLabel={item.props.arrowLabel}
           variant={item.props.variant}
           hasExpand={item.props.hasExpand}
-          // eslint-disable-next-line react/jsx-no-bind
           handleOnClick={() => item.props.hasExpand && openList.toggle(index)}
         >
           <Spacer space='tiny' />

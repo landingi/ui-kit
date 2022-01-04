@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import scss from './Accordion.scss'
 import Button from '@components/ui/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
-
-const cssClass = styles(scss)
+import styles from './Accordion.module.scss'
 
 /**
  * AccordionSection - stateless presentational component
@@ -25,15 +22,15 @@ const AccordionSection = ({
   variant,
   hasExpand
 }) => (
-  <div className={scss.accordion}>
-    <div className={scss.accordion__header} onClick={handleOnClick}>
+  <div className={styles.accordion}>
+    <div className={styles.accordion__header} onClick={handleOnClick}>
       <div>{label}</div>
 
       <div>
         {hasExpand &&
           (arrowLabel ? (
             <Button variant={variant} size='small'>
-              <span className={cssClass('accordion__header-arrow')}>
+              <span className={styles['accordion__header-arrow']}>
                 {isOpen ? (
                   <FontAwesomeIcon icon='chevron-up' />
                 ) : (
@@ -51,7 +48,7 @@ const AccordionSection = ({
       </div>
     </div>
 
-    {isOpen && <div className={scss.accordion__text}>{children}</div>}
+    {isOpen && <div className={styles.accordion__text}>{children}</div>}
   </div>
 )
 
