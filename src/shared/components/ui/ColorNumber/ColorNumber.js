@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './ColorNumber.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './ColorNumber.module.scss'
 
 /**
  * ColorNumber - stateless presentational component
@@ -13,17 +11,15 @@ const cssClass = styles(scss)
  * @param {number} props.size - size
  * @return {object} An object of children element
  */
-const ColorNumber = ({ children, variant, size }) => (
-  <span
-    className={cssClass(
-      'color-number',
-      `color-number__color--${variant}`,
-      `color-number__size--${size}`
-    )}
-  >
-    {children}
-  </span>
-)
+const ColorNumber = ({ children, variant, size }) => {
+  const elementClasses = useStyles({
+    [styles['color-number']]: true,
+    [styles[`color-number__color--${variant}`]]: variant,
+    [styles[`color-number__size--${size}`]]: size
+  })
+
+  return <span className={elementClasses}>{children}</span>
+}
 
 ColorNumber.displayName = 'ColorNumber'
 
