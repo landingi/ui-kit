@@ -1,6 +1,0 @@
-import { Playground, Props } from 'docz'
-import BoxBackground from '@components/ui/BoxBackground'
-
-# BoxBackground
-
-<Props of={BoxBackground} />
