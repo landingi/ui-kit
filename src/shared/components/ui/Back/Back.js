@@ -1,13 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getLocationPath } from '@helpers/url'
-import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Tooltip from '@components/ui/Tooltip'
-import scss from './Back.scss'
-
-const cssClass = styles(scss)
+import styles from './Back.module.scss'
 
 /**
  * Back - stateless presentational component
@@ -17,14 +14,14 @@ const cssClass = styles(scss)
  * @param {string} props.content - content, default: ''
  * @return {object} An object of children element
  */
-function Back({ className, url, content }) {
+const Back = ({ className, url, content }) => {
   const location = getLocationPath(),
     urlMap = location.match('/payments/subscription/cancel')
       ? '/payments/subscription'
       : url
 
   return (
-    <span className={cssClass(className)}>
+    <span className={className}>
       <a href={urlMap}>
         <Tooltip content={content} placement='bottom'>
           <Button variant='icon'>
@@ -45,7 +42,7 @@ Back.propTypes = {
 }
 
 Back.defaultProps = {
-  className: 'back',
+  className: styles.back,
   content: '',
   url: ''
 }

@@ -14,6 +14,7 @@ export { default as Accordion2 } from '@components/ui/Accordion2'
 
 export { default as Alert } from '@components/ui/Alert'
 export { default as Avatar } from '@components/ui/Avatar'
+export { default as Back } from '@components/ui/Back'
 export { default as Button } from '@components/ui/Button'
 export { default as Badge } from '@components/ui/Badge'
 export { default as BlockSection } from '@components/ui/BlockSection'
