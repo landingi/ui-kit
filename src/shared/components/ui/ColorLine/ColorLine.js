@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './ColorLine.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './ColorLine.module.scss'
 
 /**
  * Color line - stateless presentational component
@@ -12,15 +10,15 @@ const cssClass = styles(scss)
  * @param {string} props.alignment - alignment
  * @return {object} An object of children element
  */
-const ColorLine = ({ variant, alignment }) => (
-  <span
-    className={cssClass(
-      'color-line',
-      `color-line--${variant}`,
-      `color-line--${alignment}`
-    )}
-  />
-)
+const ColorLine = ({ variant, alignment }) => {
+  const elementClasses = useStyles({
+    [styles['color-line']]: true,
+    [styles[`color-line--${variant}`]]: variant,
+    [styles[`color-line--${alignment}`]]: alignment
+  })
+
+  return <span className={elementClasses} />
+}
 
 ColorLine.displayName = 'ColorLine'
 
