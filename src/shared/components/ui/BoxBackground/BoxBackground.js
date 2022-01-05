@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './BoxBackground.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './BoxBackground.module.scss'
 
 /**
  * Box Background - stateless presentational component
@@ -12,17 +10,21 @@ const cssClass = styles(scss)
  * @param {string} props.variant - variant
  * @return {object} An object of children element
  */
-const BoxBackground = ({ children, variant }) => (
-  <span className={cssClass('boxBackground', `boxBackground--${variant}`)}>
-    {children}
-  </span>
-)
+const BoxBackground = ({ children, variant }) => {
+  const elementClasses = useStyles({
+    [styles['boxBackground']]: true,
+    [styles[`boxBackground--${variant}`]]: variant
+  })
+
+  return <span className={elementClasses}>{children}</span>
+}
 
 BoxBackground.displayName = 'BoxBackground'
 
 BoxBackground.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.string.isRequired
+  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'info'])
+    .isRequired
 }
 
 export default BoxBackground
