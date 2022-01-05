@@ -4,7 +4,7 @@ import BoxBackground from '@components/ui/BoxBackground'
 
 const props = {
   children: 'children',
-  variant: ''
+  variant: 'info'
 }
 
 const component = <BoxBackground {...props} />
