@@ -4,7 +4,7 @@ import BoxBackground from '@components/ui/BoxBackground'
 
 const props = {
   children: 'children',
-  variant: ''
+  variant: 'info'
 }
 
 const component = <BoxBackground {...props} />
@@ -66,9 +66,5 @@ describe('<BoxBackground /> mount', () => {
     })
 
     expect(wrapper.children().hasClass('boxBackground--info')).toBe(true)
-  })
-
-  it('has no variant class name when prop variant is not provided', () => {
-    expect(wrapper.children().hasClass('boxBackground--')).toBe(true)
   })
 })
