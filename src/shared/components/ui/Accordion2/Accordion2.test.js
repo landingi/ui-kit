@@ -42,10 +42,6 @@ describe('<Accordion /> mount', () => {
   it('is mounted', () => {
     expect(wrapper.exists()).toBe(true)
   })
-
-  it('has `accordion` class', () => {
-    expect(wrapper.find('div').at(0).hasClass('accordion')).toBe(true)
-  })
 })
 
 describe('<AccordionItem /> mount', () => {
