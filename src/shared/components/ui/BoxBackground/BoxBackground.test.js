@@ -67,8 +67,4 @@ describe('<BoxBackground /> mount', () => {
 
     expect(wrapper.children().hasClass('boxBackground--info')).toBe(true)
   })
-
-  it('has no variant class name when prop variant is not provided', () => {
-    expect(wrapper.children().hasClass('boxBackground--')).toBe(false)
-  })
 })
