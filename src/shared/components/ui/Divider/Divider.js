@@ -1,28 +1,26 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Divider.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Divider.module.scss'
 
 /**
  * Divider - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - a list of class names, default: `divider`
  * @param {string} props.variant - variant `normal, menu, dropdown, horizontal`
  * @param {string} props.align - align `vertical`
  * @return {object} An object of children element
  */
-const Divider = ({ className, variant, align }) => {
-  const elementClasses = cssClass({
-    'divider--dropdown': variant === 'dropdown',
-    'divider--horizontal': variant === 'horizontal',
-    'divider--menu': variant === 'menu',
-    'divider--normal': variant === 'normal',
-    'divider--vertical': align === 'vertical'
+const Divider = ({ variant, align }) => {
+  const elementClasses = useStyles({
+    [styles['divider']]: true,
+    [styles['divider--dropdown']]: variant === 'dropdown',
+    [styles['divider--horizontal']]: variant === 'horizontal',
+    [styles['divider--menu']]: variant === 'menu',
+    [styles['divider--normal']]: variant === 'normal',
+    [styles['divider--vertical']]: align === 'vertical'
   })
 
-  return <div className={cssClass('divider', className, elementClasses)} />
+  return <div className={elementClasses} />
 }
 
 Divider.displayName = 'Divider'
@@ -30,12 +28,12 @@ Divider.displayName = 'Divider'
 Divider.propTypes = {
   align: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  variant: PropTypes.string
+  variant: PropTypes.oneOf(['dropdown', 'horizontal', 'menu', 'normal'])
 }
 
 Divider.defaultProps = {
+  className: styles.divider,
   align: '',
-  className: 'divider',
   variant: 'normal'
 }
 

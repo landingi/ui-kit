@@ -1,0 +1,29 @@
+.divider {
+  height: 1px;
+
+  &--dropdown {
+    background: $color-7;
+    margin: 0;
+  }
+
+  &--normal {
+    background: $color-7;
+    margin: 0;
+  }
+
+  &--menu {
+    background: $color-sidebar-divider;
+    margin: $margin-small 0;
+    width: 30px;
+    margin-left: 20px;
+  }
+
+  &--horizontal {
+    background: $color-7;
+    margin: 0 $margin-medium;
+  }
+
+  &--vertical {
+    transform: rotate(180deg);
+  }
+}
