@@ -1,11 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Accordion.scss'
-import AccordionItem from './Item/AccordionItem'
 import uuid from 'react-uuid'
-
-const cssClass = styles(scss)
+import AccordionItem from './Item/AccordionItem'
 
 /**
  * Accordion - stateless presentational component
@@ -15,8 +11,8 @@ const cssClass = styles(scss)
  * @param {bool} props.hasNumber - has number, default `false`
  * @return {object} An object of children element
  */
-const Accordion = ({ className, data, hasNumber, size }) => (
-  <div className={cssClass(className)}>
+const Accordion = ({ data, hasNumber, size }) => (
+  <div>
     {data.map((item, index) => {
       const { title, content } = item
 
@@ -36,7 +32,6 @@ const Accordion = ({ className, data, hasNumber, size }) => (
 Accordion.displayName = 'Accordion'
 
 Accordion.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   data: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.node.isRequired,
@@ -48,7 +43,6 @@ Accordion.propTypes = {
 }
 
 Accordion.defaultProps = {
-  className: 'accordion',
   hasNumber: false,
   size: 'medium'
 }
