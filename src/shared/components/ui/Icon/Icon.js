@@ -21,8 +21,6 @@ const Icon = ({ icon, className, color }) => {
     [cssClass(icon)]: icon
   })
 
-  console.log('css', cssClass(icon))
-
   return <i className={elementStyles} />
 }
 
