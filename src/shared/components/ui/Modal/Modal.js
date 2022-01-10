@@ -128,7 +128,7 @@ const Modal = forwardRef(
             ? { ...rest, [styles[name]]: true }
             : { ...rest, [name]: true }
         }, {})
-      : className
+      : { [styles[className]]: true }
 
     const modalStyles = useStyles({
       ...defaultClassnames,
