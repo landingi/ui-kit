@@ -138,8 +138,16 @@ const Modal = forwardRef(
       </div>
     )
 
+    const defaultClassnames = Array.isArray(className)
+      ? className.map(className => {
+          return styles[className]
+            ? { [styles[className]]: true }
+            : { [className]: true }
+        })
+      : className
+
     const modalStyles = useStyles({
-      [styles[className]]: true,
+      ...defaultClassnames,
       [styles['modal--fullscreen']]: size === 'fullscreen',
       [styles['modal--big']]: size === 'big',
       [styles['modal--medium']]: size === 'medium',
