@@ -12,7 +12,7 @@ import styles from './Modal.module.scss'
  */
 const ModalFooter = ({ children, align }) => {
   const elementClasses = useStyles({
-    [styles['modal__footer}']]: true,
+    [styles['modal__footer']]: true,
     [styles['modal__footer--align-right']]: align === 'right'
   })
 

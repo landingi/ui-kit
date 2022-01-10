@@ -15,6 +15,8 @@ import ModalHeader from './Header'
 import ModalFooter from './Footer'
 import styles from './Modal.module.scss'
 
+console.log(styles)
+
 /**
  * Modal Animation, exports React-pose animations
  * @see {@link https://popmotion.io/pose/api/} for further information.
@@ -278,7 +280,7 @@ Modal.propTypes = {
 }
 
 Modal.defaultProps = {
-  className: styles.modal,
+  className: 'modal',
   children: null,
   isClosable: true,
   isButtonDisabled: false,
