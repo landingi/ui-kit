@@ -29,6 +29,22 @@
     }
   }
 
+  &__component {
+    width: 100%;
+    display: flex;
+    border-radius: 6px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: $padding-large 40px 0;
+
+    &--child {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   &__body {
     padding: $padding-x-large $padding-big;
 
@@ -37,7 +53,7 @@
     }
   }
 
-  &__footer-divider{
+  &__footer-divider {
     padding: 0px $padding-big;
   }
 
