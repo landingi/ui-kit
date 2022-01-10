@@ -1,5 +1,4 @@
 import React, { Fragment, forwardRef } from 'react'
-import posed, { PoseGroup } from 'react-pose'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Backdrop from '@components/ui/Backdrop'
@@ -14,21 +13,6 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import ModalHeader from './Header'
 import ModalFooter from './Footer'
 import styles from './Modal.module.scss'
-
-/**
- * Modal Animation, exports React-pose animations
- * @see {@link https://popmotion.io/pose/api/} for further information.
- * @return {object} An object of styles
- */
-const ModalAnimation = posed.div({
-  enter: {},
-  exit: {}
-})
-
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
 
 /**
  * Modal - stateless presentational component
@@ -139,11 +123,11 @@ const Modal = forwardRef(
     )
 
     const defaultClassnames = Array.isArray(className)
-      ? className.map(className => {
-          return styles[className]
-            ? { [styles[className]]: true }
-            : { [className]: true }
-        })
+      ? className.reduce((rest, name) => {
+          return styles[name]
+            ? { ...rest, [styles[name]]: true }
+            : { ...rest, [name]: true }
+        }, {})
       : className
 
     const modalStyles = useStyles({
@@ -162,82 +146,80 @@ const Modal = forwardRef(
 
     return (
       <Fragment>
-        <PoseGroup animateOnMount flipMove={false}>
-          {isActive && (
-            <ModalAnimation key='ModalAnimation' className={styles.dialog}>
-              <div className={modalStyles} ref={ref}>
-                {isLoading ? (
-                  <div className={styles.modal__body}>
-                    <Loader />
+        {isActive && (
+          <div className={styles.dialog}>
+            <div className={modalStyles} ref={ref}>
+              {isLoading ? (
+                <div className={styles.modal__body}>
+                  <Loader />
+                </div>
+              ) : (
+                <Fragment>
+                  {(isClosable || i18n.title || image || isEditable) &&
+                    (!isComponent ? renderTitle() : renderComponent())}
+                  {hasHeaderDivider && (
+                    <Fragment>
+                      <Spacer space='small' />
+                      <Divider />
+                    </Fragment>
+                  )}
+                  <div className={bodyStyles}>
+                    {disableOverflow ? (
+                      children
+                    ) : (
+                      <div style={overflowStyle}>{children}</div>
+                    )}
                   </div>
-                ) : (
-                  <Fragment>
-                    {(isClosable || i18n.title || image || isEditable) &&
-                      (!isComponent ? renderTitle() : renderComponent())}
-                    {hasHeaderDivider && (
-                      <Fragment>
-                        <Spacer space='small' />
-                        <Divider />
-                      </Fragment>
-                    )}
-                    <div className={bodyStyles}>
-                      {disableOverflow ? (
-                        children
-                      ) : (
-                        <div style={overflowStyle}>{children}</div>
-                      )}
+                  {hasFooterDivider && (
+                    <div className={styles['modal__footer-divider']}>
+                      <Divider />
                     </div>
-                    {hasFooterDivider && (
-                      <div className={styles['modal__footer-divider']}>
-                        <Divider />
-                      </div>
-                    )}
-                    {hasFooter && (
-                      <Fragment>
-                        <Spacer space='small' />
+                  )}
+                  {hasFooter && (
+                    <Fragment>
+                      <Spacer space='small' />
 
-                        <ModalFooter align='right'>
-                          {hasCustomButton ? (
-                            <Button
-                              variant='secondary'
-                              size='medium'
-                              onClick={onClickCustomButton}
-                              isDisabled={isCustomButtonDisabled}
-                            >
-                              {i18n.cancel}
-                            </Button>
-                          ) : (
-                            <Button
-                              variant='secondary'
-                              size='medium'
-                              onClick={onClick}
-                            >
-                              {i18n.cancel}
-                            </Button>
-                          )}
+                      <ModalFooter align='right'>
+                        {hasCustomButton ? (
                           <Button
-                            type={isSubmit ? 'submit' : 'button'}
-                            variant={actionVariant}
+                            variant='secondary'
                             size='medium'
-                            onClick={onAction}
-                            isDisabled={isButtonDisabled}
-                            isLoading={isButtonLoading}
-                            hasIcon={!!actionIcon}
+                            onClick={onClickCustomButton}
+                            isDisabled={isCustomButtonDisabled}
                           >
-                            {actionIcon && (
-                              <FontAwesomeIcon icon={actionIcon} size='xs' />
-                            )}
-                            {i18n.action}
+                            {i18n.cancel}
                           </Button>
-                        </ModalFooter>
-                      </Fragment>
-                    )}
-                  </Fragment>
-                )}
-              </div>
-            </ModalAnimation>
-          )}
-        </PoseGroup>
+                        ) : (
+                          <Button
+                            variant='secondary'
+                            size='medium'
+                            onClick={onClick}
+                          >
+                            {i18n.cancel}
+                          </Button>
+                        )}
+                        <Button
+                          type={isSubmit ? 'submit' : 'button'}
+                          variant={actionVariant}
+                          size='medium'
+                          onClick={onAction}
+                          isDisabled={isButtonDisabled}
+                          isLoading={isButtonLoading}
+                          hasIcon={!!actionIcon}
+                        >
+                          {actionIcon && (
+                            <FontAwesomeIcon icon={actionIcon} size='xs' />
+                          )}
+                          {i18n.action}
+                        </Button>
+                      </ModalFooter>
+                    </Fragment>
+                  )}
+                </Fragment>
+              )}
+            </div>
+          </div>
+        )}
         {isActive && <Backdrop onClick={onClick} />}
       </Fragment>
     )
