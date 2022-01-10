@@ -1,8 +1,6 @@
-import React, { Fragment } from 'react'
-import posed, { PoseGroup } from 'react-pose'
+import React, { Fragment, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
 import Spreader from '@components/ui/Spreader'
@@ -11,24 +9,10 @@ import Spacer from '@components/ui/Spacer'
 import Button from '@components/ui/Button'
 import Loader from '@components/ui/Loader'
 import Image from '@components/ui/Image'
+import { useStyles } from '@helpers/hooks/useStyles'
 import ModalHeader from './Header'
 import ModalFooter from './Footer'
-import scss from './Modal.scss'
-/**
- * Modal Animation, exports React-pose animations
- * @see {@link https://popmotion.io/pose/api/} for further information.
- * @return {object} An object of styles
- */
-const ModalAnimation = posed.div({
-  enter: {},
-  exit: {}
-})
-
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss)
+import styles from './Modal.module.scss'
 
 /**
  * Modal - stateless presentational component
@@ -65,91 +49,108 @@ const cssClass = styles(scss)
  * @param {bool} props.isSubmit - modal button is submit type
  * @return {object} An object of children element
  */
-const modal = ({
-  children,
-  className,
-  onClick,
-  onAction,
-  isActive,
-  isClosable,
-  isButtonDisabled,
-  isButtonLoading,
-  isMarkAsSpamVisible,
-  image,
-  hasFooter,
-  hasHeaderDivider,
-  hasFooterDivider,
-  actionVariant,
-  isLoading,
-  actionIcon,
-  overflowStyle,
-  isCentered,
-  isEditable,
-  onEdit,
-  hasCustomButton,
-  onClickCustomButton,
-  isCustomButtonDisabled,
-  onMarkAsSpam,
-  size,
-  isPage,
-  disableOverflow,
-  i18n,
-  isComponent,
-  component,
-  isSubmit
-}) => {
-  const renderTitle = () => (
-    <div className={scss.modal__header}>
-      {i18n.title && <ModalHeader title={i18n.title} />}
+const Modal = forwardRef(
+  (
+    {
+      children,
+      className,
+      onClick,
+      onAction,
+      isActive,
+      isClosable,
+      isButtonDisabled,
+      isButtonLoading,
+      isMarkAsSpamVisible,
+      image,
+      hasFooter,
+      hasHeaderDivider,
+      hasFooterDivider,
+      actionVariant,
+      isLoading,
+      actionIcon,
+      overflowStyle,
+      isCentered,
+      isEditable,
+      onEdit,
+      hasCustomButton,
+      onClickCustomButton,
+      isCustomButtonDisabled,
+      onMarkAsSpam,
+      size,
+      isPage,
+      disableOverflow,
+      i18n,
+      isComponent,
+      component,
+      isSubmit
+    },
+    ref
+  ) => {
+    const renderTitle = () => (
+      <div className={styles.modal__header}>
+        {i18n.title && <ModalHeader title={i18n.title} />}
 
-      {image && <Image src={image} size='auto' height={20} />}
+        {image && <Image src={image} size='auto' height={20} />}
 
-      <div>
-        {isMarkAsSpamVisible && (
-          <Button variant='transparent' onClick={onMarkAsSpam}>
-            <FontAwesomeIcon icon='ban' />
+        <div>
+          {isMarkAsSpamVisible && (
+            <Button variant='transparent' onClick={onMarkAsSpam}>
+              <FontAwesomeIcon icon='ban' />
 
-            {i18n.markSpam}
-          </Button>
-        )}
+              {i18n.markSpam}
+            </Button>
+          )}
 
-        {isEditable && (
-          <Button variant='icon' onClick={onEdit}>
-            <FontAwesomeIcon icon='pencil-alt' />
-          </Button>
-        )}
+          {isEditable && (
+            <Button variant='icon' onClick={onEdit}>
+              <FontAwesomeIcon icon='pencil-alt' />
+            </Button>
+          )}
 
-        <Spreader spread='tiny' />
+          <Spreader spread='tiny' />
+
+          {isClosable && <Close onClick={onClick} />}
+        </div>
+      </div>
+    )
+
+    const renderComponent = () => (
+      <div className={styles.modal__component}>
+        <div className={styles['modal__component--child']}>{component}</div>
 
         {isClosable && <Close onClick={onClick} />}
       </div>
-    </div>
-  )
+    )
 
-  const renderComponent = () => (
-    <div className={cssClass('modal__component')}>
-      <div className={cssClass('modal__component--child')}>{component}</div>
+    const defaultClassnames = Array.isArray(className)
+      ? className.reduce((rest, name) => {
+          return styles[name]
+            ? { ...rest, [styles[name]]: true }
+            : { ...rest, [name]: true }
+        }, {})
+      : className
 
-      {isClosable && <Close onClick={onClick} />}
-    </div>
-  )
+    const modalStyles = useStyles({
+      ...defaultClassnames,
+      [styles['modal--fullscreen']]: size === 'fullscreen',
+      [styles['modal--big']]: size === 'big',
+      [styles['modal--medium']]: size === 'medium',
+      [styles['modal--center']]: isCentered,
+      [styles['modal--page']]: isPage
+    })
 
-  return (
-    <Fragment>
-      <PoseGroup animateOnMount flipMove={false}>
+    const bodyStyles = useStyles({
+      [styles['modal__body']]: true,
+      [styles['modal__body--has-footer']]: hasFooter
+    })
+
+    return (
+      <Fragment>
         {isActive && (
-          <ModalAnimation key='ModalAnimation' className={scss.dialog}>
-            <div
-              className={cssClass(className, {
-                'modal--fullscreen': size === 'fullscreen',
-                'modal--big': size === 'big',
-                'modal--medium': size === 'medium',
-                'modal--center': isCentered,
-                'modal--page': isPage
-              })}
-            >
+          <div className={styles.dialog}>
+            <div className={modalStyles} ref={ref}>
               {isLoading ? (
-                <div className={scss.modal__body}>
+                <div className={styles.modal__body}>
                   <Loader />
                 </div>
               ) : (
@@ -162,11 +163,7 @@ const modal = ({
                       <Divider />
                     </Fragment>
                   )}
-                  <div
-                    className={cssClass('modal__body', {
-                      'modal__body--has-footer': hasFooter
-                    })}
-                  >
+                  <div className={bodyStyles}>
                     {disableOverflow ? (
                       children
                     ) : (
@@ -174,7 +171,7 @@ const modal = ({
                     )}
                   </div>
                   {hasFooterDivider && (
-                    <div className={'Modal__modal__footer-divider'}>
+                    <div className={styles['modal__footer-divider']}>
                       <Divider />
                     </div>
                   )}
@@ -221,17 +218,17 @@ const modal = ({
                 </Fragment>
               )}
             </div>
-          </ModalAnimation>
+          </div>
         )}
-      </PoseGroup>
-      {isActive && <Backdrop onClick={onClick} />}
-    </Fragment>
-  )
-}
+        {isActive && <Backdrop onClick={onClick} />}
+      </Fragment>
+    )
+  }
+)
 
-modal.displayName = 'Modal'
+Modal.displayName = 'Modal'
 
-modal.propTypes = {
+Modal.propTypes = {
   children: PropTypes.node,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClick: PropTypes.func,
@@ -265,10 +262,12 @@ modal.propTypes = {
   }),
   isComponent: PropTypes.bool,
   component: PropTypes.node,
-  isSubmit: PropTypes.bool
+  isSubmit: PropTypes.bool,
+  onClickCustomButton: PropTypes.func,
+  disableOverflow: PropTypes.bool
 }
 
-modal.defaultProps = {
+Modal.defaultProps = {
   className: 'modal',
   children: null,
   isClosable: true,
@@ -304,7 +303,9 @@ modal.defaultProps = {
   onEdit: () => null,
   isComponent: false,
   component: null,
-  isSubmit: false
+  isSubmit: false,
+  onClickCustomButton: null,
+  disableOverflow: false
 }
 
-export default modal
+export default Modal
