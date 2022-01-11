@@ -28,14 +28,12 @@ const Legend = ({ data, alignment }) => {
 
   return (
     <div className={wrapperClasses}>
-      {data.map(({ variant, range }) => {
-        return (
-          <span key={uuid()} className={elementClasses(variant)}>
-            <ColorLine variant={variant} alignment='horizontal' />
-            {range}
-          </span>
-        )
-      })}
+      {data.map(({ variant, range }) => (
+        <span key={uuid()} className={elementClasses(variant)}>
+          <ColorLine variant={variant} alignment='horizontal' />
+          {range}
+        </span>
+      ))}
     </div>
   )
 }
