@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import css from './fonts/css/editor-icons.css'
+import css from './fonts/css/editor-icons.module.scss'
 import { styles } from '@helpers/css'
 import stylesScss from './Icon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
 const cssClass = styles({ ...css })
+
 /**
  * Icon - stateless presentational component
  * @param {object} props - props
@@ -16,9 +17,9 @@ const cssClass = styles({ ...css })
  */
 const Icon = ({ icon, className, color }) => {
   const elementStyles = useStyles({
-    [className]: true,
-    [stylesScss[`icon--${color}`]]: color,
-    [cssClass(icon)]: icon
+    [cssClass(className)]: true,
+    [cssClass(icon)]: icon,
+    [stylesScss[`icon--${color}`]]: color
   })
 
   return <i className={elementStyles} />
