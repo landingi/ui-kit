@@ -58,8 +58,6 @@ describe('<Select /> mount', () => {
     })
 
     expect(wrapper.find('label').hasClass('label')).toBe(true)
-    expect(wrapper.find('label.input__label').text()).toEqual(
-      wrapper.prop('label')
-    )
+    expect(wrapper.find('label').text()).toEqual(wrapper.prop('label'))
   })
 })
