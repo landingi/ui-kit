@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import { legendShape } from '@shapes'
-import scss from './Legend.scss'
-import ColorLine from '../ColorLine'
-
-const cssClass = styles(scss)
+import ColorLine from '@components/ui/ColorLine'
+import uuid from 'react-uuid'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Legend.module.scss'
 
 /**
  * Legend - stateless presentational component
@@ -14,20 +13,32 @@ const cssClass = styles(scss)
  * @param {string} props.alignment - alignment
  * @return {object} An object of children element
  */
-const Legend = ({ data, alignment }) => (
-  <div className={cssClass('container', `container--${alignment}`)}>
-    {data.map((item, index) => (
-      <span
-        // eslint-disable-next-line react/no-array-index-key
-        key={index}
-        className={cssClass('legend', `legend--${item.variant}`)}
-      >
-        <ColorLine variant={item.variant} alignment='horizontal' />
-        {item.range}
-      </span>
-    ))}
-  </div>
-)
+const Legend = ({ data, alignment }) => {
+  const wrapperClasses = useStyles({
+    [styles['container']]: true,
+    [styles[`container--${alignment}`]]: alignment
+  })
+
+  const elementClasses = variant =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useStyles({
+      [styles['legend']]: true,
+      [styles[`legend--${variant}`]]: variant
+    })
+
+  return (
+    <div className={wrapperClasses}>
+      {data.map(({ variant, range }) => {
+        return (
+          <span key={uuid()} className={elementClasses(variant)}>
+            <ColorLine variant={variant} alignment='horizontal' />
+            {range}
+          </span>
+        )
+      })}
+    </div>
+  )
+}
 
 Legend.displayName = 'Legend'
 
