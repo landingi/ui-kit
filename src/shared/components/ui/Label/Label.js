@@ -15,7 +15,7 @@ import styles from './Label.module.scss'
 const Label = ({ children, id, isToggle, toggle }) => {
   const elementClasses = useStyles({
     [styles['label']]: true,
-    [styles['label--normal']]: isToggle,
+    [styles['label--normal']]: true,
     [styles['label--active']]: isToggle && toggle,
     [styles['label--inactive']]: isToggle && !toggle
   })

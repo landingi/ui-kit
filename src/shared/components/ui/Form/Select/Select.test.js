@@ -57,9 +57,7 @@ describe('<Select /> mount', () => {
       label: 'jestem sobie labelem'
     })
 
-    expect(wrapper.find('label.input__label').hasClass('input__label')).toBe(
-      true
-    )
+    expect(wrapper.find('label').hasClass('label')).toBe(true)
     expect(wrapper.find('label.input__label').text()).toEqual(
       wrapper.prop('label')
     )
