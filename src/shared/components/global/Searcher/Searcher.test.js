@@ -1,4 +1,4 @@
-import React, { useCallback as useCallbackMock } from 'react'
+import React from 'react'
 import Searcher from '@components/global/Searcher'
 import Search from '@components/global/Searcher'
 import { mountWithIntl } from '@jestutils'
@@ -8,11 +8,6 @@ registerIcons()
 
 const mockedSearchFunction = jest.fn()
 const mockedSetSearchResult = jest.fn()
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useCallback: jest.fn()
-}))
 
 const props = {
   searchFunction: mockedSearchFunction,
@@ -36,6 +31,7 @@ describe('<Searcher/> mount', () => {
 
   afterEach(() => {
     wrapper.unmount()
+    jest.clearAllMocks()
   })
 
   it('is mounted', () => {
@@ -68,20 +64,23 @@ describe('<Searcher/> mount', () => {
     expect(wrapper.props().setSearchPhrase).toEqual(null)
   })
 
-  it('on change search phrase callback should be called with new value', async () => {
-    const setSearchPhraseMock = jest.fn()
-    const newPhrase = 'new phrase'
+  it('on change search result should be called with no value', () => {
+ 
+    wrapper.find(Search).find('input').simulate('change', {target: { value: '' }})
 
-    useCallbackMock.mockImplementation(() => setSearchPhraseMock)
+    expect(mockedSetSearchResult).toBeCalled();
+    expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE');
+  })
 
-    wrapper.setProps({
-      setSearchPhrase: setSearchPhraseMock
-    })
+  it('should call search function with search value onSubmit', () => {
 
-    await wrapper.find(Search).invoke('onChange')({
-      target: { value: newPhrase }
-    })
+    const phrase = 'Search phrase'
+ 
+    wrapper.find(Search).find('input').instance().value = phrase
 
-    expect(setSearchPhraseMock).toBeCalledWith(newPhrase)
+    wrapper.find(Search).find('form').simulate('submit')
+
+    expect(mockedSearchFunction).toBeCalled();
+    expect(mockedSearchFunction).toBeCalledWith(phrase);
   })
 })
