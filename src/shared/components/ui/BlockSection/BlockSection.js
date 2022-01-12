@@ -1,4 +1,3 @@
-import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
 import Image from '@components/ui/Image'
@@ -9,10 +8,9 @@ import Paragraph from '@components/ui/Paragraph'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Spacer from '@components/ui/Spacer'
-import scss from './BlockSection.scss'
 import uuid from 'react-uuid'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './BlockSection.module.scss'
 
 /**
  * Block Section - stateless presentational component
@@ -27,7 +25,7 @@ const cssClass = styles(scss)
  * @param {array} props.list - list
  * @return {object} An object of children element
  */
-function BlockSection({
+const BlockSection = ({
   className,
   title,
   message,
@@ -36,16 +34,17 @@ function BlockSection({
   url,
   reverse,
   list
-}) {
-  const elementClasses = cssClass({
-    'block-section__panel--reverse': reverse === true
+}) => {
+  const elementClasses = useStyles({
+    [styles['block-section__panel']]: true,
+    [styles['block-section__panel--reverse']]: reverse === true
   })
 
   return (
-    <div className={cssClass(className)}>
+    <div className={className}>
       <Panel variant='padding-none'>
-        <div className={cssClass('block-section__panel', elementClasses)}>
-          <div className={cssClass('block-section__panel--content')}>
+        <div className={elementClasses}>
+          <div className={styles['block-section__panel--content']}>
             <Heading bold level={2}>
               {title}
             </Heading>
@@ -56,12 +55,6 @@ function BlockSection({
               weight={400}
             >
               {message}
-              {/* <FormattedMessage
-                id={message}
-                values={{
-                  br: <br />
-                }}
-              /> */}
             </Paragraph>
 
             {list && (
@@ -100,7 +93,7 @@ BlockSection.propTypes = {
 }
 
 BlockSection.defaultProps = {
-  className: 'block-section',
+  className: styles['block-section'],
   list: null,
   onClick: () => null,
   reverse: false

@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import scss from './../Accordion.scss'
 import Icon from '@components/ui/Icon'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from '@components/ui/Accordion2/Accordion.module.scss'
 
 /**
  * Accordion - statefull presentational component
@@ -24,31 +22,29 @@ const AccordionItem = ({ className, title, content, size }) => {
    */
   const handleOpen = useCallback(() => setOpen(!isOpen), [isOpen])
 
+  const titleStyles = useStyles({
+    [styles['accordion__item--title']]: true,
+    [styles['accordion__item--title-small']]: size === 'small',
+    [styles['accordion__item--title-medium']]: size === 'medium'
+  })
+
+  const contentStyles = useStyles({
+    [styles['accordion__item--content']]: true,
+    [styles['accordion__item--content-small']]: size === 'small',
+    [styles['accordion__item--content-medium']]: size === 'medium',
+    [styles['accordion__item--content-open']]: isOpen,
+    [styles['accordion__item--content-close']]: !isOpen
+  })
+
   return (
-    <div className={cssClass(className)}>
-      <div
-        className={cssClass(
-          'accordion__item--title',
-          `accordion__item--title-${size}`
-        )}
-        onClick={handleOpen}
-      >
+    <div className={className}>
+      <div className={titleStyles} onClick={handleOpen}>
         <div>{title}</div>
 
         <Icon icon={isOpen ? 'icon-angle-down' : 'icon-angle-up'} />
       </div>
 
-      <div
-        className={cssClass(
-          'accordion__item--content',
-          `accordion__item--content-${size}`,
-          isOpen
-            ? 'accordion__item--content-open'
-            : 'accordion__item--content-close'
-        )}
-      >
-        {content}
-      </div>
+      <div className={contentStyles}>{content}</div>
     </div>
   )
 }
@@ -63,7 +59,7 @@ AccordionItem.propTypes = {
 }
 
 AccordionItem.defaultProps = {
-  className: 'accordion__item',
+  className: styles.accordion__item,
   size: 'medium'
 }
 

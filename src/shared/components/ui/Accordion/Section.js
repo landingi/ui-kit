@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Accordion.scss'
+import styles from './Accordion.module.scss'
 
 /**
  * Accordion Section - stateless presentational component
@@ -11,17 +11,15 @@ import scss from './Accordion.scss'
  * @param {string} props.children - content
  * @return {object} An object of children element
  */
-function AccordionSection({ handleOnClick, isOpen, label, children }) {
-  return (
-    <div className={scss.accordion}>
-      <div className={scss.accordion__header} onClick={handleOnClick}>
-        {label}
-      </div>
-
-      {isOpen && <div className={scss.accordion__text}>{children}</div>}
+const AccordionSection = ({ handleOnClick, isOpen, label, children }) => (
+  <div className={styles.accordion}>
+    <div className={styles.accordion__header} onClick={handleOnClick}>
+      {label}
     </div>
-  )
-}
+
+    {isOpen && <div className={styles.accordion__text}>{children}</div>}
+  </div>
+)
 
 AccordionSection.displayName = 'Accordion Section'
 

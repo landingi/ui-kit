@@ -12,6 +12,10 @@ module.exports = {
         sassOptions: {
           includePaths: [__dirname, '../src'],
           outputStyle: 'compressed'
+        },
+        cssLoaderOptions: {
+          camelCase: false,
+          localIdentName: '[name]__[local]'
         }
       }
     }

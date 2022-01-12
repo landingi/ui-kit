@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
-import scss from './Image.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Image.module.scss'
 
 /**
  * Image - stateless presentational component
@@ -18,7 +16,7 @@ const cssClass = styles(scss)
 const Image = ({ src, alt, className, size, height }) => (
   <img
     alt={alt}
-    className={cssClass(className)}
+    className={useStyles({ [styles[className]]: true })}
     height={height}
     src={src}
     width={size}

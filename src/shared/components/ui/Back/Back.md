@@ -1,9 +1,0 @@
-import { Playground, Props } from 'docz'
-import Back from '@components/ui/Back'
-
-# Back
-
-<Props of={Back} />
-
-## Basic usage
-

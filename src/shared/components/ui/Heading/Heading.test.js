@@ -25,7 +25,7 @@ describe('<Heading/> mount', () => {
   })
 
   it('has `heading` class', () => {
-    expect(wrapper.hasClass('heading')).toBe(true)
+    expect(wrapper.find('span').hasClass('heading')).toBe(true)
   })
 
   it('when prop `level 1`, has `h1` class', () => {

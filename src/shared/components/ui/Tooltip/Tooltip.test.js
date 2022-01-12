@@ -3,6 +3,12 @@ import { mount } from 'enzyme'
 import Tooltip from '@components/ui/Tooltip'
 import ReactTooltip from 'react-tooltip'
 
+const delay = time => {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time)
+  })
+}
+
 jest.mock('react-uuid/uuid', () => () => '00000000-0000-0000-0000-000000000000')
 
 const props = {
@@ -45,5 +51,22 @@ describe('<Tooltip/> mount', () => {
     expect(wrapper.find('span').props()['data-for']).toBe(
       '00000000-0000-0000-0000-000000000000'
     )
+  })
+  it('add proper props when showOnClick is enabled', () => {
+    wrapper.setProps({ showOnClick: true })
+    const Tooltip = wrapper.find(ReactTooltip)
+
+    expect(typeof Tooltip.props().afterShow).toBe('function')
+    expect(Tooltip.props().event).toBe('click')
+    expect(Tooltip.props().delayHide).toBe(1000)
+  })
+  it('Run afterShow after click when showOnClick is enabled', async () => {
+    wrapper.setProps({ showOnClick: true })
+    const Tooltip = wrapper.find(ReactTooltip)
+    const spy = jest.spyOn(ReactTooltip, 'hide')
+
+    Tooltip.props().afterShow()
+    await delay(1001)
+    expect(spy).toBeCalled()
   })
 })

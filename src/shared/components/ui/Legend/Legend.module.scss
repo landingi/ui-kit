@@ -1,0 +1,19 @@
+
+.container {
+  display: flex;
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+}
+
+.legend {
+  display: block;
+  margin-right: 20px;
+  margin-left: $margin-large;
+  position: relative;
+}

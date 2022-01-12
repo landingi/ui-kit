@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Modal.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Modal.module.scss'
 
 /**
  * Modal Footer - stateless presentational component
@@ -13,14 +11,12 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const ModalFooter = ({ children, align }) => {
-  const elementClasses = cssClass({
-    'modal__footer--align-right': align === 'right'
+  const elementClasses = useStyles({
+    [styles['modal__footer']]: true,
+    [styles['modal__footer--align-right']]: align === 'right'
   })
-  return (
-    <div className={cssClass(`${scss.modal__footer}`, elementClasses)}>
-      {children}
-    </div>
-  )
+
+  return <div className={elementClasses}>{children}</div>
 }
 
 ModalFooter.displayName = 'ModalFooter'

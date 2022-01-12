@@ -30,10 +30,24 @@ describe('<Avatar /> mount', () => {
     expect(wrapper.find('span').hasClass('avatar--image')).toBe(true)
   })
 
+  it('has blank variant', () => {
+    wrapper.setProps({
+      variant: 'blank'
+    })
+    expect(wrapper.find('span').hasClass('avatar--blank')).toBe(true)
+  })
+
   it('has medium size', () => {
     wrapper.setProps({
       size: 'medium'
     })
     expect(wrapper.find('span').hasClass('avatar--medium')).toBe(true)
+  })
+
+  it('has tiny size', () => {
+    wrapper.setProps({
+      size: 'tiny'
+    })
+    expect(wrapper.find('span').hasClass('avatar--tiny')).toBe(true)
   })
 })
