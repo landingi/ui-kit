@@ -71,6 +71,7 @@ export { default as Search } from '@components/ui/Search'
 export { default as Section } from '@components/ui/Section'
 export { default as SectionTile } from '@components/ui/SectionTile'
 export { default as Select } from '@components/ui/Select'
+export { default as Separator } from '@components/ui/Separator'
 export { default as ShowMore } from '@components/ui/ShowMore'
 export { default as ShowPassword } from '@components/ui/ShowPassword'
 export {

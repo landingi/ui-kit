@@ -1,0 +1,17 @@
+.separator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__divider {
+    width: 100%;
+
+    &--medium {
+      height: 4px;
+    }
+
+    &--color-4 {
+      background-color: $color-4;
+    }
+  }
+}
