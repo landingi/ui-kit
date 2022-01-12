@@ -1,5 +1,6 @@
 import React from 'react'
 import Searcher from '@components/global/Searcher'
+import Search from '@components/global/Searcher'
 import { mountWithIntl } from '@jestutils'
 import registerIcons from '@helpers/icons'
 
@@ -30,6 +31,7 @@ describe('<Searcher/> mount', () => {
 
   afterEach(() => {
     wrapper.unmount()
+    jest.clearAllMocks()
   })
 
   it('is mounted', () => {
@@ -60,5 +62,26 @@ describe('<Searcher/> mount', () => {
 
   it('should have defined default prop setSearchPhrase with value set to null', () => {
     expect(wrapper.props().setSearchPhrase).toEqual(null)
+  })
+
+  it('on change search result should be called with no value', () => {
+    wrapper
+      .find(Search)
+      .find('input')
+      .simulate('change', { target: { value: '' } })
+
+    expect(mockedSetSearchResult).toBeCalled()
+    expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE')
+  })
+
+  it('should call search function with search value onSubmit', () => {
+    const phrase = 'Search phrase'
+
+    wrapper.find(Search).find('input').instance().value = phrase
+
+    wrapper.find(Search).find('form').simulate('submit')
+
+    expect(mockedSearchFunction).toBeCalled()
+    expect(mockedSearchFunction).toBeCalledWith(phrase)
   })
 })
