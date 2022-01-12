@@ -22,7 +22,8 @@ const Paragraph = ({
   size,
   align,
   padding,
-  weight
+  weight,
+  uppercase
 }) => {
   const defaultClassnames = Array.isArray(className)
     ? className.reduce((rest, name) => {
@@ -36,9 +37,10 @@ const Paragraph = ({
     ...defaultClassnames,
     [styles[`${className}-color--${color}`]]: color,
     [styles[`${className}-size--${size}`]]: size,
-    [styles[`${className}-size--${padding}`]]: padding,
-    [styles[`${className}-size--${align}`]]: align,
-    [styles[`${className}-size--${weight}`]]: weight
+    [styles[`${className}-padding--${padding}`]]: padding,
+    [styles[`${className}-align--${align}`]]: align,
+    [styles[`${className}-weight--${weight}`]]: weight,
+    [styles['paragraph-uppercase']]: uppercase
   })
 
   return <p className={paragraphStyles}>{children}</p>
@@ -53,7 +55,8 @@ Paragraph.propTypes = {
   size: PropTypes.oneOf([12, 14, 16, 18]),
   align: PropTypes.string,
   padding: PropTypes.oneOf(['small', 'medium', 'none']),
-  weight: PropTypes.number
+  weight: PropTypes.number,
+  uppercase: PropTypes.bool
 }
 
 Paragraph.defaultProps = {
@@ -62,7 +65,8 @@ Paragraph.defaultProps = {
   size: 14,
   align: null,
   padding: 'medium',
-  weight: 300
+  weight: 300,
+  uppercase: false
 }
 
 export default Paragraph

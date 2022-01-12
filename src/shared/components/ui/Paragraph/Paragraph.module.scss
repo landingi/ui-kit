@@ -2,6 +2,10 @@
   margin: 0;
   line-height: 18px;
 
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
   &-padding {
     &--medium {
       padding: 0 0 $padding-medium;
