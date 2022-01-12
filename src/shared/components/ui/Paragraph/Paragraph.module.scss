@@ -8,7 +8,7 @@
     }
 
     &--small {
-      padding: $padding-small
+      padding: $padding-small;
     }
 
     &--none {
@@ -19,6 +19,10 @@
   &-align {
     &--center {
       text-align: center;
+    }
+
+    &--right {
+      text-align: right;
     }
   }
 
@@ -36,6 +40,26 @@
     &--accent-3 {
       color: $color-8;
       line-height: 20px;
+    }
+
+    &--accent-4 {
+      color: $color-10;
+    }
+
+    &--accent-5 {
+      color: $color-2;
+    }
+
+    &--accent-6 {
+      color: $color-4;
+    }
+
+    &--info {
+      color: $color-info;
+    }
+
+    &--white {
+      color: $color-white;
     }
   }
 
@@ -59,11 +83,15 @@
 
   &-weight {
     &--300 {
-      font-weight: 300
+      font-weight: 300;
     }
 
     &--400 {
-      font-weight: 400
+      font-weight: 400;
+    }
+
+    &--700 {
+      font-weight: 700;
     }
   }
 }
