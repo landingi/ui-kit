@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Paragraph.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Paragraph.module.scss'
 
 /**
  * Paragraph - stateless presentational component
@@ -17,73 +15,58 @@ const cssClass = styles(scss)
  * @param {number} props.weight - weight
  * @return {object} An object of children element
  */
-const paragraph = ({
+const Paragraph = ({
   className,
   children,
   color,
   size,
   align,
   padding,
-  weight
-}) => (
-  <p
-    className={cssClass(
-      className,
-      color ? `${className}-color--${color}` : undefined,
-      size ? `${className}-size--${size}` : undefined,
-      padding ? `${className}-padding--${padding}` : undefined,
-      align ? `${className}-align--${align}` : undefined,
-      weight ? `${className}-weight--${weight}` : undefined
-    )}
-  >
-    {children}
-  </p>
-)
+  weight,
+  uppercase
+}) => {
+  const defaultClassnames = Array.isArray(className)
+    ? className.reduce((rest, name) => {
+        return styles[name]
+          ? { ...rest, [styles[name]]: true }
+          : { ...rest, [name]: true }
+      }, {})
+    : { [styles[className]]: true }
 
-paragraph.displayName = 'Paragraph'
+  const paragraphStyles = useStyles({
+    ...defaultClassnames,
+    [styles[`${className}-color--${color}`]]: color,
+    [styles[`${className}-size--${size}`]]: size,
+    [styles[`${className}-padding--${padding}`]]: padding,
+    [styles[`${className}-align--${align}`]]: align,
+    [styles[`${className}-weight--${weight}`]]: weight,
+    [styles['paragraph-uppercase']]: uppercase
+  })
 
-paragraph.propTypes = {
-  /**
-   * Children elements
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Classname, default `section`
-   */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Color, default `accent-1`
-   */
-  color: PropTypes.string,
-  /**
-   * Size, default `14`
-   */
-  size: PropTypes.oneOf([12, 14, 16, 18]),
-  /**
-   * Align, default `undefined`
-   */
-  align: PropTypes.string,
-  /**
-   * Padding, default `medium`
-   */
-  padding: PropTypes.oneOf(['small', 'medium', 'none']),
-  /**
-   * Weight, default `300`
-   */
-  weight: PropTypes.number
+  return <p className={paragraphStyles}>{children}</p>
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-paragraph.defaultProps = {
+Paragraph.displayName = 'Paragraph'
+
+Paragraph.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  color: PropTypes.string,
+  size: PropTypes.oneOf([12, 14, 16, 18]),
+  align: PropTypes.string,
+  padding: PropTypes.oneOf(['small', 'medium', 'none']),
+  weight: PropTypes.number,
+  uppercase: PropTypes.bool
+}
+
+Paragraph.defaultProps = {
   className: 'paragraph',
   color: 'accent-1',
   size: 14,
-  align: undefined,
+  align: null,
   padding: 'medium',
-  weight: 300
+  weight: 300,
+  uppercase: false
 }
 
-export default paragraph
+export default Paragraph
