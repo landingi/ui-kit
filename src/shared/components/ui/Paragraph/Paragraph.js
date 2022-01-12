@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Paragraph.module.scss'
 
-console.log('styles', styles)
-
 /**
  * Paragraph - stateless presentational component
  * @param {object} props - props
