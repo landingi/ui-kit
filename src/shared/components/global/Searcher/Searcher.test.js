@@ -1,5 +1,6 @@
 import React, { useCallback as useCallbackMock } from 'react'
 import Searcher from '@components/global/Searcher'
+import Search from '@components/global/Searcher'
 import { mountWithIntl } from '@jestutils'
 import registerIcons from '@helpers/icons'
 
@@ -30,7 +31,6 @@ describe('<Searcher/> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    useCallbackMock.mockImplementation(() => props.setSearchPhrase)
     wrapper = mountWithIntl(component)
   })
 
@@ -66,5 +66,22 @@ describe('<Searcher/> mount', () => {
 
   it('should have defined default prop setSearchPhrase with value set to null', () => {
     expect(wrapper.props().setSearchPhrase).toEqual(null)
+  })
+
+  it('on change search phrase callback should be called with new value', async () => {
+    const setSearchPhraseMock = jest.fn()
+    const newPhrase = 'new phrase'
+
+    useCallbackMock.mockImplementation(() => setSearchPhraseMock)
+
+    wrapper.setProps({
+      setSearchPhrase: setSearchPhraseMock
+    })
+
+    await wrapper.find(Search).invoke('onChange')({
+      target: { value: newPhrase }
+    })
+
+    expect(setSearchPhraseMock).toBeCalledWith(newPhrase)
   })
 })
