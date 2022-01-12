@@ -13,7 +13,7 @@ import styles from './ShowPassword.module.scss'
  * @return {object} An object of children element
  */
 const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
-  const [icon, setIcon] = useState('eye')
+  const [icon, setIcon] = useState('icon-eye-close')
   const [label, setLabel] = useState('word.show')
 
   /**
@@ -21,11 +21,11 @@ const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
    */
   const handleIconSet = useCallback(() => {
     if (icon === 'eye') {
-      setIcon('eye-slash')
+      setIcon('icon-eye-close')
       setHidden('text')
       setLabel(i18n.hide)
     } else {
-      setIcon('eye')
+      setIcon('icon-eye-open')
       setHidden('password')
       setLabel(i18n.show)
     }
