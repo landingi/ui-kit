@@ -24,6 +24,6 @@ describe('<Label/> mount', () => {
   })
 
   it('has `label` class', () => {
-    expect(wrapper.hasClass('label')).toBe(true)
+    expect(wrapper.find('label').hasClass('label')).toBe(true)
   })
 })
