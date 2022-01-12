@@ -65,22 +65,23 @@ describe('<Searcher/> mount', () => {
   })
 
   it('on change search result should be called with no value', () => {
- 
-    wrapper.find(Search).find('input').simulate('change', {target: { value: '' }})
+    wrapper
+      .find(Search)
+      .find('input')
+      .simulate('change', { target: { value: '' } })
 
-    expect(mockedSetSearchResult).toBeCalled();
-    expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE');
+    expect(mockedSetSearchResult).toBeCalled()
+    expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE')
   })
 
   it('should call search function with search value onSubmit', () => {
-
     const phrase = 'Search phrase'
- 
+
     wrapper.find(Search).find('input').instance().value = phrase
 
     wrapper.find(Search).find('form').simulate('submit')
 
-    expect(mockedSearchFunction).toBeCalled();
-    expect(mockedSearchFunction).toBeCalledWith(phrase);
+    expect(mockedSearchFunction).toBeCalled()
+    expect(mockedSearchFunction).toBeCalledWith(phrase)
   })
 })
