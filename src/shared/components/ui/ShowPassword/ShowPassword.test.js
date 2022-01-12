@@ -38,6 +38,6 @@ describe('<ShowPassword/> mount', () => {
     })
 
     expect(wrapper.find('Button').text()).toEqual('word.show')
-    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('eye')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-eye-close')
   })
 })
