@@ -10,22 +10,23 @@ import styles from './ShowPassword.module.scss'
  * @param {string|array} props.className
  * @param {bool} props.setHidden
  * @param {bool} props.hasLabel
+ * @param {object} props.i18n
  * @return {object} An object of children element
  */
 const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
-  const [icon, setIcon] = useState('eye')
+  const [icon, setIcon] = useState('icon-eye-close')
   const [label, setLabel] = useState('word.show')
 
   /**
    * HandleIconSet - set the icon state
    */
   const handleIconSet = useCallback(() => {
-    if (icon === 'eye') {
-      setIcon('eye-slash')
+    if (icon === 'icon-eye-close') {
+      setIcon('icon-eye-open')
       setHidden('text')
       setLabel(i18n.hide)
     } else {
-      setIcon('eye')
+      setIcon('icon-eye-close')
       setHidden('password')
       setLabel(i18n.show)
     }

@@ -31,4 +31,13 @@ describe('<ShowPassword/> mount', () => {
 
     expect(result).toBe(null)
   })
+
+  it('has label show and eye icon', () => {
+    wrapper.setProps({
+      hasLabel: true
+    })
+
+    expect(wrapper.find('Button').text()).toEqual('word.show')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-eye-close')
+  })
 })
