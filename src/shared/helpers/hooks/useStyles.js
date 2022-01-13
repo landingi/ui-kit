@@ -1,7 +1,7 @@
 /**
  * useStyles - hook to extract classes from CSS modules object or provide custom one's
  * @param {object} styles - object with CSS modules styles
- * @param {string | array} className - default or custom classes from outside of component
+ * @param {string | array} classNames - custom classes from outside of component
  * @returns {string} An string with extracted class names
  */
 export const useStyles = (styles, classNames = '') => {

@@ -8,13 +8,14 @@ import styles from './InfoBar.module.scss'
  * Info Bar - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `info-bar`
+ * @param {string|array} props.className - list of custom class names
  * @param {string} props.type - type of info bar `info, success, warning, alert`
  * @return {object} An object of children element
  */
 const InfoBar = ({ children, className, type }) => {
   const elementClasses = useStyles(
     {
+      [styles[`info-bar`]]: true,
       [styles[`info-bar--${type}`]]: type
     },
     className
@@ -56,7 +57,7 @@ InfoBar.propTypes = {
 }
 
 InfoBar.defaultProps = {
-  className: 'info-bar',
+  className: '',
   type: 'info'
 }
 
