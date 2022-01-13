@@ -23,7 +23,10 @@ const Check = ({ children, positive, iconWidth, crossedOutOnPositive }) => {
 
   return (
     <span className={wrapperStyles}>
-      <Icon icon={positive ? 'check' : 'times'} style={{ width: iconWidth }} />
+      <Icon
+        icon={positive ? 'icon-ok' : 'icon-remove'}
+        style={{ width: iconWidth }}
+      />
 
       <Spreader spread='tiny' />
       <div className={styles['check__line-through']}>{children}</div>
