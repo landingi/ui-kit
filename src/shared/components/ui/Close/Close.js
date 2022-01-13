@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/ui/Button'
+import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Close.module.scss'
@@ -14,7 +14,7 @@ import styles from './Close.module.scss'
 const Close = ({ className, onClick }) => (
   <span className={className} onClick={onClick}>
     <Button variant='icon'>
-      <FontAwesomeIcon icon='times' size='sm' />
+      <Icon icon='icon-remove' />
     </Button>
   </span>
 )
