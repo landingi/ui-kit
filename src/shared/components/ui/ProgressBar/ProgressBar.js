@@ -30,6 +30,7 @@ const progressBar = ({
   <Fragment>
     <div className={cssClass('container', border && 'container--bordered')}>
       <span
+        data-testid='background'
         className={cssClass(
           'bar',
           'bar__background',
@@ -38,6 +39,7 @@ const progressBar = ({
         )}
       />
       <span
+        data-testid='fulfillment'
         className={cssClass(
           'bar',
           'bar__fulfillment',
