@@ -1,18 +1,16 @@
-import { styles } from '@helpers/css'
 import Heading from '@components/ui/Heading'
 import Image from '@components/ui/Image'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
 import Vimeo from '@u-wave/react-vimeo'
-import scss from './Message.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Message.module.scss'
 
 /**
  * Message - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `message`
+ * @param {string|array} props.className - list of custom class names out of component
  * @param {string} props.title - title
  * @param {string} props.message - message
  * @param {string} props.url - image/video url
@@ -40,6 +38,12 @@ const Message = ({
   bold,
   withoutMargin
 }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['message']]: true
+    },
+    className
+  )
   /**
    * Render multimedia
    * @type {function}
@@ -61,7 +65,7 @@ const Message = ({
   )
 
   return (
-    <div className={cssClass(className)}>
+    <div className={elementClasses}>
       {url && multimediaPosition === 'before' && renderMultimedia()}
 
       {title && (
