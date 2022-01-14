@@ -1,117 +1,124 @@
 import React from 'react'
-import { mountWithIntl } from '@jestutils'
-import registerIcons from '@helpers/icons'
 import ColorPicker from './ColorPicker'
 import Button from '@components/ui/Button'
-import { act } from 'react-dom/test-utils'
+import registerIcons from '@helpers/icons'
 import { convertColorToObj } from './helpers'
+import { fireEvent, screen, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 registerIcons()
 HTMLCanvasElement.prototype.getContext = () => {}
 
-const props = {
-  colorValue: '#321efd',
-  i18n: {
-    label: 'Color',
-    clearButton: 'Clear'
-  },
-  favoriteColors: [
-    { id: '1', color: '#321111' },
-    { id: '2', color: '#543213' },
-    { id: '3', color: '#214321' }
-  ],
-  onColorChange: jest.fn(),
-  colorPanelHandlers: {
-    onClickFavoriteHandler: jest.fn(),
-    onClickDeleteHandler: jest.fn()
-  }
-}
-
-const ColorPickerComponent = <ColorPicker {...props} />
-
 describe('<ColorPicker/> mount', () => {
-  let wrapper
+  const props = {
+    colorValue: '#321efd',
+    i18n: {
+      label: 'Color',
+      clearButton: 'Clear'
+    },
+    favoriteColors: [
+      { id: '1', color: '#321111' },
+      { id: '2', color: '#543213' },
+      { id: '3', color: '#214321' }
+    ],
+    onColorChange: jest.fn(),
+    colorPanelHandlers: {
+      onClickFavoriteHandler: jest.fn(),
+      onClickDeleteHandler: jest.fn()
+    }
+  }
 
-  beforeEach(() => {
-    act(() => {
-      wrapper = mountWithIntl(ColorPickerComponent)
-    })
-  })
+  it('should render proper label', () => {
+    const { getByText } = render(<ColorPicker {...props} />)
 
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+    const {
+      i18n: { label }
+    } = props
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const labelNode = getByText(label)
 
-  it('should render label', () => {
-    expect(wrapper.find('div.color-picker__label').exists()).toBe(true)
+    expect(labelNode).toBeTruthy()
   })
 
   it('should render preview color box contains color matched with formated colorValue prop', () => {
-    const { r, g, b, a } = convertColorToObj(wrapper.prop('colorValue'))
+    const { getByTestId } = render(<ColorPicker {...props} />)
+
+    const { r, g, b, a } = convertColorToObj(props.colorValue)
+
     const rgbaColorString = `rgba(${r}, ${g}, ${b}, ${a})`
 
-    expect(
-      wrapper.find('div.color-picker__color-box--preview').prop('style')
-    ).toHaveProperty('backgroundColor', rgbaColorString)
+    const colorBoxPreview = getByTestId('color-preview')
+
+    expect(colorBoxPreview).toHaveStyle({
+      backgroundColor: `${rgbaColorString}`
+    })
   })
 
   it('should display color picker after clicking on label', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+    const { getByTestId } = render(<ColorPicker {...props} />)
 
-    expect(wrapper.find('div.color-picker').exists()).toBe(true)
+    const labelNode = getByTestId('color-picker-label')
+
+    fireEvent.click(labelNode)
+
+    const colorPicker = getByTestId('color-picker')
+
+    expect(colorPicker).toBeInTheDocument()
   })
 
-  it('color picker should contains two buttons', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+  it('color picker after opening should displays two buttons', () => {
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
 
-    expect(wrapper.find(Button).length).toBe(2)
-  })
+    const labelNode = getByTestId('color-picker-label')
 
-  it('color picker should contains color matched with colorValue prop', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+    fireEvent.click(labelNode)
 
-    expect(wrapper.find('Chrome').prop('hex')).toEqual(
-      wrapper.prop('colorValue')
-    )
+    const buttons = getAllByRole('button')
+
+    expect(buttons).toHaveLength(2)
   })
 
   it('color picker should contains pallete of colors which displaying favorite colors passed as prop', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+    const { getByTestId } = render(<ColorPicker {...props} />)
 
-    const favoriteColors = wrapper.prop('favoriteColors')
+    const labelNode = getByTestId('color-picker-label')
+
+    fireEvent.click(labelNode)
+
+    const { favoriteColors } = props
 
     favoriteColors.map(({ id, color }) => {
-      expect(wrapper.find(`[data-key="${id}"]`).prop('style')).toHaveProperty(
-        'backgroundColor',
-        color
-      )
+      const favoriteColorBox = getByTestId(id)
+
+      expect(favoriteColorBox).toHaveStyle({
+        backgroundColor: `${color}`
+      })
     })
   })
 
   it('selected color in pallete should has active class when has been clicked', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+    const { getByTestId } = render(<ColorPicker {...props} />)
 
-    const { id } = wrapper.prop('favoriteColors')[0]
+    const labelNode = getByTestId('color-picker-label')
 
-    wrapper.find(`[data-key="${id}"]`).simulate('click')
+    fireEvent.click(labelNode)
 
-    expect(
-      wrapper
-        .find(`[data-key="${id}"]`)
-        .hasClass('color-picker__color-box--active')
-    ).toBe(true)
+    const { favoriteColors } = props
+
+    const { id: firstColorID } = favoriteColors[0]
+
+    const firstColorBox = getByTestId(firstColorID)
+
+    fireEvent.click(firstColorBox)
+
+    expect(firstColorBox).toHaveClass('color-picker__color-box--active')
   })
 
   it('should display heart icon in second Button', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
-
-    expect(
-      wrapper.find(Button).at(1).find('FontAwesomeIcon').prop('icon')
-    ).toEqual('heart')
+    // const { getByTestId } = render(<ColorPicker {...props} />)
+    // const labelNode = getByTestId('color-picker-label')
+    // fireEvent.click(labelNode)
+    // screen.debug()
   })
 
   it('should display trash-alt icon in second Button when one of favorite colors has been clicked', () => {

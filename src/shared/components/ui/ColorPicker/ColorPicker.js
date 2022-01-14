@@ -84,6 +84,7 @@ const ColorPicker = ({
   return (
     <div ref={pickerRef} className={cssClass('wrapper')}>
       <div
+        data-testid='color-picker-label'
         className={cssClass('color-picker__label')}
         onClick={handleToggleColorPicker}
       >
@@ -91,6 +92,7 @@ const ColorPicker = ({
           {i18n.label}
         </Paragraph>
         <div
+          data-testid='color-preview'
           style={{
             backgroundColor: `rgba(${r}, ${g}, ${b}, ${a})`
           }}
@@ -102,6 +104,7 @@ const ColorPicker = ({
       </div>
       {isPickerDisplayed && (
         <div
+          data-testid='color-picker'
           className={cssClass('color-picker', {
             'color-picker--has-color-palette': hasAnyFavoriteColor
           })}
@@ -137,6 +140,7 @@ const ColorPicker = ({
               >
                 {favoriteColors.map(({ id, color }) => (
                   <div
+                    data-testid={id}
                     data-key={id}
                     key={id}
                     style={{ backgroundColor: `${color}` }}
