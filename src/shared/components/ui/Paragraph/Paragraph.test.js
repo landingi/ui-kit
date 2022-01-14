@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Paragraph from '@components/ui/Paragraph'
 
 describe('<Paragraph/> mount', () => {
@@ -9,5 +9,13 @@ describe('<Paragraph/> mount', () => {
 
   it('should display proper children', () => {
     render(<Paragraph {...props} />)
+  })
+
+  it('should display proper paragraph', () => {
+    render(<Paragraph {...props} />)
+
+    const paragraph = screen.getByText(props.children)
+
+    expect(paragraph).toBeTruthy()
   })
 })
