@@ -2,22 +2,22 @@ import React from 'react'
 import { render, screen } from '@jestutils'
 import CheckboxGroup from './CheckboxGroup'
 
-describe('CheCheckboxGroupckbox tests', () => {
+describe('CheckboxGroup tests', () => {
   const props = {
     name: 'field-name',
     children: 'children',
     errors: {},
     touched: {}
   }
-  it('Proper render with props', () => {
+  it('properly render with props', () => {
     render(<CheckboxGroup {...props} />)
   })
-  it('Proper render with label', () => {
+  it('properly render with label', () => {
     render(<CheckboxGroup {...props} label='test label' />)
 
     expect(screen.findByRole('label')).toBeTruthy()
   })
-  it('Render error when is touched', () => {
+  it('properly render error when is touched', () => {
     const touchedProps = {
       name: 'field-name',
       children: 'children',

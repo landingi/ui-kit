@@ -17,16 +17,16 @@ describe('Checkbox tests', () => {
     },
     id: 'checkbox-test'
   }
-  it('Proper render with props', () => {
+  it('properly render with props', () => {
     render(<Checkbox {...props} />)
   })
 
-  it('Proper render with label', () => {
+  it('properly render with label', () => {
     render(<Checkbox {...props} label='test label' />)
 
     expect(screen.findByRole('label')).toBeTruthy()
   })
-  it('Render error label when is touched', () => {
+  it('properly render error label when is touched', () => {
     const touchedProps = {
       field: {
         name: 'checkbox-test',
