@@ -1,44 +1,34 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import CheckboxGroup from '@components/ui/Form/Checkbox/Group'
-import registerIcons from '@helpers/icons'
+import { render, screen } from '@jestutils'
+import CheckboxGroup from './CheckboxGroup'
 
-registerIcons()
-
-const props = {
-  name: 'nazwa-pola',
-  children: 'jestem dzieckiem radio',
-  errors: {},
-  touched: {}
-}
-
-const component = <CheckboxGroup {...props} />
-
-describe('<CheckboxGroup /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
+describe('CheCheckboxGroupckbox tests', () => {
+  const props = {
+    name: 'field-name',
+    children: 'children',
+    errors: {},
+    touched: {}
+  }
+  it('Proper render with props', () => {
+    render(<CheckboxGroup {...props} />)
   })
+  it('Proper render with label', () => {
+    render(<CheckboxGroup {...props} label='test label' />)
 
-  afterEach(() => {
-    wrapper.unmount()
+    expect(screen.findByRole('label')).toBeTruthy()
   })
+  it('Render error when is touched', () => {
+    const touchedProps = {
+      name: 'field-name',
+      children: 'children',
+      errors: {},
+      touched: {
+        ['field-name']: 'error-name'
+      }
+    }
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    render(<CheckboxGroup {...touchedProps} label='test label' />)
 
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
-  })
-
-  it('has label', () => {
-    wrapper.setProps({
-      label: 'mam label'
-    })
-
-    expect(wrapper.find('label').exists()).toBe(true)
-    expect(wrapper.find('label').text()).toEqual(wrapper.prop('label'))
+    expect(screen.findByText('error-name')).toBeTruthy()
   })
 })
