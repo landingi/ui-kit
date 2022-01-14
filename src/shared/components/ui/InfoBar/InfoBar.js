@@ -1,20 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './InfoBar.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './InfoBar.module.scss'
 
 /**
  * Info Bar - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `info-bar`
+ * @param {string|array} props.className - list of custom class names
  * @param {string} props.type - type of info bar `info, success, warning, alert`
  * @return {object} An object of children element
  */
 const InfoBar = ({ children, className, type }) => {
+  const elementClasses = useStyles(
+    {
+      [styles[`info-bar`]]: true,
+      [styles[`info-bar--${type}`]]: type
+    },
+    className
+  )
+
+  const boxClasses = useStyles({
+    [styles[`info-bar--box`]]: true,
+    [styles[`info-bar--${type}-box`]]: type
+  })
+
   const icon =
     type === 'warning'
       ? 'exclamation'
@@ -23,18 +34,12 @@ const InfoBar = ({ children, className, type }) => {
       : 'info'
 
   return (
-    <div className={cssClass(className, `info-bar--${type}`)}>
-      <div
-        className={cssClass(
-          className,
-          'info-bar--box',
-          `info-bar--${type}-box`
-        )}
-      >
+    <div className={elementClasses}>
+      <div className={boxClasses}>
         <FontAwesomeIcon icon={icon} size='1x' />
       </div>
 
-      <div className={scss.info__bar}>{children}</div>
+      <div className={styles.info__bar}>{children}</div>
     </div>
   )
 }
@@ -52,7 +57,7 @@ InfoBar.propTypes = {
 }
 
 InfoBar.defaultProps = {
-  className: 'info-bar',
+  className: '',
   type: 'info'
 }
 

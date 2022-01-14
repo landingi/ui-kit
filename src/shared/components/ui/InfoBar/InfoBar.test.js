@@ -27,7 +27,7 @@ describe('<InfoBar /> mount', () => {
   })
 
   it('has `info-bar` class', () => {
-    expect(wrapper.hasClass('info-bar')).toBe(true)
+    expect(wrapper.find('div.info-bar').hasClass('info-bar')).toBe(true)
   })
 
   it('is alert', () => {

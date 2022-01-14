@@ -7,6 +7,8 @@ const mocksStyles = {
   'test--two': 'Test-module__test--two'
 }
 
+const mockCustomClasses = ['Custom-class--first', 'Custom-class--second']
+
 describe('should use useStyles', () => {
   it('return classname for single truthy case', () => {
     const { result } = renderHook(() =>
@@ -62,5 +64,27 @@ describe('should use useStyles', () => {
     rerender()
 
     expect(result.current).toEqual('Test-module__test--one')
+  })
+
+  it('return proper classname if custom classes were applied', () => {
+    const { result } = renderHook(() =>
+      useStyles(
+        {
+          [mocksStyles.test]: true,
+          [mocksStyles['test--one']]: false
+        },
+        mockCustomClasses
+      )
+    )
+
+    const allIncludedClasses = [...mockCustomClasses, mocksStyles.test]
+
+    const notIncludedClass = mocksStyles['test--one']
+
+    allIncludedClasses.map(className => {
+      expect(result.current).toContain(className)
+    })
+
+    expect(result.current).not.toContain(notIncludedClass)
   })
 })
