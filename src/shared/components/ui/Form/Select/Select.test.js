@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
 import Select from '@components/ui/Form/Select'
 import registerIcons from '@helpers/icons'
 
@@ -17,47 +17,32 @@ const props = {
   }
 }
 
-const component = <Select {...props} />
-
-describe('<Select /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
+describe('<Select /> test', () => {
+  it('properly renders with props', () => {
+    render(<Select {...props} />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('properly renders with label', () => {
+    render(<Select {...props} label='test label' />)
+
+    expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('properly renders error label when error exist', () => {
+    const errorsProps = {
+      id: 'jestem-id',
+      children: 'jestem dziecko',
+      field: {
+        name: 'field-name'
+      },
+      form: {
+        errors: { 'field-name': 'error-name' },
+        touched: { 'field-name': true }
+      }
+    }
 
-  it('has default prop `className` with value select-form', () => {
-    expect(wrapper.prop('className')).toEqual('select-form')
-  })
+    render(<Select {...errorsProps} />)
 
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
-  })
-
-  it('has class `form-field`', () => {
-    expect(wrapper.find('div.form-field').hasClass('form-field')).toBe(true)
-  })
-
-  it('has wrapper with class `input__wrapper`', () => {
-    expect(wrapper.find('div.input__wrapper').hasClass('input__wrapper')).toBe(
-      true
-    )
-  })
-
-  it('has label below input with class `input__label`', () => {
-    wrapper.setProps({
-      label: 'jestem sobie labelem'
-    })
-
-    expect(wrapper.find('label').hasClass('label')).toBe(true)
-    expect(wrapper.find('label').text()).toEqual(wrapper.prop('label'))
+    expect(screen.findByText('test label')).toBeTruthy()
   })
 })
