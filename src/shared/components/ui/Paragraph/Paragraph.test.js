@@ -1,29 +1,13 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import Paragraph from '@components/ui/Paragraph'
 
-const props = {
-  children: 'placeholder'
-}
-
-const paragraphComponent = <Paragraph {...props}>{props.children}</Paragraph>
-
 describe('<Paragraph/> mount', () => {
-  let wrapper
+  const props = {
+    children: 'placeholder'
+  }
 
-  beforeEach(() => {
-    wrapper = mount(paragraphComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `paragraph` class', () => {
-    expect(wrapper.hasClass('paragraph')).toBe(true)
+  it('should display proper children', () => {
+    render(<Paragraph {...props} />)
   })
 })
