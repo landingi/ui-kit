@@ -1,36 +1,28 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Card from '@components/ui/Card'
 import Paragraph from '@components/ui/Paragraph'
 
-const props = {
-  children: <Paragraph>children</Paragraph>
-}
-
-const cardComponent = <Card {...props} variant='success' />
-
 describe('<Card /> mount', () => {
-  let wrapper
+  const props = {
+    variant: 'alert',
+    children: <Paragraph>Alert text</Paragraph>
+  }
 
-  beforeEach(() => {
-    wrapper = mount(cardComponent)
+  it('should display proper text', () => {
+    const { getByText } = render(<Card {...props} />)
+
+    const paragraph = getByText('Alert text')
+
+    expect(paragraph).toBeTruthy()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  it('should display alert variant', () => {
+    const { getByTestId } = render(<Card {...props} />)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const card = getByTestId('card')
 
-  it('has `card` class', () => {
-    expect(wrapper.find('div.card').hasClass('card')).toBe(true)
-  })
-
-  it('has `success` class', () => {
-    expect(wrapper.find('div.card--success').hasClass('card--success')).toBe(
-      true
-    )
+    expect(card).toHaveClass('card--alert')
   })
 })
