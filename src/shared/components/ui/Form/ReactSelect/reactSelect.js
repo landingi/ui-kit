@@ -53,9 +53,7 @@ const ReactSelect = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={
-            options
-              ? options.find(option => option.value === value[name])
-              : value[name]
+            options?.find(option => option.value === value[name]) || value[name]
           }
           key={uuid()}
           placeholder={placeholder || label}
@@ -94,7 +92,7 @@ ReactSelect.propTypes = {
         PropTypes.bool
       ])
     })
-  ).isRequired,
+  ),
   i18n: PropTypes.shape({
     placeholder: PropTypes.string,
     label: PropTypes.string
