@@ -3,8 +3,6 @@ import ProgressBar from '@components/ui/ProgressBar'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 
-const progressBarComponent = <ProgressBar quantity={58} variant='success' />
-
 describe('<ProgressBar /> mount', () => {
   it('is mounted', () => {
     render(<ProgressBar quantity={58} variant='success' />)
@@ -44,5 +42,21 @@ describe('<ProgressBar /> mount', () => {
     const fulfillment = screen.getByTestId('fulfillment')
 
     expect(fulfillment).toHaveClass('bar--alert')
+  })
+
+  it('has no ColorNumber shown if showColorNumber prop is false', () => {
+    render(<ProgressBar quantity={58} variant='alert' />)
+
+    const colorNumber = screen.queryByTestId('color-number')
+
+    expect(colorNumber).not.toBeInTheDocument()
+  })
+
+  it('has ColorNumber shown if showColorNumber prop is true', () => {
+    render(<ProgressBar quantity={58} variant='alert' showColorNumber />)
+
+    const colorNumber = screen.queryByTestId('color-number')
+
+    expect(colorNumber).toBeInTheDocument()
   })
 })
