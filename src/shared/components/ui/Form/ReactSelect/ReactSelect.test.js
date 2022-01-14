@@ -1,6 +1,5 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import selectEvent from 'react-select-event'
 import ReactSelect from './ReactSelect'
 
 describe('ReactSelect tests', () => {

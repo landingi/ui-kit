@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
 import FormikToggle from '@components/ui/Form/Toggle/FormikToggle'
 import registerIcons from '@helpers/icons'
 
@@ -15,37 +15,39 @@ const props = {
   },
   form: {
     errors: {},
-    touched: {},
-    setFieldValue: jest.fn()
+    touched: {}
   }
 }
 
-const component = <FormikToggle {...props} />
-
 describe('<FormikToggle /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
+  it('properly renders with props', () => {
+    render(<FormikToggle {...props} />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('properly renders with label', () => {
+    render(<FormikToggle {...props} label='test label' />)
+
+    expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('properly renders error label when error exist', () => {
+    const errorsProps = {
+      id: 'jestem-id',
+      field: {
+        name: 'field-name',
+        value: true,
+        onChange: jest.fn(),
+        onBlur: jest.fn()
+      },
+      form: {
+        errors: { 'field-name': 'error-name' },
+        touched: { 'field-name': true }
+      },
+      label: 'test label'
+    }
 
-  it('has default prop `className` with empty string', () => {
-    expect(wrapper.prop('className')).toEqual('')
-  })
+    render(<FormikToggle {...errorsProps} />)
 
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
-  })
-
-  it('has default prop `type` with value checkbox', () => {
-    expect(wrapper.prop('type')).toEqual('checkbox')
+    expect(screen.findByText('error-name')).toBeTruthy()
   })
 })
