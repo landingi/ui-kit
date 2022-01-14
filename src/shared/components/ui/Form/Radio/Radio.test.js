@@ -1,7 +1,8 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Radio from '@components/ui/Form/Radio'
 import registerIcons from '@helpers/icons'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 registerIcons()
 
@@ -18,36 +19,23 @@ const props = {
   }
 }
 
-const component = <Radio {...props} />
-
 describe('<Radio /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Radio {...props} />)
   })
 
-  it('has default prop `className` with empty string', () => {
-    expect(wrapper.prop('className')).toEqual('input__radio')
+  it('has default prop `className` with input__radio', () => {
+    render(<Radio {...props} />)
+
+    const radio = screen.getByRole('radio')
+
+    expect(radio).toHaveClass('input__radio')
   })
 
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
-  })
+  it('has label rendered if it is given`', () => {
+    render(<Radio {...props} label='label' />)
 
-  it('has default prop `type` with value radio', () => {
-    expect(wrapper.prop('type')).toEqual('radio')
-  })
-
-  it('has class `checkbox-container`', () => {
-    expect(wrapper.find('label').exists()).toBe(true)
+    const label = screen.getByText('label')
+    expect(label).toBeInTheDocument()
   })
 })
