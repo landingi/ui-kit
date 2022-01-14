@@ -1,54 +1,62 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import ProgressBar from '@components/ui/ProgressBar'
-
-const progressBarComponent = <ProgressBar quantity={58} variant='success' />
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 describe('<ProgressBar /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(progressBarComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<ProgressBar quantity={58} variant='success' />)
   })
 
   it('has success variant', () => {
-    expect(wrapper.find('span.bar__background').hasClass('bar--success')).toBe(
-      true
-    )
-    expect(wrapper.find('span.bar__fulfillment').hasClass('bar--success')).toBe(
-      true
-    )
+    render(<ProgressBar quantity={58} variant='success' />)
+
+    const background = screen.getByTestId('background')
+
+    expect(background).toHaveClass('bar--success')
+
+    const fulfillment = screen.getByTestId('fulfillment')
+
+    expect(fulfillment).toHaveClass('bar--success')
   })
 
-  it('has warning variant', () => {
-    wrapper.setProps({
-      variant: 'warning'
-    })
-    expect(wrapper.find('span.bar__background').hasClass('bar--warning')).toBe(
-      true
-    )
-    expect(wrapper.find('span.bar__fulfillment').hasClass('bar--warning')).toBe(
-      true
-    )
+  it('has success variant', () => {
+    render(<ProgressBar quantity={58} variant='warning' />)
+
+    const background = screen.getByTestId('background')
+
+    expect(background).toHaveClass('bar--warning')
+
+    const fulfillment = screen.getByTestId('fulfillment')
+
+    expect(fulfillment).toHaveClass('bar--warning')
   })
 
   it('has alert variant', () => {
-    wrapper.setProps({
-      variant: 'alert'
-    })
-    expect(wrapper.find('span.bar__background').hasClass('bar--alert')).toBe(
-      true
-    )
-    expect(wrapper.find('span.bar__fulfillment').hasClass('bar--alert')).toBe(
-      true
-    )
+    render(<ProgressBar quantity={58} variant='alert' />)
+
+    const background = screen.getByTestId('background')
+
+    expect(background).toHaveClass('bar--alert')
+
+    const fulfillment = screen.getByTestId('fulfillment')
+
+    expect(fulfillment).toHaveClass('bar--alert')
+  })
+
+  it('has no ColorNumber shown if showColorNumber prop is false', () => {
+    render(<ProgressBar quantity={58} variant='alert' />)
+
+    const colorNumber = screen.queryByTestId('color-number')
+
+    expect(colorNumber).not.toBeInTheDocument()
+  })
+
+  it('has ColorNumber shown if showColorNumber prop is true', () => {
+    render(<ProgressBar quantity={58} variant='alert' showColorNumber />)
+
+    const colorNumber = screen.queryByTestId('color-number')
+
+    expect(colorNumber).toBeInTheDocument()
   })
 })

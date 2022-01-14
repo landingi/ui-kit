@@ -18,6 +18,7 @@ const cssClass = styles(scss),
    */
   statusIcon = ({ className, variant, size }) => (
     <div
+      data-testid='status-icon'
       className={cssClass(
         className,
         `status-icon--${variant}`,

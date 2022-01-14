@@ -6,6 +6,7 @@ describe('ErrorPresenter tests', () => {
   it('properly renders', () => {
     render(<Error />)
   })
+
   it('properly renders with custom error', () => {
     render(<Error error='error-name' />)
 
