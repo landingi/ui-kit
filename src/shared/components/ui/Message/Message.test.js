@@ -1,32 +1,49 @@
 import React from 'react'
 import Message from '@components/ui/Message'
-import { mountWithIntl } from '@jestutils'
-
-const props = {
-  children: 'placeholder',
-  title: 'domainsnew.page.title',
-  message: 'domainsnew.page.title',
-  asset: ''
-}
-
-const MessageComponent = <Message {...props} />
+import { render } from '@testing-library/react'
 
 describe('<Message/> mount', () => {
-  let wrapper
+  const props = {
+    children: 'placeholder',
+    title: 'Test title',
+    message: 'simple test message',
+    titleLevel: 1,
+    url: 'https://testpage.com/image3.png'
+  }
 
-  beforeEach(() => {
-    wrapper = mountWithIntl(MessageComponent)
+  it('should display proper title', () => {
+    const { getByText } = render(<Message {...props} />)
+
+    const heading = getByText(props.title)
+
+    expect(heading).toBeTruthy()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('should display proper message', () => {
+    const { getByText } = render(<Message {...props} />)
+
+    const message = getByText(props.message)
+
+    expect(message).toBeTruthy()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  it('should display image', () => {
+    const { getByRole } = render(<Message {...props} />)
+
+    const image = getByRole('img')
+
+    expect(image).toBeTruthy()
   })
 
-  it('has `message` class', () => {
-    expect(wrapper.find('div').first().hasClass('message')).toBe(true)
+  it('should display image when multimedia position has changed', () => {
+    const messageProps = {
+      ...props,
+      multimediaPosition: 'after'
+    }
+    const { getByRole } = render(<Message {...messageProps} />)
+
+    const image = getByRole('img')
+
+    expect(image).toBeTruthy()
   })
 })
