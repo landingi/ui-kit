@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import ReactSelect from './ReactSelect'
+import ReactSelect from './reactSelect'
 
 describe('ReactSelect tests', () => {
   const props = {
