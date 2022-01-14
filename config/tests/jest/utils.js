@@ -1,6 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { IntlProvider } from 'react-intl'
+import { render as rtlRender } from '@testing-library/react'
+import { getLanguage, getMessages } from '@helpers/i18n'
 
 /**
  * makeMountRender - a util function that accepts a component and some default props.
@@ -51,3 +53,23 @@ export const mountWithIntl = node =>
       messages
     }
   })
+
+/**
+  * render function that overrides react-testing-library render functions
+  * it wraps given component with IntlProvider
+  * @param {object} ui - component to render
+  * @param {object} param1
+  * @return wrapped element
+*/
+const render = (ui, { locale = 'en', ...renderOptions } = {}) => {
+  const wrapper = ({ children }) => (
+    <IntlProvider locale={locale} messages={getMessages[getLanguage]}>
+      {children}
+    </IntlProvider>
+  )
+  return rtlRender(ui, { wrapper, ...renderOptions })
+}
+
+export * from '@testing-library/react'
+
+export { render }
