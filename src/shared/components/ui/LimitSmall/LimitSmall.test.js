@@ -1,40 +1,32 @@
 import React from 'react'
-import { mountWithIntl } from '@jestutils'
+import { render, screen } from '@jestutils'
 import LimitSmall from '@components/ui/LimitSmall'
 
-const limitSmallComponent = (
-  <LimitSmall
-    limit={20000}
-    limitText='word.unique.visitors'
-    padding='none'
-    quantity={5}
-  />
-)
-
-describe('<Limit /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(limitSmallComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+describe('<LimitSmall /> mount', () => {
+  const props = {
+    limit: 20000,
+    limitText: 'word.unique.visitors',
+    padding: 'none',
+    quantity: 5
+  }
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<LimitSmall {...props} />)
   })
+})
 
-  it('has none padding', () => {
-    expect(wrapper.find('.result__dropdown').hasClass('padding__none')).toBe(
-      true
-    )
-  })
+describe('<LimitSmall /> mount', () => {
+  const props = {
+    limit: -1,
+    limitText: 'word.unique.visitors',
+    padding: 'none',
+    quantity: 5
+  }
 
-  it('quantity should be `word.unique.visitors 5 / 20 000`', () => {
-    expect(wrapper.find('.result__dropdown').text()).toEqual(
-      'word.unique.visitors5 / 20 000'
-    )
+  it('is mounted', () => {
+    render(<LimitSmall {...props} />)
+
+    const text = screen.getByText('/ ∞')
+    expect(text).toBeInDocument
   })
 })
