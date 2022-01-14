@@ -1,42 +1,55 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import StatusIcon from '@components/ui/StatusIcon'
 import registerIcons from '@helpers/icons'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 registerIcons()
 
-const statusIconComponent = <StatusIcon />
-
 describe('<StatusIcon /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(statusIconComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<StatusIcon />)
   })
 
   it('has `status-icon` class', () => {
-    expect(wrapper.hasClass('status-icon')).toBe(true)
+    render(<StatusIcon />)
+
+    const statusIcon = screen.getByTestId('status-icon')
+
+    expect(statusIcon).toHaveClass('status-icon')
   })
 
-  it('has active variant', () => {
-    wrapper.setProps({
-      variant: 'active'
-    })
-    expect(wrapper.children().hasClass('status-icon--active')).toBe(true)
+  it('has `status-icon--active` class when variant is active', () => {
+    render(<StatusIcon variant='active' />)
+
+    const statusIcon = screen.getByTestId('status-icon')
+
+    expect(statusIcon).not.toHaveClass('status-icon--inactive')
+    expect(statusIcon).toHaveClass('status-icon--active')
   })
 
-  it('has tiny size', () => {
-    wrapper.setProps({
-      size: 'tiny'
-    })
-    expect(wrapper.children().hasClass('status-icon--tiny')).toBe(true)
+  it('has `status-icon--inactive` class when variant is inactive', () => {
+    render(<StatusIcon variant='inactive' />)
+
+    const statusIcon = screen.getByTestId('status-icon')
+
+    expect(statusIcon).toHaveClass('status-icon--inactive')
+    expect(statusIcon).not.toHaveClass('status-icon--active')
+  })
+
+  it('has `status-icon--tiny` class when size is tiny', () => {
+    render(<StatusIcon size='tiny' />)
+
+    const statusIcon = screen.getByTestId('status-icon')
+
+    expect(statusIcon).toHaveClass('status-icon--tiny')
+  })
+
+  it('has `status-icon--medium` class by default', () => {
+    render(<StatusIcon />)
+
+    const statusIcon = screen.getByTestId('status-icon')
+
+    expect(statusIcon).toHaveClass('status-icon--medium')
   })
 })
