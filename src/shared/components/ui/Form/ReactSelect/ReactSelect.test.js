@@ -1,44 +1,45 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import ReactSelect from '@components/ui/Form/ReactSelect'
-import registerIcons from '@helpers/icons'
+import { render, screen } from '@jestutils'
+import ReactSelect from './reactSelect'
 
-registerIcons()
+describe('ReactSelect tests', () => {
+  const props = {
+    name: 'select-name',
+    id: 'select-id',
+    options: [{ label: 'label-0', value: 'value-0' }],
+    value: { 'select-name': 'test-value' }
+  }
 
-const props = {
-  id: 'jestem-id',
-  children: 'jestem dziecko',
-  name: 'field-name',
-  value: 'mam-wartosc',
-  field: {
-    name: 'field-name'
-  },
-  form: {
-    errors: {},
-    touched: {}
-  },
-  options: [
-    {
-      value: 'field-name',
-      label: 'test'
+  it('properly renders with props', () => {
+    render(<ReactSelect {...props} />)
+  })
+
+  it('has default func props', () => {
+    const onChangeResult = ReactSelect.defaultProps.onChange()
+    const onBlurResult = ReactSelect.defaultProps.onBlur()
+
+    expect(onChangeResult).toBeFalsy()
+    expect(onBlurResult).toBeFalsy()
+  })
+
+  it('properly renders with label', () => {
+    render(<ReactSelect {...props} i18n={{ label: 'test label' }} />)
+
+    expect(screen.findByText('test label')).toBeTruthy()
+  })
+
+  it('properly renders label errow when error exist', () => {
+    const props = {
+      name: 'select-name',
+      id: 'select-id',
+      options: [{ label: 'label-0', value: 'value-0' }],
+      value: {},
+      touched: { 'select-name': true },
+      errors: { 'select-name': 'error-name' }
     }
-  ]
-}
 
-const component = <ReactSelect {...props} />
+    render(<ReactSelect {...props} />)
 
-describe('<ReactSelect /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(screen.findByText('error-name')).toBeTruthy()
   })
 })
