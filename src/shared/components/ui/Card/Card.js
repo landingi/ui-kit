@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Card.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Card.module.scss'
 
 /**
  * Card - stateless presentational component
@@ -11,13 +9,24 @@ const cssClass = styles(scss)
  * @param {string} props.variant - variant
  * @return {object} An object of children element
  */
-const Card = ({ children, variant }) => (
-  <div className={cssClass('card', `card--${variant}`)}>
-    <div className={cssClass('container')}>
-      {React.Children.map(children, child => React.cloneElement(child))}
+const Card = ({ children, variant }) => {
+  const elementClasses = useStyles({
+    [styles['card']]: true,
+    [styles[`card--${variant}`]]: variant
+  })
+
+  const containerClasses = useStyles({
+    [styles['container']]: true
+  })
+
+  return (
+    <div data-testid='card' className={elementClasses}>
+      <div className={containerClasses}>
+        {React.Children.map(children, child => React.cloneElement(child))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 Card.displayName = 'Card'
 
