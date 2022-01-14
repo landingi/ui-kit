@@ -9,9 +9,11 @@ describe('ReactSelect tests', () => {
     options: [{ label: 'label-0', value: 'value-0' }],
     value: { 'select-name': 'test-value' }
   }
+
   it('properly renders with props', () => {
     render(<ReactSelect {...props} />)
   })
+
   it('has default func props', () => {
     const onChangeResult = ReactSelect.defaultProps.onChange()
     const onBlurResult = ReactSelect.defaultProps.onBlur()
