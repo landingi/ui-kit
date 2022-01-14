@@ -9,6 +9,7 @@ describe('<Card /> mount', () => {
     variant: 'alert',
     children: <Paragraph>Alert text</Paragraph>
   }
+
   it('should display proper text', () => {
     const { getByText } = render(<Card {...props} />)
 
