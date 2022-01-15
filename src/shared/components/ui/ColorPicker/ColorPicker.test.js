@@ -1,9 +1,8 @@
 import React from 'react'
 import ColorPicker from './ColorPicker'
-import Button from '@components/ui/Button'
 import registerIcons from '@helpers/icons'
 import { convertColorToObj } from './helpers'
-import { fireEvent, screen, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 registerIcons()
@@ -115,64 +114,94 @@ describe('<ColorPicker/> mount', () => {
   })
 
   it('should display heart icon in second Button', () => {
-    // const { getByTestId } = render(<ColorPicker {...props} />)
-    // const labelNode = getByTestId('color-picker-label')
-    // fireEvent.click(labelNode)
-    // screen.debug()
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
+
+    const labelNode = getByTestId('color-picker-label')
+
+    fireEvent.click(labelNode)
+
+    const secondButton = getAllByRole('button')[1]
+
+    expect(secondButton.firstChild).toHaveClass('fa-heart')
   })
 
-  it('should display trash-alt icon in second Button when one of favorite colors has been clicked', () => {
-    wrapper.find('div.color-picker__label').simulate('click')
+  it('should display trash icon in second Button when one of favorite colors has been clicked', () => {
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
 
-    const { id } = wrapper.prop('favoriteColors')[0]
+    const labelNode = getByTestId('color-picker-label')
 
-    wrapper.find(`[data-key="${id}"]`).simulate('click')
+    fireEvent.click(labelNode)
 
-    expect(
-      wrapper.find(Button).at(1).find('FontAwesomeIcon').prop('icon')
-    ).toEqual('trash-alt')
+    const { favoriteColors } = props
+
+    const { id: thirdColorID } = favoriteColors[2]
+
+    const thirdColorBox = getByTestId(thirdColorID)
+
+    fireEvent.click(thirdColorBox)
+
+    const secondButton = getAllByRole('button')[1]
+
+    expect(secondButton.firstChild).toHaveClass('fa-trash-alt')
   })
 
-  it('after clicking button with heart icon onClickFavoriteHandler callback should be called with selected color', () => {
+  it('after clicking second button with heart icon onClickFavoriteHandler callback should be called with selected color', () => {
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
+
     const { onClickFavoriteHandler } = props.colorPanelHandlers
-    wrapper.find('div.color-picker__label').simulate('click')
 
-    wrapper.find(Button).at(1).simulate('click')
+    const { colorValue } = props
 
-    expect(onClickFavoriteHandler).toBeCalledWith(props.colorValue)
+    const labelNode = getByTestId('color-picker-label')
+
+    fireEvent.click(labelNode)
+
+    const secondButton = getAllByRole('button')[1]
+
+    fireEvent.click(secondButton)
+
+    expect(onClickFavoriteHandler).toBeCalledWith(colorValue)
   })
 
   it('after clicking button with trash alt icon onDeleteHandler should be called with previously selected favorite color to delete', () => {
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
+
+    const labelNode = getByTestId('color-picker-label')
+
+    fireEvent.click(labelNode)
+
     const { onClickDeleteHandler } = props.colorPanelHandlers
 
-    wrapper.find('div.color-picker__label').simulate('click')
+    const { favoriteColors } = props
 
-    const favColor = wrapper.prop('favoriteColors')[0]
+    const choosenFavColor = favoriteColors[2]
 
-    wrapper.find(`[data-key="${favColor.id}"]`).simulate('click')
+    const favColorToDelete = getByTestId(choosenFavColor.id)
 
-    wrapper.find(Button).at(1).simulate('click')
+    fireEvent.click(favColorToDelete)
 
-    expect(onClickDeleteHandler).toBeCalledWith(favColor)
+    const deleteButton = getAllByRole('button')[1]
+
+    fireEvent.click(deleteButton)
+
+    expect(onClickDeleteHandler).toBeCalledWith(choosenFavColor)
   })
 
-  it('after changing color onColorChange callback should be called with new changed color', async () => {
+  it('on color change should be called with transparent color after clicking clear button', () => {
+    const { getByTestId, getAllByRole } = render(<ColorPicker {...props} />)
+
     const { onColorChange } = props
-    const newColor = { hex: '#321412', rgb: { a: 1 } }
 
-    wrapper.find('div.color-picker__label').simulate('click')
+    const transparentColor = `rgba(0, 0, 0, 0)`
 
-    await wrapper.find('Chrome').invoke('onChange')(newColor)
+    const labelNode = getByTestId('color-picker-label')
 
-    expect(onColorChange).toBeCalledWith('rgba(50, 20, 18, 1)')
-  })
+    fireEvent.click(labelNode)
 
-  it('onColorChange should return default black color with alpha 0 when clear button has been clicked', () => {
-    const { onColorChange } = props
-    wrapper.find('div.color-picker__label').simulate('click')
+    const clearButton = getAllByRole('button')[0]
 
-    wrapper.find(Button).at(0).simulate('click')
+    fireEvent.click(clearButton)
 
-    expect(onColorChange).toBeCalledWith('rgba(0, 0, 0, 0)')
+    expect(onColorChange).toBeCalledWith(transparentColor)
   })
 })
