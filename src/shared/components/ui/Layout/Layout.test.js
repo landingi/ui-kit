@@ -1,37 +1,35 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import Layout from '@components/ui/Layout'
 
-const props = {
-  children: 'placeholder'
-}
-
-const LayoutComponent = <Layout {...props}>{props.children}</Layout>
-
-describe('<Layout/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(LayoutComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+describe('<Layout /> mount', () => {
+  const props = {
+    children: 'Test'
+  }
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Layout {...props} />)
   })
+})
 
-  it('has `layout` class', () => {
-    expect(wrapper.find('div').hasClass('layout')).toBe(true)
+describe('<Layout /> mount', () => {
+  const props = {
+    children: 'Test',
+    width: 'big'
+  }
+
+  it('is mounted', () => {
+    render(<Layout {...props} />)
   })
+})
 
-  it('should have defined default prop width', () => {
-    expect(Layout.defaultProps.width).toBeDefined()
-  })
+describe('<Layout /> mount', () => {
+  const props = {
+    children: 'Test',
+    width: 'large'
+  }
 
-  it('has `layout-width--full` class', () => {
-    expect(wrapper.find('div').hasClass('layout-width--full')).toBe(true)
+  it('is mounted', () => {
+    render(<Layout {...props} />)
   })
 })
