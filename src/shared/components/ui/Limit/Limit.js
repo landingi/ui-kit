@@ -65,7 +65,7 @@ const Limit = ({
         <span className={styles['info--name']}>
           {name}
 
-          {tooltip && (
+          {Boolean(tooltip) && (
             <Fragment>
               <Spreader spread='tiny' />
 
