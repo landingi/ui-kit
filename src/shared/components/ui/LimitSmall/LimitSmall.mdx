@@ -6,7 +6,13 @@ import LimitSmall from '@components/ui/LimitSmall'
 <Props of={LimitSmall} />
 
 <Playground>
-  <LimitSmall limit={100} quantity={10} limitText='word.active.subaccounts' />
+  <LimitSmall limit={100} quantity={10} limitText='Vivamus ultrices' />
+</Playground>
+
+## INFINITE LIMIT
+
+<Playground>
+  <LimitSmall limit={-1} quantity={10} limitText='Vivamus ultrices' />
 </Playground>
 
 ## PADDING
@@ -17,7 +23,7 @@ import LimitSmall from '@components/ui/LimitSmall'
   <LimitSmall
     limit={100}
     quantity={10}
-    limitText='word.active.subaccounts'
+    limitText='Vivamus ultrices'
     padding='small'
   />
 </Playground>
@@ -28,7 +34,7 @@ import LimitSmall from '@components/ui/LimitSmall'
   <LimitSmall
     limit={100}
     quantity={10}
-    limitText='word.active.subaccounts'
+    limitText='Vivamus ultrices'
     padding='medium'
   />
 </Playground>
