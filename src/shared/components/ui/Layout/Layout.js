@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Layout.scss'
-
-const cssClass = styles(scss)
+import styles from './Layout.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Layout - stateless presentational component
@@ -13,22 +11,28 @@ const cssClass = styles(scss)
  * @param {string} props.width - width
  * @return {object} An object of children element
  */
-const Layout = ({ className, children, width }) => (
-  <div className={cssClass(className, `layout-width--${width}`)}>
-    {children}
-  </div>
-)
+const Layout = ({ className, children, width }) => {
+  const layoutStyles = useStyles(
+    {
+      [styles['layout']]: true,
+      [styles[`layout-width--${width}`]]: width
+    },
+    className
+  )
+
+  return <div className={layoutStyles}>{children}</div>
+}
 
 Layout.displayName = 'Layout'
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  width: PropTypes.string
+  width: PropTypes.oneOf(['large', 'big', 'full'])
 }
 
 Layout.defaultProps = {
-  className: 'layout',
+  className: '',
   width: 'full'
 }
 
