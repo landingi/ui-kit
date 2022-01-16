@@ -37,7 +37,7 @@ LimitSmall.displayName = 'LimitSmall'
 LimitSmall.propTypes = {
   limit: PropTypes.number.isRequired,
   limitText: PropTypes.string.isRequired,
-  padding: PropTypes.string,
+  padding: PropTypes.oneOf(['none', 'small', 'medium']),
   quantity: PropTypes.number.isRequired
 }
 
