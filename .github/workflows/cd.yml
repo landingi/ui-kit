@@ -2,9 +2,12 @@ on: "pull_request"
 
 jobs:
     CD:
-        if: contains(github.event.commits[0].message, '[deploy]')
         runs-on: ubuntu-20.04
         steps:
+        - name: Logging
+          run: |
+            echo "${{toJSON(github.event)}}"
+
         - uses: actions/checkout@v2
 
         - name: Setup Nodejs with yarn caching
