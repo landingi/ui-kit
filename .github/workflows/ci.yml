@@ -20,7 +20,7 @@ jobs:
           run: yarn lint
 
         - name: Test
-          run: yarn test --onlyChanged --coverage --no-cache
+          run: yarn test --coverage --no-cache
 
 
         - name: Upload coverage to Codecov
