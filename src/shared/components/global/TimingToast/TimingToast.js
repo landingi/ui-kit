@@ -5,6 +5,7 @@ import Notification from '@components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
 import styles from './TimingToast.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
 
 /**
  * Toast Animation, exports React-pose animations
@@ -28,7 +29,8 @@ const TimingToastAnimation = posed.div(toastProps)
  * @param {string|array} props.className - list of class names
  * @return {object} An object of children element
  */
-const TimingToast = () => {
+// eslint-disable-next-line no-unused-vars
+const TimingToast = ({ className }) => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
   const [type, setType] = useState('info')
@@ -80,7 +82,12 @@ const TimingToast = () => {
 
 TimingToast.displayName = 'Timing Toasr'
 
+TimingToast.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+}
+
 TimingToast.defaultProps = {
+  className: '',
   type: 'info'
 }
 
