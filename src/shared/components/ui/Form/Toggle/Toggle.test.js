@@ -17,10 +17,12 @@ describe('<Toggle /> tests', () => {
     render(<Toggle {...props} />)
   })
 
-  it('default prop `onBlur` should be undefined', () => {
+  it('default prop `onBlur` should be undefined', async done => {
     const result = Toggle.defaultProps.onBlur()
 
     expect(result).toBe(null)
+
+    done()
   })
 
   it('properly renders with label', () => {
@@ -39,10 +41,10 @@ describe('<Toggle /> tests', () => {
 
     const { container } = render(<Toggle {...checkedProps} />)
 
-    done()
-
     expect(
       container.getElementsByClassName('toggle--checked-disabled')
     ).toBeTruthy()
+
+    done()
   })
 })
