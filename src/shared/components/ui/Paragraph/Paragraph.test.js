@@ -1,21 +1,36 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Paragraph from '@components/ui/Paragraph'
+import '@testing-library/jest-dom'
 
 describe('<Paragraph/> mount', () => {
   const props = {
-    children: 'placeholder'
+    children: 'placeholder',
+    className: ['class-name', 'class-paragraph']
   }
 
   it('should display proper children', () => {
-    render(<Paragraph {...props} />)
-  })
+    const { getByText } = render(<Paragraph {...props} />)
 
-  it('should display proper paragraph', () => {
-    render(<Paragraph {...props} />)
-
-    const paragraph = screen.getByText(props.children)
+    const paragraph = getByText('placeholder')
 
     expect(paragraph).toBeTruthy()
+  })
+
+  it('should has multiple class class names', () => {
+    const { getByTestId } = render(<Paragraph {...props} />)
+
+    const paragraph = getByTestId('paragraph')
+
+    expect(paragraph).toHaveClass('class-name', 'class-paragraph')
+  })
+
+  it('should have class class name', () => {
+    props.className = 'class-name'
+    const { getByTestId } = render(<Paragraph {...props} />)
+
+    const paragraph = getByTestId('paragraph')
+
+    expect(paragraph).toHaveClass('class-name')
   })
 })

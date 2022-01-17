@@ -43,7 +43,11 @@ const Paragraph = ({
     [styles['paragraph-uppercase']]: uppercase
   })
 
-  return <p className={paragraphStyles}>{children}</p>
+  return (
+    <p data-testid='paragraph' className={paragraphStyles}>
+      {children}
+    </p>
+  )
 }
 
 Paragraph.displayName = 'Paragraph'
