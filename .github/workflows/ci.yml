@@ -1,7 +1,8 @@
 on: "pull_request"
 
 jobs:
-    frontend:
+    ci:
+        name: Install && lint && test
         runs-on: ubuntu-20.04
 
         steps:
@@ -9,7 +10,7 @@ jobs:
             -   uses: actions/setup-node@v2
                 with:
                     node-version: '14.18.0'
-                    cache: 'yarn'
+                    cache-dependency-path: './yarn.lock.json'
 
             -   name: Setup
             -   run: yarn install --frozen-lockfile
