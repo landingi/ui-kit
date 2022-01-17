@@ -13,8 +13,15 @@ jobs:
             node-version: "14.18.0"
             cache: yarn
 
-        - name: Install && lint & yarn
-          run: yarn install && yarn lint && yarn test
+        - name: Install
+          run: yarn install
+
+        - name: Lint
+          run: yarn lint
+
+        - name: Test
+          run: yarn test --onlyChanged --coverage --no-cache
+
 
         - name: Upload coverage to Codecov
           uses: codecov/codecov-action@v2

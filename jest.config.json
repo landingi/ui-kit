@@ -1,12 +1,9 @@
 {
   "automock": false,
-  "maxWorkers": "50%",
-  "maxConcurrency": 30,
   "displayName": {
     "name": "UI-KIT",
     "color": "magenta"
   },
-  "errorOnDeprecated": true,
   "setupFiles": [
     "<rootDir>/config/tests/jest/setup/setupTests.js",
     "<rootDir>/config/tests/jest/setup/mocks/matchMedia.mock"
