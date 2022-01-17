@@ -1,54 +1,35 @@
 import React from 'react'
-import Limit from '@components/ui/Limit'
+import { render } from '@jestutils'
 import registerIcons from '@helpers/icons'
-import { mountWithIntl } from '@jestutils'
+import Limit from '@components/ui/Limit'
 
 registerIcons()
 
-const limitsComponent = (
-  <Limit
-    icon='users'
-    limit={30000}
-    name='word.custom.domains'
-    quantity={100}
-    tooltip='word.custom.domains.tooltip'
-  />
-)
-
 describe('<Limit /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(limitsComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  const props = {
+    icon: 'users',
+    limit: 30000,
+    name: 'word.custom.domains',
+    quantity: 100
+  }
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Limit {...props} />)
   })
+})
 
-  it('must display `svg`', () => {
-    expect(wrapper.exists('svg')).toEqual(true)
-  })
+describe('<Limit /> mount', () => {
+  const props = {
+    icon: 'users',
+    limit: 30000,
+    name: 'word.custom.domains',
+    quantity: 100,
+    tooltip: 'word.custom.domains.tooltip',
+    unlimited: true,
+    total: 200
+  }
 
-  it('limit should be ` / 30 000`', () => {
-    expect(wrapper.find('.info--limit').text()).toEqual(' / 30 000')
-  })
-
-  it('quantity should be `100`', () => {
-    expect(wrapper.find('.info--quantity').text()).toEqual('100')
-  })
-
-  // it('name should be `Custom domains`', () => {
-  //   expect(
-  //     wrapper.find('.info--name').find(FormattedMessage).first().text()
-  //   ).toEqual('Custom domains')
-  // })
-
-  it('must display `Tooltip`', () => {
-    expect(wrapper.exists('Tooltip')).toEqual(true)
+  it('is mounted', () => {
+    render(<Limit {...props} />)
   })
 })
