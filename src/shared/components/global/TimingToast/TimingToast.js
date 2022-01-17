@@ -82,7 +82,7 @@ const TimingToast = ({ className }) => {
   )
 }
 
-TimingToast.displayName = 'Timing Toasr'
+TimingToast.displayName = 'Timing Toast'
 
 TimingToast.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
