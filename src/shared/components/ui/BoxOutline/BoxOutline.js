@@ -5,7 +5,6 @@ import styles from './BoxOutline.module.scss'
 
 /**
  * Box outline - stateless presentational component
- * @param {string|array} className - list of custom class names out of component
  * @param {object} children - children
  * @param {string|array} className - list of custom classes out of component
  * @param {boolean} isSelected - bool to decide if box was selected or not
