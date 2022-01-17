@@ -2,7 +2,6 @@ import React from 'react'
 import { render, screen } from '@jestutils'
 import Select from '@components/ui/Form/Select'
 import registerIcons from '@helpers/icons'
-import { act } from 'react-dom/test-utils'
 
 registerIcons()
 
