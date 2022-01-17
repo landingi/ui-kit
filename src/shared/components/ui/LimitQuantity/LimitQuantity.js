@@ -1,10 +1,7 @@
 import { formatNumeric } from '@helpers/data'
-import { styles } from '@helpers/css'
+import styles from './LimitQuantity.module.scss'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './LimitQuantity.scss'
-
-const cssClass = styles(scss)
 
 /**
  * Limit Quantity - stateless presentational component
@@ -14,11 +11,11 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const LimitQuantity = ({ limit, quantity }) => (
-  <div className={cssClass('limit-quantity')}>
+  <div className={styles[`limit-quantity`]}>
     <span>
       {formatNumeric(quantity)}
 
-      <span className={cssClass('limit-quantity--limit')}>
+      <span className={styles[`limit-quantity--limit`]}>
         {limit === -1 ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
       </span>
     </span>
