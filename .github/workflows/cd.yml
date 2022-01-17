@@ -2,13 +2,16 @@ on: "pull_request"
 
 jobs:
     CD:
+        if: contains(github.event.commits[0].message, '[deploy]')
         runs-on: ubuntu-20.04
         steps:
-        - name: Logging
+        - name: set the head commit message as env
+          uses: actions/checkout@v2
           run: |
-            echo "${{toJSON(github.event)}}"
-
-        - uses: actions/checkout@v2
+            echo '::set-env name=commitmsg::${{ github.event.head_commit.message }}'
+        - name: get commit message
+          run: |
+              echo Commit MSG = $commitmsg
 
         - name: Setup Nodejs with yarn caching
           uses: actions/setup-node@v2
