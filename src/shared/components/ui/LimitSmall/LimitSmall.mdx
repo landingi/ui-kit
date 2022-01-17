@@ -6,29 +6,28 @@ import LimitSmall from '@components/ui/LimitSmall'
 <Props of={LimitSmall} />
 
 <Playground>
-  <LimitSmall limit={100} quantity={10} limitText='word.active.subaccounts' />
+  <LimitSmall limit={100} quantity={10} limitText='Small limit' />
 </Playground>
 
-## PADDING
+## Unlimited
 
-### PADDING SMALL
+<Playground>
+  <LimitSmall limit={-1} quantity={10} limitText='Small limit' />
+</Playground>
+
+## Padding
 
 <Playground>
   <LimitSmall
     limit={100}
     quantity={10}
-    limitText='word.active.subaccounts'
+    limitText='Small limit'
     padding='small'
   />
-</Playground>
-
-### PADDING MEDIUM
-
-<Playground>
   <LimitSmall
     limit={100}
     quantity={10}
-    limitText='word.active.subaccounts'
+    limitText='Small limit'
     padding='medium'
   />
 </Playground>
