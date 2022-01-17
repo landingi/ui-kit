@@ -29,17 +29,19 @@ const TimingToastAnimation = posed.div(toastProps)
  * @param {string|array} props.className - list of class names
  * @return {object} An object of children element
  */
-// eslint-disable-next-line no-unused-vars
 const TimingToast = ({ className }) => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
   const [type, setType] = useState('info')
 
-  const toastStyles = useStyles({
-    [styles['toast']]: true,
-    [styles[`toast--visible`]]: isActive,
-    [styles[`toast--hidden`]]: !!isActive
-  })
+  const toastStyles = useStyles(
+    {
+      [styles['toast']]: true,
+      [styles[`toast--visible`]]: isActive,
+      [styles[`toast--hidden`]]: !!isActive
+    },
+    className
+  )
 
   const handleToastToggle = useCallback(
     (message, type) => {
