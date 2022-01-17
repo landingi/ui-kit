@@ -25,15 +25,6 @@ export const makeMountRender = (
   }
 }
 
-/**
- *  snapshotify - a util function that accepts an enzyme
- * react wrapper and calls its html method returning an HTML string.
- * @param {object} reactWrapper - react elements
- * @return {object} An object of children element
- */
-export const snapshotify = reactWrapper =>
-  reactWrapper.html()
-
   /**
  * Components using the react-intl module require access to the intl context.
  * This is not available when mounting single components in Enzyme.
