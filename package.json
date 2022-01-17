@@ -11,7 +11,7 @@
     "docz:serve": "docz build && docz serve",
     "lint": "eslint --fix -- ./src",
     "test:local": "jest --colors --changedFilesWithAncestor",
-    "test": "jest --colors",
+    "test": "jest",
     "test:coverage": "yarn test --coverage --no-cache",
     "test:badges": "yarn test:coverage && jest-coverage-badges",
     "build": "rm -rf ./dist && yarn webpack",
