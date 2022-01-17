@@ -15,7 +15,7 @@ coverage:
                 only_pulls: false
         patch:
             uikit:
-                target: 80%
+                target: 75%
                 threshold: 0%
                 base: auto
                 paths:
