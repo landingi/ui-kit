@@ -1,70 +1,47 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Section.scss'
+import styles from './Section.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss),
-  /**
-   * Section - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: section
-   * @param {object} props.children - children
-   * @param {string} props.space - Space
-   * @param {string} props.width - width
-   * @param {string} props.background - style
-   * @return {object} An object of children element
-   */
-  section = ({ className, children, space, width, background }) => (
-    <div
-      className={cssClass(
-        className,
-        `section-space--${space}`,
-        `layout-width--${width}`,
-        `section-bg--${background}`
-      )}
-    >
-      {children}
-    </div>
+/**
+ * Section - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: section
+ * @param {object} props.children - children
+ * @param {string} props.space - Space
+ * @param {string} props.width - width
+ * @param {string} props.background - style
+ * @return {object} An object of children element
+ */
+const Section = ({ className, children, space, width, background }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['section']]: true,
+      [styles[`section-space--${space}`]]: space,
+      [styles[`layout-width--${width}`]]: width,
+      [styles[`section-bg--${background}`]]: background
+    },
+    className
   )
 
-section.displayName = 'Section'
+  return <div className={elementClasses}>{children}</div>
+}
 
-section.propTypes = {
-  /**
-   *Background: `white`
-   */
+Section.displayName = 'Section'
+
+Section.propTypes = {
   background: PropTypes.string,
-
-  /**
-   * Children elements
-   */
   children: PropTypes.node.isRequired,
-
-  /**
-   * Classname, default `section`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   *Vetical space default: `medium`
-   */
   space: PropTypes.string,
-
-  /**
-   *Width default: `medium`
-   */
   width: PropTypes.string
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-section.defaultProps = {
+Section.defaultProps = {
   background: 'default',
-  className: 'section',
+  className: '',
   space: 'medium',
   width: 'full'
 }
 
-export default section
+export default Section
