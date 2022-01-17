@@ -30,12 +30,14 @@ describe('<Check/> mount', () => {
     expect(wrapper.find('span').hasClass('check--positive')).toBe(false)
   })
 
-  it('has `check--positive` class', () => {
+  it('has `check--positive` class', async done => {
     wrapper.setProps({
       positive: true
     })
 
     expect(wrapper.find('span').hasClass('check--positive')).toBe(true)
+
+    done()
   })
 
   it('should have defined default prop positive', () => {

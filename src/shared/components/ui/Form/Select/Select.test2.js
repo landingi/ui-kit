@@ -28,7 +28,7 @@ describe('<Select /> test', () => {
     expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('properly renders error label when error exist', () => {
+  it('properly renders error label when error exist', async done => {
     const errorsProps = {
       id: 'jestem-id',
       children: 'jestem dziecko',
@@ -44,5 +44,7 @@ describe('<Select /> test', () => {
     render(<Select {...errorsProps} />)
 
     expect(screen.findByText('test label')).toBeTruthy()
+
+    done()
   })
 })
