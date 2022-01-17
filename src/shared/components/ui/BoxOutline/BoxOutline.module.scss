@@ -1,0 +1,21 @@
+.box-outline {
+  box-sizing: border-box;
+  padding: $padding-medium $padding-small;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    border: 1px solid $color-brand;
+    box-shadow: 5px 10px 20px #0000001A;
+  }
+  
+  &--is-selected {
+    border: 1px solid $color-success;
+
+    &:hover {
+      border: 1px solid $color-success;
+      box-shadow: 5px 10px 20px #0000001A;
+    }
+  }
+}
