@@ -18,17 +18,7 @@ const props = {
 }
 
 describe('<Select /> test', () => {
-  it('properly renders with props', () => {
-    render(<Select {...props} />)
-  })
-
-  it('properly renders with label', () => {
-    render(<Select {...props} label='test label' />)
-
-    expect(screen.findByText('test label')).toBeTruthy()
-  })
-
-  it('properly renders error label when error exist', async done => {
+  it('properly renders error label when error exist', () => {
     const errorsProps = {
       id: 'jestem-id',
       children: 'jestem dziecko',
@@ -42,6 +32,18 @@ describe('<Select /> test', () => {
     }
 
     render(<Select {...errorsProps} />)
+
+    expect(screen.findByText('test label')).toBeTruthy()
+  })
+
+  it('properly renders with props', async done => {
+    render(<Select {...props} />)
+
+    done()
+  })
+
+  it('properly renders with label', async done => {
+    render(<Select {...props} label='test label' />)
 
     expect(screen.findByText('test label')).toBeTruthy()
 
