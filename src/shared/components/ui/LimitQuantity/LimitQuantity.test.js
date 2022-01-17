@@ -1,39 +1,28 @@
 import React from 'react'
+import { render, screen } from '@jestutils'
 import LimitQuantity from '@components/ui/LimitQuantity'
-import registerIcons from '@helpers/icons'
-import { mountWithIntl } from '@jestutils'
-
-registerIcons()
-
-const limitComponent = <LimitQuantity limit={1000} quantity={100} />
 
 describe('<LimitQuantity /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(limitComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  const props = {
+    limit: 200,
+    quantity: 100
+  }
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<LimitQuantity {...props} />)
   })
+})
 
-  it('limit should be ` / 30 000`', () => {
-    expect(wrapper.find('.limit-quantity--limit').text()).toEqual(' / 1 000')
-  })
+describe('<LimitQuantity /> mount', () => {
+  const props = {
+    limit: -1,
+    quantity: 100
+  }
 
-  it('limit should be infinity', () => {
-    wrapper.setProps({
-      limit: -1
-    })
-    expect(wrapper.find('.limit-quantity--limit').text()).toEqual(' / ∞')
-  })
+  it('is mounted', () => {
+    render(<LimitQuantity {...props} />)
 
-  it('quantity should be `100`', () => {
-    expect(wrapper.find('.limit-quantity').text()).toEqual('100 / 1 000')
+    const text = screen.getByText('/ ∞')
+    expect(text).toBeInDocument
   })
 })
