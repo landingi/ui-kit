@@ -4,16 +4,12 @@ jobs:
     CD:
         runs-on: ubuntu-20.04
         steps:
-        - name: set the head commit message as env
-          run: |
-              echo '::set-env name=commitmsg::${{ github.event.head_commit.message }}'
-
         - name: checkout
           uses: actions/checkout@v2
 
         - name: get commit message
           run: |
-              echo Commit MSG = $commitmsg
+              echo Commit MSG = ${{ github.event.head_commit.message }}
 
         - name: Setup Nodejs with yarn caching
           uses: actions/setup-node@v2
