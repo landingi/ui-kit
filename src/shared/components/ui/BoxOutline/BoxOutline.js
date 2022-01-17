@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStyles } from 'shared/helpers/hooks/useStyles'
-import styles from 'BoxOutline.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './BoxOutline.module.scss'
 
 /**
  * Box outline - stateless presentational component
