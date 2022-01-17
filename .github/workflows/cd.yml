@@ -2,7 +2,6 @@ on: "pull_request"
 
 jobs:
     CD:
-        if: contains(github.event.commits[0].message, '[deploy]')
         runs-on: ubuntu-20.04
         steps:
         - name: set the head commit message as env
