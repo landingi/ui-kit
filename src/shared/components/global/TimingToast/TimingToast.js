@@ -3,10 +3,8 @@ import emitter from '@lib/emitter'
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import Notification from '@components/ui/Notification'
 import posed, { PoseGroup } from 'react-pose'
-import scss from './TimingToast.scss'
-import { styles } from '@helpers/css'
-
-const cssClass = styles(scss)
+import styles from './TimingToast.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Toast Animation, exports React-pose animations
@@ -24,10 +22,22 @@ const toastProps = {
 
 const TimingToastAnimation = posed.div(toastProps)
 
+/**
+ * TimingToast - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
+ */
 const TimingToast = () => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
   const [type, setType] = useState('info')
+
+  const toastStyles = useStyles({
+    [styles['toast']]: true,
+    [styles[`toast--visible`]]: isActive,
+    [styles[`toast--hidden`]]: !!isActive
+  })
 
   const handleToastToggle = useCallback(
     (message, type) => {
@@ -53,10 +63,7 @@ const TimingToast = () => {
       <TimingToastAnimation
         pose={isActive ? 'open' : 'closed'}
         key='toastanimation'
-        className={cssClass(
-          'toast',
-          isActive ? 'toast--visible' : 'toast--hidden'
-        )}
+        className={toastStyles}
       >
         <Notification
           type={type}
@@ -71,6 +78,10 @@ const TimingToast = () => {
   )
 }
 
-TimingToast.displayName = 'Toast timing'
+TimingToast.displayName = 'Timing Toasr'
+
+TimingToast.defaultProps = {
+  type: 'info'
+}
 
 export default TimingToast
