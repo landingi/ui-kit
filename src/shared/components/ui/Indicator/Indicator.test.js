@@ -30,11 +30,13 @@ describe('<Indicator/> mount', () => {
     expect(wrapper.hasClass('indicator')).toBe(true)
   })
 
-  it('is alert', () => {
+  it('is alert', async done => {
     wrapper.setProps({
       isAlert: true
     })
     expect(wrapper.find('span').hasClass('is--alert')).toBe(true)
+
+    done()
   })
 
   it('is not alert', () => {
