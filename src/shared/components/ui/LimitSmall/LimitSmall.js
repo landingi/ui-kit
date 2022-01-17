@@ -1,10 +1,8 @@
 import { formatNumeric } from '@helpers/data'
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './LimitSmall.scss'
-
-const cssClass = styles(scss)
+import styles from './LimitSmall.modules.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Limit Small - stateless presentational component
@@ -16,8 +14,13 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const LimitSmall = ({ padding, limit, quantity, limitText }) => {
+  const limitSmallStyles = useStyles({
+    [styles['result__dropdown']]: true,
+    [styles[`padding__${padding}`]]: padding
+  })
+
   return (
-    <div className={cssClass('result__dropdown', `padding__${padding}`)}>
+    <div className={limitSmallStyles}>
       <span>{limitText}</span>
 
       <span>
