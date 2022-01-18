@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import css from './fonts/css/editor-icons.css'
-import scss from './Icon.scss'
-
-const cssClass = styles({ ...css, ...scss })
+import styles from './Icon.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import css from './fonts/css/editor-icons.module.scss'
 
 /**
  * Icon - stateless presentational component
@@ -13,18 +11,29 @@ const cssClass = styles({ ...css, ...scss })
  * @param {string} props.color - color of icon default, primary
  * @return {object} An object of children element
  */
-const Icon = ({ icon, color }) => (
-  <i className={cssClass('editor-icon', icon, `icon--${color}`)} />
-)
+const Icon = ({ icon, color, className }) => {
+  const elementStyles = useStyles(
+    {
+      [css['editor-icon']]: true,
+      [styles[`icon--${color}`]]: color,
+      [css[`${icon}`]]: true
+    },
+    className
+  )
+
+  return <i className={elementStyles} />
+}
 
 Icon.displayName = 'Icon'
 
 Icon.propTypes = {
   icon: PropTypes.string.isRequired,
-  color: PropTypes.string
+  color: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 Icon.defaultProps = {
+  className: '',
   color: 'default'
 }
 
