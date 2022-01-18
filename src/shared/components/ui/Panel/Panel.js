@@ -1,74 +1,49 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Panel.scss'
+import styles from './Panel.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss),
-  /**
-   * Panel - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: 'panel'
-   * @param {object} props.children - children
-   * @param {string} props.variant - variant, default 'padding-default'
-   * @param {bool} props.adjustHeight - adjust panel height to container height
-   * @param {bool} props.isBackground - add background
-   * @param {bool} props.hasShadow - panel shadow, default true
-   * @return {object} An object of children element
-   */
-  panel = ({
-    className,
-    children,
-    variant,
-    adjustHeight,
-    isBackground,
-    hasShadow
-  }) => {
-    const elementClasses = cssClass({
-      'panel--adjust-height': adjustHeight === true,
-      'panel--background': isBackground === true,
-      'panel--padding-bottom-tiny': variant === 'padding-bottom-tiny',
-      'panel--padding-default': variant === 'padding-default',
-      'panel--padding-input': variant === 'padding-input',
-      'panel--padding-nolr': variant === 'padding-nolr',
-      'panel--padding-none': variant === 'padding-none',
-      'panel--padding-tiny': variant === 'padding-tiny',
-      'panel--shadow-none': hasShadow === false
-    })
+/**
+ * Panel - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {object} props.children - children
+ * @param {string} props.variant - variant
+ * @param {bool} props.adjustHeight - adjust panel height to container height
+ * @param {bool} props.isBackground - add background
+ * @param {bool} props.hasShadow - panel shadow, default true
+ * @return {object} An object of children element
+ */
+const Panel = ({
+  className,
+  children,
+  variant,
+  adjustHeight,
+  isBackground,
+  hasShadow
+}) => {
+  const elementClasses = useStyles(
+    {
+      [styles['panel']]: true,
+      [styles['panel--adjust-height']]: adjustHeight,
+      [styles['panel--background']]: isBackground,
+      [styles['panel--background']]: !hasShadow,
+      [styles['panel--shadow-none']]: variant
+    },
+    className
+  )
 
-    return <div className={cssClass(className, elementClasses)}>{children}</div>
-  }
+  return <div className={elementClasses}>{children}</div>
+}
 
-panel.displayName = 'Panel'
+Panel.displayName = 'Panel'
 
-panel.propTypes = {
-  /**
-   * Adjust panel height to container height
-   */
+Panel.propTypes = {
   adjustHeight: PropTypes.bool,
-
-  /**
-   * Children elements
-   */
   children: PropTypes.node.isRequired,
-
-  /**
-   * Classname, default `panel`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-
-  /**
-   * HasShadow add shadows
-   */
   hasShadow: PropTypes.bool,
-
-  /**
-   * IsBackground add background
-   */
   isBackground: PropTypes.bool,
-
-  /**
-   * Variant
-   */
   variant: PropTypes.oneOf([
     'padding-default',
     'padding-nolr',
@@ -80,16 +55,12 @@ panel.propTypes = {
   ])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-panel.defaultProps = {
+Panel.defaultProps = {
   adjustHeight: false,
-  className: 'panel',
+  className: '',
   hasShadow: true,
   isBackground: false,
   variant: 'padding-default'
 }
 
-export default panel
+export default Panel
