@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
 import { Toggle } from '@components/ui/Form/Toggle/Toggle'
 import registerIcons from '@helpers/icons'
 
@@ -12,34 +12,39 @@ const props = {
   checked: false
 }
 
-const component = <Toggle {...props} />
-
-describe('<Toggle /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
+describe('<Toggle /> tests', () => {
+  it('properly renders with props', () => {
+    render(<Toggle {...props} />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has default prop `className` with empty string', () => {
-    expect(wrapper.prop('className')).toEqual('')
-  })
-
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
-  })
-
-  it('default prop `onBlur` should be undefined', () => {
+  it('default prop `onBlur` should be undefined', async done => {
     const result = Toggle.defaultProps.onBlur()
 
     expect(result).toBe(null)
+
+    done()
+  })
+
+  it('properly renders with label', () => {
+    render(<Toggle {...props} label='test label' />)
+
+    expect(screen.findByText('test label')).toBeTruthy()
+  })
+
+  it('has properly classes when checked is enabled', async done => {
+    const checkedProps = {
+      id: 'jestem-id',
+      name: 'field-name',
+      onChange: jest.fn(),
+      checked: true
+    }
+
+    const { container } = render(<Toggle {...checkedProps} />)
+
+    expect(
+      container.getElementsByClassName('toggle--checked-disabled')
+    ).toBeTruthy()
+
+    done()
   })
 })

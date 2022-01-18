@@ -1,7 +1,8 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import RadioGroup from '@components/ui/Form/Radio/Group'
 import registerIcons from '@helpers/icons'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 registerIcons()
 
@@ -12,33 +13,31 @@ const props = {
   touched: {}
 }
 
-const component = <RadioGroup {...props} />
-
 describe('<RadioGroup /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<RadioGroup {...props} />)
   })
 
-  it('has default prop `label` with value null', () => {
-    expect(wrapper.prop('label')).toEqual('')
+  it('has label rendered when prop label is set', () => {
+    render(<RadioGroup {...props} label='label' />)
+
+    const label = screen.getByText('label')
+    expect(label).toBeInTheDocument()
   })
 
-  it('has label', () => {
-    wrapper.setProps({
-      label: 'mam label'
-    })
+  it('has error displayed when touched is set', () => {
+    const touchedProps = {
+      name: 'field-name',
+      children: 'children',
+      errors: { ['field-name']: 'error' },
+      touched: {
+        ['field-name']: 'error-name'
+      }
+    }
+    render(<RadioGroup {...touchedProps} />)
 
-    expect(wrapper.find('label').exists()).toBe(true)
-    expect(wrapper.find('label').text()).toEqual(wrapper.prop('label'))
+    const error = screen.getByText('error')
+
+    expect(error).toBeInTheDocument()
   })
 })
