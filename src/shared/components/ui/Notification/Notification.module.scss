@@ -8,7 +8,7 @@
   align-items: flex-start;
   box-shadow: 0 2px 4px 3px $color-shadow;
 
-  svg {
+  i {
     align-items: center;
     color: $color-white;
   }
@@ -23,7 +23,7 @@
       background: transparent;
       color: $color-white;
 
-      svg {
+      i {
         color: $color-white;
       }
     }
@@ -39,24 +39,26 @@
   width: 210px;
 }
 
-.notification--alert {
-  background: $color-alert;
-}
+.notification {
+  &--alert {
+    background: $color-alert;
+  }
 
-.notification--warning {
-  background: $color-warning;
-}
+  &--warning {
+    background: $color-warning;
+  }
 
-.notification--success {
-  background: $color-success;
-}
+  &--success {
+    background: $color-success;
+  }
 
-.notification--info {
-  background: $color-info;
-}
+  &--info {
+    background: $color-info;
+  }
 
-.notification--pending {
-  background: $color-pending;
+  &--pending {
+    background: $color-pending;
+  }
 }
 
 .content {
