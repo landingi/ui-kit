@@ -91,14 +91,6 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 Every push triggers CI pipeline. For more information please check `.github/workflows/ci.yml`
 
-#### CD
-
-In order to deploy you have to add `[deploy]` tag to your commit message, an
-example: `[FRONT-123][deploy]I am just a fancy commit message`.
-
-For more information please have a look at Project UI-kit in the Buddy website
-or check `.github/workflows/cd.yml`
-
 #### CD Documentation
 
 In order to deploy you have to add `[docs]` tag to your commit message, an
