@@ -36,11 +36,11 @@ const Notification = ({
   return (
     <div className={elementStyles}>
       <div className={styles.content}>
-        <Icon icon={mapIconToClass(type) || 'icon-ok'} color='white' />
+        <Icon icon={mapIconToClass(type) || 'icon-ok'} iconColor='white' />
 
         <p className={styles.notification__message}>{children}</p>
 
-        {isClosable && <Close onClick={onClick} color='white' />}
+        {isClosable && <Close onClick={onClick} iconColor='white' />}
       </div>
 
       {hasTime && <span className={styles.time} />}

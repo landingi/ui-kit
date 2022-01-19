@@ -10,14 +10,14 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {object} props - props
  * @param {string|array} props.className - list of class names
  * @param {function} props.onClick - click handler
- * @param {string} props.color
+ * @param {string} props.iconName
+ * * @param {string} props.iconColor
  * @return {object} An object of children element
  */
-const Close = ({ className, onClick, color }) => {
+const Close = ({ className, onClick, iconName, iconColor }) => {
   const elementStyles = useStyles(
     {
-      [styles['color']]: true,
-      [styles[`icon--${color}`]]: color
+      [styles['close']]: true
     },
     className
   )
@@ -25,7 +25,7 @@ const Close = ({ className, onClick, color }) => {
   return (
     <span className={elementStyles} onClick={onClick}>
       <Button variant='icon'>
-        <Icon icon='icon-remove' />
+        <Icon icon={iconName} color={iconColor} />
       </Button>
     </span>
   )
@@ -36,12 +36,14 @@ Close.displayName = 'Close'
 Close.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClick: PropTypes.func,
-  color: PropTypes.string
+  iconName: PropTypes.string,
+  iconColor: PropTypes.string
 }
 
 Close.defaultProps = {
   className: '',
-  onClick: () => null
+  onClick: () => null,
+  iconName: 'icon-remove'
 }
 
 export default Close
