@@ -41,5 +41,5 @@ jobs:
           with:
             directory: ./coverage
             files: ./coverage-summary.json
-            verbose: true,
+            verbose: true
             token: ${{ secrets.CODECOV_TOKEN }}
