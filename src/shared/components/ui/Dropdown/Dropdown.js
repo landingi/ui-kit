@@ -7,20 +7,18 @@ import React, {
   forwardRef
 } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Dropdown.scss'
 import { centerParent, getBoundings } from '@helpers/position'
 import Tooltip from '@components/ui/Tooltip'
+import Icon from '@components/ui/Icon'
 import Ink from 'react-ink'
 import { NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { debounce, throttle } from '@helpers/events'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import emitter from '@lib/emitter'
 import { isEmpty } from '@helpers/data'
 import { composeRefs } from '@helpers/ref'
-
-const cssClass = styles(scss)
+import styles from './Dropdown.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Dropdown - stateless presentational component
@@ -62,11 +60,52 @@ const Dropdown = forwardRef(
     const containerRef = useRef(null)
     const dropdownRef = useRef(null)
 
+    const dropdownWrapperStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
+      [styles[`dropdown__wrapper--${alignment}`]]: alignment
+    })
+
+    const dropdownWrapperIconStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
+      [styles['dropdown__wrapper__icon']]: true
+    })
+
+    const dropdownBodySizeStyles = useStyles(
+      {
+        [styles['dropdown']]: true,
+        [styles[`dropdown--${size}`]]: size,
+        [styles['dropdown__wrapper__icon']]: true,
+        [styles['dropdown--hidden']]: isEmpty(style)
+      },
+      {
+        className
+      }
+    )
+
+    const dropdownBodyStyles = useStyles({
+      [styles['dropdown__body']]: true
+    })
+
+    const dropdownLabelStyles = useStyles({
+      [styles['dropdown__label']]: true,
+      [styles['dropdown__label--placeholder']]: asPlaceholder
+    })
+
+    const dropdownStyles = useStyles({
+      [styles[`dropdown__wrapper--${alignment}`]]: alignment,
+      [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
+      [styles['dropdown__wrapper--input']]: hasInput,
+      [styles['dropdown__wrapper--as-input']]: hasFullInputStyle,
+      [styles['dropdown__wrapper--input--disabled']]: hasInput && isOpenDisabled
+    })
+
     const handleShow = useCallback(
       event => {
         event.stopPropagation()
 
-        if (isOpenDisabled) return
+        if (isOpenDisabled) {
+          return
+        }
 
         !isOpen && handleOnOpen()
 
@@ -86,15 +125,14 @@ const Dropdown = forwardRef(
           !dropdownRef.current.contains(event.target)
         ) {
           setIsOpen(isOpen => !isOpen)
+
           handleOnClose()
         }
       },
       [isOpen, containerRef, dropdownRef]
     )
 
-    const makeClose = () => {
-      setIsOpen(false)
-    }
+    const makeClose = () => setIsOpen(false)
 
     const handlePosition = () => {
       const container = getBoundings(containerRef.current)
@@ -171,7 +209,9 @@ const Dropdown = forwardRef(
     }
 
     const handleResize = () => {
-      if (isOpen) handlePosition()
+      if (isOpen) {
+        handlePosition()
+      }
     }
 
     const renderDropdownWithTooltip = () => {
@@ -180,7 +220,7 @@ const Dropdown = forwardRef(
           <span
             ref={composeRefs(ref, containerRef)}
             onClick={handleShow}
-            className={cssClass('dropdown__wrapper')}
+            className={styles['dropdown__wrapper']}
           >
             {icon && renderIcon()}
 
@@ -195,23 +235,11 @@ const Dropdown = forwardRef(
     }
 
     const renderDropdown = () => {
-      const alignmentClasses = cssClass({
-        'dropdown__wrapper--center': alignment === 'center',
-        'dropdown__wrapper--spaced': alignment === 'spaced',
-        'dropdown__wrapper--end': alignment === 'end'
-      })
       return (
         <span
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          className={cssClass(
-            !custom && 'dropdown__wrapper',
-            isOpenDisabled && 'dropdown__wrapper--disabled',
-            alignmentClasses,
-            hasInput && 'dropdown__wrapper--input',
-            hasFullInputStyle && 'dropdown__wrapper--as-input',
-            hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
-          )}
+          className={dropdownStyles}
         >
           {custom && custom}
 
@@ -226,81 +254,53 @@ const Dropdown = forwardRef(
       )
     }
 
-    const renderDropdownWithButton = () => (
-      <span
-        className={cssClass(
-          'dropdown__wrapper',
-          alignment === 'spaced'
-            ? 'dropdown__wrapper--spaced'
-            : 'dropdown__wrapper--center'
-        )}
-        onClick={handleOnClick}
-      >
-        <NavLink to={link} activeClassName='groups--selected'>
-          {icon && renderIcon()}
+    const renderDropdownWithButton = () => {
+      return (
+        <span className={dropdownWrapperStyles} onClick={handleOnClick}>
+          <NavLink to={link} activeClassName='groups--selected'>
+            {icon && renderIcon()}
 
-          {label && renderLabel()}
+            {label && renderLabel()}
 
-          <Ink />
-        </NavLink>
+            <Ink />
+          </NavLink>
 
-        <span
-          className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
-          ref={composeRefs(ref, containerRef)}
-          onClick={handleShow}
-        >
-          {hasArrow && renderArrows(isOpen, arrowType)}
+          <span
+            className={dropdownWrapperIconStyles}
+            ref={composeRefs(ref, containerRef)}
+            onClick={handleShow}
+          >
+            {hasArrow && renderArrows(isOpen, arrowType)}
 
-          <Ink />
+            <Ink />
+          </span>
         </span>
-      </span>
-    )
+      )
+    }
 
     const renderDropdownBody = () => {
-      const elementClasses = cssClass({
-        'dropdown--mini': size === 'mini',
-        'dropdown--small': size === 'small',
-        'dropdown--medium': size === 'medium',
-        'dropdown--large': size === 'large',
-        'dropdown--huge': size === 'huge',
-        'dropdown--extra-huge': size === 'extra-huge',
-        'dropdown--auto': size === 'auto',
-        'dropdown--hidden': isEmpty(style)
-      })
-
       return (
-        <div
-          className={cssClass(className, elementClasses)}
-          ref={dropdownRef}
-          style={style}
-        >
-          <div className={cssClass('dropdown__body')}>{children}</div>
+        <div className={dropdownBodySizeStyles} ref={dropdownRef} style={style}>
+          <div className={dropdownBodyStyles}>{children}</div>
         </div>
       )
     }
 
-    const renderIcon = () => <FontAwesomeIcon icon={icon} />
+    const renderIcon = () => <Icon icon={icon} />
 
     const renderLabel = () => (
-      <span
-        className={cssClass(
-          'dropdown__label',
-          asPlaceholder && 'dropdown__label--placeholder'
-        )}
-      >
-        {label}
-      </span>
+      <span className={dropdownLabelStyles}>{label}</span>
     )
 
     const renderArrows = (isOpen, arrowType) =>
       arrowType === 'caret' ? (
         isOpen ? (
-          <FontAwesomeIcon icon='caret-up' />
+          <Icon icon='icon-caret-up' />
         ) : (
-          <FontAwesomeIcon icon='caret-down' />
+          <Icon icon='icon-caret-down' />
         )
       ) : (
-        <FontAwesomeIcon icon='ellipsis-v' />
+        <Icon icon='icon-ellipsis-v' />
       )
 
     useEffect(() => {
@@ -368,24 +368,9 @@ Dropdown.propTypes = {
   handleOnOpen: PropTypes.func,
   handleOnClose: PropTypes.func,
   link: PropTypes.string,
-  /**
-   * Render as smaller - when dropdown is too wide, it's left edge is off screen,
-   * with this prop it will be render like a 240px width
-   * default: false
-   */
   renderAsSmaller: PropTypes.bool,
   hasInput: PropTypes.bool,
-  /**
-   * Has Input full Input style
-   * default: false
-   * when its enabled dropdown looks like select in forms
-   */
   hasFullInputStyle: PropTypes.bool,
-  /**
-   * as Placeholder
-   * default: false
-   * label is styled as input placeholder
-   */
   asPlaceholder: PropTypes.bool,
   inModalName: PropTypes.string,
   custom: PropTypes.instanceOf(Object),
@@ -394,7 +379,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   offset: 5,
-  className: 'dropdown',
+  className: '',
   icon: null,
   label: null,
   tooltip: '',
