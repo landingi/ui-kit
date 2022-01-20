@@ -128,6 +128,6 @@ describe('<Dropdown/> mount', () => {
   })
 
   it('has `dropdown` class', () => {
-    expect(wrapper.find('span').hasClass('dropdown')).toBe(true)
+    expect(wrapper.hasClass('dropdown')).toBe(true)
   })
 })

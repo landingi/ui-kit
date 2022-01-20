@@ -94,7 +94,7 @@ const Dropdown = forwardRef(
 
     const dropdownStyles = useStyles(
       {
-        [styles['dropdown']]: true,
+        [styles['dropdown__wrapper']]: !custom,
         [styles[`dropdown__wrapper--${alignment}`]]: alignment,
         [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
         [styles['dropdown__wrapper--input']]: hasInput,
@@ -106,10 +106,6 @@ const Dropdown = forwardRef(
         className
       }
     )
-
-    const dropdownWithTooltipStyles = useStyles({
-      [styles['dropdown__wrapper']]: true
-    })
 
     const handleShow = useCallback(
       event => {
@@ -232,7 +228,7 @@ const Dropdown = forwardRef(
           <span
             ref={composeRefs(ref, containerRef)}
             onClick={handleShow}
-            className={dropdownWithTooltipStyles}
+            className={styles['dropdown__wrapper']}
           >
             {icon && renderIcon()}
 
@@ -391,7 +387,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   offset: 5,
-  className: '',
+  className: 'dropdown',
   icon: null,
   label: null,
   tooltip: '',
