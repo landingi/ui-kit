@@ -109,7 +109,6 @@ const Dropdown = forwardRef(
 
     const dropdownWithTooltipStyles = useStyles(
       {
-        [styles['dropdown']]: true,
         [styles['dropdown__wrapper']]: true
       },
       {
