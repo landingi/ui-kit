@@ -61,6 +61,7 @@ const Dropdown = forwardRef(
     const dropdownRef = useRef(null)
 
     const dropdownWrapperStyles = useStyles({
+      [styles['dropdown']]: true,
       [styles['dropdown__wrapper']]: true,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
@@ -91,13 +92,30 @@ const Dropdown = forwardRef(
       [styles['dropdown__label--placeholder']]: asPlaceholder
     })
 
-    const dropdownStyles = useStyles({
-      [styles[`dropdown__wrapper--${alignment}`]]: alignment,
-      [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
-      [styles['dropdown__wrapper--input']]: hasInput,
-      [styles['dropdown__wrapper--as-input']]: hasFullInputStyle,
-      [styles['dropdown__wrapper--input--disabled']]: hasInput && isOpenDisabled
-    })
+    const dropdownStyles = useStyles(
+      {
+        [styles['dropdown']]: true,
+        [styles[`dropdown__wrapper--${alignment}`]]: alignment,
+        [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
+        [styles['dropdown__wrapper--input']]: hasInput,
+        [styles['dropdown__wrapper--as-input']]: hasFullInputStyle,
+        [styles['dropdown__wrapper--input--disabled']]:
+          hasInput && isOpenDisabled
+      },
+      {
+        className
+      }
+    )
+
+    const dropdownWithTooltipStyles = useStyles(
+      {
+        [styles['dropdown']]: true,
+        [styles['dropdown__wrapper']]: true
+      },
+      {
+        className
+      }
+    )
 
     const handleShow = useCallback(
       event => {
@@ -220,7 +238,7 @@ const Dropdown = forwardRef(
           <span
             ref={composeRefs(ref, containerRef)}
             onClick={handleShow}
-            className={styles['dropdown__wrapper']}
+            className={dropdownWithTooltipStyles}
           >
             {icon && renderIcon()}
 

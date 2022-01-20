@@ -28,6 +28,6 @@ describe('<DropdownHead/> mount', () => {
   })
 
   it('has `dropdown__head` class', () => {
-    expect(wrapper.hasClass('dropdown__head')).toBe(true)
+    expect(wrapper.find('div').hasClass('dropdown__head')).toBe(true)
   })
 })
