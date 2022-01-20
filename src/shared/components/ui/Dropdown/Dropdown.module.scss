@@ -42,7 +42,7 @@
       justify-content: flex-end;
     }
 
-    svg {
+    i {
       color: $color-3;
       margin: 0 !important;
     }
@@ -109,7 +109,7 @@
       cursor: not-allowed;
   
       :global 
-      .Dropdown__dropdown__label{
+      .Dropdown__dropdown__label {
         cursor: not-allowed;
       }
   
