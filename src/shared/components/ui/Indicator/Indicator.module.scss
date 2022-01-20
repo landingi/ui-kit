@@ -11,10 +11,8 @@
     z-index: $z-index-indicator;
     min-width: 10px;
     min-height: 10px;
-  }
 
-  &--isAlert {
-    &__element {
+    &--isAlert {
       background: $color-alert;
     }
   }
