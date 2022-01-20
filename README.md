@@ -59,10 +59,7 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 5. Run `yarn docz:dev` and open `http://localhost:3000`. Check if your component works as expected.
 
-7. Run `yarn release-it`, stage all files
-
-6. In order to deploy it you have to add a `[deploy]` tag to your commit
-   message, an example: `[FRONT-123][deploy]I am just a fancy commit message`.
+6. Run `yarn release-it`, stage all files
 
 7. Push it
 
@@ -93,14 +90,6 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 #### CI
 
 Every push triggers CI pipeline. For more information please check `.github/workflows/ci.yml`
-
-#### CD
-
-In order to deploy you have to add `[deploy]` tag to your commit message, an
-example: `[FRONT-123][deploy]I am just a fancy commit message`.
-
-For more information please have a look at Project UI-kit in the Buddy website
-or check `.github/workflows/cd.yml`
 
 #### CD Documentation
 
