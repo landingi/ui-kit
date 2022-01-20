@@ -3,15 +3,19 @@
     color: $color-12;
   }
 
+  &--white {
+    color: $color-white;
+  }
+
   &--primary {
     color: $color-brand;
   }
 
-  &--secondary {
-    color: $color-3;
+  &--color-2 {
+    color: $color-2;
   }
 
-  &--white {
-    color: $color-white;
+  &--color-3 {
+    color: $color-3;
   }
 }
