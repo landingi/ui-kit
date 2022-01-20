@@ -107,14 +107,9 @@ const Dropdown = forwardRef(
       }
     )
 
-    const dropdownWithTooltipStyles = useStyles(
-      {
-        [styles['dropdown__wrapper']]: true
-      },
-      {
-        className
-      }
-    )
+    const dropdownWithTooltipStyles = useStyles({
+      [styles['dropdown__wrapper']]: true
+    })
 
     const handleShow = useCallback(
       event => {
