@@ -1,29 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import registerIcons from '@helpers/icons'
 import Paragraph from '@components/ui/Paragraph'
 
-const props = {
-  children: 'placeholder'
-}
+registerIcons()
 
-const paragraphComponent = <Paragraph {...props}>{props.children}</Paragraph>
-
-describe('<Paragraph/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(paragraphComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
+describe('<Paragraph /> mount', () => {
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `paragraph` class', () => {
-    expect(wrapper.hasClass('paragraph')).toBe(true)
+    render(<Paragraph>Test</Paragraph>)
   })
 })
