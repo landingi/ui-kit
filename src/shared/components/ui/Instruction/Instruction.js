@@ -15,7 +15,7 @@ import uuid from 'react-uuid'
 function Instruction({ className, data }) {
   const instructionStyles = useStyles(
     {
-      [styles[`instruction`]]: true
+      [styles.instruction]: true
     },
     className
   )

@@ -14,7 +14,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Layout = ({ className, children, width }) => {
   const layoutStyles = useStyles(
     {
-      [styles['layout']]: true,
+      [styles.layout]: true,
       [styles[`layout-width--${width}`]]: width
     },
     className
