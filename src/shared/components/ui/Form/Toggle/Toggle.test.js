@@ -17,10 +17,12 @@ describe('<Toggle /> tests', () => {
     render(<Toggle {...props} />)
   })
 
-  it('default prop `onBlur` should be undefined', () => {
+  it('default prop `onBlur` should be undefined', async done => {
     const result = Toggle.defaultProps.onBlur()
 
     expect(result).toBe(null)
+
+    done()
   })
 
   it('properly renders with label', () => {
@@ -29,7 +31,7 @@ describe('<Toggle /> tests', () => {
     expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('has properly classes when checked is enabled', () => {
+  it('has properly classes when checked is enabled', async done => {
     const checkedProps = {
       id: 'jestem-id',
       name: 'field-name',
@@ -42,5 +44,7 @@ describe('<Toggle /> tests', () => {
     expect(
       container.getElementsByClassName('toggle--checked-disabled')
     ).toBeTruthy()
+
+    done()
   })
 })

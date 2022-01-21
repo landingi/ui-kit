@@ -1,29 +1,13 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import Section from '@components/ui/Section'
 
 const props = {
   children: 'placeholder'
 }
 
-const sectionComponent = <Section {...props}>{props.children}</Section>
-
 describe('<Section/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(sectionComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `section` class', () => {
-    expect(wrapper.hasClass('section')).toBe(true)
+    render(<Section {...props}>{props.children}</Section>)
   })
 })

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import uuid from 'react-uuid'
 import ReactTooltip from 'react-tooltip'
+import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Tooltip.module.scss'
 
 /**
@@ -36,6 +37,11 @@ const Tooltip = ({
       }
     : {}
 
+  const tooltipStyles = useStyles({
+    [styles['react-tooltip']]: true,
+    [`react-tooltip-${align}`]: true
+  })
+
   return (
     <Fragment>
       <span className={className} data-tip data-for={tooltipUUID}>
@@ -43,7 +49,7 @@ const Tooltip = ({
       </span>
 
       <ReactTooltip
-        className={`${styles.reactTooltip} react-tooltip-${align}`}
+        className={tooltipStyles}
         background='#000'
         effect={effect}
         id={tooltipUUID}

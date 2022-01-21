@@ -21,7 +21,7 @@ const Back = ({ className, url, content }) => {
       : url
 
   return (
-    <span className={className}>
+    <span data-testid='back ' className={className}>
       <a href={urlMap}>
         <Tooltip content={content} placement='bottom'>
           <Button variant='icon'>
