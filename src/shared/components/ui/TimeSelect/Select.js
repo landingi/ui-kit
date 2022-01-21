@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
-import { styles } from '@helpers/css'
 import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
 import {
@@ -15,13 +14,13 @@ import {
   MAX_HOUR_PL
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
-import scss from './Select.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Select.module.scss'
 
 /**
  * Time Select - stateless component for selecting time
  * @param {object} props - props
+ * @param {object} props.inModalName - class name of modal within time select gonna be render
  * @param {string} props.value - current selected time
  * @param {function} props.onChange - function to change time
  * @param {string} props.formikKey - name on formik 'nested' keys
@@ -29,15 +28,24 @@ const cssClass = styles(scss)
  * @param {bool} props.disabled - when it's true, time can't be select, default: false
  * @return {object} An object of children element
  */
-const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
+const TimeSelect = ({
+  inModalName,
+  value,
+  onChange,
+  formikKey,
+  label,
+  disabled
+}) => {
   const isAmPmType = getLanguage !== 'pl'
 
-  const timePickerClasses = cssClass('time-picker', {
-    'time-picker--disabled': disabled
+  const timeSelectLabelClasses = useStyles({
+    [styles['time-select__label']]: true,
+    [styles['time-select__label--disabled']]: disabled
   })
 
-  const timeSelectClasses = cssClass('time-select', {
-    'time-select--small': isAmPmType
+  const timeSelectDropdownClasses = useStyles({
+    [styles['time-select__dropdown']]: true,
+    [styles['time-select__dropdown--small']]: isAmPmType
   })
 
   const [clockType, setClockType] = useState(isAmOrPm(value, isAmPmType))
@@ -76,8 +84,8 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
    */
   const renderDropdownLabel = useCallback(
     selectedValue => (
-      <Row className={cssClass(timePickerClasses)} vertical='center'>
-        <FontAwesomeIcon icon='clock' className={cssClass('clock-icon')} />
+      <Row className={timeSelectLabelClasses} vertical='center'>
+        <FontAwesomeIcon icon='clock' />
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}
@@ -91,9 +99,9 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
   return (
     <Row vertical='end'>
       <DropdownSelect
-        className={timeSelectClasses}
+        className={timeSelectDropdownClasses}
         overflowStyle={{ maxHeight: 180 }}
-        inModalName='Counter__Modal'
+        inModalName={inModalName}
         alwaysShowLabel
         label={label}
         dropdownLabel={renderDropdownLabel}
@@ -109,11 +117,11 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
           <Spreader spread='small' />
 
           <DropdownSelect
-            inModalName='Counter__Modal'
+            inModalName={inModalName}
             options={CLOCK_OPTIONS}
             value={clockType}
             onChange={handleClockChange}
-            className={cssClass('clock-select')}
+            className={styles['time-select__clock-type-select']}
             isOpenDisabled={disabled}
           />
         </Fragment>
@@ -127,6 +135,7 @@ export default TimeSelect
 TimeSelect.displayName = 'Time Select'
 
 TimeSelect.propTypes = {
+  inModalName: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -135,6 +144,7 @@ TimeSelect.propTypes = {
 }
 
 TimeSelect.defaultProps = {
+  inModalName: '',
   value: '12:00',
   formikKey: null,
   disabled: false

@@ -1,78 +1,75 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { fireEvent, render } from '@testing-library/react'
 import TimeSelect from '@components/ui/TimeSelect'
-import TimeInput from 'react-advanced-time-input'
 import registerIcons from '@helpers/icons'
 
 registerIcons()
 
-const mockOnChange = jest.fn().mockName('onChange')
+const mockOnChange = jest.fn()
 
 const props = {
   onChange: mockOnChange,
   label: 'Time select'
 }
 
-const timeComponent = <TimeSelect {...props} />
-
 describe('<TimeSelect/> mount', () => {
-  let wrapper
-
   beforeEach(() => {
-    wrapper = mount(timeComponent)
+    jest.clearAllMocks()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('default displayed value should be "12:00"', () => {
+    const { getByDisplayValue } = render(<TimeSelect {...props} />)
+
+    const inputNode = getByDisplayValue('12:00')
+
+    expect(inputNode).toBeTruthy()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  it('render proper label', () => {
+    const { getByText } = render(<TimeSelect {...props} />)
+
+    const labelNode = getByText(props.label)
+
+    expect(labelNode).toBeTruthy()
   })
 
-  it('default prop `value` should be "12:00"', () => {
-    const result = TimeSelect.defaultProps.value
+  it('onChange should be called with proper 24H format converted from 12H AM/PM clock', () => {
+    const { getByRole } = render(<TimeSelect {...props} />)
 
-    expect(result).toBe('12:00')
-  })
-  it('default prop `formikKey` should be null', () => {
-    const result = TimeSelect.defaultProps.formikKey
+    const inputNode = getByRole('textbox')
 
-    expect(result).toBe(null)
-  })
-  it('default prop `disabled` should be false', () => {
-    const result = TimeSelect.defaultProps.disabled
-
-    expect(result).toBe(false)
-  })
-  it('has proper label', () => {
-    const label = wrapper.find('label')
-
-    expect(label.text()).toBe('Time select')
-  })
-  it('call onChange when input change for PM', async () => {
-    await wrapper.find(TimeInput).invoke('onChange')(null, '09:27')
+    fireEvent.change(inputNode, { target: { value: '09:27' } })
 
     expect(mockOnChange).toBeCalledWith('21:27')
   })
 
-  it('not call onChange when disabled', async () => {
-    wrapper.setProps({
-      disabled: true
-    })
+  it('onChange should not be fired when component is disabled', () => {
+    const { getByRole } = render(<TimeSelect {...props} disabled={true} />)
 
-    await wrapper.find(TimeInput).invoke('onChange')(null, '09:26')
+    const inputNode = getByRole('textbox')
 
-    expect(mockOnChange).toBeCalledTimes(1)
+    fireEvent.change(inputNode, { target: { value: '09:27' } })
+
+    expect(props.onChange).toHaveBeenCalledTimes(0)
   })
 
-  it('call onChange when formikKey is selected', async () => {
-    wrapper.setProps({
-      formikKey: 'example.key'
-    })
+  it('onChange should be called with passed formikKey prop and formated time', () => {
+    const onChangeMock = jest.fn((formikKey, formatedTime) => ({
+      [formikKey]: formatedTime
+    }))
 
-    await wrapper.find(TimeInput).invoke('onChange')(null, '22:10')
+    const { getByRole } = render(
+      <TimeSelect
+        label='End time'
+        onChange={onChangeMock}
+        formikKey='endTime'
+      />
+    )
 
-    expect(mockOnChange).toHaveBeenLastCalledWith('22:10')
+    const inputNode = getByRole('textbox')
+
+    fireEvent.change(inputNode, { target: { value: '10:27' } })
+
+    expect(onChangeMock).toHaveBeenCalledWith('endTime', '22:27')
   })
 })

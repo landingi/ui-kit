@@ -68,7 +68,7 @@
       border-bottom: 1px solid $color-input-border;
       color: $color-1;
       font-size: 16px;
-      padding: 0 10px 0 0;
+      padding: 0;
       outline: none;
       line-height: 1;
       border-radius: 0px;
@@ -102,23 +102,22 @@
         font-size: 16px;
       }
     }
-    
+
     &--input--disabled {
       color: $color-input-border;
       border-bottom: 1px dotted $color-8;
       cursor: not-allowed;
-  
-      :global 
-      .Dropdown__dropdown__label{
+
+      :global .Dropdown__dropdown__label {
         cursor: not-allowed;
       }
-  
+
       &:hover {
         svg {
-          color: $color-3
+          color: $color-3;
         }
       }
-  
+
       &:focus,
       &:hover,
       &:active {
