@@ -144,6 +144,7 @@ TimeSelect.propTypes = {
 }
 
 TimeSelect.defaultProps = {
+  inModalName: '',
   value: '12:00',
   formikKey: null,
   disabled: false
