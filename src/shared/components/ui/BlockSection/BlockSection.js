@@ -41,7 +41,7 @@ const BlockSection = ({
   })
 
   return (
-    <div className={className}>
+    <div data-testid='block' className={className}>
       <Panel variant='padding-none'>
         <div className={elementClasses}>
           <div className={styles['block-section__panel--content']}>
