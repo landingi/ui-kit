@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useStyles } from 'shared/helpers/hooks/useStyles'
 import styles from './Backdrop.module.scss'
 
 /**
@@ -9,9 +10,16 @@ import styles from './Backdrop.module.scss'
  * @param {function} props.onClick - click handler
  * @return {object} An object of children element
  */
-const Backdrop = ({ className, onClick }) => (
-  <div className={className} onClick={onClick} />
-)
+const Backdrop = ({ className, onClick }) => {
+  const backdropStyles = useStyles(
+    {
+      [styles.backdrop]: true
+    },
+    className
+  )
+
+  return <div className={backdropStyles} onClick={onClick} />
+}
 
 Backdrop.displayName = 'Backdrop'
 
@@ -22,7 +30,7 @@ Backdrop.propTypes = {
 
 Backdrop.defaultProps = {
   onClick: () => null,
-  className: styles.backdrop
+  className: ''
 }
 
 export default Backdrop
