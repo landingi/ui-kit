@@ -1,29 +1,18 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Label from '@components/ui/Label'
-
-const props = {
-  children: 'label'
-}
-
-const labelComponent = <Label {...props} />
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 describe('<Label/> mount', () => {
-  let wrapper
+  const props = {
+    children: 'label'
+  }
 
-  beforeEach(() => {
-    wrapper = mount(labelComponent)
-  })
+  it('should render <Label/>', () => {
+    const { getByText } = render(<Label {...props} />)
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+    const label = getByText('label')
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `label` class', () => {
-    expect(wrapper.hasClass('label')).toBe(true)
+    expect(label).toBeTruthy()
   })
 })
