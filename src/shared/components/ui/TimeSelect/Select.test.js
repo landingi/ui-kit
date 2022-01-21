@@ -57,6 +57,7 @@ describe('<TimeSelect/> mount', () => {
     const onChangeMock = jest.fn((formikKey, formatedTime) => ({
       [formikKey]: formatedTime
     }))
+
     const { getByRole } = render(
       <TimeSelect
         label='End time'
