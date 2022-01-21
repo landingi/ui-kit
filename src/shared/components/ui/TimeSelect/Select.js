@@ -20,6 +20,7 @@ import styles from './Select.module.scss'
 /**
  * Time Select - stateless component for selecting time
  * @param {object} props - props
+ * @param {object} props.inModalName - class name of modal within time select gonna be render
  * @param {string} props.value - current selected time
  * @param {function} props.onChange - function to change time
  * @param {string} props.formikKey - name on formik 'nested' keys
@@ -27,7 +28,14 @@ import styles from './Select.module.scss'
  * @param {bool} props.disabled - when it's true, time can't be select, default: false
  * @return {object} An object of children element
  */
-const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
+const TimeSelect = ({
+  inModalName,
+  value,
+  onChange,
+  formikKey,
+  label,
+  disabled
+}) => {
   const isAmPmType = getLanguage !== 'pl'
 
   const timeSelectLabelClasses = useStyles({
@@ -93,7 +101,7 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
       <DropdownSelect
         className={timeSelectDropdownClasses}
         overflowStyle={{ maxHeight: 180 }}
-        inModalName='Counter__Modal'
+        inModalName={inModalName}
         alwaysShowLabel
         label={label}
         dropdownLabel={renderDropdownLabel}
@@ -109,7 +117,7 @@ const TimeSelect = ({ value, onChange, formikKey, label, disabled }) => {
           <Spreader spread='small' />
 
           <DropdownSelect
-            inModalName='Counter__Modal'
+            inModalName={inModalName}
             options={CLOCK_OPTIONS}
             value={clockType}
             onChange={handleClockChange}
@@ -127,6 +135,7 @@ export default TimeSelect
 TimeSelect.displayName = 'Time Select'
 
 TimeSelect.propTypes = {
+  inModalName: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
