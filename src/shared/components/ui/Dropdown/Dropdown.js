@@ -78,9 +78,7 @@ const Dropdown = forwardRef(
         [styles['dropdown__wrapper__icon']]: true,
         [styles['dropdown--hidden']]: isEmpty(style)
       },
-      {
-        className
-      }
+      className
     )
 
     const dropdownBodyStyles = useStyles({
@@ -102,9 +100,7 @@ const Dropdown = forwardRef(
         [styles['dropdown__wrapper--input--disabled']]:
           hasInput && isOpenDisabled
       },
-      {
-        className
-      }
+      className
     )
 
     const handleShow = useCallback(
@@ -222,77 +218,69 @@ const Dropdown = forwardRef(
       }
     }
 
-    const renderDropdownWithTooltip = () => {
-      return (
-        <Tooltip content={tooltip} placement={tooltipPlacement}>
-          <span
-            ref={composeRefs(ref, containerRef)}
-            onClick={handleShow}
-            className={styles['dropdown__wrapper']}
-          >
-            {icon && renderIcon()}
-
-            {renderLabel()}
-
-            <Ink />
-
-            {hasArrow && renderArrows(isOpen, arrowType)}
-          </span>
-        </Tooltip>
-      )
-    }
-
-    const renderDropdown = () => {
-      return (
+    const renderDropdownWithTooltip = () => (
+      <Tooltip content={tooltip} placement={tooltipPlacement}>
         <span
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          className={dropdownStyles}
+          className={styles['dropdown__wrapper']}
         >
-          {custom && custom}
+          {icon && renderIcon()}
 
+          {renderLabel()}
+
+          <Ink />
+
+          {hasArrow && renderArrows(isOpen, arrowType)}
+        </span>
+      </Tooltip>
+    )
+
+    const renderDropdown = () => (
+      <span
+        ref={composeRefs(ref, containerRef)}
+        onClick={handleShow}
+        className={dropdownStyles}
+      >
+        {custom && custom}
+
+        {icon && renderIcon()}
+
+        {label && renderLabel()}
+
+        {!hasInput && !custom && <Ink />}
+
+        {hasArrow && renderArrows(isOpen, arrowType)}
+      </span>
+    )
+
+    const renderDropdownWithButton = () => (
+      <span className={dropdownWrapperStyles} onClick={handleOnClick}>
+        <NavLink to={link} activeClassName='groups--selected'>
           {icon && renderIcon()}
 
           {label && renderLabel()}
 
-          {!hasInput && !custom && <Ink />}
+          <Ink />
+        </NavLink>
 
+        <span
+          className={dropdownWrapperIconStyles}
+          ref={composeRefs(ref, containerRef)}
+          onClick={handleShow}
+        >
           {hasArrow && renderArrows(isOpen, arrowType)}
+
+          <Ink />
         </span>
-      )
-    }
+      </span>
+    )
 
-    const renderDropdownWithButton = () => {
-      return (
-        <span className={dropdownWrapperStyles} onClick={handleOnClick}>
-          <NavLink to={link} activeClassName='groups--selected'>
-            {icon && renderIcon()}
-
-            {label && renderLabel()}
-
-            <Ink />
-          </NavLink>
-
-          <span
-            className={dropdownWrapperIconStyles}
-            ref={composeRefs(ref, containerRef)}
-            onClick={handleShow}
-          >
-            {hasArrow && renderArrows(isOpen, arrowType)}
-
-            <Ink />
-          </span>
-        </span>
-      )
-    }
-
-    const renderDropdownBody = () => {
-      return (
-        <div className={dropdownBodySizeStyles} ref={dropdownRef} style={style}>
-          <div className={dropdownBodyStyles}>{children}</div>
-        </div>
-      )
-    }
+    const renderDropdownBody = () => (
+      <div className={dropdownBodySizeStyles} ref={dropdownRef} style={style}>
+        <div className={dropdownBodyStyles}>{children}</div>
+      </div>
+    )
 
     const renderIcon = () => <Icon icon={icon} />
 
@@ -315,6 +303,7 @@ const Dropdown = forwardRef(
       window.addEventListener('mousedown', handleClose)
       window.addEventListener('scroll', throttle(handleClose, 500))
       window.addEventListener('resize', debounce(handleResize, 100))
+
       emitter.on(CLOSE_DROPDOWN, makeClose)
 
       return () => {
