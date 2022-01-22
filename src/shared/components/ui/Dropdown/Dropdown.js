@@ -91,6 +91,7 @@ const Dropdown = forwardRef(
 
     const dropdownStyles = useStyles(
       {
+        [styles['dropdown']]: true,
         [styles['dropdown__wrapper']]: !custom,
         [styles[`dropdown__wrapper--${alignment}`]]: alignment,
         [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
