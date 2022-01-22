@@ -73,7 +73,6 @@ const Dropdown = forwardRef(
 
     const dropdownBodySizeStyles = useStyles(
       {
-        [styles['dropdown']]: true,
         [styles[`dropdown--${size}`]]: size,
         [styles['dropdown__wrapper__icon']]: true,
         [styles['dropdown--hidden']]: isEmpty(style)
@@ -375,29 +374,29 @@ Dropdown.propTypes = {
 }
 
 Dropdown.defaultProps = {
-  offset: 5,
-  className: 'dropdown',
-  icon: null,
-  label: null,
+  className: '',
   tooltip: '',
   tooltipPlacement: '',
+  link: '',
   size: 'medium',
-  hasArrow: true,
   arrowType: 'caret',
   alignment: 'center',
   dropdownPlacement: 'left',
-  handleOnClick: () => null,
-  handleOnOpen: () => null,
-  handleOnClose: () => null,
-  link: '',
+  offset: 5,
+  icon: null,
+  label: null,
+  custom: null,
+  hasArrow: true,
   renderAsSmaller: false,
   hasInput: false,
   hasFullInputStyle: false,
   asPlaceholder: false,
   inModal: false,
   button: false,
-  custom: null,
-  isOpenDisabled: false
+  isOpenDisabled: false,
+  handleOnClick: () => null,
+  handleOnOpen: () => null,
+  handleOnClose: () => null
 }
 
 export default Dropdown

@@ -3,6 +3,7 @@
   z-index: $z-index-dropdown;
   box-shadow: 0 2px 4px 3px $color-shadow;
   background: $color-white;
+  padding: 0 $padding-medium;
 
   &__head {
     padding: 0 $padding-medium;
@@ -48,10 +49,6 @@
       i {
         color: $color-1;
       }
-    }
-
-    &__icon {
-      visibility: hidden;
     }
 
     &--input {
