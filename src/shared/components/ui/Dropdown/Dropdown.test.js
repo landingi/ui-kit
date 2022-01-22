@@ -126,8 +126,4 @@ describe('<Dropdown/> mount', () => {
 
     expect(wrapper.find('.dropdown__body').length).toBe(1)
   })
-
-  it('has `dropdown` class', () => {
-    expect(wrapper.hasClass('dropdown')).toBe(true)
-  })
 })
