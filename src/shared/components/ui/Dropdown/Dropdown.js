@@ -61,7 +61,6 @@ const Dropdown = forwardRef(
     const dropdownRef = useRef(null)
 
     const dropdownWrapperStyles = useStyles({
-      [styles['dropdown']]: true,
       [styles['dropdown__wrapper']]: true,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
@@ -73,6 +72,7 @@ const Dropdown = forwardRef(
 
     const dropdownBodySizeStyles = useStyles(
       {
+        [styles['dropdown']]: true,
         [styles[`dropdown--${size}`]]: size,
         [styles['dropdown__wrapper__icon']]: true,
         [styles['dropdown--hidden']]: isEmpty(style)
@@ -91,7 +91,6 @@ const Dropdown = forwardRef(
 
     const dropdownStyles = useStyles(
       {
-        [styles['dropdown']]: true,
         [styles['dropdown__wrapper']]: !custom,
         [styles[`dropdown__wrapper--${alignment}`]]: alignment,
         [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
