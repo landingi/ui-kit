@@ -63,7 +63,7 @@ const Dropdown = forwardRef(
 
     const dropdownWrapperWithTooltipStyles = useStyles({
       [styles['dropdown__wrapper']]: true,
-      [styles[`dropdown__wrapper--${isOnlyIcon}`]]: isOnlyIcon
+      [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownWrapperStyles = useStyles({
