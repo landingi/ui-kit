@@ -50,7 +50,8 @@ const Dropdown = forwardRef(
       asPlaceholder,
       inModalName,
       custom,
-      isOpenDisabled
+      isOpenDisabled,
+      hasOnlyIcon
     },
     ref
   ) => {
@@ -62,6 +63,7 @@ const Dropdown = forwardRef(
 
     const dropdownWrapperStyles = useStyles({
       [styles['dropdown__wrapper']]: true,
+      [styles[`dropdown__wrapper--${hasOnlyIcon}`]]: hasOnlyIcon,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
 
@@ -370,7 +372,8 @@ Dropdown.propTypes = {
   asPlaceholder: PropTypes.bool,
   inModalName: PropTypes.string,
   custom: PropTypes.instanceOf(Object),
-  isOpenDisabled: PropTypes.bool
+  isOpenDisabled: PropTypes.bool,
+  hasOnlyIcon: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
@@ -394,6 +397,7 @@ Dropdown.defaultProps = {
   inModal: false,
   button: false,
   isOpenDisabled: false,
+  hasOnlyIcon: false,
   handleOnClick: () => null,
   handleOnOpen: () => null,
   handleOnClose: () => null
