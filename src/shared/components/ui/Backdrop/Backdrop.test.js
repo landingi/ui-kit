@@ -25,10 +25,6 @@ describe('<Backdrop/> mount', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('has `backdrop` class', () => {
-    expect(wrapper.hasClass('backdrop')).toBe(true)
-  })
-
   it('calls function passed as onClick prop on click event', () => {
     wrapper.simulate('click')
     expect(onClick).toHaveBeenCalled()
