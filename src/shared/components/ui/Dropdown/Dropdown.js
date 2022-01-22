@@ -61,9 +61,12 @@ const Dropdown = forwardRef(
     const containerRef = useRef(null)
     const dropdownRef = useRef(null)
 
-    const dropdownWrapperStyles = useStyles({
+    const dropdownWrapperWithTooltipStyles = useStyles({
       [styles['dropdown__wrapper']]: true,
-      [styles[`dropdown__wrapper--${isOnlyIcon}`]]: isOnlyIcon,
+      [styles[`dropdown__wrapper--${isOnlyIcon}`]]: isOnlyIcon
+    })
+
+    const dropdownWrapperStyles = useStyles({
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
 
@@ -224,7 +227,7 @@ const Dropdown = forwardRef(
         <span
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          className={styles['dropdown__wrapper']}
+          className={dropdownWrapperWithTooltipStyles}
         >
           {icon && renderIcon()}
 
