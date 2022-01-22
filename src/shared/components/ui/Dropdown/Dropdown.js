@@ -72,7 +72,8 @@ const Dropdown = forwardRef(
 
     const dropdownWrapperIconStyles = useStyles({
       [styles['dropdown__wrapper']]: true,
-      [styles['dropdown__wrapper__icon']]: true
+      [styles['dropdown__wrapper__icon']]: true,
+      [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownBodySizeStyles = useStyles(
@@ -102,7 +103,8 @@ const Dropdown = forwardRef(
         [styles['dropdown__wrapper--input']]: hasInput,
         [styles['dropdown__wrapper--as-input']]: hasFullInputStyle,
         [styles['dropdown__wrapper--input--disabled']]:
-          hasInput && isOpenDisabled
+          hasInput && isOpenDisabled,
+        [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
       },
       className
     )
