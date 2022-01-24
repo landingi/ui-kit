@@ -24,6 +24,7 @@
   }
 
   &__checkmark-status {
+    box-sizing: border-box;
     position: absolute;
     top: 0;
     right: 0;
@@ -33,11 +34,10 @@
     align-items: center;
     width: 25px;
     height: 25px;
-    padding: 3px;
-    transition: all 0.3s ease-out;
+    border-radius: 50%;
 
     &--is-selected {
-      color: $color-success;
+      background-color: $color-success;
     }
   }
 }
