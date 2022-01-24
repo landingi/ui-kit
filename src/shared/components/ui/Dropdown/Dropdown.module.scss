@@ -29,10 +29,13 @@
 
     &__icon {
       visibility: hidden;
+    }
 
-      &:hover {
+    &:hover {
+      background: $color-button-hover;
+
+      .Dropdown-module__dropdown__wrapper__icon {
         visibility: visible;
-        background: $color-button-hover;
 
         i {
           color: $color-1;
