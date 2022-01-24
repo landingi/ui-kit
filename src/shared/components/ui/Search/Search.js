@@ -1,16 +1,10 @@
 import React, { memo, useState, useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import scss from './Search.scss'
 import Input from '@components/ui/Input'
 import Button from '@components/ui/Button'
-
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss)
+import Icon from '@components/ui/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Search.module.scss'
 
 /**
  * Search - stateful presentational component
@@ -107,17 +101,21 @@ const Search = ({
     autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
-  const elementClasses = cssClass({
-    'search--input': variant === 'input',
-    'search--button': variant === 'button'
-  })
+  const elementClasses = useStyles(
+    {
+      [styles['search--input']]: variant === 'input',
+      [styles['search--button']]: variant === 'button',
+      [styles[`search--${size}`]]: true
+    },
+    className
+  )
 
   return (
     <Tag onSubmit={handleSubmit}>
-      <div className={cssClass(className, elementClasses, `search--${size}`)}>
+      <div className={elementClasses}>
         {variant === 'input' &&
           (onSubmit || onProtectedSubmit ? (
-            <div className={scss.search__icon_button}>
+            <div className={styles.search__icon_button}>
               <Button
                 variant='icon'
                 type={onProtectedSubmit ? 'button' : 'submit'}
@@ -125,12 +123,12 @@ const Search = ({
                 isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
               >
-                <FontAwesomeIcon icon='search' />
+                <Icon icon='icon-search' />
               </Button>
             </div>
           ) : (
-            <div className={scss.search__icon}>
-              <FontAwesomeIcon size='sm' icon='search' />
+            <div className={styles.search__icon}>
+              <Icon icon='icon-search' />
             </div>
           ))}
 
@@ -149,7 +147,7 @@ const Search = ({
           <input
             autoFocus={autoFocus}
             ref={inputRef}
-            className={scss.search__input}
+            className={styles.search__input}
             type='text'
             name='search'
             placeholder={i18n.placeholder}
@@ -160,9 +158,9 @@ const Search = ({
         )}
 
         {isClearActive && variant === 'input' && (
-          <div className={scss.search__clean}>
+          <div className={styles.search__clean}>
             <Button variant='icon' size='input' onClick={handleCleanOnClick}>
-              <FontAwesomeIcon size='sm' icon='times' />
+              <Icon icon='times' />
             </Button>
           </div>
         )}
@@ -209,4 +207,4 @@ Search.defaultProps = {
   onKeyDown: () => null
 }
 
-export default memo(Search)
+export default Search

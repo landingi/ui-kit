@@ -20,9 +20,9 @@
       width: calc(100% - 80px);
       box-shadow: none;
 
-    &::placeholder {
-      color: $color-8;
-    }
+      &::placeholder {
+        color: $color-8;
+      }
 
       &:focus,
       &:active {
@@ -40,9 +40,12 @@
       z-index: 1;
       position: absolute;
       left: $margin-medium;
+      top: 50%;
+      transform: translateY(-50%);
 
-      svg, i {
-        color: $color-4
+      svg,
+      i {
+        color: $color-4;
       }
     }
 
@@ -50,15 +53,6 @@
       z-index: 1;
       position: absolute;
       left: 2px;
-    }
-  }
-
-  &--button {
-    :global {
-      .Input__input__wrapper {
-        flex: 1;
-        margin-right: 20px;
-      }
     }
   }
 }
@@ -71,15 +65,6 @@
     font-size: 12px;
     padding: 0 36px 0 34px;
     width: calc(100% - 70px);
-  }
-
-  :global {
-    .Button__button--input {
-      max-width: 22px;
-      max-height: 22px;
-      min-width: 22px;
-      min-height: 22px;
-    }
   }
 }
 
@@ -99,8 +84,4 @@
   .search__input {
     font-size: 16px;
   }
-}
-
-form {
-  margin: 0;
 }
