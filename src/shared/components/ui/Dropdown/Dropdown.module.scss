@@ -32,13 +32,11 @@
     }
 
     &:hover {
-      .Dropdown-module__dropdown__wrapper__icon {
-        visibility: visible;
-        background: $color-button-hover;
+      background: $color-button-hover;
 
-        i {
-          color: $color-1;
-        }
+      i {
+        visibility: visible;
+        color: $color-1;
       }
     }
 
