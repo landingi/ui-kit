@@ -1,40 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Dropdown.scss'
-
-const cssClass = styles(scss)
+import styles from './Dropdown.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Dropdown Head element - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `dropdown__head`
+ * @param {string|array} props.className - list of class names
  * @return {object} An object of children element
  */
-const dropdownHead = ({ children, className }) => (
-  <div className={cssClass(className)}>{children}</div>
-)
+const DropdownHead = ({ children, className }) => {
+  const elementStyles = useStyles(
+    {
+      [styles['dropdown__head']]: true
+    },
+    className
+  )
 
-dropdownHead.displayName = 'Dropdown.Head'
+  return <div className={elementStyles}>{children}</div>
+}
 
-dropdownHead.propTypes = {
-  /**
-   * Children element
-   */
+DropdownHead.displayName = 'Dropdown Head'
+
+DropdownHead.propTypes = {
   children: PropTypes.node.isRequired,
-  /**
-   * Classname, default `dropdown__head`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-dropdownHead.defaultProps = {
-  className: 'dropdown__head'
+DropdownHead.defaultProps = {
+  className: ''
 }
 
-export default dropdownHead
+export default DropdownHead
