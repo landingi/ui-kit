@@ -31,16 +31,16 @@
       visibility: hidden;
     }
 
-    &:hover {
-      &__icon {
-        visibility: visible;
-        background: $color-button-hover;
+    // &:hover {
+    //   span {
+    //     visibility: visible;
+    //     background: $color-button-hover;
 
-        i {
-          color: $color-1;
-        }
-      }
-    }
+    //     i {
+    //       color: $color-1;
+    //     }
+    //   }
+    // }
 
     &--isOnlyIcon {
       padding: 0;
@@ -195,4 +195,14 @@
   &--hidden {
     opacity: 0;
   }
+}
+
+
+.Dropdown-module__dropdown__wrapper:hover .Dropdown-module__dropdown__wrapper__icon {
+  visibility: visible;
+  background: $color-button-hover;
+}
+
+.Dropdown-module__dropdown__wrapper:hover .Dropdown-module__dropdown__wrapper__icon i {
+  color: $color-1;
 }
