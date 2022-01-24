@@ -29,10 +29,8 @@
 
     &__icon {
       visibility: hidden;
-    }
 
-    &:hover {
-      &__icon {
+      &:hover {
         visibility: visible;
         background: $color-button-hover;
 
@@ -109,7 +107,7 @@
       }
 
       &:hover {
-        svg {
+        i, svg {
           color: $color-3;
         }
       }
