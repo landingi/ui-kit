@@ -29,19 +29,17 @@
 
     &__icon {
       visibility: hidden;
+    }
 
-      &:hover {
+    &:hover {
+      &__icon {
+        visibility: hidden;
         background: $color-button-hover;
-
-        .Dropdown-module__dropdown__wrapper__icon {
-          visibility: visible;
-        }
 
         i {
           color: $color-1;
         }
       }
-
     }
 
     &--isOnlyIcon {
