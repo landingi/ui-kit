@@ -33,4 +33,20 @@ describe('<Search/> tests', () => {
 
     expect(result).toBe(null)
   })
+
+  it('renders properly button variant', () => {
+    const props = {
+      className: 'search',
+      size: 'medium',
+      autoFocus: true,
+      onChange: () => null,
+      onsubmit: mockOnSubmit(),
+      onProtectedSubmit: mockOnProtectedSubmit(),
+      children: 'children',
+      variant: 'button',
+      label: null
+    }
+
+    render(<Search {...props} />)
+  })
 })
