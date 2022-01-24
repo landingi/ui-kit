@@ -27,20 +27,21 @@
     justify-content: center;
     padding: 0 $padding-medium;
 
-    &:hover {
-      background: $color-button-hover;
+    &__icon {
+      visibility: hidden;
 
-      &__icon {
-        visibility: hidden;
+      &:hover {
+        background: $color-button-hover;
+
+        .Dropdown-module__dropdown__wrapper__icon {
+          visibility: visible;
+        }
 
         i {
           color: $color-1;
         }
       }
 
-      i {
-        color: $color-1;
-      }
     }
 
     &--isOnlyIcon {
