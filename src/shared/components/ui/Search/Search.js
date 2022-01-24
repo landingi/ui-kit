@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Input from '@components/ui/Input'
 import Button from '@components/ui/Button'
