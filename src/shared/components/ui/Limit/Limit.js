@@ -34,7 +34,7 @@ const Limit = ({
 }) => {
   const limitSmallStyles = useStyles(
     {
-      [styles[`limit`]]: true
+      [styles.limit]: true
     },
     className
   )
