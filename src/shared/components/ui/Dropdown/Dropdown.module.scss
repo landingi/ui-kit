@@ -32,7 +32,7 @@
     }
 
     &:hover {
-      .Dropdown-module__dropdown__wrapper__icon {
+      &__icon {
         visibility: visible;
         background: $color-button-hover;
 
