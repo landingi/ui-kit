@@ -33,7 +33,7 @@
 
     &:hover {
       &__icon {
-        visibility: hidden;
+        visibility: visible;
         background: $color-button-hover;
 
         i {
