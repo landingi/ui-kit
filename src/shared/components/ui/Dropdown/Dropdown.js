@@ -81,7 +81,6 @@ const Dropdown = forwardRef(
       {
         [styles['dropdown']]: true,
         [styles[`dropdown--${size}`]]: size,
-        [styles['dropdown__wrapper__icon']]: true,
         [styles['dropdown--hidden']]: isEmpty(style)
       },
       className
