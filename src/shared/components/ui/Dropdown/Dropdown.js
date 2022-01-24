@@ -67,6 +67,7 @@ const Dropdown = forwardRef(
     })
 
     const dropdownWrapperStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
 
