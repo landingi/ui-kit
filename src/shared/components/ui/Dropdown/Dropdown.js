@@ -72,6 +72,7 @@ const Dropdown = forwardRef(
     })
 
     const dropdownWrapperIconStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
       [styles['dropdown__wrapper__icon']]: true,
       [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })

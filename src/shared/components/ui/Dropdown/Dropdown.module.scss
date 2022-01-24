@@ -32,11 +32,13 @@
     }
 
     &:hover {
-      background: $color-button-hover;
-
-      i {
+      &__icon {
         visibility: visible;
-        color: $color-1;
+        background: $color-button-hover;
+
+        i {
+          color: $color-1;
+        }
       }
     }
 
