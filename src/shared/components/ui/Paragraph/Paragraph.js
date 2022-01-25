@@ -62,7 +62,7 @@ Paragraph.propTypes = {
   size: PropTypes.oneOf([10, 12, 14, 16, 18]),
   align: PropTypes.oneOf(['left', 'center', 'right']),
   padding: PropTypes.oneOf(['small', 'medium', 'none']),
-  weight: PropTypes.oneOf([300, 300, 700]),
+  weight: PropTypes.oneOf([300, 400, 700]),
   uppercase: PropTypes.bool,
   line: PropTypes.oneOf([18, 20])
 }
