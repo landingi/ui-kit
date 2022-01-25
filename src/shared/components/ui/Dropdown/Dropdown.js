@@ -7,20 +7,18 @@ import React, {
   forwardRef
 } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Dropdown.scss'
 import { centerParent, getBoundings } from '@helpers/position'
 import Tooltip from '@components/ui/Tooltip'
+import Icon from '@components/ui/Icon'
 import Ink from 'react-ink'
 import { NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { debounce, throttle } from '@helpers/events'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import emitter from '@lib/emitter'
 import { isEmpty } from '@helpers/data'
 import { composeRefs } from '@helpers/ref'
-
-const cssClass = styles(scss)
+import styles from './Dropdown.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Dropdown - stateless presentational component
@@ -52,7 +50,8 @@ const Dropdown = forwardRef(
       asPlaceholder,
       inModalName,
       custom,
-      isOpenDisabled
+      isOpenDisabled,
+      isOnlyIcon
     },
     ref
   ) => {
@@ -62,11 +61,61 @@ const Dropdown = forwardRef(
     const containerRef = useRef(null)
     const dropdownRef = useRef(null)
 
+    const dropdownWrapperWithTooltipStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
+      [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+    })
+
+    const dropdownWrapperStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
+      [styles[`dropdown__wrapper--${alignment}`]]: alignment
+    })
+
+    const dropdownWrapperIconStyles = useStyles({
+      [styles['dropdown__wrapper']]: true,
+      [styles['dropdown__wrapper__icon']]: true,
+      [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+    })
+
+    const dropdownBodySizeStyles = useStyles(
+      {
+        [styles['dropdown']]: true,
+        [styles[`dropdown--${size}`]]: size,
+        [styles['dropdown--hidden']]: isEmpty(style)
+      },
+      className
+    )
+
+    const dropdownBodyStyles = useStyles({
+      [styles['dropdown__body']]: true
+    })
+
+    const dropdownLabelStyles = useStyles({
+      [styles['dropdown__label']]: true,
+      [styles['dropdown__label--placeholder']]: asPlaceholder
+    })
+
+    const dropdownStyles = useStyles(
+      {
+        [styles['dropdown__wrapper']]: !custom,
+        [styles[`dropdown__wrapper--${alignment}`]]: alignment,
+        [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
+        [styles['dropdown__wrapper--input']]: hasInput,
+        [styles['dropdown__wrapper--as-input']]: hasFullInputStyle,
+        [styles['dropdown__wrapper--input--disabled']]:
+          hasInput && isOpenDisabled,
+        [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+      },
+      className
+    )
+
     const handleShow = useCallback(
       event => {
         event.stopPropagation()
 
-        if (isOpenDisabled) return
+        if (isOpenDisabled) {
+          return
+        }
 
         !isOpen && handleOnOpen()
 
@@ -86,15 +135,14 @@ const Dropdown = forwardRef(
           !dropdownRef.current.contains(event.target)
         ) {
           setIsOpen(isOpen => !isOpen)
+
           handleOnClose()
         }
       },
       [isOpen, containerRef, dropdownRef]
     )
 
-    const makeClose = () => {
-      setIsOpen(false)
-    }
+    const makeClose = () => setIsOpen(false)
 
     const handlePosition = () => {
       const container = getBoundings(containerRef.current)
@@ -171,71 +219,49 @@ const Dropdown = forwardRef(
     }
 
     const handleResize = () => {
-      if (isOpen) handlePosition()
+      if (isOpen) {
+        handlePosition()
+      }
     }
 
-    const renderDropdownWithTooltip = () => {
-      return (
-        <Tooltip content={tooltip} placement={tooltipPlacement}>
-          <span
-            ref={composeRefs(ref, containerRef)}
-            onClick={handleShow}
-            className={cssClass('dropdown__wrapper')}
-          >
-            {icon && renderIcon()}
-
-            {renderLabel()}
-
-            <Ink />
-
-            {hasArrow && renderArrows(isOpen, arrowType)}
-          </span>
-        </Tooltip>
-      )
-    }
-
-    const renderDropdown = () => {
-      const alignmentClasses = cssClass({
-        'dropdown__wrapper--center': alignment === 'center',
-        'dropdown__wrapper--spaced': alignment === 'spaced',
-        'dropdown__wrapper--end': alignment === 'end'
-      })
-      return (
+    const renderDropdownWithTooltip = () => (
+      <Tooltip content={tooltip} placement={tooltipPlacement}>
         <span
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          className={cssClass(
-            !custom && 'dropdown__wrapper',
-            isOpenDisabled && 'dropdown__wrapper--disabled',
-            alignmentClasses,
-            hasInput && 'dropdown__wrapper--input',
-            hasFullInputStyle && 'dropdown__wrapper--as-input',
-            hasInput && isOpenDisabled && 'dropdown__wrapper--input--disabled'
-          )}
+          className={dropdownWrapperWithTooltipStyles}
         >
-          {custom && custom}
-
           {icon && renderIcon()}
 
-          {label && renderLabel()}
+          {renderLabel()}
 
-          {!hasInput && !custom && <Ink />}
+          <Ink />
 
           {hasArrow && renderArrows(isOpen, arrowType)}
         </span>
-      )
-    }
+      </Tooltip>
+    )
+
+    const renderDropdown = () => (
+      <span
+        ref={composeRefs(ref, containerRef)}
+        onClick={handleShow}
+        className={dropdownStyles}
+      >
+        {custom && custom}
+
+        {icon && renderIcon()}
+
+        {label && renderLabel()}
+
+        {!hasInput && !custom && <Ink />}
+
+        {hasArrow && renderArrows(isOpen, arrowType)}
+      </span>
+    )
 
     const renderDropdownWithButton = () => (
-      <span
-        className={cssClass(
-          'dropdown__wrapper',
-          alignment === 'spaced'
-            ? 'dropdown__wrapper--spaced'
-            : 'dropdown__wrapper--center'
-        )}
-        onClick={handleOnClick}
-      >
+      <span className={dropdownWrapperStyles} onClick={handleOnClick}>
         <NavLink to={link} activeClassName='groups--selected'>
           {icon && renderIcon()}
 
@@ -245,7 +271,7 @@ const Dropdown = forwardRef(
         </NavLink>
 
         <span
-          className={cssClass('dropdown__wrapper', 'dropdown__wrapper__icon')}
+          className={dropdownWrapperIconStyles}
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
         >
@@ -256,57 +282,34 @@ const Dropdown = forwardRef(
       </span>
     )
 
-    const renderDropdownBody = () => {
-      const elementClasses = cssClass({
-        'dropdown--mini': size === 'mini',
-        'dropdown--small': size === 'small',
-        'dropdown--medium': size === 'medium',
-        'dropdown--large': size === 'large',
-        'dropdown--huge': size === 'huge',
-        'dropdown--extra-huge': size === 'extra-huge',
-        'dropdown--auto': size === 'auto',
-        'dropdown--hidden': isEmpty(style)
-      })
+    const renderDropdownBody = () => (
+      <div className={dropdownBodySizeStyles} ref={dropdownRef} style={style}>
+        <div className={dropdownBodyStyles}>{children}</div>
+      </div>
+    )
 
-      return (
-        <div
-          className={cssClass(className, elementClasses)}
-          ref={dropdownRef}
-          style={style}
-        >
-          <div className={cssClass('dropdown__body')}>{children}</div>
-        </div>
-      )
-    }
-
-    const renderIcon = () => <FontAwesomeIcon icon={icon} />
+    const renderIcon = () => <Icon icon={icon} />
 
     const renderLabel = () => (
-      <span
-        className={cssClass(
-          'dropdown__label',
-          asPlaceholder && 'dropdown__label--placeholder'
-        )}
-      >
-        {label}
-      </span>
+      <span className={dropdownLabelStyles}>{label}</span>
     )
 
     const renderArrows = (isOpen, arrowType) =>
       arrowType === 'caret' ? (
         isOpen ? (
-          <FontAwesomeIcon icon='caret-up' />
+          <Icon icon='icon-caret-up' />
         ) : (
-          <FontAwesomeIcon icon='caret-down' />
+          <Icon icon='icon-caret-down' />
         )
       ) : (
-        <FontAwesomeIcon icon='ellipsis-v' />
+        <Icon icon='icon-ellipsis-v' />
       )
 
     useEffect(() => {
       window.addEventListener('mousedown', handleClose)
       window.addEventListener('scroll', throttle(handleClose, 500))
       window.addEventListener('resize', debounce(handleResize, 100))
+
       emitter.on(CLOSE_DROPDOWN, makeClose)
 
       return () => {
@@ -368,54 +371,41 @@ Dropdown.propTypes = {
   handleOnOpen: PropTypes.func,
   handleOnClose: PropTypes.func,
   link: PropTypes.string,
-  /**
-   * Render as smaller - when dropdown is too wide, it's left edge is off screen,
-   * with this prop it will be render like a 240px width
-   * default: false
-   */
   renderAsSmaller: PropTypes.bool,
   hasInput: PropTypes.bool,
-  /**
-   * Has Input full Input style
-   * default: false
-   * when its enabled dropdown looks like select in forms
-   */
   hasFullInputStyle: PropTypes.bool,
-  /**
-   * as Placeholder
-   * default: false
-   * label is styled as input placeholder
-   */
   asPlaceholder: PropTypes.bool,
   inModalName: PropTypes.string,
   custom: PropTypes.instanceOf(Object),
-  isOpenDisabled: PropTypes.bool
+  isOpenDisabled: PropTypes.bool,
+  isOnlyIcon: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
-  offset: 5,
-  className: 'dropdown',
-  icon: null,
-  label: null,
+  className: '',
   tooltip: '',
   tooltipPlacement: '',
+  link: '',
   size: 'medium',
-  hasArrow: true,
   arrowType: 'caret',
   alignment: 'center',
   dropdownPlacement: 'left',
-  handleOnClick: () => null,
-  handleOnOpen: () => null,
-  handleOnClose: () => null,
-  link: '',
+  offset: 5,
+  icon: null,
+  label: null,
+  custom: null,
+  hasArrow: true,
   renderAsSmaller: false,
   hasInput: false,
   hasFullInputStyle: false,
   asPlaceholder: false,
   inModal: false,
   button: false,
-  custom: null,
-  isOpenDisabled: false
+  isOpenDisabled: false,
+  isOnlyIcon: false,
+  handleOnClick: () => null,
+  handleOnOpen: () => null,
+  handleOnClose: () => null
 }
 
 export default Dropdown

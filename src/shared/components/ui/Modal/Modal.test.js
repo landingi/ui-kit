@@ -34,10 +34,6 @@ describe('<Modal /> global mount', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('has `modal` class', () => {
-    expect(wrapper.hasClass('modal')).toBe(true)
-  })
-
   it('should have defined default prop onClick', () => {
     expect(wrapper.props().onClick).toBeDefined()
   })

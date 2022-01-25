@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BoxOutline.module.scss'
 
@@ -27,6 +28,11 @@ const BoxOutline = ({
     className
   )
 
+  const checkmarkStatusClasses = useStyles({
+    [styles['box-outline__checkmark-status']]: true,
+    [styles['box-outline__checkmark-status--is-selected']]: isSelected
+  })
+
   return (
     <div
       data-testid='box-outline'
@@ -34,6 +40,11 @@ const BoxOutline = ({
       onClick={onClickHandler}
       onDoubleClick={onDoubleClickHandler}
     >
+      {isSelected && (
+        <span className={checkmarkStatusClasses}>
+          <Icon icon='icon-ok' color='white' />
+        </span>
+      )}
       {children}
     </div>
   )

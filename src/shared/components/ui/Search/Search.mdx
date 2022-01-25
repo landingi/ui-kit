@@ -1,0 +1,24 @@
+import { Playground, Props } from 'docz'
+import Search from '@components/ui/Search'
+import Spacer from '@components/ui/Spacer'
+
+# Search
+
+<Props of={Search} />
+
+<Playground>
+  <Search size='small' />
+  <Spacer />
+  <Search size='medium' />
+  <Spacer />
+  <Search size='large' />
+  <Spacer />
+  <Search
+    size='large'
+    i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
+  />
+  <Spacer />
+  <Search size='large' variant='button'>
+    test
+  </Search>
+</Playground>
