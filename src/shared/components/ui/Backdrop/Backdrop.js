@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { useStyles } from '@helpers/hooks/useStyles'
+import { useStyles } from 'shared/helpers/hooks/useStyles'
 import styles from './Backdrop.module.scss'
 
 /**

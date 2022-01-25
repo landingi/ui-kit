@@ -34,10 +34,6 @@ describe('<Dropdown/> mount', () => {
     expect(wrapper.prop('label')).toEqual(null)
   })
 
-  it('has default prop className with value dropdown', () => {
-    expect(wrapper.prop('className')).toEqual('dropdown')
-  })
-
   it('has default prop icon with value null', () => {
     expect(wrapper.prop('icon')).toEqual(null)
   })
@@ -129,9 +125,5 @@ describe('<Dropdown/> mount', () => {
     wrapper.update()
 
     expect(wrapper.find('.dropdown__body').length).toBe(1)
-  })
-
-  it('has `dropdown` class', () => {
-    expect(wrapper.hasClass('dropdown')).toBe(true)
   })
 })
