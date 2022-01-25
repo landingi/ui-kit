@@ -32,12 +32,15 @@
     }
 
     &:hover {
-      &__icon {
-        visibility: visible;
-        background: $color-button-hover;
+      background: $color-button-hover;
 
-        i {
-          color: $color-1;
+      :global {
+        .Dropdown-module__dropdown__wrapper__icon {
+          visibility: visible;
+
+          i {
+            color: $color-3;
+          }
         }
       }
     }
@@ -109,7 +112,7 @@
       }
 
       &:hover {
-        svg {
+        i, svg {
           color: $color-3;
         }
       }
