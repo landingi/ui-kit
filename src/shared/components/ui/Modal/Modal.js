@@ -274,7 +274,7 @@ Modal.propTypes = {
 }
 
 Modal.defaultProps = {
-  className: 'modal',
+  className: '',
   children: null,
   isClosable: true,
   isButtonDisabled: false,
