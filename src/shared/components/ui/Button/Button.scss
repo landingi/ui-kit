@@ -10,7 +10,7 @@
   min-height: 36px;
   position: relative;
   font-weight: 600;
-  transition: background .5s, box-shadow .5s;
+  transition: background 0.5s, box-shadow 0.5s;
 
   &:hover {
     text-decoration: none;
@@ -23,7 +23,8 @@
     background-color: $color-4;
     color: $color-white;
 
-    svg, i {
+    svg,
+    i {
       color: $color-white;
     }
 
@@ -34,7 +35,8 @@
       background-color: $color-4;
       color: $color-white;
 
-      svg, i {
+      svg,
+      i {
         color: $color-white;
       }
     }
@@ -48,7 +50,8 @@
       background-color: $color-brand;
     }
 
-    svg, i {
+    svg,
+    i {
       color: $color-white;
     }
 
@@ -56,7 +59,7 @@
     &:focus {
       background-color: $color-button-primay-hover;
       color: $color-white;
-      box-shadow: 0 20px 20px -15px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 20px -15px rgba(0, 0, 0, 0.2);
     }
   }
 
@@ -160,7 +163,8 @@
       background: $color-button-hover;
       color: $color-1;
 
-      svg, i {
+      svg,
+      i {
         color: $color-1;
       }
     }
@@ -174,7 +178,8 @@
     text-align: left;
     padding: 0 15px;
 
-    svg, i {
+    svg,
+    i {
       color: $color-3;
     }
 
@@ -183,7 +188,8 @@
     &:active {
       color: $color-1;
 
-      svg, i {
+      svg,
+      i {
         color: $color-1;
       }
     }
@@ -193,7 +199,8 @@
     color: $color-3;
     background: transparent;
 
-    svg, i {
+    svg,
+    i {
       color: $color-3;
     }
 
@@ -205,13 +212,15 @@
         background: $color-button-hover;
         color: $color-brand;
 
-        svg, i {
-          color:$color-brand;
+        svg,
+        i {
+          color: $color-brand;
         }
       }
 
-      svg, i {
-        color: $color-brand
+      svg,
+      i {
+        color: $color-brand;
       }
     }
 
@@ -219,7 +228,8 @@
       background: $color-button-hover;
       color: $color-1;
 
-      svg, i {
+      svg,
+      i {
         color: $color-1;
       }
     }
@@ -229,7 +239,8 @@
     color: $color-white;
     background: transparent;
 
-    svg, i {
+    svg,
+    i {
       color: $color-white;
     }
 
@@ -241,7 +252,8 @@
   &--black {
     color: $color-1;
 
-    svg, i {
+    svg,
+    i {
       color: $color-1;
     }
 
@@ -267,14 +279,16 @@
       background: $color-3;
     }
 
-    svg, i {
+    svg,
+    i {
       color: $color-3;
     }
 
     &:hover {
       background: $color-button-hover;
 
-      svg, i {
+      svg,
+      i {
         color: $color-1;
       }
     }
@@ -285,7 +299,8 @@
       background-color: $color-white;
       color: $color-4;
 
-      svg, i {
+      svg,
+      i {
         background-color: $color-white;
         color: $color-4;
       }
@@ -297,7 +312,8 @@
         background-color: $color-white;
         color: $color-4;
 
-        svg, i {
+        svg,
+        i {
           background-color: $color-white;
           color: $color-4;
         }
@@ -305,8 +321,59 @@
     }
   }
 
+  &--icon-transparent {
+    padding: 0;
+    min-width: 36px;
+
+    &:after {
+      background: $color-3;
+    }
+
+    svg,
+    i {
+      color: $color-3;
+    }
+
+    &:hover {
+      background: transparent;
+
+      svg,
+      i {
+        color: $color-1;
+      }
+    }
+
+    &:disabled,
+    &[disabled] {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: $color-4;
+
+      svg,
+      i {
+        background-color: transparent;
+        color: $color-4;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        cursor: not-allowed;
+        background-color: transparent;
+        color: $color-4;
+
+        svg,
+        i {
+          background-color: transparent;
+          color: $color-4;
+        }
+      }
+    }
+  }
+
   &--svg {
-    svg, i {
+    svg,
+    i {
       margin-right: $margin-small;
     }
   }
@@ -322,7 +389,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 220px;
-
     }
   }
 
@@ -343,7 +409,8 @@
     min-width: 32px;
     min-height: 32px;
 
-    svg, i  {
+    svg,
+    i {
       margin: 0 !important;
     }
   }
@@ -360,12 +427,13 @@
     justify-content: center;
     align-items: center;
 
-    svg, i {
+    svg,
+    i {
       color: $color-white;
     }
 
     &:hover {
-      background: $color-button-primay-hover
+      background: $color-button-primay-hover;
     }
   }
 
@@ -374,7 +442,8 @@
     color: $color-white;
     font-weight: 400;
 
-    svg, i {
+    svg,
+    i {
       color: $color-white;
     }
 
@@ -388,7 +457,8 @@
       color: $color-11;
       pointer-events: none;
 
-      svg, i {
+      svg,
+      i {
         color: $color-11;
       }
     }

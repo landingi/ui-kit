@@ -118,7 +118,7 @@ const Search = ({
           (onSubmit || onProtectedSubmit ? (
             <div className={styles.search__icon_button}>
               <Button
-                variant='icon'
+                variant='icon-transparent'
                 type={onProtectedSubmit ? 'button' : 'submit'}
                 size='input'
                 isDisabled={!isClearActive}
@@ -160,7 +160,11 @@ const Search = ({
 
         {isClearActive && variant === 'input' && (
           <div className={styles.search__clean}>
-            <Button variant='icon' size='input' onClick={handleCleanOnClick}>
+            <Button
+              variant='icon-transparent'
+              size='input'
+              onClick={handleCleanOnClick}
+            >
               <Icon icon='times' />
             </Button>
           </div>
