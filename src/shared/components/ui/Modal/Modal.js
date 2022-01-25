@@ -47,6 +47,8 @@ import styles from './Modal.module.scss'
  * @param {bool} props.isComponent - component instead of title
  * @param {object} props.component - component
  * @param {bool} props.isSubmit - modal button is submit type
+ * @param {string} props.headingAlign - align text in title, default: left
+ * @param {string} props.footerAlign - modal footer alignment, default: right
  * @return {object} An object of children element
  */
 const Modal = forwardRef(
@@ -82,13 +84,15 @@ const Modal = forwardRef(
       i18n,
       isComponent,
       component,
-      isSubmit
+      isSubmit,
+      headingAlign,
+      footerAlign
     },
     ref
   ) => {
     const renderTitle = () => (
       <div className={styles.modal__header}>
-        {i18n.title && <ModalHeader title={i18n.title} />}
+        {i18n.title && <ModalHeader title={i18n.title} align={headingAlign} />}
 
         {image && <Image src={image} size='auto' height={20} />}
 
@@ -135,6 +139,7 @@ const Modal = forwardRef(
       [styles['modal--fullscreen']]: size === 'fullscreen',
       [styles['modal--big']]: size === 'big',
       [styles['modal--medium']]: size === 'medium',
+      [styles['modal--small']]: size === 'small',
       [styles['modal--center']]: isCentered,
       [styles['modal--page']]: isPage
     })
@@ -179,7 +184,7 @@ const Modal = forwardRef(
                     <Fragment>
                       <Spacer space='small' />
 
-                      <ModalFooter align='right'>
+                      <ModalFooter align={footerAlign}>
                         {hasCustomButton ? (
                           <Button
                             variant='secondary'
@@ -264,7 +269,9 @@ Modal.propTypes = {
   component: PropTypes.node,
   isSubmit: PropTypes.bool,
   onClickCustomButton: PropTypes.func,
-  disableOverflow: PropTypes.bool
+  disableOverflow: PropTypes.bool,
+  headingAlign: PropTypes.oneOf(['right, center, left']),
+  footerAlign: PropTypes.oneOf(['right, center, left'])
 }
 
 Modal.defaultProps = {
@@ -305,7 +312,9 @@ Modal.defaultProps = {
   component: null,
   isSubmit: false,
   onClickCustomButton: null,
-  disableOverflow: false
+  disableOverflow: false,
+  headingAlign: 'left',
+  footerAlign: 'right'
 }
 
 export default Modal
