@@ -49,10 +49,6 @@
   &__body {
     padding: $padding-x-large $padding-big;
 
-    &--no-padding {
-      padding: 0;
-    }
-
     &--has-footer {
       padding: $padding-x-large $padding-big 0;
     }

@@ -47,7 +47,6 @@ import styles from './Modal.module.scss'
  * @param {bool} props.isComponent - component instead of title
  * @param {object} props.component - component
  * @param {bool} props.isSubmit - modal button is submit type
- * @param {bool} props.isBodyPadding - modal body padding, default: true
  * @param {string} props.headingAlign - align text in title, default: left
  * @param {string} props.footerAlign - modal footer alignment, default: right
  * @return {object} An object of children element
@@ -86,7 +85,6 @@ const Modal = forwardRef(
       isComponent,
       component,
       isSubmit,
-      isBodyPadding,
       headingAlign,
       footerAlign
     },
@@ -148,7 +146,6 @@ const Modal = forwardRef(
 
     const bodyStyles = useStyles({
       [styles['modal__body']]: true,
-      [styles['modal__body--no-padding']]: isBodyPadding,
       [styles['modal__body--has-footer']]: hasFooter
     })
 
@@ -317,7 +314,6 @@ Modal.defaultProps = {
   isSubmit: false,
   onClickCustomButton: null,
   disableOverflow: false,
-  isBodyPadding: true,
   headingAlign: 'left',
   footerAlign: 'right'
 }
