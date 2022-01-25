@@ -269,8 +269,8 @@ Modal.propTypes = {
   onClickCustomButton: PropTypes.func,
   disableOverflow: PropTypes.bool,
   isBodyPadding: PropTypes.string,
-  headingAlign: PropTypes.oneOf(['right, center, left']),
-  footerAlign: PropTypes.oneOf(['right, center, left'])
+  headingAlign: PropTypes.oneOf(['right', 'center', 'left']),
+  footerAlign: PropTypes.oneOf(['right', 'center', 'left'])
 }
 
 Modal.defaultProps = {
