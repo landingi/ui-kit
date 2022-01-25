@@ -103,6 +103,7 @@ const Search = ({
 
   const elementClasses = useStyles(
     {
+      [styles.search]: true,
       [styles['search--input']]: variant === 'input',
       [styles['search--button']]: variant === 'button',
       [styles[`search--${size}`]]: true
@@ -191,7 +192,7 @@ Search.propTypes = {
 }
 
 Search.defaultProps = {
-  className: 'search',
+  className: '',
   tag: 'form',
   size: 'medium',
   children: null,
