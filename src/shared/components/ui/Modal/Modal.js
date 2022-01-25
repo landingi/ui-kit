@@ -128,23 +128,18 @@ const Modal = forwardRef(
       </div>
     )
 
-    const defaultClassnames = Array.isArray(className)
-      ? className.reduce((rest, name) => {
-          return styles[name]
-            ? { ...rest, [styles[name]]: true }
-            : { ...rest, [name]: true }
-        }, {})
-      : { [styles[className]]: true }
-
-    const modalStyles = useStyles({
-      ...defaultClassnames,
-      [styles['modal--fullscreen']]: size === 'fullscreen',
-      [styles['modal--big']]: size === 'big',
-      [styles['modal--medium']]: size === 'medium',
-      [styles['modal--small']]: size === 'small',
-      [styles['modal--center']]: isCentered,
-      [styles['modal--page']]: isPage
-    })
+    const modalStyles = useStyles(
+      {
+        [styles['modal']]: true,
+        [styles['modal--fullscreen']]: size === 'fullscreen',
+        [styles['modal--big']]: size === 'big',
+        [styles['modal--medium']]: size === 'medium',
+        [styles['modal--small']]: size === 'small',
+        [styles['modal--center']]: isCentered,
+        [styles['modal--page']]: isPage
+      },
+      className
+    )
 
     const bodyStyles = useStyles({
       [styles['modal__body']]: true,
