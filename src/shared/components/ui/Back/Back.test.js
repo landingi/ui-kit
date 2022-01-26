@@ -3,6 +3,9 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Back from '@components/ui/Back'
 import Tooltip from '@components/ui/Tooltip'
+import registerIcons from '@helpers/icons'
+
+registerIcons()
 
 describe('<Back/> mount', () => {
   const props = {
