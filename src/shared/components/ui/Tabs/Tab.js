@@ -15,6 +15,7 @@ const cssClass = styles(scss)
  * @param {string|array} props.className - list of class names, default: `tab`
  * @param {function} props.onClick - onClick handler
  * @param {bool} props.isDisabled - is opening tab disabled
+ * @param {function} props.onDisabledClick - callback to invoke when tab is disabled
  * @param {object} props.children - children
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
@@ -24,6 +25,7 @@ const Tab = ({
   className,
   onClick,
   isDisabled,
+  onDisabledClick,
   children,
   ...restProps
 }) => {
@@ -47,7 +49,10 @@ const Tab = ({
    * invoke only custom handler without opening tab
    * @type {function}
    */
-  const handleDisabledTabClick = useCallback(event => onClick(event), [])
+  const handleDisabledTabClick = useCallback(
+    event => onDisabledClick(event),
+    []
+  )
 
   return (
     <span
@@ -71,13 +76,15 @@ Tab.propTypes = {
     PropTypes.string,
     PropTypes.func
   ]).isRequired,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  onDisabledClick: PropTypes.func
 }
 
 Tab.defaultProps = {
   className: 'tab',
   onClick: () => null,
-  isDisabled: false
+  isDisabled: false,
+  onDisabledClick: () => null
 }
 
 export default Tab
