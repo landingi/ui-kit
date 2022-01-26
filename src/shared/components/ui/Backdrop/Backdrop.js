@@ -15,7 +15,8 @@ const Backdrop = ({ className, onClick, zIndex }) => {
     {
       [styles.backdrop]: true,
       [styles['backdrop__index-4']]: String(zIndex) === '4',
-      [styles['backdrop__index-6']]: String(zIndex) === '6'
+      [styles['backdrop__index-6']]: String(zIndex) === '6',
+      [styles['backdrop__index-8']]: String(zIndex) === '8'
     },
     className
   )
@@ -28,7 +29,7 @@ Backdrop.displayName = 'Backdrop'
 Backdrop.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClick: PropTypes.func,
-  zIndex: PropTypes.oneOf(['4', '6'])
+  zIndex: PropTypes.oneOf(['4', '6', '8'])
 }
 
 Backdrop.defaultProps = {
