@@ -15,7 +15,6 @@ const cssClass = styles(scss)
  * @param {string|array} props.className - list of class names, default: `tab`
  * @param {function} props.onClick - onClick handler
  * @param {bool} props.isDisabled - is opening tab disabled
- * @param {function} props.onDisabledClick - callback to invoke when tab is disabled
  * @param {object} props.children - children
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
@@ -67,8 +66,7 @@ Tab.propTypes = {
     PropTypes.string,
     PropTypes.func
   ]).isRequired,
-  isDisabled: PropTypes.bool,
-  onDisabledClick: PropTypes.func
+  isDisabled: PropTypes.bool
 }
 
 Tab.defaultProps = {
