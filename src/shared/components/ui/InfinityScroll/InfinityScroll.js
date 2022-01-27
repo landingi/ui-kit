@@ -36,7 +36,7 @@ const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
     if (loaderRef.current) {
       observer.observe(loaderRef.current)
     }
-  }, [handleObserver])
+  }, [])
 
   useEffect(() => {
     if (shouldFetch === true) {
