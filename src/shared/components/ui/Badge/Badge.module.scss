@@ -11,7 +11,7 @@
   height: 20px;
   margin-right: 5px;
 
-  .badge-tooltip {
+  &-tooltip {
     max-width: 105px;
     display: inline-block;
     text-overflow: ellipsis;
@@ -19,90 +19,72 @@
     white-space: nowrap;
   }
 
+  &--accent-1 {
+    background: $color-accent-1;
+  }
+
+  &--accent-2 {
+    background: $color-accent-2;
+  }
+
+  &--accent-3 {
+    background: $color-accent-3;
+  }
+
+  &--accent-4 {
+    background: $color-accent-4;
+  }
+
+  &--accent-5 {
+    background: $color-accent-5;
+  }
+
+  &--accent-6 {
+    background: $color-accent-6;
+  }
+
+  &--accent-7 {
+    background: $color-accent-7;
+  }
+
+  &--alert {
+    background: $color-alert;
+  }
+
+  &--warning {
+    background: $color-warning;
+  }
+
+  &--success {
+    background: $color-success;
+  }
+
+  &--info {
+    background: $color-info;
+  }
+
+  &--pending {
+    background: $color-pending;
+  }
+
+  &--indicator {
+    border-radius: $radius-huge;
+  }
+
+  &--paid {
+    background: $color-success;
+  }
+
+  &--open {
+    background: $color-warning;
+  }
+
+  &--canceled {
+    background: $color-alert;
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
   }
-
-  :global {
-    .Dropdown__dropdown__wrapper {
-      background: inherit;
-      padding: inherit;
-      color: inherit;
-      min-height: 20px;
-      z-index: 0;
-
-      svg {
-        color: inherit;
-      }
-    }
-
-    .Dropdown__dropdown__label {
-      font-size: inherit;
-    }
-
-    .List__list-item--dropdown {
-      text-transform: initial;
-    }
-  }
-}
-
-.badge--accent-1 {
-  background: $color-accent-1;
-}
-
-.badge--accent-2 {
-  background: $color-accent-2;
-}
-
-.badge--accent-3 {
-  background: $color-accent-3;
-}
-
-.badge--accent-4 {
-  background: $color-accent-4;
-}
-
-.badge--accent-5 {
-  background: $color-accent-5;
-}
-
-.badge--accent-6 {
-  background: $color-accent-6;
-}
-
-.badge--alert {
-  background: $color-alert;
-}
-
-.badge--warning {
-  background: $color-warning;
-}
-
-.badge--success {
-  background: $color-success;
-}
-
-.badge--info {
-  background: $color-info;
-}
-
-.badge--pending {
-  background: $color-pending;
-}
-
-.badge--indicator {
-  border-radius: $radius-huge;
-}
-
-.badge--paid {
-  background: $color-success;
-}
-
-.badge--open {
-  background: $color-warning;
-}
-
-.badge--canceled {
-  background: $color-alert;
 }

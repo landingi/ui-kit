@@ -116,7 +116,7 @@ const Search = ({
       <div className={elementClasses}>
         {variant === 'input' &&
           (onSubmit || onProtectedSubmit ? (
-            <div className={styles.search__icon_button}>
+            <div className={styles['search__icon-button']}>
               <Button
                 variant='icon-transparent'
                 type={onProtectedSubmit ? 'button' : 'submit'}
