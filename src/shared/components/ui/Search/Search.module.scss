@@ -5,11 +5,8 @@
   flex: 1;
   box-sizing: border-box;
 
+  &__input,
   input {
-    all: unset;
-  }
-
-  &__input {
     box-sizing: border-box;
     border: 0;
     padding: 0 36px 0 44px;
