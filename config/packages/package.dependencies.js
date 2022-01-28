@@ -1,8 +1,5 @@
 module.exports = {
   productionDependencies: {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "0.1.15",
     "@u-wave/react-vimeo": "0.9.5",
     "classnames": "2.3.1",
     "date-fns": "2.24.0",
@@ -25,9 +22,6 @@ module.exports = {
     "react-color": "2.19.3",
   },
   documentationDependencies: {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "0.1.15",
     "@u-wave/react-vimeo": "0.9.5",
     "classnames": "2.3.1",
     "date-fns": "2.24.0",
@@ -52,9 +46,6 @@ module.exports = {
     "react-color": "2.19.3",
   },
   testingDependencies: {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "0.1.15",
     "@u-wave/react-vimeo": "0.9.5",
     "classnames": "2.3.1",
     "date-fns": "2.24.0",
