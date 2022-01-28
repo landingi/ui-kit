@@ -1,5 +1,0 @@
-import { Playground, Props } from 'docz'
-
-# ShowMore
-
-
