@@ -6,6 +6,7 @@ import scss from './Tabs.scss'
 
 const cssClass = styles(scss)
 
+//TODO Tabs css, mdx,test
 /**
  * tabs - stateless presentational component
  * @param {object} props - props
