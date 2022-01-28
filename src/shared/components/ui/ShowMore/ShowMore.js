@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import useIsOpen from '@helpers/hooks/useIsOpen'
-import scss from './ShowMore.scss'
+import styles from './ShowMore.module.scss'
 
 /**
  * Show more/less - stateful presentational component
@@ -52,12 +52,19 @@ const ShowMore = ({ height, children, i18n }) => {
         style={{
           maxHeight: sectionHeight
         }}
-        className={scss.container}
+        className={styles.container}
       >
-        <div ref={content}>{children}</div>
+        <div data-testid='content' ref={content}>
+          {children}
+        </div>
       </div>
       {isButtonDisplay && (
-        <button type='button' onClick={handleOnClick} className={scss.button}>
+        <button
+          data-testid='show-more'
+          type='button'
+          onClick={handleOnClick}
+          className={styles.button}
+        >
           {isOpen.value ? `${i18n.more}` : `${i18n.less}`}
         </button>
       )}
