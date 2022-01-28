@@ -7,6 +7,7 @@ import styles from './TimingToast.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 
+//TODO TimingToast replace react-pose with framer-motion library
 /**
  * Toast Animation, exports React-pose animations
  * @see {@link https://popmotion.io/pose/api/} for further information.
@@ -23,6 +24,7 @@ const toastProps = {
 
 const TimingToastAnimation = posed.div(toastProps)
 
+//TODO TimingToast test
 /**
  * TimingToast - stateless presentational component
  * @param {object} props - props
@@ -82,7 +84,7 @@ const TimingToast = ({ className }) => {
   )
 }
 
-TimingToast.displayName = 'Timing Toast'
+TimingToast.displayName = 'TimingToast'
 
 TimingToast.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
