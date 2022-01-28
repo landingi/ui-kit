@@ -1,7 +1,8 @@
 import Option from './Option'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Select.scss'
+import styles from './Select.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
 
 /**
@@ -13,17 +14,26 @@ import uuid from 'react-uuid'
  * @param {function} props.onChange - on change handler
  * @return {object} An object of children element
  */
-const select = ({ value, data, name, onChange }) => (
-  <select className={scss.select} name={name} onChange={onChange} value={value}>
-    {data.map(item => (
-      <Option key={uuid()} label={item.label} value={item.value} />
-    ))}
-  </select>
-)
+const Select = ({ value, data, name, onChange }) => {
+  const selectStyles = useStyles({ [styles['select']]: true })
 
-select.displayName = 'Select'
+  return (
+    <select
+      className={selectStyles}
+      name={name}
+      onChange={onChange}
+      value={value}
+    >
+      {data.map(item => (
+        <Option key={uuid()} label={item.label} value={item.value} />
+      ))}
+    </select>
+  )
+}
 
-select.propTypes = {
+Select.displayName = 'Select'
+
+Select.propTypes = {
   /**
    * Data elements
    */
@@ -52,9 +62,9 @@ select.propTypes = {
  * The default properties.
  * @type {Object}
  */
-select.defaultProps = {
+Select.defaultProps = {
   onChange: () => null,
   value: undefined
 }
 
-export default select
+export default Select
