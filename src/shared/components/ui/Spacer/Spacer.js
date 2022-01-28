@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Spacer.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Spacer.module.scss'
 
 /**
  * Spacer - stateless presentational component
@@ -12,16 +10,18 @@ const cssClass = styles(scss)
  * @param {string} props.space - space size
  * @return {object} An object of children element
  */
-const spacer = ({ className, space }) => (
-  <div
-    data-testid='spacer'
-    className={cssClass(className, `spacer--${space}`)}
-  />
-)
+const Spacer = ({ className, space }) => {
+  const spacerClasses = useStyles({
+    [styles[className]]: true,
+    [styles[`spacer--${space}`]]: true
+  })
 
-spacer.displayName = 'Spacer'
+  return <div data-testid='spacer' className={spacerClasses} />
+}
 
-spacer.propTypes = {
+Spacer.displayName = 'Spacer'
+
+Spacer.propTypes = {
   /**
    * Classname, default `spacer`
    */
@@ -44,9 +44,9 @@ spacer.propTypes = {
  * The default properties.
  * @type {Object}
  */
-spacer.defaultProps = {
+Spacer.defaultProps = {
   className: 'spacer',
   space: 'medium'
 }
 
-export default spacer
+export default Spacer
