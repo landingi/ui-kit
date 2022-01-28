@@ -123,7 +123,7 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
-      'ban'
+      'icon-block'
     )
 
     wrapper.find('Button').at(0).simulate('click')
@@ -138,7 +138,7 @@ describe('<Modal /> global mount', () => {
     })
 
     expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
-      'pencil-alt'
+      'icon-create'
     )
 
     wrapper.find('Button').at(0).simulate('click')

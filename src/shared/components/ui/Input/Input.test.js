@@ -83,10 +83,6 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().onBlur).toBeDefined()
   })
 
-  it('should have defined default prop className with value set to input', () => {
-    expect(wrapper.props().className).toEqual('input')
-  })
-
   it('should have defined default prop type with value set to text', () => {
     expect(wrapper.props().type).toEqual('text')
   })
@@ -154,7 +150,7 @@ describe('<Input /> mount', () => {
     ).toEqual('#2550AA')
     expect(
       wrapper.find('Tooltip').children().find('Icon').prop('icon')
-    ).toEqual('exclamation-circle')
+    ).toEqual('icon-exclamation-circle')
   })
 
   it('has no tooltip', () => {
