@@ -1,4 +1,5 @@
 export const hexRegex = /#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?/i
+
 export const rgbOrRgbaRegex =
   /^rgb(a?)[(]\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*,\s*([\d.]+\s*%?)\s*(?:,\s*([\d.]+)\s*)?[)]$/i
 
@@ -52,7 +53,6 @@ export const rgbTohex = rgb => {
 }
 
 /**
- *
  * @param {string} color in hex or rgb/rgba format eg. "#333" or rgb(211,222,222)/"rgba(255,211,30,0.5)"
  * @returns {object} an object of red, green, blue, opacity integers
  */

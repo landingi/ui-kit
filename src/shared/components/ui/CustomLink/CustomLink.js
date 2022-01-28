@@ -6,7 +6,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 /**
  * Custom Link - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `custom-link`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.variant - variant of color:  active, inactive, dark
  * @param {string} props.size - variant of font-size: 14, 16; default: 14
  * @param {string} props.target - target
@@ -52,7 +52,7 @@ const CustomLink = ({
 CustomLink.displayName = 'CustomLink'
 
 CustomLink.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   href: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   size: PropTypes.oneOf([10, 12, 14, 16]),

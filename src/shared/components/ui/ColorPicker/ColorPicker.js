@@ -9,6 +9,7 @@ import { convertColorToObj, rgbTohex, hexRegex } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './ColorPicker.module.scss'
 
+// TODO Color picker add className
 /**
  * Color picker - statefull component
  * @param {string} colorValue - color value to display in hex | rgb | rgba eg '#333' | 'rgb(255,21,34) |'rgba(31,22,34,0.5)
