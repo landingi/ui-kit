@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 
 const cssClass = styles(scss)
 
+//TODO InfinityScroll css, test
 /**
  * InfinityScroll - stateless presentational component
  * @param {object} props - props
@@ -20,6 +21,14 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
   // when true, trigger loadMore
   const [shouldFetch, setShouldFetch] = useState(false)
 
+  const handleObserver = entities => {
+    const target = entities[0]
+
+    if (target.isIntersecting) {
+      setShouldFetch(true)
+    }
+  }
+
   useEffect(() => {
     const options = {
       root: null,
@@ -32,14 +41,6 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
       observer.observe(loader.current)
     }
   }, [])
-
-  const handleObserver = entities => {
-    const target = entities[0]
-
-    if (target.isIntersecting) {
-      setShouldFetch(true)
-    }
-  }
 
   useEffect(() => {
     if (shouldFetch === true) {
