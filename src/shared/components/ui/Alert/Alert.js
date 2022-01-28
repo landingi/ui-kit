@@ -24,7 +24,7 @@ const Alert = ({ children, className, type }) => {
 
   return (
     <div className={alertStyles}>
-      <Icon icon={mapIconToClass(type)} />
+      <Icon icon={mapIconToClass(type)} color={type} />
 
       <div className={styles.alert__message}>{children}</div>
     </div>

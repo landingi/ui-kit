@@ -137,6 +137,7 @@
     "tiny-emitter": "2.1.0"
   },
   "resolutions": {
-    "@babel/traverse": "7.16.7"
+    "@babel/traverse": "7.16.8",
+    "@babel/core": "7.12.9"
   }
 }
