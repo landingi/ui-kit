@@ -1,9 +1,7 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './CustomLink.scss'
-
-const cssClass = styles(scss)
+import styles from './CustomLink.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Custom Link - stateless presentational component
@@ -14,6 +12,9 @@ const cssClass = styles(scss)
  * @param {string} props.target - target
  * @param {string} props.href - href
  * @param {string} props.label - label to display
+ * @param {string} props.underlined - add underlined to link
+ * @param {string} props.onClick - click handler
+ * @return {object} An object of children element
  */
 const CustomLink = ({
   className,
@@ -24,21 +25,28 @@ const CustomLink = ({
   size,
   underlined,
   onClick
-}) => (
-  <a
-    className={cssClass(
-      className,
-      `custom-link--${variant}`,
-      `custom-link--${size}`,
-      underlined && 'custom-link--underlined'
-    )}
-    href={href}
-    onClick={onClick}
-    target={target}
-  >
-    {label}
-  </a>
-)
+}) => {
+  const customLinkStyles = useStyles(
+    {
+      [styles['custom-link']]: true,
+      [styles[`custom-link--${variant}`]]: variant,
+      [styles[`custom-link--${size}`]]: size,
+      [styles['custom-link--underlined']]: underlined
+    },
+    className
+  )
+
+  return (
+    <a
+      className={customLinkStyles}
+      href={href}
+      onClick={onClick}
+      target={target}
+    >
+      {label}
+    </a>
+  )
+}
 
 CustomLink.displayName = 'CustomLink'
 
@@ -54,7 +62,7 @@ CustomLink.propTypes = {
 }
 
 CustomLink.defaultProps = {
-  className: 'custom-link',
+  className: '',
   size: 14,
   target: '_self',
   variant: 'active',
