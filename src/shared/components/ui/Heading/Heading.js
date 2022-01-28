@@ -8,22 +8,33 @@ import styles from './Heading.module.scss'
  * @param {object} props - props
  * @param {object} props.children - children
  * @param {number} props.level - level size, one of: 1, 2, 3, 4, 5, 6, large. Adds css class based on provided level ex. .h1, .h2 etc
- * @param {string|array} props.className- a list of class names, default: `heading`
+ * @param {string|array} props.className- a list of class names
  * @param {string} props.align - align text `left, center, right`
  * @param {string} props.margin - margin bottom
  * @param {bool} props.bold - bold text
  * @param {string} props.color - text color
  * @return {object} An object of children element
  */
-const Heading = ({ children, level, align, margin, bold, color }) => {
-  const elementClasses = useStyles({
-    [styles['heading']]: true,
-    [styles[`h${level}`]]: level,
-    [styles['heading--bold']]: bold,
-    [styles[`heading--${align}`]]: align,
-    [styles['heading--no-margin']]: margin === 'none',
-    [styles[`heading__color--${color}`]]: color
-  })
+const Heading = ({
+  className,
+  children,
+  level,
+  align,
+  margin,
+  bold,
+  color
+}) => {
+  const elementClasses = useStyles(
+    {
+      [styles['heading']]: true,
+      [styles[`h${level}`]]: level,
+      [styles['heading--bold']]: bold,
+      [styles[`heading--${align}`]]: align,
+      [styles['heading--no-margin']]: margin === 'none',
+      [styles[`heading__color--${color}`]]: color
+    },
+    className
+  )
 
   return <span className={elementClasses}>{children}</span>
 }
@@ -31,6 +42,7 @@ const Heading = ({ children, level, align, margin, bold, color }) => {
 Heading.displayName = 'Heading'
 
 Heading.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   align: PropTypes.string,
   bold: PropTypes.bool,
   children: PropTypes.node.isRequired,
@@ -40,6 +52,7 @@ Heading.propTypes = {
 }
 
 Heading.defaultProps = {
+  className: '',
   align: '',
   margin: '',
   color: undefined,
