@@ -10,6 +10,7 @@ import { getLanguage } from '@helpers/i18n'
 
 const cssClass = styles(scss)
 
+// TODO Date Time Picker css, mdx, tests. Fix jsx-no-bind
 /**
  * Date Time Picker - stateless presentational component
  * this component is a wrapper for react-date-range calendar
