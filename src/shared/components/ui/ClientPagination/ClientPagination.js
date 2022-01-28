@@ -10,6 +10,7 @@ import scss from './ClientPagination.scss'
 
 const cssClass = styles(scss)
 
+// TODO Pagination css, mdx and tests
 /**
  * Pagination - stateless presentational component
  * @param {object} props - props

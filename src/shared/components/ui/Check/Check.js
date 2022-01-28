@@ -5,6 +5,7 @@ import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Check.module.scss'
 
+// TODO Check tests and mdx
 /**
  * Check - stateless presentational component
  * @param {object} props - props

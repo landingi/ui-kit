@@ -3,6 +3,7 @@ import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BoxBackground.module.scss'
 
+// TODO BoxBackground tests
 /**
  * Box Background - stateless presentational component
  * @param {object} props - props

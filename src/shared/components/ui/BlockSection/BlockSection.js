@@ -12,6 +12,8 @@ import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BlockSection.module.scss'
 
+// TODO Block Section tests
+
 /**
  * Block Section - stateless presentational component
  * @param {object} props - props

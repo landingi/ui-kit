@@ -4,6 +4,7 @@ import Tooltip from '@components/ui/Tooltip'
 import styles from './Badge.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
+// TODO Badge tests
 /**
  * Badge - stateless presentational component
  * @param {object} props - props
