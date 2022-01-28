@@ -1,11 +1,8 @@
 import React from 'react'
 import TimingToast from '@components/global/TimingToast'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
 import { emitTimingToastToggle } from '@events/toast'
 import { act } from 'react-dom/test-utils'
-
-registerIcons()
 
 const component = <TimingToast />
 

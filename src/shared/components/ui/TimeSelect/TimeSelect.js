@@ -1,11 +1,11 @@
 import React, { Fragment, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
 import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
+import Icon from '@components/ui/Icon'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,
@@ -86,7 +86,7 @@ const TimeSelect = ({
   const renderDropdownLabel = useCallback(
     selectedValue => (
       <Row className={timeSelectLabelClasses} vertical='center'>
-        <FontAwesomeIcon icon='clock' />
+        <Icon icon='icon-time' />
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}

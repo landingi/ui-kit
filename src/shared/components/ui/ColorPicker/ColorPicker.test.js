@@ -1,11 +1,9 @@
 import React from 'react'
 import ColorPicker from './ColorPicker'
-import registerIcons from '@helpers/icons'
 import { convertColorToObj } from './helpers'
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-registerIcons()
 HTMLCanvasElement.prototype.getContext = () => {}
 
 describe('<ColorPicker/> mount', () => {

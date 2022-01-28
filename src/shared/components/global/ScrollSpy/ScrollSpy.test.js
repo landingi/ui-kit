@@ -1,9 +1,6 @@
 import React from 'react'
 import ScrollSpy from '@components/global/ScrollSpy'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const mockedOnClick = jest.fn()
 

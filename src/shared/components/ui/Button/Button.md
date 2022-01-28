@@ -1,7 +1,7 @@
 import { Playground, Props } from 'docz'
 import Button from '@components/ui/Button'
 import Spreader from '@components/ui/Spreader'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 
 # Button
 
@@ -130,25 +130,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 <Playground>
   <Button variant="icon" size="tiny">
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
   <Button variant="icon" size="medium">
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
   <Button variant="icon" size="large">
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
 
   <br /><br />
 
   <Button variant="icon" size="tiny" isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
   <Button variant="icon" size="medium" isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
   <Button variant="icon" size="large" isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
   </Button>
 </Playground>
 
@@ -156,30 +156,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 <Playground>
   <Button variant="secondary" size="tiny" hasIcon>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
   <Button variant="secondary" size="medium" hasIcon>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
   <Button variant="secondary" size="large" hasIcon>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
 
   <br /><br />
 
   <Button variant="secondary" size="tiny" hasIcon isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
   <Button variant="secondary" size="medium" hasIcon isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
   <Button variant="secondary" size="large" hasIcon isDisabled>
-    <FontAwesomeIcon icon="bullhorn" />
+    <Icon icon="icon-bullhorn" />
     <span>Good morning</span>
   </Button>
 </Playground>

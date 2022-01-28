@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Section from '@components/ui/Accordion/Section'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   handleOnClick: jest.fn(),

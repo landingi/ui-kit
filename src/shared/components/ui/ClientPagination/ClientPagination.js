@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 import { styles } from '@helpers/css'
 import Button from '@components/ui/Button'
 import List from '@components/ui/List'
@@ -49,7 +49,7 @@ const Pagination = ({
             size='small'
             variant='icon'
           >
-            <FontAwesomeIcon icon='caret-left' />
+            <Icon icon='icon-caret-left' />
           </Button>
 
           <List variant='inline'>
@@ -140,7 +140,7 @@ const Pagination = ({
             size='small'
             variant='icon'
           >
-            <FontAwesomeIcon icon='caret-right' />
+            <Icon icon='icon-caret-right' />
           </Button>
 
           <span className={scss.pagination__last}>
