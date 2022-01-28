@@ -1,9 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import registerIcons from '@helpers/icons'
 import Limit from '@components/ui/Limit'
-
-registerIcons()
 
 describe('<Limit /> mount', () => {
   const props = {
