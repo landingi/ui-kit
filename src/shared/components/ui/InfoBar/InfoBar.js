@@ -1,9 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './InfoBar.module.scss'
 
+// TODO InfoBar test
 /**
  * Info Bar - stateless presentational component
  * @param {object} props - props
@@ -36,7 +37,7 @@ const InfoBar = ({ children, className, type }) => {
   return (
     <div className={elementClasses}>
       <div className={boxClasses}>
-        <FontAwesomeIcon icon={icon} size='1x' />
+        <Icon icon={icon} />
       </div>
 
       <div className={styles.info__bar}>{children}</div>
