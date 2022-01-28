@@ -1,10 +1,8 @@
-import { styles } from '@helpers/css'
 import Heading from '@components/ui/Heading'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './StatsBadge.scss'
-
-const cssClass = styles(scss)
+import styles from './StatsBadge.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * StatsBadge - stateless presentational component
@@ -14,10 +12,21 @@ const cssClass = styles(scss)
  * @param {string} props.description
  * @return {object} An object of children element
  */
-const StatsBadge = ({ color, quantity, description }) => {
+const StatsBadge = ({ className, color, quantity, description }) => {
+  const badgeStyles = useStyles(
+    {
+      [styles['container']]: true,
+      [styles[`container--${color}`]]: color
+    },
+    className
+  )
+  const descriptionStyles = useStyles({
+    [styles['container--description']]: true
+  })
+
   return (
-    <div className={cssClass('container', `container--${color}`)}>
-      <div className={cssClass('container--description')}>
+    <div data-testid='badge' className={badgeStyles}>
+      <div className={descriptionStyles}>
         <Heading level={2} margin='none'>
           {quantity}
         </Heading>
@@ -31,12 +40,14 @@ const StatsBadge = ({ color, quantity, description }) => {
 StatsBadge.displayName = 'StatsBadge'
 
 StatsBadge.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   color: PropTypes.oneOf(['green', 'yellow', 'pink']),
   description: PropTypes.string.isRequired,
   quantity: PropTypes.number
 }
 
 StatsBadge.defaultProps = {
+  className: '',
   color: 'green',
   quantity: 0
 }
