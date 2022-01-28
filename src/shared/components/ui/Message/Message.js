@@ -7,15 +7,16 @@ import Vimeo from '@u-wave/react-vimeo'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Message.module.scss'
 
+//TODO Message mdx
 /**
  * Message - stateless presentational component
  * @param {object} props - props
+ * @param {object} props.children - children element
  * @param {string|array} props.className - list of custom class names out of component
  * @param {string} props.title - title
  * @param {string} props.message - message
  * @param {string} props.url - image/video url
  * @param {number} props.height - height of image/video
- * @param {object} props.children - children element
  * @param {number} props.titleLevel - title font size
  * @param {number} props.messageLevel - message font size
  * @param {bool} props.isVideo - video, default false
@@ -80,13 +81,13 @@ const Message = ({
       )}
 
       {message && (
-        <>
+        <Fragment>
           <Spacer space='tiny' />
 
           <Heading align='center' level={messageLevel}>
             {message}
           </Heading>
-        </>
+        </Fragment>
       )}
 
       {url && multimediaPosition === 'after' && renderMultimedia()}
@@ -114,9 +115,9 @@ Message.propTypes = {
 }
 
 Message.defaultProps = {
+  className: '',
   bold: false,
   children: null,
-  className: 'message',
   height: 220,
   isVideo: false,
   message: undefined,
