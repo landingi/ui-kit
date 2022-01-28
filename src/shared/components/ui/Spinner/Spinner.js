@@ -7,7 +7,7 @@ import styles from './Spinner.module.scss'
 /**
  * Spinner - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `spinner__spin`
+ * @param {string|array} props.className - list of class names
  * @return {object} An object of children element
  */
 const Spinner = ({ className }) => {
