@@ -8,18 +8,28 @@ import styles from './Check.module.scss'
 /**
  * Check - stateless presentational component
  * @param {object} props - props
+ * @param {string|array} props.className - list of class names
  * @param {bool} positive - positive
  * @param {object} children - children
  * @param {string} iconWidth - iconWidth
  * @param {bool} crossedOutOnPositive - defines whether text crossing out animation will be player or not when positive prop changes to true
  * @return {object} An object of children element
  */
-const Check = ({ children, positive, iconWidth, crossedOutOnPositive }) => {
-  const wrapperStyles = useStyles({
-    [styles.check]: true,
-    [styles['check--positive']]: positive,
-    [styles['check--crossed-out']]: positive && crossedOutOnPositive
-  })
+const Check = ({
+  className,
+  children,
+  positive,
+  iconWidth,
+  crossedOutOnPositive
+}) => {
+  const wrapperStyles = useStyles(
+    {
+      [styles['check']]: true,
+      [styles['check--positive']]: positive,
+      [styles['check--crossed-out']]: positive && crossedOutOnPositive
+    },
+    className
+  )
 
   return (
     <span className={wrapperStyles}>
@@ -37,6 +47,7 @@ const Check = ({ children, positive, iconWidth, crossedOutOnPositive }) => {
 Check.displayName = 'Check'
 
 Check.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.node.isRequired,
   positive: PropTypes.bool,
   iconWidth: PropTypes.string,
@@ -44,6 +55,7 @@ Check.propTypes = {
 }
 
 Check.defaultProps = {
+  className: '',
   positive: false,
   iconWidth: '1em',
   crossedOutOnPositive: false
