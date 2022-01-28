@@ -1,10 +1,7 @@
 import React, { useCallback as useCallbackMock, useEffect } from 'react'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
 import MonthRangePicker from '@components/ui/MonthRangePicker/MonthRangePicker'
 import Button from '@components/ui/Button'
-
-registerIcons()
 
 const props = {
   onChange: jest.fn(),
