@@ -13,7 +13,10 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const spacer = ({ className, space }) => (
-  <div className={cssClass(className, `spacer--${space}`)} />
+  <div
+    data-testid='spacer'
+    className={cssClass(className, `spacer--${space}`)}
+  />
 )
 
 spacer.displayName = 'Spacer'
