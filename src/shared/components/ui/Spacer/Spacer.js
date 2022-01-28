@@ -6,7 +6,7 @@ import styles from './Spacer.module.scss'
 /**
  * Spacer - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `spacer`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.space - space size
  * @return {object} An object of children element
  */
