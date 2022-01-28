@@ -83,7 +83,7 @@ describe('<AccordionSection /> mount', () => {
       arrowLabel: 'I am just an arrow label'
     })
 
-    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('chevron-up')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-up')
   })
 
   it('when is not open it has icon chevron down', () => {
@@ -93,6 +93,6 @@ describe('<AccordionSection /> mount', () => {
       arrowLabel: 'I am just an arrow label'
     })
 
-    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('chevron-down')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-down')
   })
 })

@@ -21,10 +21,4 @@ describe('<Spinner/> mount', () => {
   it('is mounted', () => {
     expect(wrapper.exists()).toBe(true)
   })
-
-  it('default prop `classname` should be spinner', () => {
-    const result = Spinner.defaultProps.className
-
-    expect(result).toBe('spinner')
-  })
 })

@@ -27,7 +27,7 @@ describe('<Alert /> mount', () => {
   })
 
   it('has `alert-message` class', () => {
-    expect(wrapper.hasClass('alert-message')).toBe(true)
+    expect(wrapper.children().hasClass('alert-message')).toBe(true)
   })
 
   it('is alert', () => {
