@@ -5,6 +5,7 @@ import scss from './Label.scss'
 
 const cssClass = styles(scss)
 
+// TODO Label css, check global, mdx, test
 /**
  * Label - stateless presentational component
  * @param {object} props - props

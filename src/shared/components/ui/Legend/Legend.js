@@ -6,18 +6,23 @@ import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Legend.module.scss'
 
+//TODO Legend test
 /**
  * Legend - stateless presentational component
  * @param {object} props - props
+ * @param {string|array} props.className - list of class names
  * @param {object[]} props.data - data
  * @param {string} props.alignment - alignment
  * @return {object} An object of children element
  */
-const Legend = ({ data, alignment }) => {
-  const wrapperClasses = useStyles({
-    [styles['container']]: true,
-    [styles[`container--${alignment}`]]: alignment
-  })
+const Legend = ({ className, data, alignment }) => {
+  const wrapperClasses = useStyles(
+    {
+      [styles['container']]: true,
+      [styles[`container--${alignment}`]]: alignment
+    },
+    className
+  )
 
   const elementClasses = variant =>
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -41,11 +46,13 @@ const Legend = ({ data, alignment }) => {
 Legend.displayName = 'Legend'
 
 Legend.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   alignment: PropTypes.oneOf(['vertical', 'horizontal']),
   data: PropTypes.arrayOf(legendShape).isRequired
 }
 
 Legend.defaultProps = {
+  className: '',
   alignment: 'vertical'
 }
 
