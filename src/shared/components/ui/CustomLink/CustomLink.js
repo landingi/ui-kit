@@ -12,8 +12,8 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} props.target - target
  * @param {string} props.href - href
  * @param {string} props.label - label to display
- * @param {string} props.underlined - add underlined to link
- * @param {string} props.onClick - click handler
+ * @param {boolean} props.underlined - add underlined to link
+ * @param {function} props.onClick - click handler
  * @return {object} An object of children element
  */
 const CustomLink = ({
@@ -38,6 +38,7 @@ const CustomLink = ({
 
   return (
     <a
+      data-testid='custom-link'
       className={customLinkStyles}
       href={href}
       onClick={onClick}
