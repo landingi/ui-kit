@@ -18,7 +18,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Select.module.scss'
 
 /**
- * Time Select - stateless component for selecting time
+ * TimeSelect - stateless component for selecting time
  * @param {object} props - props
  * @param {object} props.inModalName - class name of modal within time select gonna be render
  * @param {string} props.value - current selected time
