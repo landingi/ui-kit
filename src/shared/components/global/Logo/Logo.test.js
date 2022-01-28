@@ -1,37 +1,15 @@
 import React from 'react'
 import { ShortLogo, LongLogo } from '@components/global/Logo'
-import { mount } from 'enzyme'
-
-const component = <ShortLogo />
+import { render } from '@jestutils'
 
 describe('<ShortLogo/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<ShortLogo />)
   })
 })
 
 describe('<LongLogo /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(<LongLogo />)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<LongLogo />)
   })
 })
