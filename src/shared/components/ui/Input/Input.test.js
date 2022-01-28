@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Input from '@components/ui/Input'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
