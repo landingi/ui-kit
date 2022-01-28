@@ -1,43 +1,50 @@
 import React from 'react'
 import StatsBadge from '@components/ui/StatsBadge'
-import { mountWithIntl } from '@jestutils'
-
-const statsBadgeComponent = <StatsBadge description='word.statistics' />
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 describe('<StatsBadge /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(statsBadgeComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<StatsBadge description='word.statistics' />)
   })
 
-  it('has green color', () => {
-    expect(wrapper.prop('color')).toBe('green')
-    expect(wrapper.find('.container').hasClass('container--green')).toBe(true)
+  it('has green color by default', () => {
+    render(<StatsBadge description='word.statistics' />)
+
+    const badge = screen.getByTestId('badge')
+
+    expect(badge).toHaveClass('container--green')
   })
 
-  it('has yellow color', () => {
-    wrapper.setProps({
-      color: 'yellow'
-    })
+  it('has yellow color when color prop equals yellow', () => {
+    render(<StatsBadge description='word.statistics' color='yellow' />)
 
-    expect(wrapper.find('.container').hasClass('container--yellow')).toBe(true)
+    const badge = screen.getByTestId('badge')
+
+    expect(badge).toHaveClass('container--yellow')
   })
 
-  it('has description box', () => {
-    wrapper.setProps({
-      variant: 'alert'
-    })
-    expect(
-      wrapper.find('.container--description').hasClass('container--description')
-    ).toBe(true)
+  it('has pink color when color prop equals pink', () => {
+    render(<StatsBadge description='word.statistics' color='pink' />)
+
+    const badge = screen.getByTestId('badge')
+
+    expect(badge).toHaveClass('container--pink')
+  })
+
+  it('has quantity displayed when prop is set', () => {
+    render(<StatsBadge description='word.statistics' quantity={50} />)
+
+    const quantity = screen.getByText('50')
+
+    expect(quantity).toBeInTheDocument()
+  })
+
+  it('has description displayed when prop is set', () => {
+    render(<StatsBadge description='word.statistics' quantity={50} />)
+
+    const description = screen.getByText('word.statistics')
+
+    expect(description).toBeInTheDocument()
   })
 })
