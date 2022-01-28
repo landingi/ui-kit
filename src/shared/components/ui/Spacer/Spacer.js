@@ -11,10 +11,13 @@ import styles from './Spacer.module.scss'
  * @return {object} An object of children element
  */
 const Spacer = ({ className, space }) => {
-  const spacerClasses = useStyles({
-    [styles[className]]: true,
-    [styles[`spacer--${space}`]]: true
-  })
+  const spacerClasses = useStyles(
+    {
+      [styles['spacer']]: true,
+      [styles[`spacer--${space}`]]: space
+    },
+    className
+  )
 
   return <div data-testid='spacer' className={spacerClasses} />
 }
@@ -22,13 +25,7 @@ const Spacer = ({ className, space }) => {
 Spacer.displayName = 'Spacer'
 
 Spacer.propTypes = {
-  /**
-   * Classname, default `spacer`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Space
-   */
   space: PropTypes.oneOf([
     'mini',
     'tiny',
@@ -40,12 +37,8 @@ Spacer.propTypes = {
   ])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Spacer.defaultProps = {
-  className: 'spacer',
+  className: '',
   space: 'medium'
 }
 
