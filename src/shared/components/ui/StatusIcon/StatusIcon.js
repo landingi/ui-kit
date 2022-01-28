@@ -41,7 +41,7 @@ StatusIcon.propTypes = {
 }
 
 StatusIcon.defaultProps = {
-  className: 'status-icon',
+  className: '',
   size: 'medium',
   variant: 'active'
 }
