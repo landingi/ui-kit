@@ -193,7 +193,7 @@ describe('<Input /> mount', () => {
     })
 
     expect(wrapper.find('label').prop('className')).toEqual(
-      'label label--normal'
+      'input__label label--normal'
     )
   })
 

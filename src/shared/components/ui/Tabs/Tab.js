@@ -14,11 +14,19 @@ const cssClass = styles(scss)
  * @param {string} props.name - name
  * @param {string|array} props.className - list of class names, default: `tab`
  * @param {function} props.onClick - onClick handler
+ * @param {bool} props.isDisabled - is opening tab disabled
  * @param {object} props.children - children
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
  */
-const Tab = ({ name, className, onClick, children, ...restProps }) => {
+const Tab = ({
+  name,
+  className,
+  onClick,
+  isDisabled,
+  children,
+  ...restProps
+}) => {
   const tabContext = useContext(TabContext)
   const activeTab = tabContext.activeTab === name ? 'Tabs__tab--active' : ''
   const classNames = `${cssClass(className)} ${activeTab}`
@@ -34,8 +42,19 @@ const Tab = ({ name, className, onClick, children, ...restProps }) => {
     onClick(event)
   }, [])
 
+  /**
+   * Handle disabled tab click
+   * invoke only custom handler without opening tab
+   * @type {function}
+   */
+  const handleDisabledTabClick = useCallback(event => onClick(event), [])
+
   return (
-    <span className={classNames} onClick={handleClick} {...restProps}>
+    <span
+      className={classNames}
+      onClick={isDisabled ? handleDisabledTabClick : handleClick}
+      {...restProps}
+    >
       <Button variant='tabs'>{children}</Button>
     </span>
   )
@@ -51,12 +70,15 @@ Tab.propTypes = {
     PropTypes.node,
     PropTypes.string,
     PropTypes.func
-  ]).isRequired
+  ]).isRequired,
+  isDisabled: PropTypes.bool,
+  onDisabledClick: PropTypes.func
 }
 
 Tab.defaultProps = {
   className: 'tab',
-  onClick: () => null
+  onClick: () => null,
+  isDisabled: false
 }
 
 export default Tab

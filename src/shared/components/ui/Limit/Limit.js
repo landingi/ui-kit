@@ -1,13 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { formatNumeric } from '@helpers/data'
-import { styles } from '@helpers/css'
+import styles from './Limit.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import Spreader from '@components/ui/Spreader'
 import Tooltip from '@components/ui/Tooltip'
-import scss from './Limit.scss'
-
-const cssClass = styles(scss)
 
 /**
  * Limit - stateless presentational component
@@ -34,33 +32,40 @@ const Limit = ({
   tooltip,
   i18n
 }) => {
+  const limitSmallStyles = useStyles(
+    {
+      [styles.limit]: true
+    },
+    className
+  )
+
   return (
-    <div className={cssClass(className)}>
-      <div className={cssClass('limit--icon')}>
+    <div className={limitSmallStyles}>
+      <div className={styles['limit--icon']}>
         <FontAwesomeIcon icon={icon} size='lg' />
       </div>
 
-      <div className={cssClass('limit--info')}>
-        <span className={cssClass('info')}>
-          <span className={cssClass('info--quantity')}>
+      <div className={styles['limit--info']}>
+        <span className={styles.info}>
+          <span className={styles['info--quantity']}>
             {formatNumeric(quantity)}
           </span>
 
-          <span className={cssClass('info--limit')}>
+          <span className={styles['info--limit']}>
             {unlimited ? <span> / &#8734;</span> : ` / ${formatNumeric(limit)}`}
           </span>
 
           {Boolean(total) && (
-            <span className={cssClass('info--total')}>
+            <span className={styles['info--total']}>
               {i18n.total}:<b>{total}</b>
             </span>
           )}
         </span>
 
-        <span className={cssClass('info--name')}>
+        <span className={styles['info--name']}>
           {name}
 
-          {tooltip && (
+          {Boolean(tooltip) && (
             <Fragment>
               <Spreader spread='tiny' />
 
@@ -92,7 +97,7 @@ Limit.propTypes = {
 }
 
 Limit.defaultProps = {
-  className: 'limit',
+  className: '',
   tooltip: '',
   total: 0,
   unlimited: false,

@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import { ChromePicker } from 'react-color'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useClickOutside } from '@helpers/hooks/useClickOutside'
-import { styles } from '@helpers/css'
-import scss from './ColorPicker.scss'
 import Paragraph from '@components/ui/Paragraph'
 import Button from '@components/ui/Button'
 import { convertColorToObj, rgbTohex, hexRegex } from './helpers'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './ColorPicker.module.scss'
 
 /**
  * Color picker - statefull component
@@ -29,6 +27,23 @@ const ColorPicker = ({
   onColorChange,
   colorPanelHandlers: { onClickFavoriteHandler, onClickDeleteHandler }
 }) => {
+  const hasAnyFavoriteColor = favoriteColors.length >= 1
+
+  const colorPreviewClasses = useStyles({
+    [styles['color-picker__color-box']]: true,
+    [styles['color-picker__color-box--preview']]: true
+  })
+
+  const colorPickerClasses = useStyles({
+    [styles['color-picker']]: true,
+    [styles['color-picker--has-color-palette']]: hasAnyFavoriteColor
+  })
+
+  const colorSwatchClasses = useStyles({
+    [styles['color-picker__color-box']]: true,
+    [styles['color-picker__color-box--swatch']]: true
+  })
+
   const [isPickerDisplayed, setPickerDisplay] = useState(false)
   const [selectedFavColor, setSelectedFavColor] = useState(null)
 
@@ -37,7 +52,6 @@ const ColorPicker = ({
 
   const rgbaColor = convertColorToObj(colorValue)
   const { r, g, b, a } = rgbaColor
-  const hasAnyFavoriteColor = favoriteColors.length >= 1
 
   const handleToggleColorPicker = useCallback(
     () => setPickerDisplay(prevState => !prevState),
@@ -78,37 +92,51 @@ const ColorPicker = ({
     handleCloseColorPicker()
   }
 
+  const renderColorSwatches = colors =>
+    colors.map(({ id, color }) => {
+      const isActiveColor =
+        id === selectedFavColor?.id
+          ? styles['color-picker__color-box--active']
+          : ''
+
+      return (
+        <div
+          data-testid={id}
+          data-key={id}
+          key={id}
+          style={{ backgroundColor: `${color}` }}
+          className={`${colorSwatchClasses} ${isActiveColor}`}
+          onClick={handleSelectingFavColor}
+        />
+      )
+    })
+
   useClickOutside(pickerRef, handleCloseColorPicker)
   useClickOutside(colorPaletteRef, removeMarkedFavColor)
 
   return (
-    <div ref={pickerRef} className={cssClass('wrapper')}>
+    <div ref={pickerRef} className={styles.wrapper}>
       <div
-        className={cssClass('color-picker__label')}
+        data-testid='color-picker-label'
+        className={styles['color-picker__label']}
         onClick={handleToggleColorPicker}
       >
-        <Paragraph color='3' size={16} weight={400} padding='none'>
+        <Paragraph color='accent-3' size={16} weight={400} padding='none'>
           {i18n.label}
         </Paragraph>
         <div
+          data-testid='color-preview'
           style={{
             backgroundColor: `rgba(${r}, ${g}, ${b}, ${a})`
           }}
-          className={cssClass(
-            'color-picker__color-box',
-            'color-picker__color-box--preview'
-          )}
+          className={colorPreviewClasses}
         />
       </div>
       {isPickerDisplayed && (
-        <div
-          className={cssClass('color-picker', {
-            'color-picker--has-color-palette': hasAnyFavoriteColor
-          })}
-        >
+        <div data-testid='color-picker' className={colorPickerClasses}>
           <ChromePicker color={rgbaColor} onChange={handleColorChange} />
-          <div className={cssClass('color-picker__switches')}>
-            <div className={cssClass('icons-wrapper')}>
+          <div className={styles['color-picker__switches']}>
+            <div className={styles['icons-wrapper']}>
               <Button
                 size='tiny'
                 variant='transparent'
@@ -133,24 +161,9 @@ const ColorPicker = ({
             {hasAnyFavoriteColor && (
               <div
                 ref={colorPaletteRef}
-                className={cssClass('color-picker__color-palette')}
+                className={styles['color-picker__color-palette']}
               >
-                {favoriteColors.map(({ id, color }) => (
-                  <div
-                    data-key={id}
-                    key={id}
-                    style={{ backgroundColor: `${color}` }}
-                    className={cssClass(
-                      'color-picker__color-box',
-                      'color-picker__color-box--swatch',
-                      {
-                        'color-picker__color-box--active':
-                          id === selectedFavColor?.id
-                      }
-                    )}
-                    onClick={handleSelectingFavColor}
-                  />
-                ))}
+                {renderColorSwatches(favoriteColors)}
               </div>
             )}
           </div>

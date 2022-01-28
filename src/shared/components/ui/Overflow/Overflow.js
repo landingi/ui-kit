@@ -1,44 +1,36 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Overflow.scss'
+import styles from './Overflow.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
+ * Overflow - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - childrens
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
  */
-const cssClass = styles(scss),
-  /**
-   * Overflow - stateless presentational component
-   * @param {object} props - props
-   * @param {object} props.children - childrens
-   * @param {string|array} props.className - list of class names, default: overflow
-   * @return {object} An object of children element
-   */
-  overflow = ({ children, className }) => (
-    <div className={cssClass(className)}>{children}</div>
+const Overflow = ({ children, className }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['overflow']]: true
+    },
+    className
   )
 
-overflow.displayName = 'Overflow'
+  return <div className={elementClasses}>{children}</div>
+}
 
-overflow.propTypes = {
-  /**
-   * Children elements
-   */
+Overflow.displayName = 'Overflow'
+
+Overflow.propTypes = {
   children: PropTypes.node,
-  /**
-   * Classname, default `overflow`
-   */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-overflow.defaultProps = {
+Overflow.defaultProps = {
   children: null,
-  className: 'overflow'
+  className: ''
 }
 
-export default overflow
+export default Overflow

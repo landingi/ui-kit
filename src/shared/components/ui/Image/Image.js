@@ -11,17 +11,26 @@ import styles from './Image.module.scss'
  * @param {string|array} props.className - list of class names
  * @param {number|string} props.size - width of the image
  * @param {number} props.height - height of the image
+ * @param {boolean} props.auto - auto size of image
+ * @param {boolean} props.small - small image
  * @return {object} An object of children element
  */
-const Image = ({ src, alt, className, size, height }) => (
-  <img
-    alt={alt}
-    className={useStyles({ [styles[className]]: true })}
-    height={height}
-    src={src}
-    width={size}
-  />
-)
+const Image = ({ src, alt, className, size, height, auto, small }) => {
+  const elementStyles = useStyles(
+    { [styles['image--auto']]: auto, [styles['image--small']]: small },
+    className
+  )
+
+  return (
+    <img
+      alt={alt}
+      className={elementStyles}
+      height={height}
+      src={src}
+      width={size}
+    />
+  )
+}
 
 Image.displayName = 'Image'
 
@@ -33,14 +42,18 @@ Image.propTypes = {
   src: PropTypes.oneOfType([
     PropTypes.string.isRequired,
     PropTypes.object.isRequired
-  ]).isRequired
+  ]).isRequired,
+  auto: PropTypes.bool,
+  small: PropTypes.bool
 }
 
 Image.defaultProps = {
   alt: null,
-  className: null,
+  className: '',
   height: null,
-  size: null
+  size: null,
+  auto: false,
+  small: false
 }
 
 export default memo(Image)

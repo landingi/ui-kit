@@ -1,12 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { mapIconToClass } from '@helpers/data'
-import { styles } from '@helpers/css'
 import Close from '@components/ui/Close'
+import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Notification.scss'
-
-const cssClass = styles(scss)
+import styles from './Notification.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Notification - stateless presentational component
@@ -26,19 +24,29 @@ const Notification = ({
   isClosable,
   onClick,
   hasTime
-}) => (
-  <div className={cssClass(className, `notification--${type}`)}>
-    <div className={scss.content}>
-      <FontAwesomeIcon icon={mapIconToClass(type) || 'check'} size='sm' />
+}) => {
+  const elementStyles = useStyles(
+    {
+      [styles['notification']]: true,
+      [styles[`notification--${type}`]]: type
+    },
+    className
+  )
 
-      <p className={scss.notification__message}>{children}</p>
+  return (
+    <div className={elementStyles}>
+      <div className={styles.content}>
+        <Icon icon={mapIconToClass(type) || 'icon-ok'} iconColor='white' />
 
-      {isClosable && <Close onClick={onClick} />}
+        <p className={styles.notification__message}>{children}</p>
+
+        {isClosable && <Close onClick={onClick} iconColor='white' />}
+      </div>
+
+      {hasTime && <span className={styles.time} />}
     </div>
-
-    {hasTime && <span className={scss.time} />}
-  </div>
-)
+  )
+}
 
 Notification.displayName = 'Notification'
 

@@ -11,13 +11,6 @@
   }
 }
 
-:global
-div.TimingToast__toast {
-  .Notification__notification {
-    border-radius: $radius-tiny !important;
-  }
-}
-
 @keyframes show-toast {
   0% {
     opacity: 1;

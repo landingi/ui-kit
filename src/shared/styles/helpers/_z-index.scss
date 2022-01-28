@@ -1,4 +1,9 @@
-$z-index-sidebar: 3;
+$z-index-sidebar: 5;
+$z-index-sidebar-backdrop: 4;
+$z-index-sidebar-workspaces: 7;
+$z-index-sidebar-workspaces-backdrop: 6;
+$z-index-product-updates: 9;
+$z-index-product-updates-backdrop: 8;
 $z-index-toast: 1000;
 $z-index-topbar: 4;
 $z-index-backdrop: 250996;
@@ -14,5 +19,4 @@ $z-index-tooltip: 250999;
 $z-index-list--item: 2;
 $z-index-hover-table: 3;
 $z-index-label: 1;
-$z-index-color-picker: 251001
-
+$z-index-color-picker: 251001;

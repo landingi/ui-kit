@@ -1,11 +1,9 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
 import StepNumber from '@components/ui/StepNumber'
-import scss from './Instruction.scss'
+import styles from './Instruction.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
-
-const cssClass = styles(scss)
 
 /**
  * Instruction - stateless presentational component
@@ -15,10 +13,17 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 function Instruction({ className, data }) {
+  const instructionStyles = useStyles(
+    {
+      [styles.instruction]: true
+    },
+    className
+  )
+
   return (
-    <div className={cssClass(className)}>
+    <div className={instructionStyles}>
       {data.map(({ content }, index) => (
-        <div className={cssClass('instruction__step')} key={uuid()}>
+        <div className={styles.instruction__step} key={uuid()}>
           <StepNumber absolute size='medium' step={index + 1} />
 
           {content}
@@ -40,7 +45,7 @@ Instruction.propTypes = {
 }
 
 Instruction.defaultProps = {
-  className: 'instruction'
+  className: ''
 }
 
 export default Instruction

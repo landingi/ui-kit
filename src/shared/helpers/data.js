@@ -17,10 +17,10 @@ export const isEmpty = value =>
  * @return {object}
  */
 const fontIcons = {
-  alert: 'times',
-  info: 'info',
-  success: 'check',
-  warning: 'exclamation'
+  alert: 'icon-remove',
+  info: 'icon-info',
+  success: 'icon-ok',
+  warning: 'icon-exclamation'
 }
 
 /**

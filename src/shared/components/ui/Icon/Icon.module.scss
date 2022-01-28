@@ -1,0 +1,21 @@
+.icon {
+  &--default {
+    color: $color-12;
+  }
+
+  &--white {
+    color: $color-white;
+  }
+
+  &--primary {
+    color: $color-brand;
+  }
+
+  &--color-2 {
+    color: $color-2;
+  }
+
+  &--color-3 {
+    color: $color-3;
+  }
+}

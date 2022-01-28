@@ -30,7 +30,7 @@ describe('<FormikToggle /> mount', () => {
     expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('properly renders error label when error exist', () => {
+  it('properly renders error label when error exist', async done => {
     const errorsProps = {
       id: 'jestem-id',
       field: {
@@ -49,5 +49,7 @@ describe('<FormikToggle /> mount', () => {
     render(<FormikToggle {...errorsProps} />)
 
     expect(screen.findByText('error-name')).toBeTruthy()
+
+    done()
   })
 })

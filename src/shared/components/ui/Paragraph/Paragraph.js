@@ -13,6 +13,7 @@ import styles from './Paragraph.module.scss'
  * @param {string} props.align - align
  * @param {string} props.padding - padding
  * @param {number} props.weight - weight
+ * @param {number} props.line - line height
  * @return {object} An object of children element
  */
 const Paragraph = ({
@@ -23,25 +24,22 @@ const Paragraph = ({
   align,
   padding,
   weight,
-  uppercase
+  uppercase,
+  line
 }) => {
-  const defaultClassnames = Array.isArray(className)
-    ? className.reduce((rest, name) => {
-        return styles[name]
-          ? { ...rest, [styles[name]]: true }
-          : { ...rest, [name]: true }
-      }, {})
-    : { [styles[className]]: true }
-
-  const paragraphStyles = useStyles({
-    ...defaultClassnames,
-    [styles[`${className}-color--${color}`]]: color,
-    [styles[`${className}-size--${size}`]]: size,
-    [styles[`${className}-padding--${padding}`]]: padding,
-    [styles[`${className}-align--${align}`]]: align,
-    [styles[`${className}-weight--${weight}`]]: weight,
-    [styles['paragraph-uppercase']]: uppercase
-  })
+  const paragraphStyles = useStyles(
+    {
+      [styles.paragraph]: true,
+      [styles[`paragraph-color--${color}`]]: color,
+      [styles[`paragraph-size--${size}`]]: size,
+      [styles[`paragraph-padding--${padding}`]]: padding,
+      [styles[`paragraph-align--${align}`]]: align,
+      [styles[`paragraph-weight--${weight}`]]: weight,
+      [styles['paragraph-uppercase']]: uppercase,
+      [styles[`paragraph-line--${line}`]]: line
+    },
+    className
+  )
 
   return <p className={paragraphStyles}>{children}</p>
 }
@@ -51,22 +49,33 @@ Paragraph.displayName = 'Paragraph'
 Paragraph.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  color: PropTypes.string,
-  size: PropTypes.oneOf([12, 14, 16, 18]),
-  align: PropTypes.string,
+  color: PropTypes.oneOf([
+    'accent-1',
+    'accent-2',
+    'accent-3',
+    'accent-4',
+    'accent-5',
+    'accent-6',
+    'info',
+    'white'
+  ]),
+  size: PropTypes.oneOf([10, 12, 14, 16, 18]),
+  align: PropTypes.oneOf(['left', 'center', 'right']),
   padding: PropTypes.oneOf(['small', 'medium', 'none']),
-  weight: PropTypes.number,
-  uppercase: PropTypes.bool
+  weight: PropTypes.oneOf([300, 400, 700]),
+  uppercase: PropTypes.bool,
+  line: PropTypes.oneOf([18, 20])
 }
 
 Paragraph.defaultProps = {
-  className: 'paragraph',
+  className: '',
   color: 'accent-1',
   size: 14,
-  align: null,
+  align: 'left',
   padding: 'medium',
   weight: 300,
-  uppercase: false
+  uppercase: false,
+  line: 18
 }
 
 export default Paragraph

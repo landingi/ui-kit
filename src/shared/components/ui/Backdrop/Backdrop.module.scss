@@ -6,6 +6,18 @@
   z-index: $z-index-backdrop;
   left: 0;
   top: 0;
+
+  &__index-4 {
+    z-index: $z-index-sidebar-backdrop;
+  }
+
+  &__index-6 {
+    z-index: $z-index-sidebar-workspaces-backdrop;
+  }
+
+  &__index-8 {
+    z-index: $z-index-product-updates-backdrop;
+  }
 }
 
 @supports (backdrop-filter: none) {

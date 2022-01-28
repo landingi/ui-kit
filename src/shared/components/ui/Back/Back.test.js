@@ -1,32 +1,32 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Back from '@components/ui/Back'
+import Tooltip from '@components/ui/Tooltip'
 import registerIcons from '@helpers/icons'
 
 registerIcons()
 
-const props = {
-  children: 'test'
-}
-
-const backComponent = <Back {...props} />
-
 describe('<Back/> mount', () => {
-  let wrapper
+  const props = {
+    className: 'class-name',
+    content: <Tooltip>Content</Tooltip>,
+    url: '/payments/subscription/cancel'
+  }
 
-  beforeEach(() => {
-    wrapper = mount(backComponent)
+  it('should display proper text', () => {
+    const { getByText } = render(<Back {...props} />)
+
+    const tooltip = getByText('Content')
+
+    expect(tooltip).toBeTruthy()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  it('should have class class-name', () => {
+    const { getByTestId } = render(<Back {...props} />)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const back = getByTestId('back')
 
-  it('has `back` class', () => {
-    expect(wrapper.hasClass('back')).toBe(true)
+    expect(back).toHaveClass('class-name')
   })
 })
