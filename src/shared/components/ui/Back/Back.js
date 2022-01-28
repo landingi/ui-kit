@@ -1,10 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getLocationPath } from '@helpers/url'
 import Button from '@components/ui/Button'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Tooltip from '@components/ui/Tooltip'
 import styles from './Back.module.scss'
+import Icon from '@components/ui/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Back - stateless presentational component
@@ -15,17 +16,24 @@ import styles from './Back.module.scss'
  * @return {object} An object of children element
  */
 const Back = ({ className, url, content }) => {
+  const elementStyles = useStyles(
+    {
+      [styles['back']]: true
+    },
+    className
+  )
+
   const location = getLocationPath(),
     urlMap = location.match('/payments/subscription/cancel')
       ? '/payments/subscription'
       : url
 
   return (
-    <span data-testid='back ' className={className}>
+    <span data-testid='back' className={elementStyles}>
       <a href={urlMap}>
         <Tooltip content={content} placement='bottom'>
           <Button variant='icon'>
-            <FontAwesomeIcon icon='arrow-left' />
+            <Icon icon='icon-arrow-left' />
           </Button>
         </Tooltip>
       </a>
@@ -37,12 +45,12 @@ Back.displayName = 'Back'
 
 Back.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  url: PropTypes.string
+  url: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
 Back.defaultProps = {
-  className: styles.back,
+  className: '',
   content: '',
   url: ''
 }
