@@ -15,7 +15,7 @@ import styles from './BlockSection.module.scss'
 /**
  * Block Section - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `block-section`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.title - title
  * @param {string} props.message - message
  * @param {string} props.button - button title
