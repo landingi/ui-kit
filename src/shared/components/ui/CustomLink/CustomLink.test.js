@@ -1,58 +1,21 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { fireEvent } from '@testing-library/react'
 import CustomLink from '@components/ui/CustomLink'
-import registerIcons from '@helpers/icons'
+import '@testing-library/jest-dom'
 
-registerIcons()
+describe('<CustomLink/> tests', () => {
+  const props = { label: 'Custom link' }
 
-const CustomLinkComponent = <CustomLink href='foo.com' label='active' />
-
-describe('<CustomLink /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(CustomLinkComponent)
+  it('<CustomLink/> mout', () => {
+    render(<CustomLink {...props} />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  it('<CustomLink/> mout & simulate click', () => {
+    const { getByTestId } = render(<CustomLink {...props} />)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const customLink = getByTestId('custom-link')
 
-  it('has `custom-link` class', () => {
-    expect(wrapper.hasClass('custom-link')).toBe(true)
-  })
-
-  it('has active variant', () => {
-    expect(wrapper.children().hasClass('custom-link--active')).toBe(true)
-  })
-
-  it('has inactive variant', () => {
-    wrapper.setProps({
-      variant: 'inactive'
-    })
-    expect(wrapper.children().hasClass('custom-link--inactive')).toBe(true)
-  })
-
-  it('has dark variant', () => {
-    wrapper.setProps({
-      variant: 'dark'
-    })
-    expect(wrapper.children().hasClass('custom-link--dark')).toBe(true)
-  })
-
-  it('has font-size: 14', () => {
-    expect(wrapper.children().hasClass('custom-link--14')).toBe(true)
-  })
-
-  it('has font-size: 16', () => {
-    wrapper.setProps({
-      size: 16
-    })
-
-    expect(wrapper.children().hasClass('custom-link--16')).toBe(true)
+    fireEvent.click(customLink)
   })
 })
