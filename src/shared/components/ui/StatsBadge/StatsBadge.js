@@ -12,11 +12,14 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} props.description
  * @return {object} An object of children element
  */
-const StatsBadge = ({ color, quantity, description }) => {
-  const badgeStyles = useStyles({
-    [styles['container']]: true,
-    [styles[`container--${color}`]]: color
-  })
+const StatsBadge = ({ className, color, quantity, description }) => {
+  const badgeStyles = useStyles(
+    {
+      [styles['container']]: true,
+      [styles[`container--${color}`]]: color
+    },
+    className
+  )
   const descriptionStyles = useStyles({
     [styles['container--description']]: true
   })
@@ -37,12 +40,14 @@ const StatsBadge = ({ color, quantity, description }) => {
 StatsBadge.displayName = 'StatsBadge'
 
 StatsBadge.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   color: PropTypes.oneOf(['green', 'yellow', 'pink']),
   description: PropTypes.string.isRequired,
   quantity: PropTypes.number
 }
 
 StatsBadge.defaultProps = {
+  className: '',
   color: 'green',
   quantity: 0
 }
