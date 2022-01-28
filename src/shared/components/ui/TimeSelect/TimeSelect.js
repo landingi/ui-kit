@@ -17,6 +17,7 @@ import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Select.module.scss'
 
+//TODO TimeSelect css
 /**
  * TimeSelect - stateless component for selecting time
  * @param {object} props - props
@@ -130,9 +131,7 @@ const TimeSelect = ({
   )
 }
 
-export default TimeSelect
-
-TimeSelect.displayName = 'Time Select'
+TimeSelect.displayName = 'TimeSelect'
 
 TimeSelect.propTypes = {
   inModalName: PropTypes.string,
@@ -149,3 +148,5 @@ TimeSelect.defaultProps = {
   formikKey: null,
   disabled: false
 }
+
+export default TimeSelect
