@@ -3,28 +3,24 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './Spreader.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Spreader - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: `spreader`
-   * @param {string} props.spread - spread size
-   * @return {object} An object of children element
-   */
-  spreader = ({ className, spread }) => (
-    <div className={cssClass(className, `spreader--${spread}`)} />
-  )
+const cssClass = styles(scss)
 
-spreader.displayName = 'Spreader'
+//TODO Spreader css, test
+/**
+ * Spreader - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `spreader`
+ * @param {string} props.spread - spread size
+ * @return {object} An object of children element
+ */
+const Spreader = ({ className, spread }) => (
+  <div className={cssClass(className, `spreader--${spread}`)} />
+)
 
-spreader.propTypes = {
-  /**
-   * Classname, default `spreader`
-   */
+Spreader.displayName = 'Spreader'
+
+Spreader.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  /**
-   * Spread
-   */
   spread: PropTypes.oneOf([
     'mini',
     'tiny',
@@ -37,13 +33,9 @@ spreader.propTypes = {
   ])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-spreader.defaultProps = {
+Spreader.defaultProps = {
   className: 'spreader',
   spread: 'medium'
 }
 
-export default spreader
+export default Spreader
