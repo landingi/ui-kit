@@ -11,6 +11,9 @@ import Icon from '@components/ui/Icon'
  * @param {boolean} props.isOpen - determine if section should be open
  * @param {string} props.label - label
  * @param {string} props.children - content
+ * @param {string|node} props.arrowLabel
+ * @param {string} props.variant
+ * @param {boolean|string} props.hasExpand
  * @return {object} An object of children element
  */
 const AccordionSection = ({

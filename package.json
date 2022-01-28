@@ -135,5 +135,8 @@
     "react-uuid": "1.0.2",
     "simple-flexbox": "2.3.3",
     "tiny-emitter": "2.1.0"
+  },
+  "resolutions": {
+    "@babel/traverse": "7.16.7"
   }
 }
