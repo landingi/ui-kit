@@ -165,7 +165,7 @@ const Search = ({
               size='input'
               onClick={handleCleanOnClick}
             >
-              <Icon icon='times' />
+              <Icon icon='icon-remove' />
             </Button>
           </div>
         )}
