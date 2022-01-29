@@ -7,25 +7,23 @@ import { getMessages } from '@helpers/i18n'
 <Props of={Steps} />
 
 <Playground>
-  <IntlProvider
-    locale='en'
-    messages={getMessages['en']}>
-      <Steps data={[
-        {
-          step: 1,
-          variant: 'completed',
-          description: 'Completed step'
-        },
-        {
-          step: 2,
-          variant: 'current',
-          description: 'Current step'
-        },
-        {
-          step: 3,
-          variant: 'next',
-          description: 'Next step'
-        }
-      ]} />
-  </IntlProvider>
+  <Steps
+    data={[
+      {
+        step: 1,
+        variant: 'completed',
+        description: 'Completed step'
+      },
+      {
+        step: 2,
+        variant: 'current',
+        description: 'Current step'
+      },
+      {
+        step: 3,
+        variant: 'next',
+        description: 'Next step'
+      }
+    ]}
+  />
 </Playground>

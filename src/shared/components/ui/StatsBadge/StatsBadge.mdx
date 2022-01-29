@@ -1,6 +1,5 @@
 import { Playground, Props } from 'docz'
 import StatsBadge from '@components/ui/StatsBadge'
-import { getMessages } from '@helpers/i18n'
 
 # StatsBadge
 
@@ -9,15 +8,15 @@ import { getMessages } from '@helpers/i18n'
 ## Variant
 
 <Playground>
-  <StatsBadge
-    description='word.total.subaccounts'
-    quantity={100} />
+  <StatsBadge description='word.total.subaccounts' quantity={100} />
   <StatsBadge
     description='word.active.subaccounts'
     quantity={30}
-    color='yellow' />
+    color='yellow'
+  />
   <StatsBadge
     description='word.active.subaccounts'
     quantity={60}
-    color='pink' />
+    color='pink'
+  />
 </Playground>
