@@ -23,10 +23,6 @@ describe('<Badge/> mount', () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  it('has `badge` class', () => {
-    expect(wrapper.hasClass('badge')).toBe(true)
-  })
-
   it('is alert', () => {
     wrapper.setProps({
       type: 'alert'

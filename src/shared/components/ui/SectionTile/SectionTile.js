@@ -5,6 +5,7 @@ import scss from './SectionTile.scss'
 
 const cssClass = styles(scss)
 
+//TODO SectionTile css, mdx, test
 /**
  * SectionTile - stateless presentational component
  * @param {object} props - props
@@ -15,7 +16,7 @@ const cssClass = styles(scss)
  * @param {boolean} props.isActive - onDoubleClick
  * @return {object} An object of children element
  */
-const sectionTile = ({
+const SectionTile = ({
   children,
   thumbnailUrl,
   onClick,
@@ -37,36 +38,21 @@ const sectionTile = ({
   </div>
 )
 
-sectionTile.displayName = 'Section Tile'
+SectionTile.displayName = 'Section Tile'
 
-sectionTile.propTypes = {
-  /**
-   * Thumbnail url
-   */
+SectionTile.propTypes = {
+  children: PropTypes.node.isRequired,
   thumbnailUrl: PropTypes.string,
-  /**
-   * click handler
-   */
   onClick: PropTypes.func,
-  /**
-   * double click handler
-   */
   onDoubleClick: PropTypes.func,
-  /**
-   * isActive
-   */
   isActive: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-sectionTile.defaultProps = {
+SectionTile.defaultProps = {
   thumbnailUrl: '',
+  isActive: false,
   onClick: () => null,
-  onDoubleClick: () => null,
-  isActive: false
+  onDoubleClick: () => null
 }
 
-export default sectionTile
+export default SectionTile

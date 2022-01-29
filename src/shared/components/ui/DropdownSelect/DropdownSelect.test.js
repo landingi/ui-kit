@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import DropdownSelect from '@components/ui/DropdownSelect'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   children: 'children',

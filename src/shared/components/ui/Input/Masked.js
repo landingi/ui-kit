@@ -7,6 +7,7 @@ import MaskedInput from 'react-text-mask'
 
 const cssClass = styles(scss)
 
+// TODO MaskedInput css, mdx, test
 /**
  * Masked Input - stateless presentational component
  * @param {object} props - props

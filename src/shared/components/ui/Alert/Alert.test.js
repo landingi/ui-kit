@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Alert from '@components/ui/Alert'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   children: 'Alert'
@@ -27,7 +24,7 @@ describe('<Alert /> mount', () => {
   })
 
   it('has `alert-message` class', () => {
-    expect(wrapper.hasClass('alert-message')).toBe(true)
+    expect(wrapper.children().hasClass('alert-message')).toBe(true)
   })
 
   it('is alert', () => {

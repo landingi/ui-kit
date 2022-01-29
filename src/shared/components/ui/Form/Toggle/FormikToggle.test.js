@@ -1,9 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
 import FormikToggle from '@components/ui/Form/Toggle/FormikToggle'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   id: 'jestem-id',

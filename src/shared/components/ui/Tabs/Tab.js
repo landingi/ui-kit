@@ -8,8 +8,9 @@ import scss from './Tabs.scss'
 
 const cssClass = styles(scss)
 
+//TODO Tab css, test
 /**
- * tab - stateless presentational component
+ * Tab - stateless presentational component
  * @param {object} props - props
  * @param {string} props.name - name
  * @param {string|array} props.className - list of class names, default: `tab`

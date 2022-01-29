@@ -4,6 +4,7 @@ import styles from './Icon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import css from './fonts/css/editor-icons.module.scss'
 
+//TODO Icon mdx
 /**
  * Icon - stateless presentational component
  * @param {object} props - props

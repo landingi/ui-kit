@@ -11,7 +11,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string|array} props.className - list of class names
  * @param {function} props.onClick - click handler
  * @param {string} props.iconName
- * * @param {string} props.iconColor
+ * @param {string} props.iconColor
  * @return {object} An object of children element
  */
 const Close = ({ className, onClick, iconName, iconColor }) => {

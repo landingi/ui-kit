@@ -1,40 +1,40 @@
 .status-icon {
-    display: inline-flex;
-    border-radius: 50%;
+  display: inline-flex;
+  border-radius: 50%;
 
-    &--active {
-        padding: 0;
-        background-color: $color-success;
+  &--active {
+    padding: 0;
+    background-color: $color-success;
+  }
+
+  &--inactive {
+    padding: 0;
+    background-color: $color-5;
+  }
+
+  &--tiny {
+    min-height: 15px;
+    min-width: 15px;
+    height: 15px;
+    width: 15px;
+
+    i {
+        color: $color-white;
+        font-size: 7px;
+        margin: auto;
     }
+  }
 
-    &--inactive {
-        padding: 0;
-        background-color: $color-5;
+  &--medium {
+    min-height: 20px;
+    min-width: 20px;
+    height: 20px;
+    width: 20px;
+
+    i {
+        color: $color-white;
+        font-size: .75em;
+        margin: auto;
     }
-
-    &--tiny {
-        min-height: 15px;
-        min-width: 15px;
-        height: 15px;
-        width: 15px;
-
-        svg {
-            color: $color-white;
-            font-size: 7px;
-            margin: auto;
-        }
-    }
-
-    &--medium {
-        min-height: 20px;
-        min-width: 20px;
-        height: 20px;
-        width: 20px;
-
-        svg {
-            color: $color-white;
-            font-size: .75em;
-            margin: auto;
-        }
-    }
+  }
 }

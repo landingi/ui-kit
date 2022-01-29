@@ -5,6 +5,7 @@ import scss from './StepNumber.scss'
 
 const cssClass = styles(scss)
 
+//TODO StepNumber css, test
 /**
  * StepNumber - stateless presentational component
  * @param {object} props - props
@@ -15,7 +16,7 @@ const cssClass = styles(scss)
  * @param {bool} props.absolute - position absolute, default 'false'
  * @return {object} An object of children element
  */
-function StepNumber({ className, step, variant, size, absolute }) {
+const StepNumber = ({ className, step, variant, size, absolute }) => {
   const elementClasses = cssClass({
     'step__number--absolute': absolute === true,
     'step__number--completed': variant === 'completed',
@@ -28,7 +29,7 @@ function StepNumber({ className, step, variant, size, absolute }) {
   return <span className={cssClass(className, elementClasses)}>{step}</span>
 }
 
-StepNumber.displayName = 'Step Number'
+StepNumber.displayName = 'StepNumber'
 
 StepNumber.propTypes = {
   absolute: PropTypes.bool,
@@ -39,10 +40,10 @@ StepNumber.propTypes = {
 }
 
 StepNumber.defaultProps = {
-  absolute: false,
   className: 'step__number',
   size: 'small',
-  variant: 'current'
+  variant: 'current',
+  absolute: false
 }
 
 export default StepNumber

@@ -2,11 +2,8 @@ import React from 'react'
 import Toast from '@components/global/Toast'
 import Notification from '@components/ui/Notification'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
 import { emitToastToggle } from '@events/toast'
 import { act } from 'react-dom/test-utils'
-
-registerIcons()
 
 const props = {
   message: 'jestem tekstem do komponentu Notification'

@@ -9,6 +9,7 @@ import scss from './Toast.scss'
 
 const cssClass = styles(scss)
 
+//TODO TimingToast replace react-pose with framer-motion library
 /**
  * Toast Animation, exports React-pose animations
  * @see {@link https://popmotion.io/pose/api/} for further information.
@@ -31,6 +32,7 @@ const toastProps = {
 
 const ToastAnimation = posed.div(toastProps)
 
+//TODO Toast test, css, mdx
 /**
  * Toast stateful container component
  * @param {object} props

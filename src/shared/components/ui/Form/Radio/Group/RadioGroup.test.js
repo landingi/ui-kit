@@ -1,10 +1,7 @@
 import React from 'react'
 import RadioGroup from '@components/ui/Form/Radio/Group'
-import registerIcons from '@helpers/icons'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
-
-registerIcons()
 
 const props = {
   name: 'nazwa-pola',

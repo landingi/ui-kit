@@ -38,8 +38,8 @@ Section.propTypes = {
 }
 
 Section.defaultProps = {
-  background: 'default',
   className: '',
+  background: 'default',
   space: 'medium',
   width: 'full'
 }

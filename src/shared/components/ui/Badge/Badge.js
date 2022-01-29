@@ -4,6 +4,7 @@ import Tooltip from '@components/ui/Tooltip'
 import styles from './Badge.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
+// TODO Badge tests
 /**
  * Badge - stateless presentational component
  * @param {object} props - props
@@ -18,14 +19,16 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
   const badgeRef = useRef()
   const width = badgeRef.current ? badgeRef.current.offsetWidth : 0
 
-  const badgeStyles = useStyles({
-    [className]: true,
-    [styles[`badge--${type}`]]: type,
-    [styles['badge--indicator']]: isIndicator
-  })
+  const badgeStyles = useStyles(
+    {
+      [styles['badge']]: true,
+      [styles[`badge--${type}`]]: type,
+      [styles['badge--indicator']]: isIndicator
+    },
+    className
+  )
 
   const tooltipStyles = useStyles({
-    [className]: false,
     [styles['badge-tooltip']]: tooltip
   })
 
@@ -59,7 +62,7 @@ Badge.propTypes = {
 }
 
 Badge.defaultProps = {
-  className: styles.badge,
+  className: '',
   type: 'primary',
   tooltip: null,
   isIndicator: false

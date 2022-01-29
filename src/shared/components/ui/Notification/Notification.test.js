@@ -2,9 +2,6 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import Notification from '@components/ui/Notification'
 import Close from '@components/ui/Close'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   children: 'Notification'

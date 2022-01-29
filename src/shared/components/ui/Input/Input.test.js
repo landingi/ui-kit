@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Input from '@components/ui/Input'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
@@ -86,10 +83,6 @@ describe('<Input /> mount', () => {
     expect(wrapper.props().onBlur).toBeDefined()
   })
 
-  it('should have defined default prop className with value set to input', () => {
-    expect(wrapper.props().className).toEqual('input')
-  })
-
   it('should have defined default prop type with value set to text', () => {
     expect(wrapper.props().type).toEqual('text')
   })
@@ -153,11 +146,11 @@ describe('<Input /> mount', () => {
       'some tooltip content'
     )
     expect(
-      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('color')
+      wrapper.find('Tooltip').children().find('Icon').prop('color')
     ).toEqual('#2550AA')
     expect(
-      wrapper.find('Tooltip').children().find('FontAwesomeIcon').prop('icon')
-    ).toEqual('exclamation-circle')
+      wrapper.find('Tooltip').children().find('Icon').prop('icon')
+    ).toEqual('icon-exclamation-circle')
   })
 
   it('has no tooltip', () => {

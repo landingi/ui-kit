@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Textarea from '@components/ui/Textarea'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   value: 'initial value',

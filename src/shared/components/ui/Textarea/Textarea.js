@@ -5,6 +5,7 @@ import scss from './Textarea.scss'
 
 const cssClass = styles(scss)
 
+//TODO Textarea css, mdx, test
 /**
  * Textarea - stateless presentational component
  * @param {object} i18n- props with translated string

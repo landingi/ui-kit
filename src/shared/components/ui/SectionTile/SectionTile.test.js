@@ -2,7 +2,7 @@ import React from 'react'
 import SectionTile from '@components/ui/SectionTile'
 import { mountWithIntl } from '@jestutils'
 
-const component = <SectionTile />
+const component = <SectionTile>CHILDREN</SectionTile>
 
 describe('<SectionTile/> mount', () => {
   let wrapper

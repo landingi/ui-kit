@@ -1,10 +1,7 @@
 import React from 'react'
 import StatusIcon from '@components/ui/StatusIcon'
-import registerIcons from '@helpers/icons'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
-
-registerIcons()
 
 describe('<StatusIcon /> mount', () => {
   it('is mounted', () => {

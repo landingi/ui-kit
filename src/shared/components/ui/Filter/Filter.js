@@ -17,19 +17,21 @@ import uuid from 'react-uuid'
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @return {object} An object of children element
  */
-function Filter({ values, setValue, initialValue, localStorageKey }) {
+const Filter = ({ values, setValue, initialValue, localStorageKey }) => {
   const findInitialValue = () => {
-      const find = values.find(({ value }) => value === initialValue)
+    const find = values.find(({ value }) => value === initialValue)
 
-      return find.label
-    },
-    [filterLabel, setLabel] = useState(findInitialValue()),
-    setFilter = (label, value) => {
-      setLabel(label)
-      setValue(value)
-      localStorageKey && setLocalStorage(localStorageKey, value)
-      emitCloseDropdown()
-    }
+    return find.label
+  }
+
+  const [filterLabel, setLabel] = useState(findInitialValue())
+
+  const setFilter = (label, value) => {
+    setLabel(label)
+    setValue(value)
+    localStorageKey && setLocalStorage(localStorageKey, value)
+    emitCloseDropdown()
+  }
 
   return (
     <Dropdown label={filterLabel} size='medium'>
@@ -39,7 +41,6 @@ function Filter({ values, setValue, initialValue, localStorageKey }) {
             <Button
               onClick={() => setFilter(label, value)}
               tag='a'
-              // eslint-disable-next-line react/jsx-no-bind
               variant='dropdown'
             >
               {label}

@@ -6,17 +6,21 @@ import styles from './Separator.module.scss'
 
 /**
  * Separator - stateless presentational component
+ * @param {string|array} props.className - list of class names
  * @param {object} props.children - children
  * @param {string} props.size - size
  * @param {string} props.color - color
  * @return {object} An object of children element
  */
-const Separator = ({ children, size, color }) => {
-  const elementClasses = useStyles({
-    [styles['separator__divider']]: true,
-    [styles['separator__divider--medium']]: size === 'medium',
-    [styles['separator__divider--color-4']]: color === 'color-4'
-  })
+const Separator = ({ className, children, size, color }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['separator__divider']]: true,
+      [styles[`separator__divider--${size}`]]: size,
+      [styles[`separator__divider--${color}`]]: color
+    },
+    className
+  )
 
   return (
     <div className={styles.separator}>
@@ -36,12 +40,14 @@ const Separator = ({ children, size, color }) => {
 Separator.displayName = 'Separator'
 
 Separator.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.node.isRequired,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['medium']),
   color: PropTypes.string
 }
 
 Separator.defaultProps = {
+  className: '',
   size: 'medium',
   color: 'color-4'
 }

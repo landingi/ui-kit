@@ -6,18 +6,21 @@ import ColorNumber from '@components/ui/ColorNumber'
 
 const cssClass = styles(scss)
 
+//TODO ProgressBar css, props naming ex. withoutAnimation, limitExceededInfo, showColorNumber
 /**
  * Progress Bar - stateless presentational component
  * @param {object} props - props
- * @param {string} props.quantity - quantity to display
+ * @param {number} props.size
  * @param {number} props.limit - limit to display
  * @param {string} props.variant - variant
- * @param {bool} props.limitExceededInfo - TODO
+ * @param {string} props.quantity - quantity to display
+ * @param {bool} props.limitExceededInfo - TODO add translation
  * @param {bool} props.showColorNumber - should show limit as an ColoroNumber, deafult: false
- * @param {number} props.size - size
+ * @param {string} props.border
+ * @param {number} props.withoutAnimation
  * @return {object} An object of children element
  */
-const progressBar = ({
+const ProgressBar = ({
   size,
   limit,
   variant,
@@ -67,50 +70,22 @@ const progressBar = ({
   </Fragment>
 )
 
-progressBar.displayName = 'Progress Bar'
+ProgressBar.displayName = 'ProgressBar'
 
-progressBar.propTypes = {
-  /**
-   * Variant
-   */
+ProgressBar.propTypes = {
   variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'brand'])
     .isRequired,
-  /**
-   * Quantity
-   */
   quantity: PropTypes.number.isRequired,
-  /**
-   * Limit
-   */
   limit: PropTypes.number,
-  /**
-   * Size
-   */
   size: PropTypes.number,
-  /**
-   * Border
-   */
   border: PropTypes.oneOf(['white', 'grey']),
-  /**
-   * Limit exceeded info
-   * TODO: add translation or put translation in prop
-   */
+  //TODO: add translation or put translation in prop
   limitExceededInfo: PropTypes.bool,
-  /**
-   * should show color numbers, default: false
-   */
   showColorNumber: PropTypes.bool,
-  /**
-   * block animation
-   */
   withoutAnimation: PropTypes.bool
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-progressBar.defaultProps = {
+ProgressBar.defaultProps = {
   limit: 100,
   size: 32,
   limitExceededInfo: false,
@@ -119,4 +94,4 @@ progressBar.defaultProps = {
   withoutAnimation: false
 }
 
-export default progressBar
+export default ProgressBar

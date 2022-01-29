@@ -6,6 +6,7 @@ import scss from './Loader.scss'
 
 const cssClass = styles(scss)
 
+//TODO Loader css, test
 /**
  * Loader - stateless presentational component
  * @param {object} props - props

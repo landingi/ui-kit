@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { ChromePicker } from 'react-color'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 import { useClickOutside } from '@helpers/hooks/useClickOutside'
 import Paragraph from '@components/ui/Paragraph'
 import Button from '@components/ui/Button'
@@ -9,6 +9,7 @@ import { convertColorToObj, rgbTohex, hexRegex } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './ColorPicker.module.scss'
 
+// TODO Color picker add className
 /**
  * Color picker - statefull component
  * @param {string} colorValue - color value to display in hex | rgb | rgba eg '#333' | 'rgb(255,21,34) |'rgba(31,22,34,0.5)
@@ -143,7 +144,7 @@ const ColorPicker = ({
                 hasIcon
                 onClick={handleClear}
               >
-                <FontAwesomeIcon icon='eye-slash' />
+                <Icon icon='icon-eye-close' />
                 {i18n.clearButton}
               </Button>
               <Button
@@ -153,9 +154,7 @@ const ColorPicker = ({
                   selectedFavColor ? handleDeleteFavColor : handleAddFavorite
                 }
               >
-                <FontAwesomeIcon
-                  icon={selectedFavColor ? 'trash-alt' : 'heart'}
-                />
+                <Icon icon={selectedFavColor ? 'icon-trash' : 'icon-heart'} />
               </Button>
             </div>
             {hasAnyFavoriteColor && (

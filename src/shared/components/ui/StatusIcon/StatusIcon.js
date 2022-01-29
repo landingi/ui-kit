@@ -1,13 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './StatusIcon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import Icon from '@components/ui/Icon'
 
 /**
  * Status Icon - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `status-icon`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.variant - variant of statusIcon active, inactive
  * @param {string} props.size - variant of statusIcon tiny, medium
  */
@@ -24,15 +24,15 @@ const StatusIcon = ({ className, variant, size }) => {
   return (
     <div data-testid='status-icon' className={statusIconStyles}>
       {variant === 'active' ? (
-        <FontAwesomeIcon icon='check' size='xs' />
+        <Icon icon='icon-ok' />
       ) : (
-        <FontAwesomeIcon icon='times' size='xs' />
+        <Icon icon='icon-remove' />
       )}
     </div>
   )
 }
 
-StatusIcon.displayName = 'Status Icon'
+StatusIcon.displayName = 'StatusIcon'
 
 StatusIcon.propTypes = {
   className: PropTypes.string,

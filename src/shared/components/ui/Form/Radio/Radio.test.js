@@ -1,10 +1,7 @@
 import React from 'react'
 import Radio from '@components/ui/Form/Radio'
-import registerIcons from '@helpers/icons'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
-
-registerIcons()
 
 const props = {
   id: 'jestem-id',

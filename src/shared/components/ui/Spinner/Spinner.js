@@ -1,37 +1,38 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
+import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Spinner.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Spinner.module.scss'
 
-const cssClass = styles(scss),
-  /**
-   * Spinner - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: `spinner__spin`
-   * @return {object} An object of children element
-   */
-  spinner = ({ className }) => (
-    <div className={cssClass(className)}>
-      <FontAwesomeIcon icon='spinner' spin />
-    </div>
+/**
+ * Spinner - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
+ */
+const Spinner = ({ className }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['spinner']]: true
+    },
+    className
   )
 
-spinner.displayName = 'Spinner'
+  return (
+    <div className={elementClasses}>
+      <Icon icon='icon-spinner' />
+    </div>
+  )
+}
 
-spinner.propTypes = {
-  /**
-   * Classname, default `spinner__spin`
-   */
+Spinner.displayName = 'Spinner'
+
+Spinner.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-spinner.defaultProps = {
-  className: 'spinner__spin'
+Spinner.defaultProps = {
+  className: ''
 }
 
-export default spinner
+export default Spinner

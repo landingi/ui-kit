@@ -8,6 +8,7 @@ import styles from './Backdrop.module.scss'
  * @param {object} props - props
  * @param {string|array} props.className - list of class names
  * @param {function} props.onClick - click handler
+ * @param {number} props.zIndex
  * @return {object} An object of children element
  */
 const Backdrop = ({ className, onClick, zIndex }) => {
