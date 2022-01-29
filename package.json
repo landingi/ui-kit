@@ -26,7 +26,9 @@
     "release-it": "yarn version --patch && yarn test:badges && yarn build"
   },
   "devDependencies": {
-    "@babel/core": "7.15.5",
+    "@babel/core": "7.16.7",
+    "@babel/runtime": "7.16.7",
+    "@babel/traverse": "7.16.7",
     "@babel/eslint-parser": "7.15.7",
     "@babel/eslint-plugin": "7.14.5",
     "@babel/plugin-proposal-class-properties": "7.14.5",
@@ -107,7 +109,7 @@
     "npm": ">=7.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.15.4",
+    "@babel/runtime": "7.16.7",
     "@u-wave/react-vimeo": "0.9.5",
     "classnames": "2.3.1",
     "date-fns": "2.24.0",
@@ -131,6 +133,6 @@
     "tiny-emitter": "2.1.0"
   },
   "resolutions": {
-    "@babel/traverse": "7.16.10"
+    "@babel/traverse": "7.16.7"
   }
 }
