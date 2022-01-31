@@ -22,6 +22,7 @@ import styles from './Search.module.scss'
  * @param {object} props.i18n - object of translations
  * @param {string} props.tag - tag
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
+ * @param {boolean} props.submitEmptyOnBlur - submit triggered onBlur when value is empty
  * @return {object} An object of children element
  */
 const Search = ({
@@ -35,7 +36,8 @@ const Search = ({
   onSubmit,
   i18n,
   tag: Tag,
-  onProtectedSubmit
+  onProtectedSubmit,
+  submitEmptyOnBlur
 }) => {
   const elementClasses = useStyles(
     {
@@ -59,6 +61,15 @@ const Search = ({
 
     setClearActive(false)
     onChange()
+    if (submitEmptyOnBlur) {
+      onSubmit()
+    }
+  }, [])
+
+  const onBlur = useCallback(() => {
+    if (inputRef.current.value === '' && submitEmptyOnBlur) {
+      onSubmit()
+    }
   }, [])
 
   /**
@@ -153,6 +164,7 @@ const Search = ({
             name='search'
             placeholder={i18n.placeholder}
             onChange={onChange}
+            onBlur={onBlur}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
           />
@@ -192,7 +204,8 @@ Search.propTypes = {
   }),
   onSubmit: PropTypes.func,
   tag: PropTypes.string,
-  onProtectedSubmit: PropTypes.func
+  onProtectedSubmit: PropTypes.func,
+  submitEmptyOnBlur: PropTypes.bool
 }
 
 Search.defaultProps = {
@@ -209,7 +222,8 @@ Search.defaultProps = {
   onProtectedSubmit: null,
   autoFocus: false,
   onChange: () => null,
-  onKeyDown: () => null
+  onKeyDown: () => null,
+  submitEmptyOnBlur: false
 }
 
 export default Search
