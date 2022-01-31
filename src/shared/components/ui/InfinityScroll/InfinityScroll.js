@@ -55,7 +55,7 @@ const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
   )
 
   const loaderStyles = useStyles({
-    [styles['loading-hide ']]: isLastPage
+    [styles['loading-hide']]: isLastPage
   })
 
   return (
