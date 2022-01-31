@@ -1,11 +1,9 @@
 import React from 'react'
 import ColorPicker from './ColorPicker'
-import registerIcons from '@helpers/icons'
 import { convertColorToObj } from './helpers'
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-registerIcons()
 HTMLCanvasElement.prototype.getContext = () => {}
 
 describe('<ColorPicker/> mount', () => {
@@ -122,7 +120,9 @@ describe('<ColorPicker/> mount', () => {
 
     const secondButton = getAllByRole('button')[1]
 
-    expect(secondButton.firstChild).toHaveClass('fa-heart')
+    expect(secondButton.firstChild).toHaveClass(
+      'editor-icon icon--default icon-heart'
+    )
   })
 
   it('should display trash icon in second Button when one of favorite colors has been clicked', () => {
@@ -142,7 +142,9 @@ describe('<ColorPicker/> mount', () => {
 
     const secondButton = getAllByRole('button')[1]
 
-    expect(secondButton.firstChild).toHaveClass('fa-trash-alt')
+    expect(secondButton.firstChild).toHaveClass(
+      'editor-icon icon--default icon-trash'
+    )
   })
 
   it('after clicking second button with heart icon onClickFavoriteHandler callback should be called with selected color', () => {

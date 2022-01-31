@@ -7,6 +7,7 @@ import { getDeepValue } from '@helpers/data'
 
 const cssClass = styles(scss)
 
+// TODO Form Checkbox css, mdx
 /**
  * Checkbox - stateless presentational component
  * @param {object} props - props

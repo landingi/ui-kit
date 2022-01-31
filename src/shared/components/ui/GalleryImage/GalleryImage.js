@@ -5,6 +5,7 @@ import scss from './GalleryImage.scss'
 
 const cssClass = styles(scss)
 
+//TODO GalleryImage css, mdx
 /**
  * GalleryImage - stateless presentational component
  * @param {object} props - props

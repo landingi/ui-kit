@@ -20,7 +20,7 @@ describe('<Avatar /> mount', () => {
   })
 
   it('has `avatar` class', () => {
-    expect(wrapper.hasClass('avatar')).toBe(true)
+    expect(wrapper.find('span').hasClass('avatar')).toBe(true)
   })
 
   it('has image variant', () => {

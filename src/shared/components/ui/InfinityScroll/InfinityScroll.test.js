@@ -1,9 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
 import InfinityScroll from '@components/ui/InfinityScroll'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 global.IntersectionObserver = class IntersectionObserver {
   constructor(func) {

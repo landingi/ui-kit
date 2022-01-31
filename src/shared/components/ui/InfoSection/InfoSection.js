@@ -13,6 +13,7 @@ import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
 
+// TODO Info Section css, test
 /**
  * Info Section - stateless presentational component
  * @param {object} props - props

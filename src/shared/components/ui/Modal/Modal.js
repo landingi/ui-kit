@@ -1,6 +1,5 @@
 import React, { Fragment, forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
 import Spreader from '@components/ui/Spreader'
@@ -9,11 +8,13 @@ import Spacer from '@components/ui/Spacer'
 import Button from '@components/ui/Button'
 import Loader from '@components/ui/Loader'
 import Image from '@components/ui/Image'
+import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import ModalHeader from './Header'
 import ModalFooter from './Footer'
 import styles from './Modal.module.scss'
 
+// TODO Modal check actionIcon
 /**
  * Modal - stateless presentational component
  * @param {object} props - props
@@ -101,7 +102,7 @@ const Modal = forwardRef(
         <div>
           {isMarkAsSpamVisible && (
             <Button variant='transparent' onClick={onMarkAsSpam}>
-              <FontAwesomeIcon icon='ban' />
+              <Icon icon='icon-block' />
 
               {i18n.markSpam}
             </Button>
@@ -109,7 +110,7 @@ const Modal = forwardRef(
 
           {isEditable && (
             <Button variant='icon' onClick={onEdit}>
-              <FontAwesomeIcon icon='pencil-alt' />
+              <Icon icon='icon-create' />
             </Button>
           )}
 
@@ -210,9 +211,7 @@ const Modal = forwardRef(
                           isLoading={isButtonLoading}
                           hasIcon={!!actionIcon}
                         >
-                          {actionIcon && (
-                            <FontAwesomeIcon icon={actionIcon} size='xs' />
-                          )}
+                          {actionIcon && <Icon icon={actionIcon} />}
                           {i18n.action}
                         </Button>
                       </ModalFooter>

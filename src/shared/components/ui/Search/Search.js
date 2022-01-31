@@ -6,6 +6,7 @@ import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Search.module.scss'
 
+//TODO Search split to modules
 /**
  * Search - stateful presentational component
  * @param {object} props - props
@@ -36,6 +37,15 @@ const Search = ({
   tag: Tag,
   onProtectedSubmit
 }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['search']]: true,
+      [styles[`search--${variant}`]]: variant,
+      [styles[`search--${size}`]]: true
+    },
+    className
+  )
+
   const [isClearActive, setClearActive] = useState(false)
 
   const inputRef = useRef()
@@ -101,16 +111,6 @@ const Search = ({
     autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
-  const elementClasses = useStyles(
-    {
-      [styles.search]: true,
-      [styles['search--input']]: variant === 'input',
-      [styles['search--button']]: variant === 'button',
-      [styles[`search--${size}`]]: true
-    },
-    className
-  )
-
   return (
     <Tag onSubmit={handleSubmit}>
       <div className={elementClasses}>
@@ -165,7 +165,7 @@ const Search = ({
               size='input'
               onClick={handleCleanOnClick}
             >
-              <Icon icon='times' />
+              <Icon icon='icon-remove' />
             </Button>
           </div>
         )}
@@ -199,12 +199,12 @@ Search.defaultProps = {
   className: '',
   tag: 'form',
   size: 'medium',
-  children: null,
   variant: 'input',
   i18n: {
     placeholder: null,
     label: null
   },
+  children: null,
   onSubmit: null,
   onProtectedSubmit: null,
   autoFocus: false,

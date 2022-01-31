@@ -8,18 +8,19 @@ import uuid from 'react-uuid'
 
 const cssClass = styles(scss)
 
+//TODO Steps css, test
 /**
  * Steps - stateless presentational component
  * @param {object} props - props
  * @param {object[]} props.data - data
  * @return {object} An object of children element
  */
-function Steps({ data }) {
+const Steps = ({ data }) => {
   return (
     <div className={cssClass('container')}>
       {data.map((item, index) => {
-        const step = index + 1,
-          { variant, description } = item
+        const step = index + 1
+        const { variant, description } = item
 
         return (
           <div className={scss.step} key={uuid()}>

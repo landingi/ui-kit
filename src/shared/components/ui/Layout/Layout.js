@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './Layout.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
+//TODO Layout mdx add background to layouts
 /**
  * Layout - stateless presentational component
  * @param {object} props - props

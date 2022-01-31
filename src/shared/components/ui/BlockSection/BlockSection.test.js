@@ -30,7 +30,7 @@ describe('<BlockSection /> mount', () => {
   })
 
   it('has `block-section` class', () => {
-    expect(wrapper.hasClass('block-section')).toBe(true)
+    expect(wrapper.children().hasClass('block-section')).toBe(true)
   })
 
   it('has not `block-section__panel--reverse` class when reverse is set to false', () => {
@@ -59,10 +59,6 @@ describe('<BlockSection /> mount', () => {
 
   it('should have defined default prop onClick', () => {
     expect(wrapper.props().onClick).toBeDefined()
-  })
-
-  it('should have defined default prop className with value set to block-section', () => {
-    expect(wrapper.props().className).toEqual('block-section')
   })
 
   it('should have defined default prop list with value set to null', () => {

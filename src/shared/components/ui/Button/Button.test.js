@@ -1,10 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Button from '@components/ui/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const onClick = jest.fn()
 
@@ -53,7 +49,7 @@ describe('<Button/> mount', () => {
       isLoading: true
     })
 
-    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(true)
+    expect(wrapper.find('Icon').exists()).toBe(true)
   })
 
   it('when prop isLoading is false, spinner is not visible', () => {
@@ -61,7 +57,7 @@ describe('<Button/> mount', () => {
       isLoading: false
     })
 
-    expect(wrapper.find(FontAwesomeIcon).exists()).toBe(false)
+    expect(wrapper.find('Icon').exists()).toBe(false)
   })
 
   it('renders text', () => {

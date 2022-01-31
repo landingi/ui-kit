@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Input.module.scss'
+import Icon from '@components/ui/Icon'
 
+//TODO Input css, global,
 /**
  * Input - stateless presentational component
  * @param {object} props - props
@@ -54,14 +55,17 @@ const Input = ({
   alwaysShowLabel,
   defaultValue
 }) => {
-  const wrapperStyles = useStyles({
-    [styles['input__wrapper']]: true,
-    [styles['input__wrapper--focused']]: focused === 'true',
-    [styles['input__wrapper--show-label']]: alwaysShowLabel
-  })
+  const wrapperStyles = useStyles(
+    {
+      [styles['input__wrapper']]: true,
+      [styles['input__wrapper--focused']]: focused === 'true',
+      [styles['input__wrapper--show-label']]: alwaysShowLabel
+    },
+    className
+  )
 
   const inputStyles = useStyles({
-    [className]: true,
+    [styles['input']]: true,
     [styles['input--transparent']]: background === 'transparent',
     [styles['input--hidden-arrows']]: hideArrows
   })
@@ -104,7 +108,7 @@ const Input = ({
           placement='bottom'
           content={tooltip}
         >
-          <FontAwesomeIcon color='#2550AA' icon='exclamation-circle' />
+          <Icon color='#2550AA' icon='icon-exclamation-circle' />
         </Tooltip>
       )}
     </div>
@@ -144,7 +148,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  className: styles['input'],
+  className: '',
   type: 'text',
   focused: 'false',
   tooltip: '',

@@ -1,11 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
 import Modal from '@components/ui/Modal'
 import Backdrop from '@components/ui/Backdrop'
 import Button from '@components/ui/Button'
-
-registerIcons()
 
 const props = {
   isActive: true,
@@ -125,9 +122,9 @@ describe('<Modal /> global mount', () => {
       onMarkAsSpam: jest.fn()
     })
 
-    expect(
-      wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')
-    ).toEqual('ban')
+    expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
+      'icon-block'
+    )
 
     wrapper.find('Button').at(0).simulate('click')
 
@@ -140,9 +137,9 @@ describe('<Modal /> global mount', () => {
       onEdit: jest.fn()
     })
 
-    expect(
-      wrapper.find('Button').at(0).find('FontAwesomeIcon').prop('icon')
-    ).toEqual('pencil-alt')
+    expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
+      'icon-create'
+    )
 
     wrapper.find('Button').at(0).simulate('click')
 
@@ -239,7 +236,7 @@ describe('<Modal /> global mount', () => {
         .find('div.modal__footer')
         .find('Button')
         .at(1)
-        .find('FontAwesomeIcon')
+        .find('Icon')
         .prop('icon')
     ).toEqual('times')
   })

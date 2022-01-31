@@ -4,6 +4,7 @@ import TabContext from './TabContext'
 import { styles } from '@helpers/css'
 import scss from './Tabs.scss'
 
+//TODO TabPanel css, test
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
@@ -11,7 +12,7 @@ import scss from './Tabs.scss'
 const cssClass = styles(scss)
 
 /**
- * tabPanel - stateless presentational component
+ * TabPanel - stateless presentational component
  * @param {object} props - props
  * @param {string} props.name - name
  * @param {string|array} props.className - list of class names, default: `tab__panel`
@@ -35,9 +36,6 @@ const TabPanel = ({ name, className, children, ...restProps }) => {
 TabPanel.displayName = 'TabPanel'
 
 TabPanel.propTypes = {
-  /**
-   * name
-   */
   name: PropTypes.string.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.oneOfType([
@@ -47,10 +45,6 @@ TabPanel.propTypes = {
   ]).isRequired
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 TabPanel.defaultProps = {
   className: 'tab__panel'
 }

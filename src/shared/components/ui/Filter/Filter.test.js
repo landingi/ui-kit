@@ -3,10 +3,7 @@ import { mount } from 'enzyme'
 import Filter from '@components/ui/Filter'
 import Button from '@components/ui/Button'
 import Dropdown from '@components/ui/Dropdown'
-import registerIcons from '@helpers/icons'
 import ListItem from '@components/ui/List/Item'
-
-registerIcons()
 
 const props = {
   values: [

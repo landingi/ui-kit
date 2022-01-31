@@ -3,6 +3,7 @@ import styles from './LimitQuantity.module.scss'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+//TODO Limit Quantity css
 /**
  * Limit Quantity - stateless presentational component
  * @param {object} props - props

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './InfinityScroll.module.scss'
 
+//TODO InfinityScroll css, test
 /**
  * InfinityScroll - stateless presentational component
  * @param {object} props - props

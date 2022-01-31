@@ -1,11 +1,11 @@
 import React, { Fragment, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
 import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
+import Icon from '@components/ui/Icon'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,
@@ -15,10 +15,11 @@ import {
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from './Select.module.scss'
+import styles from './TimeSelect.module.scss'
 
+//TODO TimeSelect css
 /**
- * Time Select - stateless component for selecting time
+ * TimeSelect - stateless component for selecting time
  * @param {object} props - props
  * @param {object} props.inModalName - class name of modal within time select gonna be render
  * @param {string} props.value - current selected time
@@ -85,7 +86,7 @@ const TimeSelect = ({
   const renderDropdownLabel = useCallback(
     selectedValue => (
       <Row className={timeSelectLabelClasses} vertical='center'>
-        <FontAwesomeIcon icon='clock' />
+        <Icon icon='icon-time' />
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}
@@ -130,9 +131,7 @@ const TimeSelect = ({
   )
 }
 
-export default TimeSelect
-
-TimeSelect.displayName = 'Time Select'
+TimeSelect.displayName = 'TimeSelect'
 
 TimeSelect.propTypes = {
   inModalName: PropTypes.string,
@@ -149,3 +148,5 @@ TimeSelect.defaultProps = {
   formikKey: null,
   disabled: false
 }
+
+export default TimeSelect

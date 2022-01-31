@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import AccordionSection from '@components/ui/Accordion/AccordionSection'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   handleOnClick: jest.fn(),
@@ -83,7 +80,7 @@ describe('<AccordionSection /> mount', () => {
       arrowLabel: 'I am just an arrow label'
     })
 
-    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('chevron-up')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-up')
   })
 
   it('when is not open it has icon chevron down', () => {
@@ -93,6 +90,6 @@ describe('<AccordionSection /> mount', () => {
       arrowLabel: 'I am just an arrow label'
     })
 
-    expect(wrapper.find('FontAwesomeIcon').prop('icon')).toEqual('chevron-down')
+    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-down')
   })
 })

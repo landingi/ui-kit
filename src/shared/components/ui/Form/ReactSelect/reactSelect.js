@@ -10,10 +10,11 @@ import scss from './reactSelect.scss'
 
 const cssClass = styles(scss)
 
+// TODO Form ReactSelect css, mdx
 /**
  * React Select - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `input`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.name - element name
  * @param {string|number} props.value
  * @param {SyntheticEvent} props.onChange - The react `SyntheticEvent`
