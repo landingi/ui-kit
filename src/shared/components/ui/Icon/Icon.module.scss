@@ -35,12 +35,16 @@
     color: $color-info;
   }
 
-  &--spin-animation {
-    animation: spin-animation 1s linear infinite;
+  &--spin {
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: spinIcon;
+    animation-timing-function: linear;
   }
 }
 
-@keyframes spin-animation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(359deg); }
+@keyframes spinIcon {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
+

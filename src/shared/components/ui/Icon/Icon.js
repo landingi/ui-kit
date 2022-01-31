@@ -18,7 +18,7 @@ const Icon = ({ icon, color, className, spin }) => {
     {
       [css['editor-icon']]: true,
       [styles[`icon--${color}`]]: color,
-      [styles['icon--spin-animation']]: spin,
+      [styles['icon--spin']]: spin,
       [css[`${icon}`]]: true
     },
     className
@@ -39,7 +39,7 @@ Icon.propTypes = {
 Icon.defaultProps = {
   className: '',
   color: 'default',
-  spin: true
+  spin: false
 }
 
 export default Icon
