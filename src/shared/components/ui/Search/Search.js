@@ -64,13 +64,13 @@ const Search = ({
     setClearActive(false)
     onChange()
     if (submitEmptyOnBlur) {
-      onSubmit('')
+      onSubmit()
     }
   }, [])
 
   const onBlur = useCallback(() => {
     if (inputRef.current.value === '' && submitEmptyOnBlur) {
-      onSubmit('')
+      onSubmit()
     }
   }, [])
 
