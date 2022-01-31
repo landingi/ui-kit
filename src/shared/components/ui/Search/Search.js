@@ -23,6 +23,7 @@ import styles from './Search.module.scss'
  * @param {string} props.tag - tag
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
  * @param {boolean} props.submitEmptyOnBlur - submit triggered onBlur when value is empty
+ * @param {string} props.defaultValue - default value of input
  * @return {object} An object of children element
  */
 const Search = ({
@@ -37,7 +38,8 @@ const Search = ({
   i18n,
   tag: Tag,
   onProtectedSubmit,
-  submitEmptyOnBlur
+  submitEmptyOnBlur,
+  defaultValue
 }) => {
   const elementClasses = useStyles(
     {
@@ -167,6 +169,7 @@ const Search = ({
             onBlur={onBlur}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
+            defaultValue={defaultValue}
           />
         )}
 
@@ -205,7 +208,8 @@ Search.propTypes = {
   onSubmit: PropTypes.func,
   tag: PropTypes.string,
   onProtectedSubmit: PropTypes.func,
-  submitEmptyOnBlur: PropTypes.bool
+  submitEmptyOnBlur: PropTypes.bool,
+  defaultValue: PropTypes.string
 }
 
 Search.defaultProps = {
@@ -223,7 +227,8 @@ Search.defaultProps = {
   autoFocus: false,
   onChange: () => null,
   onKeyDown: () => null,
-  submitEmptyOnBlur: false
+  submitEmptyOnBlur: false,
+  defaultValue: ''
 }
 
 export default Search
