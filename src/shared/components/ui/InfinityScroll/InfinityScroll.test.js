@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from '@jestutils'
 import InfinityScroll from '@components/ui/InfinityScroll'
+import '@testing-library/jest-dom'
 
 global.IntersectionObserver = class IntersectionObserver {
   constructor(func) {
@@ -26,9 +27,11 @@ describe('<InfinityScroll/> tests', () => {
   })
 
   it('has no loader on end', () => {
-    const { getByTestId } = render(
+    const { getByTestId, debug } = render(
       <InfinityScroll isLastPage>children</InfinityScroll>
     )
+
+    debug()
 
     expect(getByTestId('loader-wrapper')).toHaveClass('loading-hide')
   })

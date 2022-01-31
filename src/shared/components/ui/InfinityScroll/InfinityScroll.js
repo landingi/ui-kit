@@ -64,7 +64,7 @@ const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
       <div
         className={loaderStyles}
         ref={loaderRef}
-        deta-testid='loader-wrapper'
+        data-testid='loader-wrapper'
       >
         <Loader />
       </div>
