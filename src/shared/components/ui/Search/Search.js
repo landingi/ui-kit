@@ -36,6 +36,7 @@ const Search = ({
   children,
   size,
   onSubmit,
+  onClean,
   i18n,
   tag: Tag,
   onProtectedSubmit,
@@ -208,6 +209,7 @@ Search.propTypes = {
     label: PropTypes.string
   }),
   onSubmit: PropTypes.func,
+  onClean: PropTypes.func,
   tag: PropTypes.string,
   onProtectedSubmit: PropTypes.func,
   submitEmptyOnBlur: PropTypes.bool,
