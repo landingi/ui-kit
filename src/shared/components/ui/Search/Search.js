@@ -19,6 +19,7 @@ import styles from './Search.module.scss'
  * @param {string} props.size - size of search field `small, medium, large`
  * @param {string} props.label - input label
  * @param {func} props.onSubmit - handle action on form submit
+ * @param {func} props.onClean- handle action on form clean
  * @param {object} props.i18n - object of translations
  * @param {string} props.tag - tag
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
@@ -35,6 +36,7 @@ const Search = ({
   children,
   size,
   onSubmit,
+  onClean,
   i18n,
   tag: Tag,
   onProtectedSubmit,
@@ -63,6 +65,7 @@ const Search = ({
 
     setClearActive(false)
     onChange()
+    onClean()
     if (submitEmptyOnBlur) {
       onSubmit()
     }
@@ -206,6 +209,7 @@ Search.propTypes = {
     label: PropTypes.string
   }),
   onSubmit: PropTypes.func,
+  onClean: PropTypes.func,
   tag: PropTypes.string,
   onProtectedSubmit: PropTypes.func,
   submitEmptyOnBlur: PropTypes.bool,
@@ -223,6 +227,7 @@ Search.defaultProps = {
   },
   children: null,
   onSubmit: null,
+  onClean: () => null,
   onProtectedSubmit: null,
   autoFocus: false,
   onChange: () => null,
