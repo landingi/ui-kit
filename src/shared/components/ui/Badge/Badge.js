@@ -21,7 +21,7 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
 
   const badgeStyles = useStyles(
     {
-      [styles['badge']]: true,
+      [styles.badge]: true,
       [styles[`badge--${type}`]]: type,
       [styles['badge--indicator']]: isIndicator
     },
@@ -55,7 +55,12 @@ Badge.propTypes = {
     'success',
     'info',
     'accent-1',
-    'accent-2'
+    'accent-2',
+    'accent-3',
+    'accent-4',
+    'accent-5',
+    'accent-6',
+    'accent-7'
   ]),
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isIndicator: PropTypes.bool

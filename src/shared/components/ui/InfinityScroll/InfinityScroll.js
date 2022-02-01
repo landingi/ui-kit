@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { styles } from '@helpers/css'
-import scss from './InfinityScroll.scss'
+import React from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Loader from '@components/ui/Loader'
 import PropTypes from 'prop-types'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './InfinityScroll.module.scss'
 
 //TODO InfinityScroll css, test
 /**
@@ -15,10 +14,8 @@ const cssClass = styles(scss)
  * @param {func} props.isLastPage - hide loader
  * @return {object} An object of children element
  */
-const InfinityScroll = ({ children, loadMore, isLastPage }) => {
-  // loader element
-  const loader = useRef(null)
-  // when true, trigger loadMore
+const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
+  const loaderRef = useRef(null)
   const [shouldFetch, setShouldFetch] = useState(false)
 
   const handleObserver = entities => {
@@ -37,8 +34,8 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
     }
 
     const observer = new IntersectionObserver(handleObserver, options)
-    if (loader.current) {
-      observer.observe(loader.current)
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current)
     }
   }, [])
 
@@ -50,12 +47,24 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
     }
   }, [shouldFetch])
 
+  const wrapperStyles = useStyles(
+    {
+      [styles.wrapper]: true
+    },
+    className
+  )
+
+  const loaderStyles = useStyles({
+    [styles['loading-hide']]: isLastPage
+  })
+
   return (
-    <div className={cssClass('container')}>
+    <div className={wrapperStyles}>
       {children}
       <div
-        className={cssClass('loading', isLastPage && 'loading-hide')}
-        ref={loader}
+        className={loaderStyles}
+        ref={loaderRef}
+        data-testid='loader-wrapper'
       >
         <Loader />
       </div>
@@ -66,12 +75,14 @@ const InfinityScroll = ({ children, loadMore, isLastPage }) => {
 InfinityScroll.displayName = 'InfinityScroll'
 
 InfinityScroll.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   loadMore: PropTypes.func,
   isLastPage: PropTypes.bool
 }
 
 InfinityScroll.defaultProps = {
+  className: '',
   isLastPage: false,
   loadMore: () => null
 }
