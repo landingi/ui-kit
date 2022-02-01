@@ -5,6 +5,13 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import Spreader from '@components/ui/Spreader'
 import styles from './Dot.module.scss'
 
+/**
+ * Dot - stateless ui component
+ * @param {string} props.variant - dot color
+ * @param {string} props.label - optional label
+ * @param {string | array} props.className - additional styles
+ * @return {object} An object of children element
+ */
 const Dot = ({ variant, label, className }) => {
   const wrapperStyles = useStyles({}, className)
 
