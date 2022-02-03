@@ -1,7 +1,6 @@
 import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Spinner.module.scss'
 
 /**
  * Spinner - stateless presentational component
@@ -12,7 +11,7 @@ import styles from './Spinner.module.scss'
 const Spinner = ({ className }) => {
   return (
     <div className={className}>
-      <Icon icon='icon-spinner' spin className={styles['spinner']} />
+      <Icon icon='icon-spinner' spin />
     </div>
   )
 }
