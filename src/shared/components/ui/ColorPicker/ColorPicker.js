@@ -122,7 +122,7 @@ const ColorPicker = ({
         className={styles['color-picker__label']}
         onClick={handleToggleColorPicker}
       >
-        <Paragraph color='accent-3' size={16} weight={400} padding='none'>
+        <Paragraph color='accent-7' size={16} weight={400} padding='none'>
           {i18n.label}
         </Paragraph>
         <div
