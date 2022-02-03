@@ -10,7 +10,7 @@ import css from './fonts/css/editor-icons.module.scss'
  * @param {object} props - props
  * @param {string} props.icon - icon name
  * @param {string} props.color - color of icon default, primary
- * @param {string} props.color - color of icon default, primary
+ * @param {string | array} props.className - list of classes out of module
  * @return {object} An object of children element
  */
 const Icon = ({ icon, color, className, spin }) => {
