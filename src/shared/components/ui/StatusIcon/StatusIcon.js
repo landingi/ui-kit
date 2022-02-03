@@ -1,65 +1,49 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './StatusIcon.scss'
+import styles from './StatusIcon.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import Icon from '@components/ui/Icon'
 
 /**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
+ * Status Icon - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.variant - variant of statusIcon active, inactive
+ * @param {string} props.size - variant of statusIcon tiny, medium
  */
-const cssClass = styles(scss),
-  /**
-   * Status Icon - stateless presentational component
-   * @param {object} props - props
-   * @param {string|array} props.className - list of class names, default: `status-icon`
-   * @param {string} props.variant - variant of statusIcon active, inactive
-   * @param {string} props.size - variant of statusIcon tiny, medium
-   */
-  statusIcon = ({ className, variant, size }) => (
-    <div
-      data-testid='status-icon'
-      className={cssClass(
-        className,
-        `status-icon--${variant}`,
-        `status-icon--${size}`
-      )}
-    >
+const StatusIcon = ({ className, variant, size }) => {
+  const statusIconStyles = useStyles(
+    {
+      [styles['status-icon']]: true,
+      [styles[`status-icon--${variant}`]]: variant,
+      [styles[`status-icon--${size}`]]: size
+    },
+    className
+  )
+
+  return (
+    <div data-testid='status-icon' className={statusIconStyles}>
       {variant === 'active' ? (
-        <FontAwesomeIcon icon='check' size='xs' />
+        <Icon icon='icon-ok' />
       ) : (
-        <FontAwesomeIcon icon='times' size='xs' />
+        <Icon icon='icon-remove' />
       )}
     </div>
   )
+}
 
-statusIcon.displayName = 'Status Icon'
+StatusIcon.displayName = 'StatusIcon'
 
-statusIcon.propTypes = {
-  /**
-   * Classname, default `status-icon`
-   */
+StatusIcon.propTypes = {
   className: PropTypes.string,
-
-  /**
-   * Size, default 'medium'
-   */
   size: PropTypes.oneOf(['tiny', 'medium']),
-
-  /**
-   * Variant, default 'active'
-   */
   variant: PropTypes.oneOf(['active', 'inactive'])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-statusIcon.defaultProps = {
-  className: 'status-icon',
+StatusIcon.defaultProps = {
+  className: '',
   size: 'medium',
   variant: 'active'
 }
 
-export default statusIcon
+export default StatusIcon

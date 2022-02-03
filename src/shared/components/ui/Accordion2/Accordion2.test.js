@@ -2,9 +2,6 @@ import React from 'react'
 import { mountWithIntl } from '@jestutils'
 import Accordion from '@components/ui/Accordion2'
 import AccordionItem from '@components/ui/Accordion2/Item/AccordionItem'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const propsAccordion = {
   data: [

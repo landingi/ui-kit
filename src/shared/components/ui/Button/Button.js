@@ -7,6 +7,7 @@ import scss from './Button.scss'
 
 const cssClass = styles(scss)
 
+// TODO Button css-modules and tests
 /**
  * Button - stateless presentational component
  * @param {object} props - props

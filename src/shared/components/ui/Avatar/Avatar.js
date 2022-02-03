@@ -18,11 +18,14 @@ const renderVariant = (variant, src, name) =>
  * @return {object} An object of children element
  */
 const Avatar = ({ className, size, variant, src, name }) => {
-  const avatarStyles = useStyles({
-    [className]: true,
-    [styles[`avatar--${size}`]]: size,
-    [styles[`avatar--${variant}`]]: variant
-  })
+  const avatarStyles = useStyles(
+    {
+      [styles['avatar']]: true,
+      [styles[`avatar--${size}`]]: size,
+      [styles[`avatar--${variant}`]]: variant
+    },
+    className
+  )
 
   return (
     <span className={avatarStyles}>{renderVariant(variant, src, name)}</span>
@@ -40,7 +43,7 @@ Avatar.propTypes = {
 }
 
 Avatar.defaultProps = {
-  className: styles['avatar'],
+  className: '',
   name: null,
   size: 'medium',
   src: '',

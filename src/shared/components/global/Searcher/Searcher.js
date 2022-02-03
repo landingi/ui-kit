@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
 import Search from '@components/ui/Search'
 
+//TODO Searcher test, mdx
 /**
  * Searcher - stateful presentational component
  * @param {object} props - props

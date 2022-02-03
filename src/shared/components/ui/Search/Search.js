@@ -6,6 +6,7 @@ import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Search.module.scss'
 
+//TODO Search split to modules
 /**
  * Search - stateful presentational component
  * @param {object} props - props
@@ -18,9 +19,12 @@ import styles from './Search.module.scss'
  * @param {string} props.size - size of search field `small, medium, large`
  * @param {string} props.label - input label
  * @param {func} props.onSubmit - handle action on form submit
+ * @param {func} props.onClean- handle action on form clean
  * @param {object} props.i18n - object of translations
  * @param {string} props.tag - tag
  * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
+ * @param {boolean} props.submitEmptyOnBlur - submit triggered onBlur when value is empty
+ * @param {string} props.defaultValue - default value of input
  * @return {object} An object of children element
  */
 const Search = ({
@@ -32,10 +36,22 @@ const Search = ({
   children,
   size,
   onSubmit,
+  onClean,
   i18n,
   tag: Tag,
-  onProtectedSubmit
+  onProtectedSubmit,
+  submitEmptyOnBlur,
+  defaultValue
 }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['search']]: true,
+      [styles[`search--${variant}`]]: variant,
+      [styles[`search--${size}`]]: true
+    },
+    className
+  )
+
   const [isClearActive, setClearActive] = useState(false)
 
   const inputRef = useRef()
@@ -49,6 +65,16 @@ const Search = ({
 
     setClearActive(false)
     onChange()
+    onClean()
+    if (submitEmptyOnBlur) {
+      onSubmit()
+    }
+  }, [])
+
+  const onBlur = useCallback(() => {
+    if (inputRef.current.value === '' && submitEmptyOnBlur) {
+      onSubmit()
+    }
   }, [])
 
   /**
@@ -101,22 +127,12 @@ const Search = ({
     autoFocus && variant === 'input' && inputRef.current.focus()
   }, [])
 
-  const elementClasses = useStyles(
-    {
-      [styles.search]: true,
-      [styles['search--input']]: variant === 'input',
-      [styles['search--button']]: variant === 'button',
-      [styles[`search--${size}`]]: true
-    },
-    className
-  )
-
   return (
     <Tag onSubmit={handleSubmit}>
       <div className={elementClasses}>
         {variant === 'input' &&
           (onSubmit || onProtectedSubmit ? (
-            <div className={styles.search__icon_button}>
+            <div className={styles['search__icon-button']}>
               <Button
                 variant='icon-transparent'
                 type={onProtectedSubmit ? 'button' : 'submit'}
@@ -153,8 +169,10 @@ const Search = ({
             name='search'
             placeholder={i18n.placeholder}
             onChange={onChange}
+            onBlur={onBlur}
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
+            defaultValue={defaultValue}
           />
         )}
 
@@ -165,7 +183,7 @@ const Search = ({
               size='input'
               onClick={handleCleanOnClick}
             >
-              <Icon icon='times' />
+              <Icon icon='icon-remove' />
             </Button>
           </div>
         )}
@@ -191,25 +209,31 @@ Search.propTypes = {
     label: PropTypes.string
   }),
   onSubmit: PropTypes.func,
+  onClean: PropTypes.func,
   tag: PropTypes.string,
-  onProtectedSubmit: PropTypes.func
+  onProtectedSubmit: PropTypes.func,
+  submitEmptyOnBlur: PropTypes.bool,
+  defaultValue: PropTypes.string
 }
 
 Search.defaultProps = {
   className: '',
   tag: 'form',
   size: 'medium',
-  children: null,
   variant: 'input',
   i18n: {
     placeholder: null,
     label: null
   },
+  children: null,
   onSubmit: null,
+  onClean: () => null,
   onProtectedSubmit: null,
   autoFocus: false,
   onChange: () => null,
-  onKeyDown: () => null
+  onKeyDown: () => null,
+  submitEmptyOnBlur: false,
+  defaultValue: ''
 }
 
 export default Search

@@ -1,9 +1,6 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import TimeSelect from '@components/ui/TimeSelect'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const mockOnChange = jest.fn()
 

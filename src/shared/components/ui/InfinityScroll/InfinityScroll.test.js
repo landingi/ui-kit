@@ -1,15 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import InfinityScroll from '@components/ui/InfinityScroll'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
-
-const props = {
-  children: 'Infinity Scroll'
-}
-
-const infinityScrollComponent = <InfinityScroll {...props} />
+import '@testing-library/jest-dom'
 
 global.IntersectionObserver = class IntersectionObserver {
   constructor(func) {
@@ -29,28 +21,18 @@ global.IntersectionObserver = class IntersectionObserver {
   }
 }
 
-describe('<InfinityScroll/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(infinityScrollComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+describe('<InfinityScroll/> tests', () => {
+  it('renders properly', () => {
+    render(<InfinityScroll>children</InfinityScroll>)
   })
 
   it('has no loader on end', () => {
-    wrapper.setProps({
-      isLastPage: true
-    })
+    const { getByTestId, debug } = render(
+      <InfinityScroll isLastPage>children</InfinityScroll>
+    )
 
-    expect(
-      wrapper.find('.container').find('.loading').hasClass('loading-hide')
-    ).toBe(true)
+    debug()
+
+    expect(getByTestId('loader-wrapper')).toHaveClass('loading-hide')
   })
 })

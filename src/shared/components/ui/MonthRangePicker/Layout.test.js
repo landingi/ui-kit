@@ -1,12 +1,9 @@
 import React, { useState as useStateMock } from 'react'
 import { mount } from 'enzyme'
-import registerIcons from '@helpers/icons'
 import MonthRangePickerLayout from '@components/ui/MonthRangePicker'
 import MonthRangePicker from '@components/ui/MonthRangePicker/MonthRangePicker'
 import Button from '@components/ui/Button'
 import Spacer from '@components/ui/Spacer'
-
-registerIcons()
 
 const props = {
   onChange: jest.fn(),

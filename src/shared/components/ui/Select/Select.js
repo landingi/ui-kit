@@ -5,6 +5,7 @@ import styles from './Select.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
 
+//TODO Select css, test
 /**
  * Select - stateless presentational component
  * @param {object} props - props
@@ -34,34 +35,12 @@ const Select = ({ value, data, name, onChange }) => {
 Select.displayName = 'Select'
 
 Select.propTypes = {
-  /**
-   * Data elements
-   */
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-
-  /**
-   * Name
-   */
   name: PropTypes.string.isRequired,
-
-  /**
-   * Gets called when input changes
-   *
-   * @param {SyntheticEvent} event The react `SyntheticEvent`
-   * @param {Object} All props
-   */
   onChange: PropTypes.func,
-
-  /**
-   * Value
-   */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
 Select.defaultProps = {
   onChange: () => null,
   value: undefined

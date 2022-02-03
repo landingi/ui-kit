@@ -1,9 +1,6 @@
 import React from 'react'
 import ShowPassword from '@components/ui/ShowPassword'
-import registerIcons from '@helpers/icons'
 import { mountWithIntl } from '@jestutils'
-
-registerIcons()
 
 const component = <ShowPassword />
 

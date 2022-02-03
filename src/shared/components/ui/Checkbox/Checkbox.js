@@ -5,6 +5,7 @@ import scss from './Checkbox.scss'
 
 const cssClass = styles(scss)
 
+// TODO Checkbox css-modules, mdx and test
 /**
  * Checkbox - stateless presentational component
  * @param {object} props - props

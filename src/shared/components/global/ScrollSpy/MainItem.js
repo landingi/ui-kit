@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollSpyShape } from '@shapes'
 import Button from '@components/ui/Button'
+import Icon from '@components/ui/Icon'
 import Item from './Item'
 import ListItem from '@components/ui/List/Item'
 import PropTypes from 'prop-types'
@@ -22,7 +22,7 @@ const MainItem = ({ item, onClick }) => {
   return (
     <ListItem variant='menu'>
       <Button onClick={onClick}>
-        <FontAwesomeIcon icon={icon} size='1x' />
+        <Icon icon={icon} />
 
         <span>{title}</span>
       </Button>

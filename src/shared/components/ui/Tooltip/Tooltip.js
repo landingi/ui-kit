@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Tooltip.module.scss'
 
+//TODO Tooltip css, test, mdx remove <br/>
 /**
  * Tooltip - stateless presentational component
  * @param {object} props - props
@@ -76,12 +77,12 @@ Tooltip.propTypes = {
 }
 
 Tooltip.defaultProps = {
+  className: '',
+  content: '',
   effect: 'solid',
   placement: 'bottom',
-  content: '',
   showOnClick: false,
   disabled: false,
-  className: '',
   align: 'left'
 }
 

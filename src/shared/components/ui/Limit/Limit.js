@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 import { formatNumeric } from '@helpers/data'
 import styles from './Limit.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -34,7 +34,7 @@ const Limit = ({
 }) => {
   const limitSmallStyles = useStyles(
     {
-      [styles.limit]: true
+      [styles['limit']]: true
     },
     className
   )
@@ -42,7 +42,7 @@ const Limit = ({
   return (
     <div className={limitSmallStyles}>
       <div className={styles['limit--icon']}>
-        <FontAwesomeIcon icon={icon} size='lg' />
+        <Icon icon={icon} />
       </div>
 
       <div className={styles['limit--info']}>
@@ -70,7 +70,7 @@ const Limit = ({
               <Spreader spread='tiny' />
 
               <Tooltip content={tooltip}>
-                <FontAwesomeIcon icon='exclamation-circle' />
+                <Icon icon='icon-exclamation-circle' />
               </Tooltip>
             </Fragment>
           )}

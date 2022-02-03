@@ -6,8 +6,9 @@ import scss from './Headline.scss'
 
 const cssClass = styles(scss)
 
+//TODO Headline css, mdx, test
 /**
- * Headline page - stateless presentational component
+ * Headline - stateless presentational component
  * @param {object} props - props
  * @param {string|array} props.className - list of class names, default: page__headline
  * @param {string} props.title - data

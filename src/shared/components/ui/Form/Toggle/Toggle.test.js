@@ -1,9 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
 import { Toggle } from '@components/ui/Form/Toggle/Toggle'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   id: 'jestem-id',

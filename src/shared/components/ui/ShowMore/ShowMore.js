@@ -54,9 +54,7 @@ const ShowMore = ({ height, children, i18n }) => {
         }}
         className={styles.container}
       >
-        <div data-testid='content' ref={content}>
-          {children}
-        </div>
+        <div ref={content}>{children}</div>
       </div>
       {isButtonDisplay && (
         <button

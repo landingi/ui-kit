@@ -6,17 +6,21 @@ import styles from './ColorNumber.module.scss'
 /**
  * ColorNumber - stateless presentational component
  * @param {object} props - props
+ * @param {string|array} props.className - list of class names
  * @param {object} props.children - children
  * @param {string} props.color - color
  * @param {number} props.size - size
  * @return {object} An object of children element
  */
-const ColorNumber = ({ children, variant, size }) => {
-  const elementClasses = useStyles({
-    [styles['color-number']]: true,
-    [styles[`color-number__color--${variant}`]]: variant,
-    [styles[`color-number__size--${size}`]]: size
-  })
+const ColorNumber = ({ className, children, variant, size }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['color-number']]: true,
+      [styles[`color-number__color--${variant}`]]: variant,
+      [styles[`color-number__size--${size}`]]: size
+    },
+    className
+  )
 
   return <span className={elementClasses}>{children}</span>
 }
@@ -24,6 +28,7 @@ const ColorNumber = ({ children, variant, size }) => {
 ColorNumber.displayName = 'ColorNumber'
 
 ColorNumber.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf([
     'alert',
@@ -39,6 +44,7 @@ ColorNumber.propTypes = {
 }
 
 ColorNumber.defaultProps = {
+  className: '',
   size: 18
 }
 

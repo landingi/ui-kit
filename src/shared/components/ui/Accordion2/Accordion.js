@@ -6,9 +6,9 @@ import AccordionItem from './Item/AccordionItem'
 /**
  * Accordion - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `accordion`
  * @param {array} props.data - accordion content
- * @param {bool} props.hasNumber - has number, default `false`
+ * @param {bool} props.hasNumber - has number
+ * @param {string} props.size
  * @return {object} An object of children element
  */
 const Accordion = ({ data, hasNumber, size }) => (
@@ -43,8 +43,8 @@ Accordion.propTypes = {
 }
 
 Accordion.defaultProps = {
-  hasNumber: false,
-  size: 'medium'
+  size: 'medium',
+  hasNumber: false
 }
 
 export default memo(Accordion)

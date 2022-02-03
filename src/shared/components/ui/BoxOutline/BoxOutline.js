@@ -4,6 +4,7 @@ import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BoxOutline.module.scss'
 
+// TODO BoxOutline add mdx examples
 /**
  * Box outline - stateless presentational component
  * @param {object} children - children

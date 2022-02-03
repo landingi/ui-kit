@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Paragraph.module.scss'
 
+//TODO Paragraph check mdx examples
 /**
  * Paragraph - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: paragraph
+ * @param {string|array} props.className - list of class names
  * @param {object} props.children - children
  * @param {string} props.color - color
  * @param {number} props.size - size
  * @param {string} props.align - align
  * @param {string} props.padding - padding
  * @param {number} props.weight - weight
+ * @param {boolean} props.uppercase - weight
  * @param {number} props.line - line height
  * @return {object} An object of children element
  */
@@ -29,7 +31,7 @@ const Paragraph = ({
 }) => {
   const paragraphStyles = useStyles(
     {
-      [styles.paragraph]: true,
+      [styles['paragraph']]: true,
       [styles[`paragraph-color--${color}`]]: color,
       [styles[`paragraph-size--${size}`]]: size,
       [styles[`paragraph-padding--${padding}`]]: padding,
@@ -56,6 +58,7 @@ Paragraph.propTypes = {
     'accent-4',
     'accent-5',
     'accent-6',
+    'accent-7',
     'info',
     'white'
   ]),

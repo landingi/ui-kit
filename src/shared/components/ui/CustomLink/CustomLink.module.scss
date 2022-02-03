@@ -2,9 +2,22 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &--active {
+        color: $color-brand;
+
+        &:hover {
+            color: $color-button-primay-hover;
+        }
+    }
 
     &--inactive {
-        color: $color-5;
+        color: $color-4;
         pointer-events: none;
         cursor: default;
     }

@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Check from '@components/ui/Check'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const checkComponent = <Check> Landingi </Check>
 

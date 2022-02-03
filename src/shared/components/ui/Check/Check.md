@@ -8,11 +8,11 @@ import Check from '@components/ui/Check'
 ## Positive
 
 <Playground>
-    <Check positive>Positive</Check>
+  <Check positive>Positive</Check>
 </Playground>
 
 ## Negative
 
 <Playground>
-    <Check>Negative</Check>
+  <Check>Negative</Check>
 </Playground>

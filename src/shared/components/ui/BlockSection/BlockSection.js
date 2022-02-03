@@ -12,10 +12,12 @@ import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BlockSection.module.scss'
 
+// TODO Block Section tests
+
 /**
  * Block Section - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `block-section`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.title - title
  * @param {string} props.message - message
  * @param {string} props.button - button title
@@ -35,13 +37,20 @@ const BlockSection = ({
   reverse,
   list
 }) => {
+  const wrapperClasses = useStyles(
+    {
+      [styles['block-section']]: true
+    },
+    className
+  )
+
   const elementClasses = useStyles({
     [styles['block-section__panel']]: true,
-    [styles['block-section__panel--reverse']]: reverse === true
+    [styles['block-section__panel--reverse']]: reverse
   })
 
   return (
-    <div className={className}>
+    <div className={wrapperClasses}>
       <Panel variant='padding-none'>
         <div className={elementClasses}>
           <div className={styles['block-section__panel--content']}>
@@ -93,10 +102,10 @@ BlockSection.propTypes = {
 }
 
 BlockSection.defaultProps = {
-  className: styles['block-section'],
+  className: '',
   list: null,
-  onClick: () => null,
-  reverse: false
+  reverse: false,
+  onClick: () => null
 }
 
 export default BlockSection

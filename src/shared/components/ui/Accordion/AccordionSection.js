@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@components/ui/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './Accordion.module.scss'
+import Icon from '@components/ui/Icon'
 
 /**
  * AccordionSection - stateless presentational component
@@ -11,6 +11,9 @@ import styles from './Accordion.module.scss'
  * @param {boolean} props.isOpen - determine if section should be open
  * @param {string} props.label - label
  * @param {string} props.children - content
+ * @param {string|node} props.arrowLabel
+ * @param {string} props.variant
+ * @param {boolean|string} props.hasExpand
  * @return {object} An object of children element
  */
 const AccordionSection = ({
@@ -32,18 +35,18 @@ const AccordionSection = ({
             <Button variant={variant} size='small'>
               <span className={styles['accordion__header-arrow']}>
                 {isOpen ? (
-                  <FontAwesomeIcon icon='chevron-up' />
+                  <Icon icon='icon-chevron-up' />
                 ) : (
-                  <FontAwesomeIcon icon='chevron-down' />
+                  <Icon icon='icon-chevron-down' />
                 )}
 
                 {arrowLabel}
               </span>
             </Button>
           ) : isOpen ? (
-            <FontAwesomeIcon size='xs' icon='chevron-up' />
+            <Icon size='xs' icon='icon-chevron-up' />
           ) : (
-            <FontAwesomeIcon size='xs' icon='chevron-down' />
+            <Icon size='xs' icon='icon-chevron-down' />
           ))}
       </div>
     </div>

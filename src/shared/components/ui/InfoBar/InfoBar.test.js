@@ -1,9 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import InfoBar from '@components/ui/InfoBar'
-import registerIcons from '@helpers/icons'
-
-registerIcons()
 
 const props = {
   children: 'Info Bar'

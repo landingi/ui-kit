@@ -1,19 +1,20 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './CustomLink.scss'
-
-const cssClass = styles(scss)
+import styles from './CustomLink.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Custom Link - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `custom-link`
+ * @param {string|array} props.className - list of class names
  * @param {string} props.variant - variant of color:  active, inactive, dark
  * @param {string} props.size - variant of font-size: 14, 16; default: 14
  * @param {string} props.target - target
  * @param {string} props.href - href
  * @param {string} props.label - label to display
+ * @param {boolean} props.underlined - add underlined to link
+ * @param {function} props.onClick - click handler
+ * @return {object} An object of children element
  */
 const CustomLink = ({
   className,
@@ -24,26 +25,34 @@ const CustomLink = ({
   size,
   underlined,
   onClick
-}) => (
-  <a
-    className={cssClass(
-      className,
-      `custom-link--${variant}`,
-      `custom-link--${size}`,
-      underlined && 'custom-link--underlined'
-    )}
-    href={href}
-    onClick={onClick}
-    target={target}
-  >
-    {label}
-  </a>
-)
+}) => {
+  const customLinkStyles = useStyles(
+    {
+      [styles['custom-link']]: true,
+      [styles[`custom-link--${variant}`]]: variant,
+      [styles[`custom-link--${size}`]]: size,
+      [styles['custom-link--underlined']]: underlined
+    },
+    className
+  )
+
+  return (
+    <a
+      data-testid='custom-link'
+      className={customLinkStyles}
+      href={href}
+      onClick={onClick}
+      target={target}
+    >
+      {label}
+    </a>
+  )
+}
 
 CustomLink.displayName = 'CustomLink'
 
 CustomLink.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   href: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   size: PropTypes.oneOf([10, 12, 14, 16]),
@@ -54,7 +63,7 @@ CustomLink.propTypes = {
 }
 
 CustomLink.defaultProps = {
-  className: 'custom-link',
+  className: '',
   size: 14,
   target: '_self',
   variant: 'active',

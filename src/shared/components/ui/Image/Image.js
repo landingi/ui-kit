@@ -3,6 +3,7 @@ import React, { memo } from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Image.module.scss'
 
+//TODO Image test
 /**
  * Image - stateless presentational component
  * @param {object} props - props
@@ -17,7 +18,10 @@ import styles from './Image.module.scss'
  */
 const Image = ({ src, alt, className, size, height, auto, small }) => {
   const elementStyles = useStyles(
-    { [styles['image--auto']]: auto, [styles['image--small']]: small },
+    {
+      [styles['image--auto']]: auto,
+      [styles['image--small']]: small
+    },
     className
   )
 

@@ -1,17 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@components/ui/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Alert.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
-
-const icons = {
-  success: 'check',
-  warning: 'exclamation',
-  alert: 'exclamation-triangle',
-  info: 'info'
-}
-
-const getIcon = type => icons[type]
+import { mapIconToClass } from '@helpers/data'
 
 /**
  * Alert - stateless presentational component
@@ -22,14 +14,17 @@ const getIcon = type => icons[type]
  * @return {object} An object of children element
  */
 const Alert = ({ children, className, type }) => {
-  const alertStyles = useStyles({
-    [className]: true,
-    [styles[`alert-message--${type}`]]: type
-  })
+  const alertStyles = useStyles(
+    {
+      [styles['alert-message']]: true,
+      [styles[`alert-message--${type}`]]: type
+    },
+    className
+  )
 
   return (
     <div className={alertStyles}>
-      <FontAwesomeIcon icon={getIcon(type)} size='xs' />
+      <Icon icon={mapIconToClass(type)} color={type} />
 
       <div className={styles.alert__message}>{children}</div>
     </div>
@@ -49,7 +44,7 @@ Alert.propTypes = {
 }
 
 Alert.defaultProps = {
-  className: styles['alert-message'],
+  className: '',
   type: 'info'
 }
 
