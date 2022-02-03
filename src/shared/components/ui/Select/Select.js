@@ -5,7 +5,6 @@ import styles from './Select.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
 
-//TODO Select css, test
 /**
  * Select - stateless presentational component
  * @param {object} props - props
