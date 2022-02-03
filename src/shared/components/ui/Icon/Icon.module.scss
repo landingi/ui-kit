@@ -36,10 +36,8 @@
   }
 
   &--spin {
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-name: spinIcon;
-    animation-timing-function: linear;
+    display: inline-block;
+    animation: spinIcon 1s linear infinite;
   }
 }
 
