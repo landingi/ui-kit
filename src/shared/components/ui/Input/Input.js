@@ -75,6 +75,7 @@ const Input = ({
   return (
     <div className={wrapperStyles}>
       <input
+        data-testid='input-component'
         className={inputStyles}
         onBlur={onBlur}
         onChange={onChange}

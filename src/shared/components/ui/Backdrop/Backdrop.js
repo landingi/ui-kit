@@ -22,7 +22,9 @@ const Backdrop = ({ className, onClick, zIndex }) => {
     className
   )
 
-  return <div className={backdropStyles} onClick={onClick} />
+  return (
+    <div className={backdropStyles} onClick={onClick} data-testid='backdrop' />
+  )
 }
 
 Backdrop.displayName = 'Backdrop'
