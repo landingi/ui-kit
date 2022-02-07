@@ -96,6 +96,7 @@ const Button = ({
             )
       }
       onClick={onClick}
+      data-testid='button-component'
     >
       {isLoading && <Spinner />}
 
