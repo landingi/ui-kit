@@ -48,7 +48,8 @@ const Button = ({
   hasIcon,
   hide,
   buttonStyle,
-  fitWidth
+  fitWidth,
+  ['data-testid']: dataTestId
 }) => {
   const elementClasses = cssClass({
     'button--primary': variant === 'primary',
@@ -96,7 +97,7 @@ const Button = ({
             )
       }
       onClick={onClick}
-      data-testid='button-component'
+      data-testid={dataTestId}
     >
       {isLoading && <Spinner />}
 
@@ -144,7 +145,8 @@ Button.propTypes = {
   hasIcon: PropTypes.bool,
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
-  fitWidth: PropTypes.bool
+  fitWidth: PropTypes.bool,
+  ['data-testid']: PropTypes.string
 }
 
 Button.defaultProps = {
@@ -164,7 +166,8 @@ Button.defaultProps = {
   hide: false,
   buttonStyle: false,
   fitWidth: false,
-  onClick: () => {}
+  onClick: () => {},
+  ['data-testid']: undefined
 }
 
 export default Button
