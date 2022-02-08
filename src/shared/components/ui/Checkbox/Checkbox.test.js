@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import React from 'react'
 import { render } from '@jestutils'
 import Checkbox from '@components/ui/Checkbox'
@@ -8,7 +9,13 @@ const props = {
 }
 
 describe('<Checkbox /> tests', () => {
-  it('renders properly', () => {
-    render(<Checkbox {...props} />)
+  it('renders properly', async () => {
+    const { getByTestId } = render(
+      <Checkbox {...props} data-testid='checkbox' />
+    )
+    const checkbox = await getByTestId('checkbox')
+
+    expect(checkbox).toBeInTheDocument()
+    expect(checkbox).not.toBeChecked()
   })
 })

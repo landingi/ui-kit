@@ -26,8 +26,9 @@ const Checkbox = ({
   )
 
   return (
-    <label className={checkboxStyles} data-testid={dataTestId}>
+    <label className={checkboxStyles}>
       <input
+        data-testid={dataTestId}
         onChange={onChange}
         name={formikKey}
         checked={checked}
