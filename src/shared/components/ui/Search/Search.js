@@ -173,6 +173,7 @@ const Search = ({
             onKeyDown={handleOnKeyDown}
             onKeyUp={handleOnKeyUp}
             defaultValue={defaultValue}
+            data-testid='search-input'
           />
         )}
 
