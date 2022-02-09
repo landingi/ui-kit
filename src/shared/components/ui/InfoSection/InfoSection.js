@@ -1,19 +1,16 @@
-import { styles } from '@helpers/css'
+import React, { useMemo } from 'react'
+import PropTypes from 'prop-types'
+import uuid from 'react-uuid'
 import Button from '@components/ui/Button'
 import Heading from '@components/ui/Heading'
 import Image from '@components/ui/Image'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
 import Paragraph from '@components/ui/Paragraph'
-import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
 import Spacer from '@components/ui/Spacer'
-import scss from './InfoSection.scss'
-import uuid from 'react-uuid'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './InfoSection.module.scss'
 
-const cssClass = styles(scss)
-
-// TODO Info Section css, test
 /**
  * Info Section - stateless presentational component
  * @param {object} props - props
@@ -25,7 +22,7 @@ const cssClass = styles(scss)
  * @param {func} props.onClick - button action
  * @return {object} An object of children element
  */
-function InfoSection({ className, title, list, url, button, onClick }) {
+const InfoSection = ({ className, title, list, url, button, onClick }) => {
   const renderList = useMemo(
     () => (
       <List listStyle='ordered-check'>
@@ -39,8 +36,13 @@ function InfoSection({ className, title, list, url, button, onClick }) {
     []
   )
 
+  const infoSectionStyles = useStyles(
+    { [styles['info-section']]: true },
+    className
+  )
+
   return (
-    <div className={cssClass(className)}>
+    <div className={infoSectionStyles}>
       <div>
         <Heading bold level={1}>
           {title}
@@ -74,7 +76,7 @@ InfoSection.propTypes = {
 }
 
 InfoSection.defaultProps = {
-  className: 'info-section',
+  className: '',
   onClick: () => null
 }
 
