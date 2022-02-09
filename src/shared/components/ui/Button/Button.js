@@ -28,6 +28,7 @@ const cssClass = styles(scss)
  * @param {bool} props.hasIcon - has icon, default: false
  * @param {bool} props.hide - Hide, default: false
  * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false'
+ * @param {string} props.dataTestid - test id
  * @return {object} An object of children elements
  */
 const Button = ({
