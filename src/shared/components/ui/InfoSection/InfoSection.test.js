@@ -1,6 +1,6 @@
 import React from 'react'
 import InfoSection from '@components/ui/InfoSection'
-import { mountWithIntl } from '@jestutils'
+import { render } from '@jestutils'
 
 const props = {
   title: 'empty.list.message.domains.title',
@@ -14,55 +14,40 @@ const props = {
   onClick: () => null
 }
 
-const infoSectionComponent = <InfoSection {...props} />
-
-describe('<InfoSection /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(infoSectionComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `info-section` class', () => {
-    expect(wrapper.find('div').first().hasClass('info-section')).toBe(true)
+describe('<InfoSection /> tests', () => {
+  it('renders properly', () => {
+    render(<InfoSection {...props} />)
   })
 
   it('expect "Let your landing page go live!"', () => {
-    expect(wrapper.find('span').text()).toEqual(
-      'empty.list.message.domains.title'
-    )
+    const { getByText } = render(<InfoSection {...props} />)
+
+    const title = getByText('empty.list.message.domains.title')
+
+    expect(title).toBeDefined()
   })
 
   it('expect "Add a domain in a few easy steps"', () => {
-    expect(wrapper.find('div').at(2).text()).toEqual(
-      'empty.list.message.domains.item1'
-    )
+    const { getByText } = render(<InfoSection {...props} />)
+
+    const item = getByText('empty.list.message.domains.item1')
+
+    expect(item).toBeDefined()
   })
 
   it('expect "Get a free SSL certificate"', () => {
-    expect(wrapper.find('div').at(3).text()).toEqual(
-      'empty.list.message.domains.item2'
-    )
+    const { getByText } = render(<InfoSection {...props} />)
+
+    const item = getByText('empty.list.message.domains.item2')
+
+    expect(item).toBeDefined()
   })
 
   it('expect "Take advantage of multiple publishing options"', () => {
-    expect(wrapper.find('div').at(4).text()).toEqual(
-      'empty.list.message.domains.item3'
-    )
-  })
+    const { getByText } = render(<InfoSection {...props} />)
 
-  it('simulate <Button /> click', () => {
-    const mockCallBack = jest.fn()
-    wrapper.find('Button').simulate('click')
+    const item = getByText('empty.list.message.domains.item3')
 
-    expect(mockCallBack.mock.calls.length).toEqual(0)
+    expect(item).toBeDefined()
   })
 })
