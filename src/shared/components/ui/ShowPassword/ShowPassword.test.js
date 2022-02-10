@@ -1,40 +1,35 @@
+import '@testing-library/jest-dom'
 import React from 'react'
+import { render, fireEvent } from '@jestutils'
 import ShowPassword from '@components/ui/ShowPassword'
-import { mountWithIntl } from '@jestutils'
+import { act } from 'react-dom/test-utils'
 
-const component = <ShowPassword />
-
-describe('<ShowPassword/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mountWithIntl(component)
+describe('<ShowPassword/> tests', () => {
+  it('renders properly with no label', () => {
+    render(<ShowPassword />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('renders properly with label', () => {
+    const { container } = render(
+      <ShowPassword hasLabel i18n={{ show: 'show', hide: 'hide' }} />
+    )
+
+    expect(container.innerHTML).toMatch(/show/i)
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('change icon and label on click', () => {
+    const { container, getByTestId } = render(
+      <ShowPassword hasLabel i18n={{ show: 'show', hide: 'hide' }} />
+    )
 
-  it('has `showpassword` class', () => {
-    expect(wrapper.hasClass('showpassword')).toBe(true)
-  })
+    const button = getByTestId('show-pasword')
 
-  it('default prop `setHidden` should be undefined', () => {
-    const result = ShowPassword.defaultProps.setHidden()
+    act(() => fireEvent.click(button))
 
-    expect(result).toBe(null)
-  })
+    expect(container.innerHTML).toMatch(/hide/i)
 
-  it('has label show and eye icon', () => {
-    wrapper.setProps({
-      hasLabel: true
-    })
+    fireEvent.click(button)
 
-    expect(wrapper.find('Button').text()).toEqual('word.show')
-    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-eye-close')
+    expect(container.innerHTML).toMatch(/show/i)
   })
 })

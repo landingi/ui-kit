@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@components/ui/Button'
 import Icon from '@components/ui/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './ShowPassword.module.scss'
 
-//TODO ShowPassword css, mdx, test
 /**
  * ShowPassword - stateful presentational component
  * @param {object} props - props
@@ -16,7 +16,7 @@ import styles from './ShowPassword.module.scss'
  */
 const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
   const [icon, setIcon] = useState('icon-eye-close')
-  const [label, setLabel] = useState('word.show')
+  const [label, setLabel] = useState('')
 
   /**
    * HandleIconSet - set the icon state
@@ -33,11 +33,20 @@ const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
     }
   })
 
+  const showPasswordStyles = useStyles(
+    { [styles.showpassword]: true },
+    className
+  )
+
   return (
-    <span className={className} onClick={handleIconSet}>
+    <span
+      className={showPasswordStyles}
+      onClick={handleIconSet}
+      data-testid='show-pasword'
+    >
       {hasLabel ? (
         <Button hasIcon size='tiny' variant='switcher-brand'>
-          <Icon icon={icon} />
+          <Icon icon={icon} data-testid={icon} />
           {label}
         </Button>
       ) : (
@@ -62,7 +71,7 @@ ShowPassword.propTypes = {
 }
 
 ShowPassword.defaultProps = {
-  className: styles.showpassword,
+  className: '',
   hasLabel: false,
   setHidden: () => null,
   i18n: {
