@@ -23,6 +23,7 @@ import { getDeepValue } from '@helpers/data'
  * @param {string} props.background - color of background `white, transparent', default: white
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {object} props.i18n - object of translation
+ * @param {string} props.variant - input variant, default ''
  * @return {object} An object of children element
  */
 const Input = ({
@@ -38,7 +39,8 @@ const Input = ({
   tooltip,
   focused,
   background,
-  alwaysShowLabel
+  alwaysShowLabel,
+  variant
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -62,6 +64,7 @@ const Input = ({
         focused={focused}
         background={background}
         alwaysShowLabel={alwaysShowLabel}
+        variant={variant}
       />
       {isTouched && <Error error={error} />}
     </div>
@@ -99,7 +102,8 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string
-  })
+  }),
+  variant: PropTypes.string
 }
 
 Input.defaultProps = {
@@ -117,7 +121,8 @@ Input.defaultProps = {
   i18n: {
     label: null,
     placeholder: null
-  }
+  },
+  variant: ''
 }
 
 export default Input
