@@ -2,7 +2,6 @@ export { default as Headline } from '@components/global/Headline'
 export { default as Html } from '@components/global/Html'
 export { LongLogo } from '@components/global/Logo'
 export { ShortLogo } from '@components/global/Logo'
-export { default as ScrollSpy } from '@components/global/ScrollSpy'
 export { default as Searcher } from '@components/global/Searcher'
 
 export { default as TimingToast } from '@components/global/TimingToast'

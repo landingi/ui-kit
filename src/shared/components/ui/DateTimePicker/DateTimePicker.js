@@ -1,16 +1,12 @@
-import React, { Fragment, useState, useCallback } from 'react'
+import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './DateTimePicker.scss'
 import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from '@helpers/i18n'
+import './DateTimePicker.scss'
 
-const cssClass = styles(scss)
-
-// TODO Date Time Picker css, mdx, tests. Fix jsx-no-bind
 /**
  * Date Time Picker - stateless presentational component
  * this component is a wrapper for react-date-range calendar
@@ -59,14 +55,16 @@ const DateTimePicker = ({
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     addElements()
   }, [])
 
   const handleApply = useCallback(() => setDate(...state))
 
+  const handleChange = item => setState([item.selection])
+
   return (
-    <div className={cssClass('react-datetimepicker')}>
+    <div className='react-datetimepicker'>
       {oneDatePicker ? (
         <Calendar
           date={selectedDateCalendar || new Date()}
@@ -82,8 +80,7 @@ const DateTimePicker = ({
         <Fragment>
           <DateRange
             locale={getLanguage === 'pl' ? pl : enUS}
-            // eslint-disable-next-line react/jsx-no-bind
-            onChange={item => setState([item.selection])}
+            onChange={handleChange}
             showSelectionPreview
             moveRangeOnFirstSelection={false}
             rangeColors={['#EDECEC']}
@@ -96,7 +93,7 @@ const DateTimePicker = ({
             minDate={minDate ? new Date(minDate) : undefined}
             showMonthAndYearPickers={showMonthAndYearPickers}
           />
-          <Button onClick={handleApply} size='tiny'>
+          <Button onClick={handleApply} size='tiny' data-testid='apply-button'>
             {i18n.apply}
           </Button>
         </Fragment>

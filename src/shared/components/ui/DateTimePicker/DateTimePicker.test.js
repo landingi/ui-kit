@@ -1,182 +1,31 @@
-import React, {
-  useState as useStateMock,
-  useCallback as useCallbackMock
-} from 'react'
-import { mount } from 'enzyme'
+import React from 'react'
+import { render, fireEvent } from '@jestutils'
 import DateTimePicker from '@components/ui/DateTimePicker'
-import Button from '@components/ui/Button'
-import { Calendar, DateRange } from 'react-date-range'
-import { getAgoDate, getTodayDate } from '@helpers/data'
 
-const props = {
-  setDate: jest.fn(),
-  minDate: '2021/11/10',
-  maxDate: new Date(2022, 1, 11),
-  oneDatePicker: true,
-  showMonthAndYearPickers: false,
-  selectedDateCalendar: new Date(2021, 11, 15)
-}
-
-const rangePickerProps = {
-  ...props,
-  oneDatePicker: false,
-  showMonthAndYearPickers: true,
-  i18n: {
-    apply: 'Apply'
-  }
-}
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: jest.fn(),
-  useCallback: jest.fn()
-}))
-
-const initialRange = [
-  {
-    startDate: getAgoDate(5),
-    endDate: getTodayDate(),
-    key: 'selection'
-  }
-]
 const mockSetState = jest.fn()
 
-const DateTimepickerComponent = <DateTimePicker {...props} />
-const RangeDatePickerComponent = <DateTimePicker {...rangePickerProps} />
-
-describe('<DateTimePicker /> mount as Calendar', () => {
-  let wrapper
-
-  beforeAll(() => {
-    const div = document.createElement('div')
-    window.domNode = div
-    document.body.appendChild(div)
+describe('<DateTimePicker /> test as default variant', () => {
+  it('renders properly', () => {
+    render(<DateTimePicker setDate={mockSetState} />)
   })
 
-  beforeEach(() => {
-    useStateMock.mockImplementation(() => [initialRange, mockSetState])
-    useCallbackMock.mockImplementation(() => mockSetState)
-    wrapper = mount(DateTimepickerComponent, {
-      attachTo: window.domNode
-    })
+  it('renders properly with min date', () => {
+    render(<DateTimePicker setDate={mockSetState} minDate='2021/11/10' />)
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-    jest.clearAllMocks()
-  })
+  it('call setState on apply', () => {
+    const { getByTestId } = render(<DateTimePicker setDate={mockSetState} />)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const applyButton = getByTestId('apply-button')
 
-  it('should contains rendered Calendar', () => {
-    expect(wrapper.find(Calendar).length).toBe(1)
-  })
+    fireEvent.click(applyButton)
 
-  it('should not render DateRange', () => {
-    expect(wrapper.find(DateRange).exists()).toBe(false)
-  })
-
-  it('setDate func should be passed as prop to Calendar onChange', () => {
-    expect(wrapper.find(Calendar).prop('onChange')).toBe(props.setDate)
-  })
-
-  it('setDate func should be called with selected date in Calendar', async () => {
-    const selectedDate = new Date(2022, 10, 1)
-
-    await wrapper.find('Calendar').invoke('onChange')(selectedDate)
-
-    expect(props.setDate).toBeCalledTimes(1)
-    expect(props.setDate).toBeCalledWith(selectedDate)
-  })
-
-  it('Calendar should contains min and max date passed as props', () => {
-    const { minDate, maxDate } = props
-
-    expect(wrapper.find('Calendar').prop('minDate')).toEqual(new Date(minDate))
-    expect(wrapper.find('Calendar').prop('maxDate')).toEqual(maxDate)
-  })
-
-  it('Calendar should contains date prop equal selected date', () => {
-    const { selectedDateCalendar } = props
-
-    expect(wrapper.find('Calendar').prop('date')).toEqual(selectedDateCalendar)
-  })
-
-  it('Calendar should not contains month and year pickers', () => {
-    expect(wrapper.find('Calendar').prop('showMonthAndYearPickers')).toEqual(
-      false
-    )
+    expect(mockSetState).toBeCalled()
   })
 })
 
-describe('<DateTimePicker /> mount as DateRange', () => {
-  let wrapper
-
-  beforeAll(() => {
-    const div = document.createElement('div')
-    window.domNode = div
-    document.body.appendChild(div)
-  })
-
-  beforeEach(() => {
-    useStateMock.mockImplementation(() => [initialRange, mockSetState])
-    useCallbackMock.mockImplementation(() => mockSetState)
-    wrapper = mount(RangeDatePickerComponent, {
-      attachTo: window.domNode
-    })
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-    jest.clearAllMocks()
-  })
-
-  it('should contains rendered DateRange', () => {
-    expect(wrapper.find(DateRange).exists()).toBe(true)
-  })
-
-  it('should contains Button with text from i18n prop', () => {
-    const {
-      i18n: { apply }
-    } = rangePickerProps
-
-    expect(wrapper.find(Button).exists()).toBe(true)
-    expect(wrapper.find(Button).text()).toEqual(apply)
-  })
-
-  it('should contains month and year pickers', async () => {
-    expect(wrapper.find(DateRange).find('.rdrMonthPicker').length).toBe(1)
-    expect(wrapper.find(DateRange).find('.rdrYearPicker').length).toBe(1)
-  })
-
-  it('should contains minDate equal passed minDate as prop', () => {
-    const { minDate } = rangePickerProps
-    expect(wrapper.find(DateRange).prop('minDate')).toEqual(new Date(minDate))
-  })
-
-  it('should display date ranges defined in state', async () => {
-    expect(wrapper.find(DateRange).prop('ranges')).toEqual(initialRange)
-  })
-
-  it('setState func should be called with selected new date range in DateRange', async () => {
-    const newSelectedRange = {
-      selection: {
-        startDate: new Date(2021, 11, 21),
-        endDate: new Date(2022, 1, 11)
-      }
-    }
-    const { selection } = newSelectedRange
-
-    await wrapper.find(DateRange).invoke('onChange')(newSelectedRange)
-
-    expect(mockSetState).toBeCalledTimes(1)
-    expect(mockSetState).toBeCalledWith([selection])
-  })
-
-  it('after apply changes on clicking apply button setDate handler should be called with date range from state', async () => {
-    await wrapper.find(Button).invoke('onClick')(initialRange)
-    expect(mockSetState).toBeCalledWith(initialRange)
+describe('<DateTimePicker /> test as one day picker', () => {
+  it('renders properly', () => {
+    render(<DateTimePicker setDate={mockSetState} oneDatePicker />)
   })
 })
