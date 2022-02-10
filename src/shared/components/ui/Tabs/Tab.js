@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import TabContext from './TabContext'
 import Button from '@components/ui/Button'
 import useQueryString from '@helpers/hooks/useQueryString'
-import { styles } from '@helpers/css'
-import scss from './Tabs.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Tabs.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO Tab css, test
 /**
  * Tab - stateless presentational component
  * @param {object} props - props
@@ -29,9 +26,15 @@ const Tab = ({
   ...restProps
 }) => {
   const tabContext = useContext(TabContext)
-  const activeTab = tabContext.activeTab === name ? 'Tabs__tab--active' : ''
-  const classNames = `${cssClass(className)} ${activeTab}`
   const [, setTabValue] = useQueryString('tab')
+
+  const tabStyles = useStyles(
+    {
+      [styles.tab]: true,
+      [styles['tab--active']]: tabContext.activeTab === name
+    },
+    className
+  )
 
   /**
    * Handle tab click
@@ -52,8 +55,9 @@ const Tab = ({
 
   return (
     <span
-      className={classNames}
+      className={tabStyles}
       onClick={isDisabled ? handleDisabledTabClick : handleClick}
+      data-testid='tab-button'
       {...restProps}
     >
       <Button variant='tabs'>{children}</Button>
@@ -77,7 +81,7 @@ Tab.propTypes = {
 }
 
 Tab.defaultProps = {
-  className: 'tab',
+  className: '',
   onClick: () => null,
   isDisabled: false
 }

@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Tabs.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Tabs.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO TabList css, test
 /**
  * TabList - stateless presentational component
  * @param {object} props - props
@@ -15,8 +12,10 @@ const cssClass = styles(scss)
  * @return {object} An object of children element
  */
 const TabList = ({ className, children, ...restProps }) => {
+  const tabListStyles = useStyles({ [styles['tab__list']]: true }, className)
+
   return (
-    <div className={cssClass(className)} {...restProps}>
+    <div className={tabListStyles} {...restProps}>
       {children}
     </div>
   )
@@ -34,7 +33,7 @@ TabList.propTypes = {
 }
 
 TabList.defaultProps = {
-  className: 'tab__list'
+  className: ''
 }
 
 export default TabList

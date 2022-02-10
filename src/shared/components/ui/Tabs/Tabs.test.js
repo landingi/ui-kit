@@ -1,5 +1,7 @@
+import '@testing-library/jest-dom'
 import React from 'react'
-import { mount } from 'enzyme'
+import PropTypes from 'prop-types'
+import { render, fireEvent } from '@jestutils'
 import Tabs from '@components/ui/Tabs/Tabs'
 import TabList from '@components/ui/Tabs/TabList'
 import Tab from '@components/ui/Tabs/Tab'
@@ -9,36 +11,62 @@ const props = {
   initialValue: 'predefined'
 }
 
-const tabsComponent = (
+const Component = ({ isDisabled }) => (
   <Tabs {...props}>
     <TabList>
       <Tab name='predefined'>
-        <span> Some text</span>
+        <span>Some text</span>
+      </Tab>
+      <Tab name='addittional' isDisabled={isDisabled}>
+        <span>Some text</span>
       </Tab>
     </TabList>
 
-    <TabPanel name='predefined'>Tab Panel content</TabPanel>
+    <TabPanel name='predefined'>Tab Panel predefined</TabPanel>
+    <TabPanel name='addittional'>Tab Panel addittional</TabPanel>
   </Tabs>
 )
 
-describe('<Tabs/> mount', () => {
-  let wrapper
+Component.propTypes = {
+  isDisabled: PropTypes.bool
+}
 
-  beforeEach(() => {
-    wrapper = mount(tabsComponent)
+Component.defaultProps = {
+  isDisabled: false
+}
+
+describe('<Tabs/> tests', () => {
+  it('renders properly', () => {
+    const { getByText, queryByText } = render(<Component />)
+
+    const predefinedTabContent = getByText('Tab Panel predefined')
+    const addittionalTabContent = queryByText('Tab Panel addittional')
+
+    expect(predefinedTabContent).toBeInTheDocument()
+    expect(addittionalTabContent).not.toBeInTheDocument()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('switch content on tab click', () => {
+    const { getAllByTestId, queryByText } = render(<Component />)
+
+    const addittionalTabButtons = getAllByTestId('tab-button')
+
+    fireEvent.click(addittionalTabButtons[1])
+
+    const addittionalTabContent = queryByText('Tab Panel addittional')
+
+    expect(addittionalTabContent).toBeInTheDocument()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('does not switch content on tab click when it is disabled', () => {
+    const { getAllByTestId, queryByText } = render(<Component isDisabled />)
 
-  it('default prop `onClick` should be null', () => {
-    const result = Tab.defaultProps.onClick()
+    const addittionalTabButtons = getAllByTestId('tab-button')
 
-    expect(result).toBe(null)
+    fireEvent.click(addittionalTabButtons[1])
+
+    const addittionalTabContent = queryByText('Tab Panel addittional')
+
+    expect(addittionalTabContent).not.toBeInTheDocument()
   })
 })
