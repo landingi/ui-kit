@@ -76,6 +76,10 @@
       font-size: 14px;
       opacity: 1;
     }
+
+    &--table {
+      min-height: 22px;
+    }
   }
 
   button {
@@ -142,6 +146,12 @@
       &[type=number]{
         -moz-appearance: textfield;
       }
+    }
+
+    &--table {
+      width: 100%;
+      font-size: 14px;
+      height: 22px;
     }
   }
 }
