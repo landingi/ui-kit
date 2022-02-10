@@ -13,7 +13,13 @@ import css from './fonts/css/editor-icons.module.scss'
  * @param {string | array} props.className - list of classes out of module
  * @return {object} An object of children element
  */
-const Icon = ({ icon, color, className, spin }) => {
+const Icon = ({
+  icon,
+  color,
+  className,
+  spin,
+  ['data-testid']: dataTestId
+}) => {
   const elementStyles = useStyles(
     {
       [css['editor-icon']]: true,
@@ -24,7 +30,7 @@ const Icon = ({ icon, color, className, spin }) => {
     className
   )
 
-  return <i className={elementStyles} />
+  return <i className={elementStyles} data-testid={dataTestId} />
 }
 
 Icon.displayName = 'Icon'
@@ -33,13 +39,15 @@ Icon.propTypes = {
   icon: PropTypes.string.isRequired,
   color: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  spin: PropTypes.bool
+  spin: PropTypes.bool,
+  ['data-testid']: PropTypes.string
 }
 
 Icon.defaultProps = {
   className: '',
   color: 'default',
-  spin: false
+  spin: false,
+  ['data-testid']: undefined
 }
 
 export default Icon
