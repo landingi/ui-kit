@@ -1,9 +1,7 @@
+import '@testing-library/jest-dom'
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, fireEvent } from '@jestutils'
 import Filter from '@components/ui/Filter'
-import Button from '@components/ui/Button'
-import Dropdown from '@components/ui/Dropdown'
-import ListItem from '@components/ui/List/Item'
 
 const props = {
   values: [
@@ -19,38 +17,57 @@ const props = {
   initialValue: 'name'
 }
 
-const FilterComponent = <Filter {...props} />
-
-describe('<Filter/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(FilterComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+describe('<Filter/> tests', () => {
+  it('renders properly', () => {
+    render(<Filter {...props} />)
   })
 
   it('has `Nazwa` label', () => {
-    expect(wrapper.find(Dropdown).props().label).toEqual('Nazwa')
+    const { getByText } = render(<Filter {...props} />)
+
+    expect(getByText('Nazwa')).toBeInTheDocument()
   })
 
-  it('has two filters to choose', () => {
-    wrapper.find(Dropdown).find('span').first().simulate('click')
-    wrapper.update()
-    expect(wrapper.find(Dropdown).find(ListItem).length).toEqual(2)
+  it('has two filters to choose', async () => {
+    const { getByTestId, findAllByText } = render(<Filter {...props} />)
+    const button = getByTestId('trigger-dropdown')
+
+    fireEvent.click(button)
+
+    const Data = await findAllByText('Data')
+    const Nazwa = await findAllByText('Nazwa')
+
+    expect(Data.length).toEqual(1)
+    expect(Nazwa.length).toEqual(2)
   })
 
-  it('set filter after click', () => {
-    wrapper.find(Dropdown).find('span').first().simulate('click')
-    wrapper.update()
-    wrapper.find(Dropdown).find(ListItem).last().find(Button).simulate('click')
-    wrapper.update()
-    expect(wrapper.find(Dropdown).props().label).toEqual('Data')
+  it('call setValue on select', async () => {
+    const mockedSetValue = jest.fn()
+
+    const { getByTestId, findByText } = render(
+      <Filter {...props} setValue={mockedSetValue} />
+    )
+    const button = getByTestId('trigger-dropdown')
+
+    fireEvent.click(button)
+
+    const Data = await findByText('Data')
+
+    fireEvent.click(Data)
+
+    expect(mockedSetValue).toBeCalled()
+  })
+
+  it('call default setValue on select', async () => {
+    const { getByTestId, findByText } = render(
+      <Filter {...props} localStorageKey />
+    )
+    const button = getByTestId('trigger-dropdown')
+
+    fireEvent.click(button)
+
+    const Data = await findByText('Data')
+
+    fireEvent.click(Data)
   })
 })
