@@ -30,6 +30,7 @@ import Icon from '@components/ui/Icon'
  * @param {string} props.background - Color of background `white, transparent', default: white
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
  * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {string} props.variant - input variant, default ''
  * @return {object} An object of children element
  */
 const Input = ({
@@ -53,13 +54,15 @@ const Input = ({
   background,
   hideArrows,
   alwaysShowLabel,
-  defaultValue
+  defaultValue,
+  variant
 }) => {
   const wrapperStyles = useStyles(
     {
       [styles['input__wrapper']]: true,
       [styles['input__wrapper--focused']]: focused === 'true',
-      [styles['input__wrapper--show-label']]: alwaysShowLabel
+      [styles['input__wrapper--show-label']]: alwaysShowLabel,
+      [styles['input__wrapper--table']]: variant === 'table'
     },
     className
   )
@@ -67,7 +70,8 @@ const Input = ({
   const inputStyles = useStyles({
     [styles['input']]: true,
     [styles['input--transparent']]: background === 'transparent',
-    [styles['input--hidden-arrows']]: hideArrows
+    [styles['input--hidden-arrows']]: hideArrows,
+    [styles['input--table']]: variant === 'table'
   })
 
   const renderDefault = defaultValue && !value
@@ -145,7 +149,8 @@ Input.propTypes = {
     placeholder: PropTypes.string
   }),
   defaultValue: PropTypes.string,
-  alwaysShowLabel: PropTypes.bool
+  alwaysShowLabel: PropTypes.bool,
+  variant: PropTypes.string
 }
 
 Input.defaultProps = {
@@ -170,7 +175,8 @@ Input.defaultProps = {
   onKeyDown: () => null,
   onBlur: () => null,
   defaultValue: null,
-  alwaysShowLabel: false
+  alwaysShowLabel: false,
+  variant: ''
 }
 
 export default Input
