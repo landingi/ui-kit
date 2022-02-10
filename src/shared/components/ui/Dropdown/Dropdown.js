@@ -231,6 +231,7 @@ const Dropdown = forwardRef(
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
           className={dropdownWrapperWithTooltipStyles}
+          data-testid='trigger-dropdown'
         >
           {icon && renderIcon()}
 
@@ -248,6 +249,7 @@ const Dropdown = forwardRef(
         ref={composeRefs(ref, containerRef)}
         onClick={handleShow}
         className={dropdownStyles}
+        data-testid='trigger-dropdown'
       >
         {custom && custom}
 
@@ -275,6 +277,7 @@ const Dropdown = forwardRef(
           className={dropdownWrapperIconStyles}
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
+          data-testid='trigger-dropdown'
         >
           {hasArrow && renderArrows(isOpen, arrowType)}
 
