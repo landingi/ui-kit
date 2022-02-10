@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useStyles } from '@helpers/hooks/useStyles'
 import TabContext from './TabContext'
-import { styles } from '@helpers/css'
-import scss from './Tabs.scss'
+import styles from './Tabs.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO Tabs css, mdx,test
 /**
- * tabs - stateless presentational component
+ * Tabs - stateless presentational component
  * @param {object} props - props
  * @param {string} props.initialValue - initial value
- * @param {string|array} props.className - list of class names, default: `tabs__wrapper`
+ * @param {string|array} props.className - list of class names
  * @param {object} props.children - children
  * @param {string|array|object} props.restProps - rest of props
  * @return {object} An object of children element
@@ -23,9 +20,11 @@ const Tabs = ({ initialValue, className, children, ...restProps }) => {
     changeTab
   }
 
+  const tabsStyles = useStyles({ [styles['tabs__wrapper']]: true }, className)
+
   return (
     <TabContext.Provider value={tabProviderValue}>
-      <div className={cssClass(className)} {...restProps}>
+      <div className={tabsStyles} {...restProps}>
         {children}
       </div>
     </TabContext.Provider>
@@ -45,7 +44,7 @@ Tabs.propTypes = {
 }
 
 Tabs.defaultProps = {
-  className: 'tabs__wrapper'
+  className: ''
 }
 
 export default Tabs
