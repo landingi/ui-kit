@@ -62,7 +62,7 @@ const Input = ({
       [styles['input__wrapper']]: true,
       [styles['input__wrapper--focused']]: focused === 'true',
       [styles['input__wrapper--show-label']]: alwaysShowLabel,
-      [styles['input__wrapper--tabl']]: variant === 'table'
+      [styles['input__wrapper--table']]: variant === 'table'
     },
     className
   )
