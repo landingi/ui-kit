@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './GalleryImage.scss'
+import styles from './GalleryImage.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO GalleryImage css, mdx
 /**
  * GalleryImage - stateless presentational component
  * @param {object} props - props
@@ -16,14 +12,12 @@ const cssClass = styles(scss)
  */
 const GalleryImage = ({ src, onClick, onDoubleClick }) => (
   <div
-    className={cssClass('background')}
+    className={styles.background}
     onClick={onClick}
     onDoubleClick={onDoubleClick}
+    data-testid='gallery-image'
   >
-    <div
-      className={cssClass('image')}
-      style={{ backgroundImage: `url(${src})` }}
-    />
+    <div className={styles.image} style={{ backgroundImage: `url(${src})` }} />
   </div>
 )
 
