@@ -1,35 +1,41 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
-import scss from './Loader.scss'
+import styles from './Loader.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
-
-//TODO Loader css, test
 /**
  * Loader - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `loader__spin`
+ * @param {string|array} props.className - list of class names out of component
  * @return {object} An object of children element
  */
-const Loader = ({ className }) => (
-  <Fragment>
-    <Spacer space='large' />
+const Loader = ({ className }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['loader__spin']]: true
+    },
+    className
+  )
 
-    <div className={cssClass(className)}>
-      <div className={scss.rect1} />
+  return (
+    <Fragment>
+      <Spacer space='large' />
 
-      <div className={scss.rect2} />
+      <div className={elementClasses} data-testid='loader'>
+        <div className={styles['rect1']} />
 
-      <div className={scss.rect3} />
+        <div className={styles['rect2']} />
 
-      <div className={scss.rect4} />
+        <div className={styles['rect3']} />
 
-      <div className={scss.rect5} />
-    </div>
-  </Fragment>
-)
+        <div className={styles['rect4']} />
+
+        <div className={styles['rect5']} />
+      </div>
+    </Fragment>
+  )
+}
 
 Loader.displayName = 'Loader'
 
@@ -38,7 +44,7 @@ Loader.propTypes = {
 }
 
 Loader.defaultProps = {
-  className: 'loader__spin'
+  className: ''
 }
 
 export default Loader
