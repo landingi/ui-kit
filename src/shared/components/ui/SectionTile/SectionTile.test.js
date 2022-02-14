@@ -1,62 +1,40 @@
+import '@testing-library/jest-dom'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { render, fireEvent } from '@jestutils'
 import SectionTile from '@components/ui/SectionTile'
-import { mountWithIntl } from '@jestutils'
 
-const component = <SectionTile>CHILDREN</SectionTile>
+const Component = ({ isActive }) => (
+  <SectionTile isActive={isActive}>CHILDREN</SectionTile>
+)
 
-describe('<SectionTile/> mount', () => {
-  let wrapper
+Component.propTypes = {
+  isActive: PropTypes.bool
+}
 
-  beforeEach(() => {
-    wrapper = mountWithIntl(component)
+Component.defaultProps = {
+  isActive: false
+}
+
+describe('<SectionTile/> tests', () => {
+  it('renders properly', () => {
+    const { getByText } = render(<Component isActive />)
+    const children = getByText('CHILDREN')
+
+    expect(children).toBeInTheDocument()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('call default onClick', () => {
+    const { getByTestId } = render(<Component />)
+    const pointArea = getByTestId('point-area')
+
+    fireEvent.click(pointArea)
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('call default onDoubleClick', () => {
+    const { getByTestId } = render(<Component />)
+    const pointArea = getByTestId('point-area')
 
-  it('default prop `onDoubleClick` should be null', () => {
-    const result = SectionTile.defaultProps.onDoubleClick()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onClick` should be null', () => {
-    const result = SectionTile.defaultProps.onClick()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `thumbnailUrl` should empty string', () => {
-    const result = SectionTile.defaultProps.thumbnailUrl
-
-    expect(result).toBe('')
-  })
-
-  it('default prop `isActive` should be false', () => {
-    const result = SectionTile.defaultProps.isActive
-
-    expect(result).toBe(false)
-  })
-
-  it('has class name section-tile', () => {
-    expect(wrapper.find('div.section-tile').exists()).toBe(true)
-    expect(
-      wrapper.find('div.section-tile').hasClass('section-tile--active')
-    ).toBe(false)
-  })
-
-  it('should have `section-tile--active` when isActive', () => {
-    wrapper.setProps({
-      isActive: true
-    })
-
-    expect(
-      wrapper.find('div.section-tile').hasClass('section-tile--active')
-    ).toBe(true)
+    fireEvent.doubleClick(pointArea)
   })
 })
