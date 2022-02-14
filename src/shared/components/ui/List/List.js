@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styles from './List.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO List css, mdx, test
 /**
  * List - stateless presentational component
  * @param {object} props - props
@@ -37,14 +36,19 @@ List.displayName = 'List'
 List.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  listStyle: PropTypes.string,
-  variant: PropTypes.oneOf(['inline'])
+  listStyle: PropTypes.oneOf([
+    'ordered-check',
+    'ordered-decimal',
+    'ordered-disc',
+    ''
+  ]),
+  variant: PropTypes.oneOf(['inline', ''])
 }
 
 List.defaultProps = {
-  className: 'list',
+  className: '',
   listStyle: '',
-  variant: null
+  variant: ''
 }
 
 export default List
