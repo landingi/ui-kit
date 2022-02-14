@@ -7,11 +7,11 @@ export default ({ activeSectionDefault = 0, sectionElementRefs = [] }) => {
     handle = () => {
       let currentSectionId = activeSection
 
-      sectionElementRefs.map(item => {
-        const section = sectionElementRefs[item].current
+      sectionElementRefs.map((item, index) => {
+        const section = sectionElementRefs[index].current
 
         if (isInViewVertical(section)) {
-          currentSectionId = item
+          currentSectionId = sectionElementRefs[index].current
         }
       })
 
