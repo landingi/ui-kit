@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './SectionTile.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './SectionTile.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO SectionTile css, mdx, test
 /**
  * SectionTile - stateless presentational component
  * @param {object} props - props
@@ -22,21 +19,29 @@ const SectionTile = ({
   onClick,
   onDoubleClick,
   isActive
-}) => (
-  <div
-    style={{
-      background: `url(${thumbnailUrl}) center top no-repeat`
-    }}
-    className={cssClass('section-tile', isActive && 'section-tile--active')}
-  >
+}) => {
+  const sectionStyles = useStyles({
+    [styles['section-tile']]: true,
+    [styles['section-tile--active']]: isActive
+  })
+
+  return (
     <div
-      onClick={onClick}
-      onDoubleClick={onDoubleClick}
-      className={cssClass('point-area')}
-    />
-    {children}
-  </div>
-)
+      style={{
+        background: `url(${thumbnailUrl}) center top no-repeat`
+      }}
+      className={sectionStyles}
+    >
+      <div
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
+        className={styles['point-area']}
+        data-testid='point-area'
+      />
+      {children}
+    </div>
+  )
+}
 
 SectionTile.displayName = 'Section Tile'
 
