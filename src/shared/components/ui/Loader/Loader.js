@@ -7,7 +7,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 /**
  * Loader - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names out of component, default: `loader__spin`
+ * @param {string|array} props.className - list of class names out of component`
  * @return {object} An object of children element
  */
 const Loader = ({ className }) => {
