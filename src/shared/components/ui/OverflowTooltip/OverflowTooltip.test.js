@@ -1,56 +1,71 @@
 import React from 'react'
 import { render } from '@jestutils'
 import OverflowTooltip from '@components/ui/OverflowTooltip'
-import Tooltip from '@components/ui/Tooltip'
-
-const props = {
-  content: 'foobar',
-  length: 100,
-  placement: 'left',
-  children: 'child'
-}
-
-const overflowComponent = (
-  <OverflowTooltip {...props}>{props.children}</OverflowTooltip>
-)
+import '@testing-library/jest-dom'
 
 describe('<OverflowTooltip/> mount', () => {
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  const props = {
+    content: 'foobar',
+    length: 100,
+    placement: 'left',
+    children: 'child'
+  }
+
+  it('is mounted and displays whole content', () => {
+    const { getByText } = render(<OverflowTooltip {...props} />)
+
+    const contentNode = getByText(props.content)
+
+    expect(contentNode).toBeVisible()
   })
 
-  it('has `overflow-tooltip` class', () => {
-    expect(wrapper.hasClass('overflow-tooltip')).toBe(true)
-  })
+  it('has `overflow-tooltip` class when content text is longest than length property', () => {
+    const newProps = {
+      ...props,
+      length: 10,
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
+    }
+    const { getByTestId } = render(<OverflowTooltip {...newProps} />)
 
-  it('displays whole content unless exceeds given length', () => {
-    expect(wrapper.text()).toEqual('foobar')
-    expect(wrapper.find(Tooltip).length).toBe(0)
+    const overflowTooltipNode = getByTestId('overflow-tooltip')
+
+    expect(overflowTooltipNode).toHaveClass('overflow-tooltip')
   })
 
   it('trims content if exceeds given length and renders <Tooltip/> with whole content', () => {
-    wrapper.setProps({
-      length: 3
-    })
+    const newProps = {
+      ...props,
+      length: 3,
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
+    }
+    const { getByText } = render(<OverflowTooltip {...newProps} />)
 
-    expect(
-      wrapper.find('.overflow-tooltip div div').first().text() +
-        wrapper.find('.overflow-tooltip span').text()
-    ).toEqual('foo...child')
-    expect(wrapper.find(Tooltip).length).toBe(1)
-    expect(wrapper.find(Tooltip).props().content).toEqual(props.content)
-    expect(wrapper.find(Tooltip).props().align).toEqual(props.placement)
+    const trimedContentNode = getByText('Lor...')
+
+    expect(trimedContentNode).toBeVisible()
+
+    const wholeContentNode = getByText(newProps.content)
+
+    expect(wholeContentNode).toBeInTheDocument()
   })
 
   it('renders only trimmed text if there are no children', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...props,
       length: 3,
       children: null
-    })
+    }
 
-    expect(wrapper.find('.overflow-tooltip span').text()).toEqual('foo...')
-    expect(wrapper.find(Tooltip).length).toBe(1)
-    expect(wrapper.find(Tooltip).props().content).toEqual(props.content)
-    expect(wrapper.find(Tooltip).props().align).toEqual(props.placement)
+    const { getByText } = render(<OverflowTooltip {...newProps} />)
+
+    const trimedContentNode = getByText('foo...')
+
+    expect(trimedContentNode).toBeVisible()
+
+    const contentNode = getByText(props.content)
+
+    expect(contentNode).not.toBeVisible()
   })
 })

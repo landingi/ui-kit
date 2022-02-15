@@ -29,7 +29,7 @@ const OverflowTooltip = ({
 
   if (content?.length > length) {
     return children ? (
-      <div className={elementClasses}>
+      <div data-testid='overflow-tooltip' className={elementClasses}>
         <div>{`${content.slice(0, length).trim()}...`}</div>
 
         <Tooltip content={content} placement={placement}>
@@ -37,7 +37,7 @@ const OverflowTooltip = ({
         </Tooltip>
       </div>
     ) : (
-      <div className={elementClasses}>
+      <div data-testid='overflow-tooltip' className={elementClasses}>
         <Tooltip content={content} placement={placement}>
           <div>{`${content.slice(0, length).trim()}...`}</div>
         </Tooltip>
