@@ -1,13 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Input.scss'
 import Label from '@components/ui/Label'
-import MaskedInput from 'react-text-mask'
+import MaskedInputComponent from 'react-text-mask'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Input.module.scss'
 
-const cssClass = styles(scss)
-
-// TODO MaskedInput css, mdx, test
 /**
  * Masked Input - stateless presentational component
  * @param {object} props - props
@@ -24,49 +21,49 @@ const cssClass = styles(scss)
  * @param {bool} props.autoFocus - autoFocus
  * @param {string} props.mask - mask applied to input
  * @param {number} props.maxLength - max length of input
- * @param {bool} props.translate - true if placeholder/label is an id for translation
  * @param {object} props.field - formik field
  * @param {bool}  props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
  * @param {string|number} props.value - value
+ * @param {object} props.i18n - translations
  * @return {object} An object of children element
  */
 
-const Masked = ({
+const MaskedInput = ({
   className,
   onChange,
   onKeyDown,
   onBlur,
   type,
-  placeholder,
   name,
   disabled,
   readonly,
-  label,
   value,
   autoFocus,
-  translate,
   maxLength,
   mask,
-  field,
   guide,
-  focused
+  focused,
+  i18n: { placeholder, label }
 }) => {
-  const elementClasses = cssClass({
-    'input__wrapper--focused': focused === 'true'
-  })
+  const elementClasses = useStyles(
+    {
+      [styles.input__wrapper]: true,
+      [styles['input__wrapper--focused']]: focused === 'true'
+    },
+    className
+  )
 
   return (
-    <div className={cssClass(scss.input__wrapper, elementClasses)}>
-      <MaskedInput
-        field={field}
+    <div className={elementClasses}>
+      <MaskedInputComponent
         mask={mask}
-        className={cssClass(className)}
+        className={styles.input}
         onBlur={onBlur}
         onChange={onChange}
         onKeyDown={onKeyDown}
         type={type}
-        placeholder={translate ? placeholder || label : label}
+        placeholder={placeholder || label}
         name={name}
         id={name}
         defaultValue={value}
@@ -77,37 +74,29 @@ const Masked = ({
         required
         guide={guide}
         focused={focused}
+        data-testid='masked-input'
       />
-      <span className={cssClass('highlight')} />
-      <span className={cssClass('bar')} />
+
+      <span className={styles.highlight} />
+
+      <span className={styles.bar} />
+
       {label && (
-        <Label id={name} className={scss.input__label}>
-          {translate ? label : label}
+        <Label id={name} className={styles.input__label}>
+          {label}
         </Label>
       )}
     </div>
   )
 }
 
-Masked.displayName = 'Masked'
+MaskedInput.displayName = 'Masked'
 
-Masked.propTypes = {
-  /**
-   * Field
-   */
-  field: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
-  }).isRequired,
+MaskedInput.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
   onBlur: PropTypes.func,
-  /**
-   * Type, default `text`, `number`, `textarea`
-   */
   type: PropTypes.string,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   name: PropTypes.string,
@@ -116,24 +105,20 @@ Masked.propTypes = {
   label: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   autoFocus: PropTypes.bool,
-  translate: PropTypes.bool,
   maxLength: PropTypes.number,
   mask: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
   ),
-  /**
-   * if it is true underscores will be displayed to represent mask format, for example ____-____-____-____.
-   * If it is false no help will be displayed in input.
-   */
   guide: PropTypes.bool,
-  /**
-   * is focused, focused, keep label by default on top
-   */
-  focused: PropTypes.string
+  focused: PropTypes.string,
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string,
+    label: PropTypes.string
+  })
 }
 
-Masked.defaultProps = {
-  className: 'input',
+MaskedInput.defaultProps = {
+  className: '',
   onChange: () => null,
   onKeyDown: () => null,
   onBlur: () => null,
@@ -145,11 +130,14 @@ Masked.defaultProps = {
   label: null,
   value: null,
   autoFocus: false,
-  translate: true,
   maxLength: 524288,
   mask: [],
   guide: false,
-  focused: 'false'
+  focused: 'false',
+  i18n: {
+    placeholder: '',
+    label: ''
+  }
 }
 
-export default Masked
+export default MaskedInput
