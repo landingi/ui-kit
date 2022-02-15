@@ -1,0 +1,47 @@
+import { useState } from 'react'
+import { Playground, Props } from 'docz'
+import MaskedInputForm from '@components/ui/Form/Input/MaskedInput'
+
+# FormInput
+
+<Props of={MaskedInputForm} />
+
+<Playground>
+  {() => {
+    const [phone, setPhone] = useState('')
+    return (
+      <MaskedInputForm
+        i18n={{ placeholder: 'Test placeholder', label: 'Test label' }}
+        type='text'
+        field={{
+          name: 'phone',
+          value: phone,
+          onChange: ({ target: { value } }) => setPhone(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: {},
+          touched: {}
+        }}
+        id='phone'
+        guide
+        mask={[
+          '(',
+          /[1-9]/,
+          /\d/,
+          /\d/,
+          ')',
+          ' ',
+          /\d/,
+          /\d/,
+          /\d/,
+          '-',
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/
+        ]}
+      />
+    )
+  }}
+</Playground>
