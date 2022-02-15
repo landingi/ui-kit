@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
-import MaskedInput from '@components/ui/Input/Masked'
+import MaskedInput from '@components/ui/Input/MaskedInput'
 
 // TODO Form Input Masked css, mdx, test
 /**
@@ -19,21 +19,21 @@ import MaskedInput from '@components/ui/Input/Masked'
  * @param {array} props.mask - mask applied to input
  * @param {bool} props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
+ * @param {object} props.i18n - translations
  * @return {object} An object of children element
  */
 const Masked = ({
   field,
   form,
   id,
-  label,
-  placeholder,
   type,
   disabled,
   translate,
   maxLength,
   mask,
   guide,
-  focused
+  focused,
+  i18n
 }) => {
   const { name, value, onChange, onBlur } = field
   const { errors, touched } = form
@@ -50,8 +50,7 @@ const Masked = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        label={label}
-        placeholder={placeholder}
+        i18n={i18n}
         disabled={disabled}
         translate={translate}
         maxLength={maxLength}
@@ -87,7 +86,11 @@ Masked.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
   ),
   guide: PropTypes.bool,
-  focused: PropTypes.string
+  focused: PropTypes.string,
+  i18n: PropTypes.shape({
+    placeholder: PropTypes.string,
+    label: PropTypes.string
+  })
 }
 
 Masked.defaultProps = {
@@ -99,7 +102,11 @@ Masked.defaultProps = {
   disabled: false,
   translate: true,
   guide: false,
-  focused: 'false'
+  focused: 'false',
+  i18n: {
+    placeholder: '',
+    label: ''
+  }
 }
 
 export default Masked
