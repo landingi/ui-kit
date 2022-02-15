@@ -1,34 +1,41 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
-
-const props = {
-  children: <ListItem variant='inline'>children</ListItem>
-}
-
-const listComponent = <List {...props} />
+import '@testing-library/jest-dom'
 
 describe('<List/> mount', () => {
-  let wrapper
+  const props = {
+    children: (
+      <ListItem variant='menu' size='small'>
+        children
+      </ListItem>
+    )
+  }
 
-  beforeEach(() => {
-    wrapper = mount(listComponent)
+  it('list should be displayed', () => {
+    const { queryByRole } = render(<List {...props} />)
+
+    const listNode = queryByRole('list')
+
+    expect(listNode).toBeVisible()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('list has `list` class', () => {
+    const { queryByRole } = render(<List {...props} />)
+
+    const listNode = queryByRole('list')
+
+    expect(listNode).toHaveClass('list')
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+  it('<ListItem/> should be displayed with proper class', () => {
+    const { queryByRole } = render(<List {...props} />)
 
-  it('has `list` class', () => {
-    expect(wrapper.hasClass('list')).toBe(true)
-  })
+    const listItemNode = queryByRole('listitem')
 
-  it('<ListItem/> has `list__item` class', () => {
-    expect(wrapper.find('li').hasClass('list__item')).toBe(true)
+    expect(listItemNode).toBeVisible()
+
+    expect(listItemNode).toHaveClass('list-item--small', 'list-item--menu')
   })
 })

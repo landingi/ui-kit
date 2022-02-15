@@ -1,32 +1,30 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './List.scss'
-
-const cssClass = styles(scss)
+import styles from './List.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * ListItem - stateless presentational component
  * @param {object} props - props
  * @param {object} props.children - children
  * @param {string} props.variant - Variant `menu, dropdown, table`
- * @param {string} props.size - Size `small`
+ * @param {string} props.size - size
  * @param {string|array} props.className - list of class names, default: `list__item`,
- * @param {string} props.margin - left margin
+ * @param {bool} props.margin - left margin
  * @return {object} An object of children element
  */
 const ListItem = ({ children, variant, size, className, margin }) => {
-  const elementClasses = cssClass({
-    'list-item--block': variant === 'block',
-    'list-item--dropdown': variant === 'dropdown',
-    'list-item--list': variant === 'list',
-    'list-item--margin': margin,
-    'list-item--menu': variant === 'menu',
-    'list-item--small': size === 'small',
-    'list-item--table': variant === 'table'
-  })
+  const elementClasses = useStyles(
+    {
+      [styles['list__item']]: true,
+      [styles[`list-item--${variant}`]]: variant,
+      [styles['list-item--margin']]: margin,
+      [styles['list-item--small']]: size === 'small'
+    },
+    className
+  )
   return (
-    <li className={cssClass(className, elementClasses)}>
+    <li className={elementClasses}>
       <div>{children}</div>
     </li>
   )
@@ -38,20 +36,12 @@ ListItem.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   margin: PropTypes.bool,
-  size: PropTypes.string,
-  variant: PropTypes.oneOf([
-    'menu',
-    'dropdown',
-    'table',
-    'inline',
-    'list',
-    'block',
-    ''
-  ])
+  size: PropTypes.oneOf(['small', '']),
+  variant: PropTypes.oneOf(['menu', 'dropdown', 'table', 'list', 'block', ''])
 }
 
 ListItem.defaultProps = {
-  className: 'list__item',
+  className: '',
   margin: false,
   size: '',
   variant: ''
