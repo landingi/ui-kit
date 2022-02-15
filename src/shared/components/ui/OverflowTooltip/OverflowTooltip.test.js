@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import OverflowTooltip from '@components/ui/OverflowTooltip'
 import Tooltip from '@components/ui/Tooltip'
 
@@ -15,16 +15,6 @@ const overflowComponent = (
 )
 
 describe('<OverflowTooltip/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(overflowComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
     expect(wrapper.exists()).toBe(true)
   })
