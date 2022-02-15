@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
-import MaskedInput from '@components/ui/Input/Masked'
+import MaskedInput from '@components/ui/Input/MaskedInput'
 
 // TODO Form Input Masked css, mdx, test
 /**
