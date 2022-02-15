@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'react-editor-icons';
+  src: url('/src/shared/fonts/css/font/editor-icons.eot?30795734');
+  src: url('/src/shared/fonts/css/font/editor-icons.eot?30795734#iefix')
+      format('embedded-opentype'),
+    url('/src/shared/fonts/css/font/editor-icons.woff2?30795734')
+      format('woff2'),
+    url('/src/shared/fonts/css/font/editor-icons.woff?30795734') format('woff'),
+    url('/src/shared/fonts/css/font/editor-icons.ttf?30795734')
+      format('truetype'),
+    url('/src/shared/fonts/css/font/editor-icons.svg?30795734#editor-icons')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .list {
   list-style: none;
   padding: 0;
@@ -228,8 +244,8 @@
     }
 
     li:before {
-      font-family: 'Font Awesome 5 Free';
-      content: '\f00c';
+      font-family: 'react-editor-icons';
+      content: '\e873';
       font-size: 14px;
       font-weight: 600;
       color: $color-brand;

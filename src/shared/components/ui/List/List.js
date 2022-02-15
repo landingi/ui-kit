@@ -17,9 +17,7 @@ const List = ({ children, variant, className, listStyle }) => {
     {
       [styles['list']]: true,
       [styles['list--inline']]: variant === 'inline',
-      [styles['list--ordered-check']]: listStyle === 'ordered-check',
-      [styles['list--ordered-decimal']]: listStyle === 'ordered-decimal',
-      [styles['list--ordered-disc']]: listStyle === 'ordered-disc'
+      [styles[`list--${listStyle}`]]: listStyle
     },
     className
   )

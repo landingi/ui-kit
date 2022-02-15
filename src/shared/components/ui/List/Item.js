@@ -17,13 +17,9 @@ const ListItem = ({ children, variant, size, className, margin }) => {
   const elementClasses = useStyles(
     {
       [styles['list__item']]: true,
-      [styles['list-item--block']]: variant === 'block',
-      [styles['list-item--dropdown']]: variant === 'dropdown',
-      [styles['list-item--list']]: variant === 'list',
+      [styles[`list-item--${variant}`]]: variant,
       [styles['list-item--margin']]: margin,
-      [styles['list-item--menu']]: variant === 'menu',
-      [styles['list-item--small']]: size === 'small',
-      [styles['list-item--table']]: variant === 'table'
+      [styles['list-item--small']]: size === 'small'
     },
     className
   )
