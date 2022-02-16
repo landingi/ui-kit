@@ -1,84 +1,77 @@
 import React, { useState as useStateMock } from 'react'
-import { mount } from 'enzyme'
 import MonthRangePickerLayout from '@components/ui/MonthRangePicker'
-import MonthRangePicker from '@components/ui/MonthRangePicker/MonthRangePicker'
-import Button from '@components/ui/Button'
-import Spacer from '@components/ui/Spacer'
-
-const props = {
-  onChange: jest.fn(),
-  minDate: new Date(2021, 10, 11),
-  maxDate: new Date(2022, 10, 11),
-  i18n: {
-    apply: 'apply'
-  }
-}
+import { render } from '@jestutils'
+import { fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: jest.fn()
 }))
 
-const selectedRangeMock = null
-
-const setRangeMock = jest.fn()
-
-const MonthRangePickerWrapper = <MonthRangePickerLayout {...props} />
-
 describe('<MonthRangePickerLayout/> mount', () => {
-  let wrapper
+  const props = {
+    onChange: jest.fn(),
+    minDate: new Date(2021, 10, 11),
+    maxDate: new Date(2022, 10, 11),
+    i18n: {
+      apply: 'apply'
+    },
+    i18nHandler: jest.fn(translation => translation)
+  }
+
+  const selectedRangeMock = null
+
+  const setRangeMock = jest.fn()
 
   beforeEach(() => {
-    useStateMock.mockImplementation(() => [selectedRangeMock, setRangeMock])
-    wrapper = mount(MonthRangePickerWrapper)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
     jest.clearAllMocks()
+
+    useStateMock.mockImplementation(() => [selectedRangeMock, setRangeMock])
   })
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByTestId } = render(<MonthRangePickerLayout {...props} />)
+
+    const monthRangePickerLayout = getByTestId('layoutMonthRangePicker')
+
+    expect(monthRangePickerLayout).toBeVisible()
   })
 
-  it('should render three <Spacer/>', () => {
-    expect(wrapper.find(Spacer).length).toBe(3)
-  })
+  it('should render button with text from i18n props', () => {
+    const { getByRole } = render(<MonthRangePickerLayout {...props} />)
 
-  it('should render <Button/> with text from i18n props a', () => {
     const {
       i18n: { apply }
     } = props
 
-    expect(wrapper.find(Button).at(2).text()).toEqual(apply)
+    const buttonApply = getByRole('button', { name: apply })
+
+    expect(buttonApply).toBeVisible()
   })
 
-  it('should render MonthRangePicker with minDate, maxDate props passed to wrapper', () => {
-    const MonthRangePickerComponent = wrapper.find(MonthRangePicker)
+  it('should displays <MonthRangePicker/>', () => {
+    const { getByTestId } = render(<MonthRangePickerLayout {...props} />)
 
-    expect(MonthRangePickerComponent.exists()).toBe(true)
-    expect(MonthRangePickerComponent.prop('minDate')).toEqual(
-      wrapper.prop('minDate')
-    )
-    expect(MonthRangePickerComponent.prop('maxDate')).toEqual(
-      wrapper.prop('maxDate')
-    )
+    const monthRangePickerNode = getByTestId('month-range-picker')
+
+    expect(monthRangePickerNode).toBeVisible()
   })
 
-  it('on click button apply range should be called with onChange function', async () => {
-    const { onChange } = props
-    const ButtonApply = wrapper.find(Button).at(2)
+  it('onChange callback should be called with selected range when button apply was pressed', async () => {
+    const { getByRole } = render(<MonthRangePickerLayout {...props} />)
 
-    await ButtonApply.invoke('onClick')(selectedRangeMock)
+    const {
+      onChange,
+      i18n: { apply }
+    } = props
+
+    const buttonApplyNode = getByRole('button', { name: apply })
+
+    fireEvent.click(buttonApplyNode)
 
     expect(onChange).toBeCalledTimes(1)
+
     expect(onChange).toBeCalledWith(selectedRangeMock)
-  })
-
-  it('default prop onChange should be null', () => {
-    const result = MonthRangePickerLayout.defaultProps.onChange()
-
-    expect(result).toBe(null)
   })
 })
