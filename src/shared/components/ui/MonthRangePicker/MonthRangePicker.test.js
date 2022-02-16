@@ -1,13 +1,9 @@
 import React, { useCallback as useCallbackMock, useEffect } from 'react'
-import { mount } from 'enzyme'
 import MonthRangePicker from '@components/ui/MonthRangePicker/MonthRangePicker'
-import Button from '@components/ui/Button'
-
-const props = {
-  onChange: jest.fn(),
-  minDate: new Date(2018, 3, 11),
-  maxDate: new Date(2024, 10, 11)
-}
+import { render } from '@jestutils'
+import { fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { monthsArray } from './helpers'
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -15,102 +11,113 @@ jest.mock('react', () => ({
   useEffect: jest.fn()
 }))
 
-const setYearMock = jest.fn()
-
-const MonthRangePickerComponent = <MonthRangePicker {...props} />
-
 describe('<MonthRangePicker/> mount', () => {
-  let wrapper
+  const props = {
+    onChange: jest.fn(),
+    minDate: new Date(2018, 3, 11),
+    maxDate: new Date(2024, 10, 11),
+    i18nHandler: jest.fn(translation => translation)
+  }
+
+  const setYearMock = jest.fn()
 
   beforeEach(() => {
-    useCallbackMock.mockImplementation(() => setYearMock)
-    useEffect.mockImplementation(() => props.onChange)
-    wrapper = mount(MonthRangePickerComponent)
-  })
-
-  afterEach(() => {
     jest.clearAllMocks()
-    wrapper.unmount()
+
+    useCallbackMock.mockImplementation(() => setYearMock)
+
+    useEffect.mockImplementation(() => props.onChange)
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  it('should be displayed', () => {
+    const { getByTestId } = render(<MonthRangePicker {...props} />)
+
+    const monthRangePickerNode = getByTestId('month-range-picker')
+
+    expect(monthRangePickerNode).toBeVisible()
   })
 
-  it('setYear func should be called on click arrow left', async () => {
-    const btnArrowLeft = wrapper.find(Button).at(0)
+  it('setYear func should be called on click arrow left', () => {
+    const { getAllByRole } = render(<MonthRangePicker {...props} />)
 
-    await btnArrowLeft.invoke('onClick')()
+    const btnArrowLeftNode = getAllByRole('button')[0]
+
+    fireEvent.click(btnArrowLeftNode)
 
     expect(setYearMock).toBeCalledTimes(1)
   })
 
   it('setYear func should be called on click arrow right', async () => {
-    const btnArrowRight = wrapper.find(Button).at(0)
+    const { getAllByRole } = render(<MonthRangePicker {...props} />)
 
-    await btnArrowRight.invoke('onClick')()
+    const btnArrowRightNode = getAllByRole('button')[1]
+
+    fireEvent.click(btnArrowRightNode)
 
     expect(setYearMock).toBeCalledTimes(1)
   })
 
   it('month should has first and last style after click', async () => {
-    wrapper.find('div.grid-container').find('button').last().simulate('click')
+    const { getByRole } = render(<MonthRangePicker {...props} />)
 
-    const decemberBtn = wrapper.find('div.grid-container').find('button').last()
+    const decemberBtn = getByRole('button', { name: 'month.december' })
 
-    expect(decemberBtn.hasClass('button_month--last')).toBe(true)
-    expect(decemberBtn.hasClass('button_month--first')).toBe(true)
+    fireEvent.click(decemberBtn)
+
+    expect(decemberBtn).toHaveClass('button_month--last', 'button_month--first')
   })
 
   it('all initial months should be enabled to select', () => {
-    wrapper
-      .find('div.grid-container')
-      .find('button')
-      .map(node => {
-        expect(node.hasClass('button_month--disabled')).toBe(false)
-      })
+    const { getByTestId } = render(<MonthRangePicker {...props} />)
+
+    monthsArray.forEach(month => {
+      const buttonMonthNode = getByTestId(`button-${month.name}`)
+
+      expect(buttonMonthNode).not.toHaveClass('button_month--disabled')
+    })
   })
 
   it('month should has selecting style after clicking and during hover', () => {
-    wrapper
-      .find('div.grid-container')
-      .find('button')
-      .last()
-      .simulate('click')
-      .simulate('mouseOver')
+    const { getByTestId } = render(<MonthRangePicker {...props} />)
 
-    const decemberBtn = wrapper.find('div.grid-container').find('button').last()
+    const decemberBtn = getByTestId('button-month.december')
 
-    expect(decemberBtn.hasClass('button_month--selecting')).toBe(true)
+    fireEvent.click(decemberBtn)
+
+    fireEvent.mouseOver(decemberBtn)
+
+    expect(decemberBtn).toHaveClass('button_month--selecting')
   })
 
   it('month should be selected after first click, hover and second click', () => {
-    wrapper
-      .find('div.grid-container')
-      .find('button')
-      .last()
-      .simulate('click')
-      .simulate('mouseOver')
-      .simulate('click')
+    const { getByTestId } = render(<MonthRangePicker {...props} />)
 
-    const decemberBtn = wrapper.find('div.grid-container').find('button').last()
+    const decemberBtn = getByTestId('button-month.december')
 
-    expect(decemberBtn.hasClass('button_month--selected')).toBe(true)
+    fireEvent.click(decemberBtn)
+
+    fireEvent.mouseOver(decemberBtn)
+
+    fireEvent.click(decemberBtn)
+
+    expect(decemberBtn).toHaveClass('button_month--selected')
   })
 
   it('month button should be disabled if is before minimal date and after maximal date', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...props,
       minDate: new Date(2021, 5, 2),
       maxDate: new Date(2021, 8, 3)
-    })
+    }
 
-    wrapper
-      .find('div.grid-container')
-      .find('button')
-      .map((node, index) => {
-        if (index >= 9 || index <= 4) {
-          expect(node.hasClass('button_month--disabled')).toBe(true)
-        }
-      })
+    const { container } = render(<MonthRangePicker {...newProps} />)
+
+    const allMonthButtons = container.querySelectorAll('.button_month')
+
+    allMonthButtons.forEach((node, index) => {
+      if (index >= 9 || index <= 4) {
+        expect(node).toHaveClass('button_month--disabled')
+      }
+    })
   })
 })
