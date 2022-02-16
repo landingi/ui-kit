@@ -1,5 +1,5 @@
 import React from 'react'
-import scss from './Skeleton.scss'
+import styles from './Skeleton.module.scss'
 
 /**
  * Skeleton sidebar - stateless presentational component
@@ -7,35 +7,35 @@ import scss from './Skeleton.scss'
  */
 export function SkeletonSidebar() {
   return (
-    <div className={scss.sidebarSkeleton}>
-      <div className={scss.item}>
-        <div className={scss.circle} />
+    <div data-testid='skeleton-sidebar' className={styles.sidebarSkeleton}>
+      <div className={styles.item}>
+        <div className={styles.circle} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
-        <div className={scss.circle} />
+      <div className={styles.item}>
+        <div className={styles.circle} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
-        <div className={scss.circle} />
+      <div className={styles.item}>
+        <div className={styles.circle} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
-        <div className={scss.circle} />
+      <div className={styles.item}>
+        <div className={styles.circle} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
-        <div className={scss.circle} />
+      <div className={styles.item}>
+        <div className={styles.circle} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
     </div>
   )
@@ -47,35 +47,35 @@ export function SkeletonSidebar() {
  */
 export function SkeletonDrawer() {
   return (
-    <div className={scss.drawerSkeleton}>
-      <div className={scss.item}>
+    <div data-testid='skeleton-drawer' className={styles.drawerSkeleton}>
+      <div className={styles.item}>
         <div>
-          <div className={scss.circle} />
+          <div className={styles.circle} />
         </div>
 
-        <div className={scss.line} />
+        <div className={styles.line} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
+      <div className={styles.item}>
         <div>
-          <div className={scss.circle} />
+          <div className={styles.circle} />
         </div>
 
-        <div className={scss.line} />
+        <div className={styles.line} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
 
-      <div className={scss.item}>
+      <div className={styles.item}>
         <div>
-          <div className={scss.circle} />
+          <div className={styles.circle} />
         </div>
 
-        <div className={scss.line} />
+        <div className={styles.line} />
 
-        <div className={scss.line} />
+        <div className={styles.line} />
       </div>
     </div>
   )
@@ -87,8 +87,8 @@ export function SkeletonDrawer() {
  */
 export function SkeletonLine() {
   return (
-    <div className={scss.sekeleton}>
-      <div className={scss.line} />
+    <div data-testid='skeleton-line' className={styles.skeleton}>
+      <div className={styles.line} />
     </div>
   )
 }
@@ -99,8 +99,8 @@ export function SkeletonLine() {
  */
 export function SkeletonCircle() {
   return (
-    <div className={scss.sekeleton}>
-      <div className={scss.circle} />
+    <div data-testid='skeleton-circle' className={styles.skeleton}>
+      <div className={styles.circle} />
     </div>
   )
 }
