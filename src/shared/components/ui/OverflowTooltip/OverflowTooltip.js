@@ -1,24 +1,16 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Tooltip from '../Tooltip'
-import scss from './OverflowTooltip.scss'
-
-//TODO overflowTooltip css, test
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss)
+import Tooltip from '@components/ui/Tooltip'
+import styles from './OverflowTooltip.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * OverflowTooltip - stateless presentational component
- * @param {object} props - props
- * @param {object} props.content - content to overflow
- * @param {object} props.placement - tooltip placement
- * @param {object} props.length - max content length to overflow if it is exceeded
+ * @param {string} props.content - content to overflow
+ * @param {string} props.placement - tooltip placement
+ * @param {number} props.length - max content length to overflow if it is exceeded
  * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: overflow-tooltip
+ * @param {string|array} props.className - list of class names out of component
  * @return {object} An object of children element
  */
 const OverflowTooltip = ({
@@ -28,9 +20,16 @@ const OverflowTooltip = ({
   children,
   className
 }) => {
+  const elementClasses = useStyles(
+    {
+      [styles['overflow-tooltip']]: true
+    },
+    className
+  )
+
   if (content?.length > length) {
     return children ? (
-      <div className={cssClass(className)}>
+      <div data-testid='overflow-tooltip' className={elementClasses}>
         <div>{`${content.slice(0, length).trim()}...`}</div>
 
         <Tooltip content={content} placement={placement}>
@@ -38,7 +37,7 @@ const OverflowTooltip = ({
         </Tooltip>
       </div>
     ) : (
-      <div className={cssClass(className)}>
+      <div data-testid='overflow-tooltip' className={elementClasses}>
         <Tooltip content={content} placement={placement}>
           <div>{`${content.slice(0, length).trim()}...`}</div>
         </Tooltip>
@@ -61,7 +60,7 @@ OverflowTooltip.propTypes = {
 
 OverflowTooltip.defaultProps = {
   children: null,
-  className: 'overflow-tooltip',
+  className: '',
   length: 20,
   placement: 'right'
 }
