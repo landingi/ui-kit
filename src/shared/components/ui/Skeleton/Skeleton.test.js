@@ -1,77 +1,50 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { screen } from '@testing-library/react'
 import {
   SkeletonCircle,
   SkeletonLine,
   SkeletonSidebar,
   SkeletonDrawer
 } from '@components/ui/Skeleton'
-
-const skeletonCircleComponent = <SkeletonCircle />
-const skeletonLineComponent = <SkeletonLine />
-const skeletonSidebarComponent = <SkeletonSidebar />
-const skeletonDrawerComponent = <SkeletonDrawer />
+import '@testing-library/jest-dom'
 
 describe('<SkeletonCircle/> mount', () => {
-  let wrapper
+  it('should be displayed', () => {
+    render(<SkeletonCircle />)
 
-  beforeEach(() => {
-    wrapper = mount(skeletonCircleComponent)
-  })
+    const skeletonCircleNode = screen.getByTestId('skeleton-circle')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(skeletonCircleNode).toBeVisible()
   })
 })
 
 describe('<SkeletonLine/> mount', () => {
-  let wrapper
+  it('should be displayed', () => {
+    render(<SkeletonLine />)
 
-  beforeEach(() => {
-    wrapper = mount(skeletonLineComponent)
-  })
+    const skeletonLineNode = screen.getByTestId('skeleton-line')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(skeletonLineNode).toBeVisible()
   })
 })
 
 describe('<SkeletonSidebar/> mount', () => {
-  let wrapper
+  it('should be displayed', () => {
+    render(<SkeletonSidebar />)
 
-  beforeEach(() => {
-    wrapper = mount(skeletonSidebarComponent)
-  })
+    const skeletonSidebarNode = screen.getByTestId('skeleton-sidebar')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(skeletonSidebarNode).toBeVisible()
   })
 })
 
 describe('<SkeletonDrawer /> mount', () => {
-  let wrapper
+  it('should be displayed', () => {
+    render(<SkeletonDrawer />)
 
-  beforeEach(() => {
-    wrapper = mount(skeletonDrawerComponent)
-  })
+    const skeletonDrawerNode = screen.getByTestId('skeleton-drawer')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(skeletonDrawerNode).toBeVisible()
   })
 })
