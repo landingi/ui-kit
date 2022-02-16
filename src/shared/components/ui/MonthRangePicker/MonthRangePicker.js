@@ -7,24 +7,22 @@ import {
   parseDateToMonthID,
   transformMonthToDate
 } from './helpers'
-import { styles } from '@helpers/css'
 import Icon from '@components/ui/Icon'
 import Button from '@components/ui/Button'
 import Spacer from '@components/ui/Spacer'
-import scss from './MonthRangePicker.scss'
+import styles from './MonthRangePicker.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
-
-//TODO MonthRangePicker css, mdx, test
 /**
  * MonthRangePicker - stateful component
  * @param {object} props - props
  * @param {func} props.onChange - called on date confirm
  * @param {date} props.minDate - minimal date
  * @param {date} props.maxDate - maximal date
+ * @param {func} props.i18nHandler - callback function to translate keys
  * @return {object} An object of children element
  */
-const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
+const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
   const minimalDate = parseDateToMonthID(minDate),
     maximalDate = parseDateToMonthID(maxDate),
     [isSelecting, setSelecting] = useState(false),
@@ -74,31 +72,40 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
     monthsArray.map(({ code, name }) => {
       const monthID = constructMonthID(code)
 
-      const btnClasses = () =>
-        cssClass(
-          'button_month',
-          !isSelecting && 'button_month--not-selecting',
-          handleRangeMarker(monthID, endMonth, startMonth) &&
-            'button_month--selecting',
-          handleRangeMarker(monthID, confirmedEndMonth, startMonth) &&
-            'button_month--selected',
-          monthID < minimalDate && 'button_month--disabled',
-          monthID > maximalDate && 'button_month--disabled',
-          handleFirstMarker(monthID) && 'button_month--first',
-          handleLastMarker(monthID) && 'button_month--last'
-        )
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const buttonClasses = useStyles({
+        [styles['button_month']]: true,
+        [styles['button_month--not-selecting']]: !isSelecting,
+        [styles['button_month--selecting']]: handleRangeMarker(
+          monthID,
+          endMonth,
+          startMonth
+        ),
+        [styles['button_month--selected']]: handleRangeMarker(
+          monthID,
+          confirmedEndMonth,
+          startMonth
+        ),
+        [styles['button_month--disabled']]:
+          monthID < minimalDate || monthID > maximalDate,
+        [styles['button_month--first']]: handleFirstMarker(monthID),
+        [styles['button_month--last']]: handleLastMarker(monthID)
+      })
 
       return (
         <button
-          className={btnClasses()}
+          data-testid={`button-${name}`}
+          className={buttonClasses}
           key={name}
           onClick={() => handleSelect(monthID)}
           onMouseOver={() => handleHover(monthID)}
           type='button'
         >
-          <span className={cssClass('button_month--marker')} />
+          <span className={styles['button_month--marker']} />
 
-          <span className={cssClass('button_month--name')}>{name}</span>
+          <span className={styles['button_month--name']}>
+            {i18nHandler(name)}
+          </span>
         </button>
       )
     })
@@ -129,7 +136,10 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
 
   return (
     <Fragment>
-      <div className={cssClass('year-container')}>
+      <div
+        data-testid='month-range-picker'
+        className={styles['year-container']}
+      >
         <Button
           onClick={useCallback(() => setYear(year - 1), [year])}
           size='tiny'
@@ -138,7 +148,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
           <Icon icon='icon-arrow-left' />
         </Button>
 
-        <span className={cssClass('year')}>{year}</span>
+        <span className={styles['year']}>{year}</span>
 
         <Button
           onClick={useCallback(() => setYear(year + 1), [year])}
@@ -151,7 +161,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
 
       <Spacer space='tiny' />
 
-      <div className={cssClass('grid-container')}>{renderMonths()}</div>
+      <div className={styles['grid-container']}>{renderMonths()}</div>
     </Fragment>
   )
 }
@@ -159,7 +169,8 @@ const MonthRangePicker = ({ onChange, minDate, maxDate }) => {
 MonthRangePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   minDate: PropTypes.instanceOf(Date).isRequired,
-  maxDate: PropTypes.instanceOf(Date).isRequired
+  maxDate: PropTypes.instanceOf(Date).isRequired,
+  i18nHandler: PropTypes.func.isRequired
 }
 
 export default MonthRangePicker
