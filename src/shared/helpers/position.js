@@ -18,26 +18,3 @@ export const centerParent = (parentWidth, childWidth, parentOffsetLeft) => {
  */
 export const getBoundings = element =>
   element && element.getBoundingClientRect()
-
-/**
- * Element is in view vertically
- * @param {node} element The element
- * @return {bool}
- */
-export const isInViewVertical = element => {
-  let rect = getBoundings(element)
-  const { top, bottom, height } = rect,
-    { parentNode } = element,
-    { clientHeight } = document.documentElement
-
-  if (rect.bottom < 0) return false
-
-  if (top > clientHeight) return false
-  do {
-    rect = getBoundings(parentNode)
-    if (top <= bottom === false) return false
-    if (top + height <= top) return false
-  } while (parentNode !== document.body)
-
-  return true
-}
