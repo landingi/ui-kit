@@ -28,7 +28,7 @@ const Panel = ({
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
       [styles['panel--background']]: !hasShadow,
-      [styles['panel--shadow-none']]: variant
+      [styles[`panel--${variant}`]]: variant
     },
     className
   )
