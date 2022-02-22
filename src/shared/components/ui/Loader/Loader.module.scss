@@ -5,37 +5,38 @@
   text-align: center;
   font-size: 15px;
   clear: both;
+}
 
-  div {
-    background-color: $color-brand;
-    height: 15px;
-    width: 15px;
-    display: inline-block;
-    border-radius: 250px;
-    opacity: 0.5;
-    -webkit-animation: sk-stretchdelay 1s infinite ease-in-out;
-    animation: sk-stretchdelay 1s infinite ease-in-out;
-  }
+.loader__spin > div {
+  background-color: $color-brand;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  border-radius: 250px;
+  opacity: 0.5;
 
-  .rect2 {
-    -webkit-animation-delay: -0.9s;
-    animation-delay: -0.9s;
-  }
+  -webkit-animation: sk-stretchdelay 1s infinite ease-in-out;
+  animation: sk-stretchdelay 1s infinite ease-in-out;
+}
 
-  .rect3 {
-    -webkit-animation-delay: -0.8s;
-    animation-delay: -0.8s;
-  }
+.loader__spin .rect2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
 
-  .rect4 {
-    -webkit-animation-delay: -0.7s;
-    animation-delay: -0.7s;
-  }
+.loader__spin .rect3 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
 
-  .rect5 {
-    -webkit-animation-delay: -0.6s;
-    animation-delay: -0.6s;
-  }
+.loader__spin .rect4 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.loader__spin .rect5 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
 }
 
 @keyframes sk-stretchdelay {
@@ -51,5 +52,148 @@
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     opacity: 1;
+  }
+}
+
+.loader {
+  margin: 0 auto;
+  width: 115px;
+  height: 75px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__spinner {
+    display: block;
+
+    &--inner {
+      width: 38px;
+      height: 38px;
+      animation: spin 2.5s linear infinite;
+      border-radius: 300px;
+      padding: 4px;
+
+      svg {
+        stroke-dasharray: 86;
+        stroke-dashoffset: 0;
+        animation: dash 1s ease-in-out infinite;
+        animation-direction: alternate-reverse;
+        stroke-width: 4px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__triangle {
+    fill: #f27589;
+    position: absolute;
+    top: 46px;
+    left: 79px;
+    transform: rotate(154deg);
+    animation: move-triangle 3.2s infinite;
+  }
+
+  &__square {
+    fill: #f8d260;
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    transform: rotate(105deg);
+    animation: move-square 3.2s infinite;
+  }
+
+  &__circle {
+    fill: #7271d4;
+    position: absolute;
+    top: 48px;
+    left: 23px;
+    opacity: 1;
+    animation: move-circle 3.2s infinite;
+  }
+
+  &__circle2 {
+    fill: #2550aa;
+    position: absolute;
+    top: 22px;
+    left: 83px;
+    opacity: 1;
+    animation: move-circle-2 3.2s infinite;
+  }
+}
+
+@keyframes move-triangle {
+  0%,
+  25% {
+    top: 46px;
+    left: 79px;
+  }
+  50% {
+    top: 60px;
+    left: 100px;
+  }
+  100% {
+    top: 46px;
+    left: 79px;
+  }
+}
+
+@keyframes move-square {
+  0%,
+  25% {
+    top: 20px;
+    left: 25px;
+  }
+  50% {
+    top: 10px;
+    left: 10px;
+  }
+  100% {
+    top: 20px;
+    left: 25px;
+  }
+}
+
+@keyframes move-circle {
+  0%,
+  25% {
+    top: 48px;
+    left: 23px;
+  }
+  50% {
+    top: 60px;
+    left: 8px;
+  }
+  100% {
+    top: 48px;
+    left: 23px;
+  }
+}
+
+@keyframes move-circle-2 {
+  0%,
+  25% {
+    top: 22px;
+    left: 83px;
+  }
+  50% {
+    top: 8px;
+    left: 100px;
+  }
+  100% {
+    top: 22px;
+    left: 83px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 80;
   }
 }
