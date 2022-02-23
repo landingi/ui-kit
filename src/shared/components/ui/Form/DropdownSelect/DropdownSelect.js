@@ -17,6 +17,7 @@ import Spacer from '@components/ui/Spacer'
 import Searcher from '@components/global/Searcher'
 import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
+import Icon from '@components/ui/Icon'
 import scss from './Select.scss'
 
 const cssClass = styles(scss)
@@ -43,6 +44,7 @@ const cssClass = styles(scss)
  * @param {bool} props.optionalContent
  * @param {bool} props.hasLoadMoreButton - has load more button
  * @param {function} props.loadMoreEvent - load more button event
+ * @param {object} props.i18n - object of translations
  * @return {object} An object of children element
  */
 const Select = ({
@@ -65,7 +67,8 @@ const Select = ({
   liveChanges,
   optionalContent,
   hasLoadMoreButton,
-  loadMoreEvent
+  loadMoreEvent,
+  i18n
 }) => {
   const [inModalPosition, setInModalPosition] = useState(false)
   const errorClass = errors[name] ? 'form--has-error' : ''
@@ -132,9 +135,9 @@ const Select = ({
       hasIcon
       fitWidth
     >
-      <FontAwesomeIcon icon='arrow-down' />
+      <Icon icon='icon-arrow-down' />
 
-      <FormattedMessage id='word.loadmore' />
+      {i18n.loadmore}
     </Button>
   )
 
@@ -272,7 +275,8 @@ Select.propTypes = {
   hasLoadMoreButton: PropTypes.bool,
   loadMoreEvent: PropTypes.func,
   isLoading: PropTypes.bool,
-  isEmptyList: PropTypes.bool
+  isEmptyList: PropTypes.bool,
+  i18n: PropTypes.shape({ loadmore: PropTypes.string })
 }
 
 /**
@@ -302,7 +306,10 @@ Select.defaultProps = {
   liveChanges: false,
   optionalContent: null,
   hasLoadMoreButton: false,
-  loadMoreEvent: () => null
+  loadMoreEvent: () => null,
+  i18n: {
+    loadmore: ''
+  }
 }
 
 export default Select
