@@ -32,6 +32,7 @@ export { default as Dot } from '@components/ui/Dot'
 
 export { default as Dropdown } from '@components/ui/Dropdown'
 export { default as DropdownSelect } from '@components/ui/DropdownSelect'
+export { default as DropdownSelectForm } from '@components/ui/Form/DropdownSelect'
 export { emitCloseDropdown } from '@events/dropdown'
 
 export { default as Filter } from '@components/ui/Filter'

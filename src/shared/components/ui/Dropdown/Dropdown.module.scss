@@ -61,7 +61,6 @@
       color: $color-3;
     }
 
-
     &--input {
       border: 0;
       border-bottom: 1px solid $color-input-border;
@@ -112,7 +111,8 @@
       }
 
       &:hover {
-        i, svg {
+        i,
+        svg {
           color: $color-3;
         }
       }
@@ -193,9 +193,6 @@
 
   &--hidden {
     overflow: hidden;
-  }
-
-  &--hidden {
     opacity: 0;
   }
 }
