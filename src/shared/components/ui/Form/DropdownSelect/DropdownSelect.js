@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormattedMessage } from 'react-intl'
-import Error from '@components/ui/Form2/Error'
-import scss from './Select.scss'
+import Error from '@components/ui/Form/Error'
 import Message from '@components/ui/Message/Message'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
@@ -20,8 +17,9 @@ import Spacer from '@components/ui/Spacer'
 import Searcher from '@components/global/Searcher'
 import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
-const cssClass = styles(scss)
+import scss from './Select.scss'
 
+const cssClass = styles(scss)
 /**
  * Select - stateless presentational component
  * @param {object} props - props
