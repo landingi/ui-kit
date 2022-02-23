@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { useCallback, useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
@@ -48,7 +47,7 @@ const cssClass = styles(scss)
  * @param {function} props.loadMoreEvent - load more button event
  * @return {object} An object of children element
  */
-const select = ({
+const Select = ({
   name,
   value,
   onChange,
@@ -213,13 +212,13 @@ const select = ({
  * Display name
  * @type {string}
  */
-select.displayName = 'Select in dropdown'
+Select.displayName = 'Select in dropdown'
 
 /**
  * The properties.
  * @type {Object}
  */
-select.propTypes = {
+Select.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
@@ -273,14 +272,16 @@ select.propTypes = {
   liveChanges: PropTypes.bool,
   optionalContent: PropTypes.node,
   hasLoadMoreButton: PropTypes.bool,
-  loadMoreEvent: PropTypes.func
+  loadMoreEvent: PropTypes.func,
+  isLoading: PropTypes.bool,
+  isEmptyList: PropTypes.bool
 }
 
 /**
  * The default properties.
  * @type {Object}
  */
-select.defaultProps = {
+Select.defaultProps = {
   className: '',
   label: '',
   placeholder: '',
@@ -306,4 +307,4 @@ select.defaultProps = {
   loadMoreEvent: () => null
 }
 
-export default select
+export default Select
