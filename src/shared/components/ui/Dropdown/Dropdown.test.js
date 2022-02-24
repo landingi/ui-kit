@@ -43,9 +43,9 @@ describe('<Dropdown/> mount', () => {
     expect(wrapper.prop('tooltipPlacement')).toEqual('')
   })
 
-  it('has default size size with value medium', () => {
-    expect(wrapper.prop('size')).toEqual('medium')
-  })
+  // it('has default size size with value medium', () => {
+  //   expect(wrapper.prop('size')).toEqual('medium')
+  // })
 
   it('has default hasArrow with value true', () => {
     expect(wrapper.prop('arrowType')).toEqual('caret')

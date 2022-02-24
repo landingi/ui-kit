@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, Fragment } from 'react'
+import React, { useCallback, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
 // import Error from '@components/ui/Form/Error'
@@ -58,7 +58,7 @@ const DropdownSelectForm = ({
   options,
   handleOnSearchChange,
   searchPlaceholder,
-  inModal,
+  // inModal,
   isLoading,
   isEmptyList,
   hasDescription,
@@ -71,7 +71,7 @@ const DropdownSelectForm = ({
   i18n,
   hasParentElementFixed
 }) => {
-  const [inModalPosition, setInModalPosition] = useState(false)
+  // const [inModalPosition, setInModalPosition] = useState(false)
   const errorClass = errors[name] ? 'form--has-error' : ''
   const valueClass = value[name] ? 'form--has-value' : ''
   const filledClass = touched[name] ? 'form-field--touched' : ''
@@ -81,9 +81,9 @@ const DropdownSelectForm = ({
     onChange(name, item)
   })
 
-  useEffect(() => {
-    setInModalPosition(inModal)
-  }, [inModal])
+  // useEffect(() => {
+  //   setInModalPosition(inModal)
+  // }, [inModal])
 
   const renderOption = item =>
     hasDescription ? (
@@ -157,7 +157,6 @@ const DropdownSelectForm = ({
         asPlaceholder={!value[name]?.label}
         alignment='spaced'
         hasParentElementFixed={hasParentElementFixed}
-        inModalName={inModalPosition}
       >
         {handleOnSearchChange && (
           <Fragment>
