@@ -152,13 +152,6 @@ const Dropdown = forwardRef(
       const renderAbove =
         window.innerHeight <= dropdown?.height + container?.top + offset
 
-      if (hasParentElementFixed) {
-        setStyle({
-          marginTop: 10,
-          width: container?.width
-        })
-      }
-
       if (inModalName) {
         const modal = document.getElementsByClassName(inModalName)[0]
         const modalWidth = modal?.offsetWidth || 600
@@ -171,6 +164,13 @@ const Dropdown = forwardRef(
             : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
       } else {
+        if (hasParentElementFixed) {
+          setStyle({
+            marginTop: 10,
+            width: container?.width
+          })
+        }
+
         if (size === 'fixed') {
           setStyle({
             left: container?.left,
@@ -411,6 +411,7 @@ Dropdown.defaultProps = {
   renderAsSmaller: false,
   hasInput: false,
   hasFullInputStyle: false,
+  inModalName: null,
   asPlaceholder: false,
   button: false,
   isOpenDisabled: false,
