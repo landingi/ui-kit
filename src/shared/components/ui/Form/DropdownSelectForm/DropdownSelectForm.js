@@ -156,7 +156,7 @@ const DropdownSelectForm = ({
         asPlaceholder={!value[name]?.label}
         size='fixed'
         alignment='spaced'
-        inModal={inModalPosition}
+        inModalName={inModalPosition}
       >
         {handleOnSearchChange && (
           <Fragment>

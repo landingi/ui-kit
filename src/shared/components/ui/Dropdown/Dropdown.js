@@ -403,7 +403,6 @@ Dropdown.defaultProps = {
   hasInput: false,
   hasFullInputStyle: false,
   asPlaceholder: false,
-  inModal: false,
   button: false,
   isOpenDisabled: false,
   isOnlyIcon: false,
