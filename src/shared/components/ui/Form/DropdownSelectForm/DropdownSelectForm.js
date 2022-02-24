@@ -155,7 +155,6 @@ const DropdownSelectForm = ({
         hasInput
         hasFullInputStyle
         asPlaceholder={!value[name]?.label}
-        size='fixed'
         alignment='spaced'
         hasParentElementFixed={hasParentElementFixed}
         inModalName={inModalPosition}
