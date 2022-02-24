@@ -52,7 +52,8 @@ const Dropdown = forwardRef(
       inModalName,
       custom,
       isOpenDisabled,
-      isOnlyIcon
+      isOnlyIcon,
+      hasParentElementFixed
     },
     ref
   ) => {
@@ -150,6 +151,13 @@ const Dropdown = forwardRef(
       const dropdown = getBoundings(dropdownRef.current)
       const renderAbove =
         window.innerHeight <= dropdown?.height + container?.top + offset
+
+      if (hasParentElementFixed) {
+        setStyle({
+          marginTop: 10,
+          width: container?.width
+        })
+      }
 
       if (inModalName) {
         const modal = document.getElementsByClassName(inModalName)[0]
@@ -380,6 +388,7 @@ Dropdown.propTypes = {
   hasFullInputStyle: PropTypes.bool,
   asPlaceholder: PropTypes.bool,
   inModalName: PropTypes.string,
+  hasParentElementFixed: PropTypes.bool,
   custom: PropTypes.instanceOf(Object),
   isOpenDisabled: PropTypes.bool,
   isOnlyIcon: PropTypes.bool
@@ -406,6 +415,7 @@ Dropdown.defaultProps = {
   button: false,
   isOpenDisabled: false,
   isOnlyIcon: false,
+  hasParentElementFixed: false,
   handleOnClick: () => null,
   handleOnOpen: () => null,
   handleOnClose: () => null

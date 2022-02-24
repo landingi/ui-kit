@@ -68,7 +68,8 @@ const DropdownSelectForm = ({
   optionalContent,
   hasLoadMoreButton,
   loadMoreEvent,
-  i18n
+  i18n,
+  hasParentElementFixed
 }) => {
   const [inModalPosition, setInModalPosition] = useState(false)
   const errorClass = errors[name] ? 'form--has-error' : ''
@@ -156,6 +157,7 @@ const DropdownSelectForm = ({
         asPlaceholder={!value[name]?.label}
         size='fixed'
         alignment='spaced'
+        hasParentElementFixed={hasParentElementFixed}
         inModalName={inModalPosition}
       >
         {handleOnSearchChange && (
@@ -246,6 +248,7 @@ DropdownSelectForm.propTypes = {
   handleOnSearchChange: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   inModal: PropTypes.bool,
+  hasParentElementFixed: PropTypes.bool,
   hasDescription: PropTypes.bool,
   overflowStyle: PropTypes.instanceOf(Object),
   emphasisedOptions: PropTypes.arrayOf(
@@ -284,6 +287,7 @@ DropdownSelectForm.defaultProps = {
   value: null,
   searchPlaceholder: '',
   inModal: false,
+  hasParentElementFixed: false,
   empty: '',
   img: '',
   isLoading: false,
