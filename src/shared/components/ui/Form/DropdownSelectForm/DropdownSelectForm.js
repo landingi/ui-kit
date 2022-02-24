@@ -47,7 +47,7 @@ const cssClass = styles(scss)
  * @param {object} props.i18n - object of translations
  * @return {object} An object of children element
  */
-const Select = ({
+const DropdownSelectForm = ({
   name,
   value,
   onChange,
@@ -204,22 +204,14 @@ const Select = ({
         {optionalContent}
       </Dropdown>
 
-      <Error error={errors[name]} />
+      {/* <Error error={errors[name]} /> */}
     </div>
   )
 }
 
-/**
- * Display name
- * @type {string}
- */
-Select.displayName = 'Select in dropdown'
+DropdownSelectForm.displayName = 'DropdownSelectForm'
 
-/**
- * The properties.
- * @type {Object}
- */
-Select.propTypes = {
+DropdownSelectForm.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
@@ -279,11 +271,7 @@ Select.propTypes = {
   i18n: PropTypes.shape({ loadmore: PropTypes.string })
 }
 
-/**
- * The default properties.
- * @type {Object}
- */
-Select.defaultProps = {
+DropdownSelectForm.defaultProps = {
   className: '',
   label: '',
   placeholder: '',
@@ -312,4 +300,4 @@ Select.defaultProps = {
   }
 }
 
-export default Select
+export default DropdownSelectForm
