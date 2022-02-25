@@ -33,6 +33,7 @@ describe('<Radio /> mount', () => {
     render(<Radio {...props} label='label' />)
 
     const label = screen.getByText('label')
+
     expect(label).toBeInTheDocument()
   })
 })

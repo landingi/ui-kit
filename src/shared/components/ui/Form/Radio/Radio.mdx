@@ -1,0 +1,29 @@
+import { useState } from 'react'
+import { Playground, Props } from 'docz'
+import Radio from '@components/ui/Form/Radio'
+
+# Form Radio
+
+<Props of={Radio} />
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Radio
+        i18n={{ label: 'Test label' }}
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: {},
+          touched: {}
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
