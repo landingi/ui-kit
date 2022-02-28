@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-// import Error from '@components/ui/Form/Error'
+import Error from '@components/ui/Form/Error'
 import Message from '@components/ui/Message/Message'
 import List from '@components/ui/List'
 import ListItem from '@components/ui/List/Item'
@@ -18,9 +17,9 @@ import Searcher from '@components/global/Searcher'
 import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
 import Icon from '@components/ui/Icon'
-import scss from './Select.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './DropdownSelect.module.scss'
 
-const cssClass = styles(scss)
 /**
  * Select - stateless presentational component
  * @param {object} props - props
@@ -71,9 +70,16 @@ const DropdownSelectForm = ({
   i18n
 }) => {
   const [inModalPosition, setInModalPosition] = useState(false)
-  const errorClass = errors[name] ? 'form--has-error' : ''
-  const valueClass = value[name] ? 'form--has-value' : ''
-  const filledClass = touched[name] ? 'form-field--touched' : ''
+
+  const labelStyles = useStyles({
+    [styles['form-field__label']]: true,
+    [styles['form-field__label--has-error']]: errors[name] || touched[name],
+    [styles['form-field__label--has-value']]: value[name]
+  })
+
+  const dropdownStyles = useStyles({
+    [styles['form-field__dropdown--has-error']]: errors[name] || touched[name]
+  })
 
   const handleChange = useCallback((name, item) => {
     emitCloseDropdown()
@@ -142,25 +148,25 @@ const DropdownSelectForm = ({
   )
 
   return (
-    <div
-      className={`form-field form-field--dropdown ${
-        errorClass || valueClass || filledClass
-      }`}
-    >
-      {label && hasLabel && <Label id={name}>{label}</Label>}
+    <div>
+      {label && hasLabel && (
+        <Label id={name} className={labelStyles}>
+          {label}
+        </Label>
+      )}
 
       <Dropdown
-        label={value[name]?.label || label}
         hasInput
         hasFullInputStyle
         asPlaceholder={!value[name]?.label}
         size='fixed'
-        alignment='spaced'
+        alignment={value ? 'spaced' : 'end'}
         inModal={inModalPosition}
+        className={dropdownStyles}
       >
         {handleOnSearchChange && (
           <Fragment>
-            <div className={cssClass('search-container')}>
+            <div className={styles['search-container']}>
               <Searcher
                 setSearchPhrase={handleOnSearchChange}
                 placeholder={searchPlaceholder}
@@ -204,7 +210,7 @@ const DropdownSelectForm = ({
         {optionalContent}
       </Dropdown>
 
-      {/* <Error error={errors[name]} /> */}
+      <Error error={errors[name]} />
     </div>
   )
 }
