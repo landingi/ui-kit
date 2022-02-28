@@ -1,5 +1,5 @@
-:global {
-  .form--has-error {
+.form {
+  &--has-error {
     input,
     select {
       border-color: $color-error !important;
@@ -12,6 +12,42 @@
 
     label {
       color: $color-error;
+    }
+  }
+}
+
+.form-field {
+  position: relative;
+  min-height: 62px;
+
+  .label {
+    padding: 0 0 5px;
+  }
+
+  .input {
+    &__error {
+      color: $color-error;
+      font-size: 12px;
+      display: block;
+    }
+  }
+
+  &--has-error {
+    margin-bottom: $margin-medium;
+
+    label {
+      color: $color-error;
+      position: absolute;
+      top: 20px;
+      left: 0;
+      text-transform: uppercase;
+      transition: opacity 0.3s, top 0.3s;
+      opacity: 0;
+    }
+
+    select {
+      border-color: $color-error;
+      border-width: 2px;
     }
   }
 }
@@ -60,7 +96,7 @@
     input ~ label,
     input:focus ~ label,
     input:valid ~ label,
-    input:invalid ~ label  {
+    input:invalid ~ label {
       top: -14px;
       font-size: 14px;
       opacity: 1;
@@ -143,7 +179,7 @@
         margin: 0;
       }
 
-      &[type=number]{
+      &[type='number'] {
         -moz-appearance: textfield;
       }
     }

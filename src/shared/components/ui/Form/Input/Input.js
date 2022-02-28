@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import InputComponent from '@components/ui/Input'
 import { getDeepValue } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from '@components/ui/Input/Input.module.scss'
 
 // TODO Form Input css, mdx
 /**
@@ -44,10 +46,14 @@ const Input = ({
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
-  const errorClass = error && isTouched ? 'form--has-error' : ''
+
+  const wrapperStyles = useStyles({
+    [styles['form-field']]: true,
+    [styles['form--has-error']]: error && isTouched
+  })
 
   return (
-    <div className={`form-field ${errorClass}`}>
+    <div className={wrapperStyles}>
       <InputComponent
         type={type}
         name={name}
