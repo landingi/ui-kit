@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import CheckboxGroup from './CheckboxGroup'
+import FieldGroup from './FieldGroup'
 
-describe('CheckboxGroup tests', () => {
+describe('FieldGroup tests', () => {
   const props = {
     name: 'field-name',
     children: 'children',
@@ -10,10 +10,10 @@ describe('CheckboxGroup tests', () => {
     touched: {}
   }
   it('properly render with props', () => {
-    render(<CheckboxGroup {...props} />)
+    render(<FieldGroup {...props} />)
   })
   it('properly render with label', () => {
-    render(<CheckboxGroup {...props} label='test label' />)
+    render(<FieldGroup {...props} label='test label' />)
 
     expect(screen.findByRole('label')).toBeTruthy()
   })
@@ -27,7 +27,7 @@ describe('CheckboxGroup tests', () => {
       }
     }
 
-    render(<CheckboxGroup {...touchedProps} label='test label' />)
+    render(<FieldGroup {...touchedProps} label='test label' />)
 
     expect(screen.findByText('error-name')).toBeTruthy()
   })
