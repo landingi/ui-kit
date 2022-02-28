@@ -6,7 +6,6 @@ import React, {
   useEffect
 } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
 import Message from '@components/ui/Message/Message'
 import List from '@components/ui/List'
@@ -24,13 +23,12 @@ import Searcher from '@components/global/Searcher'
 import Search from '@components/ui/Search'
 import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
-import scss from './DropdownSelect.scss'
-
-const cssClass = styles(scss)
+import styles from './DropdownSelect.module.scss'
+import { useStyles } from 'shared/helpers/hooks/useStyles'
 
 //TODO DropdownSelect css, mdx, tests, jsdoc props
 /**
- * Select - stateless presentational component
+ * DropdownSelect - stateless presentational component
  * @param {object} props - props
  * @param {string} props.value - field value
  * @param {func} props.onChange - on Change handler
@@ -58,7 +56,7 @@ const cssClass = styles(scss)
  * @param {string} props.i18n - object of translations
  * @return {object} An object of children element
  */
-const Select = ({
+const DropdownSelect = ({
   value,
   onChange,
   errors,
@@ -83,11 +81,20 @@ const Select = ({
   searchInOptions,
   i18n
 }) => {
-  const errorClass = errors[formikKey] ? 'form--has-error' : ''
-  // eslint-disable-next-line prettier/prettier
-  const valueClass = value || alwaysShowLabel ? 'form--has-value' : ''
-  const filledClass = touched[formikKey] ? 'form-field--touched' : ''
-  const disabledClass = isOpenDisabled ? 'form-field--disabled' : ''
+  const hasValue = value || alwaysShowLabel
+
+  const labelStyles = useStyles({
+    [styles['form-field__label']]: true,
+    [styles['form-field__label--has-error']]:
+      errors[formikKey] || touched[formikKey],
+    [styles['form-field__label--has-value']]: hasValue,
+    [styles['form-field__label--disabled']]: isOpenDisabled
+  })
+
+  const dropdownStyles = useStyles({
+    [styles['form-field__dropdown--has-error']]:
+      errors[formikKey] || touched[formikKey]
+  })
 
   const getSelectedItem = () => {
     const currentItem = options.find(
@@ -196,17 +203,12 @@ const Select = ({
   )
 
   return (
-    <div
-      className={cssClass([
-        `form-field form-field--dropdown ${
-          errorClass || valueClass || filledClass
-        }`,
-        disabledClass,
-        className
-      ])}
-      ref={containerRef}
-    >
-      {label && <Label id={label}>{label}</Label>}
+    <div className={className} ref={containerRef}>
+      {label && (
+        <Label id={label} className={labelStyles}>
+          {label}
+        </Label>
+      )}
 
       <Dropdown
         label={
@@ -216,15 +218,16 @@ const Select = ({
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
         size='fixed'
-        alignment={valueClass ? 'spaced' : 'end'}
+        alignment={hasValue ? 'spaced' : 'end'}
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
+        className={dropdownStyles}
       >
         {handleOnSearchChange && (
           <Fragment>
-            <div className={cssClass('search-container')}>
+            <div className={styles['search-container']}>
               <Searcher
                 setSearchPhrase={handleOnSearchChange}
                 i18n={{ placeholder: i18n.placeholder }}
@@ -238,7 +241,7 @@ const Select = ({
         )}
         {searchInOptions && (
           <Fragment>
-            <div className={cssClass('search-container')}>
+            <div className={styles['search-container']}>
               <Search
                 onChange={handleSearchOptionsChange}
                 i18n={{ placeholder: i18n.placeholder }}
@@ -286,9 +289,9 @@ const Select = ({
   )
 }
 
-Select.displayName = 'Select dropdown'
+DropdownSelect.displayName = 'DropdownSelect'
 
-Select.propTypes = {
+DropdownSelect.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -331,7 +334,7 @@ Select.propTypes = {
   })
 }
 
-Select.defaultProps = {
+DropdownSelect.defaultProps = {
   label: '',
   searchPlaceholder: '',
   inModalName: '',
@@ -356,4 +359,4 @@ Select.defaultProps = {
   onChange: () => null
 }
 
-export default Select
+export default DropdownSelect

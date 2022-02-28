@@ -72,6 +72,7 @@ const Input = ({
         alwaysShowLabel={alwaysShowLabel}
         variant={variant}
       />
+
       {isTouched && <Error error={error} />}
     </div>
   )

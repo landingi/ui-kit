@@ -1,11 +1,9 @@
-import { styles } from '@helpers/css'
+import React from 'react'
 import PropTypes from 'prop-types'
-import React, { memo } from 'react'
-import scss from './Label.scss'
+import { useStyles } from 'shared/helpers/hooks/useStyles'
+import styles from './Label.module.scss'
 
-const cssClass = styles(scss)
-
-// TODO Label css, check global, mdx, test
+// TODO Label test
 /**
  * Label - stateless presentational component
  * @param {object} props - props
@@ -16,21 +14,23 @@ const cssClass = styles(scss)
  * @param {bool} props.toggle - toggle change
  * @return {object} An object of children element
  */
-const Label = memo(({ children, className, id, isToggle, toggle }) => (
-  <label
-    className={cssClass(
-      className,
-      isToggle
-        ? toggle
-          ? 'label--active'
-          : 'label--inactive'
-        : 'label--normal'
-    )}
-    id={id}
-  >
-    {children}
-  </label>
-))
+const Label = ({ children, className, id, isToggle, toggle }) => {
+  const labelStyles = useStyles(
+    {
+      [styles.label]: true,
+      [styles['label--normal']]: !isToggle,
+      [styles['label--active']]: isToggle && toggle,
+      [styles['label--inactive']]: isToggle && !toggle
+    },
+    className
+  )
+
+  return (
+    <label className={labelStyles} id={id}>
+      {children}
+    </label>
+  )
+}
 
 Label.displayName = 'Label'
 
@@ -43,7 +43,7 @@ Label.propTypes = {
 }
 
 Label.defaultProps = {
-  className: 'label',
+  className: '',
   id: null,
   isToggle: false,
   toggle: false

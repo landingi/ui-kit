@@ -1,0 +1,33 @@
+.search-container {
+  margin: 0 15px 15px;
+}
+
+.form-field {
+  &__dropdown {
+    &--has-error {
+      border-color: $color-error;
+      border-width: 2px;
+    }
+  }
+
+  &__label {
+    position: relative;
+    top: 35px;
+    left: 0px;
+    font-size: 16px;
+
+    &--has-error {
+      color: $color-error;
+    }
+
+    &--has-value {
+      top: 14px;
+      font-size: 14px;
+    }
+
+    &--disabled {
+      color: $color-input-border;
+      cursor: not-allowed;
+    }
+  }
+}
