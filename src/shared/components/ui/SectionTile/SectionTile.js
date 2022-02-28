@@ -34,7 +34,7 @@ const SectionTile = ({
         className={styles['section__tile']}
       />
     </BoxOutline>
-    <div className={styles['section__row-actions']}>{children}</div>
+    {children}
   </div>
 )
 
