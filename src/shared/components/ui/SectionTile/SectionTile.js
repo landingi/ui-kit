@@ -22,6 +22,7 @@ const SectionTile = ({
 }) => (
   <div className={styles['section__wrapper']}>
     <BoxOutline
+      className={styles['section__tile']}
       isSelected={isActive}
       onClickHandler={onClick}
       onDoubleClickHandler={onDoubleClick}
@@ -31,11 +32,10 @@ const SectionTile = ({
         style={{
           background: `url(${thumbnailUrl}) center top no-repeat`
         }}
-        className={styles['section__tile']}
-      >
-        {children}
-      </div>
+        className={styles['section__pointer-area']}
+      />
     </BoxOutline>
+    {children}
   </div>
 )
 
