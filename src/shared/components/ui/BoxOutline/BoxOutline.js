@@ -12,6 +12,7 @@ import styles from './BoxOutline.module.scss'
  * @param {boolean} isSelected - bool to decide if box was selected or not
  * @param {func} onClickHandler - callback to invoke when box was clicked
  * @param {func} onDoubleClickHandler - callback to invoke when box was clicked double times
+ * @param {string} padding - deafult is set. Set 'none' to turn off
  * @return {object} An object of children element
  */
 const BoxOutline = ({
