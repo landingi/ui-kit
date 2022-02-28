@@ -25,6 +25,7 @@ const SectionTile = ({
       isSelected={isActive}
       onClickHandler={onClick}
       onDoubleClickHandler={onDoubleClick}
+      padding='none'
     >
       <div
         style={{

@@ -19,12 +19,14 @@ const BoxOutline = ({
   className,
   isSelected,
   onClickHandler,
-  onDoubleClickHandler
+  onDoubleClickHandler,
+  padding
 }) => {
   const elementClasses = useStyles(
     {
       [styles['box-outline']]: true,
-      [styles['box-outline--is-selected']]: isSelected
+      [styles['box-outline--is-selected']]: isSelected,
+      [styles['box-outline--no-padding']]: padding === 'none'
     },
     className
   )
@@ -56,15 +58,17 @@ BoxOutline.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isSelected: PropTypes.bool,
   onClickHandler: PropTypes.func.isRequired,
-  onDoubleClickHandler: PropTypes.func
+  onDoubleClickHandler: PropTypes.func,
+  padding: PropTypes.oneOf(['', 'none'])
 }
 
 BoxOutline.defaultProps = {
   className: '',
   isSelected: false,
-  onDoubleClickHandler: () => undefined
+  onDoubleClickHandler: () => undefined,
+  padding: ''
 }
 
-BoxOutline.displayName = 'Box outline'
+BoxOutline.displayName = 'BoxOutline'
 
 export default BoxOutline
