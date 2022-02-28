@@ -1,33 +1,14 @@
-.section-tile {
+.section {
+  &__wrapper {
+    margin: 10px auto 10px 10px;
+  }
+
+  &__tile {
   width: 340px;
   height: 190px;
-  margin: 10px auto 10px 10px;
   position: relative;
   border: 1px solid $color-7;
   display: inline-flex;
-  transition: ease-out 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    .section-button {
-      display: none;
-    }
-
-    border-color: $color-brand;
-    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  &--active {
-    border-color: $color-success;
-
-    &:hover {
-      border-color: $color-success;
-    }
-  }
-
-  .point-area {
-    width: 100%;
-    position: absolute;
-    height: 100%;
   }
 }
+
