@@ -58,7 +58,7 @@ BoxOutline.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   isSelected: PropTypes.bool,
-  onClickHandler: PropTypes.func.isRequired,
+  onClickHandler: PropTypes.func,
   onDoubleClickHandler: PropTypes.func,
   padding: PropTypes.oneOf(['', 'none'])
 }
@@ -66,7 +66,8 @@ BoxOutline.propTypes = {
 BoxOutline.defaultProps = {
   className: '',
   isSelected: false,
-  onDoubleClickHandler: () => undefined,
+  onClick: () => null,
+  onDoubleClick: () => null,
   padding: ''
 }
 
