@@ -1,6 +1,6 @@
 .section {
   &__tile {
-    margin: 10px auto 10px 10px;
+    margin: $margin-small auto $margin-small $margin-small;
     display: inline-flex;
     justify-content: flex-start;
     align-items: flex-start;
