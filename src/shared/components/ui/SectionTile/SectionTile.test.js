@@ -26,14 +26,14 @@ describe('<SectionTile/> tests', () => {
 
   it('call default onClick', () => {
     const { getByTestId } = render(<Component />)
-    const pointArea = getByTestId('point-area')
+    const pointArea = getByTestId('box-outline')
 
     fireEvent.click(pointArea)
   })
 
   it('call default onDoubleClick', () => {
     const { getByTestId } = render(<Component />)
-    const pointArea = getByTestId('point-area')
+    const pointArea = getByTestId('box-outline')
 
     fireEvent.doubleClick(pointArea)
   })

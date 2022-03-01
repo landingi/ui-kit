@@ -9,12 +9,16 @@
   border: 1px solid transparent;
   transition: all 0.3s ease-out;
 
+  &--no-padding {
+    padding: 0;
+  }
+
   &:hover {
     border: 1px solid $color-brand;
     box-shadow: 5px 10px 20px #0000001a;
   }
 
-  &--is-selected {
+  &.box-outline--is-selected {
     border: 1px solid $color-success;
 
     &:hover {
@@ -36,6 +40,7 @@
     height: 25px;
     border-radius: 50%;
     font-size: 12px;
+    z-index: $z-index-boxoutline-checkmark;
 
     &--is-selected {
       background-color: $color-success;

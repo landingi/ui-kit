@@ -1,33 +1,18 @@
-.section-tile {
-  width: 340px;
-  height: 190px;
-  margin: 10px auto 10px 10px;
-  position: relative;
-  border: 1px solid $color-7;
-  display: inline-flex;
-  transition: ease-out 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    .section-button {
-      display: none;
-    }
-
-    border-color: $color-brand;
-    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1);
+.section {
+  &__tile {
+    margin: $margin-small auto $margin-small $margin-small;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 340px;
+    height: 190px;
+    border: 1px solid $color-7
   }
 
-  &--active {
-    border-color: $color-success;
-
-    &:hover {
-      border-color: $color-success;
-    }
-  }
-
-  .point-area {
+  &__pointer-area {
     width: 100%;
-    position: absolute;
     height: 100%;
+    position: absolute;
   }
 }
+

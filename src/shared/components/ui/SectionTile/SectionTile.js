@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStyles } from '@helpers/hooks/useStyles'
+import BoxOutline from '@components/ui/BoxOutline'
 import styles from './SectionTile.module.scss'
 
 /**
@@ -19,31 +19,25 @@ const SectionTile = ({
   onClick,
   onDoubleClick,
   isActive
-}) => {
-  const sectionStyles = useStyles({
-    [styles['section-tile']]: true,
-    [styles['section-tile--active']]: isActive
-  })
-
-  return (
+}) => (
+  <BoxOutline
+    className={styles['section__tile']}
+    isSelected={isActive}
+    padding='none'
+  >
     <div
       style={{
         background: `url(${thumbnailUrl}) center top no-repeat`
       }}
-      className={sectionStyles}
-    >
-      <div
-        onClick={onClick}
-        onDoubleClick={onDoubleClick}
-        className={styles['point-area']}
-        data-testid='point-area'
-      />
-      {children}
-    </div>
-  )
-}
+      className={styles['section__pointer-area']}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+    />
+    {children}
+  </BoxOutline>
+)
 
-SectionTile.displayName = 'Section Tile'
+SectionTile.displayName = 'SectionTile'
 
 SectionTile.propTypes = {
   children: PropTypes.node.isRequired,
