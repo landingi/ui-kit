@@ -20,23 +20,21 @@ const SectionTile = ({
   onDoubleClick,
   isActive
 }) => (
-  <div className={styles['section__wrapper']}>
-    <BoxOutline
-      isSelected={isActive}
-      onClickHandler={onClick}
-      onDoubleClickHandler={onDoubleClick}
-      padding='none'
-    >
-      <div
-        style={{
-          background: `url(${thumbnailUrl}) center top no-repeat`
-        }}
-        className={styles['section__tile']}
-      >
-        {children}
-      </div>
-    </BoxOutline>
-  </div>
+  <BoxOutline
+    className={styles['section__tile']}
+    isSelected={isActive}
+    padding='none'
+  >
+    <div
+      style={{
+        background: `url(${thumbnailUrl}) center top no-repeat`
+      }}
+      className={styles['section__pointer-area']}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+    />
+    {children}
+  </BoxOutline>
 )
 
 SectionTile.displayName = 'SectionTile'
