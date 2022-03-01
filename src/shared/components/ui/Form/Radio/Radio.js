@@ -1,12 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Radio.scss'
-import { getDeepValue } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Radio.module.scss'
 
-const cssClass = styles(scss)
-
-// TODO Form Radio css, mdx
 /**
  * Radio - stateless presentational component
  * @param {object} props - props
@@ -20,36 +16,39 @@ const cssClass = styles(scss)
  */
 const Radio = ({
   field: { name, value, onChange, onBlur },
-  form: { errors /*touched [UNUSED_VARIABLE]*/ },
   id,
   label,
   className,
   type
 }) => {
-  const error = getDeepValue(errors, name)
-  const errorClass = error ? 'form--has-error' : ''
+  const radioStyles = useStyles(
+    {
+      [styles.radio]: true
+    },
+    className
+  )
 
   return (
-    <div className={`form-field ${errorClass}`}>
-      <label className={cssClass(className)}>
-        {label && <label htmlFor={id}>{label}</label>}
-        <input
-          name={name}
-          id={id}
-          type={type}
-          value={id}
-          checked={id === value}
-          onChange={onChange}
-          onBlur={onBlur}
-          className={cssClass(className)}
-        />
-        <div />
-      </label>
-    </div>
+    <label className={radioStyles}>
+      {label && <label htmlFor={id}>{label}</label>}
+
+      <input
+        name={name}
+        id={id}
+        type={type}
+        value={id}
+        checked={id === value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={radioStyles}
+      />
+
+      <div />
+    </label>
   )
 }
 
-Radio.displayName = 'radio'
+Radio.displayName = 'Radio'
 
 Radio.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -69,7 +68,7 @@ Radio.propTypes = {
 }
 
 Radio.defaultProps = {
-  className: 'input__radio',
+  className: '',
   type: 'radio',
   label: ''
 }
