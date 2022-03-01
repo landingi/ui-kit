@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { styles } from '@helpers/css'
+import scss from './Radio.scss'
 import { getDeepValue } from '@helpers/data'
-import { useStyles } from '@helpers/hooks/useStyles'
-import styles from './Radio.module.scss'
-import InputComponent from '@components/ui/Input'
 
-// TODO Form Radio mdx
+const cssClass = styles(scss)
+
+// TODO Form Radio css, mdx
 /**
  * Radio - stateless presentational component
  * @param {object} props - props
@@ -15,44 +16,32 @@ import InputComponent from '@components/ui/Input'
  * @param {string} props.label - label
  * @param {string|array} props.className - list of class names, default: input__radio
  * @param {string} props.type - type of element `text, number etc`
- * @param {object} props.i18n - object of translation
  * @return {object} An object of children element
  */
 const Radio = ({
   field: { name, value, onChange, onBlur },
-  form: { errors },
+  form: { errors /*touched [UNUSED_VARIABLE]*/ },
   id,
   label,
   className,
-  type,
-  i18n
+  type
 }) => {
   const error = getDeepValue(errors, name)
-  const wrapperClasses = useStyles(
-    {
-      [styles['form-field']]: error,
-      [styles['form--has-error']]: error
-    },
-    className
-  )
-  const elementClasses = useStyles({
-    [styles['input__radio']]: true
-  })
+  const errorClass = error ? 'form--has-error' : ''
 
   return (
-    <div className={wrapperClasses}>
-      <label className={elementClasses}>
-        {label && <label htmlFor={id}>{i18n?.label}</label>}
-        <InputComponent
+    <div className={`form-field ${errorClass}`}>
+      <label className={cssClass(className)}>
+        {label && <label htmlFor={id}>{label}</label>}
+        <input
           name={name}
           id={id}
           type={type}
           value={id}
-          i18n={i18n}
           checked={id === value}
           onChange={onChange}
           onBlur={onBlur}
-          className={styles['form-field']}
+          className={cssClass(className)}
         />
         <div />
       </label>
@@ -60,7 +49,7 @@ const Radio = ({
   )
 }
 
-Radio.displayName = 'FormRadio'
+Radio.displayName = 'radio'
 
 Radio.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -72,24 +61,17 @@ Radio.propTypes = {
     onBlur: PropTypes.func
   }).isRequired,
   form: PropTypes.shape({
-    errors: PropTypes.instanceOf(Object)
+    errors: PropTypes.instanceOf(Object),
+    touched: PropTypes.instanceOf(Object)
   }),
   id: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  i18n: PropTypes.shape({
-    label: PropTypes.string,
-    placeholder: PropTypes.string
-  })
+  label: PropTypes.string
 }
 
 Radio.defaultProps = {
+  className: 'input__radio',
   type: 'radio',
-  className: '',
-  label: '',
-  i18n: {
-    label: null,
-    placeholder: null
-  }
+  label: ''
 }
 
 export default Radio
