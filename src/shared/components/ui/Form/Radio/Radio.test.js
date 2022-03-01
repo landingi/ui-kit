@@ -29,6 +29,6 @@ describe('<Radio /> mount', () => {
 
     const radio = screen.getByRole('radio')
 
-    expect(radio).toHaveClass('input')
+    expect(radio).toHaveClass('radio')
   })
 })

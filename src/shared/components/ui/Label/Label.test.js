@@ -22,8 +22,4 @@ describe('<Label/> mount', () => {
   it('is mounted', () => {
     expect(wrapper.exists()).toBe(true)
   })
-
-  it('has `label` class', () => {
-    expect(wrapper.hasClass('label')).toBe(true)
-  })
 })
