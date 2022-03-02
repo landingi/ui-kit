@@ -31,6 +31,7 @@ import Icon from '@components/ui/Icon'
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {string} props.variant - input variant, default ''
+ * @param {bool} props.form - is input form
  * @return {object} An object of children element
  */
 const Input = ({
@@ -55,7 +56,8 @@ const Input = ({
   hideArrows,
   alwaysShowLabel,
   defaultValue,
-  variant
+  variant,
+  form
 }) => {
   const wrapperStyles = useStyles(
     {
@@ -66,6 +68,11 @@ const Input = ({
     },
     className
   )
+
+  const tooltopStyles = useStyles({
+    [styles['input__tooltip']]: true,
+    [styles['input__tooltip--form']]: form
+  })
 
   const inputStyles = useStyles({
     [styles['input']]: true,
@@ -108,12 +115,8 @@ const Input = ({
       )}
 
       {tooltip && (
-        <Tooltip
-          className='input__tooltip'
-          placement='bottom'
-          content={tooltip}
-        >
-          <Icon color='#2550AA' icon='icon-exclamation-circle' />
+        <Tooltip className={tooltopStyles} placement='bottom' content={tooltip}>
+          <Icon color='color-3 ' icon='icon-exclamation-circle' />
         </Tooltip>
       )}
     </div>
@@ -150,7 +153,8 @@ Input.propTypes = {
   }),
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  form: PropTypes.bool
 }
 
 Input.defaultProps = {
@@ -176,7 +180,8 @@ Input.defaultProps = {
   onBlur: () => null,
   defaultValue: null,
   alwaysShowLabel: false,
-  variant: ''
+  variant: '',
+  form: false
 }
 
 export default Input

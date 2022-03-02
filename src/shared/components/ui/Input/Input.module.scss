@@ -240,10 +240,12 @@ input:focus ~ .bar:after {
   width: 100%;
 }
 
-:global {
-  .input__tooltip {
-    position: absolute;
-    top: -14px;
-    right: 0;
+.input__tooltip {
+  position: absolute;
+  top: -14px;
+  right: 0;
+
+  &--form {
+    top: 4px;
   }
 }
