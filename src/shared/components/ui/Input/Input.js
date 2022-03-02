@@ -116,7 +116,7 @@ const Input = ({
 
       {tooltip && (
         <Tooltip className={tooltopStyles} placement='bottom' content={tooltip}>
-          <Icon color='color-3 ' icon='icon-exclamation-circle' />
+          <Icon color='color-3' icon='icon-exclamation-circle' />
         </Tooltip>
       )}
     </div>
