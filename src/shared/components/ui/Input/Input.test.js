@@ -147,7 +147,7 @@ describe('<Input /> mount', () => {
     )
     expect(
       wrapper.find('Tooltip').children().find('Icon').prop('color')
-    ).toEqual('#2550AA')
+    ).toEqual('color-3')
     expect(
       wrapper.find('Tooltip').children().find('Icon').prop('icon')
     ).toEqual('icon-exclamation-circle')

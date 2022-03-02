@@ -71,6 +71,7 @@ const Input = ({
         background={background}
         alwaysShowLabel={alwaysShowLabel}
         variant={variant}
+        form
       />
 
       {isTouched && <Error error={error} />}
