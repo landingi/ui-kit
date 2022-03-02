@@ -81,13 +81,13 @@ const DropdownSelect = ({
   searchInOptions,
   i18n
 }) => {
-  const hasValue = value || alwaysShowLabel
+  const hasLabel = value || alwaysShowLabel
 
   const labelStyles = useStyles({
     [styles['form-field__label']]: true,
     [styles['form-field__label--has-error']]:
       errors[formikKey] || touched[formikKey],
-    [styles['form-field__label--has-value']]: hasValue,
+    [styles['form-field__label--has-label']]: hasLabel,
     [styles['form-field__label--disabled']]: isOpenDisabled
   })
 
@@ -218,7 +218,7 @@ const DropdownSelect = ({
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
         size='fixed'
-        alignment={hasValue ? 'spaced' : 'end'}
+        alignment={hasLabel ? 'spaced' : 'end'}
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
