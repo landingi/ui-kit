@@ -24,7 +24,7 @@ import Search from '@components/ui/Search'
 import Paragraph from '@components/ui/Paragraph'
 import Label from '@components/ui/Label'
 import styles from './DropdownSelect.module.scss'
-import { useStyles } from 'shared/helpers/hooks/useStyles'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 //TODO DropdownSelect css, mdx, tests, jsdoc props
 /**

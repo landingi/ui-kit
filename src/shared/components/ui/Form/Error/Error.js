@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useStyles } from 'shared/helpers/hooks/useStyles'
+import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Error.module.scss'
 
 // TODO Form Error checkbox mdx
