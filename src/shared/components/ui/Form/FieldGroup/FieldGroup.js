@@ -12,7 +12,6 @@ import styles from './FieldGroup.module.scss'
  * @param {object} props.touched
  * @param {string} props.label
  * @param {string} props.name
- * @param {string|array} props.className
  * @param {object} props.children
  * @return {object} An object of children element
  */
