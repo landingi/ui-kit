@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './Error.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Error.module.scss'
 
-const cssClass = styles(scss)
-
-// TODO Form Error checkbox css, mdx, global
+// TODO Form Error checkbox mdx
 /**
  * Form input error - stateless presentational component
  * @param {object} props - props
@@ -13,12 +11,11 @@ const cssClass = styles(scss)
  * @param {string|array} props.className
  * @return {object} An object of children element
  */
-const Error = ({ error, className }) =>
-  error ? (
-    <span className={cssClass(className)}>{error}</span>
-  ) : (
-    <span className={cssClass(className)} />
-  )
+const Error = ({ error, className }) => {
+  const errorStyles = useStyles({ [styles.error]: true }, className)
+
+  return error ? <span className={errorStyles}>{error}</span> : null
+}
 
 Error.displayName = 'Error'
 
@@ -28,7 +25,7 @@ Error.propTypes = {
 }
 
 Error.defaultProps = {
-  className: 'input__error',
+  className: '',
   error: ''
 }
 

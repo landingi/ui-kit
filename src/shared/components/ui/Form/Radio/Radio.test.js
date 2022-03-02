@@ -13,6 +13,9 @@ const props = {
   form: {
     errors: {},
     touched: {}
+  },
+  i18n: {
+    label: 'label'
   }
 }
 
@@ -21,18 +24,11 @@ describe('<Radio /> mount', () => {
     render(<Radio {...props} />)
   })
 
-  it('has default prop `className` with input__radio', () => {
+  it('has default prop `className` with input', () => {
     render(<Radio {...props} />)
 
     const radio = screen.getByRole('radio')
 
-    expect(radio).toHaveClass('input__radio')
-  })
-
-  it('has label rendered if it is given`', () => {
-    render(<Radio {...props} label='label' />)
-
-    const label = screen.getByText('label')
-    expect(label).toBeInTheDocument()
+    expect(radio).toHaveClass('radio')
   })
 })

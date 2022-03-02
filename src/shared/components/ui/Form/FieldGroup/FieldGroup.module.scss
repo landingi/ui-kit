@@ -1,0 +1,10 @@
+.field-group {
+  position: relative;
+  margin-bottom: 15px;
+
+  &--has-error {
+    color: $color-error;
+    transition: opacity 0.3s, top 0.3s;
+    opacity: 0;
+  }
+}

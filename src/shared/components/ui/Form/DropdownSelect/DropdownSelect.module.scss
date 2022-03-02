@@ -1,0 +1,28 @@
+.form-field {
+  &__dropdown {
+    &--has-error {
+      border-color: $color-error;
+      border-width: 2px;
+    }
+  }
+
+  &__label {
+    position: relative;
+    top: 35px;
+    left: 0px;
+    font-size: 16px;
+
+    &--has-error {
+      color: $color-error;
+    }
+
+    &--has-label {
+      top: 14px;
+      font-size: 14px;
+    }
+  }
+}
+
+.search-container {
+  margin: 0 15px 15px;
+}

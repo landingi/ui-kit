@@ -28,3 +28,28 @@ import Input from '@components/ui/Form/Input'
     )
   }}
 </Playground>
+
+## Input Form with error
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{ placeholder: 'Test placeholder', label: 'Test label' }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: { login: 'aaa' },
+          touched: { login: true }
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
