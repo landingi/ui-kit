@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
-import scss from './Toggle.scss'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Toggle.module.scss'
 
 /**
  * Formik toggle - stateless presentational component
@@ -19,33 +17,48 @@ const cssClass = styles(scss)
  */
 const FormikToggle = ({
   field: { name, value, onChange, onBlur },
-  form: { errors, touched /*setFieldValue [UNUSED_VARIABLE]*/ },
+  form: { errors, touched },
   id,
   label,
   className,
   type
-}) => (
-  <div className={cssClass('toggle-container', className)}>
-    <label className={cssClass('toggle', { 'toggle--checked': value })}>
-      <input
-        name={name}
-        className={cssClass('toggle__checkbox')}
-        checked={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        type={type}
-        id={id}
-      />
-      <span className={cssClass('toggle__button')} />
-    </label>
-    {label && (
-      <label htmlFor={id} className={cssClass('toggle__label')}>
-        {label}
-        {touched[name] && <Error error={errors[name]} />}
+}) => {
+  const wrapperStyles = useStyles(
+    { [styles['toggle-container']]: true },
+    className
+  )
+
+  const labelStyles = useStyles({
+    [styles.toggle]: true,
+    [styles['toggle--checked']]: value
+  })
+
+  return (
+    <div className={wrapperStyles}>
+      <label className={labelStyles}>
+        <input
+          name={name}
+          className={styles.toggle__checkbox}
+          checked={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          type={type}
+          id={id}
+        />
+
+        <span className={styles.toggle__button} />
       </label>
-    )}
-  </div>
-)
+
+      {label && (
+        <label htmlFor={id} className={styles.toggle__label}>
+          {label}
+
+          {touched[name] && <Error error={errors[name]} />}
+        </label>
+      )}
+    </div>
+  )
+}
 
 FormikToggle.displayName = 'FormikToggle'
 

@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Html from '@components/global/Html'
-import scss from './Toggle.scss'
-
-const cssClass = styles(scss)
+import styles from './Toggle.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
- * toggle - stateless presentational component
+ * Toggle - stateless presentational component
  * @param {object} props - props
  * @param {string|array} props.className - list of class names, default: ''
  * @param {string} props.name - name
@@ -20,7 +18,7 @@ const cssClass = styles(scss)
  * @param {bool} props.disabled - disabled, default: false
  * @return {object} An object of children element
  */
-const toggle = ({
+const Toggle = ({
   name,
   checked,
   onChange,
@@ -30,20 +28,24 @@ const toggle = ({
   className,
   disabled
 }) => {
-  const getDisabledClassName = () =>
-    checked ? 'toggle--checked-disabled' : 'toggle--disabled'
+  const wrapperStyles = useStyles(
+    { [styles['toggle-container']]: true },
+    className
+  )
+
+  const labelStyles = useStyles({
+    [styles.toggle]: true,
+    [styles['toggle--checked']]: checked,
+    [styles['toggle--checked-disabled']]: checked && disabled,
+    [styles['toggle--disabled']]: !checked && disabled
+  })
 
   return (
-    <div className={cssClass('toggle-container', className)}>
-      <label
-        className={cssClass('toggle', {
-          'toggle--checked': checked,
-          [getDisabledClassName()]: disabled
-        })}
-      >
+    <div className={wrapperStyles}>
+      <label className={labelStyles}>
         <input
           name={name}
-          className={cssClass('toggle__checkbox')}
+          className={styles.toggle__checkbox}
           checked={checked}
           onChange={onChange}
           onBlur={onBlur}
@@ -51,8 +53,10 @@ const toggle = ({
           id={id}
           disabled={disabled}
         />
-        <span className={cssClass('toggle__button')} />
+
+        <span className={styles.toggle__button} />
       </label>
+
       {label && (
         <label htmlFor={id}>
           <Html value={label} />
@@ -62,9 +66,9 @@ const toggle = ({
   )
 }
 
-toggle.displayName = 'Toggle'
+Toggle.displayName = 'Toggle'
 
-toggle.propTypes = {
+Toggle.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
@@ -75,11 +79,11 @@ toggle.propTypes = {
   disabled: PropTypes.bool
 }
 
-toggle.defaultProps = {
+Toggle.defaultProps = {
   className: '',
   label: '',
   onBlur: () => null,
   disabled: false
 }
 
-export { toggle as Toggle }
+export default Toggle
