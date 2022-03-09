@@ -90,7 +90,8 @@
     z-index: $z-index-modal--dialog;
     background: $color-bg;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
     align-items: center;
     border-radius: 0;
   }
