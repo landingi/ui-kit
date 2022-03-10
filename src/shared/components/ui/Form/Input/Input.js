@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/ui/Form/Error'
 import InputComponent from '@components/ui/Input'
+import Paragraph from '@components/ui/Paragraph'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from '@components/ui/Input/Input.module.scss'
@@ -74,6 +75,12 @@ const Input = ({
         form
       />
 
+      {i18n?.description && !isTouched && (
+        <Paragraph size='10' color='color-8'>
+          {i18n.description}
+        </Paragraph>
+      )}
+
       {isTouched && <Error error={error} />}
     </div>
   )
@@ -109,7 +116,8 @@ Input.propTypes = {
   alwaysShowLabel: PropTypes.bool,
   i18n: PropTypes.shape({
     label: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    description: PropTypes.string
   }),
   variant: PropTypes.string
 }
@@ -128,7 +136,8 @@ Input.defaultProps = {
   alwaysShowLabel: false,
   i18n: {
     label: null,
-    placeholder: null
+    placeholder: null,
+    description: null
   },
   variant: ''
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
+import Paragraph from '@components/ui/Paragraph'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Input.module.scss'
 import Icon from '@components/ui/Icon'
@@ -114,6 +115,12 @@ const Input = ({
         </Label>
       )}
 
+      {i18n?.description && !form && (
+        <Paragraph size='10' color='color-8'>
+          {i18n.description}
+        </Paragraph>
+      )}
+
       {tooltip && (
         <Tooltip className={tooltopStyles} placement='bottom' content={tooltip}>
           <Icon color='color-3' icon='icon-exclamation-circle' />
@@ -149,7 +156,8 @@ Input.propTypes = {
   hideArrows: PropTypes.bool,
   i18n: PropTypes.shape({
     label: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    description: PropTypes.string
   }),
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
@@ -166,7 +174,8 @@ Input.defaultProps = {
   maxLength: 524288,
   i18n: {
     label: null,
-    placeholder: null
+    placeholder: null,
+    description: null
   },
   name: null,
   value: undefined,
