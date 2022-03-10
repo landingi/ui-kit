@@ -133,7 +133,8 @@ describe('<Input /> mount', () => {
   it('should have defined default prop i18', () => {
     expect(wrapper.props().i18n).toEqual({
       placeholder: null,
-      label: null
+      label: null,
+      description: null
     })
   })
 
