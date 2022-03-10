@@ -29,7 +29,7 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
   )
 
   const tooltipStyles = useStyles({
-    [styles['badge-tooltip']]: tooltip
+    [styles['badge__tooltip']]: tooltip
   })
 
   return (

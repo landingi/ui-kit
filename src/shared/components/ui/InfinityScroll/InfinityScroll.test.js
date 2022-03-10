@@ -27,11 +27,9 @@ describe('<InfinityScroll/> tests', () => {
   })
 
   it('has no loader on end', () => {
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <InfinityScroll isLastPage>children</InfinityScroll>
     )
-
-    debug()
 
     expect(getByTestId('loader-wrapper')).toHaveClass('loading-hide')
   })

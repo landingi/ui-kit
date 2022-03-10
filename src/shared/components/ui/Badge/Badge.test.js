@@ -101,7 +101,7 @@ describe('<Badge/> mount', () => {
       tooltip: 'tooltip'
     })
 
-    expect(wrapper.find('span').at(2).hasClass('badge-tooltip')).toBe(true)
+    expect(wrapper.find('span').at(2).hasClass('badge__tooltip')).toBe(true)
   })
 
   it('Tooltip is disabled when prop content is empty', () => {

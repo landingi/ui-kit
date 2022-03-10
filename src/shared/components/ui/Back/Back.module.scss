@@ -8,6 +8,10 @@
   font-size: 16px;
   position: relative;
 
+  button {
+    background-color: transparent;
+  }
+
   svg {
     color: $color-3;
     cursor: pointer;
