@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import { Toggle } from '@components/ui/Form/Toggle/Toggle'
+import Toggle from '@components/ui/Form/Toggle/Toggle'
 
 const props = {
   id: 'jestem-id',
