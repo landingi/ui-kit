@@ -95,6 +95,7 @@ const Modal = forwardRef(
   ) => {
     const renderTitle = () => (
       <div className={styles.modal__header}>
+        {headingAlign === 'center' && <Spreader />}
         {i18n.title && <ModalHeader title={i18n.title} align={headingAlign} />}
 
         {image && <Image src={image} size='auto' height={20} />}
