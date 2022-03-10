@@ -75,7 +75,7 @@ const Input = ({
         form
       />
 
-      {i18n?.description && !isTouched && (
+      {i18n?.description && !error && (
         <Paragraph size='10' color='color-8'>
           {i18n.description}
         </Paragraph>
