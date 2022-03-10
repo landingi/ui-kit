@@ -24,7 +24,9 @@ describe('<ShowPassword/> tests', () => {
 
     const button = getByTestId('show-pasword')
 
-    act(() => fireEvent.click(button))
+    act(() => {
+      fireEvent.click(button)
+    })
 
     expect(container.innerHTML).toMatch(/hide/i)
 

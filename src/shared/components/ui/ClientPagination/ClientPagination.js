@@ -53,7 +53,7 @@ const Pagination = ({
           </Button>
 
           <List variant='inline'>
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex - 3 < 0}
                 onClick={handleGoToPage(pageIndex - 3)}
@@ -64,7 +64,7 @@ const Pagination = ({
               </Button>
             </ListItem>
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex - 2 < 0}
                 onClick={handleGoToPage(pageIndex - 2)}
@@ -75,7 +75,7 @@ const Pagination = ({
               </Button>
             </ListItem>
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex - 1 < 0}
                 onClick={handleGoToPage(pageIndex - 1)}
@@ -86,16 +86,13 @@ const Pagination = ({
               </Button>
             </ListItem>
 
-            <ListItem
-              className={scss.pagination__links__current}
-              variant='inline'
-            >
+            <ListItem className={scss.pagination__links__current}>
               <Button size='small' variant='icon'>
                 {pageIndex + 1}
               </Button>
             </ListItem>
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex + 2 >= pageCount}
                 onClick={handleGoToPage(pageIndex + 1)}
@@ -106,7 +103,7 @@ const Pagination = ({
               </Button>
             </ListItem>
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex + 4 !== pageCount}
                 onClick={handleGoToPage(pageIndex + 1)}
@@ -118,12 +115,12 @@ const Pagination = ({
             </ListItem>
 
             {pageIndex + 4 < pageCount && (
-              <ListItem variant='inline'>
+              <ListItem>
                 <span>...</span>
               </ListItem>
             )}
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex >= pageCount - 1}
                 onClick={handleGoToPage(pageCount - 1)}

@@ -1,5 +1,5 @@
-import { getLocationPath } from '@helpers/url'
 import Button from '@components/ui/Button'
+import Spreader from '@components/ui/Spreader'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Tooltip from '@components/ui/Tooltip'
@@ -13,9 +13,10 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string|array} props.className - list of class names, default: back
  * @param {string} props.url - url, default: ''
  * @param {string} props.content - content, default: ''
+ * @param {func} props.onClick - onClick
  * @return {object} An object of children element
  */
-const Back = ({ className, url, content }) => {
+const Back = ({ className, url, content, label, onClick }) => {
   const elementStyles = useStyles(
     {
       [styles['back']]: true
@@ -23,17 +24,16 @@ const Back = ({ className, url, content }) => {
     className
   )
 
-  const location = getLocationPath(),
-    urlMap = location.match('/payments/subscription/cancel')
-      ? '/payments/subscription'
-      : url
-
   return (
     <span data-testid='back' className={elementStyles}>
-      <a href={urlMap}>
-        <Tooltip content={content} placement='bottom'>
-          <Button variant='icon'>
+      <a href={url}>
+        <Tooltip content={content} placement='bottom' disabled={!content}>
+          <Button variant='icon' onClick={onClick}>
             <Icon icon='icon-arrow-left' />
+
+            <Spreader spread='tiny' />
+
+            {label && label}
           </Button>
         </Tooltip>
       </a>
@@ -46,13 +46,17 @@ Back.displayName = 'Back'
 Back.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   url: PropTypes.string,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  label: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  onClick: PropTypes.func
 }
 
 Back.defaultProps = {
+  label: null,
   className: '',
-  content: '',
-  url: ''
+  content: null,
+  url: null,
+  onClick: () => null
 }
 
 export default Back

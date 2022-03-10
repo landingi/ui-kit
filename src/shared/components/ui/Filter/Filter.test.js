@@ -60,7 +60,7 @@ describe('<Filter/> tests', () => {
 
   it('call default setValue on select', async () => {
     const { getByTestId, findByText } = render(
-      <Filter {...props} localStorageKey />
+      <Filter {...props} localStorageKey={'I am just a value'} />
     )
     const button = getByTestId('trigger-dropdown')
 
