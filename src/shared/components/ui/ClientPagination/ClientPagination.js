@@ -103,7 +103,7 @@ const Pagination = ({
               </Button>
             </ListItem>
 
-            <ListItem variant='inline'>
+            <ListItem>
               <Button
                 hide={pageIndex + 4 !== pageCount}
                 onClick={handleGoToPage(pageIndex + 1)}
