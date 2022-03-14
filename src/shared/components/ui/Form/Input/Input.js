@@ -30,6 +30,7 @@ import styles from '@components/ui/Input/Input.module.scss'
  * @return {object} An object of children element
  */
 const Input = ({
+  className,
   field: { name, value, onChange, onBlur },
   form: { errors, touched },
   id,
@@ -48,10 +49,13 @@ const Input = ({
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
 
-  const wrapperStyles = useStyles({
-    [styles['form-field']]: true,
-    [styles['form--has-error']]: error && isTouched
-  })
+  const wrapperStyles = useStyles(
+    {
+      [styles['form-field']]: true,
+      [styles['form--has-error']]: error && isTouched
+    },
+    className
+  )
 
   return (
     <div className={wrapperStyles}>
@@ -89,6 +93,7 @@ const Input = ({
 Input.displayName = 'Input'
 
 Input.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -123,6 +128,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
+  className: '',
   label: '',
   placeholder: '',
   type: 'text',
