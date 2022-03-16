@@ -128,7 +128,7 @@ const Dropdown = forwardRef(
     const handleClose = useCallback(
       event => {
         event.stopPropagation()
-
+        console.log('@@@@__in handle close__@@@')
         if (
           containerRef.current &&
           !containerRef.current.contains(event.target) &&
@@ -310,6 +310,7 @@ const Dropdown = forwardRef(
       )
 
     useEffect(() => {
+      console.log('@@@@__in use effect__@@@')
       window.addEventListener('mousedown', handleClose)
       window.addEventListener('scroll', throttle(handleClose, 500))
       window.addEventListener('resize', debounce(handleResize, 100))
