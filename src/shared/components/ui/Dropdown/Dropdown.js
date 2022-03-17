@@ -310,16 +310,16 @@ const Dropdown = forwardRef(
       )
 
     useEffect(() => {
-      window.addEventListener('mousedown', handleClose)
-      window.addEventListener('scroll', throttle(handleClose, 500))
-      window.addEventListener('resize', debounce(handleResize, 100))
+      document.addEventListener('mousedown', handleClose)
+      document.addEventListener('scroll', throttle(handleClose, 500))
+      document.addEventListener('resize', debounce(handleResize, 100))
 
       emitter.on(CLOSE_DROPDOWN, makeClose)
 
       return () => {
-        window.removeEventListener('mousedown', handleClose)
-        window.removeEventListener('scroll', handleClose)
-        window.removeEventListener('resize', handleResize)
+        document.removeEventListener('mousedown', handleClose)
+        document.removeEventListener('scroll', handleClose)
+        document.removeEventListener('resize', handleResize)
 
         emitter.off(CLOSE_DROPDOWN, makeClose)
       }
