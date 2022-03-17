@@ -1,6 +1,46 @@
-import { Props } from 'docz'
+import { Playground, Props } from 'docz'
 import BoxOutline from '@components/ui/BoxOutline'
 
 # BoxOutline
 
 <Props of={BoxOutline} />
+
+## Default
+
+<Playground>
+  <BoxOutline>Box Outline</BoxOutline>
+</Playground>
+
+### Default selected
+
+<Playground>
+  <BoxOutline isSelected>Box Outline</BoxOutline>
+</Playground>
+
+### Default click
+
+<Playground>
+  <BoxOutline onClickHandler={() => alert('Click!')}>Box Outline</BoxOutline>
+</Playground>
+
+### Default double click
+
+<Playground>
+  <BoxOutline onDoubleClickHandler={() => alert('Double click!')}>
+    Box Outline
+  </BoxOutline>
+</Playground>
+
+## Background
+
+<Playground>
+  <BoxOutline variant='background'>Box Outline</BoxOutline>
+</Playground>
+
+### Background selected
+
+<Playground>
+  <BoxOutline variant='background' isSelected>
+    Box Outline
+  </BoxOutline>
+</Playground>
