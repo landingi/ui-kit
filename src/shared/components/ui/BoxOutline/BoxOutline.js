@@ -4,11 +4,11 @@ import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BoxOutline.module.scss'
 
-// TODO BoxOutline add mdx examples
 /**
  * Box outline - stateless presentational component
  * @param {object} children - children
  * @param {string|array} className - list of custom classes out of component
+ * @param {string} variant - box variant
  * @param {boolean} isSelected - bool to decide if box was selected or not
  * @param {func} onClickHandler - callback to invoke when box was clicked
  * @param {func} onDoubleClickHandler - callback to invoke when box was clicked double times
@@ -18,6 +18,7 @@ import styles from './BoxOutline.module.scss'
 const BoxOutline = ({
   children,
   className,
+  variant,
   isSelected,
   onClickHandler,
   onDoubleClickHandler,
@@ -26,6 +27,8 @@ const BoxOutline = ({
   const elementClasses = useStyles(
     {
       [styles['box-outline']]: true,
+      [styles['box-outline--default']]: variant === 'default',
+      [styles['box-outline--background']]: variant === 'background',
       [styles['box-outline--is-selected']]: isSelected,
       [styles['box-outline--no-padding']]: padding === 'none'
     },
@@ -57,6 +60,7 @@ const BoxOutline = ({
 BoxOutline.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  variant: PropTypes.oneOf(['default', 'background']),
   isSelected: PropTypes.bool,
   onClickHandler: PropTypes.func,
   onDoubleClickHandler: PropTypes.func,
@@ -65,6 +69,7 @@ BoxOutline.propTypes = {
 
 BoxOutline.defaultProps = {
   className: '',
+  variant: 'default',
   isSelected: false,
   onClick: () => null,
   onDoubleClick: () => null,
