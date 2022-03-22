@@ -29,6 +29,7 @@ const cssClass = styles(scss)
  * @param {bool} props.hide - Hide, default: false
  * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false'
  * @param {string} props.dataTestid - test id
+ * @param {string} props.id - id
  * @return {object} An object of children elements
  */
 const Button = ({
@@ -50,7 +51,8 @@ const Button = ({
   hide,
   buttonStyle,
   fitWidth,
-  ['data-testid']: dataTestId
+  ['data-testid']: dataTestId,
+  id
 }) => {
   const elementClasses = cssClass({
     'button--primary': variant === 'primary',
@@ -84,6 +86,7 @@ const Button = ({
 
   return (
     <Tag
+      id={id}
       type={Tag === 'button' ? type : undefined}
       disabled={isDisabled ? 'disabled' : undefined}
       href={Tag === 'a' ? href : undefined}
@@ -147,7 +150,8 @@ Button.propTypes = {
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  ['data-testid']: PropTypes.string,
+  id: PropTypes.string
 }
 
 Button.defaultProps = {
@@ -168,7 +172,8 @@ Button.defaultProps = {
   buttonStyle: false,
   fitWidth: false,
   onClick: () => {},
-  ['data-testid']: undefined
+  ['data-testid']: undefined,
+  id: null
 }
 
 export default Button
