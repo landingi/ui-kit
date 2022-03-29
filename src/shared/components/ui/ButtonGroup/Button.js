@@ -1,5 +1,6 @@
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useStyles } from '@hooks/useStyles'
+import { useStyles } from '@helpers/hooks/useStyles'
 import { useButtonGroupContext } from './context'
 import styles from './ButtonGroup.module.scss'
 

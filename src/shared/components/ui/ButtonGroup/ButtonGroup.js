@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { ButtonGroupProvider } from './context'
 import styles from './ButtonGroup.module.scss'
