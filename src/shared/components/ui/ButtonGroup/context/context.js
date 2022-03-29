@@ -10,6 +10,13 @@ const useButtonGroupState = initialValue => {
   return { selected, setSelected }
 }
 
+/**
+ * ButtonGroupProvider - statefull provider component
+ * @param {children} props.children - children of the component
+ * @param {string} props.initialValue - initial active id
+ * @param {function} props.onChange - change state callback
+ * @return {object} An object of children element
+ */
 export const ButtonGroupProvider = ({ children, initialValue, onChange }) => {
   const value = useButtonGroupState(initialValue)
 

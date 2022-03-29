@@ -4,6 +4,12 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import { useButtonGroupContext } from './context'
 import styles from './ButtonGroup.module.scss'
 
+/**
+ * Button - statefull presentational component
+ * @param {node} props.children - children of the component
+ * @param {string} props.id - id of the component
+ * @return {object} An object of children element
+ */
 const Button = ({ children, id }) => {
   const { selected, setSelected } = useButtonGroupContext()
 
