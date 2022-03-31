@@ -23,6 +23,10 @@
     align-items: center;
     padding: $padding-x-large $padding-big 0;
 
+    &--close-only {
+      justify-content: flex-end;
+    }
+
     span {
       flex: 1;
       margin: 0;

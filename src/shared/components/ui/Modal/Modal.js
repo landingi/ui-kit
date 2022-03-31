@@ -93,8 +93,13 @@ const Modal = forwardRef(
     },
     ref
   ) => {
+    const headerStyles = useStyles({
+      [styles.modal__header]: true,
+      [styles['modal__header--close-only']]: !i18n.title && !image
+    })
+
     const renderTitle = () => (
-      <div className={styles.modal__header}>
+      <div className={headerStyles}>
         {headingAlign === 'center' && <Spreader />}
         {i18n.title && <ModalHeader title={i18n.title} align={headingAlign} />}
 
@@ -110,12 +115,14 @@ const Modal = forwardRef(
           )}
 
           {isEditable && (
-            <Button variant='icon' onClick={onEdit}>
-              <Icon icon='icon-create' />
-            </Button>
+            <Fragment>
+              <Button variant='icon' onClick={onEdit}>
+                <Icon icon='icon-create' />
+              </Button>
+            </Fragment>
           )}
 
-          <Spreader spread='tiny' />
+          {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}
 
           {isClosable && <Close onClick={onClick} />}
         </div>
