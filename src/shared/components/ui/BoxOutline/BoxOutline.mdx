@@ -1,5 +1,6 @@
 import { Playground, Props } from 'docz'
 import BoxOutline from '@components/ui/BoxOutline'
+import Image from '@components/ui/Image'
 
 # BoxOutline
 
@@ -35,6 +36,26 @@ import BoxOutline from '@components/ui/BoxOutline'
 
 <Playground>
   <BoxOutline variant='background'>Box Outline</BoxOutline>
+</Playground>
+
+## Background with disable hover
+
+<Playground>
+  <BoxOutline variant='background' disableHover>
+    Box Outline
+  </BoxOutline>
+</Playground>
+
+## Background disabled
+
+<Playground>
+  <BoxOutline variant='background' disabled>
+    <Image
+      src='https://images.assets-landingi.com/REiQ5YQl/logo_sygnet.svg'
+      size='20px'
+    />
+    Box Outline
+  </BoxOutline>
 </Playground>
 
 ### Background selected

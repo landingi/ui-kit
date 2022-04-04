@@ -22,15 +22,21 @@ const BoxOutline = ({
   isSelected,
   onClickHandler,
   onDoubleClickHandler,
-  padding
+  padding,
+  disableHover,
+  disabled
 }) => {
   const elementClasses = useStyles(
     {
       [styles['box-outline']]: true,
+      [styles['box-outline--has-hover']]: !disableHover,
       [styles['box-outline--default']]: variant === 'default',
+      [styles['box-outline--default--has-hover']]: !disableHover,
       [styles['box-outline--background']]: variant === 'background',
+      [styles['box-outline--background--has-hover']]: !disableHover,
       [styles['box-outline--is-selected']]: isSelected,
-      [styles['box-outline--no-padding']]: padding === 'none'
+      [styles['box-outline--no-padding']]: padding === 'none',
+      [styles['box-outline--disabled']]: disabled
     },
     className
   )
@@ -64,7 +70,9 @@ BoxOutline.propTypes = {
   isSelected: PropTypes.bool,
   onClickHandler: PropTypes.func,
   onDoubleClickHandler: PropTypes.func,
-  padding: PropTypes.oneOf(['', 'none'])
+  padding: PropTypes.oneOf(['', 'none']),
+  disableHover: PropTypes.bool,
+  disabled: PropTypes.bool
 }
 
 BoxOutline.defaultProps = {
@@ -73,7 +81,9 @@ BoxOutline.defaultProps = {
   isSelected: false,
   onClick: () => null,
   onDoubleClick: () => null,
-  padding: ''
+  padding: '',
+  disableHover: false,
+  disabled: false
 }
 
 BoxOutline.displayName = 'BoxOutline'
