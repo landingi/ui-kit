@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef } from 'react'
+import React, { Fragment, forwardRef, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Backdrop from '@components/ui/Backdrop'
 import Close from '@components/ui/Close'
@@ -155,6 +155,23 @@ const Modal = forwardRef(
       [styles['modal__body--has-footer']]: hasFooter,
       [styles['modal__body--no-padding']]: isBodyPadding === 'none'
     })
+
+    const handleCloseOnEscape = useCallback(
+      ({ key }) => {
+        if (key === 'Escape' && isClosable && isActive) {
+          onClick()
+        }
+      },
+      [onClick, isClosable, isActive]
+    )
+
+    useEffect(() => {
+      if (size === 'fullscreen') {
+        document.addEventListener('keydown', handleCloseOnEscape)
+      }
+
+      return () => document.removeEventListener('keydown', handleCloseOnEscape)
+    }, [handleCloseOnEscape, size])
 
     return (
       <Fragment>
