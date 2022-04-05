@@ -1,122 +1,75 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Button from '@components/ui/Button'
+import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-const onClick = jest.fn()
+describe('<Button /> mount', () => {
+  it('should render <Button />', async () => {
+    const props = {
+      children: <p>Button</p>,
+      variant: 'primary',
+      ['data-testid']: 'button'
+    }
 
-const props = {
-  tag: 'a',
-  title: undefined,
-  type: 'button',
-  href: undefined,
-  target: undefined,
-  className: 'button',
-  children: 'Placeholder',
-  isLoading: false,
-  isDisabled: false,
-  onClick: onClick
-}
+    const { getByTestId } = render(<Button {...props} />)
 
-const buttonComponent = <Button {...props}>{props.children}</Button>
+    const button = getByTestId('button')
 
-describe('<Button/> mount', () => {
-  let wrapper
+    fireEvent.click(button)
 
-  beforeEach(() => {
-    wrapper = mount(buttonComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `button` class', () => {
-    expect(wrapper.hasClass('button')).toBe(true)
-  })
-
-  it('default prop `onClick` should be undefined', () => {
-    const result = Button.defaultProps.onClick()
-
-    expect(result).toBe(undefined)
-  })
-
-  it('when prop isLoading is true, spinner is visible', () => {
-    wrapper.setProps({
-      isLoading: true
-    })
-
-    expect(wrapper.find('Icon').exists()).toBe(true)
-  })
-
-  it('when prop isLoading is false, spinner is not visible', () => {
-    wrapper.setProps({
-      isLoading: false
-    })
-
-    expect(wrapper.find('Icon').exists()).toBe(false)
-  })
-
-  it('renders text', () => {
-    expect(wrapper.text()).toEqual(props.children)
-  })
-
-  it('calls function passed as onClick prop on click event', () => {
-    wrapper.simulate('click')
-
-    expect(onClick).toHaveBeenCalled()
+    expect(button).toHaveClass('button button--primary button--medium')
   })
 })
 
-describe('<Button/> mount as a link', () => {
-  let wrapper
+it('should render <Button /> as disabled & loading', () => {
+  const props = {
+    children: <p>Button</p>,
+    variant: 'primary',
+    isLoading: true,
+    isDisabled: true,
+    ['data-testid']: 'button'
+  }
 
-  beforeEach(() => {
-    wrapper = mount(buttonComponent)
+  const { getByTestId } = render(<Button {...props} />)
+
+  const button = getByTestId('button').querySelector('div')
+
+  expect(button).toHaveClass('spinner')
+})
+
+describe('<Button /> mount as link', () => {
+  it('should render <Button /> as link', () => {
+    const props = {
+      tag: 'a',
+      title: undefined,
+      href: undefined,
+      target: undefined,
+      children: <p>Link</p>,
+      ['data-testid']: 'link'
+    }
+
+    const { getByTestId } = render(<Button {...props} />)
+
+    const button = getByTestId('link')
+
+    expect(button).toHaveClass('link')
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  it('should render <Button /> as link with button style', () => {
+    const props = {
+      tag: 'a',
+      title: undefined,
+      href: undefined,
+      target: undefined,
+      children: <p>Link</p>,
+      buttonStyle: true,
+      ['data-testid']: 'link'
+    }
 
-  beforeEach(() => {
-    wrapper.setProps({
-      tag: 'a'
-    })
-  })
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const { getByTestId } = render(<Button {...props} />)
 
-  it('is A tag', () => {
-    expect(wrapper.children().type()).toBe('a')
-  })
+    const button = getByTestId('link')
 
-  it('has title', () => {
-    wrapper.setProps({
-      title: 'Title test'
-    })
-    expect(wrapper.children().prop('title')).toBe('Title test')
-  })
-
-  it('has href', () => {
-    wrapper.setProps({
-      href: 'http://wwww.google.com'
-    })
-    expect(wrapper.children().prop('href')).toBe('http://wwww.google.com')
-  })
-
-  it('has target', () => {
-    wrapper.setProps({
-      target: '_blank'
-    })
-    expect(wrapper.children().prop('target')).toBe('_blank')
-  })
-
-  it('is target false', () => {
-    expect(wrapper.children().prop('target')).toBe(undefined)
+    expect(button).toHaveClass('button button--primary button--medium')
   })
 })
