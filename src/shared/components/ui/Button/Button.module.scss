@@ -11,6 +11,7 @@
   position: relative;
   font-weight: 600;
   transition: background 0.5s, box-shadow 0.5s;
+  text-decoration: none;
 
   &:hover {
     text-decoration: none;
@@ -191,6 +192,27 @@
       svg,
       i {
         color: $color-1;
+      }
+    }
+
+    &:disabled,
+    &[disabled] {
+      background: transparent;
+      color: $color-4;
+
+      svg {
+        color: $color-4;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background: transparent;
+        color: $color-4;
+
+        svg {
+          color: $color-4;
+        }
       }
     }
   }
