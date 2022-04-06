@@ -167,7 +167,7 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string,
-    description: PropTypes.oneOfType([PropTypes.string, PropTypes.function])
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }),
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
