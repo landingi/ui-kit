@@ -45,7 +45,7 @@
   &.box-outline--is-selected {
     border: 1px solid $color-success;
 
-    &:hover {
+    &--has-hover:hover {
       border: 1px solid $color-success;
       box-shadow: 5px 10px 20px #0000001a;
     }
