@@ -116,7 +116,7 @@ const Input = ({
       )}
 
       {i18n?.description && !form && (
-        <Paragraph size='10' color='color-8'>
+        <Paragraph size='12' color='color-8'>
           {i18n.description}
         </Paragraph>
       )}
@@ -157,7 +157,7 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.function])
   }),
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,

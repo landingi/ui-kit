@@ -13,6 +13,9 @@ import styles from './BoxOutline.module.scss'
  * @param {func} onClickHandler - callback to invoke when box was clicked
  * @param {func} onDoubleClickHandler - callback to invoke when box was clicked double times
  * @param {string} padding - deafult is set. Set 'none' to turn off
+ * @param {boolean} disableHover - disable hover events only
+ * @param {boolean} disabled - grayed contend and disable all events
+ * @param {boolean} noCheckmark - selected without green checkmark on top right corner
  * @return {object} An object of children element
  */
 const BoxOutline = ({
@@ -24,7 +27,8 @@ const BoxOutline = ({
   onDoubleClickHandler,
   padding,
   disableHover,
-  disabled
+  disabled,
+  noCheckmark
 }) => {
   const elementClasses = useStyles(
     {
@@ -35,6 +39,7 @@ const BoxOutline = ({
       [styles['box-outline--background']]: variant === 'background',
       [styles['box-outline--background--has-hover']]: !disableHover,
       [styles['box-outline--is-selected']]: isSelected,
+      [styles['box-outline--is-selected--has-hover']]: !disableHover,
       [styles['box-outline--no-padding']]: padding === 'none',
       [styles['box-outline--disabled']]: disabled
     },
@@ -53,7 +58,7 @@ const BoxOutline = ({
       onClick={onClickHandler}
       onDoubleClick={onDoubleClickHandler}
     >
-      {isSelected && (
+      {isSelected && !noCheckmark && (
         <span className={checkmarkStatusClasses}>
           <Icon icon='icon-ok' color='white' />
         </span>
@@ -72,7 +77,8 @@ BoxOutline.propTypes = {
   onDoubleClickHandler: PropTypes.func,
   padding: PropTypes.oneOf(['', 'none']),
   disableHover: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  noCheckmark: PropTypes.bool
 }
 
 BoxOutline.defaultProps = {
@@ -83,7 +89,8 @@ BoxOutline.defaultProps = {
   onDoubleClick: () => null,
   padding: '',
   disableHover: false,
-  disabled: false
+  disabled: false,
+  noCheckmark: false
 }
 
 BoxOutline.displayName = 'BoxOutline'
