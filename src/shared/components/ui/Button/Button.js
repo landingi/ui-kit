@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Spinner from '@components/ui/Spinner'
-import scss from './Button.scss'
+import styles from './Button.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
-
-// TODO Button css-modules and tests
 /**
  * Button - stateless presentational component
  * @param {object} props - props
@@ -52,35 +49,25 @@ const Button = ({
   fitWidth,
   ['data-testid']: dataTestId
 }) => {
-  const elementClasses = cssClass({
-    'button--primary': variant === 'primary',
-    'button--secondary': variant === 'secondary',
-    'button--dropdown': variant === 'dropdown',
-    'button--transparent': variant === 'transparent',
-    'button--transparent-blue': variant === 'transparent-blue',
-    'button--dropdown-element': variant === 'dropdown-element',
-    'dropdown button--switcher': variant === 'switcher',
-    'button--tabs': variant === 'tabs',
-    'button--alert': variant === 'alert',
-    'button--icon': variant === 'icon',
-    'button--icon-transparent': variant === 'icon-transparent',
-    'button--white': variant === 'white',
-    'button--black': variant === 'black',
-    'button--action': variant === 'action',
-    'button--publish': variant === 'publish',
-    'button--mini': size === 'mini',
-    'button--tiny': size === 'tiny',
-    'button--small': size === 'small',
-    'button--medium': size === 'medium',
-    'button--large': size === 'large',
-    'button--input': size === 'input',
-    'button--center': align === 'center',
-    'button--left': align === 'left',
-    'button--right': align === 'right',
-    'button--svg': hasIcon === true,
-    'button--hide': hide === true,
-    'button--fit-width': fitWidth === true
-  })
+  const elementClassesButton = useStyles(
+    {
+      [styles.button]: true,
+      [styles[`button--${variant}`]]: variant,
+      [styles[`button--${size}`]]: size,
+      [styles[`button--${align}`]]: align,
+      [styles['button--svg']]: hasIcon === true,
+      [styles['button--hide']]: hide === true,
+      [styles['button--fit-width']]: fitWidth === true
+    },
+    className
+  )
+
+  const elementClassesLink = useStyles(
+    {
+      [styles.link]: true
+    },
+    className
+  )
 
   return (
     <Tag
@@ -91,11 +78,10 @@ const Button = ({
       target={Tag === 'a' ? target : undefined}
       className={
         Tag === 'button'
-          ? cssClass('button', elementClasses, className)
-          : cssClass(
-              buttonStyle ? ['button', elementClasses] : 'link',
-              className
-            )
+          ? elementClassesButton
+          : buttonStyle
+          ? elementClassesButton
+          : elementClassesLink
       }
       onClick={onClick}
       data-testid={dataTestId}
@@ -156,7 +142,7 @@ Button.defaultProps = {
   type: 'button',
   href: undefined,
   target: undefined,
-  className: 'button',
+  className: '',
   size: 'medium',
   align: null,
   variant: 'primary',
