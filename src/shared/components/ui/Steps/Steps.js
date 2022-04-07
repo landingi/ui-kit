@@ -1,14 +1,10 @@
 import { stepsShape } from '@shapes'
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
 import StepNumber from '@components/ui/StepNumber'
-import scss from './Steps.scss'
+import styles from './Steps.module.scss'
 import uuid from 'react-uuid'
 
-const cssClass = styles(scss)
-
-//TODO Steps css, test
 /**
  * Steps - stateless presentational component
  * @param {object} props - props
@@ -17,21 +13,16 @@ const cssClass = styles(scss)
  */
 const Steps = ({ data }) => {
   return (
-    <div className={cssClass('container')}>
+    <div className={styles.container}>
       {data.map((item, index) => {
         const step = index + 1
         const { variant, description } = item
 
         return (
-          <div className={scss.step} key={uuid()}>
+          <div className={styles.step} key={uuid()}>
             <StepNumber step={step} variant={variant} />
 
-            <span
-              className={cssClass(
-                'step__description',
-                `step__description--${variant}`
-              )}
-            >
+            <span className={styles[`step__description--${variant}`]}>
               {description}
             </span>
           </div>
