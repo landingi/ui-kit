@@ -20,12 +20,10 @@
   margin: 0;
 
   &__item {
-    > a {
+    a {
       text-decoration: none;
-    }
 
-    &:hover {
-      > a {
+      &:hover {
         color: $color-1;
       }
     }
