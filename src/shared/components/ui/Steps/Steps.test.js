@@ -21,7 +21,7 @@ const props = {
 }
 
 describe('<Steps /> mount', () => {
-  it('should render <Button />', async () => {
+  it('should render <Steps />', async () => {
     const { getByText } = render(<Steps {...props} />)
 
     const step1 = getByText('1')
