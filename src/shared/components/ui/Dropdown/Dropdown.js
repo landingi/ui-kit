@@ -262,19 +262,18 @@ const Dropdown = forwardRef(
       </span>
     )
 
-    const LinkComponeent = linkComponent
-
     const renderDropdownWithButton = () => (
       <span className={dropdownWrapperStyles} onClick={handleOnClick}>
-        {linkComponent && (
-          <LinkComponeent>
-            {icon && renderIcon()}
+        {linkComponent &&
+          linkComponent(
+            <Fragment>
+              {icon && renderIcon()}
 
-            {label && renderLabel()}
+              {label && renderLabel()}
 
-            <Ink />
-          </LinkComponeent>
-        )}
+              <Ink />
+            </Fragment>
+          )}
 
         <span
           className={dropdownWrapperIconStyles}
