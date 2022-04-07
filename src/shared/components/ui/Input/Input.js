@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import Label from '@components/ui/Label'
 import Tooltip from '@components/ui/Tooltip'
@@ -35,100 +35,110 @@ import Icon from '@components/ui/Icon'
  * @param {bool} props.form - is input form
  * @return {object} An object of children element
  */
-const Input = ({
-  className,
-  onChange,
-  onKeyDown,
-  onBlur,
-  type,
-  name,
-  disabled,
-  readonly,
-  i18n,
-  value,
-  autoFocus,
-  maxLength,
-  required,
-  focused,
-  tooltip,
-  min,
-  max,
-  background,
-  hideArrows,
-  alwaysShowLabel,
-  defaultValue,
-  variant,
-  form
-}) => {
-  const wrapperStyles = useStyles(
+const Input = forwardRef(
+  (
     {
-      [styles['input__wrapper']]: true,
-      [styles['input__wrapper--focused']]: focused === 'true',
-      [styles['input__wrapper--show-label']]: alwaysShowLabel,
-      [styles['input__wrapper--table']]: variant === 'table'
+      className,
+      onChange,
+      onKeyDown,
+      onBlur,
+      type,
+      name,
+      disabled,
+      readonly,
+      i18n,
+      value,
+      autoFocus,
+      maxLength,
+      required,
+      focused,
+      tooltip,
+      min,
+      max,
+      background,
+      hideArrows,
+      alwaysShowLabel,
+      defaultValue,
+      variant,
+      form
     },
-    className
-  )
+    ref
+  ) => {
+    const wrapperStyles = useStyles(
+      {
+        [styles['input__wrapper']]: true,
+        [styles['input__wrapper--focused']]: focused === 'true',
+        [styles['input__wrapper--show-label']]: alwaysShowLabel,
+        [styles['input__wrapper--table']]: variant === 'table'
+      },
+      className
+    )
 
-  const tooltopStyles = useStyles({
-    [styles['input__tooltip']]: true,
-    [styles['input__tooltip--form']]: form
-  })
+    const tooltopStyles = useStyles({
+      [styles['input__tooltip']]: true,
+      [styles['input__tooltip--form']]: form
+    })
 
-  const inputStyles = useStyles({
-    [styles['input']]: true,
-    [styles['input--transparent']]: background === 'transparent',
-    [styles['input--hidden-arrows']]: hideArrows,
-    [styles['input--table']]: variant === 'table'
-  })
+    const inputStyles = useStyles({
+      [styles['input']]: true,
+      [styles['input--transparent']]: background === 'transparent',
+      [styles['input--hidden-arrows']]: hideArrows,
+      [styles['input--table']]: variant === 'table'
+    })
 
-  const renderDefault = defaultValue && !value
+    const renderDefault = defaultValue && !value
 
-  return (
-    <div className={wrapperStyles}>
-      <input
-        data-testid='input-component'
-        className={inputStyles}
-        onBlur={onBlur}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        type={type}
-        placeholder={i18n.placeholder}
-        name={name}
-        id={name}
-        value={value}
-        readOnly={disabled ? readonly : undefined}
-        disabled={!disabled ? undefined : disabled}
-        autoFocus={autoFocus}
-        maxLength={maxLength}
-        required={required}
-        {...(type === 'number' ? { min, max } : {})}
-        {...(renderDefault ? { defaultValue } : {})}
-      />
-      <span className={styles['highlight']} />
+    return (
+      <div className={wrapperStyles}>
+        <input
+          data-testid='input-component'
+          ref={ref}
+          className={inputStyles}
+          onBlur={onBlur}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          type={type}
+          placeholder={i18n.placeholder}
+          name={name}
+          id={name}
+          value={value}
+          readOnly={disabled ? readonly : undefined}
+          disabled={!disabled ? undefined : disabled}
+          autoFocus={autoFocus}
+          maxLength={maxLength}
+          required={required}
+          {...(type === 'number' ? { min, max } : {})}
+          {...(renderDefault ? { defaultValue } : {})}
+        />
+        <span className={styles['highlight']} />
 
-      <span className={styles['bar']} />
+        <span className={styles['bar']} />
 
-      {i18n?.label && (
-        <Label id={name} className={styles['input__label']}>
-          {i18n.label}
-        </Label>
-      )}
+        {i18n?.label && (
+          <Label id={name} className={styles['input__label']}>
+            {i18n.label}
+          </Label>
+        )}
 
-      {i18n?.description && !form && (
-        <Paragraph size='12' color='color-8'>
-          {i18n.description}
-        </Paragraph>
-      )}
+        {i18n?.description && !form && (
+          <Paragraph size='12' color='color-8'>
+            {i18n.description}
+          </Paragraph>
+        )}
 
-      {tooltip && (
-        <Tooltip className={tooltopStyles} placement='bottom' content={tooltip}>
-          <Icon color='color-3' icon='icon-exclamation-circle' />
-        </Tooltip>
-      )}
-    </div>
-  )
-}
+        {tooltip && (
+          <Tooltip
+            className={tooltopStyles}
+            placement='bottom'
+            content={tooltip}
+          >
+            <Icon color='color-3' icon='icon-exclamation-circle' />
+          </Tooltip>
+        )}
+      </div>
+    )
+  }
+)
 
 Input.displayName = 'Input'
 
@@ -157,7 +167,7 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string,
-    description: PropTypes.oneOfType([PropTypes.string, PropTypes.function])
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }),
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
