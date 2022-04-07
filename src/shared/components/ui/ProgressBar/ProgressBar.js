@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './ProgressBar.scss'
+import styles from './ProgressBar.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 import ColorNumber from '@components/ui/ColorNumber'
-
-const cssClass = styles(scss)
 
 //TODO ProgressBar css, props naming ex. withoutAnimation, limitExceededInfo, showColorNumber
 /**
@@ -29,46 +27,52 @@ const ProgressBar = ({
   showColorNumber,
   border,
   withoutAnimation
-}) => (
-  <Fragment>
-    <div className={cssClass('container', border && 'container--bordered')}>
-      <span
-        data-testid='background'
-        className={cssClass(
-          'bar',
-          'bar__background',
-          `bar--${variant}`,
-          border && `bar__border--${border}`
-        )}
-      />
-      <span
-        data-testid='fulfillment'
-        className={cssClass(
-          'bar',
-          'bar__fulfillment',
-          `bar--${variant}`,
-          border && 'bar__fulfillment--bordered',
-          withoutAnimation && 'bar__fulfillment--no-animation'
-        )}
-        style={{ width: `${(quantity / limit) * 100}%` }}
-      />
-    </div>
-    {limitExceededInfo && (
-      <span className={cssClass('limit-exceeded__info')}>
-        limitExceededInfo
-      </span>
-    )}
+}) => {
+  const elementClassesContainer = useStyles({
+    [styles['progress-bar__container']]: true,
+    [styles['progress-bar__container--bordered']]: border
+  })
 
-    {showColorNumber && (
-      <span data-testid='color-number' className={cssClass('max-result')}>
-        <ColorNumber variant={variant} size={size}>
-          {quantity}
-        </ColorNumber>
-        /{limit}
-      </span>
-    )}
-  </Fragment>
-)
+  const elementClassesBackground = useStyles({
+    [styles[`progress-bar--${variant}`]]: variant,
+    [styles['progress-bar__background']]: true,
+    [styles[`progress-bar__border--${border}`]]: border
+  })
+
+  const elementClassesFulfillment = useStyles({
+    [styles[`progress-bar--${variant}`]]: variant,
+    [styles['progress-bar__fulfillment']]: true,
+    [styles['progress-bar__fulfillment--bordered']]: border,
+    [styles['progress-bar__fulfillment--without-animation']]: withoutAnimation
+  })
+
+  return (
+    <Fragment>
+      <div className={elementClassesContainer}>
+        <span data-testid='background' className={elementClassesBackground} />
+
+        <span
+          data-testid='fulfillment'
+          className={elementClassesFulfillment}
+          style={{ width: `${(quantity / limit) * 100}%` }}
+        />
+      </div>
+
+      {limitExceededInfo && (
+        <span className={styles['limit-exceeded-info']}>limitExceededInfo</span>
+      )}
+
+      {showColorNumber && (
+        <span data-testid='color-number' className={styles['max-result']}>
+          <ColorNumber variant={variant} size={size}>
+            {quantity}
+          </ColorNumber>
+          /{limit}
+        </span>
+      )}
+    </Fragment>
+  )
+}
 
 ProgressBar.displayName = 'ProgressBar'
 
@@ -77,7 +81,7 @@ ProgressBar.propTypes = {
     .isRequired,
   quantity: PropTypes.number.isRequired,
   limit: PropTypes.number,
-  size: PropTypes.number,
+  size: PropTypes.oneOf([10, 12, 16, 18, 32, 44, 62]),
   border: PropTypes.oneOf(['white', 'grey']),
   //TODO: add translation or put translation in prop
   limitExceededInfo: PropTypes.bool,

@@ -1,6 +1,53 @@
-import { Props } from 'docz'
+import { Playground, Props } from 'docz'
 import ProgressBar from '@components/ui/ProgressBar'
+import Spacer from '@components/ui/Spacer'
 
 # Progress Bar
 
 <Props of={ProgressBar} />
+
+## ProgressBar variants
+
+<Playground>
+  <ProgressBar variant='success' quantity={50} />
+  <Spacer />
+  <ProgressBar variant='warning' quantity={50} />
+  <Spacer />
+  <ProgressBar variant='alert' quantity={50} />
+  <Spacer />
+  <ProgressBar variant='progress' quantity={50} />
+  <Spacer />
+  <ProgressBar variant='brand' quantity={50} />
+</Playground>
+
+## ProgressBar border
+
+<Playground>
+  <ProgressBar variant='success' quantity={50} border='white' />
+  <Spacer />
+  <ProgressBar variant='success' quantity={50} border='grey' />
+</Playground>
+
+## ProgressBar without animation
+
+<Playground>
+  <ProgressBar variant='success' quantity={50} withoutAnimation />
+</Playground>
+
+## ProgressBar limit exceeded info
+
+<Playground>
+  <ProgressBar variant='success' quantity={50} limitExceededInfo='Test' />
+</Playground>
+
+## ProgressBar limit exceeded info
+
+<Playground>
+  <ProgressBar variant='success' quantity={50} showColorNumber size={10} />
+  <Spacer />
+  <ProgressBar variant='warning' quantity={50} showColorNumber size={12} />
+  <Spacer />
+  <ProgressBar variant='alert' quantity={50} showColorNumber size={16} />
+  <Spacer />
+  <ProgressBar variant='progress' quantity={50} showColorNumber />
+</Playground>

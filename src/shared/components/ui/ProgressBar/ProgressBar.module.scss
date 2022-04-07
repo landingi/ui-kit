@@ -1,14 +1,31 @@
-.bar {
+@mixin progress-bar {
   height: 12px;
-	position: absolute;
+  position: absolute;
   border-radius: 250px;
+}
+
+@keyframes fill {
+  0% { width: 0px; }
+}
+
+.progress-bar {
+  &__container {
+    position: relative;
+    margin-bottom: 15px;
+
+    &--bordered {
+      margin-right: 6px;
+    }
+  }
 
   &__background {
+    @include progress-bar;
     width: 100%;
     opacity: 0.2;
   }
 
   &__fulfillment {
+    @include progress-bar;
     animation: fill 2s ease-out;
 
     &--bordered {
@@ -17,7 +34,7 @@
       height: 10px;
     }
 
-    &--no-animation {
+    &--without-animation {
       animation: none;
     }
   }
@@ -59,15 +76,6 @@
   }
 }
 
-.container {
-  position: relative;
-  margin-bottom: 15px;
-
-  &--bordered {
-    margin-right: 6px;
-  }
-}
-
 .max-result {
   display: flex;
   justify-content: flex-end;
@@ -76,13 +84,9 @@
   font-size: 14px;
 }
 
-.limit-exceeded__info {
+.limit-exceeded-info {
   font-size: 12px;
   display: flex;
   justify-content: flex-end;
   color: $color-2;
-}
-
-@keyframes fill {
-  0% { width: 0px; }
 }
