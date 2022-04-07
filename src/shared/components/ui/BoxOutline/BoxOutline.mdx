@@ -12,10 +12,28 @@ import Image from '@components/ui/Image'
   <BoxOutline>Box Outline</BoxOutline>
 </Playground>
 
+## Default with disable hover
+
+<Playground>
+  <BoxOutline disableHover>Box Outline</BoxOutline>
+</Playground>
+
 ### Default selected
 
 <Playground>
   <BoxOutline isSelected>Box Outline</BoxOutline>
+</Playground>
+
+## Default disabled
+
+<Playground>
+  <BoxOutline disabled>
+    <Image
+      src='https://images.assets-landingi.com/REiQ5YQl/logo_sygnet.svg'
+      size='20px'
+    />
+    Box Outline
+  </BoxOutline>
 </Playground>
 
 ### Default click
@@ -46,6 +64,14 @@ import Image from '@components/ui/Image'
   </BoxOutline>
 </Playground>
 
+### Background selected
+
+<Playground>
+  <BoxOutline variant='background' isSelected>
+    Box Outline
+  </BoxOutline>
+</Playground>
+
 ## Background disabled
 
 <Playground>
@@ -54,14 +80,6 @@ import Image from '@components/ui/Image'
       src='https://images.assets-landingi.com/REiQ5YQl/logo_sygnet.svg'
       size='20px'
     />
-    Box Outline
-  </BoxOutline>
-</Playground>
-
-### Background selected
-
-<Playground>
-  <BoxOutline variant='background' isSelected>
     Box Outline
   </BoxOutline>
 </Playground>
