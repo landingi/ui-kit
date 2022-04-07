@@ -1,75 +1,51 @@
 import React from 'react'
 import Steps from '@components/ui/Steps'
-import { mountWithIntl } from '@jestutils'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 const props = {
   data: [
     {
       variant: 'completed',
-      description: 'modal.domains.steps.add.domain'
+      description: 'Completed step'
     },
     {
       variant: 'current',
-      description: 'modal.domains.steps.verify.provider'
+      description: 'Current step'
     },
     {
       variant: 'next',
-      description: 'modal.domains.steps.setup.domain'
+      description: 'Next step'
     }
   ]
 }
 
-const stepsComponent = <Steps {...props} />
+describe('<Button /> mount', () => {
+  it('should render <Button />', async () => {
+    const { getByText } = render(<Steps {...props} />)
 
-describe('<Steps /> mount', () => {
-  let wrapper
+    const step1 = getByText('1')
+    const stepDescription1 = getByText('Completed step')
 
-  beforeEach(() => {
-    wrapper = mountWithIntl(stepsComponent)
-  })
+    const step2 = getByText('2')
+    const stepDescription2 = getByText('Current step')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+    const step3 = getByText('3')
+    const stepDescription3 = getByText('Next step')
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    expect(step1).toHaveClass(
+      'step__number step__number--completed step__number--small'
+    )
+    expect(stepDescription1).toHaveClass('step__description--completed')
 
-  it('has one completed variant', () => {
-    expect(
-      wrapper
-        .find('span.step__number--completed')
-        .hasClass('step__number--completed')
-    ).toBe(true)
-    expect(
-      wrapper
-        .find('span.step__description--completed')
-        .hasClass('step__description--completed')
-    ).toBe(true)
-  })
+    expect(step2).toHaveClass(
+      'step__number step__number--current step__number--small'
+    )
+    expect(stepDescription2).toHaveClass('step__description--current')
 
-  it('has one current variant', () => {
-    expect(
-      wrapper
-        .find('span.step__number--current')
-        .hasClass('step__number--current')
-    ).toBe(true)
-    expect(
-      wrapper
-        .find('span.step__description--current')
-        .hasClass('step__description--current')
-    ).toBe(true)
-  })
-
-  it('has one next variant', () => {
-    expect(
-      wrapper.find('span.step__number--next').hasClass('step__number--next')
-    ).toBe(true)
-    expect(
-      wrapper
-        .find('span.step__description--next')
-        .hasClass('step__description--next')
-    ).toBe(true)
+    expect(step3).toHaveClass(
+      'step__number step__number--next step__number--small'
+    )
+    expect(stepDescription3).toHaveClass('step__description--next')
   })
 })
