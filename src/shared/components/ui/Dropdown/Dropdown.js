@@ -11,7 +11,6 @@ import { centerParent, getBoundings } from '@helpers/position'
 import Tooltip from '@components/ui/Tooltip'
 import Icon from '@components/ui/Icon'
 import Ink from 'react-ink'
-import { NavLink } from 'react-router-dom'
 import { debounce, throttle } from '@helpers/events'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import emitter from '@lib/emitter'
@@ -44,7 +43,7 @@ const Dropdown = forwardRef(
       handleOnClick,
       handleOnOpen,
       handleOnClose,
-      link,
+      linkComponent,
       renderAsSmaller,
       hasInput,
       hasFullInputStyle,
@@ -263,15 +262,19 @@ const Dropdown = forwardRef(
       </span>
     )
 
+    const LinkComponeent = linkComponent
+
     const renderDropdownWithButton = () => (
       <span className={dropdownWrapperStyles} onClick={handleOnClick}>
-        <NavLink to={link} activeClassName='groups--selected'>
-          {icon && renderIcon()}
+        {linkComponent && (
+          <LinkComponeent>
+            {icon && renderIcon()}
 
-          {label && renderLabel()}
+            {label && renderLabel()}
 
-          <Ink />
-        </NavLink>
+            <Ink />
+          </LinkComponeent>
+        )}
 
         <span
           className={dropdownWrapperIconStyles}
@@ -374,7 +377,7 @@ Dropdown.propTypes = {
   handleOnClick: PropTypes.func,
   handleOnOpen: PropTypes.func,
   handleOnClose: PropTypes.func,
-  link: PropTypes.string,
+  linkComponent: PropTypes.func,
   renderAsSmaller: PropTypes.bool,
   hasInput: PropTypes.bool,
   hasFullInputStyle: PropTypes.bool,
@@ -389,7 +392,7 @@ Dropdown.defaultProps = {
   className: '',
   tooltip: '',
   tooltipPlacement: '',
-  link: '',
+  linkComponent: null,
   size: 'medium',
   arrowType: 'caret',
   alignment: 'center',

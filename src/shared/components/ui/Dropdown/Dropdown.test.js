@@ -81,10 +81,6 @@ describe('<Dropdown/> mount', () => {
     expect(wrapper.prop('hasArrow')).toEqual(true)
   })
 
-  it('has default link icon with value empty string', () => {
-    expect(wrapper.prop('link')).toEqual('')
-  })
-
   it('has default renderAsSmaller with value false', () => {
     expect(wrapper.prop('renderAsSmaller')).toEqual(false)
   })
