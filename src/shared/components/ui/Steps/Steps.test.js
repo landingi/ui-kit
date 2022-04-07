@@ -20,7 +20,7 @@ const props = {
   ]
 }
 
-describe('<Button /> mount', () => {
+describe('<Steps /> mount', () => {
   it('should render <Button />', async () => {
     const { getByText } = render(<Steps {...props} />)
 
