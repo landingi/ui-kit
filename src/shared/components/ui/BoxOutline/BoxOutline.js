@@ -36,7 +36,7 @@ const BoxOutline = ({
       [styles[`box-outline__${variant}`]]: variant,
       [styles[`box-outline__${variant}--hover`]]: !disableHover,
       [styles['box-outline__is-selected']]: isSelected,
-      [styles['box-outline__is-selected--hover']]: !disableHover,
+      [styles['box-outline__is-selected--hover']]: isSelected && !disableHover,
       [styles['box-outline__no-padding']]: padding === 'none',
       [styles['box-outline__disabled']]: disabled
     },
