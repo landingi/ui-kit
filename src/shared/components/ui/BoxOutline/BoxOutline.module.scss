@@ -37,7 +37,7 @@
     padding: 0;
   }
 
-  &.box-outline__is-selected {
+  &__is-selected {
     border: 1px solid $color-success;
 
     &--hover:hover {
