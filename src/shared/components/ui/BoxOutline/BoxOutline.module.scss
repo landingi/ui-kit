@@ -8,44 +8,39 @@
   cursor: pointer;
   transition: all 0.3s ease-out;
 
-  &--disabled {
+  &__disabled {
     opacity: 0.5;
     pointer-events: none;
     filter: grayscale(1);
   }
 
-  &--default {
+  &__default {
     border: 1px solid transparent;
 
-    &--has-hover:hover {
+    &--hover:hover {
       border: 1px solid $color-brand;
       box-shadow: 5px 10px 20px $color-shadow;
     }
   }
 
-  &--background {
+  &__background {
     border: 1px solid $color-input-border;
 
-    &--has-hover:hover {
+    &--hover:hover {
       border: 1px solid $color-brand;
       background: $color-box-bg-hover;
       box-shadow: 0px 2px 4px $color-shadow;
     }
   }
 
-  &--no-padding {
+  &__no-padding {
     padding: 0;
   }
 
-  &--has-hover:hover {
-    border: 1px solid $color-brand;
-    box-shadow: 5px 10px 20px #0000001a;
-  }
-
-  &.box-outline--is-selected {
+  &__is-selected {
     border: 1px solid $color-success;
 
-    &--has-hover:hover {
+    &--hover:hover {
       border: 1px solid $color-success;
       box-shadow: 5px 10px 20px #0000001a;
     }

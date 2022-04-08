@@ -33,15 +33,12 @@ const BoxOutline = ({
   const elementClasses = useStyles(
     {
       [styles['box-outline']]: true,
-      [styles['box-outline--has-hover']]: !disableHover,
-      [styles['box-outline--default']]: variant === 'default',
-      [styles['box-outline--default--has-hover']]: !disableHover,
-      [styles['box-outline--background']]: variant === 'background',
-      [styles['box-outline--background--has-hover']]: !disableHover,
-      [styles['box-outline--is-selected']]: isSelected,
-      [styles['box-outline--is-selected--has-hover']]: !disableHover,
-      [styles['box-outline--no-padding']]: padding === 'none',
-      [styles['box-outline--disabled']]: disabled
+      [styles[`box-outline__${variant}`]]: variant,
+      [styles[`box-outline__${variant}--hover`]]: !disableHover,
+      [styles['box-outline__is-selected']]: isSelected,
+      [styles['box-outline__is-selected--hover']]: isSelected && !disableHover,
+      [styles['box-outline__no-padding']]: padding === 'none',
+      [styles['box-outline__disabled']]: disabled
     },
     className
   )
