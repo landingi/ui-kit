@@ -57,14 +57,8 @@ const Button = ({
       [styles[`button--${align}`]]: align,
       [styles['button--svg']]: hasIcon === true,
       [styles['button--hide']]: hide === true,
-      [styles['button--fit-width']]: fitWidth === true
-    },
-    className
-  )
-
-  const elementClassesLink = useStyles(
-    {
-      [styles.link]: true
+      [styles['button--fit-width']]: fitWidth === true,
+      [styles.link]: !buttonStyle && Tag === 'a'
     },
     className
   )
@@ -76,13 +70,7 @@ const Button = ({
       href={Tag === 'a' ? href : undefined}
       title={Tag === 'a' ? title : undefined}
       target={Tag === 'a' ? target : undefined}
-      className={
-        Tag === 'button'
-          ? elementClassesButton
-          : buttonStyle
-          ? elementClassesButton
-          : elementClassesLink
-      }
+      className={elementClassesButton}
       onClick={onClick}
       data-testid={dataTestId}
     >
