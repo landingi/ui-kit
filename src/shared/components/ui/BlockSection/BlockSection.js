@@ -12,8 +12,6 @@ import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BlockSection.module.scss'
 
-// TODO Block Section tests
-
 /**
  * Block Section - stateless presentational component
  * @param {object} props - props
@@ -52,7 +50,7 @@ const BlockSection = ({
   return (
     <div className={wrapperClasses}>
       <Panel variant='padding-none'>
-        <div className={elementClasses}>
+        <div data-testid='panel' className={elementClasses}>
           <div className={styles['block-section__panel--content']}>
             <Heading bold level={2}>
               {title}
