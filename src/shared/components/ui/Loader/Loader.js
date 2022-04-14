@@ -3,11 +3,14 @@ import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
 import styles from './Loader.module.scss'
 
-const renderDefaultLoader = () => (
+const renderDefaultLoader = ({ dataTestId }) => (
   <Fragment>
     <Spacer space='large' />
 
-    <div className={styles.loader__spin} data-testid='loader-default'>
+    <div
+      className={styles.loader__spin}
+      data-testid={dataTestId ?? 'loader-default'}
+    >
       <div className={styles.rect1} />
 
       <div className={styles.rect2} />
@@ -21,8 +24,8 @@ const renderDefaultLoader = () => (
   </Fragment>
 )
 
-const renderShapesLoader = () => (
-  <div className={styles.loader} data-testid='loader-shapes'>
+const renderShapesLoader = ({ dataTestId }) => (
+  <div className={styles.loader} data-testid={dataTestId ?? 'loader-shapes'}>
     <svg
       className={styles.loader__circle}
       width='8px'
@@ -93,10 +96,10 @@ const renderShapesLoader = () => (
  * @param {string} props.variant - loader variant
  * @return {object} An object of children element
  */
-const Loader = ({ variant }) => {
+const Loader = ({ variant, ['data-testid']: dataTestId }) => {
   const loader = {
-    default: renderDefaultLoader(),
-    shapes: renderShapesLoader()
+    default: renderDefaultLoader({ dataTestId }),
+    shapes: renderShapesLoader({ dataTestId })
   }
 
   return loader[variant]
@@ -105,11 +108,13 @@ const Loader = ({ variant }) => {
 Loader.displayName = 'Loader'
 
 Loader.propTypes = {
-  variant: PropTypes.oneOf(['default', 'shapes'])
+  variant: PropTypes.oneOf(['default', 'shapes']),
+  ['data-testid']: PropTypes.string
 }
 
 Loader.defaultProps = {
-  variant: 'default'
+  variant: 'default',
+  ['data-testid']: null
 }
 
 export default Loader
