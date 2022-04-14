@@ -44,7 +44,8 @@ const Input = ({
   focused,
   background,
   alwaysShowLabel,
-  variant
+  variant,
+  ['data-testid']: dataTestId
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -76,6 +77,7 @@ const Input = ({
         background={background}
         alwaysShowLabel={alwaysShowLabel}
         variant={variant}
+        data-testid={dataTestId}
         form
       />
 
@@ -124,7 +126,8 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     description: PropTypes.string
   }),
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  ['data-testid']: PropTypes.string
 }
 
 Input.defaultProps = {
@@ -145,7 +148,8 @@ Input.defaultProps = {
     placeholder: null,
     description: null
   },
-  variant: ''
+  variant: '',
+  ['data-testid']: 'input-component'
 }
 
 export default Input

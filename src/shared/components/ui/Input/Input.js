@@ -60,7 +60,8 @@ const Input = forwardRef(
       alwaysShowLabel,
       defaultValue,
       variant,
-      form
+      form,
+      ['data-testid']: dataTestId
     },
     ref
   ) => {
@@ -91,7 +92,7 @@ const Input = forwardRef(
     return (
       <div className={wrapperStyles}>
         <input
-          data-testid='input-component'
+          data-testid={dataTestId}
           ref={ref}
           className={inputStyles}
           onBlur={onBlur}
@@ -172,7 +173,8 @@ Input.propTypes = {
   defaultValue: PropTypes.string,
   alwaysShowLabel: PropTypes.bool,
   variant: PropTypes.string,
-  form: PropTypes.bool
+  form: PropTypes.bool,
+  ['data-testid']: PropTypes.string
 }
 
 Input.defaultProps = {
@@ -200,7 +202,8 @@ Input.defaultProps = {
   defaultValue: null,
   alwaysShowLabel: false,
   variant: '',
-  form: false
+  form: false,
+  ['data-testid']: 'input-component'
 }
 
 export default Input
