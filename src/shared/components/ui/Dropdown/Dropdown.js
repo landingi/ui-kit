@@ -51,7 +51,8 @@ const Dropdown = forwardRef(
       inModalName,
       custom,
       isOpenDisabled,
-      isOnlyIcon
+      isOnlyIcon,
+      ['data-testid']: dataTestId
     },
     ref
   ) => {
@@ -230,7 +231,7 @@ const Dropdown = forwardRef(
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
           className={dropdownWrapperWithTooltipStyles}
-          data-testid='trigger-dropdown'
+          data-testid={dataTestId}
         >
           {icon && renderIcon()}
 
@@ -248,7 +249,7 @@ const Dropdown = forwardRef(
         ref={composeRefs(ref, containerRef)}
         onClick={handleShow}
         className={dropdownStyles}
-        data-testid='trigger-dropdown'
+        data-testid={dataTestId}
       >
         {custom && custom}
 
@@ -279,7 +280,7 @@ const Dropdown = forwardRef(
           className={dropdownWrapperIconStyles}
           ref={composeRefs(ref, containerRef)}
           onClick={handleShow}
-          data-testid='trigger-dropdown'
+          data-testid={dataTestId}
         >
           {hasArrow && renderArrows(isOpen, arrowType)}
 
@@ -384,7 +385,8 @@ Dropdown.propTypes = {
   inModalName: PropTypes.string,
   custom: PropTypes.instanceOf(Object),
   isOpenDisabled: PropTypes.bool,
-  isOnlyIcon: PropTypes.bool
+  isOnlyIcon: PropTypes.bool,
+  ['data-testid']: PropTypes.string
 }
 
 Dropdown.defaultProps = {
@@ -411,7 +413,8 @@ Dropdown.defaultProps = {
   isOnlyIcon: false,
   handleOnClick: () => null,
   handleOnOpen: () => null,
-  handleOnClose: () => null
+  handleOnClose: () => null,
+  ['data-testid']: 'trigger-dropdown'
 }
 
 export default Dropdown
