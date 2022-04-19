@@ -6,7 +6,7 @@ const renderDefaultLoader = ({ dataTestId }) => (
   <Fragment>
     <div
       className={styles.container}
-      ata-testid={dataTestId ?? 'loader-default'}
+      data-testid={dataTestId ?? 'loader-default'}
     >
       <div className={styles.main}>
         <div className={styles.one}></div>
