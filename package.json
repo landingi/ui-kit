@@ -22,6 +22,7 @@
     "prepare": "husky install",
     "build:local": "node ./config/packages/package.builder.js production && yarn install && yarn build",
     "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn build",
+    "bundle:analyze": "webpack --config ./webpack.bundle.js",
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build"
