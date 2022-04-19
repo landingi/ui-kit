@@ -140,3 +140,84 @@
     stroke-dashoffset: 80;
   }
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  height: 128px;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  margin-top: 12px;
+}
+
+.one {
+  animation-name: load-one;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 0px;
+  width: 0px;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #2550aa;
+  border-left: 8px solid transparent;
+  margin-right: 12px;
+}
+
+@keyframes load-one {
+  30% {
+    transform: translateY(-100%);
+  }
+}
+
+.two {
+  animation-name: load-two;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 8px;
+  width: 16px;
+  border-radius: 150px 150px 0 0;
+  background-color: #1ec7b8;
+  transform: rotate(45deg);
+  margin-right: 12px;
+}
+
+@keyframes load-two {
+  50% {
+    transform: translateY(-100%) rotate(45deg);
+  }
+}
+
+.three {
+  animation-name: load-three;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 12px;
+  width: 12px;
+  background-color: #f8d260;
+  margin-right: 12px;
+}
+
+@keyframes load-three {
+  70% {
+    transform: translateY(-100%);
+  }
+}
+
+.forth {
+  animation-name: load-forth;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 12px;
+  width: 12px;
+  background-color: #f27589;
+  border-radius: 12px;
+  margin-right: 12px;
+}
+
+@keyframes load-forth {
+  90% {
+    transform: translateY(-100%);
+  }
+}
