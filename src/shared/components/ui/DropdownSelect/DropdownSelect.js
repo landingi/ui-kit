@@ -48,7 +48,6 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {func} props.className - wrapper custom styles
  * @param {func} props.customValue - allow use custom value which is not in options
  * @param {func} props.formikKey - name on formik 'nasted' keys
- * @param {string} props.translate - translate key when items in dropdown use react-intl
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
  * @param {string} props.alwaysShowLabel - always show label on top

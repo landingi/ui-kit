@@ -1,8 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { IntlProvider } from 'react-intl'
 import { render as rtlRender } from '@testing-library/react'
-import { getLanguage, getMessages } from '@helpers/i18n'
 
 /**
  * makeMountRender - a util function that accepts a component and some default props.
@@ -25,25 +23,6 @@ export const makeMountRender = (
   }
 }
 
-  /**
- * Components using the react-intl module require access to the intl context.
- * This is not available when mounting single components in Enzyme.
- * This helper function aim to address that and wrap a valid,
- * English-locale intl context around them.
- */
-const messages = require('@i18n/en/en.json')
-const defaultLocale = 'en'
-const locale = defaultLocale
-
-export const mountWithIntl = node =>
-  mount(node, {
-    wrappingComponent: IntlProvider,
-    wrappingComponentProps: {
-      locale,
-      defaultLocale,
-      messages
-    }
-  })
 
 /**
   * render function that overrides react-testing-library render functions
@@ -52,12 +31,9 @@ export const mountWithIntl = node =>
   * @param {object} param1
   * @return wrapped element
 */
-const render = (ui, { locale = 'en', ...renderOptions } = {}) => {
-  const wrapper = ({ children }) => (
-    <IntlProvider locale={locale} messages={getMessages[getLanguage]}>
-      {children}
-    </IntlProvider>
-  )
+const render = (ui, { ...renderOptions } = {}) => {
+  const wrapper = ({ children }) => children
+
   return rtlRender(ui, { wrapper, ...renderOptions })
 }
 

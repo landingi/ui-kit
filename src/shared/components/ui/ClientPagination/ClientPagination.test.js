@@ -1,6 +1,6 @@
 import React from 'react'
 import ClientPagination from '@components/ui/ClientPagination'
-import { mountWithIntl } from '@jestutils'
+import { mount } from 'enzyme'
 
 const props = {
   goToPage: () => null,
@@ -16,7 +16,7 @@ describe('<Client Pagination/> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(clientPaginationComponent)
+    wrapper = mount(clientPaginationComponent)
   })
 
   afterEach(() => {

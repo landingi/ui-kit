@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
-import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
 import Icon from '@components/ui/Icon'
 import {
@@ -35,7 +34,8 @@ const TimeSelect = ({
   onChange,
   formikKey,
   label,
-  disabled
+  disabled,
+  getLanguage
 }) => {
   const isAmPmType = getLanguage !== 'pl'
 
@@ -139,14 +139,16 @@ TimeSelect.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   formikKey: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  getLanguage: PropTypes.string
 }
 
 TimeSelect.defaultProps = {
   inModalName: '',
   value: '12:00',
   formikKey: null,
-  disabled: false
+  disabled: false,
+  getLanguage: 'en'
 }
 
 export default TimeSelect

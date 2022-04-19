@@ -4,7 +4,6 @@ import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
-import { getLanguage } from '@helpers/i18n'
 import './DateTimePicker.scss'
 
 /**
@@ -27,7 +26,8 @@ const DateTimePicker = ({
   oneDatePicker,
   selectedDateCalendar,
   showMonthAndYearPickers,
-  i18n
+  i18n,
+  getLanguage
 }) => {
   const [state, setState] = useState([
     {
@@ -113,7 +113,8 @@ DateTimePicker.propTypes = {
   showMonthAndYearPickers: PropTypes.bool,
   i18n: PropTypes.shape({
     apply: PropTypes.string
-  })
+  }),
+  getLanguage: PropTypes.string
 }
 
 DateTimePicker.defaultProps = {
@@ -121,7 +122,8 @@ DateTimePicker.defaultProps = {
   maxDate: undefined,
   oneDatePicker: false,
   showMonthAndYearPickers: true,
-  i18n: {}
+  i18n: {},
+  getLanguage: 'en'
 }
 
 export default DateTimePicker

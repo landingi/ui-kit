@@ -1,6 +1,6 @@
 import React from 'react'
 import Headline from '@components/global/Headline'
-import { mountWithIntl } from '@jestutils'
+import { mount } from 'enzyme'
 
 const component = <Headline title='Headline title' />
 
@@ -8,7 +8,7 @@ describe('<Headline/> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(component)
+    wrapper = mount(component)
   })
 
   afterEach(() => {
