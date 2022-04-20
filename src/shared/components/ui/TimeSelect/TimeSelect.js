@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect from '@components/ui/DropdownSelect'
-import { getLanguage } from '@helpers/i18n'
 import Spreader from '@components/ui/Spreader'
 import Icon from '@components/ui/Icon'
 import {
@@ -15,6 +14,7 @@ import {
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { getLanguage } from '@helpers/i18n'
 import styles from './TimeSelect.module.scss'
 
 //TODO TimeSelect css
