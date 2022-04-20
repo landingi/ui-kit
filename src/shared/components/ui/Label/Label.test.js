@@ -1,25 +1,73 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { screen } from '@testing-library/react'
 import Label from '@components/ui/Label'
-
-const props = {
-  children: 'label'
-}
-
-const labelComponent = <Label {...props} />
+import '@testing-library/jest-dom'
 
 describe('<Label/> mount', () => {
-  let wrapper
+  const props = {
+    children: 'random text',
+    id: 'my-label',
+    isToggle: false,
+    toggle: false
+  }
 
-  beforeEach(() => {
-    wrapper = mount(labelComponent)
+  const { children: childText } = props
+
+  it('should be displayed in normal variant with provided custom class', () => {
+    const newProps = {
+      ...props,
+      className: 'label--green',
+      id: 'my-label'
+    }
+
+    const { className } = newProps
+
+    render(<Label {...newProps} />)
+
+    const label = screen.getByText(childText)
+
+    expect(label).toHaveClass(className)
+
+    expect(label).toHaveClass('label--normal')
+
+    expect(label).toBeVisible()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('should be inactive when toggling is enabled', () => {
+    const newProps = {
+      ...props,
+      id: 'my-label',
+      isToggle: true
+    }
+
+    render(<Label {...newProps} />)
+
+    const label = screen.getByText(childText)
+
+    expect(label).toHaveClass('label--inactive')
+
+    expect(label).toBeVisible()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  it('should be active when toggling is enabled and toggle props equal true', () => {
+    const newProps = {
+      ...props,
+      id: 'my-label',
+      isToggle: true,
+      toggle: true
+    }
+
+    const { id } = newProps
+
+    render(<Label {...newProps} />)
+
+    const label = screen.getByText(childText)
+
+    expect(label).toHaveClass('label--active')
+
+    expect(label).toHaveAttribute('id', id)
+
+    expect(label).toBeVisible()
   })
 })

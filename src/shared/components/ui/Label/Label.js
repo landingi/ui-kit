@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Label.module.scss'
 
-// TODO Label test
 /**
  * Label - stateless presentational component
  * @param {object} props - props
