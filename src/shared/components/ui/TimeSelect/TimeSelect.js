@@ -34,8 +34,7 @@ const TimeSelect = ({
   onChange,
   formikKey,
   label,
-  disabled,
-  getLanguage
+  disabled
 }) => {
   const isAmPmType = getLanguage !== 'pl'
 
@@ -139,16 +138,14 @@ TimeSelect.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   formikKey: PropTypes.string,
-  disabled: PropTypes.bool,
-  getLanguage: PropTypes.string
+  disabled: PropTypes.bool
 }
 
 TimeSelect.defaultProps = {
   inModalName: '',
   value: '12:00',
   formikKey: null,
-  disabled: false,
-  getLanguage: 'en'
+  disabled: false
 }
 
 export default TimeSelect

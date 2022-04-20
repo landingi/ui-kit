@@ -26,8 +26,7 @@ const DateTimePicker = ({
   oneDatePicker,
   selectedDateCalendar,
   showMonthAndYearPickers,
-  i18n,
-  getLanguage
+  i18n
 }) => {
   const [state, setState] = useState([
     {
@@ -113,8 +112,7 @@ DateTimePicker.propTypes = {
   showMonthAndYearPickers: PropTypes.bool,
   i18n: PropTypes.shape({
     apply: PropTypes.string
-  }),
-  getLanguage: PropTypes.string
+  })
 }
 
 DateTimePicker.defaultProps = {
@@ -122,8 +120,7 @@ DateTimePicker.defaultProps = {
   maxDate: undefined,
   oneDatePicker: false,
   showMonthAndYearPickers: true,
-  i18n: {},
-  getLanguage: 'en'
+  i18n: {}
 }
 
 export default DateTimePicker
