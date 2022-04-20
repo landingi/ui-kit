@@ -14,6 +14,7 @@ import {
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { getLanguage } from '@helpers/i18n'
 import styles from './TimeSelect.module.scss'
 
 //TODO TimeSelect css

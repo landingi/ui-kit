@@ -4,6 +4,7 @@ import { DateRange, Calendar } from 'react-date-range'
 import Button from '@components/ui/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
+import { getLanguage } from '@helpers/i18n'
 import './DateTimePicker.scss'
 
 /**

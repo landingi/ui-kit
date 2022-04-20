@@ -1,2 +1,2 @@
 export const getLanguage =
-  typeof document !== `undefined` && document.documentElement.lang
+  (typeof document !== `undefined` && document.documentElement.lang) || 'en'
