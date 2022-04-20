@@ -1,25 +1,19 @@
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import Spacer from '@components/ui/Spacer'
 import styles from './Loader.module.scss'
 
 const renderDefaultLoader = ({ dataTestId }) => (
   <Fragment>
-    <Spacer space='large' />
-
     <div
-      className={styles.loader__spin}
+      className={styles.container}
       data-testid={dataTestId ?? 'loader-default'}
     >
-      <div className={styles.rect1} />
-
-      <div className={styles.rect2} />
-
-      <div className={styles.rect3} />
-
-      <div className={styles.rect4} />
-
-      <div className={styles.rect5} />
+      <div className={styles.main}>
+        <div className={styles.one}></div>
+        <div className={styles.two}></div>
+        <div className={styles.three}></div>
+        <div className={styles.forth}></div>
+      </div>
     </div>
   </Fragment>
 )

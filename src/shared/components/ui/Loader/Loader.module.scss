@@ -1,60 +1,3 @@
-.loader__spin {
-  margin: 0 auto;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  font-size: 15px;
-  clear: both;
-}
-
-.loader__spin > div {
-  background-color: $color-brand;
-  height: 15px;
-  width: 15px;
-  display: inline-block;
-  border-radius: 250px;
-  opacity: 0.5;
-
-  -webkit-animation: sk-stretchdelay 1s infinite ease-in-out;
-  animation: sk-stretchdelay 1s infinite ease-in-out;
-}
-
-.loader__spin .rect2 {
-  -webkit-animation-delay: -0.9s;
-  animation-delay: -0.9s;
-}
-
-.loader__spin .rect3 {
-  -webkit-animation-delay: -0.8s;
-  animation-delay: -0.8s;
-}
-
-.loader__spin .rect4 {
-  -webkit-animation-delay: -0.7s;
-  animation-delay: -0.7s;
-}
-
-.loader__spin .rect5 {
-  -webkit-animation-delay: -0.6s;
-  animation-delay: -0.6s;
-}
-
-@keyframes sk-stretchdelay {
-  0%,
-  40%,
-  100% {
-    transform: scale(0.7);
-    -webkit-transform: scale(0.7);
-    opacity: 0.5;
-  }
-
-  20% {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
 .loader {
   margin: 0 auto;
   width: 115px;
@@ -195,5 +138,85 @@
 @keyframes dash {
   to {
     stroke-dashoffset: 80;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  height: 128px;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  margin-top: 12px;
+}
+
+.one {
+  animation-name: load-one;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 0px;
+  width: 0px;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #2550aa;
+  border-left: 8px solid transparent;
+  margin-right: 12px;
+}
+
+@keyframes load-one {
+  30% {
+    transform: translateY(-100%);
+  }
+}
+
+.two {
+  animation-name: load-two;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 8px;
+  width: 16px;
+  border-radius: 150px 150px 0 0;
+  background-color: #1ec7b8;
+  transform: rotate(45deg);
+  margin-right: 12px;
+}
+
+@keyframes load-two {
+  50% {
+    transform: translateY(-100%) rotate(45deg);
+  }
+}
+
+.three {
+  animation-name: load-three;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 12px;
+  width: 12px;
+  background-color: #f8d260;
+  margin-right: 12px;
+}
+
+@keyframes load-three {
+  70% {
+    transform: translateY(-100%);
+  }
+}
+
+.forth {
+  animation-name: load-forth;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  height: 12px;
+  width: 12px;
+  background-color: #f27589;
+  border-radius: 12px;
+}
+
+@keyframes load-forth {
+  90% {
+    transform: translateY(-100%);
   }
 }
