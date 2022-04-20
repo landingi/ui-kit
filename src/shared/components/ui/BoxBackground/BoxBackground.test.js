@@ -1,5 +1,5 @@
 import React from 'react'
-import { mountWithIntl } from '@jestutils'
+import { mount } from 'enzyme'
 import BoxBackground from '@components/ui/BoxBackground'
 
 const props = {
@@ -13,7 +13,7 @@ describe('<BoxBackground /> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(component)
+    wrapper = mount(component)
   })
 
   afterEach(() => {

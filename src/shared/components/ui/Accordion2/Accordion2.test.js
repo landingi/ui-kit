@@ -1,5 +1,5 @@
 import React from 'react'
-import { mountWithIntl } from '@jestutils'
+import { mount } from 'enzyme'
 import Accordion from '@components/ui/Accordion2'
 import AccordionItem from '@components/ui/Accordion2/Item/AccordionItem'
 
@@ -29,7 +29,7 @@ describe('<Accordion /> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(accordionComponent)
+    wrapper = mount(accordionComponent)
   })
 
   afterEach(() => {
@@ -45,7 +45,7 @@ describe('<AccordionItem /> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(accordionItemComponent)
+    wrapper = mount(accordionItemComponent)
   })
 
   afterEach(() => {

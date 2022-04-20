@@ -1,7 +1,7 @@
 import React from 'react'
 import Searcher from '@components/global/Searcher'
 import Search from '@components/global/Searcher'
-import { mountWithIntl } from '@jestutils'
+import { mount } from 'enzyme'
 
 const mockedSearchFunction = jest.fn()
 const mockedSetSearchResult = jest.fn()
@@ -23,7 +23,7 @@ describe('<Searcher/> mount', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mountWithIntl(component)
+    wrapper = mount(component)
   })
 
   afterEach(() => {

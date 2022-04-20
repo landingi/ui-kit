@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "1.4.65",
+  "version": "1.4.67",
   "description": "Landingi UI-Kit",
   "main": "dist/app-uikit.js",
   "private": true,
@@ -22,6 +22,7 @@
     "prepare": "husky install",
     "build:local": "node ./config/packages/package.builder.js production && yarn install && yarn build",
     "build:dev": "node ./config/packages/package.builder.js development && yarn install && yarn build",
+    "bundle:analyze": "webpack --config ./webpack.bundle.js",
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build"
@@ -90,7 +91,6 @@
     "react-date-range": "1.4.0",
     "react-dom": "17.0.2",
     "react-ink": "6.5.1",
-    "react-intl": "5.20.10",
     "react-pose": "4.0.10",
     "react-redux": "7.2.5",
     "react-select": "4.3.1",
@@ -126,7 +126,6 @@
     "react-date-range": "1.4.0",
     "react-ink": "6.5.1",
     "react-input-range": "1.3.0",
-    "react-intl": "5.20.10",
     "react-pose": "4.0.10",
     "react-select": "4.3.1",
     "react-text-mask": "5.4.3",
