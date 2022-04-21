@@ -44,7 +44,7 @@ const Filter = ({
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel
 
   return (
-    <Dropdown label={dropdownLabel} size='medium' data-test-id={dataTestId}>
+    <Dropdown label={dropdownLabel} size='medium' data-testid={dataTestId}>
       <List>
         {values.map(({ value, label }) => (
           <ListItem key={uuid()} variant='dropdown'>
