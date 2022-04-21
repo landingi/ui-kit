@@ -30,7 +30,7 @@ describe('<Filter/> tests', () => {
 
   it('has two filters to choose', async () => {
     const { getByTestId, findAllByText } = render(<Filter {...props} />)
-    const button = getByTestId('trigger-dropdown')
+    const button = getByTestId('filter-component')
 
     fireEvent.click(button)
 
@@ -47,7 +47,7 @@ describe('<Filter/> tests', () => {
     const { getByTestId, findByText } = render(
       <Filter {...props} setValue={mockedSetValue} />
     )
-    const button = getByTestId('trigger-dropdown')
+    const button = getByTestId('filter-component')
 
     fireEvent.click(button)
 
@@ -62,7 +62,7 @@ describe('<Filter/> tests', () => {
     const { getByTestId, findByText } = render(
       <Filter {...props} localStorageKey={'I am just a value'} />
     )
-    const button = getByTestId('trigger-dropdown')
+    const button = getByTestId('filter-component')
 
     fireEvent.click(button)
 
