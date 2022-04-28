@@ -74,6 +74,7 @@ const Modal = forwardRef(
       actionIcon,
       overflowStyle,
       isCentered,
+      isContentCentered,
       isEditable,
       onEdit,
       hasCustomButton,
@@ -145,6 +146,7 @@ const Modal = forwardRef(
         [styles['modal--medium']]: size === 'medium',
         [styles['modal--small']]: size === 'small',
         [styles['modal--center']]: isCentered,
+        [styles['modal--centered-content']]: isContentCentered,
         [styles['modal--page']]: isPage
       },
       className
@@ -273,6 +275,7 @@ Modal.propTypes = {
   actionIcon: PropTypes.string,
   overflowStyle: PropTypes.instanceOf(Object),
   isCentered: PropTypes.bool,
+  isContentCentered: PropTypes.bool,
   onEdit: PropTypes.func,
   onMarkAsSpam: PropTypes.func,
   isEditable: PropTypes.bool,
@@ -318,6 +321,7 @@ Modal.defaultProps = {
     overflowX: 'hidden'
   },
   isCentered: false,
+  isContentCentered: false,
   isEditable: false,
   hasCustomButton: false,
   isCustomButtonDisabled: false,
