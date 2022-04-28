@@ -112,6 +112,11 @@
     width: 1080px;
   }
 
+  &--huge-responsive {
+    width: 85vw;
+    max-width: 1280px;
+  }
+
   &--topbar {
     width: 100vw;
     height: 100vh;

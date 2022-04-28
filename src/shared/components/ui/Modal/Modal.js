@@ -140,6 +140,7 @@ const Modal = forwardRef(
     const modalStyles = useStyles(
       {
         [styles['modal']]: true,
+        [styles['modal--huge-responsive']]: size === 'huge-responsive',
         [styles['modal--fullscreen']]: size === 'fullscreen',
         [styles['modal--big']]: size === 'big',
         [styles['modal--medium']]: size === 'medium',
@@ -279,7 +280,13 @@ Modal.propTypes = {
   hasCustomButton: PropTypes.bool,
   isCustomButtonDisabled: PropTypes.bool,
   isMarkAsSpamVisible: PropTypes.bool,
-  size: PropTypes.oneOf(['medium', 'big', 'fullscreen']),
+  size: PropTypes.oneOf([
+    'small',
+    'medium',
+    'big',
+    'fullscreen',
+    'huge-responsive'
+  ]),
   isPage: PropTypes.bool,
   i18n: PropTypes.shape({
     title: PropTypes.string,
