@@ -100,10 +100,6 @@
     border-radius: 0;
   }
 
-  &--centered-content {
-    align-items: center;
-  }
-
   &--small {
     width: 764px;
   }
@@ -151,6 +147,6 @@
   }
 
   &--center {
-    text-align: center;
+    align-items: center;
   }
 }
