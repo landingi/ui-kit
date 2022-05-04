@@ -43,6 +43,7 @@ describe('<Dropdown/> mount', () => {
     const newProps = {
       ...props,
       isOpenDisabled: true,
+      inModalName: '',
       size: 'fixed'
     }
 
@@ -102,5 +103,25 @@ describe('<Dropdown/> mount', () => {
     const customLabel = screen.queryByText(customLabelText)
 
     expect(customLabel).toBeVisible()
+  })
+
+  it('modal should be closed after emitting mousedown event', () => {
+    const { children } = props
+
+    renderDropdown(props)
+
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
+
+    const dropdown = screen.queryByTestId('trigger-dropdown')
+
+    fireEvent.click(dropdown)
+
+    expect(screen.queryByText(children)).toBeInTheDocument()
+
+    const mouseDownEvent = new Event('mousedown')
+
+    document.dispatchEvent(mouseDownEvent)
+
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
   })
 })
