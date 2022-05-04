@@ -1,13 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
 import Error from '@components/ui/Form/Error'
-import scss from './Checkbox.scss'
+import styles from './Checkbox.module.scss'
 import { getDeepValue } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
-
-// TODO Form Checkbox css, mdx
 /**
  * Checkbox - stateless presentational component
  * @param {object} props - props
@@ -30,9 +27,24 @@ const Checkbox = ({
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
 
+  const containerStyles = useStyles(
+    {
+      [styles['checkbox-container']]: true
+    },
+    className
+  )
+
+  const inputStyles = useStyles({
+    [styles['checkbox__input']]: true
+  })
+
+  const labelStyles = useStyles({
+    [styles['checkbox__label']]: true
+  })
+
   return (
-    <div className={cssClass('checkbox-container', className)}>
-      <label className={cssClass('checkbox__input')}>
+    <div className={containerStyles}>
+      <label className={inputStyles}>
         <input
           name={name}
           checked={value}
@@ -44,7 +56,7 @@ const Checkbox = ({
         <div />
       </label>
       {label && (
-        <label htmlFor={id} className={cssClass('checkbox__label')}>
+        <label htmlFor={id} className={labelStyles}>
           {label}
           {isTouched && <Error error={error} />}
         </label>
