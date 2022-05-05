@@ -1,5 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import DropdownHead from '@components/ui/Dropdown/Head'
 
 const props = {
@@ -9,25 +11,15 @@ const props = {
 const dropdownComponent = <DropdownHead {...props} />
 
 describe('<DropdownHead/> mount', () => {
-  let wrapper
+  it('should displayed children and contains default class', () => {
+    render(dropdownComponent)
 
-  beforeEach(() => {
-    wrapper = mount(dropdownComponent)
-  })
+    const { children } = props
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+    const dropdownHeadNode = screen.queryByText(children)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    expect(dropdownHeadNode).toBeVisible()
 
-  it('has children', () => {
-    expect(wrapper.find('div').text()).toEqual(wrapper.prop('children'))
-  })
-
-  it('has `dropdown__head` class', () => {
-    expect(wrapper.find('div').hasClass('dropdown__head')).toBe(true)
+    expect(dropdownHeadNode).toHaveClass('dropdown__head')
   })
 })

@@ -1,122 +1,127 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Dropdown from '@components/ui/Dropdown'
 
-const props = {
-  children: 'children'
-}
-
-const dropdownComponent = <Dropdown {...props}>{props.children}</Dropdown>
+const renderDropdown = ({ children, ...props }) =>
+  render(<Dropdown {...props}>{children}</Dropdown>)
 
 describe('<Dropdown/> mount', () => {
-  let wrapper
+  const props = {
+    label: 'Custom dropdown',
+    children: 'Dropdown child',
+    icon: 'icon-elipssis',
+    inModalName: 'Modal with dropdown'
+  }
 
-  beforeEach(() => {
-    wrapper = mount(dropdownComponent)
+  it('should be displayed with passed label ', () => {
+    const { label } = props
+
+    renderDropdown(props)
+
+    const dropdownLabelNode = screen.queryByText(label)
+
+    expect(dropdownLabelNode).toBeVisible()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('Dropdown children should be displayed on click', () => {
+    const { children } = props
+
+    renderDropdown(props)
+
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
+
+    const dropdown = screen.queryByTestId('trigger-dropdown')
+
+    fireEvent.click(dropdown)
+
+    expect(screen.queryByText(children)).toBeInTheDocument()
   })
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+  it(`Dropdown shouldn't open if opening is disabled `, () => {
+    const newProps = {
+      ...props,
+      isOpenDisabled: true,
+      inModalName: '',
+      size: 'fixed'
+    }
+
+    const { children } = newProps
+
+    renderDropdown(newProps)
+
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
+
+    const dropdown = screen.queryByTestId('trigger-dropdown')
+
+    fireEvent.click(dropdown)
+
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
   })
 
-  it('has default prop offset with value 5', () => {
-    expect(wrapper.prop('offset')).toEqual(5)
+  it('when button prop is passed should be rendered with button', () => {
+    const newProps = {
+      ...props,
+      button: true,
+      linkComponent: children => <span>{children}</span>,
+      size: 'huge'
+    }
+
+    renderDropdown(newProps)
+
+    const dropdown = screen.queryByTestId('trigger-dropdown')
+
+    expect(dropdown).toBeVisible()
   })
 
-  it('has default prop label with value null', () => {
-    expect(wrapper.prop('label')).toEqual(null)
+  it('when tooltip is passed should be rendered with tooltip variant', () => {
+    const newProps = {
+      ...props,
+      tooltip: 'Random tooltip',
+      tooltipPlacement: 'right'
+    }
+
+    renderDropdown(newProps)
+
+    const dropdown = screen.queryByTestId('trigger-dropdown')
+
+    expect(dropdown).toBeVisible()
   })
 
-  it('has default prop icon with value null', () => {
-    expect(wrapper.prop('icon')).toEqual(null)
+  it('should be rendered with custom label and dots arrowType', () => {
+    const customLabelText = 'custom label'
+
+    const newProps = {
+      ...props,
+      custom: <span>{customLabelText}</span>,
+      arrowType: 'dots'
+    }
+
+    renderDropdown(newProps)
+
+    const customLabel = screen.queryByText(customLabelText)
+
+    expect(customLabel).toBeVisible()
   })
 
-  it('has default tooltip icon with value empty string', () => {
-    expect(wrapper.prop('tooltip')).toEqual('')
-  })
+  it('modal should be closed after emitting mousedown event', () => {
+    const { children } = props
 
-  it('has default tooltipPlacement icon with value empty string', () => {
-    expect(wrapper.prop('tooltipPlacement')).toEqual('')
-  })
+    renderDropdown(props)
 
-  it('has default size size with value medium', () => {
-    expect(wrapper.prop('size')).toEqual('medium')
-  })
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
 
-  it('has default hasArrow with value true', () => {
-    expect(wrapper.prop('arrowType')).toEqual('caret')
-  })
+    const dropdown = screen.queryByTestId('trigger-dropdown')
 
-  it('has default alignment with value center', () => {
-    expect(wrapper.prop('alignment')).toEqual('center')
-  })
+    fireEvent.click(dropdown)
 
-  it('has default dropdownPlacement with value center', () => {
-    expect(wrapper.prop('dropdownPlacement')).toEqual('left')
-  })
+    expect(screen.queryByText(children)).toBeInTheDocument()
 
-  it('default prop `handleOnClick` should be null', () => {
-    const result = Dropdown.defaultProps.handleOnClick()
+    const mouseDownEvent = new Event('mousedown')
 
-    expect(result).toBe(null)
-  })
+    document.dispatchEvent(mouseDownEvent)
 
-  it('default prop `handleOnOpen` should be null', () => {
-    const result = Dropdown.defaultProps.handleOnOpen()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `handleOnClose` should be null', () => {
-    const result = Dropdown.defaultProps.handleOnClose()
-
-    expect(result).toBe(null)
-  })
-
-  it('has default hasArrow with value true', () => {
-    expect(wrapper.prop('hasArrow')).toEqual(true)
-  })
-
-  it('has default renderAsSmaller with value false', () => {
-    expect(wrapper.prop('renderAsSmaller')).toEqual(false)
-  })
-
-  it('has default hasInput with value false', () => {
-    expect(wrapper.prop('hasInput')).toEqual(false)
-  })
-
-  it('has default hasFullInputStyle with value false', () => {
-    expect(wrapper.prop('hasFullInputStyle')).toEqual(false)
-  })
-
-  it('has default asPlaceholder with value false', () => {
-    expect(wrapper.prop('asPlaceholder')).toEqual(false)
-  })
-
-  it('has default inModal with value false', () => {
-    expect(wrapper.prop('inModal')).toEqual(false)
-  })
-
-  it('has default button with value false', () => {
-    expect(wrapper.prop('button')).toEqual(false)
-  })
-
-  it('has default custom with value false', () => {
-    expect(wrapper.prop('custom')).toEqual(null)
-  })
-
-  it('has default isOpenDisabled with value false', () => {
-    expect(wrapper.prop('isOpenDisabled')).toEqual(false)
-  })
-
-  it('on `click` state `isOpen` set to true', () => {
-    wrapper.simulate('click')
-    wrapper.update()
-
-    expect(wrapper.find('.dropdown__body').length).toBe(1)
+    expect(screen.queryByText(children)).not.toBeInTheDocument()
   })
 })
