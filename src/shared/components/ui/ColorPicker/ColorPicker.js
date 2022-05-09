@@ -17,6 +17,7 @@ import styles from './ColorPicker.module.scss'
  * @param {array} favoriteColors - an array of objects favorite colors eg. [{id: '1', color: #333}]
  * @param {function} onColorChange - on color change handler get object with changed color in callback
  * @param {object} colorPanelHandlers - an object of handler functions, functions get value in callback eg.
+ * @param {bool} disableOpacity - disable opacity in picker
  * onClickFavoriteHandler - string selected color value in hex format eg. '#213'
  * onClickDeleteHandler - an object with id and color to delete
  * @returns an object of children elements
@@ -26,6 +27,7 @@ const ColorPicker = ({
   i18n,
   favoriteColors,
   onColorChange,
+  disableOpacity,
   colorPanelHandlers: { onClickFavoriteHandler, onClickDeleteHandler }
 }) => {
   const hasAnyFavoriteColor = favoriteColors.length >= 1
@@ -135,7 +137,11 @@ const ColorPicker = ({
       </div>
       {isPickerDisplayed && (
         <div data-testid='color-picker' className={colorPickerClasses}>
-          <ChromePicker color={rgbaColor} onChange={handleColorChange} />
+          <ChromePicker
+            color={rgbaColor}
+            onChange={handleColorChange}
+            disableAlpha={disableOpacity}
+          />
           <div className={styles['color-picker__switches']}>
             <div className={styles['icons-wrapper']}>
               <Button
@@ -190,12 +196,14 @@ ColorPicker.propTypes = {
   colorPanelHandlers: PropTypes.shape({
     onClickFavoriteHandler: PropTypes.func.isRequired,
     onClickDeleteHandler: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  disableOpacity: PropTypes.bool
 }
 
 ColorPicker.defaultProps = {
   colorValue: '#000',
-  favoriteColors: []
+  favoriteColors: [],
+  disableOpacity: false
 }
 
 export default ColorPicker

@@ -4,3 +4,46 @@ import ColorPicker from '@components/ui/ColorPicker'
 # ColorPicker
 
 <Props of={ColorPicker} />
+
+## Color Picker
+
+<Playground>
+  <div style="position:absolute;">
+    <ColorPicker
+    colorValue="#fff"
+    i18n={{
+      label: 'color',
+      clearButton: 'clear'
+    }}
+    favoriteColors={[]}
+    onColorChange={() => null}
+    colorPanelHandlers={{
+      onClickFavoriteHandler: () => null,
+      onClickDeleteHandler: () => null
+    }}
+  />
+  </div>
+</Playground>
+
+<br />
+
+## Opacity disabled
+
+<Playground>
+  <div style="position:absolute;">
+    <ColorPicker
+    colorValue="#fff"
+    disableOpacity
+    i18n={{
+      label: 'color',
+      clearButton: 'clear'
+    }}
+    favoriteColors={[]}
+    onColorChange={() => null}
+    colorPanelHandlers={{
+      onClickFavoriteHandler: () => null,
+      onClickDeleteHandler: () => null
+    }}
+  />
+  </div>
+</Playground>
