@@ -248,7 +248,7 @@ const Modal = forwardRef(
             </div>
           </div>
         )}
-        {isActive && <Backdrop onClick={onClick} />}
+        {isActive && size !== 'fullscreen' && <Backdrop onClick={onClick} />}
       </Fragment>
     )
   }
