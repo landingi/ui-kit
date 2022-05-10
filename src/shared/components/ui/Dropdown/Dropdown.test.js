@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import { screen, fireEvent } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Dropdown from '@components/ui/Dropdown'
 
@@ -25,7 +25,7 @@ describe('<Dropdown/> mount', () => {
     expect(dropdownLabelNode).toBeVisible()
   })
 
-  it('Dropdown children should be displayed on click', () => {
+  it('Dropdown children should be displayed on click', async () => {
     const { children } = props
 
     renderDropdown(props)
@@ -34,12 +34,12 @@ describe('<Dropdown/> mount', () => {
 
     const dropdown = screen.queryByTestId('trigger-dropdown')
 
-    fireEvent.click(dropdown)
+    await waitFor(() => fireEvent.click(dropdown))
 
     expect(screen.queryByText(children)).toBeInTheDocument()
   })
 
-  it(`Dropdown shouldn't open if opening is disabled `, () => {
+  it(`Dropdown shouldn't open if opening is disabled `, async () => {
     const newProps = {
       ...props,
       isOpenDisabled: true,
@@ -55,7 +55,7 @@ describe('<Dropdown/> mount', () => {
 
     const dropdown = screen.queryByTestId('trigger-dropdown')
 
-    fireEvent.click(dropdown)
+    await waitFor(() => fireEvent.click(dropdown))
 
     expect(screen.queryByText(children)).not.toBeInTheDocument()
   })
@@ -105,7 +105,7 @@ describe('<Dropdown/> mount', () => {
     expect(customLabel).toBeVisible()
   })
 
-  it('modal should be closed after emitting mousedown event', () => {
+  it('modal should be closed after emitting mousedown event', async () => {
     const { children } = props
 
     renderDropdown(props)
@@ -114,14 +114,16 @@ describe('<Dropdown/> mount', () => {
 
     const dropdown = screen.queryByTestId('trigger-dropdown')
 
-    fireEvent.click(dropdown)
+    await waitFor(() => {
+      fireEvent.click(dropdown)
 
-    expect(screen.queryByText(children)).toBeInTheDocument()
+      expect(screen.queryByText(children)).toBeInTheDocument()
 
-    const mouseDownEvent = new Event('mousedown')
+      const mouseDownEvent = new Event('mousedown')
 
-    document.dispatchEvent(mouseDownEvent)
+      document.dispatchEvent(mouseDownEvent)
 
-    expect(screen.queryByText(children)).not.toBeInTheDocument()
+      expect(screen.queryByText(children)).not.toBeInTheDocument()
+    })
   })
 })
