@@ -10,8 +10,9 @@ import styles from './Radio.module.scss'
  * @param {object} props.form - react-formik form properties
  * @param {string} props.id - id of the element
  * @param {string} props.label - label
- * @param {string|array} props.className - list of class names, default: input__radio
+ * @param {string|array} props.className - list of class names, default: radio
  * @param {string} props.type - type of element `text, number etc`
+ * @param {bool} props.disabled - radio button is disabled
  * @return {object} An object of children element
  */
 const Radio = ({
@@ -19,7 +20,8 @@ const Radio = ({
   id,
   label,
   className,
-  type
+  type,
+  disabled
 }) => {
   const radioStyles = useStyles(
     {
@@ -41,9 +43,10 @@ const Radio = ({
         onChange={onChange}
         onBlur={onBlur}
         className={radioStyles}
+        disabled={disabled}
       />
 
-      <div />
+      <div className={styles.radio__overlay} />
     </label>
   )
 }
@@ -64,13 +67,15 @@ Radio.propTypes = {
     touched: PropTypes.instanceOf(Object)
   }),
   id: PropTypes.string.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 Radio.defaultProps = {
   className: '',
   type: 'radio',
-  label: ''
+  label: '',
+  disabled: false
 }
 
 export default Radio

@@ -6,12 +6,14 @@ import Radio from '@components/ui/Form/Radio'
 
 <Props of={Radio} />
 
+### Radio
+
 <Playground>
   {() => {
     const [login, setLogin] = useState('')
     return (
       <Radio
-        label='test label'
+        label='Test label'
         field={{
           name: 'login',
           value: login,
@@ -26,4 +28,42 @@ import Radio from '@components/ui/Form/Radio'
       />
     )
   }}
+</Playground>
+
+### Radio disabled
+
+<Playground>
+  <Radio
+    label='Test label'
+    field={{
+      name: 'test2',
+      value: '',
+      onBlur: () => {}
+    }}
+    form={{
+      errors: {},
+      touched: {}
+    }}
+    id='test2'
+    disabled
+  />
+</Playground>
+
+### Radio checked disabled
+
+<Playground>
+  <Radio
+    label='Test label'
+    field={{
+      name: 'login',
+      value: 'test3',
+      onBlur: () => {}
+    }}
+    form={{
+      errors: {},
+      touched: {}
+    }}
+    id='test3'
+    disabled
+  />
 </Playground>
