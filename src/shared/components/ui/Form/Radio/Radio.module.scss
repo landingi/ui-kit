@@ -22,7 +22,7 @@
   }
 
   &:checked {
-    & ~ div {
+    & ~ .radio__overlay {
       &:after {
         display: block;
       }
@@ -35,7 +35,7 @@
     opacity: 0;
 
     &:checked {
-      & ~ div {
+      & ~ .radio__overlay {
         background: $color-brand;
         border-color: $color-brand;
 
@@ -48,19 +48,28 @@
     &:disabled {
       color: $color-5;
 
-      & ~ div {
-        background: #e6e6e6;
-        opacity: 0.6;
+      & ~ .radio__overlay {
+        background: $color-white;
+        border: 2px solid $color-5;
         pointer-events: none;
 
         &:after {
           border: 0;
         }
       }
+
+      &:checked {
+        & ~ .radio__overlay {
+          &:after {
+            border: 2px solid $color-white;
+            background: $color-5;
+          }
+        }
+      }
     }
   }
 
-  div {
+  .radio__overlay {
     box-sizing: border-box;
     position: absolute;
     top: 2px;
