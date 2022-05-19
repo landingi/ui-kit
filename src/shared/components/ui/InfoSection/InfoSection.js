@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import uuid from 'react-uuid'
 import Button from '@components/ui/Button'
@@ -22,7 +22,15 @@ import styles from './InfoSection.module.scss'
  * @param {func} props.onClick - button action
  * @return {object} An object of children element
  */
-const InfoSection = ({ className, title, list, url, button, onClick }) => {
+const InfoSection = ({
+  className,
+  title,
+  list,
+  url,
+  button,
+  image,
+  onClick
+}) => {
   const renderList = useMemo(
     () => (
       <List listStyle='ordered-check'>
@@ -44,6 +52,13 @@ const InfoSection = ({ className, title, list, url, button, onClick }) => {
   return (
     <div className={infoSectionStyles}>
       <div>
+        {image && (
+          <Fragment>
+            <Image src={image.src} size={image.size} />
+
+            <Spacer space='medium' />
+          </Fragment>
+        )}
         <Heading bold level={1}>
           {title}
         </Heading>
@@ -72,7 +87,8 @@ InfoSection.propTypes = {
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClick: PropTypes.func,
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  image: PropTypes.objectOf({ src: PropTypes.string, size: PropTypes.number })
 }
 
 InfoSection.defaultProps = {
