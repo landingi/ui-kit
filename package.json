@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "1.4.87",
+  "version": "1.4.88",
   "description": "Landingi UI-Kit",
   "main": "dist/app-uikit.js",
   "private": true,
@@ -109,8 +109,7 @@
     "yup": "0.32.9"
   },
   "engines": {
-    "node": "14.18.0",
-    "npm": ">=7.0.0"
+    "node": ">=14.18.0"
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
