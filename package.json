@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "1.4.88",
+  "version": "1.4.89",
   "description": "Landingi UI-Kit",
   "main": "dist/app-uikit.js",
   "private": true,
