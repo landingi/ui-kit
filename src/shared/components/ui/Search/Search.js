@@ -52,7 +52,7 @@ const Search = ({
     className
   )
 
-  const [isClearActive, setClearActive] = useState(defaultValue)
+  const [isClearActive, setClearActive] = useState(!!defaultValue)
 
   const inputRef = useRef()
 
