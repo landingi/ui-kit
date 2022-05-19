@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { styles } from '@helpers/css'
-import scss from './ProgressBar.scss'
+import styles from './ProgressBar.module.scss'
 import ColorNumber from '@components/ui/ColorNumber'
-
-const cssClass = styles(scss)
+import { useStyles } from '@helpers/hooks/useStyles'
 
 //TODO ProgressBar css, props naming ex. withoutAnimation, limitExceededInfo, showColorNumber
 /**
@@ -29,46 +27,54 @@ const ProgressBar = ({
   showColorNumber,
   border,
   withoutAnimation
-}) => (
-  <Fragment>
-    <div className={cssClass('container', border && 'container--bordered')}>
-      <span
-        data-testid='background'
-        className={cssClass(
-          'bar',
-          'bar__background',
-          `bar--${variant}`,
-          border && `bar__border--${border}`
-        )}
-      />
-      <span
-        data-testid='fulfillment'
-        className={cssClass(
-          'bar',
-          'bar__fulfillment',
-          `bar--${variant}`,
-          border && 'bar__fulfillment--bordered',
-          withoutAnimation && 'bar__fulfillment--no-animation'
-        )}
-        style={{ width: `${(quantity / limit) * 100}%` }}
-      />
-    </div>
-    {limitExceededInfo && (
-      <span className={cssClass('limit-exceeded__info')}>
-        limitExceededInfo
-      </span>
-    )}
+}) => {
+  const containerStyles = useStyles({
+    [styles['container']]: true,
+    [styles['container--bordered']]: border
+  })
 
-    {showColorNumber && (
-      <span data-testid='color-number' className={cssClass('max-result')}>
-        <ColorNumber variant={variant} size={size}>
-          {quantity}
-        </ColorNumber>
-        /{limit}
-      </span>
-    )}
-  </Fragment>
-)
+  const backgroundStyles = useStyles({
+    [styles['bar']]: true,
+    [styles['bar__background']]: true,
+    [styles[`bar--${variant}`]]: true,
+    [styles[`bar__border--${border}`]]: border
+  })
+
+  const fulfillmentStyles = useStyles({
+    [styles['bar']]: true,
+    [styles['bar__fulfillment']]: true,
+    [styles[`bar--${variant}`]]: true,
+    [styles['bar__fulfillment--bordered']]: border,
+    [styles['bar__fulfillment--no-animation']]: withoutAnimation
+  })
+
+  return (
+    <Fragment>
+      <div className={containerStyles}>
+        <span data-testid='background' className={backgroundStyles} />
+        <span
+          data-testid='fulfillment'
+          className={fulfillmentStyles}
+          style={{ width: `${(quantity / limit) * 100}%` }}
+        />
+      </div>
+      {limitExceededInfo && (
+        <span className={styles['limit-exceeded__info']}>
+          limitExceededInfo
+        </span>
+      )}
+
+      {showColorNumber && (
+        <span data-testid='color-number' className={styles['max-result']}>
+          <ColorNumber variant={variant} size={size}>
+            {quantity}
+          </ColorNumber>
+          /{limit}
+        </span>
+      )}
+    </Fragment>
+  )
+}
 
 ProgressBar.displayName = 'ProgressBar'
 
