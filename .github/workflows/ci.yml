@@ -9,7 +9,7 @@ jobs:
         - name: Setup Nodejs
           uses: actions/setup-node@v2
           with:
-            node-version: "14.18.0"
+            node-version: "18.2.0"
 
         - name: Get yarn cache directory path
           id: yarn-cache-dir-path
