@@ -60,7 +60,8 @@ Badge.propTypes = {
     'accent-4',
     'accent-5',
     'accent-6',
-    'accent-7'
+    'accent-7',
+    'accent-8'
   ]),
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isIndicator: PropTypes.bool
