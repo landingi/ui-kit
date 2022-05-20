@@ -18,7 +18,7 @@
     type: "BUILD"
     working_directory: "/buddy/ui-kit"
     docker_image_name: "library/node"
-    docker_image_tag: "14.18.0-alpine3.14"
+    docker_image_tag: "18.2.0-alpine3.14"
     cache_base_image: true
     setup_commands:
     - "yarn global add gatsby-cli"
