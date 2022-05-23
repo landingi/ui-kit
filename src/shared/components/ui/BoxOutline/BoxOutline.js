@@ -16,6 +16,8 @@ import styles from './BoxOutline.module.scss'
  * @param {boolean} disableHover - disable hover events only
  * @param {boolean} disabled - grayed contend and disable all events
  * @param {boolean} noCheckmark - selected without green checkmark on top right corner
+ * @param {func} onMouseOver - onMouseOver
+ * @param {func} onMouseLeave - onMouseLeave
  * @return {object} An object of children element
  */
 const BoxOutline = ({
@@ -28,7 +30,9 @@ const BoxOutline = ({
   padding,
   disableHover,
   disabled,
-  noCheckmark
+  noCheckmark,
+  onMouseOver,
+  onMouseLeave
 }) => {
   const elementClasses = useStyles(
     {
@@ -54,6 +58,8 @@ const BoxOutline = ({
       className={elementClasses}
       onClick={onClickHandler}
       onDoubleClick={onDoubleClickHandler}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
     >
       {isSelected && !noCheckmark && (
         <span className={checkmarkStatusClasses}>
@@ -75,7 +81,9 @@ BoxOutline.propTypes = {
   padding: PropTypes.oneOf(['', 'none']),
   disableHover: PropTypes.bool,
   disabled: PropTypes.bool,
-  noCheckmark: PropTypes.bool
+  noCheckmark: PropTypes.bool,
+  onMouseOver: PropTypes.func,
+  onMouseLeave: PropTypes.func
 }
 
 BoxOutline.defaultProps = {
@@ -87,7 +95,9 @@ BoxOutline.defaultProps = {
   padding: '',
   disableHover: false,
   disabled: false,
-  noCheckmark: false
+  noCheckmark: false,
+  onMouseOver: () => null,
+  onMouseLeave: () => null
 }
 
 BoxOutline.displayName = 'BoxOutline'
