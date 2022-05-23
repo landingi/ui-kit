@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "1.4.101",
+  "version": "1.4.107",
   "description": "Landingi UI-Kit",
   "main": "dist/app-uikit.js",
   "private": true,
@@ -131,7 +131,8 @@
   },
   "resolutions": {
     "remark-mdx": "1.6.22",
-    "@emotion/core": "10.1.1"
+    "@emotion/core": "10.1.1",
+    "cheerio": "1.0.0-rc.10"
   },
   "engines": {
     "node": ">=14.18.0"
