@@ -30,7 +30,8 @@ const BoxOutline = forwardRef(
       padding,
       disableHover,
       disabled,
-      noCheckmark
+      noCheckmark,
+      ...rest
     },
     ref
   ) => {
@@ -60,6 +61,7 @@ const BoxOutline = forwardRef(
         onClick={onClickHandler}
         onDoubleClick={onDoubleClickHandler}
         ref={ref}
+        {...rest}
       >
         {isSelected && !noCheckmark && (
           <span className={checkmarkStatusClasses}>
