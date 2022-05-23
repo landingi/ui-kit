@@ -19,6 +19,8 @@ import { composeRefs } from '@helpers/ref'
 import styles from './Dropdown.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
+console.log(styles)
+
 //TODO Dropdown test, mdx, jsdoc props
 /**
  * Dropdown - stateless presentational component
