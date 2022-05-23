@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import Icon from '@components/ui/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -18,52 +18,59 @@ import styles from './BoxOutline.module.scss'
  * @param {boolean} noCheckmark - selected without green checkmark on top right corner
  * @return {object} An object of children element
  */
-const BoxOutline = ({
-  children,
-  className,
-  variant,
-  isSelected,
-  onClickHandler,
-  onDoubleClickHandler,
-  padding,
-  disableHover,
-  disabled,
-  noCheckmark
-}) => {
-  const elementClasses = useStyles(
+const BoxOutline = forwardRef(
+  (
     {
-      [styles['box-outline']]: true,
-      [styles[`box-outline__${variant}`]]: variant,
-      [styles[`box-outline__${variant}--hover`]]: !disableHover,
-      [styles['box-outline__is-selected']]: isSelected,
-      [styles['box-outline__is-selected--hover']]: isSelected && !disableHover,
-      [styles['box-outline__no-padding']]: padding === 'none',
-      [styles['box-outline__disabled']]: disabled
+      children,
+      className,
+      variant,
+      isSelected,
+      onClickHandler,
+      onDoubleClickHandler,
+      padding,
+      disableHover,
+      disabled,
+      noCheckmark
     },
-    className
-  )
+    ref
+  ) => {
+    const elementClasses = useStyles(
+      {
+        [styles['box-outline']]: true,
+        [styles[`box-outline__${variant}`]]: variant,
+        [styles[`box-outline__${variant}--hover`]]: !disableHover,
+        [styles['box-outline__is-selected']]: isSelected,
+        [styles['box-outline__is-selected--hover']]:
+          isSelected && !disableHover,
+        [styles['box-outline__no-padding']]: padding === 'none',
+        [styles['box-outline__disabled']]: disabled
+      },
+      className
+    )
 
-  const checkmarkStatusClasses = useStyles({
-    [styles['box-outline__checkmark-status']]: true,
-    [styles['box-outline__checkmark-status--is-selected']]: isSelected
-  })
+    const checkmarkStatusClasses = useStyles({
+      [styles['box-outline__checkmark-status']]: true,
+      [styles['box-outline__checkmark-status--is-selected']]: isSelected
+    })
 
-  return (
-    <div
-      data-testid='box-outline'
-      className={elementClasses}
-      onClick={onClickHandler}
-      onDoubleClick={onDoubleClickHandler}
-    >
-      {isSelected && !noCheckmark && (
-        <span className={checkmarkStatusClasses}>
-          <Icon icon='icon-ok' color='white' />
-        </span>
-      )}
-      {children}
-    </div>
-  )
-}
+    return (
+      <div
+        data-testid='box-outline'
+        className={elementClasses}
+        onClick={onClickHandler}
+        onDoubleClick={onDoubleClickHandler}
+        ref={ref}
+      >
+        {isSelected && !noCheckmark && (
+          <span className={checkmarkStatusClasses}>
+            <Icon icon='icon-ok' color='white' />
+          </span>
+        )}
+        {children}
+      </div>
+    )
+  }
+)
 
 BoxOutline.propTypes = {
   children: PropTypes.node.isRequired,
