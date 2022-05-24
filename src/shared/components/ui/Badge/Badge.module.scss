@@ -92,6 +92,10 @@
     background: $color-alert;
   }
 
+  &--ai {
+    background: $color-ai;
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
