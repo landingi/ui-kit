@@ -150,6 +150,8 @@ const DropdownSelect = ({
           </Paragraph>
         </Button>
 
+        <Spacer space='tiny' />
+
         <Divider />
       </Fragment>
     ) : (
