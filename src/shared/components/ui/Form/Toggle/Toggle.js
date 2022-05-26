@@ -26,7 +26,8 @@ const Toggle = ({
   id,
   label,
   className,
-  disabled
+  disabled,
+  ['data-testid']: dataTestId
 }) => {
   const wrapperStyles = useStyles(
     { [styles['toggle-container']]: true },
@@ -52,6 +53,7 @@ const Toggle = ({
           type='checkbox'
           id={id}
           disabled={disabled}
+          {...(dataTestId ? { ['data-testid']: dataTestId } : {})}
         />
 
         <span className={styles.toggle__button} />
@@ -76,14 +78,16 @@ Toggle.propTypes = {
   onBlur: PropTypes.func,
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  ['data-testid']: PropTypes.string
 }
 
 Toggle.defaultProps = {
   className: '',
   label: '',
   onBlur: () => null,
-  disabled: false
+  disabled: false,
+  ['data-testid']: null
 }
 
 export default Toggle
