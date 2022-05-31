@@ -38,7 +38,7 @@ const Textarea = ({ className, name, id, value, onChange, i18n }) => {
 Textarea.displayName = 'Textarea'
 
 Textarea.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.string,
   id: PropTypes.string,
   value: PropTypes.string.isRequired,
