@@ -160,7 +160,10 @@ const Dropdown = forwardRef(
           left: container.left - (window.innerWidth - modalWidth) / 2,
           top: renderAbove
             ? container.top - dropdown.height
-            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
+            : container.bottom -
+              (window.innerHeight - modalHeight) / 2 +
+              offset,
+          width: container?.width
         })
       } else {
         if (size === 'fixed') {
