@@ -45,8 +45,7 @@ const TimeSelect = ({
   })
 
   const timeSelectDropdownClasses = useStyles({
-    [styles['time-select__dropdown']]: true,
-    [styles['time-select__dropdown--small']]: isAmPmType
+    [styles['time-select__dropdown']]: true
   })
 
   const [clockType, setClockType] = useState(isAmOrPm(value, isAmPmType))
