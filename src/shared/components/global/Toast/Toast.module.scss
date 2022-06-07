@@ -1,0 +1,35 @@
+.toast {
+  position: fixed;
+  left: 240px;
+  bottom: 20px;
+  z-index: $z-index-toast;
+  min-width: 300px;
+  visibility: hidden;
+
+  &--active {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 4.6s;
+  }
+
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 20px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeout {
+    from {
+      bottom: 20px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+}
