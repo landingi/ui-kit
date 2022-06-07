@@ -3,7 +3,6 @@ import Image from '@components/ui/Image'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import Spacer from '@components/ui/Spacer'
-import Vimeo from '@u-wave/react-vimeo'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Message.module.scss'
 
@@ -19,7 +18,7 @@ import styles from './Message.module.scss'
  * @param {number} props.height - height of image/video
  * @param {number} props.titleLevel - title font size
  * @param {number} props.messageLevel - message font size
- * @param {bool} props.isVideo - video, default false
+ * @param {bool} props.video - component with wideo
  * @param {string} props.multimediaPosition - image/video position before or after content, default `before`
  * @param {bool} props.bold - message title is bold
  * @param {bool} props.withoutMargin - message title without bottom margin
@@ -34,7 +33,7 @@ const Message = ({
   height,
   titleLevel,
   messageLevel,
-  isVideo,
+  video,
   multimediaPosition,
   bold,
   withoutMargin
@@ -53,9 +52,9 @@ const Message = ({
     <div>
       <Spacer space='small' />
 
-      {isVideo ? (
+      {video ? (
         <Fragment>
-          <Vimeo height={height} video={url} />
+          {video}
 
           <Spacer space='small' />
         </Fragment>
@@ -104,7 +103,7 @@ Message.propTypes = {
   children: PropTypes.node,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   height: PropTypes.number,
-  isVideo: PropTypes.bool,
+  video: PropTypes.node,
   message: PropTypes.string,
   messageLevel: PropTypes.number,
   multimediaPosition: PropTypes.oneOf(['before', 'after']),
@@ -119,7 +118,7 @@ Message.defaultProps = {
   bold: false,
   children: null,
   height: 220,
-  isVideo: false,
+  video: null,
   message: undefined,
   messageLevel: 3,
   multimediaPosition: 'before',
