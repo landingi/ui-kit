@@ -1,62 +1,40 @@
 import React from 'react'
-import Toast from '@components/global/Toast'
-import Notification from '@components/ui/Notification'
-import { mount } from 'enzyme'
+import { render, screen, waitFor, fireEvent } from '@jestutils'
 import { emitToastToggle } from '@events/toast'
 import { act } from 'react-dom/test-utils'
+import Toast from './Toast'
+import '@testing-library/jest-dom'
 
-const props = {
-  message: 'jestem tekstem do komponentu Notification'
-}
+jest.setTimeout(10000)
 
-const component = <Toast {...props} />
+describe('Toast tests', () => {
+  it('renders, opens and closes properly', async () => {
+    render(<Toast />)
 
-describe('<Toast/> mount', () => {
-  let wrapper
+    await act(async () => emitToastToggle())
 
-  beforeEach(() => {
-    act(() => {
-      wrapper = mount(component)
-    })
+    await waitFor(() =>
+      expect(screen.getByTestId('toast-component')).toBeInTheDocument()
+    )
+
+    await new Promise(r => setTimeout(r, 5001))
+
+    expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
+  it('closes by button click properly', async () => {
+    render(<Toast />)
 
-    jest.clearAllMocks()
-  })
+    await act(async () => emitToastToggle())
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    await waitFor(() =>
+      expect(screen.getByTestId('toast-component')).toBeInTheDocument()
+    )
 
-  it('should be active after emitting event', async () => {
-    await act(async () => {
-      emitToastToggle()
-    })
+    const closeButton = screen.getByTestId('close-component-button')
 
-    wrapper.update()
+    fireEvent.click(closeButton)
 
-    expect(wrapper.find(Toast).exists()).toBe(true)
-  })
-
-  it('has class name toast', async () => {
-    await act(async () => {
-      emitToastToggle()
-    })
-
-    wrapper.update()
-
-    expect(wrapper.find(Toast).hasClass('toast')).toBe(true)
-  })
-
-  it('has Notification', async () => {
-    await act(async () => {
-      emitToastToggle()
-    })
-
-    wrapper.update()
-
-    expect(wrapper.find(Notification).exists()).toBe(true)
+    expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
 })

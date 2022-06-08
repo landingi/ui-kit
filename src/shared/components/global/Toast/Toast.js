@@ -75,7 +75,7 @@ const Toast = () => {
 
   return (
     isActive && (
-      <div className={toastStyles}>
+      <div className={toastStyles} data-testid='toast-component'>
         <Notification type={type} onClick={handleToastToggle} isClosable>
           {message}
         </Notification>
