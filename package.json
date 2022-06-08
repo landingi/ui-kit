@@ -2,7 +2,6 @@
   "name": "@landingi/landingi-ui-kit",
   "version": "1.4.125",
   "description": "Landingi UI-Kit",
-  "main": "dist/app-uikit.js",
   "private": true,
   "license": "proprietary",
   "scripts": {
@@ -19,7 +18,8 @@
     "pretty-quick": "pretty-quick --staged",
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
-    "release-it": "yarn version --patch && yarn test:badges && yarn build"
+    "release-it": "yarn version --patch && yarn test:badges && yarn build",
+    "rollup": "rollup -c"
   },
   "devDependencies": {
     "@babel/core": "7.17.12",
@@ -92,6 +92,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "dompurify": "2.3.8",
@@ -104,6 +106,7 @@
     "react-time-picker": "4.5.0",
     "react-tooltip": "4.2.21",
     "react-uuid": "1.0.2",
+    "rollup": "^2.75.6",
     "simple-flexbox": "2.3.3",
     "tiny-emitter": "2.1.0"
   },
@@ -114,5 +117,10 @@
   },
   "engines": {
     "node": ">=14.18.0"
-  }
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ]
 }
