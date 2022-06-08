@@ -19,7 +19,7 @@
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build",
-    "rollup": "rollup -c"
+    "rollup": "rm -rf ./dist && rollup -c"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
@@ -31,6 +31,7 @@
     "@types/enzyme": "3.10.12",
     "@types/jest": "27.5.1",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
+    "babel-plugin-module-resolver": "^4.1.0",
     "classnames": "2.3.1",
     "core-js": "3.22.5",
     "css-loader": "6.7.1",

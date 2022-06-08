@@ -1,54 +1,3 @@
-import { styles as styles$1a } from '@helpers/css';
-import Heading$1 from '@components/Heading';
-import { isSafari } from '@helpers/browser';
-import { NO_VALUE } from '@constants/helpers';
-import Search$1 from '@components/Search';
-import emitter from '@lib/emitter';
-import { TOGGLE_TIMING_TOAST, TOGGLE_TOAST, CLOSE_DROPDOWN } from '@constants/eventTypes';
-import Notification$1 from '@components/Notification';
-import { useStyles } from '@helpers/hooks/useStyles';
-import useIsOpen from '@helpers/hooks/useIsOpen';
-import Spacer$1 from '@components/Spacer';
-import Button$2 from '@components/Button';
-import Icon$1 from '@components/Icon';
-import styles$1b from '@components/Accordion2/Accordion.module.scss';
-import { mapIconToClass, getAgoDate, getTodayDate, isEmpty, getDeepValue, formatNumeric } from '@helpers/data';
-import Image$2 from '@components/Image';
-import Spreader$1 from '@components/Spreader';
-import Tooltip$1 from '@components/Tooltip';
-import Spinner$1 from '@components/Spinner';
-import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect';
-import List$1 from '@components/List';
-import ListItem$1 from '@components/List/Item';
-import Panel$1 from '@components/Panel';
-import Paragraph$1 from '@components/Paragraph';
-import { getLanguage } from '@helpers/i18n';
-import { getBoundings, centerParent } from '@helpers/position';
-import { throttle, debounce } from '@helpers/events';
-import { composeRefs } from '@helpers/ref';
-import Error$2 from '@components/Form/Error';
-import Message$1 from '@components/Message/Message';
-import Dropdown$1 from '@components/Dropdown';
-import Overflow$1 from '@components/Overflow';
-import Divider$1 from '@components/Divider';
-import Loader$1 from '@components/Loader';
-import { emitCloseDropdown as emitCloseDropdown$1 } from '@events/dropdown';
-import Searcher$2 from '@components/Searcher';
-import Label$1 from '@components/Label';
-import { setLocalStorage } from '@helpers/storage';
-import InputComponent from '@components/Input';
-import styles$1c from '@components/Input/Input.module.scss';
-import Html$1 from '@components/Html';
-import DropdownSelect$1 from '@components/DropdownSelect';
-import StepNumber$1 from '@components/StepNumber';
-import { legendShape, stepsShape } from '@shapes';
-import ColorLine$1 from '@components/ColorLine';
-import MaskedInput$1 from '@components/Input/MaskedInput';
-import Backdrop$1 from '@components/Backdrop';
-import Close$1 from '@components/Close';
-import ColorNumber$1 from '@components/ColorNumber';
-import BoxOutline$1 from '@components/BoxOutline';
-import useQueryString from '@helpers/hooks/useQueryString';
 import crypto from 'crypto';
 
 var commonjsGlobal$1 = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -77,6 +26,67 @@ function getAugmentedNamespace(n) {
 	});
 	return a;
 }
+
+var bind = {exports: {}};
+
+/*!
+  Copyright (c) 2018 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+(function (module) {
+	/* global define */
+	(function () {
+
+	  var hasOwn = {}.hasOwnProperty;
+
+	  function classNames() {
+	    var classes = [];
+
+	    for (var i = 0; i < arguments.length; i++) {
+	      var arg = arguments[i];
+	      if (!arg) continue;
+	      var argType = typeof arg;
+
+	      if (argType === 'string' || argType === 'number') {
+	        classes.push(this && this[arg] || arg);
+	      } else if (Array.isArray(arg)) {
+	        classes.push(classNames.apply(this, arg));
+	      } else if (argType === 'object') {
+	        if (arg.toString === Object.prototype.toString) {
+	          for (var key in arg) {
+	            if (hasOwn.call(arg, key) && arg[key]) {
+	              classes.push(this && this[key] || key);
+	            }
+	          }
+	        } else {
+	          classes.push(arg.toString());
+	        }
+	      }
+	    }
+
+	    return classes.join(' ');
+	  }
+
+	  if (module.exports) {
+	    classNames.default = classNames;
+	    module.exports = classNames;
+	  } else {
+	    window.classNames = classNames;
+	  }
+	})();
+} (bind));
+
+var classnames$1 = bind.exports;
+
+/**
+ * Exports styles from SCSS file
+ * @param {object} styles
+ * @return {object} An object of styles
+ */
+
+const styles$1b = styles => classnames$1.bind(styles);
 
 var propTypes = {exports: {}};
 
@@ -4159,40 +4169,85 @@ function requireReact_development () {
 
 var React = /*@__PURE__*/getDefaultExportFromCjs(react.exports);
 
-function styleInject(css, ref) {
-  if (ref === void 0) ref = {};
-  var insertAt = ref.insertAt;
+/**
+ * useStyles - hook to extract classes from CSS modules object or provide custom one's
+ * @param {object} styles - object with CSS modules styles
+ * @param {string | array} classNames - custom classes from outside of component
+ * @returns {string} An string with extracted class names
+ */
+const useStyles = (styles, classNames = '') => {
+  let classes = '';
 
-  if (!css || typeof document === 'undefined') {
-    return;
-  }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
+  for (const [key, value] of Object.entries(styles)) {
+    if (value) {
+      classes += `${key} `;
     }
-  } else {
-    head.appendChild(style);
   }
 
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
+  Array.isArray(classNames) ? classNames.forEach(className => {
+    classes += `${className} `;
+  }) : classes += `${classNames} `;
+  return classes.trim();
+};
 
-var css_248z$1f = ".Headline_text--truncate__Qk116 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Headline_page__headline__kD-8W {\n  padding-top: 25px;\n}";
+var styles$1a = {"text--truncate":"Heading-module_text--truncate__M7l2Z","h1":"Heading-module_h1__TsuVw","h2":"Heading-module_h2__nvr-4","h3":"Heading-module_h3__cayyr","h4":"Heading-module_h4__BpRZb","h5":"Heading-module_h5__I8haX","h6":"Heading-module_h6__Qklc8","hlarge":"Heading-module_hlarge__guIve","heading--left":"Heading-module_heading--left__M0c9-","heading--center":"Heading-module_heading--center__azkpB","heading--right":"Heading-module_heading--right__cj5xv","heading--no-margin":"Heading-module_heading--no-margin__-wthh","heading--bold":"Heading-module_heading--bold__rAjdQ","heading__color--white":"Heading-module_heading__color--white__x-WI-","heading__color--brand":"Heading-module_heading__color--brand__ls-iy"};
+
+/**
+ * Heading - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {number} props.level - level size, one of: 1, 2, 3, 4, 5, 6, large. Adds css class based on provided level ex. .h1, .h2 etc
+ * @param {string|array} props.className- a list of class names
+ * @param {string} props.align - align text `left, center, right`
+ * @param {string} props.margin - margin bottom
+ * @param {bool} props.bold - bold text
+ * @param {string} props.color - text color
+ * @return {object} An object of children element
+ */
+
+const Heading = ({
+  className,
+  children,
+  level,
+  align,
+  margin,
+  bold,
+  color
+}) => {
+  const elementClasses = useStyles({
+    [styles$1a['heading']]: true,
+    [styles$1a[`h${level}`]]: level,
+    [styles$1a['heading--bold']]: bold,
+    [styles$1a[`heading--${align}`]]: align,
+    [styles$1a['heading--no-margin']]: margin === 'none',
+    [styles$1a[`heading__color--${color}`]]: color
+  }, className);
+  return /*#__PURE__*/React.createElement("span", {
+    className: elementClasses
+  }, children);
+};
+
+Heading.displayName = 'Heading';
+Heading.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  align: propTypes.exports.string,
+  bold: propTypes.exports.bool,
+  children: propTypes.exports.node.isRequired,
+  color: propTypes.exports.string,
+  level: propTypes.exports.oneOf([1, 2, 3, 4, 5, 6, 'large']).isRequired,
+  margin: propTypes.exports.string
+};
+Heading.defaultProps = {
+  className: '',
+  align: '',
+  margin: '',
+  color: undefined,
+  bold: false
+};
+
 var scss$4 = {"text--truncate":"Headline_text--truncate__Qk116","page__headline":"Headline_page__headline__kD-8W"};
-styleInject(css_248z$1f);
 
-const cssClass$4 = styles$1a(scss$4); //TODO Headline css, mdx, test
+const cssClass$4 = styles$1b(scss$4); //TODO Headline css, mdx, test
 
 /**
  * Headline - stateless presentational component
@@ -4207,7 +4262,7 @@ const Headline = ({
   title
 }) => /*#__PURE__*/React.createElement("div", {
   className: cssClass$4(className)
-}, /*#__PURE__*/React.createElement(Heading$1, {
+}, /*#__PURE__*/React.createElement(Heading, {
   className: "text--truncate",
   level: 1
 }, title));
@@ -5847,11 +5902,14 @@ Html.propTypes = {
   value: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]).isRequired
 };
 
-var css_248z$1e = ".Logo_text--truncate__D5C9w {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Logo_logo__animated__87Kfc .Logo_logotype__D7ltC,\n.Logo_logo__animated__87Kfc .Logo_rectangle__eTRH5,\n.Logo_logo__animated__87Kfc .Logo_triangle__0ROGa {\n  opacity: 0;\n}\n.Logo_logo__animated__87Kfc .Logo_rectangle__eTRH5 {\n  animation: Logo_swoopInLeft__uM-96 1s both;\n}\n.Logo_logo__animated__87Kfc .Logo_rectangle_safari__8Mxhi {\n  animation: Logo_swoopInLeftSafari__Pn7ks 1s both;\n}\n.Logo_logo__animated__87Kfc .Logo_triangle__0ROGa {\n  animation: Logo_flip__ULjCy 0.6s both;\n  animation-delay: 1s;\n}\n.Logo_logo__animated__87Kfc .Logo_logotype__D7ltC {\n  animation: Logo_fadeIn__sDcvU 0.6s both;\n  animation-delay: 1.7s;\n}\n@keyframes Logo_swoopInLeft__uM-96 {\n  0% {\n    opacity: 0;\n    filter: url(#blur);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    transform: scale(2, 1) translate3d(-400px, 0, 0);\n  }\n  20% {\n    opacity: 0.3;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(2, 1) translate3d(0, 0, 0);\n  }\n  45% {\n    opacity: 0.8;\n    transform: scale(1, 1) translate3d(20px, 0, 0);\n  }\n  80% {\n    opacity: 1;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(1, 1) translate3d(0, 0, 0);\n    transform: matrix(0.7071, -0.7071, 0.7071, 0.7071, -5.3426, 11.257);\n  }\n  100% {\n    opacity: 1;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(1, 1) translate3d(0, 0, 0);\n    transform: matrix(0.7071, -0.7071, 0.7071, 0.7071, -5.3426, 11.257);\n  }\n}\n@keyframes Logo_swoopInLeftSafari__Pn7ks {\n  0% {\n    opacity: 0;\n    filter: url(#blur);\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(1, 1) translate3d(0, 0, 0);\n    transform: matrix(0.7071, -0.7071, 0.7071, 0.7071, -5.3426, 11.257);\n  }\n  20% {\n    opacity: 0.3;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(2, 1) translate3d(0, 0, 0);\n  }\n  45% {\n    opacity: 0.8;\n    transform: scale(1, 1) translate3d(20px, 0, 0);\n  }\n  80% {\n    opacity: 1;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(1, 1) translate3d(0, 0, 0);\n    transform: matrix(0.7071, -0.7071, 0.7071, 0.7071, -5.3426, 11.257);\n  }\n  100% {\n    opacity: 1;\n    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);\n    transform: scale(1, 1) translate3d(0, 0, 0);\n    transform: matrix(0.7071, -0.7071, 0.7071, 0.7071, -5.3426, 11.257);\n  }\n}\n@keyframes Logo_flip__ULjCy {\n  0% {\n    opacity: 0;\n    filter: url(#blur);\n    transform: rotateY(-360deg);\n    transform-origin: 14.87% 0;\n    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);\n  }\n  25% {\n    opacity: 0.4;\n    filter: url(#blur);\n    transform: rotateY(-270deg);\n    transform-origin: 14.87% 0;\n    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);\n  }\n  50% {\n    opacity: 0.8;\n    transform: rotateY(-180deg);\n    transform-origin: 14.87% 0;\n    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);\n  }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    transform-origin: 14.87% 0;\n    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);\n  }\n}\n@keyframes Logo_fadeIn__sDcvU {\n  0% {\n    opacity: 0;\n    filter: url(#blur);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  20% {\n    opacity: 0.5;\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  100% {\n    opacity: 1;\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n}";
-var scss$3 = {"text--truncate":"Logo_text--truncate__D5C9w","logo__animated":"Logo_logo__animated__87Kfc","logotype":"Logo_logotype__D7ltC","rectangle":"Logo_rectangle__eTRH5","triangle":"Logo_triangle__0ROGa","swoopInLeft":"Logo_swoopInLeft__uM-96","rectangle_safari":"Logo_rectangle_safari__8Mxhi","swoopInLeftSafari":"Logo_swoopInLeftSafari__Pn7ks","flip":"Logo_flip__ULjCy","fadeIn":"Logo_fadeIn__sDcvU"};
-styleInject(css_248z$1e);
+const chrome = navigator.userAgent.includes('Chrome');
+      navigator.userAgent.includes('Firefox');
+      const safari = navigator.userAgent.includes('Safari');
+const isSafari = safari && !chrome;
 
-const cssClass$3 = styles$1a(scss$3);
+var scss$3 = {"text--truncate":"Logo_text--truncate__D5C9w","logo__animated":"Logo_logo__animated__87Kfc","logotype":"Logo_logotype__D7ltC","rectangle":"Logo_rectangle__eTRH5","triangle":"Logo_triangle__0ROGa","swoopInLeft":"Logo_swoopInLeft__uM-96","rectangle_safari":"Logo_rectangle_safari__8Mxhi","swoopInLeftSafari":"Logo_swoopInLeftSafari__Pn7ks","flip":"Logo_flip__ULjCy","fadeIn":"Logo_fadeIn__sDcvU"};
+
+const cssClass$3 = styles$1b(scss$3);
 /**
  * Logo - stateless presentational component
  * @param {object} props - props
@@ -5942,319 +6000,53 @@ function _extends$6() {
   return _extends$6.apply(this, arguments);
 }
 
+const NO_VALUE = 'NO_VALUE';
+
+var styles$19 = {"text--truncate":"Label-module_text--truncate__5NoLZ","label":"Label-module_label__meqL2","label--normal":"Label-module_label--normal__rCpai","label--active":"Label-module_label--active__IBUXi","label--inactive":"Label-module_label--inactive__z5W0k"};
+
 /**
- * Searcher - stateful presentational component
+ * Label - stateless presentational component
  * @param {object} props - props
- * @param {function} props.setSearchResult - search result setter
- * @param {function} props.searchFunction - search function
- * @param {function} props.setSearchPhrase - search phrase function
- * @param {object} props.i18n - translations
- * @param {bool} props.protectedSubmit - protectedSubmit
- * @param {bool} props.liveChanges - search by entering characters
+ * @param {object} props.children - children
+ * @param {string|array} props.className - list of class names, default: `label`
+ * @param {string} props.id - input id
+ * @param {bool} props.isToggle - is toggle label
+ * @param {bool} props.toggle - toggle change
  * @return {object} An object of children element
  */
 
-const Searcher = ({
-  setSearchResult,
-  searchFunction,
-  setSearchPhrase,
-  i18n,
-  protectedSubmit,
-  liveChanges,
-  ...rest
-}) => {
-  const search = async value => {
-    const response = await searchFunction(value);
-    setSearchResult(response);
-  };
-
-  const handleOnChange = react.exports.useCallback(event => {
-    let value;
-    !event ? value = '' : value = event.target.value;
-
-    if (setSearchPhrase) {
-      !value && setSearchPhrase('');
-      value && liveChanges && setSearchPhrase(value);
-    } else {
-      !value && setSearchResult(NO_VALUE);
-    }
-  }, [liveChanges]);
-  const handleOnSubmit = react.exports.useCallback(event => {
-    if (setSearchPhrase) {
-      setSearchPhrase(event);
-    } else {
-      search(event);
-    }
-  }, []);
-  const handleOnProtectedSubmit = react.exports.useCallback(event => setSearchPhrase(event), []);
-  return /*#__PURE__*/React.createElement(Search$1, _extends$6({
-    onChange: handleOnChange,
-    onProtectedSubmit: protectedSubmit ? handleOnProtectedSubmit : null,
-    onSubmit: protectedSubmit ? null : handleOnSubmit,
-    i18n: i18n
-  }, rest));
-};
-
-Searcher.displayName = 'Searcher';
-Searcher.propTypes = {
-  liveChanges: propTypes.exports.bool,
-  protectedSubmit: propTypes.exports.bool,
-  setSearchPhrase: propTypes.exports.func,
-  searchFunction: propTypes.exports.func,
-  setSearchResult: propTypes.exports.func,
-  i18n: propTypes.exports.shape({
-    placeholder: propTypes.exports.string
-  })
-};
-Searcher.defaultProps = {
-  liveChanges: false,
-  i18n: {
-    placeholder: ''
-  },
-  protectedSubmit: false,
-  setSearchPhrase: () => null,
-  searchFunction: () => null,
-  setSearchResult: () => null
-};
-var Searcher$1 = /*#__PURE__*/react.exports.memo(Searcher);
-
-var css_248z$1d = ".TimingToast-module_text--truncate__Lfi0S {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.TimingToast-module_toast__R2jOK {\n  position: fixed;\n  left: 240px;\n  bottom: 20px;\n  z-index: 251002;\n  min-width: 300px;\n  visibility: hidden;\n}\n.TimingToast-module_toast--active__3UYHX {\n  visibility: visible;\n  animation: TimingToast-module_fadein__bsbVy 0.5s, 3s 1s, TimingToast-module_fadeout__7nJJ6 0.5s 4.6s;\n}\n@keyframes TimingToast-module_fadein__bsbVy {\n  from {\n    bottom: 0;\n    opacity: 0;\n  }\n  to {\n    bottom: 20px;\n    opacity: 1;\n  }\n}\n@keyframes TimingToast-module_fadeout__7nJJ6 {\n  from {\n    bottom: 20px;\n    opacity: 1;\n  }\n  to {\n    bottom: 0;\n    opacity: 0;\n  }\n}";
-var styles$19 = {"text--truncate":"TimingToast-module_text--truncate__Lfi0S","toast":"TimingToast-module_toast__R2jOK","toast--active":"TimingToast-module_toast--active__3UYHX","fadein":"TimingToast-module_fadein__bsbVy","fadeout":"TimingToast-module_fadeout__7nJJ6"};
-styleInject(css_248z$1d);
-
-/**
- * TimingToast - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @return {object} An object of children element
- */
-
-const TimingToast = ({
-  className
-}) => {
-  const [isActive, setActive] = react.exports.useState(false);
-  const [message, setMessage] = react.exports.useState('');
-  const [type, setType] = react.exports.useState('info');
-  const toastStyles = useStyles({
-    [styles$19['toast']]: true,
-    [styles$19[`toast--active`]]: isActive
-  }, className);
-  let autoHideTimer;
-
-  const setAutoHideTimer = () => autoHideTimer = setTimeout(() => setActive(false), 5000);
-
-  const handleToastToggle = react.exports.useCallback((message, type) => {
-    setActive(!isActive);
-    message && setMessage(message);
-    type && setType(type);
-    setAutoHideTimer();
-  }, [isActive, message, type, autoHideTimer]);
-  const closeToast = react.exports.useCallback(() => setActive(false), [isActive]);
-  react.exports.useEffect(() => {
-    emitter.on(TOGGLE_TIMING_TOAST, handleToastToggle);
-    return () => {
-      emitter.off(TOGGLE_TIMING_TOAST, handleToastToggle);
-      clearTimeout(autoHideTimer);
-    };
-  }, []);
-  return isActive && /*#__PURE__*/React.createElement("div", {
-    className: toastStyles,
-    "data-testid": "toast-component"
-  }, /*#__PURE__*/React.createElement(Notification$1, {
-    type: type,
-    isClosable: true,
-    onClick: closeToast,
-    hasTime: isActive
-  }, message));
-};
-
-TimingToast.displayName = 'TimingToast';
-TimingToast.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
-};
-TimingToast.defaultProps = {
-  className: '',
-  type: 'info'
-};
-
-var css_248z$1c = ".Toast-module_text--truncate__tRl9f {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Toast-module_toast__ngbBR {\n  position: fixed;\n  left: 240px;\n  bottom: 20px;\n  z-index: 251002;\n  min-width: 300px;\n  visibility: hidden;\n}\n.Toast-module_toast--active__eCnYp {\n  visibility: visible;\n  animation: Toast-module_fadein__kJk41 0.5s, Toast-module_fadeout__ZPODd 0.5s 4.6s;\n}\n@keyframes Toast-module_fadein__kJk41 {\n  from {\n    bottom: 0;\n    opacity: 0;\n  }\n  to {\n    bottom: 20px;\n    opacity: 1;\n  }\n}\n@keyframes Toast-module_fadeout__ZPODd {\n  from {\n    bottom: 20px;\n    opacity: 1;\n  }\n  to {\n    bottom: 0;\n    opacity: 0;\n  }\n}";
-var styles$18 = {"text--truncate":"Toast-module_text--truncate__tRl9f","toast":"Toast-module_toast__ngbBR","toast--active":"Toast-module_toast--active__eCnYp","fadein":"Toast-module_fadein__kJk41","fadeout":"Toast-module_fadeout__ZPODd"};
-styleInject(css_248z$1c);
-
-/**
- * Toast stateful container component
- * @param {object} props
- * @param {string|array} props.className
- * @return {object} An object of children elements
- */
-
-const Toast = () => {
-  const [isActive, setActive] = react.exports.useState(false);
-  const [message, setMessage] = react.exports.useState('');
-  const [type, setType] = react.exports.useState('success');
-  const [hideTimeout, setHideTimeout] = react.exports.useState(5000);
-  let autoHideTimer = 100;
-  /**
-   * handleToastToggle
-   * Updates state isActive
-   * @type {function}
-   */
-
-  const handleToastToggle = react.exports.useCallback(() => {
-    setActive(prev => !prev);
-  });
-  /**
-   * handleToastData
-   * get notification value
-   * @param {string} message - message of notification
-   * @param {string} type - type of notification
-   * @param {int} timeout - timeout to hide notification
-   * @type {function}
-   */
-
-  const handleToastData = (message, type, timeout = 5000) => {
-    setMessage(message);
-    setType(type);
-    setHideTimeout(timeout);
-  };
-
-  const setAutoHideTimer = () => autoHideTimer = setTimeout(() => setActive(false), hideTimeout);
-
-  const clearAutoHideTimer = () => clearTimeout(autoHideTimer);
-  /**
-   * useEffect
-   */
-
-
-  react.exports.useEffect(() => {
-    emitter.on(TOGGLE_TOAST, handleToastToggle);
-    emitter.on(TOGGLE_TOAST, handleToastData);
-    return () => {
-      emitter.off(TOGGLE_TOAST, handleToastToggle);
-      emitter.off(TOGGLE_TOAST, handleToastData);
-    };
-  }, []);
-  react.exports.useEffect(() => {
-    emitter.on(TOGGLE_TOAST, setAutoHideTimer);
-    return () => {
-      emitter.off(TOGGLE_TOAST, setAutoHideTimer);
-      clearAutoHideTimer();
-    };
-  }, []);
-  const toastStyles = useStyles({
-    [styles$18.toast]: true,
-    [styles$18['toast--active']]: isActive
-  });
-  return isActive && /*#__PURE__*/React.createElement("div", {
-    className: toastStyles,
-    "data-testid": "toast-component"
-  }, /*#__PURE__*/React.createElement(Notification$1, {
-    type: type,
-    onClick: handleToastToggle,
-    isClosable: true
-  }, message));
-};
-
-Toast.displayName = 'Toast';
-
-var css_248z$1b = ".Accordion-module_text--truncate__DuJhq {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Accordion-module_accordion__wD27Q {\n  padding: 8px;\n  background: #fff;\n}\n.Accordion-module_accordion__header__vicgB {\n  color: #1f1f1f;\n  font-size: 18px;\n  border-bottom: 1px solid #cccccc;\n  padding: 8px 0;\n  display: flex;\n  justify-content: space-between;\n}\n.Accordion-module_accordion__header-arrow__R7Ea7 {\n  margin: 0 5px;\n  font-size: 14px;\n}\n.Accordion-module_accordion__header-arrow__R7Ea7 i {\n  margin-right: 5px;\n  font-size: 14px;\n}\n.Accordion-module_accordion__header-arrow--blue__3NXoX {\n  color: #2550aa;\n}\n.Accordion-module_accordion__text__VBSKI {\n  color: #4c4c4c;\n  font-size: 16px;\n  padding: 8px 0;\n  font-weight: 300;\n}";
-var styles$17 = {"text--truncate":"Accordion-module_text--truncate__DuJhq","accordion":"Accordion-module_accordion__wD27Q","accordion__header":"Accordion-module_accordion__header__vicgB","accordion__header-arrow":"Accordion-module_accordion__header-arrow__R7Ea7","accordion__header-arrow--blue":"Accordion-module_accordion__header-arrow--blue__3NXoX","accordion__text":"Accordion-module_accordion__text__VBSKI"};
-styleInject(css_248z$1b);
-
-/**
- * AccordionSection - stateless presentational component
- * @param {object} props - props
- * @param {function} props.handleOnClick - handle click event
- * @param {boolean} props.isOpen - determine if section should be open
- * @param {string} props.label - label
- * @param {string} props.children - content
- * @param {string|node} props.arrowLabel
- * @param {string} props.variant
- * @param {boolean|string} props.hasExpand
- * @return {object} An object of children element
- */
-
-const AccordionSection = ({
-  handleOnClick,
-  isOpen,
-  label,
+const Label = ({
   children,
-  arrowLabel,
-  variant,
-  hasExpand
-}) => /*#__PURE__*/React.createElement("div", {
-  className: styles$17.accordion
-}, /*#__PURE__*/React.createElement("div", {
-  className: styles$17.accordion__header,
-  onClick: handleOnClick
-}, /*#__PURE__*/React.createElement("div", null, label), /*#__PURE__*/React.createElement("div", null, hasExpand && (arrowLabel ? /*#__PURE__*/React.createElement(Button$2, {
-  variant: variant,
-  size: "small"
-}, /*#__PURE__*/React.createElement("span", {
-  className: styles$17['accordion__header-arrow']
-}, isOpen ? /*#__PURE__*/React.createElement(Icon$1, {
-  icon: "icon-chevron-up"
-}) : /*#__PURE__*/React.createElement(Icon$1, {
-  icon: "icon-chevron-down"
-}), arrowLabel)) : isOpen ? /*#__PURE__*/React.createElement(Icon$1, {
-  size: "xs",
-  icon: "icon-chevron-up"
-}) : /*#__PURE__*/React.createElement(Icon$1, {
-  size: "xs",
-  icon: "icon-chevron-down"
-})))), isOpen && /*#__PURE__*/React.createElement("div", {
-  className: styles$17.accordion__text
-}, children));
-
-AccordionSection.displayName = 'AccordionSection';
-AccordionSection.propTypes = {
-  isOpen: propTypes.exports.bool,
-  hasExpand: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.bool]),
-  label: propTypes.exports.node.isRequired,
-  children: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.arrayOf, propTypes.exports.node]),
-  handleOnClick: propTypes.exports.func.isRequired,
-  arrowLabel: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.node]),
-  variant: propTypes.exports.oneOf(['icon', 'secondary'])
-};
-AccordionSection.defaultProps = {
-  isOpen: false,
-  arrowLabel: '',
-  variant: 'icon',
-  children: [],
-  hasExpand: true
-};
-
-/**
- * Accordion - stateful presentational component
- * @param {object} props - props
- * @param {object} props.children - content to display
- * @return {object} An object of children element
- */
-
-const Accordion$2 = ({
-  children
+  className,
+  id,
+  isToggle,
+  toggle
 }) => {
-  const openList = useIsOpen([]);
-  return Array.isArray(children) && children.map((item, index) => /*#__PURE__*/React.createElement(react.exports.Fragment, {
-    key: index
-  }, /*#__PURE__*/React.createElement(AccordionSection, {
-    key: index,
-    isOpen: openList.value.includes(index),
-    label: item.props.label,
-    arrowLabel: item.props.arrowLabel,
-    variant: item.props.variant,
-    hasExpand: item.props.hasExpand,
-    handleOnClick: () => item.props.hasExpand && openList.toggle(index)
-  }, /*#__PURE__*/React.createElement(Spacer$1, {
-    space: "tiny"
-  }), item.props.children), /*#__PURE__*/React.createElement(Spacer$1, {
-    space: "tiny"
-  })));
+  const labelStyles = useStyles({
+    [styles$19.label]: true,
+    [styles$19['label--normal']]: !isToggle,
+    [styles$19['label--active']]: isToggle && toggle,
+    [styles$19['label--inactive']]: isToggle && !toggle
+  }, className);
+  return /*#__PURE__*/React.createElement("label", {
+    className: labelStyles,
+    id: id
+  }, children);
 };
 
-Accordion$2.displayName = 'Accordion';
-Accordion$2.propTypes = {
-  children: propTypes.exports.node.isRequired
+Label.displayName = 'Label';
+Label.propTypes = {
+  children: propTypes.exports.node.isRequired,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  id: propTypes.exports.string,
+  isToggle: propTypes.exports.bool,
+  toggle: propTypes.exports.bool
+};
+Label.defaultProps = {
+  className: '',
+  id: null,
+  isToggle: false,
+  toggle: false
 };
 
 /**
@@ -6280,259 +6072,3065 @@ function uuid() {
 
 var uuid_1 = uuid;
 
+function rng() {
+  return crypto.randomBytes(16);
+}
+
 /**
- * Accordion - statefull presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `accordion__item`
- * @param {number} props.number - item number
- * @param {node} props.title - item title
- * @param {node} props.content - item content
- * @return {object} An object of children element
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+
+for (var i$1 = 0; i$1 < 256; ++i$1) {
+  byteToHex[i$1] = (i$1 + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex; // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+
+  return [bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]]].join('');
+}
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof options == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+function _classCallCheck$8(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties$8(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass$8(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$8(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$8(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty$9(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends$5() {
+  _extends$5 = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends$5.apply(this, arguments);
+}
+
+function ownKeys$7(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys$7(Object(source), true).forEach(function (key) {
+        _defineProperty$9(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$7(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _inherits$8(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf$8(subClass, superClass);
+}
+
+function _getPrototypeOf$8(o) {
+  _getPrototypeOf$8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf$8(o);
+}
+
+function _setPrototypeOf$8(o, p) {
+  _setPrototypeOf$8 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf$8(o, p);
+}
+
+function _assertThisInitialized$8(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn$8(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized$8(self);
+}
+
+var CONSTANT = {
+  GLOBAL: {
+    HIDE: '__react_tooltip_hide_event',
+    REBUILD: '__react_tooltip_rebuild_event',
+    SHOW: '__react_tooltip_show_event'
+  }
+};
+/**
+ * Static methods for react-tooltip
  */
 
-const AccordionItem = ({
-  className,
-  title,
-  content,
-  size
-}) => {
-  const [isOpen, setOpen] = react.exports.useState(true);
+var dispatchGlobalEvent = function dispatchGlobalEvent(eventName, opts) {
+  // Compatible with IE
+  // @see http://stackoverflow.com/questions/26596123/internet-explorer-9-10-11-event-constructor-doesnt-work
+  // @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+  var event;
+
+  if (typeof window.CustomEvent === 'function') {
+    event = new window.CustomEvent(eventName, {
+      detail: opts
+    });
+  } else {
+    event = document.createEvent('Event');
+    event.initEvent(eventName, false, true, opts);
+  }
+
+  window.dispatchEvent(event);
+};
+
+function staticMethods(target) {
   /**
-   * handleOpen - open section
-   * @type {function}
+   * Hide all tooltip
+   * @trigger ReactTooltip.hide()
+   */
+  target.hide = function (target) {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.HIDE, {
+      target: target
+    });
+  };
+  /**
+   * Rebuild all tooltip
+   * @trigger ReactTooltip.rebuild()
    */
 
-  const handleOpen = react.exports.useCallback(() => setOpen(!isOpen), [isOpen]);
-  const titleStyles = useStyles({
-    [styles$1b['accordion__item--title']]: true,
-    [styles$1b['accordion__item--title-small']]: size === 'small',
-    [styles$1b['accordion__item--title-medium']]: size === 'medium'
-  });
-  const contentStyles = useStyles({
-    [styles$1b['accordion__item--content']]: true,
-    [styles$1b['accordion__item--content-small']]: size === 'small',
-    [styles$1b['accordion__item--content-medium']]: size === 'medium',
-    [styles$1b['accordion__item--content-open']]: isOpen,
-    [styles$1b['accordion__item--content-close']]: !isOpen
-  });
-  return /*#__PURE__*/React.createElement("div", {
-    className: className
-  }, /*#__PURE__*/React.createElement("div", {
-    className: titleStyles,
-    onClick: handleOpen
-  }, /*#__PURE__*/React.createElement("div", null, title), /*#__PURE__*/React.createElement(Icon$1, {
-    icon: isOpen ? 'icon-angle-down' : 'icon-angle-up'
-  })), /*#__PURE__*/React.createElement("div", {
-    className: contentStyles
-  }, content));
+
+  target.rebuild = function () {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.REBUILD);
+  };
+  /**
+   * Show specific tooltip
+   * @trigger ReactTooltip.show()
+   */
+
+
+  target.show = function (target) {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.SHOW, {
+      target: target
+    });
+  };
+
+  target.prototype.globalRebuild = function () {
+    if (this.mount) {
+      this.unbindListener();
+      this.bindListener();
+    }
+  };
+
+  target.prototype.globalShow = function (event) {
+    if (this.mount) {
+      var hasTarget = event && event.detail && event.detail.target && true || false; // Create a fake event, specific show will limit the type to `solid`
+      // only `float` type cares e.clientX e.clientY
+
+      this.showTooltip({
+        currentTarget: hasTarget && event.detail.target
+      }, true);
+    }
+  };
+
+  target.prototype.globalHide = function (event) {
+    if (this.mount) {
+      var hasTarget = event && event.detail && event.detail.target && true || false;
+      this.hideTooltip({
+        currentTarget: hasTarget && event.detail.target
+      }, hasTarget);
+    }
+  };
+}
+/**
+ * Events that should be bound to the window
+ */
+
+
+function windowListener(target) {
+  target.prototype.bindWindowEvents = function (resizeHide) {
+    // ReactTooltip.hide
+    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
+    window.addEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide, false); // ReactTooltip.rebuild
+
+    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
+    window.addEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild, false); // ReactTooltip.show
+
+    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
+    window.addEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow, false); // Resize
+
+    if (resizeHide) {
+      window.removeEventListener('resize', this.onWindowResize);
+      window.addEventListener('resize', this.onWindowResize, false);
+    }
+  };
+
+  target.prototype.unbindWindowEvents = function () {
+    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
+    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
+    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
+    window.removeEventListener('resize', this.onWindowResize);
+  };
+  /**
+   * invoked by resize event of window
+   */
+
+
+  target.prototype.onWindowResize = function () {
+    if (!this.mount) return;
+    this.hideTooltip();
+  };
+}
+/**
+ * Custom events to control showing and hiding of tooltip
+ *
+ * @attributes
+ * - `event` {String}
+ * - `eventOff` {String}
+ */
+
+
+var checkStatus = function checkStatus(dataEventOff, e) {
+  var show = this.state.show;
+  var id = this.props.id;
+  var isCapture = this.isCapture(e.currentTarget);
+  var currentItem = e.currentTarget.getAttribute('currentItem');
+  if (!isCapture) e.stopPropagation();
+
+  if (show && currentItem === 'true') {
+    if (!dataEventOff) this.hideTooltip(e);
+  } else {
+    e.currentTarget.setAttribute('currentItem', 'true');
+    setUntargetItems(e.currentTarget, this.getTargetArray(id));
+    this.showTooltip(e);
+  }
 };
 
-AccordionItem.displayName = 'Accordion Item';
-AccordionItem.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  title: propTypes.exports.node.isRequired,
-  content: propTypes.exports.node.isRequired,
-  size: propTypes.exports.oneOf(['small', 'medium'])
+var setUntargetItems = function setUntargetItems(currentTarget, targetArray) {
+  for (var i = 0; i < targetArray.length; i++) {
+    if (currentTarget !== targetArray[i]) {
+      targetArray[i].setAttribute('currentItem', 'false');
+    } else {
+      targetArray[i].setAttribute('currentItem', 'true');
+    }
+  }
 };
-AccordionItem.defaultProps = {
-  className: styles$1b.accordion__item,
-  size: 'medium'
+
+var customListeners = {
+  id: '9b69f92e-d3fe-498b-b1b4-c5e63a51b0cf',
+  set: function set(target, event, listener) {
+    if (this.id in target) {
+      var map = target[this.id];
+      map[event] = listener;
+    } else {
+      // this is workaround for WeakMap, which is not supported in older browsers, such as IE
+      Object.defineProperty(target, this.id, {
+        configurable: true,
+        value: _defineProperty$9({}, event, listener)
+      });
+    }
+  },
+  get: function get(target, event) {
+    var map = target[this.id];
+
+    if (map !== undefined) {
+      return map[event];
+    }
+  }
 };
+
+function customEvent(target) {
+  target.prototype.isCustomEvent = function (ele) {
+    var event = this.state.event;
+    return event || !!ele.getAttribute('data-event');
+  };
+  /* Bind listener for custom event */
+
+
+  target.prototype.customBindListener = function (ele) {
+    var _this = this;
+
+    var _this$state = this.state,
+        event = _this$state.event,
+        eventOff = _this$state.eventOff;
+    var dataEvent = ele.getAttribute('data-event') || event;
+    var dataEventOff = ele.getAttribute('data-event-off') || eventOff;
+    dataEvent.split(' ').forEach(function (event) {
+      ele.removeEventListener(event, customListeners.get(ele, event));
+      var customListener = checkStatus.bind(_this, dataEventOff);
+      customListeners.set(ele, event, customListener);
+      ele.addEventListener(event, customListener, false);
+    });
+
+    if (dataEventOff) {
+      dataEventOff.split(' ').forEach(function (event) {
+        ele.removeEventListener(event, _this.hideTooltip);
+        ele.addEventListener(event, _this.hideTooltip, false);
+      });
+    }
+  };
+  /* Unbind listener for custom event */
+
+
+  target.prototype.customUnbindListener = function (ele) {
+    var _this$state2 = this.state,
+        event = _this$state2.event,
+        eventOff = _this$state2.eventOff;
+    var dataEvent = event || ele.getAttribute('data-event');
+    var dataEventOff = eventOff || ele.getAttribute('data-event-off');
+    ele.removeEventListener(dataEvent, customListeners.get(ele, event));
+    if (dataEventOff) ele.removeEventListener(dataEventOff, this.hideTooltip);
+  };
+}
+/**
+ * Util method to judge if it should follow capture model
+ */
+
+
+function isCapture(target) {
+  target.prototype.isCapture = function (currentTarget) {
+    return currentTarget && currentTarget.getAttribute('data-iscapture') === 'true' || this.props.isCapture || false;
+  };
+}
+/**
+ * Util method to get effect
+ */
+
+
+function getEffect(target) {
+  target.prototype.getEffect = function (currentTarget) {
+    var dataEffect = currentTarget.getAttribute('data-effect');
+    return dataEffect || this.props.effect || 'float';
+  };
+}
+/**
+ * Util method to get effect
+ */
+
+
+var makeProxy = function makeProxy(e) {
+  var proxy = {};
+
+  for (var key in e) {
+    if (typeof e[key] === 'function') {
+      proxy[key] = e[key].bind(e);
+    } else {
+      proxy[key] = e[key];
+    }
+  }
+
+  return proxy;
+};
+
+var bodyListener = function bodyListener(callback, options, e) {
+  var _options$respectEffec = options.respectEffect,
+      respectEffect = _options$respectEffec === void 0 ? false : _options$respectEffec,
+      _options$customEvent = options.customEvent,
+      customEvent = _options$customEvent === void 0 ? false : _options$customEvent;
+  var id = this.props.id;
+  var tip = e.target.getAttribute('data-tip') || null;
+  var forId = e.target.getAttribute('data-for') || null;
+  var target = e.target;
+
+  if (this.isCustomEvent(target) && !customEvent) {
+    return;
+  }
+
+  var isTargetBelongsToTooltip = id == null && forId == null || forId === id;
+
+  if (tip != null && (!respectEffect || this.getEffect(target) === 'float') && isTargetBelongsToTooltip) {
+    var proxy = makeProxy(e);
+    proxy.currentTarget = target;
+    callback(proxy);
+  }
+};
+
+var findCustomEvents = function findCustomEvents(targetArray, dataAttribute) {
+  var events = {};
+  targetArray.forEach(function (target) {
+    var event = target.getAttribute(dataAttribute);
+    if (event) event.split(' ').forEach(function (event) {
+      return events[event] = true;
+    });
+  });
+  return events;
+};
+
+var getBody = function getBody() {
+  return document.getElementsByTagName('body')[0];
+};
+
+function bodyMode(target) {
+  target.prototype.isBodyMode = function () {
+    return !!this.props.bodyMode;
+  };
+
+  target.prototype.bindBodyListener = function (targetArray) {
+    var _this = this;
+
+    var _this$state = this.state,
+        event = _this$state.event,
+        eventOff = _this$state.eventOff,
+        possibleCustomEvents = _this$state.possibleCustomEvents,
+        possibleCustomEventsOff = _this$state.possibleCustomEventsOff;
+    var body = getBody();
+    var customEvents = findCustomEvents(targetArray, 'data-event');
+    var customEventsOff = findCustomEvents(targetArray, 'data-event-off');
+    if (event != null) customEvents[event] = true;
+    if (eventOff != null) customEventsOff[eventOff] = true;
+    possibleCustomEvents.split(' ').forEach(function (event) {
+      return customEvents[event] = true;
+    });
+    possibleCustomEventsOff.split(' ').forEach(function (event) {
+      return customEventsOff[event] = true;
+    });
+    this.unbindBodyListener(body);
+    var listeners = this.bodyModeListeners = {};
+
+    if (event == null) {
+      listeners.mouseover = bodyListener.bind(this, this.showTooltip, {});
+      listeners.mousemove = bodyListener.bind(this, this.updateTooltip, {
+        respectEffect: true
+      });
+      listeners.mouseout = bodyListener.bind(this, this.hideTooltip, {});
+    }
+
+    for (var _event in customEvents) {
+      listeners[_event] = bodyListener.bind(this, function (e) {
+        var targetEventOff = e.currentTarget.getAttribute('data-event-off') || eventOff;
+        checkStatus.call(_this, targetEventOff, e);
+      }, {
+        customEvent: true
+      });
+    }
+
+    for (var _event2 in customEventsOff) {
+      listeners[_event2] = bodyListener.bind(this, this.hideTooltip, {
+        customEvent: true
+      });
+    }
+
+    for (var _event3 in listeners) {
+      body.addEventListener(_event3, listeners[_event3]);
+    }
+  };
+
+  target.prototype.unbindBodyListener = function (body) {
+    body = body || getBody();
+    var listeners = this.bodyModeListeners;
+
+    for (var event in listeners) {
+      body.removeEventListener(event, listeners[event]);
+    }
+  };
+}
+/**
+ * Tracking target removing from DOM.
+ * It's necessary to hide tooltip when it's target disappears.
+ * Otherwise, the tooltip would be shown forever until another target
+ * is triggered.
+ *
+ * If MutationObserver is not available, this feature just doesn't work.
+ */
+// https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
+
+
+var getMutationObserverClass = function getMutationObserverClass() {
+  return window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+};
+
+function trackRemoval(target) {
+  target.prototype.bindRemovalTracker = function () {
+    var _this = this;
+
+    var MutationObserver = getMutationObserverClass();
+    if (MutationObserver == null) return;
+    var observer = new MutationObserver(function (mutations) {
+      for (var m1 = 0; m1 < mutations.length; m1++) {
+        var mutation = mutations[m1];
+
+        for (var m2 = 0; m2 < mutation.removedNodes.length; m2++) {
+          var element = mutation.removedNodes[m2];
+
+          if (element === _this.state.currentTarget) {
+            _this.hideTooltip();
+
+            return;
+          }
+        }
+      }
+    });
+    observer.observe(window.document, {
+      childList: true,
+      subtree: true
+    });
+    this.removalTracker = observer;
+  };
+
+  target.prototype.unbindRemovalTracker = function () {
+    if (this.removalTracker) {
+      this.removalTracker.disconnect();
+      this.removalTracker = null;
+    }
+  };
+}
+/**
+ * Calculate the position of tooltip
+ *
+ * @params
+ * - `e` {Event} the event of current mouse
+ * - `target` {Element} the currentTarget of the event
+ * - `node` {DOM} the react-tooltip object
+ * - `place` {String} top / right / bottom / left
+ * - `effect` {String} float / solid
+ * - `offset` {Object} the offset to default position
+ *
+ * @return {Object}
+ * - `isNewState` {Bool} required
+ * - `newState` {Object}
+ * - `position` {Object} {left: {Number}, top: {Number}}
+ */
+
+
+function getPosition(e, target, node, place, desiredPlace, effect, offset) {
+  var _getDimensions = getDimensions(node),
+      tipWidth = _getDimensions.width,
+      tipHeight = _getDimensions.height;
+
+  var _getDimensions2 = getDimensions(target),
+      targetWidth = _getDimensions2.width,
+      targetHeight = _getDimensions2.height;
+
+  var _getCurrentOffset = getCurrentOffset(e, target, effect),
+      mouseX = _getCurrentOffset.mouseX,
+      mouseY = _getCurrentOffset.mouseY;
+
+  var defaultOffset = getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight);
+
+  var _calculateOffset = calculateOffset(offset),
+      extraOffsetX = _calculateOffset.extraOffsetX,
+      extraOffsetY = _calculateOffset.extraOffsetY;
+
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  var _getParent = getParent(node),
+      parentTop = _getParent.parentTop,
+      parentLeft = _getParent.parentLeft; // Get the edge offset of the tooltip
+
+
+  var getTipOffsetLeft = function getTipOffsetLeft(place) {
+    var offsetX = defaultOffset[place].l;
+    return mouseX + offsetX + extraOffsetX;
+  };
+
+  var getTipOffsetRight = function getTipOffsetRight(place) {
+    var offsetX = defaultOffset[place].r;
+    return mouseX + offsetX + extraOffsetX;
+  };
+
+  var getTipOffsetTop = function getTipOffsetTop(place) {
+    var offsetY = defaultOffset[place].t;
+    return mouseY + offsetY + extraOffsetY;
+  };
+
+  var getTipOffsetBottom = function getTipOffsetBottom(place) {
+    var offsetY = defaultOffset[place].b;
+    return mouseY + offsetY + extraOffsetY;
+  }; //
+  // Functions to test whether the tooltip's sides are inside
+  // the client window for a given orientation p
+  //
+  //  _____________
+  // |             | <-- Right side
+  // | p = 'left'  |\
+  // |             |/  |\
+  // |_____________|   |_\  <-- Mouse
+  //      / \           |
+  //       |
+  //       |
+  //  Bottom side
+  //
+
+
+  var outsideLeft = function outsideLeft(p) {
+    return getTipOffsetLeft(p) < 0;
+  };
+
+  var outsideRight = function outsideRight(p) {
+    return getTipOffsetRight(p) > windowWidth;
+  };
+
+  var outsideTop = function outsideTop(p) {
+    return getTipOffsetTop(p) < 0;
+  };
+
+  var outsideBottom = function outsideBottom(p) {
+    return getTipOffsetBottom(p) > windowHeight;
+  }; // Check whether the tooltip with orientation p is completely inside the client window
+
+
+  var outside = function outside(p) {
+    return outsideLeft(p) || outsideRight(p) || outsideTop(p) || outsideBottom(p);
+  };
+
+  var inside = function inside(p) {
+    return !outside(p);
+  };
+
+  var placesList = ['top', 'bottom', 'left', 'right'];
+  var insideList = [];
+
+  for (var i = 0; i < 4; i++) {
+    var p = placesList[i];
+
+    if (inside(p)) {
+      insideList.push(p);
+    }
+  }
+
+  var isNewState = false;
+  var newPlace;
+  var shouldUpdatePlace = desiredPlace !== place;
+
+  if (inside(desiredPlace) && shouldUpdatePlace) {
+    isNewState = true;
+    newPlace = desiredPlace;
+  } else if (insideList.length > 0 && outside(desiredPlace) && outside(place)) {
+    isNewState = true;
+    newPlace = insideList[0];
+  }
+
+  if (isNewState) {
+    return {
+      isNewState: true,
+      newState: {
+        place: newPlace
+      }
+    };
+  }
+
+  return {
+    isNewState: false,
+    position: {
+      left: parseInt(getTipOffsetLeft(place) - parentLeft, 10),
+      top: parseInt(getTipOffsetTop(place) - parentTop, 10)
+    }
+  };
+}
+
+var getDimensions = function getDimensions(node) {
+  var _node$getBoundingClie = node.getBoundingClientRect(),
+      height = _node$getBoundingClie.height,
+      width = _node$getBoundingClie.width;
+
+  return {
+    height: parseInt(height, 10),
+    width: parseInt(width, 10)
+  };
+}; // Get current mouse offset
+
+
+var getCurrentOffset = function getCurrentOffset(e, currentTarget, effect) {
+  var boundingClientRect = currentTarget.getBoundingClientRect();
+  var targetTop = boundingClientRect.top;
+  var targetLeft = boundingClientRect.left;
+
+  var _getDimensions3 = getDimensions(currentTarget),
+      targetWidth = _getDimensions3.width,
+      targetHeight = _getDimensions3.height;
+
+  if (effect === 'float') {
+    return {
+      mouseX: e.clientX,
+      mouseY: e.clientY
+    };
+  }
+
+  return {
+    mouseX: targetLeft + targetWidth / 2,
+    mouseY: targetTop + targetHeight / 2
+  };
+}; // List all possibility of tooltip final offset
+// This is useful in judging if it is necessary for tooltip to switch position when out of window
+
+
+var getDefaultPosition = function getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight) {
+  var top;
+  var right;
+  var bottom;
+  var left;
+  var disToMouse = 3;
+  var triangleHeight = 2;
+  var cursorHeight = 12; // Optimize for float bottom only, cause the cursor will hide the tooltip
+
+  if (effect === 'float') {
+    top = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: -(tipHeight + disToMouse + triangleHeight),
+      b: -disToMouse
+    };
+    bottom = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: disToMouse + cursorHeight,
+      b: tipHeight + disToMouse + triangleHeight + cursorHeight
+    };
+    left = {
+      l: -(tipWidth + disToMouse + triangleHeight),
+      r: -disToMouse,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+    right = {
+      l: disToMouse,
+      r: tipWidth + disToMouse + triangleHeight,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+  } else if (effect === 'solid') {
+    top = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: -(targetHeight / 2 + tipHeight + triangleHeight),
+      b: -(targetHeight / 2)
+    };
+    bottom = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: targetHeight / 2,
+      b: targetHeight / 2 + tipHeight + triangleHeight
+    };
+    left = {
+      l: -(tipWidth + targetWidth / 2 + triangleHeight),
+      r: -(targetWidth / 2),
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+    right = {
+      l: targetWidth / 2,
+      r: tipWidth + targetWidth / 2 + triangleHeight,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+  }
+
+  return {
+    top: top,
+    bottom: bottom,
+    left: left,
+    right: right
+  };
+}; // Consider additional offset into position calculation
+
+
+var calculateOffset = function calculateOffset(offset) {
+  var extraOffsetX = 0;
+  var extraOffsetY = 0;
+
+  if (Object.prototype.toString.apply(offset) === '[object String]') {
+    offset = JSON.parse(offset.toString().replace(/'/g, '"'));
+  }
+
+  for (var key in offset) {
+    if (key === 'top') {
+      extraOffsetY -= parseInt(offset[key], 10);
+    } else if (key === 'bottom') {
+      extraOffsetY += parseInt(offset[key], 10);
+    } else if (key === 'left') {
+      extraOffsetX -= parseInt(offset[key], 10);
+    } else if (key === 'right') {
+      extraOffsetX += parseInt(offset[key], 10);
+    }
+  }
+
+  return {
+    extraOffsetX: extraOffsetX,
+    extraOffsetY: extraOffsetY
+  };
+}; // Get the offset of the parent elements
+
+
+var getParent = function getParent(currentTarget) {
+  var currentParent = currentTarget;
+
+  while (currentParent) {
+    var computedStyle = window.getComputedStyle(currentParent); // transform and will-change: transform change the containing block
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_Block
+
+    if (computedStyle.getPropertyValue('transform') !== 'none' || computedStyle.getPropertyValue('will-change') === 'transform') break;
+    currentParent = currentParent.parentElement;
+  }
+
+  var parentTop = currentParent && currentParent.getBoundingClientRect().top || 0;
+  var parentLeft = currentParent && currentParent.getBoundingClientRect().left || 0;
+  return {
+    parentTop: parentTop,
+    parentLeft: parentLeft
+  };
+};
+/**
+ * To get the tooltip content
+ * it may comes from data-tip or this.props.children
+ * it should support multiline
+ *
+ * @params
+ * - `tip` {String} value of data-tip
+ * - `children` {ReactElement} this.props.children
+ * - `multiline` {Any} could be Bool(true/false) or String('true'/'false')
+ *
+ * @return
+ * - String or react component
+ */
+
+
+function getTipContent(tip, children, getContent, multiline) {
+  if (children) return children;
+  if (getContent !== undefined && getContent !== null) return getContent; // getContent can be 0, '', etc.
+
+  if (getContent === null) return null; // Tip not exist and children is null or undefined
+
+  var regexp = /<br\s*\/?>/;
+
+  if (!multiline || multiline === 'false' || !regexp.test(tip)) {
+    // No trim(), so that user can keep their input
+    return tip;
+  } // Multiline tooltip content
+
+
+  return tip.split(regexp).map(function (d, i) {
+    return React.createElement("span", {
+      key: i,
+      className: "multi-line"
+    }, d);
+  });
+}
+/**
+ * Support aria- and role in ReactTooltip
+ *
+ * @params props {Object}
+ * @return {Object}
+ */
+
+
+function parseAria(props) {
+  var ariaObj = {};
+  Object.keys(props).filter(function (prop) {
+    // aria-xxx and role is acceptable
+    return /(^aria-\w+$|^role$)/.test(prop);
+  }).forEach(function (prop) {
+    ariaObj[prop] = props[prop];
+  });
+  return ariaObj;
+}
+/**
+ * Convert nodelist to array
+ * @see https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/core/createArrayFromMixed.js#L24
+ * NodeLists are functions in Safari
+ */
+
+
+function nodeListToArray(nodeList) {
+  var length = nodeList.length;
+
+  if (nodeList.hasOwnProperty) {
+    return Array.prototype.slice.call(nodeList);
+  }
+
+  return new Array(length).fill().map(function (index) {
+    return nodeList[index];
+  });
+}
+
+function generateUUID() {
+  return 't' + v4();
+}
+
+var baseCss = ".__react_component_tooltip {\n  border-radius: 3px;\n  display: inline-block;\n  font-size: 13px;\n  left: -999em;\n  opacity: 0;\n  padding: 8px 21px;\n  position: fixed;\n  pointer-events: none;\n  transition: opacity 0.3s ease-out;\n  top: -999em;\n  visibility: hidden;\n  z-index: 999;\n}\n.__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {\n  pointer-events: auto;\n}\n.__react_component_tooltip::before, .__react_component_tooltip::after {\n  content: \"\";\n  width: 0;\n  height: 0;\n  position: absolute;\n}\n.__react_component_tooltip.show {\n  opacity: 0.9;\n  margin-top: 0;\n  margin-left: 0;\n  visibility: visible;\n}\n.__react_component_tooltip.place-top::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  bottom: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-bottom::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  top: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-left::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  right: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip.place-right::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  left: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip .multi-line {\n  display: block;\n  padding: 2px 0;\n  text-align: center;\n}";
+/**
+ * Default pop-up style values (text color, background color).
+ */
+
+var defaultColors = {
+  dark: {
+    text: '#fff',
+    background: '#222',
+    border: 'transparent',
+    arrow: '#222'
+  },
+  success: {
+    text: '#fff',
+    background: '#8DC572',
+    border: 'transparent',
+    arrow: '#8DC572'
+  },
+  warning: {
+    text: '#fff',
+    background: '#F0AD4E',
+    border: 'transparent',
+    arrow: '#F0AD4E'
+  },
+  error: {
+    text: '#fff',
+    background: '#BE6464',
+    border: 'transparent',
+    arrow: '#BE6464'
+  },
+  info: {
+    text: '#fff',
+    background: '#337AB7',
+    border: 'transparent',
+    arrow: '#337AB7'
+  },
+  light: {
+    text: '#222',
+    background: '#fff',
+    border: 'transparent',
+    arrow: '#fff'
+  }
+};
+
+function getDefaultPopupColors(type) {
+  return defaultColors[type] ? _objectSpread2({}, defaultColors[type]) : undefined;
+}
+/**
+ * Generates the specific tooltip style for use on render.
+ */
+
+
+function generateTooltipStyle(uuid, customColors, type, hasBorder) {
+  return generateStyle(uuid, getPopupColors(customColors, type, hasBorder));
+}
+/**
+ * Generates the tooltip style rules based on the element-specified "data-type" property.
+ */
+
+
+function generateStyle(uuid, colors) {
+  var textColor = colors.text;
+  var backgroundColor = colors.background;
+  var borderColor = colors.border;
+  var arrowColor = colors.arrow;
+  return "\n  \t.".concat(uuid, " {\n\t    color: ").concat(textColor, ";\n\t    background: ").concat(backgroundColor, ";\n\t    border: 1px solid ").concat(borderColor, ";\n  \t}\n\n  \t.").concat(uuid, ".place-top {\n        margin-top: -10px;\n    }\n    .").concat(uuid, ".place-top::before {\n        border-top: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-top::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        bottom: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-top-color: ").concat(arrowColor, ";\n        border-top-style: solid;\n        border-top-width: 6px;\n    }\n\n    .").concat(uuid, ".place-bottom {\n        margin-top: 10px;\n    }\n    .").concat(uuid, ".place-bottom::before {\n        border-bottom: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-bottom::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        top: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-bottom-color: ").concat(arrowColor, ";\n        border-bottom-style: solid;\n        border-bottom-width: 6px;\n    }\n\n    .").concat(uuid, ".place-left {\n        margin-left: -10px;\n    }\n    .").concat(uuid, ".place-left::before {\n        border-left: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-left::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        right: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-left-color: ").concat(arrowColor, ";\n        border-left-style: solid;\n        border-left-width: 6px;\n    }\n\n    .").concat(uuid, ".place-right {\n        margin-left: 10px;\n    }\n    .").concat(uuid, ".place-right::before {\n        border-right: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-right::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        left: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-right-color: ").concat(arrowColor, ";\n        border-right-style: solid;\n        border-right-width: 6px;\n    }\n  ");
+}
+
+function getPopupColors(customColors, type, hasBorder) {
+  var textColor = customColors.text;
+  var backgroundColor = customColors.background;
+  var borderColor = customColors.border;
+  var arrowColor = customColors.arrow ? customColors.arrow : customColors.background;
+  var colors = getDefaultPopupColors(type);
+
+  if (textColor) {
+    colors.text = textColor;
+  }
+
+  if (backgroundColor) {
+    colors.background = backgroundColor;
+  }
+
+  if (hasBorder) {
+    if (borderColor) {
+      colors.border = borderColor;
+    } else {
+      colors.border = type === 'light' ? 'black' : 'white';
+    }
+  }
+
+  if (arrowColor) {
+    colors.arrow = arrowColor;
+  }
+
+  return colors;
+}
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+  return module = {
+    exports: {}
+  }, fn(module, module.exports), module.exports;
+}
+
+var check = function (it) {
+  return it && it.Math == Math && it;
+}; // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+
+
+var global_1 = // eslint-disable-next-line es/no-global-this -- safe
+check(typeof globalThis == 'object' && globalThis) || check(typeof window == 'object' && window) || // eslint-disable-next-line no-restricted-globals -- safe
+check(typeof self == 'object' && self) || check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func -- fallback
+function () {
+  return this;
+}() || Function('return this')();
+
+var fails = function (exec) {
+  try {
+    return !!exec();
+  } catch (error) {
+    return true;
+  }
+}; // Detect IE8's incomplete defineProperty implementation
+
+
+var descriptors = !fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  return Object.defineProperty({}, 1, {
+    get: function () {
+      return 7;
+    }
+  })[1] != 7;
+});
+var $propertyIsEnumerable = {}.propertyIsEnumerable; // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor; // Nashorn ~ JDK8 bug
+
+var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({
+  1: 2
+}, 1); // `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
+
+var f$1 = NASHORN_BUG ? function propertyIsEnumerable(V) {
+  var descriptor = getOwnPropertyDescriptor(this, V);
+  return !!descriptor && descriptor.enumerable;
+} : $propertyIsEnumerable;
+var objectPropertyIsEnumerable = {
+  f: f$1
+};
+
+var createPropertyDescriptor = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+var toString = {}.toString;
+
+var classofRaw = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+var split = ''.split; // fallback for non-array-like ES3 and non-enumerable old V8 strings
+
+var indexedObject = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins -- safe
+  return !Object('z').propertyIsEnumerable(0);
+}) ? function (it) {
+  return classofRaw(it) == 'String' ? split.call(it, '') : Object(it);
+} : Object; // `RequireObjectCoercible` abstract operation
+// https://tc39.es/ecma262/#sec-requireobjectcoercible
+
+var requireObjectCoercible = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on " + it);
+  return it;
+}; // toObject with fallback for non-array-like ES3 strings
+
+
+var toIndexedObject = function (it) {
+  return indexedObject(requireObjectCoercible(it));
+};
+
+var isObject = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+}; // `ToPrimitive` abstract operation
+// https://tc39.es/ecma262/#sec-toprimitive
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+
+
+var toPrimitive = function (input, PREFERRED_STRING) {
+  if (!isObject(input)) return input;
+  var fn, val;
+  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  throw TypeError("Can't convert object to primitive value");
+}; // `ToObject` abstract operation
+// https://tc39.es/ecma262/#sec-toobject
+
+
+var toObject = function (argument) {
+  return Object(requireObjectCoercible(argument));
+};
+
+var hasOwnProperty = {}.hasOwnProperty;
+
+var has = function hasOwn(it, key) {
+  return hasOwnProperty.call(toObject(it), key);
+};
+
+var document$1 = global_1.document; // typeof document.createElement is 'object' in old IE
+
+var EXISTS = isObject(document$1) && isObject(document$1.createElement);
+
+var documentCreateElement = function (it) {
+  return EXISTS ? document$1.createElement(it) : {};
+}; // Thank's IE8 for his funny defineProperty
+
+
+var ie8DomDefine = !descriptors && !fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
+  return Object.defineProperty(documentCreateElement('div'), 'a', {
+    get: function () {
+      return 7;
+    }
+  }).a != 7;
+}); // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+
+var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor; // `Object.getOwnPropertyDescriptor` method
+// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
+
+var f$1$1 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  O = toIndexedObject(O);
+  P = toPrimitive(P, true);
+  if (ie8DomDefine) try {
+    return $getOwnPropertyDescriptor(O, P);
+  } catch (error) {
+    /* empty */
+  }
+  if (has(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
+};
+var objectGetOwnPropertyDescriptor = {
+  f: f$1$1
+};
+
+var anObject = function (it) {
+  if (!isObject(it)) {
+    throw TypeError(String(it) + ' is not an object');
+  }
+
+  return it;
+}; // eslint-disable-next-line es/no-object-defineproperty -- safe
+
+
+var $defineProperty = Object.defineProperty; // `Object.defineProperty` method
+// https://tc39.es/ecma262/#sec-object.defineproperty
+
+var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (ie8DomDefine) try {
+    return $defineProperty(O, P, Attributes);
+  } catch (error) {
+    /* empty */
+  }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+var objectDefineProperty = {
+  f: f$2
+};
+var createNonEnumerableProperty = descriptors ? function (object, key, value) {
+  return objectDefineProperty.f(object, key, createPropertyDescriptor(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+var setGlobal = function (key, value) {
+  try {
+    createNonEnumerableProperty(global_1, key, value);
+  } catch (error) {
+    global_1[key] = value;
+  }
+
+  return value;
+};
+
+var SHARED = '__core-js_shared__';
+var store = global_1[SHARED] || setGlobal(SHARED, {});
+var sharedStore = store;
+var functionToString = Function.toString; // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+
+if (typeof sharedStore.inspectSource != 'function') {
+  sharedStore.inspectSource = function (it) {
+    return functionToString.call(it);
+  };
+}
+
+var inspectSource = sharedStore.inspectSource;
+var WeakMap$1 = global_1.WeakMap;
+var nativeWeakMap = typeof WeakMap$1 === 'function' && /native code/.test(inspectSource(WeakMap$1));
+var shared = createCommonjsModule(function (module) {
+  (module.exports = function (key, value) {
+    return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
+  })('versions', []).push({
+    version: '3.12.1',
+    mode: 'global',
+    copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
+  });
+});
+var id = 0;
+var postfix = Math.random();
+
+var uid = function (key) {
+  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
+};
+
+var keys = shared('keys');
+
+var sharedKey = function (key) {
+  return keys[key] || (keys[key] = uid(key));
+};
+
+var hiddenKeys = {};
+var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
+var WeakMap$1$1 = global_1.WeakMap;
+var set, get, has$1;
+
+var enforce = function (it) {
+  return has$1(it) ? get(it) : set(it, {});
+};
+
+var getterFor = function (TYPE) {
+  return function (it) {
+    var state;
+
+    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+    }
+
+    return state;
+  };
+};
+
+if (nativeWeakMap || sharedStore.state) {
+  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1$1());
+  var wmget = store$1.get;
+  var wmhas = store$1.has;
+  var wmset = store$1.set;
+
+  set = function (it, metadata) {
+    if (wmhas.call(store$1, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
+    metadata.facade = it;
+    wmset.call(store$1, it, metadata);
+    return metadata;
+  };
+
+  get = function (it) {
+    return wmget.call(store$1, it) || {};
+  };
+
+  has$1 = function (it) {
+    return wmhas.call(store$1, it);
+  };
+} else {
+  var STATE = sharedKey('state');
+  hiddenKeys[STATE] = true;
+
+  set = function (it, metadata) {
+    if (has(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
+    metadata.facade = it;
+    createNonEnumerableProperty(it, STATE, metadata);
+    return metadata;
+  };
+
+  get = function (it) {
+    return has(it, STATE) ? it[STATE] : {};
+  };
+
+  has$1 = function (it) {
+    return has(it, STATE);
+  };
+}
+
+var internalState = {
+  set: set,
+  get: get,
+  has: has$1,
+  enforce: enforce,
+  getterFor: getterFor
+};
+var redefine = createCommonjsModule(function (module) {
+  var getInternalState = internalState.get;
+  var enforceInternalState = internalState.enforce;
+  var TEMPLATE = String(String).split('String');
+  (module.exports = function (O, key, value, options) {
+    var unsafe = options ? !!options.unsafe : false;
+    var simple = options ? !!options.enumerable : false;
+    var noTargetGet = options ? !!options.noTargetGet : false;
+    var state;
+
+    if (typeof value == 'function') {
+      if (typeof key == 'string' && !has(value, 'name')) {
+        createNonEnumerableProperty(value, 'name', key);
+      }
+
+      state = enforceInternalState(value);
+
+      if (!state.source) {
+        state.source = TEMPLATE.join(typeof key == 'string' ? key : '');
+      }
+    }
+
+    if (O === global_1) {
+      if (simple) O[key] = value;else setGlobal(key, value);
+      return;
+    } else if (!unsafe) {
+      delete O[key];
+    } else if (!noTargetGet && O[key]) {
+      simple = true;
+    }
+
+    if (simple) O[key] = value;else createNonEnumerableProperty(O, key, value); // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+  })(Function.prototype, 'toString', function toString() {
+    return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
+  });
+});
+var path = global_1;
+
+var aFunction = function (variable) {
+  return typeof variable == 'function' ? variable : undefined;
+};
+
+var getBuiltIn = function (namespace, method) {
+  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global_1[namespace]) : path[namespace] && path[namespace][method] || global_1[namespace] && global_1[namespace][method];
+};
+
+var ceil = Math.ceil;
+var floor = Math.floor; // `ToInteger` abstract operation
+// https://tc39.es/ecma262/#sec-tointeger
+
+var toInteger$1 = function (argument) {
+  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
+};
+
+var min$2 = Math.min; // `ToLength` abstract operation
+// https://tc39.es/ecma262/#sec-tolength
+
+var toLength = function (argument) {
+  return argument > 0 ? min$2(toInteger$1(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+var max$2 = Math.max;
+var min$1$1 = Math.min; // Helper for a popular repeating case of the spec:
+// Let integer be ? ToInteger(index).
+// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
+
+var toAbsoluteIndex = function (index, length) {
+  var integer = toInteger$1(index);
+  return integer < 0 ? max$2(integer + length, 0) : min$1$1(integer, length);
+}; // `Array.prototype.{ indexOf, includes }` methods implementation
+
+
+var createMethod = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIndexedObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value; // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare -- NaN check
+
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++]; // eslint-disable-next-line no-self-compare -- NaN check
+
+      if (value != value) return true; // Array#indexOf ignores holes, Array#includes - not
+    } else for (; length > index; index++) {
+      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+    }
+    return !IS_INCLUDES && -1;
+  };
+};
+
+var arrayIncludes = {
+  // `Array.prototype.includes` method
+  // https://tc39.es/ecma262/#sec-array.prototype.includes
+  includes: createMethod(true),
+  // `Array.prototype.indexOf` method
+  // https://tc39.es/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod(false)
+};
+var indexOf = arrayIncludes.indexOf;
+
+var objectKeysInternal = function (object, names) {
+  var O = toIndexedObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+
+  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key); // Don't enum bug & hidden keys
+
+
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~indexOf(result, key) || result.push(key);
+  }
+
+  return result;
+}; // IE8- don't enum bug keys
+
+
+var enumBugKeys = ['constructor', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'toLocaleString', 'toString', 'valueOf'];
+var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype'); // `Object.getOwnPropertyNames` method
+// https://tc39.es/ecma262/#sec-object.getownpropertynames
+// eslint-disable-next-line es/no-object-getownpropertynames -- safe
+
+var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return objectKeysInternal(O, hiddenKeys$1);
+};
+
+var objectGetOwnPropertyNames = {
+  f: f$3
+}; // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
+
+var f$4 = Object.getOwnPropertySymbols;
+var objectGetOwnPropertySymbols = {
+  f: f$4
+}; // all object keys, includes non-enumerable and symbols
+
+var ownKeys$1$1 = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
+  var keys = objectGetOwnPropertyNames.f(anObject(it));
+  var getOwnPropertySymbols = objectGetOwnPropertySymbols.f;
+  return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys;
+};
+
+var copyConstructorProperties = function (target, source) {
+  var keys = ownKeys$1$1(source);
+  var defineProperty = objectDefineProperty.f;
+  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (!has(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
+  }
+};
+
+var replacement = /#|\.prototype\./;
+
+var isForced = function (feature, detection) {
+  var value = data[normalize(feature)];
+  return value == POLYFILL ? true : value == NATIVE ? false : typeof detection == 'function' ? fails(detection) : !!detection;
+};
+
+var normalize = isForced.normalize = function (string) {
+  return String(string).replace(replacement, '.').toLowerCase();
+};
+
+var data = isForced.data = {};
+var NATIVE = isForced.NATIVE = 'N';
+var POLYFILL = isForced.POLYFILL = 'P';
+var isForced_1 = isForced;
+var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
+/*
+  options.target      - name of the target object
+  options.global      - target is the global object
+  options.stat        - export as static methods of target
+  options.proto       - export as prototype methods of target
+  options.real        - real prototype method for the `pure` version
+  options.forced      - export even if the native feature is available
+  options.bind        - bind methods to the target, required for the `pure` version
+  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
+  options.sham        - add a flag to not completely full polyfills
+  options.enumerable  - export as enumerable property
+  options.noTargetGet - prevent calling a getter on target
+*/
+
+var _export = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
+
+  if (GLOBAL) {
+    target = global_1;
+  } else if (STATIC) {
+    target = global_1[TARGET] || setGlobal(TARGET, {});
+  } else {
+    target = (global_1[TARGET] || {}).prototype;
+  }
+
+  if (target) for (key in source) {
+    sourceProperty = source[key];
+
+    if (options.noTargetGet) {
+      descriptor = getOwnPropertyDescriptor$1(target, key);
+      targetProperty = descriptor && descriptor.value;
+    } else targetProperty = target[key];
+
+    FORCED = isForced_1(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced); // contained in target
+
+    if (!FORCED && targetProperty !== undefined) {
+      if (typeof sourceProperty === typeof targetProperty) continue;
+      copyConstructorProperties(sourceProperty, targetProperty);
+    } // add a flag to not completely full polyfills
+
+
+    if (options.sham || targetProperty && targetProperty.sham) {
+      createNonEnumerableProperty(sourceProperty, 'sham', true);
+    } // extend global
+
+
+    redefine(target, key, sourceProperty, options);
+  }
+};
+
+var aFunction$1 = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function');
+  }
+
+  return it;
+}; // optional / simple context binding
+
+
+var functionBindContext = function (fn, that, length) {
+  aFunction$1(fn);
+  if (that === undefined) return fn;
+
+  switch (length) {
+    case 0:
+      return function () {
+        return fn.call(that);
+      };
+
+    case 1:
+      return function (a) {
+        return fn.call(that, a);
+      };
+
+    case 2:
+      return function (a, b) {
+        return fn.call(that, a, b);
+      };
+
+    case 3:
+      return function (a, b, c) {
+        return fn.call(that, a, b, c);
+      };
+  }
+
+  return function
+    /* ...args */
+  () {
+    return fn.apply(that, arguments);
+  };
+}; // `IsArray` abstract operation
+// https://tc39.es/ecma262/#sec-isarray
+// eslint-disable-next-line es/no-array-isarray -- safe
+
+
+var isArray = Array.isArray || function isArray(arg) {
+  return classofRaw(arg) == 'Array';
+};
+
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || '';
+var process$1 = global_1.process;
+var versions = process$1 && process$1.versions;
+var v8 = versions && versions.v8;
+var match$4, version;
+
+if (v8) {
+  match$4 = v8.split('.');
+  version = match$4[0] < 4 ? 1 : match$4[0] + match$4[1];
+} else if (engineUserAgent) {
+  match$4 = engineUserAgent.match(/Edge\/(\d+)/);
+
+  if (!match$4 || match$4[1] >= 74) {
+    match$4 = engineUserAgent.match(/Chrome\/(\d+)/);
+    if (match$4) version = match$4[1];
+  }
+}
+
+var engineV8Version = version && +version;
+/* eslint-disable es/no-symbol -- required for testing */
+// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
+
+var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
+  return !String(Symbol()) || // Chrome 38 Symbol has incorrect toString conversion
+  // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
+  !Symbol.sham && engineV8Version && engineV8Version < 41;
+});
+/* eslint-disable es/no-symbol -- required for testing */
+
+var useSymbolAsUid = nativeSymbol && !Symbol.sham && typeof Symbol.iterator == 'symbol';
+var WellKnownSymbolsStore = shared('wks');
+var Symbol$1 = global_1.Symbol;
+var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
+
+var wellKnownSymbol = function (name) {
+  if (!has(WellKnownSymbolsStore, name) || !(nativeSymbol || typeof WellKnownSymbolsStore[name] == 'string')) {
+    if (nativeSymbol && has(Symbol$1, name)) {
+      WellKnownSymbolsStore[name] = Symbol$1[name];
+    } else {
+      WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
+    }
+  }
+
+  return WellKnownSymbolsStore[name];
+};
+
+var SPECIES = wellKnownSymbol('species'); // `ArraySpeciesCreate` abstract operation
+// https://tc39.es/ecma262/#sec-arrayspeciescreate
+
+var arraySpeciesCreate = function (originalArray, length) {
+  var C;
+
+  if (isArray(originalArray)) {
+    C = originalArray.constructor; // cross-realm fallback
+
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;else if (isObject(C)) {
+      C = C[SPECIES];
+      if (C === null) C = undefined;
+    }
+  }
+
+  return new (C === undefined ? Array : C)(length === 0 ? 0 : length);
+};
+
+var push = [].push; // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
+
+var createMethod$1 = function (TYPE) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var IS_FILTER_OUT = TYPE == 7;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  return function ($this, callbackfn, that, specificCreate) {
+    var O = toObject($this);
+    var self = indexedObject(O);
+    var boundFunction = functionBindContext(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var create = specificCreate || arraySpeciesCreate;
+    var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_OUT ? create($this, 0) : undefined;
+    var value, result;
+
+    for (; length > index; index++) if (NO_HOLES || index in self) {
+      value = self[index];
+      result = boundFunction(value, index, O);
+
+      if (TYPE) {
+        if (IS_MAP) target[index] = result; // map
+        else if (result) switch (TYPE) {
+          case 3:
+            return true;
+          // some
+
+          case 5:
+            return value;
+          // find
+
+          case 6:
+            return index;
+          // findIndex
+
+          case 2:
+            push.call(target, value);
+          // filter
+        } else switch (TYPE) {
+          case 4:
+            return false;
+          // every
+
+          case 7:
+            push.call(target, value);
+          // filterOut
+        }
+      }
+    }
+
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
+  };
+};
+
+var arrayIteration = {
+  // `Array.prototype.forEach` method
+  // https://tc39.es/ecma262/#sec-array.prototype.foreach
+  forEach: createMethod$1(0),
+  // `Array.prototype.map` method
+  // https://tc39.es/ecma262/#sec-array.prototype.map
+  map: createMethod$1(1),
+  // `Array.prototype.filter` method
+  // https://tc39.es/ecma262/#sec-array.prototype.filter
+  filter: createMethod$1(2),
+  // `Array.prototype.some` method
+  // https://tc39.es/ecma262/#sec-array.prototype.some
+  some: createMethod$1(3),
+  // `Array.prototype.every` method
+  // https://tc39.es/ecma262/#sec-array.prototype.every
+  every: createMethod$1(4),
+  // `Array.prototype.find` method
+  // https://tc39.es/ecma262/#sec-array.prototype.find
+  find: createMethod$1(5),
+  // `Array.prototype.findIndex` method
+  // https://tc39.es/ecma262/#sec-array.prototype.findIndex
+  findIndex: createMethod$1(6),
+  // `Array.prototype.filterOut` method
+  // https://github.com/tc39/proposal-array-filtering
+  filterOut: createMethod$1(7)
+}; // `Object.keys` method
+// https://tc39.es/ecma262/#sec-object.keys
+// eslint-disable-next-line es/no-object-keys -- safe
+
+var objectKeys = Object.keys || function keys(O) {
+  return objectKeysInternal(O, enumBugKeys);
+}; // `Object.defineProperties` method
+// https://tc39.es/ecma262/#sec-object.defineproperties
+// eslint-disable-next-line es/no-object-defineproperties -- safe
+
+
+var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = objectKeys(Properties);
+  var length = keys.length;
+  var index = 0;
+  var key;
+
+  while (length > index) objectDefineProperty.f(O, key = keys[index++], Properties[key]);
+
+  return O;
+};
+var html = getBuiltIn('document', 'documentElement');
+var GT = '>';
+var LT = '<';
+var PROTOTYPE = 'prototype';
+var SCRIPT = 'script';
+var IE_PROTO = sharedKey('IE_PROTO');
+
+var EmptyConstructor = function () {
+  /* empty */
+};
+
+var scriptTag = function (content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
+}; // Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+
+
+var NullProtoObjectViaActiveX = function (activeXDocument) {
+  activeXDocument.write(scriptTag(''));
+  activeXDocument.close();
+  var temp = activeXDocument.parentWindow.Object;
+  activeXDocument = null; // avoid memory leak
+
+  return temp;
+}; // Create object with fake `null` prototype: use iframe Object with cleared prototype
+
+
+var NullProtoObjectViaIFrame = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = documentCreateElement('iframe');
+  var JS = 'java' + SCRIPT + ':';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  html.appendChild(iframe); // https://github.com/zloirock/core-js/issues/475
+
+  iframe.src = String(JS);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(scriptTag('document.F=Object'));
+  iframeDocument.close();
+  return iframeDocument.F;
+}; // Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
+
+
+var activeXDocument;
+
+var NullProtoObject = function () {
+  try {
+    /* global ActiveXObject -- old IE */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile');
+  } catch (error) {
+    /* ignore */
+  }
+
+  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
+  var length = enumBugKeys.length;
+
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
+
+  return NullProtoObject();
+};
+
+hiddenKeys[IE_PROTO] = true; // `Object.create` method
+// https://tc39.es/ecma262/#sec-object.create
+
+var objectCreate = Object.create || function create(O, Properties) {
+  var result;
+
+  if (O !== null) {
+    EmptyConstructor[PROTOTYPE] = anObject(O);
+    result = new EmptyConstructor();
+    EmptyConstructor[PROTOTYPE] = null; // add "__proto__" for Object.getPrototypeOf polyfill
+
+    result[IE_PROTO] = O;
+  } else result = NullProtoObject();
+
+  return Properties === undefined ? result : objectDefineProperties(result, Properties);
+};
+
+var UNSCOPABLES = wellKnownSymbol('unscopables');
+var ArrayPrototype = Array.prototype; // Array.prototype[@@unscopables]
+// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
+
+if (ArrayPrototype[UNSCOPABLES] == undefined) {
+  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
+    configurable: true,
+    value: objectCreate(null)
+  });
+} // add a key to Array.prototype[@@unscopables]
+
+
+var addToUnscopables = function (key) {
+  ArrayPrototype[UNSCOPABLES][key] = true;
+};
+
+var $find = arrayIteration.find;
+var FIND = 'find';
+var SKIPS_HOLES = true; // Shouldn't skip holes
+
+if (FIND in []) Array(1)[FIND](function () {
+  SKIPS_HOLES = false;
+}); // `Array.prototype.find` method
+// https://tc39.es/ecma262/#sec-array.prototype.find
+
+_export({
+  target: 'Array',
+  proto: true,
+  forced: SKIPS_HOLES
+}, {
+  find: function find(callbackfn
+  /* , that = undefined */
+  ) {
+    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+  }
+}); // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
+
+
+addToUnscopables(FIND);
+
+var _class, _class2, _temp;
+
+var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_class = isCapture(_class = getEffect(_class = bodyMode(_class = trackRemoval(_class = (_temp = _class2 = /*#__PURE__*/function (_React$Component) {
+  _inherits$8(ReactTooltip, _React$Component);
+
+  _createClass$8(ReactTooltip, null, [{
+    key: "propTypes",
+    get: function get() {
+      return {
+        uuid: propTypes.exports.string,
+        children: propTypes.exports.any,
+        place: propTypes.exports.string,
+        type: propTypes.exports.string,
+        effect: propTypes.exports.string,
+        offset: propTypes.exports.object,
+        multiline: propTypes.exports.bool,
+        border: propTypes.exports.bool,
+        textColor: propTypes.exports.string,
+        backgroundColor: propTypes.exports.string,
+        borderColor: propTypes.exports.string,
+        arrowColor: propTypes.exports.string,
+        insecure: propTypes.exports.bool,
+        "class": propTypes.exports.string,
+        className: propTypes.exports.string,
+        id: propTypes.exports.string,
+        html: propTypes.exports.bool,
+        delayHide: propTypes.exports.number,
+        delayUpdate: propTypes.exports.number,
+        delayShow: propTypes.exports.number,
+        event: propTypes.exports.string,
+        eventOff: propTypes.exports.string,
+        isCapture: propTypes.exports.bool,
+        globalEventOff: propTypes.exports.string,
+        getContent: propTypes.exports.any,
+        afterShow: propTypes.exports.func,
+        afterHide: propTypes.exports.func,
+        overridePosition: propTypes.exports.func,
+        disable: propTypes.exports.bool,
+        scrollHide: propTypes.exports.bool,
+        resizeHide: propTypes.exports.bool,
+        wrapper: propTypes.exports.string,
+        bodyMode: propTypes.exports.bool,
+        possibleCustomEvents: propTypes.exports.string,
+        possibleCustomEventsOff: propTypes.exports.string,
+        clickable: propTypes.exports.bool
+      };
+    }
+  }]);
+
+  function ReactTooltip(props) {
+    var _this;
+
+    _classCallCheck$8(this, ReactTooltip);
+
+    _this = _possibleConstructorReturn$8(this, _getPrototypeOf$8(ReactTooltip).call(this, props));
+    _this.state = {
+      uuid: props.uuid || generateUUID(),
+      place: props.place || 'top',
+      // Direction of tooltip
+      desiredPlace: props.place || 'top',
+      type: 'dark',
+      // Color theme of tooltip
+      effect: 'float',
+      // float or fixed
+      show: false,
+      border: false,
+      customColors: {},
+      offset: {},
+      extraClass: '',
+      html: false,
+      delayHide: 0,
+      delayShow: 0,
+      event: props.event || null,
+      eventOff: props.eventOff || null,
+      currentEvent: null,
+      // Current mouse event
+      currentTarget: null,
+      // Current target of mouse event
+      ariaProps: parseAria(props),
+      // aria- and role attributes
+      isEmptyTip: false,
+      disable: false,
+      possibleCustomEvents: props.possibleCustomEvents || '',
+      possibleCustomEventsOff: props.possibleCustomEventsOff || '',
+      originTooltip: null,
+      isMultiline: false
+    };
+
+    _this.bind(['showTooltip', 'updateTooltip', 'hideTooltip', 'hideTooltipOnScroll', 'getTooltipContent', 'globalRebuild', 'globalShow', 'globalHide', 'onWindowResize', 'mouseOnToolTip']);
+
+    _this.mount = true;
+    _this.delayShowLoop = null;
+    _this.delayHideLoop = null;
+    _this.delayReshow = null;
+    _this.intervalUpdateContent = null;
+    return _this;
+  }
+  /**
+   * For unify the bind and unbind listener
+   */
+
+
+  _createClass$8(ReactTooltip, [{
+    key: "bind",
+    value: function bind(methodArray) {
+      var _this2 = this;
+
+      methodArray.forEach(function (method) {
+        _this2[method] = _this2[method].bind(_this2);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props = this.props;
+          _this$props.insecure;
+          var resizeHide = _this$props.resizeHide;
+      this.bindListener(); // Bind listener for tooltip
+
+      this.bindWindowEvents(resizeHide); // Bind global event for static method
+
+      this.injectStyles(); // Inject styles for each DOM root having tooltip.
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.mount = false;
+      this.clearTimer();
+      this.unbindListener();
+      this.removeScrollListener(this.state.currentTarget);
+      this.unbindWindowEvents();
+    }
+    /* Look for the closest DOM root having tooltip and inject styles. */
+
+  }, {
+    key: "injectStyles",
+    value: function injectStyles() {
+      var tooltipRef = this.tooltipRef;
+
+      if (!tooltipRef) {
+        return;
+      }
+
+      var parentNode = tooltipRef.parentNode;
+
+      while (parentNode.parentNode) {
+        parentNode = parentNode.parentNode;
+      }
+
+      var domRoot;
+
+      switch (parentNode.constructor.name) {
+        case 'Document':
+        case 'HTMLDocument':
+        case undefined:
+          domRoot = parentNode.head;
+          break;
+
+        case 'ShadowRoot':
+        default:
+          domRoot = parentNode;
+          break;
+      } // Prevent styles duplication.
+
+
+      if (!domRoot.querySelector('style[data-react-tooltip]')) {
+        var style = document.createElement('style');
+        style.textContent = baseCss;
+        style.setAttribute('data-react-tooltip', 'true');
+        domRoot.appendChild(style);
+      }
+    }
+    /**
+     * Return if the mouse is on the tooltip.
+     * @returns {boolean} true - mouse is on the tooltip
+     */
+
+  }, {
+    key: "mouseOnToolTip",
+    value: function mouseOnToolTip() {
+      var show = this.state.show;
+
+      if (show && this.tooltipRef) {
+        /* old IE or Firefox work around */
+        if (!this.tooltipRef.matches) {
+          /* old IE work around */
+          if (this.tooltipRef.msMatchesSelector) {
+            this.tooltipRef.matches = this.tooltipRef.msMatchesSelector;
+          } else {
+            /* old Firefox work around */
+            this.tooltipRef.matches = this.tooltipRef.mozMatchesSelector;
+          }
+        }
+
+        return this.tooltipRef.matches(':hover');
+      }
+
+      return false;
+    }
+    /**
+     * Pick out corresponded target elements
+     */
+
+  }, {
+    key: "getTargetArray",
+    value: function getTargetArray(id) {
+      var targetArray = [];
+      var selector;
+
+      if (!id) {
+        selector = '[data-tip]:not([data-for])';
+      } else {
+        var escaped = id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        selector = "[data-tip][data-for=\"".concat(escaped, "\"]");
+      } // Scan document for shadow DOM elements
+
+
+      nodeListToArray(document.getElementsByTagName('*')).filter(function (element) {
+        return element.shadowRoot;
+      }).forEach(function (element) {
+        targetArray = targetArray.concat(nodeListToArray(element.shadowRoot.querySelectorAll(selector)));
+      });
+      return targetArray.concat(nodeListToArray(document.querySelectorAll(selector)));
+    }
+    /**
+     * Bind listener to the target elements
+     * These listeners used to trigger showing or hiding the tooltip
+     */
+
+  }, {
+    key: "bindListener",
+    value: function bindListener() {
+      var _this3 = this;
+
+      var _this$props2 = this.props,
+          id = _this$props2.id,
+          globalEventOff = _this$props2.globalEventOff,
+          isCapture = _this$props2.isCapture;
+      var targetArray = this.getTargetArray(id);
+      targetArray.forEach(function (target) {
+        if (target.getAttribute('currentItem') === null) {
+          target.setAttribute('currentItem', 'false');
+        }
+
+        _this3.unbindBasicListener(target);
+
+        if (_this3.isCustomEvent(target)) {
+          _this3.customUnbindListener(target);
+        }
+      });
+
+      if (this.isBodyMode()) {
+        this.bindBodyListener(targetArray);
+      } else {
+        targetArray.forEach(function (target) {
+          var isCaptureMode = _this3.isCapture(target);
+
+          var effect = _this3.getEffect(target);
+
+          if (_this3.isCustomEvent(target)) {
+            _this3.customBindListener(target);
+
+            return;
+          }
+
+          target.addEventListener('mouseenter', _this3.showTooltip, isCaptureMode);
+          target.addEventListener('focus', _this3.showTooltip, isCaptureMode);
+
+          if (effect === 'float') {
+            target.addEventListener('mousemove', _this3.updateTooltip, isCaptureMode);
+          }
+
+          target.addEventListener('mouseleave', _this3.hideTooltip, isCaptureMode);
+          target.addEventListener('blur', _this3.hideTooltip, isCaptureMode);
+        });
+      } // Global event to hide tooltip
+
+
+      if (globalEventOff) {
+        window.removeEventListener(globalEventOff, this.hideTooltip);
+        window.addEventListener(globalEventOff, this.hideTooltip, isCapture);
+      } // Track removal of targetArray elements from DOM
+
+
+      this.bindRemovalTracker();
+    }
+    /**
+     * Unbind listeners on target elements
+     */
+
+  }, {
+    key: "unbindListener",
+    value: function unbindListener() {
+      var _this4 = this;
+
+      var _this$props3 = this.props,
+          id = _this$props3.id,
+          globalEventOff = _this$props3.globalEventOff;
+
+      if (this.isBodyMode()) {
+        this.unbindBodyListener();
+      } else {
+        var targetArray = this.getTargetArray(id);
+        targetArray.forEach(function (target) {
+          _this4.unbindBasicListener(target);
+
+          if (_this4.isCustomEvent(target)) _this4.customUnbindListener(target);
+        });
+      }
+
+      if (globalEventOff) window.removeEventListener(globalEventOff, this.hideTooltip);
+      this.unbindRemovalTracker();
+    }
+    /**
+     * Invoke this before bind listener and unmount the component
+     * it is necessary to invoke this even when binding custom event
+     * so that the tooltip can switch between custom and default listener
+     */
+
+  }, {
+    key: "unbindBasicListener",
+    value: function unbindBasicListener(target) {
+      var isCaptureMode = this.isCapture(target);
+      target.removeEventListener('mouseenter', this.showTooltip, isCaptureMode);
+      target.removeEventListener('mousemove', this.updateTooltip, isCaptureMode);
+      target.removeEventListener('mouseleave', this.hideTooltip, isCaptureMode);
+    }
+  }, {
+    key: "getTooltipContent",
+    value: function getTooltipContent() {
+      var _this$props4 = this.props,
+          getContent = _this$props4.getContent,
+          children = _this$props4.children; // Generate tooltip content
+
+      var content;
+
+      if (getContent) {
+        if (Array.isArray(getContent)) {
+          content = getContent[0] && getContent[0](this.state.originTooltip);
+        } else {
+          content = getContent(this.state.originTooltip);
+        }
+      }
+
+      return getTipContent(this.state.originTooltip, children, content, this.state.isMultiline);
+    }
+  }, {
+    key: "isEmptyTip",
+    value: function isEmptyTip(placeholder) {
+      return typeof placeholder === 'string' && placeholder === '' || placeholder === null;
+    }
+    /**
+     * When mouse enter, show the tooltip
+     */
+
+  }, {
+    key: "showTooltip",
+    value: function showTooltip(e, isGlobalCall) {
+      if (!this.tooltipRef) {
+        return;
+      }
+
+      if (isGlobalCall) {
+        // Don't trigger other elements belongs to other ReactTooltip
+        var targetArray = this.getTargetArray(this.props.id);
+        var isMyElement = targetArray.some(function (ele) {
+          return ele === e.currentTarget;
+        });
+        if (!isMyElement) return;
+      } // Get the tooltip content
+      // calculate in this phrase so that tip width height can be detected
+
+
+      var _this$props5 = this.props,
+          multiline = _this$props5.multiline,
+          getContent = _this$props5.getContent;
+      var originTooltip = e.currentTarget.getAttribute('data-tip');
+      var isMultiline = e.currentTarget.getAttribute('data-multiline') || multiline || false; // If it is focus event or called by ReactTooltip.show, switch to `solid` effect
+
+      var switchToSolid = e instanceof window.FocusEvent || isGlobalCall; // if it needs to skip adding hide listener to scroll
+
+      var scrollHide = true;
+
+      if (e.currentTarget.getAttribute('data-scroll-hide')) {
+        scrollHide = e.currentTarget.getAttribute('data-scroll-hide') === 'true';
+      } else if (this.props.scrollHide != null) {
+        scrollHide = this.props.scrollHide;
+      } // adding aria-describedby to target to make tooltips read by screen readers
+
+
+      if (e && e.currentTarget && e.currentTarget.setAttribute) {
+        e.currentTarget.setAttribute('aria-describedby', this.state.uuid);
+      } // Make sure the correct place is set
+
+
+      var desiredPlace = e.currentTarget.getAttribute('data-place') || this.props.place || 'top';
+      var effect = switchToSolid && 'solid' || this.getEffect(e.currentTarget);
+      var offset = e.currentTarget.getAttribute('data-offset') || this.props.offset || {};
+      var result = getPosition(e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
+
+      if (result.position && this.props.overridePosition) {
+        result.position = this.props.overridePosition(result.position, e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
+      }
+
+      var place = result.isNewState ? result.newState.place : desiredPlace; // To prevent previously created timers from triggering
+
+      this.clearTimer();
+      var target = e.currentTarget;
+      var reshowDelay = this.state.show ? target.getAttribute('data-delay-update') || this.props.delayUpdate : 0;
+      var self = this;
+
+      var updateState = function updateState() {
+        self.setState({
+          originTooltip: originTooltip,
+          isMultiline: isMultiline,
+          desiredPlace: desiredPlace,
+          place: place,
+          type: target.getAttribute('data-type') || self.props.type || 'dark',
+          customColors: {
+            text: target.getAttribute('data-text-color') || self.props.textColor || null,
+            background: target.getAttribute('data-background-color') || self.props.backgroundColor || null,
+            border: target.getAttribute('data-border-color') || self.props.borderColor || null,
+            arrow: target.getAttribute('data-arrow-color') || self.props.arrowColor || null
+          },
+          effect: effect,
+          offset: offset,
+          html: (target.getAttribute('data-html') ? target.getAttribute('data-html') === 'true' : self.props.html) || false,
+          delayShow: target.getAttribute('data-delay-show') || self.props.delayShow || 0,
+          delayHide: target.getAttribute('data-delay-hide') || self.props.delayHide || 0,
+          delayUpdate: target.getAttribute('data-delay-update') || self.props.delayUpdate || 0,
+          border: (target.getAttribute('data-border') ? target.getAttribute('data-border') === 'true' : self.props.border) || false,
+          extraClass: target.getAttribute('data-class') || self.props["class"] || self.props.className || '',
+          disable: (target.getAttribute('data-tip-disable') ? target.getAttribute('data-tip-disable') === 'true' : self.props.disable) || false,
+          currentTarget: target
+        }, function () {
+          if (scrollHide) {
+            self.addScrollListener(self.state.currentTarget);
+          }
+
+          self.updateTooltip(e);
+
+          if (getContent && Array.isArray(getContent)) {
+            self.intervalUpdateContent = setInterval(function () {
+              if (self.mount) {
+                var _getContent = self.props.getContent;
+                var placeholder = getTipContent(originTooltip, '', _getContent[0](), isMultiline);
+                var isEmptyTip = self.isEmptyTip(placeholder);
+                self.setState({
+                  isEmptyTip: isEmptyTip
+                });
+                self.updatePosition();
+              }
+            }, getContent[1]);
+          }
+        });
+      }; // If there is no delay call immediately, don't allow events to get in first.
+
+
+      if (reshowDelay) {
+        this.delayReshow = setTimeout(updateState, reshowDelay);
+      } else {
+        updateState();
+      }
+    }
+    /**
+     * When mouse hover, update tool tip
+     */
+
+  }, {
+    key: "updateTooltip",
+    value: function updateTooltip(e) {
+      var _this5 = this;
+
+      var _this$state = this.state,
+          delayShow = _this$state.delayShow,
+          disable = _this$state.disable;
+      var afterShow = this.props.afterShow;
+      var placeholder = this.getTooltipContent();
+      var eventTarget = e.currentTarget || e.target; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
+
+      if (this.mouseOnToolTip()) {
+        return;
+      } // if the tooltip is empty, disable the tooltip
+
+
+      if (this.isEmptyTip(placeholder) || disable) {
+        return;
+      }
+
+      var delayTime = !this.state.show ? parseInt(delayShow, 10) : 0;
+
+      var updateState = function updateState() {
+        if (Array.isArray(placeholder) && placeholder.length > 0 || placeholder) {
+          var isInvisible = !_this5.state.show;
+
+          _this5.setState({
+            currentEvent: e,
+            currentTarget: eventTarget,
+            show: true
+          }, function () {
+            _this5.updatePosition();
+
+            if (isInvisible && afterShow) {
+              afterShow(e);
+            }
+          });
+        }
+      };
+
+      clearTimeout(this.delayShowLoop);
+
+      if (delayTime) {
+        this.delayShowLoop = setTimeout(updateState, delayTime);
+      } else {
+        updateState();
+      }
+    }
+    /*
+     * If we're mousing over the tooltip remove it when we leave.
+     */
+
+  }, {
+    key: "listenForTooltipExit",
+    value: function listenForTooltipExit() {
+      var show = this.state.show;
+
+      if (show && this.tooltipRef) {
+        this.tooltipRef.addEventListener('mouseleave', this.hideTooltip);
+      }
+    }
+  }, {
+    key: "removeListenerForTooltipExit",
+    value: function removeListenerForTooltipExit() {
+      var show = this.state.show;
+
+      if (show && this.tooltipRef) {
+        this.tooltipRef.removeEventListener('mouseleave', this.hideTooltip);
+      }
+    }
+    /**
+     * When mouse leave, hide tooltip
+     */
+
+  }, {
+    key: "hideTooltip",
+    value: function hideTooltip(e, hasTarget) {
+      var _this6 = this;
+
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+        isScroll: false
+      };
+      var disable = this.state.disable;
+      var isScroll = options.isScroll;
+      var delayHide = isScroll ? 0 : this.state.delayHide;
+      var afterHide = this.props.afterHide;
+      var placeholder = this.getTooltipContent();
+      if (!this.mount) return;
+      if (this.isEmptyTip(placeholder) || disable) return; // if the tooltip is empty, disable the tooltip
+
+      if (hasTarget) {
+        // Don't trigger other elements belongs to other ReactTooltip
+        var targetArray = this.getTargetArray(this.props.id);
+        var isMyElement = targetArray.some(function (ele) {
+          return ele === e.currentTarget;
+        });
+        if (!isMyElement || !this.state.show) return;
+      } // clean up aria-describedby when hiding tooltip
+
+
+      if (e && e.currentTarget && e.currentTarget.removeAttribute) {
+        e.currentTarget.removeAttribute('aria-describedby');
+      }
+
+      var resetState = function resetState() {
+        var isVisible = _this6.state.show; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
+
+        if (_this6.mouseOnToolTip()) {
+          _this6.listenForTooltipExit();
+
+          return;
+        }
+
+        _this6.removeListenerForTooltipExit();
+
+        _this6.setState({
+          show: false
+        }, function () {
+          _this6.removeScrollListener(_this6.state.currentTarget);
+
+          if (isVisible && afterHide) {
+            afterHide(e);
+          }
+        });
+      };
+
+      this.clearTimer();
+
+      if (delayHide) {
+        this.delayHideLoop = setTimeout(resetState, parseInt(delayHide, 10));
+      } else {
+        resetState();
+      }
+    }
+    /**
+     * When scroll, hide tooltip
+     */
+
+  }, {
+    key: "hideTooltipOnScroll",
+    value: function hideTooltipOnScroll(event, hasTarget) {
+      this.hideTooltip(event, hasTarget, {
+        isScroll: true
+      });
+    }
+    /**
+     * Add scroll event listener when tooltip show
+     * automatically hide the tooltip when scrolling
+     */
+
+  }, {
+    key: "addScrollListener",
+    value: function addScrollListener(currentTarget) {
+      var isCaptureMode = this.isCapture(currentTarget);
+      window.addEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
+    }
+  }, {
+    key: "removeScrollListener",
+    value: function removeScrollListener(currentTarget) {
+      var isCaptureMode = this.isCapture(currentTarget);
+      window.removeEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
+    } // Calculation the position
+
+  }, {
+    key: "updatePosition",
+    value: function updatePosition() {
+      var _this7 = this;
+
+      var _this$state2 = this.state,
+          currentEvent = _this$state2.currentEvent,
+          currentTarget = _this$state2.currentTarget,
+          place = _this$state2.place,
+          desiredPlace = _this$state2.desiredPlace,
+          effect = _this$state2.effect,
+          offset = _this$state2.offset;
+      var node = this.tooltipRef;
+      var result = getPosition(currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
+
+      if (result.position && this.props.overridePosition) {
+        result.position = this.props.overridePosition(result.position, currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
+      }
+
+      if (result.isNewState) {
+        // Switch to reverse placement
+        return this.setState(result.newState, function () {
+          _this7.updatePosition();
+        });
+      } // Set tooltip position
+
+
+      node.style.left = result.position.left + 'px';
+      node.style.top = result.position.top + 'px';
+    }
+    /**
+     * CLear all kinds of timeout of interval
+     */
+
+  }, {
+    key: "clearTimer",
+    value: function clearTimer() {
+      clearTimeout(this.delayShowLoop);
+      clearTimeout(this.delayHideLoop);
+      clearTimeout(this.delayReshow);
+      clearInterval(this.intervalUpdateContent);
+    }
+  }, {
+    key: "hasCustomColors",
+    value: function hasCustomColors() {
+      var _this8 = this;
+
+      return Boolean(Object.keys(this.state.customColors).find(function (color) {
+        return color !== 'border' && _this8.state.customColors[color];
+      }) || this.state.border && this.state.customColors['border']);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this9 = this;
+
+      var _this$state3 = this.state,
+          extraClass = _this$state3.extraClass,
+          html = _this$state3.html,
+          ariaProps = _this$state3.ariaProps,
+          disable = _this$state3.disable,
+          uuid = _this$state3.uuid;
+      var content = this.getTooltipContent();
+      var isEmptyTip = this.isEmptyTip(content);
+      var style = generateTooltipStyle(this.state.uuid, this.state.customColors, this.state.type, this.state.border);
+      var tooltipClass = '__react_component_tooltip' + " ".concat(this.state.uuid) + (this.state.show && !disable && !isEmptyTip ? ' show' : '') + (this.state.border ? ' border' : '') + " place-".concat(this.state.place) + // top, bottom, left, right
+      " type-".concat(this.hasCustomColors() ? 'custom' : this.state.type) + ( // dark, success, warning, error, info, light, custom
+      this.props.delayUpdate ? ' allow_hover' : '') + (this.props.clickable ? ' allow_click' : '');
+      var Wrapper = this.props.wrapper;
+
+      if (ReactTooltip.supportedWrappers.indexOf(Wrapper) < 0) {
+        Wrapper = ReactTooltip.defaultProps.wrapper;
+      }
+
+      var wrapperClassName = [tooltipClass, extraClass].filter(Boolean).join(' ');
+
+      if (html) {
+        var htmlContent = "".concat(content, "\n<style aria-hidden=\"true\">").concat(style, "</style>");
+        return React.createElement(Wrapper, _extends$5({
+          className: "".concat(wrapperClassName),
+          id: this.props.id || uuid,
+          ref: function ref(_ref) {
+            return _this9.tooltipRef = _ref;
+          }
+        }, ariaProps, {
+          "data-id": "tooltip",
+          dangerouslySetInnerHTML: {
+            __html: htmlContent
+          }
+        }));
+      } else {
+        return React.createElement(Wrapper, _extends$5({
+          className: "".concat(wrapperClassName),
+          id: this.props.id || uuid
+        }, ariaProps, {
+          ref: function ref(_ref2) {
+            return _this9.tooltipRef = _ref2;
+          },
+          "data-id": "tooltip"
+        }), React.createElement("style", {
+          dangerouslySetInnerHTML: {
+            __html: style
+          },
+          "aria-hidden": "true"
+        }), content);
+      }
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      var ariaProps = prevState.ariaProps;
+      var newAriaProps = parseAria(nextProps);
+      var isChanged = Object.keys(newAriaProps).some(function (props) {
+        return newAriaProps[props] !== ariaProps[props];
+      });
+
+      if (!isChanged) {
+        return null;
+      }
+
+      return _objectSpread2({}, prevState, {
+        ariaProps: newAriaProps
+      });
+    }
+  }]);
+
+  return ReactTooltip;
+}(React.Component), _defineProperty$9(_class2, "defaultProps", {
+  insecure: true,
+  resizeHide: true,
+  wrapper: 'div',
+  clickable: false
+}), _defineProperty$9(_class2, "supportedWrappers", ['div', 'span']), _defineProperty$9(_class2, "displayName", 'ReactTooltip'), _temp)) || _class) || _class) || _class) || _class) || _class) || _class) || _class;
+
+var styles$18 = {"text--truncate":"Tooltip-module_text--truncate__Zp5oG","react-tooltip":"Tooltip-module_react-tooltip__RadNp","react-tooltip-left":"Tooltip-module_react-tooltip-left__xv6S4","react-tooltip-right":"Tooltip-module_react-tooltip-right__NBuxn","react-tooltip-center":"Tooltip-module_react-tooltip-center__lpMOs"};
 
 /**
- * Accordion - stateless presentational component
+ * Tooltip - stateless presentational component
  * @param {object} props - props
- * @param {array} props.data - accordion content
- * @param {bool} props.hasNumber - has number
- * @param {string} props.size
+ * @param {object} props.children - children
+ * @param {string} props.placement - placement, default `bottom`
+ * @param {string} props.align - align, default `left`
+ * @param {string} props.effect - behaviour of tooltip
+ * @param {string|object} props.content - content
+ * @param {bool} props.disabled - disabled
+ * @param {bool} props.showOnClick - show on click
  * @return {object} An object of children element
  */
 
-const Accordion = ({
-  data,
-  hasNumber,
-  size
-}) => /*#__PURE__*/React.createElement("div", null, data.map((item, index) => {
-  const {
-    title,
-    content
-  } = item;
-  return /*#__PURE__*/React.createElement(AccordionItem, {
-    key: uuid_1(),
-    number: hasNumber ? index + 1 : null,
-    title: title,
-    size: size,
-    content: content
-  });
-}));
-
-Accordion.displayName = 'Accordion';
-Accordion.propTypes = {
-  data: propTypes.exports.arrayOf(propTypes.exports.shape({
-    title: propTypes.exports.node.isRequired,
-    content: propTypes.exports.node.isRequired
-  })).isRequired,
-  hasNumber: propTypes.exports.bool,
-  size: propTypes.exports.oneOf(['small', 'medium'])
-};
-Accordion.defaultProps = {
-  size: 'medium',
-  hasNumber: false
-};
-var Accordion$1 = /*#__PURE__*/react.exports.memo(Accordion);
-
-var css_248z$1a = ".Alert-module_text--truncate__eaYch {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Alert-module_alert-message__xbVJN {\n  position: relative;\n  padding: 10px 15px;\n  line-height: 1;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  color: #1f1f1f;\n}\n.Alert-module_alert-message__xbVJN .Alert-module_alert__message__4TQjo {\n  padding: 0 15px;\n  text-align: left;\n  flex: 2;\n  margin: 0;\n  font-size: 12px;\n  line-height: 16px;\n  width: 210px;\n}\n.Alert-module_alert-message--alert__RIDkz {\n  background: #ffebed;\n  border: 1px solid #ff3245;\n}\n.Alert-module_alert-message--alert__RIDkz svg {\n  align-items: center;\n  color: #ff3245;\n}\n.Alert-module_alert-message--warning__MehY2 {\n  background: #fff7e5;\n  border: 1px solid #ffb000;\n}\n.Alert-module_alert-message--warning__MehY2 svg {\n  align-items: center;\n  color: #ffb000;\n}\n.Alert-module_alert-message--success__EpRxy {\n  background: #e9f8ef;\n  border: 1px solid #29b662;\n}\n.Alert-module_alert-message--success__EpRxy svg {\n  align-items: center;\n  color: #29b662;\n}\n.Alert-module_alert-message--info__XWRBn {\n  background: #e5edff;\n  border: 1px solid #5d92ff;\n}\n.Alert-module_alert-message--info__XWRBn svg {\n  align-items: center;\n  color: #5d92ff;\n}";
-var styles$16 = {"text--truncate":"Alert-module_text--truncate__eaYch","alert-message":"Alert-module_alert-message__xbVJN","alert__message":"Alert-module_alert__message__4TQjo","alert-message--alert":"Alert-module_alert-message--alert__RIDkz","alert-message--warning":"Alert-module_alert-message--warning__MehY2","alert-message--success":"Alert-module_alert-message--success__EpRxy","alert-message--info":"Alert-module_alert-message--info__XWRBn"};
-styleInject(css_248z$1a);
-
-/**
- * Alert - stateless presentational component
- * @param {object} props - props
- * @param {node|string|object} props.children - children
- * @param {string|array} props.className - list of class names
- * @param {string} props.type - type of alert message
- * @return {object} An object of children element
- */
-
-const Alert = ({
+const Tooltip = ({
+  className,
   children,
-  className,
-  type
+  effect,
+  content,
+  disabled,
+  showOnClick,
+  placement,
+  align
 }) => {
-  const alertStyles = useStyles({
-    [styles$16['alert-message']]: true,
-    [styles$16[`alert-message--${type}`]]: type
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    className: alertStyles
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: mapIconToClass(type),
-    color: type
-  }), /*#__PURE__*/React.createElement("div", {
-    className: styles$16.alert__message
-  }, children));
+  const tooltipUUID = uuid_1();
+  const showOnClickProps = showOnClick ? {
+    delayHide: 1000,
+    event: 'click',
+    afterShow: () => ReactTooltip.hide()
+  } : {};
+  const tooltipStyles = useStyles({
+    [styles$18['react-tooltip']]: true,
+    [`react-tooltip-${align}`]: true
+  });
+  return /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: className,
+    "data-tip": true,
+    "data-for": tooltipUUID
+  }, children), /*#__PURE__*/React.createElement(ReactTooltip, _extends$6({
+    className: tooltipStyles,
+    background: "#000",
+    effect: effect,
+    id: tooltipUUID,
+    disable: disabled,
+    isCapture: true,
+    place: placement
+  }, showOnClickProps), content));
 };
 
-Alert.displayName = 'Alert';
-Alert.propTypes = {
-  children: propTypes.exports.oneOfType([propTypes.exports.node, propTypes.exports.string, propTypes.exports.func]).isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  type: propTypes.exports.oneOf(['info', 'success', 'warning', 'alert'])
+Tooltip.propTypes = {
+  effect: propTypes.exports.oneOf(['solid', 'float']),
+  placement: propTypes.exports.oneOf(['top', 'left', 'right', 'bottom']),
+  align: propTypes.exports.oneOf(['center', 'left', 'right']),
+  children: propTypes.exports.node.isRequired,
+  content: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
+  showOnClick: propTypes.exports.bool,
+  disabled: propTypes.exports.bool,
+  className: propTypes.exports.string
 };
-Alert.defaultProps = {
+Tooltip.defaultProps = {
   className: '',
-  type: 'info'
+  content: '',
+  effect: 'solid',
+  placement: 'bottom',
+  showOnClick: false,
+  disabled: false,
+  align: 'left'
 };
 
-var css_248z$19 = ".Avatar-module_text--truncate__7z5el {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Avatar-module_avatar__5-kP8 {\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  color: white;\n}\n.Avatar-module_avatar__5-kP8 p {\n  display: block;\n  visibility: hidden;\n  position: relative;\n  width: 11px;\n}\n.Avatar-module_avatar__5-kP8 p:first-letter {\n  visibility: visible;\n}\n.Avatar-module_avatar__5-kP8 img {\n  border-radius: 50%;\n}\n.Avatar-module_avatar--blank__EcdP6 {\n  background: #9368b3;\n}\n.Avatar-module_avatar--tiny__cvKKh {\n  width: 36px;\n  height: 36px;\n}\n.Avatar-module_avatar--tiny__cvKKh img {\n  width: inherit;\n}\n.Avatar-module_avatar--medium__un4U9 {\n  width: 42px;\n  height: 42px;\n}\n.Avatar-module_avatar--medium__un4U9 img {\n  width: inherit;\n}";
-var styles$15 = {"text--truncate":"Avatar-module_text--truncate__7z5el","avatar":"Avatar-module_avatar__5-kP8","avatar--blank":"Avatar-module_avatar--blank__EcdP6","avatar--tiny":"Avatar-module_avatar--tiny__cvKKh","avatar--medium":"Avatar-module_avatar--medium__un4U9"};
-styleInject(css_248z$19);
+var styles$17 = {"text--truncate":"Paragraph-module_text--truncate__9vDI7","paragraph":"Paragraph-module_paragraph__RPQE0","paragraph-uppercase":"Paragraph-module_paragraph-uppercase__A2oby","paragraph-padding--medium":"Paragraph-module_paragraph-padding--medium__n08e3","paragraph-padding--small":"Paragraph-module_paragraph-padding--small__PT8Gv","paragraph-padding--none":"Paragraph-module_paragraph-padding--none__vMqWI","paragraph-align--left":"Paragraph-module_paragraph-align--left__ZjYgF","paragraph-align--center":"Paragraph-module_paragraph-align--center__gKf1d","paragraph-align--right":"Paragraph-module_paragraph-align--right__vVOG2","paragraph-color--accent-1":"Paragraph-module_paragraph-color--accent-1__FFWMc","paragraph-color--accent-2":"Paragraph-module_paragraph-color--accent-2__-cKAe","paragraph-color--accent-3":"Paragraph-module_paragraph-color--accent-3__LBh-v","paragraph-color--accent-4":"Paragraph-module_paragraph-color--accent-4__SO04S","paragraph-color--accent-5":"Paragraph-module_paragraph-color--accent-5__sbq6v","paragraph-color--accent-6":"Paragraph-module_paragraph-color--accent-6__FocSG","paragraph-color--accent-7":"Paragraph-module_paragraph-color--accent-7__xErhj","paragraph-color--info":"Paragraph-module_paragraph-color--info__7PTO6","paragraph-color--white":"Paragraph-module_paragraph-color--white__VvZPs","paragraph-color--color-8":"Paragraph-module_paragraph-color--color-8__SA-2-","paragraph-size--10":"Paragraph-module_paragraph-size--10__19FM2","paragraph-size--12":"Paragraph-module_paragraph-size--12__QvBjN","paragraph-size--14":"Paragraph-module_paragraph-size--14__PpMUI","paragraph-size--16":"Paragraph-module_paragraph-size--16__wZWua","paragraph-size--18":"Paragraph-module_paragraph-size--18__QHIvC","paragraph-weight--300":"Paragraph-module_paragraph-weight--300__5vaXV","paragraph-weight--400":"Paragraph-module_paragraph-weight--400__X8AMy","paragraph-weight--700":"Paragraph-module_paragraph-weight--700__xmRe6","paragraph-line--18":"Paragraph-module_paragraph-line--18__myvqm","paragraph-line--20":"Paragraph-module_paragraph-line--20__4WrdL"};
 
-const renderVariant = (variant, src, name) => variant === 'image' ? /*#__PURE__*/React.createElement(Image$2, {
-  src: src
-}) : /*#__PURE__*/React.createElement("p", null, name);
 /**
- * Avatar - stateless presentational component
+ * Paragraph - stateless presentational component
  * @param {object} props - props
  * @param {string|array} props.className - list of class names
- * @param {string} props.size - size of avatar
- * @param {string} props.variant - variant of avatar image
- * @param {string} props.src - source of avatar image
- * @param {string} props.name - avatar name
+ * @param {object} props.children - children
+ * @param {string} props.color - color
+ * @param {number} props.size - size
+ * @param {string} props.align - align
+ * @param {string} props.padding - padding
+ * @param {number} props.weight - weight
+ * @param {boolean} props.uppercase - weight
+ * @param {number} props.line - line height
  * @return {object} An object of children element
  */
 
-
-const Avatar = ({
+const Paragraph = ({
   className,
+  children,
+  color,
   size,
-  variant,
-  src,
-  name
+  align,
+  padding,
+  weight,
+  uppercase,
+  line
 }) => {
-  const avatarStyles = useStyles({
-    [styles$15['avatar']]: true,
-    [styles$15[`avatar--${size}`]]: size,
-    [styles$15[`avatar--${variant}`]]: variant
+  const paragraphStyles = useStyles({
+    [styles$17['paragraph']]: true,
+    [styles$17[`paragraph-color--${color}`]]: color,
+    [styles$17[`paragraph-size--${size}`]]: size,
+    [styles$17[`paragraph-padding--${padding}`]]: padding,
+    [styles$17[`paragraph-align--${align}`]]: align,
+    [styles$17[`paragraph-weight--${weight}`]]: weight,
+    [styles$17['paragraph-uppercase']]: uppercase,
+    [styles$17[`paragraph-line--${line}`]]: line
   }, className);
-  return /*#__PURE__*/React.createElement("span", {
-    className: avatarStyles
-  }, renderVariant(variant, src, name));
+  return /*#__PURE__*/React.createElement("p", {
+    className: paragraphStyles
+  }, children);
 };
 
-Avatar.displayName = 'Avatar';
-Avatar.propTypes = {
+Paragraph.displayName = 'Paragraph';
+Paragraph.propTypes = {
+  children: propTypes.exports.node.isRequired,
   className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  name: propTypes.exports.string,
-  size: propTypes.exports.oneOf(['tiny', 'medium']),
-  src: propTypes.exports.string,
-  variant: propTypes.exports.oneOf(['image', 'blank'])
+  color: propTypes.exports.oneOf(['accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5', 'accent-6', 'accent-7', 'info', 'white']),
+  size: propTypes.exports.oneOf([10, 12, 14, 16, 18]),
+  align: propTypes.exports.oneOf(['left', 'center', 'right']),
+  padding: propTypes.exports.oneOf(['small', 'medium', 'none']),
+  weight: propTypes.exports.oneOf([300, 400, 700]),
+  uppercase: propTypes.exports.bool,
+  line: propTypes.exports.oneOf([18, 20])
 };
-Avatar.defaultProps = {
+Paragraph.defaultProps = {
   className: '',
-  name: null,
-  size: 'medium',
-  src: '',
-  variant: 'blank'
+  color: 'accent-1',
+  size: 14,
+  align: 'left',
+  padding: 'medium',
+  weight: 300,
+  uppercase: false,
+  line: 18
 };
 
-var css_248z$18 = ".Back-module_text--truncate__D3BTG {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Back-module_back__6QVso {\n  color: #1f1f1f;\n  font-size: 16px;\n  font-weight: 400;\n}\n.Back-module_back__6QVso button {\n  background-color: transparent;\n  font-weight: 400;\n  padding: 0 10px;\n}\n.Back-module_back__6QVso svg {\n  color: #7b7b7b;\n  cursor: pointer;\n}\n\n.Back-module_hidden__Y4mBY {\n  display: none;\n}";
-var styles$14 = {"text--truncate":"Back-module_text--truncate__D3BTG","back":"Back-module_back__6QVso","hidden":"Back-module_hidden__Y4mBY"};
-styleInject(css_248z$18);
+var styles$16 = {"text--truncate":"Input-module_text--truncate__tIA1t","form--has-error":"Input-module_form--has-error__Egj9b","form-field":"Input-module_form-field__5YTgz","label":"Input-module_label__gmqts","input__error":"Input-module_input__error__mMn-I","form-field--has-error":"Input-module_form-field--has-error__kFgNP","input__label":"Input-module_input__label__gjmTL","input__wrapper":"Input-module_input__wrapper__wv11S","input__wrapper--show-label":"Input-module_input__wrapper--show-label__TzFm-","input__wrapper--focused":"Input-module_input__wrapper--focused__2xWNt","input__wrapper--focused--table":"Input-module_input__wrapper--focused--table__md2io","input":"Input-module_input__505b7","bar":"Input-module_bar__5-fIy","error":"Input-module_error__38tit","input--transparent":"Input-module_input--transparent__AOANq","input--grayed-placeholder":"Input-module_input--grayed-placeholder__EHLHP","input--hidden-arrows":"Input-module_input--hidden-arrows__NUYwo","input--table":"Input-module_input--table__U5XYc","input__tooltip":"Input-module_input__tooltip__OcUUQ","input__tooltip--form":"Input-module_input__tooltip--form__dPlig"};
+
+var styles$15 = {"text--truncate":"Icon-module_text--truncate__B3o5H","icon--default":"Icon-module_icon--default__7ewH8","icon--white":"Icon-module_icon--white__FKvy8","icon--primary":"Icon-module_icon--primary__lclud","icon--color-2":"Icon-module_icon--color-2__fGvX7","icon--color-3":"Icon-module_icon--color-3__UWX4B","icon--warning":"Icon-module_icon--warning__2xp2W","icon--success":"Icon-module_icon--success__Jbdc3","icon--alert":"Icon-module_icon--alert__Hlj7b","icon--info":"Icon-module_icon--info__sIO63","icon--spin":"Icon-module_icon--spin__79oK7","spinIcon":"Icon-module_spinIcon__KZUJm"};
+
+var css = {"text--truncate":"editor-icons-module_text--truncate__sYGOs","editor-icon":"editor-icons-module_editor-icon__IF6YS","icon-ab-testing":"editor-icons-module_icon-ab-testing__qSCoH","icon-align-center":"editor-icons-module_icon-align-center__FnT2y","icon-align-justify":"editor-icons-module_icon-align-justify__izCV3","icon-align-left":"editor-icons-module_icon-align-left__ZO0I-","icon-align-right":"editor-icons-module_icon-align-right__fZmog","icon-angle-double-down":"editor-icons-module_icon-angle-double-down__WoOTs","icon-angle-double-left":"editor-icons-module_icon-angle-double-left__pX-KE","icon-angle-double-right":"editor-icons-module_icon-angle-double-right__besDN","icon-angle-double-up":"editor-icons-module_icon-angle-double-up__--tEZ","icon-angle-down":"editor-icons-module_icon-angle-down__3QOMs","icon-angle-left":"editor-icons-module_icon-angle-left__DWVRT","icon-angle-right":"editor-icons-module_icon-angle-right__UFJOL","icon-angle-up":"editor-icons-module_icon-angle-up__pTLCI","icon-arrow-down":"editor-icons-module_icon-arrow-down__DxHIk","icon-arrow-left":"editor-icons-module_icon-arrow-left__NY2jS","icon-arrow-right":"editor-icons-module_icon-arrow-right__wK6bs","icon-arrow-up":"editor-icons-module_icon-arrow-up__-UxKi","icon-backward":"editor-icons-module_icon-backward__oCYh9","icon-barcode":"editor-icons-module_icon-barcode__0PDQ5","icon-bold":"editor-icons-module_icon-bold__p2ydG","icon-long-arrow-alt-up":"editor-icons-module_icon-long-arrow-alt-up__2rAf8","icon-borders":"editor-icons-module_icon-borders__Jzjr7","icon-box":"editor-icons-module_icon-box__fqOsM","icon-building":"editor-icons-module_icon-building__T-Cxk","icon-info-outline":"editor-icons-module_icon-info-outline__b86IL","icon-button":"editor-icons-module_icon-button__0-avg","icon-calendar":"editor-icons-module_icon-calendar__jgXsb","icon-caret-down":"editor-icons-module_icon-caret-down__aoKP4","icon-caret-left":"editor-icons-module_icon-caret-left__vZ3rQ","icon-caret-right":"editor-icons-module_icon-caret-right__n0lpq","icon-caret-up":"editor-icons-module_icon-caret-up__3f-2q","icon-check-square-o":"editor-icons-module_icon-check-square-o__Y4ZGf","icon-check-circle":"editor-icons-module_icon-check-circle__Yc6au","icon-check-square":"editor-icons-module_icon-check-square__eNgin","icon-chevron-down":"editor-icons-module_icon-chevron-down__OWeiY","icon-chevron-left":"editor-icons-module_icon-chevron-left__yOdWM","icon-chevron-up":"editor-icons-module_icon-chevron-up__oxTh9","icon-chevron-right":"editor-icons-module_icon-chevron-right__PcFJK","icon-circle":"editor-icons-module_icon-circle__bXuQ7","icon-clone-alt":"editor-icons-module_icon-clone-alt__n8s-6","icon-cloud-download-alt":"editor-icons-module_icon-cloud-download-alt__vWzVK","icon-cloud-upload":"editor-icons-module_icon-cloud-upload__0Scfk","icon-code":"editor-icons-module_icon-code__RTZlZ","icon-cog":"editor-icons-module_icon-cog__1Iorm","icon-copy_landing":"editor-icons-module_icon-copy_landing__h4MTP","icon-create":"editor-icons-module_icon-create__NiZeQ","icon-creative-commons-brands":"editor-icons-module_icon-creative-commons-brands__dc0nQ","icon-dashboard":"editor-icons-module_icon-dashboard__UI3cP","icon-desktop":"editor-icons-module_icon-desktop__H9DEv","icon-dot-circle":"editor-icons-module_icon-dot-circle__vwCr2","icon-duplicate":"editor-icons-module_icon-duplicate__WUP7C","icon-edit":"editor-icons-module_icon-edit__NZqxZ","icon-ellipsis-h":"editor-icons-module_icon-ellipsis-h__fIt-a","icon-ellipsis-v":"editor-icons-module_icon-ellipsis-v__ZId4E","icon-envelope":"editor-icons-module_icon-envelope__kGOPO","icon-sync":"editor-icons-module_icon-sync__oBJiO","icon-exchange-alt":"editor-icons-module_icon-exchange-alt__q-TT-","icon-exclamation-circle":"editor-icons-module_icon-exclamation-circle__qBlKH","icon-exclamation-triangle":"editor-icons-module_icon-exclamation-triangle__WzoeH","icon-button-paypal":"editor-icons-module_icon-button-paypal__Il2ju","icon-smart_section":"editor-icons-module_icon-smart_section__DlW-a","icon-external-link-alt":"editor-icons-module_icon-external-link-alt__3-xDo","icon-eye-close":"editor-icons-module_icon-eye-close__eeVNc","icon-eye-open":"editor-icons-module_icon-eye-open__VDOKK","icon-file":"editor-icons-module_icon-file__Ti1y6","icon-main_page":"editor-icons-module_icon-main_page__YxyKr","icon-folder-minus":"editor-icons-module_icon-folder-minus__LjD-Q","icon-folder-move-to":"editor-icons-module_icon-folder-move-to__K0ZFv","icon-folder-o":"editor-icons-module_icon-folder-o__Z4GeS","icon-folder-plus":"editor-icons-module_icon-folder-plus__Ftq5-","icon-folder":"editor-icons-module_icon-folder__RVnKJ","icon-font":"editor-icons-module_icon-font__UMA2G","icon-thank_you_page":"editor-icons-module_icon-thank_you_page__PfigI","icon-forward":"editor-icons-module_icon-forward__ML1NG","icon-globe":"editor-icons-module_icon-globe__I3VBg","icon-hand-up-alt":"editor-icons-module_icon-hand-up-alt__OPiBi","icon-hand-up":"editor-icons-module_icon-hand-up__ixFOg","icon-handlebar-circled":"editor-icons-module_icon-handlebar-circled__7o0ow","icon-header":"editor-icons-module_icon-header__u17pE","icon-header1":"editor-icons-module_icon-header1__L8fJz","icon-header2":"editor-icons-module_icon-header2__oTTks","icon-header3":"editor-icons-module_icon-header3__3Afg7","icon-header4":"editor-icons-module_icon-header4__cID6-","icon-header5":"editor-icons-module_icon-header5__OP2Y9","icon-heart":"editor-icons-module_icon-heart__Fo71q","icon-help_outline":"editor-icons-module_icon-help_outline__x5dos","icon-help":"editor-icons-module_icon-help__s8DQY","icon-history":"editor-icons-module_icon-history__sIVvX","icon-home":"editor-icons-module_icon-home__NIW-s","icon-icons":"editor-icons-module_icon-icons__mblfV","icon-indent":"editor-icons-module_icon-indent__MucuX","icon-info-circle":"editor-icons-module_icon-info-circle__9uis9","icon-button-payu":"editor-icons-module_icon-button-payu__qr1AC","icon-italic":"editor-icons-module_icon-italic__E9MH8","icon-js":"editor-icons-module_icon-js__7W4fJ","icon-key":"editor-icons-module_icon-key__N4zyM","icon-keyboard":"editor-icons-module_icon-keyboard__bp4un","icon-layers-2":"editor-icons-module_icon-layers-2__-7-9i","icon-lightbulb":"editor-icons-module_icon-lightbulb__rgk3f","icon-line-dash":"editor-icons-module_icon-line-dash__60kj5","icon-line-dots":"editor-icons-module_icon-line-dots__xdP0X","icon-line-height":"editor-icons-module_icon-line-height__msRqU","icon-line-solid":"editor-icons-module_icon-line-solid__-AYpL","icon-link":"editor-icons-module_icon-link__Y8DDs","icon-list-ol":"editor-icons-module_icon-list-ol__akV7Z","icon-list-ul":"editor-icons-module_icon-list-ul__lwmMI","icon-lock-open":"editor-icons-module_icon-lock-open__qUCA4","icon-lock":"editor-icons-module_icon-lock__-eaUE","icon-minus-circle":"editor-icons-module_icon-minus-circle__SiWie","icon-menu":"editor-icons-module_icon-menu__eLGNc","icon-minus-square":"editor-icons-module_icon-minus-square__seBU4","icon-button-stripe":"editor-icons-module_icon-button-stripe__tKrci","icon-mobile":"editor-icons-module_icon-mobile__gulDP","icon-move":"editor-icons-module_icon-move__L7y0K","icon-ok":"editor-icons-module_icon-ok__gy4N6","icon-outdent":"editor-icons-module_icon-outdent__MkdE-","icon-padding-bottom":"editor-icons-module_icon-padding-bottom__SdnH-","icon-padding-right":"editor-icons-module_icon-padding-right__nZWCG","icon-paragraph-widget":"editor-icons-module_icon-paragraph-widget__SPu-J","icon-paragraph":"editor-icons-module_icon-paragraph__sKCrL","icon-phone":"editor-icons-module_icon-phone__4tFxq","icon-photo":"editor-icons-module_icon-photo__LFnKE","icon-picture":"editor-icons-module_icon-picture__LJBeh","icon-archive-restore":"editor-icons-module_icon-archive-restore__ArEO3","icon-plus-circle":"editor-icons-module_icon-plus-circle__7hWX8","icon-plus-square":"editor-icons-module_icon-plus-square__GaK4y","icon-plus":"editor-icons-module_icon-plus__xoYCL","icon-publish":"editor-icons-module_icon-publish__Pxaqt","icon-pushpin":"editor-icons-module_icon-pushpin__pUcpG","icon-download":"editor-icons-module_icon-download__fk1G2","icon-radius-all":"editor-icons-module_icon-radius-all__7ExXa","icon-radius-left-down":"editor-icons-module_icon-radius-left-down__DkAVp","icon-radius-left-top":"editor-icons-module_icon-radius-left-top__sDSUm","icon-radius-right-down":"editor-icons-module_icon-radius-right-down__u--Sc","icon-radius-right-top":"editor-icons-module_icon-radius-right-top__fAmUA","icon-long-arrow-alt-up-left":"editor-icons-module_icon-long-arrow-alt-up-left__JZpyT","icon-redo":"editor-icons-module_icon-redo__RF1p3","icon-caps":"editor-icons-module_icon-caps__xxSSK","icon-reply":"editor-icons-module_icon-reply__MOq0G","icon-resize-horizontal":"editor-icons-module_icon-resize-horizontal__uUAL6","icon-resize-vertical":"editor-icons-module_icon-resize-vertical__t6Rh-","icon-save":"editor-icons-module_icon-save__Rv6V4","icon-search":"editor-icons-module_icon-search__4ZGJS","icon-section":"editor-icons-module_icon-section__eknzN","icon-long-arrow-alt-up-right":"editor-icons-module_icon-long-arrow-alt-up-right__MbeWS","icon-share":"editor-icons-module_icon-share__swdtv","icon-sort-down":"editor-icons-module_icon-sort-down__B5Xb0","icon-sort-up":"editor-icons-module_icon-sort-up__eIR5M","icon-sort":"editor-icons-module_icon-sort__Lnt5e","icon-spinner":"editor-icons-module_icon-spinner__5L1L0","icon-square-o":"editor-icons-module_icon-square-o__RGWin","icon-long-arrow-alt-down-left":"editor-icons-module_icon-long-arrow-alt-down-left__s-J5y","icon-long-arrow-alt-down-right":"editor-icons-module_icon-long-arrow-alt-down-right__giqXP","icon-strikethrough":"editor-icons-module_icon-strikethrough__k4LoJ","icon-suitcase":"editor-icons-module_icon-suitcase__O1Z0B","icon-switches":"editor-icons-module_icon-switches__TroPj","icon-sygnet":"editor-icons-module_icon-sygnet__Ve9QE","icon-tablet":"editor-icons-module_icon-tablet__uwZkH","icon-text-height":"editor-icons-module_icon-text-height__zlULH","icon-text-width":"editor-icons-module_icon-text-width__pDrqO","icon-text":"editor-icons-module_icon-text__9hDX6","icon-time":"editor-icons-module_icon-time__Zbeft","icon-timer":"editor-icons-module_icon-timer__uqu1w","icon-times-circle":"editor-icons-module_icon-times-circle__p9k5y","icon-trash":"editor-icons-module_icon-trash__OzME9","icon-underline":"editor-icons-module_icon-underline__vkClv","icon-undo":"editor-icons-module_icon-undo__3Y3GF","icon-unlink":"editor-icons-module_icon-unlink__QtQ2l","icon-user-tie":"editor-icons-module_icon-user-tie__KkBhi","icon-user":"editor-icons-module_icon-user__krB9f","icon-users":"editor-icons-module_icon-users__0ZaY5","icon-video":"editor-icons-module_icon-video__Iiy8H","icon-view_list":"editor-icons-module_icon-view_list__QWST3","icon-window-close":"editor-icons-module_icon-window-close__YQtOX","icon-long-arrow-alt-down":"editor-icons-module_icon-long-arrow-alt-down__dC-7l","icon-long-arrow-alt-left":"editor-icons-module_icon-long-arrow-alt-left__xEPOM","icon-long-arrow-alt-right":"editor-icons-module_icon-long-arrow-alt-right__iwbqN","icon-equal":"editor-icons-module_icon-equal__lqc76","icon-exclamation":"editor-icons-module_icon-exclamation__f3uoO","icon-exit":"editor-icons-module_icon-exit__X225z","icon-filter":"editor-icons-module_icon-filter__kDWZ1","icon-form":"editor-icons-module_icon-form__0e0io","icon-info":"editor-icons-module_icon-info__v8FzC","icon-minus":"editor-icons-module_icon-minus__EHEu8","icon-play":"editor-icons-module_icon-play__zkBZh","icon-question":"editor-icons-module_icon-question__5gN6R","icon-random":"editor-icons-module_icon-random__4qHQ4","icon-remove":"editor-icons-module_icon-remove__SVXlD","icon-share-square":"editor-icons-module_icon-share-square__GnXG5","icon-step-backward":"editor-icons-module_icon-step-backward__Mu1pD","icon-step-forward":"editor-icons-module_icon-step-forward__uJVBT","icon-button-pay":"editor-icons-module_icon-button-pay__qhlzG","icon-percent":"editor-icons-module_icon-percent__PobuD","icon-desktop-mobile2":"editor-icons-module_icon-desktop-mobile2__AIiwU","icon-lab":"editor-icons-module_icon-lab__U-Ws2","icon-api":"editor-icons-module_icon-api__tLSH-","icon-clipboard":"editor-icons-module_icon-clipboard__qst0U","icon-login":"editor-icons-module_icon-login__5FRMr","icon-shield-info":"editor-icons-module_icon-shield-info__Qb6o5","icon-shield":"editor-icons-module_icon-shield__mmY5L","icon-article":"editor-icons-module_icon-article__c-EH-","icon-block":"editor-icons-module_icon-block__HjqO9","icon-reset":"editor-icons-module_icon-reset__hJNft","icon-star":"editor-icons-module_icon-star__sknoh","icon-share-alt":"editor-icons-module_icon-share-alt__p-X0-","icon-ai":"editor-icons-module_icon-ai__jm7WN","icon-line-chart":"editor-icons-module_icon-line-chart__LEY7X","icon-chart-alt":"editor-icons-module_icon-chart-alt__Xkw7k","icon-chart":"editor-icons-module_icon-chart__Dx3So","icon-web":"editor-icons-module_icon-web__IitoO","icon-popup":"editor-icons-module_icon-popup__RdDhk","icon-product":"editor-icons-module_icon-product__Rlht5","icon-money":"editor-icons-module_icon-money__phbdt","icon-credit-card":"editor-icons-module_icon-credit-card__vXzlH","icon-server":"editor-icons-module_icon-server__pCeqU","icon-play-lesson":"editor-icons-module_icon-play-lesson__EBuAy","icon-academy":"editor-icons-module_icon-academy__h1Gn5","icon-case-studies":"editor-icons-module_icon-case-studies__SPX6b","icon-video-alt":"editor-icons-module_icon-video-alt__5HHvi","icon-help-center":"editor-icons-module_icon-help-center__H6QuA","icon-bullhorn":"editor-icons-module_icon-bullhorn__5MoHk","icon-visits":"editor-icons-module_icon-visits__gsTMW","icon-templates":"editor-icons-module_icon-templates__yIj1U","icon-package":"editor-icons-module_icon-package__8Txt4","icon-gallery":"editor-icons-module_icon-gallery__truHd","icon-archive":"editor-icons-module_icon-archive__JDMFo","icon-users-circle":"editor-icons-module_icon-users-circle__Qb28f","icon-inbox":"editor-icons-module_icon-inbox__RAl-e","icon-workspaces":"editor-icons-module_icon-workspaces__yWeAM","icon-anchor":"editor-icons-module_icon-anchor__fhvU1","icon-guide":"editor-icons-module_icon-guide__RxiAx","icon-dis-rules":"editor-icons-module_icon-dis-rules__OXtyX","icon-champ":"editor-icons-module_icon-champ__mrfM-","icon-consultation":"editor-icons-module_icon-consultation__MB2CA","icon-configure":"editor-icons-module_icon-configure__-jhFD","icon-thumb-up":"editor-icons-module_icon-thumb-up__py0wj","icon-thumb-down":"editor-icons-module_icon-thumb-down__FO0D2","icon-star-outlined":"editor-icons-module_icon-star-outlined__ZS-1K","icon-palette":"editor-icons-module_icon-palette__Ug6-c","icon-brush":"editor-icons-module_icon-brush__klh5H","icon-globe-active-ssl":"editor-icons-module_icon-globe-active-ssl__PU5rf","icon-globe-active-no-ssl":"editor-icons-module_icon-globe-active-no-ssl__f4BPq","icon-hourglass-start":"editor-icons-module_icon-hourglass-start__UK9vT","icon-notifications":"editor-icons-module_icon-notifications__T5lOz","icon-extension":"editor-icons-module_icon-extension__8gP3E","icon-separate-borders":"editor-icons-module_icon-separate-borders__Wv0NR","icon-border-left":"editor-icons-module_icon-border-left__wgqIb","icon-border-right":"editor-icons-module_icon-border-right__1C0DA","icon-border-bottom":"editor-icons-module_icon-border-bottom__apehG","icon-border-top":"editor-icons-module_icon-border-top__tw7uc","icon-file-copy":"editor-icons-module_icon-file-copy__bnY8K","icon-arrow-increase":"editor-icons-module_icon-arrow-increase__LlNkT","icon-arrow-decrease":"editor-icons-module_icon-arrow-decrease__dccFe","icon-keyboard_command":"editor-icons-module_icon-keyboard_command__UzD8M","icon-backspace":"editor-icons-module_icon-backspace__f8Uib"};
 
 /**
- * Back - stateless presentational component
+ * Icon - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: back
- * @param {string} props.url - url, default: ''
- * @param {string} props.content - content, default: ''
- * @param {func} props.onClick - onClick
+ * @param {string} props.icon - icon name
+ * @param {string} props.color - color of icon default, primary
+ * @param {string | array} props.className - list of classes out of module
  * @return {object} An object of children element
  */
 
-const Back = ({
+const Icon = ({
+  icon,
+  color,
   className,
-  url,
-  content,
-  label,
-  onClick
+  spin,
+  ['data-testid']: dataTestId
 }) => {
   const elementStyles = useStyles({
-    [styles$14['back']]: true
+    [css['editor-icon']]: true,
+    [styles$15[`icon--${color}`]]: color,
+    [styles$15['icon--spin']]: spin,
+    [css[`${icon}`]]: true
   }, className);
-  return /*#__PURE__*/React.createElement("span", {
-    "data-testid": "back",
-    className: elementStyles
-  }, /*#__PURE__*/React.createElement("a", {
-    href: url
-  }, /*#__PURE__*/React.createElement(Tooltip$1, {
-    content: content,
-    placement: "bottom",
-    disabled: !content
-  }, /*#__PURE__*/React.createElement(Button$2, {
-    variant: "icon",
-    onClick: onClick
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: "icon-arrow-left"
-  }), /*#__PURE__*/React.createElement(Spreader$1, {
-    spread: "tiny"
-  }), label && label))));
+  return /*#__PURE__*/React.createElement("i", {
+    className: elementStyles,
+    "data-testid": dataTestId
+  });
 };
 
-Back.displayName = 'Back';
-Back.propTypes = {
+Icon.displayName = 'Icon';
+Icon.propTypes = {
+  icon: propTypes.exports.string.isRequired,
+  color: propTypes.exports.string,
   className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  url: propTypes.exports.string,
-  label: propTypes.exports.string,
-  content: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
-  onClick: propTypes.exports.func
+  spin: propTypes.exports.bool,
+  ['data-testid']: propTypes.exports.string
 };
-Back.defaultProps = {
-  label: null,
+Icon.defaultProps = {
   className: '',
-  content: null,
-  url: null,
-  onClick: () => null
+  color: 'default',
+  spin: false,
+  ['data-testid']: undefined
+};
+
+/**
+ * Input - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: input
+ * @param {function} props.onChange - click handler
+ * @param {function} props.onKeyDown - key down handler
+ * @param {function} props.onBlur - blur handler
+ * @param {string} props.type - type
+ * @param {string} props.name - name
+ * @param {boolean} props.disabled - disabled
+ * @param {boolean} props.readonly - readonly
+ * @param {object} props.i18n - object of translation
+ * @param {bool} props.autoFocus - autoFocus
+ * @param {string} props.focused - focused, keep label by default on top
+ * @param {number} props.maxLength - max length of input
+ * @param {string|object} props.tooltip - tooltip
+ * @param {string|number} props.value - value
+ * @param {number} props.min - min value when type is number
+ * @param {number} props.max - max value when type is number
+ * @param {bool} props.required - required
+ * @param {string} props.background - Color of background `white, transparent', default: white
+ * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
+ * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {string} props.variant - input variant, default ''
+ * @param {bool} props.form - is input form
+ * @return {object} An object of children element
+ */
+
+const Input$1 = /*#__PURE__*/react.exports.forwardRef(({
+  className,
+  onChange,
+  onKeyDown,
+  onBlur,
+  type,
+  name,
+  disabled,
+  readonly,
+  i18n,
+  value,
+  autoFocus,
+  maxLength,
+  required,
+  focused,
+  tooltip,
+  min,
+  max,
+  background,
+  hideArrows,
+  alwaysShowLabel,
+  defaultValue,
+  variant,
+  form,
+  ['data-testid']: dataTestId
+}, ref) => {
+  const wrapperStyles = useStyles({
+    [styles$16['input__wrapper']]: true,
+    [styles$16['input__wrapper--focused']]: focused === 'true',
+    [styles$16['input__wrapper--show-label']]: alwaysShowLabel,
+    [styles$16['input__wrapper--table']]: variant === 'table'
+  }, className);
+  const tooltopStyles = useStyles({
+    [styles$16['input__tooltip']]: true,
+    [styles$16['input__tooltip--form']]: form
+  });
+  const inputStyles = useStyles({
+    [styles$16['input']]: true,
+    [styles$16['input--transparent']]: background === 'transparent',
+    [styles$16['input--hidden-arrows']]: hideArrows,
+    [styles$16['input--table']]: variant === 'table'
+  });
+  const renderDefault = defaultValue && !value;
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperStyles
+  }, /*#__PURE__*/React.createElement("input", _extends$6({
+    "data-testid": dataTestId,
+    ref: ref,
+    className: inputStyles,
+    onBlur: onBlur,
+    onChange: onChange,
+    onKeyDown: onKeyDown,
+    type: type,
+    placeholder: i18n.placeholder,
+    name: name,
+    id: name,
+    value: value,
+    readOnly: disabled ? readonly : undefined,
+    disabled: !disabled ? undefined : disabled,
+    autoFocus: autoFocus,
+    maxLength: maxLength,
+    required: required
+  }, type === 'number' ? {
+    min,
+    max
+  } : {}, renderDefault ? {
+    defaultValue
+  } : {})), /*#__PURE__*/React.createElement("span", {
+    className: styles$16['highlight']
+  }), /*#__PURE__*/React.createElement("span", {
+    className: styles$16['bar']
+  }), i18n?.label && /*#__PURE__*/React.createElement(Label, {
+    id: name,
+    className: styles$16['input__label']
+  }, i18n.label), i18n?.description && !form && /*#__PURE__*/React.createElement(Paragraph, {
+    size: "12",
+    color: "color-8"
+  }, i18n.description), tooltip && /*#__PURE__*/React.createElement(Tooltip, {
+    className: tooltopStyles,
+    placement: "bottom",
+    content: tooltip
+  }, /*#__PURE__*/React.createElement(Icon, {
+    color: "color-3",
+    icon: "icon-exclamation-circle"
+  })));
+});
+Input$1.displayName = 'Input';
+Input$1.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  onChange: propTypes.exports.func,
+  onKeyDown: propTypes.exports.func,
+  onBlur: propTypes.exports.func,
+  type: propTypes.exports.string,
+  name: propTypes.exports.string,
+  disabled: propTypes.exports.bool,
+  readonly: propTypes.exports.bool,
+  value: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.number]),
+  autoFocus: propTypes.exports.bool,
+  maxLength: propTypes.exports.number,
+  required: propTypes.exports.bool,
+  focused: propTypes.exports.string,
+  min: propTypes.exports.number,
+  max: propTypes.exports.number,
+  tooltip: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.instanceOf(Object)]),
+  background: propTypes.exports.oneOf(['white', 'transparent']),
+  hideArrows: propTypes.exports.bool,
+  i18n: propTypes.exports.shape({
+    label: propTypes.exports.string,
+    placeholder: propTypes.exports.string,
+    description: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.func])
+  }),
+  defaultValue: propTypes.exports.string,
+  alwaysShowLabel: propTypes.exports.bool,
+  variant: propTypes.exports.string,
+  form: propTypes.exports.bool,
+  ['data-testid']: propTypes.exports.string
+};
+Input$1.defaultProps = {
+  className: '',
+  type: 'text',
+  focused: 'false',
+  tooltip: '',
+  background: 'white',
+  maxLength: 524288,
+  i18n: {
+    label: null,
+    placeholder: null,
+    description: null
+  },
+  name: null,
+  value: undefined,
+  disabled: false,
+  readonly: false,
+  autoFocus: false,
+  required: true,
+  hideArrows: false,
+  onChange: () => null,
+  onKeyDown: () => null,
+  onBlur: () => null,
+  defaultValue: null,
+  alwaysShowLabel: false,
+  variant: '',
+  form: false,
+  ['data-testid']: 'input-component'
 };
 
 var ink = {exports: {}};
@@ -6545,7 +9143,7 @@ var s = t(react.exports),
     n = !1;
 "undefined" != typeof window && (n = "ontouchstart" in window || window.DocumentTouch && document instanceof window.DocumentTouch);
 
-var i$1 = n,
+var i = n,
     p = function (t) {
   return (window.devicePixelRatio || 1) / (t.webkitBackingStorePixelRatio || t.mozBackingStorePixelRatio || t.msBackingStorePixelRatio || t.oBackingStorePixelRatio || t.backingStorePixelRatio || 1);
 },
@@ -6567,7 +9165,7 @@ var r = Math.sqrt(2),
     c = Math.max,
     o = Math.min;
 
-function f$5(t) {
+function f(t) {
   return o(t.duration, Date.now() - t.mouseDown);
 }
 
@@ -6578,7 +9176,7 @@ function d(t) {
 function e(t) {
   var n = t.duration,
       i = t.radius,
-      r = .85 * u(f$5(t), 0, i, n),
+      r = .85 * u(f(t), 0, i, n),
       o = .15 * u(d(t), 0, i, n),
       e = .02 * i * a(Date.now() / n);
   return c(0, r + o + e);
@@ -6593,7 +9191,7 @@ function v(t, n) {
 }
 
 function w(t, n) {
-  return o(v(t, n), u(f$5(t), 0, .3, 3 * t.duration));
+  return o(v(t, n), u(f(t), 0, .3, 3 * t.duration));
 }
 
 function l(t, n, i) {
@@ -6663,7 +9261,7 @@ var T = 2 * Math.PI,
   duration: 1e3,
   opacity: .25,
   recenter: !0,
-  hasTouch: i$1
+  hasTouch: i
 },
     k = function (n) {
   function t(t) {
@@ -6782,9 +9380,38 @@ var T = 2 * Math.PI,
 
 k.defaultProps = j, ink.exports = k;
 
-var css_248z$17 = ".Button-module_text--truncate__Jtf7p {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Button-module_button__18Bed {\n  outline-style: none;\n  box-shadow: none;\n  border-color: transparent;\n  border: 0;\n  cursor: pointer;\n  line-height: 1;\n  background: white;\n  min-width: 36px;\n  min-height: 36px;\n  position: relative;\n  font-weight: 600;\n  transition: background 0.5s, box-shadow 0.5s;\n  text-decoration: none;\n}\n.Button-module_button__18Bed:hover {\n  text-decoration: none;\n  color: #1f1f1f;\n}\n.Button-module_button__18Bed:disabled, .Button-module_button__18Bed[disabled] {\n  cursor: not-allowed;\n  background-color: #d8d8d8;\n  color: white;\n}\n.Button-module_button__18Bed:disabled svg,\n.Button-module_button__18Bed:disabled i, .Button-module_button__18Bed[disabled] svg,\n.Button-module_button__18Bed[disabled] i {\n  color: white;\n}\n.Button-module_button__18Bed:disabled:hover, .Button-module_button__18Bed:disabled:focus, .Button-module_button__18Bed:disabled:active, .Button-module_button__18Bed[disabled]:hover, .Button-module_button__18Bed[disabled]:focus, .Button-module_button__18Bed[disabled]:active {\n  cursor: not-allowed;\n  background-color: #d8d8d8;\n  color: white;\n}\n.Button-module_button__18Bed:disabled:hover svg,\n.Button-module_button__18Bed:disabled:hover i, .Button-module_button__18Bed:disabled:focus svg,\n.Button-module_button__18Bed:disabled:focus i, .Button-module_button__18Bed:disabled:active svg,\n.Button-module_button__18Bed:disabled:active i, .Button-module_button__18Bed[disabled]:hover svg,\n.Button-module_button__18Bed[disabled]:hover i, .Button-module_button__18Bed[disabled]:focus svg,\n.Button-module_button__18Bed[disabled]:focus i, .Button-module_button__18Bed[disabled]:active svg,\n.Button-module_button__18Bed[disabled]:active i {\n  color: white;\n}\n.Button-module_button--primary__VuF-P {\n  background: #2550aa;\n  color: white;\n}\n.Button-module_button--primary__VuF-P:active {\n  background-color: #2550aa;\n}\n.Button-module_button--primary__VuF-P svg,\n.Button-module_button--primary__VuF-P i {\n  color: white;\n}\n.Button-module_button--primary__VuF-P:hover, .Button-module_button--primary__VuF-P:focus {\n  background-color: #4168c4;\n  color: white;\n  box-shadow: 0 20px 20px -15px rgba(0, 0, 0, 0.2);\n}\n.Button-module_button--alert__gSqgP {\n  background: #df2439;\n  color: white;\n}\n.Button-module_button--alert__gSqgP:active {\n  background-color: #df2439;\n}\n.Button-module_button--alert__gSqgP:hover, .Button-module_button--alert__gSqgP:focus {\n  background-color: #f40035;\n  color: white;\n}\n.Button-module_button--secondary__lD5E3 {\n  background: white;\n  color: #2550aa;\n}\n.Button-module_button--secondary__lD5E3:active {\n  background-color: #d8d8d8;\n}\n.Button-module_button--secondary__lD5E3:hover, .Button-module_button--secondary__lD5E3:active, .Button-module_button--secondary__lD5E3:focus {\n  background-color: #edecec;\n  color: #2550aa;\n}\n.Button-module_button--secondary__lD5E3:disabled {\n  cursor: not-allowed;\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--secondary__lD5E3:disabled svg, .Button-module_button--secondary__lD5E3:disabled i {\n  color: #d8d8d8;\n}\n.Button-module_button--secondary__lD5E3:disabled:hover {\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--secondary__lD5E3:disabled:hover svg, .Button-module_button--secondary__lD5E3:disabled:hover i {\n  color: #d8d8d8;\n}\n.Button-module_button--hide__206Jo {\n  display: none;\n}\n.Button-module_button--mini__Dkgpx {\n  font-size: 12px;\n  padding: 0;\n  width: 25px;\n  min-width: 25px;\n  height: 25px;\n  min-height: 25px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.Button-module_button--tiny__oQNs9 {\n  padding: 8px 20px;\n  font-size: 12px;\n  min-height: 28px;\n}\n.Button-module_button--small__ADJQe {\n  padding: 0;\n  font-size: 12px;\n}\n.Button-module_button--medium__ZuR4Z {\n  padding: 12px 20px;\n  max-height: 38px;\n  font-size: 14px;\n}\n.Button-module_button--large__-FaV5 {\n  padding: 13px 24px;\n  font-size: 18px;\n}\n.Button-module_button--fit-width__ayu8R {\n  width: 100%;\n}\n.Button-module_button--dropdown__RDb-c {\n  padding: 10px 15px;\n  color: #7b7b7b;\n  background: transparent;\n}\n.Button-module_button--dropdown__RDb-c span {\n  font-size: 14px;\n  font-weight: 400;\n  padding: 0 15px 0 10px;\n  color: #1f1f1f;\n}\n.Button-module_button--dropdown__RDb-c:hover {\n  background: #edecec;\n  color: #1f1f1f;\n}\n.Button-module_button--dropdown__RDb-c:hover svg,\n.Button-module_button--dropdown__RDb-c:hover i {\n  color: #1f1f1f;\n}\n.Button-module_button--dropdown-element__vf8jt {\n  color: #4c4c4c;\n  background: transparent;\n  font-weight: 400;\n  width: 100%;\n  text-align: left;\n  padding: 0 15px;\n  max-height: none;\n}\n.Button-module_button--dropdown-element__vf8jt svg,\n.Button-module_button--dropdown-element__vf8jt i {\n  color: #7b7b7b;\n}\n.Button-module_button--dropdown-element__vf8jt:hover, .Button-module_button--dropdown-element__vf8jt:focus, .Button-module_button--dropdown-element__vf8jt:active {\n  color: #1f1f1f;\n}\n.Button-module_button--dropdown-element__vf8jt:hover svg,\n.Button-module_button--dropdown-element__vf8jt:hover i, .Button-module_button--dropdown-element__vf8jt:focus svg,\n.Button-module_button--dropdown-element__vf8jt:focus i, .Button-module_button--dropdown-element__vf8jt:active svg,\n.Button-module_button--dropdown-element__vf8jt:active i {\n  color: #1f1f1f;\n}\n.Button-module_button--dropdown-element__vf8jt:disabled, .Button-module_button--dropdown-element__vf8jt[disabled] {\n  background: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--dropdown-element__vf8jt:disabled svg, .Button-module_button--dropdown-element__vf8jt[disabled] svg {\n  color: #d8d8d8;\n}\n.Button-module_button--dropdown-element__vf8jt:disabled:hover, .Button-module_button--dropdown-element__vf8jt:disabled:focus, .Button-module_button--dropdown-element__vf8jt:disabled:active, .Button-module_button--dropdown-element__vf8jt[disabled]:hover, .Button-module_button--dropdown-element__vf8jt[disabled]:focus, .Button-module_button--dropdown-element__vf8jt[disabled]:active {\n  background: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--dropdown-element__vf8jt:disabled:hover svg, .Button-module_button--dropdown-element__vf8jt:disabled:focus svg, .Button-module_button--dropdown-element__vf8jt:disabled:active svg, .Button-module_button--dropdown-element__vf8jt[disabled]:hover svg, .Button-module_button--dropdown-element__vf8jt[disabled]:focus svg, .Button-module_button--dropdown-element__vf8jt[disabled]:active svg {\n  color: #d8d8d8;\n}\n.Button-module_button--transparent__e5EjK {\n  color: #7b7b7b;\n  background: transparent;\n}\n.Button-module_button--transparent__e5EjK svg,\n.Button-module_button--transparent__e5EjK i {\n  color: #7b7b7b;\n}\n.Button-module_button--transparent-blue__vSlMi {\n  background: transparent;\n  color: #2550aa;\n}\n.Button-module_button--transparent-blue__vSlMi:hover {\n  background: #edecec;\n  color: #2550aa;\n}\n.Button-module_button--transparent-blue__vSlMi:hover svg,\n.Button-module_button--transparent-blue__vSlMi:hover i {\n  color: #2550aa;\n}\n.Button-module_button--transparent-blue__vSlMi svg,\n.Button-module_button--transparent-blue__vSlMi i {\n  color: #2550aa;\n}\n.Button-module_button--transparent__e5EjK:hover {\n  background: #edecec;\n  color: #1f1f1f;\n}\n.Button-module_button--transparent__e5EjK:hover svg,\n.Button-module_button--transparent__e5EjK:hover i {\n  color: #1f1f1f;\n}\n.Button-module_button--white__xL64b {\n  color: white;\n  background: transparent;\n}\n.Button-module_button--white__xL64b svg,\n.Button-module_button--white__xL64b i {\n  color: white;\n}\n.Button-module_button--white__xL64b:hover {\n  background: rgba(255, 255, 255, 0.15);\n}\n.Button-module_button--black__xyQxe {\n  color: #1f1f1f;\n}\n.Button-module_button--black__xyQxe svg,\n.Button-module_button--black__xyQxe i {\n  color: #1f1f1f;\n}\n.Button-module_button--black__xyQxe:hover {\n  background-color: #edecec;\n}\n.Button-module_button--tabs__GeeH4 {\n  background: transparent;\n  border-radius: 0;\n  padding: 10px 20px 10px;\n  min-width: 100px;\n  font-weight: 600;\n  color: inherit;\n}\n.Button-module_button--icon__yYJ76 {\n  padding: 0;\n  min-width: 36px;\n}\n.Button-module_button--icon__yYJ76:after {\n  background: #7b7b7b;\n}\n.Button-module_button--icon__yYJ76 svg,\n.Button-module_button--icon__yYJ76 i {\n  color: #7b7b7b;\n}\n.Button-module_button--icon__yYJ76:hover {\n  background: #edecec;\n}\n.Button-module_button--icon__yYJ76:hover svg,\n.Button-module_button--icon__yYJ76:hover i {\n  color: #1f1f1f;\n}\n.Button-module_button--icon__yYJ76:disabled, .Button-module_button--icon__yYJ76[disabled] {\n  cursor: not-allowed;\n  background-color: white;\n  color: #d8d8d8;\n}\n.Button-module_button--icon__yYJ76:disabled svg,\n.Button-module_button--icon__yYJ76:disabled i, .Button-module_button--icon__yYJ76[disabled] svg,\n.Button-module_button--icon__yYJ76[disabled] i {\n  background-color: white;\n  color: #d8d8d8;\n}\n.Button-module_button--icon__yYJ76:disabled:hover, .Button-module_button--icon__yYJ76:disabled:focus, .Button-module_button--icon__yYJ76:disabled:active, .Button-module_button--icon__yYJ76[disabled]:hover, .Button-module_button--icon__yYJ76[disabled]:focus, .Button-module_button--icon__yYJ76[disabled]:active {\n  cursor: not-allowed;\n  background-color: white;\n  color: #d8d8d8;\n}\n.Button-module_button--icon__yYJ76:disabled:hover svg,\n.Button-module_button--icon__yYJ76:disabled:hover i, .Button-module_button--icon__yYJ76:disabled:focus svg,\n.Button-module_button--icon__yYJ76:disabled:focus i, .Button-module_button--icon__yYJ76:disabled:active svg,\n.Button-module_button--icon__yYJ76:disabled:active i, .Button-module_button--icon__yYJ76[disabled]:hover svg,\n.Button-module_button--icon__yYJ76[disabled]:hover i, .Button-module_button--icon__yYJ76[disabled]:focus svg,\n.Button-module_button--icon__yYJ76[disabled]:focus i, .Button-module_button--icon__yYJ76[disabled]:active svg,\n.Button-module_button--icon__yYJ76[disabled]:active i {\n  background-color: white;\n  color: #d8d8d8;\n}\n.Button-module_button--icon-transparent__VX5bK {\n  padding: 0;\n  min-width: 36px;\n  background: transparent;\n}\n.Button-module_button--icon-transparent__VX5bK:after {\n  background: #7b7b7b;\n}\n.Button-module_button--icon-transparent__VX5bK svg,\n.Button-module_button--icon-transparent__VX5bK i {\n  color: #7b7b7b;\n}\n.Button-module_button--icon-transparent__VX5bK:hover {\n  background: transparent;\n}\n.Button-module_button--icon-transparent__VX5bK:hover svg,\n.Button-module_button--icon-transparent__VX5bK:hover i {\n  color: #1f1f1f;\n}\n.Button-module_button--icon-transparent__VX5bK:disabled, .Button-module_button--icon-transparent__VX5bK[disabled] {\n  cursor: not-allowed;\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--icon-transparent__VX5bK:disabled svg,\n.Button-module_button--icon-transparent__VX5bK:disabled i, .Button-module_button--icon-transparent__VX5bK[disabled] svg,\n.Button-module_button--icon-transparent__VX5bK[disabled] i {\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--icon-transparent__VX5bK:disabled:hover, .Button-module_button--icon-transparent__VX5bK:disabled:focus, .Button-module_button--icon-transparent__VX5bK:disabled:active, .Button-module_button--icon-transparent__VX5bK[disabled]:hover, .Button-module_button--icon-transparent__VX5bK[disabled]:focus, .Button-module_button--icon-transparent__VX5bK[disabled]:active {\n  cursor: not-allowed;\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--icon-transparent__VX5bK:disabled:hover svg,\n.Button-module_button--icon-transparent__VX5bK:disabled:hover i, .Button-module_button--icon-transparent__VX5bK:disabled:focus svg,\n.Button-module_button--icon-transparent__VX5bK:disabled:focus i, .Button-module_button--icon-transparent__VX5bK:disabled:active svg,\n.Button-module_button--icon-transparent__VX5bK:disabled:active i, .Button-module_button--icon-transparent__VX5bK[disabled]:hover svg,\n.Button-module_button--icon-transparent__VX5bK[disabled]:hover i, .Button-module_button--icon-transparent__VX5bK[disabled]:focus svg,\n.Button-module_button--icon-transparent__VX5bK[disabled]:focus i, .Button-module_button--icon-transparent__VX5bK[disabled]:active svg,\n.Button-module_button--icon-transparent__VX5bK[disabled]:active i {\n  background-color: transparent;\n  color: #d8d8d8;\n}\n.Button-module_button--svg__xleuq svg,\n.Button-module_button--svg__xleuq i {\n  margin-right: 10px;\n}\n.Button-module_button--switcher__FgAif {\n  max-width: 220px;\n  display: flex;\n  align-items: center;\n  line-height: 18px;\n}\n.Button-module_button--switcher__FgAif span {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  max-width: 220px;\n}\n.Button-module_button--center__vsNub {\n  display: block;\n  margin: 0 auto;\n}\n.Button-module_button--left__azrn0 {\n  text-align: left;\n}\n.Button-module_button--right__czZoD {\n  text-align: right;\n}\n.Button-module_button--input__0jKlF {\n  font-size: 14px;\n  min-width: 32px;\n  min-height: 32px;\n}\n.Button-module_button--input__0jKlF svg,\n.Button-module_button--input__0jKlF i {\n  margin: 0 !important;\n}\n.Button-module_button--action__9SCtG {\n  font-size: 12px;\n  padding: 0;\n  width: 25px;\n  min-width: 25px;\n  height: 25px;\n  min-height: 25px;\n  background: #2550aa;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.Button-module_button--action__9SCtG svg,\n.Button-module_button--action__9SCtG i {\n  color: white;\n}\n.Button-module_button--action__9SCtG:hover {\n  background: #4168c4;\n}\n.Button-module_button--publish__f91X1 {\n  background: #46be83;\n  color: white;\n  font-weight: 400;\n}\n.Button-module_button--publish__f91X1 svg,\n.Button-module_button--publish__f91X1 i {\n  color: white;\n}\n.Button-module_button--publish__f91X1:hover {\n  background: #2ecc78;\n  color: white;\n}\n.Button-module_button--publish__f91X1:disabled {\n  background-color: #3c785b;\n  color: #999;\n  pointer-events: none;\n}\n.Button-module_button--publish__f91X1:disabled svg,\n.Button-module_button--publish__f91X1:disabled i {\n  color: #999;\n}\n\n.Button-module_link__MzvJO {\n  color: #4c4c4c;\n  background: transparent;\n}\n.Button-module_link__MzvJO:hover, .Button-module_link__MzvJO:focus, .Button-module_link__MzvJO:active {\n  color: #4c4c4c;\n  background: transparent;\n  box-shadow: none;\n}";
+var styles$14 = {"text--truncate":"Spinner-module_text--truncate__79eHW","spinner":"Spinner-module_spinner__SZoUP"};
+
+/**
+ * Spinner - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
+ */
+
+const Spinner = ({
+  className
+}) => {
+  const elementClasses = useStyles({
+    [styles$14['spinner']]: true
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    className: elementClasses
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: "icon-spinner",
+    spin: true
+  }));
+};
+
+Spinner.displayName = 'Spinner';
+Spinner.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
+};
+Spinner.defaultProps = {
+  className: ''
+};
+
 var styles$13 = {"text--truncate":"Button-module_text--truncate__Jtf7p","button":"Button-module_button__18Bed","button--primary":"Button-module_button--primary__VuF-P","button--alert":"Button-module_button--alert__gSqgP","button--secondary":"Button-module_button--secondary__lD5E3","button--hide":"Button-module_button--hide__206Jo","button--mini":"Button-module_button--mini__Dkgpx","button--tiny":"Button-module_button--tiny__oQNs9","button--small":"Button-module_button--small__ADJQe","button--medium":"Button-module_button--medium__ZuR4Z","button--large":"Button-module_button--large__-FaV5","button--fit-width":"Button-module_button--fit-width__ayu8R","button--dropdown":"Button-module_button--dropdown__RDb-c","button--dropdown-element":"Button-module_button--dropdown-element__vf8jt","button--transparent":"Button-module_button--transparent__e5EjK","button--transparent-blue":"Button-module_button--transparent-blue__vSlMi","button--white":"Button-module_button--white__xL64b","button--black":"Button-module_button--black__xyQxe","button--tabs":"Button-module_button--tabs__GeeH4","button--icon":"Button-module_button--icon__yYJ76","button--icon-transparent":"Button-module_button--icon-transparent__VX5bK","button--svg":"Button-module_button--svg__xleuq","button--switcher":"Button-module_button--switcher__FgAif","button--center":"Button-module_button--center__vsNub","button--left":"Button-module_button--left__azrn0","button--right":"Button-module_button--right__czZoD","button--input":"Button-module_button--input__0jKlF","button--action":"Button-module_button--action__9SCtG","button--publish":"Button-module_button--publish__f91X1","link":"Button-module_link__MzvJO"};
-styleInject(css_248z$17);
 
 /**
  * Button - stateless presentational component
@@ -6850,7 +9477,7 @@ const Button$1 = ({
     className: elementClassesButton,
     onClick: onClick,
     "data-testid": dataTestId
-  }, isLoading && /*#__PURE__*/React.createElement(Spinner$1, null), !isLoading && /*#__PURE__*/React.createElement(react.exports.Fragment, null, children), hasBackgoundRipple && /*#__PURE__*/React.createElement(ink.exports, null));
+  }, isLoading && /*#__PURE__*/React.createElement(Spinner, null), !isLoading && /*#__PURE__*/React.createElement(react.exports.Fragment, null, children), hasBackgoundRipple && /*#__PURE__*/React.createElement(ink.exports, null));
 };
 
 Button$1.displayName = 'Button';
@@ -6894,6 +9521,1168 @@ Button$1.defaultProps = {
   fitWidth: false,
   onClick: () => {},
   ['data-testid']: undefined
+};
+
+var styles$12 = {"text--truncate":"Search-module_text--truncate__bsqbP","search":"Search-module_search__u3QsV","search__input":"Search-module_search__input__UDAiT","search__clean":"Search-module_search__clean__KT3Pk","search__icon":"Search-module_search__icon__yqFzh","search__icon-button":"Search-module_search__icon-button__T5qYo","search--small":"Search-module_search--small__ooJ42","search--medium":"Search-module_search--medium__1Pk1C","search--large":"Search-module_search--large__Zj4UH","search--input":"Search-module_search--input__qhH5U"};
+
+/**
+ * Search - stateful presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `search`
+ * @param {string} props.variant - variant input or button action default: `input`
+ * @param {func} props.onChange - change handler
+ * @param {func} props.onKeyDown - key click handler
+ * @param {bool} props.autoFocus - autofocus
+ * @param {object} props.children - children
+ * @param {string} props.size - size of search field `small, medium, large`
+ * @param {string} props.label - input label
+ * @param {func} props.onSubmit - handle action on form submit
+ * @param {func} props.onClean- handle action on form clean
+ * @param {object} props.i18n - object of translations
+ * @param {string} props.tag - tag
+ * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
+ * @param {boolean} props.submitEmptyOnBlur - submit triggered onBlur when value is empty
+ * @param {string} props.defaultValue - default value of input
+ * @return {object} An object of children element
+ */
+
+const Search = ({
+  className,
+  variant,
+  onChange,
+  onKeyDown,
+  autoFocus,
+  children,
+  size,
+  onSubmit,
+  onClean,
+  i18n,
+  tag: Tag,
+  onProtectedSubmit,
+  submitEmptyOnBlur,
+  defaultValue
+}) => {
+  const elementClasses = useStyles({
+    [styles$12['search']]: true,
+    [styles$12[`search--${variant}`]]: variant,
+    [styles$12[`search--${size}`]]: true
+  }, className);
+  const [isClearActive, setClearActive] = react.exports.useState(!!defaultValue);
+  const inputRef = react.exports.useRef();
+  /**
+   * Handle input clean
+   * @type {function}
+   */
+
+  const handleCleanOnClick = react.exports.useCallback(() => {
+    inputRef.current.value = '';
+    setClearActive(false);
+    onChange();
+    onClean();
+
+    if (submitEmptyOnBlur) {
+      onSubmit();
+    }
+  }, []);
+  const onBlur = react.exports.useCallback(() => {
+    if (inputRef.current.value === '' && submitEmptyOnBlur) {
+      onSubmit();
+    }
+  }, []);
+  /**
+   * Handle input keyup
+   * @type {function}
+   */
+
+  const handleOnKeyUp = react.exports.useCallback(event => setClearActive(event.target.value), []);
+  /**
+   * Handle input key down
+   * @type {function}
+   */
+
+  const handleOnKeyDown = react.exports.useCallback(event => {
+    if (event.key === 'Enter' && !onSubmit) {
+      event.preventDefault();
+      handleProtectedSubmit(inputRef.current.value);
+    }
+  }, []);
+  /**
+   * Handle on form submit
+   * @type {function}
+   */
+
+  const handleSubmit = react.exports.useCallback(event => {
+    event.preventDefault();
+
+    if (onSubmit) {
+      onSubmit(inputRef.current.value);
+    } else {
+      onChange();
+    }
+  }, []);
+  /**
+   * Handle on form submit
+   * @type {function}
+   */
+
+  const handleProtectedSubmit = react.exports.useCallback(() => {
+    onProtectedSubmit && onProtectedSubmit(inputRef.current.value);
+  }, []);
+  /**
+   * useEffect
+   */
+
+  react.exports.useEffect(() => {
+    autoFocus && variant === 'input' && inputRef.current.focus();
+  }, []);
+  return /*#__PURE__*/React.createElement(Tag, {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/React.createElement("div", {
+    className: elementClasses
+  }, variant === 'input' && (onSubmit || onProtectedSubmit ? /*#__PURE__*/React.createElement("div", {
+    className: styles$12['search__icon-button']
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    variant: "icon-transparent",
+    type: onProtectedSubmit ? 'button' : 'submit',
+    size: "input",
+    isDisabled: !isClearActive,
+    onClick: handleProtectedSubmit
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: "icon-search"
+  }))) : /*#__PURE__*/React.createElement("div", {
+    className: styles$12.search__icon
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: "icon-search"
+  }))), children && variant === 'button' && /*#__PURE__*/React.createElement(Input$1, {
+    label: i18n.label,
+    name: "search",
+    type: "text",
+    onChange: onChange,
+    onKeyDown: onKeyDown,
+    autoFocus: autoFocus
+  }), variant === 'input' && /*#__PURE__*/React.createElement("input", {
+    autoFocus: autoFocus,
+    ref: inputRef,
+    className: styles$12.search__input,
+    type: "text",
+    name: "search",
+    placeholder: i18n.placeholder,
+    onChange: onChange,
+    onBlur: onBlur,
+    onKeyDown: handleOnKeyDown,
+    onKeyUp: handleOnKeyUp,
+    defaultValue: defaultValue,
+    "data-testid": "search-input"
+  }), isClearActive && variant === 'input' && /*#__PURE__*/React.createElement("div", {
+    className: styles$12.search__clean
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    variant: "icon-transparent",
+    size: "input",
+    onClick: handleCleanOnClick
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: "icon-remove"
+  }))), children && variant === 'button' && children));
+};
+
+Search.displayName = 'Search';
+Search.propTypes = {
+  className: propTypes.exports.string,
+  children: propTypes.exports.node,
+  onChange: propTypes.exports.func,
+  onKeyDown: propTypes.exports.func,
+  size: propTypes.exports.oneOf(['small', 'medium', 'large']),
+  autoFocus: propTypes.exports.bool,
+  variant: propTypes.exports.oneOf(['input', 'button']),
+  i18n: propTypes.exports.shape({
+    placeholder: propTypes.exports.string,
+    label: propTypes.exports.string
+  }),
+  onSubmit: propTypes.exports.func,
+  onClean: propTypes.exports.func,
+  tag: propTypes.exports.string,
+  onProtectedSubmit: propTypes.exports.func,
+  submitEmptyOnBlur: propTypes.exports.bool,
+  defaultValue: propTypes.exports.string
+};
+Search.defaultProps = {
+  className: '',
+  tag: 'form',
+  size: 'medium',
+  variant: 'input',
+  i18n: {
+    placeholder: null,
+    label: null
+  },
+  children: null,
+  onSubmit: null,
+  onClean: () => null,
+  onProtectedSubmit: null,
+  autoFocus: false,
+  onChange: () => null,
+  onKeyDown: () => null,
+  submitEmptyOnBlur: false,
+  defaultValue: ''
+};
+
+/**
+ * Searcher - stateful presentational component
+ * @param {object} props - props
+ * @param {function} props.setSearchResult - search result setter
+ * @param {function} props.searchFunction - search function
+ * @param {function} props.setSearchPhrase - search phrase function
+ * @param {object} props.i18n - translations
+ * @param {bool} props.protectedSubmit - protectedSubmit
+ * @param {bool} props.liveChanges - search by entering characters
+ * @return {object} An object of children element
+ */
+
+const Searcher = ({
+  setSearchResult,
+  searchFunction,
+  setSearchPhrase,
+  i18n,
+  protectedSubmit,
+  liveChanges,
+  ...rest
+}) => {
+  const search = async value => {
+    const response = await searchFunction(value);
+    setSearchResult(response);
+  };
+
+  const handleOnChange = react.exports.useCallback(event => {
+    let value;
+    !event ? value = '' : value = event.target.value;
+
+    if (setSearchPhrase) {
+      !value && setSearchPhrase('');
+      value && liveChanges && setSearchPhrase(value);
+    } else {
+      !value && setSearchResult(NO_VALUE);
+    }
+  }, [liveChanges]);
+  const handleOnSubmit = react.exports.useCallback(event => {
+    if (setSearchPhrase) {
+      setSearchPhrase(event);
+    } else {
+      search(event);
+    }
+  }, []);
+  const handleOnProtectedSubmit = react.exports.useCallback(event => setSearchPhrase(event), []);
+  return /*#__PURE__*/React.createElement(Search, _extends$6({
+    onChange: handleOnChange,
+    onProtectedSubmit: protectedSubmit ? handleOnProtectedSubmit : null,
+    onSubmit: protectedSubmit ? null : handleOnSubmit,
+    i18n: i18n
+  }, rest));
+};
+
+Searcher.displayName = 'Searcher';
+Searcher.propTypes = {
+  liveChanges: propTypes.exports.bool,
+  protectedSubmit: propTypes.exports.bool,
+  setSearchPhrase: propTypes.exports.func,
+  searchFunction: propTypes.exports.func,
+  setSearchResult: propTypes.exports.func,
+  i18n: propTypes.exports.shape({
+    placeholder: propTypes.exports.string
+  })
+};
+Searcher.defaultProps = {
+  liveChanges: false,
+  i18n: {
+    placeholder: ''
+  },
+  protectedSubmit: false,
+  setSearchPhrase: () => null,
+  searchFunction: () => null,
+  setSearchResult: () => null
+};
+var Searcher$1 = /*#__PURE__*/react.exports.memo(Searcher);
+
+var tinyEmitter = {exports: {}};
+
+function E() {// Keep this empty so it's easier to inherit from
+  // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+}
+
+E.prototype = {
+  on: function (name, callback, ctx) {
+    var e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({
+      fn: callback,
+      ctx: ctx
+    });
+    return this;
+  },
+  once: function (name, callback, ctx) {
+    var self = this;
+
+    function listener() {
+      self.off(name, listener);
+      callback.apply(ctx, arguments);
+    }
+    listener._ = callback;
+    return this.on(name, listener, ctx);
+  },
+  emit: function (name) {
+    var data = [].slice.call(arguments, 1);
+    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    var i = 0;
+    var len = evtArr.length;
+
+    for (i; i < len; i++) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+
+    return this;
+  },
+  off: function (name, callback) {
+    var e = this.e || (this.e = {});
+    var evts = e[name];
+    var liveEvents = [];
+
+    if (evts && callback) {
+      for (var i = 0, len = evts.length; i < len; i++) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback) liveEvents.push(evts[i]);
+      }
+    } // Remove event from queue to prevent memory leak
+    // Suggested by https://github.com/lazd
+    // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+
+    liveEvents.length ? e[name] = liveEvents : delete e[name];
+    return this;
+  }
+};
+tinyEmitter.exports = E;
+tinyEmitter.exports.TinyEmitter = E;
+
+/**
+ * A tiny event emitter library
+ * @see {@link https://github.com/scottcorgan/tiny-emitter} for further information.
+ * @return {object}
+ */
+var emitter = new tinyEmitter.exports();
+
+const CLOSE_DROPDOWN = 'CLOSE_DROPDOWN';
+const TOGGLE_TIMING_TOAST = 'TOGGLE_TIMING_TOAST';
+const TOGGLE_TOAST = 'TOGGLE_TOAST';
+
+/**
+ * Check if value is empty
+ * @function isEmpty
+ * @param {array|object} parentWidth
+ * @return {bool} Returns bool
+ */
+const isEmpty = value => value === null || value === undefined || // eslint-disable-next-line no-prototype-builtins
+value.hasOwnProperty('length') && value.length === 0 || value.constructor === Object && Object.keys(value).length === 0;
+/**
+ * Font icons mapper
+ * @const fontIcons
+ * @return {object}
+ */
+
+const fontIcons = {
+  alert: 'icon-remove',
+  info: 'icon-info',
+  success: 'icon-ok',
+  warning: 'icon-exclamation'
+};
+/**
+ * Maps icons to class name
+ * @function mapIconToClass
+ * @param {string} value
+ * @return {string} Returns string
+ */
+
+const mapIconToClass = value => fontIcons[value];
+/**
+ * GetTodayDate - return today date with hour 00:00:00
+ * @type {function}
+ */
+
+const getTodayDate = () => new Date(new Date().toDateString());
+/**
+ * GetAgoDate - return date {number} days ago with hour 00:00:00
+ * @param {number} days - days ago
+ * @type {function}
+ */
+
+const getAgoDate = days => {
+  const today = getTodayDate();
+  return new Date(new Date(new Date().setDate(today.getDate() - days)).toDateString());
+};
+/**
+ * Format numeric
+ * ex. 10000 => 10 000
+ * @return {string}
+ */
+
+
+const formatNumeric = value => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+/**
+ * Access a deep value inside a object
+ * Works by passing a path like "foo.bar.xyz"
+ */
+
+const getDeepValue = (obj, path) => path.split('.').reduce((r, val) => r ? r[val] : undefined, obj);
+
+var styles$11 = {"text--truncate":"Close-module_text--truncate__YDOC-","close":"Close-module_close__Im49f"};
+
+/**
+ * Close - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {function} props.onClick - click handler
+ * @param {string} props.iconName
+ * @param {string} props.iconColor
+ * @return {object} An object of children element
+ */
+
+const Close = ({
+  className,
+  onClick,
+  iconName,
+  iconColor
+}) => {
+  const elementStyles = useStyles({
+    [styles$11['close']]: true
+  }, className);
+  return /*#__PURE__*/React.createElement("span", {
+    className: elementStyles,
+    onClick: onClick
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    variant: "icon",
+    "data-testid": "close-component-button"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: iconName,
+    color: iconColor
+  })));
+};
+
+Close.displayName = 'Close';
+Close.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  onClick: propTypes.exports.func,
+  iconName: propTypes.exports.string,
+  iconColor: propTypes.exports.string
+};
+Close.defaultProps = {
+  className: '',
+  onClick: () => null,
+  iconName: 'icon-remove'
+};
+
+var styles$10 = {"text--truncate":"Notification-module_text--truncate__arh3w","notification":"Notification-module_notification__WfYqO","notification__message":"Notification-module_notification__message__t9f44","notification--alert":"Notification-module_notification--alert__jphqx","notification--warning":"Notification-module_notification--warning__ttBUE","notification--success":"Notification-module_notification--success__7CBET","notification--info":"Notification-module_notification--info__tmglJ","notification--pending":"Notification-module_notification--pending__w867P","content":"Notification-module_content__xt6uE","time":"Notification-module_time__IY7UF","load":"Notification-module_load__An5Ps"};
+
+/**
+ * Notification - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string|array} props.className - list of class names, default: `notification`
+ * @param {string} props.type - type of notification `info, success, warning, alert`
+ * @param {bool} props.isClosable - show close
+ * @param {bool} props.onClick - gets called when the user clicks on backdrop
+ * @param {bool} props.hasTime - hasTime
+ * @return {object} An object of children element
+ */
+
+const Notification = ({
+  children,
+  className,
+  type,
+  isClosable,
+  onClick,
+  hasTime
+}) => {
+  const elementStyles = useStyles({
+    [styles$10['notification']]: true,
+    [styles$10[`notification--${type}`]]: type
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    className: elementStyles
+  }, /*#__PURE__*/React.createElement("div", {
+    className: styles$10.content
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: mapIconToClass(type) || 'icon-ok',
+    iconColor: "white"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: styles$10.notification__message
+  }, children), isClosable && /*#__PURE__*/React.createElement(Close, {
+    onClick: onClick,
+    iconColor: "white"
+  })), hasTime && /*#__PURE__*/React.createElement("span", {
+    className: styles$10.time
+  }));
+};
+
+Notification.displayName = 'Notification';
+Notification.propTypes = {
+  children: propTypes.exports.oneOfType([propTypes.exports.node, propTypes.exports.string, propTypes.exports.func]),
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  hasTime: propTypes.exports.bool,
+  isClosable: propTypes.exports.bool,
+  onClick: propTypes.exports.func,
+  type: propTypes.exports.oneOf(['info', 'success', 'warning', 'alert'])
+};
+Notification.defaultProps = {
+  className: 'notification',
+  type: 'info',
+  hasTime: false,
+  isClosable: false,
+  onClick: () => null
+};
+
+var styles$$ = {"text--truncate":"TimingToast-module_text--truncate__Lfi0S","toast":"TimingToast-module_toast__R2jOK","toast--active":"TimingToast-module_toast--active__3UYHX","fadein":"TimingToast-module_fadein__bsbVy","fadeout":"TimingToast-module_fadeout__7nJJ6"};
+
+/**
+ * TimingToast - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
+ */
+
+const TimingToast = ({
+  className
+}) => {
+  const [isActive, setActive] = react.exports.useState(false);
+  const [message, setMessage] = react.exports.useState('');
+  const [type, setType] = react.exports.useState('info');
+  const toastStyles = useStyles({
+    [styles$$['toast']]: true,
+    [styles$$[`toast--active`]]: isActive
+  }, className);
+  let autoHideTimer;
+
+  const setAutoHideTimer = () => autoHideTimer = setTimeout(() => setActive(false), 5000);
+
+  const handleToastToggle = react.exports.useCallback((message, type) => {
+    setActive(!isActive);
+    message && setMessage(message);
+    type && setType(type);
+    setAutoHideTimer();
+  }, [isActive, message, type, autoHideTimer]);
+  const closeToast = react.exports.useCallback(() => setActive(false), [isActive]);
+  react.exports.useEffect(() => {
+    emitter.on(TOGGLE_TIMING_TOAST, handleToastToggle);
+    return () => {
+      emitter.off(TOGGLE_TIMING_TOAST, handleToastToggle);
+      clearTimeout(autoHideTimer);
+    };
+  }, []);
+  return isActive && /*#__PURE__*/React.createElement("div", {
+    className: toastStyles,
+    "data-testid": "toast-component"
+  }, /*#__PURE__*/React.createElement(Notification, {
+    type: type,
+    isClosable: true,
+    onClick: closeToast,
+    hasTime: isActive
+  }, message));
+};
+
+TimingToast.displayName = 'TimingToast';
+TimingToast.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
+};
+TimingToast.defaultProps = {
+  className: '',
+  type: 'info'
+};
+
+var styles$_ = {"text--truncate":"Toast-module_text--truncate__tRl9f","toast":"Toast-module_toast__ngbBR","toast--active":"Toast-module_toast--active__eCnYp","fadein":"Toast-module_fadein__kJk41","fadeout":"Toast-module_fadeout__ZPODd"};
+
+/**
+ * Toast stateful container component
+ * @param {object} props
+ * @param {string|array} props.className
+ * @return {object} An object of children elements
+ */
+
+const Toast = () => {
+  const [isActive, setActive] = react.exports.useState(false);
+  const [message, setMessage] = react.exports.useState('');
+  const [type, setType] = react.exports.useState('success');
+  const [hideTimeout, setHideTimeout] = react.exports.useState(5000);
+  let autoHideTimer = 100;
+  /**
+   * handleToastToggle
+   * Updates state isActive
+   * @type {function}
+   */
+
+  const handleToastToggle = react.exports.useCallback(() => {
+    setActive(prev => !prev);
+  });
+  /**
+   * handleToastData
+   * get notification value
+   * @param {string} message - message of notification
+   * @param {string} type - type of notification
+   * @param {int} timeout - timeout to hide notification
+   * @type {function}
+   */
+
+  const handleToastData = (message, type, timeout = 5000) => {
+    setMessage(message);
+    setType(type);
+    setHideTimeout(timeout);
+  };
+
+  const setAutoHideTimer = () => autoHideTimer = setTimeout(() => setActive(false), hideTimeout);
+
+  const clearAutoHideTimer = () => clearTimeout(autoHideTimer);
+  /**
+   * useEffect
+   */
+
+
+  react.exports.useEffect(() => {
+    emitter.on(TOGGLE_TOAST, handleToastToggle);
+    emitter.on(TOGGLE_TOAST, handleToastData);
+    return () => {
+      emitter.off(TOGGLE_TOAST, handleToastToggle);
+      emitter.off(TOGGLE_TOAST, handleToastData);
+    };
+  }, []);
+  react.exports.useEffect(() => {
+    emitter.on(TOGGLE_TOAST, setAutoHideTimer);
+    return () => {
+      emitter.off(TOGGLE_TOAST, setAutoHideTimer);
+      clearAutoHideTimer();
+    };
+  }, []);
+  const toastStyles = useStyles({
+    [styles$_.toast]: true,
+    [styles$_['toast--active']]: isActive
+  });
+  return isActive && /*#__PURE__*/React.createElement("div", {
+    className: toastStyles,
+    "data-testid": "toast-component"
+  }, /*#__PURE__*/React.createElement(Notification, {
+    type: type,
+    onClick: handleToastToggle,
+    isClosable: true
+  }, message));
+};
+
+Toast.displayName = 'Toast';
+
+const useIsOpen = initial => {
+  const [value, setValue] = react.exports.useState(initial);
+  return {
+    set: react.exports.useCallback(item => setValue(arr => {
+      if (arr.includes(item)) {
+        return [];
+      }
+
+      return [item];
+    })),
+    setValue,
+    toggle: react.exports.useCallback(item => setValue(arr => {
+      if (arr.includes(item)) {
+        return arr.filter(value => value !== item);
+      }
+
+      return [...arr, item];
+    })),
+    toggleOneElement: react.exports.useCallback(() => setValue(value => {
+      if (value) {
+        return false;
+      }
+
+      return true;
+    })),
+    value
+  };
+};
+
+var styles$Z = {"text--truncate":"Spacer-module_text--truncate__16fjV","spacer--mini":"Spacer-module_spacer--mini__ORPSv","spacer--tiny":"Spacer-module_spacer--tiny__9VaNB","spacer--small":"Spacer-module_spacer--small__WXK02","spacer--medium":"Spacer-module_spacer--medium__LVRpH","spacer--large":"Spacer-module_spacer--large__HA0vN","spacer--big":"Spacer-module_spacer--big__ThfV4","spacer--huge":"Spacer-module_spacer--huge__iZ8KE"};
+
+/**
+ * Spacer - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.space - space size
+ * @return {object} An object of children element
+ */
+
+const Spacer = ({
+  className,
+  space
+}) => {
+  const spacerClasses = useStyles({
+    [styles$Z['spacer']]: true,
+    [styles$Z[`spacer--${space}`]]: space
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    "data-testid": "spacer",
+    className: spacerClasses
+  });
+};
+
+Spacer.displayName = 'Spacer';
+Spacer.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  space: propTypes.exports.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'x-large', 'huge'])
+};
+Spacer.defaultProps = {
+  className: '',
+  space: 'medium'
+};
+
+var styles$Y = {"text--truncate":"Accordion-module_text--truncate__DuJhq","accordion":"Accordion-module_accordion__wD27Q","accordion__header":"Accordion-module_accordion__header__vicgB","accordion__header-arrow":"Accordion-module_accordion__header-arrow__R7Ea7","accordion__header-arrow--blue":"Accordion-module_accordion__header-arrow--blue__3NXoX","accordion__text":"Accordion-module_accordion__text__VBSKI"};
+
+/**
+ * AccordionSection - stateless presentational component
+ * @param {object} props - props
+ * @param {function} props.handleOnClick - handle click event
+ * @param {boolean} props.isOpen - determine if section should be open
+ * @param {string} props.label - label
+ * @param {string} props.children - content
+ * @param {string|node} props.arrowLabel
+ * @param {string} props.variant
+ * @param {boolean|string} props.hasExpand
+ * @return {object} An object of children element
+ */
+
+const AccordionSection = ({
+  handleOnClick,
+  isOpen,
+  label,
+  children,
+  arrowLabel,
+  variant,
+  hasExpand
+}) => /*#__PURE__*/React.createElement("div", {
+  className: styles$Y.accordion
+}, /*#__PURE__*/React.createElement("div", {
+  className: styles$Y.accordion__header,
+  onClick: handleOnClick
+}, /*#__PURE__*/React.createElement("div", null, label), /*#__PURE__*/React.createElement("div", null, hasExpand && (arrowLabel ? /*#__PURE__*/React.createElement(Button$1, {
+  variant: variant,
+  size: "small"
+}, /*#__PURE__*/React.createElement("span", {
+  className: styles$Y['accordion__header-arrow']
+}, isOpen ? /*#__PURE__*/React.createElement(Icon, {
+  icon: "icon-chevron-up"
+}) : /*#__PURE__*/React.createElement(Icon, {
+  icon: "icon-chevron-down"
+}), arrowLabel)) : isOpen ? /*#__PURE__*/React.createElement(Icon, {
+  size: "xs",
+  icon: "icon-chevron-up"
+}) : /*#__PURE__*/React.createElement(Icon, {
+  size: "xs",
+  icon: "icon-chevron-down"
+})))), isOpen && /*#__PURE__*/React.createElement("div", {
+  className: styles$Y.accordion__text
+}, children));
+
+AccordionSection.displayName = 'AccordionSection';
+AccordionSection.propTypes = {
+  isOpen: propTypes.exports.bool,
+  hasExpand: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.bool]),
+  label: propTypes.exports.node.isRequired,
+  children: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.arrayOf, propTypes.exports.node]),
+  handleOnClick: propTypes.exports.func.isRequired,
+  arrowLabel: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.node]),
+  variant: propTypes.exports.oneOf(['icon', 'secondary'])
+};
+AccordionSection.defaultProps = {
+  isOpen: false,
+  arrowLabel: '',
+  variant: 'icon',
+  children: [],
+  hasExpand: true
+};
+
+/**
+ * Accordion - stateful presentational component
+ * @param {object} props - props
+ * @param {object} props.children - content to display
+ * @return {object} An object of children element
+ */
+
+const Accordion$2 = ({
+  children
+}) => {
+  const openList = useIsOpen([]);
+  return Array.isArray(children) && children.map((item, index) => /*#__PURE__*/React.createElement(react.exports.Fragment, {
+    key: index
+  }, /*#__PURE__*/React.createElement(AccordionSection, {
+    key: index,
+    isOpen: openList.value.includes(index),
+    label: item.props.label,
+    arrowLabel: item.props.arrowLabel,
+    variant: item.props.variant,
+    hasExpand: item.props.hasExpand,
+    handleOnClick: () => item.props.hasExpand && openList.toggle(index)
+  }, /*#__PURE__*/React.createElement(Spacer, {
+    space: "tiny"
+  }), item.props.children), /*#__PURE__*/React.createElement(Spacer, {
+    space: "tiny"
+  })));
+};
+
+Accordion$2.displayName = 'Accordion';
+Accordion$2.propTypes = {
+  children: propTypes.exports.node.isRequired
+};
+
+var styles$X = {"text--truncate":"Accordion-module_text--truncate__uqQRE","accordion__item":"Accordion-module_accordion__item__0nxhu","accordion__item--title":"Accordion-module_accordion__item--title__m5HAA","accordion__item--title-small":"Accordion-module_accordion__item--title-small__UCZ3Y","accordion__item--content":"Accordion-module_accordion__item--content__6WKQw","accordion__item--content-small":"Accordion-module_accordion__item--content-small__ipO4T","accordion__item--content-open":"Accordion-module_accordion__item--content-open__NSoN6"};
+
+/**
+ * Accordion - statefull presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `accordion__item`
+ * @param {number} props.number - item number
+ * @param {node} props.title - item title
+ * @param {node} props.content - item content
+ * @return {object} An object of children element
+ */
+
+const AccordionItem = ({
+  className,
+  title,
+  content,
+  size
+}) => {
+  const [isOpen, setOpen] = react.exports.useState(true);
+  /**
+   * handleOpen - open section
+   * @type {function}
+   */
+
+  const handleOpen = react.exports.useCallback(() => setOpen(!isOpen), [isOpen]);
+  const titleStyles = useStyles({
+    [styles$X['accordion__item--title']]: true,
+    [styles$X['accordion__item--title-small']]: size === 'small',
+    [styles$X['accordion__item--title-medium']]: size === 'medium'
+  });
+  const contentStyles = useStyles({
+    [styles$X['accordion__item--content']]: true,
+    [styles$X['accordion__item--content-small']]: size === 'small',
+    [styles$X['accordion__item--content-medium']]: size === 'medium',
+    [styles$X['accordion__item--content-open']]: isOpen,
+    [styles$X['accordion__item--content-close']]: !isOpen
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: className
+  }, /*#__PURE__*/React.createElement("div", {
+    className: titleStyles,
+    onClick: handleOpen
+  }, /*#__PURE__*/React.createElement("div", null, title), /*#__PURE__*/React.createElement(Icon, {
+    icon: isOpen ? 'icon-angle-down' : 'icon-angle-up'
+  })), /*#__PURE__*/React.createElement("div", {
+    className: contentStyles
+  }, content));
+};
+
+AccordionItem.displayName = 'Accordion Item';
+AccordionItem.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  title: propTypes.exports.node.isRequired,
+  content: propTypes.exports.node.isRequired,
+  size: propTypes.exports.oneOf(['small', 'medium'])
+};
+AccordionItem.defaultProps = {
+  className: styles$X.accordion__item,
+  size: 'medium'
+};
+
+/**
+ * Accordion - stateless presentational component
+ * @param {object} props - props
+ * @param {array} props.data - accordion content
+ * @param {bool} props.hasNumber - has number
+ * @param {string} props.size
+ * @return {object} An object of children element
+ */
+
+const Accordion = ({
+  data,
+  hasNumber,
+  size
+}) => /*#__PURE__*/React.createElement("div", null, data.map((item, index) => {
+  const {
+    title,
+    content
+  } = item;
+  return /*#__PURE__*/React.createElement(AccordionItem, {
+    key: uuid_1(),
+    number: hasNumber ? index + 1 : null,
+    title: title,
+    size: size,
+    content: content
+  });
+}));
+
+Accordion.displayName = 'Accordion';
+Accordion.propTypes = {
+  data: propTypes.exports.arrayOf(propTypes.exports.shape({
+    title: propTypes.exports.node.isRequired,
+    content: propTypes.exports.node.isRequired
+  })).isRequired,
+  hasNumber: propTypes.exports.bool,
+  size: propTypes.exports.oneOf(['small', 'medium'])
+};
+Accordion.defaultProps = {
+  size: 'medium',
+  hasNumber: false
+};
+var Accordion$1 = /*#__PURE__*/react.exports.memo(Accordion);
+
+var styles$W = {"text--truncate":"Alert-module_text--truncate__eaYch","alert-message":"Alert-module_alert-message__xbVJN","alert__message":"Alert-module_alert__message__4TQjo","alert-message--alert":"Alert-module_alert-message--alert__RIDkz","alert-message--warning":"Alert-module_alert-message--warning__MehY2","alert-message--success":"Alert-module_alert-message--success__EpRxy","alert-message--info":"Alert-module_alert-message--info__XWRBn"};
+
+/**
+ * Alert - stateless presentational component
+ * @param {object} props - props
+ * @param {node|string|object} props.children - children
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.type - type of alert message
+ * @return {object} An object of children element
+ */
+
+const Alert = ({
+  children,
+  className,
+  type
+}) => {
+  const alertStyles = useStyles({
+    [styles$W['alert-message']]: true,
+    [styles$W[`alert-message--${type}`]]: type
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    className: alertStyles
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: mapIconToClass(type),
+    color: type
+  }), /*#__PURE__*/React.createElement("div", {
+    className: styles$W.alert__message
+  }, children));
+};
+
+Alert.displayName = 'Alert';
+Alert.propTypes = {
+  children: propTypes.exports.oneOfType([propTypes.exports.node, propTypes.exports.string, propTypes.exports.func]).isRequired,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  type: propTypes.exports.oneOf(['info', 'success', 'warning', 'alert'])
+};
+Alert.defaultProps = {
+  className: '',
+  type: 'info'
+};
+
+var styles$V = {"text--truncate":"Image-module_text--truncate__2hDsM","image--small":"Image-module_image--small__IRvZ0","image--auto":"Image-module_image--auto__4d-T1"};
+
+/**
+ * Image - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.src - src url
+ * @param {string} props.alt - alt text
+ * @param {string|array} props.className - list of class names
+ * @param {number|string} props.size - width of the image
+ * @param {number} props.height - height of the image
+ * @param {boolean} props.auto - auto size of image
+ * @param {boolean} props.small - small image
+ * @return {object} An object of children element
+ */
+
+const Image = ({
+  src,
+  alt,
+  className,
+  size,
+  height,
+  auto,
+  small
+}) => {
+  const elementStyles = useStyles({
+    [styles$V['image--auto']]: auto,
+    [styles$V['image--small']]: small
+  }, className);
+  return /*#__PURE__*/React.createElement("img", {
+    alt: alt,
+    className: elementStyles,
+    height: height,
+    src: src,
+    width: size
+  });
+};
+
+Image.displayName = 'Image';
+Image.propTypes = {
+  alt: propTypes.exports.string,
+  className: propTypes.exports.string,
+  height: propTypes.exports.number,
+  size: propTypes.exports.oneOfType([propTypes.exports.number, propTypes.exports.string]),
+  src: propTypes.exports.oneOfType([propTypes.exports.string.isRequired, propTypes.exports.object.isRequired]).isRequired,
+  auto: propTypes.exports.bool,
+  small: propTypes.exports.bool
+};
+Image.defaultProps = {
+  alt: null,
+  className: '',
+  height: null,
+  size: null,
+  auto: false,
+  small: false
+};
+var Image$1 = /*#__PURE__*/react.exports.memo(Image);
+
+var styles$U = {"text--truncate":"Avatar-module_text--truncate__7z5el","avatar":"Avatar-module_avatar__5-kP8","avatar--blank":"Avatar-module_avatar--blank__EcdP6","avatar--tiny":"Avatar-module_avatar--tiny__cvKKh","avatar--medium":"Avatar-module_avatar--medium__un4U9"};
+
+const renderVariant = (variant, src, name) => variant === 'image' ? /*#__PURE__*/React.createElement(Image$1, {
+  src: src
+}) : /*#__PURE__*/React.createElement("p", null, name);
+/**
+ * Avatar - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {string} props.size - size of avatar
+ * @param {string} props.variant - variant of avatar image
+ * @param {string} props.src - source of avatar image
+ * @param {string} props.name - avatar name
+ * @return {object} An object of children element
+ */
+
+
+const Avatar = ({
+  className,
+  size,
+  variant,
+  src,
+  name
+}) => {
+  const avatarStyles = useStyles({
+    [styles$U['avatar']]: true,
+    [styles$U[`avatar--${size}`]]: size,
+    [styles$U[`avatar--${variant}`]]: variant
+  }, className);
+  return /*#__PURE__*/React.createElement("span", {
+    className: avatarStyles
+  }, renderVariant(variant, src, name));
+};
+
+Avatar.displayName = 'Avatar';
+Avatar.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  name: propTypes.exports.string,
+  size: propTypes.exports.oneOf(['tiny', 'medium']),
+  src: propTypes.exports.string,
+  variant: propTypes.exports.oneOf(['image', 'blank'])
+};
+Avatar.defaultProps = {
+  className: '',
+  name: null,
+  size: 'medium',
+  src: '',
+  variant: 'blank'
+};
+
+var scss$2 = {"text--truncate":"Spreader_text--truncate__xQYi8","spreader":"Spreader_spreader__lmB06","spreader--mini":"Spreader_spreader--mini__OB5kR","spreader--tiny":"Spreader_spreader--tiny__L44yx","spreader--small":"Spreader_spreader--small__61iel","spreader--medium":"Spreader_spreader--medium__bL833","spreader--large":"Spreader_spreader--large__ZIEx8","spreader--x-large":"Spreader_spreader--x-large__yHNcV","spreader--big":"Spreader_spreader--big__NmzUq","spreader--huge":"Spreader_spreader--huge__OwRua"};
+
+const cssClass$2 = styles$1b(scss$2); //TODO Spreader css, test
+
+/**
+ * Spreader - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: `spreader`
+ * @param {string} props.spread - spread size
+ * @return {object} An object of children element
+ */
+
+const Spreader = ({
+  className,
+  spread
+}) => /*#__PURE__*/React.createElement("div", {
+  className: cssClass$2(className, `spreader--${spread}`)
+});
+
+Spreader.displayName = 'Spreader';
+Spreader.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  spread: propTypes.exports.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'x-large', 'big', 'huge'])
+};
+Spreader.defaultProps = {
+  className: 'spreader',
+  spread: 'medium'
+};
+
+var styles$T = {"text--truncate":"Back-module_text--truncate__D3BTG","back":"Back-module_back__6QVso","hidden":"Back-module_hidden__Y4mBY"};
+
+/**
+ * Back - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names, default: back
+ * @param {string} props.url - url, default: ''
+ * @param {string} props.content - content, default: ''
+ * @param {func} props.onClick - onClick
+ * @return {object} An object of children element
+ */
+
+const Back = ({
+  className,
+  url,
+  content,
+  label,
+  onClick
+}) => {
+  const elementStyles = useStyles({
+    [styles$T['back']]: true
+  }, className);
+  return /*#__PURE__*/React.createElement("span", {
+    "data-testid": "back",
+    className: elementStyles
+  }, /*#__PURE__*/React.createElement("a", {
+    href: url
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    content: content,
+    placement: "bottom",
+    disabled: !content
+  }, /*#__PURE__*/React.createElement(Button$1, {
+    variant: "icon",
+    onClick: onClick
+  }, /*#__PURE__*/React.createElement(Icon, {
+    icon: "icon-arrow-left"
+  }), /*#__PURE__*/React.createElement(Spreader, {
+    spread: "tiny"
+  }), label && label))));
+};
+
+Back.displayName = 'Back';
+Back.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  url: propTypes.exports.string,
+  label: propTypes.exports.string,
+  content: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
+  onClick: propTypes.exports.func
+};
+Back.defaultProps = {
+  label: null,
+  className: '',
+  content: null,
+  url: null,
+  onClick: () => null
+};
+
+/**
+ * useUpdateEffect - rerender component only when dependency array changed
+ * @param {function} props.effect - function to call
+ * @param {array} props.dependencies - dependency array
+ * @return {object}
+ */
+
+const useUpdateEffect = (effect, dependencies = []) => {
+  const isInitialMount = react.exports.useRef(true);
+  react.exports.useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      effect();
+    }
+  }, dependencies);
 };
 
 const ButtonGroupContext = /*#__PURE__*/react.exports.createContext(null);
@@ -6946,9 +10735,7 @@ const useButtonGroupContext = () => {
   return buttonGroup;
 };
 
-var css_248z$16 = ".ButtonGroup-module_text--truncate__HAbZq {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ButtonGroup-module_wrapper__6XLyS {\n  border: 1px solid #edecec;\n  width: fit-content;\n}\n\n.ButtonGroup-module_button__Qd3wE {\n  background: none;\n  color: #7b7b7b;\n  border: none;\n  font: inherit;\n  cursor: pointer;\n  outline: inherit;\n  padding: 10px 20px;\n  font-size: 14px;\n  font-weight: 600;\n}\n.ButtonGroup-module_button__Qd3wE:hover {\n  background-color: #edecec;\n}\n.ButtonGroup-module_button--active__V1QX- {\n  text-decoration: none;\n  background-color: #edecec;\n  color: #000000;\n}";
-var styles$12 = {"text--truncate":"ButtonGroup-module_text--truncate__HAbZq","wrapper":"ButtonGroup-module_wrapper__6XLyS","button":"ButtonGroup-module_button__Qd3wE","button--active":"ButtonGroup-module_button--active__V1QX-"};
-styleInject(css_248z$16);
+var styles$S = {"text--truncate":"ButtonGroup-module_text--truncate__HAbZq","wrapper":"ButtonGroup-module_wrapper__6XLyS","button":"ButtonGroup-module_button__Qd3wE","button--active":"ButtonGroup-module_button--active__V1QX-"};
 
 /**
  * ButtonGroup - stateless presentational component
@@ -6966,7 +10753,7 @@ const ButtonGroup = ({
   initialValue: initialValue,
   onChange: onChange
 }, /*#__PURE__*/React.createElement("div", {
-  className: styles$12.wrapper
+  className: styles$S.wrapper
 }, children));
 
 ButtonGroup.displayName = 'ButtonGroup';
@@ -6995,8 +10782,8 @@ const Button = ({
     setSelected
   } = useButtonGroupContext();
   const buttonStyles = useStyles({
-    [styles$12.button]: true,
-    [styles$12[`button--active`]]: selected === id
+    [styles$S.button]: true,
+    [styles$S[`button--active`]]: selected === id
   });
 
   const handleChange = () => setSelected(id);
@@ -7015,9 +10802,7 @@ Button.propTypes = {
 
 ButtonGroup.Button = Button;
 
-var css_248z$15 = ".Backdrop-module_text--truncate__cjp-c {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Backdrop-module_backdrop__sB-mT {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 4, 35, 0.6);\n  z-index: 250996;\n  left: 0;\n  top: 0;\n}\n.Backdrop-module_backdrop__index-4__mgW3B {\n  z-index: 4;\n}\n.Backdrop-module_backdrop__index-6__RGltE {\n  z-index: 6;\n}\n.Backdrop-module_backdrop__index-8__FA2Dd {\n  z-index: 8;\n}\n\n@supports (backdrop-filter: none) {\n  .Backdrop-module_backdrop__sB-mT {\n    backdrop-filter: blur(5px);\n  }\n}";
-var styles$11 = {"text--truncate":"Backdrop-module_text--truncate__cjp-c","backdrop":"Backdrop-module_backdrop__sB-mT","backdrop__index-4":"Backdrop-module_backdrop__index-4__mgW3B","backdrop__index-6":"Backdrop-module_backdrop__index-6__RGltE","backdrop__index-8":"Backdrop-module_backdrop__index-8__FA2Dd"};
-styleInject(css_248z$15);
+var styles$R = {"text--truncate":"Backdrop-module_text--truncate__cjp-c","backdrop":"Backdrop-module_backdrop__sB-mT","backdrop__index-4":"Backdrop-module_backdrop__index-4__mgW3B","backdrop__index-6":"Backdrop-module_backdrop__index-6__RGltE","backdrop__index-8":"Backdrop-module_backdrop__index-8__FA2Dd"};
 
 /**
  * Backdrop - stateless presentational component
@@ -7034,10 +10819,10 @@ const Backdrop = ({
   zIndex
 }) => {
   const backdropStyles = useStyles({
-    [styles$11.backdrop]: true,
-    [styles$11['backdrop__index-4']]: String(zIndex) === '4',
-    [styles$11['backdrop__index-6']]: String(zIndex) === '6',
-    [styles$11['backdrop__index-8']]: String(zIndex) === '8'
+    [styles$R.backdrop]: true,
+    [styles$R['backdrop__index-4']]: String(zIndex) === '4',
+    [styles$R['backdrop__index-6']]: String(zIndex) === '6',
+    [styles$R['backdrop__index-8']]: String(zIndex) === '8'
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: backdropStyles,
@@ -7058,9 +10843,7 @@ Backdrop.defaultProps = {
   zIndex: null
 };
 
-var css_248z$14 = ".Badge-module_text--truncate__YlWm1 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Badge-module_badge__ZbEBU {\n  position: relative;\n  padding: 0 5px;\n  text-transform: uppercase;\n  font-size: 12px;\n  color: white;\n  border-radius: 2px;\n  line-height: 20px;\n  display: inline-flex;\n  align-items: baseline;\n  height: 20px;\n  margin-right: 5px;\n}\n.Badge-module_badge__ZbEBU a {\n  font-weight: 400;\n  color: white;\n  text-decoration: none;\n}\n.Badge-module_badge__tooltip__uIAJK {\n  max-width: 105px;\n  display: inline-block;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.Badge-module_badge--accent-1__W9cxn {\n  background: #9368b3;\n}\n.Badge-module_badge--accent-2__NTq-U {\n  background: #00bd9e;\n}\n.Badge-module_badge--accent-3__hEASz {\n  background: #f99e31;\n}\n.Badge-module_badge--accent-4__Ck5dA {\n  background: #24bd9c;\n}\n.Badge-module_badge--accent-5__FUotC {\n  background: #610fb7;\n}\n.Badge-module_badge--accent-6__MoCPA {\n  background: #9363b6;\n}\n.Badge-module_badge--accent-7__aeniW {\n  background: #f27589;\n}\n.Badge-module_badge--accent-8__bSHYd {\n  background: #7b7b7b;\n}\n.Badge-module_badge--alert__F97SN {\n  background: #ff3245;\n}\n.Badge-module_badge--warning__SABjF {\n  background: #ffb000;\n}\n.Badge-module_badge--success__ymIaK {\n  background: #29b662;\n}\n.Badge-module_badge--info__IRK9m {\n  background: #5d92ff;\n}\n.Badge-module_badge--pending__v8UHR {\n  background: #7988a0;\n}\n.Badge-module_badge--indicator__ElBEb {\n  border-radius: 50px;\n}\n.Badge-module_badge--paid__YJbLX {\n  background: #29b662;\n}\n.Badge-module_badge--open__HeeX1 {\n  background: #ffb000;\n}\n.Badge-module_badge--canceled__AwgnS {\n  background: #ff3245;\n}\n.Badge-module_badge--ai__BkpEJ {\n  background: #29cbb7;\n}\n.Badge-module_badge__ZbEBU svg {\n  vertical-align: -1px;\n  margin-right: 5px;\n}";
-var styles$10 = {"text--truncate":"Badge-module_text--truncate__YlWm1","badge":"Badge-module_badge__ZbEBU","badge__tooltip":"Badge-module_badge__tooltip__uIAJK","badge--accent-1":"Badge-module_badge--accent-1__W9cxn","badge--accent-2":"Badge-module_badge--accent-2__NTq-U","badge--accent-3":"Badge-module_badge--accent-3__hEASz","badge--accent-4":"Badge-module_badge--accent-4__Ck5dA","badge--accent-5":"Badge-module_badge--accent-5__FUotC","badge--accent-6":"Badge-module_badge--accent-6__MoCPA","badge--accent-7":"Badge-module_badge--accent-7__aeniW","badge--accent-8":"Badge-module_badge--accent-8__bSHYd","badge--alert":"Badge-module_badge--alert__F97SN","badge--warning":"Badge-module_badge--warning__SABjF","badge--success":"Badge-module_badge--success__ymIaK","badge--info":"Badge-module_badge--info__IRK9m","badge--pending":"Badge-module_badge--pending__v8UHR","badge--indicator":"Badge-module_badge--indicator__ElBEb","badge--paid":"Badge-module_badge--paid__YJbLX","badge--open":"Badge-module_badge--open__HeeX1","badge--canceled":"Badge-module_badge--canceled__AwgnS","badge--ai":"Badge-module_badge--ai__BkpEJ"};
-styleInject(css_248z$14);
+var styles$Q = {"text--truncate":"Badge-module_text--truncate__YlWm1","badge":"Badge-module_badge__ZbEBU","badge__tooltip":"Badge-module_badge__tooltip__uIAJK","badge--accent-1":"Badge-module_badge--accent-1__W9cxn","badge--accent-2":"Badge-module_badge--accent-2__NTq-U","badge--accent-3":"Badge-module_badge--accent-3__hEASz","badge--accent-4":"Badge-module_badge--accent-4__Ck5dA","badge--accent-5":"Badge-module_badge--accent-5__FUotC","badge--accent-6":"Badge-module_badge--accent-6__MoCPA","badge--accent-7":"Badge-module_badge--accent-7__aeniW","badge--accent-8":"Badge-module_badge--accent-8__bSHYd","badge--alert":"Badge-module_badge--alert__F97SN","badge--warning":"Badge-module_badge--warning__SABjF","badge--success":"Badge-module_badge--success__ymIaK","badge--info":"Badge-module_badge--info__IRK9m","badge--pending":"Badge-module_badge--pending__v8UHR","badge--indicator":"Badge-module_badge--indicator__ElBEb","badge--paid":"Badge-module_badge--paid__YJbLX","badge--open":"Badge-module_badge--open__HeeX1","badge--canceled":"Badge-module_badge--canceled__AwgnS","badge--ai":"Badge-module_badge--ai__BkpEJ"};
 
 /**
  * Badge - stateless presentational component
@@ -7083,14 +10866,14 @@ const Badge = ({
   const badgeRef = react.exports.useRef();
   const width = badgeRef.current ? badgeRef.current.offsetWidth : 0;
   const badgeStyles = useStyles({
-    [styles$10.badge]: true,
-    [styles$10[`badge--${type}`]]: type,
-    [styles$10['badge--indicator']]: isIndicator
+    [styles$Q.badge]: true,
+    [styles$Q[`badge--${type}`]]: type,
+    [styles$Q['badge--indicator']]: isIndicator
   }, className);
   const tooltipStyles = useStyles({
-    [styles$10['badge__tooltip']]: tooltip
+    [styles$Q['badge__tooltip']]: tooltip
   });
-  return /*#__PURE__*/React.createElement(Tooltip$1, {
+  return /*#__PURE__*/React.createElement(Tooltip, {
     content: tooltip,
     disabled: !tooltip || width < 105
   }, /*#__PURE__*/React.createElement("span", {
@@ -7116,9 +10899,143 @@ Badge.defaultProps = {
   isIndicator: false
 };
 
-var css_248z$13 = ".BlockSection-module_text--truncate__FuVvO {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.BlockSection-module_block-section__5z7Lb {\n  margin: 0 auto;\n  width: 1054px;\n  height: 400px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.BlockSection-module_block-section__panel__OkppT {\n  width: 1054px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.BlockSection-module_block-section__panel--reverse__rp-Q- {\n  flex-direction: row-reverse;\n}\n.BlockSection-module_block-section__panel--content__HVbu7 {\n  padding: 10px 70px;\n  display: flex;\n  justify-content: center;\n  align-items: flex-start;\n  flex-direction: column;\n}";
-var styles$$ = {"text--truncate":"BlockSection-module_text--truncate__FuVvO","block-section":"BlockSection-module_block-section__5z7Lb","block-section__panel":"BlockSection-module_block-section__panel__OkppT","block-section__panel--reverse":"BlockSection-module_block-section__panel--reverse__rp-Q-","block-section__panel--content":"BlockSection-module_block-section__panel--content__HVbu7"};
-styleInject(css_248z$13);
+var styles$P = {"text--truncate":"List-module_text--truncate__-G3ts","list":"List-module_list__yt0s5","list__item":"List-module_list__item__Zaere","list--inline":"List-module_list--inline__qtMYm","list-item--table":"List-module_list-item--table__BD36t","list-item--list":"List-module_list-item--list__RiUg-","list-item--block":"List-module_list-item--block__nLk7-","list-item--dropdown":"List-module_list-item--dropdown__tssPM","list-item--menu":"List-module_list-item--menu__auwtG","list-item--menu-active":"List-module_list-item--menu-active__F0gQs","list-item--small":"List-module_list-item--small__R-Mdx","list-item--margin":"List-module_list-item--margin__3zLPC","list--ordered-decimal":"List-module_list--ordered-decimal__G7mPj","list--ordered-disc":"List-module_list--ordered-disc__aYjeG","list--ordered-check":"List-module_list--ordered-check__Ms6JY"};
+
+/**
+ * List - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string} props.variant - Variant
+ * @param {string|array} props.className - list of class names out of component
+ * @param {string} props.listStyle - list style
+ * @return {object} An object of children element
+ */
+
+const List = ({
+  children,
+  variant,
+  className,
+  listStyle
+}) => {
+  const elementClasses = useStyles({
+    [styles$P['list']]: true,
+    [styles$P['list--inline']]: variant === 'inline',
+    [styles$P[`list--${listStyle}`]]: listStyle
+  }, className);
+  return /*#__PURE__*/React.createElement("ul", {
+    className: elementClasses
+  }, React.Children.toArray(children).filter(item => item));
+};
+
+List.displayName = 'List';
+List.propTypes = {
+  children: propTypes.exports.node.isRequired,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  listStyle: propTypes.exports.oneOf(['ordered-check', 'ordered-decimal', 'ordered-disc', '']),
+  variant: propTypes.exports.oneOf(['inline', ''])
+};
+List.defaultProps = {
+  className: '',
+  listStyle: '',
+  variant: ''
+};
+
+/**
+ * ListItem - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children
+ * @param {string} props.variant - Variant `menu, dropdown, table`
+ * @param {string} props.size - size
+ * @param {string|array} props.className - list of class names, default: `list__item`,
+ * @param {bool} props.margin - left margin
+ * @return {object} An object of children element
+ */
+
+const ListItem = ({
+  children,
+  variant,
+  size,
+  className,
+  margin
+}) => {
+  const elementClasses = useStyles({
+    [styles$P['list__item']]: true,
+    [styles$P[`list-item--${variant}`]]: variant,
+    [styles$P['list-item--margin']]: margin,
+    [styles$P['list-item--small']]: size === 'small'
+  }, className);
+  return /*#__PURE__*/React.createElement("li", {
+    className: elementClasses
+  }, /*#__PURE__*/React.createElement("div", null, children));
+};
+
+ListItem.displayName = 'ListItem';
+ListItem.propTypes = {
+  children: propTypes.exports.node.isRequired,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  margin: propTypes.exports.bool,
+  size: propTypes.exports.oneOf(['small', '']),
+  variant: propTypes.exports.oneOf(['menu', 'dropdown', 'table', 'list', 'block', ''])
+};
+ListItem.defaultProps = {
+  className: '',
+  margin: false,
+  size: '',
+  variant: ''
+};
+
+var styles$O = {"text--truncate":"Panel-module_text--truncate__cvEeJ","panel":"Panel-module_panel__nwNeT","panel--background":"Panel-module_panel--background__-eNL2","panel--padding-default":"Panel-module_panel--padding-default__ISqNw","panel--padding-tiny":"Panel-module_panel--padding-tiny__xKQgr","panel--padding-nolr":"Panel-module_panel--padding-nolr__9MCjC","panel--padding-none":"Panel-module_panel--padding-none__IyINM","panel--padding-bottom-tiny":"Panel-module_panel--padding-bottom-tiny__AdPMa","panel--padding-input":"Panel-module_panel--padding-input__WzDvo","panel--adjust-height":"Panel-module_panel--adjust-height__SQ9Ui","panel--shadow-none":"Panel-module_panel--shadow-none__L3VRp"};
+
+/**
+ * Panel - stateless presentational component
+ * @param {object} props - props
+ * @param {string|array} props.className - list of class names
+ * @param {object} props.children - children
+ * @param {string} props.variant - variant
+ * @param {bool} props.adjustHeight - adjust panel height to container height
+ * @param {bool} props.isBackground - add background
+ * @param {bool} props.hasShadow - panel shadow, default true
+ * @return {object} An object of children element
+ */
+
+const Panel = ({
+  className,
+  children,
+  variant,
+  adjustHeight,
+  isBackground,
+  hasShadow
+}) => {
+  const elementClasses = useStyles({
+    [styles$O['panel']]: true,
+    [styles$O['panel--adjust-height']]: adjustHeight,
+    [styles$O['panel--background']]: isBackground,
+    [styles$O['panel--background']]: !hasShadow,
+    [styles$O[`panel--${variant}`]]: variant
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    className: elementClasses
+  }, children);
+};
+
+Panel.displayName = 'Panel';
+Panel.propTypes = {
+  adjustHeight: propTypes.exports.bool,
+  children: propTypes.exports.node.isRequired,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  hasShadow: propTypes.exports.bool,
+  isBackground: propTypes.exports.bool,
+  variant: propTypes.exports.oneOf(['padding-default', 'padding-nolr', 'padding-tiny', 'padding-none', 'padding-bottom-tiny', 'padding-input', 'padding-huge'])
+};
+Panel.defaultProps = {
+  adjustHeight: false,
+  className: '',
+  hasShadow: true,
+  isBackground: false,
+  variant: 'padding-default'
+};
+
+var styles$N = {"text--truncate":"BlockSection-module_text--truncate__FuVvO","block-section":"BlockSection-module_block-section__5z7Lb","block-section__panel":"BlockSection-module_block-section__panel__OkppT","block-section__panel--reverse":"BlockSection-module_block-section__panel--reverse__rp-Q-","block-section__panel--content":"BlockSection-module_block-section__panel--content__HVbu7"};
 
 /**
  * Block Section - stateless presentational component
@@ -7145,38 +11062,38 @@ const BlockSection = ({
   list
 }) => {
   const wrapperClasses = useStyles({
-    [styles$$['block-section']]: true
+    [styles$N['block-section']]: true
   }, className);
   const elementClasses = useStyles({
-    [styles$$['block-section__panel']]: true,
-    [styles$$['block-section__panel--reverse']]: reverse
+    [styles$N['block-section__panel']]: true,
+    [styles$N['block-section__panel--reverse']]: reverse
   });
   return /*#__PURE__*/React.createElement("div", {
     className: wrapperClasses
-  }, /*#__PURE__*/React.createElement(Panel$1, {
+  }, /*#__PURE__*/React.createElement(Panel, {
     variant: "padding-none"
   }, /*#__PURE__*/React.createElement("div", {
     "data-testid": "panel",
     className: elementClasses
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$$['block-section__panel--content']
-  }, /*#__PURE__*/React.createElement(Heading$1, {
+    className: styles$N['block-section__panel--content']
+  }, /*#__PURE__*/React.createElement(Heading, {
     bold: true,
     level: 2
-  }, title), /*#__PURE__*/React.createElement(Paragraph$1, {
+  }, title), /*#__PURE__*/React.createElement(Paragraph, {
     line: 20,
     padding: list ? 'none' : 'medium',
     weight: 400
-  }, message), list && /*#__PURE__*/React.createElement(List$1, {
+  }, message), list && /*#__PURE__*/React.createElement(List, {
     listStyle: "ordered-disc"
-  }, list.map(item => /*#__PURE__*/React.createElement(ListItem$1, {
+  }, list.map(item => /*#__PURE__*/React.createElement(ListItem, {
     key: uuid_1(),
     variant: "block"
-  }, item))), /*#__PURE__*/React.createElement(Spacer$1, {
+  }, item))), /*#__PURE__*/React.createElement(Spacer, {
     space: list ? 'medium' : 'small'
-  }), /*#__PURE__*/React.createElement(Button$2, {
+  }), /*#__PURE__*/React.createElement(Button$1, {
     onClick: onClick
-  }, button)), /*#__PURE__*/React.createElement(Image$2, {
+  }, button)), /*#__PURE__*/React.createElement(Image$1, {
     size: 527,
     src: url
   }))));
@@ -7200,9 +11117,7 @@ BlockSection.defaultProps = {
   onClick: () => null
 };
 
-var css_248z$12 = ".BoxBackground-module_text--truncate__taorY {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.BoxBackground-module_boxBackground__s84Mt {\n  display: flex;\n  text-align: center;\n  color: white;\n  align-items: center;\n  align-self: center;\n  justify-content: center;\n  align-content: center;\n  font-size: 16px;\n  padding: 2px 5px;\n  font-weight: 600;\n}\n.BoxBackground-module_boxBackground--success__jcIbs {\n  background-color: #29b662;\n}\n.BoxBackground-module_boxBackground--warning__pDKF9 {\n  background-color: #ffb000;\n}\n.BoxBackground-module_boxBackground--alert__VF4f- {\n  background-color: #ff3245;\n}\n.BoxBackground-module_boxBackground--progress__v5D0M, .BoxBackground-module_boxBackground--info__CnhIt {\n  background-color: #009fe3;\n}";
-var styles$_ = {"text--truncate":"BoxBackground-module_text--truncate__taorY","boxBackground":"BoxBackground-module_boxBackground__s84Mt","boxBackground--success":"BoxBackground-module_boxBackground--success__jcIbs","boxBackground--warning":"BoxBackground-module_boxBackground--warning__pDKF9","boxBackground--alert":"BoxBackground-module_boxBackground--alert__VF4f-","boxBackground--progress":"BoxBackground-module_boxBackground--progress__v5D0M","boxBackground--info":"BoxBackground-module_boxBackground--info__CnhIt"};
-styleInject(css_248z$12);
+var styles$M = {"text--truncate":"BoxBackground-module_text--truncate__taorY","boxBackground":"BoxBackground-module_boxBackground__s84Mt","boxBackground--success":"BoxBackground-module_boxBackground--success__jcIbs","boxBackground--warning":"BoxBackground-module_boxBackground--warning__pDKF9","boxBackground--alert":"BoxBackground-module_boxBackground--alert__VF4f-","boxBackground--progress":"BoxBackground-module_boxBackground--progress__v5D0M","boxBackground--info":"BoxBackground-module_boxBackground--info__CnhIt"};
 
 /**
  * Box Background - stateless presentational component
@@ -7219,8 +11134,8 @@ const BoxBackground = ({
   variant
 }) => {
   const elementClasses = useStyles({
-    [styles$_['boxBackground']]: true,
-    [styles$_[`boxBackground--${variant}`]]: variant
+    [styles$M['boxBackground']]: true,
+    [styles$M[`boxBackground--${variant}`]]: variant
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: elementClasses
@@ -7237,9 +11152,7 @@ BoxBackground.defaultProps = {
   className: ''
 };
 
-var css_248z$11 = ".BoxOutline-module_text--truncate__JlpxK {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.BoxOutline-module_box-outline__-A2Lk {\n  position: relative;\n  box-sizing: border-box;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 15px 10px;\n  cursor: pointer;\n  transition: all 0.3s ease-out;\n}\n.BoxOutline-module_box-outline__disabled__xPkQp {\n  opacity: 0.5;\n  pointer-events: none;\n  filter: grayscale(1);\n}\n.BoxOutline-module_box-outline__default__EnZf3 {\n  border: 1px solid transparent;\n}\n.BoxOutline-module_box-outline__default--hover__BMIg5:hover {\n  border: 1px solid #2550aa;\n  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1);\n}\n.BoxOutline-module_box-outline__background__IlfR8 {\n  border: 1px solid #dddddd;\n}\n.BoxOutline-module_box-outline__background--hover__0qrtO:hover {\n  border: 1px solid #2550aa;\n  background: #f5f7fc;\n  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);\n}\n.BoxOutline-module_box-outline__no-padding__wsZ3w {\n  padding: 0;\n}\n.BoxOutline-module_box-outline__-A2Lk.BoxOutline-module_box-outline__is-selected__vszMZ {\n  border: 1px solid #29b662;\n}\n.BoxOutline-module_box-outline__-A2Lk.BoxOutline-module_box-outline__is-selected--hover__4fhtH:hover {\n  border: 1px solid #29b662;\n  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1019607843);\n}\n.BoxOutline-module_box-outline__checkmark-status__vS22A {\n  box-sizing: border-box;\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(50%, -50%);\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  width: 25px;\n  height: 25px;\n  border-radius: 50%;\n  font-size: 12px;\n  z-index: 3;\n}\n.BoxOutline-module_box-outline__checkmark-status--is-selected__GbZhR {\n  background-color: #29b662;\n}";
-var styles$Z = {"text--truncate":"BoxOutline-module_text--truncate__JlpxK","box-outline":"BoxOutline-module_box-outline__-A2Lk","box-outline__disabled":"BoxOutline-module_box-outline__disabled__xPkQp","box-outline__default":"BoxOutline-module_box-outline__default__EnZf3","box-outline__default--hover":"BoxOutline-module_box-outline__default--hover__BMIg5","box-outline__background":"BoxOutline-module_box-outline__background__IlfR8","box-outline__background--hover":"BoxOutline-module_box-outline__background--hover__0qrtO","box-outline__no-padding":"BoxOutline-module_box-outline__no-padding__wsZ3w","box-outline__is-selected":"BoxOutline-module_box-outline__is-selected__vszMZ","box-outline__is-selected--hover":"BoxOutline-module_box-outline__is-selected--hover__4fhtH","box-outline__checkmark-status":"BoxOutline-module_box-outline__checkmark-status__vS22A","box-outline__checkmark-status--is-selected":"BoxOutline-module_box-outline__checkmark-status--is-selected__GbZhR"};
-styleInject(css_248z$11);
+var styles$L = {"text--truncate":"BoxOutline-module_text--truncate__JlpxK","box-outline":"BoxOutline-module_box-outline__-A2Lk","box-outline__disabled":"BoxOutline-module_box-outline__disabled__xPkQp","box-outline__default":"BoxOutline-module_box-outline__default__EnZf3","box-outline__default--hover":"BoxOutline-module_box-outline__default--hover__BMIg5","box-outline__background":"BoxOutline-module_box-outline__background__IlfR8","box-outline__background--hover":"BoxOutline-module_box-outline__background--hover__0qrtO","box-outline__no-padding":"BoxOutline-module_box-outline__no-padding__wsZ3w","box-outline__is-selected":"BoxOutline-module_box-outline__is-selected__vszMZ","box-outline__is-selected--hover":"BoxOutline-module_box-outline__is-selected--hover__4fhtH","box-outline__checkmark-status":"BoxOutline-module_box-outline__checkmark-status__vS22A","box-outline__checkmark-status--is-selected":"BoxOutline-module_box-outline__checkmark-status--is-selected__GbZhR"};
 
 /**
  * Box outline - stateless presentational component
@@ -7273,17 +11186,17 @@ const BoxOutline = ({
   onMouseLeave
 }) => {
   const elementClasses = useStyles({
-    [styles$Z['box-outline']]: true,
-    [styles$Z[`box-outline__${variant}`]]: variant,
-    [styles$Z[`box-outline__${variant}--hover`]]: !disableHover,
-    [styles$Z['box-outline__is-selected']]: isSelected,
-    [styles$Z['box-outline__is-selected--hover']]: isSelected && !disableHover,
-    [styles$Z['box-outline__no-padding']]: padding === 'none',
-    [styles$Z['box-outline__disabled']]: disabled
+    [styles$L['box-outline']]: true,
+    [styles$L[`box-outline__${variant}`]]: variant,
+    [styles$L[`box-outline__${variant}--hover`]]: !disableHover,
+    [styles$L['box-outline__is-selected']]: isSelected,
+    [styles$L['box-outline__is-selected--hover']]: isSelected && !disableHover,
+    [styles$L['box-outline__no-padding']]: padding === 'none',
+    [styles$L['box-outline__disabled']]: disabled
   }, className);
   const checkmarkStatusClasses = useStyles({
-    [styles$Z['box-outline__checkmark-status']]: true,
-    [styles$Z['box-outline__checkmark-status--is-selected']]: isSelected
+    [styles$L['box-outline__checkmark-status']]: true,
+    [styles$L['box-outline__checkmark-status--is-selected']]: isSelected
   });
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "box-outline",
@@ -7294,7 +11207,7 @@ const BoxOutline = ({
     onMouseLeave: onMouseLeave
   }, isSelected && !noCheckmark && /*#__PURE__*/React.createElement("span", {
     className: checkmarkStatusClasses
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-ok",
     color: "white"
   })), children);
@@ -7329,9 +11242,7 @@ BoxOutline.defaultProps = {
 };
 BoxOutline.displayName = 'BoxOutline';
 
-var css_248z$10 = ".Card-module_text--truncate__V1PAm {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Card-module_card__LzN-3 {\n  position: relative;\n  border-radius: 6px;\n  padding: 16px 20px 16px 40px;\n  background: white;\n  transition: 0.2s;\n}\n.Card-module_card--success__-xF1x {\n  border: 1px solid #29b662;\n}\n.Card-module_card--success__-xF1x:hover {\n  background: rgba(34, 182, 98, 0.1);\n}\n.Card-module_card--warning__tTne9 {\n  border: 1px solid #ffb000;\n}\n.Card-module_card--warning__tTne9:hover {\n  background: rgba(255, 176, 0, 0.1);\n}\n.Card-module_card--alert__krr0Y {\n  border: 1px solid #ff3245;\n}\n.Card-module_card--alert__krr0Y:hover {\n  background: rgba(255, 50, 69, 0.1);\n}\n\n.Card-module_container__K688s {\n  position: relative;\n}";
-var styles$Y = {"text--truncate":"Card-module_text--truncate__V1PAm","card":"Card-module_card__LzN-3","card--success":"Card-module_card--success__-xF1x","card--warning":"Card-module_card--warning__tTne9","card--alert":"Card-module_card--alert__krr0Y","container":"Card-module_container__K688s"};
-styleInject(css_248z$10);
+var styles$K = {"text--truncate":"Card-module_text--truncate__V1PAm","card":"Card-module_card__LzN-3","card--success":"Card-module_card--success__-xF1x","card--warning":"Card-module_card--warning__tTne9","card--alert":"Card-module_card--alert__krr0Y","container":"Card-module_container__K688s"};
 
 /**
  * Card - stateless presentational component
@@ -7347,11 +11258,11 @@ const Card = ({
   variant
 }) => {
   const elementClasses = useStyles({
-    [styles$Y['card']]: true,
-    [styles$Y[`card--${variant}`]]: variant
+    [styles$K['card']]: true,
+    [styles$K[`card--${variant}`]]: variant
   }, className);
   const containerClasses = useStyles({
-    [styles$Y['container']]: true
+    [styles$K['container']]: true
   });
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "card",
@@ -7371,9 +11282,7 @@ Card.defaultProps = {
   className: ''
 };
 
-var css_248z$$ = ".Check-module_text--truncate__wEnyK {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Check-module_check__TPGL4 {\n  font-size: 10px;\n  color: #1f1f1f;\n}\n.Check-module_check__TPGL4 svg,\n.Check-module_check__TPGL4 i {\n  color: #ff3245;\n}\n.Check-module_check--positive__uDYwI svg,\n.Check-module_check--positive__uDYwI i {\n  color: #29b662;\n}\n.Check-module_check__TPGL4 .Check-module_check__line-through__JOHWg {\n  position: relative;\n  display: inline;\n}\n@keyframes Check-module_strike__X5waS {\n  0% {\n    transform: scaleX(0%);\n  }\n  100% {\n    transform: scaleX(100%);\n  }\n}\n.Check-module_check--crossed-out__TdCyC .Check-module_check__line-through__JOHWg::after {\n  content: \" \";\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 100%;\n  height: 1px;\n  background: black;\n  animation-name: Check-module_strike__X5waS;\n  animation-duration: 0.1s;\n  animation-timing-function: linear;\n  animation-iteration-count: 1;\n  animation-fill-mode: forwards;\n  transform-origin: 0% 50%;\n}";
-var styles$X = {"text--truncate":"Check-module_text--truncate__wEnyK","check":"Check-module_check__TPGL4","check--positive":"Check-module_check--positive__uDYwI","check__line-through":"Check-module_check__line-through__JOHWg","check--crossed-out":"Check-module_check--crossed-out__TdCyC","strike":"Check-module_strike__X5waS"};
-styleInject(css_248z$$);
+var styles$J = {"text--truncate":"Check-module_text--truncate__wEnyK","check":"Check-module_check__TPGL4","check--positive":"Check-module_check--positive__uDYwI","check__line-through":"Check-module_check__line-through__JOHWg","check--crossed-out":"Check-module_check--crossed-out__TdCyC","strike":"Check-module_strike__X5waS"};
 
 /**
  * Check - stateless presentational component
@@ -7394,21 +11303,21 @@ const Check = ({
   crossedOutOnPositive
 }) => {
   const wrapperStyles = useStyles({
-    [styles$X['check']]: true,
-    [styles$X['check--positive']]: positive,
-    [styles$X['check--crossed-out']]: positive && crossedOutOnPositive
+    [styles$J['check']]: true,
+    [styles$J['check--positive']]: positive,
+    [styles$J['check--crossed-out']]: positive && crossedOutOnPositive
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: wrapperStyles
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: positive ? 'icon-ok' : 'icon-remove',
     style: {
       width: iconWidth
     }
-  }), /*#__PURE__*/React.createElement(Spreader$1, {
+  }), /*#__PURE__*/React.createElement(Spreader, {
     spread: "tiny"
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$X['check__line-through']
+    className: styles$J['check__line-through']
   }, children));
 };
 
@@ -7427,57 +11336,7 @@ Check.defaultProps = {
   crossedOutOnPositive: false
 };
 
-var css_248z$_ = ".Close-module_text--truncate__YDOC- {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Close-module_close__Im49f {\n  cursor: pointer;\n}\n.Close-module_close__Im49f svg {\n  opacity: 0.6;\n  font-size: 14px;\n}";
-var styles$W = {"text--truncate":"Close-module_text--truncate__YDOC-","close":"Close-module_close__Im49f"};
-styleInject(css_248z$_);
-
-/**
- * Close - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {function} props.onClick - click handler
- * @param {string} props.iconName
- * @param {string} props.iconColor
- * @return {object} An object of children element
- */
-
-const Close = ({
-  className,
-  onClick,
-  iconName,
-  iconColor
-}) => {
-  const elementStyles = useStyles({
-    [styles$W['close']]: true
-  }, className);
-  return /*#__PURE__*/React.createElement("span", {
-    className: elementStyles,
-    onClick: onClick
-  }, /*#__PURE__*/React.createElement(Button$2, {
-    variant: "icon",
-    "data-testid": "close-component-button"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: iconName,
-    color: iconColor
-  })));
-};
-
-Close.displayName = 'Close';
-Close.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  onClick: propTypes.exports.func,
-  iconName: propTypes.exports.string,
-  iconColor: propTypes.exports.string
-};
-Close.defaultProps = {
-  className: '',
-  onClick: () => null,
-  iconName: 'icon-remove'
-};
-
-var css_248z$Z = ".ColorLine-module_text--truncate__JivkU {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ColorLine-module_color-line__QPTPV:before {\n  content: \"\";\n  width: 15px;\n  height: 10px;\n  position: absolute;\n  left: -25px;\n  top: 6px;\n  border-radius: 250px;\n}\n.ColorLine-module_color-line--vertical__yMjs8:before {\n  width: 9px;\n  height: 100%;\n  top: 0px;\n}\n.ColorLine-module_color-line--success__xojTC:before {\n  background: #29b662;\n}\n.ColorLine-module_color-line--warning__WgLxF:before {\n  background: #ffb000;\n}\n.ColorLine-module_color-line--alert__BFNEa:before {\n  background: #ff3245;\n}\n.ColorLine-module_color-line--info__WR5vE:before {\n  background: #5d92ff;\n}";
-var styles$V = {"text--truncate":"ColorLine-module_text--truncate__JivkU","color-line":"ColorLine-module_color-line__QPTPV","color-line--vertical":"ColorLine-module_color-line--vertical__yMjs8","color-line--success":"ColorLine-module_color-line--success__xojTC","color-line--warning":"ColorLine-module_color-line--warning__WgLxF","color-line--alert":"ColorLine-module_color-line--alert__BFNEa","color-line--info":"ColorLine-module_color-line--info__WR5vE"};
-styleInject(css_248z$Z);
+var styles$I = {"text--truncate":"ColorLine-module_text--truncate__JivkU","color-line":"ColorLine-module_color-line__QPTPV","color-line--vertical":"ColorLine-module_color-line--vertical__yMjs8","color-line--success":"ColorLine-module_color-line--success__xojTC","color-line--warning":"ColorLine-module_color-line--warning__WgLxF","color-line--alert":"ColorLine-module_color-line--alert__BFNEa","color-line--info":"ColorLine-module_color-line--info__WR5vE"};
 
 /**
  * Color line - stateless presentational component
@@ -7494,9 +11353,9 @@ const ColorLine = ({
   alignment
 }) => {
   const elementClasses = useStyles({
-    [styles$V['color-line']]: true,
-    [styles$V[`color-line--${variant}`]]: variant,
-    [styles$V[`color-line--${alignment}`]]: alignment
+    [styles$I['color-line']]: true,
+    [styles$I[`color-line--${variant}`]]: variant,
+    [styles$I[`color-line--${alignment}`]]: alignment
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: elementClasses
@@ -7514,9 +11373,7 @@ ColorLine.defaultProps = {
   alignment: 'vertical'
 };
 
-var css_248z$Y = ".ColorNumber-module_text--truncate__IbM-X {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ColorNumber-module_color-number__ndYyD {\n  margin: 0;\n  font-weight: 600;\n}\n.ColorNumber-module_color-number__color--success__m5gXO {\n  color: #29b662;\n}\n.ColorNumber-module_color-number__color--warning__7vZby {\n  color: #ffb000;\n}\n.ColorNumber-module_color-number__color--alert__duAI3 {\n  color: #ff3245;\n}\n.ColorNumber-module_color-number__color--progress__3X41s {\n  color: #009fe3;\n}\n.ColorNumber-module_color-number__color--default__a-Ejb {\n  color: black;\n}\n.ColorNumber-module_color-number__color--brand__dF6AM {\n  color: #2550aa;\n}\n.ColorNumber-module_color-number__color--white__k92gx {\n  color: white;\n}\n.ColorNumber-module_color-number__size--10__FFEeY {\n  font-size: 10px;\n}\n.ColorNumber-module_color-number__size--12__V5hcT {\n  font-size: 12px;\n}\n.ColorNumber-module_color-number__size--16__xMG5V {\n  font-size: 16px;\n}\n.ColorNumber-module_color-number__size--18__MbL8P {\n  font-size: 18px;\n}\n.ColorNumber-module_color-number__size--32__g90Ej {\n  font-size: 32px;\n}\n.ColorNumber-module_color-number__size--44__H0H9E {\n  font-size: 44px;\n}\n.ColorNumber-module_color-number__size--62__5gnuu {\n  font-size: 62px;\n}";
-var styles$U = {"text--truncate":"ColorNumber-module_text--truncate__IbM-X","color-number":"ColorNumber-module_color-number__ndYyD","color-number__color--success":"ColorNumber-module_color-number__color--success__m5gXO","color-number__color--warning":"ColorNumber-module_color-number__color--warning__7vZby","color-number__color--alert":"ColorNumber-module_color-number__color--alert__duAI3","color-number__color--progress":"ColorNumber-module_color-number__color--progress__3X41s","color-number__color--default":"ColorNumber-module_color-number__color--default__a-Ejb","color-number__color--brand":"ColorNumber-module_color-number__color--brand__dF6AM","color-number__color--white":"ColorNumber-module_color-number__color--white__k92gx","color-number__size--10":"ColorNumber-module_color-number__size--10__FFEeY","color-number__size--12":"ColorNumber-module_color-number__size--12__V5hcT","color-number__size--16":"ColorNumber-module_color-number__size--16__xMG5V","color-number__size--18":"ColorNumber-module_color-number__size--18__MbL8P","color-number__size--32":"ColorNumber-module_color-number__size--32__g90Ej","color-number__size--44":"ColorNumber-module_color-number__size--44__H0H9E","color-number__size--62":"ColorNumber-module_color-number__size--62__5gnuu"};
-styleInject(css_248z$Y);
+var styles$H = {"text--truncate":"ColorNumber-module_text--truncate__IbM-X","color-number":"ColorNumber-module_color-number__ndYyD","color-number__color--success":"ColorNumber-module_color-number__color--success__m5gXO","color-number__color--warning":"ColorNumber-module_color-number__color--warning__7vZby","color-number__color--alert":"ColorNumber-module_color-number__color--alert__duAI3","color-number__color--progress":"ColorNumber-module_color-number__color--progress__3X41s","color-number__color--default":"ColorNumber-module_color-number__color--default__a-Ejb","color-number__color--brand":"ColorNumber-module_color-number__color--brand__dF6AM","color-number__color--white":"ColorNumber-module_color-number__color--white__k92gx","color-number__size--10":"ColorNumber-module_color-number__size--10__FFEeY","color-number__size--12":"ColorNumber-module_color-number__size--12__V5hcT","color-number__size--16":"ColorNumber-module_color-number__size--16__xMG5V","color-number__size--18":"ColorNumber-module_color-number__size--18__MbL8P","color-number__size--32":"ColorNumber-module_color-number__size--32__g90Ej","color-number__size--44":"ColorNumber-module_color-number__size--44__H0H9E","color-number__size--62":"ColorNumber-module_color-number__size--62__5gnuu"};
 
 /**
  * ColorNumber - stateless presentational component
@@ -7535,9 +11392,9 @@ const ColorNumber = ({
   size
 }) => {
   const elementClasses = useStyles({
-    [styles$U['color-number']]: true,
-    [styles$U[`color-number__color--${variant}`]]: variant,
-    [styles$U[`color-number__size--${size}`]]: size
+    [styles$H['color-number']]: true,
+    [styles$H[`color-number__color--${variant}`]]: variant,
+    [styles$H[`color-number__size--${size}`]]: size
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: elementClasses
@@ -7556,9 +11413,7 @@ ColorNumber.defaultProps = {
   size: 18
 };
 
-var css_248z$X = ".CustomLink-module_text--truncate__zghoR {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.CustomLink-module_custom-link__TQ7IV {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  text-decoration: none;\n}\n.CustomLink-module_custom-link__TQ7IV:hover {\n  text-decoration: underline;\n}\n.CustomLink-module_custom-link--active__-YlG5 {\n  color: #2550aa;\n}\n.CustomLink-module_custom-link--active__-YlG5:hover {\n  color: #4168c4;\n}\n.CustomLink-module_custom-link--inactive__EHXH- {\n  color: #d8d8d8;\n  pointer-events: none;\n  cursor: default;\n}\n.CustomLink-module_custom-link--dark__jeEXt {\n  color: #1f1f1f;\n}\n.CustomLink-module_custom-link--dark__jeEXt:hover {\n  color: #2550aa;\n}\n.CustomLink-module_custom-link--underlined__4n86P {\n  text-decoration: underline;\n}\n.CustomLink-module_custom-link--10__3ZqNk {\n  font-size: 10px;\n}\n.CustomLink-module_custom-link--12__g9iqF {\n  font-size: 12px;\n}\n.CustomLink-module_custom-link--14__WeHUW {\n  font-size: 14px;\n}\n.CustomLink-module_custom-link--16__aU-k9 {\n  font-size: 16px;\n}";
-var styles$T = {"text--truncate":"CustomLink-module_text--truncate__zghoR","custom-link":"CustomLink-module_custom-link__TQ7IV","custom-link--active":"CustomLink-module_custom-link--active__-YlG5","custom-link--inactive":"CustomLink-module_custom-link--inactive__EHXH-","custom-link--dark":"CustomLink-module_custom-link--dark__jeEXt","custom-link--underlined":"CustomLink-module_custom-link--underlined__4n86P","custom-link--10":"CustomLink-module_custom-link--10__3ZqNk","custom-link--12":"CustomLink-module_custom-link--12__g9iqF","custom-link--14":"CustomLink-module_custom-link--14__WeHUW","custom-link--16":"CustomLink-module_custom-link--16__aU-k9"};
-styleInject(css_248z$X);
+var styles$G = {"text--truncate":"CustomLink-module_text--truncate__zghoR","custom-link":"CustomLink-module_custom-link__TQ7IV","custom-link--active":"CustomLink-module_custom-link--active__-YlG5","custom-link--inactive":"CustomLink-module_custom-link--inactive__EHXH-","custom-link--dark":"CustomLink-module_custom-link--dark__jeEXt","custom-link--underlined":"CustomLink-module_custom-link--underlined__4n86P","custom-link--10":"CustomLink-module_custom-link--10__3ZqNk","custom-link--12":"CustomLink-module_custom-link--12__g9iqF","custom-link--14":"CustomLink-module_custom-link--14__WeHUW","custom-link--16":"CustomLink-module_custom-link--16__aU-k9"};
 
 /**
  * Custom Link - stateless presentational component
@@ -7585,10 +11440,10 @@ const CustomLink = ({
   onClick
 }) => {
   const customLinkStyles = useStyles({
-    [styles$T['custom-link']]: true,
-    [styles$T[`custom-link--${variant}`]]: variant,
-    [styles$T[`custom-link--${size}`]]: size,
-    [styles$T['custom-link--underlined']]: underlined
+    [styles$G['custom-link']]: true,
+    [styles$G[`custom-link--${variant}`]]: variant,
+    [styles$G[`custom-link--${size}`]]: size,
+    [styles$G['custom-link--underlined']]: underlined
   }, className);
   return /*#__PURE__*/React.createElement("a", {
     "data-testid": "custom-link",
@@ -8490,7 +12345,7 @@ var parseDayPeriodPatterns$1 = {
     night: /night/i
   }
 };
-var match$3 = {
+var match$2 = {
   ordinalNumber: buildMatchPatternFn({
     matchPattern: matchOrdinalNumberPattern$1,
     parsePattern: parseOrdinalNumberPattern$1,
@@ -8532,7 +12387,7 @@ var match$3 = {
     defaultParseWidth: 'any'
   })
 };
-var match$4 = match$3;
+var match$3 = match$2;
 
 /**
  * @type {Locale}
@@ -8550,7 +12405,7 @@ var locale$1 = {
   formatLong: formatLong$3,
   formatRelative: formatRelative$2,
   localize: localize$3,
-  match: match$4,
+  match: match$3,
   options: {
     weekStartsOn: 0
     /* Sunday */
@@ -8565,7 +12420,7 @@ var enUS$1 = /*#__PURE__*/Object.freeze({
 	'default': enUS
 });
 
-function toInteger$1(dirtyNumber) {
+function toInteger(dirtyNumber) {
   if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
     return NaN;
   }
@@ -8605,7 +12460,7 @@ function toInteger$1(dirtyNumber) {
 function addMilliseconds(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
   var timestamp = toDate(dirtyDate).getTime();
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
   return new Date(timestamp + amount);
 }
 
@@ -8634,7 +12489,7 @@ function addMilliseconds(dirtyDate, dirtyAmount) {
 
 function subMilliseconds(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
   return addMilliseconds(dirtyDate, -amount);
 }
 
@@ -8721,8 +12576,8 @@ function startOfUTCWeek(dirtyDate, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
@@ -8745,8 +12600,8 @@ function getUTCWeekYear(dirtyDate, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeFirstWeekContainsDate = locale && locale.options && locale.options.firstWeekContainsDate;
-  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger$1(localeFirstWeekContainsDate);
-  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger$1(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger(localeFirstWeekContainsDate);
+  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
 
   if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
     throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
@@ -8777,8 +12632,8 @@ function startOfUTCWeekYear(dirtyDate, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeFirstWeekContainsDate = locale && locale.options && locale.options.firstWeekContainsDate;
-  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger$1(localeFirstWeekContainsDate);
-  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger$1(options.firstWeekContainsDate);
+  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger(localeFirstWeekContainsDate);
+  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger(options.firstWeekContainsDate);
   var year = getUTCWeekYear(dirtyDate, dirtyOptions);
   var firstWeek = new Date(0);
   firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
@@ -10225,16 +14080,16 @@ function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale || enUS;
   var localeFirstWeekContainsDate = locale.options && locale.options.firstWeekContainsDate;
-  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger$1(localeFirstWeekContainsDate);
-  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger$1(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger(localeFirstWeekContainsDate);
+  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
 
   if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
     throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
   }
 
   var localeWeekStartsOn = locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
@@ -10417,8 +14272,8 @@ function _interopRequireWildcard$7(obj, nodeInterop) {
   return newObj;
 }
 
-function _extends$5() {
-  _extends$5 = Object.assign || function (target) {
+function _extends$4() {
+  _extends$4 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -10432,10 +14287,10 @@ function _extends$5() {
     return target;
   };
 
-  return _extends$5.apply(this, arguments);
+  return _extends$4.apply(this, arguments);
 }
 
-function ownKeys$8(object, enumerableOnly) {
+function ownKeys$6(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -10458,13 +14313,13 @@ function _objectSpread$6(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$8(Object(source), true).forEach(function (key) {
-        _defineProperty$9(target, key, source[key]);
+      ownKeys$6(Object(source), true).forEach(function (key) {
+        _defineProperty$8(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$8(Object(source)).forEach(function (key) {
+      ownKeys$6(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -10508,13 +14363,13 @@ function _arrayLikeToArray$1(arr, len) {
   return arr2;
 }
 
-function _classCallCheck$8(instance, Constructor) {
+function _classCallCheck$7(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$8(target, props) {
+function _defineProperties$7(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -10524,13 +14379,13 @@ function _defineProperties$8(target, props) {
   }
 }
 
-function _createClass$8(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$8(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$8(Constructor, staticProps);
+function _createClass$7(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$7(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$7(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$8(subClass, superClass) {
+function _inherits$7(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -10542,46 +14397,46 @@ function _inherits$8(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$8(subClass, superClass);
+  if (superClass) _setPrototypeOf$7(subClass, superClass);
 }
 
-function _setPrototypeOf$8(o, p) {
-  _setPrototypeOf$8 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$7(o, p) {
+  _setPrototypeOf$7 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$8(o, p);
+  return _setPrototypeOf$7(o, p);
 }
 
 function _createSuper$7(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$7();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$8(Derived),
+    var Super = _getPrototypeOf$7(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$8(this).constructor;
+      var NewTarget = _getPrototypeOf$7(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$8(this, result);
+    return _possibleConstructorReturn$7(this, result);
   };
 }
 
-function _possibleConstructorReturn$8(self, call) {
+function _possibleConstructorReturn$7(self, call) {
   if (call && (_typeof$7(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$8(self);
+  return _assertThisInitialized$7(self);
 }
 
-function _assertThisInitialized$8(self) {
+function _assertThisInitialized$7(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -10602,14 +14457,14 @@ function _isNativeReflectConstruct$7() {
   }
 }
 
-function _getPrototypeOf$8(o) {
-  _getPrototypeOf$8 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$7(o) {
+  _getPrototypeOf$7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$8(o);
+  return _getPrototypeOf$7(o);
 }
 
-function _defineProperty$9(obj, key, value) {
+function _defineProperty$8(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -10625,18 +14480,18 @@ function _defineProperty$9(obj, key, value) {
 }
 
 var DayCell = /*#__PURE__*/function (_Component) {
-  _inherits$8(DayCell, _Component);
+  _inherits$7(DayCell, _Component);
 
   var _super = _createSuper$7(DayCell);
 
   function DayCell(props, context) {
     var _this;
 
-    _classCallCheck$8(this, DayCell);
+    _classCallCheck$7(this, DayCell);
 
     _this = _super.call(this, props, context);
 
-    _defineProperty$9(_assertThisInitialized$8(_this), "handleKeyEvent", function (event) {
+    _defineProperty$8(_assertThisInitialized$7(_this), "handleKeyEvent", function (event) {
       var _this$props = _this.props,
           day = _this$props.day,
           onMouseDown = _this$props.onMouseDown,
@@ -10651,7 +14506,7 @@ var DayCell = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty$9(_assertThisInitialized$8(_this), "handleMouseEvent", function (event) {
+    _defineProperty$8(_assertThisInitialized$7(_this), "handleMouseEvent", function (event) {
       var _this$props2 = _this.props,
           day = _this$props2.day,
           disabled = _this$props2.disabled,
@@ -10699,7 +14554,7 @@ var DayCell = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty$9(_assertThisInitialized$8(_this), "getClassNames", function () {
+    _defineProperty$8(_assertThisInitialized$7(_this), "getClassNames", function () {
       var _classnames;
 
       var _this$props3 = _this.props,
@@ -10712,10 +14567,10 @@ var DayCell = /*#__PURE__*/function (_Component) {
           isEndOfMonth = _this$props3.isEndOfMonth,
           disabled = _this$props3.disabled,
           styles = _this$props3.styles;
-      return (0, _classnames4.default)(styles.day, (_classnames = {}, _defineProperty$9(_classnames, styles.dayPassive, isPassive), _defineProperty$9(_classnames, styles.dayDisabled, disabled), _defineProperty$9(_classnames, styles.dayToday, isToday), _defineProperty$9(_classnames, styles.dayWeekend, isWeekend), _defineProperty$9(_classnames, styles.dayStartOfWeek, isStartOfWeek), _defineProperty$9(_classnames, styles.dayEndOfWeek, isEndOfWeek), _defineProperty$9(_classnames, styles.dayStartOfMonth, isStartOfMonth), _defineProperty$9(_classnames, styles.dayEndOfMonth, isEndOfMonth), _defineProperty$9(_classnames, styles.dayHovered, _this.state.hover), _defineProperty$9(_classnames, styles.dayActive, _this.state.active), _classnames));
+      return (0, _classnames4.default)(styles.day, (_classnames = {}, _defineProperty$8(_classnames, styles.dayPassive, isPassive), _defineProperty$8(_classnames, styles.dayDisabled, disabled), _defineProperty$8(_classnames, styles.dayToday, isToday), _defineProperty$8(_classnames, styles.dayWeekend, isWeekend), _defineProperty$8(_classnames, styles.dayStartOfWeek, isStartOfWeek), _defineProperty$8(_classnames, styles.dayEndOfWeek, isEndOfWeek), _defineProperty$8(_classnames, styles.dayStartOfMonth, isStartOfMonth), _defineProperty$8(_classnames, styles.dayEndOfMonth, isEndOfMonth), _defineProperty$8(_classnames, styles.dayHovered, _this.state.hover), _defineProperty$8(_classnames, styles.dayActive, _this.state.active), _classnames));
     });
 
-    _defineProperty$9(_assertThisInitialized$8(_this), "renderPreviewPlaceholder", function () {
+    _defineProperty$8(_assertThisInitialized$7(_this), "renderPreviewPlaceholder", function () {
       var _classnames2;
 
       var _this$props4 = _this.props,
@@ -10729,14 +14584,14 @@ var DayCell = /*#__PURE__*/function (_Component) {
       var isStartEdge = !isInRange && (0, _isSameDay$3.default)(day, startDate);
       var isEndEdge = !isInRange && (0, _isSameDay$3.default)(day, endDate);
       return /*#__PURE__*/_react$7.default.createElement("span", {
-        className: (0, _classnames4.default)((_classnames2 = {}, _defineProperty$9(_classnames2, styles.dayStartPreview, isStartEdge), _defineProperty$9(_classnames2, styles.dayInPreview, isInRange), _defineProperty$9(_classnames2, styles.dayEndPreview, isEndEdge), _classnames2)),
+        className: (0, _classnames4.default)((_classnames2 = {}, _defineProperty$8(_classnames2, styles.dayStartPreview, isStartEdge), _defineProperty$8(_classnames2, styles.dayInPreview, isInRange), _defineProperty$8(_classnames2, styles.dayEndPreview, isEndEdge), _classnames2)),
         style: {
           color: preview.color
         }
       });
     });
 
-    _defineProperty$9(_assertThisInitialized$8(_this), "renderSelectionPlaceholders", function () {
+    _defineProperty$8(_assertThisInitialized$7(_this), "renderSelectionPlaceholders", function () {
       var _this$props5 = _this.props,
           styles = _this$props5.styles,
           ranges = _this$props5.ranges,
@@ -10783,7 +14638,7 @@ var DayCell = /*#__PURE__*/function (_Component) {
 
         return /*#__PURE__*/_react$7.default.createElement("span", {
           key: i,
-          className: (0, _classnames4.default)((_classnames3 = {}, _defineProperty$9(_classnames3, styles.startEdge, range.isStartEdge), _defineProperty$9(_classnames3, styles.endEdge, range.isEndEdge), _defineProperty$9(_classnames3, styles.inRange, range.isInRange), _classnames3)),
+          className: (0, _classnames4.default)((_classnames3 = {}, _defineProperty$8(_classnames3, styles.startEdge, range.isStartEdge), _defineProperty$8(_classnames3, styles.endEdge, range.isEndEdge), _defineProperty$8(_classnames3, styles.inRange, range.isInRange), _classnames3)),
           style: {
             color: range.color || _this.props.color
           }
@@ -10798,11 +14653,11 @@ var DayCell = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$8(DayCell, [{
+  _createClass$7(DayCell, [{
     key: "render",
     value: function render() {
       var dayContentRenderer = this.props.dayContentRenderer;
-      return /*#__PURE__*/_react$7.default.createElement("button", _extends$5({
+      return /*#__PURE__*/_react$7.default.createElement("button", _extends$4({
         type: "button",
         onMouseEnter: this.handleMouseEvent,
         onMouseLeave: this.handleMouseEvent,
@@ -11137,8 +14992,8 @@ function endOfWeek(dirtyDate, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
@@ -11196,8 +15051,8 @@ function startOfWeek(dirtyDate, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
@@ -11246,7 +15101,7 @@ var utils = {};
 function addDays(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
 
   if (isNaN(amount)) {
     return new Date(NaN);
@@ -11659,8 +15514,8 @@ function _interopRequireWildcard$6(obj, nodeInterop) {
   return newObj;
 }
 
-function _extends$4() {
-  _extends$4 = Object.assign || function (target) {
+function _extends$3() {
+  _extends$3 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -11674,10 +15529,10 @@ function _extends$4() {
     return target;
   };
 
-  return _extends$4.apply(this, arguments);
+  return _extends$3.apply(this, arguments);
 }
 
-function ownKeys$7(object, enumerableOnly) {
+function ownKeys$5(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -11700,13 +15555,13 @@ function _objectSpread$5(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$7(Object(source), true).forEach(function (key) {
-        _defineProperty$8(target, key, source[key]);
+      ownKeys$5(Object(source), true).forEach(function (key) {
+        _defineProperty$7(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$7(Object(source)).forEach(function (key) {
+      ownKeys$5(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -11715,7 +15570,7 @@ function _objectSpread$5(target) {
   return target;
 }
 
-function _defineProperty$8(obj, key, value) {
+function _defineProperty$7(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -11730,13 +15585,13 @@ function _defineProperty$8(obj, key, value) {
   return obj;
 }
 
-function _classCallCheck$7(instance, Constructor) {
+function _classCallCheck$6(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$7(target, props) {
+function _defineProperties$6(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -11746,13 +15601,13 @@ function _defineProperties$7(target, props) {
   }
 }
 
-function _createClass$7(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$7(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$7(Constructor, staticProps);
+function _createClass$6(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$6(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$6(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$7(subClass, superClass) {
+function _inherits$6(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -11764,46 +15619,46 @@ function _inherits$7(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$7(subClass, superClass);
+  if (superClass) _setPrototypeOf$6(subClass, superClass);
 }
 
-function _setPrototypeOf$7(o, p) {
-  _setPrototypeOf$7 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$6(o, p) {
+  _setPrototypeOf$6 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$7(o, p);
+  return _setPrototypeOf$6(o, p);
 }
 
 function _createSuper$6(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$6();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$7(Derived),
+    var Super = _getPrototypeOf$6(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$7(this).constructor;
+      var NewTarget = _getPrototypeOf$6(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$7(this, result);
+    return _possibleConstructorReturn$6(this, result);
   };
 }
 
-function _possibleConstructorReturn$7(self, call) {
+function _possibleConstructorReturn$6(self, call) {
   if (call && (_typeof$6(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$7(self);
+  return _assertThisInitialized$6(self);
 }
 
-function _assertThisInitialized$7(self) {
+function _assertThisInitialized$6(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -11824,11 +15679,11 @@ function _isNativeReflectConstruct$6() {
   }
 }
 
-function _getPrototypeOf$7(o) {
-  _getPrototypeOf$7 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$6(o) {
+  _getPrototypeOf$6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$7(o);
+  return _getPrototypeOf$6(o);
 }
 
 function renderWeekdays(styles, dateOptions, weekdayDisplayFormat) {
@@ -11847,17 +15702,17 @@ function renderWeekdays(styles, dateOptions, weekdayDisplayFormat) {
 }
 
 var Month = /*#__PURE__*/function (_PureComponent) {
-  _inherits$7(Month, _PureComponent);
+  _inherits$6(Month, _PureComponent);
 
   var _super = _createSuper$6(Month);
 
   function Month() {
-    _classCallCheck$7(this, Month);
+    _classCallCheck$6(this, Month);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass$7(Month, [{
+  _createClass$6(Month, [{
     key: "render",
     value: function render() {
       var _this = this;
@@ -11908,7 +15763,7 @@ var Month = /*#__PURE__*/function (_PureComponent) {
           return (0, _isSameDay$2.default)(disabledDate, day);
         });
         var isDisabledDay = disabledDay(day);
-        return /*#__PURE__*/_react$6.default.createElement(_DayCell$3.default, _extends$4({}, _this.props, {
+        return /*#__PURE__*/_react$6.default.createElement(_DayCell$3.default, _extends$3({}, _this.props, {
           ranges: ranges,
           day: day,
           preview: showPreview ? _this.props.preview : null,
@@ -12038,15 +15893,15 @@ function setUTCDay(dirtyDate, dirtyDay, dirtyOptions) {
   var options = dirtyOptions || {};
   var locale = options.locale;
   var localeWeekStartsOn = locale && locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
   }
 
   var date = toDate(dirtyDate);
-  var day = toInteger$1(dirtyDay);
+  var day = toInteger(dirtyDay);
   var currentDay = date.getUTCDay();
   var remainder = day % 7;
   var dayIndex = (remainder + 7) % 7;
@@ -12059,7 +15914,7 @@ function setUTCDay(dirtyDate, dirtyDay, dirtyOptions) {
 
 function setUTCISODay(dirtyDate, dirtyDay) {
   requiredArgs(2, arguments);
-  var day = toInteger$1(dirtyDay);
+  var day = toInteger(dirtyDay);
 
   if (day % 7 === 0) {
     day = day - 7;
@@ -12080,7 +15935,7 @@ function setUTCISODay(dirtyDate, dirtyDay) {
 function setUTCISOWeek(dirtyDate, dirtyISOWeek) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var isoWeek = toInteger$1(dirtyISOWeek);
+  var isoWeek = toInteger(dirtyISOWeek);
   var diff = getUTCISOWeek(date) - isoWeek;
   date.setUTCDate(date.getUTCDate() - diff * 7);
   return date;
@@ -12091,7 +15946,7 @@ function setUTCISOWeek(dirtyDate, dirtyISOWeek) {
 function setUTCWeek(dirtyDate, dirtyWeek, options) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var week = toInteger$1(dirtyWeek);
+  var week = toInteger(dirtyWeek);
   var diff = getUTCWeek(date, options) - week;
   date.setUTCDate(date.getUTCDate() - diff * 7);
   return date;
@@ -13945,16 +17800,16 @@ function parse(dirtyDateString, dirtyFormatString, dirtyReferenceDate, dirtyOpti
   }
 
   var localeFirstWeekContainsDate = locale.options && locale.options.firstWeekContainsDate;
-  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger$1(localeFirstWeekContainsDate);
-  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger$1(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+  var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger(localeFirstWeekContainsDate);
+  var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
 
   if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
     throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
   }
 
   var localeWeekStartsOn = locale.options && locale.options.weekStartsOn;
-  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger$1(localeWeekStartsOn);
-  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger$1(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+  var defaultWeekStartsOn = localeWeekStartsOn == null ? 0 : toInteger(localeWeekStartsOn);
+  var weekStartsOn = options.weekStartsOn == null ? defaultWeekStartsOn : toInteger(options.weekStartsOn); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
 
   if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
     throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
@@ -14234,13 +18089,13 @@ function _interopRequireWildcard$5(obj, nodeInterop) {
   return newObj;
 }
 
-function _classCallCheck$6(instance, Constructor) {
+function _classCallCheck$5(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$6(target, props) {
+function _defineProperties$5(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -14250,13 +18105,13 @@ function _defineProperties$6(target, props) {
   }
 }
 
-function _createClass$6(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$6(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$6(Constructor, staticProps);
+function _createClass$5(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$5(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$5(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$6(subClass, superClass) {
+function _inherits$5(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -14268,46 +18123,46 @@ function _inherits$6(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$6(subClass, superClass);
+  if (superClass) _setPrototypeOf$5(subClass, superClass);
 }
 
-function _setPrototypeOf$6(o, p) {
-  _setPrototypeOf$6 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$5(o, p) {
+  _setPrototypeOf$5 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$6(o, p);
+  return _setPrototypeOf$5(o, p);
 }
 
 function _createSuper$5(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$5();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$6(Derived),
+    var Super = _getPrototypeOf$5(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$6(this).constructor;
+      var NewTarget = _getPrototypeOf$5(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$6(this, result);
+    return _possibleConstructorReturn$5(this, result);
   };
 }
 
-function _possibleConstructorReturn$6(self, call) {
+function _possibleConstructorReturn$5(self, call) {
   if (call && (_typeof$5(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$6(self);
+  return _assertThisInitialized$5(self);
 }
 
-function _assertThisInitialized$6(self) {
+function _assertThisInitialized$5(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -14328,14 +18183,14 @@ function _isNativeReflectConstruct$5() {
   }
 }
 
-function _getPrototypeOf$6(o) {
-  _getPrototypeOf$6 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$5(o) {
+  _getPrototypeOf$5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$6(o);
+  return _getPrototypeOf$5(o);
 }
 
-function _defineProperty$7(obj, key, value) {
+function _defineProperty$6(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -14351,18 +18206,18 @@ function _defineProperty$7(obj, key, value) {
 }
 
 var DateInput = /*#__PURE__*/function (_PureComponent) {
-  _inherits$6(DateInput, _PureComponent);
+  _inherits$5(DateInput, _PureComponent);
 
   var _super = _createSuper$5(DateInput);
 
   function DateInput(props, context) {
     var _this;
 
-    _classCallCheck$6(this, DateInput);
+    _classCallCheck$5(this, DateInput);
 
     _this = _super.call(this, props, context);
 
-    _defineProperty$7(_assertThisInitialized$6(_this), "onKeyDown", function (e) {
+    _defineProperty$6(_assertThisInitialized$5(_this), "onKeyDown", function (e) {
       var value = _this.state.value;
 
       if (e.key === 'Enter') {
@@ -14370,7 +18225,7 @@ var DateInput = /*#__PURE__*/function (_PureComponent) {
       }
     });
 
-    _defineProperty$7(_assertThisInitialized$6(_this), "onChange", function (e) {
+    _defineProperty$6(_assertThisInitialized$5(_this), "onChange", function (e) {
       _this.setState({
         value: e.target.value,
         changed: true,
@@ -14378,7 +18233,7 @@ var DateInput = /*#__PURE__*/function (_PureComponent) {
       });
     });
 
-    _defineProperty$7(_assertThisInitialized$6(_this), "onBlur", function () {
+    _defineProperty$6(_assertThisInitialized$5(_this), "onBlur", function () {
       var value = _this.state.value;
 
       _this.update(value);
@@ -14392,7 +18247,7 @@ var DateInput = /*#__PURE__*/function (_PureComponent) {
     return _this;
   }
 
-  _createClass$6(DateInput, [{
+  _createClass$5(DateInput, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       var value = prevProps.value;
@@ -15527,7 +19382,7 @@ var require$$8 = /*@__PURE__*/getAugmentedNamespace(index_esm);
  * //=> Sun Jul 02 1995 00:00:00
  */
 
-function max$1(dirtyDatesArray) {
+function max(dirtyDatesArray) {
   requiredArgs(1, arguments);
   var datesArray; // `dirtyDatesArray` is Array, Set or Map, or object with custom `forEach` method
 
@@ -15551,12 +19406,12 @@ function max$1(dirtyDatesArray) {
   return result || new Date(NaN);
 }
 
-var max$2 = /*#__PURE__*/Object.freeze({
+var max$1 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': max$1
+	'default': max
 });
 
-var require$$5 = /*@__PURE__*/getAugmentedNamespace(max$2);
+var require$$5 = /*@__PURE__*/getAugmentedNamespace(max$1);
 
 /**
  * @name min
@@ -15598,7 +19453,7 @@ var require$$5 = /*@__PURE__*/getAugmentedNamespace(max$2);
  * //=> Wed Feb 11 1987 00:00:00
  */
 
-function min$2(dirtyDatesArray) {
+function min(dirtyDatesArray) {
   requiredArgs(1, arguments);
   var datesArray; // `dirtyDatesArray` is Array, Set or Map, or object with custom `forEach` method
 
@@ -15622,12 +19477,12 @@ function min$2(dirtyDatesArray) {
   return result || new Date(NaN);
 }
 
-var min$3 = /*#__PURE__*/Object.freeze({
+var min$1 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': min$2
+	'default': min
 });
 
-var require$$7 = /*@__PURE__*/getAugmentedNamespace(min$3);
+var require$$7 = /*@__PURE__*/getAugmentedNamespace(min$1);
 
 // for accurate equality comparisons of UTC timestamps that end up
 // having the same representation in local time, e.g. one hour before
@@ -15822,7 +19677,7 @@ function getDaysInMonth(dirtyDate) {
 function setMonth(dirtyDate, dirtyMonth) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var month = toInteger$1(dirtyMonth);
+  var month = toInteger(dirtyMonth);
   var year = date.getFullYear();
   var day = date.getDate();
   var dateWithDesiredMonth = new Date(0);
@@ -15868,7 +19723,7 @@ var require$$17 = /*@__PURE__*/getAugmentedNamespace(setMonth$1);
 function setYear(dirtyDate, dirtyYear) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var year = toInteger$1(dirtyYear); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
+  var year = toInteger(dirtyYear); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
 
   if (isNaN(date.getTime())) {
     return new Date(NaN);
@@ -15911,7 +19766,7 @@ var require$$18 = /*@__PURE__*/getAugmentedNamespace(setYear$1);
 function addMonths(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
   var date = toDate(dirtyDate);
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
 
   if (isNaN(amount)) {
     return new Date(NaN);
@@ -15982,7 +19837,7 @@ var addMonths$1 = /*#__PURE__*/Object.freeze({
 
 function addYears(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
   return addMonths(dirtyDate, amount * 12);
 }
 
@@ -16018,7 +19873,7 @@ var require$$19 = /*@__PURE__*/getAugmentedNamespace(addYears$1);
 
 function subMonths(dirtyDate, dirtyAmount) {
   requiredArgs(2, arguments);
-  var amount = toInteger$1(dirtyAmount);
+  var amount = toInteger(dirtyAmount);
   return addMonths(dirtyDate, -amount);
 }
 
@@ -16033,12 +19888,12 @@ var require$$4 = /*@__PURE__*/getAugmentedNamespace(addMonths$1);
 
 var require$$27 = /*@__PURE__*/getAugmentedNamespace(enUS$1);
 
-var styles$S = {};
+var styles$F = {};
 
-Object.defineProperty(styles$S, "__esModule", {
+Object.defineProperty(styles$F, "__esModule", {
   value: true
 });
-styles$S.default = void 0;
+styles$F.default = void 0;
 var _default$5 = {
   dateRangeWrapper: 'rdrDateRangeWrapper',
   calendarWrapper: 'rdrCalendarWrapper',
@@ -16092,7 +19947,7 @@ var _default$5 = {
   monthsVertical: 'rdrMonthsVertical',
   monthsHorizontal: 'rdrMonthsHorizontal'
 };
-styles$S.default = _default$5;
+styles$F.default = _default$5;
 
 var accessibility = {};
 
@@ -16199,7 +20054,7 @@ var _addMonths$1 = _interopRequireDefault$5(require$$4);
 
 var _enUS = _interopRequireDefault$5(require$$27);
 
-var _styles$3 = _interopRequireDefault$5(styles$S);
+var _styles$3 = _interopRequireDefault$5(styles$F);
 
 var _accessibility = accessibility;
 
@@ -16259,8 +20114,8 @@ function _interopRequireWildcard$4(obj, nodeInterop) {
   return newObj;
 }
 
-function _extends$3() {
-  _extends$3 = Object.assign || function (target) {
+function _extends$2() {
+  _extends$2 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -16274,7 +20129,7 @@ function _extends$3() {
     return target;
   };
 
-  return _extends$3.apply(this, arguments);
+  return _extends$2.apply(this, arguments);
 }
 
 function _toConsumableArray(arr) {
@@ -16312,7 +20167,7 @@ function _arrayLikeToArray(arr, len) {
   return arr2;
 }
 
-function ownKeys$6(object, enumerableOnly) {
+function ownKeys$4(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -16335,13 +20190,13 @@ function _objectSpread$4(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$6(Object(source), true).forEach(function (key) {
-        _defineProperty$6(target, key, source[key]);
+      ownKeys$4(Object(source), true).forEach(function (key) {
+        _defineProperty$5(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$6(Object(source)).forEach(function (key) {
+      ownKeys$4(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -16350,13 +20205,13 @@ function _objectSpread$4(target) {
   return target;
 }
 
-function _classCallCheck$5(instance, Constructor) {
+function _classCallCheck$4(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$5(target, props) {
+function _defineProperties$4(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -16366,13 +20221,13 @@ function _defineProperties$5(target, props) {
   }
 }
 
-function _createClass$5(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$5(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$5(Constructor, staticProps);
+function _createClass$4(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$4(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$4(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$5(subClass, superClass) {
+function _inherits$4(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -16384,46 +20239,46 @@ function _inherits$5(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$5(subClass, superClass);
+  if (superClass) _setPrototypeOf$4(subClass, superClass);
 }
 
-function _setPrototypeOf$5(o, p) {
-  _setPrototypeOf$5 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$4(o, p) {
+  _setPrototypeOf$4 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$5(o, p);
+  return _setPrototypeOf$4(o, p);
 }
 
 function _createSuper$4(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$4();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$5(Derived),
+    var Super = _getPrototypeOf$4(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$5(this).constructor;
+      var NewTarget = _getPrototypeOf$4(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$5(this, result);
+    return _possibleConstructorReturn$4(this, result);
   };
 }
 
-function _possibleConstructorReturn$5(self, call) {
+function _possibleConstructorReturn$4(self, call) {
   if (call && (_typeof$4(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$5(self);
+  return _assertThisInitialized$4(self);
 }
 
-function _assertThisInitialized$5(self) {
+function _assertThisInitialized$4(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -16444,14 +20299,14 @@ function _isNativeReflectConstruct$4() {
   }
 }
 
-function _getPrototypeOf$5(o) {
-  _getPrototypeOf$5 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$4(o) {
+  _getPrototypeOf$4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$5(o);
+  return _getPrototypeOf$4(o);
 }
 
-function _defineProperty$6(obj, key, value) {
+function _defineProperty$5(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -16467,18 +20322,18 @@ function _defineProperty$6(obj, key, value) {
 }
 
 var Calendar = /*#__PURE__*/function (_PureComponent) {
-  _inherits$5(Calendar, _PureComponent);
+  _inherits$4(Calendar, _PureComponent);
 
   var _super = _createSuper$4(Calendar);
 
   function Calendar(_props, context) {
     var _this;
 
-    _classCallCheck$5(this, Calendar);
+    _classCallCheck$4(this, Calendar);
 
     _this = _super.call(this, _props, context);
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "focusToDate", function (date) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "focusToDate", function (date) {
       var props = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _this.props;
       var preventUnnecessary = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
@@ -16514,7 +20369,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       });
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "updateShownDate", function () {
+    _defineProperty$5(_assertThisInitialized$4(_this), "updateShownDate", function () {
       var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.props;
       var newProps = props.scroll.enabled ? _objectSpread$4(_objectSpread$4({}, props), {}, {
         months: _this.list.getVisibleRange().length
@@ -16524,7 +20379,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       _this.focusToDate(newFocus, newProps);
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "updatePreview", function (val) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "updatePreview", function (val) {
       if (!val) {
         _this.setState({
           preview: null
@@ -16544,7 +20399,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       });
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "changeShownDate", function (value) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "changeShownDate", function (value) {
       var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'set';
       var focusedDate = _this.state.focusedDate;
       var _this$props = _this.props,
@@ -16592,17 +20447,17 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       onShownDateChange && onShownDateChange(newDate);
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "handleRangeFocusChange", function (rangesIndex, rangeItemIndex) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "handleRangeFocusChange", function (rangesIndex, rangeItemIndex) {
       _this.props.onRangeFocusChange && _this.props.onRangeFocusChange([rangesIndex, rangeItemIndex]);
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "handleScroll", function () {
+    _defineProperty$5(_assertThisInitialized$4(_this), "handleScroll", function () {
       var _this$props2 = _this.props,
           onShownDateChange = _this$props2.onShownDateChange,
           minDate = _this$props2.minDate;
       var focusedDate = _this.state.focusedDate;
 
-      var _assertThisInitialize = _assertThisInitialized$5(_this),
+      var _assertThisInitialize = _assertThisInitialized$4(_this),
           isFirstRender = _assertThisInitialize.isFirstRender;
 
       var visibleMonths = _this.list.getVisibleRange(); // prevent scroll jump with wrong visible value
@@ -16623,7 +20478,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       _this.isFirstRender = false;
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "renderMonthAndYear", function (focusedDate, changeShownDate, props) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "renderMonthAndYear", function (focusedDate, changeShownDate, props) {
       var showMonthArrow = props.showMonthArrow,
           minDate = props.minDate,
           maxDate = props.maxDate,
@@ -16687,7 +20542,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       }, /*#__PURE__*/_react$4.default.createElement("i", null)) : null);
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "renderDateDisplay", function () {
+    _defineProperty$5(_assertThisInitialized$4(_this), "renderDateDisplay", function () {
       var _this$props3 = _this.props,
           focusedRange = _this$props3.focusedRange,
           color = _this$props3.color,
@@ -16711,7 +20566,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
             color: range.color || defaultColor
           }
         }, /*#__PURE__*/_react$4.default.createElement(_DateInput.default, {
-          className: (0, _classnames3.default)(styles.dateDisplayItem, _defineProperty$6({}, styles.dateDisplayItemActive, focusedRange[0] === i && focusedRange[1] === 0)),
+          className: (0, _classnames3.default)(styles.dateDisplayItem, _defineProperty$5({}, styles.dateDisplayItemActive, focusedRange[0] === i && focusedRange[1] === 0)),
           readOnly: !editableDateInputs,
           disabled: range.disabled,
           value: range.startDate,
@@ -16724,7 +20579,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
             return _this.handleRangeFocusChange(i, 0);
           }
         }), /*#__PURE__*/_react$4.default.createElement(_DateInput.default, {
-          className: (0, _classnames3.default)(styles.dateDisplayItem, _defineProperty$6({}, styles.dateDisplayItemActive, focusedRange[0] === i && focusedRange[1] === 1)),
+          className: (0, _classnames3.default)(styles.dateDisplayItem, _defineProperty$5({}, styles.dateDisplayItemActive, focusedRange[0] === i && focusedRange[1] === 1)),
           readOnly: !editableDateInputs,
           disabled: range.disabled,
           value: range.endDate,
@@ -16740,7 +20595,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       }));
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "onDragSelectionStart", function (date) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "onDragSelectionStart", function (date) {
       var _this$props4 = _this.props,
           onChange = _this$props4.onChange,
           dragSelectionEnabled = _this$props4.dragSelectionEnabled;
@@ -16761,7 +20616,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       }
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "onDragSelectionEnd", function (date) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "onDragSelectionEnd", function (date) {
       var _this$props5 = _this.props,
           updateRange = _this$props5.updateRange,
           displayMode = _this$props5.displayMode,
@@ -16800,7 +20655,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       }
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "onDragSelectionMove", function (date) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "onDragSelectionMove", function (date) {
       var drag = _this.state.drag;
       if (!drag.status || !_this.props.dragSelectionEnabled) return;
 
@@ -16816,7 +20671,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
       });
     });
 
-    _defineProperty$6(_assertThisInitialized$5(_this), "estimateMonthSize", function (index, cache) {
+    _defineProperty$5(_assertThisInitialized$4(_this), "estimateMonthSize", function (index, cache) {
       var _this$props6 = _this.props,
           direction = _this$props6.direction,
           minDate = _this$props6.minDate;
@@ -16861,7 +20716,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
     return _this;
   }
 
-  _createClass$5(Calendar, [{
+  _createClass$4(Calendar, [{
     key: "getMonthNames",
     value: function getMonthNames() {
       var _this2 = this;
@@ -17026,7 +20881,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
         axis: isVertical ? 'y' : 'x',
         itemRenderer: function itemRenderer(index, key) {
           var monthStep = (0, _addMonths$1.default)(minDate, index);
-          return /*#__PURE__*/_react$4.default.createElement(_Month.default, _extends$3({}, _this5.props, {
+          return /*#__PURE__*/_react$4.default.createElement(_Month.default, _extends$2({}, _this5.props, {
             onPreviewChange: onPreviewChange || _this5.updatePreview,
             preview: preview || _this5.state.preview,
             ranges: ranges,
@@ -17062,7 +20917,7 @@ var Calendar = /*#__PURE__*/function (_PureComponent) {
           monthStep = (0, _subMonths.default)(_this5.state.focusedDate, _this5.props.months - 1 - i);
         }
 
-        return /*#__PURE__*/_react$4.default.createElement(_Month.default, _extends$3({}, _this5.props, {
+        return /*#__PURE__*/_react$4.default.createElement(_Month.default, _extends$2({}, _this5.props, {
           onPreviewChange: onPreviewChange || _this5.updatePreview,
           preview: preview || _this5.state.preview,
           ranges: ranges,
@@ -17226,7 +21081,7 @@ var _isBefore = _interopRequireDefault$4(require$$10);
 
 var _classnames$2 = _interopRequireDefault$4(classnames.exports);
 
-var _styles$2 = _interopRequireDefault$4(styles$S);
+var _styles$2 = _interopRequireDefault$4(styles$F);
 
 function _interopRequireDefault$4(obj) {
   return obj && obj.__esModule ? obj : {
@@ -17284,8 +21139,8 @@ function _interopRequireWildcard$3(obj, nodeInterop) {
   return newObj;
 }
 
-function _extends$2() {
-  _extends$2 = Object.assign || function (target) {
+function _extends$1() {
+  _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -17299,10 +21154,10 @@ function _extends$2() {
     return target;
   };
 
-  return _extends$2.apply(this, arguments);
+  return _extends$1.apply(this, arguments);
 }
 
-function ownKeys$5(object, enumerableOnly) {
+function ownKeys$3(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -17325,13 +21180,13 @@ function _objectSpread$3(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$5(Object(source), true).forEach(function (key) {
-        _defineProperty$5(target, key, source[key]);
+      ownKeys$3(Object(source), true).forEach(function (key) {
+        _defineProperty$4(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$5(Object(source)).forEach(function (key) {
+      ownKeys$3(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -17340,13 +21195,13 @@ function _objectSpread$3(target) {
   return target;
 }
 
-function _classCallCheck$4(instance, Constructor) {
+function _classCallCheck$3(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$4(target, props) {
+function _defineProperties$3(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -17356,13 +21211,13 @@ function _defineProperties$4(target, props) {
   }
 }
 
-function _createClass$4(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$4(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$4(Constructor, staticProps);
+function _createClass$3(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$3(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$3(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$4(subClass, superClass) {
+function _inherits$3(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -17374,46 +21229,46 @@ function _inherits$4(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$4(subClass, superClass);
+  if (superClass) _setPrototypeOf$3(subClass, superClass);
 }
 
-function _setPrototypeOf$4(o, p) {
-  _setPrototypeOf$4 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$3(o, p) {
+  _setPrototypeOf$3 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$4(o, p);
+  return _setPrototypeOf$3(o, p);
 }
 
 function _createSuper$3(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$3();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$4(Derived),
+    var Super = _getPrototypeOf$3(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$4(this).constructor;
+      var NewTarget = _getPrototypeOf$3(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$4(this, result);
+    return _possibleConstructorReturn$3(this, result);
   };
 }
 
-function _possibleConstructorReturn$4(self, call) {
+function _possibleConstructorReturn$3(self, call) {
   if (call && (_typeof$3(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$4(self);
+  return _assertThisInitialized$3(self);
 }
 
-function _assertThisInitialized$4(self) {
+function _assertThisInitialized$3(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -17434,14 +21289,14 @@ function _isNativeReflectConstruct$3() {
   }
 }
 
-function _getPrototypeOf$4(o) {
-  _getPrototypeOf$4 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$3(o) {
+  _getPrototypeOf$3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$4(o);
+  return _getPrototypeOf$3(o);
 }
 
-function _defineProperty$5(obj, key, value) {
+function _defineProperty$4(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -17457,18 +21312,18 @@ function _defineProperty$5(obj, key, value) {
 }
 
 var DateRange = /*#__PURE__*/function (_Component) {
-  _inherits$4(DateRange, _Component);
+  _inherits$3(DateRange, _Component);
 
   var _super = _createSuper$3(DateRange);
 
   function DateRange(props, context) {
     var _this;
 
-    _classCallCheck$4(this, DateRange);
+    _classCallCheck$3(this, DateRange);
 
     _this = _super.call(this, props, context);
 
-    _defineProperty$5(_assertThisInitialized$4(_this), "calcNewSelection", function (value) {
+    _defineProperty$4(_assertThisInitialized$3(_this), "calcNewSelection", function (value) {
       var isSingleValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var focusedRange = _this.props.focusedRange || _this.state.focusedRange;
       var _this$props = _this.props,
@@ -17557,7 +21412,7 @@ var DateRange = /*#__PURE__*/function (_Component) {
       };
     });
 
-    _defineProperty$5(_assertThisInitialized$4(_this), "setSelection", function (value, isSingleValue) {
+    _defineProperty$4(_assertThisInitialized$3(_this), "setSelection", function (value, isSingleValue) {
       var _this$props2 = _this.props,
           onChange = _this$props2.onChange,
           ranges = _this$props2.ranges,
@@ -17569,7 +21424,7 @@ var DateRange = /*#__PURE__*/function (_Component) {
 
       var newSelection = _this.calcNewSelection(value, isSingleValue);
 
-      onChange(_defineProperty$5({}, selectedRange.key || "range".concat(focusedRangeIndex + 1), _objectSpread$3(_objectSpread$3({}, selectedRange), newSelection.range)));
+      onChange(_defineProperty$4({}, selectedRange.key || "range".concat(focusedRangeIndex + 1), _objectSpread$3(_objectSpread$3({}, selectedRange), newSelection.range)));
 
       _this.setState({
         focusedRange: newSelection.nextFocusRange,
@@ -17579,7 +21434,7 @@ var DateRange = /*#__PURE__*/function (_Component) {
       onRangeFocusChange && onRangeFocusChange(newSelection.nextFocusRange);
     });
 
-    _defineProperty$5(_assertThisInitialized$4(_this), "handleRangeFocusChange", function (focusedRange) {
+    _defineProperty$4(_assertThisInitialized$3(_this), "handleRangeFocusChange", function (focusedRange) {
       _this.setState({
         focusedRange: focusedRange
       });
@@ -17587,7 +21442,7 @@ var DateRange = /*#__PURE__*/function (_Component) {
       _this.props.onRangeFocusChange && _this.props.onRangeFocusChange(focusedRange);
     });
 
-    _defineProperty$5(_assertThisInitialized$4(_this), "updatePreview", function (val) {
+    _defineProperty$4(_assertThisInitialized$3(_this), "updatePreview", function (val) {
       var _ranges$focusedRange$;
 
       if (!val) {
@@ -17619,12 +21474,12 @@ var DateRange = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$4(DateRange, [{
+  _createClass$3(DateRange, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return /*#__PURE__*/_react$3.default.createElement(_Calendar.default, _extends$2({
+      return /*#__PURE__*/_react$3.default.createElement(_Calendar.default, _extends$1({
         focusedRange: this.state.focusedRange,
         onRangeFocusChange: this.handleRangeFocusChange,
         preview: this.state.preview,
@@ -17705,7 +21560,7 @@ function _interopRequireDefault$3(obj) {
   };
 }
 
-function ownKeys$4(object, enumerableOnly) {
+function ownKeys$2(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -17728,13 +21583,13 @@ function _objectSpread$2(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$4(Object(source), true).forEach(function (key) {
-        _defineProperty$4(target, key, source[key]);
+      ownKeys$2(Object(source), true).forEach(function (key) {
+        _defineProperty$3(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$4(Object(source)).forEach(function (key) {
+      ownKeys$2(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -17743,7 +21598,7 @@ function _objectSpread$2(target) {
   return target;
 }
 
-function _defineProperty$4(obj, key, value) {
+function _defineProperty$3(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -17949,13 +21804,13 @@ function _interopRequireWildcard$2(obj, nodeInterop) {
   return newObj;
 }
 
-function _classCallCheck$3(instance, Constructor) {
+function _classCallCheck$2(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$3(target, props) {
+function _defineProperties$2(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -17965,13 +21820,13 @@ function _defineProperties$3(target, props) {
   }
 }
 
-function _createClass$3(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$3(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$3(Constructor, staticProps);
+function _createClass$2(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$2(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$3(subClass, superClass) {
+function _inherits$2(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -17983,46 +21838,46 @@ function _inherits$3(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$3(subClass, superClass);
+  if (superClass) _setPrototypeOf$2(subClass, superClass);
 }
 
-function _setPrototypeOf$3(o, p) {
-  _setPrototypeOf$3 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$2(o, p) {
+  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$3(o, p);
+  return _setPrototypeOf$2(o, p);
 }
 
 function _createSuper$2(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$3(Derived),
+    var Super = _getPrototypeOf$2(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$3(this).constructor;
+      var NewTarget = _getPrototypeOf$2(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$3(this, result);
+    return _possibleConstructorReturn$2(this, result);
   };
 }
 
-function _possibleConstructorReturn$3(self, call) {
+function _possibleConstructorReturn$2(self, call) {
   if (call && (_typeof$2(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$3(self);
+  return _assertThisInitialized$2(self);
 }
 
-function _assertThisInitialized$3(self) {
+function _assertThisInitialized$2(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -18043,14 +21898,14 @@ function _isNativeReflectConstruct$2() {
   }
 }
 
-function _getPrototypeOf$3(o) {
-  _getPrototypeOf$3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$2(o) {
+  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$3(o);
+  return _getPrototypeOf$2(o);
 }
 
-function _defineProperty$3(obj, key, value) {
+function _defineProperty$2(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -18069,18 +21924,18 @@ var MIN = 0;
 var MAX = 99999;
 
 var InputRangeField = /*#__PURE__*/function (_Component) {
-  _inherits$3(InputRangeField, _Component);
+  _inherits$2(InputRangeField, _Component);
 
   var _super = _createSuper$2(InputRangeField);
 
   function InputRangeField(props, context) {
     var _this;
 
-    _classCallCheck$3(this, InputRangeField);
+    _classCallCheck$2(this, InputRangeField);
 
     _this = _super.call(this, props, context);
 
-    _defineProperty$3(_assertThisInitialized$3(_this), "onChange", function (e) {
+    _defineProperty$2(_assertThisInitialized$2(_this), "onChange", function (e) {
       var onChange = _this.props.onChange;
       var value = parseInt(e.target.value, 10);
       value = isNaN(value) ? 0 : Math.max(Math.min(MAX, value), MIN);
@@ -18090,7 +21945,7 @@ var InputRangeField = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$3(InputRangeField, [{
+  _createClass$2(InputRangeField, [{
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(nextProps) {
       var _this$props = this.props,
@@ -18174,7 +22029,7 @@ var _react$1 = _interopRequireWildcard$1(react.exports);
 
 var _propTypes$1 = _interopRequireDefault$1(propTypes.exports);
 
-var _styles$1 = _interopRequireDefault$1(styles$S);
+var _styles$1 = _interopRequireDefault$1(styles$F);
 
 var _defaultRanges = defaultRanges;
 
@@ -18240,7 +22095,7 @@ function _interopRequireWildcard$1(obj, nodeInterop) {
   return newObj;
 }
 
-function ownKeys$3(object, enumerableOnly) {
+function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -18263,13 +22118,13 @@ function _objectSpread$1(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$3(Object(source), true).forEach(function (key) {
-        _defineProperty$2(target, key, source[key]);
+      ownKeys$1(Object(source), true).forEach(function (key) {
+        _defineProperty$1(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$3(Object(source)).forEach(function (key) {
+      ownKeys$1(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -18278,13 +22133,13 @@ function _objectSpread$1(target) {
   return target;
 }
 
-function _classCallCheck$2(instance, Constructor) {
+function _classCallCheck$1(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$2(target, props) {
+function _defineProperties$1(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -18294,13 +22149,13 @@ function _defineProperties$2(target, props) {
   }
 }
 
-function _createClass$2(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$2(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$2(Constructor, staticProps);
+function _createClass$1(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties$1(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$2(subClass, superClass) {
+function _inherits$1(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -18312,46 +22167,46 @@ function _inherits$2(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$2(subClass, superClass);
+  if (superClass) _setPrototypeOf$1(subClass, superClass);
 }
 
-function _setPrototypeOf$2(o, p) {
-  _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$1(o, p) {
+  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$2(o, p);
+  return _setPrototypeOf$1(o, p);
 }
 
 function _createSuper$1(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct$1();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$2(Derived),
+    var Super = _getPrototypeOf$1(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$2(this).constructor;
+      var NewTarget = _getPrototypeOf$1(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$2(this, result);
+    return _possibleConstructorReturn$1(this, result);
   };
 }
 
-function _possibleConstructorReturn$2(self, call) {
+function _possibleConstructorReturn$1(self, call) {
   if (call && (_typeof$1(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$2(self);
+  return _assertThisInitialized$1(self);
 }
 
-function _assertThisInitialized$2(self) {
+function _assertThisInitialized$1(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -18372,14 +22227,14 @@ function _isNativeReflectConstruct$1() {
   }
 }
 
-function _getPrototypeOf$2(o) {
-  _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf$1(o) {
+  _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$2(o);
+  return _getPrototypeOf$1(o);
 }
 
-function _defineProperty$2(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -18395,25 +22250,25 @@ function _defineProperty$2(obj, key, value) {
 }
 
 var DefinedRange = /*#__PURE__*/function (_Component) {
-  _inherits$2(DefinedRange, _Component);
+  _inherits$1(DefinedRange, _Component);
 
   var _super = _createSuper$1(DefinedRange);
 
   function DefinedRange(props) {
     var _this;
 
-    _classCallCheck$2(this, DefinedRange);
+    _classCallCheck$1(this, DefinedRange);
 
     _this = _super.call(this, props);
 
-    _defineProperty$2(_assertThisInitialized$2(_this), "handleRangeChange", function (range) {
+    _defineProperty$1(_assertThisInitialized$1(_this), "handleRangeChange", function (range) {
       var _this$props = _this.props,
           onChange = _this$props.onChange,
           ranges = _this$props.ranges,
           focusedRange = _this$props.focusedRange;
       var selectedRange = ranges[focusedRange[0]];
       if (!onChange || !selectedRange) return;
-      onChange(_defineProperty$2({}, selectedRange.key || "range".concat(focusedRange[0] + 1), _objectSpread$1(_objectSpread$1({}, selectedRange), range)));
+      onChange(_defineProperty$1({}, selectedRange.key || "range".concat(focusedRange[0] + 1), _objectSpread$1(_objectSpread$1({}, selectedRange), range)));
     });
 
     _this.state = {
@@ -18423,7 +22278,7 @@ var DefinedRange = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$2(DefinedRange, [{
+  _createClass$1(DefinedRange, [{
     key: "getRangeOptionValue",
     value: function getRangeOptionValue(option) {
       var _this$props2 = this.props,
@@ -18486,7 +22341,7 @@ var DefinedRange = /*#__PURE__*/function (_Component) {
 
         return /*#__PURE__*/_react$1.default.createElement("button", {
           type: "button",
-          className: (0, _classnames$1.default)(_styles$1.default.staticRange, _defineProperty$2({}, _styles$1.default.staticRangeSelected, Boolean(selectedRange))),
+          className: (0, _classnames$1.default)(_styles$1.default.staticRange, _defineProperty$1({}, _styles$1.default.staticRangeSelected, Boolean(selectedRange))),
           style: {
             color: selectedRange ? selectedRange.color || rangeColors[focusedRangeIndex] : null
           },
@@ -18593,7 +22448,7 @@ var _utils = utils;
 
 var _classnames = _interopRequireDefault(classnames.exports);
 
-var _styles = _interopRequireDefault(styles$S);
+var _styles = _interopRequireDefault(styles$F);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -18651,7 +22506,7 @@ function _interopRequireWildcard(obj, nodeInterop) {
   return newObj;
 }
 
-function ownKeys$2(object, enumerableOnly) {
+function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -18674,13 +22529,13 @@ function _objectSpread(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$2(Object(source), true).forEach(function (key) {
-        _defineProperty$1(target, key, source[key]);
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$2(Object(source)).forEach(function (key) {
+      ownKeys(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -18689,7 +22544,7 @@ function _objectSpread(target) {
   return target;
 }
 
-function _defineProperty$1(obj, key, value) {
+function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -18704,8 +22559,8 @@ function _defineProperty$1(obj, key, value) {
   return obj;
 }
 
-function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+function _extends() {
+  _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -18719,16 +22574,16 @@ function _extends$1() {
     return target;
   };
 
-  return _extends$1.apply(this, arguments);
+  return _extends.apply(this, arguments);
 }
 
-function _classCallCheck$1(instance, Constructor) {
+function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
 
-function _defineProperties$1(target, props) {
+function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
@@ -18738,13 +22593,13 @@ function _defineProperties$1(target, props) {
   }
 }
 
-function _createClass$1(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties$1(Constructor, staticProps);
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
 }
 
-function _inherits$1(subClass, superClass) {
+function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
@@ -18756,46 +22611,46 @@ function _inherits$1(subClass, superClass) {
       configurable: true
     }
   });
-  if (superClass) _setPrototypeOf$1(subClass, superClass);
+  if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
-function _setPrototypeOf$1(o, p) {
-  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf$1(o, p);
+  return _setPrototypeOf(o, p);
 }
 
 function _createSuper(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct();
 
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf$1(Derived),
+    var Super = _getPrototypeOf(Derived),
         result;
 
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf$1(this).constructor;
+      var NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
 
-    return _possibleConstructorReturn$1(this, result);
+    return _possibleConstructorReturn(this, result);
   };
 }
 
-function _possibleConstructorReturn$1(self, call) {
+function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
   }
 
-  return _assertThisInitialized$1(self);
+  return _assertThisInitialized(self);
 }
 
-function _assertThisInitialized$1(self) {
+function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
@@ -18816,22 +22671,22 @@ function _isNativeReflectConstruct() {
   }
 }
 
-function _getPrototypeOf$1(o) {
-  _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
-  return _getPrototypeOf$1(o);
+  return _getPrototypeOf(o);
 }
 
 var DateRangePicker = /*#__PURE__*/function (_Component) {
-  _inherits$1(DateRangePicker, _Component);
+  _inherits(DateRangePicker, _Component);
 
   var _super = _createSuper(DateRangePicker);
 
   function DateRangePicker(props) {
     var _this;
 
-    _classCallCheck$1(this, DateRangePicker);
+    _classCallCheck(this, DateRangePicker);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -18841,7 +22696,7 @@ var DateRangePicker = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$1(DateRangePicker, [{
+  _createClass(DateRangePicker, [{
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -18849,7 +22704,7 @@ var DateRangePicker = /*#__PURE__*/function (_Component) {
       var focusedRange = this.state.focusedRange;
       return /*#__PURE__*/_react.default.createElement("div", {
         className: (0, _classnames.default)(this.styles.dateRangePickerWrapper, this.props.className)
-      }, /*#__PURE__*/_react.default.createElement(_DefinedRange.default, _extends$1({
+      }, /*#__PURE__*/_react.default.createElement(_DefinedRange.default, _extends({
         focusedRange: focusedRange,
         onPreviewChange: function onPreviewChange(value) {
           return _this2.dateRange.updatePreview(value ? _this2.dateRange.calcNewSelection(value, typeof value === 'string') : null);
@@ -18857,7 +22712,7 @@ var DateRangePicker = /*#__PURE__*/function (_Component) {
       }, this.props, {
         range: this.props.ranges[focusedRange[0]],
         className: undefined
-      })), /*#__PURE__*/_react.default.createElement(_DateRange.default, _extends$1({
+      })), /*#__PURE__*/_react.default.createElement(_DateRange.default, _extends({
         onRangeFocusChange: function onRangeFocusChange(focusedRange) {
           return _this2.setState({
             focusedRange: focusedRange
@@ -19407,7 +23262,7 @@ var parseDayPeriodPatterns = {
     night: /noc/i
   }
 };
-var match$1 = {
+var match = {
   ordinalNumber: buildMatchPatternFn({
     matchPattern: matchOrdinalNumberPattern,
     parsePattern: parseOrdinalNumberPattern,
@@ -19449,7 +23304,7 @@ var match$1 = {
     defaultParseWidth: 'any'
   })
 };
-var match$2 = match$1;
+var match$1 = match;
 
 /**
  * @type {Locale}
@@ -19469,7 +23324,7 @@ var locale = {
   formatLong: formatLong$1,
   formatRelative: formatRelative,
   localize: localize$1,
-  match: match$2,
+  match: match$1,
   options: {
     weekStartsOn: 1
     /* Monday */
@@ -19479,8 +23334,7 @@ var locale = {
 };
 var pl = locale;
 
-var css_248z$W = ".DateTimePicker_text--truncate__pnC2y {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.react-datetimepicker {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n}\n.react-datetimepicker > button {\n  margin: 0 15px 5px auto;\n  width: 100px;\n}\n.react-datetimepicker .rdrCalendarWrapper {\n  color: #000000;\n  font-size: 12px;\n}\n.react-datetimepicker .rdrDateDisplay {\n  background-color: rgb(239, 242, 247);\n  padding: 0.833em;\n}\n.react-datetimepicker .rdrDateDisplayItem {\n  border-radius: 4px;\n  background-color: rgb(255, 255, 255);\n  box-shadow: 0 1px 2px 0 rgba(35, 57, 66, 0.21);\n  border: 1px solid transparent;\n}\n.react-datetimepicker .rdrDateDisplayItem input {\n  cursor: pointer;\n  height: 2.5em;\n  line-height: 2.5em;\n  border: 0px;\n  background: transparent;\n  width: 100%;\n  color: #849095;\n}\n.react-datetimepicker .rdrDateDisplayItemActive {\n  border-color: currentColor;\n}\n.react-datetimepicker .rdrDateDisplayItemActive input {\n  color: #7d888d;\n}\n.react-datetimepicker .rdrMonthAndYearWrapper {\n  -webkit-box-align: center;\n  align-items: center;\n  height: 60px;\n  padding-top: 10px;\n}\n.react-datetimepicker .rdrMonthAndYearPickers {\n  font-weight: 600;\n}\n.react-datetimepicker .rdrMonthAndYearPickers select {\n  -moz-appearance: none;\n  appearance: none;\n  -webkit-appearance: none;\n  border: 0;\n  background: transparent;\n  padding: 10px;\n  border-radius: 4px;\n  outline: 0;\n  color: #1f1f1f;\n  background-position: right 8px center;\n  cursor: pointer;\n  text-align: center;\n}\n.react-datetimepicker .rdrMonthPicker:hover, .react-datetimepicker .rdrYearPicker:hover {\n  background-color: #edecec;\n}\n.react-datetimepicker .rdrMonthPicker .fas, .react-datetimepicker .rdrYearPicker .fas {\n  padding-right: 10px;\n  color: #7b7b7b;\n}\n.react-datetimepicker .rdrMonthPicker, .react-datetimepicker .rdrYearPicker {\n  margin: 0 5px;\n}\n.react-datetimepicker .rdrNextPrevButton {\n  display: block;\n  width: 30px;\n  height: 30px;\n  margin: 0 0.833em;\n  padding: 0;\n  border: 0;\n  border-radius: 0;\n  background: none;\n}\n.react-datetimepicker .rdrNextPrevButton .fas {\n  color: #7b7b7b;\n  font-size: 13px;\n}\n.react-datetimepicker .rdrNextPrevButton:hover {\n  background: #edecec;\n}\n.react-datetimepicker .rdrNextPrevButton:hover .fas {\n  color: #1f1f1f;\n}\n.react-datetimepicker .rdrWeekDays {\n  padding: 0 0.833em;\n}\n.react-datetimepicker .rdrMonth {\n  padding: 0 0.833em 1.666em 0.833em;\n}\n.react-datetimepicker .rdrMonth .rdrWeekDays {\n  padding: 0;\n}\n.react-datetimepicker .rdrMonths.rdrMonthsVertical .rdrMonth:first-child .rdrMonthName {\n  display: none;\n}\n.react-datetimepicker .rdrWeekDay {\n  font-weight: 400;\n  line-height: 2.667em;\n  color: rgb(132, 144, 149);\n}\n.react-datetimepicker .rdrDay {\n  background: transparent;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  border: 0;\n  padding: 0;\n  line-height: 3em;\n  height: 3em;\n  text-align: center;\n  color: #1d2429;\n}\n.react-datetimepicker .rdrDay:focus {\n  outline: 0;\n}\n.react-datetimepicker .rdrDayNumber {\n  outline: 0;\n  font-weight: 300;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  top: 5px;\n  bottom: 5px;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n  align-items: center;\n  -webkit-box-pack: center;\n  justify-content: center;\n}\n.react-datetimepicker .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span, .react-datetimepicker .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, .react-datetimepicker .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span, .react-datetimepicker .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {\n  color: #1f1f1f;\n}\n.react-datetimepicker .rdrSelected, .react-datetimepicker .rdrInRange, .react-datetimepicker .rdrStartEdge, .react-datetimepicker .rdrEndEdge {\n  background: currentColor;\n  position: absolute;\n  top: 5px;\n  left: 0;\n  right: 0;\n  bottom: 5px;\n}\n.react-datetimepicker .rdrStartEdge ~ .rdrDayNumber span, .react-datetimepicker .rdrEndEdge ~ .rdrDayNumber span {\n  font-weight: 600;\n}\n.react-datetimepicker .rdrSelected {\n  left: 2px;\n  right: 2px;\n}\n.react-datetimepicker .rdrStartEdge {\n  left: 2px;\n}\n.react-datetimepicker .rdrEndEdge {\n  right: 2px;\n}\n.react-datetimepicker .rdrDayStartOfMonth .rdrInRange, .react-datetimepicker .rdrDayStartOfMonth .rdrEndEdge, .react-datetimepicker .rdrDayStartOfWeek .rdrInRange, .react-datetimepicker .rdrDayStartOfWeek .rdrEndEdge {\n  left: 2px;\n}\n.react-datetimepicker .rdrDayEndOfMonth .rdrInRange, .react-datetimepicker .rdrDayEndOfMonth .rdrStartEdge, .react-datetimepicker .rdrDayEndOfWeek .rdrInRange, .react-datetimepicker .rdrDayEndOfWeek .rdrStartEdge {\n  right: 2px;\n}\n.react-datetimepicker .rdrDayStartOfMonth .rdrDayInPreview, .react-datetimepicker .rdrDayStartOfMonth .rdrDayEndPreview, .react-datetimepicker .rdrDayStartOfWeek .rdrDayInPreview, .react-datetimepicker .rdrDayStartOfWeek .rdrDayEndPreview {\n  border-left-width: 1px;\n  left: 0px;\n}\n.react-datetimepicker .rdrDayEndOfMonth .rdrDayInPreview, .react-datetimepicker .rdrDayEndOfMonth .rdrDayStartPreview, .react-datetimepicker .rdrDayEndOfWeek .rdrDayInPreview, .react-datetimepicker .rdrDayEndOfWeek .rdrDayStartPreview {\n  border-right-width: 1px;\n  right: 0px;\n}\n.react-datetimepicker .rdrDayStartPreview, .react-datetimepicker .rdrDayInPreview, .react-datetimepicker .rdrDayEndPreview {\n  background: rgba(255, 255, 255, 0.09);\n  position: absolute;\n  top: 3px;\n  left: 0px;\n  right: 0px;\n  bottom: 3px;\n  pointer-events: none;\n  border: 0px solid currentColor;\n  z-index: 1;\n}\n.react-datetimepicker .rdrDayStartPreview {\n  border-top-width: 1px;\n  border-left-width: 1px;\n  border-bottom-width: 1px;\n  left: 0px;\n}\n.react-datetimepicker .rdrDayInPreview {\n  border-top-width: 1px;\n  border-bottom-width: 1px;\n}\n.react-datetimepicker .rdrDayEndPreview {\n  border-top-width: 1px;\n  border-right-width: 1px;\n  border-bottom-width: 1px;\n  right: 2px;\n  right: 0px;\n}\n.react-datetimepicker .rdrDefinedRangesWrapper {\n  font-size: 12px;\n  width: 226px;\n  border-right: solid 1px #eff2f7;\n  background: #fff;\n}\n.react-datetimepicker .rdrDefinedRangesWrapper .rdrStaticRangeSelected {\n  color: currentColor;\n  font-weight: 600;\n}\n.react-datetimepicker .rdrStaticRange {\n  border: 0;\n  cursor: pointer;\n  display: block;\n  outline: 0;\n  border-bottom: 1px solid #eff2f7;\n  padding: 0;\n  background: #fff;\n}\n.react-datetimepicker .rdrStaticRange:hover .rdrStaticRangeLabel, .react-datetimepicker .rdrStaticRange:focus .rdrStaticRangeLabel {\n  background: #eff2f7;\n}\n.react-datetimepicker .rdrStaticRangeLabel {\n  display: block;\n  outline: 0;\n  line-height: 18px;\n  padding: 10px 20px;\n  text-align: left;\n}\n.react-datetimepicker .rdrInputRanges {\n  padding: 10px 0;\n}\n.react-datetimepicker .rdrInputRange {\n  -webkit-box-align: center;\n  align-items: center;\n  padding: 5px 20px;\n}\n.react-datetimepicker .rdrInputRangeInput {\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  border-radius: 4px;\n  text-align: center;\n  border: solid 1px rgb(222, 231, 235);\n  margin-right: 10px;\n  color: rgb(108, 118, 122);\n}\n.react-datetimepicker .rdrInputRangeInput:focus, .react-datetimepicker .rdrInputRangeInput:hover {\n  border-color: rgb(180, 191, 196);\n  outline: 0;\n  color: #333;\n}\n.react-datetimepicker .rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after {\n  content: \"\";\n  border: 1px solid currentColor;\n  position: absolute;\n  top: -2px;\n  bottom: -2px;\n  left: 0px;\n  right: 0px;\n  background: transparent;\n}\n.react-datetimepicker .rdrDayPassive {\n  pointer-events: none;\n}\n.react-datetimepicker .rdrDayPassive .rdrDayNumber span {\n  color: #d5dce0;\n}\n.react-datetimepicker .rdrDayPassive .rdrInRange, .react-datetimepicker .rdrDayPassive .rdrStartEdge, .react-datetimepicker .rdrDayPassive .rdrEndEdge, .react-datetimepicker .rdrDayPassive .rdrSelected, .react-datetimepicker .rdrDayPassive .rdrDayStartPreview, .react-datetimepicker .rdrDayPassive .rdrDayInPreview, .react-datetimepicker .rdrDayPassive .rdrDayEndPreview {\n  display: none;\n}\n.react-datetimepicker .rdrDayDisabled {\n  background-color: rgb(248, 248, 248);\n}\n.react-datetimepicker .rdrDayDisabled .rdrDayNumber span {\n  color: #aeb9bf;\n}\n.react-datetimepicker .rdrDayDisabled .rdrInRange, .react-datetimepicker .rdrDayDisabled .rdrStartEdge, .react-datetimepicker .rdrDayDisabled .rdrEndEdge, .react-datetimepicker .rdrDayDisabled .rdrSelected, .react-datetimepicker .rdrDayDisabled .rdrDayStartPreview, .react-datetimepicker .rdrDayDisabled .rdrDayInPreview, .react-datetimepicker .rdrDayDisabled .rdrDayEndPreview {\n  -webkit-filter: grayscale(100%) opacity(60%);\n  filter: grayscale(100%) opacity(60%);\n}\n.react-datetimepicker .rdrMonthName {\n  display: none;\n}\n.react-datetimepicker .rdrMonths {\n  display: -webkit-box;\n  display: flex;\n}\n.rdrDateRangePickerWrapper {\n  display: inline-flex;\n  user-select: none;\n}\n.rdrCalendarWrapper {\n  box-sizing: border-box;\n  background: #ffffff;\n  display: -webkit-inline-box;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  flex-direction: column;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.rdrDateDisplay {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n  justify-content: space-between;\n}\n.rdrDateDisplayItem {\n  -webkit-box-flex: 1;\n  flex: 1 1;\n  width: 0;\n  text-align: center;\n  color: inherit;\n}\n.rdrDateDisplayItem + .rdrDateDisplayItem {\n  margin-left: 0.833em;\n}\n.rdrDateDisplayItem input {\n  text-align: inherit;\n}\n.rdrDateDisplayItem input:disabled {\n  cursor: default;\n}\n.rdrMonthAndYearWrapper {\n  box-sizing: inherit;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n  justify-content: space-between;\n}\n.rdrMonthAndYearPickers {\n  -webkit-box-flex: 1;\n  flex: 1 1 auto;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n  justify-content: center;\n  -webkit-box-align: center;\n  align-items: center;\n}\n.rdrNextPrevButton {\n  box-sizing: inherit;\n  cursor: pointer;\n  outline: none;\n}\n.rdrMonths {\n  display: -webkit-box;\n  display: flex;\n}\n.rdrMonthsVertical {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  flex-direction: column;\n}\n.rdrMonthsHorizontal > div > div > div {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  flex-direction: row;\n}\n.rdrMonth {\n  width: 27.667em;\n}\n.rdrWeekDays {\n  display: -webkit-box;\n  display: flex;\n}\n.rdrWeekDay {\n  flex-basis: 14.2857142857%;\n  box-sizing: inherit;\n  text-align: center;\n}\n.rdrDays {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n}\n.rdrInfiniteMonths {\n  overflow: auto;\n}\n.rdrDateRangeWrapper {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.rdrDateInput {\n  position: relative;\n}\n.rdrDateInput input {\n  outline: none;\n}\n.rdrDateInput .rdrWarning {\n  position: absolute;\n  font-size: 1.6em;\n  line-height: 1.6em;\n  top: 0;\n  right: 0.25em;\n  color: #ff0000;\n}\n.rdrDay {\n  box-sizing: inherit;\n  width: 14.2857142857%;\n  position: relative;\n  font: inherit;\n  cursor: pointer;\n}\n.rdrDayNumber {\n  display: block;\n  position: relative;\n}\n.rdrDayNumber span {\n  color: #4c4c4c;\n}\n.rdrDayDisabled {\n  cursor: not-allowed;\n}\n@supports (-ms-ime-align: auto) {\n  .rdrDay {\n    flex-basis: 14.285% !important;\n  }\n}\n.rdrSelected, .rdrInRange, .rdrStartEdge, .rdrEndEdge {\n  pointer-events: none;\n}\n.rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview {\n  pointer-events: none;\n}\n.rdrDateRangePickerWrapper {\n  display: -webkit-inline-box;\n  display: inline-flex;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.rdrStaticRanges {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  flex-direction: column;\n}\n.rdrStaticRange {\n  font-size: inherit;\n}\n.rdrInputRange {\n  display: -webkit-box;\n  display: flex;\n}";
-styleInject(css_248z$W);
+const getLanguage = typeof document !== `undefined` && document.documentElement.lang || 'en';
 
 /**
  * Date Time Picker - stateless presentational component
@@ -19557,7 +23411,7 @@ const DateTimePicker = ({
     maxDate: new Date(),
     minDate: minDate ? new Date(minDate) : undefined,
     showMonthAndYearPickers: showMonthAndYearPickers
-  }), /*#__PURE__*/React.createElement(Button$2, {
+  }), /*#__PURE__*/React.createElement(Button$1, {
     onClick: handleApply,
     size: "tiny",
     "data-testid": "apply-button"
@@ -19584,9 +23438,7 @@ DateTimePicker.defaultProps = {
   i18n: {}
 };
 
-var css_248z$V = ".Divider-module_text--truncate__o6509 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Divider-module_divider__uz6wt {\n  height: 1px;\n}\n.Divider-module_divider--dropdown__Yrzn6 {\n  background: #dfdddd;\n  margin: 0;\n}\n.Divider-module_divider--normal__PqCJT {\n  background: #dfdddd;\n  margin: 0;\n}\n.Divider-module_divider--menu__gSSUt {\n  background: #5d92ff;\n  margin: 10px 0;\n  width: 30px;\n  margin-left: 20px;\n}\n.Divider-module_divider--horizontal__UV8Jb {\n  background: #dfdddd;\n  margin: 0 15px;\n}\n.Divider-module_divider--vertical__Lkyfx {\n  transform: rotate(180deg);\n}";
-var styles$R = {"text--truncate":"Divider-module_text--truncate__o6509","divider":"Divider-module_divider__uz6wt","divider--dropdown":"Divider-module_divider--dropdown__Yrzn6","divider--normal":"Divider-module_divider--normal__PqCJT","divider--menu":"Divider-module_divider--menu__gSSUt","divider--horizontal":"Divider-module_divider--horizontal__UV8Jb","divider--vertical":"Divider-module_divider--vertical__Lkyfx"};
-styleInject(css_248z$V);
+var styles$E = {"text--truncate":"Divider-module_text--truncate__o6509","divider":"Divider-module_divider__uz6wt","divider--dropdown":"Divider-module_divider--dropdown__Yrzn6","divider--normal":"Divider-module_divider--normal__PqCJT","divider--menu":"Divider-module_divider--menu__gSSUt","divider--horizontal":"Divider-module_divider--horizontal__UV8Jb","divider--vertical":"Divider-module_divider--vertical__Lkyfx"};
 
 /**
  * Divider - stateless presentational component
@@ -19603,12 +23455,12 @@ const Divider = ({
   align
 }) => {
   const elementClasses = useStyles({
-    [styles$R['divider']]: true,
-    [styles$R['divider--dropdown']]: variant === 'dropdown',
-    [styles$R['divider--horizontal']]: variant === 'horizontal',
-    [styles$R['divider--menu']]: variant === 'menu',
-    [styles$R['divider--normal']]: variant === 'normal',
-    [styles$R['divider--vertical']]: align === 'vertical'
+    [styles$E['divider']]: true,
+    [styles$E['divider--dropdown']]: variant === 'dropdown',
+    [styles$E['divider--horizontal']]: variant === 'horizontal',
+    [styles$E['divider--menu']]: variant === 'menu',
+    [styles$E['divider--normal']]: variant === 'normal',
+    [styles$E['divider--vertical']]: align === 'vertical'
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: elementClasses
@@ -20190,9 +24042,7 @@ var build = {exports: {}};
   })(), build.exports = r;
 })();
 
-var css_248z$U = ".Dot-module_text--truncate__k7TMC {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Dot-module_dot__8mbuu {\n  height: 12px;\n  width: 12px;\n  border-radius: 50%;\n  display: inline-block;\n}\n.Dot-module_dot--brand__z3IG4 {\n  background: #2550aa;\n}\n.Dot-module_dot--accent-1__BM2Gm {\n  background: #9368b3;\n}\n.Dot-module_dot--accent-2__SIN4q {\n  background: #00bd9e;\n}\n.Dot-module_dot--accent-3__d9fyF {\n  background: #f99e31;\n}\n.Dot-module_dot--accent-4__3YTdg {\n  background: #24bd9c;\n}\n.Dot-module_dot--accent-5__956Go {\n  background: #610fb7;\n}\n.Dot-module_dot--accent-6__WjuZ6 {\n  background: #9363b6;\n}\n.Dot-module_dot--accent-7__le9BF {\n  background: #f27589;\n}\n.Dot-module_dot--alert__YeaEc {\n  background: #ff3245;\n}\n.Dot-module_dot--warning__Puj-v {\n  background: #ffb000;\n}\n.Dot-module_dot--success__E5yj5 {\n  background: #29b662;\n}\n.Dot-module_dot--info__-Jkhb {\n  background: #5d92ff;\n}\n.Dot-module_dot--pending__oos-k {\n  background: #7988a0;\n}";
-var styles$Q = {"text--truncate":"Dot-module_text--truncate__k7TMC","dot":"Dot-module_dot__8mbuu","dot--brand":"Dot-module_dot--brand__z3IG4","dot--accent-1":"Dot-module_dot--accent-1__BM2Gm","dot--accent-2":"Dot-module_dot--accent-2__SIN4q","dot--accent-3":"Dot-module_dot--accent-3__d9fyF","dot--accent-4":"Dot-module_dot--accent-4__3YTdg","dot--accent-5":"Dot-module_dot--accent-5__956Go","dot--accent-6":"Dot-module_dot--accent-6__WjuZ6","dot--accent-7":"Dot-module_dot--accent-7__le9BF","dot--alert":"Dot-module_dot--alert__YeaEc","dot--warning":"Dot-module_dot--warning__Puj-v","dot--success":"Dot-module_dot--success__E5yj5","dot--info":"Dot-module_dot--info__-Jkhb","dot--pending":"Dot-module_dot--pending__oos-k"};
-styleInject(css_248z$U);
+var styles$D = {"text--truncate":"Dot-module_text--truncate__k7TMC","dot":"Dot-module_dot__8mbuu","dot--brand":"Dot-module_dot--brand__z3IG4","dot--accent-1":"Dot-module_dot--accent-1__BM2Gm","dot--accent-2":"Dot-module_dot--accent-2__SIN4q","dot--accent-3":"Dot-module_dot--accent-3__d9fyF","dot--accent-4":"Dot-module_dot--accent-4__3YTdg","dot--accent-5":"Dot-module_dot--accent-5__956Go","dot--accent-6":"Dot-module_dot--accent-6__WjuZ6","dot--accent-7":"Dot-module_dot--accent-7__le9BF","dot--alert":"Dot-module_dot--alert__YeaEc","dot--warning":"Dot-module_dot--warning__Puj-v","dot--success":"Dot-module_dot--success__E5yj5","dot--info":"Dot-module_dot--info__-Jkhb","dot--pending":"Dot-module_dot--pending__oos-k"};
 
 /**
  * Dot - stateless ui component
@@ -20209,15 +24059,15 @@ const Dot = ({
 }) => {
   const wrapperStyles = useStyles({}, className);
   const dotStyles = useStyles({
-    [styles$Q.dot]: true,
-    [styles$Q[`dot--${variant}`]]: true
+    [styles$D.dot]: true,
+    [styles$D[`dot--${variant}`]]: true
   });
   return /*#__PURE__*/React.createElement(build.exports.Row, {
     alignItems: "center",
     className: wrapperStyles
   }, /*#__PURE__*/React.createElement("div", {
     className: dotStyles
-  }), /*#__PURE__*/React.createElement(Spreader$1, {
+  }), /*#__PURE__*/React.createElement(Spreader, {
     spread: "tiny"
   }), label ? /*#__PURE__*/React.createElement("span", null, label) : null);
 };
@@ -20234,9 +24084,90 @@ Dot.defaultProps = {
   label: null
 };
 
-var css_248z$T = ".Dropdown-module_text--truncate__2gSL1 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Dropdown-module_dropdown__HMCqD {\n  position: fixed;\n  z-index: 5;\n  box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.1);\n  background: white;\n}\n.Dropdown-module_dropdown__head__396jT {\n  padding: 0 15px;\n}\n.Dropdown-module_dropdown__head__396jT > span {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.Dropdown-module_dropdown__wrapper__1egqO {\n  z-index: 1;\n  color: #1f1f1f;\n  cursor: pointer;\n  line-height: 1;\n  position: relative;\n  min-width: 36px;\n  min-height: 36px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0 15px;\n  box-sizing: border-box;\n}\n.Dropdown-module_dropdown__wrapper__icon__Jyo6a {\n  visibility: hidden;\n}\n.Dropdown-module_dropdown__wrapper__1egqO:hover {\n  background: #edecec;\n}\n.Dropdown-module_dropdown__wrapper__1egqO:hover .Dropdown-module__dropdown__wrapper__icon {\n  visibility: visible;\n}\n.Dropdown-module_dropdown__wrapper__1egqO:hover .Dropdown-module__dropdown__wrapper__icon i {\n  color: #7b7b7b;\n}\n.Dropdown-module_dropdown__wrapper--isOnlyIcon__axCFS {\n  padding: 0;\n}\n.Dropdown-module_dropdown__wrapper--spaced__P9FzW {\n  justify-content: space-between;\n}\n.Dropdown-module_dropdown__wrapper--end__bP-0- {\n  justify-content: flex-end;\n}\n.Dropdown-module_dropdown__wrapper__1egqO i {\n  color: #7b7b7b;\n}\n.Dropdown-module_dropdown__wrapper--input__OrJSn {\n  border: 0;\n  border-bottom: 1px solid #dddddd;\n  color: #1f1f1f;\n  font-size: 16px;\n  padding: 0;\n  outline: none;\n  line-height: 1;\n  border-radius: 0px;\n  margin: 0 10px;\n  position: relative;\n}\n.Dropdown-module_dropdown__wrapper--input__OrJSn:focus, .Dropdown-module_dropdown__wrapper--input__OrJSn:hover, .Dropdown-module_dropdown__wrapper--input__OrJSn:active {\n  outline: none;\n  background-color: transparent;\n}\n.Dropdown-module_dropdown__wrapper--input__OrJSn:focus:after, .Dropdown-module_dropdown__wrapper--input__OrJSn:hover:after, .Dropdown-module_dropdown__wrapper--input__OrJSn:active:after {\n  content: \"\";\n  height: 2px;\n  background: #1f1f1f;\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: -1px;\n}\n.Dropdown-module_dropdown__wrapper--as-input__RJFIb {\n  height: 38px;\n  margin: 0;\n}\n.Dropdown-module_dropdown__wrapper--as-input__RJFIb span {\n  padding: 0;\n  font-size: 16px;\n}\n.Dropdown-module_dropdown__wrapper--input--disabled__yqS5m {\n  color: #dddddd;\n  border-bottom: 1px dotted #a7a7a7;\n  cursor: not-allowed;\n}\n.Dropdown-module_dropdown__wrapper--input--disabled__yqS5m label {\n  cursor: not-allowed;\n}\n.Dropdown-module_dropdown__wrapper--input--disabled__yqS5m:hover i,\n.Dropdown-module_dropdown__wrapper--input--disabled__yqS5m:hover svg {\n  color: #7b7b7b;\n}\n.Dropdown-module_dropdown__wrapper--input--disabled__yqS5m:focus:after, .Dropdown-module_dropdown__wrapper--input--disabled__yqS5m:hover:after, .Dropdown-module_dropdown__wrapper--input--disabled__yqS5m:active:after {\n  display: none;\n}\n.Dropdown-module_dropdown__body__S2eLp {\n  padding: 20px 0 10px;\n}\n.Dropdown-module_dropdown__body__S2eLp label {\n  padding: 0 15px 10px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.Dropdown-module_dropdown__label__6N61W {\n  padding: 0 15px 0 15px;\n  font-weight: 400;\n  margin: 0;\n  font-size: 14px;\n  cursor: pointer;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  line-height: normal;\n}\n.Dropdown-module_dropdown__label__6N61W svg,\n.Dropdown-module_dropdown__label__6N61W i {\n  padding-right: 10px;\n}\n.Dropdown-module_dropdown__label--placeholder__ofJhe {\n  color: #a7a7a7;\n}\n.Dropdown-module_dropdown--auto__nkM1m {\n  width: auto;\n}\n.Dropdown-module_dropdown--mini__by6XY {\n  width: 80px;\n}\n.Dropdown-module_dropdown--small__SuG5D {\n  width: 180px;\n}\n.Dropdown-module_dropdown--medium__O0sjc {\n  width: 220px;\n}\n.Dropdown-module_dropdown--big__9WvMv {\n  width: 240px;\n}\n.Dropdown-module_dropdown--large__6mAkI {\n  width: 280px;\n}\n.Dropdown-module_dropdown--huge__a5SP3 {\n  width: 480px;\n}\n.Dropdown-module_dropdown--extra-huge__HP5py {\n  width: 720px;\n}\n.Dropdown-module_dropdown--hidden__lm-mk {\n  overflow: hidden;\n  opacity: 0;\n}";
-var styles$P = {"text--truncate":"Dropdown-module_text--truncate__2gSL1","dropdown":"Dropdown-module_dropdown__HMCqD","dropdown__head":"Dropdown-module_dropdown__head__396jT","dropdown__wrapper":"Dropdown-module_dropdown__wrapper__1egqO","dropdown__wrapper__icon":"Dropdown-module_dropdown__wrapper__icon__Jyo6a","dropdown__wrapper--isOnlyIcon":"Dropdown-module_dropdown__wrapper--isOnlyIcon__axCFS","dropdown__wrapper--spaced":"Dropdown-module_dropdown__wrapper--spaced__P9FzW","dropdown__wrapper--end":"Dropdown-module_dropdown__wrapper--end__bP-0-","dropdown__wrapper--input":"Dropdown-module_dropdown__wrapper--input__OrJSn","dropdown__wrapper--as-input":"Dropdown-module_dropdown__wrapper--as-input__RJFIb","dropdown__wrapper--input--disabled":"Dropdown-module_dropdown__wrapper--input--disabled__yqS5m","dropdown__body":"Dropdown-module_dropdown__body__S2eLp","dropdown__label":"Dropdown-module_dropdown__label__6N61W","dropdown__label--placeholder":"Dropdown-module_dropdown__label--placeholder__ofJhe","dropdown--auto":"Dropdown-module_dropdown--auto__nkM1m","dropdown--mini":"Dropdown-module_dropdown--mini__by6XY","dropdown--small":"Dropdown-module_dropdown--small__SuG5D","dropdown--medium":"Dropdown-module_dropdown--medium__O0sjc","dropdown--big":"Dropdown-module_dropdown--big__9WvMv","dropdown--large":"Dropdown-module_dropdown--large__6mAkI","dropdown--huge":"Dropdown-module_dropdown--huge__a5SP3","dropdown--extra-huge":"Dropdown-module_dropdown--extra-huge__HP5py","dropdown--hidden":"Dropdown-module_dropdown--hidden__lm-mk"};
-styleInject(css_248z$T);
+/**
+ * Position of child to parent element
+ * @function centerParent
+ * @param {number} parentWidth
+ * @param {number} childWidth
+ * @param {number} parentOffsetLeft
+ * @return {number} Returns position
+ */
+const centerParent = (parentWidth, childWidth, parentOffsetLeft) => {
+  const calc = Math.floor(parentWidth / 2 - childWidth / 2 + parentOffsetLeft);
+  return isNaN(calc) ? 0 : calc;
+};
+/**
+ * Element bounding
+ * @param {node} element The element
+ * @return {object} getBoundingClientRect()
+ */
+
+const getBoundings = element => element && element.getBoundingClientRect();
+
+/**
+ * Creates a throttled function that only invokes func at most once per
+ * every wait milliseconds
+ * @param {function} Func to throttle
+ * @param {number} [interval=0] The number of milliseconds to delay
+ * @return {function} Returns the new throttled function
+ */
+const throttle = (func, interval) => {
+  let timeout;
+  return function (...args) {
+    const later = function () {
+      timeout = false;
+    };
+
+    if (!timeout) {
+      func.apply(this, args);
+      timeout = true;
+      setTimeout(later, interval);
+    }
+  };
+};
+/**
+ * Creates a debounced function that delays invoking func until after wait
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked
+ * @param {function} Func The function to throttle
+ * @param {number} [interval=0] The number of milliseconds to delay
+ * @return {function} Returns the new debounced function
+ */
+
+const debounce = (func, interval) => {
+  let timeout;
+  return function (...args) {
+    const context = () => func.apply(this, args);
+
+    clearTimeout(timeout);
+    timeout = setTimeout(context, interval);
+  };
+};
+
+/**
+ * composeRefs func - help with composing multiple refs in React functional components
+ * eg. <Input ref={composeRefs(ref1,ref2)}/>
+ * @param  {...any} args
+ * @return {object}
+ */
+const composeRefs = (...args) => {
+  return ref => {
+    args.forEach(arg => {
+      if (!arg) {
+        return;
+      }
+
+      if (typeof arg === 'function') {
+        arg(ref);
+        return;
+      }
+
+      arg.current = ref;
+    });
+  };
+};
+
+var styles$C = {"text--truncate":"Dropdown-module_text--truncate__2gSL1","dropdown":"Dropdown-module_dropdown__HMCqD","dropdown__head":"Dropdown-module_dropdown__head__396jT","dropdown__wrapper":"Dropdown-module_dropdown__wrapper__1egqO","dropdown__wrapper__icon":"Dropdown-module_dropdown__wrapper__icon__Jyo6a","dropdown__wrapper--isOnlyIcon":"Dropdown-module_dropdown__wrapper--isOnlyIcon__axCFS","dropdown__wrapper--spaced":"Dropdown-module_dropdown__wrapper--spaced__P9FzW","dropdown__wrapper--end":"Dropdown-module_dropdown__wrapper--end__bP-0-","dropdown__wrapper--input":"Dropdown-module_dropdown__wrapper--input__OrJSn","dropdown__wrapper--as-input":"Dropdown-module_dropdown__wrapper--as-input__RJFIb","dropdown__wrapper--input--disabled":"Dropdown-module_dropdown__wrapper--input--disabled__yqS5m","dropdown__body":"Dropdown-module_dropdown__body__S2eLp","dropdown__label":"Dropdown-module_dropdown__label__6N61W","dropdown__label--placeholder":"Dropdown-module_dropdown__label--placeholder__ofJhe","dropdown--auto":"Dropdown-module_dropdown--auto__nkM1m","dropdown--mini":"Dropdown-module_dropdown--mini__by6XY","dropdown--small":"Dropdown-module_dropdown--small__SuG5D","dropdown--medium":"Dropdown-module_dropdown--medium__O0sjc","dropdown--big":"Dropdown-module_dropdown--big__9WvMv","dropdown--large":"Dropdown-module_dropdown--large__6mAkI","dropdown--huge":"Dropdown-module_dropdown--huge__a5SP3","dropdown--extra-huge":"Dropdown-module_dropdown--extra-huge__HP5py","dropdown--hidden":"Dropdown-module_dropdown--hidden__lm-mk"};
 
 /**
  * Dropdown - stateless presentational component
@@ -20276,38 +24207,38 @@ const Dropdown = /*#__PURE__*/react.exports.forwardRef(({
   const containerRef = react.exports.useRef(null);
   const dropdownRef = react.exports.useRef(null);
   const dropdownWrapperWithTooltipStyles = useStyles({
-    [styles$P['dropdown__wrapper']]: true,
-    [styles$P['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+    [styles$C['dropdown__wrapper']]: true,
+    [styles$C['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
   });
   const dropdownWrapperStyles = useStyles({
-    [styles$P['dropdown__wrapper']]: true,
-    [styles$P[`dropdown__wrapper--${alignment}`]]: alignment
+    [styles$C['dropdown__wrapper']]: true,
+    [styles$C[`dropdown__wrapper--${alignment}`]]: alignment
   });
   const dropdownWrapperIconStyles = useStyles({
-    [styles$P['dropdown__wrapper']]: true,
-    [styles$P['dropdown__wrapper__icon']]: true,
-    [styles$P['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+    [styles$C['dropdown__wrapper']]: true,
+    [styles$C['dropdown__wrapper__icon']]: true,
+    [styles$C['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
   });
   const dropdownBodySizeStyles = useStyles({
-    [styles$P['dropdown']]: true,
-    [styles$P[`dropdown--${size}`]]: size,
-    [styles$P['dropdown--hidden']]: isEmpty(style)
+    [styles$C['dropdown']]: true,
+    [styles$C[`dropdown--${size}`]]: size,
+    [styles$C['dropdown--hidden']]: isEmpty(style)
   }, className);
   const dropdownBodyStyles = useStyles({
-    [styles$P['dropdown__body']]: true
+    [styles$C['dropdown__body']]: true
   });
   const dropdownLabelStyles = useStyles({
-    [styles$P['dropdown__label']]: true,
-    [styles$P['dropdown__label--placeholder']]: asPlaceholder
+    [styles$C['dropdown__label']]: true,
+    [styles$C['dropdown__label--placeholder']]: asPlaceholder
   });
   const dropdownStyles = useStyles({
-    [styles$P['dropdown__wrapper']]: !custom,
-    [styles$P[`dropdown__wrapper--${alignment}`]]: alignment,
-    [styles$P['dropdown__wrapper--disabled']]: isOpenDisabled,
-    [styles$P['dropdown__wrapper--input']]: hasInput,
-    [styles$P['dropdown__wrapper--as-input']]: hasFullInputStyle,
-    [styles$P['dropdown__wrapper--input--disabled']]: hasInput && isOpenDisabled,
-    [styles$P['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
+    [styles$C['dropdown__wrapper']]: !custom,
+    [styles$C[`dropdown__wrapper--${alignment}`]]: alignment,
+    [styles$C['dropdown__wrapper--disabled']]: isOpenDisabled,
+    [styles$C['dropdown__wrapper--input']]: hasInput,
+    [styles$C['dropdown__wrapper--as-input']]: hasFullInputStyle,
+    [styles$C['dropdown__wrapper--input--disabled']]: hasInput && isOpenDisabled,
+    [styles$C['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
   }, className);
   const handleShow = react.exports.useCallback(event => {
     event.stopPropagation();
@@ -20370,7 +24301,7 @@ const Dropdown = /*#__PURE__*/react.exports.forwardRef(({
     }
   };
 
-  const renderDropdownWithTooltip = () => /*#__PURE__*/React.createElement(Tooltip$1, {
+  const renderDropdownWithTooltip = () => /*#__PURE__*/React.createElement(Tooltip, {
     content: tooltip,
     placement: tooltipPlacement
   }, /*#__PURE__*/React.createElement("span", {
@@ -20405,7 +24336,7 @@ const Dropdown = /*#__PURE__*/react.exports.forwardRef(({
     className: dropdownBodyStyles
   }, children));
 
-  const renderIcon = () => /*#__PURE__*/React.createElement(Icon$1, {
+  const renderIcon = () => /*#__PURE__*/React.createElement(Icon, {
     icon: icon
   });
 
@@ -20413,11 +24344,11 @@ const Dropdown = /*#__PURE__*/react.exports.forwardRef(({
     className: dropdownLabelStyles
   }, label);
 
-  const renderArrows = (isOpen, arrowType) => arrowType === 'caret' ? isOpen ? /*#__PURE__*/React.createElement(Icon$1, {
+  const renderArrows = (isOpen, arrowType) => arrowType === 'caret' ? isOpen ? /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-caret-up"
-  }) : /*#__PURE__*/React.createElement(Icon$1, {
+  }) : /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-caret-down"
-  }) : /*#__PURE__*/React.createElement(Icon$1, {
+  }) : /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-ellipsis-v"
   });
 
@@ -20497,9 +24428,285 @@ Dropdown.defaultProps = {
   ['data-testid']: 'trigger-dropdown'
 };
 
-var css_248z$S = ".DropdownSelect-module_text--truncate__-qi-s {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.DropdownSelect-module_search-container__6FcCx {\n  margin: 0 15px 15px;\n}\n\n.DropdownSelect-module_form-field__dropdown--has-error__DHUwj {\n  border-color: #df2439;\n  border-width: 2px;\n}\n.DropdownSelect-module_form-field__label__qmn8J {\n  position: relative;\n  top: 35px;\n  left: 0px;\n  font-size: 16px;\n}\n.DropdownSelect-module_form-field__label--has-error__usSjI {\n  color: #df2439;\n}\n.DropdownSelect-module_form-field__label--has-label__u5dBY {\n  top: 0;\n  font-size: 14px;\n}\n.DropdownSelect-module_form-field__label--disabled__PyISX {\n  color: #dddddd;\n  cursor: not-allowed;\n}";
-var styles$O = {"text--truncate":"DropdownSelect-module_text--truncate__-qi-s","search-container":"DropdownSelect-module_search-container__6FcCx","form-field__dropdown--has-error":"DropdownSelect-module_form-field__dropdown--has-error__DHUwj","form-field__label":"DropdownSelect-module_form-field__label__qmn8J","form-field__label--has-error":"DropdownSelect-module_form-field__label--has-error__usSjI","form-field__label--has-label":"DropdownSelect-module_form-field__label--has-label__u5dBY","form-field__label--disabled":"DropdownSelect-module_form-field__label--disabled__PyISX"};
-styleInject(css_248z$S);
+var styles$B = {"text--truncate":"Error-module_text--truncate__cmNlG","error":"Error-module_error__oTprb"};
+
+/**
+ * Form input error - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.error - error message
+ * @param {string|array} props.className
+ * @return {object} An object of children element
+ */
+
+const Error$1 = ({
+  error,
+  className
+}) => {
+  const errorStyles = useStyles({
+    [styles$B.error]: true
+  }, className);
+  return error ? /*#__PURE__*/React.createElement("span", {
+    className: errorStyles
+  }, error) : null;
+};
+
+Error$1.displayName = 'Error';
+Error$1.propTypes = {
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  error: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object])
+};
+Error$1.defaultProps = {
+  className: '',
+  error: ''
+};
+
+var styles$A = {"text--truncate":"Message-module_text--truncate__RWs0W","message":"Message-module_message__UaN2I"};
+
+/**
+ * Message - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - children element
+ * @param {string|array} props.className - list of custom class names out of component
+ * @param {string} props.title - title
+ * @param {string} props.message - message
+ * @param {string} props.url - image/video url
+ * @param {number} props.height - height of image/video
+ * @param {number} props.titleLevel - title font size
+ * @param {number} props.messageLevel - message font size
+ * @param {bool} props.video - component with wideo
+ * @param {string} props.multimediaPosition - image/video position before or after content, default `before`
+ * @param {bool} props.bold - message title is bold
+ * @param {bool} props.withoutMargin - message title without bottom margin
+ * @return {object} An object of children element
+ */
+
+const Message = ({
+  children,
+  className,
+  title,
+  message,
+  url,
+  height,
+  titleLevel,
+  messageLevel,
+  video,
+  multimediaPosition,
+  bold,
+  withoutMargin
+}) => {
+  const elementClasses = useStyles({
+    [styles$A['message']]: true
+  }, className);
+  /**
+   * Render multimedia
+   * @type {function}
+   */
+
+  const renderMultimedia = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Spacer, {
+    space: "small"
+  }), video ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, video, /*#__PURE__*/React.createElement(Spacer, {
+    space: "small"
+  })) : /*#__PURE__*/React.createElement(Image$1, {
+    height: height,
+    size: "auto",
+    src: url
+  }));
+
+  return /*#__PURE__*/React.createElement("div", {
+    className: elementClasses
+  }, url && multimediaPosition === 'before' && renderMultimedia(), title && /*#__PURE__*/React.createElement(Heading, {
+    align: "center",
+    bold: bold,
+    level: titleLevel,
+    margin: withoutMargin ? 'none' : ''
+  }, title), message && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer, {
+    space: "tiny"
+  }), /*#__PURE__*/React.createElement(Heading, {
+    align: "center",
+    level: messageLevel
+  }, message)), url && multimediaPosition === 'after' && renderMultimedia(), children);
+};
+
+Message.displayName = 'Message';
+Message.propTypes = {
+  bold: propTypes.exports.bool,
+  children: propTypes.exports.node,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  height: propTypes.exports.number,
+  video: propTypes.exports.node,
+  message: propTypes.exports.string,
+  messageLevel: propTypes.exports.number,
+  multimediaPosition: propTypes.exports.oneOf(['before', 'after']),
+  title: propTypes.exports.string,
+  titleLevel: propTypes.exports.number,
+  url: propTypes.exports.string,
+  withoutMargin: propTypes.exports.bool
+};
+Message.defaultProps = {
+  className: '',
+  bold: false,
+  children: null,
+  height: 220,
+  video: null,
+  message: undefined,
+  messageLevel: 3,
+  multimediaPosition: 'before',
+  title: undefined,
+  titleLevel: 1,
+  url: undefined,
+  withoutMargin: false
+};
+
+var styles$z = {"text--truncate":"Overflow-module_text--truncate__gxBOP","overflow":"Overflow-module_overflow__KDqwd"};
+
+/**
+ * Overflow - stateless presentational component
+ * @param {object} props - props
+ * @param {object} props.children - childrens
+ * @param {string|array} props.className - list of class names
+ * @return {object} An object of children element
+ */
+
+const Overflow = ({
+  children,
+  className
+}) => {
+  const elementClasses = useStyles({
+    [styles$z['overflow']]: true
+  }, className);
+  return /*#__PURE__*/React.createElement("div", {
+    className: elementClasses
+  }, children);
+};
+
+Overflow.displayName = 'Overflow';
+Overflow.propTypes = {
+  children: propTypes.exports.node,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
+};
+Overflow.defaultProps = {
+  children: null,
+  className: ''
+};
+
+var styles$y = {"text--truncate":"Loader-module_text--truncate__EvM0o","loader":"Loader-module_loader__Ukoov","loader__spinner":"Loader-module_loader__spinner__cp5N7","loader__spinner--inner":"Loader-module_loader__spinner--inner__1jgqz","spin":"Loader-module_spin__HfHqf","dash":"Loader-module_dash__6cly-","loader__triangle":"Loader-module_loader__triangle__A47-U","move-triangle":"Loader-module_move-triangle__B8vUY","loader__square":"Loader-module_loader__square__kePmA","move-square":"Loader-module_move-square__52oi0","loader__circle":"Loader-module_loader__circle__yJvMH","move-circle":"Loader-module_move-circle__UPbLZ","loader__circle2":"Loader-module_loader__circle2__brpSM","move-circle-2":"Loader-module_move-circle-2__L8pHb","container":"Loader-module_container__FieQ6","main":"Loader-module_main__rju3o","one":"Loader-module_one__84UfA","load-one":"Loader-module_load-one__hmMU-","two":"Loader-module_two__blOBv","load-two":"Loader-module_load-two__ru3Ib","three":"Loader-module_three__iX5OZ","load-three":"Loader-module_load-three__eFTKC","forth":"Loader-module_forth__xUCuH","load-forth":"Loader-module_load-forth__j17oz"};
+
+const renderDefaultLoader = ({
+  dataTestId
+}) => /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  className: styles$y.container,
+  "data-testid": dataTestId ?? 'loader-default'
+}, /*#__PURE__*/React.createElement("div", {
+  className: styles$y.main
+}, /*#__PURE__*/React.createElement("div", {
+  className: styles$y.one
+}), /*#__PURE__*/React.createElement("div", {
+  className: styles$y.two
+}), /*#__PURE__*/React.createElement("div", {
+  className: styles$y.three
+}), /*#__PURE__*/React.createElement("div", {
+  className: styles$y.forth
+}))));
+
+const renderShapesLoader = ({
+  dataTestId
+}) => /*#__PURE__*/React.createElement("div", {
+  className: styles$y.loader,
+  "data-testid": dataTestId ?? 'loader-shapes'
+}, /*#__PURE__*/React.createElement("svg", {
+  className: styles$y.loader__circle,
+  width: "8px",
+  height: "8px",
+  viewBox: "0 0 22 22",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, /*#__PURE__*/React.createElement("circle", {
+  cx: "11",
+  cy: "11",
+  r: "11"
+})), /*#__PURE__*/React.createElement("svg", {
+  className: styles$y.loader__circle2,
+  width: "8px",
+  height: "8px",
+  viewBox: "0 0 22 22",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, /*#__PURE__*/React.createElement("circle", {
+  cx: "11",
+  cy: "11",
+  r: "11"
+})), /*#__PURE__*/React.createElement("svg", {
+  className: styles$y.loader__triangle,
+  width: "13px",
+  height: "13px",
+  viewBox: "0 0 40 45",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M31.673,18.327,6.673,25,0,0Z",
+  transform: "translate(15.836 39.929) rotate(-120)"
+})), /*#__PURE__*/React.createElement("svg", {
+  className: styles$y.loader__square,
+  width: "7px",
+  height: "7px",
+  viewBox: "0 0 10 10",
+  version: "1.1",
+  xmlns: "http://www.w3.org/2000/svg"
+}, /*#__PURE__*/React.createElement("rect", {
+  width: "15",
+  height: "15"
+})), /*#__PURE__*/React.createElement("div", {
+  className: styles$y.loader__spinner
+}, /*#__PURE__*/React.createElement("div", {
+  className: styles$y[`loader__spinner--inner`]
+}, /*#__PURE__*/React.createElement("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  height: "36",
+  width: "36"
+}, /*#__PURE__*/React.createElement("circle", {
+  cx: "50%",
+  cy: "50%",
+  r: "40%",
+  fill: "rgba(0,0,0,0)",
+  stroke: "#28C7B8",
+  strokeLinecap: "round"
+})))));
+/**
+ * Loader - stateless presentational component
+ * @param {object} props - props
+ * @param {string} props.variant - loader variant
+ * @return {object} An object of children element
+ */
+
+
+const Loader = ({
+  variant,
+  ['data-testid']: dataTestId
+}) => {
+  const loader = {
+    default: renderDefaultLoader({
+      dataTestId
+    }),
+    shapes: renderShapesLoader({
+      dataTestId
+    })
+  };
+  return loader[variant];
+};
+
+Loader.displayName = 'Loader';
+Loader.propTypes = {
+  variant: propTypes.exports.oneOf(['default', 'shapes']),
+  ['data-testid']: propTypes.exports.string
+};
+Loader.defaultProps = {
+  variant: 'default',
+  ['data-testid']: null
+};
+
+const emitCloseDropdown = (...args) => emitter.emit(CLOSE_DROPDOWN, ...args);
+
+var styles$x = {"text--truncate":"DropdownSelect-module_text--truncate__-qi-s","search-container":"DropdownSelect-module_search-container__6FcCx","form-field__dropdown--has-error":"DropdownSelect-module_form-field__dropdown--has-error__DHUwj","form-field__label":"DropdownSelect-module_form-field__label__qmn8J","form-field__label--has-error":"DropdownSelect-module_form-field__label--has-error__usSjI","form-field__label--has-label":"DropdownSelect-module_form-field__label--has-label__u5dBY","form-field__label--disabled":"DropdownSelect-module_form-field__label--disabled__PyISX"};
 
 /**
  * DropdownSelect - stateless presentational component
@@ -20557,13 +24764,13 @@ const DropdownSelect = ({
 }) => {
   const hasLabel = value || alwaysShowLabel;
   const labelStyles = useStyles({
-    [styles$O['form-field__label']]: true,
-    [styles$O['form-field__label--has-error']]: errors[formikKey] || touched[formikKey],
-    [styles$O['form-field__label--has-label']]: hasLabel,
-    [styles$O['form-field__label--disabled']]: isOpenDisabled
+    [styles$x['form-field__label']]: true,
+    [styles$x['form-field__label--has-error']]: errors[formikKey] || touched[formikKey],
+    [styles$x['form-field__label--has-label']]: hasLabel,
+    [styles$x['form-field__label--disabled']]: isOpenDisabled
   });
   const dropdownStyles = useStyles({
-    [styles$O['form-field__dropdown--has-error']]: errors[formikKey] || touched[formikKey]
+    [styles$x['form-field__dropdown--has-error']]: errors[formikKey] || touched[formikKey]
   });
 
   const getSelectedItem = () => {
@@ -20595,7 +24802,7 @@ const DropdownSelect = ({
       onChange(value);
     }
 
-    emitCloseDropdown$1();
+    emitCloseDropdown();
   });
   const dropdownRef = react.exports.useRef(null);
   const containerRef = react.exports.useRef(null);
@@ -20609,15 +24816,15 @@ const DropdownSelect = ({
     if (labelWidth) setDropdownWidth(labelWidth);
   }, [containerRef.current]);
 
-  const renderOption = item => hasDescription ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$2, {
+  const renderOption = item => hasDescription ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$1, {
     variant: "dropdown-element",
     onClick: () => handleChange(item.value)
-  }, /*#__PURE__*/React.createElement(Heading$1, {
+  }, /*#__PURE__*/React.createElement(Heading, {
     level: 5
-  }, item?.label), /*#__PURE__*/React.createElement(Paragraph$1, {
+  }, item?.label), /*#__PURE__*/React.createElement(Paragraph, {
     color: "accent-2",
     size: 12
-  }, item?.description)), /*#__PURE__*/React.createElement(Divider$1, null)) : /*#__PURE__*/React.createElement(Button$2, {
+  }, item?.description)), /*#__PURE__*/React.createElement(Divider, null)) : /*#__PURE__*/React.createElement(Button$1, {
     variant: "dropdown-element",
     onClick: () => handleChange(item.value)
   }, item?.label);
@@ -20634,10 +24841,10 @@ const DropdownSelect = ({
 
   const clearSearchValue = react.exports.useCallback(() => setSearchValue(''), []);
 
-  const renderOptions = () => /*#__PURE__*/React.createElement(react.exports.Fragment, null, emphasisedOptions.map((item, index) => /*#__PURE__*/React.createElement(ListItem$1, {
+  const renderOptions = () => /*#__PURE__*/React.createElement(react.exports.Fragment, null, emphasisedOptions.map((item, index) => /*#__PURE__*/React.createElement(ListItem, {
     className: "list-item--dropdown",
     key: index
-  }, renderOption(item))), !isEmpty(emphasisedOptions) && /*#__PURE__*/React.createElement(Divider$1, null), options.filter(({
+  }, renderOption(item))), !isEmpty(emphasisedOptions) && /*#__PURE__*/React.createElement(Divider, null), options.filter(({
     label
   }) => {
     if (!searchValue) {
@@ -20646,7 +24853,7 @@ const DropdownSelect = ({
 
     const items = label.toLowerCase().match(new RegExp(searchValue.toLowerCase()));
     return items;
-  }).map((item, index) => /*#__PURE__*/React.createElement(ListItem$1, {
+  }).map((item, index) => /*#__PURE__*/React.createElement(ListItem, {
     className: "list-item--dropdown",
     key: index
   }, renderOption(item))));
@@ -20654,10 +24861,10 @@ const DropdownSelect = ({
   return /*#__PURE__*/React.createElement("div", {
     className: className,
     ref: containerRef
-  }, label && /*#__PURE__*/React.createElement(Label$1, {
+  }, label && /*#__PURE__*/React.createElement(Label, {
     id: label,
     className: labelStyles
-  }, label), /*#__PURE__*/React.createElement(Dropdown$1, {
+  }, label), /*#__PURE__*/React.createElement(Dropdown, {
     label: dropdownLabel ? dropdownLabel(selectedItem) : selectedItem?.label,
     hasInput: true,
     hasFullInputStyle: true,
@@ -20670,8 +24877,8 @@ const DropdownSelect = ({
     handleOnClose: clearSearchValue,
     className: dropdownStyles
   }, handleOnSearchChange && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: styles$O['search-container']
-  }, /*#__PURE__*/React.createElement(Searcher$2, {
+    className: styles$x['search-container']
+  }, /*#__PURE__*/React.createElement(Searcher$1, {
     setSearchPhrase: handleOnSearchChange,
     i18n: {
       placeholder: i18n.placeholder
@@ -20679,34 +24886,34 @@ const DropdownSelect = ({
     tag: "div",
     protectedSubmit: true,
     liveChanges: liveChanges
-  })), /*#__PURE__*/React.createElement(Divider$1, {
+  })), /*#__PURE__*/React.createElement(Divider, {
     variant: "dropdown"
   })), searchInOptions && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: styles$O['search-container']
-  }, /*#__PURE__*/React.createElement(Search$1, {
+    className: styles$x['search-container']
+  }, /*#__PURE__*/React.createElement(Search, {
     onChange: handleSearchOptionsChange,
     i18n: {
       placeholder: i18n.placeholder
     },
     tag: "div",
     autoFocus: true
-  })), /*#__PURE__*/React.createElement(Divider$1, {
+  })), /*#__PURE__*/React.createElement(Divider, {
     variant: "dropdown"
-  })), /*#__PURE__*/React.createElement(Overflow$1, null, /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement(Overflow, null, /*#__PURE__*/React.createElement("div", {
     style: {
       minWidth: dropdownWidth,
       ...overflowStyle
     }
-  }, /*#__PURE__*/React.createElement(List$1, null, !isLoading && isEmptyList && isEmpty(options) ? /*#__PURE__*/React.createElement(Message$1, {
+  }, /*#__PURE__*/React.createElement(List, null, !isLoading && isEmptyList && isEmpty(options) ? /*#__PURE__*/React.createElement(Message, {
     title: i18n.emptySearchMessageTitle,
     message: i18n.emptySearchMessage,
     url: "https://images.assets-landingi.com/images/search_empty.svg",
     height: 41,
     titleLevel: 5,
     messageLevel: 6
-  }) : renderOptions(), isLoading && /*#__PURE__*/React.createElement(Loader$1, null)), /*#__PURE__*/React.createElement(Spacer$1, {
+  }) : renderOptions(), isLoading && /*#__PURE__*/React.createElement(Loader, null)), /*#__PURE__*/React.createElement(Spacer, {
     space: "tiny"
-  }))), optionalContent), /*#__PURE__*/React.createElement(Error$2, {
+  }))), optionalContent), /*#__PURE__*/React.createElement(Error$1, {
     error: errors[formikKey]
   }));
 };
@@ -20773,9 +24980,7 @@ DropdownSelect.defaultProps = {
   onChange: () => null
 };
 
-var css_248z$R = ".DropdownSelect-module_text--truncate__kHH7C {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.DropdownSelect-module_form-field__dropdown--has-error__3i7He {\n  border-color: #df2439;\n  border-width: 2px;\n}\n.DropdownSelect-module_form-field__label__v8f9B {\n  position: relative;\n  top: 35px;\n  left: 0px;\n  font-size: 16px;\n}\n.DropdownSelect-module_form-field__label--has-error__Xi5nb {\n  color: #df2439;\n}\n.DropdownSelect-module_form-field__label--has-label__4N-v- {\n  top: 0;\n  font-size: 14px;\n}\n\n.DropdownSelect-module_search-container__jZNeq {\n  margin: 0 15px 15px;\n}";
-var styles$N = {"text--truncate":"DropdownSelect-module_text--truncate__kHH7C","form-field__dropdown--has-error":"DropdownSelect-module_form-field__dropdown--has-error__3i7He","form-field__label":"DropdownSelect-module_form-field__label__v8f9B","form-field__label--has-error":"DropdownSelect-module_form-field__label--has-error__Xi5nb","form-field__label--has-label":"DropdownSelect-module_form-field__label--has-label__4N-v-","search-container":"DropdownSelect-module_search-container__jZNeq"};
-styleInject(css_248z$R);
+var styles$w = {"text--truncate":"DropdownSelect-module_text--truncate__kHH7C","form-field__dropdown--has-error":"DropdownSelect-module_form-field__dropdown--has-error__3i7He","form-field__label":"DropdownSelect-module_form-field__label__v8f9B","form-field__label--has-error":"DropdownSelect-module_form-field__label--has-error__Xi5nb","form-field__label--has-label":"DropdownSelect-module_form-field__label--has-label__4N-v-","search-container":"DropdownSelect-module_search-container__jZNeq"};
 
 /**
  * Select - stateless presentational component
@@ -20829,56 +25034,56 @@ const DropdownSelectForm = ({
 }) => {
   const [inModalPosition, setInModalPosition] = react.exports.useState(false);
   const labelStyles = useStyles({
-    [styles$N['form-field__label']]: true,
-    [styles$N['form-field__label--has-error']]: errors[name] || touched[name],
-    [styles$N['form-field__label--has-value']]: value[name]
+    [styles$w['form-field__label']]: true,
+    [styles$w['form-field__label--has-error']]: errors[name] || touched[name],
+    [styles$w['form-field__label--has-value']]: value[name]
   });
   const dropdownStyles = useStyles({
-    [styles$N['form-field__dropdown--has-error']]: errors[name] || touched[name]
+    [styles$w['form-field__dropdown--has-error']]: errors[name] || touched[name]
   });
   const handleChange = react.exports.useCallback((name, item) => {
-    emitCloseDropdown$1();
+    emitCloseDropdown();
     onChange(name, item);
   });
   react.exports.useEffect(() => {
     setInModalPosition(inModal);
   }, [inModal]);
 
-  const renderOption = item => hasDescription ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$2, {
+  const renderOption = item => hasDescription ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$1, {
     variant: "dropdown-element",
     onClick: () => handleChange(name, item)
-  }, /*#__PURE__*/React.createElement(Heading$1, {
+  }, /*#__PURE__*/React.createElement(Heading, {
     level: 5
-  }, item?.label), /*#__PURE__*/React.createElement(Paragraph$1, {
+  }, item?.label), /*#__PURE__*/React.createElement(Paragraph, {
     color: "accent-2",
     size: 12
-  }, item?.description)), /*#__PURE__*/React.createElement(Divider$1, null)) : /*#__PURE__*/React.createElement(Button$2, {
+  }, item?.description)), /*#__PURE__*/React.createElement(Divider, null)) : /*#__PURE__*/React.createElement(Button$1, {
     variant: "dropdown-element",
     onClick: () => handleChange(name, item)
   }, item?.label);
 
-  const renderOptions = () => /*#__PURE__*/React.createElement(react.exports.Fragment, null, emphasisedOptions.map((item, index) => /*#__PURE__*/React.createElement(ListItem$1, {
+  const renderOptions = () => /*#__PURE__*/React.createElement(react.exports.Fragment, null, emphasisedOptions.map((item, index) => /*#__PURE__*/React.createElement(ListItem, {
     className: "list-item--dropdown",
     key: index
-  }, renderOption(item))), !isEmpty(emphasisedOptions) && /*#__PURE__*/React.createElement(Divider$1, null), options.map((item, index) => /*#__PURE__*/React.createElement(ListItem$1, {
+  }, renderOption(item))), !isEmpty(emphasisedOptions) && /*#__PURE__*/React.createElement(Divider, null), options.map((item, index) => /*#__PURE__*/React.createElement(ListItem, {
     className: "list-item--dropdown",
     key: index
   }, renderOption(item))));
 
-  const renderLoadMoreButton = () => /*#__PURE__*/React.createElement(Button$2, {
+  const renderLoadMoreButton = () => /*#__PURE__*/React.createElement(Button$1, {
     align: "left",
     variant: "dropdown",
     onClick: loadMoreEvent,
     hasIcon: true,
     fitWidth: true
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-arrow-down"
   }), i18n.loadmore);
 
-  return /*#__PURE__*/React.createElement("div", null, label && hasLabel && /*#__PURE__*/React.createElement(Label$1, {
+  return /*#__PURE__*/React.createElement("div", null, label && hasLabel && /*#__PURE__*/React.createElement(Label, {
     id: name,
     className: labelStyles
-  }, label), /*#__PURE__*/React.createElement(Dropdown$1, {
+  }, label), /*#__PURE__*/React.createElement(Dropdown, {
     hasInput: true,
     hasFullInputStyle: true,
     asPlaceholder: !value[name]?.label,
@@ -20887,27 +25092,27 @@ const DropdownSelectForm = ({
     inModal: inModalPosition,
     className: dropdownStyles
   }, handleOnSearchChange && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: styles$N['search-container']
-  }, /*#__PURE__*/React.createElement(Searcher$2, {
+    className: styles$w['search-container']
+  }, /*#__PURE__*/React.createElement(Searcher$1, {
     setSearchPhrase: handleOnSearchChange,
     placeholder: searchPlaceholder,
     tag: "div",
     protectedSubmit: true,
     liveChanges: liveChanges
-  })), /*#__PURE__*/React.createElement(Divider$1, {
+  })), /*#__PURE__*/React.createElement(Divider, {
     variant: "dropdown"
-  })), /*#__PURE__*/React.createElement(Overflow$1, null, /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement(Overflow, null, /*#__PURE__*/React.createElement("div", {
     style: overflowStyle
-  }, /*#__PURE__*/React.createElement(List$1, null, !isLoading && isEmptyList && isEmpty(options) ? /*#__PURE__*/React.createElement(Message$1, {
+  }, /*#__PURE__*/React.createElement(List, null, !isLoading && isEmptyList && isEmpty(options) ? /*#__PURE__*/React.createElement(Message, {
     title: "message.empty.search.results",
     message: "message.empty.search.results.small",
     url: "https://images.assets-landingi.com/images/search_empty.svg",
     height: 41,
     titleLevel: 5,
     messageLevel: 6
-  }) : /*#__PURE__*/React.createElement(react.exports.Fragment, null, renderOptions(), !isLoading && hasLoadMoreButton && renderLoadMoreButton()), isLoading && /*#__PURE__*/React.createElement(Loader$1, null)), /*#__PURE__*/React.createElement(Spacer$1, {
+  }) : /*#__PURE__*/React.createElement(react.exports.Fragment, null, renderOptions(), !isLoading && hasLoadMoreButton && renderLoadMoreButton()), isLoading && /*#__PURE__*/React.createElement(Loader, null)), /*#__PURE__*/React.createElement(Spacer, {
     space: "tiny"
-  }))), optionalContent), /*#__PURE__*/React.createElement(Error$2, {
+  }))), optionalContent), /*#__PURE__*/React.createElement(Error$1, {
     error: errors[name]
   }));
 };
@@ -20977,39 +25182,7 @@ DropdownSelectForm.defaultProps = {
   }
 };
 
-var css_248z$Q = ".Error-module_text--truncate__cmNlG {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Error-module_error__oTprb {\n  color: #df2439;\n  font-size: 12px;\n  display: block;\n}";
-var styles$M = {"text--truncate":"Error-module_text--truncate__cmNlG","error":"Error-module_error__oTprb"};
-styleInject(css_248z$Q);
-
-/**
- * Form input error - stateless presentational component
- * @param {object} props - props
- * @param {string} props.error - error message
- * @param {string|array} props.className
- * @return {object} An object of children element
- */
-
-const Error$1 = ({
-  error,
-  className
-}) => {
-  const errorStyles = useStyles({
-    [styles$M.error]: true
-  }, className);
-  return error ? /*#__PURE__*/React.createElement("span", {
-    className: errorStyles
-  }, error) : null;
-};
-
-Error$1.displayName = 'Error';
-Error$1.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  error: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object])
-};
-Error$1.defaultProps = {
-  className: '',
-  error: ''
-};
+const setLocalStorage = (key, value) => localStorage.setItem(key, value);
 
 /**
  * Filter - stateful presentational component
@@ -21043,21 +25216,21 @@ const Filter = ({
     setLabel(label);
     setValue(value);
     localStorageKey && setLocalStorage(localStorageKey, value);
-    emitCloseDropdown$1();
+    emitCloseDropdown();
   };
 
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel;
-  return /*#__PURE__*/React.createElement(Dropdown$1, {
+  return /*#__PURE__*/React.createElement(Dropdown, {
     label: dropdownLabel,
     size: "medium",
     "data-testid": dataTestId
-  }, /*#__PURE__*/React.createElement(List$1, null, values.map(({
+  }, /*#__PURE__*/React.createElement(List, null, values.map(({
     value,
     label
-  }) => /*#__PURE__*/React.createElement(ListItem$1, {
+  }) => /*#__PURE__*/React.createElement(ListItem, {
     key: uuid_1(),
     variant: "dropdown"
-  }, /*#__PURE__*/React.createElement(Button$2, {
+  }, /*#__PURE__*/React.createElement(Button$1, {
     onClick: () => setFilter(label, value),
     tag: "a",
     variant: "dropdown"
@@ -21084,9 +25257,7 @@ Filter.defaultProps = {
   ['data-testid']: 'filter-component'
 };
 
-var css_248z$P = ".GalleryImage-module_text--truncate__tHAVu {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.GalleryImage-module_background__atEfn {\n  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05)), linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));\n  background-size: 16px 16px;\n  background-position: 0 0, 8px 8px;\n  background-repeat: repeat;\n  display: inline-flex;\n  border: 1px solid #dfdddd;\n}\n\n.GalleryImage-module_image__0fia7 {\n  width: 140px;\n  height: 140px;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: 50%;\n}";
-var styles$L = {"text--truncate":"GalleryImage-module_text--truncate__tHAVu","background":"GalleryImage-module_background__atEfn","image":"GalleryImage-module_image__0fia7"};
-styleInject(css_248z$P);
+var styles$v = {"text--truncate":"GalleryImage-module_text--truncate__tHAVu","background":"GalleryImage-module_background__atEfn","image":"GalleryImage-module_image__0fia7"};
 
 /**
  * GalleryImage - stateless presentational component
@@ -21102,12 +25273,12 @@ const GalleryImage = ({
   onClick,
   onDoubleClick
 }) => /*#__PURE__*/React.createElement("div", {
-  className: styles$L.background,
+  className: styles$v.background,
   onClick: onClick,
   onDoubleClick: onDoubleClick,
   "data-testid": "gallery-image"
 }, /*#__PURE__*/React.createElement("div", {
-  className: styles$L.image,
+  className: styles$v.image,
   style: {
     backgroundImage: `url(${src})`
   }
@@ -21124,9 +25295,7 @@ GalleryImage.defaultProps = {
   onDoubleClick: () => null
 };
 
-var css_248z$O = ".FieldGroup-module_text--truncate__oU0d- {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.FieldGroup-module_field-group__TGqEE {\n  position: relative;\n  margin-bottom: 15px;\n}\n.FieldGroup-module_field-group--has-error__8tEhR {\n  color: #df2439;\n  transition: opacity 0.3s, top 0.3s;\n  opacity: 0;\n}";
-var styles$K = {"text--truncate":"FieldGroup-module_text--truncate__oU0d-","field-group":"FieldGroup-module_field-group__TGqEE","field-group--has-error":"FieldGroup-module_field-group--has-error__8tEhR"};
-styleInject(css_248z$O);
+var styles$u = {"text--truncate":"FieldGroup-module_text--truncate__oU0d-","field-group":"FieldGroup-module_field-group__TGqEE","field-group--has-error":"FieldGroup-module_field-group--has-error__8tEhR"};
 
 /**
  * Field Group  - stateless presentational component
@@ -21147,13 +25316,13 @@ const FieldGroup = ({
   children
 }) => {
   const labelStyles = useStyles({
-    [styles$K['field-group--has-error']]: touched[name]
+    [styles$u['field-group--has-error']]: touched[name]
   });
   return /*#__PURE__*/React.createElement("div", {
-    className: styles$K['field-group']
-  }, label && /*#__PURE__*/React.createElement(Label$1, {
+    className: styles$u['field-group']
+  }, label && /*#__PURE__*/React.createElement(Label, {
     className: labelStyles
-  }, label), children, touched[name] && /*#__PURE__*/React.createElement(Error$2, {
+  }, label), children, touched[name] && /*#__PURE__*/React.createElement(Error$1, {
     error: errors[name]
   }));
 };
@@ -21194,7 +25363,7 @@ FieldGroup.defaultProps = {
  * @return {object} An object of children element
  */
 
-const Input$1 = ({
+const Input = ({
   className,
   field: {
     name,
@@ -21223,12 +25392,12 @@ const Input$1 = ({
   const error = getDeepValue(errors, name);
   const isTouched = getDeepValue(touched, name);
   const wrapperStyles = useStyles({
-    [styles$1c['form-field']]: true,
-    [styles$1c['form--has-error']]: error && isTouched
+    [styles$16['form-field']]: true,
+    [styles$16['form--has-error']]: error && isTouched
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: wrapperStyles
-  }, /*#__PURE__*/React.createElement(InputComponent, {
+  }, /*#__PURE__*/React.createElement(Input$1, {
     type: type,
     name: name,
     id: id,
@@ -21247,16 +25416,16 @@ const Input$1 = ({
     variant: variant,
     "data-testid": dataTestId,
     form: true
-  }), i18n?.description && !error && /*#__PURE__*/React.createElement(Paragraph$1, {
+  }), i18n?.description && !error && /*#__PURE__*/React.createElement(Paragraph, {
     size: "12",
     color: "color-8"
-  }, i18n.description), isTouched && /*#__PURE__*/React.createElement(Error$2, {
+  }, i18n.description), isTouched && /*#__PURE__*/React.createElement(Error$1, {
     error: error
   }));
 };
 
-Input$1.displayName = 'Input';
-Input$1.propTypes = {
+Input.displayName = 'Input';
+Input.propTypes = {
   className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
   field: propTypes.exports.shape({
     name: propTypes.exports.string.isRequired,
@@ -21288,7 +25457,7 @@ Input$1.propTypes = {
   variant: propTypes.exports.string,
   ['data-testid']: propTypes.exports.string
 };
-Input$1.defaultProps = {
+Input.defaultProps = {
   className: '',
   label: '',
   placeholder: '',
@@ -21310,9 +25479,7 @@ Input$1.defaultProps = {
   ['data-testid']: 'input-component'
 };
 
-var css_248z$N = ".Radio-module_text--truncate__Bjb2G {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Radio-module_radio__B6HML {\n  display: block;\n  position: relative;\n  padding-left: 30px;\n  cursor: pointer;\n  font-size: 14px;\n  margin: 0;\n  line-height: 24px;\n  opacity: 1;\n  height: 0;\n}\n.Radio-module_radio__B6HML label {\n  font-weight: 400;\n  margin: 0;\n  font-size: 14px;\n  color: #4c4c4c;\n  cursor: pointer;\n  top: unset !important;\n  left: unset !important;\n  opacity: 1 !important;\n  pointer-events: none;\n}\n.Radio-module_radio__B6HML:checked ~ .Radio-module_radio__overlay__G3gzy:after {\n  display: block;\n}\n.Radio-module_radio__B6HML input {\n  position: absolute;\n  z-index: -1;\n  opacity: 0;\n}\n.Radio-module_radio__B6HML input:checked ~ .Radio-module_radio__overlay__G3gzy {\n  background: #2550aa;\n  border-color: #2550aa;\n}\n.Radio-module_radio__B6HML input:checked ~ .Radio-module_radio__overlay__G3gzy:after {\n  display: block;\n}\n.Radio-module_radio__B6HML input:disabled {\n  color: #cccccc;\n}\n.Radio-module_radio__B6HML input:disabled ~ .Radio-module_radio__overlay__G3gzy {\n  background: white;\n  border: 2px solid #cccccc;\n  pointer-events: none;\n}\n.Radio-module_radio__B6HML input:disabled ~ .Radio-module_radio__overlay__G3gzy:after {\n  border: 0;\n}\n.Radio-module_radio__B6HML input:disabled:checked ~ .Radio-module_radio__overlay__G3gzy:after {\n  border: 2px solid white;\n  background: #cccccc;\n}\n.Radio-module_radio__B6HML .Radio-module_radio__overlay__G3gzy {\n  box-sizing: border-box;\n  position: absolute;\n  top: 2px;\n  left: 0;\n  height: 18px;\n  width: 18px;\n  background: white;\n  border: 2px solid #a2a2a2;\n  border-radius: 50%;\n}\n.Radio-module_radio__B6HML .Radio-module_radio__overlay__G3gzy:after {\n  box-sizing: unset;\n  content: \"\";\n  position: absolute;\n  display: none;\n  left: 0;\n  top: 0;\n  width: 10px;\n  height: 10px;\n  border: 2px solid white;\n  border-radius: 50%;\n  background: #2550aa;\n}";
-var styles$J = {"text--truncate":"Radio-module_text--truncate__Bjb2G","radio":"Radio-module_radio__B6HML","radio__overlay":"Radio-module_radio__overlay__G3gzy"};
-styleInject(css_248z$N);
+var styles$t = {"text--truncate":"Radio-module_text--truncate__Bjb2G","radio":"Radio-module_radio__B6HML","radio__overlay":"Radio-module_radio__overlay__G3gzy"};
 
 /**
  * Radio - stateless presentational component
@@ -21341,7 +25508,7 @@ const Radio = ({
   disabled
 }) => {
   const radioStyles = useStyles({
-    [styles$J.radio]: true
+    [styles$t.radio]: true
   }, className);
   return /*#__PURE__*/React.createElement("label", {
     className: radioStyles
@@ -21358,7 +25525,7 @@ const Radio = ({
     className: radioStyles,
     disabled: disabled
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$J.radio__overlay
+    className: styles$t.radio__overlay
   }));
 };
 
@@ -21387,9 +25554,7 @@ Radio.defaultProps = {
   disabled: false
 };
 
-var css_248z$M = ".Checkbox-module_text--truncate__JdbPW {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Checkbox-module_input__checkbox__aJIGW {\n  z-index: 0;\n  position: relative;\n  display: inline-block;\n  margin-bottom: 0;\n}\n.Checkbox-module_input__checkbox__aJIGW input {\n  appearance: none;\n  z-index: -1;\n  position: absolute;\n  left: -10px;\n  top: -8px;\n  display: block;\n  margin: 0;\n  width: 40px;\n  height: 40px;\n  box-shadow: none;\n  outline: none;\n  opacity: 0;\n  transform: scale(1);\n  pointer-events: none;\n  transition: opacity 0.3s, transform 0.2s;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked, .Checkbox-module_input__checkbox__aJIGW input:indeterminate {\n  background-color: #2550aa;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked + div::before, .Checkbox-module_input__checkbox__aJIGW input:indeterminate + div::before {\n  border-color: #2550aa;\n  background-color: #2550aa;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked + div::after, .Checkbox-module_input__checkbox__aJIGW input:indeterminate + div::after {\n  border-color: white;\n}\n.Checkbox-module_input__checkbox__aJIGW input:indeterminate {\n  background-color: #2550aa;\n}\n.Checkbox-module_input__checkbox__aJIGW input:indeterminate + div::after {\n  border-left: none;\n  transform: translate(3px, 4px);\n}\n.Checkbox-module_input__checkbox__aJIGW input:focus {\n  opacity: 0;\n  outline: none;\n}\n.Checkbox-module_input__checkbox__aJIGW input:active {\n  opacity: 1;\n  transform: scale(0);\n  transition: transform 0s, opacity 0s;\n}\n.Checkbox-module_input__checkbox__aJIGW input:active + div::before {\n  border-color: #2550aa;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked:active {\n  opacity: 1;\n  transform: scale(0);\n  transition: transform 0s, opacity 0s;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked:active + div::before {\n  border-color: transparent;\n  background-color: #2550aa;\n  opacity: 0.6;\n}\n.Checkbox-module_input__checkbox__aJIGW input:disabled {\n  opacity: 0;\n}\n.Checkbox-module_input__checkbox__aJIGW input:disabled + div {\n  color: #2550aa;\n  opacity: 0.38;\n  cursor: initial;\n}\n.Checkbox-module_input__checkbox__aJIGW input:disabled + div::before {\n  border-color: currentColor;\n}\n.Checkbox-module_input__checkbox__aJIGW input:checked:disabled + div::before, .Checkbox-module_input__checkbox__aJIGW input:indeterminate:disabled + div::before {\n  border-color: transparent;\n  background-color: currentColor;\n}\n.Checkbox-module_input__checkbox__aJIGW div::before {\n  content: \"\";\n  display: inline-block;\n  box-sizing: border-box;\n  margin: 3px 11px 3px 1px;\n  border: solid 2px;\n  border-color: #a7a7a7;\n  border-radius: 2px;\n  width: 18px;\n  height: 18px;\n  vertical-align: top;\n  transition: border-color 0.2s, background-color 0.2s;\n}\n.Checkbox-module_input__checkbox__aJIGW div::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: 4px;\n  left: 2px;\n  width: 8px;\n  height: 3px;\n  border: solid 2px transparent;\n  border-right: none;\n  border-top: none;\n  transform: translate(3px, 4px) rotate(-45deg);\n}\n.Checkbox-module_input__checkbox__aJIGW:hover input {\n  opacity: 0.04;\n}\n.Checkbox-module_input__checkbox__aJIGW:hover input:focus {\n  opacity: 0.16;\n}";
-var styles$I = {"text--truncate":"Checkbox-module_text--truncate__JdbPW","input__checkbox":"Checkbox-module_input__checkbox__aJIGW"};
-styleInject(css_248z$M);
+var styles$s = {"text--truncate":"Checkbox-module_text--truncate__JdbPW","input__checkbox":"Checkbox-module_input__checkbox__aJIGW"};
 
 /**
  * Checkbox - stateless presentational component
@@ -21410,7 +25575,7 @@ const Checkbox$1 = ({
   ['data-testid']: dataTestId
 }) => {
   const checkboxStyles = useStyles({
-    [styles$I.input__checkbox]: true
+    [styles$s.input__checkbox]: true
   }, className);
   return /*#__PURE__*/React.createElement("label", {
     className: checkboxStyles
@@ -21440,9 +25605,7 @@ Checkbox$1.defaultProps = {
   ['data-testid']: undefined
 };
 
-var css_248z$L = ".Checkbox-module_text--truncate__TZFGj {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Checkbox-module_checkbox-container__GaVTZ {\n  display: flex;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL {\n  z-index: 0;\n  position: relative;\n  display: inline-block;\n  margin-bottom: 0;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input {\n  appearance: none;\n  z-index: -1;\n  position: absolute;\n  left: -10px;\n  top: -8px;\n  display: block;\n  margin: 0;\n  width: 40px;\n  height: 40px;\n  box-shadow: none;\n  outline: none;\n  opacity: 0;\n  transform: scale(1);\n  pointer-events: none;\n  transition: opacity 0.3s, transform 0.2s;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked, .Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate {\n  background-color: #2550aa;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked + div::before, .Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate + div::before {\n  border-color: #2550aa;\n  background-color: #2550aa;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked + div::after, .Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate + div::after {\n  border-color: white;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate {\n  background-color: #2550aa;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate + div::after {\n  border-left: none;\n  transform: translate(3px, 4px);\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:focus {\n  opacity: 0;\n  outline: none;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:active {\n  opacity: 1;\n  transform: scale(0);\n  transition: transform 0s, opacity 0s;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:active + div::before {\n  border-color: #2550aa;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked:active {\n  opacity: 1;\n  transform: scale(0);\n  transition: transform 0s, opacity 0s;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked:active + div::before {\n  border-color: transparent;\n  background-color: #2550aa;\n  opacity: 0.6;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:disabled {\n  opacity: 0;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:disabled + div {\n  color: #2550aa;\n  opacity: 0.38;\n  cursor: initial;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:disabled + div::before {\n  border-color: currentColor;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:checked:disabled + div::before, .Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL input:indeterminate:disabled + div::before {\n  border-color: transparent;\n  background-color: currentColor;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL div::before {\n  content: \"\";\n  display: inline-block;\n  box-sizing: border-box;\n  margin: 3px 11px 3px 1px;\n  border: solid 2px;\n  border-color: #a7a7a7;\n  border-radius: 2px;\n  width: 18px;\n  height: 18px;\n  vertical-align: top;\n  transition: border-color 0.2s, background-color 0.2s;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL div::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: 4px;\n  left: 2px;\n  width: 8px;\n  height: 3px;\n  border: solid 2px transparent;\n  border-right: none;\n  border-top: none;\n  transform: translate(3px, 4px) rotate(-45deg);\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL:hover input {\n  opacity: 0.04;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__meFPL:hover input:focus {\n  opacity: 0.16;\n}\n.Checkbox-module_checkbox-container__GaVTZ .Checkbox-module_checkbox__input__label__arQxP {\n  font-size: 16px;\n  font-weight: 400;\n  pointer-events: none;\n  margin-bottom: 0;\n}";
-var styles$H = {"text--truncate":"Checkbox-module_text--truncate__TZFGj","checkbox-container":"Checkbox-module_checkbox-container__GaVTZ","checkbox__input":"Checkbox-module_checkbox__input__meFPL","checkbox__input__label":"Checkbox-module_checkbox__input__label__arQxP"};
-styleInject(css_248z$L);
+var styles$r = {"text--truncate":"Checkbox-module_text--truncate__TZFGj","checkbox-container":"Checkbox-module_checkbox-container__GaVTZ","checkbox__input":"Checkbox-module_checkbox__input__meFPL","checkbox__input__label":"Checkbox-module_checkbox__input__label__arQxP"};
 
 /**
  * Checkbox - stateless presentational component
@@ -21477,13 +25640,13 @@ const Checkbox = ({
   const error = getDeepValue(errors, name);
   const isTouched = getDeepValue(touched, name);
   const containerStyles = useStyles({
-    [styles$H['checkbox-container']]: true
+    [styles$r['checkbox-container']]: true
   }, className);
   const inputStyles = useStyles({
-    [styles$H['checkbox__input']]: true
+    [styles$r['checkbox__input']]: true
   });
   const labelStyles = useStyles({
-    [styles$H['checkbox__label']]: true
+    [styles$r['checkbox__label']]: true
   });
   return /*#__PURE__*/React.createElement("div", {
     className: containerStyles
@@ -21499,7 +25662,7 @@ const Checkbox = ({
   }), /*#__PURE__*/React.createElement("div", null)), label && /*#__PURE__*/React.createElement("label", {
     htmlFor: id,
     className: labelStyles
-  }, label, isTouched && /*#__PURE__*/React.createElement(Error$2, {
+  }, label, isTouched && /*#__PURE__*/React.createElement(Error$1, {
     error: error
   })));
 };
@@ -21528,9 +25691,7 @@ Checkbox.defaultProps = {
   type: 'checkbox'
 };
 
-var css_248z$K = ".Toggle-module_text--truncate__8F6Mx {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Toggle-module_toggle-container__TKOUJ {\n  display: flex;\n  align-items: center;\n}\n\n.Toggle-module_toggle__yQYkY {\n  display: flex;\n  margin-right: 5px;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  min-width: 49px;\n  height: 24px;\n  background: #7b7b7b;\n  border-radius: 12px;\n  position: relative;\n  transition: background-color 0.2s;\n}\n.Toggle-module_toggle--checked__k6ksL {\n  background: #29b662;\n}\n.Toggle-module_toggle--checked-disabled__u5dql {\n  background: #a0d9b9;\n  cursor: not-allowed;\n}\n.Toggle-module_toggle__checkbox__Qy8tI {\n  height: 0;\n  width: 0;\n  visibility: hidden;\n}\n.Toggle-module_toggle__checkbox__Qy8tI:checked + span {\n  left: calc(100% - 3px);\n  transform: translateX(-100%);\n}\n.Toggle-module_toggle__button__qtF8- {\n  content: \"\";\n  position: absolute;\n  top: 3px;\n  left: 3px;\n  width: 18px;\n  height: 18px;\n  border-radius: 18px;\n  transition: 0.2s;\n  background: #fff;\n  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);\n}\n.Toggle-module_toggle__label__gVtDC {\n  font-size: 16px;\n  font-weight: 400;\n  pointer-events: none;\n}\n.Toggle-module_toggle__yQYkY::before {\n  visibility: hidden;\n}\n.Toggle-module_toggle--disabled__3-1zu {\n  background: #d8d8d8;\n  cursor: not-allowed;\n}";
-var styles$G = {"text--truncate":"Toggle-module_text--truncate__8F6Mx","toggle-container":"Toggle-module_toggle-container__TKOUJ","toggle":"Toggle-module_toggle__yQYkY","toggle--checked":"Toggle-module_toggle--checked__k6ksL","toggle--checked-disabled":"Toggle-module_toggle--checked-disabled__u5dql","toggle__checkbox":"Toggle-module_toggle__checkbox__Qy8tI","toggle__button":"Toggle-module_toggle__button__qtF8-","toggle__label":"Toggle-module_toggle__label__gVtDC","toggle--disabled":"Toggle-module_toggle--disabled__3-1zu"};
-styleInject(css_248z$K);
+var styles$q = {"text--truncate":"Toggle-module_text--truncate__8F6Mx","toggle-container":"Toggle-module_toggle-container__TKOUJ","toggle":"Toggle-module_toggle__yQYkY","toggle--checked":"Toggle-module_toggle--checked__k6ksL","toggle--checked-disabled":"Toggle-module_toggle--checked-disabled__u5dql","toggle__checkbox":"Toggle-module_toggle__checkbox__Qy8tI","toggle__button":"Toggle-module_toggle__button__qtF8-","toggle__label":"Toggle-module_toggle__label__gVtDC","toggle--disabled":"Toggle-module_toggle--disabled__3-1zu"};
 
 /**
  * Toggle - stateless presentational component
@@ -21559,13 +25720,13 @@ const Toggle = ({
   ['data-testid']: dataTestId
 }) => {
   const wrapperStyles = useStyles({
-    [styles$G['toggle-container']]: true
+    [styles$q['toggle-container']]: true
   }, className);
   const labelStyles = useStyles({
-    [styles$G.toggle]: true,
-    [styles$G['toggle--checked']]: checked,
-    [styles$G['toggle--checked-disabled']]: checked && disabled,
-    [styles$G['toggle--disabled']]: !checked && disabled
+    [styles$q.toggle]: true,
+    [styles$q['toggle--checked']]: checked,
+    [styles$q['toggle--checked-disabled']]: checked && disabled,
+    [styles$q['toggle--disabled']]: !checked && disabled
   });
   return /*#__PURE__*/React.createElement("div", {
     className: wrapperStyles
@@ -21573,7 +25734,7 @@ const Toggle = ({
     className: labelStyles
   }, /*#__PURE__*/React.createElement("input", _extends$6({
     name: name,
-    className: styles$G.toggle__checkbox,
+    className: styles$q.toggle__checkbox,
     checked: checked,
     onChange: onChange,
     onBlur: onBlur,
@@ -21583,10 +25744,10 @@ const Toggle = ({
   }, dataTestId ? {
     ['data-testid']: dataTestId
   } : {})), /*#__PURE__*/React.createElement("span", {
-    className: styles$G.toggle__button
+    className: styles$q.toggle__button
   })), label && /*#__PURE__*/React.createElement("label", {
     htmlFor: id
-  }, /*#__PURE__*/React.createElement(Html$1, {
+  }, /*#__PURE__*/React.createElement(Html, {
     value: label
   })));
 };
@@ -21640,11 +25801,11 @@ const FormikToggle = ({
   type
 }) => {
   const wrapperStyles = useStyles({
-    [styles$G['toggle-container']]: true
+    [styles$q['toggle-container']]: true
   }, className);
   const labelStyles = useStyles({
-    [styles$G.toggle]: true,
-    [styles$G['toggle--checked']]: value
+    [styles$q.toggle]: true,
+    [styles$q['toggle--checked']]: value
   });
   return /*#__PURE__*/React.createElement("div", {
     className: wrapperStyles
@@ -21652,18 +25813,18 @@ const FormikToggle = ({
     className: labelStyles
   }, /*#__PURE__*/React.createElement("input", {
     name: name,
-    className: styles$G.toggle__checkbox,
+    className: styles$q.toggle__checkbox,
     checked: value,
     onChange: onChange,
     onBlur: onBlur,
     type: type,
     id: id
   }), /*#__PURE__*/React.createElement("span", {
-    className: styles$G.toggle__button
+    className: styles$q.toggle__button
   })), label && /*#__PURE__*/React.createElement("label", {
     htmlFor: id,
-    className: styles$G.toggle__label
-  }, label, touched[name] && /*#__PURE__*/React.createElement(Error$2, {
+    className: styles$q.toggle__label
+  }, label, touched[name] && /*#__PURE__*/React.createElement(Error$1, {
     error: errors[name]
   })));
 };
@@ -21691,122 +25852,6 @@ FormikToggle.defaultProps = {
   type: 'checkbox',
   label: ''
 };
-
-var css_248z$J = ".Heading-module_text--truncate__M7l2Z {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Heading-module_h1__TsuVw,\n.Heading-module_h2__nvr-4,\n.Heading-module_h3__cayyr,\n.Heading-module_h4__BpRZb,\n.Heading-module_h5__I8haX,\n.Heading-module_h6__Qklc8,\n.Heading-module_hlarge__guIve {\n  color: #1f1f1f;\n  font-weight: 400;\n  display: block;\n}\n\n.Heading-module_hlarge__guIve {\n  font-size: 36px;\n  margin-bottom: 25px;\n  line-height: 42px;\n}\n\n.Heading-module_h1__TsuVw {\n  font-size: 28px;\n  margin-bottom: 25px;\n  line-height: 42px;\n}\n\n.Heading-module_h2__nvr-4 {\n  font-size: 22px;\n  margin-bottom: 22px;\n  line-height: 36px;\n}\n\n.Heading-module_h3__cayyr {\n  font-size: 18px;\n  margin-bottom: 18px;\n  line-height: 26px;\n}\n\n.Heading-module_h4__BpRZb {\n  font-size: 16px;\n  margin-bottom: 8px;\n  line-height: 22px;\n}\n\n.Heading-module_h5__I8haX {\n  font-size: 14px;\n  margin-bottom: 4px;\n  line-height: 20px;\n}\n\n.Heading-module_h6__Qklc8 {\n  font-size: 12px;\n  margin-bottom: 2px;\n  line-height: 18px;\n}\n\n.Heading-module_heading--left__M0c9- {\n  text-align: left;\n}\n.Heading-module_heading--center__azkpB {\n  text-align: center;\n}\n.Heading-module_heading--right__cj5xv {\n  text-align: right;\n}\n.Heading-module_heading--no-margin__-wthh {\n  margin-bottom: 0;\n}\n.Heading-module_heading--bold__rAjdQ {\n  font-weight: 700;\n}\n.Heading-module_heading__color--white__x-WI- {\n  color: white;\n}\n.Heading-module_heading__color--brand__ls-iy {\n  color: #2550aa;\n}";
-var styles$F = {"text--truncate":"Heading-module_text--truncate__M7l2Z","h1":"Heading-module_h1__TsuVw","h2":"Heading-module_h2__nvr-4","h3":"Heading-module_h3__cayyr","h4":"Heading-module_h4__BpRZb","h5":"Heading-module_h5__I8haX","h6":"Heading-module_h6__Qklc8","hlarge":"Heading-module_hlarge__guIve","heading--left":"Heading-module_heading--left__M0c9-","heading--center":"Heading-module_heading--center__azkpB","heading--right":"Heading-module_heading--right__cj5xv","heading--no-margin":"Heading-module_heading--no-margin__-wthh","heading--bold":"Heading-module_heading--bold__rAjdQ","heading__color--white":"Heading-module_heading__color--white__x-WI-","heading__color--brand":"Heading-module_heading__color--brand__ls-iy"};
-styleInject(css_248z$J);
-
-/**
- * Heading - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {number} props.level - level size, one of: 1, 2, 3, 4, 5, 6, large. Adds css class based on provided level ex. .h1, .h2 etc
- * @param {string|array} props.className- a list of class names
- * @param {string} props.align - align text `left, center, right`
- * @param {string} props.margin - margin bottom
- * @param {bool} props.bold - bold text
- * @param {string} props.color - text color
- * @return {object} An object of children element
- */
-
-const Heading = ({
-  className,
-  children,
-  level,
-  align,
-  margin,
-  bold,
-  color
-}) => {
-  const elementClasses = useStyles({
-    [styles$F['heading']]: true,
-    [styles$F[`h${level}`]]: level,
-    [styles$F['heading--bold']]: bold,
-    [styles$F[`heading--${align}`]]: align,
-    [styles$F['heading--no-margin']]: margin === 'none',
-    [styles$F[`heading__color--${color}`]]: color
-  }, className);
-  return /*#__PURE__*/React.createElement("span", {
-    className: elementClasses
-  }, children);
-};
-
-Heading.displayName = 'Heading';
-Heading.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  align: propTypes.exports.string,
-  bold: propTypes.exports.bool,
-  children: propTypes.exports.node.isRequired,
-  color: propTypes.exports.string,
-  level: propTypes.exports.oneOf([1, 2, 3, 4, 5, 6, 'large']).isRequired,
-  margin: propTypes.exports.string
-};
-Heading.defaultProps = {
-  className: '',
-  align: '',
-  margin: '',
-  color: undefined,
-  bold: false
-};
-
-var css_248z$I = ".Image-module_text--truncate__2hDsM {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Image-module_image--small__IRvZ0 {\n  width: 24px;\n}\n\n.Image-module_image--auto__4d-T1 {\n  max-width: 100%;\n  height: auto;\n}";
-var styles$E = {"text--truncate":"Image-module_text--truncate__2hDsM","image--small":"Image-module_image--small__IRvZ0","image--auto":"Image-module_image--auto__4d-T1"};
-styleInject(css_248z$I);
-
-/**
- * Image - stateless presentational component
- * @param {object} props - props
- * @param {string} props.src - src url
- * @param {string} props.alt - alt text
- * @param {string|array} props.className - list of class names
- * @param {number|string} props.size - width of the image
- * @param {number} props.height - height of the image
- * @param {boolean} props.auto - auto size of image
- * @param {boolean} props.small - small image
- * @return {object} An object of children element
- */
-
-const Image = ({
-  src,
-  alt,
-  className,
-  size,
-  height,
-  auto,
-  small
-}) => {
-  const elementStyles = useStyles({
-    [styles$E['image--auto']]: auto,
-    [styles$E['image--small']]: small
-  }, className);
-  return /*#__PURE__*/React.createElement("img", {
-    alt: alt,
-    className: elementStyles,
-    height: height,
-    src: src,
-    width: size
-  });
-};
-
-Image.displayName = 'Image';
-Image.propTypes = {
-  alt: propTypes.exports.string,
-  className: propTypes.exports.string,
-  height: propTypes.exports.number,
-  size: propTypes.exports.oneOfType([propTypes.exports.number, propTypes.exports.string]),
-  src: propTypes.exports.oneOfType([propTypes.exports.string.isRequired, propTypes.exports.object.isRequired]).isRequired,
-  auto: propTypes.exports.bool,
-  small: propTypes.exports.bool
-};
-Image.defaultProps = {
-  alt: null,
-  className: '',
-  height: null,
-  size: null,
-  auto: false,
-  small: false
-};
-var Image$1 = /*#__PURE__*/react.exports.memo(Image);
 
 var reactAdvancedTimeInput = {exports: {}};
 
@@ -22480,9 +26525,7 @@ const isAmOrPm = (time, isAmPmType) => {
   }
 };
 
-var css_248z$H = ".TimeSelect-module_text--truncate__73unQ {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.TimeSelect-module_time-select__label__25pOX {\n  margin-right: 34px;\n}\n.TimeSelect-module_time-select__label__25pOX input {\n  color: #1f1f1f;\n  width: 50px !important;\n  padding-top: 4px;\n  padding-bottom: 4px;\n  padding-left: 10px;\n}\n.TimeSelect-module_time-select__label__25pOX input::-webkit-outer-spin-button,\n.TimeSelect-module_time-select__label__25pOX input::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n  border: none;\n  background-color: transparent;\n  box-shadow: none;\n}\n.TimeSelect-module_time-select__label__25pOX input[type=text] {\n  -moz-appearance: textfield;\n  border: none;\n  background-color: transparent;\n  box-shadow: none;\n}\n.TimeSelect-module_time-select__label__25pOX svg[data-icon=clock] {\n  padding-right: 0;\n  color: #1f1f1f;\n}\n.TimeSelect-module_time-select__label--disabled__Ou4QO input {\n  color: #dddddd;\n  -webkit-text-fill-color: #dddddd;\n  cursor: not-allowed;\n}\n.TimeSelect-module_time-select__label--disabled__Ou4QO svg[data-icon=clock] {\n  color: #dddddd;\n}\n.TimeSelect-module_time-select__dropdown__SmdkZ {\n  width: 145px;\n}\n.TimeSelect-module_time-select__clock-type-select__DvkrZ {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n}";
-var styles$D = {"text--truncate":"TimeSelect-module_text--truncate__73unQ","time-select__label":"TimeSelect-module_time-select__label__25pOX","time-select__label--disabled":"TimeSelect-module_time-select__label--disabled__Ou4QO","time-select__dropdown":"TimeSelect-module_time-select__dropdown__SmdkZ","time-select__clock-type-select":"TimeSelect-module_time-select__clock-type-select__DvkrZ"};
-styleInject(css_248z$H);
+var styles$p = {"text--truncate":"TimeSelect-module_text--truncate__73unQ","time-select__label":"TimeSelect-module_time-select__label__25pOX","time-select__label--disabled":"TimeSelect-module_time-select__label--disabled__Ou4QO","time-select__dropdown":"TimeSelect-module_time-select__dropdown__SmdkZ","time-select__clock-type-select":"TimeSelect-module_time-select__clock-type-select__DvkrZ"};
 
 /**
  * TimeSelect - stateless component for selecting time
@@ -22506,11 +26549,11 @@ const TimeSelect = ({
 }) => {
   const isAmPmType = getLanguage !== 'pl';
   const timeSelectLabelClasses = useStyles({
-    [styles$D['time-select__label']]: true,
-    [styles$D['time-select__label--disabled']]: disabled
+    [styles$p['time-select__label']]: true,
+    [styles$p['time-select__label--disabled']]: disabled
   });
   const timeSelectDropdownClasses = useStyles({
-    [styles$D['time-select__dropdown']]: true
+    [styles$p['time-select__dropdown']]: true
   });
   const [clockType, setClockType] = react.exports.useState(isAmOrPm(value, isAmPmType));
   /**
@@ -22546,7 +26589,7 @@ const TimeSelect = ({
   const renderDropdownLabel = react.exports.useCallback(selectedValue => /*#__PURE__*/React.createElement(build.exports.Row, {
     className: timeSelectLabelClasses,
     vertical: "center"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-time"
   }), /*#__PURE__*/React.createElement(TimeInput, {
     onChange: handleTimeInputChange,
@@ -22555,7 +26598,7 @@ const TimeSelect = ({
   })), [disabled, value, isAmPmType]);
   return /*#__PURE__*/React.createElement(build.exports.Row, {
     vertical: "end"
-  }, /*#__PURE__*/React.createElement(DropdownSelect$1, {
+  }, /*#__PURE__*/React.createElement(DropdownSelect, {
     className: timeSelectDropdownClasses,
     overflowStyle: {
       maxHeight: 180
@@ -22569,14 +26612,14 @@ const TimeSelect = ({
     onChange: handleTimeChange,
     customValue: true,
     isOpenDisabled: disabled
-  }), isAmPmType ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spreader$1, {
+  }), isAmPmType ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spreader, {
     spread: "small"
-  }), /*#__PURE__*/React.createElement(DropdownSelect$1, {
+  }), /*#__PURE__*/React.createElement(DropdownSelect, {
     inModalName: inModalName,
     options: CLOCK_OPTIONS,
     value: clockType,
     onChange: handleClockChange,
-    className: styles$D['time-select__clock-type-select'],
+    className: styles$p['time-select__clock-type-select'],
     isOpenDisabled: disabled
   })) : null);
 };
@@ -22597,9 +26640,7 @@ TimeSelect.defaultProps = {
   disabled: false
 };
 
-var css_248z$G = ".Indicator-module_text--truncate__5Pong {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Indicator-module_indicator__FJkLr {\n  position: relative;\n}\n.Indicator-module_indicator__element__DxAqG {\n  border-radius: 50px;\n  right: 6px;\n  top: 0;\n  color: white;\n  display: block;\n  position: absolute;\n  z-index: 1;\n  min-width: 10px;\n  min-height: 10px;\n}\n.Indicator-module_indicator__element--isAlert__kbI62 {\n  background: #ff3245;\n}";
-var styles$C = {"text--truncate":"Indicator-module_text--truncate__5Pong","indicator":"Indicator-module_indicator__FJkLr","indicator__element":"Indicator-module_indicator__element__DxAqG","indicator__element--isAlert":"Indicator-module_indicator__element--isAlert__kbI62"};
-styleInject(css_248z$G);
+var styles$o = {"text--truncate":"Indicator-module_text--truncate__5Pong","indicator":"Indicator-module_indicator__FJkLr","indicator__element":"Indicator-module_indicator__element__DxAqG","indicator__element--isAlert":"Indicator-module_indicator__element--isAlert__kbI62"};
 
 /**
  * Indicator - stateless presentational component
@@ -22620,11 +26661,11 @@ const Indicator = ({
   onClick
 }) => {
   const elementStyles = useStyles({
-    [styles$C['indicator']]: true
+    [styles$o['indicator']]: true
   }, className);
   const indicatorStyles = useStyles({
-    [styles$C['indicator__element']]: true,
-    [styles$C['indicator__element--isAlert']]: isAlert
+    [styles$o['indicator__element']]: true,
+    [styles$o['indicator__element--isAlert']]: isAlert
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: elementStyles,
@@ -22648,9 +26689,7 @@ Indicator.defaultProps = {
   onClick: () => {}
 };
 
-var css_248z$F = ".InfinityScroll-module_text--truncate__n1kJI {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.InfinityScroll-module_wrapper__ozrI7 {\n  display: block;\n}\n\n.InfinityScroll-module_loading-hide__ePeD9 {\n  display: none;\n}";
-var styles$B = {"text--truncate":"InfinityScroll-module_text--truncate__n1kJI","wrapper":"InfinityScroll-module_wrapper__ozrI7","loading-hide":"InfinityScroll-module_loading-hide__ePeD9"};
-styleInject(css_248z$F);
+var styles$n = {"text--truncate":"InfinityScroll-module_text--truncate__n1kJI","wrapper":"InfinityScroll-module_wrapper__ozrI7","loading-hide":"InfinityScroll-module_loading-hide__ePeD9"};
 
 /**
  * InfinityScroll - stateless presentational component
@@ -22697,10 +26736,10 @@ const InfinityScroll = ({
     }
   }, [shouldFetch]);
   const wrapperStyles = useStyles({
-    [styles$B.wrapper]: true
+    [styles$n.wrapper]: true
   }, className);
   const loaderStyles = useStyles({
-    [styles$B['loading-hide']]: isLastPage
+    [styles$n['loading-hide']]: isLastPage
   });
   return /*#__PURE__*/React.createElement("div", {
     className: wrapperStyles
@@ -22708,7 +26747,7 @@ const InfinityScroll = ({
     className: loaderStyles,
     ref: loaderRef,
     "data-testid": "loader-wrapper"
-  }, /*#__PURE__*/React.createElement(Loader$1, null)));
+  }, /*#__PURE__*/React.createElement(Loader, null)));
 };
 
 InfinityScroll.displayName = 'InfinityScroll';
@@ -22724,9 +26763,7 @@ InfinityScroll.defaultProps = {
   loadMore: () => null
 };
 
-var css_248z$E = ".InfoBar-module_text--truncate__JLawy {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.InfoBar-module_info-bar__FPcOv {\n  position: relative;\n  line-height: 1;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 60px;\n}\n.InfoBar-module_info-bar__FPcOv .InfoBar-module_info__bar__ODCKA {\n  padding: 0 25px;\n  text-align: left;\n  flex: 2;\n  margin: 0;\n  font-size: 14px;\n  width: 210px;\n}\n.InfoBar-module_info-bar--box__U1D6Z {\n  width: 60px;\n  height: 60px;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  padding: 0;\n}\n.InfoBar-module_info-bar--box__U1D6Z:after {\n  content: \"\";\n  position: absolute;\n  right: 100%;\n  top: 23px;\n  width: 0;\n  height: 0;\n  left: 60px;\n  border-top: 8px solid transparent;\n  border-bottom: 8px solid transparent;\n}\n.InfoBar-module_info-bar--alert__PpSkW {\n  background: #ffebed;\n}\n.InfoBar-module_info-bar--alert-box__R95Kd {\n  background: #ff3245;\n}\n.InfoBar-module_info-bar--alert-box__R95Kd:after {\n  border-left: 10px solid #ff3245;\n}\n.InfoBar-module_info-bar--alert__PpSkW i {\n  align-items: center;\n  color: white;\n}\n.InfoBar-module_info-bar--warning__3FDRp {\n  background: #fff7e5;\n}\n.InfoBar-module_info-bar--warning-box__lmtXj {\n  background: #ffb000;\n}\n.InfoBar-module_info-bar--warning-box__lmtXj:after {\n  border-left: 10px solid #ffb000;\n}\n.InfoBar-module_info-bar--warning__3FDRp i {\n  align-items: center;\n  color: white;\n}\n.InfoBar-module_info-bar--info__3yFXA {\n  background: #e5edff;\n}\n.InfoBar-module_info-bar--info-box__sCuxk {\n  background: #5d92ff;\n}\n.InfoBar-module_info-bar--info-box__sCuxk:after {\n  border-left: 10px solid #5d92ff;\n}\n.InfoBar-module_info-bar--info__3yFXA i {\n  align-items: center;\n  color: white;\n}";
-var styles$A = {"text--truncate":"InfoBar-module_text--truncate__JLawy","info-bar":"InfoBar-module_info-bar__FPcOv","info__bar":"InfoBar-module_info__bar__ODCKA","info-bar--box":"InfoBar-module_info-bar--box__U1D6Z","info-bar--alert":"InfoBar-module_info-bar--alert__PpSkW","info-bar--alert-box":"InfoBar-module_info-bar--alert-box__R95Kd","info-bar--warning":"InfoBar-module_info-bar--warning__3FDRp","info-bar--warning-box":"InfoBar-module_info-bar--warning-box__lmtXj","info-bar--info":"InfoBar-module_info-bar--info__3yFXA","info-bar--info-box":"InfoBar-module_info-bar--info-box__sCuxk"};
-styleInject(css_248z$E);
+var styles$m = {"text--truncate":"InfoBar-module_text--truncate__JLawy","info-bar":"InfoBar-module_info-bar__FPcOv","info__bar":"InfoBar-module_info__bar__ODCKA","info-bar--box":"InfoBar-module_info-bar--box__U1D6Z","info-bar--alert":"InfoBar-module_info-bar--alert__PpSkW","info-bar--alert-box":"InfoBar-module_info-bar--alert-box__R95Kd","info-bar--warning":"InfoBar-module_info-bar--warning__3FDRp","info-bar--warning-box":"InfoBar-module_info-bar--warning-box__lmtXj","info-bar--info":"InfoBar-module_info-bar--info__3yFXA","info-bar--info-box":"InfoBar-module_info-bar--info-box__sCuxk"};
 
 /**
  * Info Bar - stateless presentational component
@@ -22743,22 +26780,22 @@ const InfoBar = ({
   type
 }) => {
   const elementClasses = useStyles({
-    [styles$A[`info-bar`]]: true,
-    [styles$A[`info-bar--${type}`]]: type
+    [styles$m[`info-bar`]]: true,
+    [styles$m[`info-bar--${type}`]]: type
   }, className);
   const boxClasses = useStyles({
-    [styles$A[`info-bar--box`]]: true,
-    [styles$A[`info-bar--${type}-box`]]: type
+    [styles$m[`info-bar--box`]]: true,
+    [styles$m[`info-bar--${type}-box`]]: type
   });
   const icon = type === 'warning' ? 'exclamation' : type === 'alert' ? 'exclamation-triangle' : 'info';
   return /*#__PURE__*/React.createElement("div", {
     className: elementClasses
   }, /*#__PURE__*/React.createElement("div", {
     className: boxClasses
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: icon
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$A.info__bar
+    className: styles$m.info__bar
   }, children));
 };
 
@@ -22773,9 +26810,7 @@ InfoBar.defaultProps = {
   type: 'info'
 };
 
-var css_248z$D = ".InfoSection-module_text--truncate__bKtmh {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.InfoSection-module_info-section__5GZoz {\n  margin: 0 auto;\n  width: 1054px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.InfoSection-module_info-section__5GZoz > div {\n  width: 50%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-start;\n}";
-var styles$z = {"text--truncate":"InfoSection-module_text--truncate__bKtmh","info-section":"InfoSection-module_info-section__5GZoz"};
-styleInject(css_248z$D);
+var styles$l = {"text--truncate":"InfoSection-module_text--truncate__bKtmh","info-section":"InfoSection-module_info-section__5GZoz"};
 
 /**
  * Info Section - stateless presentational component
@@ -22798,33 +26833,33 @@ const InfoSection = ({
   image,
   onClick
 }) => {
-  const renderList = react.exports.useMemo(() => /*#__PURE__*/React.createElement(List$1, {
+  const renderList = react.exports.useMemo(() => /*#__PURE__*/React.createElement(List, {
     listStyle: "ordered-check"
-  }, list.map(item => /*#__PURE__*/React.createElement(ListItem$1, {
+  }, list.map(item => /*#__PURE__*/React.createElement(ListItem, {
     key: uuid_1(),
     variant: "list"
-  }, /*#__PURE__*/React.createElement(Paragraph$1, {
+  }, /*#__PURE__*/React.createElement(Paragraph, {
     size: 18
   }, item)))), []);
   const infoSectionStyles = useStyles({
-    [styles$z['info-section']]: true
+    [styles$l['info-section']]: true
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: infoSectionStyles
-  }, /*#__PURE__*/React.createElement("div", null, image && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Image$2, {
+  }, /*#__PURE__*/React.createElement("div", null, image && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Image$1, {
     src: image.src,
     size: image.size
-  }), /*#__PURE__*/React.createElement(Spacer$1, {
+  }), /*#__PURE__*/React.createElement(Spacer, {
     space: "medium"
-  })), /*#__PURE__*/React.createElement(Heading$1, {
+  })), /*#__PURE__*/React.createElement(Heading, {
     bold: true,
     level: 1
-  }, title), renderList, /*#__PURE__*/React.createElement(Spacer$1, {
+  }, title), renderList, /*#__PURE__*/React.createElement(Spacer, {
     space: "medium"
-  }), /*#__PURE__*/React.createElement(Button$2, {
+  }), /*#__PURE__*/React.createElement(Button$1, {
     onClick: onClick,
     size: "large"
-  }, button)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Image$2, {
+  }, button)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Image$1, {
     size: 526,
     src: url
   })));
@@ -22848,187 +26883,57 @@ InfoSection.defaultProps = {
   onClick: () => null
 };
 
-var css_248z$C = ".Input-module_text--truncate__tIA1t {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Input-module_form--has-error__Egj9b input,\n.Input-module_form--has-error__Egj9b select {\n  border-color: #df2439 !important;\n  border-width: 2px !important;\n}\n.Input-module_form--has-error__Egj9b input {\n  box-shadow: none;\n}\n.Input-module_form--has-error__Egj9b label {\n  color: #df2439;\n}\n\n.Input-module_form-field__5YTgz {\n  position: relative;\n  min-height: 62px;\n}\n.Input-module_form-field__5YTgz .Input-module_label__gmqts {\n  padding: 0 0 5px;\n}\n.Input-module_form-field__5YTgz .Input-module_input__error__mMn-I {\n  color: #df2439;\n  font-size: 12px;\n  display: block;\n}\n.Input-module_form-field--has-error__kFgNP {\n  margin-bottom: 15px;\n}\n.Input-module_form-field--has-error__kFgNP label {\n  color: #df2439;\n  position: absolute;\n  top: 20px;\n  left: 0;\n  text-transform: uppercase;\n  transition: opacity 0.3s, top 0.3s;\n  opacity: 0;\n}\n.Input-module_form-field--has-error__kFgNP select {\n  border-color: #df2439;\n  border-width: 2px;\n}\n\n.Input-module_input__label__gjmTL {\n  font-size: 16px;\n  height: 20px;\n  font-weight: 400;\n  color: #7b7b7b;\n  margin: 0;\n  left: 0;\n  position: absolute;\n  pointer-events: none;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n  opacity: 0;\n}\n\n.Input-module_input__wrapper__wv11S {\n  display: flex;\n  flex-direction: column;\n  min-height: 38px;\n  position: relative;\n}\n.Input-module_input__wrapper__wv11S input:focus ~ label,\n.Input-module_input__wrapper__wv11S input:valid ~ label {\n  top: -14px;\n  font-size: 14px;\n}\n.Input-module_input__wrapper__wv11S input:valid ~ label {\n  opacity: 1;\n}\n.Input-module_input__wrapper__wv11S input:invalid ~ label {\n  top: 11px;\n  font-size: 16px;\n}\n.Input-module_input__wrapper__wv11S input:invalid:focus {\n  box-shadow: none;\n}\n.Input-module_input__wrapper--show-label__TzFm- input ~ label,\n.Input-module_input__wrapper--show-label__TzFm- input:focus ~ label,\n.Input-module_input__wrapper--show-label__TzFm- input:valid ~ label,\n.Input-module_input__wrapper--show-label__TzFm- input:invalid ~ label {\n  top: -14px;\n  font-size: 14px;\n  opacity: 1;\n}\n.Input-module_input__wrapper--focused__2xWNt input ~ label,\n.Input-module_input__wrapper--focused__2xWNt input:focus ~ label,\n.Input-module_input__wrapper--focused__2xWNt input:valid ~ label,\n.Input-module_input__wrapper--focused__2xWNt input:invalid ~ label {\n  top: -14px;\n  font-size: 14px;\n  opacity: 1;\n}\n.Input-module_input__wrapper--focused--table__md2io {\n  min-height: 22px;\n}\n.Input-module_input__wrapper__wv11S button {\n  margin-right: 15px;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7 {\n  border: 0;\n  border-bottom: 1px solid #dddddd;\n  color: #1f1f1f;\n  font-size: 16px;\n  height: 38px;\n  outline: none;\n  line-height: 1;\n  letter-spacing: unset;\n  padding: 0;\n  box-shadow: none;\n  width: auto;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7:focus {\n  outline: none;\n  box-shadow: none;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7:focus ~ .Input-module_bar__5-fIy:before,\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7:focus ~ .Input-module_bar__5-fIy:after {\n  width: 100%;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7.Input-module_error__38tit {\n  border-color: #df2439;\n  border-width: 2px;\n  box-shadow: none;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7::placeholder {\n  color: #a7a7a7;\n  border-style: dotted;\n  border-color: #dddddd;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input__505b7:disabled {\n  border-color: #a7a7a7;\n  border-style: dotted;\n  color: #dddddd;\n  background-color: transparent;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input--transparent__AOANq {\n  background-color: transparent;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input--grayed-placeholder__EHLHP {\n  color: #7b7b7b;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input--hidden-arrows__NUYwo::-webkit-outer-spin-button, .Input-module_input__wrapper__wv11S .Input-module_input--hidden-arrows__NUYwo::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input--hidden-arrows__NUYwo[type=number] {\n  -moz-appearance: textfield;\n}\n.Input-module_input__wrapper__wv11S .Input-module_input--table__U5XYc {\n  width: 100%;\n  font-size: 14px;\n  height: 22px;\n}\n\n::-webkit-input-placeholder {\n  border: 0;\n}\n\n::-moz-placeholder {\n  border: 0;\n}\n\n:-ms-input-placeholder {\n  border: 0;\n}\n\n:-moz-placeholder {\n  border: 0;\n}\n\n.Input-module_bar__5-fIy {\n  position: relative;\n  display: block;\n  width: 100%;\n}\n\n.Input-module_bar__5-fIy:before,\n.Input-module_bar__5-fIy:after {\n  content: \"\";\n  height: 2px;\n  width: 0;\n  bottom: 0;\n  position: absolute;\n  background: #1f1f1f;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n\n.Input-module_bar__5-fIy:before {\n  left: 0;\n}\n\n.Input-module_bar__5-fIy:after {\n  right: auto;\n}\n\ninput:focus ~ .Input-module_bar__5-fIy:before,\ninput:focus ~ .Input-module_bar__5-fIy:after {\n  width: 100%;\n}\n\n.Input-module_input__tooltip__OcUUQ {\n  position: absolute;\n  top: -14px;\n  right: 0;\n}\n.Input-module_input__tooltip--form__dPlig {\n  top: 8px;\n}";
-var styles$y = {"text--truncate":"Input-module_text--truncate__tIA1t","form--has-error":"Input-module_form--has-error__Egj9b","form-field":"Input-module_form-field__5YTgz","label":"Input-module_label__gmqts","input__error":"Input-module_input__error__mMn-I","form-field--has-error":"Input-module_form-field--has-error__kFgNP","input__label":"Input-module_input__label__gjmTL","input__wrapper":"Input-module_input__wrapper__wv11S","input__wrapper--show-label":"Input-module_input__wrapper--show-label__TzFm-","input__wrapper--focused":"Input-module_input__wrapper--focused__2xWNt","input__wrapper--focused--table":"Input-module_input__wrapper--focused--table__md2io","input":"Input-module_input__505b7","bar":"Input-module_bar__5-fIy","error":"Input-module_error__38tit","input--transparent":"Input-module_input--transparent__AOANq","input--grayed-placeholder":"Input-module_input--grayed-placeholder__EHLHP","input--hidden-arrows":"Input-module_input--hidden-arrows__NUYwo","input--table":"Input-module_input--table__U5XYc","input__tooltip":"Input-module_input__tooltip__OcUUQ","input__tooltip--form":"Input-module_input__tooltip--form__dPlig"};
-styleInject(css_248z$C);
+var scss$1 = {"text--truncate":"StepNumber_text--truncate__2uO2n","step__number":"StepNumber_step__number__2ZNh0","step__number--small":"StepNumber_step__number--small__0KeKl","step__number--medium":"StepNumber_step__number--medium__Sluvf","step__number--completed":"StepNumber_step__number--completed__3sTXT","step__number--current":"StepNumber_step__number--current__HRbyz","step__number--next":"StepNumber_step__number--next__WIuzn","step__number--absolute":"StepNumber_step__number--absolute__wOLRC"};
+
+const cssClass$1 = styles$1b(scss$1); //TODO StepNumber css, test
 
 /**
- * Input - stateless presentational component
+ * StepNumber - stateless presentational component
  * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: input
- * @param {function} props.onChange - click handler
- * @param {function} props.onKeyDown - key down handler
- * @param {function} props.onBlur - blur handler
- * @param {string} props.type - type
- * @param {string} props.name - name
- * @param {boolean} props.disabled - disabled
- * @param {boolean} props.readonly - readonly
- * @param {object} props.i18n - object of translation
- * @param {bool} props.autoFocus - autoFocus
- * @param {string} props.focused - focused, keep label by default on top
- * @param {number} props.maxLength - max length of input
- * @param {string|object} props.tooltip - tooltip
- * @param {string|number} props.value - value
- * @param {number} props.min - min value when type is number
- * @param {number} props.max - max value when type is number
- * @param {bool} props.required - required
- * @param {string} props.background - Color of background `white, transparent', default: white
- * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
- * @param {bool} props.alwaysShowLabel - always show label on top
- * @param {string} props.variant - input variant, default ''
- * @param {bool} props.form - is input form
+ * @param {string|array} props.className - list of class names, default: 'step__number'
+ * @param {number} props.step - step number
+ * @param {string} props.variant - step number variant, default 'current'
+ * @param {string} props.size - step number size, default 'small'
+ * @param {bool} props.absolute - position absolute, default 'false'
  * @return {object} An object of children element
  */
 
-const Input = /*#__PURE__*/react.exports.forwardRef(({
+const StepNumber = ({
   className,
-  onChange,
-  onKeyDown,
-  onBlur,
-  type,
-  name,
-  disabled,
-  readonly,
-  i18n,
-  value,
-  autoFocus,
-  maxLength,
-  required,
-  focused,
-  tooltip,
-  min,
-  max,
-  background,
-  hideArrows,
-  alwaysShowLabel,
-  defaultValue,
+  step,
   variant,
-  form,
-  ['data-testid']: dataTestId
-}, ref) => {
-  const wrapperStyles = useStyles({
-    [styles$y['input__wrapper']]: true,
-    [styles$y['input__wrapper--focused']]: focused === 'true',
-    [styles$y['input__wrapper--show-label']]: alwaysShowLabel,
-    [styles$y['input__wrapper--table']]: variant === 'table'
-  }, className);
-  const tooltopStyles = useStyles({
-    [styles$y['input__tooltip']]: true,
-    [styles$y['input__tooltip--form']]: form
+  size,
+  absolute
+}) => {
+  const elementClasses = cssClass$1({
+    'step__number--absolute': absolute === true,
+    'step__number--completed': variant === 'completed',
+    'step__number--current': variant === 'current',
+    'step__number--medium': size === 'medium',
+    'step__number--next': variant === 'next',
+    'step__number--small': size === 'small'
   });
-  const inputStyles = useStyles({
-    [styles$y['input']]: true,
-    [styles$y['input--transparent']]: background === 'transparent',
-    [styles$y['input--hidden-arrows']]: hideArrows,
-    [styles$y['input--table']]: variant === 'table'
-  });
-  const renderDefault = defaultValue && !value;
-  return /*#__PURE__*/React.createElement("div", {
-    className: wrapperStyles
-  }, /*#__PURE__*/React.createElement("input", _extends$6({
-    "data-testid": dataTestId,
-    ref: ref,
-    className: inputStyles,
-    onBlur: onBlur,
-    onChange: onChange,
-    onKeyDown: onKeyDown,
-    type: type,
-    placeholder: i18n.placeholder,
-    name: name,
-    id: name,
-    value: value,
-    readOnly: disabled ? readonly : undefined,
-    disabled: !disabled ? undefined : disabled,
-    autoFocus: autoFocus,
-    maxLength: maxLength,
-    required: required
-  }, type === 'number' ? {
-    min,
-    max
-  } : {}, renderDefault ? {
-    defaultValue
-  } : {})), /*#__PURE__*/React.createElement("span", {
-    className: styles$y['highlight']
-  }), /*#__PURE__*/React.createElement("span", {
-    className: styles$y['bar']
-  }), i18n?.label && /*#__PURE__*/React.createElement(Label$1, {
-    id: name,
-    className: styles$y['input__label']
-  }, i18n.label), i18n?.description && !form && /*#__PURE__*/React.createElement(Paragraph$1, {
-    size: "12",
-    color: "color-8"
-  }, i18n.description), tooltip && /*#__PURE__*/React.createElement(Tooltip$1, {
-    className: tooltopStyles,
-    placement: "bottom",
-    content: tooltip
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    color: "color-3",
-    icon: "icon-exclamation-circle"
-  })));
-});
-Input.displayName = 'Input';
-Input.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  onChange: propTypes.exports.func,
-  onKeyDown: propTypes.exports.func,
-  onBlur: propTypes.exports.func,
-  type: propTypes.exports.string,
-  name: propTypes.exports.string,
-  disabled: propTypes.exports.bool,
-  readonly: propTypes.exports.bool,
-  value: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.number]),
-  autoFocus: propTypes.exports.bool,
-  maxLength: propTypes.exports.number,
-  required: propTypes.exports.bool,
-  focused: propTypes.exports.string,
-  min: propTypes.exports.number,
-  max: propTypes.exports.number,
-  tooltip: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.instanceOf(Object)]),
-  background: propTypes.exports.oneOf(['white', 'transparent']),
-  hideArrows: propTypes.exports.bool,
-  i18n: propTypes.exports.shape({
-    label: propTypes.exports.string,
-    placeholder: propTypes.exports.string,
-    description: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.func])
-  }),
-  defaultValue: propTypes.exports.string,
-  alwaysShowLabel: propTypes.exports.bool,
-  variant: propTypes.exports.string,
-  form: propTypes.exports.bool,
-  ['data-testid']: propTypes.exports.string
-};
-Input.defaultProps = {
-  className: '',
-  type: 'text',
-  focused: 'false',
-  tooltip: '',
-  background: 'white',
-  maxLength: 524288,
-  i18n: {
-    label: null,
-    placeholder: null,
-    description: null
-  },
-  name: null,
-  value: undefined,
-  disabled: false,
-  readonly: false,
-  autoFocus: false,
-  required: true,
-  hideArrows: false,
-  onChange: () => null,
-  onKeyDown: () => null,
-  onBlur: () => null,
-  defaultValue: null,
-  alwaysShowLabel: false,
-  variant: '',
-  form: false,
-  ['data-testid']: 'input-component'
+  return /*#__PURE__*/React.createElement("span", {
+    className: cssClass$1(className, elementClasses)
+  }, step);
 };
 
-var css_248z$B = ".Instruction-module_text--truncate__lvMG- {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Instruction-module_instruction__wm01Y {\n  padding: 30px;\n}\n.Instruction-module_instruction__step__ITpVV {\n  padding: 0 30px;\n  padding-bottom: 50px;\n  border-left: 1px solid #2550aa;\n  position: relative;\n}\n.Instruction-module_instruction__step__ITpVV:last-child {\n  padding-bottom: 0;\n  border-left: none;\n}";
-var styles$x = {"text--truncate":"Instruction-module_text--truncate__lvMG-","instruction":"Instruction-module_instruction__wm01Y","instruction__step":"Instruction-module_instruction__step__ITpVV"};
-styleInject(css_248z$B);
+StepNumber.displayName = 'StepNumber';
+StepNumber.propTypes = {
+  absolute: propTypes.exports.bool,
+  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
+  size: propTypes.exports.string,
+  step: propTypes.exports.number.isRequired,
+  variant: propTypes.exports.string
+};
+StepNumber.defaultProps = {
+  className: 'step__number',
+  size: 'small',
+  variant: 'current',
+  absolute: false
+};
+
+var styles$k = {"text--truncate":"Instruction-module_text--truncate__lvMG-","instruction":"Instruction-module_instruction__wm01Y","instruction__step":"Instruction-module_instruction__step__ITpVV"};
 
 /**
  * Instruction - stateless presentational component
@@ -23043,16 +26948,16 @@ function Instruction({
   data
 }) {
   const instructionStyles = useStyles({
-    [styles$x.instruction]: true
+    [styles$k.instruction]: true
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: instructionStyles
   }, data.map(({
     content
   }, index) => /*#__PURE__*/React.createElement("div", {
-    className: styles$x.instruction__step,
+    className: styles$k.instruction__step,
     key: uuid_1()
-  }, /*#__PURE__*/React.createElement(StepNumber$1, {
+  }, /*#__PURE__*/React.createElement(StepNumber, {
     absolute: true,
     size: "medium",
     step: index + 1
@@ -23070,58 +26975,7 @@ Instruction.defaultProps = {
   className: ''
 };
 
-var css_248z$A = ".Label-module_text--truncate__5NoLZ {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Label-module_label__meqL2 {\n  font-size: 14px;\n  padding: 7px 0;\n  line-height: 1;\n  display: block;\n  font-weight: 400;\n  margin: 0;\n}\n.Label-module_label--normal__rCpai {\n  color: #7b7b7b;\n}\n.Label-module_label--active__IBUXi {\n  color: #1f1f1f;\n}\n.Label-module_label--inactive__z5W0k {\n  color: #cccccc;\n}";
-var styles$w = {"text--truncate":"Label-module_text--truncate__5NoLZ","label":"Label-module_label__meqL2","label--normal":"Label-module_label--normal__rCpai","label--active":"Label-module_label--active__IBUXi","label--inactive":"Label-module_label--inactive__z5W0k"};
-styleInject(css_248z$A);
-
-/**
- * Label - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `label`
- * @param {string} props.id - input id
- * @param {bool} props.isToggle - is toggle label
- * @param {bool} props.toggle - toggle change
- * @return {object} An object of children element
- */
-
-const Label = ({
-  children,
-  className,
-  id,
-  isToggle,
-  toggle
-}) => {
-  const labelStyles = useStyles({
-    [styles$w.label]: true,
-    [styles$w['label--normal']]: !isToggle,
-    [styles$w['label--active']]: isToggle && toggle,
-    [styles$w['label--inactive']]: isToggle && !toggle
-  }, className);
-  return /*#__PURE__*/React.createElement("label", {
-    className: labelStyles,
-    id: id
-  }, children);
-};
-
-Label.displayName = 'Label';
-Label.propTypes = {
-  children: propTypes.exports.node.isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  id: propTypes.exports.string,
-  isToggle: propTypes.exports.bool,
-  toggle: propTypes.exports.bool
-};
-Label.defaultProps = {
-  className: '',
-  id: null,
-  isToggle: false,
-  toggle: false
-};
-
-var css_248z$z = ".Layout-module_text--truncate__pmrR5 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Layout-module_layout__Bjb4T {\n  margin: 0 auto 0;\n}\n\n.Layout-module_layout-width--large__gR2hp {\n  max-width: 1130px;\n}\n\n.Layout-module_layout-width--big__in1Dp {\n  max-width: 1070px;\n}\n\n.Layout-module_layout-width--full__5jvgz {\n  max-width: 100%;\n}";
-var styles$v = {"text--truncate":"Layout-module_text--truncate__pmrR5","layout":"Layout-module_layout__Bjb4T","layout-width--large":"Layout-module_layout-width--large__gR2hp","layout-width--big":"Layout-module_layout-width--big__in1Dp","layout-width--full":"Layout-module_layout-width--full__5jvgz"};
-styleInject(css_248z$z);
+var styles$j = {"text--truncate":"Layout-module_text--truncate__pmrR5","layout":"Layout-module_layout__Bjb4T","layout-width--large":"Layout-module_layout-width--large__gR2hp","layout-width--big":"Layout-module_layout-width--big__in1Dp","layout-width--full":"Layout-module_layout-width--full__5jvgz"};
 
 /**
  * Layout - stateless presentational component
@@ -23140,8 +26994,8 @@ const Layout = ({
   ['data-testid']: dataTestId
 }) => {
   const layoutStyles = useStyles({
-    [styles$v.layout]: true,
-    [styles$v[`layout-width--${width}`]]: width
+    [styles$j.layout]: true,
+    [styles$j[`layout-width--${width}`]]: width
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: layoutStyles,
@@ -23162,9 +27016,48 @@ Layout.defaultProps = {
   ['data-testid']: 'layout-component'
 };
 
-var css_248z$y = ".Legend-module_text--truncate__YOm-0 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Legend-module_container__vuzq3 {\n  display: flex;\n}\n.Legend-module_container--vertical__GhGwl {\n  flex-direction: column;\n}\n.Legend-module_container--horizontal__EiOA- {\n  flex-direction: row;\n}\n\n.Legend-module_legend__lc2-d {\n  display: block;\n  margin-right: 20px;\n  margin-left: 25px;\n  position: relative;\n}";
-var styles$u = {"text--truncate":"Legend-module_text--truncate__YOm-0","container":"Legend-module_container__vuzq3","container--vertical":"Legend-module_container--vertical__GhGwl","container--horizontal":"Legend-module_container--horizontal__EiOA-","legend":"Legend-module_legend__lc2-d"};
-styleInject(css_248z$y);
+propTypes.exports.shape({
+  content: propTypes.exports.string.isRequired,
+  image: propTypes.exports.string.isRequired,
+  title: propTypes.exports.string.isRequired
+});
+
+const shape$1 = propTypes.exports.shape({
+  description: propTypes.exports.string.isRequired,
+  variant: propTypes.exports.oneOf(['completed', 'current', 'next']).isRequired
+});
+
+propTypes.exports.shape({
+  after_values: propTypes.exports.shape({
+    next: propTypes.exports.number
+  }),
+  before_values: propTypes.exports.shape({
+    first: propTypes.exports.number,
+    prev: propTypes.exports.number
+  }),
+  values: propTypes.exports.shape({
+    after: propTypes.exports.arrayOf(propTypes.exports.number),
+    before: propTypes.exports.arrayOf(propTypes.exports.number),
+    current: propTypes.exports.arrayOf(propTypes.exports.number)
+  })
+}).isRequired;
+
+const shape = propTypes.exports.shape({
+  range: propTypes.exports.string.isRequired,
+  variant: propTypes.exports.oneOf(['success', 'warning', 'alert', 'info']).isRequired
+});
+
+const childrenShape = propTypes.exports.shape({
+  title: propTypes.exports.string.isRequired,
+  url: propTypes.exports.string.isRequired
+});
+propTypes.exports.shape({
+  children: propTypes.exports.arrayOf(childrenShape),
+  icon: propTypes.exports.string,
+  title: propTypes.exports.string.isRequired
+});
+
+var styles$i = {"text--truncate":"Legend-module_text--truncate__YOm-0","container":"Legend-module_container__vuzq3","container--vertical":"Legend-module_container--vertical__GhGwl","container--horizontal":"Legend-module_container--horizontal__EiOA-","legend":"Legend-module_legend__lc2-d"};
 
 /**
  * Legend - stateless presentational component
@@ -23181,14 +27074,14 @@ const Legend = ({
   alignment
 }) => {
   const wrapperClasses = useStyles({
-    [styles$u['container']]: true,
-    [styles$u[`container--${alignment}`]]: alignment
+    [styles$i['container']]: true,
+    [styles$i[`container--${alignment}`]]: alignment
   }, className);
 
   const elementClasses = variant => // eslint-disable-next-line react-hooks/rules-of-hooks
   useStyles({
-    [styles$u['legend']]: true,
-    [styles$u[`legend--${variant}`]]: variant
+    [styles$i['legend']]: true,
+    [styles$i[`legend--${variant}`]]: variant
   });
 
   return /*#__PURE__*/React.createElement("div", {
@@ -23199,7 +27092,7 @@ const Legend = ({
   }) => /*#__PURE__*/React.createElement("span", {
     key: uuid_1(),
     className: elementClasses(variant)
-  }, /*#__PURE__*/React.createElement(ColorLine$1, {
+  }, /*#__PURE__*/React.createElement(ColorLine, {
     variant: variant,
     alignment: "horizontal"
   }), range)));
@@ -23209,16 +27102,14 @@ Legend.displayName = 'Legend';
 Legend.propTypes = {
   className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
   alignment: propTypes.exports.oneOf(['vertical', 'horizontal']),
-  data: propTypes.exports.arrayOf(legendShape).isRequired
+  data: propTypes.exports.arrayOf(shape).isRequired
 };
 Legend.defaultProps = {
   className: '',
   alignment: 'vertical'
 };
 
-var css_248z$x = ".LimitQuantity-module_text--truncate__C01PI {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.LimitQuantity-module_limit-quantity--limit__t-C5S {\n  color: #7b7b7b;\n}";
-var styles$t = {"text--truncate":"LimitQuantity-module_text--truncate__C01PI","limit-quantity--limit":"LimitQuantity-module_limit-quantity--limit__t-C5S"};
-styleInject(css_248z$x);
+var styles$h = {"text--truncate":"LimitQuantity-module_text--truncate__C01PI","limit-quantity--limit":"LimitQuantity-module_limit-quantity--limit__t-C5S"};
 
 /**
  * Limit Quantity - stateless presentational component
@@ -23232,9 +27123,9 @@ const LimitQuantity = ({
   limit,
   quantity
 }) => /*#__PURE__*/React.createElement("div", {
-  className: styles$t[`limit-quantity`]
+  className: styles$h[`limit-quantity`]
 }, /*#__PURE__*/React.createElement("span", null, formatNumeric(quantity), /*#__PURE__*/React.createElement("span", {
-  className: styles$t[`limit-quantity--limit`]
+  className: styles$h[`limit-quantity--limit`]
 }, limit === -1 ? /*#__PURE__*/React.createElement("span", null, " / \u221E") : ` / ${formatNumeric(limit)}`)));
 
 LimitQuantity.displayName = 'LimitQuantity';
@@ -23243,9 +27134,7 @@ LimitQuantity.propTypes = {
   quantity: propTypes.exports.number.isRequired
 };
 
-var css_248z$w = ".LimitSmall-module_text--truncate__Cb5GJ {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.LimitSmall-module_result__dropdown__Ty0-8 {\n  display: flex;\n  justify-content: space-between;\n  align-items: baseline;\n  color: #4c4c4c;\n  font-size: 10px;\n}\n\n.LimitSmall-module_padding__none__dtANx {\n  padding-top: 0;\n}\n\n.LimitSmall-module_padding__small__f2z0N {\n  padding-top: 10px;\n}\n\n.LimitSmall-module_padding__medium__FVGLJ {\n  padding-top: 15px;\n}";
-var styles$s = {"text--truncate":"LimitSmall-module_text--truncate__Cb5GJ","result__dropdown":"LimitSmall-module_result__dropdown__Ty0-8","padding__none":"LimitSmall-module_padding__none__dtANx","padding__small":"LimitSmall-module_padding__small__f2z0N","padding__medium":"LimitSmall-module_padding__medium__FVGLJ"};
-styleInject(css_248z$w);
+var styles$g = {"text--truncate":"LimitSmall-module_text--truncate__Cb5GJ","result__dropdown":"LimitSmall-module_result__dropdown__Ty0-8","padding__none":"LimitSmall-module_padding__none__dtANx","padding__small":"LimitSmall-module_padding__small__f2z0N","padding__medium":"LimitSmall-module_padding__medium__FVGLJ"};
 
 /**
  * Limit Small - stateless presentational component
@@ -23266,8 +27155,8 @@ const LimitSmall = ({
   limitText
 }) => {
   const limitSmallStyles = useStyles({
-    [styles$s['result__dropdown']]: true,
-    [styles$s[`padding__${padding}`]]: padding
+    [styles$g['result__dropdown']]: true,
+    [styles$g[`padding__${padding}`]]: padding
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: limitSmallStyles
@@ -23285,318 +27174,6 @@ LimitSmall.propTypes = {
 LimitSmall.defaultProps = {
   className: '',
   padding: 'none'
-};
-
-var css_248z$v = ".List-module_text--truncate__-G3ts {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n@font-face {\n  font-family: \"react-editor-icons\";\n  src: url(\"/src/fonts/css/font/editor-icons.eot?30795734\");\n  src: url(\"/src/fonts/css/font/editor-icons.eot?30795734#iefix\") format(\"embedded-opentype\"), url(\"/src/fonts/css/font/editor-icons.woff2?30795734\") format(\"woff2\"), url(\"/src/fonts/css/font/editor-icons.woff?30795734\") format(\"woff\"), url(\"/src/fonts/css/font/editor-icons.ttf?30795734\") format(\"truetype\"), url(\"/src/fonts/css/font/editor-icons.svg?30795734#editor-icons\") format(\"svg\");\n  font-weight: normal;\n  font-style: normal;\n}\n.List-module_list__yt0s5 {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n.List-module_list__item__Zaere a {\n  text-decoration: none;\n}\n.List-module_list__item__Zaere a:hover {\n  color: #1f1f1f;\n}\n.List-module_list__item__Zaere svg {\n  margin-right: 10px;\n}\n.List-module_list--inline__qtMYm > li {\n  display: inline-block;\n}\n\n.List-module_list-item--table__BD36t {\n  padding: 16px 0;\n  border-bottom: 1px solid #e6e4e4;\n}\n.List-module_list-item--table__BD36t:last-child {\n  border: 0;\n}\n.List-module_list-item--table__BD36t > div {\n  flex: 1;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.List-module_list-item--table__BD36t > div div:nth-child(1) {\n  flex: 1;\n}\n.List-module_list-item--table__BD36t > div div {\n  padding: 0 30px;\n}\n\n.List-module_list-item--list__RiUg- {\n  margin: 0 30px;\n  padding: 4px 0;\n}\n.List-module_list-item--list__RiUg- > div {\n  text-align: left;\n  font-size: 14px;\n}\n\n.List-module_list-item--block__nLk7- {\n  margin: 0 20px;\n  padding: 2px 0;\n}\n.List-module_list-item--block__nLk7- > div {\n  text-align: left;\n  font-size: 14px;\n}\n\n.List-module_list-item--dropdown__tssPM {\n  padding: 0;\n  font-size: 14px;\n  min-height: 34px;\n  line-height: 34px;\n}\n.List-module_list-item--dropdown__tssPM span {\n  padding: 10px 0;\n}\n.List-module_list-item--dropdown__tssPM a {\n  display: flex;\n  align-items: center;\n  padding: 0 15px;\n  font-weight: 400;\n}\n.List-module_list-item--dropdown__tssPM:hover {\n  background: #e6e4e4;\n  color: #1f1f1f;\n  cursor: pointer;\n}\n.List-module_list-item--dropdown__tssPM:hover svg {\n  color: #1f1f1f;\n}\n\n.List-module_list-item--menu__auwtG {\n  color: #5d92ff;\n  position: relative;\n}\n.List-module_list-item--menu__auwtG > div {\n  position: relative;\n  z-index: 2;\n  width: 100%;\n}\n.List-module_list-item--menu__auwtG span {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.List-module_list-item--menu__auwtG svg {\n  color: #5d92ff;\n  margin-right: 10px;\n}\n.List-module_list-item--menu__auwtG a {\n  color: #5d92ff;\n  font-size: 14px;\n  padding: 10px 8px 10px 28px;\n  display: flex;\n  align-items: center;\n  line-height: normal;\n}\n.List-module_list-item--menu__auwtG a:active, .List-module_list-item--menu__auwtG a:focus {\n  color: #5d92ff;\n}\n.List-module_list-item--menu__auwtG:hover a {\n  color: #5d92ff;\n}\n.List-module_list-item--menu__auwtG:hover::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: #1b46a2;\n  border-radius: 0;\n}\n.List-module_list-item--menu__auwtG:hover svg {\n  color: #5d92ff;\n}\n\n.List-module_list-item--menu-active__F0gQs a {\n  color: white;\n  position: relative;\n  font-weight: 600;\n}\n.List-module_list-item--menu-active__F0gQs a::after {\n  content: \"\";\n  position: absolute;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  top: 50%;\n  left: 0px;\n  transform: translateY(-50%);\n}\n.List-module_list-item--menu-active__F0gQs a:active, .List-module_list-item--menu-active__F0gQs a:focus {\n  color: white;\n}\n.List-module_list-item--menu-active__F0gQs svg {\n  color: white;\n}\n.List-module_list-item--menu-active__F0gQs:hover a {\n  color: white;\n}\n.List-module_list-item--menu-active__F0gQs:hover a::after {\n  border-left-color: white;\n  border-top-color: transparent;\n  border-bottom-color: transparent;\n}\n.List-module_list-item--menu-active__F0gQs:hover svg {\n  color: white;\n}\n\n.List-module_list-item--small__R-Mdx a {\n  font-size: 12px;\n  padding: 10px 8px 10px 28px;\n}\n\n.List-module_list-item--margin__3zLPC {\n  margin-left: 20px;\n}\n\n.List-module_list--ordered-decimal__G7mPj {\n  list-style: decimal;\n}\n.List-module_list--ordered-disc__aYjeG {\n  list-style: disc;\n}\n.List-module_list--ordered-check__Ms6JY {\n  list-style: none;\n}\n.List-module_list--ordered-check__Ms6JY li {\n  margin: 0;\n  padding-left: 30px;\n  position: relative;\n}\n.List-module_list--ordered-check__Ms6JY li:before {\n  font-family: \"react-editor-icons\";\n  content: \"\\e873\";\n  font-size: 14px;\n  font-weight: 600;\n  color: #2550aa;\n  position: absolute;\n  left: 0;\n}\n\n.sidebar--dark .List__list-item--menu-active a::after, .sidebar--default .List__list-item--menu-active a::after {\n  border-left: 5px solid white;\n}\n.sidebar--white .List__list-item--menu-active a::after {\n  border-left: 5px solid #2550aa;\n}";
-var styles$r = {"text--truncate":"List-module_text--truncate__-G3ts","list":"List-module_list__yt0s5","list__item":"List-module_list__item__Zaere","list--inline":"List-module_list--inline__qtMYm","list-item--table":"List-module_list-item--table__BD36t","list-item--list":"List-module_list-item--list__RiUg-","list-item--block":"List-module_list-item--block__nLk7-","list-item--dropdown":"List-module_list-item--dropdown__tssPM","list-item--menu":"List-module_list-item--menu__auwtG","list-item--menu-active":"List-module_list-item--menu-active__F0gQs","list-item--small":"List-module_list-item--small__R-Mdx","list-item--margin":"List-module_list-item--margin__3zLPC","list--ordered-decimal":"List-module_list--ordered-decimal__G7mPj","list--ordered-disc":"List-module_list--ordered-disc__aYjeG","list--ordered-check":"List-module_list--ordered-check__Ms6JY"};
-styleInject(css_248z$v);
-
-/**
- * List - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string} props.variant - Variant
- * @param {string|array} props.className - list of class names out of component
- * @param {string} props.listStyle - list style
- * @return {object} An object of children element
- */
-
-const List = ({
-  children,
-  variant,
-  className,
-  listStyle
-}) => {
-  const elementClasses = useStyles({
-    [styles$r['list']]: true,
-    [styles$r['list--inline']]: variant === 'inline',
-    [styles$r[`list--${listStyle}`]]: listStyle
-  }, className);
-  return /*#__PURE__*/React.createElement("ul", {
-    className: elementClasses
-  }, React.Children.toArray(children).filter(item => item));
-};
-
-List.displayName = 'List';
-List.propTypes = {
-  children: propTypes.exports.node.isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  listStyle: propTypes.exports.oneOf(['ordered-check', 'ordered-decimal', 'ordered-disc', '']),
-  variant: propTypes.exports.oneOf(['inline', ''])
-};
-List.defaultProps = {
-  className: '',
-  listStyle: '',
-  variant: ''
-};
-
-/**
- * ListItem - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string} props.variant - Variant `menu, dropdown, table`
- * @param {string} props.size - size
- * @param {string|array} props.className - list of class names, default: `list__item`,
- * @param {bool} props.margin - left margin
- * @return {object} An object of children element
- */
-
-const ListItem = ({
-  children,
-  variant,
-  size,
-  className,
-  margin
-}) => {
-  const elementClasses = useStyles({
-    [styles$r['list__item']]: true,
-    [styles$r[`list-item--${variant}`]]: variant,
-    [styles$r['list-item--margin']]: margin,
-    [styles$r['list-item--small']]: size === 'small'
-  }, className);
-  return /*#__PURE__*/React.createElement("li", {
-    className: elementClasses
-  }, /*#__PURE__*/React.createElement("div", null, children));
-};
-
-ListItem.displayName = 'ListItem';
-ListItem.propTypes = {
-  children: propTypes.exports.node.isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  margin: propTypes.exports.bool,
-  size: propTypes.exports.oneOf(['small', '']),
-  variant: propTypes.exports.oneOf(['menu', 'dropdown', 'table', 'list', 'block', ''])
-};
-ListItem.defaultProps = {
-  className: '',
-  margin: false,
-  size: '',
-  variant: ''
-};
-
-var css_248z$u = ".Loader-module_text--truncate__EvM0o {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Loader-module_loader__Ukoov {\n  margin: 0 auto;\n  width: 115px;\n  height: 75px;\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.Loader-module_loader__spinner__cp5N7 {\n  display: block;\n}\n.Loader-module_loader__spinner--inner__1jgqz {\n  width: 38px;\n  height: 38px;\n  animation: Loader-module_spin__HfHqf 2.5s linear infinite;\n  border-radius: 300px;\n  padding: 4px;\n}\n.Loader-module_loader__spinner--inner__1jgqz svg {\n  stroke-dasharray: 86;\n  stroke-dashoffset: 0;\n  animation: Loader-module_dash__6cly- 1s ease-in-out infinite;\n  animation-direction: alternate-reverse;\n  stroke-width: 4px;\n  transform: rotate(180deg);\n}\n.Loader-module_loader__triangle__A47-U {\n  fill: #f27589;\n  position: absolute;\n  top: 46px;\n  left: 79px;\n  transform: rotate(154deg);\n  animation: Loader-module_move-triangle__B8vUY 3.2s infinite;\n}\n.Loader-module_loader__square__kePmA {\n  fill: #f8d260;\n  position: absolute;\n  top: 20px;\n  left: 25px;\n  transform: rotate(105deg);\n  animation: Loader-module_move-square__52oi0 3.2s infinite;\n}\n.Loader-module_loader__circle__yJvMH {\n  fill: #7271d4;\n  position: absolute;\n  top: 48px;\n  left: 23px;\n  opacity: 1;\n  animation: Loader-module_move-circle__UPbLZ 3.2s infinite;\n}\n.Loader-module_loader__circle2__brpSM {\n  fill: #2550aa;\n  position: absolute;\n  top: 22px;\n  left: 83px;\n  opacity: 1;\n  animation: Loader-module_move-circle-2__L8pHb 3.2s infinite;\n}\n\n@keyframes Loader-module_move-triangle__B8vUY {\n  0%, 25% {\n    top: 46px;\n    left: 79px;\n  }\n  50% {\n    top: 60px;\n    left: 100px;\n  }\n  100% {\n    top: 46px;\n    left: 79px;\n  }\n}\n@keyframes Loader-module_move-square__52oi0 {\n  0%, 25% {\n    top: 20px;\n    left: 25px;\n  }\n  50% {\n    top: 10px;\n    left: 10px;\n  }\n  100% {\n    top: 20px;\n    left: 25px;\n  }\n}\n@keyframes Loader-module_move-circle__UPbLZ {\n  0%, 25% {\n    top: 48px;\n    left: 23px;\n  }\n  50% {\n    top: 60px;\n    left: 8px;\n  }\n  100% {\n    top: 48px;\n    left: 23px;\n  }\n}\n@keyframes Loader-module_move-circle-2__L8pHb {\n  0%, 25% {\n    top: 22px;\n    left: 83px;\n  }\n  50% {\n    top: 8px;\n    left: 100px;\n  }\n  100% {\n    top: 22px;\n    left: 83px;\n  }\n}\n@keyframes Loader-module_spin__HfHqf {\n  to {\n    transform: rotate(360deg);\n  }\n}\n@keyframes Loader-module_dash__6cly- {\n  to {\n    stroke-dashoffset: 80;\n  }\n}\n.Loader-module_container__FieQ6 {\n  display: flex;\n  justify-content: center;\n  height: 128px;\n  align-items: center;\n}\n\n.Loader-module_main__rju3o {\n  display: flex;\n  margin-top: 12px;\n}\n\n.Loader-module_one__84UfA {\n  animation-name: Loader-module_load-one__hmMU-;\n  animation-duration: 0.6s;\n  animation-iteration-count: infinite;\n  height: 0px;\n  width: 0px;\n  border-right: 8px solid transparent;\n  border-bottom: 12px solid #2550aa;\n  border-left: 8px solid transparent;\n  margin-right: 12px;\n}\n\n@keyframes Loader-module_load-one__hmMU- {\n  30% {\n    transform: translateY(-100%);\n  }\n}\n.Loader-module_two__blOBv {\n  animation-name: Loader-module_load-two__ru3Ib;\n  animation-duration: 0.6s;\n  animation-iteration-count: infinite;\n  height: 8px;\n  width: 16px;\n  border-radius: 150px 150px 0 0;\n  background-color: #1ec7b8;\n  transform: rotate(45deg);\n  margin-right: 12px;\n}\n\n@keyframes Loader-module_load-two__ru3Ib {\n  50% {\n    transform: translateY(-100%) rotate(45deg);\n  }\n}\n.Loader-module_three__iX5OZ {\n  animation-name: Loader-module_load-three__eFTKC;\n  animation-duration: 0.6s;\n  animation-iteration-count: infinite;\n  height: 12px;\n  width: 12px;\n  background-color: #f8d260;\n  margin-right: 12px;\n}\n\n@keyframes Loader-module_load-three__eFTKC {\n  70% {\n    transform: translateY(-100%);\n  }\n}\n.Loader-module_forth__xUCuH {\n  animation-name: Loader-module_load-forth__j17oz;\n  animation-duration: 0.6s;\n  animation-iteration-count: infinite;\n  height: 12px;\n  width: 12px;\n  background-color: #f27589;\n  border-radius: 12px;\n}\n\n@keyframes Loader-module_load-forth__j17oz {\n  90% {\n    transform: translateY(-100%);\n  }\n}";
-var styles$q = {"text--truncate":"Loader-module_text--truncate__EvM0o","loader":"Loader-module_loader__Ukoov","loader__spinner":"Loader-module_loader__spinner__cp5N7","loader__spinner--inner":"Loader-module_loader__spinner--inner__1jgqz","spin":"Loader-module_spin__HfHqf","dash":"Loader-module_dash__6cly-","loader__triangle":"Loader-module_loader__triangle__A47-U","move-triangle":"Loader-module_move-triangle__B8vUY","loader__square":"Loader-module_loader__square__kePmA","move-square":"Loader-module_move-square__52oi0","loader__circle":"Loader-module_loader__circle__yJvMH","move-circle":"Loader-module_move-circle__UPbLZ","loader__circle2":"Loader-module_loader__circle2__brpSM","move-circle-2":"Loader-module_move-circle-2__L8pHb","container":"Loader-module_container__FieQ6","main":"Loader-module_main__rju3o","one":"Loader-module_one__84UfA","load-one":"Loader-module_load-one__hmMU-","two":"Loader-module_two__blOBv","load-two":"Loader-module_load-two__ru3Ib","three":"Loader-module_three__iX5OZ","load-three":"Loader-module_load-three__eFTKC","forth":"Loader-module_forth__xUCuH","load-forth":"Loader-module_load-forth__j17oz"};
-styleInject(css_248z$u);
-
-const renderDefaultLoader = ({
-  dataTestId
-}) => /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
-  className: styles$q.container,
-  "data-testid": dataTestId ?? 'loader-default'
-}, /*#__PURE__*/React.createElement("div", {
-  className: styles$q.main
-}, /*#__PURE__*/React.createElement("div", {
-  className: styles$q.one
-}), /*#__PURE__*/React.createElement("div", {
-  className: styles$q.two
-}), /*#__PURE__*/React.createElement("div", {
-  className: styles$q.three
-}), /*#__PURE__*/React.createElement("div", {
-  className: styles$q.forth
-}))));
-
-const renderShapesLoader = ({
-  dataTestId
-}) => /*#__PURE__*/React.createElement("div", {
-  className: styles$q.loader,
-  "data-testid": dataTestId ?? 'loader-shapes'
-}, /*#__PURE__*/React.createElement("svg", {
-  className: styles$q.loader__circle,
-  width: "8px",
-  height: "8px",
-  viewBox: "0 0 22 22",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg"
-}, /*#__PURE__*/React.createElement("circle", {
-  cx: "11",
-  cy: "11",
-  r: "11"
-})), /*#__PURE__*/React.createElement("svg", {
-  className: styles$q.loader__circle2,
-  width: "8px",
-  height: "8px",
-  viewBox: "0 0 22 22",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg"
-}, /*#__PURE__*/React.createElement("circle", {
-  cx: "11",
-  cy: "11",
-  r: "11"
-})), /*#__PURE__*/React.createElement("svg", {
-  className: styles$q.loader__triangle,
-  width: "13px",
-  height: "13px",
-  viewBox: "0 0 40 45",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg"
-}, /*#__PURE__*/React.createElement("path", {
-  d: "M31.673,18.327,6.673,25,0,0Z",
-  transform: "translate(15.836 39.929) rotate(-120)"
-})), /*#__PURE__*/React.createElement("svg", {
-  className: styles$q.loader__square,
-  width: "7px",
-  height: "7px",
-  viewBox: "0 0 10 10",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg"
-}, /*#__PURE__*/React.createElement("rect", {
-  width: "15",
-  height: "15"
-})), /*#__PURE__*/React.createElement("div", {
-  className: styles$q.loader__spinner
-}, /*#__PURE__*/React.createElement("div", {
-  className: styles$q[`loader__spinner--inner`]
-}, /*#__PURE__*/React.createElement("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  height: "36",
-  width: "36"
-}, /*#__PURE__*/React.createElement("circle", {
-  cx: "50%",
-  cy: "50%",
-  r: "40%",
-  fill: "rgba(0,0,0,0)",
-  stroke: "#28C7B8",
-  strokeLinecap: "round"
-})))));
-/**
- * Loader - stateless presentational component
- * @param {object} props - props
- * @param {string} props.variant - loader variant
- * @return {object} An object of children element
- */
-
-
-const Loader = ({
-  variant,
-  ['data-testid']: dataTestId
-}) => {
-  const loader = {
-    default: renderDefaultLoader({
-      dataTestId
-    }),
-    shapes: renderShapesLoader({
-      dataTestId
-    })
-  };
-  return loader[variant];
-};
-
-Loader.displayName = 'Loader';
-Loader.propTypes = {
-  variant: propTypes.exports.oneOf(['default', 'shapes']),
-  ['data-testid']: propTypes.exports.string
-};
-Loader.defaultProps = {
-  variant: 'default',
-  ['data-testid']: null
-};
-
-/**
- * Masked Input - stateless presentational component
- * @param {object} props - props
- * @param {object} props.field - react-formik field properties
- * @param {object} props.form - react-formik form properties
- * @param {string} props.id - id of the element
- * @param {string} props.label - label
- * @param {string} props.placeholder - placeholder
- * @param {string} props.type - type of element `text, number etc`
- * @param {bool} props.translate - if label should be translated by intl
- * @param {number} props.maxLength - maxLength
- * @param {disabled} props.disabled - disabled
- * @param {array} props.mask - mask applied to input
- * @param {bool} props.guide - if it is true underscores will be displayed to represent mask format
- * @param {string} props.focused - focused, keep label by default on top
- * @param {object} props.i18n - translations
- * @return {object} An object of children element
- */
-
-const Masked = ({
-  field,
-  form,
-  id,
-  type,
-  disabled,
-  translate,
-  maxLength,
-  mask,
-  guide,
-  focused,
-  i18n
-}) => {
-  const {
-    name,
-    value,
-    onChange,
-    onBlur
-  } = field;
-  const {
-    errors,
-    touched
-  } = form;
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : '';
-  return /*#__PURE__*/React.createElement("div", {
-    className: `form-field ${errorClass}`
-  }, /*#__PURE__*/React.createElement(MaskedInput$1, {
-    field: field,
-    mask: mask,
-    type: type,
-    name: name,
-    id: id,
-    value: value,
-    onChange: onChange,
-    onBlur: onBlur,
-    i18n: i18n,
-    disabled: disabled,
-    translate: translate,
-    maxLength: maxLength,
-    guide: guide,
-    focused: focused
-  }), touched[name] && /*#__PURE__*/React.createElement(Error$2, {
-    error: errors[name]
-  }));
-};
-
-Masked.displayName = 'Masked';
-Masked.propTypes = {
-  field: propTypes.exports.shape({
-    name: propTypes.exports.string.isRequired,
-    value: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.number]),
-    onChange: propTypes.exports.func,
-    onBlur: propTypes.exports.func
-  }).isRequired,
-  form: propTypes.exports.shape({
-    errors: propTypes.exports.instanceOf(Object),
-    touched: propTypes.exports.instanceOf(Object)
-  }).isRequired,
-  id: propTypes.exports.string.isRequired,
-  label: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
-  placeholder: propTypes.exports.string,
-  type: propTypes.exports.string,
-  disabled: propTypes.exports.bool,
-  translate: propTypes.exports.bool,
-  maxLength: propTypes.exports.number,
-  mask: propTypes.exports.arrayOf(propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.instanceOf(RegExp)])),
-  guide: propTypes.exports.bool,
-  focused: propTypes.exports.string,
-  i18n: propTypes.exports.shape({
-    placeholder: propTypes.exports.string,
-    label: propTypes.exports.string
-  })
-};
-Masked.defaultProps = {
-  label: '',
-  placeholder: '',
-  type: 'text',
-  maxLength: 524288,
-  mask: [],
-  disabled: false,
-  translate: true,
-  guide: false,
-  focused: 'false',
-  i18n: {
-    placeholder: '',
-    label: ''
-  }
 };
 
 var reactTextMask = {exports: {}};
@@ -24308,14 +27885,14 @@ const MaskedInput = ({
   }
 }) => {
   const elementClasses = useStyles({
-    [styles$y.input__wrapper]: true,
-    [styles$y['input__wrapper--focused']]: focused === 'true'
+    [styles$16.input__wrapper]: true,
+    [styles$16['input__wrapper--focused']]: focused === 'true'
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: elementClasses
   }, /*#__PURE__*/React.createElement(MaskedInputComponent, {
     mask: mask,
-    className: styles$y.input,
+    className: styles$16.input,
     onBlur: onBlur,
     onChange: onChange,
     onKeyDown: onKeyDown,
@@ -24333,12 +27910,12 @@ const MaskedInput = ({
     focused: focused,
     "data-testid": "masked-input"
   }), /*#__PURE__*/React.createElement("span", {
-    className: styles$y.highlight
+    className: styles$16.highlight
   }), /*#__PURE__*/React.createElement("span", {
-    className: styles$y.bar
-  }), label && /*#__PURE__*/React.createElement(Label$1, {
+    className: styles$16.bar
+  }), label && /*#__PURE__*/React.createElement(Label, {
     id: name,
-    className: styles$y.input__label
+    className: styles$16.input__label
   }, label));
 };
 
@@ -24388,103 +27965,112 @@ MaskedInput.defaultProps = {
   }
 };
 
-var css_248z$t = ".Message-module_text--truncate__RWs0W {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Message-module_message__UaN2I {\n  text-align: center;\n}";
-var styles$p = {"text--truncate":"Message-module_text--truncate__RWs0W","message":"Message-module_message__UaN2I"};
-styleInject(css_248z$t);
-
 /**
- * Message - stateless presentational component
+ * Masked Input - stateless presentational component
  * @param {object} props - props
- * @param {object} props.children - children element
- * @param {string|array} props.className - list of custom class names out of component
- * @param {string} props.title - title
- * @param {string} props.message - message
- * @param {string} props.url - image/video url
- * @param {number} props.height - height of image/video
- * @param {number} props.titleLevel - title font size
- * @param {number} props.messageLevel - message font size
- * @param {bool} props.video - component with wideo
- * @param {string} props.multimediaPosition - image/video position before or after content, default `before`
- * @param {bool} props.bold - message title is bold
- * @param {bool} props.withoutMargin - message title without bottom margin
+ * @param {object} props.field - react-formik field properties
+ * @param {object} props.form - react-formik form properties
+ * @param {string} props.id - id of the element
+ * @param {string} props.label - label
+ * @param {string} props.placeholder - placeholder
+ * @param {string} props.type - type of element `text, number etc`
+ * @param {bool} props.translate - if label should be translated by intl
+ * @param {number} props.maxLength - maxLength
+ * @param {disabled} props.disabled - disabled
+ * @param {array} props.mask - mask applied to input
+ * @param {bool} props.guide - if it is true underscores will be displayed to represent mask format
+ * @param {string} props.focused - focused, keep label by default on top
+ * @param {object} props.i18n - translations
  * @return {object} An object of children element
  */
 
-const Message = ({
-  children,
-  className,
-  title,
-  message,
-  url,
-  height,
-  titleLevel,
-  messageLevel,
-  video,
-  multimediaPosition,
-  bold,
-  withoutMargin
+const Masked = ({
+  field,
+  form,
+  id,
+  type,
+  disabled,
+  translate,
+  maxLength,
+  mask,
+  guide,
+  focused,
+  i18n
 }) => {
-  const elementClasses = useStyles({
-    [styles$p['message']]: true
-  }, className);
-  /**
-   * Render multimedia
-   * @type {function}
-   */
-
-  const renderMultimedia = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Spacer$1, {
-    space: "small"
-  }), video ? /*#__PURE__*/React.createElement(react.exports.Fragment, null, video, /*#__PURE__*/React.createElement(Spacer$1, {
-    space: "small"
-  })) : /*#__PURE__*/React.createElement(Image$2, {
-    height: height,
-    size: "auto",
-    src: url
-  }));
-
+  const {
+    name,
+    value,
+    onChange,
+    onBlur
+  } = field;
+  const {
+    errors,
+    touched
+  } = form;
+  const errorClass = errors[name] && touched[name] ? 'form--has-error' : '';
   return /*#__PURE__*/React.createElement("div", {
-    className: elementClasses
-  }, url && multimediaPosition === 'before' && renderMultimedia(), title && /*#__PURE__*/React.createElement(Heading$1, {
-    align: "center",
-    bold: bold,
-    level: titleLevel,
-    margin: withoutMargin ? 'none' : ''
-  }, title), message && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer$1, {
-    space: "tiny"
-  }), /*#__PURE__*/React.createElement(Heading$1, {
-    align: "center",
-    level: messageLevel
-  }, message)), url && multimediaPosition === 'after' && renderMultimedia(), children);
+    className: `form-field ${errorClass}`
+  }, /*#__PURE__*/React.createElement(MaskedInput, {
+    field: field,
+    mask: mask,
+    type: type,
+    name: name,
+    id: id,
+    value: value,
+    onChange: onChange,
+    onBlur: onBlur,
+    i18n: i18n,
+    disabled: disabled,
+    translate: translate,
+    maxLength: maxLength,
+    guide: guide,
+    focused: focused
+  }), touched[name] && /*#__PURE__*/React.createElement(Error$1, {
+    error: errors[name]
+  }));
 };
 
-Message.displayName = 'Message';
-Message.propTypes = {
-  bold: propTypes.exports.bool,
-  children: propTypes.exports.node,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  height: propTypes.exports.number,
-  video: propTypes.exports.node,
-  message: propTypes.exports.string,
-  messageLevel: propTypes.exports.number,
-  multimediaPosition: propTypes.exports.oneOf(['before', 'after']),
-  title: propTypes.exports.string,
-  titleLevel: propTypes.exports.number,
-  url: propTypes.exports.string,
-  withoutMargin: propTypes.exports.bool
+Masked.displayName = 'Masked';
+Masked.propTypes = {
+  field: propTypes.exports.shape({
+    name: propTypes.exports.string.isRequired,
+    value: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.number]),
+    onChange: propTypes.exports.func,
+    onBlur: propTypes.exports.func
+  }).isRequired,
+  form: propTypes.exports.shape({
+    errors: propTypes.exports.instanceOf(Object),
+    touched: propTypes.exports.instanceOf(Object)
+  }).isRequired,
+  id: propTypes.exports.string.isRequired,
+  label: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
+  placeholder: propTypes.exports.string,
+  type: propTypes.exports.string,
+  disabled: propTypes.exports.bool,
+  translate: propTypes.exports.bool,
+  maxLength: propTypes.exports.number,
+  mask: propTypes.exports.arrayOf(propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.instanceOf(RegExp)])),
+  guide: propTypes.exports.bool,
+  focused: propTypes.exports.string,
+  i18n: propTypes.exports.shape({
+    placeholder: propTypes.exports.string,
+    label: propTypes.exports.string
+  })
 };
-Message.defaultProps = {
-  className: '',
-  bold: false,
-  children: null,
-  height: 220,
-  video: null,
-  message: undefined,
-  messageLevel: 3,
-  multimediaPosition: 'before',
-  title: undefined,
-  titleLevel: 1,
-  url: undefined,
-  withoutMargin: false
+Masked.defaultProps = {
+  label: '',
+  placeholder: '',
+  type: 'text',
+  maxLength: 524288,
+  mask: [],
+  disabled: false,
+  translate: true,
+  guide: false,
+  focused: 'false',
+  i18n: {
+    placeholder: '',
+    label: ''
+  }
 };
 
 /**
@@ -24499,7 +28085,7 @@ const ModalHeader = ({
   title,
   align
 }) => {
-  return /*#__PURE__*/React.createElement(Heading$1, {
+  return /*#__PURE__*/React.createElement(Heading, {
     level: 2,
     align: align
   }, title);
@@ -24514,9 +28100,7 @@ ModalHeader.defaultProps = {
   align: 'left'
 };
 
-var css_248z$s = ".Modal-module_text--truncate__RQn4E {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Modal-module_dialog__4344p {\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  z-index: 250999;\n}\n\n.Modal-module_modal__yNG-7 {\n  position: relative;\n  left: -50%;\n  transform: translateY(-50%);\n  background: white;\n  box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.1);\n  width: 780px;\n  max-width: 100%;\n  max-height: 100%;\n  z-index: 998;\n}\n.Modal-module_modal__header__22qVU {\n  display: flex;\n  border-radius: 6px;\n  justify-content: space-between;\n  align-items: center;\n  padding: 30px 40px 0;\n}\n.Modal-module_modal__header--close-only__EpZqa {\n  justify-content: flex-end;\n}\n.Modal-module_modal__header__22qVU span {\n  flex: 1;\n  margin: 0;\n  line-height: 1;\n}\n.Modal-module_modal__component__BF4TF {\n  width: 100%;\n  display: flex;\n  border-radius: 6px;\n  justify-content: space-between;\n  align-items: flex-start;\n  padding: 25px 40px 0;\n}\n.Modal-module_modal__component--child__3Y1EE {\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.Modal-module_modal__body__K3X3J {\n  padding: 30px 40px;\n}\n.Modal-module_modal__body--has-footer__ey5v9 {\n  padding: 30px 40px 0;\n}\n.Modal-module_modal__body--no-padding__NTl2q {\n  padding: 0;\n}\n.Modal-module_modal__footer-divider__tQkAd {\n  padding: 0px 40px;\n}\n.Modal-module_modal__footer__-z-ze {\n  display: flex;\n  align-items: center;\n  padding: 0 40px 30px;\n}\n.Modal-module_modal__footer__-z-ze button {\n  margin-left: 15px;\n}\n.Modal-module_modal__footer--align-right__dr5oC {\n  justify-content: flex-end;\n}\n.Modal-module_modal__footer--align-center__1V4gX {\n  justify-content: center;\n}\n.Modal-module_modal__footer--align-left__UUj1c {\n  justify-content: flex-start;\n}\n.Modal-module_modal--fullscreen__bZVpl {\n  width: 100vw;\n  height: 100vh;\n  z-index: 250999;\n  background: white;\n  display: flex;\n  justify-content: flex-start;\n  flex-direction: column;\n  align-items: stretch;\n  border-radius: 0;\n}\n.Modal-module_modal--small__Obt8i {\n  width: 764px;\n}\n.Modal-module_modal--medium__-ZcX5 {\n  width: 880px;\n}\n.Modal-module_modal--big__bZ7RV {\n  width: 1080px;\n}\n.Modal-module_modal--huge-responsive__m4dVy {\n  width: 85vw;\n  max-width: 1280px;\n}\n.Modal-module_modal--topbar__ITy4f {\n  width: 100vw;\n  height: 100vh;\n  z-index: 250999;\n  border-radius: 0;\n  background-color: #ececec;\n}\n.Modal-module_modal--topbar__ITy4f .Modal__modal__header {\n  height: 60px;\n  background: white;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n  padding: 0 28px;\n}\n.Modal-module_modal--page__C0n6v {\n  width: 100vw;\n  height: 100vh;\n  z-index: 250999;\n  background: #f5f5f5;\n  border-radius: 0;\n}\n.Modal-module_modal--page__C0n6v .Modal__modal__body {\n  padding: 0;\n}\n.Modal-module_modal--page__C0n6v .Modal__modal__body > div {\n  max-height: 100vh !important;\n}\n.Modal-module_modal--center__2wE-S {\n  align-items: center;\n}";
-var styles$o = {"text--truncate":"Modal-module_text--truncate__RQn4E","dialog":"Modal-module_dialog__4344p","modal":"Modal-module_modal__yNG-7","modal__header":"Modal-module_modal__header__22qVU","modal__header--close-only":"Modal-module_modal__header--close-only__EpZqa","modal__component":"Modal-module_modal__component__BF4TF","modal__component--child":"Modal-module_modal__component--child__3Y1EE","modal__body":"Modal-module_modal__body__K3X3J","modal__body--has-footer":"Modal-module_modal__body--has-footer__ey5v9","modal__body--no-padding":"Modal-module_modal__body--no-padding__NTl2q","modal__footer-divider":"Modal-module_modal__footer-divider__tQkAd","modal__footer":"Modal-module_modal__footer__-z-ze","modal__footer--align-right":"Modal-module_modal__footer--align-right__dr5oC","modal__footer--align-center":"Modal-module_modal__footer--align-center__1V4gX","modal__footer--align-left":"Modal-module_modal__footer--align-left__UUj1c","modal--fullscreen":"Modal-module_modal--fullscreen__bZVpl","modal--small":"Modal-module_modal--small__Obt8i","modal--medium":"Modal-module_modal--medium__-ZcX5","modal--big":"Modal-module_modal--big__bZ7RV","modal--huge-responsive":"Modal-module_modal--huge-responsive__m4dVy","modal--topbar":"Modal-module_modal--topbar__ITy4f","modal--page":"Modal-module_modal--page__C0n6v","modal--center":"Modal-module_modal--center__2wE-S"};
-styleInject(css_248z$s);
+var styles$f = {"text--truncate":"Modal-module_text--truncate__RQn4E","dialog":"Modal-module_dialog__4344p","modal":"Modal-module_modal__yNG-7","modal__header":"Modal-module_modal__header__22qVU","modal__header--close-only":"Modal-module_modal__header--close-only__EpZqa","modal__component":"Modal-module_modal__component__BF4TF","modal__component--child":"Modal-module_modal__component--child__3Y1EE","modal__body":"Modal-module_modal__body__K3X3J","modal__body--has-footer":"Modal-module_modal__body--has-footer__ey5v9","modal__body--no-padding":"Modal-module_modal__body--no-padding__NTl2q","modal__footer-divider":"Modal-module_modal__footer-divider__tQkAd","modal__footer":"Modal-module_modal__footer__-z-ze","modal__footer--align-right":"Modal-module_modal__footer--align-right__dr5oC","modal__footer--align-center":"Modal-module_modal__footer--align-center__1V4gX","modal__footer--align-left":"Modal-module_modal__footer--align-left__UUj1c","modal--fullscreen":"Modal-module_modal--fullscreen__bZVpl","modal--small":"Modal-module_modal--small__Obt8i","modal--medium":"Modal-module_modal--medium__-ZcX5","modal--big":"Modal-module_modal--big__bZ7RV","modal--huge-responsive":"Modal-module_modal--huge-responsive__m4dVy","modal--topbar":"Modal-module_modal--topbar__ITy4f","modal--page":"Modal-module_modal--page__C0n6v","modal--center":"Modal-module_modal--center__2wE-S"};
 
 /**
  * Modal Footer - stateless presentational component
@@ -24531,10 +28115,10 @@ const ModalFooter = ({
   align
 }) => {
   const elementClasses = useStyles({
-    [styles$o['modal__footer']]: true,
-    [styles$o['modal__footer--align-right']]: align === 'right',
-    [styles$o['modal__footer--align-center']]: align === 'center',
-    [styles$o['modal__footer--align-left']]: align === 'left'
+    [styles$f['modal__footer']]: true,
+    [styles$f['modal__footer--align-right']]: align === 'right',
+    [styles$f['modal__footer--align-center']]: align === 'center',
+    [styles$f['modal__footer--align-left']]: align === 'left'
   });
   return /*#__PURE__*/React.createElement("div", {
     className: elementClasses
@@ -24626,57 +28210,57 @@ const Modal = /*#__PURE__*/react.exports.forwardRef(({
   footerAlign
 }, ref) => {
   const headerStyles = useStyles({
-    [styles$o.modal__header]: true,
-    [styles$o['modal__header--close-only']]: !i18n.title && !image
+    [styles$f.modal__header]: true,
+    [styles$f['modal__header--close-only']]: !i18n.title && !image
   });
 
   const renderTitle = () => /*#__PURE__*/React.createElement("div", {
     className: headerStyles
-  }, headingAlign === 'center' && /*#__PURE__*/React.createElement(Spreader$1, null), i18n.title && /*#__PURE__*/React.createElement(ModalHeader, {
+  }, headingAlign === 'center' && /*#__PURE__*/React.createElement(Spreader, null), i18n.title && /*#__PURE__*/React.createElement(ModalHeader, {
     title: i18n.title,
     align: headingAlign
-  }), image && /*#__PURE__*/React.createElement(Image$2, {
+  }), image && /*#__PURE__*/React.createElement(Image$1, {
     src: image,
     size: "auto",
     height: 20
-  }), /*#__PURE__*/React.createElement("div", null, isMarkAsSpamVisible && /*#__PURE__*/React.createElement(Button$2, {
+  }), /*#__PURE__*/React.createElement("div", null, isMarkAsSpamVisible && /*#__PURE__*/React.createElement(Button$1, {
     variant: "transparent",
     onClick: onMarkAsSpam
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-block"
-  }), i18n.markSpam), isEditable && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$2, {
+  }), i18n.markSpam), isEditable && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Button$1, {
     variant: "icon",
     onClick: onEdit
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-create"
-  }))), (isMarkAsSpamVisible || isEditable) && /*#__PURE__*/React.createElement(Spreader$1, {
+  }))), (isMarkAsSpamVisible || isEditable) && /*#__PURE__*/React.createElement(Spreader, {
     spread: "tiny"
-  }), isClosable && /*#__PURE__*/React.createElement(Close$1, {
+  }), isClosable && /*#__PURE__*/React.createElement(Close, {
     onClick: onClick
   })));
 
   const renderComponent = () => /*#__PURE__*/React.createElement("div", {
-    className: styles$o.modal__component
+    className: styles$f.modal__component
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$o['modal__component--child']
-  }, component), isClosable && /*#__PURE__*/React.createElement(Close$1, {
+    className: styles$f['modal__component--child']
+  }, component), isClosable && /*#__PURE__*/React.createElement(Close, {
     onClick: onClick
   }));
 
   const modalStyles = useStyles({
-    [styles$o['modal']]: true,
-    [styles$o['modal--huge-responsive']]: size === 'huge-responsive',
-    [styles$o['modal--fullscreen']]: size === 'fullscreen',
-    [styles$o['modal--big']]: size === 'big',
-    [styles$o['modal--medium']]: size === 'medium',
-    [styles$o['modal--small']]: size === 'small',
-    [styles$o['modal--center']]: isCentered,
-    [styles$o['modal--page']]: isPage
+    [styles$f['modal']]: true,
+    [styles$f['modal--huge-responsive']]: size === 'huge-responsive',
+    [styles$f['modal--fullscreen']]: size === 'fullscreen',
+    [styles$f['modal--big']]: size === 'big',
+    [styles$f['modal--medium']]: size === 'medium',
+    [styles$f['modal--small']]: size === 'small',
+    [styles$f['modal--center']]: isCentered,
+    [styles$f['modal--page']]: isPage
   }, className);
   const bodyStyles = useStyles({
-    [styles$o['modal__body']]: true,
-    [styles$o['modal__body--has-footer']]: hasFooter,
-    [styles$o['modal__body--no-padding']]: isBodyPadding === 'none'
+    [styles$f['modal__body']]: true,
+    [styles$f['modal__body--has-footer']]: hasFooter,
+    [styles$f['modal__body--no-padding']]: isBodyPadding === 'none'
   });
   const handleCloseOnEscape = react.exports.useCallback(({
     key
@@ -24693,34 +28277,34 @@ const Modal = /*#__PURE__*/react.exports.forwardRef(({
     return () => document.removeEventListener('keydown', handleCloseOnEscape);
   }, [handleCloseOnEscape, size]);
   return /*#__PURE__*/React.createElement(react.exports.Fragment, null, isActive && /*#__PURE__*/React.createElement("div", {
-    className: styles$o.dialog
+    className: styles$f.dialog
   }, /*#__PURE__*/React.createElement("div", {
     className: modalStyles,
     ref: ref
   }, isLoading ? /*#__PURE__*/React.createElement("div", {
-    className: styles$o.modal__body
-  }, /*#__PURE__*/React.createElement(Loader$1, null)) : /*#__PURE__*/React.createElement(react.exports.Fragment, null, (isClosable || i18n.title || image || isEditable) && (!isComponent ? renderTitle() : renderComponent()), hasHeaderDivider && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer$1, {
+    className: styles$f.modal__body
+  }, /*#__PURE__*/React.createElement(Loader, null)) : /*#__PURE__*/React.createElement(react.exports.Fragment, null, (isClosable || i18n.title || image || isEditable) && (!isComponent ? renderTitle() : renderComponent()), hasHeaderDivider && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer, {
     space: "small"
-  }), /*#__PURE__*/React.createElement(Divider$1, null)), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement(Divider, null)), /*#__PURE__*/React.createElement("div", {
     className: bodyStyles
   }, disableOverflow ? children : /*#__PURE__*/React.createElement("div", {
     style: overflowStyle
   }, children)), hasFooterDivider && /*#__PURE__*/React.createElement("div", {
-    className: styles$o['modal__footer-divider']
-  }, /*#__PURE__*/React.createElement(Divider$1, null)), hasFooter && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer$1, {
+    className: styles$f['modal__footer-divider']
+  }, /*#__PURE__*/React.createElement(Divider, null)), hasFooter && /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(Spacer, {
     space: "small"
   }), /*#__PURE__*/React.createElement(ModalFooter, {
     align: footerAlign
-  }, hasCustomButton ? /*#__PURE__*/React.createElement(Button$2, {
+  }, hasCustomButton ? /*#__PURE__*/React.createElement(Button$1, {
     variant: "secondary",
     size: "medium",
     onClick: onClickCustomButton,
     isDisabled: isCustomButtonDisabled
-  }, i18n.cancel) : /*#__PURE__*/React.createElement(Button$2, {
+  }, i18n.cancel) : /*#__PURE__*/React.createElement(Button$1, {
     variant: "secondary",
     size: "medium",
     onClick: onClick
-  }, i18n.cancel), /*#__PURE__*/React.createElement(Button$2, {
+  }, i18n.cancel), /*#__PURE__*/React.createElement(Button$1, {
     type: isSubmit ? 'submit' : 'button',
     variant: actionVariant,
     size: "medium",
@@ -24728,9 +28312,9 @@ const Modal = /*#__PURE__*/react.exports.forwardRef(({
     isDisabled: isButtonDisabled,
     isLoading: isButtonLoading,
     hasIcon: !!actionIcon
-  }, actionIcon && /*#__PURE__*/React.createElement(Icon$1, {
+  }, actionIcon && /*#__PURE__*/React.createElement(Icon, {
     icon: actionIcon
-  }), i18n.action)))))), isActive && size !== 'fullscreen' && /*#__PURE__*/React.createElement(Backdrop$1, {
+  }), i18n.action)))))), isActive && size !== 'fullscreen' && /*#__PURE__*/React.createElement(Backdrop, {
     onClick: onClick
   }));
 });
@@ -24908,9 +28492,7 @@ const parseDateToMonthID = date => `${date.getFullYear()}${monthsArray[date.getM
 
 const transformMonthToDate = monthID => new Date(`${monthID}`.substring(0, 4), `${monthID}`.substring(4, 6));
 
-var css_248z$r = ".MonthRangePicker-module_text--truncate__rBMIY {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.MonthRangePicker-module_grid-container__dzia- {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  gap: 0px 0px;\n  grid-template-areas: \". . .\" \". . .\" \". . .\" \". . .\";\n  margin: 0 7px;\n  width: 300px;\n}\n\n.MonthRangePicker-module_button_month__Ys-tE {\n  color: #4c4c4c;\n  background: white;\n  outline: 0;\n  border: none;\n  font-size: 12px;\n  font-weight: 300;\n  padding: 3px 0;\n  position: relative;\n  height: 30px;\n}\n.MonthRangePicker-module_button_month--name__jYEN5 {\n  color: #4c4c4c;\n  width: 100%;\n  height: 100%;\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n}\n.MonthRangePicker-module_button_month--marker__-kzfH {\n  position: absolute;\n  top: 1px;\n  height: 28px;\n  width: 100%;\n  z-index: 1;\n}\n.MonthRangePicker-module_button_month--not-selecting__i1PT-:hover .MonthRangePicker-module_button_month--marker__-kzfH {\n  border: 1px solid #dee7eb;\n}\n.MonthRangePicker-module_button_month--selecting__E0Rwp .MonthRangePicker-module_button_month--marker__-kzfH {\n  border-top: 1px solid #dee7eb;\n  border-bottom: 1px solid #dee7eb;\n}\n.MonthRangePicker-module_button_month--first__84QSw {\n  padding-left: 4px;\n}\n.MonthRangePicker-module_button_month--first__84QSw .MonthRangePicker-module_button_month--name__jYEN5 {\n  font-weight: 600;\n}\n.MonthRangePicker-module_button_month--first__84QSw .MonthRangePicker-module_button_month--marker__-kzfH {\n  border-left: 1px solid #dee7eb;\n  left: 2px;\n  width: calc(100% - 2px);\n}\n.MonthRangePicker-module_button_month--last__ecaUQ {\n  padding-right: 4px;\n}\n.MonthRangePicker-module_button_month--last__ecaUQ .MonthRangePicker-module_button_month--name__jYEN5 {\n  font-weight: 600;\n}\n.MonthRangePicker-module_button_month--last__ecaUQ .MonthRangePicker-module_button_month--marker__-kzfH {\n  border-right: 1px solid #dee7eb;\n  right: 2px;\n  width: calc(100% - 2px);\n}\n.MonthRangePicker-module_button_month--selected__5-s3b .MonthRangePicker-module_button_month--name__jYEN5 {\n  color: #1f1f1f;\n  background: #edecec;\n}\n.MonthRangePicker-module_button_month--selected__5-s3b:not(:hover) .MonthRangePicker-module_button_month--marker__-kzfH {\n  display: none;\n}\n.MonthRangePicker-module_button_month--disabled__ho943 {\n  pointer-events: none;\n  background: #f8f8f8;\n}\n.MonthRangePicker-module_button_month--disabled__ho943 .MonthRangePicker-module_button_month--name__jYEN5 {\n  color: #aeb9bf;\n}\n\n.MonthRangePicker-module_button_month--first__84QSw.MonthRangePicker-module_button_month--last__ecaUQ .MonthRangePicker-module_button_month--marker__-kzfH {\n  width: calc(100% - 4px);\n  border-top: 1px solid #dee7eb;\n  border-bottom: 1px solid #dee7eb;\n}\n\n.MonthRangePicker-module_year__xoKC- {\n  font-size: 12px;\n  font-weight: 600;\n  color: #1f1f1f;\n}\n\n.MonthRangePicker-module_year-container__kJjjf {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.MonthRangePicker-module_month-range-picker__eMp0J > button {\n  display: block;\n  margin: 0 15px 5px auto;\n  width: 100px;\n}";
-var styles$n = {"text--truncate":"MonthRangePicker-module_text--truncate__rBMIY","grid-container":"MonthRangePicker-module_grid-container__dzia-","button_month":"MonthRangePicker-module_button_month__Ys-tE","button_month--name":"MonthRangePicker-module_button_month--name__jYEN5","button_month--marker":"MonthRangePicker-module_button_month--marker__-kzfH","button_month--not-selecting":"MonthRangePicker-module_button_month--not-selecting__i1PT-","button_month--selecting":"MonthRangePicker-module_button_month--selecting__E0Rwp","button_month--first":"MonthRangePicker-module_button_month--first__84QSw","button_month--last":"MonthRangePicker-module_button_month--last__ecaUQ","button_month--selected":"MonthRangePicker-module_button_month--selected__5-s3b","button_month--disabled":"MonthRangePicker-module_button_month--disabled__ho943","year":"MonthRangePicker-module_year__xoKC-","year-container":"MonthRangePicker-module_year-container__kJjjf","month-range-picker":"MonthRangePicker-module_month-range-picker__eMp0J"};
-styleInject(css_248z$r);
+var styles$e = {"text--truncate":"MonthRangePicker-module_text--truncate__rBMIY","grid-container":"MonthRangePicker-module_grid-container__dzia-","button_month":"MonthRangePicker-module_button_month__Ys-tE","button_month--name":"MonthRangePicker-module_button_month--name__jYEN5","button_month--marker":"MonthRangePicker-module_button_month--marker__-kzfH","button_month--not-selecting":"MonthRangePicker-module_button_month--not-selecting__i1PT-","button_month--selecting":"MonthRangePicker-module_button_month--selecting__E0Rwp","button_month--first":"MonthRangePicker-module_button_month--first__84QSw","button_month--last":"MonthRangePicker-module_button_month--last__ecaUQ","button_month--selected":"MonthRangePicker-module_button_month--selected__5-s3b","button_month--disabled":"MonthRangePicker-module_button_month--disabled__ho943","year":"MonthRangePicker-module_year__xoKC-","year-container":"MonthRangePicker-module_year-container__kJjjf","month-range-picker":"MonthRangePicker-module_month-range-picker__eMp0J"};
 
 /**
  * MonthRangePicker - stateful component
@@ -24971,13 +28553,13 @@ const MonthRangePicker = ({
     const monthID = constructMonthID(code); // eslint-disable-next-line react-hooks/rules-of-hooks
 
     const buttonClasses = useStyles({
-      [styles$n['button_month']]: true,
-      [styles$n['button_month--not-selecting']]: !isSelecting,
-      [styles$n['button_month--selecting']]: handleRangeMarker(monthID, endMonth, startMonth),
-      [styles$n['button_month--selected']]: handleRangeMarker(monthID, confirmedEndMonth, startMonth),
-      [styles$n['button_month--disabled']]: monthID < minimalDate || monthID > maximalDate,
-      [styles$n['button_month--first']]: handleFirstMarker(monthID),
-      [styles$n['button_month--last']]: handleLastMarker(monthID)
+      [styles$e['button_month']]: true,
+      [styles$e['button_month--not-selecting']]: !isSelecting,
+      [styles$e['button_month--selecting']]: handleRangeMarker(monthID, endMonth, startMonth),
+      [styles$e['button_month--selected']]: handleRangeMarker(monthID, confirmedEndMonth, startMonth),
+      [styles$e['button_month--disabled']]: monthID < minimalDate || monthID > maximalDate,
+      [styles$e['button_month--first']]: handleFirstMarker(monthID),
+      [styles$e['button_month--last']]: handleLastMarker(monthID)
     });
     return /*#__PURE__*/React.createElement("button", {
       "data-testid": `button-${name}`,
@@ -24987,9 +28569,9 @@ const MonthRangePicker = ({
       onMouseOver: () => handleHover(monthID),
       type: "button"
     }, /*#__PURE__*/React.createElement("span", {
-      className: styles$n['button_month--marker']
+      className: styles$e['button_month--marker']
     }), /*#__PURE__*/React.createElement("span", {
-      className: styles$n['button_month--name']
+      className: styles$e['button_month--name']
     }, i18nHandler(name)));
   });
 
@@ -25014,25 +28596,25 @@ const MonthRangePicker = ({
 
   return /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
     "data-testid": "month-range-picker",
-    className: styles$n['year-container']
-  }, /*#__PURE__*/React.createElement(Button$2, {
+    className: styles$e['year-container']
+  }, /*#__PURE__*/React.createElement(Button$1, {
     onClick: react.exports.useCallback(() => setYear(year - 1), [year]),
     size: "tiny",
     variant: "icon"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-arrow-left"
   })), /*#__PURE__*/React.createElement("span", {
-    className: styles$n['year']
-  }, year), /*#__PURE__*/React.createElement(Button$2, {
+    className: styles$e['year']
+  }, year), /*#__PURE__*/React.createElement(Button$1, {
     onClick: react.exports.useCallback(() => setYear(year + 1), [year]),
     size: "tiny",
     variant: "icon"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-arrow-right"
-  }))), /*#__PURE__*/React.createElement(Spacer$1, {
+  }))), /*#__PURE__*/React.createElement(Spacer, {
     space: "tiny"
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$n['grid-container']
+    className: styles$e['grid-container']
   }, renderMonths()));
 };
 
@@ -25064,17 +28646,17 @@ const Picker = ({
   const [range, setRange] = react.exports.useState(null);
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "layoutMonthRangePicker",
-    className: styles$n['month-range-picker']
-  }, /*#__PURE__*/React.createElement(Spacer$1, {
+    className: styles$e['month-range-picker']
+  }, /*#__PURE__*/React.createElement(Spacer, {
     space: "tiny"
   }), /*#__PURE__*/React.createElement(MonthRangePicker, {
     maxDate: maxDate,
     minDate: minDate,
     onChange: setRange,
     i18nHandler: i18nHandler
-  }), /*#__PURE__*/React.createElement(Spacer$1, {
+  }), /*#__PURE__*/React.createElement(Spacer, {
     space: "tiny"
-  }), /*#__PURE__*/React.createElement(Button$2, {
+  }), /*#__PURE__*/React.createElement(Button$1, {
     onClick: react.exports.useCallback(() => onChange(range), [range]),
     size: "tiny"
   }, i18n.apply));
@@ -25095,105 +28677,7 @@ Picker.defaultProps = {
   i18n: {}
 };
 
-var css_248z$q = ".Notification-module_text--truncate__arh3w {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Notification-module_notification__WfYqO {\n  position: relative;\n  padding: 10px 15px;\n  line-height: 1;\n  color: white;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.1);\n}\n.Notification-module_notification__WfYqO i {\n  align-items: center;\n  color: white;\n}\n.Notification-module_notification__WfYqO button {\n  background: transparent;\n  color: white;\n}\n.Notification-module_notification__WfYqO button:hover, .Notification-module_notification__WfYqO button:active, .Notification-module_notification__WfYqO button:focus {\n  background: transparent;\n  color: white;\n}\n.Notification-module_notification__WfYqO button:hover i, .Notification-module_notification__WfYqO button:active i, .Notification-module_notification__WfYqO button:focus i {\n  color: white;\n}\n\n.Notification-module_notification__message__t9f44 {\n  padding: 0 15px;\n  text-align: left;\n  flex: 2;\n  margin: 0;\n  font-size: 14px;\n  width: 210px;\n}\n\n.Notification-module_notification--alert__jphqx {\n  background: #ff3245;\n}\n.Notification-module_notification--warning__ttBUE {\n  background: #ffb000;\n}\n.Notification-module_notification--success__7CBET {\n  background: #29b662;\n}\n.Notification-module_notification--info__tmglJ {\n  background: #5d92ff;\n}\n.Notification-module_notification--pending__w867P {\n  background: #7988a0;\n}\n\n.Notification-module_content__xt6uE {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.Notification-module_time__IY7UF {\n  margin-top: 3px;\n  background-color: white;\n  display: block;\n  animation: Notification-module_load__An5Ps 5s normal forwards;\n  height: 3px;\n  left: 0;\n}\n\n@keyframes Notification-module_load__An5Ps {\n  0% {\n    width: 0;\n  }\n  100% {\n    width: 100%;\n  }\n}";
-var styles$m = {"text--truncate":"Notification-module_text--truncate__arh3w","notification":"Notification-module_notification__WfYqO","notification__message":"Notification-module_notification__message__t9f44","notification--alert":"Notification-module_notification--alert__jphqx","notification--warning":"Notification-module_notification--warning__ttBUE","notification--success":"Notification-module_notification--success__7CBET","notification--info":"Notification-module_notification--info__tmglJ","notification--pending":"Notification-module_notification--pending__w867P","content":"Notification-module_content__xt6uE","time":"Notification-module_time__IY7UF","load":"Notification-module_load__An5Ps"};
-styleInject(css_248z$q);
-
-/**
- * Notification - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: `notification`
- * @param {string} props.type - type of notification `info, success, warning, alert`
- * @param {bool} props.isClosable - show close
- * @param {bool} props.onClick - gets called when the user clicks on backdrop
- * @param {bool} props.hasTime - hasTime
- * @return {object} An object of children element
- */
-
-const Notification = ({
-  children,
-  className,
-  type,
-  isClosable,
-  onClick,
-  hasTime
-}) => {
-  const elementStyles = useStyles({
-    [styles$m['notification']]: true,
-    [styles$m[`notification--${type}`]]: type
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    className: elementStyles
-  }, /*#__PURE__*/React.createElement("div", {
-    className: styles$m.content
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: mapIconToClass(type) || 'icon-ok',
-    iconColor: "white"
-  }), /*#__PURE__*/React.createElement("p", {
-    className: styles$m.notification__message
-  }, children), isClosable && /*#__PURE__*/React.createElement(Close$1, {
-    onClick: onClick,
-    iconColor: "white"
-  })), hasTime && /*#__PURE__*/React.createElement("span", {
-    className: styles$m.time
-  }));
-};
-
-Notification.displayName = 'Notification';
-Notification.propTypes = {
-  children: propTypes.exports.oneOfType([propTypes.exports.node, propTypes.exports.string, propTypes.exports.func]),
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  hasTime: propTypes.exports.bool,
-  isClosable: propTypes.exports.bool,
-  onClick: propTypes.exports.func,
-  type: propTypes.exports.oneOf(['info', 'success', 'warning', 'alert'])
-};
-Notification.defaultProps = {
-  className: 'notification',
-  type: 'info',
-  hasTime: false,
-  isClosable: false,
-  onClick: () => null
-};
-
-var css_248z$p = ".Overflow-module_text--truncate__gxBOP {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Overflow-module_overflow__KDqwd {\n  overflow-x: hidden;\n}";
-var styles$l = {"text--truncate":"Overflow-module_text--truncate__gxBOP","overflow":"Overflow-module_overflow__KDqwd"};
-styleInject(css_248z$p);
-
-/**
- * Overflow - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - childrens
- * @param {string|array} props.className - list of class names
- * @return {object} An object of children element
- */
-
-const Overflow = ({
-  children,
-  className
-}) => {
-  const elementClasses = useStyles({
-    [styles$l['overflow']]: true
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    className: elementClasses
-  }, children);
-};
-
-Overflow.displayName = 'Overflow';
-Overflow.propTypes = {
-  children: propTypes.exports.node,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
-};
-Overflow.defaultProps = {
-  children: null,
-  className: ''
-};
-
-var css_248z$o = ".OverflowTooltip-module_text--truncate__y3rfN {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.OverflowTooltip-module_overflow-tooltip__2NtuG {\n  display: flex;\n}\n.OverflowTooltip-module_overflow-tooltip__2NtuG div:first-child {\n  padding-right: 5px;\n}";
-var styles$k = {"text--truncate":"OverflowTooltip-module_text--truncate__y3rfN","overflow-tooltip":"OverflowTooltip-module_overflow-tooltip__2NtuG"};
-styleInject(css_248z$o);
+var styles$d = {"text--truncate":"OverflowTooltip-module_text--truncate__y3rfN","overflow-tooltip":"OverflowTooltip-module_overflow-tooltip__2NtuG"};
 
 /**
  * OverflowTooltip - stateless presentational component
@@ -25213,20 +28697,20 @@ const OverflowTooltip = ({
   className
 }) => {
   const elementClasses = useStyles({
-    [styles$k['overflow-tooltip']]: true
+    [styles$d['overflow-tooltip']]: true
   }, className);
 
   if (content?.length > length) {
     return children ? /*#__PURE__*/React.createElement("div", {
       "data-testid": "overflow-tooltip",
       className: elementClasses
-    }, /*#__PURE__*/React.createElement("div", null, `${content.slice(0, length).trim()}...`), /*#__PURE__*/React.createElement(Tooltip$1, {
+    }, /*#__PURE__*/React.createElement("div", null, `${content.slice(0, length).trim()}...`), /*#__PURE__*/React.createElement(Tooltip, {
       content: content,
       placement: placement
     }, children)) : /*#__PURE__*/React.createElement("div", {
       "data-testid": "overflow-tooltip",
       className: elementClasses
-    }, /*#__PURE__*/React.createElement(Tooltip$1, {
+    }, /*#__PURE__*/React.createElement(Tooltip, {
       content: content,
       placement: placement
     }, /*#__PURE__*/React.createElement("div", null, `${content.slice(0, length).trim()}...`)));
@@ -25250,130 +28734,7 @@ OverflowTooltip.defaultProps = {
   placement: 'right'
 };
 
-var css_248z$n = ".Panel-module_text--truncate__cvEeJ {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Panel-module_panel__nwNeT {\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\n  background-color: white;\n  margin-bottom: 3px;\n}\n.Panel-module_panel--background__-eNL2 {\n  background-color: #2550aa;\n}\n.Panel-module_panel--background__-eNL2 > span {\n  color: white;\n}\n.Panel-module_panel--padding-default__ISqNw {\n  padding: 30px;\n}\n.Panel-module_panel--padding-tiny__xKQgr {\n  padding: 10px 0;\n}\n.Panel-module_panel--padding-nolr__9MCjC {\n  padding: 30px 0 10px;\n}\n.Panel-module_panel--padding-none__IyINM {\n  padding: 0;\n}\n.Panel-module_panel--padding-bottom-tiny__AdPMa {\n  padding: 0 0 10px;\n}\n.Panel-module_panel--padding-input__WzDvo {\n  padding: 30px 30px 10px 30px;\n}\n.Panel-module_panel--adjust-height__SQ9Ui {\n  height: 100%;\n}\n.Panel-module_panel--shadow-none__L3VRp {\n  box-shadow: none;\n}";
-var styles$j = {"text--truncate":"Panel-module_text--truncate__cvEeJ","panel":"Panel-module_panel__nwNeT","panel--background":"Panel-module_panel--background__-eNL2","panel--padding-default":"Panel-module_panel--padding-default__ISqNw","panel--padding-tiny":"Panel-module_panel--padding-tiny__xKQgr","panel--padding-nolr":"Panel-module_panel--padding-nolr__9MCjC","panel--padding-none":"Panel-module_panel--padding-none__IyINM","panel--padding-bottom-tiny":"Panel-module_panel--padding-bottom-tiny__AdPMa","panel--padding-input":"Panel-module_panel--padding-input__WzDvo","panel--adjust-height":"Panel-module_panel--adjust-height__SQ9Ui","panel--shadow-none":"Panel-module_panel--shadow-none__L3VRp"};
-styleInject(css_248z$n);
-
-/**
- * Panel - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {object} props.children - children
- * @param {string} props.variant - variant
- * @param {bool} props.adjustHeight - adjust panel height to container height
- * @param {bool} props.isBackground - add background
- * @param {bool} props.hasShadow - panel shadow, default true
- * @return {object} An object of children element
- */
-
-const Panel = ({
-  className,
-  children,
-  variant,
-  adjustHeight,
-  isBackground,
-  hasShadow
-}) => {
-  const elementClasses = useStyles({
-    [styles$j['panel']]: true,
-    [styles$j['panel--adjust-height']]: adjustHeight,
-    [styles$j['panel--background']]: isBackground,
-    [styles$j['panel--background']]: !hasShadow,
-    [styles$j[`panel--${variant}`]]: variant
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    className: elementClasses
-  }, children);
-};
-
-Panel.displayName = 'Panel';
-Panel.propTypes = {
-  adjustHeight: propTypes.exports.bool,
-  children: propTypes.exports.node.isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  hasShadow: propTypes.exports.bool,
-  isBackground: propTypes.exports.bool,
-  variant: propTypes.exports.oneOf(['padding-default', 'padding-nolr', 'padding-tiny', 'padding-none', 'padding-bottom-tiny', 'padding-input', 'padding-huge'])
-};
-Panel.defaultProps = {
-  adjustHeight: false,
-  className: '',
-  hasShadow: true,
-  isBackground: false,
-  variant: 'padding-default'
-};
-
-var css_248z$m = ".Paragraph-module_text--truncate__9vDI7 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Paragraph-module_paragraph__RPQE0 {\n  margin: 0;\n}\n.Paragraph-module_paragraph-uppercase__A2oby {\n  text-transform: uppercase;\n}\n.Paragraph-module_paragraph-padding--medium__n08e3 {\n  padding: 0 0 15px;\n}\n.Paragraph-module_paragraph-padding--small__PT8Gv {\n  padding: 10px;\n}\n.Paragraph-module_paragraph-padding--none__vMqWI {\n  padding: 0;\n}\n.Paragraph-module_paragraph-align--left__ZjYgF {\n  text-align: left;\n}\n.Paragraph-module_paragraph-align--center__gKf1d {\n  text-align: center;\n}\n.Paragraph-module_paragraph-align--right__vVOG2 {\n  text-align: right;\n}\n.Paragraph-module_paragraph-color--accent-1__FFWMc {\n  color: #1f1f1f;\n  line-height: 20px;\n}\n.Paragraph-module_paragraph-color--accent-2__-cKAe {\n  color: #7b7b7b;\n  line-height: 20px;\n}\n.Paragraph-module_paragraph-color--accent-3__LBh-v {\n  color: #a7a7a7;\n  line-height: 20px;\n}\n.Paragraph-module_paragraph-color--accent-4__SO04S {\n  color: #f2f2f2;\n}\n.Paragraph-module_paragraph-color--accent-5__sbq6v {\n  color: #4c4c4c;\n}\n.Paragraph-module_paragraph-color--accent-6__FocSG {\n  color: #d8d8d8;\n}\n.Paragraph-module_paragraph-color--accent-7__xErhj {\n  color: #333;\n}\n.Paragraph-module_paragraph-color--info__7PTO6 {\n  color: #5d92ff;\n}\n.Paragraph-module_paragraph-color--white__VvZPs {\n  color: white;\n}\n.Paragraph-module_paragraph-color--color-8__SA-2- {\n  color: #a7a7a7;\n}\n.Paragraph-module_paragraph-size--10__19FM2 {\n  font-size: 10px;\n}\n.Paragraph-module_paragraph-size--12__QvBjN {\n  font-size: 12px;\n}\n.Paragraph-module_paragraph-size--14__PpMUI {\n  font-size: 14px;\n}\n.Paragraph-module_paragraph-size--16__wZWua {\n  font-size: 16px;\n}\n.Paragraph-module_paragraph-size--18__QHIvC {\n  font-size: 18px;\n}\n.Paragraph-module_paragraph-weight--300__5vaXV {\n  font-weight: 300;\n}\n.Paragraph-module_paragraph-weight--400__X8AMy {\n  font-weight: 400;\n}\n.Paragraph-module_paragraph-weight--700__xmRe6 {\n  font-weight: 700;\n}\n.Paragraph-module_paragraph-line--18__myvqm {\n  line-height: 18px;\n}\n.Paragraph-module_paragraph-line--20__4WrdL {\n  line-height: 20px;\n}";
-var styles$i = {"text--truncate":"Paragraph-module_text--truncate__9vDI7","paragraph":"Paragraph-module_paragraph__RPQE0","paragraph-uppercase":"Paragraph-module_paragraph-uppercase__A2oby","paragraph-padding--medium":"Paragraph-module_paragraph-padding--medium__n08e3","paragraph-padding--small":"Paragraph-module_paragraph-padding--small__PT8Gv","paragraph-padding--none":"Paragraph-module_paragraph-padding--none__vMqWI","paragraph-align--left":"Paragraph-module_paragraph-align--left__ZjYgF","paragraph-align--center":"Paragraph-module_paragraph-align--center__gKf1d","paragraph-align--right":"Paragraph-module_paragraph-align--right__vVOG2","paragraph-color--accent-1":"Paragraph-module_paragraph-color--accent-1__FFWMc","paragraph-color--accent-2":"Paragraph-module_paragraph-color--accent-2__-cKAe","paragraph-color--accent-3":"Paragraph-module_paragraph-color--accent-3__LBh-v","paragraph-color--accent-4":"Paragraph-module_paragraph-color--accent-4__SO04S","paragraph-color--accent-5":"Paragraph-module_paragraph-color--accent-5__sbq6v","paragraph-color--accent-6":"Paragraph-module_paragraph-color--accent-6__FocSG","paragraph-color--accent-7":"Paragraph-module_paragraph-color--accent-7__xErhj","paragraph-color--info":"Paragraph-module_paragraph-color--info__7PTO6","paragraph-color--white":"Paragraph-module_paragraph-color--white__VvZPs","paragraph-color--color-8":"Paragraph-module_paragraph-color--color-8__SA-2-","paragraph-size--10":"Paragraph-module_paragraph-size--10__19FM2","paragraph-size--12":"Paragraph-module_paragraph-size--12__QvBjN","paragraph-size--14":"Paragraph-module_paragraph-size--14__PpMUI","paragraph-size--16":"Paragraph-module_paragraph-size--16__wZWua","paragraph-size--18":"Paragraph-module_paragraph-size--18__QHIvC","paragraph-weight--300":"Paragraph-module_paragraph-weight--300__5vaXV","paragraph-weight--400":"Paragraph-module_paragraph-weight--400__X8AMy","paragraph-weight--700":"Paragraph-module_paragraph-weight--700__xmRe6","paragraph-line--18":"Paragraph-module_paragraph-line--18__myvqm","paragraph-line--20":"Paragraph-module_paragraph-line--20__4WrdL"};
-styleInject(css_248z$m);
-
-/**
- * Paragraph - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {object} props.children - children
- * @param {string} props.color - color
- * @param {number} props.size - size
- * @param {string} props.align - align
- * @param {string} props.padding - padding
- * @param {number} props.weight - weight
- * @param {boolean} props.uppercase - weight
- * @param {number} props.line - line height
- * @return {object} An object of children element
- */
-
-const Paragraph = ({
-  className,
-  children,
-  color,
-  size,
-  align,
-  padding,
-  weight,
-  uppercase,
-  line
-}) => {
-  const paragraphStyles = useStyles({
-    [styles$i['paragraph']]: true,
-    [styles$i[`paragraph-color--${color}`]]: color,
-    [styles$i[`paragraph-size--${size}`]]: size,
-    [styles$i[`paragraph-padding--${padding}`]]: padding,
-    [styles$i[`paragraph-align--${align}`]]: align,
-    [styles$i[`paragraph-weight--${weight}`]]: weight,
-    [styles$i['paragraph-uppercase']]: uppercase,
-    [styles$i[`paragraph-line--${line}`]]: line
-  }, className);
-  return /*#__PURE__*/React.createElement("p", {
-    className: paragraphStyles
-  }, children);
-};
-
-Paragraph.displayName = 'Paragraph';
-Paragraph.propTypes = {
-  children: propTypes.exports.node.isRequired,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  color: propTypes.exports.oneOf(['accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5', 'accent-6', 'accent-7', 'info', 'white']),
-  size: propTypes.exports.oneOf([10, 12, 14, 16, 18]),
-  align: propTypes.exports.oneOf(['left', 'center', 'right']),
-  padding: propTypes.exports.oneOf(['small', 'medium', 'none']),
-  weight: propTypes.exports.oneOf([300, 400, 700]),
-  uppercase: propTypes.exports.bool,
-  line: propTypes.exports.oneOf([18, 20])
-};
-Paragraph.defaultProps = {
-  className: '',
-  color: 'accent-1',
-  size: 14,
-  align: 'left',
-  padding: 'medium',
-  weight: 300,
-  uppercase: false,
-  line: 18
-};
-
-var css_248z$l = ".ProgressBar-module_text--truncate__6JuFs {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ProgressBar-module_bar__-Hy4j {\n  height: 12px;\n  position: absolute;\n  border-radius: 250px;\n}\n.ProgressBar-module_bar__background__BnH5Z {\n  width: 100%;\n  opacity: 0.2;\n}\n.ProgressBar-module_bar__fulfillment__JKEcA {\n  animation: ProgressBar-module_fill__MAyGB 2s ease-out;\n}\n.ProgressBar-module_bar__fulfillment--bordered__rwwW7 {\n  top: 3px;\n  left: 3px;\n  height: 10px;\n}\n.ProgressBar-module_bar__fulfillment--no-animation__ldkwq {\n  animation: none;\n}\n.ProgressBar-module_bar--success__JHy8w {\n  background-color: #29b662;\n}\n.ProgressBar-module_bar--warning__9DBaw {\n  background-color: #ffb000;\n}\n.ProgressBar-module_bar--alert__OOCR3 {\n  background-color: #ff3245;\n}\n.ProgressBar-module_bar--progress__iUDM4 {\n  background-color: #5d92ff;\n}\n.ProgressBar-module_bar--brand__XxZ0d {\n  background-color: #2550aa;\n}\n.ProgressBar-module_bar__border--white__t-gmt {\n  border: 3px solid white;\n  background-color: white;\n  opacity: 1;\n  height: 10px;\n}\n.ProgressBar-module_bar__border--grey__8LQrR {\n  border: 3px solid #f2f2f2;\n  background-color: #f2f2f2;\n  opacity: 1;\n  height: 10px;\n}\n\n.ProgressBar-module_container__dkF5C {\n  position: relative;\n  margin-bottom: 15px;\n}\n.ProgressBar-module_container--bordered__jdIqc {\n  margin-right: 6px;\n}\n\n.ProgressBar-module_max-result__uVdqv {\n  display: flex;\n  justify-content: flex-end;\n  align-items: baseline;\n  color: #cccccc;\n  font-size: 14px;\n}\n\n.ProgressBar-module_limit-exceeded__info__WKoNi {\n  font-size: 12px;\n  display: flex;\n  justify-content: flex-end;\n  color: #4c4c4c;\n}\n\n@keyframes ProgressBar-module_fill__MAyGB {\n  0% {\n    width: 0px;\n  }\n}";
-var styles$h = {"text--truncate":"ProgressBar-module_text--truncate__6JuFs","bar":"ProgressBar-module_bar__-Hy4j","bar__background":"ProgressBar-module_bar__background__BnH5Z","bar__fulfillment":"ProgressBar-module_bar__fulfillment__JKEcA","fill":"ProgressBar-module_fill__MAyGB","bar__fulfillment--bordered":"ProgressBar-module_bar__fulfillment--bordered__rwwW7","bar__fulfillment--no-animation":"ProgressBar-module_bar__fulfillment--no-animation__ldkwq","bar--success":"ProgressBar-module_bar--success__JHy8w","bar--warning":"ProgressBar-module_bar--warning__9DBaw","bar--alert":"ProgressBar-module_bar--alert__OOCR3","bar--progress":"ProgressBar-module_bar--progress__iUDM4","bar--brand":"ProgressBar-module_bar--brand__XxZ0d","bar__border--white":"ProgressBar-module_bar__border--white__t-gmt","bar__border--grey":"ProgressBar-module_bar__border--grey__8LQrR","container":"ProgressBar-module_container__dkF5C","container--bordered":"ProgressBar-module_container--bordered__jdIqc","max-result":"ProgressBar-module_max-result__uVdqv","limit-exceeded__info":"ProgressBar-module_limit-exceeded__info__WKoNi"};
-styleInject(css_248z$l);
+var styles$c = {"text--truncate":"ProgressBar-module_text--truncate__6JuFs","bar":"ProgressBar-module_bar__-Hy4j","bar__background":"ProgressBar-module_bar__background__BnH5Z","bar__fulfillment":"ProgressBar-module_bar__fulfillment__JKEcA","fill":"ProgressBar-module_fill__MAyGB","bar__fulfillment--bordered":"ProgressBar-module_bar__fulfillment--bordered__rwwW7","bar__fulfillment--no-animation":"ProgressBar-module_bar__fulfillment--no-animation__ldkwq","bar--success":"ProgressBar-module_bar--success__JHy8w","bar--warning":"ProgressBar-module_bar--warning__9DBaw","bar--alert":"ProgressBar-module_bar--alert__OOCR3","bar--progress":"ProgressBar-module_bar--progress__iUDM4","bar--brand":"ProgressBar-module_bar--brand__XxZ0d","bar__border--white":"ProgressBar-module_bar__border--white__t-gmt","bar__border--grey":"ProgressBar-module_bar__border--grey__8LQrR","container":"ProgressBar-module_container__dkF5C","container--bordered":"ProgressBar-module_container--bordered__jdIqc","max-result":"ProgressBar-module_max-result__uVdqv","limit-exceeded__info":"ProgressBar-module_limit-exceeded__info__WKoNi"};
 
 /**
  * Progress Bar - stateless presentational component
@@ -25400,21 +28761,21 @@ const ProgressBar = ({
   withoutAnimation
 }) => {
   const containerStyles = useStyles({
-    [styles$h['container']]: true,
-    [styles$h['container--bordered']]: border
+    [styles$c['container']]: true,
+    [styles$c['container--bordered']]: border
   });
   const backgroundStyles = useStyles({
-    [styles$h['bar']]: true,
-    [styles$h['bar__background']]: true,
-    [styles$h[`bar--${variant}`]]: true,
-    [styles$h[`bar__border--${border}`]]: border
+    [styles$c['bar']]: true,
+    [styles$c['bar__background']]: true,
+    [styles$c[`bar--${variant}`]]: true,
+    [styles$c[`bar__border--${border}`]]: border
   });
   const fulfillmentStyles = useStyles({
-    [styles$h['bar']]: true,
-    [styles$h['bar__fulfillment']]: true,
-    [styles$h[`bar--${variant}`]]: true,
-    [styles$h['bar__fulfillment--bordered']]: border,
-    [styles$h['bar__fulfillment--no-animation']]: withoutAnimation
+    [styles$c['bar']]: true,
+    [styles$c['bar__fulfillment']]: true,
+    [styles$c[`bar--${variant}`]]: true,
+    [styles$c['bar__fulfillment--bordered']]: border,
+    [styles$c['bar__fulfillment--no-animation']]: withoutAnimation
   });
   return /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: containerStyles
@@ -25428,11 +28789,11 @@ const ProgressBar = ({
       width: `${quantity / limit * 100}%`
     }
   })), limitExceededInfo && /*#__PURE__*/React.createElement("span", {
-    className: styles$h['limit-exceeded__info']
+    className: styles$c['limit-exceeded__info']
   }, "limitExceededInfo"), showColorNumber && /*#__PURE__*/React.createElement("span", {
     "data-testid": "color-number",
-    className: styles$h['max-result']
-  }, /*#__PURE__*/React.createElement(ColorNumber$1, {
+    className: styles$c['max-result']
+  }, /*#__PURE__*/React.createElement(ColorNumber, {
     variant: variant,
     size: size
   }, quantity), "/", limit));
@@ -25459,212 +28820,7 @@ ProgressBar.defaultProps = {
   withoutAnimation: false
 };
 
-var css_248z$k = ".Search-module_text--truncate__bsqbP {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Search-module_search__u3QsV {\n  display: flex;\n  align-content: center;\n  align-items: center;\n  flex: 1;\n  box-sizing: border-box;\n}\n.Search-module_search__input__UDAiT,\n.Search-module_search__u3QsV input {\n  box-sizing: border-box;\n  border: 0;\n  padding: 0 36px 0 44px;\n  flex: 1;\n  line-height: 1;\n  position: absolute;\n  left: 0;\n  right: 0;\n  height: 100%;\n  width: 100%;\n  box-shadow: none;\n  font-size: 1em;\n}\n.Search-module_search__input__UDAiT::placeholder,\n.Search-module_search__u3QsV input::placeholder {\n  color: #a7a7a7;\n}\n.Search-module_search__input__UDAiT:focus, .Search-module_search__input__UDAiT:active,\n.Search-module_search__u3QsV input:focus,\n.Search-module_search__u3QsV input:active {\n  box-shadow: 0px 3px 6px 0px rgba(221, 221, 221, 0.7);\n  outline: none;\n}\n.Search-module_search__clean__KT3Pk {\n  position: absolute;\n  right: 2px;\n}\n.Search-module_search__icon__yqFzh {\n  z-index: 1;\n  position: absolute;\n  left: 15px;\n  top: 50%;\n  transform: translateY(-50%);\n}\n.Search-module_search__icon__yqFzh svg,\n.Search-module_search__icon__yqFzh i {\n  color: #d8d8d8;\n}\n.Search-module_search__icon-button__T5qYo {\n  z-index: 1;\n  position: absolute;\n  left: 2px;\n}\n.Search-module_search--small__ooJ42 {\n  height: 28px;\n  font-size: 12px;\n  padding: 0 36px 0 34px;\n}\n.Search-module_search--medium__1Pk1C {\n  height: 38px;\n  font-size: 14px;\n}\n.Search-module_search--large__Zj4UH {\n  height: 44px;\n  font-size: 16px;\n}\n.Search-module_search--input__qhH5U {\n  border: 1px solid #dddddd;\n  position: relative;\n}";
-var styles$g = {"text--truncate":"Search-module_text--truncate__bsqbP","search":"Search-module_search__u3QsV","search__input":"Search-module_search__input__UDAiT","search__clean":"Search-module_search__clean__KT3Pk","search__icon":"Search-module_search__icon__yqFzh","search__icon-button":"Search-module_search__icon-button__T5qYo","search--small":"Search-module_search--small__ooJ42","search--medium":"Search-module_search--medium__1Pk1C","search--large":"Search-module_search--large__Zj4UH","search--input":"Search-module_search--input__qhH5U"};
-styleInject(css_248z$k);
-
-/**
- * Search - stateful presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `search`
- * @param {string} props.variant - variant input or button action default: `input`
- * @param {func} props.onChange - change handler
- * @param {func} props.onKeyDown - key click handler
- * @param {bool} props.autoFocus - autofocus
- * @param {object} props.children - children
- * @param {string} props.size - size of search field `small, medium, large`
- * @param {string} props.label - input label
- * @param {func} props.onSubmit - handle action on form submit
- * @param {func} props.onClean- handle action on form clean
- * @param {object} props.i18n - object of translations
- * @param {string} props.tag - tag
- * @param {func} props.onProtectedSubmit - submit triggered by enter/button but event is immidiately stopped, useful for searchers in forms
- * @param {boolean} props.submitEmptyOnBlur - submit triggered onBlur when value is empty
- * @param {string} props.defaultValue - default value of input
- * @return {object} An object of children element
- */
-
-const Search = ({
-  className,
-  variant,
-  onChange,
-  onKeyDown,
-  autoFocus,
-  children,
-  size,
-  onSubmit,
-  onClean,
-  i18n,
-  tag: Tag,
-  onProtectedSubmit,
-  submitEmptyOnBlur,
-  defaultValue
-}) => {
-  const elementClasses = useStyles({
-    [styles$g['search']]: true,
-    [styles$g[`search--${variant}`]]: variant,
-    [styles$g[`search--${size}`]]: true
-  }, className);
-  const [isClearActive, setClearActive] = react.exports.useState(!!defaultValue);
-  const inputRef = react.exports.useRef();
-  /**
-   * Handle input clean
-   * @type {function}
-   */
-
-  const handleCleanOnClick = react.exports.useCallback(() => {
-    inputRef.current.value = '';
-    setClearActive(false);
-    onChange();
-    onClean();
-
-    if (submitEmptyOnBlur) {
-      onSubmit();
-    }
-  }, []);
-  const onBlur = react.exports.useCallback(() => {
-    if (inputRef.current.value === '' && submitEmptyOnBlur) {
-      onSubmit();
-    }
-  }, []);
-  /**
-   * Handle input keyup
-   * @type {function}
-   */
-
-  const handleOnKeyUp = react.exports.useCallback(event => setClearActive(event.target.value), []);
-  /**
-   * Handle input key down
-   * @type {function}
-   */
-
-  const handleOnKeyDown = react.exports.useCallback(event => {
-    if (event.key === 'Enter' && !onSubmit) {
-      event.preventDefault();
-      handleProtectedSubmit(inputRef.current.value);
-    }
-  }, []);
-  /**
-   * Handle on form submit
-   * @type {function}
-   */
-
-  const handleSubmit = react.exports.useCallback(event => {
-    event.preventDefault();
-
-    if (onSubmit) {
-      onSubmit(inputRef.current.value);
-    } else {
-      onChange();
-    }
-  }, []);
-  /**
-   * Handle on form submit
-   * @type {function}
-   */
-
-  const handleProtectedSubmit = react.exports.useCallback(() => {
-    onProtectedSubmit && onProtectedSubmit(inputRef.current.value);
-  }, []);
-  /**
-   * useEffect
-   */
-
-  react.exports.useEffect(() => {
-    autoFocus && variant === 'input' && inputRef.current.focus();
-  }, []);
-  return /*#__PURE__*/React.createElement(Tag, {
-    onSubmit: handleSubmit
-  }, /*#__PURE__*/React.createElement("div", {
-    className: elementClasses
-  }, variant === 'input' && (onSubmit || onProtectedSubmit ? /*#__PURE__*/React.createElement("div", {
-    className: styles$g['search__icon-button']
-  }, /*#__PURE__*/React.createElement(Button$2, {
-    variant: "icon-transparent",
-    type: onProtectedSubmit ? 'button' : 'submit',
-    size: "input",
-    isDisabled: !isClearActive,
-    onClick: handleProtectedSubmit
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: "icon-search"
-  }))) : /*#__PURE__*/React.createElement("div", {
-    className: styles$g.search__icon
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: "icon-search"
-  }))), children && variant === 'button' && /*#__PURE__*/React.createElement(InputComponent, {
-    label: i18n.label,
-    name: "search",
-    type: "text",
-    onChange: onChange,
-    onKeyDown: onKeyDown,
-    autoFocus: autoFocus
-  }), variant === 'input' && /*#__PURE__*/React.createElement("input", {
-    autoFocus: autoFocus,
-    ref: inputRef,
-    className: styles$g.search__input,
-    type: "text",
-    name: "search",
-    placeholder: i18n.placeholder,
-    onChange: onChange,
-    onBlur: onBlur,
-    onKeyDown: handleOnKeyDown,
-    onKeyUp: handleOnKeyUp,
-    defaultValue: defaultValue,
-    "data-testid": "search-input"
-  }), isClearActive && variant === 'input' && /*#__PURE__*/React.createElement("div", {
-    className: styles$g.search__clean
-  }, /*#__PURE__*/React.createElement(Button$2, {
-    variant: "icon-transparent",
-    size: "input",
-    onClick: handleCleanOnClick
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: "icon-remove"
-  }))), children && variant === 'button' && children));
-};
-
-Search.displayName = 'Search';
-Search.propTypes = {
-  className: propTypes.exports.string,
-  children: propTypes.exports.node,
-  onChange: propTypes.exports.func,
-  onKeyDown: propTypes.exports.func,
-  size: propTypes.exports.oneOf(['small', 'medium', 'large']),
-  autoFocus: propTypes.exports.bool,
-  variant: propTypes.exports.oneOf(['input', 'button']),
-  i18n: propTypes.exports.shape({
-    placeholder: propTypes.exports.string,
-    label: propTypes.exports.string
-  }),
-  onSubmit: propTypes.exports.func,
-  onClean: propTypes.exports.func,
-  tag: propTypes.exports.string,
-  onProtectedSubmit: propTypes.exports.func,
-  submitEmptyOnBlur: propTypes.exports.bool,
-  defaultValue: propTypes.exports.string
-};
-Search.defaultProps = {
-  className: '',
-  tag: 'form',
-  size: 'medium',
-  variant: 'input',
-  i18n: {
-    placeholder: null,
-    label: null
-  },
-  children: null,
-  onSubmit: null,
-  onClean: () => null,
-  onProtectedSubmit: null,
-  autoFocus: false,
-  onChange: () => null,
-  onKeyDown: () => null,
-  submitEmptyOnBlur: false,
-  defaultValue: ''
-};
-
-var css_248z$j = ".Section-module_text--truncate__D1keY {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Section-module_section-space--medium__22v4A {\n  padding: 15px 0;\n}\n\n.Section-module_section-space--huge__eFB-D {\n  padding: 50px 0;\n}\n\n.Section-module_layout-width--full__9lki5 {\n  width: 100%;\n  margin: 0 auto;\n}\n\n.Section-module_section-bg--default__w2eqd {\n  background: #f5f5f5;\n}\n\n.Section-module_section-bg--white__SrgWf {\n  background: white;\n}";
-var styles$f = {"text--truncate":"Section-module_text--truncate__D1keY","section-space--medium":"Section-module_section-space--medium__22v4A","section-space--huge":"Section-module_section-space--huge__eFB-D","layout-width--full":"Section-module_layout-width--full__9lki5","section-bg--default":"Section-module_section-bg--default__w2eqd","section-bg--white":"Section-module_section-bg--white__SrgWf"};
-styleInject(css_248z$j);
+var styles$b = {"text--truncate":"Section-module_text--truncate__D1keY","section-space--medium":"Section-module_section-space--medium__22v4A","section-space--huge":"Section-module_section-space--huge__eFB-D","layout-width--full":"Section-module_layout-width--full__9lki5","section-bg--default":"Section-module_section-bg--default__w2eqd","section-bg--white":"Section-module_section-bg--white__SrgWf"};
 
 /**
  * Section - stateless presentational component
@@ -25685,10 +28841,10 @@ const Section = ({
   background
 }) => {
   const elementClasses = useStyles({
-    [styles$f['section']]: true,
-    [styles$f[`section-space--${space}`]]: space,
-    [styles$f[`layout-width--${width}`]]: width,
-    [styles$f[`section-bg--${background}`]]: background
+    [styles$b['section']]: true,
+    [styles$b[`section-space--${space}`]]: space,
+    [styles$b[`layout-width--${width}`]]: width,
+    [styles$b[`section-bg--${background}`]]: background
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     className: elementClasses
@@ -25710,9 +28866,7 @@ Section.defaultProps = {
   width: 'full'
 };
 
-var css_248z$i = ".SectionTile-module_text--truncate__g-4h6 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.SectionTile-module_section__tile__W8CpJ {\n  margin: 10px auto 10px 10px;\n  display: inline-flex;\n  justify-content: flex-start;\n  align-items: flex-start;\n  width: 340px;\n  height: 190px;\n  border: 1px solid #dfdddd;\n}\n.SectionTile-module_section__pointer-area__U7-5A {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}";
-var styles$e = {"text--truncate":"SectionTile-module_text--truncate__g-4h6","section__tile":"SectionTile-module_section__tile__W8CpJ","section__pointer-area":"SectionTile-module_section__pointer-area__U7-5A"};
-styleInject(css_248z$i);
+var styles$a = {"text--truncate":"SectionTile-module_text--truncate__g-4h6","section__tile":"SectionTile-module_section__tile__W8CpJ","section__pointer-area":"SectionTile-module_section__pointer-area__U7-5A"};
 
 /**
  * SectionTile - stateless presentational component
@@ -25731,15 +28885,15 @@ const SectionTile = ({
   onClick,
   onDoubleClick,
   isActive
-}) => /*#__PURE__*/React.createElement(BoxOutline$1, {
-  className: styles$e['section__tile'],
+}) => /*#__PURE__*/React.createElement(BoxOutline, {
+  className: styles$a['section__tile'],
   isSelected: isActive,
   padding: "none"
 }, /*#__PURE__*/React.createElement("div", {
   style: {
     background: `url(${thumbnailUrl}) center top no-repeat`
   },
-  className: styles$e['section__pointer-area'],
+  className: styles$a['section__pointer-area'],
   onClick: onClick,
   onDoubleClick: onDoubleClick
 }), children);
@@ -25787,9 +28941,7 @@ Option.defaultProps = {
   className: 'select__option'
 };
 
-var css_248z$h = ".Select-module_text--truncate__YhtvE {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Select-module_select__U4LyF {\n  border: 0;\n  background: transparent;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  padding: 0 30px 0 0;\n  background: transparent;\n  background-image: url(\"data:image/svg+xml;utf8,<svg fill='grey' height='16' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>\");\n  background-repeat: no-repeat;\n  background-position-x: 100%;\n  background-position-y: center;\n  outline: none;\n}\n\nselect::-ms-expand {\n  display: none;\n}";
-var styles$d = {"text--truncate":"Select-module_text--truncate__YhtvE","select":"Select-module_select__U4LyF"};
-styleInject(css_248z$h);
+var styles$9 = {"text--truncate":"Select-module_text--truncate__YhtvE","select":"Select-module_select__U4LyF"};
 
 /**
  * Select - stateless presentational component
@@ -25808,7 +28960,7 @@ const Select = ({
   onChange
 }) => {
   const selectStyles = useStyles({
-    [styles$d['select']]: true
+    [styles$9['select']]: true
   });
   return /*#__PURE__*/React.createElement("select", {
     className: selectStyles,
@@ -25834,9 +28986,7 @@ Select.defaultProps = {
   value: undefined
 };
 
-var css_248z$g = ".Separator-module_text--truncate__ysiIi {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Separator-module_separator__k9fO- {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.Separator-module_separator__divider__UCYek {\n  width: 100%;\n}\n.Separator-module_separator__divider--medium__Jshvq {\n  height: 4px;\n}\n.Separator-module_separator__divider--color-4__m4Hm0 {\n  background-color: #d8d8d8;\n}";
-var styles$c = {"text--truncate":"Separator-module_text--truncate__ysiIi","separator":"Separator-module_separator__k9fO-","separator__divider":"Separator-module_separator__divider__UCYek","separator__divider--medium":"Separator-module_separator__divider--medium__Jshvq","separator__divider--color-4":"Separator-module_separator__divider--color-4__m4Hm0"};
-styleInject(css_248z$g);
+var styles$8 = {"text--truncate":"Separator-module_text--truncate__ysiIi","separator":"Separator-module_separator__k9fO-","separator__divider":"Separator-module_separator__divider__UCYek","separator__divider--medium":"Separator-module_separator__divider--medium__Jshvq","separator__divider--color-4":"Separator-module_separator__divider--color-4__m4Hm0"};
 
 /**
  * Separator - stateless presentational component
@@ -25854,17 +29004,17 @@ const Separator = ({
   color
 }) => {
   const elementClasses = useStyles({
-    [styles$c['separator__divider']]: true,
-    [styles$c[`separator__divider--${size}`]]: size,
-    [styles$c[`separator__divider--${color}`]]: color
+    [styles$8['separator__divider']]: true,
+    [styles$8[`separator__divider--${size}`]]: size,
+    [styles$8[`separator__divider--${color}`]]: color
   }, className);
   return /*#__PURE__*/React.createElement("div", {
-    className: styles$c.separator
+    className: styles$8.separator
   }, /*#__PURE__*/React.createElement("div", {
     className: elementClasses
-  }), /*#__PURE__*/React.createElement(Spreader$1, {
+  }), /*#__PURE__*/React.createElement(Spreader, {
     spread: "tiny"
-  }), children, /*#__PURE__*/React.createElement(Spreader$1, {
+  }), children, /*#__PURE__*/React.createElement(Spreader, {
     spread: "tiny"
   }), /*#__PURE__*/React.createElement("div", {
     className: elementClasses
@@ -25884,9 +29034,7 @@ Separator.defaultProps = {
   color: 'color-4'
 };
 
-var css_248z$f = ".ShowMore-module_text--truncate__ATIex {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ShowMore-module_container__bQevu {\n  overflow: hidden;\n}\n\n.ShowMore-module_button__K8v-1 {\n  margin: 10px auto;\n  display: block;\n  color: #2550aa;\n  font-size: 14px;\n  background: none;\n  border: none;\n  outline: 0;\n}";
-var styles$b = {"text--truncate":"ShowMore-module_text--truncate__ATIex","container":"ShowMore-module_container__bQevu","button":"ShowMore-module_button__K8v-1"};
-styleInject(css_248z$f);
+var styles$7 = {"text--truncate":"ShowMore-module_text--truncate__ATIex","container":"ShowMore-module_container__bQevu","button":"ShowMore-module_button__K8v-1"};
 
 /**
  * Show more/less - stateful presentational component
@@ -25924,14 +29072,14 @@ const ShowMore = ({
     style: {
       maxHeight: sectionHeight
     },
-    className: styles$b.container
+    className: styles$7.container
   }, /*#__PURE__*/React.createElement("div", {
     ref: content
   }, children)), isButtonDisplay && /*#__PURE__*/React.createElement("button", {
     "data-testid": "show-more",
     type: "button",
     onClick: handleOnClick,
-    className: styles$b.button
+    className: styles$7.button
   }, isOpen.value ? `${i18n.more}` : `${i18n.less}`));
 };
 
@@ -25949,9 +29097,7 @@ ShowMore.defaultProps = {
   i18n: {}
 };
 
-var css_248z$e = ".ShowPassword-module_text--truncate__TaTch {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.ShowPassword-module_showpassword__Hguii {\n  cursor: pointer;\n}";
-var styles$a = {"text--truncate":"ShowPassword-module_text--truncate__TaTch","showpassword":"ShowPassword-module_showpassword__Hguii"};
-styleInject(css_248z$e);
+var styles$6 = {"text--truncate":"ShowPassword-module_text--truncate__TaTch","showpassword":"ShowPassword-module_showpassword__Hguii"};
 
 /**
  * ShowPassword - stateful presentational component
@@ -25987,22 +29133,22 @@ const ShowPassword = ({
     }
   });
   const showPasswordStyles = useStyles({
-    [styles$a.showpassword]: true
+    [styles$6.showpassword]: true
   }, className);
   return /*#__PURE__*/React.createElement("span", {
     className: showPasswordStyles,
     onClick: handleIconSet,
     "data-testid": "show-pasword"
-  }, hasLabel ? /*#__PURE__*/React.createElement(Button$2, {
+  }, hasLabel ? /*#__PURE__*/React.createElement(Button$1, {
     hasIcon: true,
     size: "tiny",
     variant: "switcher-brand"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: icon,
     "data-testid": icon
-  }), label) : /*#__PURE__*/React.createElement(Button$2, {
+  }), label) : /*#__PURE__*/React.createElement(Button$1, {
     variant: "icon"
-  }, /*#__PURE__*/React.createElement(Icon$1, {
+  }, /*#__PURE__*/React.createElement(Icon, {
     icon: icon
   })));
 };
@@ -26027,9 +29173,7 @@ ShowPassword.defaultProps = {
   }
 };
 
-var css_248z$d = ".Skeleton-module_text--truncate__lv5HU {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Skeleton-module_sidebarSkeleton__H9wq6 {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-top: 15px;\n}\n.Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_item__OUvJl {\n  width: 172px;\n  height: 36px;\n  margin-left: 28px;\n}\n.Skeleton-module_sidebarSkeleton__H9wq6 > .Skeleton-module_item__OUvJl:nth-child(2) .Skeleton-module_line__8roAA, .Skeleton-module_sidebarSkeleton__H9wq6 > .Skeleton-module_item__OUvJl:nth-child(4) .Skeleton-module_line__8roAA {\n  width: 60px;\n}\n.Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_circle__o-WgD {\n  float: left;\n  width: 14px;\n  height: 14px;\n  background-color: #ccc;\n  border-radius: 100%;\n  margin-right: 10px;\n  background-image: linear-gradient(90deg, #24328e 0px, #2b3ba5 40px, #24328e 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-circle-sidebar__KPSeD 1.6s infinite linear;\n}\n.Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_line__8roAA {\n  float: left;\n  width: 100px;\n  height: 14px;\n  border-radius: 7px;\n  background-image: linear-gradient(90deg, #24328e 0px, #2b3ba5 40px, #24328e 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-lines-sidebar__JaZgk 1.6s infinite linear;\n}\n.Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_line__8roAA ~ .Skeleton-module_line__8roAA {\n  background-color: #ddd;\n}\n@media all and (max-width: 1339px) {\n  .Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_item__OUvJl {\n    width: 20px;\n    margin-left: 0;\n  }\n  .Skeleton-module_sidebarSkeleton__H9wq6 .Skeleton-module_line__8roAA {\n    display: none;\n  }\n}\n\n.Skeleton-module_drawerSkeleton__HTsiz {\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-start;\n  margin-top: 5px;\n}\n.Skeleton-module_drawerSkeleton__HTsiz .Skeleton-module_item__OUvJl {\n  padding: 15px;\n  justify-content: center;\n}\n.Skeleton-module_drawerSkeleton__HTsiz .Skeleton-module_item__OUvJl .Skeleton-module_circle__o-WgD {\n  float: left;\n  width: 20px;\n  height: 20px;\n  background-color: #ccc;\n  border-radius: 100%;\n  margin: 8px 10px 10px 10px;\n  justify-content: center;\n  background-image: linear-gradient(90deg, #dddddd 0px, #eaeaea 40px, #dddddd 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-circle__zq3Zu 1.6s infinite linear;\n}\n.Skeleton-module_drawerSkeleton__HTsiz .Skeleton-module_item__OUvJl .Skeleton-module_line__8roAA {\n  float: left;\n  width: 70px;\n  height: 10px;\n  border-radius: 7px;\n  margin-top: 4px;\n  background-image: linear-gradient(90deg, #dddddd 0px, #eaeaea 40px, #dddddd 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-lines__JMxXv 1.6s infinite linear;\n}\n.Skeleton-module_drawerSkeleton__HTsiz .Skeleton-module_item__OUvJl .Skeleton-module_line__8roAA ~ .Skeleton-module_line__8roAA {\n  background-color: #ddd;\n}\n.Skeleton-module_drawerSkeleton__HTsiz .Skeleton-module_item__OUvJl > .Skeleton-module_line__8roAA:nth-child(3) {\n  margin-top: 8px;\n  width: 140px;\n}\n\n.Skeleton-module_tableSkeleton__UzoG3 {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: flex-start;\n  margin-top: 20px;\n}\n.Skeleton-module_tableSkeleton__UzoG3 .Skeleton-module_item__OUvJl {\n  margin: 0 30px;\n  display: flex;\n  justify-content: space-between;\n}\n.Skeleton-module_tableSkeleton__UzoG3 .Skeleton-module_item__OUvJl .Skeleton-module_line__8roAA {\n  width: 200px;\n  height: 25px;\n  border-radius: 7px;\n  background-image: linear-gradient(90deg, #dddddd 0px, #eaeaea 40px, #dddddd 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-lines__JMxXv 1.6s infinite linear;\n  margin: 10px 20px;\n}\n.Skeleton-module_tableSkeleton__UzoG3 .Skeleton-module_item__OUvJl .Skeleton-module_line__8roAA ~ .Skeleton-module_line__8roAA {\n  background-color: #ddd;\n}\n\n.Skeleton-module_skeleton__-VV98 .Skeleton-module_circle__o-WgD {\n  float: left;\n  width: 20px;\n  height: 20px;\n  background-color: #ccc;\n  border-radius: 100%;\n  margin-right: 20px;\n  background-image: linear-gradient(90deg, #dddddd 0px, #f5f5f5 40px, #dddddd 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-circle__zq3Zu 1.6s infinite linear;\n}\n.Skeleton-module_skeleton__-VV98 .Skeleton-module_line__8roAA {\n  float: left;\n  width: 100px;\n  height: 20px;\n  border-radius: 10px;\n  margin-right: 20px;\n  background-image: linear-gradient(90deg, #dddddd 0px, #f5f5f5 40px, #dddddd 80px);\n  background-size: 600px;\n  animation: Skeleton-module_shine-lines__JMxXv 1.6s infinite linear;\n}\n\n@keyframes Skeleton-module_shine-lines__JMxXv {\n  0% {\n    background-position: -100px;\n  }\n  40%, 100% {\n    background-position: 140px;\n  }\n}\n@keyframes Skeleton-module_shine-circle__zq3Zu {\n  0% {\n    background-position: -32px;\n  }\n  40%, 100% {\n    background-position: 208px;\n  }\n}\n@keyframes Skeleton-module_shine-lines-sidebar__JaZgk {\n  0% {\n    background-position: -100px;\n  }\n  40%, 100% {\n    background-position: 140px;\n  }\n}\n@keyframes Skeleton-module_shine-circle-sidebar__KPSeD {\n  0% {\n    background-position: -32px;\n  }\n  40%, 100% {\n    background-position: 208px;\n  }\n}";
-var styles$9 = {"text--truncate":"Skeleton-module_text--truncate__lv5HU","sidebarSkeleton":"Skeleton-module_sidebarSkeleton__H9wq6","item":"Skeleton-module_item__OUvJl","line":"Skeleton-module_line__8roAA","circle":"Skeleton-module_circle__o-WgD","shine-circle-sidebar":"Skeleton-module_shine-circle-sidebar__KPSeD","shine-lines-sidebar":"Skeleton-module_shine-lines-sidebar__JaZgk","drawerSkeleton":"Skeleton-module_drawerSkeleton__HTsiz","shine-circle":"Skeleton-module_shine-circle__zq3Zu","shine-lines":"Skeleton-module_shine-lines__JMxXv","tableSkeleton":"Skeleton-module_tableSkeleton__UzoG3","skeleton":"Skeleton-module_skeleton__-VV98"};
-styleInject(css_248z$d);
+var styles$5 = {"text--truncate":"Skeleton-module_text--truncate__lv5HU","sidebarSkeleton":"Skeleton-module_sidebarSkeleton__H9wq6","item":"Skeleton-module_item__OUvJl","line":"Skeleton-module_line__8roAA","circle":"Skeleton-module_circle__o-WgD","shine-circle-sidebar":"Skeleton-module_shine-circle-sidebar__KPSeD","shine-lines-sidebar":"Skeleton-module_shine-lines-sidebar__JaZgk","drawerSkeleton":"Skeleton-module_drawerSkeleton__HTsiz","shine-circle":"Skeleton-module_shine-circle__zq3Zu","shine-lines":"Skeleton-module_shine-lines__JMxXv","tableSkeleton":"Skeleton-module_tableSkeleton__UzoG3","skeleton":"Skeleton-module_skeleton__-VV98"};
 
 /**
  * Skeleton sidebar - stateless presentational component
@@ -26039,37 +29183,37 @@ styleInject(css_248z$d);
 function SkeletonSidebar() {
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "skeleton-sidebar",
-    className: styles$9.sidebarSkeleton
+    className: styles$5.sidebarSkeleton
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })));
 }
 /**
@@ -26080,31 +29224,31 @@ function SkeletonSidebar() {
 function SkeletonDrawer() {
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "skeleton-drawer",
-    className: styles$9.drawerSkeleton
+    className: styles$5.drawerSkeleton
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.item
+    className: styles$5.item
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   })), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   }), /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   })));
 }
 /**
@@ -26115,9 +29259,9 @@ function SkeletonDrawer() {
 function SkeletonLine() {
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "skeleton-line",
-    className: styles$9.skeleton
+    className: styles$5.skeleton
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.line
+    className: styles$5.line
   }));
 }
 /**
@@ -26128,115 +29272,13 @@ function SkeletonLine() {
 function SkeletonCircle() {
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "skeleton-circle",
-    className: styles$9.skeleton
+    className: styles$5.skeleton
   }, /*#__PURE__*/React.createElement("div", {
-    className: styles$9.circle
+    className: styles$5.circle
   }));
 }
 
-var css_248z$c = ".Spacer-module_text--truncate__16fjV {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Spacer-module_spacer--mini__ORPSv {\n  padding: 2.5px 0;\n}\n\n.Spacer-module_spacer--tiny__9VaNB {\n  padding: 5px 0;\n}\n\n.Spacer-module_spacer--small__WXK02 {\n  padding: 10px 0;\n}\n\n.Spacer-module_spacer--medium__LVRpH {\n  padding: 15px 0;\n}\n\n.Spacer-module_spacer--large__HA0vN {\n  padding: 25px 0;\n}\n\n.Spacer-module_spacer--big__ThfV4 {\n  padding: 40px 0;\n}\n\n.Spacer-module_spacer--huge__iZ8KE {\n  padding: 50px 0;\n}";
-var styles$8 = {"text--truncate":"Spacer-module_text--truncate__16fjV","spacer--mini":"Spacer-module_spacer--mini__ORPSv","spacer--tiny":"Spacer-module_spacer--tiny__9VaNB","spacer--small":"Spacer-module_spacer--small__WXK02","spacer--medium":"Spacer-module_spacer--medium__LVRpH","spacer--large":"Spacer-module_spacer--large__HA0vN","spacer--big":"Spacer-module_spacer--big__ThfV4","spacer--huge":"Spacer-module_spacer--huge__iZ8KE"};
-styleInject(css_248z$c);
-
-/**
- * Spacer - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {string} props.space - space size
- * @return {object} An object of children element
- */
-
-const Spacer = ({
-  className,
-  space
-}) => {
-  const spacerClasses = useStyles({
-    [styles$8['spacer']]: true,
-    [styles$8[`spacer--${space}`]]: space
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    "data-testid": "spacer",
-    className: spacerClasses
-  });
-};
-
-Spacer.displayName = 'Spacer';
-Spacer.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  space: propTypes.exports.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'x-large', 'huge'])
-};
-Spacer.defaultProps = {
-  className: '',
-  space: 'medium'
-};
-
-var css_248z$b = ".Spinner-module_text--truncate__79eHW {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Spinner-module_spinner__SZoUP {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}";
-var styles$7 = {"text--truncate":"Spinner-module_text--truncate__79eHW","spinner":"Spinner-module_spinner__SZoUP"};
-styleInject(css_248z$b);
-
-/**
- * Spinner - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @return {object} An object of children element
- */
-
-const Spinner = ({
-  className
-}) => {
-  const elementClasses = useStyles({
-    [styles$7['spinner']]: true
-  }, className);
-  return /*#__PURE__*/React.createElement("div", {
-    className: elementClasses
-  }, /*#__PURE__*/React.createElement(Icon$1, {
-    icon: "icon-spinner",
-    spin: true
-  }));
-};
-
-Spinner.displayName = 'Spinner';
-Spinner.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array])
-};
-Spinner.defaultProps = {
-  className: ''
-};
-
-var css_248z$a = ".Spreader_text--truncate__xQYi8 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Spreader_spreader__lmB06 {\n  display: inline-block;\n}\n\n.Spreader_spreader--mini__OB5kR {\n  padding: 0 5px 0 0;\n}\n\n.Spreader_spreader--tiny__L44yx {\n  padding: 0 5px;\n}\n\n.Spreader_spreader--small__61iel {\n  padding: 0 10px;\n}\n\n.Spreader_spreader--medium__bL833 {\n  padding: 0 15px;\n}\n\n.Spreader_spreader--large__ZIEx8 {\n  padding: 0 25px;\n}\n\n.Spreader_spreader--x-large__yHNcV {\n  padding: 0 30px;\n}\n\n.Spreader_spreader--big__NmzUq {\n  padding: 0 40px;\n}\n\n.Spreader_spreader--huge__OwRua {\n  padding: 0 50px;\n}";
-var scss$2 = {"text--truncate":"Spreader_text--truncate__xQYi8","spreader":"Spreader_spreader__lmB06","spreader--mini":"Spreader_spreader--mini__OB5kR","spreader--tiny":"Spreader_spreader--tiny__L44yx","spreader--small":"Spreader_spreader--small__61iel","spreader--medium":"Spreader_spreader--medium__bL833","spreader--large":"Spreader_spreader--large__ZIEx8","spreader--x-large":"Spreader_spreader--x-large__yHNcV","spreader--big":"Spreader_spreader--big__NmzUq","spreader--huge":"Spreader_spreader--huge__OwRua"};
-styleInject(css_248z$a);
-
-const cssClass$2 = styles$1a(scss$2); //TODO Spreader css, test
-
-/**
- * Spreader - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `spreader`
- * @param {string} props.spread - spread size
- * @return {object} An object of children element
- */
-
-const Spreader = ({
-  className,
-  spread
-}) => /*#__PURE__*/React.createElement("div", {
-  className: cssClass$2(className, `spreader--${spread}`)
-});
-
-Spreader.displayName = 'Spreader';
-Spreader.propTypes = {
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  spread: propTypes.exports.oneOf(['mini', 'tiny', 'small', 'medium', 'large', 'x-large', 'big', 'huge'])
-};
-Spreader.defaultProps = {
-  className: 'spreader',
-  spread: 'medium'
-};
-
-var css_248z$9 = ".StatsBadge-module_text--truncate__ydbo1 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.StatsBadge-module_container__3tDFd {\n  display: flex;\n}\n.StatsBadge-module_container__3tDFd:before {\n  content: \"\";\n  width: 24px;\n  height: 12px;\n  margin-right: 15px;\n  margin-top: 9px;\n}\n.StatsBadge-module_container--green__JmoBE:before {\n  background: #29b662;\n}\n.StatsBadge-module_container--yellow__KEcry:before {\n  background: #ffb000;\n}\n.StatsBadge-module_container--pink__heuJQ:before {\n  background: #f27589;\n}\n.StatsBadge-module_container--description__yHvu5 {\n  display: flex;\n  flex-direction: column;\n}";
-var styles$6 = {"text--truncate":"StatsBadge-module_text--truncate__ydbo1","container":"StatsBadge-module_container__3tDFd","container--green":"StatsBadge-module_container--green__JmoBE","container--yellow":"StatsBadge-module_container--yellow__KEcry","container--pink":"StatsBadge-module_container--pink__heuJQ","container--description":"StatsBadge-module_container--description__yHvu5"};
-styleInject(css_248z$9);
+var styles$4 = {"text--truncate":"StatsBadge-module_text--truncate__ydbo1","container":"StatsBadge-module_container__3tDFd","container--green":"StatsBadge-module_container--green__JmoBE","container--yellow":"StatsBadge-module_container--yellow__KEcry","container--pink":"StatsBadge-module_container--pink__heuJQ","container--description":"StatsBadge-module_container--description__yHvu5"};
 
 /**
  * StatsBadge - stateless presentational component
@@ -26254,21 +29296,21 @@ const StatsBadge = ({
   description
 }) => {
   const badgeStyles = useStyles({
-    [styles$6['container']]: true,
-    [styles$6[`container--${color}`]]: color
+    [styles$4['container']]: true,
+    [styles$4[`container--${color}`]]: color
   }, className);
   const descriptionStyles = useStyles({
-    [styles$6['container--description']]: true
+    [styles$4['container--description']]: true
   });
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "badge",
     className: badgeStyles
   }, /*#__PURE__*/React.createElement("div", {
     className: descriptionStyles
-  }, /*#__PURE__*/React.createElement(Heading$1, {
+  }, /*#__PURE__*/React.createElement(Heading, {
     level: 2,
     margin: "none"
-  }, quantity), /*#__PURE__*/React.createElement(Heading$1, {
+  }, quantity), /*#__PURE__*/React.createElement(Heading, {
     level: 5
   }, description)));
 };
@@ -26286,9 +29328,7 @@ StatsBadge.defaultProps = {
   quantity: 0
 };
 
-var css_248z$8 = ".StatusIcon-module_text--truncate__4quJy {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.StatusIcon-module_status-icon__oIfDB {\n  display: inline-flex;\n  border-radius: 50%;\n}\n.StatusIcon-module_status-icon--active__PRS-- {\n  padding: 0;\n  background-color: #29b662;\n}\n.StatusIcon-module_status-icon--inactive__vFgPc {\n  padding: 0;\n  background-color: #cccccc;\n}\n.StatusIcon-module_status-icon--tiny__8R1SP {\n  min-height: 15px;\n  min-width: 15px;\n  height: 15px;\n  width: 15px;\n}\n.StatusIcon-module_status-icon--tiny__8R1SP i {\n  color: white;\n  font-size: 7px;\n  margin: auto;\n}\n.StatusIcon-module_status-icon--medium__qhct9 {\n  min-height: 20px;\n  min-width: 20px;\n  height: 20px;\n  width: 20px;\n}\n.StatusIcon-module_status-icon--medium__qhct9 i {\n  color: white;\n  font-size: 0.75em;\n  margin: auto;\n}";
-var styles$5 = {"text--truncate":"StatusIcon-module_text--truncate__4quJy","status-icon":"StatusIcon-module_status-icon__oIfDB","status-icon--active":"StatusIcon-module_status-icon--active__PRS--","status-icon--inactive":"StatusIcon-module_status-icon--inactive__vFgPc","status-icon--tiny":"StatusIcon-module_status-icon--tiny__8R1SP","status-icon--medium":"StatusIcon-module_status-icon--medium__qhct9"};
-styleInject(css_248z$8);
+var styles$3 = {"text--truncate":"StatusIcon-module_text--truncate__4quJy","status-icon":"StatusIcon-module_status-icon__oIfDB","status-icon--active":"StatusIcon-module_status-icon--active__PRS--","status-icon--inactive":"StatusIcon-module_status-icon--inactive__vFgPc","status-icon--tiny":"StatusIcon-module_status-icon--tiny__8R1SP","status-icon--medium":"StatusIcon-module_status-icon--medium__qhct9"};
 
 /**
  * Status Icon - stateless presentational component
@@ -26304,16 +29344,16 @@ const StatusIcon = ({
   size
 }) => {
   const statusIconStyles = useStyles({
-    [styles$5['status-icon']]: true,
-    [styles$5[`status-icon--${variant}`]]: variant,
-    [styles$5[`status-icon--${size}`]]: size
+    [styles$3['status-icon']]: true,
+    [styles$3[`status-icon--${variant}`]]: variant,
+    [styles$3[`status-icon--${size}`]]: size
   }, className);
   return /*#__PURE__*/React.createElement("div", {
     "data-testid": "status-icon",
     className: statusIconStyles
-  }, variant === 'active' ? /*#__PURE__*/React.createElement(Icon$1, {
+  }, variant === 'active' ? /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-ok"
-  }) : /*#__PURE__*/React.createElement(Icon$1, {
+  }) : /*#__PURE__*/React.createElement(Icon, {
     icon: "icon-remove"
   }));
 };
@@ -26330,61 +29370,7 @@ StatusIcon.defaultProps = {
   variant: 'active'
 };
 
-var css_248z$7 = ".StepNumber_text--truncate__2uO2n {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.StepNumber_step__number__2ZNh0 {\n  margin-right: 15px;\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 10px;\n  font-weight: 600;\n  color: white;\n}\n.StepNumber_step__number--small__0KeKl {\n  top: 0;\n  left: -9px;\n  width: 18px;\n  height: 18px;\n}\n.StepNumber_step__number--medium__Sluvf {\n  top: 0;\n  left: -11px;\n  width: 22px;\n  height: 22px;\n}\n.StepNumber_step__number--completed__3sTXT {\n  background: #29b662;\n}\n.StepNumber_step__number--current__HRbyz {\n  background: #2550aa;\n}\n.StepNumber_step__number--next__WIuzn {\n  background: #cccccc;\n}\n.StepNumber_step__number--absolute__wOLRC {\n  position: absolute;\n  z-index: 30;\n}";
-var scss$1 = {"text--truncate":"StepNumber_text--truncate__2uO2n","step__number":"StepNumber_step__number__2ZNh0","step__number--small":"StepNumber_step__number--small__0KeKl","step__number--medium":"StepNumber_step__number--medium__Sluvf","step__number--completed":"StepNumber_step__number--completed__3sTXT","step__number--current":"StepNumber_step__number--current__HRbyz","step__number--next":"StepNumber_step__number--next__WIuzn","step__number--absolute":"StepNumber_step__number--absolute__wOLRC"};
-styleInject(css_248z$7);
-
-const cssClass$1 = styles$1a(scss$1); //TODO StepNumber css, test
-
-/**
- * StepNumber - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: 'step__number'
- * @param {number} props.step - step number
- * @param {string} props.variant - step number variant, default 'current'
- * @param {string} props.size - step number size, default 'small'
- * @param {bool} props.absolute - position absolute, default 'false'
- * @return {object} An object of children element
- */
-
-const StepNumber = ({
-  className,
-  step,
-  variant,
-  size,
-  absolute
-}) => {
-  const elementClasses = cssClass$1({
-    'step__number--absolute': absolute === true,
-    'step__number--completed': variant === 'completed',
-    'step__number--current': variant === 'current',
-    'step__number--medium': size === 'medium',
-    'step__number--next': variant === 'next',
-    'step__number--small': size === 'small'
-  });
-  return /*#__PURE__*/React.createElement("span", {
-    className: cssClass$1(className, elementClasses)
-  }, step);
-};
-
-StepNumber.displayName = 'StepNumber';
-StepNumber.propTypes = {
-  absolute: propTypes.exports.bool,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  size: propTypes.exports.string,
-  step: propTypes.exports.number.isRequired,
-  variant: propTypes.exports.string
-};
-StepNumber.defaultProps = {
-  className: 'step__number',
-  size: 'small',
-  variant: 'current',
-  absolute: false
-};
-
-var css_248z$6 = ".Steps-module_text--truncate__rNh-k {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Steps-module_container__jjMpY {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  padding: 22px 0;\n}\n\n.Steps-module_step__xylai {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0 0 0 15px;\n}\n.Steps-module_step__description--completed__XNbwC {\n  font-size: 14px;\n  position: relative;\n  color: #7b7b7b;\n}\n.Steps-module_step__description--current__ptZm4 {\n  font-size: 14px;\n  position: relative;\n  color: #1f1f1f;\n}\n.Steps-module_step__description--next__ey808 {\n  font-size: 14px;\n  position: relative;\n  color: #cccccc;\n}\n.Steps-module_step__xylai:after {\n  content: \"\";\n  background: #dddddd;\n  height: 1px;\n  width: 15px;\n  margin-left: 15px;\n  top: 45%;\n}\n.Steps-module_step__xylai:last-of-type:after {\n  display: none;\n}";
-var styles$4 = {"text--truncate":"Steps-module_text--truncate__rNh-k","container":"Steps-module_container__jjMpY","step":"Steps-module_step__xylai","step__description--completed":"Steps-module_step__description--completed__XNbwC","step__description--current":"Steps-module_step__description--current__ptZm4","step__description--next":"Steps-module_step__description--next__ey808"};
-styleInject(css_248z$6);
+var styles$2 = {"text--truncate":"Steps-module_text--truncate__rNh-k","container":"Steps-module_container__jjMpY","step":"Steps-module_step__xylai","step__description--completed":"Steps-module_step__description--completed__XNbwC","step__description--current":"Steps-module_step__description--current__ptZm4","step__description--next":"Steps-module_step__description--next__ey808"};
 
 /**
  * Steps - stateless presentational component
@@ -26397,7 +29383,7 @@ const Steps = ({
   data
 }) => {
   return /*#__PURE__*/React.createElement("div", {
-    className: styles$4.container
+    className: styles$2.container
   }, data.map((item, index) => {
     const step = index + 1;
     const {
@@ -26405,27 +29391,633 @@ const Steps = ({
       description
     } = item;
     return /*#__PURE__*/React.createElement("div", {
-      className: styles$4.step,
+      className: styles$2.step,
       key: uuid_1()
-    }, /*#__PURE__*/React.createElement(StepNumber$1, {
+    }, /*#__PURE__*/React.createElement(StepNumber, {
       step: step,
       variant: variant
     }), /*#__PURE__*/React.createElement("span", {
-      className: styles$4[`step__description--${variant}`]
+      className: styles$2[`step__description--${variant}`]
     }, description));
   }));
 };
 
 Steps.displayName = 'Steps';
 Steps.propTypes = {
-  data: propTypes.exports.arrayOf(stepsShape).isRequired
+  data: propTypes.exports.arrayOf(shape$1).isRequired
 };
 
 const tabContext = /*#__PURE__*/react.exports.createContext();
 
-var css_248z$5 = ".Tabs-module_text--truncate__aRRuH {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Tabs-module_tab__LYqhc {\n  cursor: pointer;\n  line-height: 1;\n  color: #7b7b7b;\n  display: block;\n}\n.Tabs-module_tab--active__EAtDK {\n  position: relative;\n  color: #2550aa;\n  font-weight: 600;\n}\n.Tabs-module_tab--active__EAtDK:before {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: -2px;\n  width: 100%;\n  height: 4px;\n  background-color: #2550aa;\n}\n.Tabs-module_tab--active__EAtDK:hover button, .Tabs-module_tab--active__EAtDK:active button, .Tabs-module_tab--active__EAtDK:focus button {\n  color: #2550aa;\n}\n.Tabs-module_tab__list__SQvrB {\n  display: flex;\n  justify-content: flex-start;\n  border-bottom: 2px solid #dddddd;\n}\n.Tabs-module_tab__panel__q267o {\n  background-color: white;\n}";
-var styles$3 = {"text--truncate":"Tabs-module_text--truncate__aRRuH","tab":"Tabs-module_tab__LYqhc","tab--active":"Tabs-module_tab--active__EAtDK","tab__list":"Tabs-module_tab__list__SQvrB","tab__panel":"Tabs-module_tab__panel__q267o"};
-styleInject(css_248z$5);
+var queryString = {};
+
+var strictUriEncode = str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.charCodeAt(0).toString(16).toUpperCase()}`);
+
+var token = '%[a-f0-9]{2}';
+var singleMatcher = new RegExp(token, 'gi');
+var multiMatcher = new RegExp('(' + token + ')+', 'gi');
+
+function decodeComponents(components, split) {
+  try {
+    // Try to decode the entire string first
+    return decodeURIComponent(components.join(''));
+  } catch (err) {// Do nothing
+  }
+
+  if (components.length === 1) {
+    return components;
+  }
+
+  split = split || 1; // Split the array in 2 parts
+
+  var left = components.slice(0, split);
+  var right = components.slice(split);
+  return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
+}
+
+function decode(input) {
+  try {
+    return decodeURIComponent(input);
+  } catch (err) {
+    var tokens = input.match(singleMatcher);
+
+    for (var i = 1; i < tokens.length; i++) {
+      input = decodeComponents(tokens, i).join('');
+      tokens = input.match(singleMatcher);
+    }
+
+    return input;
+  }
+}
+
+function customDecodeURIComponent(input) {
+  // Keep track of all the replacements and prefill the map with the `BOM`
+  var replaceMap = {
+    '%FE%FF': '\uFFFD\uFFFD',
+    '%FF%FE': '\uFFFD\uFFFD'
+  };
+  var match = multiMatcher.exec(input);
+
+  while (match) {
+    try {
+      // Decode as big chunks as possible
+      replaceMap[match[0]] = decodeURIComponent(match[0]);
+    } catch (err) {
+      var result = decode(match[0]);
+
+      if (result !== match[0]) {
+        replaceMap[match[0]] = result;
+      }
+    }
+
+    match = multiMatcher.exec(input);
+  } // Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
+
+
+  replaceMap['%C2'] = '\uFFFD';
+  var entries = Object.keys(replaceMap);
+
+  for (var i = 0; i < entries.length; i++) {
+    // Replace all decoded components
+    var key = entries[i];
+    input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
+  }
+
+  return input;
+}
+
+var decodeUriComponent = function (encodedURI) {
+  if (typeof encodedURI !== 'string') {
+    throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
+  }
+
+  try {
+    encodedURI = encodedURI.replace(/\+/g, ' '); // Try the built in decoder first
+
+    return decodeURIComponent(encodedURI);
+  } catch (err) {
+    // Fallback to a more advanced decoder
+    return customDecodeURIComponent(encodedURI);
+  }
+};
+
+var splitOnFirst = (string, separator) => {
+  if (!(typeof string === 'string' && typeof separator === 'string')) {
+    throw new TypeError('Expected the arguments to be of type `string`');
+  }
+
+  if (separator === '') {
+    return [string];
+  }
+
+  const separatorIndex = string.indexOf(separator);
+
+  if (separatorIndex === -1) {
+    return [string];
+  }
+
+  return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
+};
+
+var filterObj = function (obj, predicate) {
+  var ret = {};
+  var keys = Object.keys(obj);
+  var isArr = Array.isArray(predicate);
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = obj[key];
+
+    if (isArr ? predicate.indexOf(key) !== -1 : predicate(key, val, obj)) {
+      ret[key] = val;
+    }
+  }
+
+  return ret;
+};
+
+(function (exports) {
+
+	const strictUriEncode$1 = strictUriEncode;
+
+	const decodeComponent = decodeUriComponent;
+
+	const splitOnFirst$1 = splitOnFirst;
+
+	const filterObject = filterObj;
+
+	const isNullOrUndefined = value => value === null || value === undefined;
+
+	const encodeFragmentIdentifier = Symbol('encodeFragmentIdentifier');
+
+	function encoderForArrayFormat(options) {
+	  switch (options.arrayFormat) {
+	    case 'index':
+	      return key => (result, value) => {
+	        const index = result.length;
+
+	        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+	          return result;
+	        }
+
+	        if (value === null) {
+	          return [...result, [encode(key, options), '[', index, ']'].join('')];
+	        }
+
+	        return [...result, [encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('')];
+	      };
+
+	    case 'bracket':
+	      return key => (result, value) => {
+	        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+	          return result;
+	        }
+
+	        if (value === null) {
+	          return [...result, [encode(key, options), '[]'].join('')];
+	        }
+
+	        return [...result, [encode(key, options), '[]=', encode(value, options)].join('')];
+	      };
+
+	    case 'colon-list-separator':
+	      return key => (result, value) => {
+	        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+	          return result;
+	        }
+
+	        if (value === null) {
+	          return [...result, [encode(key, options), ':list='].join('')];
+	        }
+
+	        return [...result, [encode(key, options), ':list=', encode(value, options)].join('')];
+	      };
+
+	    case 'comma':
+	    case 'separator':
+	    case 'bracket-separator':
+	      {
+	        const keyValueSep = options.arrayFormat === 'bracket-separator' ? '[]=' : '=';
+	        return key => (result, value) => {
+	          if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+	            return result;
+	          } // Translate null to an empty string so that it doesn't serialize as 'null'
+
+
+	          value = value === null ? '' : value;
+
+	          if (result.length === 0) {
+	            return [[encode(key, options), keyValueSep, encode(value, options)].join('')];
+	          }
+
+	          return [[result, encode(value, options)].join(options.arrayFormatSeparator)];
+	        };
+	      }
+
+	    default:
+	      return key => (result, value) => {
+	        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+	          return result;
+	        }
+
+	        if (value === null) {
+	          return [...result, encode(key, options)];
+	        }
+
+	        return [...result, [encode(key, options), '=', encode(value, options)].join('')];
+	      };
+	  }
+	}
+
+	function parserForArrayFormat(options) {
+	  let result;
+
+	  switch (options.arrayFormat) {
+	    case 'index':
+	      return (key, value, accumulator) => {
+	        result = /\[(\d*)\]$/.exec(key);
+	        key = key.replace(/\[\d*\]$/, '');
+
+	        if (!result) {
+	          accumulator[key] = value;
+	          return;
+	        }
+
+	        if (accumulator[key] === undefined) {
+	          accumulator[key] = {};
+	        }
+
+	        accumulator[key][result[1]] = value;
+	      };
+
+	    case 'bracket':
+	      return (key, value, accumulator) => {
+	        result = /(\[\])$/.exec(key);
+	        key = key.replace(/\[\]$/, '');
+
+	        if (!result) {
+	          accumulator[key] = value;
+	          return;
+	        }
+
+	        if (accumulator[key] === undefined) {
+	          accumulator[key] = [value];
+	          return;
+	        }
+
+	        accumulator[key] = [].concat(accumulator[key], value);
+	      };
+
+	    case 'colon-list-separator':
+	      return (key, value, accumulator) => {
+	        result = /(:list)$/.exec(key);
+	        key = key.replace(/:list$/, '');
+
+	        if (!result) {
+	          accumulator[key] = value;
+	          return;
+	        }
+
+	        if (accumulator[key] === undefined) {
+	          accumulator[key] = [value];
+	          return;
+	        }
+
+	        accumulator[key] = [].concat(accumulator[key], value);
+	      };
+
+	    case 'comma':
+	    case 'separator':
+	      return (key, value, accumulator) => {
+	        const isArray = typeof value === 'string' && value.includes(options.arrayFormatSeparator);
+	        const isEncodedArray = typeof value === 'string' && !isArray && decode(value, options).includes(options.arrayFormatSeparator);
+	        value = isEncodedArray ? decode(value, options) : value;
+	        const newValue = isArray || isEncodedArray ? value.split(options.arrayFormatSeparator).map(item => decode(item, options)) : value === null ? value : decode(value, options);
+	        accumulator[key] = newValue;
+	      };
+
+	    case 'bracket-separator':
+	      return (key, value, accumulator) => {
+	        const isArray = /(\[\])$/.test(key);
+	        key = key.replace(/\[\]$/, '');
+
+	        if (!isArray) {
+	          accumulator[key] = value ? decode(value, options) : value;
+	          return;
+	        }
+
+	        const arrayValue = value === null ? [] : value.split(options.arrayFormatSeparator).map(item => decode(item, options));
+
+	        if (accumulator[key] === undefined) {
+	          accumulator[key] = arrayValue;
+	          return;
+	        }
+
+	        accumulator[key] = [].concat(accumulator[key], arrayValue);
+	      };
+
+	    default:
+	      return (key, value, accumulator) => {
+	        if (accumulator[key] === undefined) {
+	          accumulator[key] = value;
+	          return;
+	        }
+
+	        accumulator[key] = [].concat(accumulator[key], value);
+	      };
+	  }
+	}
+
+	function validateArrayFormatSeparator(value) {
+	  if (typeof value !== 'string' || value.length !== 1) {
+	    throw new TypeError('arrayFormatSeparator must be single character string');
+	  }
+	}
+
+	function encode(value, options) {
+	  if (options.encode) {
+	    return options.strict ? strictUriEncode$1(value) : encodeURIComponent(value);
+	  }
+
+	  return value;
+	}
+
+	function decode(value, options) {
+	  if (options.decode) {
+	    return decodeComponent(value);
+	  }
+
+	  return value;
+	}
+
+	function keysSorter(input) {
+	  if (Array.isArray(input)) {
+	    return input.sort();
+	  }
+
+	  if (typeof input === 'object') {
+	    return keysSorter(Object.keys(input)).sort((a, b) => Number(a) - Number(b)).map(key => input[key]);
+	  }
+
+	  return input;
+	}
+
+	function removeHash(input) {
+	  const hashStart = input.indexOf('#');
+
+	  if (hashStart !== -1) {
+	    input = input.slice(0, hashStart);
+	  }
+
+	  return input;
+	}
+
+	function getHash(url) {
+	  let hash = '';
+	  const hashStart = url.indexOf('#');
+
+	  if (hashStart !== -1) {
+	    hash = url.slice(hashStart);
+	  }
+
+	  return hash;
+	}
+
+	function extract(input) {
+	  input = removeHash(input);
+	  const queryStart = input.indexOf('?');
+
+	  if (queryStart === -1) {
+	    return '';
+	  }
+
+	  return input.slice(queryStart + 1);
+	}
+
+	function parseValue(value, options) {
+	  if (options.parseNumbers && !Number.isNaN(Number(value)) && typeof value === 'string' && value.trim() !== '') {
+	    value = Number(value);
+	  } else if (options.parseBooleans && value !== null && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')) {
+	    value = value.toLowerCase() === 'true';
+	  }
+
+	  return value;
+	}
+
+	function parse(query, options) {
+	  options = Object.assign({
+	    decode: true,
+	    sort: true,
+	    arrayFormat: 'none',
+	    arrayFormatSeparator: ',',
+	    parseNumbers: false,
+	    parseBooleans: false
+	  }, options);
+	  validateArrayFormatSeparator(options.arrayFormatSeparator);
+	  const formatter = parserForArrayFormat(options); // Create an object with no prototype
+
+	  const ret = Object.create(null);
+
+	  if (typeof query !== 'string') {
+	    return ret;
+	  }
+
+	  query = query.trim().replace(/^[?#&]/, '');
+
+	  if (!query) {
+	    return ret;
+	  }
+
+	  for (const param of query.split('&')) {
+	    if (param === '') {
+	      continue;
+	    }
+
+	    let [key, value] = splitOnFirst$1(options.decode ? param.replace(/\+/g, ' ') : param, '='); // Missing `=` should be `null`:
+	    // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+
+	    value = value === undefined ? null : ['comma', 'separator', 'bracket-separator'].includes(options.arrayFormat) ? value : decode(value, options);
+	    formatter(decode(key, options), value, ret);
+	  }
+
+	  for (const key of Object.keys(ret)) {
+	    const value = ret[key];
+
+	    if (typeof value === 'object' && value !== null) {
+	      for (const k of Object.keys(value)) {
+	        value[k] = parseValue(value[k], options);
+	      }
+	    } else {
+	      ret[key] = parseValue(value, options);
+	    }
+	  }
+
+	  if (options.sort === false) {
+	    return ret;
+	  }
+
+	  return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce((result, key) => {
+	    const value = ret[key];
+
+	    if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
+	      // Sort object keys, not values
+	      result[key] = keysSorter(value);
+	    } else {
+	      result[key] = value;
+	    }
+
+	    return result;
+	  }, Object.create(null));
+	}
+
+	exports.extract = extract;
+	exports.parse = parse;
+
+	exports.stringify = (object, options) => {
+	  if (!object) {
+	    return '';
+	  }
+
+	  options = Object.assign({
+	    encode: true,
+	    strict: true,
+	    arrayFormat: 'none',
+	    arrayFormatSeparator: ','
+	  }, options);
+	  validateArrayFormatSeparator(options.arrayFormatSeparator);
+
+	  const shouldFilter = key => options.skipNull && isNullOrUndefined(object[key]) || options.skipEmptyString && object[key] === '';
+
+	  const formatter = encoderForArrayFormat(options);
+	  const objectCopy = {};
+
+	  for (const key of Object.keys(object)) {
+	    if (!shouldFilter(key)) {
+	      objectCopy[key] = object[key];
+	    }
+	  }
+
+	  const keys = Object.keys(objectCopy);
+
+	  if (options.sort !== false) {
+	    keys.sort(options.sort);
+	  }
+
+	  return keys.map(key => {
+	    const value = object[key];
+
+	    if (value === undefined) {
+	      return '';
+	    }
+
+	    if (value === null) {
+	      return encode(key, options);
+	    }
+
+	    if (Array.isArray(value)) {
+	      if (value.length === 0 && options.arrayFormat === 'bracket-separator') {
+	        return encode(key, options) + '[]';
+	      }
+
+	      return value.reduce(formatter(key), []).join('&');
+	    }
+
+	    return encode(key, options) + '=' + encode(value, options);
+	  }).filter(x => x.length > 0).join('&');
+	};
+
+	exports.parseUrl = (url, options) => {
+	  options = Object.assign({
+	    decode: true
+	  }, options);
+	  const [url_, hash] = splitOnFirst$1(url, '#');
+	  return Object.assign({
+	    url: url_.split('?')[0] || '',
+	    query: parse(extract(url), options)
+	  }, options && options.parseFragmentIdentifier && hash ? {
+	    fragmentIdentifier: decode(hash, options)
+	  } : {});
+	};
+
+	exports.stringifyUrl = (object, options) => {
+	  options = Object.assign({
+	    encode: true,
+	    strict: true,
+	    [encodeFragmentIdentifier]: true
+	  }, options);
+	  const url = removeHash(object.url).split('?')[0] || '';
+	  const queryFromUrl = exports.extract(object.url);
+	  const parsedQueryFromUrl = exports.parse(queryFromUrl, {
+	    sort: false
+	  });
+	  const query = Object.assign(parsedQueryFromUrl, object.query);
+	  let queryString = exports.stringify(query, options);
+
+	  if (queryString) {
+	    queryString = `?${queryString}`;
+	  }
+
+	  let hash = getHash(object.url);
+
+	  if (object.fragmentIdentifier) {
+	    hash = `#${options[encodeFragmentIdentifier] ? encode(object.fragmentIdentifier, options) : object.fragmentIdentifier}`;
+	  }
+
+	  return `${url}${queryString}${hash}`;
+	};
+
+	exports.pick = (input, filter, options) => {
+	  options = Object.assign({
+	    parseFragmentIdentifier: true,
+	    [encodeFragmentIdentifier]: false
+	  }, options);
+	  const {
+	    url,
+	    query,
+	    fragmentIdentifier
+	  } = exports.parseUrl(input, options);
+	  return exports.stringifyUrl({
+	    url,
+	    query: filterObject(query, filter),
+	    fragmentIdentifier
+	  }, options);
+	};
+
+	exports.exclude = (input, filter, options) => {
+	  const exclusionFilter = Array.isArray(filter) ? key => !filter.includes(key) : (key, value) => !filter(key, value);
+	  return exports.pick(input, exclusionFilter, options);
+	};
+} (queryString));
+
+const setQueryStringWithoutPageReload = qsValue => {
+  const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}${qsValue}`;
+  window.history.pushState({
+    path: newurl
+  }, '', newurl);
+};
+
+const getQueryStringValue = (key, queryString$1 = window.location.search) => {
+  const values = queryString.parse(queryString$1);
+  return values[key];
+};
+const setQueryStringValue = (key, value, queryString$1 = window.location.search) => {
+  const values = queryString.parse(queryString$1),
+        newQsValue = queryString.stringify({ ...values,
+    [key]: value
+  });
+  setQueryStringWithoutPageReload(`?${newQsValue}`);
+};
+
+const useQueryString = (key, initialValue) => {
+  const [value, setValue] = react.exports.useState(getQueryStringValue(key) || initialValue),
+        onSetValue = react.exports.useCallback(newValue => {
+    setValue(newValue);
+    setQueryStringValue(key, newValue);
+  }, [key]);
+  return [value, onSetValue];
+};
+
+var styles$1 = {"text--truncate":"Tabs-module_text--truncate__aRRuH","tab":"Tabs-module_tab__LYqhc","tab--active":"Tabs-module_tab--active__EAtDK","tab__list":"Tabs-module_tab__list__SQvrB","tab__panel":"Tabs-module_tab__panel__q267o"};
 
 /**
  * Tab - stateless presentational component
@@ -26450,8 +30042,8 @@ const Tab = ({
   const tabContext$1 = react.exports.useContext(tabContext);
   const [, setTabValue] = useQueryString('tab');
   const tabStyles = useStyles({
-    [styles$3.tab]: true,
-    [styles$3['tab--active']]: tabContext$1.activeTab === name
+    [styles$1.tab]: true,
+    [styles$1['tab--active']]: tabContext$1.activeTab === name
   }, className);
   /**
    * Handle tab click
@@ -26474,7 +30066,7 @@ const Tab = ({
     className: tabStyles,
     onClick: isDisabled ? handleDisabledTabClick : handleClick,
     "data-testid": "tab-button"
-  }, restProps), /*#__PURE__*/React.createElement(Button$2, {
+  }, restProps), /*#__PURE__*/React.createElement(Button$1, {
     variant: "tabs"
   }, children));
 };
@@ -26509,7 +30101,7 @@ const TabList = ({
   ...restProps
 }) => {
   const tabListStyles = useStyles({
-    [styles$3['tab__list']]: true
+    [styles$1['tab__list']]: true
   }, className);
   return /*#__PURE__*/React.createElement("div", _extends$6({
     className: tabListStyles
@@ -26543,7 +30135,7 @@ const TabPanel = ({
 }) => {
   const tabContext$1 = react.exports.useContext(tabContext);
   const tabPanelStyles = useStyles({
-    [styles$3['tab__panel']]: true
+    [styles$1['tab__panel']]: true
   }, className);
   return tabContext$1.activeTab === name && /*#__PURE__*/React.createElement("div", _extends$6({
     className: tabPanelStyles
@@ -26582,7 +30174,7 @@ const Tabs = ({
     changeTab
   };
   const tabsStyles = useStyles({
-    [styles$3['tabs__wrapper']]: true
+    [styles$1['tabs__wrapper']]: true
   }, className);
   return /*#__PURE__*/React.createElement(tabContext.Provider, {
     value: tabProviderValue
@@ -26601,16 +30193,14 @@ Tabs.defaultProps = {
   className: ''
 };
 
-var css_248z$4 = ".TextOverflow_text--truncate__iUSHT {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.TextOverflow_overflow__I-yGu {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: inline-block;\n  max-width: 100%;\n}";
 var scss = {"text--truncate":"TextOverflow_text--truncate__iUSHT","overflow":"TextOverflow_overflow__I-yGu"};
-styleInject(css_248z$4);
 
 /**
  * Exports css classes from SCSS file
  * @return {object} An object of styles
  */
 
-const cssClass = styles$1a(scss); //TODO TextOverflow css, test
+const cssClass = styles$1b(scss); //TODO TextOverflow css, test
 
 /**
  * TextOverflow - stateless presentational component
@@ -26637,2834 +30227,7 @@ TextOverflow.defaultProps = {
   className: 'overflow'
 };
 
-function rng() {
-  return crypto.randomBytes(16);
-}
-
-/**
- * Convert array of 16 byte values to UUID string format of the form:
- * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
- */
-var byteToHex = [];
-
-for (var i = 0; i < 256; ++i) {
-  byteToHex[i] = (i + 0x100).toString(16).substr(1);
-}
-
-function bytesToUuid(buf, offset) {
-  var i = offset || 0;
-  var bth = byteToHex; // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
-
-  return [bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]]].join('');
-}
-
-function v4(options, buf, offset) {
-  var i = buf && offset || 0;
-
-  if (typeof options == 'string') {
-    buf = options === 'binary' ? new Array(16) : null;
-    options = null;
-  }
-
-  options = options || {};
-  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-
-  rnds[6] = rnds[6] & 0x0f | 0x40;
-  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
-
-  if (buf) {
-    for (var ii = 0; ii < 16; ++ii) {
-      buf[i + ii] = rnds[ii];
-    }
-  }
-
-  return buf || bytesToUuid(rnds);
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-var CONSTANT = {
-  GLOBAL: {
-    HIDE: '__react_tooltip_hide_event',
-    REBUILD: '__react_tooltip_rebuild_event',
-    SHOW: '__react_tooltip_show_event'
-  }
-};
-/**
- * Static methods for react-tooltip
- */
-
-var dispatchGlobalEvent = function dispatchGlobalEvent(eventName, opts) {
-  // Compatible with IE
-  // @see http://stackoverflow.com/questions/26596123/internet-explorer-9-10-11-event-constructor-doesnt-work
-  // @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
-  var event;
-
-  if (typeof window.CustomEvent === 'function') {
-    event = new window.CustomEvent(eventName, {
-      detail: opts
-    });
-  } else {
-    event = document.createEvent('Event');
-    event.initEvent(eventName, false, true, opts);
-  }
-
-  window.dispatchEvent(event);
-};
-
-function staticMethods(target) {
-  /**
-   * Hide all tooltip
-   * @trigger ReactTooltip.hide()
-   */
-  target.hide = function (target) {
-    dispatchGlobalEvent(CONSTANT.GLOBAL.HIDE, {
-      target: target
-    });
-  };
-  /**
-   * Rebuild all tooltip
-   * @trigger ReactTooltip.rebuild()
-   */
-
-
-  target.rebuild = function () {
-    dispatchGlobalEvent(CONSTANT.GLOBAL.REBUILD);
-  };
-  /**
-   * Show specific tooltip
-   * @trigger ReactTooltip.show()
-   */
-
-
-  target.show = function (target) {
-    dispatchGlobalEvent(CONSTANT.GLOBAL.SHOW, {
-      target: target
-    });
-  };
-
-  target.prototype.globalRebuild = function () {
-    if (this.mount) {
-      this.unbindListener();
-      this.bindListener();
-    }
-  };
-
-  target.prototype.globalShow = function (event) {
-    if (this.mount) {
-      var hasTarget = event && event.detail && event.detail.target && true || false; // Create a fake event, specific show will limit the type to `solid`
-      // only `float` type cares e.clientX e.clientY
-
-      this.showTooltip({
-        currentTarget: hasTarget && event.detail.target
-      }, true);
-    }
-  };
-
-  target.prototype.globalHide = function (event) {
-    if (this.mount) {
-      var hasTarget = event && event.detail && event.detail.target && true || false;
-      this.hideTooltip({
-        currentTarget: hasTarget && event.detail.target
-      }, hasTarget);
-    }
-  };
-}
-/**
- * Events that should be bound to the window
- */
-
-
-function windowListener(target) {
-  target.prototype.bindWindowEvents = function (resizeHide) {
-    // ReactTooltip.hide
-    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
-    window.addEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide, false); // ReactTooltip.rebuild
-
-    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
-    window.addEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild, false); // ReactTooltip.show
-
-    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
-    window.addEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow, false); // Resize
-
-    if (resizeHide) {
-      window.removeEventListener('resize', this.onWindowResize);
-      window.addEventListener('resize', this.onWindowResize, false);
-    }
-  };
-
-  target.prototype.unbindWindowEvents = function () {
-    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
-    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
-    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
-    window.removeEventListener('resize', this.onWindowResize);
-  };
-  /**
-   * invoked by resize event of window
-   */
-
-
-  target.prototype.onWindowResize = function () {
-    if (!this.mount) return;
-    this.hideTooltip();
-  };
-}
-/**
- * Custom events to control showing and hiding of tooltip
- *
- * @attributes
- * - `event` {String}
- * - `eventOff` {String}
- */
-
-
-var checkStatus = function checkStatus(dataEventOff, e) {
-  var show = this.state.show;
-  var id = this.props.id;
-  var isCapture = this.isCapture(e.currentTarget);
-  var currentItem = e.currentTarget.getAttribute('currentItem');
-  if (!isCapture) e.stopPropagation();
-
-  if (show && currentItem === 'true') {
-    if (!dataEventOff) this.hideTooltip(e);
-  } else {
-    e.currentTarget.setAttribute('currentItem', 'true');
-    setUntargetItems(e.currentTarget, this.getTargetArray(id));
-    this.showTooltip(e);
-  }
-};
-
-var setUntargetItems = function setUntargetItems(currentTarget, targetArray) {
-  for (var i = 0; i < targetArray.length; i++) {
-    if (currentTarget !== targetArray[i]) {
-      targetArray[i].setAttribute('currentItem', 'false');
-    } else {
-      targetArray[i].setAttribute('currentItem', 'true');
-    }
-  }
-};
-
-var customListeners = {
-  id: '9b69f92e-d3fe-498b-b1b4-c5e63a51b0cf',
-  set: function set(target, event, listener) {
-    if (this.id in target) {
-      var map = target[this.id];
-      map[event] = listener;
-    } else {
-      // this is workaround for WeakMap, which is not supported in older browsers, such as IE
-      Object.defineProperty(target, this.id, {
-        configurable: true,
-        value: _defineProperty({}, event, listener)
-      });
-    }
-  },
-  get: function get(target, event) {
-    var map = target[this.id];
-
-    if (map !== undefined) {
-      return map[event];
-    }
-  }
-};
-
-function customEvent(target) {
-  target.prototype.isCustomEvent = function (ele) {
-    var event = this.state.event;
-    return event || !!ele.getAttribute('data-event');
-  };
-  /* Bind listener for custom event */
-
-
-  target.prototype.customBindListener = function (ele) {
-    var _this = this;
-
-    var _this$state = this.state,
-        event = _this$state.event,
-        eventOff = _this$state.eventOff;
-    var dataEvent = ele.getAttribute('data-event') || event;
-    var dataEventOff = ele.getAttribute('data-event-off') || eventOff;
-    dataEvent.split(' ').forEach(function (event) {
-      ele.removeEventListener(event, customListeners.get(ele, event));
-      var customListener = checkStatus.bind(_this, dataEventOff);
-      customListeners.set(ele, event, customListener);
-      ele.addEventListener(event, customListener, false);
-    });
-
-    if (dataEventOff) {
-      dataEventOff.split(' ').forEach(function (event) {
-        ele.removeEventListener(event, _this.hideTooltip);
-        ele.addEventListener(event, _this.hideTooltip, false);
-      });
-    }
-  };
-  /* Unbind listener for custom event */
-
-
-  target.prototype.customUnbindListener = function (ele) {
-    var _this$state2 = this.state,
-        event = _this$state2.event,
-        eventOff = _this$state2.eventOff;
-    var dataEvent = event || ele.getAttribute('data-event');
-    var dataEventOff = eventOff || ele.getAttribute('data-event-off');
-    ele.removeEventListener(dataEvent, customListeners.get(ele, event));
-    if (dataEventOff) ele.removeEventListener(dataEventOff, this.hideTooltip);
-  };
-}
-/**
- * Util method to judge if it should follow capture model
- */
-
-
-function isCapture(target) {
-  target.prototype.isCapture = function (currentTarget) {
-    return currentTarget && currentTarget.getAttribute('data-iscapture') === 'true' || this.props.isCapture || false;
-  };
-}
-/**
- * Util method to get effect
- */
-
-
-function getEffect(target) {
-  target.prototype.getEffect = function (currentTarget) {
-    var dataEffect = currentTarget.getAttribute('data-effect');
-    return dataEffect || this.props.effect || 'float';
-  };
-}
-/**
- * Util method to get effect
- */
-
-
-var makeProxy = function makeProxy(e) {
-  var proxy = {};
-
-  for (var key in e) {
-    if (typeof e[key] === 'function') {
-      proxy[key] = e[key].bind(e);
-    } else {
-      proxy[key] = e[key];
-    }
-  }
-
-  return proxy;
-};
-
-var bodyListener = function bodyListener(callback, options, e) {
-  var _options$respectEffec = options.respectEffect,
-      respectEffect = _options$respectEffec === void 0 ? false : _options$respectEffec,
-      _options$customEvent = options.customEvent,
-      customEvent = _options$customEvent === void 0 ? false : _options$customEvent;
-  var id = this.props.id;
-  var tip = e.target.getAttribute('data-tip') || null;
-  var forId = e.target.getAttribute('data-for') || null;
-  var target = e.target;
-
-  if (this.isCustomEvent(target) && !customEvent) {
-    return;
-  }
-
-  var isTargetBelongsToTooltip = id == null && forId == null || forId === id;
-
-  if (tip != null && (!respectEffect || this.getEffect(target) === 'float') && isTargetBelongsToTooltip) {
-    var proxy = makeProxy(e);
-    proxy.currentTarget = target;
-    callback(proxy);
-  }
-};
-
-var findCustomEvents = function findCustomEvents(targetArray, dataAttribute) {
-  var events = {};
-  targetArray.forEach(function (target) {
-    var event = target.getAttribute(dataAttribute);
-    if (event) event.split(' ').forEach(function (event) {
-      return events[event] = true;
-    });
-  });
-  return events;
-};
-
-var getBody = function getBody() {
-  return document.getElementsByTagName('body')[0];
-};
-
-function bodyMode(target) {
-  target.prototype.isBodyMode = function () {
-    return !!this.props.bodyMode;
-  };
-
-  target.prototype.bindBodyListener = function (targetArray) {
-    var _this = this;
-
-    var _this$state = this.state,
-        event = _this$state.event,
-        eventOff = _this$state.eventOff,
-        possibleCustomEvents = _this$state.possibleCustomEvents,
-        possibleCustomEventsOff = _this$state.possibleCustomEventsOff;
-    var body = getBody();
-    var customEvents = findCustomEvents(targetArray, 'data-event');
-    var customEventsOff = findCustomEvents(targetArray, 'data-event-off');
-    if (event != null) customEvents[event] = true;
-    if (eventOff != null) customEventsOff[eventOff] = true;
-    possibleCustomEvents.split(' ').forEach(function (event) {
-      return customEvents[event] = true;
-    });
-    possibleCustomEventsOff.split(' ').forEach(function (event) {
-      return customEventsOff[event] = true;
-    });
-    this.unbindBodyListener(body);
-    var listeners = this.bodyModeListeners = {};
-
-    if (event == null) {
-      listeners.mouseover = bodyListener.bind(this, this.showTooltip, {});
-      listeners.mousemove = bodyListener.bind(this, this.updateTooltip, {
-        respectEffect: true
-      });
-      listeners.mouseout = bodyListener.bind(this, this.hideTooltip, {});
-    }
-
-    for (var _event in customEvents) {
-      listeners[_event] = bodyListener.bind(this, function (e) {
-        var targetEventOff = e.currentTarget.getAttribute('data-event-off') || eventOff;
-        checkStatus.call(_this, targetEventOff, e);
-      }, {
-        customEvent: true
-      });
-    }
-
-    for (var _event2 in customEventsOff) {
-      listeners[_event2] = bodyListener.bind(this, this.hideTooltip, {
-        customEvent: true
-      });
-    }
-
-    for (var _event3 in listeners) {
-      body.addEventListener(_event3, listeners[_event3]);
-    }
-  };
-
-  target.prototype.unbindBodyListener = function (body) {
-    body = body || getBody();
-    var listeners = this.bodyModeListeners;
-
-    for (var event in listeners) {
-      body.removeEventListener(event, listeners[event]);
-    }
-  };
-}
-/**
- * Tracking target removing from DOM.
- * It's necessary to hide tooltip when it's target disappears.
- * Otherwise, the tooltip would be shown forever until another target
- * is triggered.
- *
- * If MutationObserver is not available, this feature just doesn't work.
- */
-// https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
-
-
-var getMutationObserverClass = function getMutationObserverClass() {
-  return window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-};
-
-function trackRemoval(target) {
-  target.prototype.bindRemovalTracker = function () {
-    var _this = this;
-
-    var MutationObserver = getMutationObserverClass();
-    if (MutationObserver == null) return;
-    var observer = new MutationObserver(function (mutations) {
-      for (var m1 = 0; m1 < mutations.length; m1++) {
-        var mutation = mutations[m1];
-
-        for (var m2 = 0; m2 < mutation.removedNodes.length; m2++) {
-          var element = mutation.removedNodes[m2];
-
-          if (element === _this.state.currentTarget) {
-            _this.hideTooltip();
-
-            return;
-          }
-        }
-      }
-    });
-    observer.observe(window.document, {
-      childList: true,
-      subtree: true
-    });
-    this.removalTracker = observer;
-  };
-
-  target.prototype.unbindRemovalTracker = function () {
-    if (this.removalTracker) {
-      this.removalTracker.disconnect();
-      this.removalTracker = null;
-    }
-  };
-}
-/**
- * Calculate the position of tooltip
- *
- * @params
- * - `e` {Event} the event of current mouse
- * - `target` {Element} the currentTarget of the event
- * - `node` {DOM} the react-tooltip object
- * - `place` {String} top / right / bottom / left
- * - `effect` {String} float / solid
- * - `offset` {Object} the offset to default position
- *
- * @return {Object}
- * - `isNewState` {Bool} required
- * - `newState` {Object}
- * - `position` {Object} {left: {Number}, top: {Number}}
- */
-
-
-function getPosition(e, target, node, place, desiredPlace, effect, offset) {
-  var _getDimensions = getDimensions(node),
-      tipWidth = _getDimensions.width,
-      tipHeight = _getDimensions.height;
-
-  var _getDimensions2 = getDimensions(target),
-      targetWidth = _getDimensions2.width,
-      targetHeight = _getDimensions2.height;
-
-  var _getCurrentOffset = getCurrentOffset(e, target, effect),
-      mouseX = _getCurrentOffset.mouseX,
-      mouseY = _getCurrentOffset.mouseY;
-
-  var defaultOffset = getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight);
-
-  var _calculateOffset = calculateOffset(offset),
-      extraOffsetX = _calculateOffset.extraOffsetX,
-      extraOffsetY = _calculateOffset.extraOffsetY;
-
-  var windowWidth = window.innerWidth;
-  var windowHeight = window.innerHeight;
-
-  var _getParent = getParent(node),
-      parentTop = _getParent.parentTop,
-      parentLeft = _getParent.parentLeft; // Get the edge offset of the tooltip
-
-
-  var getTipOffsetLeft = function getTipOffsetLeft(place) {
-    var offsetX = defaultOffset[place].l;
-    return mouseX + offsetX + extraOffsetX;
-  };
-
-  var getTipOffsetRight = function getTipOffsetRight(place) {
-    var offsetX = defaultOffset[place].r;
-    return mouseX + offsetX + extraOffsetX;
-  };
-
-  var getTipOffsetTop = function getTipOffsetTop(place) {
-    var offsetY = defaultOffset[place].t;
-    return mouseY + offsetY + extraOffsetY;
-  };
-
-  var getTipOffsetBottom = function getTipOffsetBottom(place) {
-    var offsetY = defaultOffset[place].b;
-    return mouseY + offsetY + extraOffsetY;
-  }; //
-  // Functions to test whether the tooltip's sides are inside
-  // the client window for a given orientation p
-  //
-  //  _____________
-  // |             | <-- Right side
-  // | p = 'left'  |\
-  // |             |/  |\
-  // |_____________|   |_\  <-- Mouse
-  //      / \           |
-  //       |
-  //       |
-  //  Bottom side
-  //
-
-
-  var outsideLeft = function outsideLeft(p) {
-    return getTipOffsetLeft(p) < 0;
-  };
-
-  var outsideRight = function outsideRight(p) {
-    return getTipOffsetRight(p) > windowWidth;
-  };
-
-  var outsideTop = function outsideTop(p) {
-    return getTipOffsetTop(p) < 0;
-  };
-
-  var outsideBottom = function outsideBottom(p) {
-    return getTipOffsetBottom(p) > windowHeight;
-  }; // Check whether the tooltip with orientation p is completely inside the client window
-
-
-  var outside = function outside(p) {
-    return outsideLeft(p) || outsideRight(p) || outsideTop(p) || outsideBottom(p);
-  };
-
-  var inside = function inside(p) {
-    return !outside(p);
-  };
-
-  var placesList = ['top', 'bottom', 'left', 'right'];
-  var insideList = [];
-
-  for (var i = 0; i < 4; i++) {
-    var p = placesList[i];
-
-    if (inside(p)) {
-      insideList.push(p);
-    }
-  }
-
-  var isNewState = false;
-  var newPlace;
-  var shouldUpdatePlace = desiredPlace !== place;
-
-  if (inside(desiredPlace) && shouldUpdatePlace) {
-    isNewState = true;
-    newPlace = desiredPlace;
-  } else if (insideList.length > 0 && outside(desiredPlace) && outside(place)) {
-    isNewState = true;
-    newPlace = insideList[0];
-  }
-
-  if (isNewState) {
-    return {
-      isNewState: true,
-      newState: {
-        place: newPlace
-      }
-    };
-  }
-
-  return {
-    isNewState: false,
-    position: {
-      left: parseInt(getTipOffsetLeft(place) - parentLeft, 10),
-      top: parseInt(getTipOffsetTop(place) - parentTop, 10)
-    }
-  };
-}
-
-var getDimensions = function getDimensions(node) {
-  var _node$getBoundingClie = node.getBoundingClientRect(),
-      height = _node$getBoundingClie.height,
-      width = _node$getBoundingClie.width;
-
-  return {
-    height: parseInt(height, 10),
-    width: parseInt(width, 10)
-  };
-}; // Get current mouse offset
-
-
-var getCurrentOffset = function getCurrentOffset(e, currentTarget, effect) {
-  var boundingClientRect = currentTarget.getBoundingClientRect();
-  var targetTop = boundingClientRect.top;
-  var targetLeft = boundingClientRect.left;
-
-  var _getDimensions3 = getDimensions(currentTarget),
-      targetWidth = _getDimensions3.width,
-      targetHeight = _getDimensions3.height;
-
-  if (effect === 'float') {
-    return {
-      mouseX: e.clientX,
-      mouseY: e.clientY
-    };
-  }
-
-  return {
-    mouseX: targetLeft + targetWidth / 2,
-    mouseY: targetTop + targetHeight / 2
-  };
-}; // List all possibility of tooltip final offset
-// This is useful in judging if it is necessary for tooltip to switch position when out of window
-
-
-var getDefaultPosition = function getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight) {
-  var top;
-  var right;
-  var bottom;
-  var left;
-  var disToMouse = 3;
-  var triangleHeight = 2;
-  var cursorHeight = 12; // Optimize for float bottom only, cause the cursor will hide the tooltip
-
-  if (effect === 'float') {
-    top = {
-      l: -(tipWidth / 2),
-      r: tipWidth / 2,
-      t: -(tipHeight + disToMouse + triangleHeight),
-      b: -disToMouse
-    };
-    bottom = {
-      l: -(tipWidth / 2),
-      r: tipWidth / 2,
-      t: disToMouse + cursorHeight,
-      b: tipHeight + disToMouse + triangleHeight + cursorHeight
-    };
-    left = {
-      l: -(tipWidth + disToMouse + triangleHeight),
-      r: -disToMouse,
-      t: -(tipHeight / 2),
-      b: tipHeight / 2
-    };
-    right = {
-      l: disToMouse,
-      r: tipWidth + disToMouse + triangleHeight,
-      t: -(tipHeight / 2),
-      b: tipHeight / 2
-    };
-  } else if (effect === 'solid') {
-    top = {
-      l: -(tipWidth / 2),
-      r: tipWidth / 2,
-      t: -(targetHeight / 2 + tipHeight + triangleHeight),
-      b: -(targetHeight / 2)
-    };
-    bottom = {
-      l: -(tipWidth / 2),
-      r: tipWidth / 2,
-      t: targetHeight / 2,
-      b: targetHeight / 2 + tipHeight + triangleHeight
-    };
-    left = {
-      l: -(tipWidth + targetWidth / 2 + triangleHeight),
-      r: -(targetWidth / 2),
-      t: -(tipHeight / 2),
-      b: tipHeight / 2
-    };
-    right = {
-      l: targetWidth / 2,
-      r: tipWidth + targetWidth / 2 + triangleHeight,
-      t: -(tipHeight / 2),
-      b: tipHeight / 2
-    };
-  }
-
-  return {
-    top: top,
-    bottom: bottom,
-    left: left,
-    right: right
-  };
-}; // Consider additional offset into position calculation
-
-
-var calculateOffset = function calculateOffset(offset) {
-  var extraOffsetX = 0;
-  var extraOffsetY = 0;
-
-  if (Object.prototype.toString.apply(offset) === '[object String]') {
-    offset = JSON.parse(offset.toString().replace(/'/g, '"'));
-  }
-
-  for (var key in offset) {
-    if (key === 'top') {
-      extraOffsetY -= parseInt(offset[key], 10);
-    } else if (key === 'bottom') {
-      extraOffsetY += parseInt(offset[key], 10);
-    } else if (key === 'left') {
-      extraOffsetX -= parseInt(offset[key], 10);
-    } else if (key === 'right') {
-      extraOffsetX += parseInt(offset[key], 10);
-    }
-  }
-
-  return {
-    extraOffsetX: extraOffsetX,
-    extraOffsetY: extraOffsetY
-  };
-}; // Get the offset of the parent elements
-
-
-var getParent = function getParent(currentTarget) {
-  var currentParent = currentTarget;
-
-  while (currentParent) {
-    var computedStyle = window.getComputedStyle(currentParent); // transform and will-change: transform change the containing block
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_Block
-
-    if (computedStyle.getPropertyValue('transform') !== 'none' || computedStyle.getPropertyValue('will-change') === 'transform') break;
-    currentParent = currentParent.parentElement;
-  }
-
-  var parentTop = currentParent && currentParent.getBoundingClientRect().top || 0;
-  var parentLeft = currentParent && currentParent.getBoundingClientRect().left || 0;
-  return {
-    parentTop: parentTop,
-    parentLeft: parentLeft
-  };
-};
-/**
- * To get the tooltip content
- * it may comes from data-tip or this.props.children
- * it should support multiline
- *
- * @params
- * - `tip` {String} value of data-tip
- * - `children` {ReactElement} this.props.children
- * - `multiline` {Any} could be Bool(true/false) or String('true'/'false')
- *
- * @return
- * - String or react component
- */
-
-
-function getTipContent(tip, children, getContent, multiline) {
-  if (children) return children;
-  if (getContent !== undefined && getContent !== null) return getContent; // getContent can be 0, '', etc.
-
-  if (getContent === null) return null; // Tip not exist and children is null or undefined
-
-  var regexp = /<br\s*\/?>/;
-
-  if (!multiline || multiline === 'false' || !regexp.test(tip)) {
-    // No trim(), so that user can keep their input
-    return tip;
-  } // Multiline tooltip content
-
-
-  return tip.split(regexp).map(function (d, i) {
-    return React.createElement("span", {
-      key: i,
-      className: "multi-line"
-    }, d);
-  });
-}
-/**
- * Support aria- and role in ReactTooltip
- *
- * @params props {Object}
- * @return {Object}
- */
-
-
-function parseAria(props) {
-  var ariaObj = {};
-  Object.keys(props).filter(function (prop) {
-    // aria-xxx and role is acceptable
-    return /(^aria-\w+$|^role$)/.test(prop);
-  }).forEach(function (prop) {
-    ariaObj[prop] = props[prop];
-  });
-  return ariaObj;
-}
-/**
- * Convert nodelist to array
- * @see https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/core/createArrayFromMixed.js#L24
- * NodeLists are functions in Safari
- */
-
-
-function nodeListToArray(nodeList) {
-  var length = nodeList.length;
-
-  if (nodeList.hasOwnProperty) {
-    return Array.prototype.slice.call(nodeList);
-  }
-
-  return new Array(length).fill().map(function (index) {
-    return nodeList[index];
-  });
-}
-
-function generateUUID() {
-  return 't' + v4();
-}
-
-var baseCss = ".__react_component_tooltip {\n  border-radius: 3px;\n  display: inline-block;\n  font-size: 13px;\n  left: -999em;\n  opacity: 0;\n  padding: 8px 21px;\n  position: fixed;\n  pointer-events: none;\n  transition: opacity 0.3s ease-out;\n  top: -999em;\n  visibility: hidden;\n  z-index: 999;\n}\n.__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {\n  pointer-events: auto;\n}\n.__react_component_tooltip::before, .__react_component_tooltip::after {\n  content: \"\";\n  width: 0;\n  height: 0;\n  position: absolute;\n}\n.__react_component_tooltip.show {\n  opacity: 0.9;\n  margin-top: 0;\n  margin-left: 0;\n  visibility: visible;\n}\n.__react_component_tooltip.place-top::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  bottom: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-bottom::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  top: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-left::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  right: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip.place-right::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  left: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip .multi-line {\n  display: block;\n  padding: 2px 0;\n  text-align: center;\n}";
-/**
- * Default pop-up style values (text color, background color).
- */
-
-var defaultColors = {
-  dark: {
-    text: '#fff',
-    background: '#222',
-    border: 'transparent',
-    arrow: '#222'
-  },
-  success: {
-    text: '#fff',
-    background: '#8DC572',
-    border: 'transparent',
-    arrow: '#8DC572'
-  },
-  warning: {
-    text: '#fff',
-    background: '#F0AD4E',
-    border: 'transparent',
-    arrow: '#F0AD4E'
-  },
-  error: {
-    text: '#fff',
-    background: '#BE6464',
-    border: 'transparent',
-    arrow: '#BE6464'
-  },
-  info: {
-    text: '#fff',
-    background: '#337AB7',
-    border: 'transparent',
-    arrow: '#337AB7'
-  },
-  light: {
-    text: '#222',
-    background: '#fff',
-    border: 'transparent',
-    arrow: '#fff'
-  }
-};
-
-function getDefaultPopupColors(type) {
-  return defaultColors[type] ? _objectSpread2({}, defaultColors[type]) : undefined;
-}
-/**
- * Generates the specific tooltip style for use on render.
- */
-
-
-function generateTooltipStyle(uuid, customColors, type, hasBorder) {
-  return generateStyle(uuid, getPopupColors(customColors, type, hasBorder));
-}
-/**
- * Generates the tooltip style rules based on the element-specified "data-type" property.
- */
-
-
-function generateStyle(uuid, colors) {
-  var textColor = colors.text;
-  var backgroundColor = colors.background;
-  var borderColor = colors.border;
-  var arrowColor = colors.arrow;
-  return "\n  \t.".concat(uuid, " {\n\t    color: ").concat(textColor, ";\n\t    background: ").concat(backgroundColor, ";\n\t    border: 1px solid ").concat(borderColor, ";\n  \t}\n\n  \t.").concat(uuid, ".place-top {\n        margin-top: -10px;\n    }\n    .").concat(uuid, ".place-top::before {\n        border-top: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-top::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        bottom: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-top-color: ").concat(arrowColor, ";\n        border-top-style: solid;\n        border-top-width: 6px;\n    }\n\n    .").concat(uuid, ".place-bottom {\n        margin-top: 10px;\n    }\n    .").concat(uuid, ".place-bottom::before {\n        border-bottom: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-bottom::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        top: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-bottom-color: ").concat(arrowColor, ";\n        border-bottom-style: solid;\n        border-bottom-width: 6px;\n    }\n\n    .").concat(uuid, ".place-left {\n        margin-left: -10px;\n    }\n    .").concat(uuid, ".place-left::before {\n        border-left: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-left::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        right: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-left-color: ").concat(arrowColor, ";\n        border-left-style: solid;\n        border-left-width: 6px;\n    }\n\n    .").concat(uuid, ".place-right {\n        margin-left: 10px;\n    }\n    .").concat(uuid, ".place-right::before {\n        border-right: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-right::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        left: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-right-color: ").concat(arrowColor, ";\n        border-right-style: solid;\n        border-right-width: 6px;\n    }\n  ");
-}
-
-function getPopupColors(customColors, type, hasBorder) {
-  var textColor = customColors.text;
-  var backgroundColor = customColors.background;
-  var borderColor = customColors.border;
-  var arrowColor = customColors.arrow ? customColors.arrow : customColors.background;
-  var colors = getDefaultPopupColors(type);
-
-  if (textColor) {
-    colors.text = textColor;
-  }
-
-  if (backgroundColor) {
-    colors.background = backgroundColor;
-  }
-
-  if (hasBorder) {
-    if (borderColor) {
-      colors.border = borderColor;
-    } else {
-      colors.border = type === 'light' ? 'black' : 'white';
-    }
-  }
-
-  if (arrowColor) {
-    colors.arrow = arrowColor;
-  }
-
-  return colors;
-}
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, module) {
-  return module = {
-    exports: {}
-  }, fn(module, module.exports), module.exports;
-}
-
-var check = function (it) {
-  return it && it.Math == Math && it;
-}; // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-
-
-var global_1 = // eslint-disable-next-line es/no-global-this -- safe
-check(typeof globalThis == 'object' && globalThis) || check(typeof window == 'object' && window) || // eslint-disable-next-line no-restricted-globals -- safe
-check(typeof self == 'object' && self) || check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func -- fallback
-function () {
-  return this;
-}() || Function('return this')();
-
-var fails = function (exec) {
-  try {
-    return !!exec();
-  } catch (error) {
-    return true;
-  }
-}; // Detect IE8's incomplete defineProperty implementation
-
-
-var descriptors = !fails(function () {
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-  return Object.defineProperty({}, 1, {
-    get: function () {
-      return 7;
-    }
-  })[1] != 7;
-});
-var $propertyIsEnumerable = {}.propertyIsEnumerable; // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor; // Nashorn ~ JDK8 bug
-
-var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({
-  1: 2
-}, 1); // `Object.prototype.propertyIsEnumerable` method implementation
-// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
-
-var f = NASHORN_BUG ? function propertyIsEnumerable(V) {
-  var descriptor = getOwnPropertyDescriptor(this, V);
-  return !!descriptor && descriptor.enumerable;
-} : $propertyIsEnumerable;
-var objectPropertyIsEnumerable = {
-  f: f
-};
-
-var createPropertyDescriptor = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-var toString = {}.toString;
-
-var classofRaw = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-var split = ''.split; // fallback for non-array-like ES3 and non-enumerable old V8 strings
-
-var indexedObject = fails(function () {
-  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins -- safe
-  return !Object('z').propertyIsEnumerable(0);
-}) ? function (it) {
-  return classofRaw(it) == 'String' ? split.call(it, '') : Object(it);
-} : Object; // `RequireObjectCoercible` abstract operation
-// https://tc39.es/ecma262/#sec-requireobjectcoercible
-
-var requireObjectCoercible = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on " + it);
-  return it;
-}; // toObject with fallback for non-array-like ES3 strings
-
-
-var toIndexedObject = function (it) {
-  return indexedObject(requireObjectCoercible(it));
-};
-
-var isObject = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-}; // `ToPrimitive` abstract operation
-// https://tc39.es/ecma262/#sec-toprimitive
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-
-
-var toPrimitive = function (input, PREFERRED_STRING) {
-  if (!isObject(input)) return input;
-  var fn, val;
-  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  throw TypeError("Can't convert object to primitive value");
-}; // `ToObject` abstract operation
-// https://tc39.es/ecma262/#sec-toobject
-
-
-var toObject = function (argument) {
-  return Object(requireObjectCoercible(argument));
-};
-
-var hasOwnProperty = {}.hasOwnProperty;
-
-var has = function hasOwn(it, key) {
-  return hasOwnProperty.call(toObject(it), key);
-};
-
-var document$1 = global_1.document; // typeof document.createElement is 'object' in old IE
-
-var EXISTS = isObject(document$1) && isObject(document$1.createElement);
-
-var documentCreateElement = function (it) {
-  return EXISTS ? document$1.createElement(it) : {};
-}; // Thank's IE8 for his funny defineProperty
-
-
-var ie8DomDefine = !descriptors && !fails(function () {
-  // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
-  return Object.defineProperty(documentCreateElement('div'), 'a', {
-    get: function () {
-      return 7;
-    }
-  }).a != 7;
-}); // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-
-var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor; // `Object.getOwnPropertyDescriptor` method
-// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-
-var f$1 = descriptors ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
-  O = toIndexedObject(O);
-  P = toPrimitive(P, true);
-  if (ie8DomDefine) try {
-    return $getOwnPropertyDescriptor(O, P);
-  } catch (error) {
-    /* empty */
-  }
-  if (has(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
-};
-var objectGetOwnPropertyDescriptor = {
-  f: f$1
-};
-
-var anObject = function (it) {
-  if (!isObject(it)) {
-    throw TypeError(String(it) + ' is not an object');
-  }
-
-  return it;
-}; // eslint-disable-next-line es/no-object-defineproperty -- safe
-
-
-var $defineProperty = Object.defineProperty; // `Object.defineProperty` method
-// https://tc39.es/ecma262/#sec-object.defineproperty
-
-var f$2 = descriptors ? $defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (ie8DomDefine) try {
-    return $defineProperty(O, P, Attributes);
-  } catch (error) {
-    /* empty */
-  }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-var objectDefineProperty = {
-  f: f$2
-};
-var createNonEnumerableProperty = descriptors ? function (object, key, value) {
-  return objectDefineProperty.f(object, key, createPropertyDescriptor(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-var setGlobal = function (key, value) {
-  try {
-    createNonEnumerableProperty(global_1, key, value);
-  } catch (error) {
-    global_1[key] = value;
-  }
-
-  return value;
-};
-
-var SHARED = '__core-js_shared__';
-var store = global_1[SHARED] || setGlobal(SHARED, {});
-var sharedStore = store;
-var functionToString = Function.toString; // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
-
-if (typeof sharedStore.inspectSource != 'function') {
-  sharedStore.inspectSource = function (it) {
-    return functionToString.call(it);
-  };
-}
-
-var inspectSource = sharedStore.inspectSource;
-var WeakMap$1 = global_1.WeakMap;
-var nativeWeakMap = typeof WeakMap$1 === 'function' && /native code/.test(inspectSource(WeakMap$1));
-var shared = createCommonjsModule(function (module) {
-  (module.exports = function (key, value) {
-    return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
-  })('versions', []).push({
-    version: '3.12.1',
-    mode: 'global',
-    copyright: '© 2021 Denis Pushkarev (zloirock.ru)'
-  });
-});
-var id = 0;
-var postfix = Math.random();
-
-var uid = function (key) {
-  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
-};
-
-var keys = shared('keys');
-
-var sharedKey = function (key) {
-  return keys[key] || (keys[key] = uid(key));
-};
-
-var hiddenKeys = {};
-var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
-var WeakMap$1$1 = global_1.WeakMap;
-var set, get, has$1;
-
-var enforce = function (it) {
-  return has$1(it) ? get(it) : set(it, {});
-};
-
-var getterFor = function (TYPE) {
-  return function (it) {
-    var state;
-
-    if (!isObject(it) || (state = get(it)).type !== TYPE) {
-      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
-    }
-
-    return state;
-  };
-};
-
-if (nativeWeakMap || sharedStore.state) {
-  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1$1());
-  var wmget = store$1.get;
-  var wmhas = store$1.has;
-  var wmset = store$1.set;
-
-  set = function (it, metadata) {
-    if (wmhas.call(store$1, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
-    metadata.facade = it;
-    wmset.call(store$1, it, metadata);
-    return metadata;
-  };
-
-  get = function (it) {
-    return wmget.call(store$1, it) || {};
-  };
-
-  has$1 = function (it) {
-    return wmhas.call(store$1, it);
-  };
-} else {
-  var STATE = sharedKey('state');
-  hiddenKeys[STATE] = true;
-
-  set = function (it, metadata) {
-    if (has(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
-    metadata.facade = it;
-    createNonEnumerableProperty(it, STATE, metadata);
-    return metadata;
-  };
-
-  get = function (it) {
-    return has(it, STATE) ? it[STATE] : {};
-  };
-
-  has$1 = function (it) {
-    return has(it, STATE);
-  };
-}
-
-var internalState = {
-  set: set,
-  get: get,
-  has: has$1,
-  enforce: enforce,
-  getterFor: getterFor
-};
-var redefine = createCommonjsModule(function (module) {
-  var getInternalState = internalState.get;
-  var enforceInternalState = internalState.enforce;
-  var TEMPLATE = String(String).split('String');
-  (module.exports = function (O, key, value, options) {
-    var unsafe = options ? !!options.unsafe : false;
-    var simple = options ? !!options.enumerable : false;
-    var noTargetGet = options ? !!options.noTargetGet : false;
-    var state;
-
-    if (typeof value == 'function') {
-      if (typeof key == 'string' && !has(value, 'name')) {
-        createNonEnumerableProperty(value, 'name', key);
-      }
-
-      state = enforceInternalState(value);
-
-      if (!state.source) {
-        state.source = TEMPLATE.join(typeof key == 'string' ? key : '');
-      }
-    }
-
-    if (O === global_1) {
-      if (simple) O[key] = value;else setGlobal(key, value);
-      return;
-    } else if (!unsafe) {
-      delete O[key];
-    } else if (!noTargetGet && O[key]) {
-      simple = true;
-    }
-
-    if (simple) O[key] = value;else createNonEnumerableProperty(O, key, value); // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-  })(Function.prototype, 'toString', function toString() {
-    return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
-  });
-});
-var path = global_1;
-
-var aFunction = function (variable) {
-  return typeof variable == 'function' ? variable : undefined;
-};
-
-var getBuiltIn = function (namespace, method) {
-  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global_1[namespace]) : path[namespace] && path[namespace][method] || global_1[namespace] && global_1[namespace][method];
-};
-
-var ceil = Math.ceil;
-var floor = Math.floor; // `ToInteger` abstract operation
-// https://tc39.es/ecma262/#sec-tointeger
-
-var toInteger = function (argument) {
-  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
-};
-
-var min = Math.min; // `ToLength` abstract operation
-// https://tc39.es/ecma262/#sec-tolength
-
-var toLength = function (argument) {
-  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
-};
-
-var max = Math.max;
-var min$1 = Math.min; // Helper for a popular repeating case of the spec:
-// Let integer be ? ToInteger(index).
-// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
-
-var toAbsoluteIndex = function (index, length) {
-  var integer = toInteger(index);
-  return integer < 0 ? max(integer + length, 0) : min$1(integer, length);
-}; // `Array.prototype.{ indexOf, includes }` methods implementation
-
-
-var createMethod = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIndexedObject($this);
-    var length = toLength(O.length);
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value; // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare -- NaN check
-
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++]; // eslint-disable-next-line no-self-compare -- NaN check
-
-      if (value != value) return true; // Array#indexOf ignores holes, Array#includes - not
-    } else for (; length > index; index++) {
-      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
-    }
-    return !IS_INCLUDES && -1;
-  };
-};
-
-var arrayIncludes = {
-  // `Array.prototype.includes` method
-  // https://tc39.es/ecma262/#sec-array.prototype.includes
-  includes: createMethod(true),
-  // `Array.prototype.indexOf` method
-  // https://tc39.es/ecma262/#sec-array.prototype.indexof
-  indexOf: createMethod(false)
-};
-var indexOf = arrayIncludes.indexOf;
-
-var objectKeysInternal = function (object, names) {
-  var O = toIndexedObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-
-  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key); // Don't enum bug & hidden keys
-
-
-  while (names.length > i) if (has(O, key = names[i++])) {
-    ~indexOf(result, key) || result.push(key);
-  }
-
-  return result;
-}; // IE8- don't enum bug keys
-
-
-var enumBugKeys = ['constructor', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'toLocaleString', 'toString', 'valueOf'];
-var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype'); // `Object.getOwnPropertyNames` method
-// https://tc39.es/ecma262/#sec-object.getownpropertynames
-// eslint-disable-next-line es/no-object-getownpropertynames -- safe
-
-var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-  return objectKeysInternal(O, hiddenKeys$1);
-};
-
-var objectGetOwnPropertyNames = {
-  f: f$3
-}; // eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
-
-var f$4 = Object.getOwnPropertySymbols;
-var objectGetOwnPropertySymbols = {
-  f: f$4
-}; // all object keys, includes non-enumerable and symbols
-
-var ownKeys$1 = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
-  var keys = objectGetOwnPropertyNames.f(anObject(it));
-  var getOwnPropertySymbols = objectGetOwnPropertySymbols.f;
-  return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys;
-};
-
-var copyConstructorProperties = function (target, source) {
-  var keys = ownKeys$1(source);
-  var defineProperty = objectDefineProperty.f;
-  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
-
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    if (!has(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
-  }
-};
-
-var replacement = /#|\.prototype\./;
-
-var isForced = function (feature, detection) {
-  var value = data[normalize(feature)];
-  return value == POLYFILL ? true : value == NATIVE ? false : typeof detection == 'function' ? fails(detection) : !!detection;
-};
-
-var normalize = isForced.normalize = function (string) {
-  return String(string).replace(replacement, '.').toLowerCase();
-};
-
-var data = isForced.data = {};
-var NATIVE = isForced.NATIVE = 'N';
-var POLYFILL = isForced.POLYFILL = 'P';
-var isForced_1 = isForced;
-var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
-/*
-  options.target      - name of the target object
-  options.global      - target is the global object
-  options.stat        - export as static methods of target
-  options.proto       - export as prototype methods of target
-  options.real        - real prototype method for the `pure` version
-  options.forced      - export even if the native feature is available
-  options.bind        - bind methods to the target, required for the `pure` version
-  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
-  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
-  options.sham        - add a flag to not completely full polyfills
-  options.enumerable  - export as enumerable property
-  options.noTargetGet - prevent calling a getter on target
-*/
-
-var _export = function (options, source) {
-  var TARGET = options.target;
-  var GLOBAL = options.global;
-  var STATIC = options.stat;
-  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
-
-  if (GLOBAL) {
-    target = global_1;
-  } else if (STATIC) {
-    target = global_1[TARGET] || setGlobal(TARGET, {});
-  } else {
-    target = (global_1[TARGET] || {}).prototype;
-  }
-
-  if (target) for (key in source) {
-    sourceProperty = source[key];
-
-    if (options.noTargetGet) {
-      descriptor = getOwnPropertyDescriptor$1(target, key);
-      targetProperty = descriptor && descriptor.value;
-    } else targetProperty = target[key];
-
-    FORCED = isForced_1(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced); // contained in target
-
-    if (!FORCED && targetProperty !== undefined) {
-      if (typeof sourceProperty === typeof targetProperty) continue;
-      copyConstructorProperties(sourceProperty, targetProperty);
-    } // add a flag to not completely full polyfills
-
-
-    if (options.sham || targetProperty && targetProperty.sham) {
-      createNonEnumerableProperty(sourceProperty, 'sham', true);
-    } // extend global
-
-
-    redefine(target, key, sourceProperty, options);
-  }
-};
-
-var aFunction$1 = function (it) {
-  if (typeof it != 'function') {
-    throw TypeError(String(it) + ' is not a function');
-  }
-
-  return it;
-}; // optional / simple context binding
-
-
-var functionBindContext = function (fn, that, length) {
-  aFunction$1(fn);
-  if (that === undefined) return fn;
-
-  switch (length) {
-    case 0:
-      return function () {
-        return fn.call(that);
-      };
-
-    case 1:
-      return function (a) {
-        return fn.call(that, a);
-      };
-
-    case 2:
-      return function (a, b) {
-        return fn.call(that, a, b);
-      };
-
-    case 3:
-      return function (a, b, c) {
-        return fn.call(that, a, b, c);
-      };
-  }
-
-  return function
-    /* ...args */
-  () {
-    return fn.apply(that, arguments);
-  };
-}; // `IsArray` abstract operation
-// https://tc39.es/ecma262/#sec-isarray
-// eslint-disable-next-line es/no-array-isarray -- safe
-
-
-var isArray = Array.isArray || function isArray(arg) {
-  return classofRaw(arg) == 'Array';
-};
-
-var engineUserAgent = getBuiltIn('navigator', 'userAgent') || '';
-var process$1 = global_1.process;
-var versions = process$1 && process$1.versions;
-var v8 = versions && versions.v8;
-var match, version;
-
-if (v8) {
-  match = v8.split('.');
-  version = match[0] < 4 ? 1 : match[0] + match[1];
-} else if (engineUserAgent) {
-  match = engineUserAgent.match(/Edge\/(\d+)/);
-
-  if (!match || match[1] >= 74) {
-    match = engineUserAgent.match(/Chrome\/(\d+)/);
-    if (match) version = match[1];
-  }
-}
-
-var engineV8Version = version && +version;
-/* eslint-disable es/no-symbol -- required for testing */
-// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
-
-var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
-  return !String(Symbol()) || // Chrome 38 Symbol has incorrect toString conversion
-  // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-  !Symbol.sham && engineV8Version && engineV8Version < 41;
-});
-/* eslint-disable es/no-symbol -- required for testing */
-
-var useSymbolAsUid = nativeSymbol && !Symbol.sham && typeof Symbol.iterator == 'symbol';
-var WellKnownSymbolsStore = shared('wks');
-var Symbol$1 = global_1.Symbol;
-var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
-
-var wellKnownSymbol = function (name) {
-  if (!has(WellKnownSymbolsStore, name) || !(nativeSymbol || typeof WellKnownSymbolsStore[name] == 'string')) {
-    if (nativeSymbol && has(Symbol$1, name)) {
-      WellKnownSymbolsStore[name] = Symbol$1[name];
-    } else {
-      WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
-    }
-  }
-
-  return WellKnownSymbolsStore[name];
-};
-
-var SPECIES = wellKnownSymbol('species'); // `ArraySpeciesCreate` abstract operation
-// https://tc39.es/ecma262/#sec-arrayspeciescreate
-
-var arraySpeciesCreate = function (originalArray, length) {
-  var C;
-
-  if (isArray(originalArray)) {
-    C = originalArray.constructor; // cross-realm fallback
-
-    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;else if (isObject(C)) {
-      C = C[SPECIES];
-      if (C === null) C = undefined;
-    }
-  }
-
-  return new (C === undefined ? Array : C)(length === 0 ? 0 : length);
-};
-
-var push = [].push; // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
-
-var createMethod$1 = function (TYPE) {
-  var IS_MAP = TYPE == 1;
-  var IS_FILTER = TYPE == 2;
-  var IS_SOME = TYPE == 3;
-  var IS_EVERY = TYPE == 4;
-  var IS_FIND_INDEX = TYPE == 6;
-  var IS_FILTER_OUT = TYPE == 7;
-  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
-  return function ($this, callbackfn, that, specificCreate) {
-    var O = toObject($this);
-    var self = indexedObject(O);
-    var boundFunction = functionBindContext(callbackfn, that, 3);
-    var length = toLength(self.length);
-    var index = 0;
-    var create = specificCreate || arraySpeciesCreate;
-    var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_OUT ? create($this, 0) : undefined;
-    var value, result;
-
-    for (; length > index; index++) if (NO_HOLES || index in self) {
-      value = self[index];
-      result = boundFunction(value, index, O);
-
-      if (TYPE) {
-        if (IS_MAP) target[index] = result; // map
-        else if (result) switch (TYPE) {
-          case 3:
-            return true;
-          // some
-
-          case 5:
-            return value;
-          // find
-
-          case 6:
-            return index;
-          // findIndex
-
-          case 2:
-            push.call(target, value);
-          // filter
-        } else switch (TYPE) {
-          case 4:
-            return false;
-          // every
-
-          case 7:
-            push.call(target, value);
-          // filterOut
-        }
-      }
-    }
-
-    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
-  };
-};
-
-var arrayIteration = {
-  // `Array.prototype.forEach` method
-  // https://tc39.es/ecma262/#sec-array.prototype.foreach
-  forEach: createMethod$1(0),
-  // `Array.prototype.map` method
-  // https://tc39.es/ecma262/#sec-array.prototype.map
-  map: createMethod$1(1),
-  // `Array.prototype.filter` method
-  // https://tc39.es/ecma262/#sec-array.prototype.filter
-  filter: createMethod$1(2),
-  // `Array.prototype.some` method
-  // https://tc39.es/ecma262/#sec-array.prototype.some
-  some: createMethod$1(3),
-  // `Array.prototype.every` method
-  // https://tc39.es/ecma262/#sec-array.prototype.every
-  every: createMethod$1(4),
-  // `Array.prototype.find` method
-  // https://tc39.es/ecma262/#sec-array.prototype.find
-  find: createMethod$1(5),
-  // `Array.prototype.findIndex` method
-  // https://tc39.es/ecma262/#sec-array.prototype.findIndex
-  findIndex: createMethod$1(6),
-  // `Array.prototype.filterOut` method
-  // https://github.com/tc39/proposal-array-filtering
-  filterOut: createMethod$1(7)
-}; // `Object.keys` method
-// https://tc39.es/ecma262/#sec-object.keys
-// eslint-disable-next-line es/no-object-keys -- safe
-
-var objectKeys = Object.keys || function keys(O) {
-  return objectKeysInternal(O, enumBugKeys);
-}; // `Object.defineProperties` method
-// https://tc39.es/ecma262/#sec-object.defineproperties
-// eslint-disable-next-line es/no-object-defineproperties -- safe
-
-
-var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = objectKeys(Properties);
-  var length = keys.length;
-  var index = 0;
-  var key;
-
-  while (length > index) objectDefineProperty.f(O, key = keys[index++], Properties[key]);
-
-  return O;
-};
-var html = getBuiltIn('document', 'documentElement');
-var GT = '>';
-var LT = '<';
-var PROTOTYPE = 'prototype';
-var SCRIPT = 'script';
-var IE_PROTO = sharedKey('IE_PROTO');
-
-var EmptyConstructor = function () {
-  /* empty */
-};
-
-var scriptTag = function (content) {
-  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
-}; // Create object with fake `null` prototype: use ActiveX Object with cleared prototype
-
-
-var NullProtoObjectViaActiveX = function (activeXDocument) {
-  activeXDocument.write(scriptTag(''));
-  activeXDocument.close();
-  var temp = activeXDocument.parentWindow.Object;
-  activeXDocument = null; // avoid memory leak
-
-  return temp;
-}; // Create object with fake `null` prototype: use iframe Object with cleared prototype
-
-
-var NullProtoObjectViaIFrame = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = documentCreateElement('iframe');
-  var JS = 'java' + SCRIPT + ':';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  html.appendChild(iframe); // https://github.com/zloirock/core-js/issues/475
-
-  iframe.src = String(JS);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(scriptTag('document.F=Object'));
-  iframeDocument.close();
-  return iframeDocument.F;
-}; // Check for document.domain and active x support
-// No need to use active x approach when document.domain is not set
-// see https://github.com/es-shims/es5-shim/issues/150
-// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
-// avoid IE GC bug
-
-
-var activeXDocument;
-
-var NullProtoObject = function () {
-  try {
-    /* global ActiveXObject -- old IE */
-    activeXDocument = document.domain && new ActiveXObject('htmlfile');
-  } catch (error) {
-    /* ignore */
-  }
-
-  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
-  var length = enumBugKeys.length;
-
-  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
-
-  return NullProtoObject();
-};
-
-hiddenKeys[IE_PROTO] = true; // `Object.create` method
-// https://tc39.es/ecma262/#sec-object.create
-
-var objectCreate = Object.create || function create(O, Properties) {
-  var result;
-
-  if (O !== null) {
-    EmptyConstructor[PROTOTYPE] = anObject(O);
-    result = new EmptyConstructor();
-    EmptyConstructor[PROTOTYPE] = null; // add "__proto__" for Object.getPrototypeOf polyfill
-
-    result[IE_PROTO] = O;
-  } else result = NullProtoObject();
-
-  return Properties === undefined ? result : objectDefineProperties(result, Properties);
-};
-
-var UNSCOPABLES = wellKnownSymbol('unscopables');
-var ArrayPrototype = Array.prototype; // Array.prototype[@@unscopables]
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-
-if (ArrayPrototype[UNSCOPABLES] == undefined) {
-  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
-    configurable: true,
-    value: objectCreate(null)
-  });
-} // add a key to Array.prototype[@@unscopables]
-
-
-var addToUnscopables = function (key) {
-  ArrayPrototype[UNSCOPABLES][key] = true;
-};
-
-var $find = arrayIteration.find;
-var FIND = 'find';
-var SKIPS_HOLES = true; // Shouldn't skip holes
-
-if (FIND in []) Array(1)[FIND](function () {
-  SKIPS_HOLES = false;
-}); // `Array.prototype.find` method
-// https://tc39.es/ecma262/#sec-array.prototype.find
-
-_export({
-  target: 'Array',
-  proto: true,
-  forced: SKIPS_HOLES
-}, {
-  find: function find(callbackfn
-  /* , that = undefined */
-  ) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-}); // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-
-
-addToUnscopables(FIND);
-
-var _class, _class2, _temp;
-
-var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_class = isCapture(_class = getEffect(_class = bodyMode(_class = trackRemoval(_class = (_temp = _class2 = /*#__PURE__*/function (_React$Component) {
-  _inherits(ReactTooltip, _React$Component);
-
-  _createClass(ReactTooltip, null, [{
-    key: "propTypes",
-    get: function get() {
-      return {
-        uuid: propTypes.exports.string,
-        children: propTypes.exports.any,
-        place: propTypes.exports.string,
-        type: propTypes.exports.string,
-        effect: propTypes.exports.string,
-        offset: propTypes.exports.object,
-        multiline: propTypes.exports.bool,
-        border: propTypes.exports.bool,
-        textColor: propTypes.exports.string,
-        backgroundColor: propTypes.exports.string,
-        borderColor: propTypes.exports.string,
-        arrowColor: propTypes.exports.string,
-        insecure: propTypes.exports.bool,
-        "class": propTypes.exports.string,
-        className: propTypes.exports.string,
-        id: propTypes.exports.string,
-        html: propTypes.exports.bool,
-        delayHide: propTypes.exports.number,
-        delayUpdate: propTypes.exports.number,
-        delayShow: propTypes.exports.number,
-        event: propTypes.exports.string,
-        eventOff: propTypes.exports.string,
-        isCapture: propTypes.exports.bool,
-        globalEventOff: propTypes.exports.string,
-        getContent: propTypes.exports.any,
-        afterShow: propTypes.exports.func,
-        afterHide: propTypes.exports.func,
-        overridePosition: propTypes.exports.func,
-        disable: propTypes.exports.bool,
-        scrollHide: propTypes.exports.bool,
-        resizeHide: propTypes.exports.bool,
-        wrapper: propTypes.exports.string,
-        bodyMode: propTypes.exports.bool,
-        possibleCustomEvents: propTypes.exports.string,
-        possibleCustomEventsOff: propTypes.exports.string,
-        clickable: propTypes.exports.bool
-      };
-    }
-  }]);
-
-  function ReactTooltip(props) {
-    var _this;
-
-    _classCallCheck(this, ReactTooltip);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReactTooltip).call(this, props));
-    _this.state = {
-      uuid: props.uuid || generateUUID(),
-      place: props.place || 'top',
-      // Direction of tooltip
-      desiredPlace: props.place || 'top',
-      type: 'dark',
-      // Color theme of tooltip
-      effect: 'float',
-      // float or fixed
-      show: false,
-      border: false,
-      customColors: {},
-      offset: {},
-      extraClass: '',
-      html: false,
-      delayHide: 0,
-      delayShow: 0,
-      event: props.event || null,
-      eventOff: props.eventOff || null,
-      currentEvent: null,
-      // Current mouse event
-      currentTarget: null,
-      // Current target of mouse event
-      ariaProps: parseAria(props),
-      // aria- and role attributes
-      isEmptyTip: false,
-      disable: false,
-      possibleCustomEvents: props.possibleCustomEvents || '',
-      possibleCustomEventsOff: props.possibleCustomEventsOff || '',
-      originTooltip: null,
-      isMultiline: false
-    };
-
-    _this.bind(['showTooltip', 'updateTooltip', 'hideTooltip', 'hideTooltipOnScroll', 'getTooltipContent', 'globalRebuild', 'globalShow', 'globalHide', 'onWindowResize', 'mouseOnToolTip']);
-
-    _this.mount = true;
-    _this.delayShowLoop = null;
-    _this.delayHideLoop = null;
-    _this.delayReshow = null;
-    _this.intervalUpdateContent = null;
-    return _this;
-  }
-  /**
-   * For unify the bind and unbind listener
-   */
-
-
-  _createClass(ReactTooltip, [{
-    key: "bind",
-    value: function bind(methodArray) {
-      var _this2 = this;
-
-      methodArray.forEach(function (method) {
-        _this2[method] = _this2[method].bind(_this2);
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props = this.props;
-          _this$props.insecure;
-          var resizeHide = _this$props.resizeHide;
-      this.bindListener(); // Bind listener for tooltip
-
-      this.bindWindowEvents(resizeHide); // Bind global event for static method
-
-      this.injectStyles(); // Inject styles for each DOM root having tooltip.
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.mount = false;
-      this.clearTimer();
-      this.unbindListener();
-      this.removeScrollListener(this.state.currentTarget);
-      this.unbindWindowEvents();
-    }
-    /* Look for the closest DOM root having tooltip and inject styles. */
-
-  }, {
-    key: "injectStyles",
-    value: function injectStyles() {
-      var tooltipRef = this.tooltipRef;
-
-      if (!tooltipRef) {
-        return;
-      }
-
-      var parentNode = tooltipRef.parentNode;
-
-      while (parentNode.parentNode) {
-        parentNode = parentNode.parentNode;
-      }
-
-      var domRoot;
-
-      switch (parentNode.constructor.name) {
-        case 'Document':
-        case 'HTMLDocument':
-        case undefined:
-          domRoot = parentNode.head;
-          break;
-
-        case 'ShadowRoot':
-        default:
-          domRoot = parentNode;
-          break;
-      } // Prevent styles duplication.
-
-
-      if (!domRoot.querySelector('style[data-react-tooltip]')) {
-        var style = document.createElement('style');
-        style.textContent = baseCss;
-        style.setAttribute('data-react-tooltip', 'true');
-        domRoot.appendChild(style);
-      }
-    }
-    /**
-     * Return if the mouse is on the tooltip.
-     * @returns {boolean} true - mouse is on the tooltip
-     */
-
-  }, {
-    key: "mouseOnToolTip",
-    value: function mouseOnToolTip() {
-      var show = this.state.show;
-
-      if (show && this.tooltipRef) {
-        /* old IE or Firefox work around */
-        if (!this.tooltipRef.matches) {
-          /* old IE work around */
-          if (this.tooltipRef.msMatchesSelector) {
-            this.tooltipRef.matches = this.tooltipRef.msMatchesSelector;
-          } else {
-            /* old Firefox work around */
-            this.tooltipRef.matches = this.tooltipRef.mozMatchesSelector;
-          }
-        }
-
-        return this.tooltipRef.matches(':hover');
-      }
-
-      return false;
-    }
-    /**
-     * Pick out corresponded target elements
-     */
-
-  }, {
-    key: "getTargetArray",
-    value: function getTargetArray(id) {
-      var targetArray = [];
-      var selector;
-
-      if (!id) {
-        selector = '[data-tip]:not([data-for])';
-      } else {
-        var escaped = id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-        selector = "[data-tip][data-for=\"".concat(escaped, "\"]");
-      } // Scan document for shadow DOM elements
-
-
-      nodeListToArray(document.getElementsByTagName('*')).filter(function (element) {
-        return element.shadowRoot;
-      }).forEach(function (element) {
-        targetArray = targetArray.concat(nodeListToArray(element.shadowRoot.querySelectorAll(selector)));
-      });
-      return targetArray.concat(nodeListToArray(document.querySelectorAll(selector)));
-    }
-    /**
-     * Bind listener to the target elements
-     * These listeners used to trigger showing or hiding the tooltip
-     */
-
-  }, {
-    key: "bindListener",
-    value: function bindListener() {
-      var _this3 = this;
-
-      var _this$props2 = this.props,
-          id = _this$props2.id,
-          globalEventOff = _this$props2.globalEventOff,
-          isCapture = _this$props2.isCapture;
-      var targetArray = this.getTargetArray(id);
-      targetArray.forEach(function (target) {
-        if (target.getAttribute('currentItem') === null) {
-          target.setAttribute('currentItem', 'false');
-        }
-
-        _this3.unbindBasicListener(target);
-
-        if (_this3.isCustomEvent(target)) {
-          _this3.customUnbindListener(target);
-        }
-      });
-
-      if (this.isBodyMode()) {
-        this.bindBodyListener(targetArray);
-      } else {
-        targetArray.forEach(function (target) {
-          var isCaptureMode = _this3.isCapture(target);
-
-          var effect = _this3.getEffect(target);
-
-          if (_this3.isCustomEvent(target)) {
-            _this3.customBindListener(target);
-
-            return;
-          }
-
-          target.addEventListener('mouseenter', _this3.showTooltip, isCaptureMode);
-          target.addEventListener('focus', _this3.showTooltip, isCaptureMode);
-
-          if (effect === 'float') {
-            target.addEventListener('mousemove', _this3.updateTooltip, isCaptureMode);
-          }
-
-          target.addEventListener('mouseleave', _this3.hideTooltip, isCaptureMode);
-          target.addEventListener('blur', _this3.hideTooltip, isCaptureMode);
-        });
-      } // Global event to hide tooltip
-
-
-      if (globalEventOff) {
-        window.removeEventListener(globalEventOff, this.hideTooltip);
-        window.addEventListener(globalEventOff, this.hideTooltip, isCapture);
-      } // Track removal of targetArray elements from DOM
-
-
-      this.bindRemovalTracker();
-    }
-    /**
-     * Unbind listeners on target elements
-     */
-
-  }, {
-    key: "unbindListener",
-    value: function unbindListener() {
-      var _this4 = this;
-
-      var _this$props3 = this.props,
-          id = _this$props3.id,
-          globalEventOff = _this$props3.globalEventOff;
-
-      if (this.isBodyMode()) {
-        this.unbindBodyListener();
-      } else {
-        var targetArray = this.getTargetArray(id);
-        targetArray.forEach(function (target) {
-          _this4.unbindBasicListener(target);
-
-          if (_this4.isCustomEvent(target)) _this4.customUnbindListener(target);
-        });
-      }
-
-      if (globalEventOff) window.removeEventListener(globalEventOff, this.hideTooltip);
-      this.unbindRemovalTracker();
-    }
-    /**
-     * Invoke this before bind listener and unmount the component
-     * it is necessary to invoke this even when binding custom event
-     * so that the tooltip can switch between custom and default listener
-     */
-
-  }, {
-    key: "unbindBasicListener",
-    value: function unbindBasicListener(target) {
-      var isCaptureMode = this.isCapture(target);
-      target.removeEventListener('mouseenter', this.showTooltip, isCaptureMode);
-      target.removeEventListener('mousemove', this.updateTooltip, isCaptureMode);
-      target.removeEventListener('mouseleave', this.hideTooltip, isCaptureMode);
-    }
-  }, {
-    key: "getTooltipContent",
-    value: function getTooltipContent() {
-      var _this$props4 = this.props,
-          getContent = _this$props4.getContent,
-          children = _this$props4.children; // Generate tooltip content
-
-      var content;
-
-      if (getContent) {
-        if (Array.isArray(getContent)) {
-          content = getContent[0] && getContent[0](this.state.originTooltip);
-        } else {
-          content = getContent(this.state.originTooltip);
-        }
-      }
-
-      return getTipContent(this.state.originTooltip, children, content, this.state.isMultiline);
-    }
-  }, {
-    key: "isEmptyTip",
-    value: function isEmptyTip(placeholder) {
-      return typeof placeholder === 'string' && placeholder === '' || placeholder === null;
-    }
-    /**
-     * When mouse enter, show the tooltip
-     */
-
-  }, {
-    key: "showTooltip",
-    value: function showTooltip(e, isGlobalCall) {
-      if (!this.tooltipRef) {
-        return;
-      }
-
-      if (isGlobalCall) {
-        // Don't trigger other elements belongs to other ReactTooltip
-        var targetArray = this.getTargetArray(this.props.id);
-        var isMyElement = targetArray.some(function (ele) {
-          return ele === e.currentTarget;
-        });
-        if (!isMyElement) return;
-      } // Get the tooltip content
-      // calculate in this phrase so that tip width height can be detected
-
-
-      var _this$props5 = this.props,
-          multiline = _this$props5.multiline,
-          getContent = _this$props5.getContent;
-      var originTooltip = e.currentTarget.getAttribute('data-tip');
-      var isMultiline = e.currentTarget.getAttribute('data-multiline') || multiline || false; // If it is focus event or called by ReactTooltip.show, switch to `solid` effect
-
-      var switchToSolid = e instanceof window.FocusEvent || isGlobalCall; // if it needs to skip adding hide listener to scroll
-
-      var scrollHide = true;
-
-      if (e.currentTarget.getAttribute('data-scroll-hide')) {
-        scrollHide = e.currentTarget.getAttribute('data-scroll-hide') === 'true';
-      } else if (this.props.scrollHide != null) {
-        scrollHide = this.props.scrollHide;
-      } // adding aria-describedby to target to make tooltips read by screen readers
-
-
-      if (e && e.currentTarget && e.currentTarget.setAttribute) {
-        e.currentTarget.setAttribute('aria-describedby', this.state.uuid);
-      } // Make sure the correct place is set
-
-
-      var desiredPlace = e.currentTarget.getAttribute('data-place') || this.props.place || 'top';
-      var effect = switchToSolid && 'solid' || this.getEffect(e.currentTarget);
-      var offset = e.currentTarget.getAttribute('data-offset') || this.props.offset || {};
-      var result = getPosition(e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
-
-      if (result.position && this.props.overridePosition) {
-        result.position = this.props.overridePosition(result.position, e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
-      }
-
-      var place = result.isNewState ? result.newState.place : desiredPlace; // To prevent previously created timers from triggering
-
-      this.clearTimer();
-      var target = e.currentTarget;
-      var reshowDelay = this.state.show ? target.getAttribute('data-delay-update') || this.props.delayUpdate : 0;
-      var self = this;
-
-      var updateState = function updateState() {
-        self.setState({
-          originTooltip: originTooltip,
-          isMultiline: isMultiline,
-          desiredPlace: desiredPlace,
-          place: place,
-          type: target.getAttribute('data-type') || self.props.type || 'dark',
-          customColors: {
-            text: target.getAttribute('data-text-color') || self.props.textColor || null,
-            background: target.getAttribute('data-background-color') || self.props.backgroundColor || null,
-            border: target.getAttribute('data-border-color') || self.props.borderColor || null,
-            arrow: target.getAttribute('data-arrow-color') || self.props.arrowColor || null
-          },
-          effect: effect,
-          offset: offset,
-          html: (target.getAttribute('data-html') ? target.getAttribute('data-html') === 'true' : self.props.html) || false,
-          delayShow: target.getAttribute('data-delay-show') || self.props.delayShow || 0,
-          delayHide: target.getAttribute('data-delay-hide') || self.props.delayHide || 0,
-          delayUpdate: target.getAttribute('data-delay-update') || self.props.delayUpdate || 0,
-          border: (target.getAttribute('data-border') ? target.getAttribute('data-border') === 'true' : self.props.border) || false,
-          extraClass: target.getAttribute('data-class') || self.props["class"] || self.props.className || '',
-          disable: (target.getAttribute('data-tip-disable') ? target.getAttribute('data-tip-disable') === 'true' : self.props.disable) || false,
-          currentTarget: target
-        }, function () {
-          if (scrollHide) {
-            self.addScrollListener(self.state.currentTarget);
-          }
-
-          self.updateTooltip(e);
-
-          if (getContent && Array.isArray(getContent)) {
-            self.intervalUpdateContent = setInterval(function () {
-              if (self.mount) {
-                var _getContent = self.props.getContent;
-                var placeholder = getTipContent(originTooltip, '', _getContent[0](), isMultiline);
-                var isEmptyTip = self.isEmptyTip(placeholder);
-                self.setState({
-                  isEmptyTip: isEmptyTip
-                });
-                self.updatePosition();
-              }
-            }, getContent[1]);
-          }
-        });
-      }; // If there is no delay call immediately, don't allow events to get in first.
-
-
-      if (reshowDelay) {
-        this.delayReshow = setTimeout(updateState, reshowDelay);
-      } else {
-        updateState();
-      }
-    }
-    /**
-     * When mouse hover, update tool tip
-     */
-
-  }, {
-    key: "updateTooltip",
-    value: function updateTooltip(e) {
-      var _this5 = this;
-
-      var _this$state = this.state,
-          delayShow = _this$state.delayShow,
-          disable = _this$state.disable;
-      var afterShow = this.props.afterShow;
-      var placeholder = this.getTooltipContent();
-      var eventTarget = e.currentTarget || e.target; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
-
-      if (this.mouseOnToolTip()) {
-        return;
-      } // if the tooltip is empty, disable the tooltip
-
-
-      if (this.isEmptyTip(placeholder) || disable) {
-        return;
-      }
-
-      var delayTime = !this.state.show ? parseInt(delayShow, 10) : 0;
-
-      var updateState = function updateState() {
-        if (Array.isArray(placeholder) && placeholder.length > 0 || placeholder) {
-          var isInvisible = !_this5.state.show;
-
-          _this5.setState({
-            currentEvent: e,
-            currentTarget: eventTarget,
-            show: true
-          }, function () {
-            _this5.updatePosition();
-
-            if (isInvisible && afterShow) {
-              afterShow(e);
-            }
-          });
-        }
-      };
-
-      clearTimeout(this.delayShowLoop);
-
-      if (delayTime) {
-        this.delayShowLoop = setTimeout(updateState, delayTime);
-      } else {
-        updateState();
-      }
-    }
-    /*
-     * If we're mousing over the tooltip remove it when we leave.
-     */
-
-  }, {
-    key: "listenForTooltipExit",
-    value: function listenForTooltipExit() {
-      var show = this.state.show;
-
-      if (show && this.tooltipRef) {
-        this.tooltipRef.addEventListener('mouseleave', this.hideTooltip);
-      }
-    }
-  }, {
-    key: "removeListenerForTooltipExit",
-    value: function removeListenerForTooltipExit() {
-      var show = this.state.show;
-
-      if (show && this.tooltipRef) {
-        this.tooltipRef.removeEventListener('mouseleave', this.hideTooltip);
-      }
-    }
-    /**
-     * When mouse leave, hide tooltip
-     */
-
-  }, {
-    key: "hideTooltip",
-    value: function hideTooltip(e, hasTarget) {
-      var _this6 = this;
-
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
-        isScroll: false
-      };
-      var disable = this.state.disable;
-      var isScroll = options.isScroll;
-      var delayHide = isScroll ? 0 : this.state.delayHide;
-      var afterHide = this.props.afterHide;
-      var placeholder = this.getTooltipContent();
-      if (!this.mount) return;
-      if (this.isEmptyTip(placeholder) || disable) return; // if the tooltip is empty, disable the tooltip
-
-      if (hasTarget) {
-        // Don't trigger other elements belongs to other ReactTooltip
-        var targetArray = this.getTargetArray(this.props.id);
-        var isMyElement = targetArray.some(function (ele) {
-          return ele === e.currentTarget;
-        });
-        if (!isMyElement || !this.state.show) return;
-      } // clean up aria-describedby when hiding tooltip
-
-
-      if (e && e.currentTarget && e.currentTarget.removeAttribute) {
-        e.currentTarget.removeAttribute('aria-describedby');
-      }
-
-      var resetState = function resetState() {
-        var isVisible = _this6.state.show; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
-
-        if (_this6.mouseOnToolTip()) {
-          _this6.listenForTooltipExit();
-
-          return;
-        }
-
-        _this6.removeListenerForTooltipExit();
-
-        _this6.setState({
-          show: false
-        }, function () {
-          _this6.removeScrollListener(_this6.state.currentTarget);
-
-          if (isVisible && afterHide) {
-            afterHide(e);
-          }
-        });
-      };
-
-      this.clearTimer();
-
-      if (delayHide) {
-        this.delayHideLoop = setTimeout(resetState, parseInt(delayHide, 10));
-      } else {
-        resetState();
-      }
-    }
-    /**
-     * When scroll, hide tooltip
-     */
-
-  }, {
-    key: "hideTooltipOnScroll",
-    value: function hideTooltipOnScroll(event, hasTarget) {
-      this.hideTooltip(event, hasTarget, {
-        isScroll: true
-      });
-    }
-    /**
-     * Add scroll event listener when tooltip show
-     * automatically hide the tooltip when scrolling
-     */
-
-  }, {
-    key: "addScrollListener",
-    value: function addScrollListener(currentTarget) {
-      var isCaptureMode = this.isCapture(currentTarget);
-      window.addEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
-    }
-  }, {
-    key: "removeScrollListener",
-    value: function removeScrollListener(currentTarget) {
-      var isCaptureMode = this.isCapture(currentTarget);
-      window.removeEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
-    } // Calculation the position
-
-  }, {
-    key: "updatePosition",
-    value: function updatePosition() {
-      var _this7 = this;
-
-      var _this$state2 = this.state,
-          currentEvent = _this$state2.currentEvent,
-          currentTarget = _this$state2.currentTarget,
-          place = _this$state2.place,
-          desiredPlace = _this$state2.desiredPlace,
-          effect = _this$state2.effect,
-          offset = _this$state2.offset;
-      var node = this.tooltipRef;
-      var result = getPosition(currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
-
-      if (result.position && this.props.overridePosition) {
-        result.position = this.props.overridePosition(result.position, currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
-      }
-
-      if (result.isNewState) {
-        // Switch to reverse placement
-        return this.setState(result.newState, function () {
-          _this7.updatePosition();
-        });
-      } // Set tooltip position
-
-
-      node.style.left = result.position.left + 'px';
-      node.style.top = result.position.top + 'px';
-    }
-    /**
-     * CLear all kinds of timeout of interval
-     */
-
-  }, {
-    key: "clearTimer",
-    value: function clearTimer() {
-      clearTimeout(this.delayShowLoop);
-      clearTimeout(this.delayHideLoop);
-      clearTimeout(this.delayReshow);
-      clearInterval(this.intervalUpdateContent);
-    }
-  }, {
-    key: "hasCustomColors",
-    value: function hasCustomColors() {
-      var _this8 = this;
-
-      return Boolean(Object.keys(this.state.customColors).find(function (color) {
-        return color !== 'border' && _this8.state.customColors[color];
-      }) || this.state.border && this.state.customColors['border']);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this9 = this;
-
-      var _this$state3 = this.state,
-          extraClass = _this$state3.extraClass,
-          html = _this$state3.html,
-          ariaProps = _this$state3.ariaProps,
-          disable = _this$state3.disable,
-          uuid = _this$state3.uuid;
-      var content = this.getTooltipContent();
-      var isEmptyTip = this.isEmptyTip(content);
-      var style = generateTooltipStyle(this.state.uuid, this.state.customColors, this.state.type, this.state.border);
-      var tooltipClass = '__react_component_tooltip' + " ".concat(this.state.uuid) + (this.state.show && !disable && !isEmptyTip ? ' show' : '') + (this.state.border ? ' border' : '') + " place-".concat(this.state.place) + // top, bottom, left, right
-      " type-".concat(this.hasCustomColors() ? 'custom' : this.state.type) + ( // dark, success, warning, error, info, light, custom
-      this.props.delayUpdate ? ' allow_hover' : '') + (this.props.clickable ? ' allow_click' : '');
-      var Wrapper = this.props.wrapper;
-
-      if (ReactTooltip.supportedWrappers.indexOf(Wrapper) < 0) {
-        Wrapper = ReactTooltip.defaultProps.wrapper;
-      }
-
-      var wrapperClassName = [tooltipClass, extraClass].filter(Boolean).join(' ');
-
-      if (html) {
-        var htmlContent = "".concat(content, "\n<style aria-hidden=\"true\">").concat(style, "</style>");
-        return React.createElement(Wrapper, _extends({
-          className: "".concat(wrapperClassName),
-          id: this.props.id || uuid,
-          ref: function ref(_ref) {
-            return _this9.tooltipRef = _ref;
-          }
-        }, ariaProps, {
-          "data-id": "tooltip",
-          dangerouslySetInnerHTML: {
-            __html: htmlContent
-          }
-        }));
-      } else {
-        return React.createElement(Wrapper, _extends({
-          className: "".concat(wrapperClassName),
-          id: this.props.id || uuid
-        }, ariaProps, {
-          ref: function ref(_ref2) {
-            return _this9.tooltipRef = _ref2;
-          },
-          "data-id": "tooltip"
-        }), React.createElement("style", {
-          dangerouslySetInnerHTML: {
-            __html: style
-          },
-          "aria-hidden": "true"
-        }), content);
-      }
-    }
-  }], [{
-    key: "getDerivedStateFromProps",
-    value: function getDerivedStateFromProps(nextProps, prevState) {
-      var ariaProps = prevState.ariaProps;
-      var newAriaProps = parseAria(nextProps);
-      var isChanged = Object.keys(newAriaProps).some(function (props) {
-        return newAriaProps[props] !== ariaProps[props];
-      });
-
-      if (!isChanged) {
-        return null;
-      }
-
-      return _objectSpread2({}, prevState, {
-        ariaProps: newAriaProps
-      });
-    }
-  }]);
-
-  return ReactTooltip;
-}(React.Component), _defineProperty(_class2, "defaultProps", {
-  insecure: true,
-  resizeHide: true,
-  wrapper: 'div',
-  clickable: false
-}), _defineProperty(_class2, "supportedWrappers", ['div', 'span']), _defineProperty(_class2, "displayName", 'ReactTooltip'), _temp)) || _class) || _class) || _class) || _class) || _class) || _class) || _class;
-
-var css_248z$3 = ".Tooltip-module_text--truncate__Zp5oG {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Tooltip-module_react-tooltip__RadNp {\n  border-radius: 0 !important;\n  opacity: 1 !important;\n  max-width: 250px;\n  word-break: break-word;\n  white-space: normal;\n  overflow: visible !important;\n  font-weight: 400;\n  line-height: normal;\n  font-size: 12px;\n  font-family: \"Inter\";\n}\n.Tooltip-module_react-tooltip-left__xv6S4 {\n  text-align: left;\n}\n.Tooltip-module_react-tooltip-right__NBuxn {\n  text-align: right;\n}\n.Tooltip-module_react-tooltip-center__lpMOs {\n  text-align: center;\n}";
-var styles$2 = {"text--truncate":"Tooltip-module_text--truncate__Zp5oG","react-tooltip":"Tooltip-module_react-tooltip__RadNp","react-tooltip-left":"Tooltip-module_react-tooltip-left__xv6S4","react-tooltip-right":"Tooltip-module_react-tooltip-right__NBuxn","react-tooltip-center":"Tooltip-module_react-tooltip-center__lpMOs"};
-styleInject(css_248z$3);
-
-/**
- * Tooltip - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string} props.placement - placement, default `bottom`
- * @param {string} props.align - align, default `left`
- * @param {string} props.effect - behaviour of tooltip
- * @param {string|object} props.content - content
- * @param {bool} props.disabled - disabled
- * @param {bool} props.showOnClick - show on click
- * @return {object} An object of children element
- */
-
-const Tooltip = ({
-  className,
-  children,
-  effect,
-  content,
-  disabled,
-  showOnClick,
-  placement,
-  align
-}) => {
-  const tooltipUUID = uuid_1();
-  const showOnClickProps = showOnClick ? {
-    delayHide: 1000,
-    event: 'click',
-    afterShow: () => ReactTooltip.hide()
-  } : {};
-  const tooltipStyles = useStyles({
-    [styles$2['react-tooltip']]: true,
-    [`react-tooltip-${align}`]: true
-  });
-  return /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement("span", {
-    className: className,
-    "data-tip": true,
-    "data-for": tooltipUUID
-  }, children), /*#__PURE__*/React.createElement(ReactTooltip, _extends$6({
-    className: tooltipStyles,
-    background: "#000",
-    effect: effect,
-    id: tooltipUUID,
-    disable: disabled,
-    isCapture: true,
-    place: placement
-  }, showOnClickProps), content));
-};
-
-Tooltip.propTypes = {
-  effect: propTypes.exports.oneOf(['solid', 'float']),
-  placement: propTypes.exports.oneOf(['top', 'left', 'right', 'bottom']),
-  align: propTypes.exports.oneOf(['center', 'left', 'right']),
-  children: propTypes.exports.node.isRequired,
-  content: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.object]),
-  showOnClick: propTypes.exports.bool,
-  disabled: propTypes.exports.bool,
-  className: propTypes.exports.string
-};
-Tooltip.defaultProps = {
-  className: '',
-  content: '',
-  effect: 'solid',
-  placement: 'bottom',
-  showOnClick: false,
-  disabled: false,
-  align: 'left'
-};
-
-var css_248z$2 = ".Icon-module_text--truncate__B3o5H {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Icon-module_icon--default__7ewH8 {\n  color: #333;\n}\n.Icon-module_icon--white__FKvy8 {\n  color: white;\n}\n.Icon-module_icon--primary__lclud {\n  color: #2550aa;\n}\n.Icon-module_icon--color-2__fGvX7 {\n  color: #4c4c4c;\n}\n.Icon-module_icon--color-3__UWX4B {\n  color: #7b7b7b;\n}\n.Icon-module_icon--warning__2xp2W {\n  color: #ffb000;\n}\n.Icon-module_icon--success__Jbdc3 {\n  color: #29b662;\n}\n.Icon-module_icon--alert__Hlj7b {\n  color: #ff3245;\n}\n.Icon-module_icon--info__sIO63 {\n  color: #5d92ff;\n}\n.Icon-module_icon--spin__79oK7 {\n  display: inline-block;\n  animation: Icon-module_spinIcon__KZUJm 1s linear infinite;\n}\n\n@keyframes Icon-module_spinIcon__KZUJm {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}";
-var styles$1 = {"text--truncate":"Icon-module_text--truncate__B3o5H","icon--default":"Icon-module_icon--default__7ewH8","icon--white":"Icon-module_icon--white__FKvy8","icon--primary":"Icon-module_icon--primary__lclud","icon--color-2":"Icon-module_icon--color-2__fGvX7","icon--color-3":"Icon-module_icon--color-3__UWX4B","icon--warning":"Icon-module_icon--warning__2xp2W","icon--success":"Icon-module_icon--success__Jbdc3","icon--alert":"Icon-module_icon--alert__Hlj7b","icon--info":"Icon-module_icon--info__sIO63","icon--spin":"Icon-module_icon--spin__79oK7","spinIcon":"Icon-module_spinIcon__KZUJm"};
-styleInject(css_248z$2);
-
-var css_248z$1 = "@charset \"UTF-8\";\n.editor-icons-module_text--truncate__sYGOs {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n@font-face {\n  font-family: \"react-editor-icons\";\n  src: url(\"/src/fonts/css/font/editor-icons.eot?30795734\");\n  src: url(\"/src/fonts/css/font/editor-icons.eot?30795734#iefix\") format(\"embedded-opentype\"), url(\"/src/fonts/css/font/editor-icons.woff2?30795734\") format(\"woff2\"), url(\"/src/fonts/css/font/editor-icons.woff?30795734\") format(\"woff\"), url(\"/src/fonts/css/font/editor-icons.ttf?30795734\") format(\"truetype\"), url(\"/src/fonts/css/font/editor-icons.svg?30795734#editor-icons\") format(\"svg\");\n  font-weight: normal;\n  font-style: normal;\n}\n/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */\n/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */\n/*\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n  @font-face {\n    font-family: 'editor-icons';\n    src: url('../font/editor-icons.svg?93249275#editor-icons') format('svg');\n  }\n}\n*/\n.editor-icons-module_editor-icon__IF6YS:before {\n  font-family: \"react-editor-icons\";\n  font-style: normal;\n  font-weight: normal;\n  speak: never;\n  display: inline-block;\n  text-decoration: inherit;\n  width: 1em;\n  margin-right: 0.2em;\n  text-align: center;\n  /* opacity: .8; */\n  /* For safety - reset parent styles, that can break glyph codes*/\n  font-variant: normal;\n  text-transform: none;\n  /* fix buttons height, for twitter bootstrap */\n  line-height: 1em;\n  /* Animation center compensation - margins should be symmetric */\n  /* remove if not needed */\n  margin-left: 0.2em;\n  /* you can be more comfortable with increased icons size */\n  /* font-size: 120%; */\n  /* Font smoothing. That was taken from TWBS */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  /* Uncomment for 3D effect */\n  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */\n}\n\n.editor-icons-module_icon-ab-testing__qSCoH:before {\n  content: \"\\e800\";\n}\n\n/* '' */\n.editor-icons-module_icon-align-center__FnT2y:before {\n  content: \"\\e801\";\n}\n\n/* '' */\n.editor-icons-module_icon-align-justify__izCV3:before {\n  content: \"\\e802\";\n}\n\n/* '' */\n.editor-icons-module_icon-align-left__ZO0I-:before {\n  content: \"\\e803\";\n}\n\n/* '' */\n.editor-icons-module_icon-align-right__fZmog:before {\n  content: \"\\e804\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-double-down__WoOTs:before {\n  content: \"\\e805\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-double-left__pX-KE:before {\n  content: \"\\e806\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-double-right__besDN:before {\n  content: \"\\e807\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-double-up__--tEZ:before {\n  content: \"\\e808\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-down__3QOMs:before {\n  content: \"\\e809\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-left__DWVRT:before {\n  content: \"\\e80a\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-right__UFJOL:before {\n  content: \"\\e80b\";\n}\n\n/* '' */\n.editor-icons-module_icon-angle-up__pTLCI:before {\n  content: \"\\e80c\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-down__DxHIk:before {\n  content: \"\\e80d\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-left__NY2jS:before {\n  content: \"\\e80e\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-right__wK6bs:before {\n  content: \"\\e80f\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-up__-UxKi:before {\n  content: \"\\e810\";\n}\n\n/* '' */\n.editor-icons-module_icon-backward__oCYh9:before {\n  content: \"\\e811\";\n}\n\n/* '' */\n.editor-icons-module_icon-barcode__0PDQ5:before {\n  content: \"\\e812\";\n}\n\n/* '' */\n.editor-icons-module_icon-bold__p2ydG:before {\n  content: \"\\e813\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-up__2rAf8:before {\n  content: \"\\e814\";\n}\n\n/* '' */\n.editor-icons-module_icon-borders__Jzjr7:before {\n  content: \"\\e816\";\n}\n\n/* '' */\n.editor-icons-module_icon-box__fqOsM:before {\n  content: \"\\e817\";\n}\n\n/* '' */\n.editor-icons-module_icon-building__T-Cxk:before {\n  content: \"\\e818\";\n}\n\n/* '' */\n.editor-icons-module_icon-info-outline__b86IL:before {\n  content: \"\\e819\";\n}\n\n/* '' */\n.editor-icons-module_icon-button__0-avg:before {\n  content: \"\\e81a\";\n}\n\n/* '' */\n.editor-icons-module_icon-calendar__jgXsb:before {\n  content: \"\\e81b\";\n}\n\n/* '' */\n.editor-icons-module_icon-caret-down__aoKP4:before {\n  content: \"\\e81c\";\n}\n\n/* '' */\n.editor-icons-module_icon-caret-left__vZ3rQ:before {\n  content: \"\\e81d\";\n}\n\n/* '' */\n.editor-icons-module_icon-caret-right__n0lpq:before {\n  content: \"\\e81e\";\n}\n\n/* '' */\n.editor-icons-module_icon-caret-up__3f-2q:before {\n  content: \"\\e81f\";\n}\n\n/* '' */\n.editor-icons-module_icon-check-square-o__Y4ZGf:before {\n  content: \"\\e820\";\n}\n\n/* '' */\n.editor-icons-module_icon-check-circle__Yc6au:before {\n  content: \"\\e821\";\n}\n\n/* '' */\n.editor-icons-module_icon-check-square__eNgin:before {\n  content: \"\\e822\";\n}\n\n/* '' */\n.editor-icons-module_icon-chevron-down__OWeiY:before {\n  content: \"\\e823\";\n}\n\n/* '' */\n.editor-icons-module_icon-chevron-left__yOdWM:before {\n  content: \"\\e824\";\n}\n\n/* '' */\n.editor-icons-module_icon-chevron-up__oxTh9:before {\n  content: \"\\e825\";\n}\n\n/* '' */\n.editor-icons-module_icon-chevron-right__PcFJK:before {\n  content: \"\\e826\";\n}\n\n/* '' */\n.editor-icons-module_icon-circle__bXuQ7:before {\n  content: \"\\e827\";\n}\n\n/* '' */\n.editor-icons-module_icon-clone-alt__n8s-6:before {\n  content: \"\\e828\";\n}\n\n/* '' */\n.editor-icons-module_icon-cloud-download-alt__vWzVK:before {\n  content: \"\\e829\";\n}\n\n/* '' */\n.editor-icons-module_icon-cloud-upload__0Scfk:before {\n  content: \"\\e82a\";\n}\n\n/* '' */\n.editor-icons-module_icon-code__RTZlZ:before {\n  content: \"\\e82b\";\n}\n\n/* '' */\n.editor-icons-module_icon-cog__1Iorm:before {\n  content: \"\\e82c\";\n}\n\n/* '' */\n.editor-icons-module_icon-copy_landing__h4MTP:before {\n  content: \"\\e82d\";\n}\n\n/* '' */\n.editor-icons-module_icon-create__NiZeQ:before {\n  content: \"\\e82e\";\n}\n\n/* '' */\n.editor-icons-module_icon-creative-commons-brands__dc0nQ:before {\n  content: \"\\e82f\";\n}\n\n/* '' */\n.editor-icons-module_icon-dashboard__UI3cP:before {\n  content: \"\\e830\";\n}\n\n/* '' */\n.editor-icons-module_icon-desktop__H9DEv:before {\n  content: \"\\e831\";\n}\n\n/* '' */\n.editor-icons-module_icon-dot-circle__vwCr2:before {\n  content: \"\\e832\";\n}\n\n/* '' */\n.editor-icons-module_icon-duplicate__WUP7C:before {\n  content: \"\\e833\";\n}\n\n/* '' */\n.editor-icons-module_icon-edit__NZqxZ:before {\n  content: \"\\e834\";\n}\n\n/* '' */\n.editor-icons-module_icon-ellipsis-h__fIt-a:before {\n  content: \"\\e835\";\n}\n\n/* '' */\n.editor-icons-module_icon-ellipsis-v__ZId4E:before {\n  content: \"\\e836\";\n}\n\n/* '' */\n.editor-icons-module_icon-envelope__kGOPO:before {\n  content: \"\\e837\";\n}\n\n/* '' */\n.editor-icons-module_icon-sync__oBJiO:before {\n  content: \"\\e838\";\n}\n\n/* '' */\n.editor-icons-module_icon-exchange-alt__q-TT-:before {\n  content: \"\\e839\";\n}\n\n/* '' */\n.editor-icons-module_icon-exclamation-circle__qBlKH:before {\n  content: \"\\e83a\";\n}\n\n/* '' */\n.editor-icons-module_icon-exclamation-triangle__WzoeH:before {\n  content: \"\\e83b\";\n}\n\n/* '' */\n.editor-icons-module_icon-button-paypal__Il2ju:before {\n  content: \"\\e83c\";\n}\n\n/* '' */\n.editor-icons-module_icon-smart_section__DlW-a:before {\n  content: \"\\e83d\";\n}\n\n/* '' */\n.editor-icons-module_icon-external-link-alt__3-xDo:before {\n  content: \"\\e83e\";\n}\n\n/* '' */\n.editor-icons-module_icon-eye-close__eeVNc:before {\n  content: \"\\e83f\";\n}\n\n/* '' */\n.editor-icons-module_icon-eye-open__VDOKK:before {\n  content: \"\\e840\";\n}\n\n/* '' */\n.editor-icons-module_icon-file__Ti1y6:before {\n  content: \"\\e841\";\n}\n\n/* '' */\n.editor-icons-module_icon-main_page__YxyKr:before {\n  content: \"\\e842\";\n}\n\n/* '' */\n.editor-icons-module_icon-folder-minus__LjD-Q:before {\n  content: \"\\e843\";\n}\n\n/* '' */\n.editor-icons-module_icon-folder-move-to__K0ZFv:before {\n  content: \"\\e844\";\n}\n\n/* '' */\n.editor-icons-module_icon-folder-o__Z4GeS:before {\n  content: \"\\e845\";\n}\n\n/* '' */\n.editor-icons-module_icon-folder-plus__Ftq5-:before {\n  content: \"\\e846\";\n}\n\n/* '' */\n.editor-icons-module_icon-folder__RVnKJ:before {\n  content: \"\\e847\";\n}\n\n/* '' */\n.editor-icons-module_icon-font__UMA2G:before {\n  content: \"\\e848\";\n}\n\n/* '' */\n.editor-icons-module_icon-thank_you_page__PfigI:before {\n  content: \"\\e849\";\n}\n\n/* '' */\n.editor-icons-module_icon-forward__ML1NG:before {\n  content: \"\\e84a\";\n}\n\n/* '' */\n.editor-icons-module_icon-globe__I3VBg:before {\n  content: \"\\e84b\";\n}\n\n/* '' */\n.editor-icons-module_icon-hand-up-alt__OPiBi:before {\n  content: \"\\e84c\";\n}\n\n/* '' */\n.editor-icons-module_icon-hand-up__ixFOg:before {\n  content: \"\\e84d\";\n}\n\n/* '' */\n.editor-icons-module_icon-handlebar-circled__7o0ow:before {\n  content: \"\\e84e\";\n}\n\n/* '' */\n.editor-icons-module_icon-header__u17pE:before {\n  content: \"\\e84f\";\n}\n\n/* '' */\n.editor-icons-module_icon-header1__L8fJz:before {\n  content: \"\\e850\";\n}\n\n/* '' */\n.editor-icons-module_icon-header2__oTTks:before {\n  content: \"\\e851\";\n}\n\n/* '' */\n.editor-icons-module_icon-header3__3Afg7:before {\n  content: \"\\e852\";\n}\n\n/* '' */\n.editor-icons-module_icon-header4__cID6-:before {\n  content: \"\\e853\";\n}\n\n/* '' */\n.editor-icons-module_icon-header5__OP2Y9:before {\n  content: \"\\e854\";\n}\n\n/* '' */\n.editor-icons-module_icon-heart__Fo71q:before {\n  content: \"\\e855\";\n}\n\n/* '' */\n.editor-icons-module_icon-help_outline__x5dos:before {\n  content: \"\\e856\";\n}\n\n/* '' */\n.editor-icons-module_icon-help__s8DQY:before {\n  content: \"\\e857\";\n}\n\n/* '' */\n.editor-icons-module_icon-history__sIVvX:before {\n  content: \"\\e858\";\n}\n\n/* '' */\n.editor-icons-module_icon-home__NIW-s:before {\n  content: \"\\e859\";\n}\n\n/* '' */\n.editor-icons-module_icon-icons__mblfV:before {\n  content: \"\\e85a\";\n}\n\n/* '' */\n.editor-icons-module_icon-indent__MucuX:before {\n  content: \"\\e85b\";\n}\n\n/* '' */\n.editor-icons-module_icon-info-circle__9uis9:before {\n  content: \"\\e85c\";\n}\n\n/* '' */\n.editor-icons-module_icon-button-payu__qr1AC:before {\n  content: \"\\e85d\";\n}\n\n/* '' */\n.editor-icons-module_icon-italic__E9MH8:before {\n  content: \"\\e85e\";\n}\n\n/* '' */\n.editor-icons-module_icon-js__7W4fJ:before {\n  content: \"\\e85f\";\n}\n\n/* '' */\n.editor-icons-module_icon-key__N4zyM:before {\n  content: \"\\e860\";\n}\n\n/* '' */\n.editor-icons-module_icon-keyboard__bp4un:before {\n  content: \"\\e861\";\n}\n\n/* '' */\n.editor-icons-module_icon-layers-2__-7-9i:before {\n  content: \"\\e862\";\n}\n\n/* '' */\n.editor-icons-module_icon-lightbulb__rgk3f:before {\n  content: \"\\e863\";\n}\n\n/* '' */\n.editor-icons-module_icon-line-dash__60kj5:before {\n  content: \"\\e864\";\n}\n\n/* '' */\n.editor-icons-module_icon-line-dots__xdP0X:before {\n  content: \"\\e865\";\n}\n\n/* '' */\n.editor-icons-module_icon-line-height__msRqU:before {\n  content: \"\\e866\";\n}\n\n/* '' */\n.editor-icons-module_icon-line-solid__-AYpL:before {\n  content: \"\\e867\";\n}\n\n/* '' */\n.editor-icons-module_icon-link__Y8DDs:before {\n  content: \"\\e868\";\n}\n\n/* '' */\n.editor-icons-module_icon-list-ol__akV7Z:before {\n  content: \"\\e869\";\n}\n\n/* '' */\n.editor-icons-module_icon-list-ul__lwmMI:before {\n  content: \"\\e86a\";\n}\n\n/* '' */\n.editor-icons-module_icon-lock-open__qUCA4:before {\n  content: \"\\e86b\";\n}\n\n/* '' */\n.editor-icons-module_icon-lock__-eaUE:before {\n  content: \"\\e86c\";\n}\n\n/* '' */\n.editor-icons-module_icon-minus-circle__SiWie:before {\n  content: \"\\e86d\";\n}\n\n/* '' */\n.editor-icons-module_icon-menu__eLGNc:before {\n  content: \"\\e86e\";\n}\n\n/* '' */\n.editor-icons-module_icon-minus-square__seBU4:before {\n  content: \"\\e86f\";\n}\n\n/* '' */\n.editor-icons-module_icon-button-stripe__tKrci:before {\n  content: \"\\e870\";\n}\n\n/* '' */\n.editor-icons-module_icon-mobile__gulDP:before {\n  content: \"\\e871\";\n}\n\n/* '' */\n.editor-icons-module_icon-move__L7y0K:before {\n  content: \"\\e872\";\n}\n\n/* '' */\n.editor-icons-module_icon-ok__gy4N6:before {\n  content: \"\\e873\";\n}\n\n/* '' */\n.editor-icons-module_icon-outdent__MkdE-:before {\n  content: \"\\e874\";\n}\n\n/* '' */\n.editor-icons-module_icon-padding-bottom__SdnH-:before {\n  content: \"\\e875\";\n}\n\n/* '' */\n.editor-icons-module_icon-padding-right__nZWCG:before {\n  content: \"\\e876\";\n}\n\n/* '' */\n.editor-icons-module_icon-paragraph-widget__SPu-J:before {\n  content: \"\\e877\";\n}\n\n/* '' */\n.editor-icons-module_icon-paragraph__sKCrL:before {\n  content: \"\\e878\";\n}\n\n/* '' */\n.editor-icons-module_icon-phone__4tFxq:before {\n  content: \"\\e879\";\n}\n\n/* '' */\n.editor-icons-module_icon-photo__LFnKE:before {\n  content: \"\\e87a\";\n}\n\n/* '' */\n.editor-icons-module_icon-picture__LJBeh:before {\n  content: \"\\e87b\";\n}\n\n/* '' */\n.editor-icons-module_icon-archive-restore__ArEO3:before {\n  content: \"\\e87c\";\n}\n\n/* '' */\n.editor-icons-module_icon-plus-circle__7hWX8:before {\n  content: \"\\e87d\";\n}\n\n/* '' */\n.editor-icons-module_icon-plus-square__GaK4y:before {\n  content: \"\\e87e\";\n}\n\n/* '' */\n.editor-icons-module_icon-plus__xoYCL:before {\n  content: \"\\e87f\";\n}\n\n/* '' */\n.editor-icons-module_icon-publish__Pxaqt:before {\n  content: \"\\e880\";\n}\n\n/* '' */\n.editor-icons-module_icon-pushpin__pUcpG:before {\n  content: \"\\e881\";\n}\n\n/* '' */\n.editor-icons-module_icon-download__fk1G2:before {\n  content: \"\\e882\";\n}\n\n/* '' */\n.editor-icons-module_icon-radius-all__7ExXa:before {\n  content: \"\\e883\";\n}\n\n/* '' */\n.editor-icons-module_icon-radius-left-down__DkAVp:before {\n  content: \"\\e884\";\n}\n\n/* '' */\n.editor-icons-module_icon-radius-left-top__sDSUm:before {\n  content: \"\\e885\";\n}\n\n/* '' */\n.editor-icons-module_icon-radius-right-down__u--Sc:before {\n  content: \"\\e886\";\n}\n\n/* '' */\n.editor-icons-module_icon-radius-right-top__fAmUA:before {\n  content: \"\\e887\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-up-left__JZpyT:before {\n  content: \"\\e888\";\n}\n\n/* '' */\n.editor-icons-module_icon-redo__RF1p3:before {\n  content: \"\\e889\";\n}\n\n/* '' */\n.editor-icons-module_icon-caps__xxSSK:before {\n  content: \"\\e88a\";\n}\n\n/* '' */\n.editor-icons-module_icon-reply__MOq0G:before {\n  content: \"\\e88b\";\n}\n\n/* '' */\n.editor-icons-module_icon-resize-horizontal__uUAL6:before {\n  content: \"\\e88c\";\n}\n\n/* '' */\n.editor-icons-module_icon-resize-vertical__t6Rh-:before {\n  content: \"\\e88d\";\n}\n\n/* '' */\n.editor-icons-module_icon-save__Rv6V4:before {\n  content: \"\\e88e\";\n}\n\n/* '' */\n.editor-icons-module_icon-search__4ZGJS:before {\n  content: \"\\e88f\";\n}\n\n/* '' */\n.editor-icons-module_icon-section__eknzN:before {\n  content: \"\\e890\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-up-right__MbeWS:before {\n  content: \"\\e891\";\n}\n\n/* '' */\n.editor-icons-module_icon-share__swdtv:before {\n  content: \"\\e892\";\n}\n\n/* '' */\n.editor-icons-module_icon-sort-down__B5Xb0:before {\n  content: \"\\e893\";\n}\n\n/* '' */\n.editor-icons-module_icon-sort-up__eIR5M:before {\n  content: \"\\e894\";\n}\n\n/* '' */\n.editor-icons-module_icon-sort__Lnt5e:before {\n  content: \"\\e895\";\n}\n\n/* '' */\n.editor-icons-module_icon-spinner__5L1L0:before {\n  content: \"\\e896\";\n}\n\n/* '' */\n.editor-icons-module_icon-square-o__RGWin:before {\n  content: \"\\e897\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-down-left__s-J5y:before {\n  content: \"\\e898\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-down-right__giqXP:before {\n  content: \"\\e899\";\n}\n\n/* '' */\n.editor-icons-module_icon-strikethrough__k4LoJ:before {\n  content: \"\\e89a\";\n}\n\n/* '' */\n.editor-icons-module_icon-suitcase__O1Z0B:before {\n  content: \"\\e89b\";\n}\n\n/* '' */\n.editor-icons-module_icon-switches__TroPj:before {\n  content: \"\\e89c\";\n}\n\n/* '' */\n.editor-icons-module_icon-sygnet__Ve9QE:before {\n  content: \"\\e89d\";\n}\n\n/* '' */\n.editor-icons-module_icon-tablet__uwZkH:before {\n  content: \"\\e89e\";\n}\n\n/* '' */\n.editor-icons-module_icon-text-height__zlULH:before {\n  content: \"\\e89f\";\n}\n\n/* '' */\n.editor-icons-module_icon-text-width__pDrqO:before {\n  content: \"\\e8a0\";\n}\n\n/* '' */\n.editor-icons-module_icon-text__9hDX6:before {\n  content: \"\\e8a1\";\n}\n\n/* '' */\n.editor-icons-module_icon-time__Zbeft:before {\n  content: \"\\e8a2\";\n}\n\n/* '' */\n.editor-icons-module_icon-timer__uqu1w:before {\n  content: \"\\e8a3\";\n}\n\n/* '' */\n.editor-icons-module_icon-times-circle__p9k5y:before {\n  content: \"\\e8a4\";\n}\n\n/* '' */\n.editor-icons-module_icon-trash__OzME9:before {\n  content: \"\\e8a5\";\n}\n\n/* '' */\n.editor-icons-module_icon-underline__vkClv:before {\n  content: \"\\e8a6\";\n}\n\n/* '' */\n.editor-icons-module_icon-undo__3Y3GF:before {\n  content: \"\\e8a7\";\n}\n\n/* '' */\n.editor-icons-module_icon-unlink__QtQ2l:before {\n  content: \"\\e8a8\";\n}\n\n/* '' */\n.editor-icons-module_icon-user-tie__KkBhi:before {\n  content: \"\\e8a9\";\n}\n\n/* '' */\n.editor-icons-module_icon-user__krB9f:before {\n  content: \"\\e8aa\";\n}\n\n/* '' */\n.editor-icons-module_icon-users__0ZaY5:before {\n  content: \"\\e8ab\";\n}\n\n/* '' */\n.editor-icons-module_icon-video__Iiy8H:before {\n  content: \"\\e8ac\";\n}\n\n/* '' */\n.editor-icons-module_icon-view_list__QWST3:before {\n  content: \"\\e8ad\";\n}\n\n/* '' */\n.editor-icons-module_icon-window-close__YQtOX:before {\n  content: \"\\e8ae\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-down__dC-7l:before {\n  content: \"\\e8af\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-left__xEPOM:before {\n  content: \"\\e8b0\";\n}\n\n/* '' */\n.editor-icons-module_icon-long-arrow-alt-right__iwbqN:before {\n  content: \"\\e8b1\";\n}\n\n/* '' */\n.editor-icons-module_icon-equal__lqc76:before {\n  content: \"\\e8b2\";\n}\n\n/* '' */\n.editor-icons-module_icon-exclamation__f3uoO:before {\n  content: \"\\e8b3\";\n}\n\n/* '' */\n.editor-icons-module_icon-exit__X225z:before {\n  content: \"\\e8b4\";\n}\n\n/* '' */\n.editor-icons-module_icon-filter__kDWZ1:before {\n  content: \"\\e8b5\";\n}\n\n/* '' */\n.editor-icons-module_icon-form__0e0io:before {\n  content: \"\\e8b6\";\n}\n\n/* '' */\n.editor-icons-module_icon-info__v8FzC:before {\n  content: \"\\e8b7\";\n}\n\n/* '' */\n.editor-icons-module_icon-minus__EHEu8:before {\n  content: \"\\e8b8\";\n}\n\n/* '' */\n.editor-icons-module_icon-play__zkBZh:before {\n  content: \"\\e8b9\";\n}\n\n/* '' */\n.editor-icons-module_icon-question__5gN6R:before {\n  content: \"\\e8ba\";\n}\n\n/* '' */\n.editor-icons-module_icon-random__4qHQ4:before {\n  content: \"\\e8bb\";\n}\n\n/* '' */\n.editor-icons-module_icon-remove__SVXlD:before {\n  content: \"\\e8bc\";\n}\n\n/* '' */\n.editor-icons-module_icon-share-square__GnXG5:before {\n  content: \"\\e8bd\";\n}\n\n/* '' */\n.editor-icons-module_icon-step-backward__Mu1pD:before {\n  content: \"\\e8be\";\n}\n\n/* '' */\n.editor-icons-module_icon-step-forward__uJVBT:before {\n  content: \"\\e8bf\";\n}\n\n/* '' */\n.editor-icons-module_icon-button-pay__qhlzG:before {\n  content: \"\\e8c0\";\n}\n\n/* '' */\n.editor-icons-module_icon-percent__PobuD:before {\n  content: \"\\e8c1\";\n}\n\n/* '' */\n.editor-icons-module_icon-desktop-mobile2__AIiwU:before {\n  content: \"\\e8c2\";\n}\n\n/* '' */\n.editor-icons-module_icon-lab__U-Ws2:before {\n  content: \"\\e8c3\";\n}\n\n/* '' */\n.editor-icons-module_icon-api__tLSH-:before {\n  content: \"\\e8c4\";\n}\n\n/* '' */\n.editor-icons-module_icon-clipboard__qst0U:before {\n  content: \"\\e8c5\";\n}\n\n/* '' */\n.editor-icons-module_icon-login__5FRMr:before {\n  content: \"\\e8c6\";\n}\n\n/* '' */\n.editor-icons-module_icon-shield-info__Qb6o5:before {\n  content: \"\\e8c7\";\n}\n\n/* '' */\n.editor-icons-module_icon-shield__mmY5L:before {\n  content: \"\\e8c8\";\n}\n\n/* '' */\n.editor-icons-module_icon-article__c-EH-:before {\n  content: \"\\e8c9\";\n}\n\n/* '' */\n.editor-icons-module_icon-block__HjqO9:before {\n  content: \"\\e8ca\";\n}\n\n/* '' */\n.editor-icons-module_icon-reset__hJNft:before {\n  content: \"\\e8cb\";\n}\n\n/* '' */\n.editor-icons-module_icon-star__sknoh:before {\n  content: \"\\e8cc\";\n}\n\n/* '' */\n.editor-icons-module_icon-share-alt__p-X0-:before {\n  content: \"\\e8cd\";\n}\n\n/* '' */\n.editor-icons-module_icon-ai__jm7WN:before {\n  content: \"\\e8ce\";\n}\n\n/* '' */\n.editor-icons-module_icon-line-chart__LEY7X:before {\n  content: \"\\e8cf\";\n}\n\n/* '' */\n.editor-icons-module_icon-chart-alt__Xkw7k:before {\n  content: \"\\e8d0\";\n}\n\n/* '' */\n.editor-icons-module_icon-chart__Dx3So:before {\n  content: \"\\e8d1\";\n}\n\n/* '' */\n.editor-icons-module_icon-web__IitoO:before {\n  content: \"\\e8d2\";\n}\n\n/* '' */\n.editor-icons-module_icon-popup__RdDhk:before {\n  content: \"\\e8d3\";\n}\n\n/* '' */\n.editor-icons-module_icon-product__Rlht5:before {\n  content: \"\\e8d4\";\n}\n\n/* '' */\n.editor-icons-module_icon-money__phbdt:before {\n  content: \"\\e8d5\";\n}\n\n/* '' */\n.editor-icons-module_icon-credit-card__vXzlH:before {\n  content: \"\\e8d6\";\n}\n\n/* '' */\n.editor-icons-module_icon-server__pCeqU:before {\n  content: \"\\e8d7\";\n}\n\n/* '' */\n.editor-icons-module_icon-play-lesson__EBuAy:before {\n  content: \"\\e8d8\";\n}\n\n/* '' */\n.editor-icons-module_icon-academy__h1Gn5:before {\n  content: \"\\e8d9\";\n}\n\n/* '' */\n.editor-icons-module_icon-case-studies__SPX6b:before {\n  content: \"\\e8da\";\n}\n\n/* '' */\n.editor-icons-module_icon-video-alt__5HHvi:before {\n  content: \"\\e8db\";\n}\n\n/* '' */\n.editor-icons-module_icon-help-center__H6QuA:before {\n  content: \"\\e8dc\";\n}\n\n/* '' */\n.editor-icons-module_icon-bullhorn__5MoHk:before {\n  content: \"\\e8dd\";\n}\n\n/* '' */\n.editor-icons-module_icon-visits__gsTMW:before {\n  content: \"\\e8de\";\n}\n\n/* '' */\n.editor-icons-module_icon-templates__yIj1U:before {\n  content: \"\\e8df\";\n}\n\n/* '' */\n.editor-icons-module_icon-package__8Txt4:before {\n  content: \"\\e8e0\";\n}\n\n/* '' */\n.editor-icons-module_icon-gallery__truHd:before {\n  content: \"\\e8e1\";\n}\n\n/* '' */\n.editor-icons-module_icon-archive__JDMFo:before {\n  content: \"\\e8e2\";\n}\n\n/* '' */\n.editor-icons-module_icon-users-circle__Qb28f:before {\n  content: \"\\e8e3\";\n}\n\n/* '' */\n.editor-icons-module_icon-inbox__RAl-e:before {\n  content: \"\\e8e4\";\n}\n\n/* '' */\n.editor-icons-module_icon-workspaces__yWeAM:before {\n  content: \"\\e8e5\";\n}\n\n/* '' */\n.editor-icons-module_icon-anchor__fhvU1:before {\n  content: \"\\e8e6\";\n}\n\n/* '' */\n.editor-icons-module_icon-guide__RxiAx:before {\n  content: \"\\e8e7\";\n}\n\n/* '' */\n.editor-icons-module_icon-dis-rules__OXtyX:before {\n  content: \"\\e8e8\";\n}\n\n/* '' */\n.editor-icons-module_icon-champ__mrfM-:before {\n  content: \"\\e8e9\";\n}\n\n/* '' */\n.editor-icons-module_icon-consultation__MB2CA:before {\n  content: \"\\e8ea\";\n}\n\n/* '' */\n.editor-icons-module_icon-configure__-jhFD:before {\n  content: \"\\e8eb\";\n}\n\n/* '' */\n.editor-icons-module_icon-thumb-up__py0wj:before {\n  content: \"\\e8ec\";\n}\n\n/* '' */\n.editor-icons-module_icon-thumb-down__FO0D2:before {\n  content: \"\\e8ed\";\n}\n\n/* '' */\n.editor-icons-module_icon-star-outlined__ZS-1K:before {\n  content: \"\\e8ef\";\n}\n\n/* '' */\n.editor-icons-module_icon-palette__Ug6-c:before {\n  content: \"\\e8f0\";\n}\n\n/* '' */\n.editor-icons-module_icon-brush__klh5H:before {\n  content: \"\\e8f1\";\n}\n\n/* '' */\n.editor-icons-module_icon-globe-active-ssl__PU5rf:before {\n  content: \"\\e8f2\";\n}\n\n/* '' */\n.editor-icons-module_icon-globe-active-no-ssl__f4BPq:before {\n  content: \"\\e8f3\";\n}\n\n/* '' */\n.editor-icons-module_icon-hourglass-start__UK9vT:before {\n  content: \"\\e8f4\";\n}\n\n/* '' */\n.editor-icons-module_icon-notifications__T5lOz:before {\n  content: \"\\e8f5\";\n}\n\n/* '' */\n.editor-icons-module_icon-extension__8gP3E:before {\n  content: \"\\e8f6\";\n}\n\n/* '' */\n.editor-icons-module_icon-separate-borders__Wv0NR:before {\n  content: \"\\e8f7\";\n}\n\n/* '' */\n.editor-icons-module_icon-border-left__wgqIb:before {\n  content: \"\\e8f8\";\n}\n\n/* '' */\n.editor-icons-module_icon-border-right__1C0DA:before {\n  content: \"\\e8f9\";\n}\n\n/* '' */\n.editor-icons-module_icon-border-bottom__apehG:before {\n  content: \"\\e8fa\";\n}\n\n/* '' */\n.editor-icons-module_icon-border-top__tw7uc:before {\n  content: \"\\e8fb\";\n}\n\n/* '' */\n.editor-icons-module_icon-file-copy__bnY8K:before {\n  content: \"\\e8fc\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-increase__LlNkT:before {\n  content: \"\\e9f9\";\n}\n\n/* '' */\n.editor-icons-module_icon-arrow-decrease__dccFe:before {\n  content: \"\\e9fa\";\n}\n\n/* '' */\n.editor-icons-module_icon-keyboard_command__UzD8M:before {\n  content: \"\\e9fb\";\n}\n\n/* '' */\n.editor-icons-module_icon-backspace__f8Uib:before {\n  content: \"\\e9fc\";\n}\n\n/* '' */";
-var css = {"text--truncate":"editor-icons-module_text--truncate__sYGOs","editor-icon":"editor-icons-module_editor-icon__IF6YS","icon-ab-testing":"editor-icons-module_icon-ab-testing__qSCoH","icon-align-center":"editor-icons-module_icon-align-center__FnT2y","icon-align-justify":"editor-icons-module_icon-align-justify__izCV3","icon-align-left":"editor-icons-module_icon-align-left__ZO0I-","icon-align-right":"editor-icons-module_icon-align-right__fZmog","icon-angle-double-down":"editor-icons-module_icon-angle-double-down__WoOTs","icon-angle-double-left":"editor-icons-module_icon-angle-double-left__pX-KE","icon-angle-double-right":"editor-icons-module_icon-angle-double-right__besDN","icon-angle-double-up":"editor-icons-module_icon-angle-double-up__--tEZ","icon-angle-down":"editor-icons-module_icon-angle-down__3QOMs","icon-angle-left":"editor-icons-module_icon-angle-left__DWVRT","icon-angle-right":"editor-icons-module_icon-angle-right__UFJOL","icon-angle-up":"editor-icons-module_icon-angle-up__pTLCI","icon-arrow-down":"editor-icons-module_icon-arrow-down__DxHIk","icon-arrow-left":"editor-icons-module_icon-arrow-left__NY2jS","icon-arrow-right":"editor-icons-module_icon-arrow-right__wK6bs","icon-arrow-up":"editor-icons-module_icon-arrow-up__-UxKi","icon-backward":"editor-icons-module_icon-backward__oCYh9","icon-barcode":"editor-icons-module_icon-barcode__0PDQ5","icon-bold":"editor-icons-module_icon-bold__p2ydG","icon-long-arrow-alt-up":"editor-icons-module_icon-long-arrow-alt-up__2rAf8","icon-borders":"editor-icons-module_icon-borders__Jzjr7","icon-box":"editor-icons-module_icon-box__fqOsM","icon-building":"editor-icons-module_icon-building__T-Cxk","icon-info-outline":"editor-icons-module_icon-info-outline__b86IL","icon-button":"editor-icons-module_icon-button__0-avg","icon-calendar":"editor-icons-module_icon-calendar__jgXsb","icon-caret-down":"editor-icons-module_icon-caret-down__aoKP4","icon-caret-left":"editor-icons-module_icon-caret-left__vZ3rQ","icon-caret-right":"editor-icons-module_icon-caret-right__n0lpq","icon-caret-up":"editor-icons-module_icon-caret-up__3f-2q","icon-check-square-o":"editor-icons-module_icon-check-square-o__Y4ZGf","icon-check-circle":"editor-icons-module_icon-check-circle__Yc6au","icon-check-square":"editor-icons-module_icon-check-square__eNgin","icon-chevron-down":"editor-icons-module_icon-chevron-down__OWeiY","icon-chevron-left":"editor-icons-module_icon-chevron-left__yOdWM","icon-chevron-up":"editor-icons-module_icon-chevron-up__oxTh9","icon-chevron-right":"editor-icons-module_icon-chevron-right__PcFJK","icon-circle":"editor-icons-module_icon-circle__bXuQ7","icon-clone-alt":"editor-icons-module_icon-clone-alt__n8s-6","icon-cloud-download-alt":"editor-icons-module_icon-cloud-download-alt__vWzVK","icon-cloud-upload":"editor-icons-module_icon-cloud-upload__0Scfk","icon-code":"editor-icons-module_icon-code__RTZlZ","icon-cog":"editor-icons-module_icon-cog__1Iorm","icon-copy_landing":"editor-icons-module_icon-copy_landing__h4MTP","icon-create":"editor-icons-module_icon-create__NiZeQ","icon-creative-commons-brands":"editor-icons-module_icon-creative-commons-brands__dc0nQ","icon-dashboard":"editor-icons-module_icon-dashboard__UI3cP","icon-desktop":"editor-icons-module_icon-desktop__H9DEv","icon-dot-circle":"editor-icons-module_icon-dot-circle__vwCr2","icon-duplicate":"editor-icons-module_icon-duplicate__WUP7C","icon-edit":"editor-icons-module_icon-edit__NZqxZ","icon-ellipsis-h":"editor-icons-module_icon-ellipsis-h__fIt-a","icon-ellipsis-v":"editor-icons-module_icon-ellipsis-v__ZId4E","icon-envelope":"editor-icons-module_icon-envelope__kGOPO","icon-sync":"editor-icons-module_icon-sync__oBJiO","icon-exchange-alt":"editor-icons-module_icon-exchange-alt__q-TT-","icon-exclamation-circle":"editor-icons-module_icon-exclamation-circle__qBlKH","icon-exclamation-triangle":"editor-icons-module_icon-exclamation-triangle__WzoeH","icon-button-paypal":"editor-icons-module_icon-button-paypal__Il2ju","icon-smart_section":"editor-icons-module_icon-smart_section__DlW-a","icon-external-link-alt":"editor-icons-module_icon-external-link-alt__3-xDo","icon-eye-close":"editor-icons-module_icon-eye-close__eeVNc","icon-eye-open":"editor-icons-module_icon-eye-open__VDOKK","icon-file":"editor-icons-module_icon-file__Ti1y6","icon-main_page":"editor-icons-module_icon-main_page__YxyKr","icon-folder-minus":"editor-icons-module_icon-folder-minus__LjD-Q","icon-folder-move-to":"editor-icons-module_icon-folder-move-to__K0ZFv","icon-folder-o":"editor-icons-module_icon-folder-o__Z4GeS","icon-folder-plus":"editor-icons-module_icon-folder-plus__Ftq5-","icon-folder":"editor-icons-module_icon-folder__RVnKJ","icon-font":"editor-icons-module_icon-font__UMA2G","icon-thank_you_page":"editor-icons-module_icon-thank_you_page__PfigI","icon-forward":"editor-icons-module_icon-forward__ML1NG","icon-globe":"editor-icons-module_icon-globe__I3VBg","icon-hand-up-alt":"editor-icons-module_icon-hand-up-alt__OPiBi","icon-hand-up":"editor-icons-module_icon-hand-up__ixFOg","icon-handlebar-circled":"editor-icons-module_icon-handlebar-circled__7o0ow","icon-header":"editor-icons-module_icon-header__u17pE","icon-header1":"editor-icons-module_icon-header1__L8fJz","icon-header2":"editor-icons-module_icon-header2__oTTks","icon-header3":"editor-icons-module_icon-header3__3Afg7","icon-header4":"editor-icons-module_icon-header4__cID6-","icon-header5":"editor-icons-module_icon-header5__OP2Y9","icon-heart":"editor-icons-module_icon-heart__Fo71q","icon-help_outline":"editor-icons-module_icon-help_outline__x5dos","icon-help":"editor-icons-module_icon-help__s8DQY","icon-history":"editor-icons-module_icon-history__sIVvX","icon-home":"editor-icons-module_icon-home__NIW-s","icon-icons":"editor-icons-module_icon-icons__mblfV","icon-indent":"editor-icons-module_icon-indent__MucuX","icon-info-circle":"editor-icons-module_icon-info-circle__9uis9","icon-button-payu":"editor-icons-module_icon-button-payu__qr1AC","icon-italic":"editor-icons-module_icon-italic__E9MH8","icon-js":"editor-icons-module_icon-js__7W4fJ","icon-key":"editor-icons-module_icon-key__N4zyM","icon-keyboard":"editor-icons-module_icon-keyboard__bp4un","icon-layers-2":"editor-icons-module_icon-layers-2__-7-9i","icon-lightbulb":"editor-icons-module_icon-lightbulb__rgk3f","icon-line-dash":"editor-icons-module_icon-line-dash__60kj5","icon-line-dots":"editor-icons-module_icon-line-dots__xdP0X","icon-line-height":"editor-icons-module_icon-line-height__msRqU","icon-line-solid":"editor-icons-module_icon-line-solid__-AYpL","icon-link":"editor-icons-module_icon-link__Y8DDs","icon-list-ol":"editor-icons-module_icon-list-ol__akV7Z","icon-list-ul":"editor-icons-module_icon-list-ul__lwmMI","icon-lock-open":"editor-icons-module_icon-lock-open__qUCA4","icon-lock":"editor-icons-module_icon-lock__-eaUE","icon-minus-circle":"editor-icons-module_icon-minus-circle__SiWie","icon-menu":"editor-icons-module_icon-menu__eLGNc","icon-minus-square":"editor-icons-module_icon-minus-square__seBU4","icon-button-stripe":"editor-icons-module_icon-button-stripe__tKrci","icon-mobile":"editor-icons-module_icon-mobile__gulDP","icon-move":"editor-icons-module_icon-move__L7y0K","icon-ok":"editor-icons-module_icon-ok__gy4N6","icon-outdent":"editor-icons-module_icon-outdent__MkdE-","icon-padding-bottom":"editor-icons-module_icon-padding-bottom__SdnH-","icon-padding-right":"editor-icons-module_icon-padding-right__nZWCG","icon-paragraph-widget":"editor-icons-module_icon-paragraph-widget__SPu-J","icon-paragraph":"editor-icons-module_icon-paragraph__sKCrL","icon-phone":"editor-icons-module_icon-phone__4tFxq","icon-photo":"editor-icons-module_icon-photo__LFnKE","icon-picture":"editor-icons-module_icon-picture__LJBeh","icon-archive-restore":"editor-icons-module_icon-archive-restore__ArEO3","icon-plus-circle":"editor-icons-module_icon-plus-circle__7hWX8","icon-plus-square":"editor-icons-module_icon-plus-square__GaK4y","icon-plus":"editor-icons-module_icon-plus__xoYCL","icon-publish":"editor-icons-module_icon-publish__Pxaqt","icon-pushpin":"editor-icons-module_icon-pushpin__pUcpG","icon-download":"editor-icons-module_icon-download__fk1G2","icon-radius-all":"editor-icons-module_icon-radius-all__7ExXa","icon-radius-left-down":"editor-icons-module_icon-radius-left-down__DkAVp","icon-radius-left-top":"editor-icons-module_icon-radius-left-top__sDSUm","icon-radius-right-down":"editor-icons-module_icon-radius-right-down__u--Sc","icon-radius-right-top":"editor-icons-module_icon-radius-right-top__fAmUA","icon-long-arrow-alt-up-left":"editor-icons-module_icon-long-arrow-alt-up-left__JZpyT","icon-redo":"editor-icons-module_icon-redo__RF1p3","icon-caps":"editor-icons-module_icon-caps__xxSSK","icon-reply":"editor-icons-module_icon-reply__MOq0G","icon-resize-horizontal":"editor-icons-module_icon-resize-horizontal__uUAL6","icon-resize-vertical":"editor-icons-module_icon-resize-vertical__t6Rh-","icon-save":"editor-icons-module_icon-save__Rv6V4","icon-search":"editor-icons-module_icon-search__4ZGJS","icon-section":"editor-icons-module_icon-section__eknzN","icon-long-arrow-alt-up-right":"editor-icons-module_icon-long-arrow-alt-up-right__MbeWS","icon-share":"editor-icons-module_icon-share__swdtv","icon-sort-down":"editor-icons-module_icon-sort-down__B5Xb0","icon-sort-up":"editor-icons-module_icon-sort-up__eIR5M","icon-sort":"editor-icons-module_icon-sort__Lnt5e","icon-spinner":"editor-icons-module_icon-spinner__5L1L0","icon-square-o":"editor-icons-module_icon-square-o__RGWin","icon-long-arrow-alt-down-left":"editor-icons-module_icon-long-arrow-alt-down-left__s-J5y","icon-long-arrow-alt-down-right":"editor-icons-module_icon-long-arrow-alt-down-right__giqXP","icon-strikethrough":"editor-icons-module_icon-strikethrough__k4LoJ","icon-suitcase":"editor-icons-module_icon-suitcase__O1Z0B","icon-switches":"editor-icons-module_icon-switches__TroPj","icon-sygnet":"editor-icons-module_icon-sygnet__Ve9QE","icon-tablet":"editor-icons-module_icon-tablet__uwZkH","icon-text-height":"editor-icons-module_icon-text-height__zlULH","icon-text-width":"editor-icons-module_icon-text-width__pDrqO","icon-text":"editor-icons-module_icon-text__9hDX6","icon-time":"editor-icons-module_icon-time__Zbeft","icon-timer":"editor-icons-module_icon-timer__uqu1w","icon-times-circle":"editor-icons-module_icon-times-circle__p9k5y","icon-trash":"editor-icons-module_icon-trash__OzME9","icon-underline":"editor-icons-module_icon-underline__vkClv","icon-undo":"editor-icons-module_icon-undo__3Y3GF","icon-unlink":"editor-icons-module_icon-unlink__QtQ2l","icon-user-tie":"editor-icons-module_icon-user-tie__KkBhi","icon-user":"editor-icons-module_icon-user__krB9f","icon-users":"editor-icons-module_icon-users__0ZaY5","icon-video":"editor-icons-module_icon-video__Iiy8H","icon-view_list":"editor-icons-module_icon-view_list__QWST3","icon-window-close":"editor-icons-module_icon-window-close__YQtOX","icon-long-arrow-alt-down":"editor-icons-module_icon-long-arrow-alt-down__dC-7l","icon-long-arrow-alt-left":"editor-icons-module_icon-long-arrow-alt-left__xEPOM","icon-long-arrow-alt-right":"editor-icons-module_icon-long-arrow-alt-right__iwbqN","icon-equal":"editor-icons-module_icon-equal__lqc76","icon-exclamation":"editor-icons-module_icon-exclamation__f3uoO","icon-exit":"editor-icons-module_icon-exit__X225z","icon-filter":"editor-icons-module_icon-filter__kDWZ1","icon-form":"editor-icons-module_icon-form__0e0io","icon-info":"editor-icons-module_icon-info__v8FzC","icon-minus":"editor-icons-module_icon-minus__EHEu8","icon-play":"editor-icons-module_icon-play__zkBZh","icon-question":"editor-icons-module_icon-question__5gN6R","icon-random":"editor-icons-module_icon-random__4qHQ4","icon-remove":"editor-icons-module_icon-remove__SVXlD","icon-share-square":"editor-icons-module_icon-share-square__GnXG5","icon-step-backward":"editor-icons-module_icon-step-backward__Mu1pD","icon-step-forward":"editor-icons-module_icon-step-forward__uJVBT","icon-button-pay":"editor-icons-module_icon-button-pay__qhlzG","icon-percent":"editor-icons-module_icon-percent__PobuD","icon-desktop-mobile2":"editor-icons-module_icon-desktop-mobile2__AIiwU","icon-lab":"editor-icons-module_icon-lab__U-Ws2","icon-api":"editor-icons-module_icon-api__tLSH-","icon-clipboard":"editor-icons-module_icon-clipboard__qst0U","icon-login":"editor-icons-module_icon-login__5FRMr","icon-shield-info":"editor-icons-module_icon-shield-info__Qb6o5","icon-shield":"editor-icons-module_icon-shield__mmY5L","icon-article":"editor-icons-module_icon-article__c-EH-","icon-block":"editor-icons-module_icon-block__HjqO9","icon-reset":"editor-icons-module_icon-reset__hJNft","icon-star":"editor-icons-module_icon-star__sknoh","icon-share-alt":"editor-icons-module_icon-share-alt__p-X0-","icon-ai":"editor-icons-module_icon-ai__jm7WN","icon-line-chart":"editor-icons-module_icon-line-chart__LEY7X","icon-chart-alt":"editor-icons-module_icon-chart-alt__Xkw7k","icon-chart":"editor-icons-module_icon-chart__Dx3So","icon-web":"editor-icons-module_icon-web__IitoO","icon-popup":"editor-icons-module_icon-popup__RdDhk","icon-product":"editor-icons-module_icon-product__Rlht5","icon-money":"editor-icons-module_icon-money__phbdt","icon-credit-card":"editor-icons-module_icon-credit-card__vXzlH","icon-server":"editor-icons-module_icon-server__pCeqU","icon-play-lesson":"editor-icons-module_icon-play-lesson__EBuAy","icon-academy":"editor-icons-module_icon-academy__h1Gn5","icon-case-studies":"editor-icons-module_icon-case-studies__SPX6b","icon-video-alt":"editor-icons-module_icon-video-alt__5HHvi","icon-help-center":"editor-icons-module_icon-help-center__H6QuA","icon-bullhorn":"editor-icons-module_icon-bullhorn__5MoHk","icon-visits":"editor-icons-module_icon-visits__gsTMW","icon-templates":"editor-icons-module_icon-templates__yIj1U","icon-package":"editor-icons-module_icon-package__8Txt4","icon-gallery":"editor-icons-module_icon-gallery__truHd","icon-archive":"editor-icons-module_icon-archive__JDMFo","icon-users-circle":"editor-icons-module_icon-users-circle__Qb28f","icon-inbox":"editor-icons-module_icon-inbox__RAl-e","icon-workspaces":"editor-icons-module_icon-workspaces__yWeAM","icon-anchor":"editor-icons-module_icon-anchor__fhvU1","icon-guide":"editor-icons-module_icon-guide__RxiAx","icon-dis-rules":"editor-icons-module_icon-dis-rules__OXtyX","icon-champ":"editor-icons-module_icon-champ__mrfM-","icon-consultation":"editor-icons-module_icon-consultation__MB2CA","icon-configure":"editor-icons-module_icon-configure__-jhFD","icon-thumb-up":"editor-icons-module_icon-thumb-up__py0wj","icon-thumb-down":"editor-icons-module_icon-thumb-down__FO0D2","icon-star-outlined":"editor-icons-module_icon-star-outlined__ZS-1K","icon-palette":"editor-icons-module_icon-palette__Ug6-c","icon-brush":"editor-icons-module_icon-brush__klh5H","icon-globe-active-ssl":"editor-icons-module_icon-globe-active-ssl__PU5rf","icon-globe-active-no-ssl":"editor-icons-module_icon-globe-active-no-ssl__f4BPq","icon-hourglass-start":"editor-icons-module_icon-hourglass-start__UK9vT","icon-notifications":"editor-icons-module_icon-notifications__T5lOz","icon-extension":"editor-icons-module_icon-extension__8gP3E","icon-separate-borders":"editor-icons-module_icon-separate-borders__Wv0NR","icon-border-left":"editor-icons-module_icon-border-left__wgqIb","icon-border-right":"editor-icons-module_icon-border-right__1C0DA","icon-border-bottom":"editor-icons-module_icon-border-bottom__apehG","icon-border-top":"editor-icons-module_icon-border-top__tw7uc","icon-file-copy":"editor-icons-module_icon-file-copy__bnY8K","icon-arrow-increase":"editor-icons-module_icon-arrow-increase__LlNkT","icon-arrow-decrease":"editor-icons-module_icon-arrow-decrease__dccFe","icon-keyboard_command":"editor-icons-module_icon-keyboard_command__UzD8M","icon-backspace":"editor-icons-module_icon-backspace__f8Uib"};
-styleInject(css_248z$1);
-
-/**
- * Icon - stateless presentational component
- * @param {object} props - props
- * @param {string} props.icon - icon name
- * @param {string} props.color - color of icon default, primary
- * @param {string | array} props.className - list of classes out of module
- * @return {object} An object of children element
- */
-
-const Icon = ({
-  icon,
-  color,
-  className,
-  spin,
-  ['data-testid']: dataTestId
-}) => {
-  const elementStyles = useStyles({
-    [css['editor-icon']]: true,
-    [styles$1[`icon--${color}`]]: color,
-    [styles$1['icon--spin']]: spin,
-    [css[`${icon}`]]: true
-  }, className);
-  return /*#__PURE__*/React.createElement("i", {
-    className: elementStyles,
-    "data-testid": dataTestId
-  });
-};
-
-Icon.displayName = 'Icon';
-Icon.propTypes = {
-  icon: propTypes.exports.string.isRequired,
-  color: propTypes.exports.string,
-  className: propTypes.exports.oneOfType([propTypes.exports.string, propTypes.exports.array]),
-  spin: propTypes.exports.bool,
-  ['data-testid']: propTypes.exports.string
-};
-Icon.defaultProps = {
-  className: '',
-  color: 'default',
-  spin: false,
-  ['data-testid']: undefined
-};
-
-var css_248z = ".Textarea-module_text--truncate__edMd7 {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.Textarea-module_textarea__yE6jp {\n  resize: none;\n  margin: 10px 0 0;\n  box-sizing: border-box;\n  width: 100%;\n  height: 414px;\n  background-color: #1f1f1f;\n  border: 1px solid #dddddd;\n  font-family: \"Courier New\", Courier, monospace;\n  color: white;\n  font-size: 13px;\n  padding: 11px 10px;\n}\n.Textarea-module_textarea__yE6jp:focus {\n  box-shadow: none;\n  border: 1px solid #1f1f1f;\n}";
 var styles = {"text--truncate":"Textarea-module_text--truncate__edMd7","textarea":"Textarea-module_textarea__yE6jp"};
-styleInject(css_248z);
 
 /**
  * Textarea - stateless presentational component
@@ -29516,7 +30279,5 @@ Textarea.defaultProps = {
 const emitToastToggle = (...args) => emitter.emit(TOGGLE_TOAST, ...args);
 const emitTimingToastToggle = (...args) => emitter.emit(TOGGLE_TIMING_TOAST, ...args);
 
-const emitCloseDropdown = (...args) => emitter.emit(CLOSE_DROPDOWN, ...args);
-
-export { Accordion$2 as Accordion, Accordion$1 as Accordion2, Alert, Avatar, Back, Backdrop, Badge, BlockSection, BoxBackground, BoxOutline, Button$1 as Button, ButtonGroup, Card, Check, Checkbox, Checkbox$1 as CheckboxNoFormik, Close, ColorLine, ColorNumber, CustomLink, DateTimePicker, Divider, Dot, Dropdown, DropdownSelect, DropdownSelectForm, Error$1 as Error, FieldGroup, Filter, FormikToggle, GalleryImage, Heading, Headline, Html, Icon, Image$1 as Image, Indicator, InfinityScroll, InfoBar, InfoSection, Input, Input$1 as InputForm, Instruction, Label, Layout, Legend, LimitQuantity as Limit, LimitSmall, List, ListItem, Loader, LongLogo, MaskedInput, Masked as MaskedInputForm, Message, Modal, Picker as MonthRangePicker, Notification, Overflow, OverflowTooltip, Panel, Paragraph, ProgressBar, Radio, Search, Searcher$1 as Searcher, Section, SectionTile, Select, Separator, ShortLogo, ShowMore, ShowPassword, SkeletonCircle, SkeletonDrawer, SkeletonLine, SkeletonSidebar, Spacer, Spinner, Spreader, StatsBadge, StatusIcon, StepNumber, Steps, Tab, TabList, TabPanel, Tabs, TextOverflow, Textarea, TimeSelect, TimingToast, Toast, Toggle, Tooltip, emitCloseDropdown, emitTimingToastToggle, emitToastToggle };
+export { Accordion$2 as Accordion, Accordion$1 as Accordion2, Alert, Avatar, Back, Backdrop, Badge, BlockSection, BoxBackground, BoxOutline, Button$1 as Button, ButtonGroup, Card, Check, Checkbox, Checkbox$1 as CheckboxNoFormik, Close, ColorLine, ColorNumber, CustomLink, DateTimePicker, Divider, Dot, Dropdown, DropdownSelect, DropdownSelectForm, Error$1 as Error, FieldGroup, Filter, FormikToggle, GalleryImage, Heading, Headline, Html, Icon, Image$1 as Image, Indicator, InfinityScroll, InfoBar, InfoSection, Input$1 as Input, Input as InputForm, Instruction, Label, Layout, Legend, LimitQuantity as Limit, LimitSmall, List, ListItem, Loader, LongLogo, MaskedInput, Masked as MaskedInputForm, Message, Modal, Picker as MonthRangePicker, Notification, Overflow, OverflowTooltip, Panel, Paragraph, ProgressBar, Radio, Search, Searcher$1 as Searcher, Section, SectionTile, Select, Separator, ShortLogo, ShowMore, ShowPassword, SkeletonCircle, SkeletonDrawer, SkeletonLine, SkeletonSidebar, Spacer, Spinner, Spreader, StatsBadge, StatusIcon, StepNumber, Steps, Tab, TabList, TabPanel, Tabs, TextOverflow, Textarea, TimeSelect, TimingToast, Toast, Toggle, Tooltip, emitCloseDropdown, emitTimingToastToggle, emitToastToggle };
 //# sourceMappingURL=index.js.map
