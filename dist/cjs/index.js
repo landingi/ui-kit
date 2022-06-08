@@ -27607,7 +27607,7 @@ function getTipContent(tip, children, getContent, multiline) {
 
 
   return tip.split(regexp).map(function (d, i) {
-    return /*#__PURE__*/React.createElement("span", {
+    return React.createElement("span", {
       key: i,
       className: "multi-line"
     }, d);
@@ -29328,7 +29328,7 @@ var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_c
 
       if (html) {
         var htmlContent = "".concat(content, "\n<style aria-hidden=\"true\">").concat(style, "</style>");
-        return /*#__PURE__*/React.createElement(Wrapper, _extends({
+        return React.createElement(Wrapper, _extends({
           className: "".concat(wrapperClassName),
           id: this.props.id || uuid,
           ref: function ref(_ref) {
@@ -29341,7 +29341,7 @@ var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_c
           }
         }));
       } else {
-        return /*#__PURE__*/React.createElement(Wrapper, _extends({
+        return React.createElement(Wrapper, _extends({
           className: "".concat(wrapperClassName),
           id: this.props.id || uuid
         }, ariaProps, {
@@ -29349,7 +29349,7 @@ var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_c
             return _this9.tooltipRef = _ref2;
           },
           "data-id": "tooltip"
-        }), /*#__PURE__*/React.createElement("style", {
+        }), React.createElement("style", {
           dangerouslySetInnerHTML: {
             __html: style
           },

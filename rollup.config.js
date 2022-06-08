@@ -25,9 +25,7 @@ export default [
       nodeResolve({
         extensions: ['.js']
       }),
-      babel({
-        presets: ['@babel/preset-react']
-      }),
+      babel(),
       resolve(),
       commonjs(),
       postcss({
