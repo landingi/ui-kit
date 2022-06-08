@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import StepNumber from '@components/ui/StepNumber'
+import StepNumber from '@components/StepNumber'
 
 const props = {
   step: 1,

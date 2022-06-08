@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from '@components/ui/Select'
+import Select from '@components/Select'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 

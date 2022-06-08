@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Check from '@components/ui/Check'
+import Check from '@components/Check'
 
 const checkComponent = <Check> Landingi </Check>
 

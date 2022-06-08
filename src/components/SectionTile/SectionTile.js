@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BoxOutline from '@components/ui/BoxOutline'
+import BoxOutline from '@components/BoxOutline'
 import styles from './SectionTile.module.scss'
 
 /**

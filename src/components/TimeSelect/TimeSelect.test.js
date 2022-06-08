@@ -1,6 +1,6 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
-import TimeSelect from '@components/ui/TimeSelect'
+import TimeSelect from '@components/TimeSelect'
 
 const mockOnChange = jest.fn()
 

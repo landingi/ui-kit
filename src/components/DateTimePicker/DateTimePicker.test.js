@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@jestutils'
-import DateTimePicker from '@components/ui/DateTimePicker'
+import DateTimePicker from '@components/DateTimePicker'
 
 const mockSetState = jest.fn()
 

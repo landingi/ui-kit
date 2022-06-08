@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from '@components/ui/Accordion2/Accordion.module.scss'
+import styles from '@components/Accordion2/Accordion.module.scss'
 
 /**
  * Accordion - statefull presentational component

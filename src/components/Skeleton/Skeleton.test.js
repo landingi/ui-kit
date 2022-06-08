@@ -6,7 +6,7 @@ import {
   SkeletonLine,
   SkeletonSidebar,
   SkeletonDrawer
-} from '@components/ui/Skeleton'
+} from '@components/Skeleton'
 import '@testing-library/jest-dom'
 
 describe('<SkeletonCircle/> mount', () => {

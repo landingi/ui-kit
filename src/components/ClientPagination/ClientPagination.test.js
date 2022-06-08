@@ -1,5 +1,5 @@
 import React from 'react'
-import ClientPagination from '@components/ui/ClientPagination'
+import ClientPagination from '@components/ClientPagination'
 import { mount } from 'enzyme'
 
 const props = {

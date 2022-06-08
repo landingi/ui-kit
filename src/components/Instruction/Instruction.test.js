@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Instruction from '@components/ui/Instruction'
+import Instruction from '@components/Instruction'
 
 const props = {
   data: [

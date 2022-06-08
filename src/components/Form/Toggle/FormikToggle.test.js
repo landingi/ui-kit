@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import FormikToggle from '@components/ui/Form/Toggle/FormikToggle'
+import FormikToggle from '@components/Form/Toggle/FormikToggle'
 
 const props = {
   id: 'jestem-id',

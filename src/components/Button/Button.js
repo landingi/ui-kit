@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
-import Spinner from '@components/ui/Spinner'
+import Spinner from '@components/Spinner'
 import styles from './Button.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 

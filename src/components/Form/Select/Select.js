@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from '@helpers/css'
-import Error from '@components/ui/Form/Error'
-import Label from '@components/ui/Label'
+import Error from '@components/Form/Error'
+import Label from '@components/Label'
 import scss from './Select.scss'
 
 const cssClass = styles(scss)

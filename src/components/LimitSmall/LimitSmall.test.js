@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import LimitSmall from '@components/ui/LimitSmall'
+import LimitSmall from '@components/LimitSmall'
 
 describe('<LimitSmall /> mount', () => {
   const props = {

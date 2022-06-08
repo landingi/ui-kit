@@ -1,5 +1,5 @@
-import { Playground, Props } from 'docz'
-import Select from '@components/ui/Form/Select'
+import { Playground, Props } from 'docz' import Select from
+'@components/Form/Select'
 
 # Select
 

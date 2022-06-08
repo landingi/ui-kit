@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 
 const props = {
   icon: 'icon-configure'

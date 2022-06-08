@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Avatar from '@components/ui/Avatar'
+import Avatar from '@components/Avatar'
 
 const avatarComponent = <Avatar />
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Limit from '@components/ui/Limit'
+import Limit from '@components/Limit'
 
 describe('<Limit /> mount', () => {
   const props = {

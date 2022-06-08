@@ -1,5 +1,5 @@
 import React from 'react'
-import InfoSection from '@components/ui/InfoSection'
+import InfoSection from '@components/InfoSection'
 import { render } from '@jestutils'
 
 const props = {

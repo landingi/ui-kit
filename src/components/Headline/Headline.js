@@ -1,5 +1,5 @@
 import { styles } from '@helpers/css'
-import Heading from '@components/ui/Heading'
+import Heading from '@components/Heading'
 import PropTypes from 'prop-types'
 import React from 'react'
 import scss from './Headline.scss'

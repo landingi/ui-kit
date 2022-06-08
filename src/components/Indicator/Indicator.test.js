@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Indicator from '@components/ui/Indicator'
+import Indicator from '@components/Indicator'
 
 const props = {
   children: 'Indicator'

@@ -1,5 +1,5 @@
 import React from 'react'
-import StatsBadge from '@components/ui/StatsBadge'
+import StatsBadge from '@components/StatsBadge'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 

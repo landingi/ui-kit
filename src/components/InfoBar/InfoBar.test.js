@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import InfoBar from '@components/ui/InfoBar'
+import InfoBar from '@components/InfoBar'
 
 const props = {
   children: 'Info Bar'

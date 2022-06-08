@@ -1,4 +1,4 @@
-import Image from '@components/ui/Image'
+import Image from '@components/Image'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Avatar.module.scss'

@@ -1,8 +1,8 @@
-import Heading from '@components/ui/Heading'
-import Image from '@components/ui/Image'
+import Heading from '@components/Heading'
+import Image from '@components/Image'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import Spacer from '@components/ui/Spacer'
+import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Message.module.scss'
 

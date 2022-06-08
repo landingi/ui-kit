@@ -1,5 +1,4 @@
-import { Playground, Props } from 'docz'
-import Check from '@components/ui/Check'
+import { Playground, Props } from 'docz' import Check from '@components/Check'
 
 # Check
 

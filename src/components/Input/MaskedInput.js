@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Label from '@components/ui/Label'
+import Label from '@components/Label'
 import MaskedInputComponent from 'react-text-mask'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Input.module.scss'

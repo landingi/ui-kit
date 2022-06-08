@@ -1,7 +1,7 @@
 import { stepsShape } from '@shapes'
 import PropTypes from 'prop-types'
 import React from 'react'
-import StepNumber from '@components/ui/StepNumber'
+import StepNumber from '@components/StepNumber'
 import styles from './Steps.module.scss'
 import uuid from 'react-uuid'
 

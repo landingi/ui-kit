@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Dot from '@components/ui/Dot'
+import Dot from '@components/Dot'
 
 describe('<Dot /> tests', () => {
   it('renders properly', () => {

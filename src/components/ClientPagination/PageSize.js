@@ -1,7 +1,7 @@
 import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Select from '@components/ui/Select'
+import Select from '@components/Select'
 import scss from './PageSize.scss'
 
 // TODO PageSize css, mdx, tests

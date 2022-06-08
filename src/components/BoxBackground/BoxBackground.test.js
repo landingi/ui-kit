@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import BoxBackground from '@components/ui/BoxBackground'
+import BoxBackground from '@components/BoxBackground'
 
 const props = {
   children: 'children',

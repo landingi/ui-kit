@@ -1,11 +1,11 @@
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 import { formatNumeric } from '@helpers/data'
 import styles from './Limit.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import Spreader from '@components/ui/Spreader'
-import Tooltip from '@components/ui/Tooltip'
+import Spreader from '@components/Spreader'
+import Tooltip from '@components/Tooltip'
 
 /**
  * Limit - stateless presentational component

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import InfinityScroll from '@components/ui/InfinityScroll'
+import InfinityScroll from '@components/InfinityScroll'
 import '@testing-library/jest-dom'
 
 global.IntersectionObserver = class IntersectionObserver {

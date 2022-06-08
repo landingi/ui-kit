@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@jestutils'
 import { screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Dropdown from '@components/ui/Dropdown'
+import Dropdown from '@components/Dropdown'
 
 const renderDropdown = ({ children, ...props }) =>
   render(<Dropdown {...props}>{children}</Dropdown>)

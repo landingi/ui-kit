@@ -32,13 +32,13 @@ then to install project pacakges run in the project root:
 
 #### Add a New component
 
-1. Create a folder inside `src/shared/components/*`
+1. Create a folder inside `src/components/*`
 2. Create `*.mdx` file and rest of the `js` files
 3. In the `*.mdx` file add the following code:
 
 ```
 import { Playground, Props } from 'docz'
-import YourComponent from '@components/ui/YourComponent'
+import YourComponent from '@components/YourComponent'
 
 # YourComponent
 
@@ -54,10 +54,11 @@ import YourComponent from '@components/ui/YourComponent'
 4. Export your component in `src/index.js`
 
 ```
-export { default as YourComponent } from '@components/ui/YourComponent'
+export { default as YourComponent } from '@components/YourComponent'
 ```
 
-5. Run `yarn docz:dev` and open `http://localhost:3000`. Check if your component works as expected.
+5. Run `yarn docz:dev` and open `http://localhost:3000`. Check if your component
+   works as expected.
 
 6. Run `yarn release-it`, stage all files
 
@@ -89,7 +90,8 @@ export { default as YourComponent } from '@components/ui/YourComponent'
 
 #### CI
 
-Every push triggers CI pipeline. For more information please check `.github/workflows/ci.yml`
+Every push triggers CI pipeline. For more information please check
+`.github/workflows/ci.yml`
 
 #### CD Documentation
 

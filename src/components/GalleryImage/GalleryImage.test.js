@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@jestutils'
-import GalleryImage from '@components/ui/GalleryImage'
+import GalleryImage from '@components/GalleryImage'
 
 const props = {
   src: 'https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512'

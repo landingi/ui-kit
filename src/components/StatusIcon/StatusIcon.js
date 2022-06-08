@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './StatusIcon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 
 /**
  * Status Icon - stateless presentational component

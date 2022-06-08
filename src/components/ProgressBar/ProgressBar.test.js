@@ -1,5 +1,5 @@
 import React from 'react'
-import ProgressBar from '@components/ui/ProgressBar'
+import ProgressBar from '@components/ProgressBar'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 

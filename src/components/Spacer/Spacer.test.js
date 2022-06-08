@@ -1,5 +1,5 @@
 import React from 'react'
-import Spacer from '@components/ui/Spacer'
+import Spacer from '@components/Spacer'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Layout from '@components/ui/Layout'
+import Layout from '@components/Layout'
 
 describe('<Layout /> mount', () => {
   const props = {

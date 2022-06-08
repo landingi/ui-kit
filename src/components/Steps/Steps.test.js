@@ -1,5 +1,5 @@
 import React from 'react'
-import Steps from '@components/ui/Steps'
+import Steps from '@components/Steps'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 

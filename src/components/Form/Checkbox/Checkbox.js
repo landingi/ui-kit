@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from '@components/ui/Form/Error'
+import Error from '@components/Form/Error'
 import styles from './Checkbox.module.scss'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'

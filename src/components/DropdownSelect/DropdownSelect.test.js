@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import DropdownSelect from '@components/ui/DropdownSelect'
+import DropdownSelect from '@components/DropdownSelect'
 
 const props = {
   children: 'children',

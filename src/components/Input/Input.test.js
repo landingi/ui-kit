@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Input from '@components/ui/Input'
+import Input from '@components/Input'
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()

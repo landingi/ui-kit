@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import Select from '@components/ui/Form/Select'
+import Select from '@components/Form/Select'
 
 const props = {
   id: 'jestem-id',

@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
-import Label from '@components/ui/Label'
-import Tooltip from '@components/ui/Tooltip'
-import Paragraph from '@components/ui/Paragraph'
+import Label from '@components/Label'
+import Tooltip from '@components/Tooltip'
+import Paragraph from '@components/Paragraph'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Input.module.scss'
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 
 //TODO Input css, global,
 /**

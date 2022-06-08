@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Spreader from '@components/ui/Spreader'
-import Icon from '@components/ui/Icon'
+import Spreader from '@components/Spreader'
+import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Check.module.scss'
 

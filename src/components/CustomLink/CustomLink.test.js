@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@jestutils'
 import { fireEvent } from '@testing-library/react'
-import CustomLink from '@components/ui/CustomLink'
+import CustomLink from '@components/CustomLink'
 import '@testing-library/jest-dom'
 
 describe('<CustomLink/> tests', () => {

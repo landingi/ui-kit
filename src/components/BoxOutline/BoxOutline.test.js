@@ -1,5 +1,5 @@
 import React from 'react'
-import BoxOutline from '@components/ui/BoxOutline'
+import BoxOutline from '@components/BoxOutline'
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 

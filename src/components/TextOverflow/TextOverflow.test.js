@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import TextOverflow from '@components/ui/TextOverflow'
+import TextOverflow from '@components/TextOverflow'
 
 const props = {
   children: 'placeholder'

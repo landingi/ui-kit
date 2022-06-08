@@ -1,6 +1,6 @@
 import { mapIconToClass } from '@helpers/data'
-import Close from '@components/ui/Close'
-import Icon from '@components/ui/Icon'
+import Close from '@components/Close'
+import Icon from '@components/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './Notification.module.scss'

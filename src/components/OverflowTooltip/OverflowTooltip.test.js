@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import OverflowTooltip from '@components/ui/OverflowTooltip'
+import OverflowTooltip from '@components/OverflowTooltip'
 import '@testing-library/jest-dom'
 
 describe('<OverflowTooltip/> mount', () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Radio from '@components/ui/Form/Radio'
+import Radio from '@components/Form/Radio'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
 

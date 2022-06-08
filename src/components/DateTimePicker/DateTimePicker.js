@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { DateRange, Calendar } from 'react-date-range'
-import Button from '@components/ui/Button'
+import Button from '@components/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { pl, enUS } from 'date-fns/locale'
 import { getLanguage } from '@helpers/i18n'

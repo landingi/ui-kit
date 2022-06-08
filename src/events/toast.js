@@ -1,5 +1,5 @@
-import { TOGGLE_TOAST, TOGGLE_TIMING_TOAST } from 'shared/constants/eventTypes'
-import emitter from 'shared/lib/emitter'
+import { TOGGLE_TOAST, TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
+import emitter from '@lib/emitter'
 
 export const emitToastToggle = (...args) => emitter.emit(TOGGLE_TOAST, ...args)
 export const emitTimingToastToggle = (...args) =>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Masked from '@components/ui/Form/Input/MaskedInput'
+import Masked from '@components/Form/Input/MaskedInput'
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()

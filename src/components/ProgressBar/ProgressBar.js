@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ProgressBar.module.scss'
-import ColorNumber from '@components/ui/ColorNumber'
+import ColorNumber from '@components/ColorNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
 
 //TODO ProgressBar css, props naming ex. withoutAnimation, limitExceededInfo, showColorNumber

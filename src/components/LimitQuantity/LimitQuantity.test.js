@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
-import LimitQuantity from '@components/ui/LimitQuantity'
+import LimitQuantity from '@components/LimitQuantity'
 
 describe('<LimitQuantity /> mount', () => {
   const props = {

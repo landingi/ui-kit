@@ -7,9 +7,9 @@ import {
   parseDateToMonthID,
   transformMonthToDate
 } from './helpers'
-import Icon from '@components/ui/Icon'
-import Button from '@components/ui/Button'
-import Spacer from '@components/ui/Spacer'
+import Icon from '@components/Icon'
+import Button from '@components/Button'
+import Spacer from '@components/Spacer'
 import styles from './MonthRangePicker.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 

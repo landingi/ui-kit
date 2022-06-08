@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Accordion from '@components/ui/Accordion2'
-import AccordionItem from '@components/ui/Accordion2/Item/AccordionItem'
+import Accordion from '@components/Accordion2'
+import AccordionItem from '@components/Accordion2/Item/AccordionItem'
 
 const propsAccordion = {
   data: [

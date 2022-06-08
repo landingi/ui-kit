@@ -2,9 +2,9 @@ import React, { Fragment, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
-import DropdownSelect from '@components/ui/DropdownSelect'
-import Spreader from '@components/ui/Spreader'
-import Icon from '@components/ui/Icon'
+import DropdownSelect from '@components/DropdownSelect'
+import Spreader from '@components/Spreader'
+import Icon from '@components/Icon'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,

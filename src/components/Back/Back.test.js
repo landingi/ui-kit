@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Back from '@components/ui/Back'
-import Tooltip from '@components/ui/Tooltip'
+import Back from '@components/Back'
+import Tooltip from '@components/Tooltip'
 
 describe('<Back/> mount', () => {
   const props = {

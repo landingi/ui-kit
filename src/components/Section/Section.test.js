@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Section from '@components/ui/Section'
+import Section from '@components/Section'
 
 const props = {
   children: 'placeholder'

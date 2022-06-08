@@ -1,5 +1,5 @@
 import React from 'react'
-import Search from '@components/ui/Search'
+import Search from '@components/Search'
 import { render } from '@jestutils'
 
 const mockOnSubmit = jest.fn()

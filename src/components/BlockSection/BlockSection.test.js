@@ -1,5 +1,5 @@
 import React from 'react'
-import BlockSection from '@components/ui/BlockSection'
+import BlockSection from '@components/BlockSection'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 

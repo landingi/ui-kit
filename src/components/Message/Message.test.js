@@ -1,5 +1,5 @@
 import React from 'react'
-import Message from '@components/ui/Message'
+import Message from '@components/Message'
 import { render } from '@testing-library/react'
 
 describe('<Message/> mount', () => {

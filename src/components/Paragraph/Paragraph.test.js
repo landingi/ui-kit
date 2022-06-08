@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Paragraph from '@components/ui/Paragraph'
+import Paragraph from '@components/Paragraph'
 
 describe('<Paragraph /> mount', () => {
   it('is mounted', () => {

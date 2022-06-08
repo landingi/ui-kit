@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@jestutils'
-import MaskedInput from '@components/ui/Input/MaskedInput'
+import MaskedInput from '@components/Input/MaskedInput'
 
 describe('<MaskedInput /> tests', () => {
   it('renders properly with default props', () => {

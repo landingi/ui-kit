@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Panel from '@components/ui/Panel'
+import Panel from '@components/Panel'
 
 const props = {
   children: 'placeholder'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Overflow from '@components/ui/Overflow'
+import Overflow from '@components/Overflow'
 
 const props = {
   children: 'placeholder'

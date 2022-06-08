@@ -1,4 +1,4 @@
-import Icon from '@components/ui/Icon'
+import Icon from '@components/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'

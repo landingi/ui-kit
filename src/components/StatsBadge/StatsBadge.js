@@ -1,4 +1,4 @@
-import Heading from '@components/ui/Heading'
+import Heading from '@components/Heading'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './StatsBadge.module.scss'

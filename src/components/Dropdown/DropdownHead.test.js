@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@jestutils'
 import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import DropdownHead from '@components/ui/Dropdown/Head'
+import DropdownHead from '@components/Dropdown/Head'
 
 const props = {
   children: 'some children'

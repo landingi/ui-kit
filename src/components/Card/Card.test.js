@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Card from '@components/ui/Card'
-import Paragraph from '@components/ui/Paragraph'
+import Card from '@components/Card'
+import Paragraph from '@components/Paragraph'
 
 describe('<Card /> mount', () => {
   const props = {

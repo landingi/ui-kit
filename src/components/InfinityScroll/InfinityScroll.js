@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRef, useEffect, useState } from 'react'
-import Loader from '@components/ui/Loader'
+import Loader from '@components/Loader'
 import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './InfinityScroll.module.scss'

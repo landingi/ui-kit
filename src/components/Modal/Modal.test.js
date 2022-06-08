@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Modal from '@components/ui/Modal'
-import Backdrop from '@components/ui/Backdrop'
-import Button from '@components/ui/Button'
+import Modal from '@components/Modal'
+import Backdrop from '@components/Backdrop'
+import Button from '@components/Button'
 
 const props = {
   isActive: true,

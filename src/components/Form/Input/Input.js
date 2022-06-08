@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from '@components/ui/Form/Error'
-import InputComponent from '@components/ui/Input'
-import Paragraph from '@components/ui/Paragraph'
+import Error from '@components/Form/Error'
+import InputComponent from '@components/Input'
+import Paragraph from '@components/Paragraph'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from '@components/ui/Input/Input.module.scss'
+import styles from '@components/Input/Input.module.scss'
 
 // TODO Form Input css, mdx
 /**

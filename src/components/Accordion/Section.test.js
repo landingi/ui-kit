@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Section from '@components/ui/Accordion/Section'
+import Section from '@components/Accordion/Section'
 
 const props = {
   handleOnClick: jest.fn(),

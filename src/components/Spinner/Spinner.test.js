@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Spinner from '@components/ui/Spinner'
+import Spinner from '@components/Spinner'
 
 const spinnerComponent = <Spinner />
 

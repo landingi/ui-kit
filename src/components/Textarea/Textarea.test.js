@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Textarea from '@components/ui/Textarea'
+import Textarea from '@components/Textarea'
 
 const props = {
   value: 'initial value',

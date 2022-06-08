@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import ColorNumber from '@components/ui/ColorNumber'
+import ColorNumber from '@components/ColorNumber'
 
 const colorNumberComponent = <ColorNumber variant='success'>5</ColorNumber>
 

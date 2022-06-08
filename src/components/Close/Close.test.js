@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@jestutils'
-import Close from '@components/ui/Close'
+import Close from '@components/Close'
 
 const onClick = jest.fn()
 

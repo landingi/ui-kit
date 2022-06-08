@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import React from 'react'
 import { render, fireEvent } from '@jestutils'
-import ShowPassword from '@components/ui/ShowPassword'
+import ShowPassword from '@components/ShowPassword'
 import { act } from 'react-dom/test-utils'
 
 describe('<ShowPassword/> tests', () => {

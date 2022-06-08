@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import Input from '@components/ui/Input'
-import Button from '@components/ui/Button'
-import Icon from '@components/ui/Icon'
+import Input from '@components/Input'
+import Button from '@components/Button'
+import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Search.module.scss'
 
