@@ -4,6 +4,7 @@ import babel from '@rollup/plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
+import externals from 'rollup-plugin-node-externals'
 
 const packageJson = require('./package.json')
 
@@ -23,6 +24,7 @@ export default [
       }
     ],
     plugins: [
+      externals({ react: 'react', 'react-dom': 'react-dom' }),
       babel(),
       external(),
       resolve(),
