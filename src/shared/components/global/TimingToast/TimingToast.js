@@ -2,29 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react'
 import emitter from '@lib/emitter'
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import Notification from '@components/ui/Notification'
-import posed, { PoseGroup } from 'react-pose'
 import styles from './TimingToast.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 
-//TODO TimingToast replace react-pose with framer-motion library
-/**
- * Toast Animation, exports React-pose animations
- * @see {@link https://popmotion.io/pose/api/} for further information.
- * @return {object} An object of styles
- */
-const toastProps = {
-  open: {
-    bottom: 40
-  },
-  closed: {
-    bottom: -100
-  }
-}
-
-const TimingToastAnimation = posed.div(toastProps)
-
-//TODO TimingToast test
 /**
  * TimingToast - stateless presentational component
  * @param {object} props - props
@@ -39,19 +20,27 @@ const TimingToast = ({ className }) => {
   const toastStyles = useStyles(
     {
       [styles['toast']]: true,
-      [styles[`toast--visible`]]: isActive,
-      [styles[`toast--hidden`]]: !!isActive
+      [styles[`toast--active`]]: isActive
     },
     className
   )
 
+  let autoHideTimer
+
+  const setAutoHideTimer = () =>
+    (autoHideTimer = setTimeout(() => setActive(false), 5000))
+
   const handleToastToggle = useCallback(
     (message, type) => {
       setActive(!isActive)
+
       message && setMessage(message)
+
       type && setType(type)
+
+      setAutoHideTimer()
     },
-    [isActive, message, type]
+    [isActive, message, type, autoHideTimer]
   )
 
   const closeToast = useCallback(() => setActive(false), [isActive])
@@ -61,16 +50,14 @@ const TimingToast = ({ className }) => {
 
     return () => {
       emitter.off(TOGGLE_TIMING_TOAST, handleToastToggle)
+
+      clearTimeout(autoHideTimer)
     }
-  }, [isActive])
+  }, [])
 
   return (
-    <PoseGroup flipMove={false} animateOnMount>
-      <TimingToastAnimation
-        pose={isActive ? 'open' : 'closed'}
-        key='toastanimation'
-        className={toastStyles}
-      >
+    isActive && (
+      <div className={toastStyles} data-testid='toast-component'>
         <Notification
           type={type}
           isClosable
@@ -79,8 +66,8 @@ const TimingToast = ({ className }) => {
         >
           {message}
         </Notification>
-      </TimingToastAnimation>
-    </PoseGroup>
+      </div>
+    )
   )
 }
 

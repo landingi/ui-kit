@@ -1,0 +1,21 @@
+import { Playground, Props } from 'docz'
+import { emitToastToggle } from '@events/toast'
+import Toast from '@components/global/Toast'
+import Button from '@components/ui/Button'
+
+# Timing Toast
+
+<Props of={Toast} />
+
+## Basic usage
+
+<Playground>
+  {() => (
+    <>
+      <Button onClick={() => emitToastToggle('test', 'success')}>
+        Open modal
+      </Button>
+      <Toast />
+    </>
+  )}
+</Playground>

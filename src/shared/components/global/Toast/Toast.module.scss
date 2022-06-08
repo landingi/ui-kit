@@ -8,7 +8,7 @@
 
   &--active {
     visibility: visible;
-    animation: fadein 0.5s, 3s 1s, fadeout 0.5s 4.6s;
+    animation: fadein 0.5s, fadeout 0.5s 4.6s;
   }
 
   @keyframes fadein {

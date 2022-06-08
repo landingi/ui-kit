@@ -1,45 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { styles } from 'shared/helpers/css'
-import emitter from 'shared/lib/emitter'
-import { TOGGLE_TOAST } from 'shared/constants/eventTypes'
-import Notification from 'shared/components/ui/Notification'
-import posed, { PoseGroup } from 'react-pose'
-import scss from './Toast.scss'
+import emitter from '@lib/emitter'
+import { TOGGLE_TOAST } from '@constants/eventTypes'
+import Notification from '@components/ui/Notification'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Toast.module.scss'
 
-const cssClass = styles(scss)
-
-//TODO TimingToast replace react-pose with framer-motion library
-/**
- * Toast Animation, exports React-pose animations
- * @see {@link https://popmotion.io/pose/api/} for further information.
- * @return {object} An object of styles
- */
-const toastProps = {
-  enter: {
-    transition: {
-      bottom: 40,
-      duration: 1000
-    }
-  },
-  exit: {
-    transition: {
-      bottom: -100,
-      duration: 500
-    }
-  }
-}
-
-const ToastAnimation = posed.div(toastProps)
-
-//TODO Toast test, css, mdx
 /**
  * Toast stateful container component
  * @param {object} props
  * @param {string|array} props.className
  * @return {object} An object of children elements
  */
-const Toast = ({ className }) => {
+const Toast = () => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
   const [type, setType] = useState('success')
@@ -52,7 +24,7 @@ const Toast = ({ className }) => {
    * @type {function}
    */
   const handleToastToggle = useCallback(() => {
-    setActive(!isActive)
+    setActive(prev => !prev)
   })
 
   /**
@@ -69,9 +41,8 @@ const Toast = ({ className }) => {
     setHideTimeout(timeout)
   }
 
-  const setAutoHideTimer = () => {
-    autoHideTimer = setTimeout(() => setActive(false), hideTimeout)
-  }
+  const setAutoHideTimer = () =>
+    (autoHideTimer = setTimeout(() => setActive(false), hideTimeout))
 
   const clearAutoHideTimer = () => clearTimeout(autoHideTimer)
 
@@ -97,27 +68,22 @@ const Toast = ({ className }) => {
     }
   }, [])
 
+  const toastStyles = useStyles({
+    [styles.toast]: true,
+    [styles['toast--active']]: isActive
+  })
+
   return (
     isActive && (
-      <PoseGroup animateOnMount flipMove={false}>
-        <ToastAnimation key='toastanimation' className={cssClass(className)}>
-          <Notification type={type} onClick={handleToastToggle} isClosable>
-            {message}
-          </Notification>
-        </ToastAnimation>
-      </PoseGroup>
+      <div className={toastStyles} data-testid='toast-component'>
+        <Notification type={type} onClick={handleToastToggle} isClosable>
+          {message}
+        </Notification>
+      </div>
     )
   )
 }
 
 Toast.displayName = 'Toast'
-
-Toast.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
-}
-
-Toast.defaultProps = {
-  className: 'toast'
-}
 
 export default Toast
