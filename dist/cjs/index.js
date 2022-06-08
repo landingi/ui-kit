@@ -6138,6 +6138,73 @@ function bytesToUuid(buf, offset) {
   return [bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]]].join('');
 }
 
+function uuidToBytes(uuid) {
+  // Note: We assume we're being passed a valid uuid string
+  var bytes = [];
+  uuid.replace(/[a-fA-F0-9]{2}/g, function (hex) {
+    bytes.push(parseInt(hex, 16));
+  });
+  return bytes;
+}
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  var bytes = new Array(str.length);
+
+  for (var i = 0; i < str.length; i++) {
+    bytes[i] = str.charCodeAt(i);
+  }
+
+  return bytes;
+}
+
+const DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+const URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+function v35 (name, version, hashfunc) {
+  var generateUUID = function (value, namespace, buf, offset) {
+    var off = buf && offset || 0;
+    if (typeof value == 'string') value = stringToBytes(value);
+    if (typeof namespace == 'string') namespace = uuidToBytes(namespace);
+    if (!Array.isArray(value)) throw TypeError('value must be an array of bytes');
+    if (!Array.isArray(namespace) || namespace.length !== 16) throw TypeError('namespace must be uuid string or an Array of 16 byte values'); // Per 4.3
+
+    var bytes = hashfunc(namespace.concat(value));
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      for (var idx = 0; idx < 16; ++idx) {
+        buf[off + idx] = bytes[idx];
+      }
+    }
+
+    return buf || bytesToUuid(bytes);
+  }; // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name;
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL;
+  return generateUUID;
+}
+
+function md5(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return crypto__default["default"].createHash('md5').update(bytes).digest();
+}
+
+v35('v3', 0x30, md5);
+
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
 
@@ -6160,6 +6227,18 @@ function v4(options, buf, offset) {
 
   return buf || bytesToUuid(rnds);
 }
+
+function sha1(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return crypto__default["default"].createHash('sha1').update(bytes).digest();
+}
+
+v35('v5', 0x50, sha1);
 
 function _classCallCheck$8(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -7766,17 +7845,17 @@ var engineUserAgent = getBuiltIn('navigator', 'userAgent') || '';
 var process$1 = global_1.process;
 var versions = process$1 && process$1.versions;
 var v8 = versions && versions.v8;
-var match$4, version;
+var match$2, version;
 
 if (v8) {
-  match$4 = v8.split('.');
-  version = match$4[0] < 4 ? 1 : match$4[0] + match$4[1];
+  match$2 = v8.split('.');
+  version = match$2[0] < 4 ? 1 : match$2[0] + match$2[1];
 } else if (engineUserAgent) {
-  match$4 = engineUserAgent.match(/Edge\/(\d+)/);
+  match$2 = engineUserAgent.match(/Edge\/(\d+)/);
 
-  if (!match$4 || match$4[1] >= 74) {
-    match$4 = engineUserAgent.match(/Chrome\/(\d+)/);
-    if (match$4) version = match$4[1];
+  if (!match$2 || match$2[1] >= 74) {
+    match$2 = engineUserAgent.match(/Chrome\/(\d+)/);
+    if (match$2) version = match$2[1];
   }
 }
 
@@ -12105,8 +12184,6 @@ var formatDistance$1 = function (token, count, options) {
   return result;
 };
 
-var formatDistance$2 = formatDistance$1;
-
 function buildFormatLongFn(args) {
   return function () {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; // TODO: Remove String()
@@ -12135,7 +12212,7 @@ var dateTimeFormats$1 = {
   medium: '{{date}}, {{time}}',
   short: '{{date}}, {{time}}'
 };
-var formatLong$2 = {
+var formatLong$1 = {
   date: buildFormatLongFn({
     formats: dateFormats$1,
     defaultWidth: 'full'
@@ -12149,7 +12226,6 @@ var formatLong$2 = {
     defaultWidth: 'full'
   })
 };
-var formatLong$3 = formatLong$2;
 
 var formatRelativeLocale$1 = {
   lastWeek: "'last' eeee 'at' p",
@@ -12163,8 +12239,6 @@ var formatRelativeLocale$1 = {
 var formatRelative$1 = function (token, _date, _baseDate, _options) {
   return formatRelativeLocale$1[token];
 };
-
-var formatRelative$2 = formatRelative$1;
 
 function buildLocalizeFn(args) {
   return function (dirtyIndex, dirtyOptions) {
@@ -12204,12 +12278,12 @@ var quarterValues$1 = {
 // Generally, formatted dates should look like they are in the middle of a sentence,
 // e.g. in Spanish language the weekdays and months should be in the lowercase.
 
-var monthValues$1 = {
+var monthValues$4 = {
   narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
   abbreviated: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   wide: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 };
-var dayValues$1 = {
+var dayValues$2 = {
   narrow: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
   short: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
   abbreviated: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -12306,7 +12380,7 @@ var ordinalNumber$1 = function (dirtyNumber, _options) {
   return number + 'th';
 };
 
-var localize$2 = {
+var localize$1 = {
   ordinalNumber: ordinalNumber$1,
   era: buildLocalizeFn({
     values: eraValues$1,
@@ -12320,11 +12394,11 @@ var localize$2 = {
     }
   }),
   month: buildLocalizeFn({
-    values: monthValues$1,
+    values: monthValues$4,
     defaultWidth: 'wide'
   }),
   day: buildLocalizeFn({
-    values: dayValues$1,
+    values: dayValues$2,
     defaultWidth: 'wide'
   }),
   dayPeriod: buildLocalizeFn({
@@ -12334,7 +12408,6 @@ var localize$2 = {
     defaultFormattingWidth: 'wide'
   })
 };
-var localize$3 = localize$2;
 
 function buildMatchFn(args) {
   return function (string) {
@@ -12456,7 +12529,7 @@ var parseDayPeriodPatterns$1 = {
     night: /night/i
   }
 };
-var match$2 = {
+var match$1 = {
   ordinalNumber: buildMatchPatternFn({
     matchPattern: matchOrdinalNumberPattern$1,
     parsePattern: parseOrdinalNumberPattern$1,
@@ -12498,7 +12571,6 @@ var match$2 = {
     defaultParseWidth: 'any'
   })
 };
-var match$3 = match$2;
 
 /**
  * @type {Locale}
@@ -12512,11 +12584,11 @@ var match$3 = match$2;
 
 var locale$1 = {
   code: 'en-US',
-  formatDistance: formatDistance$2,
-  formatLong: formatLong$3,
-  formatRelative: formatRelative$2,
-  localize: localize$3,
-  match: match$3,
+  formatDistance: formatDistance$1,
+  formatLong: formatLong$1,
+  formatRelative: formatRelative$1,
+  localize: localize$1,
+  match: match$1,
   options: {
     weekStartsOn: 0
     /* Sunday */
@@ -12524,11 +12596,10 @@ var locale$1 = {
     firstWeekContainsDate: 1
   }
 };
-var enUS = locale$1;
 
-var enUS$1 = /*#__PURE__*/Object.freeze({
+var enUS = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': enUS
+	'default': locale$1
 });
 
 function toInteger(dirtyNumber) {
@@ -12790,7 +12861,7 @@ function addLeadingZeros(number, targetLength) {
  * Letters marked by * are not implemented but reserved by Unicode standard.
  */
 
-var formatters$2 = {
+var formatters$1 = {
   // Year
   y: function (date, token) {
     // From http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_tokens
@@ -12859,7 +12930,6 @@ var formatters$2 = {
     return addLeadingZeros(fractionalSeconds, token.length);
   }
 };
-var formatters$3 = formatters$2;
 
 var dayPeriodEnum = {
   am: 'am',
@@ -12957,7 +13027,7 @@ var formatters = {
       });
     }
 
-    return formatters$3.y(date, token);
+    return formatters$1.y(date, token);
   },
   // Local week-numbering year
   Y: function (date, token, localize, options) {
@@ -13090,7 +13160,7 @@ var formatters = {
     switch (token) {
       case 'M':
       case 'MM':
-        return formatters$3.M(date, token);
+        return formatters$1.M(date, token);
       // 1st, 2nd, ..., 12th
 
       case 'Mo':
@@ -13195,7 +13265,7 @@ var formatters = {
       });
     }
 
-    return formatters$3.d(date, token);
+    return formatters$1.d(date, token);
   },
   // Day of year
   D: function (date, token, localize) {
@@ -13516,7 +13586,7 @@ var formatters = {
       });
     }
 
-    return formatters$3.h(date, token);
+    return formatters$1.h(date, token);
   },
   // Hour [0-23]
   H: function (date, token, localize) {
@@ -13526,7 +13596,7 @@ var formatters = {
       });
     }
 
-    return formatters$3.H(date, token);
+    return formatters$1.H(date, token);
   },
   // Hour [0-11]
   K: function (date, token, localize) {
@@ -13561,7 +13631,7 @@ var formatters = {
       });
     }
 
-    return formatters$3.m(date, token);
+    return formatters$1.m(date, token);
   },
   // Second
   s: function (date, token, localize) {
@@ -13571,11 +13641,11 @@ var formatters = {
       });
     }
 
-    return formatters$3.s(date, token);
+    return formatters$1.s(date, token);
   },
   // Fraction of second
   S: function (date, token) {
-    return formatters$3.S(date, token);
+    return formatters$1.S(date, token);
   },
   // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
   X: function (date, token, _localize, options) {
@@ -13719,8 +13789,6 @@ function formatTimezone(offset, dirtyDelimiter) {
   return sign + hours + delimiter + minutes;
 }
 
-var formatters$1 = formatters;
-
 function dateLongFormatter(pattern, formatLong) {
   switch (pattern) {
     case 'P':
@@ -13816,7 +13884,6 @@ var longFormatters = {
   p: timeLongFormatter,
   P: dateTimeLongFormatter
 };
-var longFormatters$1 = longFormatters;
 
 /**
  * Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
@@ -14189,7 +14256,7 @@ function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
   requiredArgs(2, arguments);
   var formatStr = String(dirtyFormatStr);
   var options = dirtyOptions || {};
-  var locale = options.locale || enUS;
+  var locale = options.locale || locale$1;
   var localeFirstWeekContainsDate = locale.options && locale.options.firstWeekContainsDate;
   var defaultFirstWeekContainsDate = localeFirstWeekContainsDate == null ? 1 : toInteger(localeFirstWeekContainsDate);
   var firstWeekContainsDate = options.firstWeekContainsDate == null ? defaultFirstWeekContainsDate : toInteger(options.firstWeekContainsDate); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
@@ -14235,7 +14302,7 @@ function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
     var firstCharacter = substring[0];
 
     if (firstCharacter === 'p' || firstCharacter === 'P') {
-      var longFormatter = longFormatters$1[firstCharacter];
+      var longFormatter = longFormatters[firstCharacter];
       return longFormatter(substring, locale.formatLong, formatterOptions);
     }
 
@@ -14252,7 +14319,7 @@ function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
       return cleanEscapedString$1(substring);
     }
 
-    var formatter = formatters$1[firstCharacter];
+    var formatter = formatters[firstCharacter];
 
     if (formatter) {
       if (!options.useAdditionalWeekYearTokens && isProtectedWeekYearToken(substring)) {
@@ -17558,7 +17625,6 @@ var parsers = {
     incompatibleTokens: '*'
   }
 };
-var parsers$1 = parsers;
 
 var TIMEZONE_UNIT_PRIORITY = 10; // This RegExp consists of three parts separated by `|`:
 // - [yYQqMLwIdDecihHKkms]o matches any available ordinal number token
@@ -17904,7 +17970,7 @@ function parse(dirtyDateString, dirtyFormatString, dirtyReferenceDate, dirtyOpti
   var dateString = String(dirtyDateString);
   var formatString = String(dirtyFormatString);
   var options = dirtyOptions || {};
-  var locale = options.locale || enUS;
+  var locale = options.locale || locale$1;
 
   if (!locale.match) {
     throw new RangeError('locale must contain match property');
@@ -17951,7 +18017,7 @@ function parse(dirtyDateString, dirtyFormatString, dirtyReferenceDate, dirtyOpti
     var firstCharacter = substring[0];
 
     if (firstCharacter === 'p' || firstCharacter === 'P') {
-      var longFormatter = longFormatters$1[firstCharacter];
+      var longFormatter = longFormatters[firstCharacter];
       return longFormatter(substring, locale.formatLong, subFnOptions);
     }
 
@@ -17971,7 +18037,7 @@ function parse(dirtyDateString, dirtyFormatString, dirtyReferenceDate, dirtyOpti
     }
 
     var firstCharacter = token[0];
-    var parser = parsers$1[firstCharacter];
+    var parser = parsers[firstCharacter];
 
     if (parser) {
       var incompatibleTokens = parser.incompatibleTokens;
@@ -19997,7 +20063,7 @@ var require$$25 = /*@__PURE__*/getAugmentedNamespace(subMonths$1);
 
 var require$$4 = /*@__PURE__*/getAugmentedNamespace(addMonths$1);
 
-var require$$27 = /*@__PURE__*/getAugmentedNamespace(enUS$1);
+var require$$27 = /*@__PURE__*/getAugmentedNamespace(enUS);
 
 var styles$F = {};
 
@@ -22923,6 +22989,65 @@ function isSameUTCWeek(dirtyDateLeft, dirtyDateRight, options) {
   return dateLeftStartOfWeek.getTime() === dateRightStartOfWeek.getTime();
 }
 
+// If you are making a new locale based on this one, check if the same is true for the language you're working on.
+// Generally, formatted dates should look like they are in the middle of a sentence,
+// e.g. in Spanish language the weekdays and months should be in the lowercase.
+
+var monthValues$3 = {
+  narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  abbreviated: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+  wide: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+}; // https://st.unicode.org/cldr-apps/v#/de/Gregorian/
+
+({
+  narrow: monthValues$3.narrow,
+  abbreviated: ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dez.'],
+  wide: monthValues$3.wide
+});
+
+// If you are making a new locale based on this one, check if the same is true for the language you're working on.
+// Generally, formatted dates should look like they are in the middle of a sentence,
+// e.g. in Spanish language the weekdays and months should be in the lowercase.
+
+var monthValues$2 = {
+  narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  abbreviated: ['Jän', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+  wide: ['Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+}; // https://st.unicode.org/cldr-apps/v#/de_AT/Gregorian/
+
+({
+  narrow: monthValues$2.narrow,
+  abbreviated: ['Jän.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dez.'],
+  wide: monthValues$2.wide
+});
+
+var monthValues$1 = {
+  narrow: ['T', 'H', 'M', 'H', 'T', 'K', 'H', 'E', 'S', 'L', 'M', 'J'],
+  abbreviated: ['tammi', 'helmi', 'maalis', 'huhti', 'touko', 'kesä', 'heinä', 'elo', 'syys', 'loka', 'marras', 'joulu'],
+  wide: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu']
+};
+({
+  narrow: monthValues$1.narrow,
+  abbreviated: monthValues$1.abbreviated,
+  wide: monthValues$1.wide.map(function (name) {
+    return name + 'ta';
+  })
+});
+var dayValues$1 = {
+  narrow: ['S', 'M', 'T', 'K', 'T', 'P', 'L'],
+  short: ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'],
+  abbreviated: ['sunn.', 'maan.', 'tiis.', 'kesk.', 'torst.', 'perj.', 'la'],
+  wide: ['sunnuntai', 'maanantai', 'tiistai', 'keskiviikko', 'torstai', 'perjantai', 'lauantai']
+};
+({
+  narrow: dayValues$1.narrow,
+  short: dayValues$1.short,
+  abbreviated: dayValues$1.abbreviated,
+  wide: dayValues$1.wide.map(function (name) {
+    return name + 'na';
+  })
+});
+
 function declensionGroup(scheme, count) {
   if (count === 1) {
     return scheme.one;
@@ -23107,7 +23232,6 @@ var formatLong = {
     defaultWidth: 'full'
   })
 };
-var formatLong$1 = formatLong;
 
 var adjectivesLastWeek = {
   masculine: 'ostatni',
@@ -23306,7 +23430,6 @@ var localize = {
     defaultFormattingWidth: 'wide'
   })
 };
-var localize$1 = localize;
 
 var matchOrdinalNumberPattern = /^(\d+)?/i;
 var parseOrdinalNumberPattern = /\d+/i;
@@ -23415,7 +23538,6 @@ var match = {
     defaultParseWidth: 'any'
   })
 };
-var match$1 = match;
 
 /**
  * @type {Locale}
@@ -23432,10 +23554,10 @@ var match$1 = match;
 var locale = {
   code: 'pl',
   formatDistance: formatDistance,
-  formatLong: formatLong$1,
+  formatLong: formatLong,
   formatRelative: formatRelative,
-  localize: localize$1,
-  match: match$1,
+  localize: localize,
+  match: match,
   options: {
     weekStartsOn: 1
     /* Monday */
@@ -23443,7 +23565,6 @@ var locale = {
     firstWeekContainsDate: 4
   }
 };
-var pl = locale;
 
 const getLanguage = typeof document !== `undefined` && document.documentElement.lang || 'en';
 
@@ -23505,14 +23626,14 @@ const DateTimePicker = ({
   }, oneDatePicker ? /*#__PURE__*/React.createElement(dist$1.Calendar, {
     date: selectedDateCalendar || new Date(),
     onChange: setDate,
-    locale: getLanguage === 'pl' ? pl : enUS,
+    locale: getLanguage === 'pl' ? locale : locale$1,
     minDate: minDate ? new Date(minDate) : undefined,
     maxDate: maxDate,
     color: '#EDECEC',
     showMonthAndYearPickers: showMonthAndYearPickers,
     direction: "horizontal"
   }) : /*#__PURE__*/React.createElement(react.exports.Fragment, null, /*#__PURE__*/React.createElement(dist$1.DateRange, {
-    locale: getLanguage === 'pl' ? pl : enUS,
+    locale: getLanguage === 'pl' ? locale : locale$1,
     onChange: handleChange,
     showSelectionPreview: true,
     moveRangeOnFirstSelection: false,
