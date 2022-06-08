@@ -57,7 +57,7 @@ const TimingToast = ({ className }) => {
 
   return (
     isActive && (
-      <div className={toastStyles}>
+      <div className={toastStyles} data-testid='toast-component'>
         <Notification
           type={type}
           isClosable

@@ -1,33 +1,40 @@
 import React from 'react'
-import TimingToast from '@components/global/TimingToast'
-import { mount } from 'enzyme'
+import { render, screen, waitFor, fireEvent } from '@jestutils'
 import { emitTimingToastToggle } from '@events/toast'
 import { act } from 'react-dom/test-utils'
+import TimingToast from './TimingToast'
+import '@testing-library/jest-dom'
 
-const component = <TimingToast />
+jest.setTimeout(10000)
 
-describe('<TimingToast/> mount', () => {
-  let wrapper
+describe('Toast tests', () => {
+  it('renders, opens and closes properly', async () => {
+    render(<TimingToast />)
 
-  beforeEach(() => {
-    wrapper = mount(component)
+    await act(async () => emitTimingToastToggle())
+
+    await waitFor(() =>
+      expect(screen.getByTestId('toast-component')).toBeInTheDocument()
+    )
+
+    await new Promise(r => setTimeout(r, 5001))
+
+    expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  it('closes by button click properly', async () => {
+    render(<TimingToast />)
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    await act(async () => emitTimingToastToggle())
 
-  it('should be active after emitting event', async () => {
-    await act(async () => {
-      emitTimingToastToggle()
-    })
+    await waitFor(() =>
+      expect(screen.getByTestId('toast-component')).toBeInTheDocument()
+    )
 
-    wrapper.update()
+    const closeButton = screen.getByTestId('close-component-button')
 
-    expect(wrapper.find(TimingToast).exists()).toBe(true)
+    fireEvent.click(closeButton)
+
+    expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
 })
