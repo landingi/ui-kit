@@ -1,6 +1,6 @@
 import React from 'react'
-import Searcher from '@components/global/Searcher'
-import Search from '@components/global/Searcher'
+import Searcher from '@components/Searcher'
+import Search from '@components/Searcher'
 import { mount } from 'enzyme'
 
 const mockedSearchFunction = jest.fn()

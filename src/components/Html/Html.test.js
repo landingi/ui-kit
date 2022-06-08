@@ -1,5 +1,5 @@
 import React from 'react'
-import Html from '@components/global/Html'
+import Html from '@components/Html'
 import { mount } from 'enzyme'
 
 const component = <Html value={<div>value</div>} />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShortLogo, LongLogo } from '@components/global/Logo'
+import { ShortLogo, LongLogo } from '@components/Logo'
 import { render } from '@jestutils'
 
 describe('<ShortLogo/> mount', () => {

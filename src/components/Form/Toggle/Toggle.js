@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Html from '@components/global/Html'
+import Html from '@components/Html'
 import styles from './Toggle.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 

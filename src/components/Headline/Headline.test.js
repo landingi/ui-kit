@@ -1,5 +1,5 @@
 import React from 'react'
-import Headline from '@components/global/Headline'
+import Headline from '@components/Headline'
 import { mount } from 'enzyme'
 
 const component = <Headline title='Headline title' />
