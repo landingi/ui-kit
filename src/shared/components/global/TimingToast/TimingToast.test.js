@@ -7,17 +7,17 @@ import '@testing-library/jest-dom'
 
 jest.setTimeout(10000)
 
-describe('Toast tests', () => {
+describe('TimingToast tests', () => {
   it('renders, opens and closes properly', async () => {
     render(<TimingToast />)
 
     await act(async () => emitTimingToastToggle())
 
     await waitFor(() =>
-      expect(screen.getByTestId('toast-component')).toBeInTheDocument()
+      expect(screen.queryByTestId('toast-component')).toBeInTheDocument()
     )
 
-    await new Promise(r => setTimeout(r, 5001))
+    await act(async () => await new Promise(r => setTimeout(r, 5001)))
 
     expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })

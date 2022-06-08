@@ -17,7 +17,7 @@ describe('Toast tests', () => {
       expect(screen.getByTestId('toast-component')).toBeInTheDocument()
     )
 
-    await new Promise(r => setTimeout(r, 5001))
+    await act(async () => await new Promise(r => setTimeout(r, 5001)))
 
     expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
