@@ -5,13 +5,12 @@ exports.onCreateWebpackConfig = args => {
     resolve: {
       modules: [path.resolve(__dirname, '../src'), 'node_modules'],
       alias: {
-        '@components': path.resolve(__dirname, '../src/shared/components'),
-        '@constants': path.resolve(__dirname, '../src/shared/constants'),
-        '@events': path.resolve(__dirname, '../src/shared/events'),
-        '@helpers': path.resolve(__dirname, '../src/shared/helpers'),
-        '@i18n': path.resolve(__dirname, '../src/shared/i18n'),
-        '@lib': path.resolve(__dirname, '../src/shared/lib'),
-        '@shapes': path.resolve(__dirname, '../src/shared/shapes')
+        '@components': path.resolve(__dirname, '../src/components'),
+        '@constants': path.resolve(__dirname, '../src/constants'),
+        '@events': path.resolve(__dirname, '../src/events'),
+        '@helpers': path.resolve(__dirname, '../src/helpers'),
+        '@lib': path.resolve(__dirname, '../src/lib'),
+        '@shapes': path.resolve(__dirname, '../src/shapes')
       }
     }
   })
