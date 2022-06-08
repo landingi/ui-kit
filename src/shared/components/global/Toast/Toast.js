@@ -74,11 +74,13 @@ const Toast = () => {
   })
 
   return (
-    <div className={toastStyles}>
-      <Notification type={type} onClick={handleToastToggle} isClosable>
-        {message}
-      </Notification>
-    </div>
+    isActive && (
+      <div className={toastStyles}>
+        <Notification type={type} onClick={handleToastToggle} isClosable>
+          {message}
+        </Notification>
+      </div>
+    )
   )
 }
 

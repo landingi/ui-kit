@@ -4,30 +4,32 @@
   bottom: 20px;
   z-index: $z-index-toast;
   min-width: 300px;
+  visibility: hidden;
 
-  &--visible {
-    animation: show-toast 5.6s ease;
-    opacity: 0;
-  }
-}
-
-@keyframes show-toast {
-  0% {
-    opacity: 1;
+  &--active {
+    visibility: visible;
+    animation: fadein 0.5s, 3s 1s, fadeout 0.5s 4.6s;
   }
 
-  6% {
-    bottom: 40px;
-    opacity: 1;
+  @keyframes fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 20px;
+      opacity: 1;
+    }
   }
 
-  94% {
-    bottom: 40px;
-    opacity: 1;
-  }
-
-  100% {
-    bottom: -100px;
-    opacity: 0;
+  @keyframes fadeout {
+    from {
+      bottom: 20px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
   }
 }
