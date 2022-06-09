@@ -6,6 +6,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import externals from 'rollup-plugin-node-externals'
 import url from '@rollup/plugin-url'
+import copy from 'rollup-plugin-copy'
 
 const packageJson = require('./package.json')
 
@@ -34,18 +35,21 @@ export default [
         modules: true,
         use: [['sass', { data: '@import "src/styles/theme.scss";' }]]
       }),
-      url({
-        include: [
-          '**/*.eot',
-          '**/*.svg',
-          '**/*.ttf',
-          '**/*.woff',
-          '**/*.woff2'
-        ],
-        limit: Infinity,
-        fileName: '[dirname][name][extname]'
-      }),
-      terser()
+      terser(),
+      copy({
+        targets: [
+          {
+            src: [
+              'src/fonts/css/font/editor-icons.eot',
+              'src/fonts/css/font/editor-icons.svg',
+              'src/fonts/css/font/editor-icons.ttf',
+              'src/fonts/css/font/editor-icons.woff',
+              'src/fonts/css/font/editor-icons.woff2'
+            ],
+            dest: 'dist/fonts'
+          }
+        ]
+      })
     ]
   }
 ]
