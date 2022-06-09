@@ -25,6 +25,16 @@ export default [
       }
     ],
     plugins: [
+      url({
+        include: [
+          '**/*/*.eot',
+          '**/*/*.svg',
+          '**/*/*.ttf',
+          '**/*/*.woff',
+          '**/*/*.woff2'
+        ],
+        limit: Infinity
+      }),
       externals({ react: 'react', 'react-dom': 'react-dom' }),
       babel(),
       external(),
@@ -34,17 +44,7 @@ export default [
         modules: true,
         use: [['sass', { data: '@import "src/styles/theme.scss";' }]]
       }),
-      terser(),
-      url({
-        include: [
-          '**/*.eot',
-          '**/*.svg',
-          '**/*.ttf',
-          '**/*.woff',
-          '**/*.woff2'
-        ],
-        limit: Infinity
-      })
+      terser()
     ]
   }
 ]
