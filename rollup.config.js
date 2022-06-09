@@ -48,7 +48,7 @@ export default [
               'src/fonts/css/font/editor-icons.woff',
               'src/fonts/css/font/editor-icons.woff2'
             ],
-            dest: 'dist/cjs/fonts'
+            dest: 'dist/fonts'
           }
         ]
       })
