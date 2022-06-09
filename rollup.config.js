@@ -34,6 +34,17 @@ export default [
         modules: true,
         use: [['sass', { data: '@import "src/styles/theme.scss";' }]]
       }),
+      url({
+        include: [
+          '**/*.eot',
+          '**/*.svg',
+          '**/*.ttf',
+          '**/*.woff',
+          '**/*.woff2'
+        ],
+        limit: Infinity,
+        fileName: '[dirname][name][extname]'
+      }),
       terser()
     ]
   }
