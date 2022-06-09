@@ -6,13 +6,12 @@
 
 @font-face {
   font-family: 'react-editor-icons';
-  src: url('../fonts/css/font/editor-icons.eot');
-  src: url('../fonts/css/font/editor-icons.eot?#iefix')
-      format('embedded-opentype'),
-    url('../fonts/css/font/editor-icons.woff2') format('woff2'),
-    url('../fonts/css/font/editor-icons.woff') format('woff'),
-    url('../fonts/css/font/editor-icons.ttf') format('truetype'),
-    url('../fonts/css/font/editor-icons.svg') format('svg');
+  src: url('./fonts/editor-icons.eot');
+  src: url('./fonts/editor-icons.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/editor-icons.woff2') format('woff2'),
+    url('./fonts/editor-icons.woff') format('woff'),
+    url('./fonts/editor-icons.ttf') format('truetype'),
+    url('./fonts/editor-icons.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }

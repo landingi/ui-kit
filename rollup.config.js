@@ -6,7 +6,6 @@ import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import externals from 'rollup-plugin-node-externals'
 import copy from 'rollup-plugin-copy'
-import url from 'postcss-url'
 
 const packageJson = require('./package.json')
 
@@ -16,14 +15,8 @@ export default [
     output: [
       {
         file: packageJson.main,
-        format: 'cjs',
-        sourcemap: true
+        format: 'cjs'
       }
-      /* {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true
-      } */
     ],
     plugins: [
       externals({ react: 'react', 'react-dom': 'react-dom' }),
@@ -34,7 +27,6 @@ export default [
       postcss({
         modules: true,
         extract: true,
-        sourceMap: true,
         minimize: true,
         use: [
           [
@@ -44,12 +36,6 @@ export default [
             }
           ]
         ]
-        /* plugins: [
-          url({
-            url: 'inline', // enable inline assets using base64 encoding
-            fallback: 'copy' // fallback method to use if max size is exceeded
-          })
-        ] */
       }),
       terser(),
       copy({
