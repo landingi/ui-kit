@@ -1,13 +1,11 @@
 @font-face {
   font-family: 'react-editor-icons';
-  src: url('/src/fonts/css/font/editor-icons.eot?30795734');
-  src: url('/src/fonts/css/font/editor-icons.eot?30795734#iefix')
-      format('embedded-opentype'),
-    url('/src/fonts/css/font/editor-icons.woff2?30795734') format('woff2'),
-    url('/src/fonts/css/font/editor-icons.woff?30795734') format('woff'),
-    url('/src/fonts/css/font/editor-icons.ttf?30795734') format('truetype'),
-    url('/src/fonts/css/font/editor-icons.svg?30795734#editor-icons')
-      format('svg');
+  src: url('/src/fonts/css/font/editor-icons.eot');
+  src: url('/src/fonts/css/font/editor-icons.eot') format('embedded-opentype'),
+    url('/src/fonts/css/font/editor-icons.woff2') format('woff2'),
+    url('/src/fonts/css/font/editor-icons.woff') format('woff'),
+    url('/src/fonts/css/font/editor-icons.ttf') format('truetype'),
+    url('/src/fonts/css/font/editor-icons.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +24,7 @@
   font-family: 'react-editor-icons';
   font-style: normal;
   font-weight: normal;
+  speak: never;
 
   display: inline-block;
   text-decoration: inherit;

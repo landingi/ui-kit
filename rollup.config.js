@@ -31,7 +31,6 @@ export default [
       resolve(),
       commonjs(),
       postcss({
-        // extract: 'app-uikit.css',
         modules: true,
         use: [['sass', { data: '@import "src/styles/theme.scss";' }]]
       }),
