@@ -26,7 +26,7 @@ export default [
       commonjs(),
       postcss({
         modules: true,
-        extract: 'dist/app-uikit.css',
+        extract: 'app-uikit.css',
         minimize: true,
         use: [
           [
