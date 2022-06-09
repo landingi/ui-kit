@@ -4,8 +4,6 @@ import styles from './Icon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import css from './editor-icons.module.scss'
 
-console.log(css)
-
 /**
  * Icon - stateless presentational component
  * @param {object} props - props
