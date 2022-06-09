@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss'
 import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import externals from 'rollup-plugin-node-externals'
+import url from '@rollup/plugin-url'
 
 const packageJson = require('./package.json')
 
@@ -34,7 +35,18 @@ export default [
         modules: true,
         use: [['sass', { data: '@import "src/styles/theme.scss";' }]]
       }),
-      terser()
+      terser(),
+      url({
+        include: [
+          '**/*.eot',
+          '**/*.svg',
+          '**/*.ttf',
+          '**/*.woff',
+          '**/*.woff2'
+        ],
+        limit: Infinity,
+        fileName: '[dirname][name][extname]'
+      })
     ]
   }
 ]
