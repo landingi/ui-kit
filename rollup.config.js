@@ -32,7 +32,7 @@ export default [
           [
             'sass',
             {
-              data: '@import "src/styles/theme.scss";'
+              data: '@import "src/styles/theme.scss"; @import "src/styles/fonts-prod.scss";'
             }
           ]
         ]

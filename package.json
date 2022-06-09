@@ -19,10 +19,11 @@
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build",
-    "rollup": "rm -rf ./dist && rollup -c"
+    "build": "rm -rf ./dist && rollup -c"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.18.2",
+    "@emotion/core": "10.1.1",
     "@rollup/plugin-babel": "5.3.1",
     "@rollup/plugin-commonjs": "22.0.0",
     "@rollup/plugin-node-resolve": "13.3.0",
