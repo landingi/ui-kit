@@ -4,6 +4,8 @@ import Modal from '@components/Modal'
 import Backdrop from '@components/Backdrop'
 import Button from '@components/Button'
 
+const onClick = jest.fn()
+
 const props = {
   isActive: true,
   onClick: onClick,
@@ -13,8 +15,6 @@ const props = {
   }
 }
 const modalComponent = <Modal {...props} />
-
-const onClick = jest.fn()
 
 describe('<Modal /> global mount', () => {
   let wrapper
