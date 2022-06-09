@@ -42,11 +42,11 @@ export default [
         targets: [
           {
             src: [
-              'src/fonts/css/font/editor-icons.eot',
-              'src/fonts/css/font/editor-icons.svg',
-              'src/fonts/css/font/editor-icons.ttf',
-              'src/fonts/css/font/editor-icons.woff',
-              'src/fonts/css/font/editor-icons.woff2'
+              'src/fonts/editor-icons.eot',
+              'src/fonts/editor-icons.svg',
+              'src/fonts/editor-icons.ttf',
+              'src/fonts/editor-icons.woff',
+              'src/fonts/editor-icons.woff2'
             ],
             dest: 'dist/fonts'
           }
