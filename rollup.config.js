@@ -43,8 +43,7 @@ export default [
           '**/*.woff',
           '**/*.woff2'
         ],
-        limit: Infinity,
-        fileName: '[dirname][name][extname]'
+        limit: Infinity
       })
     ]
   }
