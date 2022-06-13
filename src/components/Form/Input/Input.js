@@ -82,7 +82,7 @@ const Input = ({
       />
 
       {i18n?.description && !error && (
-        <Paragraph size='12' color='color-8'>
+        <Paragraph size={12} color='color-8'>
           {i18n.description}
         </Paragraph>
       )}
