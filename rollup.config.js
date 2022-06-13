@@ -26,7 +26,7 @@ export default [
       commonjs(),
       postcss({
         modules: {
-          localIdentName: '[name]__[local]'
+          generateScopedName: '[name]__[local]'
         },
         extract: 'app-uikit.css',
         minimize: true,
