@@ -102,6 +102,10 @@
       font-size: 14px;
       opacity: 1;
     }
+
+    input:disabled ~ label {
+      color: $color-7;
+    }
   }
 
   &--focused {
