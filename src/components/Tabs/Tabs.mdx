@@ -1,0 +1,22 @@
+import { Playground, Props } from 'docz'
+import Tabs from '@components/Tabs/Tabs'
+import TabList from '@components/Tabs/TabList'
+import Tab from '@components/Tabs/Tab'
+import TabPanel from '@components/Tabs/TabPanel'
+import Spreader from '@components/Spreader'
+
+# Tabs
+
+<Props of={Tabs} />
+
+<Playground>
+  <Tabs initialValue='mainPage'>
+    <TabList>
+      <Tab name='mainPage'>Main page</Tab>
+      <Tab name='thankYouPage'>Thank you page</Tab>
+    </TabList>
+    <Spreader />
+    <TabPanel name='mainPage'>Main page panel</TabPanel>
+    <TabPanel name='thankYouPage'>Thank ypu page panel</TabPanel>
+  </Tabs>
+</Playground>

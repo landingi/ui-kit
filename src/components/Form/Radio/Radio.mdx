@@ -1,0 +1,69 @@
+import { useState } from 'react'
+import { Playground, Props } from 'docz'
+import Radio from '@components/Form/Radio'
+
+# Form Radio
+
+<Props of={Radio} />
+
+### Radio
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Radio
+        label='Test label'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: {},
+          touched: {}
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
+
+### Radio disabled
+
+<Playground>
+  <Radio
+    label='Test label'
+    field={{
+      name: 'test2',
+      value: '',
+      onBlur: () => {}
+    }}
+    form={{
+      errors: {},
+      touched: {}
+    }}
+    id='test2'
+    disabled
+  />
+</Playground>
+
+### Radio checked disabled
+
+<Playground>
+  <Radio
+    label='Test label'
+    field={{
+      name: 'login',
+      value: 'test3',
+      onBlur: () => {}
+    }}
+    form={{
+      errors: {},
+      touched: {}
+    }}
+    id='test3'
+    disabled
+  />
+</Playground>

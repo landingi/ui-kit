@@ -1,0 +1,139 @@
+import { useState } from 'react'
+import { Playground, Props } from 'docz'
+import Input from '@components/Form/Input'
+
+# FormInput
+
+<Props of={Input} />
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{ placeholder: 'Test placeholder', label: 'Test label' }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: {},
+          touched: {}
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
+
+## Input Form with error
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{ placeholder: 'Test placeholder', label: 'Test label' }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: { login: 'aaa' },
+          touched: { login: true }
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
+
+## Input Form with tooltip
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{ placeholder: 'Test placeholder', label: 'Test label' }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: { login: 'aaa' },
+          touched: { login: true }
+        }}
+        id='login'
+        tooltip='test'
+      />
+    )
+  }}
+</Playground>
+
+## Input Form with description
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{
+          placeholder: 'Test placeholder',
+          label: 'Test label',
+          description: 'test'
+        }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: {},
+          touched: {}
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>
+
+## Input Form with description and error
+
+<Playground>
+  {() => {
+    const [login, setLogin] = useState('')
+    return (
+      <Input
+        i18n={{
+          placeholder: 'Test placeholder',
+          label: 'Test label',
+          description: 'test'
+        }}
+        type='text'
+        field={{
+          name: 'login',
+          value: login,
+          onChange: ({ target: { value } }) => setLogin(value),
+          onBlur: () => {}
+        }}
+        form={{
+          errors: { login: 'aaa' },
+          touched: { login: true }
+        }}
+        id='login'
+      />
+    )
+  }}
+</Playground>

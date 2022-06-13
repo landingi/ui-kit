@@ -1,0 +1,22 @@
+import { Playground, Props } from 'docz'
+import FieldGroup from '@components/Form/FieldGroup'
+import Spacer from '@components/Spacer'
+
+# FieldGroup
+
+<Props of={FieldGroup} />
+
+<Playground>
+  <FieldGroup name='test' label='no error'>
+    children
+  </FieldGroup>
+  <Spacer />
+  <FieldGroup
+    name='test'
+    label='with error'
+    touched={{ test: true }}
+    errors={{ test: 'test-error' }}
+  >
+    children
+  </FieldGroup>
+</Playground>

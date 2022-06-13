@@ -1,33 +1,24 @@
 {
-  "presets": [["@babel/preset-env"], "@babel/preset-react"],
+  "presets": [
+    "@babel/preset-react",
+    ["@babel/preset-env", { "targets": { "node": "current" } }]
+  ],
   "plugins": [
     [
       "module-resolver",
       {
         "root": ["./src"],
         "alias": {
-          "@components": "./src/shared/components",
-          "@constants": "./src/shared/constants",
-          "@events": "./src/shared/events",
-          "@helpers": "./src/shared/helpers",
-          "@i18n": "./src/shared/i18n",
-          "@lib": "./src/shared/lib",
-          "@shapes": "./src/shared/shapes",
-          "@store": "./src/shared/store",
+          "@components": "./src/components",
+          "@constants": "./src/constants",
+          "@events": "./src/events",
+          "@helpers": "./src/helpers",
+          "@i18n": "./src/i18n",
+          "@lib": "./src/lib",
+          "@shapes": "./src/shapes",
+          "@store": "./src/store",
           "@jestutils": "./config/tests/jest/utils.js",
           "@jestmocks": "./config/tests/jest/setup"
-        }
-      }
-    ],
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-runtime",
-    [
-      "transform-imports",
-      {
-        "@fortawesome/free-solid-svg-icons": {
-          "transform": "@fortawesome/free-solid-svg-icons/${member}",
-          "skipDefaultConversion": true
         }
       }
     ]

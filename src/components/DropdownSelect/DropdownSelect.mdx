@@ -1,0 +1,50 @@
+import { Playground, Props } from 'docz'
+import DropdownSelect from '@components/DropdownSelect'
+
+<Props of={DropdownSelect} />
+
+## DropdownSelect
+
+<Playground>
+  <DropdownSelect
+    formikKey='test-dropdown'
+    value={'test1'}
+    options={[
+      { label: 'test1', value: 'test1' },
+      { label: 'test2', value: 'test2' }
+    ]}
+    label='Custom label for dropdown'
+    onChange={() => {}}
+  />
+</Playground>
+
+<Playground>
+  <DropdownSelect
+    value=''
+    options={[]}
+    handleOnSearchChange={() => {}}
+    isEmptyList
+    i18n={{
+      placeholder: 'Search',
+      emptySearchMessageTitle: 'Empty message',
+      emptySearchMessage: 'No found results'
+    }}
+    label='Custom label for empty dropdown'
+  />
+</Playground>
+
+## DropdownSelect with error
+
+<Playground>
+  <DropdownSelect
+    value=''
+    isEmptyList
+    options={[
+      { label: 'test1', value: 'test1' },
+      { label: 'test2', value: 'test2' }
+    ]}
+    formikKey='test'
+    errors={{ test: 'test-error' }}
+    touched={{ test: true }}
+  />
+</Playground>

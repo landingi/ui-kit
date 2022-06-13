@@ -1,0 +1,24 @@
+import { Playground, Props } from 'docz'
+import Filter from '@components/Filter'
+
+# Tooltip
+
+<Props of={Filter} />
+
+<Playground>
+  <div style={{ maxWidth: '150px' }}>
+    <Filter
+      values={[
+        {
+          value: 'name',
+          label: 'Nazwa'
+        },
+        {
+          value: 'date',
+          label: 'Data'
+        }
+      ]}
+      initialValue='name'
+    />
+  </div>
+</Playground>
