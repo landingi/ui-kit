@@ -18,7 +18,7 @@ to your dependencies in `package.json`.
 ### Requirements
 
 - [npm](https://www.npmjs.com/get-npm) >=7.0.0
-- [Node.js](https://nodejs.org/en/download/) 14.8.0
+- [Node.js](https://nodejs.org/en/download/) 18.0.0
 
 ### Quick Start
 
