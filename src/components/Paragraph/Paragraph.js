@@ -68,7 +68,7 @@ Paragraph.propTypes = {
   padding: PropTypes.oneOf(['small', 'medium', 'none']),
   weight: PropTypes.oneOf([300, 400, 700]),
   uppercase: PropTypes.bool,
-  line: PropTypes.oneOf([18, 20, 22, 24])
+  line: PropTypes.oneOf([18, 20, 22, 24, 28])
 }
 
 Paragraph.defaultProps = {

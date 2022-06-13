@@ -31,6 +31,7 @@ Spacer.propTypes = {
     'tiny',
     'small',
     'medium',
+    'regular',
     'large',
     'big',
     'huge'
