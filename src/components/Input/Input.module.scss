@@ -96,10 +96,15 @@
     input ~ label,
     input:focus ~ label,
     input:valid ~ label,
-    input:invalid ~ label {
+    input:invalid ~ label,
+    input:disabled ~ label {
       top: -14px;
       font-size: 14px;
       opacity: 1;
+    }
+
+    input:disabled ~ label {
+      color: $color-7;
     }
   }
 
@@ -161,6 +166,7 @@
       border-color: $color-8;
       border-style: dotted;
       color: $color-input-border;
+      -webkit-text-fill-color: $color-input-border;
       background-color: transparent;
     }
 
