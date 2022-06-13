@@ -31,7 +31,7 @@ const Radio = ({
   )
 
   return (
-    <div className={radioStyles}>
+    <label className={radioStyles}>
       {label && <label htmlFor={id}>{label}</label>}
 
       <input
@@ -47,7 +47,7 @@ const Radio = ({
       />
 
       <div className={styles.radio__overlay} />
-    </div>
+    </label>
   )
 }
 
