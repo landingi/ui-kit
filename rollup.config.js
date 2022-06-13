@@ -25,7 +25,9 @@ export default [
       resolve(),
       commonjs(),
       postcss({
-        modules: true,
+        modules: {
+          localIdentName: '[name]__[local]'
+        },
         extract: 'app-uikit.css',
         minimize: true,
         use: [

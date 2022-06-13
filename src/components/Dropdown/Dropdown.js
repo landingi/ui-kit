@@ -394,7 +394,7 @@ Dropdown.defaultProps = {
   tooltip: '',
   tooltipPlacement: '',
   linkComponent: null,
-  size: 'auto',
+  size: 'medium',
   arrowType: 'caret',
   alignment: 'center',
   dropdownPlacement: 'left',
