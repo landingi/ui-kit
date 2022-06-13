@@ -109,7 +109,7 @@ Message.propTypes = {
   multimediaPosition: PropTypes.oneOf(['before', 'after']),
   title: PropTypes.string,
   titleLevel: PropTypes.number,
-  url: PropTypes.string,
+  url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   withoutMargin: PropTypes.bool
 }
 
