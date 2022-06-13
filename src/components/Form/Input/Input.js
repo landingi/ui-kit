@@ -124,7 +124,7 @@ Input.propTypes = {
   i18n: PropTypes.shape({
     label: PropTypes.string,
     placeholder: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   }),
   variant: PropTypes.string,
   ['data-testid']: PropTypes.string
