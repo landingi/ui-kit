@@ -5,6 +5,24 @@ import StepNumber from '@components/ui/StepNumber'
 
 <Props of={StepNumber} />
 
+## Small
+
 <Playground>
   <StepNumber step={1} variant='completed' />
+  <StepNumber step={2} variant='current' />
+  <StepNumber step={3} variant='next' />
+</Playground>
+
+## Medium
+
+<Playground>
+  <StepNumber step={1} variant='completed' size='medium' />
+  <StepNumber step={2} variant='current' size='medium' />
+  <StepNumber step={3} variant='next' size='medium' />
+</Playground>
+
+## Position absolute
+
+<Playground>
+  <StepNumber step={1} variant='completed' absolute />
 </Playground>

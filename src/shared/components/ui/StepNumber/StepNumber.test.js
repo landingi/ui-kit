@@ -1,5 +1,6 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import StepNumber from '@components/ui/StepNumber'
 
 const props = {
@@ -9,36 +10,72 @@ const props = {
   absolute: true
 }
 
-const stepNumberComponent = <StepNumber {...props} />
-
 describe('<StepNumber /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(stepNumberComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<StepNumber {...props} />)
   })
 
   it('wrapper text expect "1"', () => {
-    expect(wrapper.text()).toEqual('1')
+    const { getByText } = render(<StepNumber {...props} />)
+
+    const content = getByText('1')
+
+    expect(content).toHaveTextContent('1')
   })
 
   it('Expect "step__number--complete" class', () => {
-    expect(wrapper.find('span').hasClass('step__number--completed')).toBe(true)
+    render(<StepNumber {...props} />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--completed')
+  })
+
+  it('Expect "step__number--current" class', () => {
+    render(<StepNumber {...props} variant='current' />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--current')
+  })
+
+  it('Expect "step__number--next" class', () => {
+    render(<StepNumber {...props} variant='next' />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--next')
   })
 
   it('Expect "step__number--medium" class', () => {
-    expect(wrapper.find('span').hasClass('step__number--medium')).toBe(true)
+    render(<StepNumber {...props} />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--medium')
+  })
+
+  it('Expect "step__number--small" class', () => {
+    render(<StepNumber {...props} size='small' />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--small')
   })
 
   it('Expect "step__number--absolute" class', () => {
-    expect(wrapper.find('span').hasClass('step__number--absolute')).toBe(true)
+    render(<StepNumber {...props} />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).toHaveClass('step__number--absolute')
+  })
+
+  it('Expect "step__number--absolute" class', () => {
+    render(<StepNumber {...props} absolute={false} />)
+
+    const stepNumber = screen.getByTestId('stepNumber')
+
+    expect(stepNumber).not.toHaveClass('step__number--absolute')
   })
 })
