@@ -86,7 +86,7 @@ const BlockSection = ({
   )
 }
 
-BlockSection.displayName = 'Block Section'
+BlockSection.displayName = 'BlockSection'
 
 BlockSection.propTypes = {
   button: PropTypes.string.isRequired,
@@ -96,7 +96,7 @@ BlockSection.propTypes = {
   onClick: PropTypes.func,
   reverse: PropTypes.bool,
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 BlockSection.defaultProps = {
