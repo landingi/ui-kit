@@ -104,12 +104,12 @@ Message.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   height: PropTypes.number,
   video: PropTypes.node,
-  message: PropTypes.string,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   messageLevel: PropTypes.number,
   multimediaPosition: PropTypes.oneOf(['before', 'after']),
   title: PropTypes.string,
   titleLevel: PropTypes.number,
-  url: PropTypes.string,
+  url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   withoutMargin: PropTypes.bool
 }
 

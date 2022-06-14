@@ -65,7 +65,7 @@ const Filter = ({
 Filter.displayName = 'SelectFilter'
 
 Filter.propTypes = {
-  initialValue: PropTypes.string,
+  initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   localStorageKey: PropTypes.string,
   setValue: PropTypes.func,
   values: PropTypes.arrayOf(

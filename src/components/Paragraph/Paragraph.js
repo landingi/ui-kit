@@ -60,14 +60,15 @@ Paragraph.propTypes = {
     'accent-6',
     'accent-7',
     'info',
-    'white'
+    'white',
+    'color-8'
   ]),
   size: PropTypes.oneOf([10, 12, 14, 16, 18]),
   align: PropTypes.oneOf(['left', 'center', 'right']),
   padding: PropTypes.oneOf(['small', 'medium', 'none']),
   weight: PropTypes.oneOf([300, 400, 700]),
   uppercase: PropTypes.bool,
-  line: PropTypes.oneOf([18, 20])
+  line: PropTypes.oneOf([18, 20, 22, 24, 28])
 }
 
 Paragraph.defaultProps = {

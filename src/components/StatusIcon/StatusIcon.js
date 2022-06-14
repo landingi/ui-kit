@@ -36,7 +36,7 @@ StatusIcon.displayName = 'StatusIcon'
 
 StatusIcon.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['tiny', 'medium']),
+  size: PropTypes.oneOf(['tiny', 'medium', 'big']),
   variant: PropTypes.oneOf(['active', 'inactive'])
 }
 
