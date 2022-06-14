@@ -37,7 +37,15 @@ ListItem.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   margin: PropTypes.bool,
   size: PropTypes.oneOf(['small', '']),
-  variant: PropTypes.oneOf(['menu', 'dropdown', 'table', 'list', 'block', ''])
+  variant: PropTypes.oneOf([
+    'menu',
+    'dropdown',
+    'table',
+    'list',
+    'block',
+    'inline',
+    ''
+  ])
 }
 
 ListItem.defaultProps = {
