@@ -19,7 +19,7 @@ const Spinner = ({ className }) => {
   )
 
   return (
-    <div className={elementClasses}>
+    <div className={elementClasses} data-testid='spinner'>
       <Icon icon='icon-spinner' spin />
     </div>
   )

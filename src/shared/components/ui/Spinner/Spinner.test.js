@@ -1,21 +1,18 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import Spinner from '@components/ui/Spinner'
 
-const spinnerComponent = <Spinner />
-
 describe('<Spinner/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(spinnerComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Spinner />)
+  })
+
+  it('has `spinner` class', () => {
+    render(<Spinner />)
+
+    const spinner = screen.getByTestId('spinner')
+
+    expect(spinner).toHaveClass('spinner')
   })
 })
