@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
-import StepNumber from '@components/ui/StepNumber'
+import StepNumber from '@components/StepNumber'
 
 const props = {
   step: 1,

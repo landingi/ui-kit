@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
-import Spinner from '@components/ui/Spinner'
+import Spinner from '@components/Spinner'
 
 describe('<Spinner/> mount', () => {
   it('is mounted', () => {
