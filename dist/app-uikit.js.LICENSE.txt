@@ -5,9 +5,9 @@
 */
 
 /*!
- * weakmap-polyfill v2.0.1 - ECMAScript6 WeakMap polyfill
+ * weakmap-polyfill v2.0.4 - ECMAScript6 WeakMap polyfill
  * https://github.com/polygonplanet/weakmap-polyfill
- * Copyright (c) 2015-2020 Polygon Planet <polygon.planet.aqua@gmail.com>
+ * Copyright (c) 2015-2021 polygonplanet <polygon.planet.aqua@gmail.com>
  * @license MIT
  */
 
@@ -43,7 +43,7 @@ and limitations under the License.
 
 /*! @license DOMPurify 2.3.8 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.3.8/LICENSE */
 
-/*! @vimeo/player v2.16.4 | (c) 2022 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @vimeo/player v2.17.0 | (c) 2022 Vimeo | MIT License | https://github.com/vimeo/player.js */
 
 /*! Native Promise Only
     v0.8.1 (c) Kyle Simpson
