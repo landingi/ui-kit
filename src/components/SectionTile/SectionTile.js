@@ -40,7 +40,7 @@ const SectionTile = ({
 SectionTile.displayName = 'SectionTile'
 
 SectionTile.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   thumbnailUrl: PropTypes.string,
   onClick: PropTypes.func,
   onDoubleClick: PropTypes.func,
@@ -48,6 +48,7 @@ SectionTile.propTypes = {
 }
 
 SectionTile.defaultProps = {
+  children: null,
   thumbnailUrl: '',
   isActive: false,
   onClick: () => null,
