@@ -4,28 +4,29 @@ import styles from './ProgressBar.module.scss'
 import ColorNumber from '@components/ColorNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO ProgressBar css, props naming ex. withoutAnimation, limitExceededInfo, showColorNumber
 /**
  * Progress Bar - stateless presentational component
  * @param {object} props - props
- * @param {number} props.size
- * @param {number} props.limit - limit to display
- * @param {string} props.variant - variant
+ * @param {string} props.size - bar size
+ * @param {string} props.variant - color variant
  * @param {string} props.quantity - quantity to display
- * @param {bool} props.limitExceededInfo - TODO add translation
- * @param {bool} props.showColorNumber - should show limit as an ColoroNumber, deafult: false
- * @param {string} props.border
- * @param {number} props.withoutAnimation
+ * @param {number} props.limit - limit to display
+ * @param {string} props.border - with border
+ * @param {object} props.i18n - props with translated string
+ * @param {bool} props.showValue - show value (quantity/limit)
+ * @param {number} props.valueSize - value font size
+ * @param {number} props.withoutAnimation - without animation
  * @return {object} An object of children element
  */
 const ProgressBar = ({
   size,
-  limit,
   variant,
+  limit,
   quantity,
-  limitExceededInfo,
-  showColorNumber,
   border,
+  i18n,
+  showValue,
+  valueSize,
   withoutAnimation
 }) => {
   const containerStyles = useStyles({
@@ -35,6 +36,7 @@ const ProgressBar = ({
 
   const backgroundStyles = useStyles({
     [styles['bar']]: true,
+    [styles[`bar__${size}`]]: true,
     [styles['bar__background']]: true,
     [styles[`bar--${variant}`]]: true,
     [styles[`bar__border--${border}`]]: border
@@ -42,6 +44,7 @@ const ProgressBar = ({
 
   const fulfillmentStyles = useStyles({
     [styles['bar']]: true,
+    [styles[`bar__${size}`]]: true,
     [styles['bar__fulfillment']]: true,
     [styles[`bar--${variant}`]]: true,
     [styles['bar__fulfillment--bordered']]: border,
@@ -55,18 +58,21 @@ const ProgressBar = ({
         <span
           data-testid='fulfillment'
           className={fulfillmentStyles}
-          style={{ width: `${(quantity / limit) * 100}%` }}
+          style={{
+            width: `${quantity > limit ? 100 : (quantity / limit) * 100}%`
+          }}
         />
       </div>
-      {limitExceededInfo && (
-        <span className={styles['limit-exceeded__info']}>
-          limitExceededInfo
+
+      {i18n?.limitAlert && (
+        <span data-testid='limit-alert' className={styles['limit-alert']}>
+          {i18n.limitAlert}
         </span>
       )}
 
-      {showColorNumber && (
+      {showValue && (
         <span data-testid='color-number' className={styles['max-result']}>
-          <ColorNumber variant={variant} size={size}>
+          <ColorNumber variant={variant} size={valueSize}>
             {quantity}
           </ColorNumber>
           /{limit}
@@ -79,24 +85,27 @@ const ProgressBar = ({
 ProgressBar.displayName = 'ProgressBar'
 
 ProgressBar.propTypes = {
+  size: PropTypes.oneOf(['small', 'medium']),
   variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'brand'])
     .isRequired,
   quantity: PropTypes.number.isRequired,
   limit: PropTypes.number,
-  size: PropTypes.number,
   border: PropTypes.oneOf(['white', 'grey']),
-  //TODO: add translation or put translation in prop
-  limitExceededInfo: PropTypes.bool,
-  showColorNumber: PropTypes.bool,
+  i18n: PropTypes.shape({
+    limitAlert: PropTypes.string
+  }),
+  showValue: PropTypes.bool,
+  valueSize: PropTypes.number,
   withoutAnimation: PropTypes.bool
 }
 
 ProgressBar.defaultProps = {
+  size: 'medium',
   limit: 100,
-  size: 32,
-  limitExceededInfo: false,
-  showColorNumber: false,
   border: null,
+  i18n: {},
+  showValue: false,
+  valueSize: 32,
   withoutAnimation: false
 }
 
