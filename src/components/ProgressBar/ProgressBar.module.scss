@@ -3,6 +3,14 @@
 	position: absolute;
   border-radius: 250px;
 
+  &__small {
+    height: 6px;
+  }
+
+  &__medium {
+    height: 12px;
+  }
+
   &__background {
     width: 100%;
     opacity: 0.2;
@@ -76,7 +84,7 @@
   font-size: 14px;
 }
 
-.limit-exceeded__info {
+.limit-info {
   font-size: 12px;
   display: flex;
   justify-content: flex-end;
