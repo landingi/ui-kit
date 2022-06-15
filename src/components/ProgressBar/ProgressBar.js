@@ -65,7 +65,7 @@ const ProgressBar = ({
       </div>
 
       {i18n?.limitAlert && (
-        <span data-testid='color-number' className={styles['limit-alert']}>
+        <span data-testid='limit-alert' className={styles['limit-alert']}>
           {i18n.limitAlert}
         </span>
       )}
