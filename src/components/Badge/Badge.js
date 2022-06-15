@@ -34,7 +34,7 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
 
   return (
     <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
-      <span ref={badgeRef} className={badgeStyles}>
+      <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
         <span className={tooltipStyles}>{children}</span>
       </span>
     </Tooltip>
