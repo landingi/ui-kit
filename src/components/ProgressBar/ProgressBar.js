@@ -31,7 +31,6 @@ const ProgressBar = ({
 }) => {
   const containerStyles = useStyles({
     [styles['container']]: true,
-    [styles[`bar__${size}`]]: true,
     [styles['container--bordered']]: border
   })
 
