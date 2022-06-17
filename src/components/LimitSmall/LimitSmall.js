@@ -42,7 +42,7 @@ LimitSmall.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   limit: PropTypes.number.isRequired,
   limitText: PropTypes.string.isRequired,
-  padding: PropTypes.oneOf(['none', 'mini', 'small', 'medium']),
+  padding: PropTypes.oneOf(['none', 'tiny', 'small', 'medium']),
   quantity: PropTypes.number.isRequired
 }
 
