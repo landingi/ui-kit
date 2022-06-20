@@ -1,70 +1,99 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import BoxBackground from '@components/BoxBackground'
+import '@testing-library/jest-dom'
 
-const props = {
+const initialProps = {
   children: 'children',
   variant: 'info'
 }
 
-const component = <BoxBackground {...props} />
-
 describe('<BoxBackground /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  const { children } = initialProps
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByText } = render(<BoxBackground {...initialProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toBeVisible()
   })
 
-  it('has `boxBackground` class', () => {
-    expect(wrapper.children().hasClass('boxBackground')).toBe(true)
+  it(`should contains boxBackground class `, () => {
+    const { getByText } = render(<BoxBackground {...initialProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass('boxBackground')
   })
 
   it('has proper class name on success variant', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...initialProps,
       variant: 'success'
-    })
+    }
 
-    expect(wrapper.children().hasClass('boxBackground--success')).toBe(true)
+    const { variant } = newProps
+
+    const { getByText } = render(<BoxBackground {...newProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
   })
 
   it('has proper class name on warning variant', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...initialProps,
       variant: 'warning'
-    })
+    }
 
-    expect(wrapper.children().hasClass('boxBackground--warning')).toBe(true)
+    const { variant } = newProps
+
+    const { getByText } = render(<BoxBackground {...newProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
   })
 
   it('has proper class name on alert variant', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...initialProps,
       variant: 'alert'
-    })
+    }
 
-    expect(wrapper.children().hasClass('boxBackground--alert')).toBe(true)
+    const { variant } = newProps
+
+    const { getByText } = render(<BoxBackground {...newProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
   })
 
   it('has proper class name on progress variant', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...initialProps,
       variant: 'progress'
-    })
+    }
 
-    expect(wrapper.children().hasClass('boxBackground--progress')).toBe(true)
+    const { variant } = newProps
+
+    const { getByText } = render(<BoxBackground {...newProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
   })
 
   it('has proper class name on info variant', () => {
-    wrapper.setProps({
-      variant: 'info'
-    })
+    const { variant } = initialProps
 
-    expect(wrapper.children().hasClass('boxBackground--info')).toBe(true)
+    const { getByText } = render(<BoxBackground {...initialProps} />)
+
+    const boxBackgroundNode = getByText(children)
+
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
   })
 })
