@@ -4,7 +4,6 @@ import Tooltip from '@components/Tooltip'
 import styles from './Badge.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-// TODO Badge tests
 /**
  * Badge - stateless presentational component
  * @param {object} props - props
@@ -34,7 +33,7 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
 
   return (
     <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
-      <span ref={badgeRef} className={badgeStyles}>
+      <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
         <span className={tooltipStyles}>{children}</span>
       </span>
     </Tooltip>
