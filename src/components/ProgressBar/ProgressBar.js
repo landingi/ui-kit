@@ -31,6 +31,7 @@ const ProgressBar = ({
 }) => {
   const containerStyles = useStyles({
     [styles['container']]: true,
+    [styles[`container__${size}`]]: true,
     [styles['container--bordered']]: border
   })
 
@@ -38,7 +39,7 @@ const ProgressBar = ({
     [styles['bar']]: true,
     [styles[`bar__${size}`]]: true,
     [styles['bar__background']]: true,
-    [styles[`bar--${variant}`]]: true,
+    [styles[`bar__variant--${variant}`]]: true,
     [styles[`bar__border--${border}`]]: border
   })
 
@@ -46,7 +47,7 @@ const ProgressBar = ({
     [styles['bar']]: true,
     [styles[`bar__${size}`]]: true,
     [styles['bar__fulfillment']]: true,
-    [styles[`bar--${variant}`]]: true,
+    [styles[`bar__variant--${variant}`]]: true,
     [styles['bar__fulfillment--bordered']]: border,
     [styles['bar__fulfillment--no-animation']]: withoutAnimation
   })

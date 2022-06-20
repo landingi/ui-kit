@@ -43,11 +43,11 @@ describe('<ProgressBar /> mount', () => {
 
     const background = screen.getByTestId('background')
 
-    expect(background).toHaveClass('bar--success')
+    expect(background).toHaveClass('bar__variant--success')
 
     const fulfillment = screen.getByTestId('fulfillment')
 
-    expect(fulfillment).toHaveClass('bar--success')
+    expect(fulfillment).toHaveClass('bar__variant--success')
   })
 
   it('has warning variant', () => {
@@ -55,11 +55,11 @@ describe('<ProgressBar /> mount', () => {
 
     const background = screen.getByTestId('background')
 
-    expect(background).toHaveClass('bar--warning')
+    expect(background).toHaveClass('bar__variant--warning')
 
     const fulfillment = screen.getByTestId('fulfillment')
 
-    expect(fulfillment).toHaveClass('bar--warning')
+    expect(fulfillment).toHaveClass('bar__variant--warning')
   })
 
   it('has alert variant', () => {
@@ -67,11 +67,11 @@ describe('<ProgressBar /> mount', () => {
 
     const background = screen.getByTestId('background')
 
-    expect(background).toHaveClass('bar--alert')
+    expect(background).toHaveClass('bar__variant--alert')
 
     const fulfillment = screen.getByTestId('fulfillment')
 
-    expect(fulfillment).toHaveClass('bar--alert')
+    expect(fulfillment).toHaveClass('bar__variant--alert')
   })
 
   it('has progress variant', () => {
@@ -79,11 +79,11 @@ describe('<ProgressBar /> mount', () => {
 
     const background = screen.getByTestId('background')
 
-    expect(background).toHaveClass('bar--progress')
+    expect(background).toHaveClass('bar__variant--progress')
 
     const fulfillment = screen.getByTestId('fulfillment')
 
-    expect(fulfillment).toHaveClass('bar--progress')
+    expect(fulfillment).toHaveClass('bar__variant--progress')
   })
 
   it('has brand variant', () => {
@@ -91,11 +91,11 @@ describe('<ProgressBar /> mount', () => {
 
     const background = screen.getByTestId('background')
 
-    expect(background).toHaveClass('bar--brand')
+    expect(background).toHaveClass('bar__variant--brand')
 
     const fulfillment = screen.getByTestId('fulfillment')
 
-    expect(fulfillment).toHaveClass('bar--brand')
+    expect(fulfillment).toHaveClass('bar__variant--brand')
   })
 
   it('has no value show if showValue prop is false', () => {
