@@ -101,11 +101,11 @@ Input.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func
-  }).isRequired,
+  }),
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
     touched: PropTypes.instanceOf(Object)
-  }).isRequired,
+  }),
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   placeholder: PropTypes.string,
@@ -149,6 +149,8 @@ Input.defaultProps = {
     description: null
   },
   variant: '',
+  form: { errors: {}, touched: {} },
+  field: {},
   ['data-testid']: 'input-component'
 }
 

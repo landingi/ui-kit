@@ -1,31 +1,18 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import TextOverflow from '@components/TextOverflow'
 
-const props = {
-  children: 'placeholder'
-}
-
-const overflowComponent = (
-  <TextOverflow {...props}>{props.children}</TextOverflow>
-)
-
 describe('<TextOverflow/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(overflowComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<TextOverflow />)
   })
 
   it('has `overflow` class', () => {
-    expect(wrapper.hasClass('overflow')).toBe(true)
+    render(<TextOverflow />)
+
+    const overflow = screen.getByTestId('overflow')
+
+    expect(overflow).toHaveClass('overflow')
   })
 })
