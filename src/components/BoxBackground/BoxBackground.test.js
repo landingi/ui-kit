@@ -11,6 +11,14 @@ const initialProps = {
 describe('<BoxBackground /> mount', () => {
   const { children } = initialProps
 
+  const variant = {
+    success: 'success',
+    warning: 'warning',
+    alert: 'alert',
+    progress: 'progress',
+    info: 'info'
+  }
+
   it('is mounted', () => {
     const { getByText } = render(<BoxBackground {...initialProps} />)
 
@@ -33,13 +41,13 @@ describe('<BoxBackground /> mount', () => {
       variant: 'success'
     }
 
-    const { variant } = newProps
+    const { success } = variant
 
     const { getByText } = render(<BoxBackground {...newProps} />)
 
     const boxBackgroundNode = getByText(children)
 
-    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${success}`)
   })
 
   it('has proper class name on warning variant', () => {
@@ -48,13 +56,13 @@ describe('<BoxBackground /> mount', () => {
       variant: 'warning'
     }
 
-    const { variant } = newProps
+    const { warning } = variant
 
     const { getByText } = render(<BoxBackground {...newProps} />)
 
     const boxBackgroundNode = getByText(children)
 
-    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${warning}`)
   })
 
   it('has proper class name on alert variant', () => {
@@ -63,13 +71,13 @@ describe('<BoxBackground /> mount', () => {
       variant: 'alert'
     }
 
-    const { variant } = newProps
+    const { alert } = variant
 
     const { getByText } = render(<BoxBackground {...newProps} />)
 
     const boxBackgroundNode = getByText(children)
 
-    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${alert}`)
   })
 
   it('has proper class name on progress variant', () => {
@@ -78,22 +86,22 @@ describe('<BoxBackground /> mount', () => {
       variant: 'progress'
     }
 
-    const { variant } = newProps
+    const { progress } = variant
 
     const { getByText } = render(<BoxBackground {...newProps} />)
 
     const boxBackgroundNode = getByText(children)
 
-    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${progress}`)
   })
 
   it('has proper class name on info variant', () => {
-    const { variant } = initialProps
+    const { info } = variant
 
     const { getByText } = render(<BoxBackground {...initialProps} />)
 
     const boxBackgroundNode = getByText(children)
 
-    expect(boxBackgroundNode).toHaveClass(`boxBackground--${variant}`)
+    expect(boxBackgroundNode).toHaveClass(`boxBackground--${info}`)
   })
 })
