@@ -23,21 +23,14 @@ const Legend = ({ className, data, alignment }) => {
     className
   )
 
-  const elementClasses = variant =>
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useStyles({
-      [styles['legend']]: true,
-      [styles[`legend--${variant}`]]: variant
-    })
+  const elementClasses = useStyles({
+    [styles['legend']]: true
+  })
 
   return (
     <div data-testid='legend-container' className={wrapperClasses}>
       {data.map(({ variant, range }) => (
-        <span
-          data-testid='legend'
-          key={uuid()}
-          className={elementClasses(variant)}
-        >
+        <span data-testid='legend' key={uuid()} className={elementClasses}>
           <ColorLine variant={variant} alignment='horizontal' />
           {range}
         </span>
