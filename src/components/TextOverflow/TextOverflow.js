@@ -1,36 +1,40 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './TextOverflow.scss'
+import styles from './TextOverflow.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-/**
- * Exports css classes from SCSS file
- * @return {object} An object of styles
- */
-const cssClass = styles(scss)
-
-//TODO TextOverflow css, test
 /**
  * TextOverflow - stateless presentational component
  * @param {object} props - props
+ * @param {string|array} props.className - list of class names
  * @param {object} props.children - childrens
- * @param {string|array} props.className - list of class names, default: overflow
  * @return {object} An object of children element
  */
-const TextOverflow = ({ children, className }) => (
-  <div className={cssClass(className)}>{children}</div>
-)
+const TextOverflow = ({ children, className }) => {
+  const textOverflowStyles = useStyles(
+    {
+      [styles.overflow]: true
+    },
+    className
+  )
+
+  return (
+    <div className={textOverflowStyles} data-testid='overflow'>
+      {children}
+    </div>
+  )
+}
 
 TextOverflow.displayName = 'TextOverflow'
 
 TextOverflow.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  children: PropTypes.node
 }
 
 TextOverflow.defaultProps = {
-  children: null,
-  className: 'overflow'
+  className: '',
+  children: null
 }
 
 export default TextOverflow
