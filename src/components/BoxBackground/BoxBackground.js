@@ -3,7 +3,6 @@ import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './BoxBackground.module.scss'
 
-// TODO BoxBackground tests
 /**
  * Box Background - stateless presentational component
  * @param {object} props - props
@@ -21,7 +20,11 @@ const BoxBackground = ({ className, children, variant }) => {
     className
   )
 
-  return <span className={elementClasses}>{children}</span>
+  return (
+    <span data-testid='box-background' className={elementClasses}>
+      {children}
+    </span>
+  )
 }
 
 BoxBackground.displayName = 'BoxBackground'
