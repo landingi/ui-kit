@@ -4,7 +4,7 @@ import Badge from '@components/Badge'
 import '@testing-library/jest-dom'
 
 const initialProps = {
-  children: 'Badge'
+  children: 'Mocked badge'
 }
 
 describe('<Badge/> mount', () => {
@@ -91,7 +91,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered accent-2 badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'accent-1'
+      type: 'accent-2'
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -112,45 +112,39 @@ describe('<Badge/> mount', () => {
     expect(badgeNode).toHaveClass('badge--indicator')
   })
 
-  // it('when the tooltip prop has not value the children span should not have badge-tooltip class', () => {
-  //   const { getByTestId } = render(<Badge {...newProps} />)
+  it('when the tooltip prop has not value the children span should not have badge-tooltip class', () => {
+    const { getByText } = render(<Badge {...initialProps} />)
 
-  //   const badgeNode = getByTestId('badge')
+    const childSpanNode = getByText('Mocked badge')
 
-  //   expect(badgeNode).toHaveClass('badge--indicator')
-  // })
+    expect(childSpanNode).not.toHaveClass('badge__tooltip')
+  })
 
-  // it('when the tooltip prop has value the children span should have badge-tooltip class', () => {
-  //   wrapper.setProps({
-  //     tooltip: 'tooltip'
-  //   })
+  it('when the tooltip prop has value the children span should have badge-tooltip class', () => {
+    const newProps = {
+      ...initialProps,
+      tooltip: 'Mocked tooltip'
+    }
+    const { getByText, debug } = render(<Badge {...newProps} />)
 
-  //   expect(wrapper.find('span').at(2).hasClass('badge__tooltip')).toBe(true)
-  // })
+    debug()
 
-  // it('Tooltip is disabled when prop content is empty', () => {
-  //   wrapper.setProps({
-  //     content: null
-  //   })
+    const childSpanNode = getByText('Mocked badge')
 
-  //   expect(wrapper.find('Badge').prop('content')).toBe(null)
-  //   expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-  // })
+    expect(childSpanNode).toHaveClass('badge__tooltip')
+  })
 
-  // it('Tooltip is disabled when width < 105', () => {
-  //   wrapper.setProps({
-  //     width: 104
-  //   })
+  it('Tooltip badge should displays proper value', () => {
+    const newProps = {
+      ...initialProps,
+      tooltip: 'Random text to display'
+    }
+    const { tooltip } = newProps
 
-  //   expect(wrapper.find('Badge').prop('content')).toBe(undefined)
-  //   expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-  // })
+    const { getByText } = render(<Badge {...newProps} />)
 
-  // it('Tooltip is visible', () => {
-  //   wrapper.setProps({
-  //     content: 'some content'
-  //   })
+    const tooltipNode = getByText(tooltip)
 
-  //   expect(wrapper.find('Badge').prop('content')).toBe('some content')
-  // })
+    expect(tooltipNode).toHaveTextContent(tooltip)
+  })
 })
