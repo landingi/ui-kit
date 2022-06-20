@@ -56,14 +56,6 @@ describe('<Spacer/> mount', () => {
     expect(spacer).toHaveClass('spacer--large')
   })
 
-  it('has `spacer--x-large` class when space prop equals x-large', () => {
-    render(<Spacer space='x-large' />)
-
-    const spacer = screen.getByTestId('spacer')
-
-    expect(spacer).toHaveClass('spacer--x-large')
-  })
-
   it('has `spacer--huge` class when space prop equals huge', () => {
     render(<Spacer space='huge' />)
 

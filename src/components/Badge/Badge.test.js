@@ -125,9 +125,7 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       tooltip: 'Mocked tooltip'
     }
-    const { getByText, debug } = render(<Badge {...newProps} />)
-
-    debug()
+    const { getByText } = render(<Badge {...newProps} />)
 
     const childSpanNode = getByText('Mocked badge')
 
