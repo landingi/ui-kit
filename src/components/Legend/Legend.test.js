@@ -42,21 +42,27 @@ describe('<Legend/> mount', () => {
     expect(legendContainerNode).toHaveClass('container--horizontal')
   })
 
-  it('has one success variant', () => {
-    expect(
-      wrapper.find('span.legend--success').hasClass('legend--success')
-    ).toBe(true)
+  it('all ranges should be properly rendered', () => {
+    const { data } = props
+
+    const { getByText } = render(<Legend {...props} />)
+
+    data.forEach(({ range }) => {
+      const rangeNode = getByText(range)
+
+      expect(rangeNode).toBeVisible()
+    })
   })
 
-  it('has one warning variant', () => {
-    expect(
-      wrapper.find('span.legend--warning').hasClass('legend--warning')
-    ).toBe(true)
-  })
+  it('all variants should be properly rendered', () => {
+    const { getAllByTestId } = render(<Legend {...props} />)
 
-  it('has one alert variant', () => {
-    expect(wrapper.find('span.legend--alert').hasClass('legend--alert')).toBe(
-      true
-    )
+    const allColorLineNodes = getAllByTestId('colorline')
+
+    expect(allColorLineNodes[0]).toHaveClass(`color-line--success`)
+
+    expect(allColorLineNodes[1]).toHaveClass(`color-line--warning`)
+
+    expect(allColorLineNodes[2]).toHaveClass(`color-line--alert`)
   })
 })
