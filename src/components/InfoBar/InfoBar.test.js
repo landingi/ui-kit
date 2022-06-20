@@ -1,56 +1,75 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import InfoBar from '@components/InfoBar'
+import '@testing-library/jest-dom'
 
 const props = {
   children: 'Info Bar'
 }
 
-const infoBarComponent = <InfoBar {...props}>{props.children}</InfoBar>
-
 describe('<InfoBar /> mount', () => {
-  let wrapper
+  const { children } = props
 
-  beforeEach(() => {
-    wrapper = mount(infoBarComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  const wrapperTestId = 'infobar-wrapper'
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByText } = render(<InfoBar {...props} />)
+
+    const infoBarNode = getByText(children)
+
+    expect(infoBarNode).toBeVisible()
   })
 
   it('has `info-bar` class', () => {
-    expect(wrapper.find('div.info-bar').hasClass('info-bar')).toBe(true)
+    const { getByTestId } = render(<InfoBar {...props} />)
+
+    const infoBarWrapperNode = getByTestId(wrapperTestId)
+
+    expect(infoBarWrapperNode).toHaveClass('info-bar')
   })
 
-  it('is alert', () => {
-    wrapper.setProps({
+  it('should be rendered alert type of infobar', () => {
+    const newProps = {
+      ...props,
       type: 'alert'
-    })
-    expect(
-      wrapper.find('div.info-bar--alert').hasClass('info-bar--alert')
-    ).toBe(true)
+    }
+
+    const { type } = newProps
+
+    const { getByTestId } = render(<InfoBar {...newProps} />)
+
+    const infoBarWrapperNode = getByTestId(wrapperTestId)
+
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
   })
 
-  it('is info', () => {
-    wrapper.setProps({
+  it('should be rendered info type of infobar', () => {
+    const newProps = {
+      ...props,
       type: 'info'
-    })
-    expect(wrapper.find('div.info-bar--info').hasClass('info-bar--info')).toBe(
-      true
-    )
+    }
+
+    const { type } = newProps
+
+    const { getByTestId } = render(<InfoBar {...newProps} />)
+
+    const infoBarWrapperNode = getByTestId(wrapperTestId)
+
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
   })
 
-  it('is warning', () => {
-    wrapper.setProps({
+  it('should be rendered warning type of infobar', () => {
+    const newProps = {
+      ...props,
       type: 'warning'
-    })
-    expect(
-      wrapper.find('div.info-bar--warning').hasClass('info-bar--warning')
-    ).toBe(true)
+    }
+
+    const { type } = newProps
+
+    const { getByTestId } = render(<InfoBar {...newProps} />)
+
+    const infoBarWrapperNode = getByTestId(wrapperTestId)
+
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
   })
 })
