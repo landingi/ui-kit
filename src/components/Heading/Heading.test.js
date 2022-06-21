@@ -89,7 +89,7 @@ describe('<Heading/> mount', () => {
     expect(heading).toHaveClass('h6')
   })
 
-  it('when prop `bold` is `false`, has `heading--bold` class', () => {
+  it('when prop `bold` is `false`, has not `heading--bold` class', () => {
     render(<Heading {...props}>{props.children}</Heading>)
 
     const heading = screen.getByTestId('heading')
