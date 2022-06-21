@@ -20,6 +20,8 @@ describe('<AccordionSection /> mount', () => {
     const header = getByTestId('accordion-header')
 
     header.click()
+
+    expect(props.handleOnClick).toHaveBeenCalled()
   })
 
   it('has label', () => {
