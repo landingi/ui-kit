@@ -1,132 +1,148 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import Badge from '@components/Badge'
+import '@testing-library/jest-dom'
 
-const props = {
-  children: 'Badge'
+const initialProps = {
+  children: 'Mocked badge'
 }
 
-const badgeComponent = <Badge {...props} />
-
 describe('<Badge/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(badgeComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByTestId } = render(<Badge {...initialProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toBeVisible()
   })
 
-  it('is alert', () => {
-    wrapper.setProps({
+  it('should be rendered alert badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'alert'
-    })
-    expect(wrapper.find('span.badge--alert').hasClass('badge--alert')).toBe(
-      true
-    )
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--alert')
   })
 
-  it('is info', () => {
-    wrapper.setProps({
+  it('should be rendered info badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'info'
-    })
-    expect(wrapper.find('span.badge--info').hasClass('badge--info')).toBe(true)
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--info')
   })
 
-  it('is success', () => {
-    wrapper.setProps({
+  it('should be rendered success badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'success'
-    })
-    expect(wrapper.find('span.badge--success').hasClass('badge--success')).toBe(
-      true
-    )
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--success')
   })
 
-  it('is pending', () => {
-    wrapper.setProps({
+  it('should be rendered pending badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'pending'
-    })
-    expect(wrapper.find('span.badge--pending').hasClass('badge--pending')).toBe(
-      true
-    )
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--pending')
   })
 
-  it('is warning', () => {
-    wrapper.setProps({
+  it('should be rendered warning badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'warning'
-    })
-    expect(wrapper.find('span.badge--warning').hasClass('badge--warning')).toBe(
-      true
-    )
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--warning')
   })
 
-  it('is accent-1', () => {
-    wrapper.setProps({
+  it('should be rendered accent-1 badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'accent-1'
-    })
-    expect(
-      wrapper.find('span.badge--accent-1').hasClass('badge--accent-1')
-    ).toBe(true)
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--accent-1')
   })
 
-  it('is accent-2', () => {
-    wrapper.setProps({
+  it('should be rendered accent-2 badge', () => {
+    const newProps = {
+      ...initialProps,
       type: 'accent-2'
-    })
-    expect(
-      wrapper.find('span.badge--accent-2').hasClass('badge--accent-2')
-    ).toBe(true)
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
+
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--accent-2')
   })
 
   it('when is indicator should have class badge--indicator', () => {
-    wrapper.setProps({
+    const newProps = {
+      ...initialProps,
       isIndicator: true
-    })
+    }
+    const { getByTestId } = render(<Badge {...newProps} />)
 
-    expect(wrapper.find('span.badge').hasClass('badge--indicator')).toBe(true)
+    const badgeNode = getByTestId('badge')
+
+    expect(badgeNode).toHaveClass('badge--indicator')
   })
 
   it('when the tooltip prop has not value the children span should not have badge-tooltip class', () => {
-    expect(wrapper.find('span').at(2).hasClass('badge-tooltip')).toBe(false)
+    const { getByText } = render(<Badge {...initialProps} />)
+
+    const childSpanNode = getByText('Mocked badge')
+
+    expect(childSpanNode).not.toHaveClass('badge__tooltip')
   })
 
   it('when the tooltip prop has value the children span should have badge-tooltip class', () => {
-    wrapper.setProps({
-      tooltip: 'tooltip'
-    })
+    const newProps = {
+      ...initialProps,
+      tooltip: 'Mocked tooltip'
+    }
+    const { getByText } = render(<Badge {...newProps} />)
 
-    expect(wrapper.find('span').at(2).hasClass('badge__tooltip')).toBe(true)
+    const childSpanNode = getByText('Mocked badge')
+
+    expect(childSpanNode).toHaveClass('badge__tooltip')
   })
 
-  it('Tooltip is disabled when prop content is empty', () => {
-    wrapper.setProps({
-      content: null
-    })
+  it('Tooltip badge should displays proper value', () => {
+    const newProps = {
+      ...initialProps,
+      tooltip: 'Random text to display'
+    }
+    const { tooltip } = newProps
 
-    expect(wrapper.find('Badge').prop('content')).toBe(null)
-    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-  })
+    const { getByText } = render(<Badge {...newProps} />)
 
-  it('Tooltip is disabled when width < 105', () => {
-    wrapper.setProps({
-      width: 104
-    })
+    const tooltipNode = getByText(tooltip)
 
-    expect(wrapper.find('Badge').prop('content')).toBe(undefined)
-    expect(wrapper.find('Tooltip').prop('disabled')).toBe(true)
-  })
-
-  it('Tooltip is visible', () => {
-    wrapper.setProps({
-      content: 'some content'
-    })
-
-    expect(wrapper.find('Badge').prop('content')).toBe('some content')
+    expect(tooltipNode).toHaveTextContent(tooltip)
   })
 })
