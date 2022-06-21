@@ -12,6 +12,12 @@ describe('<InfoBar /> mount', () => {
 
   const wrapperTestId = 'infobar-wrapper'
 
+  const type = {
+    alert: 'alert',
+    info: 'info',
+    warning: 'warning'
+  }
+
   it('is mounted', () => {
     const { getByText } = render(<InfoBar {...props} />)
 
@@ -28,48 +34,48 @@ describe('<InfoBar /> mount', () => {
     expect(infoBarWrapperNode).toHaveClass('info-bar')
   })
 
-  it('should be rendered alert type of infobar', () => {
+  it(`should be rendered alert type of infobar when passed prop 'type' is alert`, () => {
     const newProps = {
       ...props,
       type: 'alert'
     }
 
-    const { type } = newProps
+    const { alert } = type
 
     const { getByTestId } = render(<InfoBar {...newProps} />)
 
     const infoBarWrapperNode = getByTestId(wrapperTestId)
 
-    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${alert}`)
   })
 
-  it('should be rendered info type of infobar', () => {
+  it(`should be rendered info type of infobar when passed prop 'type' is info`, () => {
     const newProps = {
       ...props,
       type: 'info'
     }
 
-    const { type } = newProps
+    const { info } = type
 
     const { getByTestId } = render(<InfoBar {...newProps} />)
 
     const infoBarWrapperNode = getByTestId(wrapperTestId)
 
-    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${info}`)
   })
 
-  it('should be rendered warning type of infobar', () => {
+  it(`should be rendered warning type of infobar when passed prop 'type' is warning`, () => {
     const newProps = {
       ...props,
       type: 'warning'
     }
 
-    const { type } = newProps
+    const { warning } = type
 
     const { getByTestId } = render(<InfoBar {...newProps} />)
 
     const infoBarWrapperNode = getByTestId(wrapperTestId)
 
-    expect(infoBarWrapperNode).toHaveClass(`info-bar--${type}`)
+    expect(infoBarWrapperNode).toHaveClass(`info-bar--${warning}`)
   })
 })
