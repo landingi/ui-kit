@@ -5,7 +5,6 @@ import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Check.module.scss'
 
-// TODO Check tests and mdx
 /**
  * Check - stateless presentational component
  * @param {object} props - props
@@ -33,7 +32,7 @@ const Check = ({
   )
 
   return (
-    <span className={wrapperStyles}>
+    <span className={wrapperStyles} data-testid='check'>
       <Icon
         icon={positive ? 'icon-ok' : 'icon-remove'}
         style={{ width: iconWidth }}
