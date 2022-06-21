@@ -1,5 +1,6 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import Heading from '@components/Heading'
 
 const props = {
@@ -7,66 +8,176 @@ const props = {
   level: 1
 }
 
-const headingComponent = <Heading {...props}>{props.children}</Heading>
-
 describe('<Heading/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(headingComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Heading {...props}>{props.children}</Heading>)
   })
 
   it('has `heading` class', () => {
-    expect(wrapper.find('span').hasClass('heading')).toBe(true)
+    render(<Heading {...props}>{props.children}</Heading>)
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading')
   })
 
   it('when prop `level 1`, has `h1` class', () => {
-    wrapper.setProps({
-      level: 1
-    })
-    expect(wrapper.find('span').hasClass('h1')).toBe(true)
+    render(<Heading {...props}>{props.children}</Heading>)
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h1')
   })
 
   it('when prop `level 2`, has `h2` class', () => {
-    wrapper.setProps({
-      level: 2
-    })
-    expect(wrapper.find('span').hasClass('h2')).toBe(true)
+    render(
+      <Heading {...props} level={2}>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h2')
   })
 
   it('when prop `level 3`, has `h3` class', () => {
-    wrapper.setProps({
-      level: 3
-    })
-    expect(wrapper.find('span').hasClass('h3')).toBe(true)
+    render(
+      <Heading {...props} level={3}>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h3')
   })
 
   it('when prop `level 4`, has `h4` class', () => {
-    wrapper.setProps({
-      level: 4
-    })
-    expect(wrapper.find('span').hasClass('h4')).toBe(true)
+    render(
+      <Heading {...props} level={4}>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h4')
   })
 
   it('when prop `level 5`, has `h5` class', () => {
-    wrapper.setProps({
-      level: 5
-    })
-    expect(wrapper.find('span').hasClass('h5')).toBe(true)
+    render(
+      <Heading {...props} level={5}>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h5')
   })
 
   it('when prop `level 6`, has `h6` class', () => {
-    wrapper.setProps({
-      level: 6
-    })
-    expect(wrapper.find('span').hasClass('h6')).toBe(true)
+    render(
+      <Heading {...props} level={6}>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('h6')
+  })
+
+  it('when prop `bold` is `false`, has `heading--bold` class', () => {
+    render(<Heading {...props}>{props.children}</Heading>)
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).not.toHaveClass('heading--bold')
+  })
+
+  it('when prop `bold` is `true`, has `heading--bold` class', () => {
+    render(
+      <Heading {...props} bold>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading--bold')
+  })
+
+  it('when prop `align` is `right`, has `heading--right` class', () => {
+    render(
+      <Heading {...props} align='right'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading--right')
+  })
+
+  it('when prop `align` is `left`, has `heading--left` class', () => {
+    render(
+      <Heading {...props} align='left'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading--left')
+  })
+
+  it('when prop `align` is `center`, has `heading--center` class', () => {
+    render(
+      <Heading {...props} align='center'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading--center')
+  })
+
+  it('when prop `margin` is `none`, has `heading--no-margin` class', () => {
+    render(
+      <Heading {...props} margin='none'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading--no-margin')
+  })
+
+  it('when prop `color` is `white`, has `heading__color--white` class', () => {
+    render(
+      <Heading {...props} color='white'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading__color--white')
+  })
+
+  it('when prop `color` is `brand`, has `heading__color--brand` class', () => {
+    render(
+      <Heading {...props} color='brand'>
+        {props.children}
+      </Heading>
+    )
+
+    const heading = screen.getByTestId('heading')
+
+    expect(heading).toHaveClass('heading__color--brand')
   })
 })
