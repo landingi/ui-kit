@@ -1,60 +1,58 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import Divider from '@components/Divider'
 
-const dividerComponent = <Divider />
-
 describe('<Divider/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(dividerComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Divider />)
   })
 
   it('has `divider` class', () => {
-    expect(wrapper.find('div').hasClass('divider')).toBe(true)
-  })
+    render(<Divider />)
 
-  it('has dropdown variant', () => {
-    wrapper.setProps({
-      variant: 'dropdown'
-    })
-    expect(wrapper.find('div').hasClass('divider--dropdown')).toBe(true)
-  })
+    const divider = screen.getByTestId('divider')
 
-  it('has horizontal variant', () => {
-    wrapper.setProps({
-      variant: 'horizontal'
-    })
-    expect(wrapper.find('div').hasClass('divider--horizontal')).toBe(true)
-  })
-
-  it('has menu variant', () => {
-    wrapper.setProps({
-      variant: 'menu'
-    })
-    expect(wrapper.find('div').hasClass('divider--menu')).toBe(true)
+    expect(divider).toHaveClass('divider')
   })
 
   it('has normal variant', () => {
-    wrapper.setProps({
-      variant: 'normal'
-    })
-    expect(wrapper.find('div').hasClass('divider--normal')).toBe(true)
+    render(<Divider />)
+
+    const divider = screen.getByTestId('divider')
+
+    expect(divider).toHaveClass('divider--normal')
+  })
+
+  it('has dropdown variant', () => {
+    render(<Divider variant='dropdown' />)
+
+    const divider = screen.getByTestId('divider')
+
+    expect(divider).toHaveClass('divider--dropdown')
+  })
+
+  it('has horizontal variant', () => {
+    render(<Divider variant='horizontal' />)
+
+    const divider = screen.getByTestId('divider')
+
+    expect(divider).toHaveClass('divider--horizontal')
+  })
+
+  it('has menu variant', () => {
+    render(<Divider variant='menu' />)
+
+    const divider = screen.getByTestId('divider')
+
+    expect(divider).toHaveClass('divider--menu')
   })
 
   it('has vertical align', () => {
-    wrapper.setProps({
-      align: 'vertical'
-    })
-    expect(wrapper.find('div').hasClass('divider--normal')).toBe(true)
+    render(<Divider align='vertical' />)
+
+    const divider = screen.getByTestId('divider')
+
+    expect(divider).toHaveClass('divider--normal')
   })
 })
