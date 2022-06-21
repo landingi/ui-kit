@@ -26,32 +26,51 @@ const AccordionSection = ({
   hasExpand
 }) => (
   <div className={styles.accordion}>
-    <div className={styles.accordion__header} onClick={handleOnClick}>
+    <div
+      className={styles.accordion__header}
+      onClick={handleOnClick}
+      data-testid='accordion-header'
+    >
       <div>{label}</div>
 
       <div>
         {hasExpand &&
           (arrowLabel ? (
             <Button variant={variant} size='small'>
-              <span className={styles['accordion__header-arrow']}>
+              <span
+                className={styles['accordion__header-arrow']}
+                data-testid='accordion-arrow'
+              >
                 {isOpen ? (
-                  <Icon icon='icon-chevron-up' />
+                  <Icon icon='icon-chevron-up' data-testid='accordion-icon' />
                 ) : (
-                  <Icon icon='icon-chevron-down' />
+                  <Icon icon='icon-chevron-down' data-testid='accordion-icon' />
                 )}
 
                 {arrowLabel}
               </span>
             </Button>
           ) : isOpen ? (
-            <Icon size='xs' icon='icon-chevron-up' />
+            <Icon
+              size='xs'
+              icon='icon-chevron-up'
+              data-testid='accordion-icon'
+            />
           ) : (
-            <Icon size='xs' icon='icon-chevron-down' />
+            <Icon
+              size='xs'
+              icon='icon-chevron-down'
+              data-testid='accordion-icon'
+            />
           ))}
       </div>
     </div>
 
-    {isOpen && <div className={styles.accordion__text}>{children}</div>}
+    {isOpen && (
+      <div className={styles.accordion__text} data-testid='accordion-text'>
+        {children}
+      </div>
+    )}
   </div>
 )
 

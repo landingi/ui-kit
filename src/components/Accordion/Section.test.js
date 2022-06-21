@@ -1,5 +1,6 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 import Section from '@components/Accordion/Section'
 
 const props = {
@@ -7,53 +8,35 @@ const props = {
   label: 'Test Label',
   children: 'I am just children element'
 }
-const component = <Section {...props} />
 
 describe('<Section /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Section {...props} />)
   })
 
   it('calls function passed as handleOnClick prop on click event', () => {
-    wrapper.find('div.accordion__header').simulate('click')
+    const { getByTestId } = render(<Section {...props} />)
 
-    expect(wrapper.prop('handleOnClick')).toHaveBeenCalled()
+    const header = getByTestId('accordion-header')
+
+    header.click()
+
+    expect(props.handleOnClick).toHaveBeenCalled()
   })
 
   it('has label', () => {
-    wrapper.setProps({
-      label: 'label content'
-    })
+    const { getByTestId } = render(<Section {...props} label='label content' />)
 
-    expect(
-      wrapper.find('div.accordion__header').hasClass('accordion__header')
-    ).toBe(true)
-    expect(wrapper.find('div.accordion__header').text()).toEqual(
-      wrapper.prop('label')
-    )
+    const header = getByTestId('accordion-header')
+
+    expect(header).toHaveTextContent('label content')
   })
 
   it('has children', () => {
-    wrapper.setProps({
-      isOpen: true,
-      children: 'children content'
-    })
+    const { getByTestId } = render(<Section {...props} isOpen={true} />)
 
-    expect(
-      wrapper.find('div.accordion__text').hasClass('accordion__text')
-    ).toBe(true)
-    expect(wrapper.find('div.accordion__text').text()).toEqual(
-      wrapper.prop('children')
-    )
+    const text = getByTestId('accordion-text')
+
+    expect(text).toHaveTextContent('I am just children element')
   })
 })
