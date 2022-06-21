@@ -1,25 +1,26 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 import Accordion from '@components/Accordion'
 
 const accordionComponent = (
   <Accordion>
-    <div label='label'>children</div>
+    <div label='label 1'>children 1</div>
+    <div label='label 2'>children 2</div>
+    <div label='label 3'>children 3</div>
   </Accordion>
 )
 
 describe('<Accordion/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(accordionComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(accordionComponent)
+  })
+
+  it('open firt section', () => {
+    const { queryAllByTestId } = render(accordionComponent)
+
+    const header = queryAllByTestId('accordion-header')
+
+    header[0].click()
   })
 })
