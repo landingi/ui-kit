@@ -1,74 +1,146 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 import Accordion from '@components/Accordion2'
 import AccordionItem from '@components/Accordion2/Item/AccordionItem'
 
 const propsAccordion = {
   data: [
     {
-      title: 'modal.domains.faq.title.1',
-      content: 'modal.domains.faq.content.1'
+      title: 'Accordion title 1',
+      description: 'Accordion description 1',
+      content: 'Accordion content 1'
     },
     {
-      title: 'modal.domains.faq.title.2',
-      content: 'modal.domains.faq.content.2'
+      title: 'Accordion title 2',
+      description: 'Accordion description 2',
+      content: 'Accordion content 2'
     }
   ]
 }
 
 const propsAccordionItem = {
   number: 1,
-  title: 'modal.domains.faq.title.1',
-  content: <p>test</p>
+  title: 'Accordion title',
+  content: <p>Accordion content</p>
 }
 
-const accordionComponent = <Accordion {...propsAccordion} />
-const accordionItemComponent = <AccordionItem {...propsAccordionItem} />
-
 describe('<Accordion /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(accordionComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Accordion {...propsAccordion} />)
   })
 })
 
 describe('<AccordionItem /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(accordionItemComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<AccordionItem {...propsAccordionItem} />)
   })
 
   it('has `accordion__item` class', () => {
-    expect(wrapper.hasClass('accordion__item')).toBe(true)
+    const { getByTestId } = render(<AccordionItem {...propsAccordionItem} />)
+
+    const accordionItem = getByTestId('accordion-item')
+
+    expect(accordionItem).toHaveClass('accordion__item')
   })
 
   it('has `accordion__item--content-close` class', () => {
-    expect(wrapper.hasClass('accordion__item--content-close')).toBe(false)
+    const { getByTestId } = render(<AccordionItem {...propsAccordionItem} />)
+
+    const accordionItemTitle = getByTestId('accordion-item-title')
+    const accordionItemContent = getByTestId('accordion-item-content')
+
+    accordionItemTitle.click()
+
+    expect(accordionItemContent).toHaveClass('accordion__item--content-close')
   })
 
   it('has `accordion__item--content-open` class', () => {
-    wrapper.find('.accordion__item--title').simulate('click')
+    const { getByTestId } = render(<AccordionItem {...propsAccordionItem} />)
 
-    wrapper.update()
+    const accordionItemContent = getByTestId('accordion-item-content')
 
-    expect(wrapper.hasClass('accordion__item--content-open')).toBe(false)
+    expect(accordionItemContent).toHaveClass('accordion__item--content-open')
+  })
+
+  it('has padding `none', () => {
+    const { getByTestId } = render(
+      <AccordionItem
+        {...propsAccordionItem}
+        description='Accordion description'
+      />
+    )
+
+    const accordionItemTitle = getByTestId('accordion-item-title')
+    const accordionItemDescription = getByTestId('accordion-item-description')
+    const accordionItemContent = getByTestId('accordion-item-content')
+
+    expect(accordionItemTitle).toHaveClass(
+      'accordion__item--title-padding-none'
+    )
+    expect(accordionItemDescription).toHaveClass(
+      'accordion__item--description-padding-none'
+    )
+    expect(accordionItemContent).toHaveClass(
+      'accordion__item--content-padding-none'
+    )
+  })
+
+  it('has padding `small', () => {
+    const { getByTestId } = render(
+      <AccordionItem
+        {...propsAccordionItem}
+        description='Accordion description'
+        padding='small'
+      />
+    )
+
+    const accordionItemTitle = getByTestId('accordion-item-title')
+    const accordionItemDescription = getByTestId('accordion-item-description')
+    const accordionItemContent = getByTestId('accordion-item-content')
+
+    expect(accordionItemTitle).toHaveClass(
+      'accordion__item--title-padding-small'
+    )
+    expect(accordionItemDescription).toHaveClass(
+      'accordion__item--description-padding-small'
+    )
+    expect(accordionItemContent).toHaveClass(
+      'accordion__item--content-padding-small'
+    )
+  })
+
+  it('has padding `medium', () => {
+    const { getByTestId } = render(
+      <AccordionItem
+        {...propsAccordionItem}
+        description='Accordion description'
+        padding='medium'
+      />
+    )
+
+    const accordionItemTitle = getByTestId('accordion-item-title')
+    const accordionItemDescription = getByTestId('accordion-item-description')
+    const accordionItemContent = getByTestId('accordion-item-content')
+
+    expect(accordionItemTitle).toHaveClass(
+      'accordion__item--title-padding-medium'
+    )
+    expect(accordionItemDescription).toHaveClass(
+      'accordion__item--description-padding-medium'
+    )
+    expect(accordionItemContent).toHaveClass(
+      'accordion__item--content-padding-medium'
+    )
+  })
+
+  it('has `isBox` style', () => {
+    const { getByTestId } = render(
+      <AccordionItem {...propsAccordionItem} isBox />
+    )
+
+    const accordionItem = getByTestId('accordion-item')
+
+    expect(accordionItem).toHaveClass('accordion__item--box')
   })
 })
