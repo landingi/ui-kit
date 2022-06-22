@@ -6,7 +6,6 @@ import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Legend.module.scss'
 
-//TODO Legend test
 /**
  * Legend - stateless presentational component
  * @param {object} props - props
@@ -24,17 +23,14 @@ const Legend = ({ className, data, alignment }) => {
     className
   )
 
-  const elementClasses = variant =>
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useStyles({
-      [styles['legend']]: true,
-      [styles[`legend--${variant}`]]: variant
-    })
+  const elementClasses = useStyles({
+    [styles['legend']]: true
+  })
 
   return (
-    <div className={wrapperClasses}>
+    <div data-testid='legend-container' className={wrapperClasses}>
       {data.map(({ variant, range }) => (
-        <span key={uuid()} className={elementClasses(variant)}>
+        <span data-testid='legend' key={uuid()} className={elementClasses}>
           <ColorLine variant={variant} alignment='horizontal' />
           {range}
         </span>

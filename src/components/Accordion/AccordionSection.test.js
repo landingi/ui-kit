@@ -1,95 +1,88 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 import AccordionSection from '@components/Accordion/AccordionSection'
 
 const props = {
   handleOnClick: jest.fn(),
-  label: 'Test Label'
+  label: 'Test Label',
+  children: 'I am just children element'
 }
-const component = <AccordionSection {...props} />
 
 describe('<AccordionSection /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<AccordionSection {...props} />)
   })
 
   it('calls function passed as handleOnClick prop on click event', () => {
-    wrapper.find('div.accordion__header').simulate('click')
+    const { getByTestId } = render(<AccordionSection {...props} />)
 
-    expect(wrapper.prop('handleOnClick')).toHaveBeenCalled()
+    const header = getByTestId('accordion-header')
+
+    header.click()
+
+    expect(props.handleOnClick).toHaveBeenCalled()
   })
 
   it('has label', () => {
-    wrapper.setProps({
-      label: 'label content'
-    })
-
-    expect(
-      wrapper.find('div.accordion__header').hasClass('accordion__header')
-    ).toBe(true)
-    expect(wrapper.find('div.accordion__header').text()).toEqual(
-      wrapper.prop('label')
+    const { getByTestId } = render(
+      <AccordionSection {...props} label='label content' />
     )
+
+    const header = getByTestId('accordion-header')
+
+    expect(header).toHaveTextContent('label content')
   })
 
   it('has children', () => {
-    wrapper.setProps({
-      isOpen: true,
-      children: 'children content'
-    })
-
-    expect(
-      wrapper.find('div.accordion__text').hasClass('accordion__text')
-    ).toBe(true)
-    expect(wrapper.find('div.accordion__text').text()).toEqual(
-      wrapper.prop('children')
+    const { getByTestId } = render(
+      <AccordionSection {...props} isOpen={true} />
     )
+
+    const text = getByTestId('accordion-text')
+
+    expect(text).toHaveTextContent('I am just children element')
   })
 
   it('has label next to the arrow', () => {
-    wrapper.setProps({
-      isOpen: true,
-      children: 'children content',
-      arrowLabel: 'I am just an arrow label'
-    })
-
-    expect(
-      wrapper
-        .find('span.accordion__header-arrow')
-        .hasClass('accordion__header-arrow')
-    ).toBe(true)
-    expect(wrapper.find('span.accordion__header-arrow').text()).toEqual(
-      wrapper.prop('arrowLabel')
+    const { getByTestId } = render(
+      <AccordionSection
+        {...props}
+        isOpen={true}
+        arrowLabel='I am just an arrow label'
+      />
     )
+
+    const arrow = getByTestId('accordion-arrow')
+
+    expect(arrow).toHaveTextContent('I am just an arrow label')
   })
 
   it('when is open it has icon chevron up', () => {
-    wrapper.setProps({
-      isOpen: true,
-      children: 'children content',
-      arrowLabel: 'I am just an arrow label'
-    })
+    const { getByTestId } = render(
+      <AccordionSection
+        {...props}
+        isOpen={true}
+        arrowLabel='I am just an arrow label'
+      />
+    )
 
-    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-up')
+    const icon = getByTestId('accordion-icon')
+
+    expect(icon).toHaveClass('editor-icon icon-chevron-up icon--default')
   })
 
   it('when is not open it has icon chevron down', () => {
-    wrapper.setProps({
-      isOpen: false,
-      children: 'children content',
-      arrowLabel: 'I am just an arrow label'
-    })
+    const { getByTestId } = render(
+      <AccordionSection
+        {...props}
+        isOpen={false}
+        arrowLabel='I am just an arrow label'
+      />
+    )
 
-    expect(wrapper.find('Icon').prop('icon')).toEqual('icon-chevron-down')
+    const icon = getByTestId('accordion-icon')
+
+    expect(icon).toHaveClass('editor-icon icon-chevron-down icon--default')
   })
 })

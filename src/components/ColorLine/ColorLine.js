@@ -21,7 +21,7 @@ const ColorLine = ({ className, variant, alignment }) => {
     className
   )
 
-  return <span className={elementClasses} />
+  return <span data-testid='colorline' className={elementClasses} />
 }
 
 ColorLine.displayName = 'ColorLine'

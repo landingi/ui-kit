@@ -1,45 +1,58 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import { fireEvent } from '@testing-library/react'
 import Textarea from '@components/Textarea'
+import '@testing-library/jest-dom'
 
-const props = {
+const initialProps = {
   value: 'initial value',
   onChange: jest.fn(),
   i18n: {
     placeholder: 'textarea placeholder'
-  }
+  },
+  id: 'mocked-textarea'
 }
 
-const TextareaComponent = <Textarea {...props} />
-
 describe('<Textarea/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(TextareaComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByRole } = render(<Textarea {...initialProps} />)
+
+    const textAreaNode = getByRole('textbox')
+
+    expect(textAreaNode).toBeVisible()
   })
 
   it('has value passed as prop', () => {
-    expect(wrapper.find('textarea').prop('value')).toEqual(props.value)
+    const { getByRole } = render(<Textarea {...initialProps} />)
+
+    const { value } = initialProps
+
+    const textAreaNode = getByRole('textbox')
+
+    expect(textAreaNode).toHaveValue(value)
   })
 
   it('has placeholder passed as prop', () => {
-    expect(wrapper.find('textarea').prop('placeholder')).toEqual(
-      props.i18n.placeholder
-    )
+    const { getByRole } = render(<Textarea {...initialProps} />)
+
+    const {
+      i18n: { placeholder }
+    } = initialProps
+
+    const textAreaNode = getByRole('textbox')
+
+    expect(textAreaNode).toHaveAttribute('placeholder', placeholder)
   })
 
-  it('should call onChange handler ', () => {
-    wrapper.find('textarea').simulate('change')
+  it('should call onChange handler', () => {
+    const { getByRole } = render(<Textarea {...initialProps} />)
 
-    expect(props.onChange).toHaveBeenCalled()
+    const { onChange } = initialProps
+
+    const textAreaNode = getByRole('textbox')
+
+    fireEvent.change(textAreaNode, { target: { value: 'new value' } })
+
+    expect(onChange).toHaveBeenCalledTimes(1)
   })
 })

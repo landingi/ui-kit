@@ -1,48 +1,34 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 import Check from '@components/Check'
 
-const checkComponent = <Check> Landingi </Check>
-
 describe('<Check/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(checkComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Check>Landingi</Check>)
   })
 
   it('has `check` class', () => {
-    expect(wrapper.find('span').hasClass('check')).toBe(true)
+    render(<Check>Landingi</Check>)
+
+    const check = screen.getByTestId('check')
+
+    expect(check).toHaveClass('check')
   })
 
   it('has not `check--positive` class', () => {
-    expect(wrapper.find('span').hasClass('check--positive')).toBe(false)
+    render(<Check>Landingi</Check>)
+
+    const check = screen.getByTestId('check')
+
+    expect(check).not.toHaveClass('check--positive')
   })
 
-  it('has `check--positive` class', async done => {
-    wrapper.setProps({
-      positive: true
-    })
+  it('has `check--positive` class', async () => {
+    render(<Check positive>Landingi</Check>)
 
-    expect(wrapper.find('span').hasClass('check--positive')).toBe(true)
+    const check = screen.getByTestId('check')
 
-    done()
-  })
-
-  it('should have defined default prop positive', () => {
-    expect(Check.defaultProps.positive).toBeDefined()
-  })
-
-  it('default prop `positive` should be false', () => {
-    const result = Check.defaultProps.positive
-    expect(result).toBe(false)
+    expect(check).toHaveClass('check--positive')
   })
 })
