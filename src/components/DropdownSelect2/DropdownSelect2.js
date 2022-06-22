@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {
   useCallback,
   Fragment,
@@ -62,7 +61,6 @@ const DropdownSelect = ({
   label,
   options,
   emphasisedOptions,
-  handleOnSearchChange,
   inModalName,
   isLoading,
   hasDescription,
@@ -72,7 +70,11 @@ const DropdownSelect = ({
   isOpenDisabled,
   i18n,
   // eslint-disable-next-line react/prop-types
-  hasSearcher
+  hasSearcher,
+  handleOnSearchChange,
+  // eslint-disable-next-line react/prop-types
+  emptyMessage,
+  optionalContent
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -123,6 +125,8 @@ const DropdownSelect = ({
    * autosize width for dropdown
    */
   const [dropdownWidth, setDropdownWidth] = useState(null)
+  const [shouldRenderEmptyMessage, setShouldRenderEmptyMessage] =
+    useState(false)
 
   useEffect(() => {
     const labelWidth = containerRef.current?.clientWidth
@@ -167,36 +171,38 @@ const DropdownSelect = ({
    */
   const clearSearchValue = useCallback(() => setSearchValue(''), [])
 
-  const shouldRenderEmptyMessage = () => {}
+  const renderOptions = () => {
+    const filteredOptions = options.filter(({ label }) => {
+      if (!searchValue) {
+        return true
+      }
+      const items = label
+        .toLowerCase()
+        .match(new RegExp(searchValue.toLowerCase()))
 
-  const renderOptions = () => (
-    <Fragment>
-      {emphasisedOptions.map((item, index) => (
-        <ListItem className='list-item--dropdown' key={index}>
-          {renderOption(item)}
-        </ListItem>
-      ))}
+      return items
+    })
 
-      {!isEmpty(emphasisedOptions) && <Divider />}
+    setShouldRenderEmptyMessage(!!filteredOptions.length)
 
-      {options
-        .filter(({ label }) => {
-          if (!searchValue) {
-            return true
-          }
-          const items = label
-            .toLowerCase()
-            .match(new RegExp(searchValue.toLowerCase()))
-
-          return items
-        })
-        .map((item, index) => (
+    return (
+      <Fragment>
+        {emphasisedOptions.map((item, index) => (
           <ListItem className='list-item--dropdown' key={index}>
             {renderOption(item)}
           </ListItem>
         ))}
-    </Fragment>
-  )
+
+        {!isEmpty(emphasisedOptions) && <Divider />}
+
+        {filteredOptions.map((item, index) => (
+          <ListItem className='list-item--dropdown' key={index}>
+            {renderOption(item)}
+          </ListItem>
+        ))}
+      </Fragment>
+    )
+  }
 
   return (
     <div className={className} ref={containerRef}>
@@ -244,13 +250,14 @@ const DropdownSelect = ({
             <List>
               {renderOptions()}
               {isLoading && <Loader />}
+              {(shouldRenderEmptyMessage && !isLoading) ?? { emptyMessage }}
             </List>
 
             <Spacer space='tiny' />
           </div>
         </Overflow>
 
-        {/* {optionalContent} */}
+        {optionalContent}
       </Dropdown>
 
       <Error error={errors[formikKey]} />
