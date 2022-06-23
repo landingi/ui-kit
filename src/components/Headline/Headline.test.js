@@ -1,29 +1,38 @@
 import React from 'react'
 import Headline from '@components/Headline'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 
-const component = <Headline title='Headline title' />
+const title = 'Headline title'
+
+const headlineNode = <Headline title={title} />
 
 describe('<Headline/> mount', () => {
-  let wrapper
+  it('is mounted and displays title', () => {
+    const { getByText } = render(headlineNode)
 
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
+    const headlineText = getByText(title)
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has title', () => {
-    expect(wrapper.find('div').text()).toMatch(/Headline title/i)
+    expect(headlineText).toBeVisible()
   })
 
   it('has class name page__headline', () => {
-    expect(wrapper.find('div').hasClass('page__headline')).toBe(true)
+    const { getByTestId } = render(headlineNode)
+
+    const headline = getByTestId('headline')
+
+    expect(headline).toHaveClass('page__headline')
+  })
+
+  it('should render custom css class passed by prop', () => {
+    const mockedCustomCssClass = 'mocked-class-headline'
+
+    const { getByTestId } = render(
+      <Headline title={title} className={mockedCustomCssClass} />
+    )
+
+    const headline = getByTestId('headline')
+
+    expect(headline).toHaveClass(mockedCustomCssClass)
   })
 })
