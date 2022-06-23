@@ -4,7 +4,6 @@ import React from 'react'
 import styles from './Headline.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO Headline mdx
 /**
  * Headline - stateless presentational component
  * @param {object} props - props
