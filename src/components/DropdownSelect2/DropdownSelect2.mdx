@@ -44,9 +44,13 @@ import DropdownSelect from '@components/DropdownSelect2'
       { label: 'label2', value: 'test2' }
     ]}
     emphasisedOptions={[
-      { label: 'wyróżniona opcja ', value: 'test3', description: 'opis wyróżnionej opcji' },
+      {
+        label: 'wyróżniona opcja ',
+        value: 'test3',
+        description: 'opis wyróżnionej opcji'
+      }
     ]}
-    label="Custom label for dropdown"
+    label='Custom label for dropdown'
     onChange={() => {}}
     hasDescription
   />
@@ -59,10 +63,10 @@ import DropdownSelect from '@components/DropdownSelect2'
     formikKey='test-dropdown'
     value={'test1'}
     options={[
-      { label: 'label1', value: 'test1'},
+      { label: 'label1', value: 'test1' },
       { label: 'label2', value: 'test2' }
     ]}
-    label="Custom label for dropdown"
+    label='Custom label for dropdown'
     onChange={() => {}}
     isOpenDisabled
   />
@@ -75,10 +79,10 @@ import DropdownSelect from '@components/DropdownSelect2'
     formikKey='test-dropdown'
     value={'test1'}
     options={[
-      { label: 'label1', value: 'test1'},
+      { label: 'label1', value: 'test1' },
       { label: 'label2', value: 'test2' }
     ]}
-    label="Custom label for dropdown"
+    label='Custom label for dropdown'
     onChange={() => {}}
     hasSearcher
     i18n={{
@@ -87,5 +91,35 @@ import DropdownSelect from '@components/DropdownSelect2'
   />
 </Playground>
 
-## DropdownSelect with error
+### Empty message
 
+<Playground>
+  <DropdownSelect
+    formikKey='test-dropdown'
+    value={'test1'}
+    options={[]}
+    label='Custom label for dropdown'
+    onChange={() => {}}
+    emptyMessage={'Pusto tutaj'}
+  />
+</Playground>
+
+### With loader
+
+<Playground>
+  <DropdownSelect
+    formikKey='test-dropdown'
+    value={'test1'}
+    options={[
+      { label: 'label1', value: 'test1' },
+      { label: 'label2', value: 'test2' }
+    ]}
+    label='Custom label for dropdown'
+    onChange={() => {}}
+    hasSearcher
+    i18n={{
+      placeholder: 'Search'
+    }}
+    isLoading
+  />
+</Playground>

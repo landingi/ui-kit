@@ -24,32 +24,29 @@ import Label from '@components/Label'
 import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO DropdownSelect css, mdx, tests, jsdoc props
 /**
  * DropdownSelect - stateless presentational component
  * @param {object} props - props
+ * @param {func} props.className - wrapper custom styles
  * @param {string} props.value - field value
  * @param {func} props.onChange - on Change handler
- * @param {string} props.label - label
  * @param {object} props.errors - element errors list
  * @param {object} props.touched - element touched list
  * @param {string} props.label - label
  * @param {array} props.options - list of options
+ * @param {array} props.emphasisedOptions - list of emphasised options, displayed on top
+ * @param {array} props.hasDescription - render description in options
+ * @param {string} props.hasSearcher - show Searcher
  * @param {func} props.handleOnSearchChange - on search input change handler
- * @param {string} props.searchPlaceholder - search placeholder
- * @param {bool} props.inModal - position in modal
  * @param {bool} props.isLoading - list loading spinner
- * @param {bool} props.liveChanges - search by entering characters
- * @param {bool} props.optionalContent
- * @param {func} props.dropdownLabel
- * @param {func} props.className - wrapper custom styles
- * @param {func} props.customValue - allow use custom value which is not in options
- * @param {func} props.formikKey - name on formik 'nasted' keys
- * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {object} props.emptyMessage - empty message component
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
- * @param {string} props.alwaysShowLabel - always show label on top
- * @param {string} props.searchInOptions - alow user to search item in options list
+ * @param {bool} props.optionalContent - optional content to render on bottom
+ * @param {bool} props.alwaysShowLabel - always show label on top
+ * @param {object} props.overflowStyle - overflow styles
+ * @param {func} props.formikKey - name on formik 'nasted' keys
  * @param {string} props.i18n - object of translations
+ * @param {string} props.inModalName - modal name for positioning
  * @return {object} An object of children element
  */
 const DropdownSelect = ({
@@ -61,20 +58,18 @@ const DropdownSelect = ({
   label,
   options,
   emphasisedOptions,
-  inModalName,
-  isLoading,
   hasDescription,
-  overflowStyle,
-  formikKey,
-  alwaysShowLabel,
-  isOpenDisabled,
-  i18n,
-  // eslint-disable-next-line react/prop-types
   hasSearcher,
   handleOnSearchChange,
-  // eslint-disable-next-line react/prop-types
+  isLoading,
   emptyMessage,
-  optionalContent
+  isOpenDisabled,
+  optionalContent,
+  alwaysShowLabel,
+  overflowStyle,
+  formikKey,
+  i18n,
+  inModalName
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -125,8 +120,6 @@ const DropdownSelect = ({
    * autosize width for dropdown
    */
   const [dropdownWidth, setDropdownWidth] = useState(null)
-  const [shouldRenderEmptyMessage, setShouldRenderEmptyMessage] =
-    useState(false)
 
   useEffect(() => {
     const labelWidth = containerRef.current?.clientWidth
@@ -171,8 +164,8 @@ const DropdownSelect = ({
    */
   const clearSearchValue = useCallback(() => setSearchValue(''), [])
 
-  const renderOptions = () => {
-    const filteredOptions = options.filter(({ label }) => {
+  const filterOptions = () =>
+    options.filter(({ label }) => {
       if (!searchValue) {
         return true
       }
@@ -183,8 +176,7 @@ const DropdownSelect = ({
       return items
     })
 
-    setShouldRenderEmptyMessage(!!filteredOptions.length)
-
+  const renderOptions = () => {
     return (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
@@ -195,7 +187,7 @@ const DropdownSelect = ({
 
         {!isEmpty(emphasisedOptions) && <Divider />}
 
-        {filteredOptions.map((item, index) => (
+        {filterOptions().map((item, index) => (
           <ListItem className='list-item--dropdown' key={index}>
             {renderOption(item)}
           </ListItem>
@@ -204,8 +196,11 @@ const DropdownSelect = ({
     )
   }
 
+  const renderEmptyMessage = () =>
+    !filterOptions().length && !isLoading ? emptyMessage : null
+
   return (
-    <div className={className} ref={containerRef}>
+    <div className={className} ref={containerRef} data-testid='dropdown-select'>
       {label && (
         <Label id={label} className={labelStyles}>
           {label}
@@ -250,7 +245,7 @@ const DropdownSelect = ({
             <List>
               {renderOptions()}
               {isLoading && <Loader />}
-              {(shouldRenderEmptyMessage && !isLoading) ?? { emptyMessage }}
+              {renderEmptyMessage()}
             </List>
 
             <Spacer space='tiny' />
@@ -268,9 +263,9 @@ const DropdownSelect = ({
 DropdownSelect.displayName = 'DropdownSelect'
 
 DropdownSelect.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
-  onBlur: PropTypes.func,
   errors: PropTypes.objectOf(PropTypes.string),
   touched: PropTypes.instanceOf(Object),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -282,55 +277,51 @@ DropdownSelect.propTypes = {
         .isRequired
     })
   ).isRequired,
-  handleOnSearchChange: PropTypes.func,
-  inModalName: PropTypes.string,
-  isLoading: PropTypes.bool,
-  hasDescription: PropTypes.bool,
-  overflowStyle: PropTypes.instanceOf(Object),
   emphasisedOptions: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     })
   ),
-  liveChanges: PropTypes.bool,
-  optionalContent: PropTypes.node,
-  dropdownLabel: PropTypes.func,
-  className: PropTypes.string,
-  customValue: PropTypes.bool,
-  formikKey: PropTypes.string,
-  alwaysShowLabel: PropTypes.bool,
+  hasDescription: PropTypes.bool,
+  hasSearcher: PropTypes.bool,
+  handleOnSearchChange: PropTypes.func,
+  isLoading: PropTypes.bool,
+  emptyMessage: PropTypes.node,
   isOpenDisabled: PropTypes.bool,
-  searchInOptions: PropTypes.bool,
+  optionalContent: PropTypes.node,
+  alwaysShowLabel: PropTypes.bool,
+  overflowStyle: PropTypes.instanceOf(Object),
+  formikKey: PropTypes.string,
   i18n: PropTypes.shape({
-    placeholder: PropTypes.string,
-    emptySearchMessageTitle: PropTypes.string,
-    emptySearchMessage: PropTypes.string
-  })
+    placeholder: PropTypes.string
+  }),
+  inModalName: PropTypes.string
 }
 
 DropdownSelect.defaultProps = {
-  label: '',
-  searchPlaceholder: '',
-  inModalName: '',
+  className: '',
+  value: null,
+  onChange: () => null,
   errors: {},
   touched: {},
-  overflowStyle: {},
+  label: '',
   emphasisedOptions: [],
-  handleOnSearchChange: () => null,
-  value: null,
-  liveChanges: false,
-  optionalContent: null,
-  dropdownLabel: null,
-  className: '',
-  customValue: false,
-  alwaysShowLabel: false,
-  isOpenDisabled: false,
-  searchInOptions: false,
-  isLoading: false,
   hasDescription: false,
-  onBlur: () => null,
-  onChange: () => null
+  hasSearcher: false,
+  handleOnSearchChange: () => null,
+  isLoading: false,
+  // emptyMessage: null,
+  isOpenDisabled: false,
+  optionalContent: null,
+  alwaysShowLabel: false,
+  overflowStyle: {},
+  formikKey: '',
+  searchPlaceholder: '',
+  i18n: {
+    placeholder: ''
+  },
+  inModalName: ''
 }
 
 export default DropdownSelect
