@@ -3,7 +3,6 @@ import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Heading.module.scss'
 
-//TODO Heading test
 /**
  * Heading - stateless presentational component
  * @param {object} props - props
@@ -37,7 +36,11 @@ const Heading = ({
     className
   )
 
-  return <span className={elementClasses}>{children}</span>
+  return (
+    <span className={elementClasses} data-testid='heading'>
+      {children}
+    </span>
+  )
 }
 
 Heading.displayName = 'Heading'

@@ -3,7 +3,6 @@ import React, { memo } from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Image.module.scss'
 
-//TODO Image test
 /**
  * Image - stateless presentational component
  * @param {object} props - props

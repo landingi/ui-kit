@@ -13,11 +13,19 @@ import styles from './Accordion.module.scss'
  */
 const AccordionSection = ({ handleOnClick, isOpen, label, children }) => (
   <div className={styles.accordion}>
-    <div className={styles.accordion__header} onClick={handleOnClick}>
+    <div
+      className={styles.accordion__header}
+      onClick={handleOnClick}
+      data-testid='accordion-header'
+    >
       {label}
     </div>
 
-    {isOpen && <div className={styles.accordion__text}>{children}</div>}
+    {isOpen && (
+      <div className={styles.accordion__text} data-testid='accordion-text'>
+        {children}
+      </div>
+    )}
   </div>
 )
 

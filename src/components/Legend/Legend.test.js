@@ -1,6 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
 import Legend from '@components/Legend'
+import '@testing-library/jest-dom'
 
 const props = {
   data: [
@@ -10,51 +11,58 @@ const props = {
   ]
 }
 
-const legendComponent = <Legend {...props} />
-
 describe('<Legend/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(legendComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
+  const legendContainerTestId = 'legend-container'
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    const { getByTestId } = render(<Legend {...props} />)
+
+    const legendContainerNode = getByTestId(legendContainerTestId)
+
+    expect(legendContainerNode).toBeVisible()
   })
 
-  it('has verical align', () => {
-    expect(wrapper.prop('alignment')).toBe('vertical')
-    expect(wrapper.find('div').hasClass('container--vertical')).toBe(true)
+  it('default align should be vertical', () => {
+    const { getByTestId } = render(<Legend {...props} />)
+
+    const legendContainerNode = getByTestId(legendContainerTestId)
+
+    expect(legendContainerNode).toHaveClass('container--vertical')
   })
 
-  it('has horizontal align', () => {
-    wrapper.setProps({
+  it('should be rendered with horizontal alignment', () => {
+    const newProps = {
+      ...props,
       alignment: 'horizontal'
+    }
+    const { getByTestId } = render(<Legend {...newProps} />)
+
+    const legendContainerNode = getByTestId(legendContainerTestId)
+
+    expect(legendContainerNode).toHaveClass('container--horizontal')
+  })
+
+  it('all ranges should be properly rendered', () => {
+    const { data } = props
+
+    const { getByText } = render(<Legend {...props} />)
+
+    data.forEach(({ range }) => {
+      const rangeNode = getByText(range)
+
+      expect(rangeNode).toBeVisible()
     })
-    expect(wrapper.prop('alignment')).toBe('horizontal')
-    expect(wrapper.find('div').hasClass('container--horizontal')).toBe(true)
   })
 
-  it('has one success variant', () => {
-    expect(
-      wrapper.find('span.legend--success').hasClass('legend--success')
-    ).toBe(true)
-  })
+  it('all variants should be properly rendered', () => {
+    const { getAllByTestId } = render(<Legend {...props} />)
 
-  it('has one warning variant', () => {
-    expect(
-      wrapper.find('span.legend--warning').hasClass('legend--warning')
-    ).toBe(true)
-  })
+    const allColorLineNodes = getAllByTestId('colorline')
 
-  it('has one alert variant', () => {
-    expect(wrapper.find('span.legend--alert').hasClass('legend--alert')).toBe(
-      true
-    )
+    expect(allColorLineNodes[0]).toHaveClass(`color-line--success`)
+
+    expect(allColorLineNodes[1]).toHaveClass(`color-line--warning`)
+
+    expect(allColorLineNodes[2]).toHaveClass(`color-line--alert`)
   })
 })

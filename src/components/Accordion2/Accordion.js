@@ -7,22 +7,23 @@ import AccordionItem from './Item/AccordionItem'
  * Accordion - stateless presentational component
  * @param {object} props - props
  * @param {array} props.data - accordion content
- * @param {bool} props.hasNumber - has number
- * @param {string} props.size
+ * @param {string} props.padding - accordion padding
+ * @param {array} props.isBox - section with background & shadow
  * @return {object} An object of children element
  */
-const Accordion = ({ data, hasNumber, size }) => (
+const Accordion = ({ data, padding, isBox }) => (
   <div>
-    {data.map((item, index) => {
-      const { title, content } = item
+    {data.map(item => {
+      const { title, description, content } = item
 
       return (
         <AccordionItem
           key={uuid()}
-          number={hasNumber ? index + 1 : null}
           title={title}
-          size={size}
+          description={description}
           content={content}
+          padding={padding}
+          isBox={isBox}
         />
       )
     })}
@@ -38,13 +39,15 @@ Accordion.propTypes = {
       content: PropTypes.node.isRequired
     })
   ).isRequired,
-  hasNumber: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'medium'])
+  padding: PropTypes.oneOf(['none', 'small', 'medium']),
+  isBox: PropTypes.bool,
+  withoutPadding: PropTypes.bool
 }
 
 Accordion.defaultProps = {
-  size: 'medium',
-  hasNumber: false
+  padding: 'medium',
+  isBox: false,
+  withoutPadding: false
 }
 
 export default memo(Accordion)

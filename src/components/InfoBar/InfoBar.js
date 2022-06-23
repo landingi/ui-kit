@@ -4,7 +4,6 @@ import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './InfoBar.module.scss'
 
-// TODO InfoBar test
 /**
  * Info Bar - stateless presentational component
  * @param {object} props - props
@@ -35,7 +34,7 @@ const InfoBar = ({ children, className, type }) => {
       : 'info'
 
   return (
-    <div className={elementClasses}>
+    <div data-testid='infobar-wrapper' className={elementClasses}>
       <div className={boxClasses}>
         <Icon icon={icon} />
       </div>

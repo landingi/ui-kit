@@ -2,20 +2,30 @@
   &__item {
     width: auto;
 
+    &--box {
+      background-color: $color-white;
+      box-shadow: 0px 2px 4px $color-shadow;
+    }
+
     &--title {
       cursor: pointer;
-      padding-left: $padding-x-large;
-      padding-right: $padding-huge;
-      height: 68px;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      &-small {
-        height: 35px;
-        padding-left: $padding-medium;
-        padding-right: $padding-medium;
-        font-size: 14px;
+      &-padding {
+        &-none {
+          padding: 0;
+        }
+
+        &-small {
+          padding: 0 $padding-medium;
+        }
+
+        &-medium {
+          padding-left: $padding-x-large;
+          padding-right: $padding-huge;
+        }
       }
 
       > div {
@@ -24,15 +34,47 @@
       }
     }
 
+    &--description {
+      cursor: pointer;
+      height: max-content;
+
+      &-padding {
+        &-none {
+          padding: $padding-tiny 0 0 0;
+        }
+
+        &-small {
+          padding-top: $padding-tiny;
+          padding-left: $padding-medium;
+          padding-right: $padding-medium;
+        }
+
+        &-medium {
+          padding-top: $padding-tiny;
+          padding-left: $padding-x-large;
+          padding-right: $padding-x-large;
+        }
+      }
+    }
+
     &--content {
-      padding:  0 $padding-x-large;
       height: 0;
       overflow: hidden;
       opacity: 0;
       transition: all .2s ease-in-out;
 
-      &-small {
-        padding:  0 $padding-medium;
+      &-padding {
+        &-none {
+          padding: 0;
+        }
+
+        &-small {
+          padding: 0 $padding-medium;
+        }
+
+        &-medium {
+          padding: 0 $padding-x-large;
+        }
       }
 
       &-open {

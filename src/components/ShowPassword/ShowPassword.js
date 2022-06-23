@@ -16,7 +16,7 @@ import styles from './ShowPassword.module.scss'
  */
 const ShowPassword = ({ className, setHidden, hasLabel, i18n }) => {
   const [icon, setIcon] = useState('icon-eye-close')
-  const [label, setLabel] = useState('')
+  const [label, setLabel] = useState(i18n.show)
 
   /**
    * HandleIconSet - set the icon state

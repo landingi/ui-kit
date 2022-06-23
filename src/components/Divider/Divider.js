@@ -3,7 +3,6 @@ import React from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Divider.module.scss'
 
-// TODO Divider test
 /**
  * Divider - stateless presentational component
  * @param {object} props - props
@@ -25,7 +24,7 @@ const Divider = ({ className, variant, align }) => {
     className
   )
 
-  return <div className={elementClasses} />
+  return <div className={elementClasses} data-testid='divider' />
 }
 
 Divider.displayName = 'Divider'
