@@ -313,7 +313,7 @@ DropdownSelect.defaultProps = {
   hasSearcher: false,
   handleOnSearchChange: () => null,
   isLoading: false,
-  // emptyMessage: null,
+  emptyMessage: null,
   isOpenDisabled: false,
   optionalContent: null,
   alwaysShowLabel: false,
