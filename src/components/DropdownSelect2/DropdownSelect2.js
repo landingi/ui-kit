@@ -111,6 +111,8 @@ const DropdownSelect = ({
     } else {
       onChange(value)
     }
+
+    clearSearchValue()
     emitCloseDropdown()
   })
 
