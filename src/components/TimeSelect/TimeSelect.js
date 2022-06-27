@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
-import DropdownSelect from '@components/DropdownSelect'
+import DropdownSelect2 from '@components/DropdownSelect'
 import Spreader from '@components/Spreader'
 import Icon from '@components/Icon'
 import {
@@ -98,7 +98,7 @@ const TimeSelect = ({
 
   return (
     <Row vertical='end'>
-      <DropdownSelect
+      <DropdownSelect2
         className={timeSelectDropdownClasses}
         overflowStyle={{ maxHeight: 180 }}
         inModalName={inModalName}
@@ -116,7 +116,7 @@ const TimeSelect = ({
         <Fragment>
           <Spreader spread='small' />
 
-          <DropdownSelect
+          <DropdownSelect2
             inModalName={inModalName}
             options={CLOCK_OPTIONS}
             value={clockType}
