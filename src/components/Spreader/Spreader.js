@@ -1,11 +1,8 @@
-import { styles } from '@helpers/css'
 import PropTypes from 'prop-types'
 import React from 'react'
-import scss from './Spreader.scss'
+import styles from './Spreader.module.scss'
+import { useStyles } from '@helpers/hooks/useStyles'
 
-const cssClass = styles(scss)
-
-//TODO Spreader css, test
 /**
  * Spreader - stateless presentational component
  * @param {object} props - props
@@ -13,9 +10,17 @@ const cssClass = styles(scss)
  * @param {string} props.spread - spread size
  * @return {object} An object of children element
  */
-const Spreader = ({ className, spread }) => (
-  <div className={cssClass(className, `spreader--${spread}`)} />
-)
+const Spreader = ({ className, spread }) => {
+  const spreaderClasses = useStyles(
+    {
+      [styles['spreader']]: true,
+      [styles[`spreader--${spread}`]]: spread
+    },
+    className
+  )
+
+  return <div data-testid='spreader' className={spreaderClasses} />
+}
 
 Spreader.displayName = 'Spreader'
 

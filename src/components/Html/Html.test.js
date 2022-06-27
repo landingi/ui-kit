@@ -1,21 +1,20 @@
 import React from 'react'
 import Html from '@components/Html'
-import { mount } from 'enzyme'
+import { render } from '@jestutils'
+import '@testing-library/jest-dom'
 
-const component = <Html value={<div>value</div>} />
+const htmlCode = `lorem <b onclick="alert('onclick');">ipsum</b>`
 
 describe('<Html/> mount', () => {
-  let wrapper
+  it('is mounted and texts display properly', () => {
+    const { getByText } = render(<Html value={htmlCode} />)
 
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
+    const firstText = getByText('lorem')
 
-  afterEach(() => {
-    wrapper.unmount()
-  })
+    const secondText = getByText('ipsum')
 
-  it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    expect(firstText).toHaveTextContent('lorem')
+
+    expect(secondText).toHaveTextContent('ipsum')
   })
 })
