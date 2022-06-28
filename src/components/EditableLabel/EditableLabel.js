@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useState, useCallback, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
@@ -6,19 +5,31 @@ import Button from '@components/Button'
 import Icon from '@components/Icon'
 import Spreader from '@components/Spreader'
 import OverflowTooltip from '@components/OverflowTooltip'
+import Spinner from '@components/Spinner'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
-import styles from './EditableLabel.module.scss'
+import styles from './EditableLabel.scss'
 
 /**
- * HeaderInput - statefull input component
+ * EditableLabel - statefull input component
  * @param {object} props - props
  * @param {string} props.initialName - init name
+ * @param {string} props.placeholder - input placeholder
  * @param {function} props.onChange - callback function
+ * @param {string} props.size - label size
+ * @param {bool} props.isLoading - is loading
+ * @param {bool} props.isDisabled - is disabled
  * @return {object} An object of children element
  */
-const HeaderInput = ({ initialName, onChange, size }) => {
+const EditableLabel = ({
+  initialName,
+  placeholder,
+  onChange,
+  size,
+  isLoading,
+  isDisabled
+}) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
   const [isFocused, setFocused] = useState(false)
   const [lenght, setLength] = useState(20)
@@ -47,20 +58,18 @@ const HeaderInput = ({ initialName, onChange, size }) => {
 
   const barStyles = useStyles({
     [styles['input-bar']]: true,
-    // [styles['input-bar--hover']]: isHoveredWrapper,
     [styles['input-bar--focus']]: isFocused
   })
 
   const handleAccept = useCallback(() => {
     if (name.length === 0 || name === initialName) {
-      setName(initialName)
+      setName(name)
     } else {
       onChange(name)
     }
 
-    // inputRef.current.blur()
     setFocused(false)
-  }, [name, setName, onChange, inputRef, setFocused])
+  }, [name, setName, onChange, inputRef, setFocused, initialName])
 
   const handleKeyDown = useCallback(
     event => {
@@ -72,7 +81,6 @@ const HeaderInput = ({ initialName, onChange, size }) => {
   )
 
   const handleFocus = useCallback(() => {
-    // inputRef.current.focus()
     setFocused(true)
   }, [inputRef, setFocused])
 
@@ -82,64 +90,76 @@ const HeaderInput = ({ initialName, onChange, size }) => {
   }, [setFocused, name])
 
   useEffect(() => {
-    const labelWidth = (labelRef.current.clientWidth / 100) * 7
+    const labelLength = size === 'small' ? 12 : 9
+
+    const labelWidth = (labelRef.current.clientWidth / 100) * labelLength
+
     setLength(labelWidth)
-  }, [labelRef])
+  }, [labelRef, size])
 
   useDetectOutsideClick(wrapperRef, handeOutsideClick)
 
   return (
-    <div ref={wrapperRef}>
-      <Row className={styles['input-wrapper']} {...wrapperProps}>
-        {!isFocused ? (
-          <span className={labelStyles} ref={labelRef}>
-            <OverflowTooltip
-              content={name}
-              length={isHoveredWrapper ? lenght - 3 : lenght}
-              placement='top'
+    <div>
+      <div className={styles['wrapper']} ref={wrapperRef} {...wrapperProps}>
+        <Row className={styles['input-wrapper']} vertical='center'>
+          {!isFocused ? (
+            <span className={labelStyles} ref={labelRef}>
+              <OverflowTooltip content={name} length={lenght} placement='top' />
+            </span>
+          ) : (
+            <input
+              className={inputStyles}
+              value={name}
+              placeholder={placeholder}
+              onChange={handleChange}
+              type='text'
+              onKeyDown={handleKeyDown}
+              data-testid='header-input'
             />
-          </span>
-        ) : (
-          <input
-            className={inputStyles}
-            value={name}
-            onChange={handleChange}
-            type='text'
-            onKeyDown={handleKeyDown}
-            // ref={inputRef}
-            // onFocus={handleFocus}
-            data-testid='header-input'
-          />
-        )}
+          )}
 
-        <span className={barStyles} />
+          <span className={barStyles} />
+        </Row>
 
         <Spreader spread='tiny' />
 
-        <Button
-          variant='icon-transparent'
-          className={buttonStyles}
-          onClick={isFocused ? handleAccept : handleFocus}
-          size={size === 'small' ? 'mini' : 'medium'}
-          data-testid='header-input-button'
-        >
-          <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
-        </Button>
-      </Row>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          !isDisabled && (
+            <Button
+              variant='transparent'
+              className={buttonStyles}
+              onClick={isFocused ? handleAccept : handleFocus}
+              size={size === 'small' ? 'mini' : 'medium'}
+              data-testid='header-input-button'
+            >
+              <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
+            </Button>
+          )
+        )}
+      </div>
     </div>
   )
 }
 
-HeaderInput.displayName = 'HeaderInput'
+EditableLabel.displayName = 'EditableLabel'
 
-HeaderInput.propTypes = {
+EditableLabel.propTypes = {
   initialName: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func,
-  size: PropTypes.oneOfType(['small', 'medium'])
+  size: PropTypes.oneOfType(['small', 'medium']),
+  isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool
 }
 
-HeaderInput.defaultProps = {
-  size: 'medium'
+EditableLabel.defaultProps = {
+  placeholder: '',
+  size: 'medium',
+  isLoading: false,
+  isDisabled: false
 }
 
-export default HeaderInput
+export default EditableLabel
