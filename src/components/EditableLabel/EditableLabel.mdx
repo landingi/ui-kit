@@ -1,0 +1,22 @@
+import { Playground, Props } from 'docz'
+import EditableLabel from '@components/EditableLabel'
+
+<Props of={EditableLabel} />
+
+## DropdownSelect
+
+<Playground>
+  <div style={{ width: 1000 }}>
+    <EditableLabel
+      initialName='Dupafdsfsdfsfsfghjsgfsgfhsgfhsvfdfgdfggfdgdgdgdngdfhsgfhsgfghsfdghsfdghsfdgfsgdfsgdfgdfsdgfsdgsfgdfgfgfgfgfgfgdfsgdfsgdfsgdfsdfgsfdgsdfgsfdsgfdgsfdgf'
+      onChange={name => console.log(name)}
+    />
+  </div>
+  <div style={{ width: 100 }}>
+    <EditableLabel
+      initialName='Dupafdsfsdfsfsfghjsgfsgfhsgfhsvfdfgdfggfdgdgdgdngdfhsgfhsgfghsfdghsfdghsfdgfsgdfsgdfgdfsdgfsdgsfgdfgfgfgfgfgfgdfsgdfsgdfsgdfsdfgsfdgsdfgsfdsgfdgsfdgf'
+      size='small'
+      onChange={name => console.log(name)}
+    />
+  </div>
+</Playground>
