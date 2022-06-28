@@ -82,11 +82,8 @@ const HeaderInput = ({ initialName, onChange, size }) => {
   }, [setFocused, name])
 
   useEffect(() => {
-    console.log(labelRef.current.clientWidth)
-
     const labelWidth = (labelRef.current.clientWidth / 100) * 7
     setLength(labelWidth)
-    console.log(labelWidth)
   }, [labelRef])
 
   useDetectOutsideClick(wrapperRef, handeOutsideClick)
