@@ -38,7 +38,7 @@
     "jsx-quotes": ["error", "prefer-single"],
     "mdx/no-unused-expressions": "off",
     "no-console": "error",
-    "react/jsx-uses-react": "off",
+    "react/jsx-uses-react": "error",
     "react/react-in-jsx-scope": "off"
   },
   "extends": [

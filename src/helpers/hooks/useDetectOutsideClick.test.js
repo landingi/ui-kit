@@ -1,7 +1,7 @@
+import React, { useRef } from 'react'
 import { fireEvent, render } from '@jestutils'
-import { useDetectOutsideClick } from '@hooks/useDetectOutsideClick'
+import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { renderHook } from '@testing-library/react-hooks'
-import { useRef } from 'react'
 
 describe('useDetectOutsideClick tests', () => {
   afterEach(() => {
