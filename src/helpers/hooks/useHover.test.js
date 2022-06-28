@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@jestutils'
-import { useHover } from '@hooks/useHover'
+import { useHover } from '@helpers/hooks/useHover'
 import { renderHook } from '@testing-library/react-hooks'
 
 describe('useHover tests', () => {
