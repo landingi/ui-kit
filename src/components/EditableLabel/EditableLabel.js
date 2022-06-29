@@ -104,8 +104,8 @@ const EditableLabel = ({
             <span
               className={labelStyles}
               ref={labelRef}
+              onClick={isClickable ? handleFocus : () => null}
               data-testid='editable-label'
-              {...(isClickable ? { onClick: handleFocus } : {})}
             >
               <OverflowTooltip
                 content={name}
