@@ -1,0 +1,43 @@
+import React, { useRef } from 'react'
+import { fireEvent, render } from '@jestutils'
+import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
+import { renderHook } from '@testing-library/react-hooks'
+
+describe('useDetectOutsideClick tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+  it('call callback function on click document', () => {
+    const {
+      result: { current: ref }
+    } = renderHook(() => useRef(null))
+
+    render(<div ref={ref} />)
+
+    const mockHandler = jest.fn()
+
+    renderHook(() => useDetectOutsideClick(ref, mockHandler))
+
+    fireEvent.mouseDown(document)
+
+    expect(mockHandler).toBeCalled()
+  })
+
+  it('do not call callback function on click ref', () => {
+    const {
+      result: { current: ref }
+    } = renderHook(() => useRef(null))
+
+    const { getByTestId } = render(<div ref={ref} data-testid='div-ref' />)
+
+    const mockHandler = jest.fn()
+
+    renderHook(() => useDetectOutsideClick(ref, mockHandler))
+
+    const div = getByTestId('div-ref')
+
+    fireEvent.mouseDown(div)
+
+    expect(mockHandler).not.toBeCalled()
+  })
+})
