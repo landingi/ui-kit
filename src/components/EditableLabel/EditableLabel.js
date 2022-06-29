@@ -97,55 +97,53 @@ const EditableLabel = ({
   useDetectOutsideClick(wrapperRef, handeOutsideClick)
 
   return (
-    <div>
-      <div className={wrapperStyles} ref={wrapperRef} {...wrapperProps}>
-        <Row className={styles['input-wrapper']} vertical='center'>
-          {!isFocused ? (
-            <span
-              className={labelStyles}
-              ref={labelRef}
-              onClick={isClickable ? handleFocus : () => null}
-              data-testid='editable-label'
-            >
-              <OverflowTooltip
-                content={name}
-                length={size === 'small' ? 21 : 44}
-                placement='top'
-              />
-            </span>
-          ) : (
-            <input
-              className={inputStyles}
-              value={name}
-              placeholder={placeholder}
-              onChange={handleChange}
-              type='text'
-              onKeyDown={handleKeyDown}
-              data-testid='editable-label-input'
+    <div className={wrapperStyles} ref={wrapperRef} {...wrapperProps}>
+      <Row className={styles['input-wrapper']} vertical='center'>
+        {!isFocused ? (
+          <span
+            className={labelStyles}
+            ref={labelRef}
+            onClick={isClickable ? handleFocus : () => null}
+            data-testid='editable-label'
+          >
+            <OverflowTooltip
+              content={name}
+              length={size === 'small' ? 21 : 44}
+              placement='top'
             />
-          )}
-
-          <span className={barStyles} />
-        </Row>
-
-        <Spreader spread='tiny' />
-
-        {isLoading ? (
-          <Spinner />
+          </span>
         ) : (
-          !isDisabled && (
-            <Button
-              variant='icon-transparent'
-              className={buttonStyles}
-              onClick={isFocused ? handleAccept : handleFocus}
-              size={size === 'small' ? 'mini' : 'medium'}
-              data-testid='editable-label-button'
-            >
-              <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
-            </Button>
-          )
+          <input
+            className={inputStyles}
+            value={name}
+            placeholder={placeholder}
+            onChange={handleChange}
+            type='text'
+            onKeyDown={handleKeyDown}
+            data-testid='editable-label-input'
+          />
         )}
-      </div>
+
+        <span className={barStyles} />
+      </Row>
+
+      <Spreader spread='tiny' />
+
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        !isDisabled && (
+          <Button
+            variant='icon-transparent'
+            className={buttonStyles}
+            onClick={isFocused ? handleAccept : handleFocus}
+            size={size === 'small' ? 'mini' : 'medium'}
+            data-testid='editable-label-button'
+          >
+            <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
+          </Button>
+        )
+      )}
     </div>
   )
 }
