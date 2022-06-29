@@ -92,7 +92,7 @@ BlockSection.propTypes = {
   button: PropTypes.string.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   list: PropTypes.arrayOf(PropTypes.string),
-  message: PropTypes.string.isRequired,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   onClick: PropTypes.func,
   reverse: PropTypes.bool,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
