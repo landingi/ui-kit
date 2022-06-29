@@ -86,7 +86,7 @@ InfoSection.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClick: PropTypes.func,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   image: PropTypes.objectOf({ src: PropTypes.string, size: PropTypes.number })
 }
