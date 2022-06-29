@@ -109,7 +109,7 @@ const EditableLabel = ({
             >
               <OverflowTooltip
                 content={name}
-                length={size === 'small' ? 2 : 44}
+                length={size === 'small' ? 21 : 44}
                 placement='top'
               />
             </span>
