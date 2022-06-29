@@ -95,7 +95,7 @@ BlockSection.propTypes = {
   message: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   reverse: PropTypes.bool,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
