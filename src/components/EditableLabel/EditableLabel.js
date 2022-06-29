@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import Button from '@components/Button'
 import Icon from '@components/Icon'
 import Spreader from '@components/Spreader'
 import Spinner from '@components/Spinner'
-import Tooltip from '@components/Tooltip'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
@@ -34,7 +33,6 @@ const EditableLabel = ({
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
   const [isFocused, setFocused] = useState(false)
-  const [disabledTooltip, setDisabledTooltip] = useState(true)
 
   const [name, setName] = useState(initialName)
   const labelRef = useRef(null)
@@ -95,12 +93,6 @@ const EditableLabel = ({
     setName(initialName)
   }, [setFocused, name])
 
-  useEffect(() => {
-    setDisabledTooltip(
-      labelRef.current.clientWidth >= labelRef.current.scrollWidth
-    )
-  }, [labelRef, setDisabledTooltip])
-
   useDetectOutsideClick(wrapperRef, handeOutsideClick)
 
   return (
@@ -113,9 +105,7 @@ const EditableLabel = ({
             onClick={isClickable ? handleFocus : () => null}
             data-testid='editable-label'
           >
-            <Tooltip content={name} placement='top' disable={disabledTooltip}>
-              {name}
-            </Tooltip>
+            {name}
           </span>
         ) : (
           <input
