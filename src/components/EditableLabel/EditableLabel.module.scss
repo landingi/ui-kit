@@ -8,7 +8,7 @@
   }
 
   &--big {
-    width: 550px;
+    width: 540px;
   }
 
 }
@@ -20,6 +20,8 @@
 
 .label {
   width: 100%;
+  display: flex;
+  align-items: center;
 
   &--small {
     font-size: 14px;
@@ -30,7 +32,7 @@
   &--big {
     font-size: 23px;
     font-weight: 600;
-    width: 500px;
+    width: 490px;
     height: 36px;
   }
 }
@@ -49,7 +51,7 @@
 
   &--big {
     font-size: 23px;
-    width: 500px;
+    width: 490px;
     height: 36px;
   }
 
