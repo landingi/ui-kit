@@ -4,7 +4,6 @@ import { Row } from 'simple-flexbox'
 import Button from '@components/Button'
 import Icon from '@components/Icon'
 import Spreader from '@components/Spreader'
-import OverflowTooltip from '@components/OverflowTooltip'
 import Spinner from '@components/Spinner'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -106,11 +105,7 @@ const EditableLabel = ({
             onClick={isClickable ? handleFocus : () => null}
             data-testid='editable-label'
           >
-            <OverflowTooltip
-              content={name}
-              length={size === 'small' ? 21 : 44}
-              placement='top'
-            />
+            {name}
           </span>
         ) : (
           <input
