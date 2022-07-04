@@ -5,6 +5,7 @@ import Button from '@components/Button'
 import Icon from '@components/Icon'
 import Spreader from '@components/Spreader'
 import Spinner from '@components/Spinner'
+import Tooltip from '@components/Tooltip'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
@@ -36,13 +37,18 @@ const EditableLabel = ({
 
   const [name, setName] = useState(initialName)
   const labelRef = useRef(null)
-  const wrapperRef = useRef(null)
+  const containerRef = useRef(null)
 
   const handleChange = event => setName(event.target.value)
 
-  const wrapperStyles = useStyles({
-    [styles.wrapper]: true,
-    [styles[`wrapper--${size}`]]: size
+  const labelWidth = {
+    small: 190,
+    big: 490
+  }
+
+  const containerStyles = useStyles({
+    [styles.container]: true,
+    [styles[`container--${size}`]]: size
   })
 
   const inputStyles = useStyles({
@@ -93,20 +99,27 @@ const EditableLabel = ({
     setName(initialName)
   }, [setFocused, name])
 
-  useDetectOutsideClick(wrapperRef, handeOutsideClick)
+  useDetectOutsideClick(containerRef, handeOutsideClick)
 
   return (
-    <div className={wrapperStyles} ref={wrapperRef} {...wrapperProps}>
-      <Row className={styles['input-wrapper']} vertical='center'>
+    <div className={containerStyles} ref={containerRef} {...wrapperProps}>
+      <Row className={styles.wrapper} vertical='center'>
         {!isFocused ? (
-          <span
+          <Tooltip
+            content={name}
+            placement='top'
+            align='center'
             className={labelStyles}
-            ref={labelRef}
-            onClick={isClickable ? handleFocus : () => null}
-            data-testid='editable-label'
+            disabled={labelRef?.current?.offsetWidth < labelWidth[size]}
           >
-            {name}
-          </span>
+            <span
+              ref={labelRef}
+              onClick={isClickable ? handleFocus : () => null}
+              data-testid='editable-label'
+            >
+              {name}
+            </span>
+          </Tooltip>
         ) : (
           <input
             className={inputStyles}
