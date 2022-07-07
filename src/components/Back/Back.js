@@ -31,6 +31,7 @@ const Back = ({ className, url, content, label, onClick }) => {
             variant={label ? 'transparent' : 'icon'}
             hasIcon={!!label}
             onClick={onClick}
+            data-testid='button'
           >
             <Icon icon='icon-arrow-left' />
 

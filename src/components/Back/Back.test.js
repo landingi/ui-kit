@@ -2,12 +2,11 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Back from '@components/Back'
-import Tooltip from '@components/Tooltip'
 
 describe('<Back/> mount', () => {
   const props = {
     className: 'class-name',
-    content: <Tooltip>Content</Tooltip>,
+    content: 'Content',
     url: '/payments/subscription/cancel'
   }
 
@@ -25,5 +24,21 @@ describe('<Back/> mount', () => {
     const back = getByTestId('back')
 
     expect(back).toHaveClass('class-name')
+  })
+
+  it('button should have class button--icon', () => {
+    const { getByTestId } = render(<Back {...props} />)
+
+    const button = getByTestId('button')
+
+    expect(button).toHaveClass('button--icon')
+  })
+
+  it('button should have class button--transparent', () => {
+    const { getByTestId } = render(<Back {...props} label='Back' />)
+
+    const button = getByTestId('button')
+
+    expect(button).toHaveClass('button--transparent')
   })
 })
