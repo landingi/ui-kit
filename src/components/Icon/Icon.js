@@ -26,7 +26,7 @@ const Icon = ({
       [css[`${icon}`]]: true,
       [styles[`icon--${color}`]]: color,
       [styles['icon--spin']]: spin,
-      [styles[`editor-icon--${size}`]]: size
+      [styles[`icon--${size}`]]: size
     },
     className
   )
