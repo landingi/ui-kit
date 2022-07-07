@@ -23,10 +23,10 @@ const Icon = ({
   const elementStyles = useStyles(
     {
       [css['editor-icon']]: true,
+      [css[`editor-icon--${size}`]]: size,
       [css[`${icon}`]]: true,
       [styles[`icon--${color}`]]: color,
-      [styles['icon--spin']]: spin,
-      [styles[`icon--${size}`]]: size
+      [styles['icon--spin']]: spin
     },
     className
   )

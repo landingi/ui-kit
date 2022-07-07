@@ -18,6 +18,18 @@
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &--10 {
+    font-size: 10px;
+  }
+
+  &--12 {
+    font-size: 12px;
+  }
+
+  &--14 {
+    font-size: 14px;
+  }
 }
 
 .icon-ab-testing:before {
