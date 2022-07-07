@@ -39,7 +39,6 @@ Spreader.propTypes = {
 }
 
 Spreader.defaultProps = {
-  className: 'spreader',
   spread: 'medium'
 }
 

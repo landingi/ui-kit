@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "2.0.50",
+  "version": "2.0.51",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -88,6 +88,7 @@
     "react-advanced-time-input": "1.2.0",
     "react-date-range": "1.4.0",
     "react-ink": "6.5.1",
+    "react-laag": "^2.0.4",
     "react-text-mask": "5.4.3",
     "react-tooltip": "4.2.21",
     "react-uuid": "1.0.2",
