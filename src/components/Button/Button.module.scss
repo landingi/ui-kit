@@ -234,7 +234,7 @@
 
     svg,
     i {
-      color: $color-3;
+      color: $color-2;
     }
 
     &-blue {
@@ -258,13 +258,7 @@
     }
 
     &:hover {
-      background: $color-button-hover;
-      color: $color-1;
-
-      svg,
-      i {
-        color: $color-1;
-      }
+      background: $color-bg;
     }
   }
 
