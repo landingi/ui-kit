@@ -47,10 +47,31 @@
     display: inline-block;
     animation: spinIcon 1s linear infinite;
   }
+
+  &--10 {
+    i {
+      font-size: 10px;
+    }
+  }
+
+  &--12 {
+    i {
+      font-size: 12px;
+    }
+  }
+
+  &--14 {
+    i {
+      font-size: 14px;
+    }
+  }
 }
 
 @keyframes spinIcon {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
