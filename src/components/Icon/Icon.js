@@ -49,7 +49,7 @@ Icon.defaultProps = {
   className: '',
   color: 'default',
   spin: false,
-  size: 12,
+  size: 14,
   ['data-testid']: undefined
 }
 
