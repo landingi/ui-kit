@@ -1,3 +1,22 @@
+.editor-icon {
+  &--10 {
+    &::before {
+      font-size: 10px;
+    }
+  }
+
+  &--12 {
+    &::before {
+      font-size: 12px;
+    }
+  }
+
+  &--14 {
+    &::before {
+      font-size: 14px;
+    }
+  }
+}
 .editor-icon:before {
   font-family: 'react-editor-icons';
   font-style: normal;
@@ -6,7 +25,6 @@
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: 0.2em;
   text-align: center;
 
   /* For safety - reset parent styles, that can break glyph codes*/
@@ -15,10 +33,6 @@
 
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
-
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: 0.2em;
 
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;

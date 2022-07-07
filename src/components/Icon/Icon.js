@@ -17,11 +17,13 @@ const Icon = ({
   color,
   className,
   spin,
+  size,
   ['data-testid']: dataTestId
 }) => {
   const elementStyles = useStyles(
     {
       [css['editor-icon']]: true,
+      [css[`editor-icon--${size}`]]: size,
       [css[`${icon}`]]: true,
       [styles[`icon--${color}`]]: color,
       [styles['icon--spin']]: spin
@@ -39,6 +41,7 @@ Icon.propTypes = {
   color: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   spin: PropTypes.bool,
+  size: PropTypes.oneOf([10, 12, 14]),
   ['data-testid']: PropTypes.string
 }
 
@@ -46,6 +49,7 @@ Icon.defaultProps = {
   className: '',
   color: 'default',
   spin: false,
+  size: 14,
   ['data-testid']: undefined
 }
 

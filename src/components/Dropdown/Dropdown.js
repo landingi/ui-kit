@@ -295,7 +295,7 @@ const Dropdown = forwardRef(
       </div>
     )
 
-    const renderIcon = () => <Icon icon={icon} />
+    const renderIcon = () => <Icon icon={icon} size={12} />
 
     const renderLabel = () => (
       <span className={dropdownLabelStyles}>{label}</span>
@@ -304,12 +304,12 @@ const Dropdown = forwardRef(
     const renderArrows = (isOpen, arrowType) =>
       arrowType === 'caret' ? (
         isOpen ? (
-          <Icon icon='icon-caret-up' />
+          <Icon icon='icon-caret-up' size={12} />
         ) : (
-          <Icon icon='icon-caret-down' />
+          <Icon icon='icon-caret-down' size={12} />
         )
       ) : (
-        <Icon icon='icon-ellipsis-v' />
+        <Icon icon='icon-ellipsis-v' size={14} />
       )
 
     useEffect(() => {
