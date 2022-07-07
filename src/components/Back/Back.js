@@ -1,7 +1,6 @@
-import Button from '@components/Button'
-import Spreader from '@components/Spreader'
-import PropTypes from 'prop-types'
 import React from 'react'
+import Button from '@components/Button'
+import PropTypes from 'prop-types'
 import Tooltip from '@components/Tooltip'
 import styles from './Back.module.scss'
 import Icon from '@components/Icon'
@@ -28,12 +27,15 @@ const Back = ({ className, url, content, label, onClick }) => {
     <span data-testid='back' className={elementStyles}>
       <a href={url}>
         <Tooltip content={content} placement='bottom' disabled={!content}>
-          <Button variant='icon' onClick={onClick}>
+          <Button
+            variant={label ? 'transparent' : 'icon'}
+            hasIcon={!!label}
+            onClick={onClick}
+            data-testid='button'
+          >
             <Icon icon='icon-arrow-left' />
 
-            <Spreader spread='tiny' />
-
-            {label && label}
+            {label}
           </Button>
         </Tooltip>
       </a>

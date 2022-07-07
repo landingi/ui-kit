@@ -40,7 +40,7 @@ const Tooltip = ({
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
-    [`react-tooltip-${align}`]: true
+    [styles[`react-tooltip-${align}`]]: align
   })
 
   return (

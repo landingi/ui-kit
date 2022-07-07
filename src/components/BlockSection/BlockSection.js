@@ -76,7 +76,7 @@ const BlockSection = ({
 
             <Spacer space={list ? 'medium' : 'small'} />
 
-            <Button onClick={onClick}>{button}</Button>
+            {button && <Button onClick={onClick}>{button}</Button>}
           </div>
 
           <Image size={527} src={url} />
@@ -89,18 +89,19 @@ const BlockSection = ({
 BlockSection.displayName = 'BlockSection'
 
 BlockSection.propTypes = {
-  button: PropTypes.string.isRequired,
+  button: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   list: PropTypes.arrayOf(PropTypes.string),
-  message: PropTypes.string.isRequired,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   onClick: PropTypes.func,
   reverse: PropTypes.bool,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 }
 
 BlockSection.defaultProps = {
   className: '',
+  button: null,
   list: null,
   reverse: false,
   onClick: () => null
