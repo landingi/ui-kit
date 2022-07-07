@@ -99,7 +99,8 @@
       background-color: transparent;
       color: $color-4;
 
-      svg,i {
+      svg,
+      i {
         color: $color-4;
       }
 
@@ -107,7 +108,8 @@
         background-color: transparent;
         color: $color-4;
 
-        svg,i {
+        svg,
+        i {
           color: $color-4;
         }
       }
@@ -138,7 +140,11 @@
 
   &--small {
     padding: 0;
-    font-size: 12px;
+    font-size: 14px;
+
+    i {
+      font-size: 12px;
+    }
   }
 
   &--medium {
