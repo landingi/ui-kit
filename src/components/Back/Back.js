@@ -1,7 +1,6 @@
+import React from 'react'
 import Button from '@components/Button'
-import Spreader from '@components/Spreader'
 import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
 import Tooltip from '@components/Tooltip'
 import styles from './Back.module.scss'
 import Icon from '@components/Icon'
