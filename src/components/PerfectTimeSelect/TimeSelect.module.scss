@@ -1,0 +1,56 @@
+.time-select {
+  &__label {
+    margin-right: 34px;
+
+    input {
+      color: $color-1;
+      width: 50px !important;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: 10px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    input[type='text'] {
+      -moz-appearance: textfield;
+      border: none;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    svg[data-icon='clock'] {
+      padding-right: 0;
+      color: $color-1;
+    }
+
+    &--disabled {
+      input {
+        color: $color-input-border;
+        -webkit-text-fill-color: $color-input-border;
+        cursor: not-allowed;
+      }
+
+      svg[data-icon='clock'] {
+        color: $color-input-border;
+      }
+    }
+  }
+
+  &__dropdown {
+    width: 145px;
+  }
+
+  &__clock-type-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}

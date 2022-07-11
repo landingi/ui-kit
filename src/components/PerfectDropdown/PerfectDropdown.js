@@ -144,12 +144,12 @@ const PerfectDropdown = ({
   const renderArrow =
     arrowType === 'caret' ? (
       isOpen ? (
-        <Icon icon='caret-up' />
+        <Icon icon='icon-caret-up' />
       ) : (
-        <Icon icon='caret-down' />
+        <Icon icon='icon-caret-down' />
       )
     ) : (
-      <Icon icon='ellipsis-v' />
+      <Icon icon='icon-ellipsis-v' />
     )
 
   const renderIcon = <Icon icon={icon} className={styles['dropdown-icon']} />
