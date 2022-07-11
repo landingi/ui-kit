@@ -88,7 +88,8 @@ const Dropdown = forwardRef(
     )
 
     const dropdownBodyStyles = useStyles({
-      [styles['dropdown__body']]: true
+      [styles['dropdown__body']]: true,
+      [styles[`dropdown--${size}`]]: size
     })
 
     const dropdownLabelStyles = useStyles({
