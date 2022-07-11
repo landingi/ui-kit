@@ -84,8 +84,7 @@ const DropdownSelect = ({
   })
 
   const dropdownStyles = useStyles({
-    [styles['form-field__dropdown--has-error']]:
-      errors[formikKey] || touched[formikKey]
+    [styles['form-field__dropdown--has-error']]: error || isTouched
   })
 
   const getSelectedItem = () => {
