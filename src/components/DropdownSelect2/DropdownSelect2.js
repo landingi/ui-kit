@@ -270,7 +270,7 @@ DropdownSelect.propTypes = {
   className: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
-  errors: PropTypes.objectOf(PropTypes.string),
+  errors: PropTypes.instanceOf(Object),
   touched: PropTypes.instanceOf(Object),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   options: PropTypes.arrayOf(
