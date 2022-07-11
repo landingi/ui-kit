@@ -77,7 +77,7 @@ FormikToggle.propTypes = {
     setFieldValue: PropTypes.func
   }).isRequired,
   id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf])
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
 FormikToggle.defaultProps = {
