@@ -40,10 +40,21 @@ const DateTimePicker = ({
   const addElements = () => {
     document
       .querySelector('.rdrNextButton i')
-      .classList.add('fas', 'fa-arrow-right')
+      .classList.add(
+        'fas',
+        'editor-icons-module__editor-icon',
+        'editor-icons-module__editor-icon--12',
+        'editor-icons-module__icon-arrow-right',
+        'Icon-module__icon--default'
+      )
     document
       .querySelector('.rdrPprevButton i')
-      .classList.add('fas', 'fa-arrow-left')
+      .classList.add(
+        'editor-icons-module__editor-icon',
+        'editor-icons-module__editor-icon--12',
+        'editor-icons-module__icon-arrow-left',
+        'Icon-module__icon--default'
+      )
 
     if (showMonthAndYearPickers) {
       const monthArrow = document.createElement('i')
