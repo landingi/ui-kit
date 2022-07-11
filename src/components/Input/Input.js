@@ -166,7 +166,11 @@ Input.propTypes = {
   background: PropTypes.oneOf(['white', 'transparent']),
   hideArrows: PropTypes.bool,
   i18n: PropTypes.shape({
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+      PropTypes.node
+    ]),
     placeholder: PropTypes.string,
     description: PropTypes.oneOfType([
       PropTypes.string,
