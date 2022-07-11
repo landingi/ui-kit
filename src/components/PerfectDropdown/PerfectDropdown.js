@@ -15,6 +15,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
 import { debounce } from '@helpers/events'
 import Ink from 'react-ink'
+import Spreader from '@components/Spreader'
 
 /**
  * PerfectDropdown - new version of dropdown using react-laag library
@@ -152,7 +153,12 @@ const PerfectDropdown = ({
       <Icon icon='icon-ellipsis-v' />
     )
 
-  const renderIcon = <Icon icon={icon} className={styles['dropdown-icon']} />
+  const renderIcon = (
+    <Fragment>
+      <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
+      <Spreader spread='tiny' />
+    </Fragment>
+  )
 
   const renderLabel = <span className={labelClasses}>{label}</span>
 
