@@ -12,12 +12,6 @@ import Icon from '@components/Icon'
  * @param {string} props.size - variant of statusIcon tiny, medium
  */
 const StatusIcon = ({ className, variant, size }) => {
-  const iconSize = {
-    tiny: 10,
-    medium: 12,
-    big: 14
-  }
-
   const statusIconStyles = useStyles(
     {
       [styles['status-icon']]: true,
@@ -30,9 +24,9 @@ const StatusIcon = ({ className, variant, size }) => {
   return (
     <div data-testid='status-icon' className={statusIconStyles}>
       {variant === 'active' ? (
-        <Icon icon='icon-ok' size={iconSize[size]} />
+        <Icon icon='icon-ok' />
       ) : (
-        <Icon icon='icon-remove' size={iconSize[size]} />
+        <Icon icon='icon-remove' />
       )}
     </div>
   )
