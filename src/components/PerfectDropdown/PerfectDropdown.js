@@ -9,7 +9,7 @@ import { useLayer, mergeRefs } from 'react-laag'
 import styles from './PerfectDropdown.module.scss'
 import Icon from '@components/Icon'
 import emitter from '@lib/emitter'
-import { CLOSE_INNER_DROPDOWN, CLOSE_DROPDOWN } from '@constants/eventTypes'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
@@ -21,7 +21,6 @@ import Ink from 'react-ink'
  * @param {object} props - props
  * @param {object} children - object of children
  * @param {string} icon - icon displayed left to label, it isn't displayed when customTrigger is given
- * @param {bool} innerDropdown - innerDropdown (?)
  * @param {string} label - label text, it isn't displayed when customTrigger is given
  * @param {string} size - size
  * @param {string} arrowType - type of arrow to display right to label, it isn't displayed when customTrigger is given
@@ -41,7 +40,6 @@ import Ink from 'react-ink'
 const PerfectDropdown = ({
   children,
   icon,
-  innerDropdown,
   label,
   size,
   arrowType,
@@ -134,22 +132,14 @@ const PerfectDropdown = ({
   )
 
   useEffect(() => {
-    emitter.on(CLOSE_INNER_DROPDOWN, closeInnerDropdown)
     emitter.on(CLOSE_DROPDOWN, close)
     window.addEventListener('resize', debouncedHandleResize)
 
     return () => {
-      emitter.off(CLOSE_INNER_DROPDOWN, closeInnerDropdown)
       emitter.off(CLOSE_DROPDOWN, close)
       window.removeEventListener('resize', debouncedHandleResize)
     }
   }, [])
-
-  const closeInnerDropdown = () => {
-    if (innerDropdown) {
-      close()
-    }
-  }
 
   const renderArrow =
     arrowType === 'caret' ? (
