@@ -106,6 +106,8 @@ const PerfectDropdown = ({
     onOutsideClick: close
   })
 
+  console.log('are changes visible')
+
   const handleResize = () => {
     if (size !== 'fixed') {
       return
@@ -156,6 +158,7 @@ const PerfectDropdown = ({
   const renderIcon = (
     <Fragment>
       <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
+
       <Spreader spread='tiny' />
     </Fragment>
   )
