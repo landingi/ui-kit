@@ -28,7 +28,7 @@ import Spreader from '@components/Spreader'
  * @param {string} hasArrow - whether arrow should be displayed or not
  * @param {string} dropdownPlacement - dropdown placement
  * @param {function} handleOnOpen - function that will be called when dropdown opens
- * @param {string} aligment - aligment of dropdown trigger elements (icon, label and arrow)
+ * @param {string} alignment - aligment of dropdown trigger elements (icon, label and arrow)
  * @param {string} hasInput - adds styling if dropdown is used as input
  * @param {string} hasFullInputStyle - adds some other styling if dropdown is used as input
  * @param {bool} asPlaceholder - changes color of the label so it looks like placeholder
@@ -76,6 +76,7 @@ const PerfectDropdown = ({
     {
       [styles['trigger']]: !CustomTrigger,
       [styles['trigger--spaced']]: alignment === 'spaced',
+      [styles['trigger--end']]: alignment === 'end',
       [styles['trigger--input']]: hasInput,
       [styles['trigger--as-input']]: hasFullInputStyle
     },
@@ -105,8 +106,6 @@ const PerfectDropdown = ({
     ],
     onOutsideClick: close
   })
-
-  console.log('are changes visible')
 
   const handleResize = () => {
     if (size !== 'fixed') {
