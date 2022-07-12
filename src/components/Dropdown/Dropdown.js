@@ -169,8 +169,7 @@ const Dropdown = forwardRef(
             left: container?.left,
             top: renderAbove
               ? container?.top - dropdown?.height
-              : container?.bottom + offset,
-            width: container?.width
+              : container?.bottom + offset
           })
         } else if (size === 'huge') {
           setStyle({
