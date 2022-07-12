@@ -2,9 +2,13 @@
   &__label {
     margin-right: 34px;
 
+    i {
+      color: $color-1;
+    }
+
     input {
       color: $color-1;
-      width: 50px !important;
+      width: 52px !important;
       padding-top: 4px;
       padding-bottom: 4px;
       padding-left: 10px;

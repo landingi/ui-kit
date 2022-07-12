@@ -216,7 +216,6 @@ const DropdownSelect = ({
         hasInput
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
-        size='fixed'
         alignment={hasLabel ? 'spaced' : 'end'}
         inModalName={inModalName}
         ref={dropdownRef}
