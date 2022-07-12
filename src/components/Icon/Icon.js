@@ -9,6 +9,8 @@ import css from './editor-icons.module.scss'
  * @param {object} props - props
  * @param {string} props.icon - icon name
  * @param {string} props.color - color of icon default, primary
+ * @param {number} props.size - size of icon default, 14px
+ * @param {bool} props.autoSize - the size of the wrapper font
  * @param {string | array} props.className - list of classes out of module
  * @return {object} An object of children element
  */
@@ -18,12 +20,13 @@ const Icon = ({
   className,
   spin,
   size,
+  autoSize,
   ['data-testid']: dataTestId
 }) => {
   const elementStyles = useStyles(
     {
       [css['editor-icon']]: true,
-      [css[`editor-icon--${size}`]]: size,
+      [css[`editor-icon--${size}`]]: !autoSize && size,
       [css[`${icon}`]]: true,
       [styles[`icon--${color}`]]: color,
       [styles['icon--spin']]: spin
@@ -42,6 +45,7 @@ Icon.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   spin: PropTypes.bool,
   size: PropTypes.oneOf([10, 12, 14]),
+  autoSize: PropTypes.bool,
   ['data-testid']: PropTypes.string
 }
 
@@ -50,6 +54,7 @@ Icon.defaultProps = {
   color: 'default',
   spin: false,
   size: 14,
+  autoSize: false,
   ['data-testid']: undefined
 }
 
