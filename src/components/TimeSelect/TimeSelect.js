@@ -85,7 +85,8 @@ const TimeSelect = ({
   const renderDropdownLabel = useCallback(
     selectedValue => (
       <Row className={timeSelectLabelClasses} vertical='center'>
-        <Icon icon='icon-time' />
+        <Icon icon='icon-time' color='color-1' />
+
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}
