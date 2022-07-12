@@ -41,11 +41,10 @@ const DateTimePicker = ({
     document
       .querySelector('.rdrNextButton i')
       .classList.add(
-        'fas',
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-arrow-right',
-        'Icon-module__icon--default'
+        'Icon-module__icon--color-3'
       )
     document
       .querySelector('.rdrPprevButton i')
@@ -53,7 +52,7 @@ const DateTimePicker = ({
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-arrow-left',
-        'Icon-module__icon--default'
+        'Icon-module__icon--color-3'
       )
 
     if (showMonthAndYearPickers) {
@@ -63,13 +62,13 @@ const DateTimePicker = ({
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-caret-down',
-        'Icon-module__icon--default'
+        'Icon-module__icon--color-3'
       )
       yearArrow.classList.add(
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-caret-down',
-        'Icon-module__icon--default'
+        'Icon-module__icon--color-3'
       )
       document.querySelector('.rdrMonthPicker').append(monthArrow)
       document.querySelector('.rdrYearPicker').append(yearArrow)
