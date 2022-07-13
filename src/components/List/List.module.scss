@@ -6,10 +6,6 @@
   &__item {
     a {
       text-decoration: none;
-
-      &:hover {
-        color: $color-1;
-      }
     }
 
     svg {
@@ -86,13 +82,8 @@
   }
 
   &:hover {
-    background: $color-6;
-    color: $color-1;
+    background: $color-bg;
     cursor: pointer;
-
-    svg {
-      color: $color-1;
-    }
   }
 }
 

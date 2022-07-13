@@ -24,9 +24,9 @@ const StatusIcon = ({ className, variant, size }) => {
   return (
     <div data-testid='status-icon' className={statusIconStyles}>
       {variant === 'active' ? (
-        <Icon icon='icon-ok' />
+        <Icon icon='icon-ok' autoSize />
       ) : (
-        <Icon icon='icon-remove' />
+        <Icon icon='icon-remove' autoSize />
       )}
     </div>
   )

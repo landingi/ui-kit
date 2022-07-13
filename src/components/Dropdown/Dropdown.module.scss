@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 $padding-medium;
+    padding: 0 $padding-small;
     box-sizing: border-box;
 
     &__icon {
@@ -129,7 +129,7 @@
   }
 
   &__body {
-    padding: 20px 0 $padding-small;
+    padding: $padding-small 0px;
 
     label {
       padding: 0 $padding-medium $padding-small;
@@ -140,7 +140,7 @@
   }
 
   &__label {
-    padding: 0 $padding-medium 0 $padding-medium;
+    padding: 0 $padding-small;
     font-weight: 400;
     margin: 0;
     font-size: 14px;

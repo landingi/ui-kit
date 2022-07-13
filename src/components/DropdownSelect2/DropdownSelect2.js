@@ -23,6 +23,7 @@ import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
 import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { getDeepValue } from '@helpers/data'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -72,18 +73,18 @@ const DropdownSelect = ({
   inModalName
 }) => {
   const hasLabel = value || alwaysShowLabel
+  const error = getDeepValue(errors, formikKey)
+  const isTouched = getDeepValue(touched, formikKey)
 
   const labelStyles = useStyles({
     [styles['form-field__label']]: true,
-    [styles['form-field__label--has-error']]:
-      errors[formikKey] || touched[formikKey],
+    [styles['form-field__label--has-error']]: error || isTouched,
     [styles['form-field__label--has-label']]: hasLabel,
     [styles['form-field__label--disabled']]: isOpenDisabled
   })
 
   const dropdownStyles = useStyles({
-    [styles['form-field__dropdown--has-error']]:
-      errors[formikKey] || touched[formikKey]
+    [styles['form-field__dropdown--has-error']]: error || isTouched
   })
 
   const getSelectedItem = () => {
@@ -257,7 +258,7 @@ const DropdownSelect = ({
         {optionalContent}
       </Dropdown>
 
-      <Error error={errors[formikKey]} />
+      {error ? <Error error={error} /> : null}
     </div>
   )
 }
@@ -268,7 +269,7 @@ DropdownSelect.propTypes = {
   className: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
-  errors: PropTypes.objectOf(PropTypes.string),
+  errors: PropTypes.instanceOf(Object),
   touched: PropTypes.instanceOf(Object),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   options: PropTypes.arrayOf(

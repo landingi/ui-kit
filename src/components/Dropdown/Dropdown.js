@@ -88,7 +88,8 @@ const Dropdown = forwardRef(
     )
 
     const dropdownBodyStyles = useStyles({
-      [styles['dropdown__body']]: true
+      [styles['dropdown__body']]: true,
+      [styles[`dropdown--${size}`]]: size
     })
 
     const dropdownLabelStyles = useStyles({
@@ -168,8 +169,7 @@ const Dropdown = forwardRef(
             left: container?.left,
             top: renderAbove
               ? container?.top - dropdown?.height
-              : container?.bottom + offset,
-            width: container?.width
+              : container?.bottom + offset
           })
         } else if (size === 'huge') {
           setStyle({
@@ -295,7 +295,7 @@ const Dropdown = forwardRef(
       </div>
     )
 
-    const renderIcon = () => <Icon icon={icon} />
+    const renderIcon = () => <Icon icon={icon} size={12} />
 
     const renderLabel = () => (
       <span className={dropdownLabelStyles}>{label}</span>
@@ -304,12 +304,12 @@ const Dropdown = forwardRef(
     const renderArrows = (isOpen, arrowType) =>
       arrowType === 'caret' ? (
         isOpen ? (
-          <Icon icon='icon-caret-up' />
+          <Icon icon='icon-caret-up' size={12} />
         ) : (
-          <Icon icon='icon-caret-down' />
+          <Icon icon='icon-caret-down' size={12} />
         )
       ) : (
-        <Icon icon='icon-ellipsis-v' />
+        <Icon icon='icon-ellipsis-v' size={14} />
       )
 
     useEffect(() => {
