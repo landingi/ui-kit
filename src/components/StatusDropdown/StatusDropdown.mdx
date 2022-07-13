@@ -1,0 +1,42 @@
+import { Playground, Props } from 'docz'
+import StatusDropdown from '@components/StatusDropdown'
+import { Row } from 'simple-flexbox'
+import Spreader from '@components/Spreader'
+
+# StatusDropdown
+
+<Props of={StatusDropdown} />
+
+## Variant
+
+<Playground>
+  <Row>
+    <StatusDropdown status='warning' label='WARNING'>
+      'content'
+    </StatusDropdown>
+  </Row>
+
+  <Spreader spread='small' />
+
+  <Row>
+    <StatusDropdown status='info' label='INFO'>
+       'content'
+    </StatusDropdown>
+  </Row>
+
+  <Spreader spread='small' />
+
+  <Row>
+    <StatusDropdown status='alert' label='ALERT'>
+       'content'
+    </StatusDropdown>
+  </Row>
+
+  <Spreader spread='small' />
+
+  <Row>
+    <StatusDropdown status='success' label='SUCCESS'>
+       'content'
+    </StatusDropdown>
+  </Row>
+</Playground>

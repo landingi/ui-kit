@@ -1,0 +1,41 @@
+.trigger {
+  padding: 0 $padding-tiny;
+  min-height: 20px;
+  color: $color-white;
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+
+  &__label {
+    font-weight: 400;
+    margin: 0;
+    font-size: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: normal;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--alert {
+    background: $color-alert;
+  }
+
+  &--warning {
+    background: $color-warning;
+  }
+
+  &--success {
+    background: $color-success;
+  }
+
+  &--info {
+    background: $color-info;
+  }
+}
