@@ -4,7 +4,7 @@
   background: $color-white;
   padding: 20px 0 $padding-small;
   max-height: calc(100vh - 100px);
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &--auto {
     width: auto;
