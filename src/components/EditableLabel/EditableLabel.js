@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback, useRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import Button from '@components/Button'
@@ -101,7 +101,7 @@ const EditableLabel = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
-  useEffect(() => setName(initialName), [initialName])
+  useMemo(() => setName(initialName), [initialName])
 
   console.log(initialName)
 
