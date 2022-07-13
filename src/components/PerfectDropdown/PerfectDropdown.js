@@ -28,6 +28,7 @@ import Spreader from '@components/Spreader'
  * @param {string} hasArrow - whether arrow should be displayed or not
  * @param {string} dropdownPlacement - dropdown placement
  * @param {function} handleOnOpen - function that will be called when dropdown opens
+ * @param {function} handleOnClose - function that will be called when dropdown closes
  * @param {string} alignment - aligment of dropdown trigger elements (icon, label and arrow)
  * @param {string} hasInput - adds styling if dropdown is used as input
  * @param {string} hasFullInputStyle - adds some other styling if dropdown is used as input
@@ -35,8 +36,8 @@ import Spreader from '@components/Spreader'
  * @param {function} customTrigger - lets you display your custom trigger for dropdown. It uses render props,
  * so you have to pass a function there () => <YourTrigger />. It allows you to use state derived from this
  * dropdown in your custom trigger as props, for example isOpen.
- * @param {number} - offset between trigger and dropdown
- * @param {string} - className of dropdown trigger, allow adjustments of position etc.
+ * @param {number} offset - offset between trigger and dropdown
+ * @param {string} className - className of dropdown trigger, allow adjustments of position etc.
  */
 const PerfectDropdown = ({
   children,
@@ -222,10 +223,9 @@ PerfectDropdown.propTypes = {
   dropdownPlacement: PropTypes.string,
   handleOnOpen: PropTypes.func,
   handleOnClose: PropTypes.func,
-  alignment: PropTypes.oneOf(['center', 'spaced']),
+  alignment: PropTypes.oneOf(['center', 'spaced', 'end']),
   children: PropTypes.node.isRequired,
   icon: PropTypes.string,
-  innerDropdown: PropTypes.bool,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   hasInput: PropTypes.bool,
   hasFullInputStyle: PropTypes.bool,
@@ -244,7 +244,6 @@ PerfectDropdown.defaultProps = {
   handleOnClose: () => null,
   alignment: 'false',
   icon: null,
-  innerDropdown: false,
   label: null,
   hasInput: false,
   hasFullInputStyle: false,

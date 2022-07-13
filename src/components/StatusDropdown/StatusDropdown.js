@@ -66,7 +66,6 @@ StatusDropdown.propTypes = {
 }
 
 StatusDropdown.defaultProps = {
-  arrowType: 'caret',
   dropdownPlacement: 'bottom-end',
   label: null,
   className: ''
