@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Row } from 'simple-flexbox'
 import Button from '@components/Button'
@@ -34,8 +34,8 @@ const EditableLabel = ({
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
   const [isFocused, setFocused] = useState(false)
-
   const [name, setName] = useState(initialName)
+
   const labelRef = useRef(null)
   const containerRef = useRef(null)
 
@@ -100,6 +100,8 @@ const EditableLabel = ({
   }, [setFocused, name])
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
+
+  useMemo(() => setName(initialName), [initialName])
 
   return (
     <div className={containerStyles} ref={containerRef} {...wrapperProps}>
