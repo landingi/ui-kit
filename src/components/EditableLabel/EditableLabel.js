@@ -34,8 +34,8 @@ const EditableLabel = ({
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
   const [isFocused, setFocused] = useState(false)
-
   const [name, setName] = useState(initialName)
+
   const labelRef = useRef(null)
   const containerRef = useRef(null)
 
