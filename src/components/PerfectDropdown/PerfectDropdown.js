@@ -3,7 +3,8 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  useRef
+  useRef,
+  forwardRef
 } from 'react'
 import { useLayer, mergeRefs } from 'react-laag'
 import styles from './PerfectDropdown.module.scss'
@@ -39,172 +40,177 @@ import Spreader from '@components/Spreader'
  * @param {number} offset - offset between trigger and dropdown
  * @param {string} className - className of dropdown trigger, allow adjustments of position etc.
  */
-const PerfectDropdown = ({
-  children,
-  icon,
-  label,
-  size,
-  arrowType,
-  hasArrow,
-  dropdownPlacement,
-  handleOnOpen,
-  handleOnClose,
-  alignment,
-  hasInput,
-  hasFullInputStyle,
-  asPlaceholder,
-  customTrigger: CustomTrigger,
-  offset,
-  className
-}) => {
-  const [isOpen, setOpen] = useState(false)
-
-  const [style, setStyle] = useState({})
-
-  const bodyClasses = useStyles({
-    [styles['dropdown']]: true,
-    [styles[`dropdown--${size}`]]: true
-  })
-
-  const labelClasses = useStyles({
-    [styles['trigger__label']]: true,
-    [styles['trigger__label--icon']]: icon,
-    [styles['trigger__label--as-input']]: hasInput,
-    [styles['trigger__label--placeholder']]: asPlaceholder
-  })
-
-  const triggerClasses = useStyles(
+const PerfectDropdown = forwardRef(
+  (
     {
-      [styles['trigger']]: !CustomTrigger,
-      [styles['trigger--spaced']]: alignment === 'spaced',
-      [styles['trigger--end']]: alignment === 'end',
-      [styles['trigger--input']]: hasInput,
-      [styles['trigger--as-input']]: hasFullInputStyle
+      children,
+      icon,
+      label,
+      size,
+      arrowType,
+      hasArrow,
+      dropdownPlacement,
+      handleOnOpen,
+      handleOnClose,
+      alignment,
+      hasInput,
+      hasFullInputStyle,
+      asPlaceholder,
+      customTrigger: CustomTrigger,
+      offset,
+      className
     },
-    className
-  )
+    ref
+  ) => {
+    const [isOpen, setOpen] = useState(false)
 
-  const triggerRef = useRef()
+    const [style, setStyle] = useState({})
 
-  const close = () => {
-    setOpen(false)
-    handleOnClose()
-  }
+    const bodyClasses = useStyles({
+      [styles['dropdown']]: true,
+      [styles[`dropdown--${size}`]]: true
+    })
 
-  const { renderLayer, triggerProps, layerProps } = useLayer({
-    isOpen,
-    auto: true,
-    snap: false,
-    triggerOffset: offset,
-    placement: dropdownPlacement,
-    possiblePlacements: [
-      'bottom-start',
-      'bottom-end',
-      'bottom-center',
-      'top-start',
-      'top-center',
-      'top-end'
-    ],
-    onOutsideClick: close
-  })
+    const labelClasses = useStyles({
+      [styles['trigger__label']]: true,
+      [styles['trigger__label--icon']]: icon,
+      [styles['trigger__label--as-input']]: hasInput,
+      [styles['trigger__label--placeholder']]: asPlaceholder
+    })
 
-  const handleResize = () => {
-    if (size !== 'fixed') {
-      return
-    }
-
-    const container = getBoundings(triggerRef.current)
-
-    setStyle({ width: container?.width })
-  }
-
-  const debouncedHandleResize = useCallback(debounce(handleResize, 50), [])
-
-  const handleShow = useCallback(
-    event => {
-      event.stopPropagation()
-      event.preventDefault()
-
-      !isOpen && handleOnOpen()
-
-      handleResize()
-
-      setOpen(isOpen => !isOpen)
-    },
-    [isOpen]
-  )
-
-  useEffect(() => {
-    emitter.on(CLOSE_DROPDOWN, close)
-    window.addEventListener('resize', debouncedHandleResize)
-
-    return () => {
-      emitter.off(CLOSE_DROPDOWN, close)
-      window.removeEventListener('resize', debouncedHandleResize)
-    }
-  }, [])
-
-  const renderArrow =
-    arrowType === 'caret' ? (
-      isOpen ? (
-        <Icon icon='icon-caret-up' />
-      ) : (
-        <Icon icon='icon-caret-down' />
-      )
-    ) : (
-      <Icon icon='icon-ellipsis-v' />
+    const triggerClasses = useStyles(
+      {
+        [styles['trigger']]: !CustomTrigger,
+        [styles['trigger--spaced']]: alignment === 'spaced',
+        [styles['trigger--end']]: alignment === 'end',
+        [styles['trigger--input']]: hasInput,
+        [styles['trigger--as-input']]: hasFullInputStyle
+      },
+      className
     )
 
-  const renderIcon = (
-    <Fragment>
-      <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
+    const triggerRef = useRef()
 
-      <Spreader spread='tiny' />
-    </Fragment>
-  )
+    const close = () => {
+      setOpen(false)
+      handleOnClose()
+    }
 
-  const renderLabel = <span className={labelClasses}>{label}</span>
+    const { renderLayer, triggerProps, layerProps } = useLayer({
+      isOpen,
+      auto: true,
+      snap: false,
+      triggerOffset: offset,
+      placement: dropdownPlacement,
+      possiblePlacements: [
+        'bottom-start',
+        'bottom-end',
+        'bottom-center',
+        'top-start',
+        'top-center',
+        'top-end'
+      ],
+      onOutsideClick: close
+    })
 
-  const renderTriggerContent = () =>
-    CustomTrigger ? (
-      <CustomTrigger isOpen={isOpen} />
-    ) : (
+    const handleResize = () => {
+      if (size !== 'fixed') {
+        return
+      }
+
+      const container = getBoundings(triggerRef.current)
+
+      setStyle({ width: container?.width })
+    }
+
+    const debouncedHandleResize = useCallback(debounce(handleResize, 50), [])
+
+    const handleShow = useCallback(
+      event => {
+        event.stopPropagation()
+        event.preventDefault()
+
+        !isOpen && handleOnOpen()
+
+        handleResize()
+
+        setOpen(isOpen => !isOpen)
+      },
+      [isOpen]
+    )
+
+    useEffect(() => {
+      emitter.on(CLOSE_DROPDOWN, close)
+      window.addEventListener('resize', debouncedHandleResize)
+
+      return () => {
+        emitter.off(CLOSE_DROPDOWN, close)
+        window.removeEventListener('resize', debouncedHandleResize)
+      }
+    }, [])
+
+    const renderArrow =
+      arrowType === 'caret' ? (
+        isOpen ? (
+          <Icon icon='icon-caret-up' />
+        ) : (
+          <Icon icon='icon-caret-down' />
+        )
+      ) : (
+        <Icon icon='icon-ellipsis-v' />
+      )
+
+    const renderIcon = (
       <Fragment>
-        {icon && renderIcon}
+        <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
 
-        {label && renderLabel}
-
-        {hasArrow && renderArrow}
-
-        {!hasInput && <Ink />}
+        <Spreader spread='tiny' />
       </Fragment>
     )
 
-  return (
-    <Fragment>
-      <span
-        {...triggerProps}
-        className={triggerClasses}
-        onClick={handleShow}
-        ref={mergeRefs(triggerProps?.ref, triggerRef)}
-        data-testid='dropdown'
-      >
-        {renderTriggerContent()}
-      </span>
+    const renderLabel = <span className={labelClasses}>{label}</span>
 
-      {isOpen &&
-        renderLayer(
-          <span
-            {...layerProps}
-            className={bodyClasses}
-            style={{ ...layerProps?.style, ...style }}
-          >
-            {children}
-          </span>
-        )}
-    </Fragment>
-  )
-}
+    const renderTriggerContent = () =>
+      CustomTrigger ? (
+        <CustomTrigger isOpen={isOpen} />
+      ) : (
+        <Fragment>
+          {icon && renderIcon}
+
+          {label && renderLabel}
+
+          {hasArrow && renderArrow}
+
+          {!hasInput && <Ink />}
+        </Fragment>
+      )
+
+    return (
+      <Fragment>
+        <span
+          {...triggerProps}
+          className={triggerClasses}
+          onClick={handleShow}
+          ref={mergeRefs(triggerProps?.ref, triggerRef, ref)}
+          data-testid='dropdown'
+        >
+          {renderTriggerContent()}
+        </span>
+
+        {isOpen &&
+          renderLayer(
+            <span
+              {...layerProps}
+              className={bodyClasses}
+              style={{ ...layerProps?.style, ...style }}
+            >
+              {children}
+            </span>
+          )}
+      </Fragment>
+    )
+  }
+)
 
 PerfectDropdown.propTypes = {
   hasArrow: PropTypes.bool,
