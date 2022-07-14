@@ -39,6 +39,7 @@ import { getDeepValue } from '@helpers/data'
  * @param {array} props.hasDescription - render description in options
  * @param {string} props.hasSearcher - show Searcher
  * @param {func} props.handleOnSearchChange - on search input change handler
+ * @param {func} props.handleOnOpen - callback called when dropdown is opening
  * @param {bool} props.isLoading - list loading spinner
  * @param {object} props.emptyMessage - empty message component
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
@@ -62,6 +63,7 @@ const DropdownSelect = ({
   hasDescription,
   hasSearcher,
   handleOnSearchChange,
+  handleOnOpen,
   isLoading,
   emptyMessage,
   isOpenDisabled,
@@ -221,6 +223,7 @@ const DropdownSelect = ({
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
+        handleOnOpen={handleOnOpen}
         className={dropdownStyles}
       >
         {hasSearcher && (
@@ -289,6 +292,7 @@ DropdownSelect.propTypes = {
   hasDescription: PropTypes.bool,
   hasSearcher: PropTypes.bool,
   handleOnSearchChange: PropTypes.func,
+  handleOnOpen: PropTypes.func,
   isLoading: PropTypes.bool,
   emptyMessage: PropTypes.node,
   isOpenDisabled: PropTypes.bool,
@@ -313,6 +317,7 @@ DropdownSelect.defaultProps = {
   hasDescription: false,
   hasSearcher: false,
   handleOnSearchChange: () => null,
+  handleOnOpen: () => null,
   isLoading: false,
   emptyMessage: null,
   isOpenDisabled: false,
