@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styles from './StatusIcon.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import Tooltip from '@components/Tooltip'
 import Icon from '@components/Icon'
 
 /**
@@ -11,7 +12,7 @@ import Icon from '@components/Icon'
  * @param {string} props.variant - variant of statusIcon active, inactive
  * @param {string} props.size - variant of statusIcon tiny, medium
  */
-const StatusIcon = ({ className, variant, size }) => {
+const StatusIcon = ({ className, variant, size, tooltip }) => {
   const statusIconStyles = useStyles(
     {
       [styles['status-icon']]: true,
@@ -28,9 +29,16 @@ const StatusIcon = ({ className, variant, size }) => {
   }
 
   return (
-    <div data-testid='status-icon' className={statusIconStyles}>
-      <Icon icon={variantsIcons[variant]} autoSize />
-    </div>
+    <Tooltip
+      content={tooltip}
+      placement='top'
+      align='center'
+      disabled={!tooltip}
+    >
+      <div data-testid='status-icon' className={statusIconStyles}>
+        <Icon icon={variantsIcons[variant]} autoSize />
+      </div>
+    </Tooltip>
   )
 }
 
