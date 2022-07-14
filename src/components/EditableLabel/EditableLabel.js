@@ -123,7 +123,7 @@ const EditableLabel = ({
         ) : (
           <input
             className={inputStyles}
-            value={inputValue}
+            value={name}
             placeholder={placeholder}
             onChange={handleChange}
             type='text'
