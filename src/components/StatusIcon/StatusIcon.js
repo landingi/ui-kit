@@ -21,13 +21,15 @@ const StatusIcon = ({ className, variant, size }) => {
     className
   )
 
+  const variantsIcons = {
+    active: 'icon-ok',
+    inactive: 'icon-remove',
+    warning: 'icon-exclamation'
+  }
+
   return (
     <div data-testid='status-icon' className={statusIconStyles}>
-      {variant === 'active' ? (
-        <Icon icon='icon-ok' autoSize />
-      ) : (
-        <Icon icon='icon-remove' autoSize />
-      )}
+      <Icon icon={variantsIcons[variant]} autoSize />
     </div>
   )
 }
