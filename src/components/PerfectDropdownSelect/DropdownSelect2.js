@@ -67,7 +67,8 @@ const PerfectDropdownSelect = ({
   alwaysShowLabel,
   overflowStyle,
   formikKey,
-  i18n
+  i18n,
+  customTrigger: CustomTrigger
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -199,6 +200,11 @@ const PerfectDropdownSelect = ({
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null
 
+  // eslint-disable-next-line react/display-name
+  const customTrigger = props => (
+    <CustomTrigger selectedValue={selectedItem} {...props} />
+  )
+
   return (
     <div className={className} ref={containerRef} data-testid='dropdown-select'>
       {label && (
@@ -218,6 +224,7 @@ const PerfectDropdownSelect = ({
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
         className={dropdownStyles}
+        customTrigger={customTrigger}
       >
         {hasSearcher && (
           <Fragment>
@@ -294,7 +301,8 @@ PerfectDropdownSelect.propTypes = {
   formikKey: PropTypes.string,
   i18n: PropTypes.shape({
     placeholder: PropTypes.string
-  })
+  }),
+  customTrigger: PropTypes.node
 }
 
 PerfectDropdownSelect.defaultProps = {
@@ -318,7 +326,8 @@ PerfectDropdownSelect.defaultProps = {
   searchPlaceholder: '',
   i18n: {
     placeholder: ''
-  }
+  },
+  customTrigger: () => null
 }
 
 export default PerfectDropdownSelect

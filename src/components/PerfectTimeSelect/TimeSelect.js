@@ -79,18 +79,24 @@ const PerfectTimeSelect = ({
     setClockType(type)
   })
 
+  const renderArrow = isOpen =>
+    isOpen ? <Icon icon='icon-caret-up' /> : <Icon icon='icon-caret-down' />
+
   /**
    * render label with custom time input
    */
   const renderDropdownLabel = useCallback(
-    selectedValue => (
+    ({ selectedValue, isOpen }) => (
       <Row className={timeSelectLabelClasses} vertical='center'>
         <Icon icon='icon-time' />
+
         <TimeInput
           onChange={handleTimeInputChange}
           value={selectedValue?.value}
           maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
         />
+
+        {renderArrow(isOpen)}
       </Row>
     ),
     [disabled, value, isAmPmType]
@@ -104,7 +110,7 @@ const PerfectTimeSelect = ({
         inModalName={inModalName}
         alwaysShowLabel
         label={label}
-        dropdownLabel={renderDropdownLabel}
+        customTrigger={renderDropdownLabel}
         options={isAmPmType ? TIME_FORMAT_EN : TIME_FORMAT_PL}
         value={isAmPmType ? convertTimeFrom24to12(value) : value}
         onChange={handleTimeChange}
