@@ -25,7 +25,7 @@ const Label = ({ children, className, id, isToggle, toggle }) => {
   )
 
   return (
-    <label className={labelStyles} id={id}>
+    <label className={labelStyles} htmlFor={id}>
       {children}
     </label>
   )
