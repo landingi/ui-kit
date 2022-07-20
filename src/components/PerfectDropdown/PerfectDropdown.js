@@ -164,7 +164,7 @@ const PerfectDropdown = forwardRef(
       <Fragment>
         <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
 
-        {label && hasArrow && <Spreader spread='tiny' />}
+        {(label || hasArrow) && <Spreader spread='tiny' />}
       </Fragment>
     )
 
