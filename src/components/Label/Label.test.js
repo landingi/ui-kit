@@ -66,7 +66,7 @@ describe('<Label/> mount', () => {
 
     expect(label).toHaveClass('label--active')
 
-    expect(label).toHaveAttribute('id', id)
+    expect(label).toHaveAttribute('for', id)
 
     expect(label).toBeVisible()
   })

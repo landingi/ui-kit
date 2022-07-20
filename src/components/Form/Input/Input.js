@@ -27,6 +27,7 @@ import styles from '@components/Input/Input.module.scss'
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {object} props.i18n - object of translation
  * @param {string} props.variant - input variant, default ''
+ * @param {function} props.onKeyDown - key down handler
  * @return {object} An object of children element
  */
 const Input = ({
@@ -45,6 +46,7 @@ const Input = ({
   background,
   alwaysShowLabel,
   variant,
+  onKeyDown,
   ['data-testid']: dataTestId
 }) => {
   const error = getDeepValue(errors, name)
@@ -67,6 +69,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        onKeyDown={onKeyDown}
         i18n={i18n}
         disabled={disabled}
         maxLength={maxLength}
@@ -100,7 +103,8 @@ Input.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func
   }),
   form: PropTypes.shape({
     errors: PropTypes.instanceOf(Object),
@@ -127,6 +131,7 @@ Input.propTypes = {
     description: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   }),
   variant: PropTypes.string,
+  onKeyDown: PropTypes.func,
   ['data-testid']: PropTypes.string
 }
 
