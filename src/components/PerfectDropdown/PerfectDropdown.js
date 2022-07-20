@@ -164,7 +164,7 @@ const PerfectDropdown = forwardRef(
       <Fragment>
         <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
 
-        <Spreader spread='tiny' />
+        {(label || hasArrow) && <Spreader spread='tiny' />}
       </Fragment>
     )
 
@@ -248,7 +248,7 @@ PerfectDropdown.defaultProps = {
   dropdownPlacement: 'bottom-end',
   handleOnOpen: () => null,
   handleOnClose: () => null,
-  alignment: 'false',
+  alignment: 'center',
   icon: null,
   label: null,
   hasInput: false,
