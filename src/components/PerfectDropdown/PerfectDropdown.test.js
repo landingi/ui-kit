@@ -5,6 +5,6 @@ import PerfectDropdown from '@components/PerfectDropdown'
 
 describe('<PerfectDropdown/> tests', () => {
   it('renders properly', () => {
-    render(<PerfectDropdown />)
+    render(<PerfectDropdown> content </PerfectDropdown>)
   })
 })
