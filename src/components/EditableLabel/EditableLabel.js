@@ -9,6 +9,7 @@ import Tooltip from '@components/Tooltip'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
+import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import styles from './EditableLabel.module.scss'
 
 /**
@@ -40,6 +41,8 @@ const EditableLabel = ({
   const containerRef = useRef(null)
 
   const handleChange = event => setName(event.target.value)
+
+  useUpdateEffect(() => setName(initialName), [initialName])
 
   const labelWidth = {
     small: 190,
@@ -97,7 +100,7 @@ const EditableLabel = ({
   const handeOutsideClick = useCallback(() => {
     setFocused(false)
     setName(initialName)
-  }, [setFocused, name])
+  }, [setFocused, initialName])
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
