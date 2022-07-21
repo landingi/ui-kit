@@ -160,7 +160,7 @@ const PerfectDropdown = forwardRef(
         <Icon icon='icon-ellipsis-v' />
       )
 
-    const renderIcon = (
+    const renderIcon = () => (
       <Fragment>
         <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
 
@@ -175,7 +175,7 @@ const PerfectDropdown = forwardRef(
         <CustomTrigger isOpen={isOpen} />
       ) : (
         <Fragment>
-          {icon && renderIcon}
+          {icon && renderIcon()}
 
           {label && renderLabel}
 
