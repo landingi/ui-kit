@@ -194,7 +194,11 @@ const DropdownSelect = ({
           return items
         })
         .map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
+          <ListItem
+            variant='dropdown'
+            className='list-item--dropdown'
+            key={index}
+          >
             {renderOption(item)}
           </ListItem>
         ))}

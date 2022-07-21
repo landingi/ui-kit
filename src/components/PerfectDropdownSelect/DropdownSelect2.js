@@ -180,7 +180,7 @@ const PerfectDropdownSelect = ({
     return (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
+          <ListItem className={styles['list-item--dropdown']} key={index}>
             {renderOption(item)}
           </ListItem>
         ))}
@@ -188,7 +188,11 @@ const PerfectDropdownSelect = ({
         {!isEmpty(emphasisedOptions) && <Divider />}
 
         {filterOptions().map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
+          <ListItem
+            variant='dropdown'
+            className={styles['list-item--dropdown']}
+            key={index}
+          >
             {renderOption(item)}
           </ListItem>
         ))}
