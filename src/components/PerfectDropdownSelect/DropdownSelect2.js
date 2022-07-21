@@ -241,7 +241,7 @@ const PerfectDropdownSelect = ({
               ...overflowStyle
             }}
           >
-            <List>
+            <List variant='dropdown'>
               {renderOptions()}
               {isLoading && <Loader />}
               {renderEmptyMessage()}

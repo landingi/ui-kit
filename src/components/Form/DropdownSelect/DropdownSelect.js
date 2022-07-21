@@ -182,7 +182,7 @@ const DropdownSelectForm = ({
 
         <Overflow>
           <div style={overflowStyle}>
-            <List>
+            <List variant='dropdown'>
               {!isLoading && isEmptyList && isEmpty(options) ? (
                 <Message
                   title='message.empty.search.results'
