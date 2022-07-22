@@ -331,7 +331,12 @@ Modal.defaultProps = {
   isMarkAsSpamVisible: false,
   size: null,
   isPage: false,
-  i18n: null,
+  i18n: {
+    title: '',
+    action: '',
+    cancel: '',
+    markSpam: ''
+  },
   onEdit: () => null,
   isComponent: false,
   component: null,
