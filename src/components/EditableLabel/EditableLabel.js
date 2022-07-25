@@ -103,6 +103,11 @@ const EditableLabel = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
+  console.log({
+    scrollWidth: labelRef?.current?.scrollWidth,
+    offsetWidth: labelRef?.current?.offsetWidth
+  })
+
   return (
     <div className={containerStyles} ref={containerRef} {...wrapperProps}>
       <Row className={styles.wrapper} vertical='center'>
