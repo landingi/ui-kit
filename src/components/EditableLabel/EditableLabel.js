@@ -118,7 +118,7 @@ const EditableLabel = ({
             align='center'
             className={labelStyles}
             disabled={
-              labelRef?.current?.scrollWidth < labelRef?.current?.offsetWidth
+              labelRef?.current?.scrollWidth <= labelRef?.current?.offsetWidth
             }
           >
             <span
