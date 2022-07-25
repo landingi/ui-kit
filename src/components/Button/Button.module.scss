@@ -377,11 +377,20 @@
 
     &-hover {
       padding: 0;
-      background: $color-button-hover;
+      background: transparent;
 
       svg,
       i {
         color: $color-3;
+      }
+
+      &:hover {
+        background: $color-button-hover;
+
+        svg,
+        i {
+          color: $color-1;
+        }
       }
     }
 
