@@ -117,7 +117,7 @@ const EditableLabel = ({
             placement='top'
             align='center'
             className={labelStyles}
-            disabled={labelRef?.current?.offsetWidth < labelWidth[size]}
+            disabled={labelRef?.current?.innerText?.slice(-3) !== '...'}
           >
             <span
               ref={labelRef}
