@@ -31,7 +31,8 @@ const EditableLabel = ({
   onChange,
   isLoading,
   isDisabled,
-  isClickable
+  isClickable,
+  tooltip
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
   const [isFocused, setFocused] = useState(false)
@@ -71,7 +72,8 @@ const EditableLabel = ({
 
   const barStyles = useStyles({
     [styles['input-bar']]: true,
-    [styles['input-bar--focus']]: isFocused
+    [styles['input-bar--focus']]: isFocused,
+    [styles['input-bar--hover']]: isHoveredWrapper && !isFocused
   })
 
   const handleAccept = useCallback(() => {
@@ -144,15 +146,22 @@ const EditableLabel = ({
         <Spinner />
       ) : (
         !isDisabled && (
-          <Button
-            variant='icon-transparent'
-            className={buttonStyles}
-            onClick={isFocused ? handleAccept : handleFocus}
-            size={size === 'small' ? 'mini' : 'medium'}
-            data-testid='editable-label-button'
+          <Tooltip
+            content={isFocused ? tooltip.focused : tooltip.notFocused}
+            placement='top'
+            align='center'
+            disabled={!tooltip.focused && !tooltip.notFocused}
           >
-            <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
-          </Button>
+            <Button
+              variant='icon-transparent-hover'
+              className={buttonStyles}
+              onClick={isFocused ? handleAccept : handleFocus}
+              size={size === 'small' ? 'mini' : 'medium'}
+              data-testid='editable-label-button'
+            >
+              <Icon icon={isFocused ? 'icon-ok' : 'icon-create'} />
+            </Button>
+          </Tooltip>
         )
       )}
     </div>
@@ -168,7 +177,11 @@ EditableLabel.propTypes = {
   onChange: PropTypes.func,
   isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  isClickable: PropTypes.bool
+  isClickable: PropTypes.bool,
+  tooltip: PropTypes.shape({
+    focused: PropTypes.string,
+    notFocused: PropTypes.string
+  })
 }
 
 EditableLabel.defaultProps = {
@@ -176,7 +189,8 @@ EditableLabel.defaultProps = {
   size: 'big',
   isLoading: false,
   isDisabled: false,
-  isClickable: false
+  isClickable: false,
+  tooltip: { focused: '', notFocused: '' }
 }
 
 export default EditableLabel
