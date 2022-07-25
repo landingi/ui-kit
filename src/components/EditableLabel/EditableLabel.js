@@ -45,11 +45,6 @@ const EditableLabel = ({
 
   useUpdateEffect(() => setName(initialName), [initialName])
 
-  const labelWidth = {
-    small: 190,
-    big: 490
-  }
-
   const containerStyles = useStyles({
     [styles.container]: true,
     [styles[`container--${size}`]]: size
@@ -108,11 +103,6 @@ const EditableLabel = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
-  console.log({
-    scrollWidth: labelRef?.current?.scrollWidth,
-    offsetWidth: labelRef?.current?.offsetWidth
-  })
-
   return (
     <div className={containerStyles} ref={containerRef} {...wrapperProps}>
       <Row className={styles.wrapper} vertical='center'>
@@ -122,7 +112,9 @@ const EditableLabel = ({
             placement='top'
             align='center'
             className={labelStyles}
-            disabled={labelRef?.current?.innerText?.slice(-3) !== '...'}
+            disabled={
+              labelRef?.current?.scrollWidth < labelRef?.current?.offsetWidth
+            }
           >
             <span
               ref={labelRef}
