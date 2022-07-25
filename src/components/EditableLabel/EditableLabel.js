@@ -73,7 +73,7 @@ const EditableLabel = ({
   const barStyles = useStyles({
     [styles['input-bar']]: true,
     [styles['input-bar--focus']]: isFocused,
-    [styles['input-bar--hover']]: isHoveredWrapper
+    [styles['input-bar--hover']]: isHoveredWrapper && !isFocused
   })
 
   const handleAccept = useCallback(() => {
