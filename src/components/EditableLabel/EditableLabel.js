@@ -72,7 +72,8 @@ const EditableLabel = ({
 
   const barStyles = useStyles({
     [styles['input-bar']]: true,
-    [styles['input-bar--focus']]: isFocused
+    [styles['input-bar--focus']]: isFocused,
+    [styles['input-bar--hover']]: isHoveredWrapper
   })
 
   const handleAccept = useCallback(() => {
@@ -152,7 +153,7 @@ const EditableLabel = ({
             disabled={!tooltip.focused && !tooltip.notFocused}
           >
             <Button
-              variant='icon-transparent'
+              variant='icon'
               className={buttonStyles}
               onClick={isFocused ? handleAccept : handleFocus}
               size={size === 'small' ? 'mini' : 'medium'}

@@ -30,6 +30,8 @@
     display: block;
     width: 100%;
     cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &--small {
@@ -79,6 +81,11 @@
 
   &--focus {
     transform: scale(1, 3);
+  }
+
+  &--hover {
+    transform: scale(1, 3);
+    height: 1px;
   }
 }
 
