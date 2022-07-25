@@ -375,6 +375,15 @@
       }
     }
 
+    &-hover {
+      background: $color-button-hover;
+
+      svg,
+      i {
+        color: $color-3;
+      }
+    }
+
     &:disabled,
     &[disabled] {
       cursor: not-allowed;

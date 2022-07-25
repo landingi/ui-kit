@@ -153,7 +153,7 @@ const EditableLabel = ({
             disabled={!tooltip.focused && !tooltip.notFocused}
           >
             <Button
-              variant='icon'
+              variant='icon-transparent-hover'
               className={buttonStyles}
               onClick={isFocused ? handleAccept : handleFocus}
               size={size === 'small' ? 'mini' : 'medium'}
