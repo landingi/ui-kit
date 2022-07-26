@@ -99,6 +99,7 @@ Button.propTypes = {
     'transparent',
     'icon',
     'icon-transparent',
+    'icon-transparent-hover',
     'alert',
     'clean',
     'tabs',
