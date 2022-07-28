@@ -76,22 +76,22 @@
   left: 0;
   transform-origin: left center;
   transition: transform 0.3s;
-  transform: scale(0, 1);
+  transform: scaleX(0);
   height: 0.5px;
 
   &--focus-big {
-    transform: scale(1, 3);
-    height: 1px;
+    transform: scaleX(1);
+    height: 2px;
   }
 
   &--focus-small {
-    transform: scale(1, 1);
-    height: 0.5px;
+    transform: scaleX(1);
+    height: 1px;
   }
 
   &--hover {
-    transform: scale(1, 3);
-    height: 0.5px;
+    transform: scaleX(1);
+    height: 1px;
   }
 }
 
