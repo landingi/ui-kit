@@ -81,17 +81,17 @@
 
   &--focus-big {
     transform: scaleX(1);
-    height: 1px;
+    height: 2px;
   }
 
   &--focus-small {
     transform: scaleX(1);
-    height: 0.5px;
+    height: 1px;
   }
 
   &--hover {
     transform: scaleX(1);
-    height: 0.5px;
+    height: 1px;
   }
 }
 
