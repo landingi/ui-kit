@@ -58,7 +58,8 @@ const PerfectDropdown = forwardRef(
       asPlaceholder,
       customTrigger: CustomTrigger,
       offset,
-      className
+      className,
+      ['data-testid']: dataTestId
     },
     ref
   ) => {
@@ -192,7 +193,7 @@ const PerfectDropdown = forwardRef(
           className={triggerClasses}
           onClick={handleShow}
           ref={mergeRefs(triggerProps?.ref, triggerRef, ref)}
-          data-testid='dropdown'
+          data-testid={dataTestId}
         >
           {renderTriggerContent()}
         </span>
@@ -238,7 +239,8 @@ PerfectDropdown.propTypes = {
   asPlaceholder: PropTypes.bool,
   customTrigger: PropTypes.func,
   className: PropTypes.string,
-  offset: PropTypes.number
+  offset: PropTypes.number,
+  'data-testid': PropTypes.string
 }
 
 PerfectDropdown.defaultProps = {
@@ -256,7 +258,8 @@ PerfectDropdown.defaultProps = {
   asPlaceholder: false,
   customTrigger: null,
   className: '',
-  offset: 5
+  offset: 5,
+  'data-testid': 'trigger-dropdown'
 }
 
 PerfectDropdown.displayName = 'PerfectDropdown'

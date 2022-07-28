@@ -1,6 +1,10 @@
 {
   "name": "@landingi/landingi-ui-kit",
+<<<<<<< HEAD
   "version": "2.0.130",
+=======
+  "version": "2.0.132",
+>>>>>>> master
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
