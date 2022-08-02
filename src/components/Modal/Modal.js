@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef, useCallback, useEffect } from 'react'
+import React, { Fragment, forwardRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Backdrop from '@components/Backdrop'
 import Close from '@components/Close'
@@ -10,11 +10,11 @@ import Loader from '@components/Loader'
 import Image from '@components/Image'
 import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { useKeyPress } from '@helpers/hooks/useKeyPress'
 import ModalHeader from './Header'
 import ModalFooter from './Footer'
 import styles from './Modal.module.scss'
 
-// TODO Modal check actionIcon
 /**
  * Modal - stateless presentational component
  * @param {object} props - props
@@ -51,6 +51,7 @@ import styles from './Modal.module.scss'
  * @param {string} props.isBodyPadding - modal body padding
  * @param {string} props.headingAlign - align text in title, default: left
  * @param {string} props.footerAlign - modal footer alignment, default: right
+ * @param {string} props.hasEneterKeyDown - has confirmed by enter key, default false
  * @return {object} An object of children element
  */
 const Modal = forwardRef(
@@ -89,7 +90,8 @@ const Modal = forwardRef(
       isSubmit,
       isBodyPadding,
       headingAlign,
-      footerAlign
+      footerAlign,
+      hasEneterKeyDown
     },
     ref
   ) => {
@@ -157,22 +159,18 @@ const Modal = forwardRef(
       [styles['modal__body--no-padding']]: isBodyPadding === 'none'
     })
 
+    const handleActionOnEnter = useCallback(() => {
+      hasEneterKeyDown && isActive && onAction()
+    }, [onAction, isActive])
+
     const handleCloseOnEscape = useCallback(
-      ({ key }) => {
-        if (key === 'Escape' && isClosable && isActive) {
-          onClick()
-        }
-      },
+      () => isClosable && isActive && onClick(),
+
       [onClick, isClosable, isActive]
     )
 
-    useEffect(() => {
-      if (size === 'fullscreen') {
-        document.addEventListener('keydown', handleCloseOnEscape)
-      }
-
-      return () => document.removeEventListener('keydown', handleCloseOnEscape)
-    }, [handleCloseOnEscape, size])
+    useKeyPress('Enter', handleActionOnEnter)
+    useKeyPress('Escape', handleCloseOnEscape)
 
     return (
       <Fragment>
@@ -219,7 +217,7 @@ const Modal = forwardRef(
                           >
                             {i18n.cancel}
                           </Button>
-                        ) : (
+                        ) : i18n.cancel ? (
                           <Button
                             variant='secondary'
                             size='medium'
@@ -227,7 +225,7 @@ const Modal = forwardRef(
                           >
                             {i18n.cancel}
                           </Button>
-                        )}
+                        ) : null}
                         <Button
                           type={isSubmit ? 'submit' : 'button'}
                           variant={actionVariant}
@@ -301,7 +299,8 @@ Modal.propTypes = {
   disableOverflow: PropTypes.bool,
   isBodyPadding: PropTypes.string,
   headingAlign: PropTypes.oneOf(['right', 'center', 'left']),
-  footerAlign: PropTypes.oneOf(['right', 'center', 'left'])
+  footerAlign: PropTypes.oneOf(['right', 'center', 'left']),
+  hasEneterKeyDown: PropTypes.bool
 }
 
 Modal.defaultProps = {
@@ -318,7 +317,7 @@ Modal.defaultProps = {
   hasFooterDivider: false,
   isLoading: false,
   actionVariant: 'primary',
-  actionIcon: null,
+  actionIcon: '',
   overflowStyle: {
     maxHeight: '80vh',
     overflowY: 'auto',
@@ -332,10 +331,10 @@ Modal.defaultProps = {
   size: null,
   isPage: false,
   i18n: PropTypes.shape({
-    title: null,
-    action: null,
-    cancel: null,
-    markSpam: null
+    title: '',
+    action: '',
+    cancel: '',
+    markSpam: ''
   }),
   onEdit: () => null,
   isComponent: false,
@@ -345,7 +344,8 @@ Modal.defaultProps = {
   disableOverflow: false,
   isBodyPadding: '',
   headingAlign: 'left',
-  footerAlign: 'right'
+  footerAlign: 'right',
+  hasEneterKeyDown: false
 }
 
 export default Modal
