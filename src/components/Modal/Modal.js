@@ -51,7 +51,7 @@ import styles from './Modal.module.scss'
  * @param {string} props.isBodyPadding - modal body padding
  * @param {string} props.headingAlign - align text in title, default: left
  * @param {string} props.footerAlign - modal footer alignment, default: right
- * @param {string} props.hasEneterKeyDown - has confirmed by enter key, default false
+ * @param {string} props.hasEnterKeyDown - has confirmed by enter key, default false
  * @return {object} An object of children element
  */
 const Modal = forwardRef(
@@ -91,7 +91,7 @@ const Modal = forwardRef(
       isBodyPadding,
       headingAlign,
       footerAlign,
-      hasEneterKeyDown
+      hasEnterKeyDown
     },
     ref
   ) => {
@@ -160,7 +160,7 @@ const Modal = forwardRef(
     })
 
     const handleActionOnEnter = useCallback(() => {
-      hasEneterKeyDown && isActive && onAction()
+      hasEnterKeyDown && isActive && onAction()
     }, [onAction, isActive])
 
     const handleCloseOnEscape = useCallback(
@@ -300,7 +300,7 @@ Modal.propTypes = {
   isBodyPadding: PropTypes.string,
   headingAlign: PropTypes.oneOf(['right', 'center', 'left']),
   footerAlign: PropTypes.oneOf(['right', 'center', 'left']),
-  hasEneterKeyDown: PropTypes.bool
+  hasEnterKeyDown: PropTypes.bool
 }
 
 Modal.defaultProps = {
@@ -330,12 +330,12 @@ Modal.defaultProps = {
   isMarkAsSpamVisible: false,
   size: null,
   isPage: false,
-  i18n: PropTypes.shape({
+  i18n: {
     title: '',
     action: '',
     cancel: '',
     markSpam: ''
-  }),
+  },
   onEdit: () => null,
   isComponent: false,
   component: null,
@@ -345,7 +345,7 @@ Modal.defaultProps = {
   isBodyPadding: '',
   headingAlign: 'left',
   footerAlign: 'right',
-  hasEneterKeyDown: false
+  hasEnterKeyDown: false
 }
 
 export default Modal
