@@ -160,8 +160,8 @@ const Modal = forwardRef(
     })
 
     const handleActionOnEnter = useCallback(() => {
-      hasEnterKeyDown && isActive && onAction()
-    }, [onAction, isActive])
+      hasEnterKeyDown && isActive && !isButtonDisabled && onAction()
+    }, [onAction, isActive, isButtonDisabled, hasEnterKeyDown])
 
     const handleCloseOnEscape = useCallback(
       () => isClosable && isActive && onClick(),
