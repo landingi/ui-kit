@@ -59,6 +59,7 @@ const PerfectDropdown = forwardRef(
       customTrigger: CustomTrigger,
       offset,
       className,
+      padding,
       ['data-testid']: dataTestId
     },
     ref
@@ -69,7 +70,8 @@ const PerfectDropdown = forwardRef(
 
     const bodyClasses = useStyles({
       [styles['dropdown']]: true,
-      [styles[`dropdown--${size}`]]: true
+      [styles[`dropdown--${size}`]]: true,
+      [styles[`dropdown--padding-${padding}`]]: padding
     })
 
     const labelClasses = useStyles({
@@ -240,6 +242,7 @@ PerfectDropdown.propTypes = {
   customTrigger: PropTypes.func,
   className: PropTypes.string,
   offset: PropTypes.number,
+  padding: PropTypes.oneOf(['none']),
   'data-testid': PropTypes.string
 }
 
@@ -259,6 +262,7 @@ PerfectDropdown.defaultProps = {
   customTrigger: null,
   className: '',
   offset: 5,
+  padding: null,
   'data-testid': 'trigger-dropdown'
 }
 
