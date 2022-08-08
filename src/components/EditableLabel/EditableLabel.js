@@ -40,6 +40,7 @@ const EditableLabel = ({
 
   const labelRef = useRef(null)
   const containerRef = useRef(null)
+  const inputRef = useRef(null)
 
   const handleChange = event => setName(event.target.value)
 
@@ -94,6 +95,8 @@ const EditableLabel = ({
 
   const handleFocus = useCallback(() => {
     setFocused(true)
+
+    inputRef.current?.focus()
   }, [setFocused])
 
   const handeOutsideClick = useCallback(() => {
@@ -132,6 +135,7 @@ const EditableLabel = ({
             onChange={handleChange}
             type='text'
             onKeyDown={handleKeyDown}
+            ref={inputRef}
             data-testid='editable-label-input'
           />
         )}
