@@ -95,9 +95,13 @@ const EditableLabel = ({
 
   const handleFocus = useCallback(() => {
     setFocused(true)
-
-    inputRef.current?.focus()
   }, [setFocused])
+
+  useUpdateEffect(() => {
+    if (isFocused) {
+      inputRef.current?.focus()
+    }
+  }, [inputRef, isFocused])
 
   const handeOutsideClick = useCallback(() => {
     setFocused(false)
