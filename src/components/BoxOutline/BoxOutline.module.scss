@@ -37,6 +37,10 @@
     padding: 0;
   }
 
+  &__padding-large {
+    padding: $padding-medium $padding-large;
+  }
+
   &.box-outline__is-selected {
     border: 1px solid $color-success;
 
