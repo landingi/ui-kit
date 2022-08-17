@@ -24,7 +24,10 @@ const Close = ({ className, onClick, iconName, iconColor }) => {
 
   return (
     <span className={elementStyles} onClick={onClick}>
-      <Button variant='secondary' data-testid='close-component-button'>
+      <Button
+        variant='icon-transparent-hover'
+        data-testid='close-component-button'
+      >
         <Icon icon={iconName} color={iconColor} />
       </Button>
     </span>
