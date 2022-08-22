@@ -122,7 +122,7 @@ const Input = forwardRef(
         )}
 
         {i18n?.description && !form && (
-          <Paragraph size={12} color='color-8'>
+          <Paragraph size={12} color='accent-5' line={24}>
             {i18n.description}
           </Paragraph>
         )}
