@@ -80,13 +80,13 @@ const DropdownSelect = ({
 
   const labelStyles = useStyles({
     [styles['form-field__label']]: true,
-    [styles['form-field__label--has-error']]: error || isTouched,
+    [styles['form-field__label--has-error']]: error && isTouched,
     [styles['form-field__label--has-label']]: hasLabel,
     [styles['form-field__label--disabled']]: isOpenDisabled
   })
 
   const dropdownStyles = useStyles({
-    [styles['form-field__dropdown--has-error']]: error || isTouched
+    [styles['form-field__dropdown--has-error']]: error && isTouched
   })
 
   const getSelectedItem = () => {
@@ -261,7 +261,7 @@ const DropdownSelect = ({
         {optionalContent}
       </Dropdown>
 
-      {error ? <Error error={error} /> : null}
+      {isTouched && <Error error={error} />}
     </div>
   )
 }
