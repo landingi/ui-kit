@@ -50,7 +50,8 @@ const MaskedInput = ({
   const elementClasses = useStyles(
     {
       [styles.input__wrapper]: true,
-      [styles['input__wrapper--focused']]: focused === 'true'
+      [styles['input__wrapper--focused']]: focused === 'true',
+      [styles['input__wrapper--show-label']]: alwaysShowLabel
     },
     className
   )
@@ -75,7 +76,6 @@ const MaskedInput = ({
         required
         guide={guide}
         focused={focused}
-        alwaysShowLabel={alwaysShowLabel}
         data-testid='masked-input'
       />
 
