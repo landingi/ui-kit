@@ -40,6 +40,7 @@ import { getDeepValue } from '@helpers/data'
  * @param {string} props.hasSearcher - show Searcher
  * @param {func} props.handleOnSearchChange - on search input change handler
  * @param {func} props.handleOnOpen - callback called when dropdown is opening
+ * @param {func} props.handleOnClose - callback called when dropdown is closing
  * @param {bool} props.isLoading - list loading spinner
  * @param {object} props.emptyMessage - empty message component
  * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
@@ -64,6 +65,7 @@ const DropdownSelect = ({
   hasSearcher,
   handleOnSearchChange,
   handleOnOpen,
+  handleOnClose,
   isLoading,
   emptyMessage,
   isOpenDisabled,
@@ -169,6 +171,11 @@ const DropdownSelect = ({
    */
   const clearSearchValue = useCallback(() => setSearchValue(''), [])
 
+  const handleClose = () => {
+    clearSearchValue()
+    handleOnClose()
+  }
+
   const filterOptions = () =>
     options.filter(({ label }) => {
       if (!searchValue) {
@@ -222,7 +229,7 @@ const DropdownSelect = ({
         inModalName={inModalName}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
-        handleOnClose={clearSearchValue}
+        handleOnClose={handleClose}
         handleOnOpen={handleOnOpen}
         className={dropdownStyles}
       >
@@ -293,6 +300,7 @@ DropdownSelect.propTypes = {
   hasSearcher: PropTypes.bool,
   handleOnSearchChange: PropTypes.func,
   handleOnOpen: PropTypes.func,
+  handleOnClose: PropTypes.func,
   isLoading: PropTypes.bool,
   emptyMessage: PropTypes.node,
   isOpenDisabled: PropTypes.bool,
@@ -318,6 +326,7 @@ DropdownSelect.defaultProps = {
   hasSearcher: false,
   handleOnSearchChange: () => null,
   handleOnOpen: () => null,
+  handleOnClose: () => null,
   isLoading: false,
   emptyMessage: null,
   isOpenDisabled: false,
