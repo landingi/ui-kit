@@ -20,6 +20,7 @@ import MaskedInput from '@components/Input/MaskedInput'
  * @param {bool} props.guide - if it is true underscores will be displayed to represent mask format
  * @param {string} props.focused - focused, keep label by default on top
  * @param {object} props.i18n - translations
+ * @param {bool} props.alwaysShowLabel - when true label is shown even when input is empty
  * @return {object} An object of children element
  */
 const Masked = ({
@@ -33,7 +34,8 @@ const Masked = ({
   mask,
   guide,
   focused,
-  i18n
+  i18n,
+  alwaysShowLabel
 }) => {
   const { name, value, onChange, onBlur } = field
   const { errors, touched } = form
@@ -56,6 +58,7 @@ const Masked = ({
         maxLength={maxLength}
         guide={guide}
         focused={focused}
+        alwaysShowLabel={alwaysShowLabel}
       />
       {touched[name] && <Error error={errors[name]} />}
     </div>
@@ -90,7 +93,8 @@ Masked.propTypes = {
   i18n: PropTypes.shape({
     placeholder: PropTypes.string,
     label: PropTypes.string
-  })
+  }),
+  alwaysShowLabel: PropTypes.bool
 }
 
 Masked.defaultProps = {
@@ -106,7 +110,8 @@ Masked.defaultProps = {
   i18n: {
     placeholder: '',
     label: ''
-  }
+  },
+  alwaysShowLabel: false
 }
 
 export default Masked
