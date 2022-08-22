@@ -26,9 +26,9 @@ import styles from './Input.module.scss'
  * @param {string} props.focused - focused, keep label by default on top
  * @param {string|number} props.value - value
  * @param {object} props.i18n - translations
+ * @param {bool} props.alwaysShowLabel - when true label is shown even when input is empty
  * @return {object} An object of children element
  */
-
 const MaskedInput = ({
   className,
   onChange,
@@ -44,12 +44,14 @@ const MaskedInput = ({
   mask,
   guide,
   focused,
-  i18n: { placeholder, label }
+  i18n: { placeholder, label },
+  alwaysShowLabel
 }) => {
   const elementClasses = useStyles(
     {
       [styles.input__wrapper]: true,
-      [styles['input__wrapper--focused']]: focused === 'true'
+      [styles['input__wrapper--focused']]: focused === 'true',
+      [styles['input__wrapper--show-label']]: alwaysShowLabel
     },
     className
   )
@@ -114,7 +116,8 @@ MaskedInput.propTypes = {
   i18n: PropTypes.shape({
     placeholder: PropTypes.string,
     label: PropTypes.string
-  })
+  }),
+  alwaysShowLabel: PropTypes.bool
 }
 
 MaskedInput.defaultProps = {
@@ -137,7 +140,8 @@ MaskedInput.defaultProps = {
   i18n: {
     placeholder: '',
     label: ''
-  }
+  },
+  alwaysShowLabel: false
 }
 
 export default MaskedInput
