@@ -34,7 +34,7 @@ const Toggle = ({
     className
   )
 
-  const labelStyles = useStyles({
+  const toggleStyles = useStyles({
     [styles.toggle]: true,
     [styles['toggle--checked']]: checked,
     [styles['toggle--checked-disabled']]: checked && disabled,
@@ -43,7 +43,7 @@ const Toggle = ({
 
   return (
     <div className={wrapperStyles}>
-      <label className={labelStyles}>
+      <label className={toggleStyles}>
         <input
           name={name}
           className={styles.toggle__checkbox}
@@ -60,7 +60,7 @@ const Toggle = ({
       </label>
 
       {label && (
-        <label htmlFor={id}>
+        <label htmlFor={id} className={styles.label}>
           <Html value={label} />
         </label>
       )}
