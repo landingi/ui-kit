@@ -15,7 +15,7 @@
 
   &:focus {
     box-shadow: none;
-    outline: 2px solid $color-1;
+    outline: 1px solid $color-1;
   }
 
   &--small {
@@ -33,5 +33,11 @@
     color: $color-white;
     font-size: 13px;
     font-family: 'Courier New', Courier, monospace;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      outline: none;
+    }
   }
 }

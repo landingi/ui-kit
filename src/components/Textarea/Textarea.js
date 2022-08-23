@@ -5,8 +5,6 @@ import Spacer from '@components/Spacer'
 import styles from './Textarea.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO Textarea mdx, test
-
 /**
  * Textarea - stateless presentational component
  * @param {string | array} className - list of custom css class from out of component
