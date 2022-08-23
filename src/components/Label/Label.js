@@ -11,15 +11,17 @@ import styles from './Label.module.scss'
  * @param {string} props.id - input id
  * @param {bool} props.isToggle - is toggle label
  * @param {bool} props.toggle - toggle change
+ * @param {string} props.padding - padding
  * @return {object} An object of children element
  */
-const Label = ({ children, className, id, isToggle, toggle }) => {
+const Label = ({ children, className, id, isToggle, toggle, padding }) => {
   const labelStyles = useStyles(
     {
       [styles.label]: true,
       [styles['label--normal']]: !isToggle,
       [styles['label--active']]: isToggle && toggle,
-      [styles['label--inactive']]: isToggle && !toggle
+      [styles['label--inactive']]: isToggle && !toggle,
+      [styles[`label--padding--${padding}`]]: padding
     },
     className
   )
@@ -38,14 +40,16 @@ Label.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   id: PropTypes.string,
   isToggle: PropTypes.bool,
-  toggle: PropTypes.bool
+  toggle: PropTypes.bool,
+  padding: PropTypes.oneOf(['default', 'none'])
 }
 
 Label.defaultProps = {
   className: '',
   id: null,
   isToggle: false,
-  toggle: false
+  toggle: false,
+  padding: 'default'
 }
 
 export default Label

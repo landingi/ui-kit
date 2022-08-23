@@ -42,7 +42,9 @@ const Textarea = ({
     <Fragment>
       {i18n?.label && (
         <Fragment>
-          <Label id={id}>{i18n.label}</Label>
+          <Label id={id} padding='none'>
+            {i18n.label}
+          </Label>
 
           <Spacer space='tiny' />
         </Fragment>
