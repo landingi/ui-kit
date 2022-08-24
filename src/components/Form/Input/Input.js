@@ -51,11 +51,12 @@ const Input = ({
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
+  const hasErrorToShow = error && isTouched
 
   const wrapperStyles = useStyles(
     {
       [styles['form-field']]: true,
-      [styles['form--has-error']]: error && isTouched
+      [styles['form--has-error']]: hasErrorToShow
     },
     className
   )
@@ -84,13 +85,13 @@ const Input = ({
         form
       />
 
-      {i18n?.description && !error && (
+      {hasErrorToShow ? (
+        <Error error={error} />
+      ) : i18n?.description ? (
         <Paragraph size={12} color='color-8' padding='none'>
           {i18n.description}
         </Paragraph>
-      )}
-
-      {isTouched && <Error error={error} />}
+      ) : null}
     </div>
   )
 }
