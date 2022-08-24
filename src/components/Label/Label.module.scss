@@ -1,10 +1,19 @@
 .label {
   font-size: 14px;
-  padding: 7px 0;
   line-height: 1;
   display: block;
   font-weight: 400;
   margin: 0;
+
+  &--padding {
+    &--default {
+      padding: 7px 0;
+    }
+
+    &--none {
+      padding: 0;
+    }
+  }
 
   &--normal {
     color: $color-3;

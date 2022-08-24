@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import Label from '@components/Label'
+import Spacer from '@components/Spacer'
 import styles from './Textarea.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
-
-//TODO Textarea mdx, test
 
 /**
  * Textarea - stateless presentational component
@@ -12,26 +12,51 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} id - id
  * @param {string} value - value
  * @param {func} onChange - on change callback
+ * @param {string} variant - variant
+ * @param {string} size - size
  * @param {object} i18n - props with translated string
  * @return {object} An object of children element
  */
-const Textarea = ({ className, name, id, value, onChange, i18n }) => {
+const Textarea = ({
+  className,
+  name,
+  id,
+  value,
+  onChange,
+  variant,
+  size,
+  i18n
+}) => {
   const textAreaStyles = useStyles(
     {
-      [styles['textarea']]: true
+      [styles['textarea']]: true,
+      [styles[`textarea--${variant}`]]: variant,
+      [styles[`textarea--${size}`]]: size
     },
     className
   )
 
   return (
-    <textarea
-      className={textAreaStyles}
-      id={id}
-      name={name}
-      placeholder={i18n.placeholder}
-      onChange={onChange}
-      value={value}
-    />
+    <Fragment>
+      {i18n?.label && (
+        <Fragment>
+          <Label id={id} padding='none'>
+            {i18n.label}
+          </Label>
+
+          <Spacer space='tiny' />
+        </Fragment>
+      )}
+
+      <textarea
+        className={textAreaStyles}
+        id={id}
+        name={name}
+        placeholder={i18n.placeholder}
+        onChange={onChange}
+        value={value}
+      />
+    </Fragment>
   )
 }
 
@@ -44,12 +69,17 @@ Textarea.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   i18n: PropTypes.shape({
-    placeholder: PropTypes.string
-  }).isRequired
+    placeholder: PropTypes.string,
+    label: PropTypes.string
+  }).isRequired,
+  variant: PropTypes.oneOf(['default', 'codearea']),
+  size: PropTypes.oneOf(['small', 'medium'])
 }
 
 Textarea.defaultProps = {
-  className: ''
+  className: '',
+  size: 'medium',
+  variant: 'default'
 }
 
 export default Textarea
