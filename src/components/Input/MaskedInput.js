@@ -60,7 +60,7 @@ const MaskedInput = ({
   return (
     <div className={elementClasses}>
       <MaskedInputComponent
-        keyProp={keyProp}
+        key={keyProp}
         mask={mask}
         className={styles.input}
         onBlur={onBlur}

@@ -45,7 +45,7 @@ const Masked = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <MaskedInput
-        key={keyProp}
+        keyProp={keyProp}
         field={field}
         mask={mask}
         type={type}
