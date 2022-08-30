@@ -21,6 +21,7 @@ import MaskedInput from '@components/Input/MaskedInput'
  * @param {string} props.focused - focused, keep label by default on top
  * @param {object} props.i18n - translations
  * @param {bool} props.alwaysShowLabel - when true label is shown even when input is empty
+ * @param {string} keyProp - it will be passed as key prop to input element
  * @return {object} An object of children element
  */
 const Masked = ({
@@ -70,6 +71,7 @@ const Masked = ({
 Masked.displayName = 'Masked'
 
 Masked.propTypes = {
+  keyProp: PropTypes.string,
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -96,8 +98,7 @@ Masked.propTypes = {
     placeholder: PropTypes.string,
     label: PropTypes.string
   }),
-  alwaysShowLabel: PropTypes.bool,
-  keyProp: PropTypes.string
+  alwaysShowLabel: PropTypes.bool
 }
 
 Masked.defaultProps = {
