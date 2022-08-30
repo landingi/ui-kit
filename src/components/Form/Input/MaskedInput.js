@@ -24,6 +24,7 @@ import MaskedInput from '@components/Input/MaskedInput'
  * @return {object} An object of children element
  */
 const Masked = ({
+  key,
   field,
   form,
   id,
@@ -44,6 +45,7 @@ const Masked = ({
   return (
     <div className={`form-field ${errorClass}`}>
       <MaskedInput
+        key={key}
         field={field}
         mask={mask}
         type={type}
@@ -94,10 +96,12 @@ Masked.propTypes = {
     placeholder: PropTypes.string,
     label: PropTypes.string
   }),
-  alwaysShowLabel: PropTypes.bool
+  alwaysShowLabel: PropTypes.bool,
+  key: PropTypes.string
 }
 
 Masked.defaultProps = {
+  key: '',
   label: '',
   placeholder: '',
   type: 'text',
