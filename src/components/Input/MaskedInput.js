@@ -30,7 +30,7 @@ import styles from './Input.module.scss'
  * @return {object} An object of children element
  */
 const MaskedInput = ({
-  key,
+  keyProp,
   className,
   onChange,
   onKeyDown,
@@ -60,7 +60,7 @@ const MaskedInput = ({
   return (
     <div className={elementClasses}>
       <MaskedInputComponent
-        key={key}
+        keyProp={keyProp}
         mask={mask}
         className={styles.input}
         onBlur={onBlur}
@@ -97,7 +97,7 @@ const MaskedInput = ({
 MaskedInput.displayName = 'Masked'
 
 MaskedInput.propTypes = {
-  key: PropTypes.string,
+  keyProp: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
@@ -124,7 +124,7 @@ MaskedInput.propTypes = {
 }
 
 MaskedInput.defaultProps = {
-  key: '',
+  keyProp: '',
   className: '',
   onChange: () => null,
   onKeyDown: () => null,
