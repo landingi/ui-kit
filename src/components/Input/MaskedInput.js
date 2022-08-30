@@ -27,11 +27,9 @@ import styles from './Input.module.scss'
  * @param {string|number} props.value - value
  * @param {object} props.i18n - translations
  * @param {bool} props.alwaysShowLabel - when true label is shown even when input is empty
- * @param {string} keyProp - it will be passed as key prop to input element
  * @return {object} An object of children element
  */
 const MaskedInput = ({
-  keyProp,
   className,
   onChange,
   onKeyDown,
@@ -61,7 +59,6 @@ const MaskedInput = ({
   return (
     <div className={elementClasses}>
       <MaskedInputComponent
-        key={keyProp}
         mask={mask}
         className={styles.input}
         onBlur={onBlur}
@@ -98,7 +95,6 @@ const MaskedInput = ({
 MaskedInput.displayName = 'Masked'
 
 MaskedInput.propTypes = {
-  keyProp: PropTypes.string,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
@@ -125,7 +121,6 @@ MaskedInput.propTypes = {
 }
 
 MaskedInput.defaultProps = {
-  keyProp: '',
   className: '',
   onChange: () => null,
   onKeyDown: () => null,
