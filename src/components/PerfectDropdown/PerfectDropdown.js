@@ -60,6 +60,7 @@ const PerfectDropdown = forwardRef(
       offset,
       className,
       padding,
+      isOpenDisabled,
       ['data-testid']: dataTestId
     },
     ref
@@ -87,7 +88,8 @@ const PerfectDropdown = forwardRef(
         [styles['trigger--spaced']]: alignment === 'spaced',
         [styles['trigger--end']]: alignment === 'end',
         [styles['trigger--input']]: hasInput,
-        [styles['trigger--as-input']]: hasFullInputStyle
+        [styles['trigger--as-input']]: hasFullInputStyle,
+        [styles['trigger--disabled']]: isOpenDisabled
       },
       className
     )
@@ -243,7 +245,8 @@ PerfectDropdown.propTypes = {
   className: PropTypes.string,
   offset: PropTypes.number,
   padding: PropTypes.oneOf(['none']),
-  'data-testid': PropTypes.string
+  'data-testid': PropTypes.string,
+  isOpenDisabled: PropTypes.bool
 }
 
 PerfectDropdown.defaultProps = {
@@ -263,7 +266,8 @@ PerfectDropdown.defaultProps = {
   className: '',
   offset: 5,
   padding: null,
-  'data-testid': 'trigger-dropdown'
+  'data-testid': 'trigger-dropdown',
+  isOpenDisabled: false
 }
 
 PerfectDropdown.displayName = 'PerfectDropdown'
