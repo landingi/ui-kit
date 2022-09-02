@@ -28,6 +28,7 @@ import styles from '@components/Input/Input.module.scss'
  * @param {object} props.i18n - object of translation
  * @param {string} props.variant - input variant, default ''
  * @param {function} props.onKeyDown - key down handler
+ * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
  * @return {object} An object of children element
  */
 const Input = ({
@@ -47,7 +48,8 @@ const Input = ({
   alwaysShowLabel,
   variant,
   onKeyDown,
-  ['data-testid']: dataTestId
+  ['data-testid']: dataTestId,
+  hideArrows
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -82,6 +84,7 @@ const Input = ({
         alwaysShowLabel={alwaysShowLabel}
         variant={variant}
         data-testid={dataTestId}
+        hideArrows={hideArrows}
         form
       />
 
@@ -133,7 +136,8 @@ Input.propTypes = {
   }),
   variant: PropTypes.string,
   onKeyDown: PropTypes.func,
-  ['data-testid']: PropTypes.string
+  ['data-testid']: PropTypes.string,
+  hideArrows: PropTypes.bool
 }
 
 Input.defaultProps = {
@@ -157,7 +161,8 @@ Input.defaultProps = {
   variant: '',
   form: { errors: {}, touched: {} },
   field: {},
-  ['data-testid']: 'input-component'
+  ['data-testid']: 'input-component',
+  hideArrows: false
 }
 
 export default Input
