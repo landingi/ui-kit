@@ -135,6 +135,10 @@ const PerfectDropdown = forwardRef(
         event.stopPropagation()
         event.preventDefault()
 
+        if (isOpenDisabled) {
+          return
+        }
+
         !isOpen && handleOnOpen()
 
         handleResize()

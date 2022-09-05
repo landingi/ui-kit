@@ -140,6 +140,8 @@
     }
 
     &:hover {
+      cursor: not-allowed;
+
       i,
       svg {
         color: $color-3;
