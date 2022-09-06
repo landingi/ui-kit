@@ -79,7 +79,8 @@ const PerfectDropdown = forwardRef(
       [styles['trigger__label']]: true,
       [styles['trigger__label--icon']]: icon,
       [styles['trigger__label--as-input']]: hasInput,
-      [styles['trigger__label--placeholder']]: asPlaceholder
+      [styles['trigger__label--placeholder']]: asPlaceholder,
+      [styles['trigger__label--disabled']]: isOpenDisabled
     })
 
     const triggerClasses = useStyles(
