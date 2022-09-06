@@ -133,18 +133,17 @@
   &--disabled {
     color: $color-input-border;
     border-bottom: 1px dotted $color-8;
-    cursor: not-allowed;
 
-    label {
-      cursor: not-allowed;
+    i,
+    svg {
+      color: $color-3;
     }
 
     &:hover {
       cursor: not-allowed;
 
-      i,
-      svg {
-        color: $color-3;
+      label {
+        cursor: not-allowed;
       }
     }
 
