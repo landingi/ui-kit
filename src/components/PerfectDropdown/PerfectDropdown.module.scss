@@ -138,10 +138,10 @@
     color: $color-input-border;
     border-bottom: 1px dotted $color-8;
 
-      i,
-      svg {
-        color: $color-3;
-      }
+    i,
+    svg {
+      color: $color-3;
+    }
 
     &:hover {
       cursor: not-allowed;
