@@ -38,6 +38,7 @@ import Spreader from '@components/Spreader'
  * so you have to pass a function there () => <YourTrigger />. It allows you to use state derived from this
  * dropdown in your custom trigger as props, for example isOpen.
  * @param {number} offset - offset between trigger and dropdown
+ * @param {bool} isOpenDisabled - when true dropdown can't be opened and it is grayed out
  * @param {string} className - className of dropdown trigger, allow adjustments of position etc.
  */
 const PerfectDropdown = forwardRef(
