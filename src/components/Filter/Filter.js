@@ -1,7 +1,7 @@
 import { emitCloseDropdown } from '@events/dropdown'
 import { setLocalStorage } from '@helpers/storage'
 import Button from '@components/Button'
-import Dropdown from '@components/Dropdown'
+import PerfectDropdown from '@components/PerfectDropdown'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
 import PropTypes from 'prop-types'
@@ -44,7 +44,11 @@ const Filter = ({
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel
 
   return (
-    <Dropdown label={dropdownLabel} size='medium' data-testid={dataTestId}>
+    <PerfectDropdown
+      label={dropdownLabel}
+      size='medium'
+      data-testid={dataTestId}
+    >
       <List>
         {values.map(({ value, label }) => (
           <ListItem key={uuid()} variant='dropdown'>
@@ -58,7 +62,7 @@ const Filter = ({
           </ListItem>
         ))}
       </List>
-    </Dropdown>
+    </PerfectDropdown>
   )
 }
 
