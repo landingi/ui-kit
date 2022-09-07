@@ -180,7 +180,7 @@ const PerfectDropdownSelect = ({
     return (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
+          <ListItem variant='dropdown' key={index}>
             {renderOption(item)}
           </ListItem>
         ))}
