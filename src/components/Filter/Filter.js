@@ -24,7 +24,8 @@ const Filter = ({
   initialValue,
   localStorageKey,
   customLabel,
-  ['data-testid']: dataTestId
+  ['data-testid']: dataTestId,
+  dropdownPlacement
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
@@ -48,6 +49,7 @@ const Filter = ({
       label={dropdownLabel}
       size='medium'
       data-testid={dataTestId}
+      dropdownPlacement={dropdownPlacement}
     >
       <List>
         {values.map(({ value, label }) => (
@@ -82,7 +84,8 @@ Filter.propTypes = {
     })
   ).isRequired,
   customLabel: PropTypes.func,
-  ['data-testid']: PropTypes.string
+  ['data-testid']: PropTypes.string,
+  dropdownPlacement: PropTypes.string
 }
 
 Filter.defaultProps = {
@@ -90,7 +93,8 @@ Filter.defaultProps = {
   localStorageKey: null,
   setValue: () => null,
   customLabel: null,
-  ['data-testid']: 'filter-component'
+  ['data-testid']: 'filter-component',
+  dropdownPlacement: 'right'
 }
 
 export default Filter
