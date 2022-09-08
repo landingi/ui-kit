@@ -23,6 +23,7 @@ import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
 import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import Icon from 'components/Icon'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -45,7 +46,9 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {bool} props.alwaysShowLabel - always show label on top
  * @param {object} props.overflowStyle - overflow styles
  * @param {func} props.formikKey - name on formik 'nasted' keys
- * @param {string} props.i18n - object of translations
+ * @param {object} props.i18n - object of translations
+ * @param {bool} props.hasLoadMoreButton - conditional render load more button
+ * @param {func} props.loadMoreEvent - handleClickCloadMore
  * @return {object} An object of children element
  */
 const PerfectDropdownSelect = ({
@@ -67,7 +70,9 @@ const PerfectDropdownSelect = ({
   alwaysShowLabel,
   overflowStyle,
   formikKey,
-  i18n
+  i18n,
+  hasLoadMoreButton,
+  loadMoreEvent
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -199,6 +204,20 @@ const PerfectDropdownSelect = ({
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null
 
+  const renderLoadMoreButton = () => (
+    <Button
+      align='left'
+      variant='dropdown'
+      onClick={loadMoreEvent}
+      hasIcon
+      fitWidth
+    >
+      <Icon icon='icon-arrow-down' />
+
+      {i18n.loadmore}
+    </Button>
+  )
+
   return (
     <div className={className} ref={containerRef} data-testid='dropdown-select'>
       {label && (
@@ -245,6 +264,7 @@ const PerfectDropdownSelect = ({
               {renderOptions()}
               {isLoading && <Loader />}
               {renderEmptyMessage()}
+              {!isLoading && hasLoadMoreButton && renderLoadMoreButton()}
             </List>
 
             <Spacer space='tiny' />
@@ -293,8 +313,11 @@ PerfectDropdownSelect.propTypes = {
   overflowStyle: PropTypes.instanceOf(Object),
   formikKey: PropTypes.string,
   i18n: PropTypes.shape({
-    placeholder: PropTypes.string
-  })
+    placeholder: PropTypes.string,
+    loadmore: PropTypes.string
+  }),
+  hasLoadMoreButton: PropTypes.bool,
+  loadMoreEvent: PropTypes.func
 }
 
 PerfectDropdownSelect.defaultProps = {
@@ -317,8 +340,11 @@ PerfectDropdownSelect.defaultProps = {
   formikKey: '',
   searchPlaceholder: '',
   i18n: {
-    placeholder: ''
-  }
+    placeholder: '',
+    loadmore: ''
+  },
+  hasLoadMoreButton: null,
+  loadMoreEvent: null
 }
 
 export default PerfectDropdownSelect
