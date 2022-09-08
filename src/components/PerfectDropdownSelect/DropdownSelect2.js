@@ -160,8 +160,13 @@ const PerfectDropdownSelect = ({
   const [searchValue, setSearchValue] = useState(null)
 
   const handleSearchOptionsChange = value => {
-    setSearchValue(value)
-    handleOnSearchChange(value)
+    if (!handleOnSearchChange) {
+      setSearchValue(value)
+    }
+
+    if (handleOnSearchChange) {
+      handleOnSearchChange(value)
+    }
   }
 
   /**
