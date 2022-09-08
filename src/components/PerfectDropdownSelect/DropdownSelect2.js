@@ -72,7 +72,8 @@ const PerfectDropdownSelect = ({
   formikKey,
   i18n,
   hasLoadMoreButton,
-  loadMoreEvent
+  loadMoreEvent,
+  ['data-testid']: dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -242,6 +243,7 @@ const PerfectDropdownSelect = ({
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
         className={dropdownStyles}
+        data-testid={dataTestId}
       >
         {hasSearcher && (
           <Fragment>
@@ -322,7 +324,8 @@ PerfectDropdownSelect.propTypes = {
     loadmore: PropTypes.string
   }),
   hasLoadMoreButton: PropTypes.bool,
-  loadMoreEvent: PropTypes.func
+  loadMoreEvent: PropTypes.func,
+  'data-testid': PropTypes.string
 }
 
 PerfectDropdownSelect.defaultProps = {
@@ -349,7 +352,8 @@ PerfectDropdownSelect.defaultProps = {
     loadmore: ''
   },
   hasLoadMoreButton: null,
-  loadMoreEvent: null
+  loadMoreEvent: null,
+  'data-testid': 'trigger-dropdown'
 }
 
 export default PerfectDropdownSelect
