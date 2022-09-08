@@ -1,7 +1,7 @@
 import { emitCloseDropdown } from '@events/dropdown'
 import { setLocalStorage } from '@helpers/storage'
 import Button from '@components/Button'
-import Dropdown from '@components/Dropdown'
+import PerfectDropdown from '@components/PerfectDropdown'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
 import PropTypes from 'prop-types'
@@ -24,7 +24,8 @@ const Filter = ({
   initialValue,
   localStorageKey,
   customLabel,
-  ['data-testid']: dataTestId
+  ['data-testid']: dataTestId,
+  dropdownPlacement
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
@@ -44,7 +45,12 @@ const Filter = ({
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel
 
   return (
-    <Dropdown label={dropdownLabel} size='medium' data-testid={dataTestId}>
+    <PerfectDropdown
+      label={dropdownLabel}
+      size='medium'
+      data-testid={dataTestId}
+      dropdownPlacement={dropdownPlacement}
+    >
       <List>
         {values.map(({ value, label }) => (
           <ListItem key={uuid()} variant='dropdown'>
@@ -58,7 +64,7 @@ const Filter = ({
           </ListItem>
         ))}
       </List>
-    </Dropdown>
+    </PerfectDropdown>
   )
 }
 
@@ -78,7 +84,8 @@ Filter.propTypes = {
     })
   ).isRequired,
   customLabel: PropTypes.func,
-  ['data-testid']: PropTypes.string
+  ['data-testid']: PropTypes.string,
+  dropdownPlacement: PropTypes.string
 }
 
 Filter.defaultProps = {
@@ -86,7 +93,8 @@ Filter.defaultProps = {
   localStorageKey: null,
   setValue: () => null,
   customLabel: null,
-  ['data-testid']: 'filter-component'
+  ['data-testid']: 'filter-component',
+  dropdownPlacement: 'right'
 }
 
 export default Filter
