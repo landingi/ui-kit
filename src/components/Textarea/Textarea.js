@@ -15,8 +15,8 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} variant - variant
  * @param {string} size - size
  * @param {object} i18n - props with translated string
- * @param {bool} isResize - is rezise
- * @param {bool} maxHeight - max height
+ * @param {bool} hasResize - is rezise
+ * @param {number} maxHeight - max height
  * @return {object} An object of children element
  */
 const Textarea = ({
@@ -28,7 +28,7 @@ const Textarea = ({
   variant,
   size,
   i18n,
-  isResize,
+  hasResize,
   maxHeight
 }) => {
   const textAreaStyles = useStyles(
@@ -36,7 +36,7 @@ const Textarea = ({
       [styles['textarea']]: true,
       [styles[`textarea--${variant}`]]: variant,
       [styles[`textarea--${size}`]]: size,
-      [styles['textarea--resize']]: isResize
+      [styles['textarea--resize']]: hasResize
     },
     className
   )
@@ -80,7 +80,7 @@ Textarea.propTypes = {
   }).isRequired,
   variant: PropTypes.oneOf(['default', 'codearea']),
   size: PropTypes.oneOf(['tiny', 'small', 'medium']),
-  isResize: PropTypes.bool,
+  hasResize: PropTypes.bool,
   maxHeight: PropTypes.number
 }
 
@@ -88,7 +88,7 @@ Textarea.defaultProps = {
   className: '',
   size: 'medium',
   variant: 'default',
-  isResize: false,
+  hasResize: false,
   maxHeight: null
 }
 
