@@ -15,7 +15,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} variant - variant
  * @param {string} size - size
  * @param {object} i18n - props with translated string
- * @param {bool} hasResize - is rezise
+ * @param {bool} hasResize - has resize
  * @param {number} maxHeight - max height
  * @return {object} An object of children element
  */
