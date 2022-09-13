@@ -18,6 +18,10 @@
     border: 1px solid $color-1;
   }
 
+  &--tiny {
+    min-height: 55px;
+  }
+
   &--small {
     min-height: 121px;
   }
@@ -39,5 +43,9 @@
     &:focus {
       border: none;
     }
+  }
+
+  &--resize {
+    resize: vertical;
   }
 }
