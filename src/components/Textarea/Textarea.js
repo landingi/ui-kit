@@ -15,6 +15,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {string} variant - variant
  * @param {string} size - size
  * @param {object} i18n - props with translated string
+ * @param {bool} isResize - is rezise
  * @return {object} An object of children element
  */
 const Textarea = ({
@@ -25,13 +26,15 @@ const Textarea = ({
   onChange,
   variant,
   size,
-  i18n
+  i18n,
+  isResize
 }) => {
   const textAreaStyles = useStyles(
     {
       [styles['textarea']]: true,
       [styles[`textarea--${variant}`]]: variant,
-      [styles[`textarea--${size}`]]: size
+      [styles[`textarea--${size}`]]: size,
+      [styles['textarea--resize']]: isResize
     },
     className
   )
@@ -73,13 +76,15 @@ Textarea.propTypes = {
     label: PropTypes.string
   }).isRequired,
   variant: PropTypes.oneOf(['default', 'codearea']),
-  size: PropTypes.oneOf(['small', 'medium'])
+  size: PropTypes.oneOf(['small', 'medium']),
+  isResize: PropTypes.bool
 }
 
 Textarea.defaultProps = {
   className: '',
   size: 'medium',
-  variant: 'default'
+  variant: 'default',
+  isResize: false
 }
 
 export default Textarea
