@@ -26,8 +26,18 @@
   }
 
   &--disabled {
+    cursor: not-allowed;
     text-decoration: none;
     background: none;
     color: $color-4;
+
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: not-allowed;
+      text-decoration: none;
+      background: none;
+      color: $color-4;
+    }
   }
 }
