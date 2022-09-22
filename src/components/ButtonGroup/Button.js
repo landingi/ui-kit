@@ -16,7 +16,8 @@ const Button = ({ children, id, isDisabled }) => {
 
   const buttonStyles = useStyles({
     [styles.button]: true,
-    [styles[`button--active`]]: selected === id
+    [styles[`button--active`]]: selected === id,
+    [styles[`button--disabled`]]: isDisabled
   })
 
   const handleChange = () => setSelected(id)

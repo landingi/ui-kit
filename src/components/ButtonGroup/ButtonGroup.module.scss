@@ -24,4 +24,10 @@
     background-color: $color-button-hover;
     color: $color-black;
   }
+
+  &--disabled {
+    text-decoration: none;
+    background: none;
+    color: $color-4;
+  }
 }
