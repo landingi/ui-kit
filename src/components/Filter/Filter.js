@@ -16,6 +16,7 @@ import uuid from 'react-uuid'
  * @param {string | object} props.initialValue - initial value
  * @param {string} props.localStorageKey - local storage key, if filter value should be remebered between sessions
  * @param {string} props.customLabel - customLabel custom label component
+ * @param {string} size - size
  * @return {object} An object of children element
  */
 const Filter = ({
@@ -25,7 +26,8 @@ const Filter = ({
   localStorageKey,
   customLabel,
   ['data-testid']: dataTestId,
-  dropdownPlacement
+  dropdownPlacement,
+  size
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
@@ -47,7 +49,7 @@ const Filter = ({
   return (
     <PerfectDropdown
       label={dropdownLabel}
-      size='medium'
+      size={size}
       data-testid={dataTestId}
       dropdownPlacement={dropdownPlacement}
     >
@@ -85,7 +87,18 @@ Filter.propTypes = {
   ).isRequired,
   customLabel: PropTypes.func,
   ['data-testid']: PropTypes.string,
-  dropdownPlacement: PropTypes.string
+  dropdownPlacement: PropTypes.string,
+  size: PropTypes.oneOf([
+    'mini',
+    'small',
+    'medium',
+    'big',
+    'large',
+    'huge',
+    'extra-huge',
+    'auto',
+    'fixed'
+  ])
 }
 
 Filter.defaultProps = {
@@ -94,7 +107,8 @@ Filter.defaultProps = {
   setValue: () => null,
   customLabel: null,
   ['data-testid']: 'filter-component',
-  dropdownPlacement: 'right'
+  dropdownPlacement: 'right',
+  size: 'medium'
 }
 
 export default Filter
