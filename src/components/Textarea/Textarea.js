@@ -17,6 +17,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @param {object} i18n - props with translated string
  * @param {bool} hasResize - has resize
  * @param {number} maxHeight - max height
+ * @param {bool} props.disabled - disabled
  * @return {object} An object of children element
  */
 const Textarea = ({
@@ -29,7 +30,8 @@ const Textarea = ({
   size,
   i18n,
   hasResize,
-  maxHeight
+  maxHeight,
+  disabled
 }) => {
   const textAreaStyles = useStyles(
     {
@@ -61,6 +63,7 @@ const Textarea = ({
         onChange={onChange}
         value={value}
         style={{ maxHeight: maxHeight }}
+        disabled={disabled}
       />
     </Fragment>
   )
@@ -81,7 +84,8 @@ Textarea.propTypes = {
   variant: PropTypes.oneOf(['default', 'codearea']),
   size: PropTypes.oneOf(['tiny', 'small', 'medium']),
   hasResize: PropTypes.bool,
-  maxHeight: PropTypes.number
+  maxHeight: PropTypes.number,
+  disabled: PropTypes.bool
 }
 
 Textarea.defaultProps = {
@@ -89,7 +93,8 @@ Textarea.defaultProps = {
   size: 'medium',
   variant: 'default',
   hasResize: false,
-  maxHeight: null
+  maxHeight: null,
+  disabled: false
 }
 
 export default Textarea
