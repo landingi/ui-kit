@@ -63,7 +63,7 @@ const Textarea = ({
         onChange={onChange}
         value={value}
         style={{ maxHeight: maxHeight }}
-        disabled={!disabled ? undefined : disabled}
+        disabled={disabled}
       />
     </Fragment>
   )
