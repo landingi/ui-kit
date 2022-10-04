@@ -61,7 +61,8 @@ Paragraph.propTypes = {
     'accent-7',
     'info',
     'white',
-    'color-8'
+    'color-8',
+    'success'
   ]),
   size: PropTypes.oneOf([10, 12, 14, 16, 18]),
   align: PropTypes.oneOf(['left', 'center', 'right']),
