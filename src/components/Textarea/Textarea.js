@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Label from '@components/Label'
 import Spacer from '@components/Spacer'
-import Error from '@components/Error'
+import Error from '@components/Form/Error'
 import styles from './Textarea.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 
