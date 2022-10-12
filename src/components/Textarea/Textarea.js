@@ -5,6 +5,7 @@ import Spacer from '@components/Spacer'
 import Error from '@components/Form/Error'
 import styles from './Textarea.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { getDeepValue } from '@helpers/data'
 
 /**
  * Textarea - stateless presentational component
@@ -39,8 +40,8 @@ const Textarea = ({
   errors,
   touched
 }) => {
-  const error = errors[name]
-  const isTouched = touched[name]
+  const error = getDeepValue(errors, name)
+  const isTouched = getDeepValue(touched, name)
   const hasErrorToShow = error && isTouched
 
   const labelStyles = useStyles({
@@ -50,10 +51,10 @@ const Textarea = ({
   const textAreaStyles = useStyles(
     {
       [styles['textarea']]: true,
-      [styles[`textarea__${variant}`]]: variant,
-      [styles[`textarea__${size}`]]: size,
-      [styles['textarea__resize']]: hasResize,
-      [styles['textarea__error']]: hasErrorToShow
+      [styles[`textarea--${variant}`]]: variant,
+      [styles[`textarea--${size}`]]: size,
+      [styles['textarea--resize']]: hasResize,
+      [styles['textarea--error']]: hasErrorToShow
     },
     className
   )

@@ -18,19 +18,19 @@
     border: 1px solid $color-1;
   }
 
-  &__tiny {
+  &--tiny {
     min-height: 55px;
   }
 
-  &__small {
+  &--small {
     min-height: 121px;
   }
 
-  &__medium {
+  &--medium {
     min-height: 300px;
   }
 
-  &__codearea {
+  &--codearea {
     height: 414px;
     padding: $padding-small;
     background-color: $color-1;
@@ -45,17 +45,19 @@
     }
   }
 
-  &__resize {
+  &--resize {
     resize: vertical;
   }
 
-  &__error {
+  &--error {
     box-shadow: none;
     border: 1px solid $color-error;
   }
 
-  &__label--error {
-    color: $color-error;
+  &__label {
+    &--error {
+      color: $color-error;
+    }
   }
 
   &:disabled {
