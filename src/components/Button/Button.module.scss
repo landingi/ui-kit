@@ -116,6 +116,69 @@
     }
   }
 
+  &--secondary-outlined {
+    background: transparent;
+    color: $color-brand;
+    border: 1px solid $color-brand;
+
+    svg,
+    i {
+      color: $color-brand;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color-button-hover;
+      color: $color-brand;
+      border: 1px solid $color-brand;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: $color-4;
+      border: 1px solid $color-4;
+
+      svg,
+      i {
+        color: $color-4;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: transparent;
+        color: $color-4;
+
+        svg,
+        i {
+          color: $color-4;
+        }
+      }
+    }
+
+    &--loading {
+      border: none;
+      background-color: transparent;
+      color: $color-4;
+
+      svg,
+      i {
+        color: $color-4;
+      }
+
+      &:hover,
+      &:active,
+      &:focus,
+      &:disabled {
+        border: none;
+        background-color: transparent;
+        color: $color-4;
+      }
+    }
+  }
+
   &--hide {
     display: none;
   }

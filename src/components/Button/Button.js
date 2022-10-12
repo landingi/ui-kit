@@ -53,6 +53,7 @@ const Button = ({
     {
       [styles.button]: true,
       [styles[`button--${variant}`]]: variant,
+      [styles[`button--${variant}--loading`]]: variant && isLoading,
       [styles[`button--${size}`]]: size,
       [styles[`button--${align}`]]: align,
       [styles['button--svg']]: hasIcon === true,
@@ -95,6 +96,7 @@ Button.propTypes = {
   variant: PropTypes.oneOf([
     'primary',
     'secondary',
+    'secondary-outlined',
     'dropdown',
     'transparent',
     'icon',
