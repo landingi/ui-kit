@@ -49,6 +49,17 @@
     resize: vertical;
   }
 
+  &--error {
+    box-shadow: none;
+    border: 1px solid $color-error;
+  }
+
+  &__label {
+    &--error {
+      color: $color-error;
+    }
+  }
+
   &:disabled {
     box-shadow: none;
     border: 1px dotted $color-8;
