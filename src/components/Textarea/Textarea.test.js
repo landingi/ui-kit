@@ -5,12 +5,22 @@ import Textarea from '@components/Textarea'
 import '@testing-library/jest-dom'
 
 const initialProps = {
+  id: 'mocked-textarea',
+  name: 'mocked-textarea',
   value: 'initial value',
   onChange: jest.fn(),
+  onBlur: jest.fn(),
   i18n: {
+    label: 'textarea label',
     placeholder: 'textarea placeholder'
   },
-  id: 'mocked-textarea'
+  errors: {},
+  touched: {}
+}
+
+const isTouchedProps = {
+  errors: { 'mocked-textarea': 'error-name' },
+  touched: { 'mocked-textarea': true }
 }
 
 describe('<Textarea/> mount', () => {
@@ -54,5 +64,13 @@ describe('<Textarea/> mount', () => {
     fireEvent.change(textAreaNode, { target: { value: 'new value' } })
 
     expect(onChange).toHaveBeenCalledTimes(1)
+  })
+
+  it('properly renders error label when is touched', () => {
+    const { getByText } = render(
+      <Textarea {...initialProps} {...isTouchedProps} />
+    )
+
+    expect(getByText('error-name')).toBeTruthy()
   })
 })
