@@ -1,65 +1,64 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Alert from '@components/Alert'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 const props = {
-  children: 'Alert'
+  children: 'Alert content'
 }
 
-const alertComponent = <Alert {...props}>{props.children}</Alert>
-
 describe('<Alert /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(alertComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Alert {...props} />)
+
+    screen.getByText('Alert content')
   })
 
   it('has `alert-message` class', () => {
-    expect(wrapper.children().hasClass('alert-message')).toBe(true)
+    render(<Alert {...props} />)
+
+    const alertComponent = screen.getByTestId('alert')
+
+    expect(alertComponent).toHaveClass('alert-message')
   })
 
-  it('is alert', () => {
-    wrapper.setProps({
-      type: 'alert'
-    })
-    expect(wrapper.find('div').first().hasClass('alert-message--alert')).toBe(
-      true
-    )
+  it('is alert type', () => {
+    render(<Alert {...props} type='alert' />)
+
+    const alertComponent = screen.getByTestId('alert')
+    const icon = screen.getByTestId('alert-icon')
+
+    expect(icon).toHaveClass('icon-remove')
+    expect(alertComponent).toHaveClass('alert-message--alert')
   })
 
-  it('is info', () => {
-    wrapper.setProps({
-      type: 'info'
-    })
-    expect(wrapper.find('div').first().hasClass('alert-message--info')).toBe(
-      true
-    )
+  it('is info type', () => {
+    render(<Alert {...props} type='info' />)
+
+    const alertComponent = screen.getByTestId('alert')
+    const icon = screen.getByTestId('alert-icon')
+
+    expect(icon).toHaveClass('icon-info')
+    expect(alertComponent).toHaveClass('alert-message--info')
   })
 
-  it('is success', () => {
-    wrapper.setProps({
-      type: 'success'
-    })
-    expect(wrapper.find('div').first().hasClass('alert-message--success')).toBe(
-      true
-    )
+  it('is warning type', () => {
+    render(<Alert {...props} type='warning' />)
+
+    const alertComponent = screen.getByTestId('alert')
+    const icon = screen.getByTestId('alert-icon')
+
+    expect(icon).toHaveClass('icon-exclamation')
+    expect(alertComponent).toHaveClass('alert-message--warning')
   })
 
-  it('is warning', () => {
-    wrapper.setProps({
-      type: 'warning'
-    })
-    expect(wrapper.find('div').first().hasClass('alert-message--warning')).toBe(
-      true
-    )
+  it('is success type', () => {
+    render(<Alert {...props} type='success' />)
+
+    const alertComponent = screen.getByTestId('alert')
+    const icon = screen.getByTestId('alert-icon')
+
+    expect(icon).toHaveClass('icon-ok')
+    expect(alertComponent).toHaveClass('alert-message--success')
   })
 })
