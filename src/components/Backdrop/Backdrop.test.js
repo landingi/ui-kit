@@ -1,41 +1,30 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Backdrop from '@components/Backdrop'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
-const onClick = jest.fn()
-
-const props = {
-  onClick: onClick
-}
-
-const backdropComponent = <Backdrop {...props} />
-
-describe('<Backdrop/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(backdropComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
+describe('<Backdrop /> mount', () => {
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Backdrop />)
   })
 
-  it('calls function passed as onClick prop on click event', () => {
-    wrapper.simulate('click')
-    expect(onClick).toHaveBeenCalled()
+  it('has backdrop class', () => {
+    render(<Backdrop />)
+    expect(screen.getByTestId('backdrop')).toHaveClass('backdrop')
   })
 
-  it('should have defined default prop onClick', () => {
-    expect(Backdrop.defaultProps.onClick).toBeDefined()
+  it('has z-index class', () => {
+    render(<Backdrop zIndex='6' />)
+    expect(screen.getByTestId('backdrop')).toHaveClass('backdrop__index-6')
   })
 
-  it('default prop `onClick` should be null', () => {
-    const result = Backdrop.defaultProps.onClick()
-    expect(result).toBe(null)
+  it('has onclick handler', () => {
+    const handleOnClick = jest.fn()
+
+    render(<Backdrop onClick={handleOnClick} />)
+    const backdrop = screen.getByTestId('backdrop')
+    backdrop.click()
+
+    expect(handleOnClick).toHaveBeenCalled()
   })
 })
