@@ -1,52 +1,61 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import ColorLine from '@components/ColorLine'
-
-const colorLineComponent = <ColorLine variant='success' />
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 describe('<ColorLine /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(colorLineComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<ColorLine variant='success' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+    expect(colorLineComponent).toHaveClass('color-line')
   })
 
-  it('has verical align', () => {
-    expect(wrapper.prop('alignment')).toBe('vertical')
-    expect(wrapper.find('span').hasClass('color-line--vertical')).toBe(true)
+  it('has vertical alignment by default', () => {
+    render(<ColorLine variant='success' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--vertical')
   })
 
-  it('has horizontal align', () => {
-    wrapper.setProps({
-      alignment: 'horizontal'
-    })
-    expect(wrapper.prop('alignment')).toBe('horizontal')
-    expect(wrapper.find('span').hasClass('color-line--horizontal')).toBe(true)
+  it('has horizontal alignment', () => {
+    render(<ColorLine variant='success' alignment='horizontal' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--horizontal')
   })
 
   it('has success variant', () => {
-    expect(wrapper.find('span').hasClass('color-line--success')).toBe(true)
+    render(<ColorLine variant='success' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--success')
   })
 
   it('has warning variant', () => {
-    wrapper.setProps({
-      variant: 'warning'
-    })
-    expect(wrapper.find('span').hasClass('color-line--warning')).toBe(true)
+    render(<ColorLine variant='warning' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--warning')
   })
 
   it('has alert variant', () => {
-    wrapper.setProps({
-      variant: 'alert'
-    })
-    expect(wrapper.find('span').hasClass('color-line--alert')).toBe(true)
+    render(<ColorLine variant='alert' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--alert')
+  })
+
+  it('has info variant', () => {
+    render(<ColorLine variant='info' />)
+
+    const colorLineComponent = screen.getByTestId('colorline')
+
+    expect(colorLineComponent).toHaveClass('color-line--info')
   })
 })
