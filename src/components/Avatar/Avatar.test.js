@@ -1,53 +1,35 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Avatar from '@components/Avatar'
-
-const avatarComponent = <Avatar />
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 describe('<Avatar /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(avatarComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
+    render(<Avatar />)
   })
 
-  it('has `avatar` class', () => {
-    expect(wrapper.find('span').hasClass('avatar')).toBe(true)
+  it('has text variant', () => {
+    render(<Avatar variant='blank' name='Nazwa' />)
+
+    screen.getByText('Nazwa')
   })
 
   it('has image variant', () => {
-    wrapper.setProps({
-      variant: 'image'
-    })
-    expect(wrapper.find('span').hasClass('avatar--image')).toBe(true)
-  })
+    render(<Avatar variant='image' src='imageSRC' />)
 
-  it('has blank variant', () => {
-    wrapper.setProps({
-      variant: 'blank'
-    })
-    expect(wrapper.find('span').hasClass('avatar--blank')).toBe(true)
+    const avatar = document.querySelector('img')
+    expect(avatar.src).toContain('imageSRC')
   })
 
   it('has medium size', () => {
-    wrapper.setProps({
-      size: 'medium'
-    })
-    expect(wrapper.find('span').hasClass('avatar--medium')).toBe(true)
+    render(<Avatar variant='blank' name='Nazwa' size='medium' />)
+
+    expect(screen.getByTestId('avatar')).toHaveClass('avatar--medium')
   })
 
   it('has tiny size', () => {
-    wrapper.setProps({
-      size: 'tiny'
-    })
-    expect(wrapper.find('span').hasClass('avatar--tiny')).toBe(true)
+    render(<Avatar variant='blank' name='Nazwa' size='tiny' />)
+
+    expect(screen.getByTestId('avatar')).toHaveClass('avatar--tiny')
   })
 })

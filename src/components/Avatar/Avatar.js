@@ -28,7 +28,9 @@ const Avatar = ({ className, size, variant, src, name }) => {
   )
 
   return (
-    <span className={avatarStyles}>{renderVariant(variant, src, name)}</span>
+    <span className={avatarStyles} data-testid='avatar'>
+      {renderVariant(variant, src, name)}
+    </span>
   )
 }
 
