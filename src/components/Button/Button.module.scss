@@ -117,6 +117,7 @@
   }
 
   &--secondary-outlined {
+    box-sizing: border-box;
     background: transparent;
     color: $color-brand;
     border: 1px solid $color-brand;
