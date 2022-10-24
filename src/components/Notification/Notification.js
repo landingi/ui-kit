@@ -34,16 +34,22 @@ const Notification = ({
   )
 
   return (
-    <div className={elementStyles}>
+    <div className={elementStyles} data-testid='notification'>
       <div className={styles.content}>
-        <Icon icon={mapIconToClass(type) || 'icon-ok'} iconColor='white' />
+        <Icon
+          icon={mapIconToClass(type) || 'icon-ok'}
+          iconColor='white'
+          data-testid='notification-icon'
+        />
 
         <p className={styles.notification__message}>{children}</p>
 
         {isClosable && <Close onClick={onClick} iconColor='white' />}
       </div>
 
-      {hasTime && <span className={styles.time} />}
+      {hasTime && (
+        <span className={styles.time} data-testid='notification-time' />
+      )}
     </div>
   )
 }
