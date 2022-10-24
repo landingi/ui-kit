@@ -72,7 +72,7 @@ const ProgressBar = ({
       )}
 
       {showValue && (
-        <span data-testid='color-number' className={styles['max-result']}>
+        <span className={styles['max-result']}>
           <ColorNumber variant={variant} size={valueSize}>
             {quantity}
           </ColorNumber>

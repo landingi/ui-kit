@@ -1,126 +1,159 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import ColorNumber from '@components/ColorNumber'
-
-const colorNumberComponent = <ColorNumber variant='success'>5</ColorNumber>
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
 describe('<ColorNumber /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(colorNumberComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-  it('has default fontsize set to `18` ', () => {
-    expect(wrapper.find('span').hasClass('color-number__size--18')).toBe(true)
-  })
+    render(<ColorNumber variant='success'>1</ColorNumber>)
 
-  it('has fontsize set to `10` ', () => {
-    wrapper.setProps({
-      size: 10
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--10')).toBe(true)
-  })
+    screen.getByText('1')
 
-  it('has fontsize set to `12` ', () => {
-    wrapper.setProps({
-      size: 12
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--12')).toBe(true)
-  })
-
-  it('has fontsize set to `16` ', () => {
-    wrapper.setProps({
-      size: 16
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--16')).toBe(true)
-  })
-
-  it('has fontsize set to `32` ', () => {
-    wrapper.setProps({
-      size: 32
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--32')).toBe(true)
-  })
-
-  it('has fontsize set to `44` ', () => {
-    wrapper.setProps({
-      size: 44
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--44')).toBe(true)
-  })
-
-  it('has fontsize set to `62` ', () => {
-    wrapper.setProps({
-      size: 62
-    })
-    expect(wrapper.find('span').hasClass('color-number__size--62')).toBe(true)
+    const colorNumberComponent = screen.getByTestId('color-number')
+    expect(colorNumberComponent).toHaveClass('color-number')
   })
 
   it('has success variant', () => {
-    expect(wrapper.find('span').hasClass('color-number__color--success')).toBe(
-      true
-    )
-  })
+    render(<ColorNumber variant='success'>1</ColorNumber>)
 
-  it('has warning variant', () => {
-    wrapper.setProps({
-      variant: 'warning'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--warning')).toBe(
-      true
-    )
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--success')
   })
 
   it('has alert variant', () => {
-    wrapper.setProps({
-      variant: 'alert'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--alert')).toBe(
-      true
-    )
+    render(<ColorNumber variant='alert'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--alert')
   })
 
-  it('has progress variant', () => {
-    wrapper.setProps({
-      variant: 'progress'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--progress')).toBe(
-      true
-    )
+  it('has warning variant', () => {
+    render(<ColorNumber variant='warning'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--warning')
   })
 
   it('has default variant', () => {
-    wrapper.setProps({
-      variant: 'default'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--default')).toBe(
-      true
-    )
+    render(<ColorNumber variant='default'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--default')
+  })
+
+  it('has progress variant', () => {
+    render(<ColorNumber variant='progress'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--progress')
+  })
+
+  it('has info variant', () => {
+    render(<ColorNumber variant='info'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--info')
   })
 
   it('has brand variant', () => {
-    wrapper.setProps({
-      variant: 'brand'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--brand')).toBe(
-      true
-    )
+    render(<ColorNumber variant='brand'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--brand')
   })
 
   it('has white variant', () => {
-    wrapper.setProps({
-      variant: 'white'
-    })
-    expect(wrapper.find('span').hasClass('color-number__color--white')).toBe(
-      true
+    render(<ColorNumber variant='white'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__color--white')
+  })
+
+  it('has font size 18 by default', () => {
+    render(<ColorNumber variant='warning'>1</ColorNumber>)
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--18')
+  })
+
+  it('has font size 10', () => {
+    render(
+      <ColorNumber variant='warning' size={10}>
+        1
+      </ColorNumber>
     )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--10')
+  })
+
+  it('has font size 12', () => {
+    render(
+      <ColorNumber variant='warning' size={12}>
+        1
+      </ColorNumber>
+    )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--12')
+  })
+
+  it('has font size 16', () => {
+    render(
+      <ColorNumber variant='warning' size={16}>
+        1
+      </ColorNumber>
+    )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--16')
+  })
+
+  it('has font size 32', () => {
+    render(
+      <ColorNumber variant='warning' size={32}>
+        1
+      </ColorNumber>
+    )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--32')
+  })
+
+  it('has font size 44', () => {
+    render(
+      <ColorNumber variant='warning' size={44}>
+        1
+      </ColorNumber>
+    )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--44')
+  })
+
+  it('has font size 62', () => {
+    render(
+      <ColorNumber variant='warning' size={62}>
+        1
+      </ColorNumber>
+    )
+
+    const colorNumberComponent = screen.getByTestId('color-number')
+
+    expect(colorNumberComponent).toHaveClass('color-number__size--62')
   })
 })
