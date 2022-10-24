@@ -5,14 +5,16 @@ import '@testing-library/jest-dom'
 
 describe('<ColorNumber /> mount', () => {
   it('is mounted', () => {
-    render(<ColorNumber variant='success' />)
+    render(<ColorNumber variant='success'>1</ColorNumber>)
+
+    screen.getByText('1')
 
     const colorNumberComponent = screen.getByTestId('color-number')
     expect(colorNumberComponent).toHaveClass('color-number')
   })
 
   it('has success variant', () => {
-    render(<ColorNumber variant='success' />)
+    render(<ColorNumber variant='success'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -20,7 +22,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has alert variant', () => {
-    render(<ColorNumber variant='alert' />)
+    render(<ColorNumber variant='alert'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -28,7 +30,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has warning variant', () => {
-    render(<ColorNumber variant='warning' />)
+    render(<ColorNumber variant='warning'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -36,7 +38,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has default variant', () => {
-    render(<ColorNumber variant='default' />)
+    render(<ColorNumber variant='default'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -44,7 +46,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has progress variant', () => {
-    render(<ColorNumber variant='progress' />)
+    render(<ColorNumber variant='progress'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -52,7 +54,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has info variant', () => {
-    render(<ColorNumber variant='info' />)
+    render(<ColorNumber variant='info'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -60,7 +62,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has brand variant', () => {
-    render(<ColorNumber variant='brand' />)
+    render(<ColorNumber variant='brand'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -68,7 +70,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has white variant', () => {
-    render(<ColorNumber variant='white' />)
+    render(<ColorNumber variant='white'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -76,7 +78,7 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 18 by default', () => {
-    render(<ColorNumber variant='warning' />)
+    render(<ColorNumber variant='warning'>1</ColorNumber>)
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -84,7 +86,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 10', () => {
-    render(<ColorNumber variant='warning' size={10} />)
+    render(
+      <ColorNumber variant='warning' size={10}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -92,7 +98,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 12', () => {
-    render(<ColorNumber variant='warning' size={12} />)
+    render(
+      <ColorNumber variant='warning' size={12}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -100,7 +110,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 16', () => {
-    render(<ColorNumber variant='warning' size={16} />)
+    render(
+      <ColorNumber variant='warning' size={16}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -108,7 +122,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 32', () => {
-    render(<ColorNumber variant='warning' size={32} />)
+    render(
+      <ColorNumber variant='warning' size={32}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -116,7 +134,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 44', () => {
-    render(<ColorNumber variant='warning' size={44} />)
+    render(
+      <ColorNumber variant='warning' size={44}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
@@ -124,7 +146,11 @@ describe('<ColorNumber /> mount', () => {
   })
 
   it('has font size 62', () => {
-    render(<ColorNumber variant='warning' size={62} />)
+    render(
+      <ColorNumber variant='warning' size={62}>
+        1
+      </ColorNumber>
+    )
 
     const colorNumberComponent = screen.getByTestId('color-number')
 
