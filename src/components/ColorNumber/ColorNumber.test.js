@@ -7,14 +7,14 @@ describe('<ColorNumber /> mount', () => {
   it('is mounted', () => {
     render(<ColorNumber variant='success' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
     expect(colorNumberComponent).toHaveClass('color-number')
   })
 
   it('has success variant', () => {
     render(<ColorNumber variant='success' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--success')
   })
@@ -22,7 +22,7 @@ describe('<ColorNumber /> mount', () => {
   it('has alert variant', () => {
     render(<ColorNumber variant='alert' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--alert')
   })
@@ -30,7 +30,7 @@ describe('<ColorNumber /> mount', () => {
   it('has warning variant', () => {
     render(<ColorNumber variant='warning' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--warning')
   })
@@ -38,7 +38,7 @@ describe('<ColorNumber /> mount', () => {
   it('has default variant', () => {
     render(<ColorNumber variant='default' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--default')
   })
@@ -46,7 +46,7 @@ describe('<ColorNumber /> mount', () => {
   it('has progress variant', () => {
     render(<ColorNumber variant='progress' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--progress')
   })
@@ -54,7 +54,7 @@ describe('<ColorNumber /> mount', () => {
   it('has info variant', () => {
     render(<ColorNumber variant='info' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--info')
   })
@@ -62,7 +62,7 @@ describe('<ColorNumber /> mount', () => {
   it('has brand variant', () => {
     render(<ColorNumber variant='brand' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--brand')
   })
@@ -70,7 +70,7 @@ describe('<ColorNumber /> mount', () => {
   it('has white variant', () => {
     render(<ColorNumber variant='white' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__color--white')
   })
@@ -78,7 +78,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 18 by default', () => {
     render(<ColorNumber variant='warning' />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--18')
   })
@@ -86,7 +86,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 10', () => {
     render(<ColorNumber variant='warning' size={10} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--10')
   })
@@ -94,7 +94,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 12', () => {
     render(<ColorNumber variant='warning' size={12} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--12')
   })
@@ -102,7 +102,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 16', () => {
     render(<ColorNumber variant='warning' size={16} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--16')
   })
@@ -110,7 +110,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 32', () => {
     render(<ColorNumber variant='warning' size={32} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--32')
   })
@@ -118,7 +118,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 44', () => {
     render(<ColorNumber variant='warning' size={44} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--44')
   })
@@ -126,7 +126,7 @@ describe('<ColorNumber /> mount', () => {
   it('has font size 62', () => {
     render(<ColorNumber variant='warning' size={62} />)
 
-    const colorNumberComponent = screen.getByTestId('colornumber')
+    const colorNumberComponent = screen.getByTestId('color-number')
 
     expect(colorNumberComponent).toHaveClass('color-number__size--62')
   })

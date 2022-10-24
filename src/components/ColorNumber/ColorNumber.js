@@ -23,7 +23,7 @@ const ColorNumber = ({ className, children, variant, size }) => {
   )
 
   return (
-    <span className={elementClasses} data-testid='colornumber'>
+    <span className={elementClasses} data-testid='color-number'>
       {children}
     </span>
   )
