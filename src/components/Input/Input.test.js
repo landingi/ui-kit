@@ -48,16 +48,6 @@ describe('<Input /> mount', () => {
     expect(mockedOnKeyDown).toHaveBeenCalled()
   })
 
-  it.skip('calls function passed as onBlur prop on click event', () => {
-    render(component)
-
-    const input = screen.getByTestId('input-component')
-
-    input.focus()
-
-    expect(mockedOnBlur).toHaveBeenCalled()
-  })
-
   it('has tooltip and exclamation icon', () => {
     render(<Input {...props} tooltip='some tooltip content' />)
 
