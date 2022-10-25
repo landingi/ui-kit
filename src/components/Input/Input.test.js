@@ -16,23 +16,9 @@ const props = {
 const component = <Input {...props} />
 
 describe('<Input /> mount', () => {
-  // let wrapper
-
-  // beforeEach(() => {
-  //   wrapper = mount(component)
-  // })
-
-  // afterEach(() => {
-  //   wrapper.unmount()
-  // })
-
   it('is mounted', () => {
     render(component)
   })
-
-  // it('has `input__wrapper` class', () => {
-  //   expect(wrapper.find('div').hasClass('input__wrapper')).toBe(true)
-  // })
 
   it('default prop `onChange` should be null', () => {
     const result = Input.defaultProps.onChange()
