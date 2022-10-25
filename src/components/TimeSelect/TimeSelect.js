@@ -27,6 +27,7 @@ import styles from './TimeSelect.module.scss'
  * @param {string} props.formikKey - name on formik 'nested' keys
  * @param {string} props.label - label
  * @param {bool} props.disabled - when it's true, time can't be select, default: false
+ * @param {string} props.size - size
  * @return {object} An object of children element
  */
 const TimeSelect = ({
@@ -35,7 +36,8 @@ const TimeSelect = ({
   onChange,
   formikKey,
   label,
-  disabled
+  disabled,
+  size
 }) => {
   const isAmPmType = getLanguage !== 'pl'
 
@@ -45,7 +47,8 @@ const TimeSelect = ({
   })
 
   const timeSelectDropdownClasses = useStyles({
-    [styles['time-select__dropdown']]: true
+    [styles['time-select__dropdown']]: true,
+    [styles[`time-select__dropdown--${size}`]]: size
   })
 
   const [clockType, setClockType] = useState(isAmOrPm(value, isAmPmType))
@@ -139,14 +142,16 @@ TimeSelect.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   formikKey: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'default'])
 }
 
 TimeSelect.defaultProps = {
   inModalName: '',
   value: '12:00',
   formikKey: null,
-  disabled: false
+  disabled: false,
+  size: 'default'
 }
 
 export default TimeSelect

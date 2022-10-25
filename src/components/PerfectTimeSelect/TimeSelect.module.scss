@@ -46,11 +46,16 @@
 
   &__dropdown {
     width: 145px;
+
+    &--small {
+      max-width: 100px;
+    }
   }
 
   &__clock-type-select {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    min-width: 40px;
   }
 }
