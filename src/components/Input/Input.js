@@ -90,7 +90,7 @@ const Input = forwardRef(
     const renderDefault = defaultValue && !value
 
     return (
-      <div className={wrapperStyles}>
+      <div className={wrapperStyles} data-testid={'input-wrapper'}>
         <input
           data-testid={dataTestId}
           ref={ref}
