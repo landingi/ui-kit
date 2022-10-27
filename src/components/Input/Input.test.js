@@ -1,6 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Input from '@components/Input'
+import { render, screen, fireEvent } from '@jestutils'
+import '@testing-library/jest-dom'
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
@@ -15,22 +16,8 @@ const props = {
 const component = <Input {...props} />
 
 describe('<Input /> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('has `input__wrapper` class', () => {
-    expect(wrapper.find('div').hasClass('input__wrapper')).toBe(true)
+    render(component)
   })
 
   it('default prop `onChange` should be null', () => {
@@ -51,181 +38,80 @@ describe('<Input /> mount', () => {
     expect(result).toBe(null)
   })
 
-  it('calls function passed as onChange prop on click event', () => {
-    wrapper
-      .find('input')
-      .simulate('change', { target: { name: 'input-name', value: 'test' } })
-
-    expect(mockedOnChange).toHaveBeenCalled()
-  })
-
   it('calls function passed as onKeyDown prop on click event', () => {
-    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+    render(component)
+
+    const input = screen.getByTestId('input-component')
+
+    fireEvent.keyDown(input, { key: 'Enter' })
 
     expect(mockedOnKeyDown).toHaveBeenCalled()
   })
 
-  it('calls function passed as onBlur prop on click event', () => {
-    wrapper.find('input').simulate('blur')
-
-    expect(mockedOnBlur).toHaveBeenCalled()
-  })
-
-  it('should have defined default prop onChange', () => {
-    expect(wrapper.props().onChange).toBeDefined()
-  })
-
-  it('should have defined default prop onKeyDown', () => {
-    expect(wrapper.props().onKeyDown).toBeDefined()
-  })
-
-  it('should have defined default prop onBlur', () => {
-    expect(wrapper.props().onBlur).toBeDefined()
-  })
-
-  it('should have defined default prop type with value set to text', () => {
-    expect(wrapper.props().type).toEqual('text')
-  })
-
-  it('should have defined default prop focused with value set to false', () => {
-    expect(wrapper.props().focused).toEqual('false')
-  })
-
-  it('should have defined default prop tooltip with value set to empty string', () => {
-    expect(wrapper.props().tooltip).toEqual('')
-  })
-
-  it('should have defined default prop background with value set to white', () => {
-    expect(wrapper.props().background).toEqual('white')
-  })
-
-  it('should have defined default prop maxLength with value set to 524288', () => {
-    expect(wrapper.props().maxLength).toEqual(524288)
-  })
-
-  it('should have defined default prop name with value set to null', () => {
-    expect(wrapper.props().name).toEqual(null)
-  })
-
-  it('should have defined default prop value with value set to undefined', () => {
-    expect(wrapper.props().value).toEqual(undefined)
-  })
-  it('should have defined default prop disabled with value set to false', () => {
-    expect(wrapper.props().disabled).toEqual(false)
-  })
-
-  it('should have defined default prop readonly with value set to false', () => {
-    expect(wrapper.props().readonly).toEqual(false)
-  })
-
-  it('should have defined default prop autoFocus with value set to false', () => {
-    expect(wrapper.props().autoFocus).toEqual(false)
-  })
-
-  it('should have defined default prop required with value set to true', () => {
-    expect(wrapper.props().required).toEqual(true)
-  })
-
-  it('should have defined default prop hideArrows with value set to false', () => {
-    expect(wrapper.props().hideArrows).toEqual(false)
-  })
-
-  it('should have defined default prop i18', () => {
-    expect(wrapper.props().i18n).toEqual({
-      placeholder: null,
-      label: null,
-      description: null
-    })
-  })
-
   it('has tooltip and exclamation icon', () => {
-    wrapper.setProps({
-      tooltip: 'some tooltip content'
-    })
+    render(<Input {...props} tooltip='some tooltip content' />)
 
-    expect(wrapper.find('Tooltip').prop('content')).toEqual(
-      'some tooltip content'
-    )
-    expect(
-      wrapper.find('Tooltip').children().find('Icon').prop('color')
-    ).toEqual('color-3')
-    expect(
-      wrapper.find('Tooltip').children().find('Icon').prop('icon')
-    ).toEqual('icon-exclamation-circle')
-  })
+    const tooltip = screen.getByText('some tooltip content')
 
-  it('has no tooltip', () => {
-    wrapper.setProps({
-      tooltip: ''
-    })
-
-    expect(wrapper.find('Tooltip').exists()).toBe(false)
-  })
-
-  it('should be readonly when is disabled', () => {
-    wrapper.setProps({
-      disabled: true,
-      readonly: true
-    })
-
-    expect(wrapper.find('input').prop('readOnly')).toBe(true)
+    expect(tooltip).toBeInTheDocument()
   })
 
   it('should be disabled', () => {
-    wrapper.setProps({
-      disabled: true
-    })
+    render(<Input {...props} disabled />)
 
-    expect(wrapper.find('input').prop('disabled')).toBe(true)
+    const input = screen.getByTestId('input-component')
+
+    expect(input).toBeDisabled()
   })
 
   it('should display label when has i18n.label', () => {
-    wrapper.setProps({
-      i18n: {
-        label: 'I am your label'
-      }
-    })
-
-    expect(wrapper.find('label').prop('className')).toEqual(
-      'label label--normal label--padding--default input__label'
+    render(
+      <Input
+        {...props}
+        disabled
+        i18n={{
+          label: 'I am your label'
+        }}
+      />
     )
-  })
 
-  it('should not display label when i18n.label is null', () => {
-    wrapper.setProps({
-      i18n: {
-        label: null
-      }
-    })
+    const label = screen.getByText('I am your label')
 
-    expect(wrapper.find('label').exists()).toBe(false)
-  })
-
-  it('should have min and max when type is number', () => {
-    wrapper.setProps({
-      type: 'number',
-      min: 1,
-      max: 10
-    })
-
-    expect(wrapper.find('input').prop('min')).toEqual(1)
-    expect(wrapper.find('input').prop('max')).toEqual(10)
+    expect(label).toBeInTheDocument()
   })
 
   it('should not have --show-label when alwaysShowLabel is set on false', () => {
-    wrapper.setProps({
-      alwaysShowLabel: false
-    })
+    render(
+      <Input
+        {...props}
+        disabled
+        alwaysShowLabel={false}
+        i18n={{
+          label: 'I am your label'
+        }}
+      />
+    )
 
-    expect(wrapper.find('div').prop('className')).toEqual('input__wrapper')
+    const inputWrapper = screen.getByTestId('input-wrapper')
+
+    expect(inputWrapper).toHaveClass('input__wrapper')
   })
 
   it('should have --show-label when alwaysShowLabel is set on true', () => {
-    wrapper.setProps({
-      alwaysShowLabel: true
-    })
+    render(
+      <Input
+        {...props}
+        disabled
+        alwaysShowLabel
+        i18n={{
+          label: 'I am your label'
+        }}
+      />
+    )
 
-    expect(wrapper.find('div').prop('className')).toEqual(
+    const inputWrapper = screen.getByTestId('input-wrapper')
+
+    expect(inputWrapper).toHaveClass(
       'input__wrapper input__wrapper--show-label'
     )
   })
