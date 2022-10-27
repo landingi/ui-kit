@@ -11,7 +11,8 @@ const props = {
   form: {
     errors: {},
     touched: {}
-  }
+  },
+  id: 'id'
 }
 
 describe('<MaskedInput/> mount', () => {
