@@ -134,6 +134,7 @@ const Search = ({
           (onSubmit || onProtectedSubmit ? (
             <div className={styles['search__icon-button']}>
               <Button
+                data-testid='search-button'
                 variant='icon-transparent'
                 type={onProtectedSubmit ? 'button' : 'submit'}
                 size='input'

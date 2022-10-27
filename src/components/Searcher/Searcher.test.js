@@ -1,7 +1,7 @@
 import React from 'react'
 import Searcher from '@components/Searcher'
-import Search from '@components/Searcher'
-import { mount } from 'enzyme'
+import { render, screen, fireEvent, waitFor } from '@jestutils'
+import '@testing-library/jest-dom'
 
 const mockedSearchFunction = jest.fn()
 const mockedSetSearchResult = jest.fn()
@@ -20,63 +20,43 @@ const props = {
 const component = <Searcher {...props} />
 
 describe('<Searcher/> mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-    jest.clearAllMocks()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('should have defined default prop searchFunction', () => {
-    expect(wrapper.props().searchFunction).toBeDefined()
-  })
-
-  it('should have defined default prop setSearchResult', () => {
-    expect(wrapper.props().setSearchResult).toBeDefined()
-  })
-
-  it('should have defined default prop liveChanges with value set to false', () => {
-    expect(wrapper.props().liveChanges).toEqual(false)
+    render(component)
   })
 
   it('should have defined default prop i18', () => {
-    expect(wrapper.props().i18n).toEqual({
-      placeholder: 'jestem placeholderem'
-    })
-  })
+    render(component)
 
-  it('should have defined default prop protectedSubmit with value set false', () => {
-    expect(wrapper.props().protectedSubmit).toEqual(false)
-  })
+    const searcher = screen.getByPlaceholderText('jestem placeholderem')
 
-  it('should have defined default prop setSearchPhrase with value set to null', () => {
-    expect(wrapper.props().setSearchPhrase).toEqual(null)
+    expect(searcher).toBeInTheDocument()
   })
 
   it('on change search result should be called with no value', () => {
-    wrapper
-      .find(Search)
-      .find('input')
-      .simulate('change', { target: { value: '' } })
+    render(component)
+
+    const searcher = screen.getByTestId('search-input')
+
+    fireEvent.change(searcher, { target: { value: '1' } })
+    fireEvent.change(searcher, { target: { value: '' } })
+    // fireEvent.keyDown(searcher, { key: 'Enter', code: 13 })
 
     expect(mockedSetSearchResult).toBeCalled()
     expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE')
   })
 
-  it('should call search function with search value onSubmit', () => {
+  it('should call search function with search value onSubmit', async () => {
     const phrase = 'Search phrase'
 
-    wrapper.find(Search).find('input').instance().value = phrase
+    render(component)
 
-    wrapper.find(Search).find('form').simulate('submit')
+    const searcher = screen.getByTestId('search-input')
+
+    fireEvent.change(searcher, { target: { value: phrase } })
+
+    const submitButton = screen.getByTestId('search-button')
+
+    fireEvent.submit(submitButton)
 
     expect(mockedSearchFunction).toBeCalled()
     expect(mockedSearchFunction).toBeCalledWith(phrase)
