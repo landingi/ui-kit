@@ -1,21 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import Masked from '@components/Form/Input/MaskedInput'
+import MaskedInput from './MaskedInput'
+import { render, screen } from '@jestutils'
+import '@testing-library/jest-dom'
 
-const mockedOnChange = jest.fn()
-const mockedOnKeyDown = jest.fn()
-const mockedOnBlur = jest.fn()
 const props = {
-  onChange: mockedOnChange,
-  onKeyDown: mockedOnKeyDown,
-  onBlur: mockedOnBlur,
-  id: 'id inputa',
   field: {
-    name: 'test',
-    value: 'test',
-    onChange: jest.fn(),
-    onBlur: jest.fn(),
-    translate: true
+    name: 'input',
+    value: 'value'
   },
   form: {
     errors: {},
@@ -23,56 +14,32 @@ const props = {
   }
 }
 
-const component = <Masked {...props} />
+describe('<MaskedInput/> mount', () => {
+  it('is mounted', () => {
+    render(<MaskedInput {...props} />)
 
-describe('<Masked /> mount', () => {
-  let wrapper
+    const component = screen.getByTestId('form-masked-input-wrapper')
 
-  beforeEach(() => {
-    wrapper = mount(component)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
+    expect(component).not.toHaveClass('form--has-error')
   })
 
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    const propsWithError = {
+      ...props,
+      form: {
+        errors: {
+          input: 'err'
+        },
+        touched: {
+          input: true
+        }
+      }
+    }
 
-  it('has value of label in the placeholder prop', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
+    render(<MaskedInput {...propsWithError} />)
 
-  it('should have defined default prop onChange', () => {
-    expect(wrapper.props().onChange).toBeDefined()
-  })
+    const component = screen.getByTestId('form-masked-input-wrapper')
 
-  it('should have defined default prop onKeyDown', () => {
-    expect(wrapper.props().onKeyDown).toBeDefined()
-  })
-
-  it('should have defined default prop onBlur', () => {
-    expect(wrapper.props().onBlur).toBeDefined()
-  })
-
-  it('should have defined default prop type with value set to text', () => {
-    expect(wrapper.props().type).toEqual('text')
-  })
-
-  it('should have defined default prop focused with value set to false', () => {
-    expect(wrapper.props().focused).toEqual('false')
-  })
-
-  it('should have defined default prop maxLength with value set to 524288', () => {
-    expect(wrapper.props().maxLength).toEqual(524288)
-  })
-
-  it('should have defined default prop disabled with value set to false', () => {
-    expect(wrapper.props().disabled).toEqual(false)
-  })
-
-  it('should have defined default prop translate with value set to true', () => {
-    expect(wrapper.props().translate).toEqual(true)
+    expect(component).toHaveClass('form--has-error')
   })
 })

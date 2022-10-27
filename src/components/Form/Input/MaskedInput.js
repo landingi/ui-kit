@@ -42,7 +42,10 @@ const Masked = ({
   const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
 
   return (
-    <div className={`form-field ${errorClass}`}>
+    <div
+      className={`form-field ${errorClass}`}
+      data-testid='form-masked-input-wrapper'
+    >
       <MaskedInput
         field={field}
         mask={mask}
