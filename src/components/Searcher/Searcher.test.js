@@ -39,7 +39,6 @@ describe('<Searcher/> mount', () => {
 
     fireEvent.change(searcher, { target: { value: '1' } })
     fireEvent.change(searcher, { target: { value: '' } })
-    // fireEvent.keyDown(searcher, { key: 'Enter', code: 13 })
 
     expect(mockedSetSearchResult).toBeCalled()
     expect(mockedSetSearchResult).toBeCalledWith('NO_VALUE')
