@@ -118,7 +118,11 @@ const Modal = forwardRef(
 
           {isEditable && (
             <Fragment>
-              <Button variant='icon' onClick={onEdit}>
+              <Button
+                variant='icon'
+                onClick={onEdit}
+                data-testid='modal-button-edit'
+              >
                 <Icon icon='icon-create' />
               </Button>
             </Fragment>
@@ -132,7 +136,7 @@ const Modal = forwardRef(
     )
 
     const renderComponent = () => (
-      <div className={styles.modal__component}>
+      <div className={styles.modal__component} data-testid='modal-component'>
         <div className={styles['modal__component--child']}>{component}</div>
 
         {isClosable && <Close onClick={onClick} />}
@@ -210,6 +214,7 @@ const Modal = forwardRef(
                       <ModalFooter align={footerAlign}>
                         {hasCustomButton ? (
                           <Button
+                            data-testid='modal-custom-button'
                             variant='secondary'
                             size='medium'
                             onClick={onClickCustomButton}
