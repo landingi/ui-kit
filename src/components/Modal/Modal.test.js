@@ -1,8 +1,8 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Modal from '@components/Modal'
-import Backdrop from '@components/Backdrop'
 import Button from '@components/Button'
+import { render, screen, fireEvent } from '@jestutils'
+import '@testing-library/jest-dom'
 
 const onClick = jest.fn()
 
@@ -17,227 +17,112 @@ const props = {
 const modalComponent = <Modal {...props} />
 
 describe('<Modal /> global mount', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = mount(modalComponent)
-  })
-
-  afterEach(() => {
-    wrapper.unmount()
-  })
-
   it('is mounted', () => {
-    expect(wrapper.exists()).toBe(true)
-  })
-
-  it('should have defined default prop onClick', () => {
-    expect(wrapper.props().onClick).toBeDefined()
-  })
-
-  it('default prop `onClick` should be null', () => {
-    const result = Modal.defaultProps.onClick()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onAction` should be null', () => {
-    const result = Modal.defaultProps.onAction()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onEdit` should be null', () => {
-    const result = Modal.defaultProps.onEdit()
-
-    expect(result).toBe(null)
-  })
-
-  it('should have defined default prop isClosable', () => {
-    expect(wrapper.props().isClosable).toBeDefined()
-  })
-
-  it('should have defined default prop i18n', () => {
-    expect(wrapper.props().i18n).toBeDefined()
-  })
-
-  it('should have defined default prop image', () => {
-    expect(wrapper.props().image).toBeDefined()
-  })
-
-  it('should have defined default prop isEditable', () => {
-    expect(wrapper.props().isEditable).toBeDefined()
-  })
-
-  it('should display backdrop when isActive', () => {
-    expect(wrapper.find(Backdrop).exists()).toBe(true)
+    render(modalComponent)
   })
 
   it('should align the button to the right', () => {
-    wrapper.setProps({
-      align: 'right',
-      hasFooter: true
-    })
+    const updatedProps = { ...props, align: 'right', hasFooter: true }
 
-    expect(wrapper.find('div.modal__footer').prop('className')).toEqual(
-      'modal__footer modal__footer--align-right'
-    )
+    render(<Modal {...updatedProps} />)
+
+    const footer = screen.getByTestId('modal-footer')
+
+    expect(footer).toHaveClass('modal__footer--align-right')
   })
 
   it('has loader when isLoading se to true', () => {
-    wrapper.setProps({
-      isLoading: true
-    })
+    const updatedProps = { ...props, isLoading: true }
 
-    expect(wrapper.find('Loader').exists()).toBe(true)
-  })
+    render(<Modal {...updatedProps} />)
 
-  it('has header', () => {
-    expect(wrapper.find('div.modal__header').exists()).toBe(true)
+    const loader = screen.getByTestId('loader-default')
+
+    expect(loader).toBeInTheDocument()
   })
 
   it('has title in the header', () => {
-    wrapper.setProps({
-      i18n: {
-        title: 'some title'
-      }
-    })
+    const updatedProps = { ...props, i18n: { title: 'Jestem tytułem' } }
 
-    expect(wrapper.find('Heading').text()).toEqual('some title')
+    render(<Modal {...updatedProps} />)
+
+    const heading = screen.getByText('Jestem tytułem')
+
+    expect(heading).toBeInTheDocument()
   })
 
   it('has image in the header', () => {
-    wrapper.setProps({
-      image: 'http://www.landingi.com/logo.png'
-    })
+    const updatedProps = { ...props, image: 'http://www.landingi.com/logo.png' }
 
-    expect(wrapper.find('Image').prop('src')).toEqual(
-      'http://www.landingi.com/logo.png'
+    render(<Modal {...updatedProps} />)
+
+    const image = screen.getByTestId('image')
+
+    expect(image).toHaveAttribute(
+      'src',
+      expect.stringMatching('http://www.landingi.com/logo.png')
     )
   })
 
   it('has button mark as spam in the header and triggers onMarkAsSpam callback', () => {
-    wrapper.setProps({
+    const updatedProps = {
+      ...props,
       isMarkAsSpamVisible: true,
-      onMarkAsSpam: jest.fn()
-    })
+      onMarkAsSpam: jest.fn(),
+      i18n: { markSpam: 'mark spam' }
+    }
 
-    expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
-      'icon-block'
-    )
+    render(<Modal {...updatedProps} />)
 
-    wrapper.find('Button').at(0).simulate('click')
+    const markSpamButton = screen.getByText('mark spam')
 
-    expect(wrapper.prop('onMarkAsSpam')).toHaveBeenCalledTimes(1)
+    expect(markSpamButton).toBeInTheDocument()
+
+    fireEvent.click(markSpamButton)
+
+    expect(updatedProps.onMarkAsSpam).toHaveBeenCalled()
   })
 
   it('has button edit in the header and triggers onEdit callback', () => {
-    wrapper.setProps({
+    const updatedProps = {
+      ...props,
       isEditable: true,
       onEdit: jest.fn()
-    })
+    }
 
-    expect(wrapper.find('Button').at(0).find('Icon').prop('icon')).toEqual(
-      'icon-create'
-    )
+    render(<Modal {...updatedProps} />)
 
-    wrapper.find('Button').at(0).simulate('click')
+    const editButton = screen.getByTestId('modal-button-edit')
 
-    expect(wrapper.prop('onEdit')).toHaveBeenCalledTimes(1)
+    fireEvent.click(editButton)
+
+    expect(updatedProps.onEdit).toHaveBeenCalled()
   })
 
   it('has component in the header', () => {
-    wrapper.setProps({
+    const updatedProps = {
+      ...props,
       isComponent: true
-    })
+    }
 
-    expect(wrapper.find('div.modal__component').exists()).toBe(true)
-    expect(
-      wrapper.find('div.modal__component').hasClass('modal__component')
-    ).toBe(true)
-  })
+    render(<Modal {...updatedProps} />)
 
-  it('has header divider', () => {
-    wrapper.setProps({
-      hasHeaderDivider: true
-    })
+    const modalComponent = screen.getByTestId('modal-component')
 
-    expect(wrapper.find('Divider').exists()).toBe(true)
-  })
-
-  it('has not header divider', () => {
-    wrapper.setProps({
-      hasHeaderDivider: false
-    })
-
-    expect(wrapper.find('Divider').exists()).toBe(false)
-  })
-
-  it('has footer divider', () => {
-    wrapper.setProps({
-      hasFooterDivider: true
-    })
-
-    expect(wrapper.find('Divider').exists()).toBe(true)
-  })
-
-  it('has not footer divider', () => {
-    wrapper.setProps({
-      hasHeaderDivider: false
-    })
-
-    expect(wrapper.find('Divider').exists()).toBe(false)
+    expect(modalComponent).toBeInTheDocument()
   })
 
   it('has custom button in the footer', () => {
-    wrapper.setProps({
+    const updatedProps = {
+      ...props,
       hasCustomButton: true,
       hasFooter: true
-    })
+    }
 
-    expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(wrapper.find('div.modal__footer').find('Button').at(0)).toEqual({})
-  })
+    render(<Modal {...updatedProps} />)
 
-  it('should have button type submit when isSubmit', () => {
-    wrapper.setProps({
-      isSubmit: true,
-      hasFooter: true
-    })
+    const customButton = screen.getByTestId('modal-custom-button')
 
-    expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(
-      wrapper.find('div.modal__footer').find('Button').at(1).prop('type')
-    ).toEqual('submit')
-  })
-
-  it('should have button type button when isSubmit set to false', () => {
-    wrapper.setProps({
-      isSubmit: false,
-      hasFooter: true
-    })
-
-    expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(
-      wrapper.find('div.modal__footer').find('Button').at(1).prop('type')
-    ).toEqual('button')
-  })
-
-  it('should have action icon in the action button', () => {
-    wrapper.setProps({
-      isSubmit: false,
-      hasFooter: true,
-      actionIcon: 'times'
-    })
-
-    expect(wrapper.find('div.modal__footer').exists()).toBe(true)
-    expect(
-      wrapper
-        .find('div.modal__footer')
-        .find('Button')
-        .at(1)
-        .find('Icon')
-        .prop('icon')
-    ).toEqual('times')
+    expect(customButton).toBeInTheDocument()
   })
 })

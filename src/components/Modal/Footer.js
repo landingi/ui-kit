@@ -18,7 +18,11 @@ const ModalFooter = ({ children, align }) => {
     [styles['modal__footer--align-left']]: align === 'left'
   })
 
-  return <div className={elementClasses}>{children}</div>
+  return (
+    <div className={elementClasses} data-testid='modal-footer'>
+      {children}
+    </div>
+  )
 }
 
 ModalFooter.displayName = 'ModalFooter'

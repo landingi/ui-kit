@@ -31,6 +31,7 @@ const Image = ({ src, alt, className, size, height, auto, small }) => {
       height={height}
       src={src}
       width={size}
+      data-testid='image'
     />
   )
 }
