@@ -1,7 +1,8 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
 import Divider from '@components/Divider'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<Divider/> mount', () => {
   it('is mounted', () => {

@@ -1,7 +1,9 @@
-import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
-import EditableLabel from './EditableLabel'
 import '@testing-library/jest-dom'
+
+import { fireEvent,render, screen } from '@testing-library/react'
+import React from 'react'
+
+import EditableLabel from './EditableLabel'
 
 describe('<EditableLabel /> tests', () => {
   it('renders properly', () => {

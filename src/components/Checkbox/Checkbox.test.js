@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
-import React from 'react'
-import { render } from '@testing-library/react'
+
 import Checkbox from '@components/Checkbox'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   onChange: jest.fn(),

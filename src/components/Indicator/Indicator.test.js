@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from '@testing-library/react'
 import Indicator from '@components/Indicator'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'Indicator'

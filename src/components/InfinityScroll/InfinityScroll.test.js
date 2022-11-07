@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import InfinityScroll from '@components/InfinityScroll'
 import '@testing-library/jest-dom'
+
+import InfinityScroll from '@components/InfinityScroll'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 global.IntersectionObserver = class IntersectionObserver {
   constructor(func) {

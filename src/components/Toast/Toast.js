@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import emitter from '@lib/emitter'
-import { TOGGLE_TOAST } from '@constants/eventTypes'
 import Notification from '@components/Notification'
+import { TOGGLE_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
+import emitter from '@lib/emitter'
+import React, { useCallback, useEffect, useState } from 'react'
+
 import styles from './Toast.module.scss'
 
 /**

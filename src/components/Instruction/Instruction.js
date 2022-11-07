@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types'
-import React from 'react'
 import StepNumber from '@components/StepNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
 import uuid from 'react-uuid'
+
 import styles from './Instruction.module.scss'
 
 /**

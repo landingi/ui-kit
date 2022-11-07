@@ -1,7 +1,8 @@
 import { formatNumeric } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './LimitSmall.module.scss'
 
 /**

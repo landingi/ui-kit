@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import Backdrop from '@components/Backdrop'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 describe('<Backdrop /> mount', () => {
   it('is mounted', () => {

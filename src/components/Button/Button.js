@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
-import Ink from 'react-ink'
-import PropTypes from 'prop-types'
 import Spinner from '@components/Spinner'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import Ink from 'react-ink'
+
 import styles from './Button.module.scss'
 
 /**

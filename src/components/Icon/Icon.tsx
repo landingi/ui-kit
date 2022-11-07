@@ -1,7 +1,8 @@
-import { FC } from 'react'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from './Icon.module.scss'
+import { FC } from 'react'
+
 import css from './editor-icons.module.scss'
+import styles from './Icon.module.scss'
 
 interface IconProps {
   icon: string

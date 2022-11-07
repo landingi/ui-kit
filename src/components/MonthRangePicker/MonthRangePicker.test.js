@@ -1,7 +1,9 @@
-import React, { useCallback as useCallbackMock, useEffect } from 'react'
-import MonthRangePicker from '@components/MonthRangePicker/MonthRangePicker'
-import { render , fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import MonthRangePicker from '@components/MonthRangePicker/MonthRangePicker'
+import { fireEvent,render  } from '@testing-library/react'
+import React, { useCallback as useCallbackMock, useEffect } from 'react'
+
 import { monthsArray } from './helpers'
 
 jest.mock('react', () => ({

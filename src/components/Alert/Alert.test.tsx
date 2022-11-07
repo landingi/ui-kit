@@ -1,6 +1,7 @@
+import '@testing-library/jest-dom'
+
 import Alert from '@components/Alert'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 
 const props = {
   children: 'Alert content'

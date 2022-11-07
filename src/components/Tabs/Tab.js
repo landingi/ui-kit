@@ -1,8 +1,9 @@
-import React, { useContext, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import Button from '@components/Button'
 import useQueryString from '@helpers/hooks/useQueryString'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useCallback,useContext } from 'react'
+
 import TabContext from './TabContext'
 import styles from './Tabs.module.scss'
 

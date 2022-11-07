@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import BoxBackground from '@components/BoxBackground'
 import '@testing-library/jest-dom'
+
+import BoxBackground from '@components/BoxBackground'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const initialProps = {
   children: 'children',

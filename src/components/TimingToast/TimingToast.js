@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import emitter from '@lib/emitter'
-import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import Notification from '@components/Notification'
+import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
+import emitter from '@lib/emitter'
 import PropTypes from 'prop-types'
+import React, { useCallback,useEffect, useState } from 'react'
+
 import styles from './TimingToast.module.scss'
 
 /**

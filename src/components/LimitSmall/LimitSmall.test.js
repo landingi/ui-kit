@@ -1,6 +1,6 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
 import LimitSmall from '@components/LimitSmall'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<LimitSmall /> mount', () => {
   const props = {

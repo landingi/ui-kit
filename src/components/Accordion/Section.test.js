@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
 import Section from '@components/Accordion/Section'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   handleOnClick: jest.fn(),

@@ -1,8 +1,9 @@
-import React from 'react'
-import Modal from '@components/Modal'
-import Button from '@components/Button'
-import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import Button from '@components/Button'
+import Modal from '@components/Modal'
+import { fireEvent,render, screen } from '@testing-library/react'
+import React from 'react'
 
 const onClick = jest.fn()
 

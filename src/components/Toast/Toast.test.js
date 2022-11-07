@@ -1,9 +1,11 @@
-import React from 'react'
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
-import { emitToastToggle } from '@events/toast'
-import { act } from 'react-dom/test-utils'
-import Toast from './Toast'
 import '@testing-library/jest-dom'
+
+import { emitToastToggle } from '@events/toast'
+import { fireEvent,render, screen, waitFor } from '@testing-library/react'
+import React from 'react'
+import { act } from 'react-dom/test-utils'
+
+import Toast from './Toast'
 
 jest.setTimeout(10000)
 

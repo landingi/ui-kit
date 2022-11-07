@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import ProgressBar from '@components/ProgressBar'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 const props = {
   quantity: 60,

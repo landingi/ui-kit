@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
+
 import styles from './Loader.module.scss'
 
 const renderDefaultLoader = ({ dataTestId }) => (

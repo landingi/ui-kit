@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import ColorLine from '@components/ColorLine'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 describe('<ColorLine /> mount', () => {
   it('is mounted', () => {

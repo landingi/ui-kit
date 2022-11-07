@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import InfoBar from '@components/InfoBar'
 import '@testing-library/jest-dom'
+
+import InfoBar from '@components/InfoBar'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'Info Bar'

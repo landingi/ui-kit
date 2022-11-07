@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from '@testing-library/react'
 import Panel from '@components/Panel'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'placeholder'

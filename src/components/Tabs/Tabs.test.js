@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom'
-import React from 'react'
-import PropTypes from 'prop-types'
-import { render, fireEvent } from '@testing-library/react'
-import Tabs from '@components/Tabs/Tabs'
-import TabList from '@components/Tabs/TabList'
+
 import Tab from '@components/Tabs/Tab'
+import TabList from '@components/Tabs/TabList'
 import TabPanel from '@components/Tabs/TabPanel'
+import Tabs from '@components/Tabs/Tabs'
+import { fireEvent,render } from '@testing-library/react'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const props = {
   initialValue: 'predefined'

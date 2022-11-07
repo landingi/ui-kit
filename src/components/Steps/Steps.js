@@ -1,8 +1,9 @@
+import StepNumber from '@components/StepNumber'
 import { stepsShape } from '@shapes'
 import PropTypes from 'prop-types'
 import React from 'react'
-import StepNumber from '@components/StepNumber'
 import uuid from 'react-uuid'
+
 import styles from './Steps.module.scss'
 
 /**

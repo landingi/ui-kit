@@ -1,21 +1,21 @@
-import React, {
-  Fragment,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  forwardRef
-} from 'react'
-import { useLayer, mergeRefs } from 'react-laag'
 import Icon from '@components/Icon'
-import emitter from '@lib/emitter'
+import Spreader from '@components/Spreader'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
-import PropTypes from 'prop-types'
+import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
-import { debounce } from '@helpers/events'
+import emitter from '@lib/emitter'
+import PropTypes from 'prop-types'
+import React, {
+  forwardRef,
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState} from 'react'
 import Ink from 'react-ink'
-import Spreader from '@components/Spreader'
+import { mergeRefs,useLayer } from 'react-laag'
+
 import styles from './PerfectDropdown.module.scss'
 
 /**

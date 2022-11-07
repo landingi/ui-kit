@@ -1,20 +1,20 @@
-import React, { Fragment, useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
-import { Row } from 'simple-flexbox'
-import TimeInput from 'react-advanced-time-input'
 import DropdownSelect2 from '@components/DropdownSelect'
+import Icon from '@components/Icon'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getLanguage } from '@helpers/i18n'
-import Icon from '@components/Icon'
+import PropTypes from 'prop-types'
+import React, { Fragment, useCallback, useState } from 'react'
+import TimeInput from 'react-advanced-time-input'
+import { Row } from 'simple-flexbox'
+
 import {
-  TIME_FORMAT_EN,
-  TIME_FORMAT_PL,
   CLOCK_OPTIONS,
   MAX_HOUR_EN,
-  MAX_HOUR_PL
-} from './constants'
-import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
+  MAX_HOUR_PL,
+  TIME_FORMAT_EN,
+  TIME_FORMAT_PL} from './constants'
+import { convertTimeFrom24to12,isAmOrPm, processTime } from './helpers'
 import styles from './TimeSelect.module.scss'
 
 // TODO TimeSelect css

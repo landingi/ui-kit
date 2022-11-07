@@ -1,15 +1,16 @@
-import React, { useState, useCallback, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { Row } from 'simple-flexbox'
 import Button from '@components/Button'
 import Icon from '@components/Icon'
-import Spreader from '@components/Spreader'
 import Spinner from '@components/Spinner'
+import Spreader from '@components/Spreader'
 import Tooltip from '@components/Tooltip'
+import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
+import PropTypes from 'prop-types'
+import React, { useCallback, useRef,useState } from 'react'
+import { Row } from 'simple-flexbox'
+
 import styles from './EditableLabel.module.scss'
 
 /**

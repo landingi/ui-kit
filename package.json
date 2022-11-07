@@ -51,6 +51,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-testing-library": "^5.9.1",
     "gatsby-plugin-mdx": "2.14.0",
     "gatsby-plugin-sass": "3.2.0",

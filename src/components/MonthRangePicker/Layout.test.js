@@ -1,7 +1,8 @@
-import React, { useState as useStateMock } from 'react'
-import MonthRangePickerLayout from '@components/MonthRangePicker'
-import { render , fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import MonthRangePickerLayout from '@components/MonthRangePicker'
+import { fireEvent,render  } from '@testing-library/react'
+import React, { useState as useStateMock } from 'react'
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),

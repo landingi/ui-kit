@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import Badge from '@components/Badge'
 import '@testing-library/jest-dom'
+
+import Badge from '@components/Badge'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const initialProps = {
   children: 'Mocked badge'

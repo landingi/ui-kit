@@ -1,7 +1,7 @@
+import Search from '@components/Search'
 import { NO_VALUE } from '@constants/helpers'
 import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
-import Search from '@components/Search'
 
 // TODO Searcher mdx
 /**

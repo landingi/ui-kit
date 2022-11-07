@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import Spacer from '@components/Spacer'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 describe('<Spacer/> mount', () => {
   it('is mounted', () => {

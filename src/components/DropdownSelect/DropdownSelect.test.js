@@ -1,7 +1,8 @@
-import React from 'react'
-import DropdownSelect from '@components/DropdownSelect'
-import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import DropdownSelect from '@components/DropdownSelect'
+import { fireEvent,render, screen } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'children',

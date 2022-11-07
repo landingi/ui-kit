@@ -1,7 +1,8 @@
 import Button from '@components/Button'
+import Spacer from '@components/Spacer'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
-import Spacer from '@components/Spacer'
+
 import MonthRangePicker from './MonthRangePicker'
 import styles from './MonthRangePicker.module.scss'
 

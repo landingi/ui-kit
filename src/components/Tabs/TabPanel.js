@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+
 import TabContext from './TabContext'
 import styles from './Tabs.module.scss'
 

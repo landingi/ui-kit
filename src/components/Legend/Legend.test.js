@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import Legend from '@components/Legend'
 import '@testing-library/jest-dom'
+
+import Legend from '@components/Legend'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   data: [

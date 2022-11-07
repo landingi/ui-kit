@@ -1,6 +1,12 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "jest-dom", "testing-library"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "jest-dom",
+    "testing-library",
+    "simple-import-sort"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -40,6 +46,8 @@
     "react/react-in-jsx-scope": "off",
     "no-plusplus": "off",
     "react-hooks/rules-of-hooks": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "no-use-before-define": "warn",
     "react-hooks/exhaustive-deps": "warn",
     "multiline-ternary": "warn",

@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { useButtonGroupContext } from './context'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './ButtonGroup.module.scss'
+import { useButtonGroupContext } from './context'
 
 /**
  * Button - statefull presentational component

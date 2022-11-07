@@ -1,7 +1,8 @@
-import { FC, ReactNode } from 'react'
 import Icon from '@components/Icon'
-import { useStyles } from '@helpers/hooks/useStyles'
 import { mapIconToClass } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { FC, ReactNode } from 'react'
+
 import styles from './Alert.module.scss'
 
 interface AletProps {

@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import useIsOpen from '@helpers/hooks/useIsOpen'
 import Spacer from '@components/Spacer'
+import useIsOpen from '@helpers/hooks/useIsOpen'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+
 import AccordionSection from './AccordionSection'
 
 /**

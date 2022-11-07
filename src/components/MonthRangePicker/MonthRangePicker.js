@@ -1,17 +1,18 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { endOfMonth, startOfMonth } from 'date-fns'
-import Icon from '@components/Icon'
 import Button from '@components/Button'
+import Icon from '@components/Icon'
 import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from './MonthRangePicker.module.scss'
+import { endOfMonth, startOfMonth } from 'date-fns'
+import PropTypes from 'prop-types'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+
 import {
   handleRangeMarker,
   monthsArray,
   parseDateToMonthID,
   transformMonthToDate
 } from './helpers'
+import styles from './MonthRangePicker.module.scss'
 
 /**
  * MonthRangePicker - stateful component

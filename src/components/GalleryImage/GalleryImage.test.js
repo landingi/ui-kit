@@ -1,6 +1,6 @@
-import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
 import GalleryImage from '@components/GalleryImage'
+import { fireEvent,render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   src: 'https://ca.slack-edge.com/T07M95VD2-U0BFVANVB-fd337e02e237-512'

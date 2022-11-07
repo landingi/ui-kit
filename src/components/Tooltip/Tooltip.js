@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import uuid from 'react-uuid'
-import ReactTooltip from 'react-tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import ReactTooltip from 'react-tooltip'
+import uuid from 'react-uuid'
+
 import styles from './Tooltip.module.scss'
 
 // TODO Tooltip css, test, mdx remove <br/>

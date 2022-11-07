@@ -1,9 +1,10 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
-import styles from './Select.module.scss'
+
 import Option from './Option'
+import styles from './Select.module.scss'
 
 /**
  * Select - stateless presentational component

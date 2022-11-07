@@ -1,7 +1,8 @@
-import React from 'react'
-import BlockSection from '@components/BlockSection'
-import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import BlockSection from '@components/BlockSection'
+import { fireEvent,render, screen } from '@testing-library/react'
+import React from 'react'
 
 const onClickMock = jest.fn()
 const props = {

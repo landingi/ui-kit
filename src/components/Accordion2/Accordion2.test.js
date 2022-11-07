@@ -1,8 +1,9 @@
-import React from 'react'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
 import Accordion from '@components/Accordion2'
 import AccordionItem from '@components/Accordion2/Item/AccordionItem'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const propsAccordion = {
   data: [

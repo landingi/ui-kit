@@ -1,7 +1,8 @@
-import React from 'react'
-import { render , fireEvent } from '@testing-library/react'
-import Textarea from '@components/Textarea'
 import '@testing-library/jest-dom'
+
+import Textarea from '@components/Textarea'
+import { fireEvent,render  } from '@testing-library/react'
+import React from 'react'
 
 const initialProps = {
   id: 'mocked-textarea',

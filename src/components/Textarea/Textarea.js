@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+import Error from '@components/Form/Error'
 import Label from '@components/Label'
 import Spacer from '@components/Spacer'
-import Error from '@components/Form/Error'
-import { useStyles } from '@helpers/hooks/useStyles'
 import { getDeepValue } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+
 import styles from './Textarea.module.scss'
 
 /**

@@ -1,7 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react'
 import Loader from '@components/Loader'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useEffect, useRef, useState } from 'react'
+
 import styles from './InfinityScroll.module.scss'
 
 /**

@@ -1,6 +1,7 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Image.module.scss'
 
 /**

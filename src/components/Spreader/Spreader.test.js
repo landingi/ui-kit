@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import Spreader from '@components/Spreader'
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 const renderSpreader = (props = {}) => render(<Spreader {...props} />)
 

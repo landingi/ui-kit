@@ -5,11 +5,12 @@ import List from '@components/List'
 import ListItem from '@components/List/Item'
 import Panel from '@components/Panel'
 import Paragraph from '@components/Paragraph'
+import Spacer from '@components/Spacer'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Spacer from '@components/Spacer'
 import uuid from 'react-uuid'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './BlockSection.module.scss'
 
 /**

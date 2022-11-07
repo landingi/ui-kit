@@ -1,7 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import { ButtonGroupProvider } from './context'
+import React from 'react'
+
 import styles from './ButtonGroup.module.scss'
+import { ButtonGroupProvider } from './context'
 
 /**
  * ButtonGroup - stateless presentational component

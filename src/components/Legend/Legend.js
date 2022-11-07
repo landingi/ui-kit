@@ -1,9 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { legendShape } from '@shapes'
 import ColorLine from '@components/ColorLine'
-import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { legendShape } from '@shapes'
+import PropTypes from 'prop-types'
+import React from 'react'
+import uuid from 'react-uuid'
+
 import styles from './Legend.module.scss'
 
 /**

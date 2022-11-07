@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
-import Label from '@components/Label'
-import Tooltip from '@components/Tooltip'
-import Paragraph from '@components/Paragraph'
-import { useStyles } from '@helpers/hooks/useStyles'
 import Icon from '@components/Icon'
+import Label from '@components/Label'
+import Paragraph from '@components/Paragraph'
+import Tooltip from '@components/Tooltip'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { forwardRef } from 'react'
+
 import styles from './Input.module.scss'
 
 // TODO Input css, global,

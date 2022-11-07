@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import OverflowTooltip from '@components/OverflowTooltip'
 import '@testing-library/jest-dom'
+
+import OverflowTooltip from '@components/OverflowTooltip'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 describe('<OverflowTooltip/> mount', () => {
   const props = {

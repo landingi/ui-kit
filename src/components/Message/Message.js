@@ -1,9 +1,10 @@
 import Heading from '@components/Heading'
 import Image from '@components/Image'
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
 import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+
 import styles from './Message.module.scss'
 
 // TODO Message mdx

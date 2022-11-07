@@ -1,6 +1,7 @@
 import { formatNumeric } from '@helpers/data'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './LimitQuantity.module.scss'
 
 // TODO Limit Quantity css

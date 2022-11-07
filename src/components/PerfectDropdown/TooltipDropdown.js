@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Tooltip from '@components/Tooltip'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import PerfectDropdown from './PerfectDropdown'
 
 const TooltipDropdown = ({

@@ -1,7 +1,7 @@
-import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
 import { useHover } from '@helpers/hooks/useHover'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { fireEvent,render } from '@testing-library/react'
+import { act,renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 
 describe('useHover tests', () => {
   it('set isHover on true when mouse over', async () => {

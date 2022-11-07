@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import ColorNumber from '@components/ColorNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+
 import styles from './ProgressBar.module.scss'
 
 /**

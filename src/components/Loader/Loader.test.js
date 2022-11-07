@@ -1,7 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom'
+
 import Loader from '@components/Loader'
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React from 'react'
 
 describe('<Loader /> mount', () => {
   it('should be displayed', () => {

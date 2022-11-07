@@ -1,22 +1,22 @@
+import Icon from '@components/Icon'
+import Tooltip from '@components/Tooltip'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import { isEmpty } from '@helpers/data'
+import { debounce, throttle } from '@helpers/events'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { centerParent, getBoundings } from '@helpers/position'
+import { composeRefs } from '@helpers/ref'
+import emitter from '@lib/emitter'
+import PropTypes from 'prop-types'
 import React, {
-  useRef,
-  useState,
+  forwardRef,
+  Fragment,
   useCallback,
   useEffect,
-  Fragment,
-  forwardRef
-} from 'react'
-import PropTypes from 'prop-types'
-import { centerParent, getBoundings } from '@helpers/position'
-import Tooltip from '@components/Tooltip'
-import Icon from '@components/Icon'
+  useRef,
+  useState} from 'react'
 import Ink from 'react-ink'
-import { debounce, throttle } from '@helpers/events'
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
-import emitter from '@lib/emitter'
-import { isEmpty } from '@helpers/data'
-import { composeRefs } from '@helpers/ref'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Dropdown.module.scss'
 
 // TODO Dropdown test, mdx, jsdoc props

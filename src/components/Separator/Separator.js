@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Separator.module.scss'
 
 /**

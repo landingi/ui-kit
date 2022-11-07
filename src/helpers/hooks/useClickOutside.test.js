@@ -1,7 +1,7 @@
-import React, { createRef } from 'react'
 import { useClickOutside } from '@helpers/hooks/useClickOutside'
+import { fireEvent,render  } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
-import { render , fireEvent } from '@testing-library/react'
+import React, { createRef } from 'react'
 
 describe('should use useClickOutside', () => {
   it('handlerCallback should be called when something out of component was clicked', () => {

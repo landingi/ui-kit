@@ -1,6 +1,7 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Layout.module.scss'
 
 // TODO Layout mdx add background to layouts
