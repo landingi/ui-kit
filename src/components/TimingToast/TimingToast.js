@@ -78,7 +78,7 @@ TimingToast.propTypes = {
 }
 
 TimingToast.defaultProps = {
-  className: '',
+  className: null,
   type: 'info'
 }
 
