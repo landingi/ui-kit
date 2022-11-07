@@ -78,10 +78,10 @@ export const getAgoDate = days => {
  * @type {function}
  */
 export const getDateObject = date => ({
-    day: date.getDate(),
-    month: mapNumberToMonth(date.getMonth()),
-    year: date.getFullYear()
-  })
+  day: date.getDate(),
+  month: mapNumberToMonth(date.getMonth()),
+  year: date.getFullYear()
+})
 
 /**
  * Months mapper

@@ -4,7 +4,9 @@
  * @param  {...any} args
  * @return {object}
  */
-export const composeRefs = (...args) => ref => {
+export const composeRefs =
+  (...args) =>
+  ref => {
     args.forEach(arg => {
       if (!arg) {
         return
