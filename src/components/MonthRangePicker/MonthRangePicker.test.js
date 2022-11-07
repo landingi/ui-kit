@@ -1,6 +1,6 @@
 import React, { useCallback as useCallbackMock, useEffect } from 'react'
 import MonthRangePicker from '@components/MonthRangePicker/MonthRangePicker'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import { fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { monthsArray } from './helpers'

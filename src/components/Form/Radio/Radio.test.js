@@ -1,6 +1,6 @@
 import React from 'react'
 import Radio from '@components/Form/Radio'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const props = {

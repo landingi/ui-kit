@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { fireEvent, render } from '@jestutils'
+import { fireEvent, render } from '@testing-library/react'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { renderHook } from '@testing-library/react-hooks'
 

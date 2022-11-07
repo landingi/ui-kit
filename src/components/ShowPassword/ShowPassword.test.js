@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import React from 'react'
-import { render, fireEvent } from '@jestutils'
+import { render, fireEvent } from '@testing-library/react'
 import ShowPassword from '@components/ShowPassword'
 import { act } from 'react-dom/test-utils'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
 import '@testing-library/jest-dom'

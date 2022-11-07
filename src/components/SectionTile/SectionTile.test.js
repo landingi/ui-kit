@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { render, fireEvent } from '@jestutils'
+import { render, fireEvent } from '@testing-library/react'
 import SectionTile from '@components/SectionTile'
 
 const Component = ({ isActive }) => (

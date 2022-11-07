@@ -1,6 +1,6 @@
 import React from 'react'
 import InfoSection from '@components/InfoSection'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 
 const props = {
   title: 'empty.list.message.domains.title',

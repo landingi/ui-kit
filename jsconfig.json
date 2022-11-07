@@ -8,8 +8,7 @@
       "@events/*": ["./src/events/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@lib/*": ["./src/lib/*"],
-      "@shapes/*": ["./src/shapes/*"],
-      "@jestutils": ["./config/tests/jest/utils.js"]
+      "@shapes/*": ["./src/shapes/*"]
     }
   },
   "exclude": ["node_modules", "cypress", "dev", "jest-report", "local"]

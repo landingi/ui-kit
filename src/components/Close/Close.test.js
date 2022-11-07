@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import Close from '@components/Close'
 
 const onClick = jest.fn()

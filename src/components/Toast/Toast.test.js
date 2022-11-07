@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, waitFor, fireEvent } from '@jestutils'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { emitToastToggle } from '@events/toast'
 import { act } from 'react-dom/test-utils'
 import Toast from './Toast'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import FormikToggle from '@components/Form/Toggle/FormikToggle'
 
 const props = {

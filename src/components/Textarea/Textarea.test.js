@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import { fireEvent } from '@testing-library/react'
 import Textarea from '@components/Textarea'
 import '@testing-library/jest-dom'

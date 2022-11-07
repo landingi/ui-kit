@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Accordion from '@components/Accordion2'
 import AccordionItem from '@components/Accordion2/Item/AccordionItem'

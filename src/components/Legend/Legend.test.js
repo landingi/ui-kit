@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import Legend from '@components/Legend'
 import '@testing-library/jest-dom'
 

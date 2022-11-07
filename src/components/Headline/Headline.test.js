@@ -1,6 +1,6 @@
 import React from 'react'
 import Headline from '@components/Headline'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const title = 'Headline title'

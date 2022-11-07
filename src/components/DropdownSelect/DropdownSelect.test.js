@@ -1,6 +1,6 @@
 import React from 'react'
 import DropdownSelect from '@components/DropdownSelect'
-import { render, screen, fireEvent } from '@jestutils'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const props = {

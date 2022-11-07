@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShortLogo, LongLogo } from '@components/Logo'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 
 describe('<ShortLogo/> mount', () => {
   it('is mounted', () => {

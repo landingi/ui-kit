@@ -1,6 +1,6 @@
 import React from 'react'
 import StatsBadge from '@components/StatsBadge'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('<StatsBadge /> mount', () => {

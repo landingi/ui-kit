@@ -1,6 +1,6 @@
 import React from 'react'
 import Html from '@components/Html'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const htmlCode = `lorem <b onclick="alert('onclick');">ipsum</b>`

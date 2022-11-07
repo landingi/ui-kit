@@ -1,6 +1,6 @@
 import React from 'react'
 import Spacer from '@components/Spacer'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('<Spacer/> mount', () => {

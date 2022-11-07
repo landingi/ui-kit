@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import Toggle from '@components/Form/Toggle/Toggle'
 
 const props = {

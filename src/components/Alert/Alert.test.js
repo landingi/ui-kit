@@ -1,5 +1,5 @@
 import Alert from '@components/Alert'
-import { render, screen } from '@jestutils'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 const props = {

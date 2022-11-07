@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import Badge from '@components/Badge'
 import '@testing-library/jest-dom'
 

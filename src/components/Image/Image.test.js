@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import Image from '@components/Image'
 import '@testing-library/jest-dom'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@jestutils'
+import { render, fireEvent } from '@testing-library/react'
 import { useHover } from '@helpers/hooks/useHover'
 import { renderHook, act } from '@testing-library/react-hooks'
 

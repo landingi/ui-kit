@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
 import Dot from '@components/Dot'
 
 describe('<Dot /> tests', () => {
