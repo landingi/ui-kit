@@ -9,7 +9,7 @@
     "docz:build": " ./node_modules/.bin/docz build",
     "docz:serve": "docz build && docz serve",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix -- ./src",
+    "lint:fix": "eslint --fix ./src",
     "test:local": "jest --colors --changedFilesWithAncestor",
     "test": "jest",
     "test:coverage": "yarn jest --coverage --no-cache",

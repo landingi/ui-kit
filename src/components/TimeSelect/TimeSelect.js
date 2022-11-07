@@ -4,9 +4,9 @@ import { Row } from 'simple-flexbox'
 import TimeInput from 'react-advanced-time-input'
 import DropdownSelect2 from '@components/DropdownSelect'
 import Spreader from '@components/Spreader'
-import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getLanguage } from '@helpers/i18n'
+import Icon from '@components/Icon'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,

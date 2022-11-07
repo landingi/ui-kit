@@ -53,7 +53,25 @@
     "no-promise-executor-return": "warn",
     "no-restricted-exports": "warn",
     "no-return-assign": "warn",
-    "react/default-props-match-prop-types": "warn"
+    "react/default-props-match-prop-types": "warn",
+    "react/require-default-props": "warn",
+    "react/jsx-no-constructed-context-values": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "react/no-unstable-nested-components": "warn",
+    "jsx-a11y/no-autofocus": "warn",
+    "react/no-array-index-key": "warn",
+    "no-nested-ternary": "warn",
+    "jsx-a11y/mouse-events-have-key-events": "warn",
+    "radix": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "class-methods-use-this": "warn",
+    "react/no-unused-prop-types": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "no-unsafe-optional-chaining": "warn",
+    "react/button-has-type": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/forbid-prop-types": "warn"
   },
   "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   "settings": {
@@ -70,7 +88,7 @@
           ["@lib", "./src/lib"],
           ["@shapes", "./src/shapes"]
         ],
-        "extensions": [".js"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }

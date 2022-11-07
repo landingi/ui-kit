@@ -22,7 +22,7 @@ import Searcher from '@components/Searcher'
 import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
 import { useStyles } from '@helpers/hooks/useStyles'
-import Icon from 'components/Icon'
+import Icon from '@components/Icon'
 import styles from './DropdownSelect.module.scss'
 
 /**
@@ -99,9 +99,8 @@ const PerfectDropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } 
-      return null
-    
+    }
+    return null
   }
 
   const selectedItem = getSelectedItem()
@@ -181,22 +180,22 @@ const PerfectDropdownSelect = ({
     })
 
   const renderOptions = () => (
-      <Fragment>
-        {emphasisedOptions.map((item, index) => (
-          <ListItem variant='dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
+    <Fragment>
+      {emphasisedOptions.map((item, index) => (
+        <ListItem variant='dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
 
-        {!isEmpty(emphasisedOptions) && <Divider />}
+      {!isEmpty(emphasisedOptions) && <Divider />}
 
-        {filterOptions().map((item, index) => (
-          <ListItem variant='dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
-      </Fragment>
-    )
+      {filterOptions().map((item, index) => (
+        <ListItem variant='dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
+    </Fragment>
+  )
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null
