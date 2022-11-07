@@ -50,7 +50,10 @@
     "no-restricted-syntax": "warn",
     "@typescript-eslint/no-shadow": "warn",
     "@typescript-eslint/no-use-before-define": "warn",
-    "no-promise-executor-return": "warn"
+    "no-promise-executor-return": "warn",
+    "no-restricted-exports": "warn",
+    "no-return-assign": "warn",
+    "react/default-props-match-prop-types": "warn"
   },
   "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   "settings": {
