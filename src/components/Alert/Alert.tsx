@@ -1,19 +1,20 @@
-import React from 'react'
+import { FC, ReactNode } from 'react'
 import Icon from '@components/Icon'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { mapIconToClass } from '@helpers/data'
 import styles from './Alert.module.scss'
 
-/**
- * Alert - stateless presentational component
- * @param {object} props - props
- * @param {node|string|object} props.children - children
- * @param {string|array} props.className - list of class names
- * @param {string} props.type - type of alert message
- * @return {object} An object of children element
- */
-const Alert = ({ children, className, type }) => {
+interface AletProps {
+  children: ReactNode
+  className?: string | string[]
+  type?: 'info' | 'success' | 'warning' | 'alert'
+}
+
+export const Alert: FC<AletProps> = ({
+  children,
+  className,
+  type = 'info'
+}) => {
   const alertStyles = useStyles(
     {
       [styles['alert-message']]: true,
@@ -32,16 +33,6 @@ const Alert = ({ children, className, type }) => {
 }
 
 Alert.displayName = 'Alert'
-
-Alert.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  type: PropTypes.oneOf(['info', 'success', 'warning', 'alert'])
-}
 
 Alert.defaultProps = {
   className: '',
