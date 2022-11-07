@@ -1,9 +1,9 @@
+import React from 'react'
 import Icon from '@components/Icon'
 import PropTypes from 'prop-types'
-import React from 'react'
-import styles from './Alert.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { mapIconToClass } from '@helpers/data'
+import styles from './Alert.module.scss'
 
 /**
  * Alert - stateless presentational component
