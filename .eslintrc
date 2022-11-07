@@ -46,20 +46,11 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "prettier",
-    "plugin:prettier/recommended",
-    "plugin:mdx/recommended"
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "mdx/code-blocks": true,
-    "mdx/language-mapper": {}
-  },
-  "overrides": [
-    {
-      "files": ["*.mdx"],
-      "parser": "eslint-mdx"
     }
-  ]
+  }
 }

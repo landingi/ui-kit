@@ -17,6 +17,7 @@ export default [
     input: 'src/index.js',
     output: [
       {
+        sourcemap: false,
         file: packageJson.main,
         format: 'cjs'
       }
