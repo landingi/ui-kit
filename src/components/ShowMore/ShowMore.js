@@ -26,12 +26,8 @@ const ShowMore = ({ height, children, i18n }) => {
   useLayoutEffect(() => {
     const {offsetHeight} = content.current
 
-    content.current.offsetHeight > height
-      ? setButtonDisplay(true)
-      : setButtonDisplay(false)
-    sectionHeight > offsetHeight
-      ? isOpen.setValue(false)
-      : isOpen.setValue(true)
+    content.current.offsetHeight > height? setButtonDisplay(true): setButtonDisplay(false)
+    sectionHeight > offsetHeight? isOpen.setValue(false): isOpen.setValue(true)
 
     return () => {
       isOpen.setValue(false)

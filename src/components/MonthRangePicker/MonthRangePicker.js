@@ -35,14 +35,10 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     if (confirmedEndMonth) {
       onChange({
         endDate: endOfMonth(
-          confirmedEndMonth > startMonth
-            ? transformMonthToDate(confirmedEndMonth)
-            : transformMonthToDate(startMonth)
+          confirmedEndMonth > startMonth? transformMonthToDate(confirmedEndMonth): transformMonthToDate(startMonth)
         ),
         startDate: startOfMonth(
-          confirmedEndMonth > startMonth
-            ? transformMonthToDate(startMonth)
-            : transformMonthToDate(confirmedEndMonth)
+          confirmedEndMonth > startMonth? transformMonthToDate(startMonth): transformMonthToDate(confirmedEndMonth)
         )
       })
     }
@@ -119,17 +115,13 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
       return startMonth === monthID
     }
 
-    return currentEndMonth > startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
+    return currentEndMonth > startMonth? startMonth === monthID: currentEndMonth === monthID
   }
 
   const handleLastMarker = monthID => {
     const currentEndMonth = confirmedEndMonth || endMonth
 
-    return currentEndMonth < startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
+    return currentEndMonth < startMonth? startMonth === monthID: currentEndMonth === monthID
   }
 
   return (

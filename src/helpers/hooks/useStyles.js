@@ -13,11 +13,9 @@ export const useStyles = (styles, classNames = '') => {
     }
   }
 
-  Array.isArray(classNames)
-    ? classNames.forEach(className => {
+  Array.isArray(classNames)? classNames.forEach(className => {
         classes += `${className} `
-      })
-    : (classes += `${classNames} `)
+      }): (classes += `${classNames} `)
 
   return classes.trim()
 }

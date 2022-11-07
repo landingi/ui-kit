@@ -27,11 +27,7 @@ const InfoBar = ({ children, className, type }) => {
   })
 
   const icon =
-    type === 'warning'
-      ? 'exclamation'
-      : type === 'alert'
-      ? 'exclamation-triangle'
-      : 'info'
+    type === 'warning'? 'exclamation': type === 'alert'? 'exclamation-triangle': 'info'
 
   return (
     <div data-testid='infobar-wrapper' className={elementClasses}>
