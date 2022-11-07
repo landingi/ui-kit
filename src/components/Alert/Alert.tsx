@@ -10,11 +10,7 @@ interface AletProps {
   type?: 'info' | 'success' | 'warning' | 'alert'
 }
 
-export const Alert: FC<AletProps> = ({
-  children,
-  className,
-  type = 'info'
-}) => {
+const Alert: FC<AletProps> = ({ children, className, type = 'info' }) => {
   const alertStyles = useStyles(
     {
       [styles['alert-message']]: true,

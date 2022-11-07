@@ -1,4 +1,3 @@
-import React from 'react'
 import Alert from '@components/Alert'
 import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
