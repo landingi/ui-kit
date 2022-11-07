@@ -1,6 +1,6 @@
 {
-  "parser": "@babel/eslint-parser",
-  "plugins": ["react", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "env": {
     "browser": true,
     "node": true,
@@ -12,7 +12,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "rules": {
     "camelcase": "off",
@@ -37,7 +38,8 @@
     "react/state-in-constructor": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "mdx/no-unused-expressions": "off",
-    "no-console": "error"
+    "no-console": "error",
+    "react/react-in-jsx-scope": "off"
   },
   "extends": [
     "eslint:recommended",

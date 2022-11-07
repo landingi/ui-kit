@@ -7,12 +7,9 @@
       "@constants/*": ["./src/constants/*"],
       "@events/*": ["./src/events/*"],
       "@helpers/*": ["./src/helpers/*"],
-      "@i18n/*": ["./src/i18n/*"],
       "@lib/*": ["./src/lib/*"],
       "@shapes/*": ["./src/shapes/*"],
-      "@store/*": ["./src/store/*"],
-      "@jestutils": ["./config/tests/jest/utils.js"],
-      "@jestmocks/*": ["./config/tests/jest/setup/*"]
+      "@jestutils": ["./config/tests/jest/utils.js"]
     }
   },
   "exclude": ["node_modules", "cypress", "dev", "jest-report", "local"]

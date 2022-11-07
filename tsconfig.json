@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "types",
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@events/*": ["./src/events/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@shapes/*": ["./src/shapes/*"]
+    }
+  },
+  "exclude": ["node_modules", "cypress", "dev", "jest-report", "local"]
+}
