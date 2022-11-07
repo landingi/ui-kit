@@ -20,8 +20,7 @@ const TimingToast = ({ className }) => {
 
   const toastStyles = useStyles(
     {
-      // eslint-disable-next-line @typescript-eslint/dot-notation
-      [styles['toast']]: true,
+      [styles.toast]: true,
       [styles[`toast--active`]]: isActive
     },
     className
