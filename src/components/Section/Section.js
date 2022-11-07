@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Section.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Section.module.scss'
 
 /**
  * Section - stateless presentational component
@@ -16,7 +16,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Section = ({ className, children, space, width, background }) => {
   const elementClasses = useStyles(
     {
-      [styles['section']]: true,
+      [styles.section]: true,
       [styles[`section-space--${space}`]]: space,
       [styles[`layout-width--${width}`]]: width,
       [styles[`section-bg--${background}`]]: background

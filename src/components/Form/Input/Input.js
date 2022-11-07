@@ -48,7 +48,7 @@ const Input = ({
   alwaysShowLabel,
   variant,
   onKeyDown,
-  ['data-testid']: dataTestId,
+  'data-testid': dataTestId,
   hideArrows
 }) => {
   const error = getDeepValue(errors, name)
@@ -136,7 +136,7 @@ Input.propTypes = {
   }),
   variant: PropTypes.string,
   onKeyDown: PropTypes.func,
-  ['data-testid']: PropTypes.string,
+  'data-testid': PropTypes.string,
   hideArrows: PropTypes.bool
 }
 
@@ -161,7 +161,7 @@ Input.defaultProps = {
   variant: '',
   form: { errors: {}, touched: {} },
   field: {},
-  ['data-testid']: 'input-component',
+  'data-testid': 'input-component',
   hideArrows: false
 }
 

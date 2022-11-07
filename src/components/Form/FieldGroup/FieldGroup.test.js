@@ -23,7 +23,7 @@ describe('FieldGroup tests', () => {
       children: 'children',
       errors: {},
       touched: {
-        ['field-name']: 'error-name'
+        'field-name': 'error-name'
       }
     }
 

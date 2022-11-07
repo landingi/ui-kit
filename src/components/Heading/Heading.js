@@ -26,7 +26,7 @@ const Heading = ({
 }) => {
   const elementClasses = useStyles(
     {
-      [styles['heading']]: true,
+      [styles.heading]: true,
       [styles[`h${level}`]]: level,
       [styles['heading--bold']]: bold,
       [styles[`heading--${align}`]]: align,

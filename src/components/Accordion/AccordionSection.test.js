@@ -36,7 +36,7 @@ describe('<AccordionSection /> mount', () => {
 
   it('has children', () => {
     const { getByTestId } = render(
-      <AccordionSection {...props} isOpen={true} />
+      <AccordionSection {...props} isOpen />
     )
 
     const text = getByTestId('accordion-text')
@@ -48,7 +48,7 @@ describe('<AccordionSection /> mount', () => {
     const { getByTestId } = render(
       <AccordionSection
         {...props}
-        isOpen={true}
+        isOpen
         arrowLabel='I am just an arrow label'
       />
     )
@@ -62,7 +62,7 @@ describe('<AccordionSection /> mount', () => {
     const { getByTestId } = render(
       <AccordionSection
         {...props}
-        isOpen={true}
+        isOpen
         arrowLabel='I am just an arrow label'
       />
     )

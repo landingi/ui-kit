@@ -5,7 +5,7 @@ import Close from '@components/Close'
 const onClick = jest.fn()
 
 const props = {
-  onClick: onClick
+  onClick
 }
 
 describe('<Close/> mount', () => {

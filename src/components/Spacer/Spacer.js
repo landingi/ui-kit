@@ -13,7 +13,7 @@ import styles from './Spacer.module.scss'
 const Spacer = ({ className, space }) => {
   const spacerClasses = useStyles(
     {
-      [styles['spacer']]: true,
+      [styles.spacer]: true,
       [styles[`spacer--${space}`]]: space
     },
     className

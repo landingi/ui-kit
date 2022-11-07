@@ -2,8 +2,8 @@ import { stepsShape } from '@shapes'
 import PropTypes from 'prop-types'
 import React from 'react'
 import StepNumber from '@components/StepNumber'
-import styles from './Steps.module.scss'
 import uuid from 'react-uuid'
+import styles from './Steps.module.scss'
 
 /**
  * Steps - stateless presentational component
@@ -11,8 +11,7 @@ import uuid from 'react-uuid'
  * @param {object[]} props.data - data
  * @return {object} An object of children element
  */
-const Steps = ({ data }) => {
-  return (
+const Steps = ({ data }) => (
     <div className={styles.container}>
       {data.map((item, index) => {
         const step = index + 1
@@ -30,7 +29,6 @@ const Steps = ({ data }) => {
       })}
     </div>
   )
-}
 
 Steps.displayName = 'Steps'
 

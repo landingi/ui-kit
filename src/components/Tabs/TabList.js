@@ -12,7 +12,7 @@ import styles from './Tabs.module.scss'
  * @return {object} An object of children element
  */
 const TabList = ({ className, children, ...restProps }) => {
-  const tabListStyles = useStyles({ [styles['tab__list']]: true }, className)
+  const tabListStyles = useStyles({ [styles.tab__list]: true }, className)
 
   return (
     <div className={tabListStyles} {...restProps}>

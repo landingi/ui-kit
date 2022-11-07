@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import Label from '@components/Label'
 import Spacer from '@components/Spacer'
 import Error from '@components/Form/Error'
-import styles from './Textarea.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getDeepValue } from '@helpers/data'
+import styles from './Textarea.module.scss'
 
 /**
  * Textarea - stateless presentational component
@@ -50,7 +50,7 @@ const Textarea = ({
 
   const textAreaStyles = useStyles(
     {
-      [styles['textarea']]: true,
+      [styles.textarea]: true,
       [styles[`textarea--${variant}`]]: variant,
       [styles[`textarea--${size}`]]: size,
       [styles['textarea--resize']]: hasResize,
@@ -79,7 +79,7 @@ const Textarea = ({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
-        style={{ maxHeight: maxHeight }}
+        style={{ maxHeight }}
         disabled={disabled}
       />
 

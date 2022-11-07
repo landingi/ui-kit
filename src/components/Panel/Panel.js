@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Panel.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Panel.module.scss'
 
 /**
  * Panel - stateless presentational component
@@ -24,7 +24,7 @@ const Panel = ({
 }) => {
   const elementClasses = useStyles(
     {
-      [styles['panel']]: true,
+      [styles.panel]: true,
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
       [styles['panel--background']]: !hasShadow,

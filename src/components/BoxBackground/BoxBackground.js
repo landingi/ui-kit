@@ -14,7 +14,7 @@ import styles from './BoxBackground.module.scss'
 const BoxBackground = ({ className, children, variant }) => {
   const elementClasses = useStyles(
     {
-      [styles['boxBackground']]: true,
+      [styles.boxBackground]: true,
       [styles[`boxBackground--${variant}`]]: variant
     },
     className

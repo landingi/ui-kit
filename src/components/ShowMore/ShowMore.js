@@ -24,7 +24,7 @@ const ShowMore = ({ height, children, i18n }) => {
   const content = useRef(null)
 
   useLayoutEffect(() => {
-    const offsetHeight = content.current.offsetHeight
+    const {offsetHeight} = content.current
 
     content.current.offsetHeight > height
       ? setButtonDisplay(true)

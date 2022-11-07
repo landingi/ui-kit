@@ -1,9 +1,9 @@
 import { formatNumeric } from '@helpers/data'
-import styles from './LimitQuantity.module.scss'
 import PropTypes from 'prop-types'
 import React from 'react'
+import styles from './LimitQuantity.module.scss'
 
-//TODO Limit Quantity css
+// TODO Limit Quantity css
 /**
  * Limit Quantity - stateless presentational component
  * @param {object} props - props

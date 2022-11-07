@@ -23,10 +23,10 @@ import Searcher from '@components/Searcher'
 import Search from '@components/Search'
 import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './DropdownSelect.module.scss'
 
-//TODO DropdownSelect css, mdx, tests, jsdoc props
+// TODO DropdownSelect css, mdx, tests, jsdoc props
 /**
  * DropdownSelect - stateless presentational component
  * @param {object} props - props
@@ -102,11 +102,11 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else if (customValue && !currentItem) {
+    } if (customValue && !currentItem) {
       return { value, label: value }
-    } else {
+    } 
       return null
-    }
+    
   }
 
   const selectedItem = getSelectedItem()

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Spreader.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Spreader.module.scss'
 
 /**
  * Spreader - stateless presentational component
@@ -13,7 +13,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Spreader = ({ className, spread }) => {
   const spreaderClasses = useStyles(
     {
-      [styles['spreader']]: true,
+      [styles.spreader]: true,
       [styles[`spreader--${spread}`]]: spread
     },
     className

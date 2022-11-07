@@ -6,7 +6,7 @@ import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Search.module.scss'
 
-//TODO Search split to modules
+// TODO Search split to modules
 /**
  * Search - stateful presentational component
  * @param {object} props - props
@@ -45,7 +45,7 @@ const Search = ({
 }) => {
   const elementClasses = useStyles(
     {
-      [styles['search']]: true,
+      [styles.search]: true,
       [styles[`search--${variant}`]]: variant,
       [styles[`search--${size}`]]: true
     },

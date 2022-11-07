@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import Tooltip from '@components/Tooltip'
-import styles from './Badge.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Badge.module.scss'
 
 /**
  * Badge - stateless presentational component
@@ -28,7 +28,7 @@ const Badge = ({ children, className, type, tooltip, isIndicator }) => {
   )
 
   const tooltipStyles = useStyles({
-    [styles['badge__tooltip']]: tooltip
+    [styles.badge__tooltip]: tooltip
   })
 
   return (

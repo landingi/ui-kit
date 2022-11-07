@@ -15,7 +15,7 @@ import styles from './Tabs.module.scss'
  */
 const TabPanel = ({ name, className, children, ...restProps }) => {
   const tabContext = useContext(TabContext)
-  const tabPanelStyles = useStyles({ [styles['tab__panel']]: true }, className)
+  const tabPanelStyles = useStyles({ [styles.tab__panel]: true }, className)
 
   return (
     tabContext.activeTab === name && (

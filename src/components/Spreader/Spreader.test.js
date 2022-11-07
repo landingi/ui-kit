@@ -12,7 +12,7 @@ describe('<Spreader /> mount', () => {
     small: 'small',
     medium: 'medium',
     large: 'large',
-    ['x-large']: 'x-large',
+    'x-large': 'x-large',
     big: 'big',
     huge: 'huge'
   }

@@ -4,10 +4,10 @@ import Label from '@components/Label'
 import Tooltip from '@components/Tooltip'
 import Paragraph from '@components/Paragraph'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from './Input.module.scss'
 import Icon from '@components/Icon'
+import styles from './Input.module.scss'
 
-//TODO Input css, global,
+// TODO Input css, global,
 /**
  * Input - stateless presentational component
  * @param {object} props - props
@@ -61,13 +61,13 @@ const Input = forwardRef(
       defaultValue,
       variant,
       form,
-      ['data-testid']: dataTestId
+      'data-testid': dataTestId
     },
     ref
   ) => {
     const wrapperStyles = useStyles(
       {
-        [styles['input__wrapper']]: true,
+        [styles.input__wrapper]: true,
         [styles['input__wrapper--focused']]: focused === 'true',
         [styles['input__wrapper--show-label']]: alwaysShowLabel,
         [styles['input__wrapper--table']]: variant === 'table'
@@ -76,12 +76,12 @@ const Input = forwardRef(
     )
 
     const tooltopStyles = useStyles({
-      [styles['input__tooltip']]: true,
+      [styles.input__tooltip]: true,
       [styles['input__tooltip--form']]: form
     })
 
     const inputStyles = useStyles({
-      [styles['input']]: true,
+      [styles.input]: true,
       [styles['input--transparent']]: background === 'transparent',
       [styles['input--hidden-arrows']]: hideArrows,
       [styles['input--table']]: variant === 'table'
@@ -90,7 +90,7 @@ const Input = forwardRef(
     const renderDefault = defaultValue && !value
 
     return (
-      <div className={wrapperStyles} data-testid={'input-wrapper'}>
+      <div className={wrapperStyles} data-testid='input-wrapper'>
         <input
           data-testid={dataTestId}
           ref={ref}
@@ -111,12 +111,12 @@ const Input = forwardRef(
           {...(type === 'number' ? { min, max } : {})}
           {...(renderDefault ? { defaultValue } : {})}
         />
-        <span className={styles['highlight']} />
+        <span className={styles.highlight} />
 
-        <span className={styles['bar']} />
+        <span className={styles.bar} />
 
         {i18n?.label && (
-          <Label id={name} className={styles['input__label']}>
+          <Label id={name} className={styles.input__label}>
             {i18n.label}
           </Label>
         )}
@@ -182,7 +182,7 @@ Input.propTypes = {
   alwaysShowLabel: PropTypes.bool,
   variant: PropTypes.string,
   form: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Input.defaultProps = {
@@ -211,7 +211,7 @@ Input.defaultProps = {
   alwaysShowLabel: false,
   variant: '',
   form: false,
-  ['data-testid']: 'input-component'
+  'data-testid': 'input-component'
 }
 
 export default Input

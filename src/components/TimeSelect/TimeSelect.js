@@ -5,6 +5,8 @@ import TimeInput from 'react-advanced-time-input'
 import DropdownSelect2 from '@components/DropdownSelect'
 import Spreader from '@components/Spreader'
 import Icon from '@components/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { getLanguage } from '@helpers/i18n'
 import {
   TIME_FORMAT_EN,
   TIME_FORMAT_PL,
@@ -13,11 +15,9 @@ import {
   MAX_HOUR_PL
 } from './constants'
 import { isAmOrPm, processTime, convertTimeFrom24to12 } from './helpers'
-import { useStyles } from '@helpers/hooks/useStyles'
-import { getLanguage } from '@helpers/i18n'
 import styles from './TimeSelect.module.scss'
 
-//TODO TimeSelect css
+// TODO TimeSelect css
 /**
  * TimeSelect - stateless component for selecting time
  * @param {object} props - props

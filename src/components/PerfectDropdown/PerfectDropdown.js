@@ -7,7 +7,6 @@ import React, {
   forwardRef
 } from 'react'
 import { useLayer, mergeRefs } from 'react-laag'
-import styles from './PerfectDropdown.module.scss'
 import Icon from '@components/Icon'
 import emitter from '@lib/emitter'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
@@ -17,6 +16,7 @@ import { getBoundings } from '@helpers/position'
 import { debounce } from '@helpers/events'
 import Ink from 'react-ink'
 import Spreader from '@components/Spreader'
+import styles from './PerfectDropdown.module.scss'
 
 /**
  * PerfectDropdown - new version of dropdown using react-laag library
@@ -62,7 +62,7 @@ const PerfectDropdown = forwardRef(
       className,
       padding,
       isOpenDisabled,
-      ['data-testid']: dataTestId
+      'data-testid': dataTestId
     },
     ref
   ) => {
@@ -71,13 +71,13 @@ const PerfectDropdown = forwardRef(
     const [style, setStyle] = useState({})
 
     const bodyClasses = useStyles({
-      [styles['dropdown']]: true,
+      [styles.dropdown]: true,
       [styles[`dropdown--${size}`]]: true,
       [styles[`dropdown--padding-${padding}`]]: padding
     })
 
     const labelClasses = useStyles({
-      [styles['trigger__label']]: true,
+      [styles.trigger__label]: true,
       [styles['trigger__label--icon']]: icon,
       [styles['trigger__label--as-input']]: hasInput,
       [styles['trigger__label--placeholder']]: asPlaceholder,
@@ -86,7 +86,7 @@ const PerfectDropdown = forwardRef(
 
     const triggerClasses = useStyles(
       {
-        [styles['trigger']]: !CustomTrigger,
+        [styles.trigger]: !CustomTrigger,
         [styles['trigger--spaced']]: alignment === 'spaced',
         [styles['trigger--end']]: alignment === 'end',
         [styles['trigger--input']]: hasInput,

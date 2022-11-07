@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Tooltip.module.scss'
 
-//TODO Tooltip css, test, mdx remove <br/>
+// TODO Tooltip css, test, mdx remove <br/>
 /**
  * Tooltip - stateless presentational component
  * @param {object} props - props

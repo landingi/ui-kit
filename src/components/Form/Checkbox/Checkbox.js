@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Error from '@components/Form/Error'
-import styles from './Checkbox.module.scss'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Checkbox.module.scss'
 
 /**
  * Checkbox - stateless presentational component
@@ -18,7 +18,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
  */
 const Checkbox = ({
   field: { name, value, onChange, onBlur },
-  form: { errors, touched /*setFieldValue  [UNUSED_VARIABLE]*/ },
+  form: { errors, touched /* setFieldValue  [UNUSED_VARIABLE] */ },
   id,
   label,
   className,
@@ -35,11 +35,11 @@ const Checkbox = ({
   )
 
   const inputStyles = useStyles({
-    [styles['checkbox__input']]: true
+    [styles.checkbox__input]: true
   })
 
   const labelStyles = useStyles({
-    [styles['checkbox__label']]: true
+    [styles.checkbox__label]: true
   })
 
   return (

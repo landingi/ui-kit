@@ -92,7 +92,7 @@ const DateTimePicker = ({
           locale={getLanguage === 'pl' ? pl : enUS}
           minDate={minDate ? new Date(minDate) : undefined}
           maxDate={maxDate}
-          color={'#EDECEC'}
+          color='#EDECEC'
           showMonthAndYearPickers={showMonthAndYearPickers}
           direction='horizontal'
         />

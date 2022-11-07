@@ -29,7 +29,7 @@ describe('<BlockSection /> mount', () => {
   })
 
   it('has `block-section__panel--reverse` class on reverse true', () => {
-    render(<BlockSection {...props} reverse={true} />)
+    render(<BlockSection {...props} reverse />)
 
     const panel = screen.getByTestId('panel')
 

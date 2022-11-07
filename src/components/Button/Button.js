@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
 import Spinner from '@components/Spinner'
-import styles from './Button.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Button.module.scss'
 
 /**
  * Button - stateless presentational component
@@ -47,7 +47,7 @@ const Button = ({
   hide,
   buttonStyle,
   fitWidth,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const elementClassesButton = useStyles(
     {
@@ -124,7 +124,7 @@ Button.propTypes = {
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Button.defaultProps = {
@@ -145,7 +145,7 @@ Button.defaultProps = {
   buttonStyle: false,
   fitWidth: false,
   onClick: () => {},
-  ['data-testid']: undefined
+  'data-testid': undefined
 }
 
 export default Button

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Overflow.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Overflow.module.scss'
 
 /**
  * Overflow - stateless presentational component
@@ -13,7 +13,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Overflow = ({ children, className }) => {
   const elementClasses = useStyles(
     {
-      [styles['overflow']]: true
+      [styles.overflow]: true
     },
     className
   )

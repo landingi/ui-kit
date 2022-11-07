@@ -1,9 +1,9 @@
-import Option from './Option'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Select.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
+import styles from './Select.module.scss'
+import Option from './Option'
 
 /**
  * Select - stateless presentational component
@@ -15,7 +15,7 @@ import uuid from 'react-uuid'
  * @return {object} An object of children element
  */
 const Select = ({ value, data, name, onChange }) => {
-  const selectStyles = useStyles({ [styles['select']]: true })
+  const selectStyles = useStyles({ [styles.select]: true })
 
   return (
     <select

@@ -2,8 +2,8 @@ import Button from '@components/Button'
 import Icon from '@components/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Close.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Close.module.scss'
 
 /**
  * Close - stateless presentational component
@@ -17,7 +17,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Close = ({ className, onClick, iconName, iconColor }) => {
   const elementStyles = useStyles(
     {
-      [styles['close']]: true
+      [styles.close]: true
     },
     className
   )

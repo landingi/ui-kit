@@ -33,7 +33,7 @@ const AccordionItem = ({
 
   const itemStyles = useStyles(
     {
-      [styles['accordion__item']]: true,
+      [styles.accordion__item]: true,
       [styles['accordion__item--box']]: isBox
     },
     className

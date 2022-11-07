@@ -21,7 +21,7 @@ const SectionTile = ({
   isActive
 }) => (
   <BoxOutline
-    className={styles['section__tile']}
+    className={styles.section__tile}
     isSelected={isActive}
     padding='none'
   >

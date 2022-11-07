@@ -13,14 +13,14 @@ import styles from './Card.module.scss'
 const Card = ({ className, children, variant }) => {
   const elementClasses = useStyles(
     {
-      [styles['card']]: true,
+      [styles.card]: true,
       [styles[`card--${variant}`]]: variant
     },
     className
   )
 
   const containerClasses = useStyles({
-    [styles['container']]: true
+    [styles.container]: true
   })
 
   return (

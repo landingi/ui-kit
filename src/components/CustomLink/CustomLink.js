@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './CustomLink.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './CustomLink.module.scss'
 
 /**
  * Custom Link - stateless presentational component

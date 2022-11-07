@@ -6,7 +6,7 @@ import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import styles from './Message.module.scss'
 
-//TODO Message mdx
+// TODO Message mdx
 /**
  * Message - stateless presentational component
  * @param {object} props - props
@@ -40,7 +40,7 @@ const Message = ({
 }) => {
   const elementClasses = useStyles(
     {
-      [styles['message']]: true
+      [styles.message]: true
     },
     className
   )

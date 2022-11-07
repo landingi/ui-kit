@@ -21,9 +21,9 @@ import Spacer from '@components/Spacer'
 import Searcher from '@components/Searcher'
 import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
 import Icon from 'components/Icon'
+import styles from './DropdownSelect.module.scss'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -73,7 +73,7 @@ const PerfectDropdownSelect = ({
   i18n,
   hasLoadMoreButton,
   loadMoreEvent,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -99,9 +99,9 @@ const PerfectDropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else {
+    } 
       return null
-    }
+    
   }
 
   const selectedItem = getSelectedItem()
@@ -182,8 +182,7 @@ const PerfectDropdownSelect = ({
       return items
     })
 
-  const renderOptions = () => {
-    return (
+  const renderOptions = () => (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
           <ListItem variant='dropdown' key={index}>
@@ -200,7 +199,6 @@ const PerfectDropdownSelect = ({
         ))}
       </Fragment>
     )
-  }
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null

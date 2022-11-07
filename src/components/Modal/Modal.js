@@ -117,15 +117,13 @@ const Modal = forwardRef(
           )}
 
           {isEditable && (
-            <Fragment>
-              <Button
+            <Button
                 variant='icon'
                 onClick={onEdit}
                 data-testid='modal-button-edit'
               >
                 <Icon icon='icon-create' />
               </Button>
-            </Fragment>
           )}
 
           {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}
@@ -145,7 +143,7 @@ const Modal = forwardRef(
 
     const modalStyles = useStyles(
       {
-        [styles['modal']]: true,
+        [styles.modal]: true,
         [styles['modal--huge-responsive']]: size === 'huge-responsive',
         [styles['modal--fullscreen']]: size === 'fullscreen',
         [styles['modal--big']]: size === 'big',
@@ -158,7 +156,7 @@ const Modal = forwardRef(
     )
 
     const bodyStyles = useStyles({
-      [styles['modal__body']]: true,
+      [styles.modal__body]: true,
       [styles['modal__body--has-footer']]: hasFooter,
       [styles['modal__body--no-padding']]: isBodyPadding === 'none'
     })

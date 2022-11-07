@@ -52,14 +52,14 @@ describe('<EditableLabel /> tests', () => {
 
     const button = screen.getByTestId('editable-label-button')
 
-    //start edit
+    // start edit
     fireEvent.click(button)
 
     const input = screen.getByTestId('editable-label-input')
 
-    //change name
+    // change name
     fireEvent.change(input, { target: { value: 'new name' } })
-    //accept edit
+    // accept edit
     fireEvent.click(button)
 
     expect(mockOnChange).toBeCalledWith('new name')
@@ -72,14 +72,14 @@ describe('<EditableLabel /> tests', () => {
 
     const button = screen.getByTestId('editable-label-button')
 
-    //start edit
+    // start edit
     fireEvent.click(button)
 
     const input = screen.getByTestId('editable-label-input')
 
-    //change name
+    // change name
     fireEvent.change(input, { target: { value: 'new name' } })
-    //accept edit
+    // accept edit
     fireEvent.keyDown(input, { key: 'Enter', code: 13 })
 
     expect(mockOnChange).toBeCalledWith('new name')
@@ -92,14 +92,14 @@ describe('<EditableLabel /> tests', () => {
 
     const button = screen.getByTestId('editable-label-button')
 
-    //start edit
+    // start edit
     fireEvent.click(button)
 
     const input = screen.getByTestId('editable-label-input')
 
-    //change name
+    // change name
     fireEvent.change(input, { target: { value: '' } })
-    //accept edit
+    // accept edit
     fireEvent.click(button)
 
     expect(mockOnChange).not.toBeCalled()
@@ -112,14 +112,14 @@ describe('<EditableLabel /> tests', () => {
 
     const button = screen.getByTestId('editable-label-button')
 
-    //start edit
+    // start edit
     fireEvent.click(button)
 
     const input = screen.getByTestId('editable-label-input')
 
-    //change name
+    // change name
     fireEvent.change(input, { target: { value: 'test name' } })
-    //accept edit
+    // accept edit
     fireEvent.click(button)
 
     expect(mockOnChange).not.toBeCalled()

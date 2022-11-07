@@ -15,7 +15,7 @@ import styles from './Separator.module.scss'
 const Separator = ({ className, children, size, color }) => {
   const elementClasses = useStyles(
     {
-      [styles['separator__divider']]: true,
+      [styles.separator__divider]: true,
       [styles[`separator__divider--${size}`]]: size,
       [styles[`separator__divider--${color}`]]: color
     },

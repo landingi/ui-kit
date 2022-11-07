@@ -1,8 +1,8 @@
 import Image from '@components/Image'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Avatar.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Avatar.module.scss'
 
 const renderVariant = (variant, src, name) =>
   variant === 'image' ? <Image src={src} /> : <p>{name}</p>
@@ -20,7 +20,7 @@ const renderVariant = (variant, src, name) =>
 const Avatar = ({ className, size, variant, src, name }) => {
   const avatarStyles = useStyles(
     {
-      [styles['avatar']]: true,
+      [styles.avatar]: true,
       [styles[`avatar--${size}`]]: size,
       [styles[`avatar--${variant}`]]: variant
     },

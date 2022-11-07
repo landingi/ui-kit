@@ -8,7 +8,7 @@ describe('<Button /> mount', () => {
     const props = {
       children: <p>Button</p>,
       variant: 'primary',
-      ['data-testid']: 'button'
+      'data-testid': 'button'
     }
 
     const { getByTestId } = render(<Button {...props} />)
@@ -27,7 +27,7 @@ it('should render <Button /> as disabled & loading', () => {
     variant: 'primary',
     isLoading: true,
     isDisabled: true,
-    ['data-testid']: 'button'
+    'data-testid': 'button'
   }
 
   const { getByTestId } = render(<Button {...props} />)
@@ -45,7 +45,7 @@ describe('<Button /> mount as link', () => {
       href: undefined,
       target: undefined,
       children: <p>Link</p>,
-      ['data-testid']: 'link'
+      'data-testid': 'link'
     }
 
     const { getByTestId } = render(<Button {...props} />)
@@ -63,7 +63,7 @@ describe('<Button /> mount as link', () => {
       target: undefined,
       children: <p>Link</p>,
       buttonStyle: true,
-      ['data-testid']: 'link'
+      'data-testid': 'link'
     }
 
     const { getByTestId } = render(<Button {...props} />)

@@ -33,7 +33,7 @@ describe('<Section /> mount', () => {
   })
 
   it('has children', () => {
-    const { getByTestId } = render(<Section {...props} isOpen={true} />)
+    const { getByTestId } = render(<Section {...props} isOpen />)
 
     const text = getByTestId('accordion-text')
 

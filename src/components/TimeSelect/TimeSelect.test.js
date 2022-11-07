@@ -41,7 +41,7 @@ describe('<TimeSelect/> mount', () => {
   })
 
   it('onChange should not be fired when component is disabled', () => {
-    const { getByRole } = render(<TimeSelect {...props} disabled={true} />)
+    const { getByRole } = render(<TimeSelect {...props} disabled />)
 
     const inputNode = getByRole('textbox')
 

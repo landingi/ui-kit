@@ -3,8 +3,8 @@ import Close from '@components/Close'
 import Icon from '@components/Icon'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Notification.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Notification.module.scss'
 
 /**
  * Notification - stateless presentational component
@@ -27,7 +27,7 @@ const Notification = ({
 }) => {
   const elementStyles = useStyles(
     {
-      [styles['notification']]: true,
+      [styles.notification]: true,
       [styles[`notification--${type}`]]: type
     },
     className

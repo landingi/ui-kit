@@ -1,6 +1,6 @@
 import React from 'react'
-import MaskedInput from './MaskedInput'
 import { render, screen } from '@testing-library/react'
+import MaskedInput from './MaskedInput'
 import '@testing-library/jest-dom'
 
 const props = {

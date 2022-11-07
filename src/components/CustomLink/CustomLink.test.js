@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import { fireEvent } from '@testing-library/react'
+import { render , fireEvent } from '@testing-library/react'
 import CustomLink from '@components/CustomLink'
 import '@testing-library/jest-dom'
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import PerfectDropdown from './PerfectDropdown'
 import PropTypes from 'prop-types'
 import Tooltip from '@components/ui/Tooltip'
+import PerfectDropdown from './PerfectDropdown'
 
 const TooltipDropdown = ({
   children,

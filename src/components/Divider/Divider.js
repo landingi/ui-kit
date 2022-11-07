@@ -14,7 +14,7 @@ import styles from './Divider.module.scss'
 const Divider = ({ className, variant, align }) => {
   const elementClasses = useStyles(
     {
-      [styles['divider']]: true,
+      [styles.divider]: true,
       [styles['divider--dropdown']]: variant === 'dropdown',
       [styles['divider--horizontal']]: variant === 'horizontal',
       [styles['divider--menu']]: variant === 'menu',

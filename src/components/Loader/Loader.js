@@ -3,19 +3,17 @@ import React, { Fragment } from 'react'
 import styles from './Loader.module.scss'
 
 const renderDefaultLoader = ({ dataTestId }) => (
-  <Fragment>
-    <div
+  <div
       className={styles.container}
       data-testid={dataTestId ?? 'loader-default'}
     >
       <div className={styles.main}>
-        <div className={styles.one}></div>
-        <div className={styles.two}></div>
-        <div className={styles.three}></div>
-        <div className={styles.forth}></div>
+        <div className={styles.one} />
+        <div className={styles.two} />
+        <div className={styles.three} />
+        <div className={styles.forth} />
       </div>
     </div>
-  </Fragment>
 )
 
 const renderShapesLoader = ({ dataTestId }) => (
@@ -90,7 +88,7 @@ const renderShapesLoader = ({ dataTestId }) => (
  * @param {string} props.variant - loader variant
  * @return {object} An object of children element
  */
-const Loader = ({ variant, ['data-testid']: dataTestId }) => {
+const Loader = ({ variant, 'data-testid': dataTestId }) => {
   const loader = {
     default: renderDefaultLoader({ dataTestId }),
     shapes: renderShapesLoader({ dataTestId })
@@ -103,12 +101,12 @@ Loader.displayName = 'Loader'
 
 Loader.propTypes = {
   variant: PropTypes.oneOf(['default', 'shapes']),
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Loader.defaultProps = {
   variant: 'default',
-  ['data-testid']: null
+  'data-testid': null
 }
 
 export default Loader

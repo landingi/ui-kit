@@ -16,14 +16,13 @@ import Overflow from '@components/Overflow'
 import Divider from '@components/Divider'
 import Loader from '@components/Loader'
 import { emitCloseDropdown } from '@events/dropdown'
-import { isEmpty } from '@helpers/data'
+import { isEmpty , getDeepValue } from '@helpers/data'
 import Spacer from '@components/Spacer'
 import Searcher from '@components/Searcher'
 import Paragraph from '@components/Paragraph'
 import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { getDeepValue } from '@helpers/data'
+import styles from './DropdownSelect.module.scss'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -100,9 +99,9 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else {
+    } 
       return null
-    }
+    
   }
 
   const selectedItem = getSelectedItem()
@@ -188,8 +187,7 @@ const DropdownSelect = ({
       return items
     })
 
-  const renderOptions = () => {
-    return (
+  const renderOptions = () => (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
           <ListItem className='list-item--dropdown' key={index}>
@@ -206,7 +204,6 @@ const DropdownSelect = ({
         ))}
       </Fragment>
     )
-  }
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null

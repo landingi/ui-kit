@@ -16,7 +16,7 @@ import styles from './List.module.scss'
 const ListItem = ({ children, variant, size, className, margin }) => {
   const elementClasses = useStyles(
     {
-      [styles['list__item']]: true,
+      [styles.list__item]: true,
       [styles[`list-item--${variant}`]]: variant,
       [styles['list-item--margin']]: margin,
       [styles['list-item--small']]: size === 'small'

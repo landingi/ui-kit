@@ -24,7 +24,7 @@ const Check = ({
 }) => {
   const wrapperStyles = useStyles(
     {
-      [styles['check']]: true,
+      [styles.check]: true,
       [styles['check--positive']]: positive,
       [styles['check--crossed-out']]: positive && crossedOutOnPositive
     },

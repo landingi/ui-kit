@@ -1,17 +1,17 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { endOfMonth, startOfMonth } from 'date-fns'
+import Icon from '@components/Icon'
+import Button from '@components/Button'
+import Spacer from '@components/Spacer'
+import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './MonthRangePicker.module.scss'
 import {
   handleRangeMarker,
   monthsArray,
   parseDateToMonthID,
   transformMonthToDate
 } from './helpers'
-import Icon from '@components/Icon'
-import Button from '@components/Button'
-import Spacer from '@components/Spacer'
-import styles from './MonthRangePicker.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * MonthRangePicker - stateful component
@@ -23,13 +23,13 @@ import { useStyles } from '@helpers/hooks/useStyles'
  * @return {object} An object of children element
  */
 const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
-  const minimalDate = parseDateToMonthID(minDate),
-    maximalDate = parseDateToMonthID(maxDate),
-    [isSelecting, setSelecting] = useState(false),
-    [startMonth, setStartMonth] = useState(null),
-    [endMonth, setEndMonth] = useState(null),
-    [year, setYear] = useState(2021),
-    [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+  const minimalDate = parseDateToMonthID(minDate);
+    const maximalDate = parseDateToMonthID(maxDate);
+    const [isSelecting, setSelecting] = useState(false);
+    const [startMonth, setStartMonth] = useState(null);
+    const [endMonth, setEndMonth] = useState(null);
+    const [year, setYear] = useState(2021);
+    const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
 
   useEffect(() => {
     if (confirmedEndMonth) {
@@ -64,9 +64,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     isSelecting && setEndMonth(monthID)
   }
 
-  const constructMonthID = monthIndex => {
-    return parseInt(`${year}${monthIndex}`)
-  }
+  const constructMonthID = monthIndex => parseInt(`${year}${monthIndex}`)
 
   const renderMonths = () =>
     monthsArray.map(({ code, name }) => {
@@ -74,7 +72,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const buttonClasses = useStyles({
-        [styles['button_month']]: true,
+        [styles.button_month]: true,
         [styles['button_month--not-selecting']]: !isSelecting,
         [styles['button_month--selecting']]: handleRangeMarker(
           monthID,
@@ -148,7 +146,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
           <Icon icon='icon-arrow-left' />
         </Button>
 
-        <span className={styles['year']}>{year}</span>
+        <span className={styles.year}>{year}</span>
 
         <Button
           onClick={useCallback(() => setYear(year + 1), [year])}

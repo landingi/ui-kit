@@ -20,7 +20,7 @@ const Tabs = ({ initialValue, className, children, ...restProps }) => {
     changeTab
   }
 
-  const tabsStyles = useStyles({ [styles['tabs__wrapper']]: true }, className)
+  const tabsStyles = useStyles({ [styles.tabs__wrapper]: true }, className)
 
   return (
     <TabContext.Provider value={tabProviderValue}>

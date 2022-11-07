@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-//TODO Select => Option css
+// TODO Select => Option css
 /**
  * Select option - stateless presentational component
  * @param {object} props - props

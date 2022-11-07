@@ -13,7 +13,7 @@ import styles from './Spinner.module.scss'
 const Spinner = ({ className }) => {
   const elementClasses = useStyles(
     {
-      [styles['spinner']]: true
+      [styles.spinner]: true
     },
     className
   )

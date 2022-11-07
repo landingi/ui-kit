@@ -8,7 +8,7 @@ const onClick = jest.fn()
 
 const props = {
   isActive: true,
-  onClick: onClick,
+  onClick,
   children: <Button> Jestem przyciskiem</Button>,
   i18n: {
     cancel: 'cancel'

@@ -16,10 +16,10 @@ import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import emitter from '@lib/emitter'
 import { isEmpty } from '@helpers/data'
 import { composeRefs } from '@helpers/ref'
-import styles from './Dropdown.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import styles from './Dropdown.module.scss'
 
-//TODO Dropdown test, mdx, jsdoc props
+// TODO Dropdown test, mdx, jsdoc props
 /**
  * Dropdown - stateless presentational component
  * @return {object} An object of children element
@@ -52,7 +52,7 @@ const Dropdown = forwardRef(
       custom,
       isOpenDisabled,
       isOnlyIcon,
-      ['data-testid']: dataTestId
+      'data-testid': dataTestId
     },
     ref
   ) => {
@@ -63,24 +63,24 @@ const Dropdown = forwardRef(
     const dropdownRef = useRef(null)
 
     const dropdownWrapperWithTooltipStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
+      [styles.dropdown__wrapper]: true,
       [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownWrapperStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
+      [styles.dropdown__wrapper]: true,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
 
     const dropdownWrapperIconStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
-      [styles['dropdown__wrapper__icon']]: true,
+      [styles.dropdown__wrapper]: true,
+      [styles.dropdown__wrapper__icon]: true,
       [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownBodySizeStyles = useStyles(
       {
-        [styles['dropdown']]: true,
+        [styles.dropdown]: true,
         [styles[`dropdown--${size}`]]: size,
         [styles['dropdown--hidden']]: isEmpty(style)
       },
@@ -88,18 +88,18 @@ const Dropdown = forwardRef(
     )
 
     const dropdownBodyStyles = useStyles({
-      [styles['dropdown__body']]: true,
+      [styles.dropdown__body]: true,
       [styles[`dropdown--${size}`]]: size
     })
 
     const dropdownLabelStyles = useStyles({
-      [styles['dropdown__label']]: true,
+      [styles.dropdown__label]: true,
       [styles['dropdown__label--placeholder']]: asPlaceholder
     })
 
     const dropdownStyles = useStyles(
       {
-        [styles['dropdown__wrapper']]: !custom,
+        [styles.dropdown__wrapper]: !custom,
         [styles[`dropdown__wrapper--${alignment}`]]: alignment,
         [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
         [styles['dropdown__wrapper--input']]: hasInput,
@@ -163,8 +163,7 @@ const Dropdown = forwardRef(
             ? container.top - dropdown.height
             : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
-      } else {
-        if (size === 'fixed') {
+      } else if (size === 'fixed') {
           setStyle({
             left: container?.left,
             top: renderAbove
@@ -216,7 +215,6 @@ const Dropdown = forwardRef(
               : container?.bottom + offset
           })
         }
-      }
     }
 
     const handleResize = () => {
@@ -386,7 +384,7 @@ Dropdown.propTypes = {
   custom: PropTypes.instanceOf(Object),
   isOpenDisabled: PropTypes.bool,
   isOnlyIcon: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Dropdown.defaultProps = {
@@ -414,7 +412,7 @@ Dropdown.defaultProps = {
   handleOnClick: () => null,
   handleOnOpen: () => null,
   handleOnClose: () => null,
-  ['data-testid']: 'trigger-dropdown'
+  'data-testid': 'trigger-dropdown'
 }
 
 export default Dropdown

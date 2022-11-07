@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
 import Search from '@components/Search'
 
-//TODO Searcher mdx
+// TODO Searcher mdx
 /**
  * Searcher - stateful presentational component
  * @param {object} props - props

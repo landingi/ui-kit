@@ -18,7 +18,7 @@ const Checkbox = ({
   checked,
   disabled,
   formikKey,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const checkboxStyles = useStyles(
     { [styles.input__checkbox]: true },
@@ -48,14 +48,14 @@ Checkbox.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   formikKey: PropTypes.string,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Checkbox.defaultProps = {
   className: '',
   disabled: false,
   formikKey: null,
-  ['data-testid']: undefined
+  'data-testid': undefined
 }
 
 export default Checkbox
