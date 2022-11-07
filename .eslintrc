@@ -73,6 +73,7 @@
     "jsx-a11y/mouse-events-have-key-events": "warn",
     "radix": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
+    "no-unused-vars": "warn",
     "class-methods-use-this": "warn",
     "react/no-unused-prop-types": "warn",
     "jsx-a11y/label-has-associated-control": "warn",

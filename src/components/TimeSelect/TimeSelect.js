@@ -13,8 +13,9 @@ import {
   MAX_HOUR_EN,
   MAX_HOUR_PL,
   TIME_FORMAT_EN,
-  TIME_FORMAT_PL} from './constants'
-import { convertTimeFrom24to12,isAmOrPm, processTime } from './helpers'
+  TIME_FORMAT_PL
+} from './constants'
+import { convertTimeFrom24to12, isAmOrPm, processTime } from './helpers'
 import styles from './TimeSelect.module.scss'
 
 // TODO TimeSelect css
