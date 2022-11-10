@@ -13,7 +13,7 @@ import styles from './Image.module.scss'
  * @param {number} props.height - height of the image
  * @param {boolean} props.auto - auto size of image
  * @param {boolean} props.small - small image
- * @param {boolean} props.loading - loading attrbiute e.g eager, lazy
+ * @param {boolean} props.loading - loading attribute for img e.g eager, lazy
  * @return {object} An object of children element
  */
 const Image = ({ src, alt, className, size, height, auto, small, loading }) => {
