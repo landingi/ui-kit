@@ -14,9 +14,19 @@ import styles from './Image.module.scss'
  * @param {number} props.height - height of the image
  * @param {boolean} props.auto - auto size of image
  * @param {boolean} props.small - small image
+ * @param {string} props.loadingAttr - loading attribute for img e.g eager, lazy
  * @return {object} An object of children element
  */
-const Image = ({ src, alt, className, size, height, auto, small }) => {
+const Image = ({
+  src,
+  alt,
+  className,
+  size,
+  height,
+  auto,
+  small,
+  loadingAttr
+}) => {
   const elementStyles = useStyles(
     {
       [styles['image--auto']]: auto,
@@ -32,6 +42,7 @@ const Image = ({ src, alt, className, size, height, auto, small }) => {
       height={height}
       src={src}
       width={size}
+      loading={loadingAttr}
       data-testid='image'
     />
   )
@@ -49,7 +60,8 @@ Image.propTypes = {
     PropTypes.object.isRequired
   ]).isRequired,
   auto: PropTypes.bool,
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  loadingAttr: PropTypes.oneOf(['lazy', 'eager'])
 }
 
 Image.defaultProps = {
@@ -58,7 +70,8 @@ Image.defaultProps = {
   height: null,
   size: null,
   auto: false,
-  small: false
+  small: false,
+  loadingAttr: 'eager'
 }
 
 export default memo(Image)
