@@ -50,6 +50,7 @@ const Button = ({
   style,
   ['data-testid']: dataTestId
 }) => {
+  // eslint-disable-next-line no-console
   console.log(style)
   const elementClassesButton = useStyles(
     {
