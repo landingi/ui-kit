@@ -68,23 +68,24 @@ const Button = ({
   )
 
   return (
-    <Tag
-      type={Tag === 'button' ? type : undefined}
-      disabled={isDisabled ? 'disabled' : undefined}
-      href={Tag === 'a' ? href : undefined}
-      title={Tag === 'a' ? title : undefined}
-      target={Tag === 'a' ? target : undefined}
-      className={elementClassesButton}
-      onClick={onClick}
-      data-testid={dataTestId}
-      style={style}
-    >
-      {isLoading && <Spinner />}
+    <div>xd</div>
+    // <Tag
+    //   type={Tag === 'button' ? type : undefined}
+    //   disabled={isDisabled ? 'disabled' : undefined}
+    //   href={Tag === 'a' ? href : undefined}
+    //   title={Tag === 'a' ? title : undefined}
+    //   target={Tag === 'a' ? target : undefined}
+    //   className={elementClassesButton}
+    //   onClick={onClick}
+    //   data-testid={dataTestId}
+    //   style={style}
+    // >
+    //   {isLoading && <Spinner />}
 
-      {!isLoading && <Fragment>{children}</Fragment>}
+    //   {!isLoading && <Fragment>{children}</Fragment>}
 
-      {hasBackgoundRipple && <Ink />}
-    </Tag>
+    //   {hasBackgoundRipple && <Ink />}
+    // </Tag>
   )
 }
 
