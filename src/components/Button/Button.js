@@ -47,6 +47,7 @@ const Button = ({
   hide,
   buttonStyle,
   fitWidth,
+  style,
   ['data-testid']: dataTestId
 }) => {
   const elementClassesButton = useStyles(
@@ -74,6 +75,7 @@ const Button = ({
       className={elementClassesButton}
       onClick={onClick}
       data-testid={dataTestId}
+      style={style}
     >
       {isLoading && <Spinner />}
 
@@ -124,6 +126,7 @@ Button.propTypes = {
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
+  style: PropTypes.object,
   ['data-testid']: PropTypes.string
 }
 
@@ -145,6 +148,7 @@ Button.defaultProps = {
   buttonStyle: false,
   fitWidth: false,
   onClick: () => {},
+  style: null,
   ['data-testid']: undefined
 }
 
