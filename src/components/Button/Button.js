@@ -50,6 +50,7 @@ const Button = ({
   style,
   ['data-testid']: dataTestId
 }) => {
+  console.log(style)
   const elementClassesButton = useStyles(
     {
       [styles.button]: true,
