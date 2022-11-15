@@ -5,13 +5,13 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Alert.module.scss'
 
-interface AletProps {
+interface AlertProps {
   children: ReactNode
   className?: string | string[]
   type?: 'info' | 'success' | 'warning' | 'alert'
 }
 
-const Alert: FC<AletProps> = ({ children, className, type = 'info' }) => {
+const Alert: FC<AlertProps> = ({ children, className, type = 'info' }) => {
   const alertStyles = useStyles(
     {
       [styles['alert-message']]: true,
