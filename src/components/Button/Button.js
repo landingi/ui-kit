@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment } from 'react'
 import Ink from 'react-ink'
 import PropTypes from 'prop-types'
@@ -49,6 +48,7 @@ const Button = ({
   buttonStyle,
   fitWidth,
   style,
+  activeColor,
   ['data-testid']: dataTestId
 }) => {
   // eslint-disable-next-line no-console
@@ -69,24 +69,23 @@ const Button = ({
   )
 
   return (
-    <div>xd</div>
-    // <Tag
-    //   type={Tag === 'button' ? type : undefined}
-    //   disabled={isDisabled ? 'disabled' : undefined}
-    //   href={Tag === 'a' ? href : undefined}
-    //   title={Tag === 'a' ? title : undefined}
-    //   target={Tag === 'a' ? target : undefined}
-    //   className={elementClassesButton}
-    //   onClick={onClick}
-    //   data-testid={dataTestId}
-    //   style={style}
-    // >
-    //   {isLoading && <Spinner />}
+    <Tag
+      type={Tag === 'button' ? type : undefined}
+      disabled={isDisabled ? 'disabled' : undefined}
+      href={Tag === 'a' ? href : undefined}
+      title={Tag === 'a' ? title : undefined}
+      target={Tag === 'a' ? target : undefined}
+      className={elementClassesButton}
+      onClick={onClick}
+      data-testid={dataTestId}
+      style={{ ...style, backgroundColor: !isDisabled ? activeColor : null }}
+    >
+      {isLoading && <Spinner />}
 
-    //   {!isLoading && <Fragment>{children}</Fragment>}
+      {!isLoading && <Fragment>{children}</Fragment>}
 
-    //   {hasBackgoundRipple && <Ink />}
-    // </Tag>
+      {hasBackgoundRipple && <Ink />}
+    </Tag>
   )
 }
 
@@ -131,6 +130,7 @@ Button.propTypes = {
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
   style: PropTypes.object,
+  activeColor: PropTypes.string,
   ['data-testid']: PropTypes.string
 }
 
@@ -153,6 +153,7 @@ Button.defaultProps = {
   fitWidth: false,
   onClick: () => {},
   style: null,
+  activeColor: null,
   ['data-testid']: undefined
 }
 
