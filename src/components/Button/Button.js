@@ -78,8 +78,8 @@ const Button = ({
       onClick={onClick}
       data-testid={dataTestId}
       style={{
-        borderRadius: customStyle.borderRadius,
-        boxShadow: customStyle.boxShadow,
+        borderRadius: customStyle?.borderRadius,
+        boxShadow: customStyle?.boxShadow,
         backgroundColor: !isDisabled ? activeColor : null
       }}
     >
