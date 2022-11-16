@@ -48,12 +48,10 @@ const Button = ({
   hide,
   buttonStyle,
   fitWidth,
-  style,
+  customStyle,
   activeColor,
   'data-testid': dataTestId
 }) => {
-  // eslint-disable-next-line no-console
-  console.log(style)
   const elementClassesButton = useStyles(
     {
       [styles.button]: true,
@@ -79,7 +77,11 @@ const Button = ({
       className={elementClassesButton}
       onClick={onClick}
       data-testid={dataTestId}
-      style={{ ...style, backgroundColor: !isDisabled ? activeColor : null }}
+      style={{
+        borderRadius: customStyle.borderRadius,
+        boxShadow: customStyle.boxShadow,
+        backgroundColor: !isDisabled ? activeColor : null
+      }}
     >
       {isLoading && <Spinner />}
 
@@ -130,7 +132,7 @@ Button.propTypes = {
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
-  style: PropTypes.object,
+  customStyle: PropTypes.object,
   activeColor: PropTypes.string,
   'data-testid': PropTypes.string
 }
@@ -153,7 +155,7 @@ Button.defaultProps = {
   buttonStyle: false,
   fitWidth: false,
   onClick: () => {},
-  style: null,
+  customStyle: null,
   activeColor: null,
   'data-testid': undefined
 }
