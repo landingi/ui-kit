@@ -3,10 +3,10 @@ import './DateTimePicker.scss'
 import Button from '@components/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { getLanguage } from '@helpers/i18n'
-import { enUS,pl } from 'date-fns/locale'
+import { enUS, pl } from 'date-fns/locale'
 import PropTypes from 'prop-types'
-import React, { Fragment, useCallback, useEffect,useState } from 'react'
-import { Calendar,DateRange } from 'react-date-range'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { Calendar, DateRange } from 'react-date-range'
 
 /**
  * Date Time Picker - stateless presentational component

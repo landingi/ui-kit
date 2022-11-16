@@ -5,16 +5,16 @@ import styles from './Loader.module.scss'
 
 const renderDefaultLoader = ({ dataTestId }) => (
   <div
-      className={styles.container}
-      data-testid={dataTestId ?? 'loader-default'}
-    >
-      <div className={styles.main}>
-        <div className={styles.one} />
-        <div className={styles.two} />
-        <div className={styles.three} />
-        <div className={styles.forth} />
-      </div>
+    className={styles.container}
+    data-testid={dataTestId ?? 'loader-default'}
+  >
+    <div className={styles.main}>
+      <div className={styles.one} />
+      <div className={styles.two} />
+      <div className={styles.three} />
+      <div className={styles.forth} />
     </div>
+  </div>
 )
 
 const renderShapesLoader = ({ dataTestId }) => (

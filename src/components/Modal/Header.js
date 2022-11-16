@@ -10,10 +10,10 @@ import React from 'react'
  * @return {object} An object of children element
  */
 const ModalHeader = ({ title, align }) => (
-    <Heading level={2} align={align}>
-      {title}
-    </Heading>
-  )
+  <Heading level={2} align={align}>
+    {title}
+  </Heading>
+)
 
 ModalHeader.displayName = 'ModalHeader'
 

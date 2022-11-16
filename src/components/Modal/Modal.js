@@ -119,12 +119,12 @@ const Modal = forwardRef(
 
           {isEditable && (
             <Button
-                variant='icon'
-                onClick={onEdit}
-                data-testid='modal-button-edit'
-              >
-                <Icon icon='icon-create' />
-              </Button>
+              variant='icon'
+              onClick={onEdit}
+              data-testid='modal-button-edit'
+            >
+              <Icon icon='icon-create' />
+            </Button>
           )}
 
           {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}

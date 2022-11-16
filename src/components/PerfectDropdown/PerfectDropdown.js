@@ -12,9 +12,10 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState} from 'react'
+  useState
+} from 'react'
 import Ink from 'react-ink'
-import { mergeRefs,useLayer } from 'react-laag'
+import { mergeRefs, useLayer } from 'react-laag'
 
 import styles from './PerfectDropdown.module.scss'
 

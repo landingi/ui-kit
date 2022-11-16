@@ -13,23 +13,23 @@ import styles from './Steps.module.scss'
  * @return {object} An object of children element
  */
 const Steps = ({ data }) => (
-    <div className={styles.container}>
-      {data.map((item, index) => {
-        const step = index + 1
-        const { variant, description } = item
+  <div className={styles.container}>
+    {data.map((item, index) => {
+      const step = index + 1
+      const { variant, description } = item
 
-        return (
-          <div className={styles.step} key={uuid()}>
-            <StepNumber step={step} variant={variant} />
+      return (
+        <div className={styles.step} key={uuid()}>
+          <StepNumber step={step} variant={variant} />
 
-            <span className={styles[`step__description--${variant}`]}>
-              {description}
-            </span>
-          </div>
-        )
-      })}
-    </div>
-  )
+          <span className={styles[`step__description--${variant}`]}>
+            {description}
+          </span>
+        </div>
+      )
+    })}
+  </div>
+)
 
 Steps.displayName = 'Steps'
 

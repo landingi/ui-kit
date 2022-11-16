@@ -12,7 +12,7 @@ import Paragraph from '@components/Paragraph'
 import Searcher from '@components/Searcher'
 import Spacer from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
-import { getDeepValue,isEmpty  } from '@helpers/data'
+import { getDeepValue, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, {
@@ -20,7 +20,8 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState} from 'react'
+  useState
+} from 'react'
 
 import styles from './DropdownSelect.module.scss'
 
@@ -99,9 +100,8 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } 
-      return null
-    
+    }
+    return null
   }
 
   const selectedItem = getSelectedItem()
@@ -188,22 +188,22 @@ const DropdownSelect = ({
     })
 
   const renderOptions = () => (
-      <Fragment>
-        {emphasisedOptions.map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
+    <Fragment>
+      {emphasisedOptions.map((item, index) => (
+        <ListItem className='list-item--dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
 
-        {!isEmpty(emphasisedOptions) && <Divider />}
+      {!isEmpty(emphasisedOptions) && <Divider />}
 
-        {filterOptions().map((item, index) => (
-          <ListItem className='list-item--dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
-      </Fragment>
-    )
+      {filterOptions().map((item, index) => (
+        <ListItem className='list-item--dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
+    </Fragment>
+  )
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null

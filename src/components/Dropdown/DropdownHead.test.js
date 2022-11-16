@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import DropdownHead from '@components/Dropdown/Head'
-import { render , screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
 
 const props = {

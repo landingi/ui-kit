@@ -8,7 +8,7 @@ import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import PropTypes from 'prop-types'
-import React, { useCallback, useRef,useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'

@@ -1,5 +1,5 @@
 import { useClickOutside } from '@helpers/hooks/useClickOutside'
-import { fireEvent,render  } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
 import React, { createRef } from 'react'
 

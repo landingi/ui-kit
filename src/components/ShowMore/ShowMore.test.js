@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import ShowMore from '@components/ShowMore'
-import { fireEvent,render  } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 describe('<ShowMore/> tests', () => {

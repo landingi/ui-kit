@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import Label from '@components/Label'
-import { render , screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
 
 describe('<Label/> mount', () => {

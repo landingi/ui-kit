@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import MonthRangePicker from '@components/MonthRangePicker/MonthRangePicker'
-import { fireEvent,render  } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React, { useCallback as useCallbackMock, useEffect } from 'react'
 
 import { monthsArray } from './helpers'
