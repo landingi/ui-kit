@@ -1,8 +1,9 @@
 import Heading from '@components/Heading'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './StatsBadge.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * StatsBadge - stateless presentational component
@@ -15,7 +16,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const StatsBadge = ({ className, color, quantity, description }) => {
   const badgeStyles = useStyles(
     {
-      [styles['container']]: true,
+      [styles.container]: true,
       [styles[`container--${color}`]]: color
     },
     className

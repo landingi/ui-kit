@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@jestutils'
 import '@testing-library/jest-dom'
+
 import AccordionSection from '@components/Accordion/AccordionSection'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   handleOnClick: jest.fn(),
@@ -36,7 +37,7 @@ describe('<AccordionSection /> mount', () => {
 
   it('has children', () => {
     const { getByTestId } = render(
-      <AccordionSection {...props} isOpen={true} />
+      <AccordionSection {...props} isOpen />
     )
 
     const text = getByTestId('accordion-text')
@@ -48,7 +49,7 @@ describe('<AccordionSection /> mount', () => {
     const { getByTestId } = render(
       <AccordionSection
         {...props}
-        isOpen={true}
+        isOpen
         arrowLabel='I am just an arrow label'
       />
     )
@@ -62,7 +63,7 @@ describe('<AccordionSection /> mount', () => {
     const { getByTestId } = render(
       <AccordionSection
         {...props}
-        isOpen={true}
+        isOpen
         arrowLabel='I am just an arrow label'
       />
     )

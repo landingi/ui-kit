@@ -1,6 +1,7 @@
 import { isSafari } from '@helpers/browser'
 import { styles } from '@helpers/css'
 import React from 'react'
+
 import scss from './Logo.scss'
 
 const cssClass = styles(scss)

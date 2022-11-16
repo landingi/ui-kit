@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Error from '@components/Form/Error'
 import Label from '@components/Label'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './FieldGroup.module.scss'
 
 /**

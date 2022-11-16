@@ -1,8 +1,9 @@
 import Heading from '@components/Heading'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './Headline.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Headline - stateless presentational component
@@ -14,7 +15,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Headline = ({ className, title }) => {
   const headlineClasses = useStyles(
     {
-      [styles['page__headline']]: true
+      [styles.page__headline]: true
     },
     className
   )

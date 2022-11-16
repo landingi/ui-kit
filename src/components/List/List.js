@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './List.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import styles from './List.module.scss'
 
 /**
  * List - stateless presentational component
@@ -15,7 +16,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const List = ({ children, variant, className, listStyle }) => {
   const elementClasses = useStyles(
     {
-      [styles['list']]: true,
+      [styles.list]: true,
       [styles['list--inline']]: variant === 'inline',
       [styles[`list--${listStyle}`]]: listStyle
     },

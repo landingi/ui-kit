@@ -1,18 +1,19 @@
-import React, { Fragment, forwardRef, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import Backdrop from '@components/Backdrop'
-import Close from '@components/Close'
-import Spreader from '@components/Spreader'
-import Divider from '@components/Divider'
-import Spacer from '@components/Spacer'
 import Button from '@components/Button'
-import Loader from '@components/Loader'
-import Image from '@components/Image'
+import Close from '@components/Close'
+import Divider from '@components/Divider'
 import Icon from '@components/Icon'
-import { useStyles } from '@helpers/hooks/useStyles'
+import Image from '@components/Image'
+import Loader from '@components/Loader'
+import Spacer from '@components/Spacer'
+import Spreader from '@components/Spreader'
 import { useKeyPress } from '@helpers/hooks/useKeyPress'
-import ModalHeader from './Header'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { forwardRef, Fragment, useCallback } from 'react'
+
 import ModalFooter from './Footer'
+import ModalHeader from './Header'
 import styles from './Modal.module.scss'
 
 /**
@@ -117,15 +118,13 @@ const Modal = forwardRef(
           )}
 
           {isEditable && (
-            <Fragment>
-              <Button
+            <Button
                 variant='icon'
                 onClick={onEdit}
                 data-testid='modal-button-edit'
               >
                 <Icon icon='icon-create' />
               </Button>
-            </Fragment>
           )}
 
           {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}
@@ -145,7 +144,7 @@ const Modal = forwardRef(
 
     const modalStyles = useStyles(
       {
-        [styles['modal']]: true,
+        [styles.modal]: true,
         [styles['modal--huge-responsive']]: size === 'huge-responsive',
         [styles['modal--fullscreen']]: size === 'fullscreen',
         [styles['modal--big']]: size === 'big',
@@ -158,7 +157,7 @@ const Modal = forwardRef(
     )
 
     const bodyStyles = useStyles({
-      [styles['modal__body']]: true,
+      [styles.modal__body]: true,
       [styles['modal__body--has-footer']]: hasFooter,
       [styles['modal__body--no-padding']]: isBodyPadding === 'none'
     })

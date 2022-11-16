@@ -9,13 +9,11 @@ import React from 'react'
  * @param {string} props.align - alignment
  * @return {object} An object of children element
  */
-const ModalHeader = ({ title, align }) => {
-  return (
+const ModalHeader = ({ title, align }) => (
     <Heading level={2} align={align}>
       {title}
     </Heading>
   )
-}
 
 ModalHeader.displayName = 'ModalHeader'
 

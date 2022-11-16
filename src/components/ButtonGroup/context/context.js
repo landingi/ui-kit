@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from 'react'
-import PropTypes from 'prop-types'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
+import PropTypes from 'prop-types'
+import React, { createContext, useContext, useState } from 'react'
 
 const ButtonGroupContext = createContext(null)
 

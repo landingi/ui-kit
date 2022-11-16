@@ -1,9 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Paragraph.module.scss'
 
-//TODO Paragraph check mdx examples
+// TODO Paragraph check mdx examples
 /**
  * Paragraph - stateless presentational component
  * @param {object} props - props
@@ -31,7 +32,7 @@ const Paragraph = ({
 }) => {
   const paragraphStyles = useStyles(
     {
-      [styles['paragraph']]: true,
+      [styles.paragraph]: true,
       [styles[`paragraph-color--${color}`]]: color,
       [styles[`paragraph-size--${size}`]]: size,
       [styles[`paragraph-padding--${padding}`]]: padding,

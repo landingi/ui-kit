@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Spreader from '@components/Spreader'
 import Icon from '@components/Icon'
+import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Check.module.scss'
 
 /**
@@ -24,7 +25,7 @@ const Check = ({
 }) => {
   const wrapperStyles = useStyles(
     {
-      [styles['check']]: true,
+      [styles.check]: true,
       [styles['check--positive']]: positive,
       [styles['check--crossed-out']]: positive && crossedOutOnPositive
     },

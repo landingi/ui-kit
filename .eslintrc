@@ -1,6 +1,12 @@
 {
-  "parser": "@babel/eslint-parser",
-  "plugins": ["react", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "jest-dom",
+    "testing-library",
+    "simple-import-sort"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -12,13 +18,16 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "camelcase": "off",
-    "no-use-before-define": "off",
     "react/sort-comp": "off",
-    "react/jsx-filename-extension": "off",
     "react/jsx-sort-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-sort-default-props": "off",
@@ -29,35 +38,68 @@
     "react/function-component-definition": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/forbid-component-props": "off",
-    "multiline-ternary": "off",
     "array-callback-return": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "off",
     "react/no-set-state": "off",
     "react/state-in-constructor": "off",
     "jsx-quotes": ["error", "prefer-single"],
-    "mdx/no-unused-expressions": "off",
-    "no-console": "error"
+    "no-console": "error",
+    "react/react-in-jsx-scope": "off",
+    "no-plusplus": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "no-use-before-define": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "multiline-ternary": "warn",
+    "no-param-reassign": "warn",
+    "no-restricted-globals": "warn",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "no-restricted-syntax": "warn",
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "no-promise-executor-return": "warn",
+    "no-restricted-exports": "warn",
+    "no-return-assign": "warn",
+    "react/default-props-match-prop-types": "warn",
+    "react/require-default-props": "warn",
+    "react/jsx-no-constructed-context-values": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "react/no-unstable-nested-components": "warn",
+    "jsx-a11y/no-autofocus": "warn",
+    "react/no-array-index-key": "warn",
+    "no-nested-ternary": "warn",
+    "jsx-a11y/mouse-events-have-key-events": "warn",
+    "radix": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-unused-vars": "warn",
+    "class-methods-use-this": "warn",
+    "react/no-unused-prop-types": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "no-unsafe-optional-chaining": "warn",
+    "react/button-has-type": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/forbid-prop-types": "warn"
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "prettier",
-    "plugin:prettier/recommended",
-    "plugin:mdx/recommended"
-  ],
+  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
     },
-    "mdx/code-blocks": true,
-    "mdx/language-mapper": {}
-  },
-  "overrides": [
-    {
-      "files": ["*.mdx"],
-      "parser": "eslint-mdx"
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@components", "./src/components"],
+          ["@constants", "./src/constants"],
+          ["@events", "./src/events"],
+          ["@helpers", "./src/helpers"],
+          ["@lib", "./src/lib"],
+          ["@shapes", "./src/shapes"]
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
-  ]
+  }
 }

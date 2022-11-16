@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@jestutils'
-import Image from '@components/Image'
 import '@testing-library/jest-dom'
+
+import Image from '@components/Image'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const initialProps = {
   src: 'http://www.laningi.com',

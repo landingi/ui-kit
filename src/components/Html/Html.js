@@ -1,6 +1,6 @@
+import createDOMPurify from 'dompurify'
 import PropTypes from 'prop-types'
 import React from 'react'
-import createDOMPurify from 'dompurify'
 
 const isBrowser = typeof window !== 'undefined'
 

@@ -1,7 +1,8 @@
-import React from 'react'
-import { render } from '@jestutils'
 import '@testing-library/jest-dom'
+
 import Accordion from '@components/Accordion'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const accordionComponent = (
   <Accordion>

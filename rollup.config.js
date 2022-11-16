@@ -1,5 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import typescript from '@rollup/plugin-typescript'
 import babel from '@rollup/plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 import external from 'rollup-plugin-peer-deps-external'
@@ -9,21 +10,25 @@ import copy from 'rollup-plugin-copy'
 
 const packageJson = require('./package.json')
 
+const extensions = ['.js', '.jsx', '.ts', '.tsx']
+
 export default [
   {
     input: 'src/index.js',
     output: [
       {
+        sourcemap: false,
         file: packageJson.main,
         format: 'cjs'
       }
     ],
     plugins: [
       externals({ react: 'react', 'react-dom': 'react-dom' }),
-      babel(),
+      typescript({ tsconfig: './tsconfig.json' }),
+      babel({ extensions }),
       external(),
-      resolve(),
-      commonjs(),
+      resolve({ extensions }),
+      commonjs({ extensions }),
       postcss({
         modules: {
           generateScopedName: '[name]__[local]'

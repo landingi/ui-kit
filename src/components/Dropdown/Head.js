@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './Dropdown.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import styles from './Dropdown.module.scss'
 
 /**
  * Dropdown Head element - stateless presentational component
@@ -13,7 +14,7 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const DropdownHead = ({ children, className }) => {
   const elementStyles = useStyles(
     {
-      [styles['dropdown__head']]: true
+      [styles.dropdown__head]: true
     },
     className
   )

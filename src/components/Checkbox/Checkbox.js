@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Checkbox.module.scss'
 
 /**
@@ -18,7 +19,7 @@ const Checkbox = ({
   checked,
   disabled,
   formikKey,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const checkboxStyles = useStyles(
     { [styles.input__checkbox]: true },
@@ -48,14 +49,14 @@ Checkbox.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   formikKey: PropTypes.string,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Checkbox.defaultProps = {
   className: '',
   disabled: false,
   formikKey: null,
-  ['data-testid']: undefined
+  'data-testid': undefined
 }
 
 export default Checkbox

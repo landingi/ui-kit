@@ -1,6 +1,7 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './BoxBackground.module.scss'
 
 /**
@@ -14,7 +15,7 @@ import styles from './BoxBackground.module.scss'
 const BoxBackground = ({ className, children, variant }) => {
   const elementClasses = useStyles(
     {
-      [styles['boxBackground']]: true,
+      [styles.boxBackground]: true,
       [styles[`boxBackground--${variant}`]]: variant
     },
     className

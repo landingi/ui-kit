@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import emitter from '@lib/emitter'
-import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import Notification from '@components/Notification'
-import styles from './TimingToast.module.scss'
+import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
+import emitter from '@lib/emitter'
 import PropTypes from 'prop-types'
+import React, { useCallback, useEffect, useState } from 'react'
+
+import styles from './TimingToast.module.scss'
 
 /**
  * TimingToast - stateless presentational component
@@ -19,7 +20,7 @@ const TimingToast = ({ className }) => {
 
   const toastStyles = useStyles(
     {
-      [styles['toast']]: true,
+      [styles.toast]: true,
       [styles[`toast--active`]]: isActive
     },
     className
@@ -55,20 +56,18 @@ const TimingToast = ({ className }) => {
     }
   }, [])
 
-  return (
-    isActive && (
-      <div className={toastStyles} data-testid='toast-component'>
-        <Notification
-          type={type}
-          isClosable
-          onClick={closeToast}
-          hasTime={isActive}
-        >
-          {message}
-        </Notification>
-      </div>
-    )
-  )
+  return isActive ? (
+    <div className={toastStyles} data-testid='toast-component'>
+      <Notification
+        type={type}
+        isClosable
+        onClick={closeToast}
+        hasTime={isActive}
+      >
+        {message}
+      </Notification>
+    </div>
+  ) : null
 }
 
 TimingToast.displayName = 'TimingToast'
@@ -78,7 +77,7 @@ TimingToast.propTypes = {
 }
 
 TimingToast.defaultProps = {
-  className: '',
+  className: null,
   type: 'info'
 }
 

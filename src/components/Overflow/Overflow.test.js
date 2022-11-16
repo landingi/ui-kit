@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from '@jestutils'
 import Overflow from '@components/Overflow'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'placeholder'

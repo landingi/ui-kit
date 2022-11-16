@@ -1,7 +1,8 @@
 import Icon from '@components/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Spinner.module.scss'
 
 /**
@@ -13,7 +14,7 @@ import styles from './Spinner.module.scss'
 const Spinner = ({ className }) => {
   const elementClasses = useStyles(
     {
-      [styles['spinner']]: true
+      [styles.spinner]: true
     },
     className
   )

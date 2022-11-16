@@ -1,6 +1,7 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Modal.module.scss'
 
 /**
@@ -12,7 +13,7 @@ import styles from './Modal.module.scss'
  */
 const ModalFooter = ({ children, align }) => {
   const elementClasses = useStyles({
-    [styles['modal__footer']]: true,
+    [styles.modal__footer]: true,
     [styles['modal__footer--align-right']]: align === 'right',
     [styles['modal__footer--align-center']]: align === 'center',
     [styles['modal__footer--align-left']]: align === 'left'

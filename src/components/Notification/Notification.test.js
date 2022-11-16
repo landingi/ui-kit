@@ -1,7 +1,8 @@
-import React from 'react'
-import Notification from '@components/Notification'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import Notification from '@components/Notification'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   children: 'Notification content'

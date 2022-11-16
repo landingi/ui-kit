@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Label from '@components/Label'
-import MaskedInputComponent from 'react-text-mask'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+import MaskedInputComponent from 'react-text-mask'
+
 import styles from './Input.module.scss'
 
 /**

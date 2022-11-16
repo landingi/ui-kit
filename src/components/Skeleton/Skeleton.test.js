@@ -1,13 +1,12 @@
-import React from 'react'
-import { render } from '@jestutils'
-import { screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
 import {
   SkeletonCircle,
+  SkeletonDrawer,
   SkeletonLine,
-  SkeletonSidebar,
-  SkeletonDrawer
-} from '@components/Skeleton'
-import '@testing-library/jest-dom'
+  SkeletonSidebar} from '@components/Skeleton'
+import { render , screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<SkeletonCircle/> mount', () => {
   it('should be displayed', () => {

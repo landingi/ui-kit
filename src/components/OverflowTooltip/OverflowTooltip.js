@@ -1,8 +1,9 @@
+import Tooltip from '@components/Tooltip'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Tooltip from '@components/Tooltip'
+
 import styles from './OverflowTooltip.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * OverflowTooltip - stateless presentational component

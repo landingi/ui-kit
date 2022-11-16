@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
-import React from 'react'
-import { render } from '@jestutils'
+
 import PerfectDropdown from '@components/PerfectDropdown'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 describe('<PerfectDropdown/> tests', () => {
   it('renders properly', () => {

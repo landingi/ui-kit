@@ -1,6 +1,6 @@
 import { useKeyPress } from '@helpers/hooks/useKeyPress'
+import { fireEvent } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
-import { fireEvent } from '@jestutils'
 
 describe('useKeyPress tests', () => {
   it('callback function after pressing the Enter key', () => {

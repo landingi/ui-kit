@@ -1,5 +1,6 @@
+import { fireEvent,render, screen } from '@testing-library/react'
 import React from 'react'
-import { render, screen, fireEvent } from '@jestutils'
+
 import ButtonGroup from './index'
 
 describe('<ButtonGroup />', () => {

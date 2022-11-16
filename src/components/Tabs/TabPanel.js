@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+
 import TabContext from './TabContext'
 import styles from './Tabs.module.scss'
 
@@ -15,7 +16,7 @@ import styles from './Tabs.module.scss'
  */
 const TabPanel = ({ name, className, children, ...restProps }) => {
   const tabContext = useContext(TabContext)
-  const tabPanelStyles = useStyles({ [styles['tab__panel']]: true }, className)
+  const tabPanelStyles = useStyles({ [styles.tab__panel]: true }, className)
 
   return (
     tabContext.activeTab === name && (

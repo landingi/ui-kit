@@ -26,10 +26,10 @@ export const monthsArray = [
  */
 export const handleRangeMarker = (monthID, endMonth, startMonth) => {
   const handleMarkerWithBiggerStartMonth = () =>
-      endMonth <= monthID && startMonth >= monthID,
-    handleMarkerWithBiggerEndMonth = () =>
-      startMonth <= monthID && endMonth >= monthID,
-    handleMarkerWithEqualStartEndMonth = () => monthID === startMonth
+      endMonth <= monthID && startMonth >= monthID;
+    const handleMarkerWithBiggerEndMonth = () =>
+      startMonth <= monthID && endMonth >= monthID;
+    const handleMarkerWithEqualStartEndMonth = () => monthID === startMonth
 
   switch (true) {
     case startMonth === null || endMonth === null:

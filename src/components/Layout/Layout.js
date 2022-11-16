@@ -1,9 +1,10 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from './Layout.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO Layout mdx add background to layouts
+import styles from './Layout.module.scss'
+
+// TODO Layout mdx add background to layouts
 /**
  * Layout - stateless presentational component
  * @param {object} props - props
@@ -17,7 +18,7 @@ const Layout = ({
   className,
   children,
   width,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const layoutStyles = useStyles(
     {
@@ -40,13 +41,13 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   width: PropTypes.oneOf(['large', 'big', 'full']),
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Layout.defaultProps = {
   className: '',
   width: 'full',
-  ['data-testid']: 'layout-component'
+  'data-testid': 'layout-component'
 }
 
 export default Layout

@@ -1,6 +1,6 @@
-import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
 import TimeSelect from '@components/TimeSelect'
+import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
 const mockOnChange = jest.fn()
 
@@ -41,7 +41,7 @@ describe('<TimeSelect/> mount', () => {
   })
 
   it('onChange should not be fired when component is disabled', () => {
-    const { getByRole } = render(<TimeSelect {...props} disabled={true} />)
+    const { getByRole } = render(<TimeSelect {...props} disabled />)
 
     const inputNode = getByRole('textbox')
 

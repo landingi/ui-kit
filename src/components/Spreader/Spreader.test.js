@@ -1,7 +1,8 @@
-import React from 'react'
-import Spreader from '@components/Spreader'
-import { render } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import Spreader from '@components/Spreader'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const renderSpreader = (props = {}) => render(<Spreader {...props} />)
 
@@ -12,7 +13,7 @@ describe('<Spreader /> mount', () => {
     small: 'small',
     medium: 'medium',
     large: 'large',
-    ['x-large']: 'x-large',
+    'x-large': 'x-large',
     big: 'big',
     huge: 'huge'
   }

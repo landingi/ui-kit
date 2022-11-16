@@ -1,7 +1,7 @@
-import React from 'react'
-import Alert from '@components/Alert'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import Alert from '@components/Alert'
+import { render, screen } from '@testing-library/react'
 
 const props = {
   children: 'Alert content'

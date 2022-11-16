@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import uuid from 'react-uuid'
-import ReactTooltip from 'react-tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import ReactTooltip from 'react-tooltip'
+import uuid from 'react-uuid'
+
 import styles from './Tooltip.module.scss'
 
-//TODO Tooltip css, test, mdx remove <br/>
+// TODO Tooltip css, test, mdx remove <br/>
 /**
  * Tooltip - stateless presentational component
  * @param {object} props - props
@@ -30,13 +31,11 @@ const Tooltip = ({
 }) => {
   const tooltipUUID = uuid()
 
-  const showOnClickProps = showOnClick
-    ? {
+  const showOnClickProps = showOnClick? {
         delayHide: 1000,
         event: 'click',
         afterShow: () => ReactTooltip.hide()
-      }
-    : {}
+      }: {}
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
