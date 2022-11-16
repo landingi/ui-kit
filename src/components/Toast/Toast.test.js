@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import { emitToastToggle } from '@events/toast'
-import { fireEvent,render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 

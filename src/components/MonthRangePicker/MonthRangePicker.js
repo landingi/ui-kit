@@ -24,22 +24,26 @@ import styles from './MonthRangePicker.module.scss'
  * @return {object} An object of children element
  */
 const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
-  const minimalDate = parseDateToMonthID(minDate);
-    const maximalDate = parseDateToMonthID(maxDate);
-    const [isSelecting, setSelecting] = useState(false);
-    const [startMonth, setStartMonth] = useState(null);
-    const [endMonth, setEndMonth] = useState(null);
-    const [year, setYear] = useState(2021);
-    const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+  const minimalDate = parseDateToMonthID(minDate)
+  const maximalDate = parseDateToMonthID(maxDate)
+  const [isSelecting, setSelecting] = useState(false)
+  const [startMonth, setStartMonth] = useState(null)
+  const [endMonth, setEndMonth] = useState(null)
+  const [year, setYear] = useState(2021)
+  const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
 
   useEffect(() => {
     if (confirmedEndMonth) {
       onChange({
         endDate: endOfMonth(
-          confirmedEndMonth > startMonth? transformMonthToDate(confirmedEndMonth): transformMonthToDate(startMonth)
+          confirmedEndMonth > startMonth
+            ? transformMonthToDate(confirmedEndMonth)
+            : transformMonthToDate(startMonth)
         ),
         startDate: startOfMonth(
-          confirmedEndMonth > startMonth? transformMonthToDate(startMonth): transformMonthToDate(confirmedEndMonth)
+          confirmedEndMonth > startMonth
+            ? transformMonthToDate(startMonth)
+            : transformMonthToDate(confirmedEndMonth)
         )
       })
     }
@@ -116,13 +120,17 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
       return startMonth === monthID
     }
 
-    return currentEndMonth > startMonth? startMonth === monthID: currentEndMonth === monthID
+    return currentEndMonth > startMonth
+      ? startMonth === monthID
+      : currentEndMonth === monthID
   }
 
   const handleLastMarker = monthID => {
     const currentEndMonth = confirmedEndMonth || endMonth
 
-    return currentEndMonth < startMonth? startMonth === monthID: currentEndMonth === monthID
+    return currentEndMonth < startMonth
+      ? startMonth === monthID
+      : currentEndMonth === monthID
   }
 
   return (

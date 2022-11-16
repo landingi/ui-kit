@@ -14,12 +14,7 @@ import styles from './Layout.module.scss'
  * @param {string} props.datatestid - data-testid
  * @return {object} An object of children element
  */
-const Layout = ({
-  className,
-  children,
-  width,
-  'data-testid': dataTestId
-}) => {
+const Layout = ({ className, children, width, 'data-testid': dataTestId }) => {
   const layoutStyles = useStyles(
     {
       [styles.layout]: true,

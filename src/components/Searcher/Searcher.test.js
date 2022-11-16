@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import Searcher from '@components/Searcher'
-import { fireEvent,render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 
 const mockedSearchFunction = jest.fn()

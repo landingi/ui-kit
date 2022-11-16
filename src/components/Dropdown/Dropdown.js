@@ -14,7 +14,8 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState} from 'react'
+  useState
+} from 'react'
 import Ink from 'react-ink'
 
 import styles from './Dropdown.module.scss'
@@ -159,46 +160,62 @@ const Dropdown = forwardRef(
 
         setStyle({
           left: container.left - (window.innerWidth - modalWidth) / 2,
-          top: renderAbove? container.top - dropdown.height: container.bottom - (window.innerHeight - modalHeight) / 2 + offset
+          top: renderAbove
+            ? container.top - dropdown.height
+            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
       } else if (size === 'fixed') {
-          setStyle({
-            left: container?.left,
-            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
-          })
-        } else if (size === 'huge') {
-          setStyle({
-            left:
-              dropdownPlacement === 'left'? (renderAsSmaller? centerParent(container?.width, 480, container?.left): centerParent(
-                        container?.width,
-                        dropdown?.width,
-                        container?.left
-                      )) - 150: centerParent(
-                    container?.width,
-                    dropdown?.width,
-                    container?.left
-                  ) -
-                  100 +
+        setStyle({
+          left: container?.left,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
+        })
+      } else if (size === 'huge') {
+        setStyle({
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(container?.width, 480, container?.left)
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 150
+              : centerParent(
+                  container?.width,
                   dropdown?.width,
-            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
-          })
-        } else {
-          setStyle({
-            left:
-              dropdownPlacement === 'left'? (renderAsSmaller? centerParent(container?.width, 240, container?.left): centerParent(
-                        container?.width,
-                        dropdown?.width,
-                        container?.left
-                      )) - 40: centerParent(
-                    container?.width,
-                    dropdown?.width,
-                    container?.left
-                  ) -
-                  100 +
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
+        })
+      } else {
+        setStyle({
+          left:
+            dropdownPlacement === 'left'
+              ? (renderAsSmaller
+                  ? centerParent(container?.width, 240, container?.left)
+                  : centerParent(
+                      container?.width,
+                      dropdown?.width,
+                      container?.left
+                    )) - 40
+              : centerParent(
+                  container?.width,
                   dropdown?.width,
-            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
-          })
-        }
+                  container?.left
+                ) -
+                100 +
+                dropdown?.width,
+          top: renderAbove
+            ? container?.top - dropdown?.height
+            : container?.bottom + offset
+        })
+      }
     }
 
     const handleResize = () => {
@@ -318,7 +335,11 @@ const Dropdown = forwardRef(
 
     return (
       <Fragment>
-        {tooltip.length > 0? renderDropdownWithTooltip(): button? renderDropdownWithButton(): renderDropdown()}
+        {tooltip.length > 0
+          ? renderDropdownWithTooltip()
+          : button
+          ? renderDropdownWithButton()
+          : renderDropdown()}
 
         {isOpen && renderDropdownBody()}
       </Fragment>

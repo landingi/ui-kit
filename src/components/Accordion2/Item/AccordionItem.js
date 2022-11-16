@@ -2,7 +2,7 @@ import styles from '@components/Accordion2/Accordion.module.scss'
 import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React, { useCallback,useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 /**
  * Accordion - statefull presentational component
