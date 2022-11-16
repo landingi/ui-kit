@@ -6,6 +6,5 @@
   "trailingComma": "none",
   "proseWrap": "always",
   "printWidth": 80,
-  "jsxSingleQuote": true,
-  "singleAttributePerLine": true
+  "jsxSingleQuote": true
 }

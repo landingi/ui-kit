@@ -83,7 +83,7 @@
     "react/jsx-no-useless-fragment": "warn",
     "react/forbid-prop-types": "warn"
   },
-  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
