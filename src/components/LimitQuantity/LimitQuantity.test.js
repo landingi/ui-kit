@@ -1,6 +1,6 @@
-import React from 'react'
-import { render, screen } from '@jestutils'
 import LimitQuantity from '@components/LimitQuantity'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<LimitQuantity /> mount', () => {
   const props = {

@@ -1,6 +1,7 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './Heading.module.scss'
 
 /**
@@ -26,7 +27,7 @@ const Heading = ({
 }) => {
   const elementClasses = useStyles(
     {
-      [styles['heading']]: true,
+      [styles.heading]: true,
       [styles[`h${level}`]]: level,
       [styles['heading--bold']]: bold,
       [styles[`heading--${align}`]]: align,

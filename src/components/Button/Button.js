@@ -1,9 +1,10 @@
+import Spinner from '@components/Spinner'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import Ink from 'react-ink'
-import PropTypes from 'prop-types'
-import Spinner from '@components/Spinner'
+
 import styles from './Button.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Button - stateless presentational component
@@ -49,7 +50,7 @@ const Button = ({
   fitWidth,
   style,
   activeColor,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   // eslint-disable-next-line no-console
   console.log(style)
@@ -131,7 +132,7 @@ Button.propTypes = {
   fitWidth: PropTypes.bool,
   style: PropTypes.object,
   activeColor: PropTypes.string,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Button.defaultProps = {
@@ -154,7 +155,7 @@ Button.defaultProps = {
   onClick: () => {},
   style: null,
   activeColor: null,
-  ['data-testid']: undefined
+  'data-testid': undefined
 }
 
 export default Button

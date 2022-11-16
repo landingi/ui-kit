@@ -53,9 +53,9 @@ export const isAmOrPm = (time, isAmPmType) => {
 
   if (isAmPmType && hoursNum >= 12) {
     return PM
-  } else if (isAmPmType && hoursNum < 12) {
+  } if (isAmPmType && hoursNum < 12) {
     return AM
-  } else {
+  } 
     return null
-  }
+  
 }

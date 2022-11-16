@@ -1,7 +1,8 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './Indicator.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * Indicator - stateless presentational component
@@ -16,14 +17,14 @@ import { useStyles } from '@helpers/hooks/useStyles'
 const Indicator = ({ children, className, content, isAlert, onClick }) => {
   const elementStyles = useStyles(
     {
-      [styles['indicator']]: true
+      [styles.indicator]: true
     },
     className
   )
 
   const indicatorStyles = useStyles(
     {
-      [styles['indicator__element']]: true,
+      [styles.indicator__element]: true,
       [styles['indicator__element--isAlert']]: isAlert
     },
     className

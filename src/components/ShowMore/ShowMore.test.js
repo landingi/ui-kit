@@ -1,8 +1,8 @@
-import React from 'react'
-import { render } from '@jestutils'
-import { fireEvent } from '@testing-library/react'
-import ShowMore from '@components/ShowMore'
 import '@testing-library/jest-dom'
+
+import ShowMore from '@components/ShowMore'
+import { fireEvent,render  } from '@testing-library/react'
+import React from 'react'
 
 describe('<ShowMore/> tests', () => {
   it('<ShowMore/> mout with short content', () => {

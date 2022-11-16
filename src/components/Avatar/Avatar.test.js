@@ -1,7 +1,8 @@
-import React from 'react'
-import Avatar from '@components/Avatar'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import Avatar from '@components/Avatar'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<Avatar /> mount', () => {
   it('is mounted', () => {

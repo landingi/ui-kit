@@ -1,5 +1,6 @@
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { render, screen } from '@jestutils'
+
 import FieldGroup from './FieldGroup'
 
 describe('FieldGroup tests', () => {
@@ -23,7 +24,7 @@ describe('FieldGroup tests', () => {
       children: 'children',
       errors: {},
       touched: {
-        ['field-name']: 'error-name'
+        'field-name': 'error-name'
       }
     }
 

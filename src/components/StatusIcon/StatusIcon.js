@@ -1,9 +1,10 @@
+import Icon from '@components/Icon'
+import Tooltip from '@components/Tooltip'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './StatusIcon.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
-import Tooltip from '@components/Tooltip'
-import Icon from '@components/Icon'
 
 /**
  * Status Icon - stateless presentational component

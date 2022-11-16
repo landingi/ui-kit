@@ -1,7 +1,8 @@
-import React from 'react'
-import ColorNumber from '@components/ColorNumber'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import ColorNumber from '@components/ColorNumber'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<ColorNumber /> mount', () => {
   it('is mounted', () => {

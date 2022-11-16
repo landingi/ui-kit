@@ -1,9 +1,10 @@
+import StepNumber from '@components/StepNumber'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import StepNumber from '@components/StepNumber'
-import styles from './Instruction.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 import uuid from 'react-uuid'
+
+import styles from './Instruction.module.scss'
 
 /**
  * Instruction - stateless presentational component

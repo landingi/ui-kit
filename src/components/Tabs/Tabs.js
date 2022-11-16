@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+
 import TabContext from './TabContext'
 import styles from './Tabs.module.scss'
 
@@ -20,7 +21,7 @@ const Tabs = ({ initialValue, className, children, ...restProps }) => {
     changeTab
   }
 
-  const tabsStyles = useStyles({ [styles['tabs__wrapper']]: true }, className)
+  const tabsStyles = useStyles({ [styles.tabs__wrapper]: true }, className)
 
   return (
     <TabContext.Provider value={tabProviderValue}>

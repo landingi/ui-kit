@@ -1,7 +1,8 @@
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
+
 import styles from './TextOverflow.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
 /**
  * TextOverflow - stateless presentational component

@@ -1,5 +1,5 @@
-import { processTime, convertTimeFrom24to12, isAmOrPm } from './helpers'
 import { AM, PM } from './constants'
+import { convertTimeFrom24to12, isAmOrPm,processTime } from './helpers'
 
 describe('Test processTime', () => {
   it('Return same time when am/pm in not selected', () => {

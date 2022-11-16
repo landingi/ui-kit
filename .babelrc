@@ -1,7 +1,13 @@
 {
   "presets": [
-    "@babel/preset-react",
-    ["@babel/preset-env", { "targets": { "node": "current" } }]
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ],
+    ["@babel/preset-env", { "targets": { "node": "current" } }],
+    "@babel/preset-typescript"
   ],
   "plugins": [
     [
@@ -13,12 +19,8 @@
           "@constants": "./src/constants",
           "@events": "./src/events",
           "@helpers": "./src/helpers",
-          "@i18n": "./src/i18n",
           "@lib": "./src/lib",
-          "@shapes": "./src/shapes",
-          "@store": "./src/store",
-          "@jestutils": "./config/tests/jest/utils.js",
-          "@jestmocks": "./config/tests/jest/setup"
+          "@shapes": "./src/shapes"
         }
       }
     ]

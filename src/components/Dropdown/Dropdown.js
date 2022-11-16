@@ -1,25 +1,25 @@
+import Icon from '@components/Icon'
+import Tooltip from '@components/Tooltip'
+import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import { isEmpty } from '@helpers/data'
+import { debounce, throttle } from '@helpers/events'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { centerParent, getBoundings } from '@helpers/position'
+import { composeRefs } from '@helpers/ref'
+import emitter from '@lib/emitter'
+import PropTypes from 'prop-types'
 import React, {
-  useRef,
-  useState,
+  forwardRef,
+  Fragment,
   useCallback,
   useEffect,
-  Fragment,
-  forwardRef
-} from 'react'
-import PropTypes from 'prop-types'
-import { centerParent, getBoundings } from '@helpers/position'
-import Tooltip from '@components/Tooltip'
-import Icon from '@components/Icon'
+  useRef,
+  useState} from 'react'
 import Ink from 'react-ink'
-import { debounce, throttle } from '@helpers/events'
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
-import emitter from '@lib/emitter'
-import { isEmpty } from '@helpers/data'
-import { composeRefs } from '@helpers/ref'
-import styles from './Dropdown.module.scss'
-import { useStyles } from '@helpers/hooks/useStyles'
 
-//TODO Dropdown test, mdx, jsdoc props
+import styles from './Dropdown.module.scss'
+
+// TODO Dropdown test, mdx, jsdoc props
 /**
  * Dropdown - stateless presentational component
  * @return {object} An object of children element
@@ -52,7 +52,7 @@ const Dropdown = forwardRef(
       custom,
       isOpenDisabled,
       isOnlyIcon,
-      ['data-testid']: dataTestId
+      'data-testid': dataTestId
     },
     ref
   ) => {
@@ -63,24 +63,24 @@ const Dropdown = forwardRef(
     const dropdownRef = useRef(null)
 
     const dropdownWrapperWithTooltipStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
+      [styles.dropdown__wrapper]: true,
       [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownWrapperStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
+      [styles.dropdown__wrapper]: true,
       [styles[`dropdown__wrapper--${alignment}`]]: alignment
     })
 
     const dropdownWrapperIconStyles = useStyles({
-      [styles['dropdown__wrapper']]: true,
-      [styles['dropdown__wrapper__icon']]: true,
+      [styles.dropdown__wrapper]: true,
+      [styles.dropdown__wrapper__icon]: true,
       [styles['dropdown__wrapper--isOnlyIcon']]: isOnlyIcon
     })
 
     const dropdownBodySizeStyles = useStyles(
       {
-        [styles['dropdown']]: true,
+        [styles.dropdown]: true,
         [styles[`dropdown--${size}`]]: size,
         [styles['dropdown--hidden']]: isEmpty(style)
       },
@@ -88,18 +88,18 @@ const Dropdown = forwardRef(
     )
 
     const dropdownBodyStyles = useStyles({
-      [styles['dropdown__body']]: true,
+      [styles.dropdown__body]: true,
       [styles[`dropdown--${size}`]]: size
     })
 
     const dropdownLabelStyles = useStyles({
-      [styles['dropdown__label']]: true,
+      [styles.dropdown__label]: true,
       [styles['dropdown__label--placeholder']]: asPlaceholder
     })
 
     const dropdownStyles = useStyles(
       {
-        [styles['dropdown__wrapper']]: !custom,
+        [styles.dropdown__wrapper]: !custom,
         [styles[`dropdown__wrapper--${alignment}`]]: alignment,
         [styles['dropdown__wrapper--disabled']]: isOpenDisabled,
         [styles['dropdown__wrapper--input']]: hasInput,
@@ -159,64 +159,46 @@ const Dropdown = forwardRef(
 
         setStyle({
           left: container.left - (window.innerWidth - modalWidth) / 2,
-          top: renderAbove
-            ? container.top - dropdown.height
-            : container.bottom - (window.innerHeight - modalHeight) / 2 + offset
+          top: renderAbove? container.top - dropdown.height: container.bottom - (window.innerHeight - modalHeight) / 2 + offset
         })
-      } else {
-        if (size === 'fixed') {
+      } else if (size === 'fixed') {
           setStyle({
             left: container?.left,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset
+            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
           })
         } else if (size === 'huge') {
           setStyle({
             left:
-              dropdownPlacement === 'left'
-                ? (renderAsSmaller
-                    ? centerParent(container?.width, 480, container?.left)
-                    : centerParent(
+              dropdownPlacement === 'left'? (renderAsSmaller? centerParent(container?.width, 480, container?.left): centerParent(
                         container?.width,
                         dropdown?.width,
                         container?.left
-                      )) - 150
-                : centerParent(
+                      )) - 150: centerParent(
                     container?.width,
                     dropdown?.width,
                     container?.left
                   ) -
                   100 +
                   dropdown?.width,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset
+            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
           })
         } else {
           setStyle({
             left:
-              dropdownPlacement === 'left'
-                ? (renderAsSmaller
-                    ? centerParent(container?.width, 240, container?.left)
-                    : centerParent(
+              dropdownPlacement === 'left'? (renderAsSmaller? centerParent(container?.width, 240, container?.left): centerParent(
                         container?.width,
                         dropdown?.width,
                         container?.left
-                      )) - 40
-                : centerParent(
+                      )) - 40: centerParent(
                     container?.width,
                     dropdown?.width,
                     container?.left
                   ) -
                   100 +
                   dropdown?.width,
-            top: renderAbove
-              ? container?.top - dropdown?.height
-              : container?.bottom + offset
+            top: renderAbove? container?.top - dropdown?.height: container?.bottom + offset
           })
         }
-      }
     }
 
     const handleResize = () => {
@@ -336,11 +318,7 @@ const Dropdown = forwardRef(
 
     return (
       <Fragment>
-        {tooltip.length > 0
-          ? renderDropdownWithTooltip()
-          : button
-          ? renderDropdownWithButton()
-          : renderDropdown()}
+        {tooltip.length > 0? renderDropdownWithTooltip(): button? renderDropdownWithButton(): renderDropdown()}
 
         {isOpen && renderDropdownBody()}
       </Fragment>
@@ -386,7 +364,7 @@ Dropdown.propTypes = {
   custom: PropTypes.instanceOf(Object),
   isOpenDisabled: PropTypes.bool,
   isOnlyIcon: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Dropdown.defaultProps = {
@@ -414,7 +392,7 @@ Dropdown.defaultProps = {
   handleOnClick: () => null,
   handleOnOpen: () => null,
   handleOnClose: () => null,
-  ['data-testid']: 'trigger-dropdown'
+  'data-testid': 'trigger-dropdown'
 }
 
 export default Dropdown

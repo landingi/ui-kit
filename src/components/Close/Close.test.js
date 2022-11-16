@@ -1,11 +1,11 @@
-import React from 'react'
-import { render } from '@jestutils'
 import Close from '@components/Close'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const onClick = jest.fn()
 
 const props = {
-  onClick: onClick
+  onClick
 }
 
 describe('<Close/> mount', () => {

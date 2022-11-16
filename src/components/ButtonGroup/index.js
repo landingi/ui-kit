@@ -1,5 +1,5 @@
-import ButtonGroup from './ButtonGroup'
 import Button from './Button'
+import ButtonGroup from './ButtonGroup'
 
 ButtonGroup.Button = Button
 

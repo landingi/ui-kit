@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Error from '@components/Form/Error'
 import InputComponent from '@components/Input'
+import styles from '@components/Input/Input.module.scss'
 import Paragraph from '@components/Paragraph'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import styles from '@components/Input/Input.module.scss'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 // TODO Form Input css, mdx
 /**
@@ -48,7 +48,7 @@ const Input = ({
   alwaysShowLabel,
   variant,
   onKeyDown,
-  ['data-testid']: dataTestId,
+  'data-testid': dataTestId,
   hideArrows
 }) => {
   const error = getDeepValue(errors, name)
@@ -136,7 +136,7 @@ Input.propTypes = {
   }),
   variant: PropTypes.string,
   onKeyDown: PropTypes.func,
-  ['data-testid']: PropTypes.string,
+  'data-testid': PropTypes.string,
   hideArrows: PropTypes.bool
 }
 
@@ -161,7 +161,7 @@ Input.defaultProps = {
   variant: '',
   form: { errors: {}, touched: {} },
   field: {},
-  ['data-testid']: 'input-component',
+  'data-testid': 'input-component',
   hideArrows: false
 }
 

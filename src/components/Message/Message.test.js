@@ -1,6 +1,6 @@
-import React from 'react'
 import Message from '@components/Message'
 import { render } from '@testing-library/react'
+import React from 'react'
 
 describe('<Message/> mount', () => {
   const props = {

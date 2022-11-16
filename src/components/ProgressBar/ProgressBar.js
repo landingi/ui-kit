@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import styles from './ProgressBar.module.scss'
 import ColorNumber from '@components/ColorNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+
+import styles from './ProgressBar.module.scss'
 
 /**
  * Progress Bar - stateless presentational component
@@ -30,23 +31,23 @@ const ProgressBar = ({
   withoutAnimation
 }) => {
   const containerStyles = useStyles({
-    [styles['container']]: true,
+    [styles.container]: true,
     [styles[`container__${size}`]]: true,
     [styles['container--bordered']]: border
   })
 
   const backgroundStyles = useStyles({
-    [styles['bar']]: true,
+    [styles.bar]: true,
     [styles[`bar__${size}`]]: true,
-    [styles['bar__background']]: true,
+    [styles.bar__background]: true,
     [styles[`bar__variant--${variant}`]]: true,
     [styles[`bar__border--${border}`]]: border
   })
 
   const fulfillmentStyles = useStyles({
-    [styles['bar']]: true,
+    [styles.bar]: true,
     [styles[`bar__${size}`]]: true,
-    [styles['bar__fulfillment']]: true,
+    [styles.bar__fulfillment]: true,
     [styles[`bar__variant--${variant}`]]: true,
     [styles['bar__fulfillment--bordered']]: border,
     [styles['bar__fulfillment--no-animation']]: withoutAnimation

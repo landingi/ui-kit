@@ -1,32 +1,32 @@
-import React, {
-  useCallback,
-  Fragment,
-  useRef,
-  useState,
-  useEffect
-} from 'react'
-import PropTypes from 'prop-types'
+import Button from '@components/Button'
+import Divider from '@components/Divider'
+import Dropdown from '@components/Dropdown'
 import Error from '@components/Form/Error'
-import Message from '@components/Message/Message'
+import Heading from '@components/Heading'
+import Label from '@components/Label'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
-import Dropdown from '@components/Dropdown'
-import Heading from '@components/Heading'
-import Button from '@components/Button'
-import Overflow from '@components/Overflow'
-import Divider from '@components/Divider'
 import Loader from '@components/Loader'
+import Message from '@components/Message/Message'
+import Overflow from '@components/Overflow'
+import Paragraph from '@components/Paragraph'
+import Search from '@components/Search'
+import Searcher from '@components/Searcher'
+import Spacer from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
 import { isEmpty } from '@helpers/data'
-import Spacer from '@components/Spacer'
-import Searcher from '@components/Searcher'
-import Search from '@components/Search'
-import Paragraph from '@components/Paragraph'
-import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState} from 'react'
 
-//TODO DropdownSelect css, mdx, tests, jsdoc props
+import styles from './DropdownSelect.module.scss'
+
+// TODO DropdownSelect css, mdx, tests, jsdoc props
 /**
  * DropdownSelect - stateless presentational component
  * @param {object} props - props
@@ -102,11 +102,11 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else if (customValue && !currentItem) {
+    } if (customValue && !currentItem) {
       return { value, label: value }
-    } else {
+    } 
       return null
-    }
+    
   }
 
   const selectedItem = getSelectedItem()

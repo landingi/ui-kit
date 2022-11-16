@@ -1,29 +1,28 @@
-import React, {
-  useCallback,
-  Fragment,
-  useRef,
-  useState,
-  useEffect
-} from 'react'
-import PropTypes from 'prop-types'
+import Button from '@components/Button'
+import Divider from '@components/Divider'
+import Dropdown from '@components/Dropdown'
 import Error from '@components/Form/Error'
+import Heading from '@components/Heading'
+import Label from '@components/Label'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
-import Dropdown from '@components/Dropdown'
-import Heading from '@components/Heading'
-import Button from '@components/Button'
-import Overflow from '@components/Overflow'
-import Divider from '@components/Divider'
 import Loader from '@components/Loader'
-import { emitCloseDropdown } from '@events/dropdown'
-import { isEmpty } from '@helpers/data'
-import Spacer from '@components/Spacer'
-import Searcher from '@components/Searcher'
+import Overflow from '@components/Overflow'
 import Paragraph from '@components/Paragraph'
-import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
+import Searcher from '@components/Searcher'
+import Spacer from '@components/Spacer'
+import { emitCloseDropdown } from '@events/dropdown'
+import { getDeepValue,isEmpty  } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { getDeepValue } from '@helpers/data'
+import PropTypes from 'prop-types'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState} from 'react'
+
+import styles from './DropdownSelect.module.scss'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -100,9 +99,9 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else {
+    } 
       return null
-    }
+    
   }
 
   const selectedItem = getSelectedItem()
@@ -188,8 +187,7 @@ const DropdownSelect = ({
       return items
     })
 
-  const renderOptions = () => {
-    return (
+  const renderOptions = () => (
       <Fragment>
         {emphasisedOptions.map((item, index) => (
           <ListItem className='list-item--dropdown' key={index}>
@@ -206,7 +204,6 @@ const DropdownSelect = ({
         ))}
       </Fragment>
     )
-  }
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null

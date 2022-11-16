@@ -1,7 +1,8 @@
-import React from 'react'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
 import Check from '@components/Check'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<Check/> mount', () => {
   it('is mounted', () => {

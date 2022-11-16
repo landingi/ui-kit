@@ -1,6 +1,6 @@
-import React from 'react'
 import Search from '@components/Search'
-import { render } from '@jestutils'
+import { render } from '@testing-library/react'
+import React from 'react'
 
 const mockOnSubmit = jest.fn()
 const mockOnProtectedSubmit = jest.fn()

@@ -1,7 +1,8 @@
-import React from 'react'
-import Input from '@components/Input'
-import { render, screen, fireEvent } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import Input from '@components/Input'
+import { fireEvent,render, screen } from '@testing-library/react'
+import React from 'react'
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()

@@ -1,7 +1,8 @@
-import React from 'react'
-import StatusIcon from '@components/StatusIcon'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import StatusIcon from '@components/StatusIcon'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
 describe('<StatusIcon /> mount', () => {
   it('is mounted', () => {

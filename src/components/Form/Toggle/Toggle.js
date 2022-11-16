@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Html from '@components/Html'
-import styles from './Toggle.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import styles from './Toggle.module.scss'
 
 /**
  * Toggle - stateless presentational component
@@ -27,7 +28,7 @@ const Toggle = ({
   label,
   className,
   disabled,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const wrapperStyles = useStyles(
     { [styles['toggle-container']]: true },
@@ -53,7 +54,7 @@ const Toggle = ({
           type='checkbox'
           id={id}
           disabled={disabled}
-          {...(dataTestId ? { ['data-testid']: dataTestId } : {})}
+          {...(dataTestId ? { 'data-testid': dataTestId } : {})}
         />
 
         <span className={styles.toggle__button} />
@@ -79,7 +80,7 @@ Toggle.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
   disabled: PropTypes.bool,
-  ['data-testid']: PropTypes.string
+  'data-testid': PropTypes.string
 }
 
 Toggle.defaultProps = {
@@ -87,7 +88,7 @@ Toggle.defaultProps = {
   label: '',
   onBlur: () => null,
   disabled: false,
-  ['data-testid']: null
+  'data-testid': null
 }
 
 export default Toggle

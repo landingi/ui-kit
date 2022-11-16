@@ -1,8 +1,8 @@
-import React from 'react'
-import { render } from '@jestutils'
-import { fireEvent } from '@testing-library/react'
-import CustomLink from '@components/CustomLink'
 import '@testing-library/jest-dom'
+
+import CustomLink from '@components/CustomLink'
+import { fireEvent,render  } from '@testing-library/react'
+import React from 'react'
 
 describe('<CustomLink/> tests', () => {
   const props = { label: 'Custom link' }

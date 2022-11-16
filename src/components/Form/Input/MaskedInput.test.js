@@ -1,7 +1,9 @@
-import React from 'react'
-import MaskedInput from './MaskedInput'
-import { render, screen } from '@jestutils'
 import '@testing-library/jest-dom'
+
+import { render, screen } from '@testing-library/react'
+import React from 'react'
+
+import MaskedInput from './MaskedInput'
 
 const props = {
   field: {

@@ -1,10 +1,11 @@
-import React from 'react'
-import styles from './StatusDropdown.module.scss'
-import PropTypes from 'prop-types'
-import { useStyles } from '@helpers/hooks/useStyles'
+import Icon from '@components/Icon'
 import PerfectDropdown from '@components/PerfectDropdown'
 import Spreader from '@components/Spreader'
-import Icon from '@components/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import styles from './StatusDropdown.module.scss'
 
 /**
  * StatusDropdown - dropdown component that uses custom trigger whose color depends on status prop given
@@ -23,12 +24,12 @@ const StatusDropdown = ({
   status
 }) => {
   const labelClasses = useStyles({
-    [styles['trigger__label']]: true
+    [styles.trigger__label]: true
   })
 
   const triggerClasses = useStyles(
     {
-      [styles['trigger']]: true,
+      [styles.trigger]: true,
       [styles[`trigger--${status}`]]: true
     },
     className

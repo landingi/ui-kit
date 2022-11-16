@@ -1,7 +1,7 @@
 import {
-  getTodayDate,
-  getDateObject,
   formatNumeric,
+  getDateObject,
+  getTodayDate,
   isLastPage,
   queryString
 } from '@helpers/data'

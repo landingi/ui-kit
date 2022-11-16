@@ -1,9 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { legendShape } from '@shapes'
 import ColorLine from '@components/ColorLine'
-import uuid from 'react-uuid'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { legendShape } from '@shapes'
+import PropTypes from 'prop-types'
+import React from 'react'
+import uuid from 'react-uuid'
+
 import styles from './Legend.module.scss'
 
 /**
@@ -17,14 +18,14 @@ import styles from './Legend.module.scss'
 const Legend = ({ className, data, alignment }) => {
   const wrapperClasses = useStyles(
     {
-      [styles['container']]: true,
+      [styles.container]: true,
       [styles[`container--${alignment}`]]: alignment
     },
     className
   )
 
   const elementClasses = useStyles({
-    [styles['legend']]: true
+    [styles.legend]: true
   })
 
   return (

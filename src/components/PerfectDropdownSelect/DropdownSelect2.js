@@ -1,29 +1,29 @@
-import React, {
-  useCallback,
-  Fragment,
-  useRef,
-  useState,
-  useEffect
-} from 'react'
-import PropTypes from 'prop-types'
+import Button from '@components/Button'
+import Divider from '@components/Divider'
 import Error from '@components/Form/Error'
+import Heading from '@components/Heading'
+import Icon from '@components/Icon'
+import Label from '@components/Label'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
-import PerfectDropdown from '@components/PerfectDropdown'
-import Heading from '@components/Heading'
-import Button from '@components/Button'
-import Overflow from '@components/Overflow'
-import Divider from '@components/Divider'
 import Loader from '@components/Loader'
+import Overflow from '@components/Overflow'
+import Paragraph from '@components/Paragraph'
+import PerfectDropdown from '@components/PerfectDropdown'
+import Searcher from '@components/Searcher'
+import Spacer from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
 import { isEmpty } from '@helpers/data'
-import Spacer from '@components/Spacer'
-import Searcher from '@components/Searcher'
-import Paragraph from '@components/Paragraph'
-import Label from '@components/Label'
-import styles from './DropdownSelect.module.scss'
 import { useStyles } from '@helpers/hooks/useStyles'
-import Icon from 'components/Icon'
+import PropTypes from 'prop-types'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState} from 'react'
+
+import styles from './DropdownSelect.module.scss'
 
 /**
  * DropdownSelect - stateless presentational component
@@ -73,7 +73,7 @@ const PerfectDropdownSelect = ({
   i18n,
   hasLoadMoreButton,
   loadMoreEvent,
-  ['data-testid']: dataTestId
+  'data-testid': dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -99,9 +99,8 @@ const PerfectDropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } else {
-      return null
     }
+    return null
   }
 
   const selectedItem = getSelectedItem()
@@ -161,9 +160,7 @@ const PerfectDropdownSelect = ({
   const [searchValue, setSearchValue] = useState(null)
 
   const handleSearchOptionsChange = value =>
-    handleOnSearchChange() === null
-      ? setSearchValue(value)
-      : handleOnSearchChange(value)
+    handleOnSearchChange() === null? setSearchValue(value): handleOnSearchChange(value)
 
   /**
    * Clear value in search / searcher
@@ -182,25 +179,23 @@ const PerfectDropdownSelect = ({
       return items
     })
 
-  const renderOptions = () => {
-    return (
-      <Fragment>
-        {emphasisedOptions.map((item, index) => (
-          <ListItem variant='dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
+  const renderOptions = () => (
+    <Fragment>
+      {emphasisedOptions.map((item, index) => (
+        <ListItem variant='dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
 
-        {!isEmpty(emphasisedOptions) && <Divider />}
+      {!isEmpty(emphasisedOptions) && <Divider />}
 
-        {filterOptions().map((item, index) => (
-          <ListItem variant='dropdown' key={index}>
-            {renderOption(item)}
-          </ListItem>
-        ))}
-      </Fragment>
-    )
-  }
+      {filterOptions().map((item, index) => (
+        <ListItem variant='dropdown' key={index}>
+          {renderOption(item)}
+        </ListItem>
+      ))}
+    </Fragment>
+  )
 
   const renderEmptyMessage = () =>
     !filterOptions().length && !isLoading ? emptyMessage : null

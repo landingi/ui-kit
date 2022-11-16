@@ -1,8 +1,9 @@
+import Spreader from '@components/Spreader'
+import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Row } from 'simple-flexbox'
-import PropTypes from 'prop-types'
-import { useStyles } from '@helpers/hooks/useStyles'
-import Spreader from '@components/Spreader'
+
 import styles from './Dot.module.scss'
 
 /**

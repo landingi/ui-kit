@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
 import Button from '@components/Button'
 import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState } from 'react'
+
 import styles from './ShowPassword.module.scss'
 
 /**

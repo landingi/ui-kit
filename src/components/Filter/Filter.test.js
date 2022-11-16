@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
-import React from 'react'
-import { render, fireEvent } from '@jestutils'
+
 import Filter from '@components/Filter'
+import { fireEvent,render } from '@testing-library/react'
+import React from 'react'
 
 const props = {
   values: [
@@ -60,7 +61,7 @@ describe('<Filter/> tests', () => {
 
   it('call default setValue on select', async () => {
     const { getByTestId, findByText } = render(
-      <Filter {...props} localStorageKey={'I am just a value'} />
+      <Filter {...props} localStorageKey='I am just a value' />
     )
     const button = getByTestId('filter-component')
 

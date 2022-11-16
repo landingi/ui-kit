@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './List.module.scss'
 
 /**
@@ -16,7 +17,7 @@ import styles from './List.module.scss'
 const ListItem = ({ children, variant, size, className, margin }) => {
   const elementClasses = useStyles(
     {
-      [styles['list__item']]: true,
+      [styles.list__item]: true,
       [styles[`list-item--${variant}`]]: variant,
       [styles['list-item--margin']]: margin,
       [styles['list-item--small']]: size === 'small'

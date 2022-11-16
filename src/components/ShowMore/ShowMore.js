@@ -1,12 +1,13 @@
+import useIsOpen from '@helpers/hooks/useIsOpen'
+import PropTypes from 'prop-types'
 import React, {
   Fragment,
+  useCallback,
   useLayoutEffect,
   useRef,
-  useCallback,
   useState
 } from 'react'
-import PropTypes from 'prop-types'
-import useIsOpen from '@helpers/hooks/useIsOpen'
+
 import styles from './ShowMore.module.scss'
 
 /**
@@ -24,14 +25,10 @@ const ShowMore = ({ height, children, i18n }) => {
   const content = useRef(null)
 
   useLayoutEffect(() => {
-    const offsetHeight = content.current.offsetHeight
+    const {offsetHeight} = content.current
 
-    content.current.offsetHeight > height
-      ? setButtonDisplay(true)
-      : setButtonDisplay(false)
-    sectionHeight > offsetHeight
-      ? isOpen.setValue(false)
-      : isOpen.setValue(true)
+    content.current.offsetHeight > height? setButtonDisplay(true): setButtonDisplay(false)
+    sectionHeight > offsetHeight? isOpen.setValue(false): isOpen.setValue(true)
 
     return () => {
       isOpen.setValue(false)

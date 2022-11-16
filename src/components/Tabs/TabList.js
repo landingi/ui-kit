@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Tabs.module.scss'
 
 /**
@@ -12,7 +13,7 @@ import styles from './Tabs.module.scss'
  * @return {object} An object of children element
  */
 const TabList = ({ className, children, ...restProps }) => {
-  const tabListStyles = useStyles({ [styles['tab__list']]: true }, className)
+  const tabListStyles = useStyles({ [styles.tab__list]: true }, className)
 
   return (
     <div className={tabListStyles} {...restProps}>

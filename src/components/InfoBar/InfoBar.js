@@ -1,7 +1,8 @@
 import Icon from '@components/Icon'
+import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useStyles } from '@helpers/hooks/useStyles'
+
 import styles from './InfoBar.module.scss'
 
 /**
@@ -27,11 +28,7 @@ const InfoBar = ({ children, className, type }) => {
   })
 
   const icon =
-    type === 'warning'
-      ? 'exclamation'
-      : type === 'alert'
-      ? 'exclamation-triangle'
-      : 'info'
+    type === 'warning'? 'exclamation': type === 'alert'? 'exclamation-triangle': 'info'
 
   return (
     <div data-testid='infobar-wrapper' className={elementClasses}>

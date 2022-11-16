@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './Spacer.module.scss'
 
 /**
@@ -13,7 +14,7 @@ import styles from './Spacer.module.scss'
 const Spacer = ({ className, space }) => {
   const spacerClasses = useStyles(
     {
-      [styles['spacer']]: true,
+      [styles.spacer]: true,
       [styles[`spacer--${space}`]]: space
     },
     className

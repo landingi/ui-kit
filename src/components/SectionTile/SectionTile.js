@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import BoxOutline from '@components/BoxOutline'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import styles from './SectionTile.module.scss'
 
 /**
@@ -21,7 +22,7 @@ const SectionTile = ({
   isActive
 }) => (
   <BoxOutline
-    className={styles['section__tile']}
+    className={styles.section__tile}
     isSelected={isActive}
     padding='none'
   >

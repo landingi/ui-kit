@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Button from '@components/Button'
-import styles from './Accordion.module.scss'
 import Icon from '@components/Icon'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import styles from './Accordion.module.scss'
 
 /**
  * AccordionSection - stateless presentational component

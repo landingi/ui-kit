@@ -1,9 +1,9 @@
-import { emitCloseDropdown } from '@events/dropdown'
-import { setLocalStorage } from '@helpers/storage'
 import Button from '@components/Button'
-import PerfectDropdown from '@components/PerfectDropdown'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
+import PerfectDropdown from '@components/PerfectDropdown'
+import { emitCloseDropdown } from '@events/dropdown'
+import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
@@ -24,7 +24,7 @@ const Filter = ({
   initialValue,
   localStorageKey,
   customLabel,
-  ['data-testid']: dataTestId,
+  'data-testid': dataTestId,
   dropdownPlacement
 }) => {
   const findInitialValue = () => {
@@ -84,7 +84,7 @@ Filter.propTypes = {
     })
   ).isRequired,
   customLabel: PropTypes.func,
-  ['data-testid']: PropTypes.string,
+  'data-testid': PropTypes.string,
   dropdownPlacement: PropTypes.string
 }
 
@@ -93,7 +93,7 @@ Filter.defaultProps = {
   localStorageKey: null,
   setValue: () => null,
   customLabel: null,
-  ['data-testid']: 'filter-component',
+  'data-testid': 'filter-component',
   dropdownPlacement: 'right'
 }
 
