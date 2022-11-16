@@ -1,5 +1,5 @@
 import DateTimePicker from '@components/DateTimePicker'
-import { fireEvent,render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 const mockSetState = jest.fn()

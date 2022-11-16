@@ -2,4 +2,5 @@ export {
   SkeletonCircle,
   SkeletonDrawer,
   SkeletonLine,
-  SkeletonSidebar} from './Skeleton'
+  SkeletonSidebar
+} from './Skeleton'

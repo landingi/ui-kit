@@ -1,5 +1,5 @@
 import GalleryImage from '@components/GalleryImage'
-import { fireEvent,render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 const props = {

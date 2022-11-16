@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import Tooltip from '@components/Tooltip'
-import { fireEvent,render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import PropTypes from 'prop-types'
 import React from 'react'
 

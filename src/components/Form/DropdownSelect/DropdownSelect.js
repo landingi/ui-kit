@@ -17,7 +17,7 @@ import { emitCloseDropdown } from '@events/dropdown'
 import { isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React, { Fragment,useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 
 import styles from './DropdownSelect.module.scss'
 

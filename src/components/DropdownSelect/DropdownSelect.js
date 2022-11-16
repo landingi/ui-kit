@@ -22,7 +22,8 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState} from 'react'
+  useState
+} from 'react'
 
 import styles from './DropdownSelect.module.scss'
 
@@ -102,11 +103,11 @@ const DropdownSelect = ({
 
     if (currentItem) {
       return currentItem
-    } if (customValue && !currentItem) {
+    }
+    if (customValue && !currentItem) {
       return { value, label: value }
-    } 
-      return null
-    
+    }
+    return null
   }
 
   const selectedItem = getSelectedItem()

@@ -7,7 +7,7 @@ import Paragraph from '@components/Paragraph'
 import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React, { Fragment,useMemo } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import uuid from 'react-uuid'
 
 import styles from './InfoSection.module.scss'
