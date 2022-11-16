@@ -13,6 +13,8 @@ import styles from './Panel.module.scss'
  * @param {bool} props.adjustHeight - adjust panel height to container height
  * @param {bool} props.isBackground - add background
  * @param {bool} props.hasShadow - panel shadow, default true
+ * @param {string} props.borderRadius - custom border radius
+ * @param {string} customBoxShadow - custom box shadow
  * @return {object} An object of children element
  */
 const Panel = ({
@@ -21,7 +23,9 @@ const Panel = ({
   variant,
   adjustHeight,
   isBackground,
-  hasShadow
+  hasShadow,
+  borderRadius,
+  customBoxShadow
 }) => {
   const elementClasses = useStyles(
     {
@@ -34,7 +38,14 @@ const Panel = ({
     className
   )
 
-  return <div className={elementClasses}>{children}</div>
+  return (
+    <div
+      className={elementClasses}
+      style={{ boxShadow: customBoxShadow, borderRadius }}
+    >
+      {children}
+    </div>
+  )
 }
 
 Panel.displayName = 'Panel'
@@ -53,7 +64,9 @@ Panel.propTypes = {
     'padding-bottom-tiny',
     'padding-input',
     'padding-huge'
-  ])
+  ]),
+  borderRadius: PropTypes.string,
+  customBoxShadow: PropTypes.string
 }
 
 Panel.defaultProps = {
@@ -61,7 +74,9 @@ Panel.defaultProps = {
   className: '',
   hasShadow: true,
   isBackground: false,
-  variant: 'padding-default'
+  variant: 'padding-default',
+  borderRadius: null,
+  customBoxShadow: null
 }
 
 export default Panel

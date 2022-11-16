@@ -25,7 +25,9 @@ import styles from './Button.module.scss'
  * @param {bool} props.hasBackgoundRipple - background ripple effect, default: true
  * @param {bool} props.hasIcon - has icon, default: false
  * @param {bool} props.hide - Hide, default: false
- * @param {buttonStyle} props.buttonStyle - enable button style for links, default: 'false'
+ * @param {bool} props.buttonStyle - enable button style for links, default: 'false'
+ * @param {object} props.customStyle - custom style for button, used mostly for old whitelabel pages
+ * @param {string} props.activeColor - custom active color of button, when isDisabled is equal to false
  * @param {string} props.dataTestid - test id
  * @return {object} An object of children elements
  */
@@ -48,6 +50,8 @@ const Button = ({
   hide,
   buttonStyle,
   fitWidth,
+  customStyle,
+  activeColor,
   'data-testid': dataTestId
 }) => {
   const elementClassesButton = useStyles(
@@ -75,6 +79,11 @@ const Button = ({
       className={elementClassesButton}
       onClick={onClick}
       data-testid={dataTestId}
+      style={{
+        borderRadius: customStyle?.borderRadius,
+        boxShadow: customStyle?.boxShadow,
+        backgroundColor: isDisabled ? null : activeColor
+      }}
     >
       {isLoading && <Spinner />}
 
@@ -125,6 +134,11 @@ Button.propTypes = {
   hide: PropTypes.bool,
   buttonStyle: PropTypes.bool,
   fitWidth: PropTypes.bool,
+  customStyle: PropTypes.shape({
+    borderRadius: PropTypes.string,
+    boxShadow: PropTypes.string
+  }),
+  activeColor: PropTypes.string,
   'data-testid': PropTypes.string
 }
 
@@ -146,6 +160,8 @@ Button.defaultProps = {
   buttonStyle: false,
   fitWidth: false,
   onClick: () => {},
+  customStyle: null,
+  activeColor: null,
   'data-testid': undefined
 }
 
