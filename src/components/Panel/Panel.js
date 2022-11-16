@@ -13,6 +13,8 @@ import styles from './Panel.module.scss'
  * @param {bool} props.adjustHeight - adjust panel height to container height
  * @param {bool} props.isBackground - add background
  * @param {bool} props.hasShadow - panel shadow, default true
+ * @param {string} props.borderRadius - custom border radius
+ * @param {string} customBoxShadow - custom box shadow
  * @return {object} An object of children element
  */
 const Panel = ({
