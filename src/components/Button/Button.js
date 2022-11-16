@@ -82,7 +82,7 @@ const Button = ({
       style={{
         borderRadius: customStyle?.borderRadius,
         boxShadow: customStyle?.boxShadow,
-        backgroundColor: !isDisabled ? activeColor : null
+        backgroundColor: isDisabled ? null : activeColor
       }}
     >
       {isLoading && <Spinner />}
