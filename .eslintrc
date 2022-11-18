@@ -63,7 +63,6 @@
     "no-restricted-exports": "warn",
     "no-return-assign": "warn",
     "react/default-props-match-prop-types": "warn",
-    "react/require-default-props": "warn",
     "react/jsx-no-constructed-context-values": "warn",
     "jsx-a11y/no-static-element-interactions": "warn",
     "jsx-a11y/click-events-have-key-events": "warn",
@@ -81,8 +80,17 @@
     "no-unsafe-optional-chaining": "warn",
     "react/button-has-type": "warn",
     "react/jsx-no-useless-fragment": "warn",
-    "react/forbid-prop-types": "warn"
+    "react/forbid-prop-types": "warn",
+    "react/require-default-props": "off"
   },
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {
+        "react/require-default-props": "warn"
+      }
+    }
+  ],
   "extends": [
     "airbnb",
     "airbnb-typescript",
