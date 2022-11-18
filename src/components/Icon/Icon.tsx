@@ -16,11 +16,11 @@ interface IconProps {
 
 const Icon: FC<IconProps> = ({
   icon,
-  color,
-  className,
-  spin,
-  size,
-  autoSize,
+  color = 'default',
+  className = '',
+  spin = false,
+  size = 14,
+  autoSize = false,
   'data-testid': dataTestId
 }) => {
   const elementStyles = useStyles(
@@ -38,14 +38,5 @@ const Icon: FC<IconProps> = ({
 }
 
 Icon.displayName = 'Icon'
-
-Icon.defaultProps = {
-  className: '',
-  color: 'default',
-  spin: false,
-  size: 14,
-  autoSize: false,
-  'data-testid': undefined
-}
 
 export default Icon

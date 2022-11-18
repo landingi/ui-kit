@@ -11,7 +11,7 @@ interface AlertProps {
   type?: 'info' | 'success' | 'warning' | 'alert'
 }
 
-const Alert: FC<AlertProps> = ({ children, className, type = 'info' }) => {
+const Alert: FC<AlertProps> = ({ children, className = '', type = 'info' }) => {
   const alertStyles = useStyles(
     {
       [styles['alert-message']]: true,
@@ -30,10 +30,5 @@ const Alert: FC<AlertProps> = ({ children, className, type = 'info' }) => {
 }
 
 Alert.displayName = 'Alert'
-
-Alert.defaultProps = {
-  className: '',
-  type: 'info'
-}
 
 export default Alert
