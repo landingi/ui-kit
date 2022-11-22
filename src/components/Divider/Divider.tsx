@@ -9,14 +9,6 @@ interface DividerProps {
   align?: string
 }
 
-/**
- * Divider - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {string} props.variant - variant `normal, menu, dropdown, horizontal`
- * @param {string} props.align - align `vertical`
- * @return {object} An object of children element
- */
 const Divider: FC<DividerProps> = ({
   className = '',
   variant = 'normal',
