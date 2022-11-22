@@ -1,8 +1,13 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC } from 'react'
 
 import styles from './Divider.module.scss'
+
+interface DividerProps {
+  className?: string | string[]
+  variant?: 'dropdown' | 'horizontal' | 'menu' | 'normal'
+  align?: string
+}
 
 /**
  * Divider - stateless presentational component
@@ -12,7 +17,11 @@ import styles from './Divider.module.scss'
  * @param {string} props.align - align `vertical`
  * @return {object} An object of children element
  */
-const Divider = ({ className, variant, align }) => {
+const Divider: FC<DividerProps> = ({
+  className = '',
+  variant = 'normal',
+  align = ''
+}) => {
   const elementClasses = useStyles(
     {
       [styles.divider]: true,
@@ -29,17 +38,5 @@ const Divider = ({ className, variant, align }) => {
 }
 
 Divider.displayName = 'Divider'
-
-Divider.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  align: PropTypes.string,
-  variant: PropTypes.oneOf(['dropdown', 'horizontal', 'menu', 'normal'])
-}
-
-Divider.defaultProps = {
-  className: '',
-  align: '',
-  variant: 'normal'
-}
 
 export default Divider
