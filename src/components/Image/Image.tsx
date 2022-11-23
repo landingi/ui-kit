@@ -24,7 +24,7 @@ const Image: FC<ImageProps> = ({
   small = false,
   loadingAttr = 'eager'
 }) => {
-  const elementStyles = useStyles(
+  const elementStyles: string = useStyles(
     {
       [styles['image--auto']]: auto,
       [styles['image--small']]: small
