@@ -12,6 +12,7 @@ interface ImageProps {
   auto?: boolean
   small?: boolean
   loadingAttr?: 'lazy' | 'eager'
+  draggable?: boolean
 }
 
 const Image: FC<ImageProps> = ({
@@ -22,7 +23,8 @@ const Image: FC<ImageProps> = ({
   height,
   auto = false,
   small = false,
-  loadingAttr = 'eager'
+  loadingAttr = 'eager',
+  draggable = false
 }) => {
   const elementStyles: string = useStyles(
     {
@@ -40,6 +42,7 @@ const Image: FC<ImageProps> = ({
       src={src}
       width={size}
       loading={loadingAttr}
+      draggable={draggable}
       data-testid='image'
     />
   )
