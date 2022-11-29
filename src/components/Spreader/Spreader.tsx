@@ -1,8 +1,20 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { FC } from 'react'
 
 import styles from './Spreader.module.scss'
+
+interface SpreaderProps {
+  className?: string | string[]
+  spread?:
+    | 'mini'
+    | 'tiny'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'x-large'
+    | 'big'
+    | 'huge'
+}
 
 /**
  * Spreader - stateless presentational component
@@ -11,7 +23,7 @@ import styles from './Spreader.module.scss'
  * @param {string} props.spread - spread size
  * @return {object} An object of children element
  */
-const Spreader = ({ className, spread }) => {
+const Spreader: FC<SpreaderProps> = ({ className, spread = 'medium' }) => {
   const spreaderClasses = useStyles(
     {
       [styles.spreader]: true,
@@ -24,23 +36,5 @@ const Spreader = ({ className, spread }) => {
 }
 
 Spreader.displayName = 'Spreader'
-
-Spreader.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  spread: PropTypes.oneOf([
-    'mini',
-    'tiny',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'big',
-    'huge'
-  ])
-}
-
-Spreader.defaultProps = {
-  spread: 'medium'
-}
 
 export default Spreader

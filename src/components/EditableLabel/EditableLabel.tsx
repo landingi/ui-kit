@@ -7,11 +7,24 @@ import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
-import PropTypes from 'prop-types'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { FC, useCallback, useRef, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'
+
+interface EditableLabelProps {
+  initialName: string
+  placeholder?: string
+  size?: 'small' | 'big'
+  onChange?: (name: string) => void
+  isLoading?: boolean
+  isDisabled?: boolean
+  isClickable?: boolean
+  tooltip?: {
+    focused: 'string'
+    notFocused: 'string'
+  }
+}
 
 /**
  * EditableLabel - statefull input component
@@ -25,25 +38,27 @@ import styles from './EditableLabel.module.scss'
  * @param {bool} props.isClickable - is clickable
  * @return {object} An object of children element
  */
-const EditableLabel = ({
+const EditableLabel: FC<EditableLabelProps> = ({
   initialName,
   placeholder,
   size,
-  onChange,
+  onChange = () => null,
   isLoading,
   isDisabled,
   isClickable,
-  tooltip
+  tooltip = { focused: '', notFocused: '' }
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
-  const [isFocused, setFocused] = useState(false)
-  const [name, setName] = useState(initialName)
+  const [isFocused, setFocused] = useState<boolean>(false)
+  const [name, setName] = useState<string>(initialName)
 
-  const labelRef = useRef(null)
-  const containerRef = useRef(null)
-  const inputRef = useRef(null)
+  const labelRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = event => setName(event.target.value)
+  const handleChange: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void = event => setName(event.target.value)
 
   useUpdateEffect(() => setName(initialName), [initialName])
 
@@ -85,7 +100,7 @@ const EditableLabel = ({
     setFocused(false)
   }, [name, setName, onChange, setFocused, initialName])
 
-  const handleKeyDown = useCallback(
+  const handleKeyDown: (event: React.KeyboardEvent) => void = useCallback(
     event => {
       if (event.key === 'Enter') {
         handleAccept()
@@ -111,6 +126,16 @@ const EditableLabel = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
+  const shouldTooltipBeDisabled: () => boolean = () => {
+    const labelCurrent = labelRef?.current
+
+    if (labelCurrent) {
+      return labelCurrent.scrollWidth <= labelCurrent.offsetWidth
+    }
+
+    return false
+  }
+
   return (
     <div className={containerStyles} ref={containerRef} {...wrapperProps}>
       <Row className={styles.wrapper} vertical='center'>
@@ -120,9 +145,7 @@ const EditableLabel = ({
             placement='top'
             align='center'
             className={labelStyles}
-            disabled={
-              labelRef?.current?.scrollWidth <= labelRef?.current?.offsetWidth
-            }
+            disabled={shouldTooltipBeDisabled()}
           >
             <span
               ref={labelRef}
@@ -179,28 +202,5 @@ const EditableLabel = ({
 }
 
 EditableLabel.displayName = 'EditableLabel'
-
-EditableLabel.propTypes = {
-  initialName: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'big']),
-  onChange: PropTypes.func,
-  isLoading: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isClickable: PropTypes.bool,
-  tooltip: PropTypes.shape({
-    focused: PropTypes.string,
-    notFocused: PropTypes.string
-  })
-}
-
-EditableLabel.defaultProps = {
-  placeholder: '',
-  size: 'big',
-  isLoading: false,
-  isDisabled: false,
-  isClickable: false,
-  tooltip: { focused: '', notFocused: '' }
-}
 
 export default EditableLabel
