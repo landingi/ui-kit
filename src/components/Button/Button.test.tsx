@@ -21,22 +21,22 @@ describe('<Button /> mount', () => {
 
     expect(button).toHaveClass('button button--primary button--medium')
   })
-})
 
-it('should render <Button /> as disabled & loading', () => {
-  const props: ButtonProps = {
-    children: <p>Button</p>,
-    variant: 'primary',
-    isLoading: true,
-    isDisabled: true,
-    'data-testid': 'button'
-  }
+  it('should render <Button /> as disabled & loading', () => {
+    const props: ButtonProps = {
+      children: <p>Button</p>,
+      variant: 'primary',
+      isLoading: true,
+      isDisabled: true,
+      'data-testid': 'button'
+    }
 
-  const { getByTestId } = render(<Button {...props} />)
+    const { getByTestId } = render(<Button {...props} />)
 
-  const button = getByTestId('button').querySelector('div')
+    const button = getByTestId('button').querySelector('div')
 
-  expect(button).toHaveClass('spinner')
+    expect(button).toHaveClass('spinner')
+  })
 })
 
 describe('<Button /> mount as link', () => {
