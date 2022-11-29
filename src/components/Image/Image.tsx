@@ -24,7 +24,7 @@ const Image: FC<ImageProps> = ({
   auto = false,
   small = false,
   loadingAttr = 'eager',
-  draggable
+  draggable = false
 }) => {
   const elementStyles: string = useStyles(
     {
