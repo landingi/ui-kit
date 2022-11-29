@@ -2,11 +2,12 @@ import '@testing-library/jest-dom'
 
 import Button from '@components/Button'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
+
+import { ButtonProps } from './Button'
 
 describe('<Button /> mount', () => {
   it('should render <Button />', async () => {
-    const props = {
+    const props: ButtonProps = {
       children: <p>Button</p>,
       variant: 'primary',
       'data-testid': 'button'
@@ -23,7 +24,7 @@ describe('<Button /> mount', () => {
 })
 
 it('should render <Button /> as disabled & loading', () => {
-  const props = {
+  const props: ButtonProps = {
     children: <p>Button</p>,
     variant: 'primary',
     isLoading: true,
@@ -40,7 +41,7 @@ it('should render <Button /> as disabled & loading', () => {
 
 describe('<Button /> mount as link', () => {
   it('should render <Button /> as link', () => {
-    const props = {
+    const props: ButtonProps = {
       tag: 'a',
       title: undefined,
       href: undefined,
@@ -57,7 +58,7 @@ describe('<Button /> mount as link', () => {
   })
 
   it('should render <Button /> as link with button style', () => {
-    const props = {
+    const props: ButtonProps = {
       tag: 'a',
       title: undefined,
       href: undefined,
