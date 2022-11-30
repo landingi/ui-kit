@@ -16,18 +16,6 @@ export interface TooltipProps {
   align?: 'center' | 'left' | 'right'
 }
 
-/**
- * Tooltip - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string} props.placement - placement, default `bottom`
- * @param {string} props.align - align, default `left`
- * @param {string} props.effect - behaviour of tooltip
- * @param {string|object} props.content - content
- * @param {bool} props.disabled - disabled
- * @param {bool} props.showOnClick - show on click
- * @return {object} An object of children element
- */
 const Tooltip: FC<TooltipProps> = ({
   className = '',
   children,
@@ -40,13 +28,11 @@ const Tooltip: FC<TooltipProps> = ({
 }) => {
   const tooltipUUID = uuidv4()
 
-  const showOnClickProps = showOnClick
-    ? {
+  const showOnClickProps = showOnClick? {
         delayHide: 1000,
         event: 'click',
         afterShow: () => ReactTooltip.hide()
-      }
-    : {}
+      }: {}
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
