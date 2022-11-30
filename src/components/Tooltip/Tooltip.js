@@ -1,4 +1,4 @@
-import { useStyles } from '@helpers/hooks/useStyles'
+import { useMemo, useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import ReactTooltip from 'react-tooltip'
@@ -31,7 +31,7 @@ const Tooltip = ({
   align,
   shouldRenderTooltip
 }) => {
-  const tooltipUUID = uuid()
+  const tooltipUUID = useMemo(() => uuid(), [])
 
   const showOnClickProps = showOnClick
     ? {
