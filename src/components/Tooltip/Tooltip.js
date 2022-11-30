@@ -17,6 +17,7 @@ import styles from './Tooltip.module.scss'
  * @param {string|object} props.content - content
  * @param {bool} props.disabled - disabled
  * @param {bool} props.showOnClick - show on click
+ * @param {bool} props.shouldRenderTooltip - stop to determine if tooltip should be rendered, default true
  * @return {object} An object of children element
  */
 const Tooltip = ({
@@ -27,7 +28,8 @@ const Tooltip = ({
   disabled,
   showOnClick,
   placement,
-  align
+  align,
+  shouldRenderTooltip
 }) => {
   const tooltipUUID = uuid()
 
@@ -50,18 +52,20 @@ const Tooltip = ({
         {children}
       </span>
 
-      <ReactTooltip
-        className={tooltipStyles}
-        background='#000'
-        effect={effect}
-        id={tooltipUUID}
-        disable={disabled}
-        isCapture
-        place={placement}
-        {...showOnClickProps}
-      >
-        {content}
-      </ReactTooltip>
+      {shouldRenderTooltip && (
+        <ReactTooltip
+          className={tooltipStyles}
+          background='#000'
+          effect={effect}
+          id={tooltipUUID}
+          disable={disabled}
+          isCapture
+          place={placement}
+          {...showOnClickProps}
+        >
+          {content}
+        </ReactTooltip>
+      )}
     </Fragment>
   )
 }
@@ -74,7 +78,8 @@ Tooltip.propTypes = {
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   showOnClick: PropTypes.bool,
   disabled: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  shouldRenderTooltip: PropTypes.bool
 }
 
 Tooltip.defaultProps = {
@@ -84,7 +89,8 @@ Tooltip.defaultProps = {
   placement: 'bottom',
   showOnClick: false,
   disabled: false,
-  align: 'left'
+  align: 'left',
+  shouldRenderTooltip: true
 }
 
 export default Tooltip
