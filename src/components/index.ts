@@ -1,6 +1,5 @@
-export { default as Accordion } from './Accordion'
 export { default as Accordion2 } from './Accordion2'
-export { default as Alert } from './Alert'
+export * from './Alert'
 export { default as Avatar } from './Avatar'
 export { default as Back } from './Back'
 export { default as Backdrop } from './Backdrop'
