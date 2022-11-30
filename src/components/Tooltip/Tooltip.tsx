@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import styles from './Tooltip.module.scss'
 
-interface TooltipProps {
+export interface TooltipProps {
   className?: string
   children: ReactNode
   effect?: 'solid' | 'float'
