@@ -2,9 +2,10 @@ import '@testing-library/jest-dom'
 
 import ProgressBar from '@components/ProgressBar'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
-const props = {
+import { ProgressBarProps } from './ProgressBar'
+
+const props: ProgressBarProps = {
   quantity: 60,
   limit: 100,
   variant: 'success'

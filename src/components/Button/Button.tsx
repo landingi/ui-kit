@@ -58,7 +58,7 @@ const Button: FC<ButtonProps> = ({
   href,
   size = 'medium',
   variant = 'primary',
-  align = 'center',
+  align,
   target,
   children,
   onClick,
