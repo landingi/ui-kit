@@ -1,4 +1,4 @@
-export { default as Accordion2 } from './Accordion2'
+export { Accordion as Accordion2 } from './Accordion'
 export * from './Alert'
 export { default as Avatar } from './Avatar'
 export { default as Back } from './Back'
