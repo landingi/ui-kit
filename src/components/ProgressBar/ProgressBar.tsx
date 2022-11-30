@@ -1,34 +1,33 @@
 import ColorNumber from '@components/ColorNumber'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
+import { FC, Fragment } from 'react'
 
 import styles from './ProgressBar.module.scss'
 
-/**
- * Progress Bar - stateless presentational component
- * @param {object} props - props
- * @param {string} props.size - bar size
- * @param {string} props.variant - color variant
- * @param {string} props.quantity - quantity to display
- * @param {number} props.limit - limit to display
- * @param {string} props.border - with border
- * @param {object} props.i18n - props with translated string
- * @param {bool} props.showValue - show value (quantity/limit)
- * @param {number} props.valueSize - value font size
- * @param {number} props.withoutAnimation - without animation
- * @return {object} An object of children element
- */
-const ProgressBar = ({
-  size,
+export interface ProgressBarProps {
+  size?: 'small' | 'medium'
+  variant: 'success' | 'warning' | 'alert' | 'progress' | 'brand'
+  quantity: number
+  limit?: number
+  border?: 'white' | 'grey'
+  i18n?: {
+    limitAlert: string
+  }
+  showValue?: boolean
+  valueSize?: 10 | 12 | 16 | 18 | 32 | 44 | 62
+  withoutAnimation?: boolean
+}
+
+const ProgressBar: FC<ProgressBarProps> = ({
+  size = 'medium',
   variant,
-  limit,
+  limit = 100,
   quantity,
   border,
   i18n,
-  showValue,
-  valueSize,
-  withoutAnimation
+  showValue = false,
+  valueSize = 32,
+  withoutAnimation = false
 }) => {
   const containerStyles = useStyles({
     [styles.container]: true,
@@ -85,30 +84,5 @@ const ProgressBar = ({
 }
 
 ProgressBar.displayName = 'ProgressBar'
-
-ProgressBar.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium']),
-  variant: PropTypes.oneOf(['success', 'warning', 'alert', 'progress', 'brand'])
-    .isRequired,
-  quantity: PropTypes.number.isRequired,
-  limit: PropTypes.number,
-  border: PropTypes.oneOf(['white', 'grey']),
-  i18n: PropTypes.shape({
-    limitAlert: PropTypes.string
-  }),
-  showValue: PropTypes.bool,
-  valueSize: PropTypes.number,
-  withoutAnimation: PropTypes.bool
-}
-
-ProgressBar.defaultProps = {
-  size: 'medium',
-  limit: 100,
-  border: null,
-  i18n: {},
-  showValue: false,
-  valueSize: 32,
-  withoutAnimation: false
-}
 
 export default ProgressBar
