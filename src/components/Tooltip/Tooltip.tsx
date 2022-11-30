@@ -28,11 +28,13 @@ const Tooltip: FC<TooltipProps> = ({
 }) => {
   const tooltipUUID = uuidv4()
 
-  const showOnClickProps = showOnClick? {
+  const showOnClickProps = showOnClick
+    ? {
         delayHide: 1000,
         event: 'click',
         afterShow: () => ReactTooltip.hide()
-      }: {}
+      }
+    : {}
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
