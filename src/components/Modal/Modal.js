@@ -1,4 +1,4 @@
-import Backdrop from '@components/Backdrop'
+import { Backdrop } from '@components/Backdrop'
 import Button from '@components/Button'
 import Close from '@components/Close'
 import Divider from '@components/Divider'
