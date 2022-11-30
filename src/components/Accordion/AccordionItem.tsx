@@ -1,34 +1,27 @@
-import styles from '@components/Accordion2/Accordion.module.scss'
+import styles from '@components/Accordion/Accordion.module.scss'
 import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, { useCallback, useState } from 'react'
+import { FC, ReactNode, useCallback, useState } from 'react'
 
-/**
- * Accordion - statefull presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `accordion__item`
- * @param {node} props.title - item title
- * @param {node} props.description - item description
- * @param {node} props.content - item content
- * @param {string} props.padding - accordion padding
- * @param {boolean} props.isBox - item with background & shadow
- * @return {object} An object of children element
- */
-const AccordionItem = ({
-  className,
+interface AccordionItemProps {
+  className?: string | string[]
+  title: ReactNode
+  description?: ReactNode
+  content: ReactNode
+  padding?: 'none' | 'small' | 'medium'
+  isBox?: boolean
+}
+
+export const AccordionItem: FC<AccordionItemProps> = ({
+  className = '',
   title,
-  description,
+  description = null,
   content,
-  padding,
-  isBox
+  padding = 'none',
+  isBox = false
 }) => {
   const [isOpen, setOpen] = useState(true)
 
-  /**
-   * handleOpen - open section
-   * @type {function}
-   */
   const handleOpen = useCallback(() => setOpen(!isOpen), [isOpen])
 
   const itemStyles = useStyles(
@@ -85,22 +78,4 @@ const AccordionItem = ({
   )
 }
 
-AccordionItem.displayName = 'Accordion Item'
-
-AccordionItem.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  title: PropTypes.node.isRequired,
-  description: PropTypes.node,
-  content: PropTypes.node.isRequired,
-  padding: PropTypes.oneOf(['none', 'small', 'medium']),
-  isBox: PropTypes.bool
-}
-
-AccordionItem.defaultProps = {
-  className: '',
-  description: null,
-  padding: 'none',
-  isBox: false
-}
-
-export default AccordionItem
+AccordionItem.displayName = 'AccordionItem'
