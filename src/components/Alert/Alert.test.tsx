@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Alert from '@components/Alert'
+import { Alert } from '@components/Alert'
 import { render, screen } from '@testing-library/react'
 
 const props = {
