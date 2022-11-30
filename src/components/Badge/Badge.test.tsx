@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import Badge from '@components/Badge'
+import { Badge } from '@components/Badge'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 const initialProps = {
   children: 'Mocked badge'
@@ -20,8 +19,9 @@ describe('<Badge/> mount', () => {
   it('should be rendered alert badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'alert'
+      type: 'alert' as const
     }
+
     const { getByTestId } = render(<Badge {...newProps} />)
 
     const badgeNode = getByTestId('badge')
@@ -32,7 +32,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered info badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'info'
+      type: 'info' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -44,7 +44,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered success badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'success'
+      type: 'success' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -56,7 +56,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered pending badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'pending'
+      type: 'pending' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -68,7 +68,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered warning badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'warning'
+      type: 'warning' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -80,7 +80,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered accent-1 badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'accent-1'
+      type: 'accent-1' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 
@@ -92,7 +92,7 @@ describe('<Badge/> mount', () => {
   it('should be rendered accent-2 badge', () => {
     const newProps = {
       ...initialProps,
-      type: 'accent-2'
+      type: 'accent-2' as const
     }
     const { getByTestId } = render(<Badge {...newProps} />)
 

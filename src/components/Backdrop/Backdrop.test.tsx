@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Backdrop from '@components/Backdrop'
+import { Backdrop } from '@components/Backdrop'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
