@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 
 import Avatar from '@components/Avatar'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 describe('<Avatar /> mount', () => {
   it('is mounted', () => {
@@ -18,8 +17,7 @@ describe('<Avatar /> mount', () => {
   it('has image variant', () => {
     render(<Avatar variant='image' src='imageSRC' />)
 
-    const avatar = document.querySelector('img')
-    expect(avatar.src).toContain('imageSRC')
+    expect(screen.getByRole('img')).toHaveAttribute('src', 'imageSRC')
   })
 
   it('has medium size', () => {
