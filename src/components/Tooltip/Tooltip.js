@@ -17,7 +17,7 @@ import styles from './Tooltip.module.scss'
  * @param {string|object} props.content - content
  * @param {bool} props.disabled - disabled
  * @param {bool} props.showOnClick - show on click
- * @param {bool} props.shouldRenderTooltip - stop to determine if tooltip should be rendered, default true
+ * @param {bool} props.shouldRenderTooltip - determine if tooltip should be rendered, default true
  * @return {object} An object of children element
  */
 const Tooltip = ({
