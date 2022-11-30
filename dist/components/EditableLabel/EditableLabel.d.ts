@@ -1,5 +1,4 @@
 import { FC } from 'react';
-
 interface EditableLabelProps {
     initialName: string;
     placeholder?: string;

@@ -2,12 +2,7 @@ import '@testing-library/jest-dom'
 
 import Tooltip from '@components/Tooltip'
 import { fireEvent, render } from '@testing-library/react'
-import PropTypes from 'prop-types'
 import React from 'react'
-
-import { TooltipProps } from './Tooltip'
-
-jest.mock('react-uuid/uuid', () => () => '00000000-0000-0000-0000-000000000000')
 
 const props = {
   content: 'Tooltip content'

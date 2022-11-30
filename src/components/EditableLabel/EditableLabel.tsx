@@ -28,12 +28,12 @@ interface EditableLabelProps {
 
 const EditableLabel: FC<EditableLabelProps> = ({
   initialName,
-  placeholder,
-  size,
+  placeholder = '',
+  size = 'big',
   onChange = () => null,
-  isLoading,
-  isDisabled,
-  isClickable,
+  isLoading = false,
+  isDisabled = false,
+  isClickable = false,
   tooltip = { focused: '', notFocused: '' }
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
@@ -114,7 +114,7 @@ const EditableLabel: FC<EditableLabelProps> = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
-  const shouldTooltipBeDisabled: () => boolean = () => {
+  const shouldTooltipBeDisabled = () => {
     const labelCurrent = labelRef?.current
 
     if (labelCurrent) {

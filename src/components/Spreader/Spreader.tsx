@@ -16,7 +16,7 @@ interface SpreaderProps {
     | 'huge'
 }
 
-const Spreader: FC<SpreaderProps> = ({ className, spread = 'medium' }) => {
+const Spreader: FC<SpreaderProps> = ({ className = '', spread = 'medium' }) => {
   const spreaderClasses = useStyles(
     {
       [styles.spreader]: true,
