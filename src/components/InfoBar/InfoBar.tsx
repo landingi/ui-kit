@@ -7,7 +7,7 @@ import styles from './InfoBar.module.scss'
 export interface InfoBarProps {
   children: ReactNode
   className?: string | string[]
-  type?: 'warning' | 'info' | 'alert' | 'success'
+  type?: 'warning' | 'info' | 'alert'
 }
 
 const InfoBar: FC<InfoBarProps> = ({
@@ -28,12 +28,18 @@ const InfoBar: FC<InfoBarProps> = ({
     [styles[`info-bar--${type}-box`]]: type
   })
 
-  const icon = {
-    warning: 'exclamation',
-    alert: 'exclamation-triangle',
-    info: 'info',
-    success: 'info'
-  }[type]
+  // const icon = {
+  //   warning: 'exclamation',
+  //   alert: 'exclamation-triangle',
+  //   info: 'info'
+  // }[type]
+
+  const icon =
+    type === 'warning'
+      ? 'exclamation'
+      : type === 'alert'
+      ? 'exclamation-triangle'
+      : 'info'
 
   return (
     <div data-testid='infobar-wrapper' className={elementClasses}>
