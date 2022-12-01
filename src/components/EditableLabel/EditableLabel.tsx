@@ -81,7 +81,7 @@ export const EditableLabel: FC<EditableLabelProps> = ({
   const handleAccept = useCallback(() => {
     if (!(name.length === 0 || name === initialName)) {
       onChange(name)
-    } 
+    }
 
     setFocused(false)
   }, [name, onChange, setFocused, initialName])
@@ -188,5 +188,3 @@ export const EditableLabel: FC<EditableLabelProps> = ({
 }
 
 EditableLabel.displayName = 'EditableLabel'
-
-
