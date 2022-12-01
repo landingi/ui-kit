@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 
 import Loader from '@components/Loader'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<Loader /> mount', () => {
   it('should be displayed', () => {
@@ -15,11 +14,8 @@ describe('<Loader /> mount', () => {
 })
 
 describe('<Loader /> mount', () => {
-  const props = {
-    variant: 'shapes'
-  }
   it('should be displayed', () => {
-    const { getByTestId } = render(<Loader {...props} />)
+    const { getByTestId } = render(<Loader variant='shapes' />)
 
     const loaderNode = getByTestId('loader-shapes')
 
