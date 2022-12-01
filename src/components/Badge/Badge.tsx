@@ -1,4 +1,4 @@
-import Tooltip from '@components/Tooltip'
+import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode, useRef } from 'react'
 
@@ -56,11 +56,11 @@ export const Badge: FC<BadgeProps> = ({
   })
 
   return (
-      <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
-        <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
-          <span className={tooltipStyles}>{children}</span>
-        </span>
-      </Tooltip>
+    <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
+      <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
+        <span className={tooltipStyles}>{children}</span>
+      </span>
+    </Tooltip>
   )
 }
 
