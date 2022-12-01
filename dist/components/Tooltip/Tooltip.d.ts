@@ -9,5 +9,4 @@ export interface TooltipProps {
     placement?: 'top' | 'left' | 'right' | 'bottom';
     align?: 'center' | 'left' | 'right';
 }
-declare const Tooltip: FC<TooltipProps>;
-export default Tooltip;
+export declare const Tooltip: FC<TooltipProps>;

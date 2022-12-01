@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Avatar from '@components/Avatar'
+import { Avatar } from '@components/Avatar'
 import { render, screen } from '@testing-library/react'
 
 describe('<Avatar /> mount', () => {

@@ -1,5 +1,5 @@
 import Icon from '@components/Icon'
-import Tooltip from '@components/Tooltip'
+import { Tooltip } from '@components/Tooltip'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import { isEmpty } from '@helpers/data'
 import { debounce, throttle } from '@helpers/events'

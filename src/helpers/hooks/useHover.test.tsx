@@ -1,7 +1,6 @@
 import { useHover } from '@helpers/hooks/useHover'
 import { fireEvent, render } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react-hooks'
-import React from 'react'
 
 describe('useHover tests', () => {
   it('set isHover on true when mouse over', async () => {

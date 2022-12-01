@@ -2,12 +2,12 @@ import Button from '@components/Button'
 import Icon from '@components/Icon'
 import Spinner from '@components/Spinner'
 import Spreader from '@components/Spreader'
-import Tooltip from '@components/Tooltip'
+import { Tooltip } from '@components/Tooltip'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
-import React, { FC, useCallback, useRef, useState } from 'react'
+import { FC, useCallback, useRef, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'
@@ -26,7 +26,7 @@ interface EditableLabelProps {
   }
 }
 
-const EditableLabel: FC<EditableLabelProps> = ({
+export const EditableLabel: FC<EditableLabelProps> = ({
   initialName,
   placeholder = '',
   size = 'big',
@@ -79,14 +79,12 @@ const EditableLabel: FC<EditableLabelProps> = ({
   })
 
   const handleAccept = useCallback(() => {
-    if (name.length === 0 || name === initialName) {
-      setName(name)
-    } else {
+    if (!(name.length === 0 || name === initialName)) {
       onChange(name)
     }
 
     setFocused(false)
-  }, [name, setName, onChange, setFocused, initialName])
+  }, [name, onChange, setFocused, initialName])
 
   const handleKeyDown: (event: React.KeyboardEvent) => void = useCallback(
     event => {
@@ -190,5 +188,3 @@ const EditableLabel: FC<EditableLabelProps> = ({
 }
 
 EditableLabel.displayName = 'EditableLabel'
-
-export default EditableLabel

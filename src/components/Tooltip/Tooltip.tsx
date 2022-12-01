@@ -1,7 +1,7 @@
+import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, Fragment, ReactNode } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { v4 as uuidv4 } from 'uuid'
 
 import styles from './Tooltip.module.scss'
 
@@ -16,7 +16,7 @@ export interface TooltipProps {
   align?: 'center' | 'left' | 'right'
 }
 
-const Tooltip: FC<TooltipProps> = ({
+export const Tooltip: FC<TooltipProps> = ({
   className = '',
   children,
   effect = 'solid',
@@ -26,15 +26,15 @@ const Tooltip: FC<TooltipProps> = ({
   placement = 'bottom',
   align = 'left'
 }) => {
-  const tooltipUUID = uuidv4()
+  const tooltipUUID = generateFakeUuid()
 
-  const showOnClickProps = showOnClick
-    ? {
-        delayHide: 1000,
-        event: 'click',
-        afterShow: () => ReactTooltip.hide()
-      }
-    : {}
+  const onClickProps = {
+    delayHide: 1000,
+    event: 'click',
+    afterShow: () => ReactTooltip.hide()
+  }
+
+  const showOnClickProps = showOnClick ? onClickProps : {}
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
@@ -61,5 +61,3 @@ const Tooltip: FC<TooltipProps> = ({
     </Fragment>
   )
 }
-
-export default Tooltip

@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import Back from '@components/Back'
+import { Back } from '@components/Back'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<Back/> mount', () => {
   const props = {
