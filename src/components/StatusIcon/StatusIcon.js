@@ -1,5 +1,5 @@
 import Icon from '@components/Icon'
-import Tooltip from '@components/Tooltip'
+import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
