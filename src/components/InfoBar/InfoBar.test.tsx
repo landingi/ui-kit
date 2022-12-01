@@ -2,15 +2,14 @@ import '@testing-library/jest-dom'
 
 import InfoBar from '@components/InfoBar'
 import { render } from '@testing-library/react'
-import React from 'react'
 
-const props = {
+import { InfoBarProps } from './InfoBar'
+
+const props: InfoBarProps = {
   children: 'Info Bar'
 }
 
 describe('<InfoBar /> mount', () => {
-  const { children } = props
-
   const wrapperTestId = 'infobar-wrapper'
 
   const type = {
@@ -22,7 +21,7 @@ describe('<InfoBar /> mount', () => {
   it('is mounted', () => {
     const { getByText } = render(<InfoBar {...props} />)
 
-    const infoBarNode = getByText(children)
+    const infoBarNode = getByText('Info Bar')
 
     expect(infoBarNode).toBeVisible()
   })
@@ -36,7 +35,7 @@ describe('<InfoBar /> mount', () => {
   })
 
   it(`should be rendered alert type of infobar when passed prop 'type' is alert`, () => {
-    const newProps = {
+    const newProps: InfoBarProps = {
       ...props,
       type: 'alert'
     }
@@ -51,7 +50,7 @@ describe('<InfoBar /> mount', () => {
   })
 
   it(`should be rendered info type of infobar when passed prop 'type' is info`, () => {
-    const newProps = {
+    const newProps: InfoBarProps = {
       ...props,
       type: 'info'
     }
@@ -66,7 +65,7 @@ describe('<InfoBar /> mount', () => {
   })
 
   it(`should be rendered warning type of infobar when passed prop 'type' is warning`, () => {
-    const newProps = {
+    const newProps: InfoBarProps = {
       ...props,
       type: 'warning'
     }
