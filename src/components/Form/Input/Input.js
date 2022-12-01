@@ -1,7 +1,7 @@
 import Error from '@components/Form/Error'
 import InputComponent from '@components/Input'
 import styles from '@components/Input/Input.module.scss'
-import Paragraph from '@components/Paragraph'
+import { Paragraph } from '@components/Paragraph'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
