@@ -1,6 +1,6 @@
 import Tooltip from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, Fragment, ReactNode, useRef } from 'react'
+import { FC, ReactNode, useRef } from 'react'
 
 import styles from './Badge.module.scss'
 
@@ -56,14 +56,11 @@ export const Badge: FC<BadgeProps> = ({
   })
 
   return (
-    <Fragment>
-      {/* @ts-ignore */}
       <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
         <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
           <span className={tooltipStyles}>{children}</span>
         </span>
       </Tooltip>
-    </Fragment>
   )
 }
 

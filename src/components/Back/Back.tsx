@@ -31,7 +31,6 @@ export const Back: FC<BackProps> = ({
   return (
     <span data-testid='back' className={elementStyles}>
       <a href={url}>
-        {/* @ts-ignore */}
         <Tooltip content={content} placement='bottom' disabled={!content}>
           <Button
             variant={label ? 'transparent' : 'icon'}

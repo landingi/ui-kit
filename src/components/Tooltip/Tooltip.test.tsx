@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import Tooltip from '@components/Tooltip'
+import { Tooltip } from '@components/Tooltip'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 
 const props = {
   content: 'Tooltip content'
