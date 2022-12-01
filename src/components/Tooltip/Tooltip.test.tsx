@@ -2,37 +2,25 @@ import '@testing-library/jest-dom'
 
 import Tooltip from '@components/Tooltip'
 import { fireEvent, render } from '@testing-library/react'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-jest.mock('react-uuid/uuid', () => () => '00000000-0000-0000-0000-000000000000')
-
 const props = {
-  placement: 'bottom',
   content: 'Tooltip content'
-}
-
-const Component = ({ showOnClick }) => (
-  <Tooltip showOnClick={showOnClick} {...props}>
-    test-children
-  </Tooltip>
-)
-
-Component.propTypes = {
-  showOnClick: PropTypes.bool
-}
-
-Component.defaultProps = {
-  showOnClick: false
 }
 
 describe('<Tooltip/> test', () => {
   it('renders properly', () => {
-    render(<Component />)
+    render(
+      <Tooltip showOnClick={false} {...props}>
+        children
+      </Tooltip>
+    )
   })
 
   it('shows tooltip on hover', async () => {
-    const { getByText, findByText } = render(<Component />)
+    const { getByText, findByText } = render(
+      <Tooltip {...props}>test-children</Tooltip>
+    )
 
     const children = getByText('test-children')
 
@@ -44,7 +32,11 @@ describe('<Tooltip/> test', () => {
   })
 
   it('shows tooltip on click', async () => {
-    const { getByText, findByText } = render(<Component showOnClick />)
+    const { getByText, findByText } = render(
+      <Tooltip showOnClick {...props}>
+        test-children
+      </Tooltip>
+    )
 
     const children = getByText('test-children')
 
