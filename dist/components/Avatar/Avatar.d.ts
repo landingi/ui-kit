@@ -6,5 +6,5 @@ interface AvatarProps {
     src?: string;
     name?: string;
 }
-declare const Avatar: FC<AvatarProps>;
-export default Avatar;
+export declare const Avatar: FC<AvatarProps>;
+export {};

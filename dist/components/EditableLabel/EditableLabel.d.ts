@@ -12,5 +12,5 @@ interface EditableLabelProps {
         notFocused: 'string';
     };
 }
-declare const EditableLabel: FC<EditableLabelProps>;
-export default EditableLabel;
+export declare const EditableLabel: FC<EditableLabelProps>;
+export {};
