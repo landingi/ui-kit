@@ -1,6 +1,6 @@
 import { Backdrop } from '@components/Backdrop'
 import Button from '@components/Button'
-import Close from '@components/Close'
+import { Close } from '@components/Close'
 import Divider from '@components/Divider'
 import Icon from '@components/Icon'
 import Image from '@components/Image'
