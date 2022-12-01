@@ -1,6 +1,11 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
+const nodeCrypto = require('crypto')
+
+window.crypto = {
+  getRandomValues: buffer => nodeCrypto.randomFillSync(buffer)
+}
 
 /**
  * mocking ResizeObserver because react-laag library uses it
