@@ -28,18 +28,11 @@ const InfoBar: FC<InfoBarProps> = ({
     [styles[`info-bar--${type}-box`]]: type
   })
 
-  // const icon = {
-  //   warning: 'exclamation',
-  //   alert: 'exclamation-triangle',
-  //   info: 'info'
-  // }[type]
-
-  const icon =
-    type === 'warning'
-      ? 'exclamation'
-      : type === 'alert'
-      ? 'exclamation-triangle'
-      : 'info'
+  const icon = {
+    warning: 'icon-exclamation',
+    alert: 'icon-exclamation-triangle',
+    info: 'icon-info'
+  }[type]
 
   return (
     <div data-testid='infobar-wrapper' className={elementClasses}>
