@@ -57,8 +57,7 @@ export const Badge: FC<BadgeProps> = ({
 
   return (
     <Fragment>
-      {/*
-// @ts-ignore */}
+      {/* @ts-ignore */}
       <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
         <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
           <span className={tooltipStyles}>{children}</span>

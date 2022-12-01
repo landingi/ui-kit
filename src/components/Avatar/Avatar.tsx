@@ -15,7 +15,7 @@ interface AvatarProps {
   name?: string
 }
 
-const Avatar: FC<AvatarProps> = ({
+export const Avatar: FC<AvatarProps> = ({
   className = '',
   size = 'medium',
   variant = 'blank',
@@ -39,5 +39,3 @@ const Avatar: FC<AvatarProps> = ({
 }
 
 Avatar.displayName = 'Avatar'
-
-export default Avatar
