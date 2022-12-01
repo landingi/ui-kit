@@ -7,7 +7,7 @@ import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
-import  { FC, useCallback, useRef, useState } from 'react'
+import { FC, useCallback, useRef, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'
