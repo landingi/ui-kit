@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types'
-import React, { Fragment } from 'react'
+import { FC } from 'react'
 
 import styles from './Loader.module.scss'
 
-const renderDefaultLoader = ({ dataTestId }) => (
+interface LoaderProps {
+  variant?: 'default' | 'shapes'
+  ['data-testid']?: string
+}
+
+interface LoaderVariantType {
+  dataTestId?: string
+}
+
+const renderDefaultLoader = ({ dataTestId }: LoaderVariantType) => (
   <div
     className={styles.container}
     data-testid={dataTestId ?? 'loader-default'}
@@ -17,7 +25,7 @@ const renderDefaultLoader = ({ dataTestId }) => (
   </div>
 )
 
-const renderShapesLoader = ({ dataTestId }) => (
+const renderShapesLoader = ({ dataTestId }: LoaderVariantType) => (
   <div className={styles.loader} data-testid={dataTestId ?? 'loader-shapes'}>
     <svg
       className={styles.loader__circle}
@@ -83,13 +91,10 @@ const renderShapesLoader = ({ dataTestId }) => (
   </div>
 )
 
-/**
- * Loader - stateless presentational component
- * @param {object} props - props
- * @param {string} props.variant - loader variant
- * @return {object} An object of children element
- */
-const Loader = ({ variant, 'data-testid': dataTestId }) => {
+const Loader: FC<LoaderProps> = ({
+  variant = 'default',
+  'data-testid': dataTestId
+}) => {
   const loader = {
     default: renderDefaultLoader({ dataTestId }),
     shapes: renderShapesLoader({ dataTestId })
@@ -99,15 +104,5 @@ const Loader = ({ variant, 'data-testid': dataTestId }) => {
 }
 
 Loader.displayName = 'Loader'
-
-Loader.propTypes = {
-  variant: PropTypes.oneOf(['default', 'shapes']),
-  'data-testid': PropTypes.string
-}
-
-Loader.defaultProps = {
-  variant: 'default',
-  'data-testid': null
-}
 
 export default Loader
