@@ -7,43 +7,46 @@ import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'
 import { useHover } from '@helpers/hooks/useHover'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
-import PropTypes from 'prop-types'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { FC, useCallback, useRef, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'
 
-/**
- * EditableLabel - statefull input component
- * @param {object} props - props
- * @param {string} props.initialName - init name
- * @param {string} props.placeholder - input placeholder
- * @param {string} props.size - label size
- * @param {function} props.onChange - callback function
- * @param {bool} props.isLoading - is loading
- * @param {bool} props.isDisabled - is disabled
- * @param {bool} props.isClickable - is clickable
- * @return {object} An object of children element
- */
-const EditableLabel = ({
+interface EditableLabelProps {
+  initialName: string
+  placeholder?: string
+  size?: 'small' | 'big'
+  onChange?: (name: string) => void
+  isLoading?: boolean
+  isDisabled?: boolean
+  isClickable?: boolean
+  tooltip?: {
+    focused: 'string'
+    notFocused: 'string'
+  }
+}
+
+const EditableLabel: FC<EditableLabelProps> = ({
   initialName,
-  placeholder,
-  size,
-  onChange,
-  isLoading,
-  isDisabled,
-  isClickable,
-  tooltip
+  placeholder = '',
+  size = 'big',
+  onChange = () => null,
+  isLoading = false,
+  isDisabled = false,
+  isClickable = false,
+  tooltip = { focused: '', notFocused: '' }
 }) => {
   const [wrapperProps, isHoveredWrapper] = useHover()
-  const [isFocused, setFocused] = useState(false)
-  const [name, setName] = useState(initialName)
+  const [isFocused, setFocused] = useState<boolean>(false)
+  const [name, setName] = useState<string>(initialName)
 
-  const labelRef = useRef(null)
-  const containerRef = useRef(null)
-  const inputRef = useRef(null)
+  const labelRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = event => setName(event.target.value)
+  const handleChange: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void = event => setName(event.target.value)
 
   useUpdateEffect(() => setName(initialName), [initialName])
 
@@ -85,7 +88,7 @@ const EditableLabel = ({
     setFocused(false)
   }, [name, setName, onChange, setFocused, initialName])
 
-  const handleKeyDown = useCallback(
+  const handleKeyDown: (event: React.KeyboardEvent) => void = useCallback(
     event => {
       if (event.key === 'Enter') {
         handleAccept()
@@ -111,6 +114,16 @@ const EditableLabel = ({
 
   useDetectOutsideClick(containerRef, handeOutsideClick)
 
+  const shouldTooltipBeDisabled = () => {
+    const labelCurrent = labelRef?.current
+
+    if (labelCurrent) {
+      return labelCurrent.scrollWidth <= labelCurrent.offsetWidth
+    }
+
+    return false
+  }
+
   return (
     <div className={containerStyles} ref={containerRef} {...wrapperProps}>
       <Row className={styles.wrapper} vertical='center'>
@@ -120,9 +133,7 @@ const EditableLabel = ({
             placement='top'
             align='center'
             className={labelStyles}
-            disabled={
-              labelRef?.current?.scrollWidth <= labelRef?.current?.offsetWidth
-            }
+            disabled={shouldTooltipBeDisabled()}
           >
             <span
               ref={labelRef}
@@ -179,28 +190,5 @@ const EditableLabel = ({
 }
 
 EditableLabel.displayName = 'EditableLabel'
-
-EditableLabel.propTypes = {
-  initialName: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'big']),
-  onChange: PropTypes.func,
-  isLoading: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isClickable: PropTypes.bool,
-  tooltip: PropTypes.shape({
-    focused: PropTypes.string,
-    notFocused: PropTypes.string
-  })
-}
-
-EditableLabel.defaultProps = {
-  placeholder: '',
-  size: 'big',
-  isLoading: false,
-  isDisabled: false,
-  isClickable: false,
-  tooltip: { focused: '', notFocused: '' }
-}
 
 export default EditableLabel
