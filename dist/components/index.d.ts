@@ -63,7 +63,7 @@ export { default as Notification } from './Notification';
 export { default as Overflow } from './Overflow';
 export { default as OverflowTooltip } from './OverflowTooltip';
 export { default as Panel } from './Panel';
-export { default as Paragraph } from './Paragraph';
+export * from './Paragraph';
 export { default as PerfectDropdown } from './PerfectDropdown';
 export { default as PerfectDropdownSelect } from './PerfectDropdownSelect';
 export { default as ProgressBar } from './ProgressBar';
