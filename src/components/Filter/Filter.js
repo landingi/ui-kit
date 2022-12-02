@@ -1,7 +1,7 @@
 import Button from '@components/Button'
 import List from '@components/List'
 import ListItem from '@components/List/Item'
-import {PerfectDropdown} from '@components/PerfectDropdown'
+import { PerfectDropdown } from '@components/PerfectDropdown'
 import { emitCloseDropdown } from '@events/dropdown'
 import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
