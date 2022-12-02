@@ -1,4 +1,4 @@
-import BoxOutline from '@components/BoxOutline'
+import { BoxOutline } from '@components/BoxOutline'
 import PropTypes from 'prop-types'
 import React from 'react'
 
