@@ -1,5 +1,6 @@
 import { Tooltip } from '@components/Tooltip'
 import { FC, ReactNode } from 'react'
+
 import { PerfectDropdown } from './PerfectDropdown'
 
 interface TooltipDropdownProps {
@@ -23,27 +24,19 @@ interface TooltipDropdownProps {
     | 'top-center'
     | 'top-end'
   handleOnOpen?: () => void
-  handleOnClose?: () => void
   alignment?: 'center' | 'spaced' | 'end'
   children: ReactNode
   icon?: string
   label?: string
   hasInput?: boolean
   hasFullInputStyle?: boolean
-  asPlaceholder?: boolean,
-  customTrigger?: FC<{isOpen: boolean}>
+  asPlaceholder?: boolean
+  customTrigger?: FC<{ isOpen: boolean }>
   className?: string | string[]
   offset?: number
-  padding?: 'none'
-  ['data-testid']?: string
-  isOpenDisabled?: boolean
-  innerDropdown?: boolean
   tooltip: string
   tooltipPlacement?: 'top' | 'left' | 'right' | 'bottom'
 }
-
-
-
 
 export const TooltipDropdown: FC<TooltipDropdownProps> = ({
   children,
@@ -87,4 +80,3 @@ export const TooltipDropdown: FC<TooltipDropdownProps> = ({
 )
 
 TooltipDropdown.displayName = 'TooltipDropdown'
-
