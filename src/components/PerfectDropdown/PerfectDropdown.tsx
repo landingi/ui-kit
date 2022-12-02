@@ -6,15 +6,15 @@ import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
 import emitter from '@lib/emitter'
 import {
+  FC,
   forwardRef,
   Fragment,
+  MouseEvent,
   ReactNode,
   useCallback,
   useEffect,
   useRef,
-  useState,
-  MouseEvent,
-  FC
+  useState
 } from 'react'
 import Ink from 'react-ink'
 import { mergeRefs, useLayer } from 'react-laag'
@@ -49,8 +49,8 @@ interface PerfectDropdownProps {
   label?: string
   hasInput?: boolean
   hasFullInputStyle?: boolean
-  asPlaceholder?: boolean,
-  customTrigger?: FC<{isOpen: boolean}>
+  asPlaceholder?: boolean
+  customTrigger?: FC<{ isOpen: boolean }>
   className?: string | string[]
   offset?: number
   padding?: 'none'
@@ -120,10 +120,10 @@ export const PerfectDropdown = forwardRef<
 
     const triggerRef = useRef<HTMLSpanElement>(null!)
 
-    const close = () => {
+    const close = useCallback(() => {
       setOpen(false)
       handleOnClose?.()
-    }
+    }, [])
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
@@ -178,24 +178,33 @@ export const PerfectDropdown = forwardRef<
 
       return () => {
         emitter.off(CLOSE_DROPDOWN, close)
-        window.removeEventListener('resize', debouncedHandleResize as EventListener)
+        window.removeEventListener(
+          'resize',
+          debouncedHandleResize as EventListener
+        )
       }
     }, [])
 
-    const renderArrow =
-      arrowType === 'caret' ? (
-        isOpen ? (
-          <Icon icon='icon-caret-up' />
-        ) : (
-          <Icon icon='icon-caret-down' />
-        )
-      ) : (
-        <Icon icon='icon-ellipsis-v' />
-      )
+    const renderArrow = () => {
+      switch (arrowType) {
+        case 'caret':
+          return isOpen ? (
+            <Icon icon='icon-caret-up' />
+          ) : (
+            <Icon icon='icon-caret-down' />
+          )
+        default:
+          return <Icon icon='icon-ellipsis-v' />
+      }
+    }
 
     const renderIcon = () => (
       <Fragment>
-        <Icon color='color-3' icon={icon!} className={styles['dropdown-icon']} />
+        <Icon
+          color='color-3'
+          icon={icon!}
+          className={styles['dropdown-icon']}
+        />
 
         {(label || hasArrow) && <Spreader spread='tiny' />}
       </Fragment>
@@ -212,7 +221,7 @@ export const PerfectDropdown = forwardRef<
 
           {label && renderLabel}
 
-          {hasArrow && renderArrow}
+          {hasArrow && renderArrow()}
 
           {!hasInput && <Ink />}
         </Fragment>
