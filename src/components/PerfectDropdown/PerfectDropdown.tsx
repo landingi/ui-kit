@@ -5,65 +5,86 @@ import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
 import emitter from '@lib/emitter'
-import PropTypes from 'prop-types'
-import React, {
+import {
   forwardRef,
   Fragment,
+  ReactNode,
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
+  MouseEvent,
+  FC
 } from 'react'
 import Ink from 'react-ink'
 import { mergeRefs, useLayer } from 'react-laag'
 
 import styles from './PerfectDropdown.module.scss'
 
-/**
- * PerfectDropdown - new version of dropdown using react-laag library
- * @param {object} props - props
- * @param {object} children - object of children
- * @param {string} icon - icon displayed left to label, it isn't displayed when customTrigger is given
- * @param {string} label - label text, it isn't displayed when customTrigger is given
- * @param {string} size - size
- * @param {string} arrowType - type of arrow to display right to label, it isn't displayed when customTrigger is given
- * @param {string} hasArrow - whether arrow should be displayed or not
- * @param {string} dropdownPlacement - dropdown placement
- * @param {function} handleOnOpen - function that will be called when dropdown opens
- * @param {function} handleOnClose - function that will be called when dropdown closes
- * @param {string} alignment - aligment of dropdown trigger elements (icon, label and arrow)
- * @param {string} hasInput - adds styling if dropdown is used as input
- * @param {string} hasFullInputStyle - adds some other styling if dropdown is used as input
- * @param {bool} asPlaceholder - changes color of the label so it looks like placeholder
- * @param {function} customTrigger - lets you display your custom trigger for dropdown. It uses render props,
- * so you have to pass a function there () => <YourTrigger />. It allows you to use state derived from this
- * dropdown in your custom trigger as props, for example isOpen.
- * @param {number} offset - offset between trigger and dropdown
- * @param {bool} isOpenDisabled - when true dropdown can't be opened and it is grayed out
- * @param {string} className - className of dropdown trigger, allow adjustments of position etc.
- */
-const PerfectDropdown = forwardRef(
+interface PerfectDropdownProps {
+  hasArrow?: boolean
+  arrowType?: 'caret' | 'dots'
+  size?:
+    | 'mini'
+    | 'small'
+    | 'medium'
+    | 'big'
+    | 'large'
+    | 'huge'
+    | 'extra-huge'
+    | 'auto'
+    | 'fixed'
+  dropdownPlacement?:
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'bottom-center'
+    | 'top-start'
+    | 'top-center'
+    | 'top-end'
+  handleOnOpen?: () => void
+  handleOnClose?: () => void
+  alignment?: 'center' | 'spaced' | 'end'
+  children: ReactNode
+  icon?: string
+  label?: string
+  hasInput?: boolean
+  hasFullInputStyle?: boolean
+  asPlaceholder?: boolean,
+  customTrigger?: FC<{isOpen: boolean}>
+  className?: string | string[]
+  offset?: number
+  padding?: 'none'
+  ['data-testid']?: string
+  isOpenDisabled?: boolean
+}
+
+type PerfectDropdownRef = HTMLSpanElement
+
+export const PerfectDropdown = forwardRef<
+  PerfectDropdownRef,
+  PerfectDropdownProps
+>(
   (
     {
       children,
       icon,
       label,
-      size,
-      arrowType,
-      hasArrow,
-      dropdownPlacement,
+      size = 'medium',
+      arrowType = 'caret',
+      hasArrow = true,
+      dropdownPlacement = 'bottom-end',
       handleOnOpen,
       handleOnClose,
-      alignment,
-      hasInput,
-      hasFullInputStyle,
-      asPlaceholder,
+      alignment = 'center',
+      hasInput = false,
+      hasFullInputStyle = false,
+      asPlaceholder = false,
       customTrigger: CustomTrigger,
-      offset,
-      className,
+      offset = 5,
+      className = '',
       padding,
-      isOpenDisabled,
-      'data-testid': dataTestId
+      isOpenDisabled = false,
+      'data-testid': dataTestId = 'trigger-dropdown'
     },
     ref
   ) => {
@@ -97,11 +118,11 @@ const PerfectDropdown = forwardRef(
       className
     )
 
-    const triggerRef = useRef()
+    const triggerRef = useRef<HTMLSpanElement>(null!)
 
     const close = () => {
       setOpen(false)
-      handleOnClose()
+      handleOnClose?.()
     }
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
@@ -134,7 +155,7 @@ const PerfectDropdown = forwardRef(
     const debouncedHandleResize = useCallback(debounce(handleResize, 50), [])
 
     const handleShow = useCallback(
-      event => {
+      (event: MouseEvent<HTMLSpanElement>) => {
         event.stopPropagation()
         event.preventDefault()
 
@@ -142,7 +163,7 @@ const PerfectDropdown = forwardRef(
           return
         }
 
-        !isOpen && handleOnOpen()
+        !isOpen && handleOnOpen?.()
 
         handleResize()
 
@@ -153,11 +174,11 @@ const PerfectDropdown = forwardRef(
 
     useEffect(() => {
       emitter.on(CLOSE_DROPDOWN, close)
-      window.addEventListener('resize', debouncedHandleResize)
+      window.addEventListener('resize', debouncedHandleResize as EventListener)
 
       return () => {
         emitter.off(CLOSE_DROPDOWN, close)
-        window.removeEventListener('resize', debouncedHandleResize)
+        window.removeEventListener('resize', debouncedHandleResize as EventListener)
       }
     }, [])
 
@@ -174,7 +195,7 @@ const PerfectDropdown = forwardRef(
 
     const renderIcon = () => (
       <Fragment>
-        <Icon color='color-3' icon={icon} className={styles['dropdown-icon']} />
+        <Icon color='color-3' icon={icon!} className={styles['dropdown-icon']} />
 
         {(label || hasArrow) && <Spreader spread='tiny' />}
       </Fragment>
@@ -224,59 +245,4 @@ const PerfectDropdown = forwardRef(
   }
 )
 
-PerfectDropdown.propTypes = {
-  hasArrow: PropTypes.bool,
-  arrowType: PropTypes.oneOf(['caret', 'dots']),
-  size: PropTypes.oneOf([
-    'mini',
-    'small',
-    'medium',
-    'big',
-    'large',
-    'huge',
-    'extra-huge',
-    'auto',
-    'fixed'
-  ]),
-  dropdownPlacement: PropTypes.string,
-  handleOnOpen: PropTypes.func,
-  handleOnClose: PropTypes.func,
-  alignment: PropTypes.oneOf(['center', 'spaced', 'end']),
-  children: PropTypes.node.isRequired,
-  icon: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  hasInput: PropTypes.bool,
-  hasFullInputStyle: PropTypes.bool,
-  asPlaceholder: PropTypes.bool,
-  customTrigger: PropTypes.func,
-  className: PropTypes.string,
-  offset: PropTypes.number,
-  padding: PropTypes.oneOf(['none']),
-  'data-testid': PropTypes.string,
-  isOpenDisabled: PropTypes.bool
-}
-
-PerfectDropdown.defaultProps = {
-  hasArrow: true,
-  arrowType: 'caret',
-  size: 'medium',
-  dropdownPlacement: 'bottom-end',
-  handleOnOpen: () => null,
-  handleOnClose: () => null,
-  alignment: 'center',
-  icon: null,
-  label: null,
-  hasInput: false,
-  hasFullInputStyle: false,
-  asPlaceholder: false,
-  customTrigger: null,
-  className: '',
-  offset: 5,
-  padding: null,
-  'data-testid': 'trigger-dropdown',
-  isOpenDisabled: false
-}
-
 PerfectDropdown.displayName = 'PerfectDropdown'
-
-export default PerfectDropdown
