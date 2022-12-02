@@ -5,7 +5,6 @@ interface TooltipDropdownProps {
     size?: 'mini' | 'small' | 'medium' | 'big' | 'large' | 'huge' | 'extra-huge' | 'auto' | 'fixed';
     dropdownPlacement?: 'bottom-start' | 'bottom-end' | 'bottom-center' | 'top-start' | 'top-center' | 'top-end';
     handleOnOpen?: () => void;
-    handleOnClose?: () => void;
     alignment?: 'center' | 'spaced' | 'end';
     children: ReactNode;
     icon?: string;
@@ -18,10 +17,6 @@ interface TooltipDropdownProps {
     }>;
     className?: string | string[];
     offset?: number;
-    padding?: 'none';
-    ['data-testid']?: string;
-    isOpenDisabled?: boolean;
-    innerDropdown?: boolean;
     tooltip: string;
     tooltipPlacement?: 'top' | 'left' | 'right' | 'bottom';
 }
