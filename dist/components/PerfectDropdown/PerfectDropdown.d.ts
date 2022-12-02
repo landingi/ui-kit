@@ -1,4 +1,4 @@
-import { ReactNode, FC } from 'react';
+import { FC, ReactNode } from 'react';
 interface PerfectDropdownProps {
     hasArrow?: boolean;
     arrowType?: 'caret' | 'dots';
