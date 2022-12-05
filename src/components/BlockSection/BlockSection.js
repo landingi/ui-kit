@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import Heading from '@components/Heading'
+import { Heading } from '@components/Heading'
 import Image from '@components/Image'
 import List from '@components/List'
 import ListItem from '@components/List/Item'

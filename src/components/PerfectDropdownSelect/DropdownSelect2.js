@@ -1,7 +1,7 @@
 import Button from '@components/Button'
 import Divider from '@components/Divider'
 import Error from '@components/Form/Error'
-import Heading from '@components/Heading'
+import { Heading } from '@components/Heading'
 import Icon from '@components/Icon'
 import Label from '@components/Label'
 import List from '@components/List'

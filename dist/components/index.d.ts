@@ -34,7 +34,7 @@ export { default as Radio } from './Form/Radio';
 export { default as FormikToggle } from './Form/Toggle/FormikToggle';
 export { default as Toggle } from './Form/Toggle/Toggle';
 export { default as GalleryImage } from './GalleryImage';
-export { default as Heading } from './Heading';
+export * from './Heading';
 export { default as Headline } from './Headline';
 export { default as Html } from './Html';
 export { default as Icon } from './Icon';
