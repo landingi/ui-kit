@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import BoxOutline from '@components/BoxOutline'
+import { BoxOutline } from '@components/BoxOutline'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 
 describe('<BoxOutline/> mount', () => {
   const props = {
