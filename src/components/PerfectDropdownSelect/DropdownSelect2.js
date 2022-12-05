@@ -74,6 +74,7 @@ const PerfectDropdownSelect = ({
   i18n,
   hasLoadMoreButton,
   loadMoreEvent,
+  liveChanges,
   'data-testid': dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
@@ -247,6 +248,7 @@ const PerfectDropdownSelect = ({
                 tag='div'
                 autoFocus
                 protectedSubmit
+                liveChanges={liveChanges}
               />
             </div>
             <Divider variant='dropdown' />
@@ -318,6 +320,7 @@ PerfectDropdownSelect.propTypes = {
   }),
   hasLoadMoreButton: PropTypes.bool,
   loadMoreEvent: PropTypes.func,
+  liveChanges: PropTypes.bool,
   'data-testid': PropTypes.string
 }
 
@@ -346,6 +349,7 @@ PerfectDropdownSelect.defaultProps = {
   },
   hasLoadMoreButton: null,
   loadMoreEvent: null,
+  liveChanges: false,
   'data-testid': 'trigger-dropdown'
 }
 
