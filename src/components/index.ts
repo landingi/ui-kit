@@ -81,7 +81,7 @@ export {
   SkeletonLine,
   SkeletonSidebar
 } from './Skeleton'
-export { default as Spacer } from './Spacer'
+export * from './Spacer'
 export { default as Spinner } from './Spinner'
 export { default as Spreader } from './Spreader'
 export { default as StatsBadge } from './StatsBadge'
