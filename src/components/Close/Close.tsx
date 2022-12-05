@@ -1,13 +1,13 @@
 import Button from '@components/Button'
 import Icon from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC } from 'react'
+import { FC, MouseEventHandler } from 'react'
 
 import styles from './Close.module.scss'
 
 interface CloseProps {
   className?: string | string[]
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLSpanElement>
   iconName?: string
   iconColor?: string
 }
