@@ -1,8 +1,22 @@
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { FC } from 'react'
 
 import styles from './Radio.module.scss'
+
+interface RadioProps {
+  field: {
+    name: string
+    value: string
+    onChange: React.ChangeEventHandler<HTMLInputElement>
+    onBlur: React.FocusEventHandler<HTMLInputElement>
+  }
+  id: string
+  label?: string
+  className?: string | string[]
+  type?: string
+  disabled?: boolean
+}
 
 /**
  * Radio - stateless presentational component
@@ -16,12 +30,12 @@ import styles from './Radio.module.scss'
  * @param {bool} props.disabled - radio button is disabled
  * @return {object} An object of children element
  */
-const Radio = ({
+const Radio: FC<RadioProps> = ({
   field: { name, value, onChange, onBlur },
   id,
   label,
-  className,
-  type,
+  className = '',
+  type = 'radio',
   disabled
 }) => {
   const radioStyles = useStyles(
