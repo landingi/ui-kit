@@ -1,17 +1,19 @@
-import { FC, ForwardRefExoticComponent } from 'react'
+import { FC } from 'react'
 
 import { Button, ButtonProps } from './Button'
 import {
   ButtonGroup as ButtonGroupComponent,
-  ButtonGroupProps as ButtonGrouComponentProps
+  ButtonGroupProps as ButtonGroupComponentProps
 } from './ButtonGroup'
 
-interface ButtonGroupProps
-  extends ForwardRefExoticComponent<ButtonGrouComponentProps> {
+interface IButtonGroupComposition {
   Button: FC<ButtonProps>
 }
 
-export const ButtonGroup = {
-  ...ButtonGroupComponent,
-  Button
-} as ButtonGroupProps
+type ButtonGroupProps = FC<ButtonGroupComponentProps> & IButtonGroupComposition
+
+const ButtonGroup: ButtonGroupProps = ButtonGroupComponent as ButtonGroupProps
+
+ButtonGroup.Button = Button
+
+export { ButtonGroup }

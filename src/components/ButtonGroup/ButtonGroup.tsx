@@ -6,7 +6,7 @@ import { ButtonGroupProvider } from './context'
 export interface ButtonGroupProps {
   children: ReactElement[]
   initialValue?: string
-  onChange: () => void
+  onChange: (value: string | null) => void
 }
 
 export const ButtonGroup: FC<ButtonGroupProps> = ({
