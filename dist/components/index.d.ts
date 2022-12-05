@@ -12,7 +12,7 @@ export { default as ButtonGroup } from './ButtonGroup';
 export { default as Card } from './Card';
 export { default as Check } from './Check';
 export { default as CheckboxNoFormik } from './Checkbox';
-export { default as Close } from './Close';
+export * from './Close';
 export { default as ColorLine } from './ColorLine';
 export { default as ColorNumber } from './ColorNumber';
 export { default as CustomLink } from './CustomLink';
