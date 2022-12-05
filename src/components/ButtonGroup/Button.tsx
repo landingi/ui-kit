@@ -1,18 +1,20 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './ButtonGroup.module.scss'
 import { useButtonGroupContext } from './context'
 
-/**
- * Button - statefull presentational component
- * @param {node} props.children - children of the component
- * @param {string} props.id - id of the component
- * @param {bool} props.isDisabled - disabled status, default: false
- * @return {object} An object of children element
- */
-const Button = ({ children, id, isDisabled }) => {
+export interface ButtonProps {
+  children: ReactNode
+  id: string
+  isDisabled?: boolean
+}
+
+export const Button: FC<ButtonProps> = ({
+  children,
+  id,
+  isDisabled = false
+}) => {
   const { selected, setSelected } = useButtonGroupContext()
 
   const buttonStyles = useStyles({
@@ -28,6 +30,7 @@ const Button = ({ children, id, isDisabled }) => {
       className={buttonStyles}
       onClick={handleChange}
       disabled={isDisabled}
+      type='button'
     >
       {children}
     </button>
@@ -35,15 +38,3 @@ const Button = ({ children, id, isDisabled }) => {
 }
 
 Button.displayName = 'ButtonGroupButton'
-
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool
-}
-
-Button.defaultProps = {
-  isDisabled: false
-}
-
-export default Button
