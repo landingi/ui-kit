@@ -94,5 +94,3 @@ export const Message: FC<MessageProps> = ({
 }
 
 Message.displayName = 'Message'
-
-export default Message
