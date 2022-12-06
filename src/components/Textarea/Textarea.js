@@ -1,6 +1,6 @@
 import Error from '@components/Form/Error'
 import Label from '@components/Label'
-import Spacer from '@components/Spacer'
+import { Spacer } from '@components/Spacer'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
