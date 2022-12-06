@@ -1,4 +1,4 @@
-import ColorLine from '@components/ColorLine'
+import { ColorLine } from '@components/ColorLine'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { legendShape } from '@shapes'
 import PropTypes from 'prop-types'
