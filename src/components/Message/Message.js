@@ -1,6 +1,6 @@
 import { Heading } from '@components/Heading'
 import Image from '@components/Image'
-import Spacer from '@components/Spacer'
+import { Spacer } from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'

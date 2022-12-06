@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import Spacer from '@components/Spacer'
+import { Spacer } from '@components/Spacer'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 
