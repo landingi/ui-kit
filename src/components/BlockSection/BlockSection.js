@@ -19,7 +19,7 @@ import styles from './BlockSection.module.scss'
  * @param {string} props.title - title
  * @param {string} props.message - message
  * @param {string} props.button - button title
- * @param {func} props.onClick - button action
+* @param {func} props.onClick - button action
  * @param {string} props.url - image url
  * @param {bool} props.reverse - column reverse
  * @param {array} props.list - list
