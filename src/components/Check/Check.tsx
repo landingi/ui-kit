@@ -12,7 +12,7 @@ interface CheckProps {
   crossedOutOnPositive?: boolean
 }
 
-const Check: FC<CheckProps> = ({
+export const Check: FC<CheckProps> = ({
   className = '',
   children,
   positive = false,
@@ -38,5 +38,3 @@ const Check: FC<CheckProps> = ({
 }
 
 Check.displayName = 'Check'
-
-export default Check

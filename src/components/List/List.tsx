@@ -1,5 +1,4 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
 import React, { FC, ReactNode } from 'react'
 
 import styles from './List.module.scss'
@@ -11,7 +10,7 @@ interface ListProps {
   variant?: 'inline'
 }
 
-const List: FC<ListProps> = ({
+export const List: FC<ListProps> = ({
   children,
   variant = '',
   className = '',
@@ -34,5 +33,3 @@ const List: FC<ListProps> = ({
 }
 
 List.displayName = 'List'
-
-export default List

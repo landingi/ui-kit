@@ -3,7 +3,6 @@ import '@testing-library/jest-dom'
 import Card from '@components/Card'
 import { Paragraph } from '@components/Paragraph'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<Card /> mount', () => {
   const props = {

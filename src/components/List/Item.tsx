@@ -11,9 +11,9 @@ interface ListItemProps {
   margin?: boolean
 }
 
-const ListItem: FC<ListItemProps> = ({
+export const ListItem: FC<ListItemProps> = ({
   children,
-  variant,
+  variant = 'inline',
   size = '',
   className = '',
   margin = false
@@ -35,5 +35,3 @@ const ListItem: FC<ListItemProps> = ({
 }
 
 ListItem.displayName = 'ListItem'
-
-export default ListItem
