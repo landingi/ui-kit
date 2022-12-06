@@ -1,3 +1,5 @@
+import { Dict } from 'src/types/mapped-types.type'
+
 export const isEmpty = (value?: string) =>
   value === null ||
   value === undefined ||
@@ -16,7 +18,7 @@ export const mapIconToClass = (
   value: 'alert' | 'info' | 'success' | 'warning'
 ) => fontIcons[value]
 
-export const queryString = (data: string) =>
+export const queryString = (data: Dict<string>) =>
   Object.entries(data)
     .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
     .join('&')

@@ -10,7 +10,7 @@ afterEach(() => {
 
 describe('Helpers events, `debounce`', () => {
   let func = jest.mock
-  let debouncedFunc
+  let debouncedFunc: (...args: unknown[]) => void
 
   beforeEach(() => {
     func = jest.fn()
@@ -48,7 +48,7 @@ describe('Helpers events, `debounce`', () => {
 
 describe('Helpers events, `throttle`', () => {
   let func = jest.mock
-  let throttledFunc
+  let throttledFunc: (...args: unknown[]) => void
 
   beforeEach(() => {
     func = jest.fn()
