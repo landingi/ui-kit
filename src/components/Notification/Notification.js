@@ -1,4 +1,4 @@
-import Close from '@components/Close'
+import { Close } from '@components/Close'
 import Icon from '@components/Icon'
 import { mapIconToClass } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'

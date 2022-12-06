@@ -1,6 +1,6 @@
 import Icon from '@components/Icon'
 import Label from '@components/Label'
-import Paragraph from '@components/Paragraph'
+import { Paragraph } from '@components/Paragraph'
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'

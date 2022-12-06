@@ -1,4 +1,4 @@
-import Heading from '@components/Heading'
+import { Heading } from '@components/Heading'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'

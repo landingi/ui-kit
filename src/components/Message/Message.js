@@ -1,4 +1,4 @@
-import Heading from '@components/Heading'
+import { Heading } from '@components/Heading'
 import Image from '@components/Image'
 import Spacer from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
