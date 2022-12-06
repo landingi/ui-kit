@@ -24,9 +24,9 @@ interface MessageProps {
 export const Message: FC<MessageProps> = ({
   children = null,
   className = '',
-  title = undefined,
-  message = undefined,
-  url = undefined,
+  title,
+  message,
+  url,
   height = 220,
   titleLevel = 1,
   messageLevel = 3,
