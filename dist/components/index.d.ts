@@ -33,7 +33,7 @@ export { default as MaskedInputForm } from './Form/Input/MaskedInput';
 export * from './Form/Radio';
 export { default as FormikToggle } from './Form/Toggle/FormikToggle';
 export { default as Toggle } from './Form/Toggle/Toggle';
-export { default as GalleryImage } from './GalleryImage';
+export * from './GalleryImage';
 export * from './Heading';
 export * from './Headline';
 export { default as Html } from './Html';
