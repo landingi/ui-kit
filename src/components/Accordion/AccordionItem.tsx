@@ -1,5 +1,5 @@
 import styles from '@components/Accordion/Accordion.module.scss'
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode, useCallback, useState } from 'react'
 

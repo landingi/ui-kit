@@ -1,4 +1,4 @@
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'

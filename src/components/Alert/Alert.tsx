@@ -1,4 +1,4 @@
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { mapIconToClass } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode } from 'react'

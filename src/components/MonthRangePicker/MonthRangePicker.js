@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { Spacer } from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { endOfMonth, startOfMonth } from 'date-fns'

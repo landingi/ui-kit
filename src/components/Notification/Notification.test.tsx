@@ -1,16 +1,11 @@
 import '@testing-library/jest-dom'
 
-import Notification from '@components/Notification'
+import { Notification } from '@components/Notification'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
-
-const props = {
-  children: 'Notification content'
-}
 
 describe('<Notification/> mount', () => {
   it('is mounted', () => {
-    render(<Notification {...props} />)
+    render(<Notification>Notification content</Notification>)
 
     screen.getByText('Notification content')
 
@@ -20,7 +15,7 @@ describe('<Notification/> mount', () => {
   })
 
   it('has info variant by default', () => {
-    render(<Notification {...props} />)
+    render(<Notification>Notification content</Notification>)
 
     const notificationComponent = screen.getByTestId('notification')
     const icon = screen.getByTestId('notification-icon')
@@ -30,7 +25,7 @@ describe('<Notification/> mount', () => {
   })
 
   it('has success variant', () => {
-    render(<Notification {...props} type='success' />)
+    render(<Notification type='success'>Notification content</Notification>)
 
     const notificationComponent = screen.getByTestId('notification')
     const icon = screen.getByTestId('notification-icon')
@@ -40,7 +35,7 @@ describe('<Notification/> mount', () => {
   })
 
   it('has warning variant', () => {
-    render(<Notification {...props} type='warning' />)
+    render(<Notification type='warning'>Notification content</Notification>)
 
     const notificationComponent = screen.getByTestId('notification')
     const icon = screen.getByTestId('notification-icon')
@@ -50,7 +45,7 @@ describe('<Notification/> mount', () => {
   })
 
   it('has alert variant', () => {
-    render(<Notification {...props} type='alert' />)
+    render(<Notification type='alert'>Notification content</Notification>)
 
     const notificationComponent = screen.getByTestId('notification')
     const icon = screen.getByTestId('notification-icon')
@@ -62,7 +57,11 @@ describe('<Notification/> mount', () => {
   it('has working close button', () => {
     const handleOnClick = jest.fn()
 
-    render(<Notification {...props} isClosable onClick={handleOnClick} />)
+    render(
+      <Notification isClosable onClick={handleOnClick}>
+        Notification content
+      </Notification>
+    )
 
     const closeButton = screen.getByTestId('close-component-button')
 
@@ -72,7 +71,7 @@ describe('<Notification/> mount', () => {
   })
 
   it('has time', () => {
-    render(<Notification {...props} hasTime />)
+    render(<Notification hasTime>Notification content</Notification>)
 
     screen.getByTestId('notification-time')
   })
