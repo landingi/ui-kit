@@ -8,5 +8,5 @@ interface IconProps {
     autoSize?: boolean;
     'data-testid'?: string;
 }
-declare const Icon: FC<IconProps>;
+export declare const Icon: FC<IconProps>;
 export default Icon;
