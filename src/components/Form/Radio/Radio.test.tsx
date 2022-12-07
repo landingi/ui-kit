@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Radio from '@components/Form/Radio'
+import { Radio } from '@components/Form/Radio'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
@@ -9,7 +9,8 @@ const props = {
   field: {
     name: 'field-name',
     value: 'some-value',
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    onBlur: jest.fn()
   },
   form: {
     errors: {},
