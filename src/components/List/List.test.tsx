@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom'
 
-import List from '@components/List'
-import ListItem from '@components/List/Item'
+import { List } from '@components/List'
+import { ListItem } from '@components/List/Item'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<List/> mount', () => {
   const props = {
