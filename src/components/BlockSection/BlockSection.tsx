@@ -14,8 +14,8 @@ import styles from './BlockSection.module.scss'
 
 interface BlockSectionProps {
   className?: string | string[]
-  title: string | string[]
-  message: string | string[]
+  title: string
+  message: string
   button?: string
   onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
   url: string
