@@ -1,8 +1,8 @@
 import { FC, MouseEvent } from 'react';
 interface BlockSectionProps {
     className?: string | string[];
-    title: string | string[];
-    message: string | string[];
+    title: string;
+    message: string;
     button?: string;
     onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
     url: string;
