@@ -6,33 +6,31 @@ import { ListItem } from '@components/List/Item'
 import { Panel } from '@components/Panel'
 import { Paragraph } from '@components/Paragraph'
 import { Spacer } from '@components/Spacer'
+import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import uuid from 'react-uuid'
+import { FC, MouseEvent } from 'react'
 
 import styles from './BlockSection.module.scss'
 
-/**
- * Block Section - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {string} props.title - title
- * @param {string} props.message - message
- * @param {string} props.button - button title
- * @param {func} props.onClick - button action
- * @param {string} props.url - image url
- * @param {bool} props.reverse - column reverse
- * @param {array} props.list - list
- * @return {object} An object of children element
- */
-const BlockSection = ({
-  className,
+interface BlockSectionProps {
+  className?: string | string[]
+  title: string | string[]
+  message: string | string[]
+  button?: string
+  onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+  url: string
+  reverse?: boolean
+  list?: string[]
+}
+
+export const BlockSection: FC<BlockSectionProps> = ({
+  className = '',
   title,
   message,
   button,
-  onClick,
+  onClick = () => null,
   url,
-  reverse,
+  reverse = false,
   list
 }) => {
   const wrapperClasses = useStyles(
@@ -67,7 +65,7 @@ const BlockSection = ({
             {list && (
               <List listStyle='ordered-disc'>
                 {list.map(item => (
-                  <ListItem key={uuid()} variant='block'>
+                  <ListItem key={generateFakeUuid()} variant='block'>
                     {item}
                   </ListItem>
                 ))}
@@ -87,24 +85,3 @@ const BlockSection = ({
 }
 
 BlockSection.displayName = 'BlockSection'
-
-BlockSection.propTypes = {
-  button: PropTypes.string,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  list: PropTypes.arrayOf(PropTypes.string),
-  message: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  onClick: PropTypes.func,
-  reverse: PropTypes.bool,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
-}
-
-BlockSection.defaultProps = {
-  className: '',
-  button: null,
-  list: null,
-  reverse: false,
-  onClick: () => null
-}
-
-export default BlockSection
