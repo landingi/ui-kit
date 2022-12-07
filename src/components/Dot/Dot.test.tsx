@@ -1,6 +1,5 @@
-import Dot from '@components/Dot'
+import { Dot } from '@components/Dot'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<Dot /> tests', () => {
   it('renders properly', () => {
