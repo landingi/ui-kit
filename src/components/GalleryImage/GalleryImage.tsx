@@ -10,8 +10,8 @@ interface GalleryImageProps {
 
 export const GalleryImage: FC<GalleryImageProps> = ({
   src,
-  onClick,
-  onDoubleClick
+  onClick = () => null,
+  onDoubleClick = () => null
 }) => (
   <div
     className={styles.background}
