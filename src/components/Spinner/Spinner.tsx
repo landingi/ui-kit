@@ -1,4 +1,4 @@
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC } from 'react'
 

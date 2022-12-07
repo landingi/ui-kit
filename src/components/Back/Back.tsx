@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode } from 'react'

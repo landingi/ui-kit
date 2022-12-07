@@ -1,4 +1,4 @@
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import { render } from '@testing-library/react'
 import React from 'react'
 

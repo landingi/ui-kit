@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import Input from '@components/Input'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'

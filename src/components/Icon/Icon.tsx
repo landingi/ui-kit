@@ -14,7 +14,7 @@ interface IconProps {
   'data-testid'?: string
 }
 
-const Icon: FC<IconProps> = ({
+export const Icon: FC<IconProps> = ({
   icon,
   color = 'default',
   className = '',

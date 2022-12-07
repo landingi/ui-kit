@@ -1,4 +1,4 @@
-import Notification from '@components/Notification'
+import { Notification } from '@components/Notification'
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
 import emitter from '@lib/emitter'

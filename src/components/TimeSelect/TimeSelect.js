@@ -1,5 +1,5 @@
 import DropdownSelect2 from '@components/DropdownSelect'
-import Icon from '@components/Icon'
+import { Icon } from '@components/Icon'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getLanguage } from '@helpers/i18n'
