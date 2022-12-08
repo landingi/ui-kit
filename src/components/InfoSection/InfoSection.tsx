@@ -5,26 +5,27 @@ import { List } from '@components/List'
 import { ListItem } from '@components/List/Item'
 import { Paragraph } from '@components/Paragraph'
 import { Spacer } from '@components/Spacer'
+import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, { Fragment, useMemo } from 'react'
-import uuid from 'react-uuid'
+import { FC, Fragment, MouseEvent, useMemo } from 'react'
 
 import styles from './InfoSection.module.scss'
 
-/**
- * Info Section - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: `info-section`
- * @param {string} props.title - title
- * @param {array} props.list - list of items
- * @param {string} props.url - image url
- * @param {string} props.button - button title
- * @param {func} props.onClick - button action
- * @return {object} An object of children element
- */
-const InfoSection = ({
-  className,
+interface InfoSectionProps {
+  className?: string | string[]
+  title: string
+  list: string[]
+  url: string
+  button: string
+  image?: {
+    src: string
+    size: number
+  }
+  onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+}
+
+export const InfoSection: FC<InfoSectionProps> = ({
+  className = '',
   title,
   list,
   url,
@@ -36,13 +37,13 @@ const InfoSection = ({
     () => (
       <List listStyle='ordered-check'>
         {list.map(item => (
-          <ListItem key={uuid()} variant='list'>
+          <ListItem key={generateFakeUuid()} variant='list'>
             <Paragraph size={18}>{item}</Paragraph>
           </ListItem>
         ))}
       </List>
     ),
-    []
+    [list]
   )
 
   const infoSectionStyles = useStyles(
@@ -81,20 +82,3 @@ const InfoSection = ({
 }
 
 InfoSection.displayName = 'InfoSection'
-
-InfoSection.propTypes = {
-  button: PropTypes.string.isRequired,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  list: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  url: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  image: PropTypes.objectOf({ src: PropTypes.string, size: PropTypes.number })
-}
-
-InfoSection.defaultProps = {
-  className: '',
-  onClick: () => null
-}
-
-export default InfoSection
