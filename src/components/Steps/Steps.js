@@ -1,4 +1,4 @@
-import StepNumber from '@components/StepNumber'
+import { StepNumber } from '@components/StepNumber'
 import { stepsShape } from '@shapes'
 import PropTypes from 'prop-types'
 import React from 'react'

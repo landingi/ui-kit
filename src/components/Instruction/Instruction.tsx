@@ -7,7 +7,7 @@ import styles from './Instruction.module.scss'
 
 interface InstructionProps {
   className?: string | string[]
-  data: [{ content: ReactNode }]
+  data: { content: ReactNode }[]
 }
 
 export const Instruction: FC<InstructionProps> = ({ className = '', data }) => {
