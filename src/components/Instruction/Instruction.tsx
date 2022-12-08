@@ -1,4 +1,4 @@
-import StepNumber from '@components/StepNumber'
+import { StepNumber } from '@components/StepNumber'
 import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode } from 'react'

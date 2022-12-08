@@ -1,23 +1,17 @@
 import '@testing-library/jest-dom'
 
-import StepNumber from '@components/StepNumber'
+import { StepNumber } from '@components/StepNumber'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
-
-const props = {
-  step: 1,
-  variant: 'completed',
-  size: 'medium',
-  absolute: true
-}
 
 describe('<StepNumber /> mount', () => {
   it('is mounted', () => {
-    render(<StepNumber {...props} />)
+    render(<StepNumber step={1} variant='completed' size='medium' absolute />)
   })
 
   it('wrapper text expect "1"', () => {
-    const { getByText } = render(<StepNumber {...props} />)
+    const { getByText } = render(
+      <StepNumber step={1} variant='completed' size='medium' absolute />
+    )
 
     const content = getByText('1')
 
@@ -25,7 +19,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--complete" class', () => {
-    render(<StepNumber {...props} />)
+    render(<StepNumber step={1} variant='completed' size='medium' absolute />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -33,7 +27,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--current" class', () => {
-    render(<StepNumber {...props} variant='current' />)
+    render(<StepNumber step={1} size='medium' absolute variant='current' />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -41,7 +35,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--next" class', () => {
-    render(<StepNumber {...props} variant='next' />)
+    render(<StepNumber step={1} size='medium' absolute variant='next' />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -49,7 +43,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--medium" class', () => {
-    render(<StepNumber {...props} />)
+    render(<StepNumber step={1} variant='completed' size='medium' absolute />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -57,7 +51,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--small" class', () => {
-    render(<StepNumber {...props} size='small' />)
+    render(<StepNumber step={1} variant='completed' absolute size='small' />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -65,7 +59,7 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--absolute" class', () => {
-    render(<StepNumber {...props} />)
+    render(<StepNumber step={1} variant='completed' size='medium' absolute />)
 
     const stepNumber = screen.getByTestId('stepNumber')
 
@@ -73,7 +67,9 @@ describe('<StepNumber /> mount', () => {
   })
 
   it('Expect "step__number--absolute" class', () => {
-    render(<StepNumber {...props} absolute={false} />)
+    render(
+      <StepNumber step={1} variant='completed' size='medium' absolute={false} />
+    )
 
     const stepNumber = screen.getByTestId('stepNumber')
 
