@@ -1,5 +1,7 @@
+import { isSafari } from '@helpers/browser'
 import { useHover } from '@helpers/hooks/useHover'
-import { ReactNode } from 'react'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { MutableRefObject, ReactNode, useRef } from 'react'
 
 import type {
   ColumnAccessor,
@@ -16,12 +18,19 @@ export const BodyTr = <Item extends ItemBase>({
 }: TrProps<Item>) => {
   const [hoverProps, isHover] = useHover()
 
-  return (
-    <tr className={styles.tr} {...hoverProps}>
-      {rowActions && isHover && (
-        <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
-      )}
+  const trRowActionsStyles = useStyles({
+    [styles['tr__row-actions']]: true,
+    // special fix ONLY for safari
+    [styles['tr__row-actions--safari']]: isSafari
+  })
 
+  const trRef =
+    useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
+
+  const renderRowActions = trRef?.current?.offsetHeight && rowActions && isHover
+
+  return (
+    <tr className={styles.tr} ref={trRef} {...hoverProps}>
       {columns.map(column => {
         if ((column as ColumnAccessor<Item>).accessor) {
           return (
@@ -37,6 +46,18 @@ export const BodyTr = <Item extends ItemBase>({
           </td>
         )
       })}
+
+      {renderRowActions ? (
+        <div
+          className={trRowActionsStyles}
+          style={{
+            // special fix ONLY for safari
+            height: isSafari ? trRef?.current?.offsetHeight : undefined
+          }}
+        >
+          {rowActions(item)}
+        </div>
+      ) : null}
     </tr>
   )
 }

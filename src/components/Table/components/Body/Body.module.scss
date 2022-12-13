@@ -1,4 +1,5 @@
 .tr {
+  border-bottom: 1px solid $color-7;
   position: relative;
   transform: scale(1, 1);
 
@@ -24,12 +25,17 @@
     padding-right: $padding-x-large;
     background-color: $color-bg;
     z-index: 1;
+    max-width: 100%;
+
+    &--safari {
+      right: -30px;
+      bottom: auto;
+    }
   }
 }
 
 .td {
   padding: $padding-medium;
-  border-bottom: 1px solid $color-7;
   font-size: 14px;
   color: $color-1;
 }
