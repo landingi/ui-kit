@@ -1,4 +1,6 @@
 .tr {
+  transform: scale(1);
+
   td:first-of-type {
     padding-left: $padding-x-large;
   }
@@ -11,11 +13,6 @@
     background-color: $color-bg;
   }
 
-  &__row-actions-wrapper {
-    position: relative;
-    overflow: auto;
-    height: 100%;
-  }
   &__row-actions {
     position: absolute;
     top: 0;

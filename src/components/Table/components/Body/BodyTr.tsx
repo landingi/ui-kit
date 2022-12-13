@@ -19,9 +19,7 @@ export const BodyTr = <Item extends ItemBase>({
   return (
     <tr className={styles.tr} {...hoverProps}>
       {rowActions && isHover && (
-        <div className={styles['tr__row-actions-wrapper']}>
-          <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
-        </div>
+        <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
       )}
 
       {columns.map(column => {
