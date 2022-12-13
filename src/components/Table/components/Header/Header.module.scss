@@ -7,4 +7,12 @@
   font-size: 12px;
   font-weight: 600;
   color: $color-8;
+
+  &:first-of-type {
+    padding-left: $padding-x-large;
+  }
+
+  &:last-of-type {
+    padding-right: $padding-x-large;
+  }
 }

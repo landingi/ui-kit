@@ -15,7 +15,7 @@ export const Body = <Item extends ItemBase>({
   <tbody>
     {data.map(item => {
       return (
-        <tr key={item.identifier}>
+        <tr className={styles.tr} key={item.identifier}>
           {columns.map(column => {
             if ((column as ColumnAccessor<Item>).accessor) {
               return (
