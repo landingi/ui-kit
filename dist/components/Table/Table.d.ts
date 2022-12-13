@@ -1,2 +1,3 @@
 /// <reference types="react" />
-export declare const Table: () => JSX.Element;
+import type { ItemBase, TableProps } from './types';
+export declare const Table: <Item extends ItemBase>({ name, data, columns }: TableProps<Item>) => JSX.Element;
