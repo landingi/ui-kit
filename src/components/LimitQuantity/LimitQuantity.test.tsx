@@ -1,6 +1,5 @@
-import LimitQuantity from '@components/LimitQuantity'
+import { LimitQuantity } from '@components/LimitQuantity'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 describe('<LimitQuantity /> mount', () => {
   const props = {
@@ -23,6 +22,7 @@ describe('<LimitQuantity /> mount', () => {
     render(<LimitQuantity {...props} />)
 
     const text = screen.getByText('/ ∞')
-    expect(text).toBeInDocument
+
+    expect(text).toBeInDocument()
   })
 })
