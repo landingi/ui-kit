@@ -17,28 +17,28 @@ export const BodyTr = <Item extends ItemBase>({
   const [hoverProps, isHover] = useHover()
 
   return (
-    <tr {...hoverProps}>
-      <div className={styles.tr}>
-        {rowActions && isHover && (
+    <tr className={styles.tr} {...hoverProps}>
+      {rowActions && isHover && (
+        <div className={styles['tr__row-actions-wrapper']}>
           <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
-        )}
+        </div>
+      )}
 
-        {columns.map(column => {
-          if ((column as ColumnAccessor<Item>).accessor) {
-            return (
-              <td className={styles.td} key={column.identifier}>
-                {item[(column as ColumnAccessor<Item>).accessor] as ReactNode}
-              </td>
-            )
-          }
-
+      {columns.map(column => {
+        if ((column as ColumnAccessor<Item>).accessor) {
           return (
             <td className={styles.td} key={column.identifier}>
-              {(column as CustomColumn<Item>).render(item)}
+              {item[(column as ColumnAccessor<Item>).accessor] as ReactNode}
             </td>
           )
-        })}
-      </div>
+        }
+
+        return (
+          <td className={styles.td} key={column.identifier}>
+            {(column as CustomColumn<Item>).render(item)}
+          </td>
+        )
+      })}
     </tr>
   )
 }
