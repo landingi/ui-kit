@@ -1,5 +1,4 @@
-import { Body } from './components/Body'
-import { Header } from './components/Header'
+import { Body, Header } from './components'
 import type { ItemBase, TableProps } from './types'
 
 export const Table = <Item extends ItemBase>({

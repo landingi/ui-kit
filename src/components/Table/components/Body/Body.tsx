@@ -5,27 +5,28 @@ import type {
   ColumnAccessor,
   CustomColumn,
   ItemBase
-} from '../types'
+} from '../../types'
+import styles from './Body.module.scss'
 
 export const Body = <Item extends ItemBase>({
   data,
   columns
 }: BodyProps<Item>) => (
-  <tbody>
+  <tbody className={styles.body}>
     {data.map(item => {
       return (
-        <tr key={item.identifier}>
+        <tr className={styles.tr} key={item.identifier}>
           {columns.map(column => {
             if ((column as ColumnAccessor<Item>).accessor) {
               return (
-                <td key={column.identifier}>
+                <td className={styles.td} key={column.identifier}>
                   {item[(column as ColumnAccessor<Item>).accessor] as ReactNode}
                 </td>
               )
             }
 
             return (
-              <td key={column.identifier}>
+              <td className={styles.td} key={column.identifier}>
                 {(column as CustomColumn<Item>).render(item)}
               </td>
             )
