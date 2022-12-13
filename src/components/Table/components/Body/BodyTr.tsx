@@ -18,7 +18,7 @@ export const BodyTr = <Item extends ItemBase>({
 
   return (
     <tr className={styles.tr} {...hoverProps}>
-      {rowActions && isHover && (
+      {rowActions && !isHover && (
         <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
       )}
 
