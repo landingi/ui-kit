@@ -5,13 +5,14 @@ import type { ItemBase, TableProps } from './types'
 export const Table = <Item extends ItemBase>({
   name,
   data,
-  columns
+  columns,
+  rowActions
 }: TableProps<Item>) => {
   return (
     <table className={styles.table}>
       <Header columns={columns} />
 
-      <Body data={data} columns={columns} />
+      <Body data={data} columns={columns} rowActions={rowActions} />
     </table>
   )
 }

@@ -9,15 +9,19 @@ import type {
 } from '../../types'
 import styles from './Body.module.scss'
 
-export const Tr = <Item extends ItemBase>({ columns, item }: TrProps<Item>) => {
+export const BodyTr = <Item extends ItemBase>({
+  columns,
+  item,
+  rowActions
+}: TrProps<Item>) => {
   const [hoverProps, isHover] = useHover()
 
-  if (isHover) {
-    console.log('@@@@', item.identifier)
-  }
-
   return (
-    <tr className={styles.tr} key={item.identifier} {...hoverProps}>
+    <tr className={styles.tr} {...hoverProps}>
+      {rowActions && isHover && (
+        <div className={styles['tr__row-actions']}>{rowActions(item)}</div>
+      )}
+
       {columns.map(column => {
         if ((column as ColumnAccessor<Item>).accessor) {
           return (

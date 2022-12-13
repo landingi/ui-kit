@@ -22,6 +22,7 @@ export interface TableProps<Item> {
   name: string
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
+  rowActions?: (item: Item) => ReactNode
 }
 
 export interface HeaderProps<Item> {
@@ -31,9 +32,11 @@ export interface HeaderProps<Item> {
 export interface BodyProps<Item> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
+  rowActions?: (item: Item) => ReactNode
 }
 
 export interface TrProps<Item> {
   item: Item
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
+  rowActions?: (item: Item) => ReactNode
 }
