@@ -1,5 +1,6 @@
 .tr {
-  transform: scale(1);
+  position: relative;
+  transform: scale(1, 1);
 
   td:first-of-type {
     padding-left: $padding-x-large;
