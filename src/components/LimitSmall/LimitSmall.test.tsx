@@ -1,8 +1,10 @@
+import '@testing-library/jest-dom'
+
 import { LimitSmall } from '@components/LimitSmall'
 import { render, screen } from '@testing-library/react'
 
 describe('<LimitSmall /> mount', () => {
-  it('is mounted', () => {
+  it('should be limit 200', () => {
     render(
       <LimitSmall
         limit={20000}
@@ -11,11 +13,13 @@ describe('<LimitSmall /> mount', () => {
         quantity={5}
       />
     )
-  })
-})
 
-describe('<LimitSmall /> mount', () => {
-  it('is mounted', () => {
+    const text = screen.getByText('/ 20 000')
+
+    expect(text).toBeInTheDocument()
+  })
+
+  it('should be no limit', () => {
     render(
       <LimitSmall
         limit={-1}
@@ -26,6 +30,7 @@ describe('<LimitSmall /> mount', () => {
     )
 
     const text = screen.getByText('/ ∞')
-    expect(text).toBeInDocument()
+
+    expect(text).toBeInTheDocument()
   })
 })

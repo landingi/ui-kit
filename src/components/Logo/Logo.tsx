@@ -76,5 +76,5 @@ export const ShortLogo = () => (
   </div>
 )
 
-LongLogo.displayName = 'Logo long'
-ShortLogo.displayName = 'Logo short'
+LongLogo.displayName = 'LogoLong'
+ShortLogo.displayName = 'LogoShort'

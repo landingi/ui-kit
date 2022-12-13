@@ -1,28 +1,22 @@
+import '@testing-library/jest-dom'
+
 import { LimitQuantity } from '@components/LimitQuantity'
 import { render, screen } from '@testing-library/react'
 
 describe('<LimitQuantity /> mount', () => {
-  const props = {
-    limit: 200,
-    quantity: 100
-  }
+  it('should be limit 200', () => {
+    render(<LimitQuantity limit={200} quantity={100} />)
 
-  it('is mounted', () => {
-    render(<LimitQuantity {...props} />)
+    const text = screen.getByText('/ 200')
+
+    expect(text).toBeInTheDocument()
   })
-})
 
-describe('<LimitQuantity /> mount', () => {
-  const props = {
-    limit: -1,
-    quantity: 100
-  }
-
-  it('is mounted', () => {
-    render(<LimitQuantity {...props} />)
+  it('should be no limit', () => {
+    render(<LimitQuantity limit={-1} quantity={100} />)
 
     const text = screen.getByText('/ ∞')
 
-    expect(text).toBeInDocument()
+    expect(text).toBeInTheDocument()
   })
 })
