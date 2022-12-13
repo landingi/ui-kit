@@ -6,6 +6,10 @@
   td:last-of-type {
     padding-right: $padding-x-large;
   }
+
+  &:hover {
+    background-color: $color-bg;
+  }
 }
 
 .td {
