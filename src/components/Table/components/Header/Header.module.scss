@@ -1,7 +1,10 @@
 .thead {
-  padding: 0 $padding-medium;
+  border-bottom: 1px solid $color-7;
 }
 
 .th {
   padding: $padding-medium;
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-8;
 }

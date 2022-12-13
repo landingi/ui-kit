@@ -12,10 +12,10 @@ export const Body = <Item extends ItemBase>({
   data,
   columns
 }: BodyProps<Item>) => (
-  <tbody className={styles.body}>
+  <tbody>
     {data.map(item => {
       return (
-        <tr className={styles.tr} key={item.identifier}>
+        <tr key={item.identifier}>
           {columns.map(column => {
             if ((column as ColumnAccessor<Item>).accessor) {
               return (

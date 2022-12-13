@@ -1,4 +1,5 @@
 import { Body, Header } from './components'
+import styles from './Table.module.scss'
 import type { ItemBase, TableProps } from './types'
 
 export const Table = <Item extends ItemBase>({
@@ -7,10 +8,12 @@ export const Table = <Item extends ItemBase>({
   columns
 }: TableProps<Item>) => {
   return (
-    <table>
-      <Header columns={columns} />
+    <div className={styles.wrapper}>
+      <table className={styles.table}>
+        <Header columns={columns} />
 
-      <Body data={data} columns={columns} />
-    </table>
+        <Body data={data} columns={columns} />
+      </table>
+    </div>
   )
 }

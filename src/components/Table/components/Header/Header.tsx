@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 export const Header = <Item extends ItemBase>({
   columns
 }: HeaderProps<Item>) => (
-  <thead className={styles.thead}>
+  <thead>
     <tr>
       {columns.map(({ header, identifier }) => {
         return (
