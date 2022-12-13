@@ -1,5 +1,5 @@
 import { Icon } from '@components/Icon'
-import Label from '@components/Label'
+import { Label } from '@components/Label'
 import { Paragraph } from '@components/Paragraph'
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
