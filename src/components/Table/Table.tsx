@@ -8,12 +8,10 @@ export const Table = <Item extends ItemBase>({
   columns
 }: TableProps<Item>) => {
   return (
-    <div className={styles.wrapper}>
-      <table className={styles.table}>
-        <Header columns={columns} />
+    <table className={styles.table}>
+      <Header columns={columns} />
 
-        <Body data={data} columns={columns} />
-      </table>
-    </div>
+      <Body data={data} columns={columns} />
+    </table>
   )
 }
