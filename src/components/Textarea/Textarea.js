@@ -1,5 +1,5 @@
 import Error from '@components/Form/Error'
-import Label from '@components/Label'
+import { Label } from '@components/Label'
 import { Spacer } from '@components/Spacer'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'

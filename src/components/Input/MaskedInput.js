@@ -1,4 +1,4 @@
-import Label from '@components/Label'
+import { Label } from '@components/Label'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
 import React from 'react'
