@@ -32,3 +32,8 @@ export interface BodyProps<Item> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
 }
+
+export interface TrProps<Item> {
+  item: Item
+  columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
+}
