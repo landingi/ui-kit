@@ -1,20 +1,23 @@
 import { Icon } from '@components/Icon'
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC } from 'react'
 
 import styles from './StatusIcon.module.scss'
 
-/**
- * Status Icon - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @param {string} props.variant - variant of status icon, active
- * @param {string} props.size - variant of status icon tiny, medium
- * @param {string} props.tooltip - tooltip of status icon
- */
-const StatusIcon = ({ className, variant, size, tooltip }) => {
+interface StatusIconProps {
+  className?: string | string[]
+  variant?: 'active' | 'inactive' | 'warning'
+  size?: 'tiny' | 'medium' | 'big'
+  tooltip?: string
+}
+
+export const StatusIcon: FC<StatusIconProps> = ({
+  className = '',
+  variant = 'active',
+  size = 'medium',
+  tooltip = ''
+}) => {
   const statusIconStyles = useStyles(
     {
       [styles['status-icon']]: true,
@@ -45,19 +48,3 @@ const StatusIcon = ({ className, variant, size, tooltip }) => {
 }
 
 StatusIcon.displayName = 'StatusIcon'
-
-StatusIcon.propTypes = {
-  className: PropTypes.string,
-  size: PropTypes.oneOf(['tiny', 'medium', 'big']),
-  variant: PropTypes.oneOf(['active', 'inactive', 'warning']),
-  tooltip: PropTypes.string
-}
-
-StatusIcon.defaultProps = {
-  className: '',
-  size: 'medium',
-  variant: 'active',
-  tooltip: ''
-}
-
-export default StatusIcon
