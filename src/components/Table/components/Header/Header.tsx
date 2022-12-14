@@ -1,4 +1,4 @@
-import Checkbox from '@components/Checkbox'
+import { Checkbox } from '@components/Checkbox'
 
 import type { HeaderProps, ItemBase } from '../../types'
 import styles from './Header.module.scss'
