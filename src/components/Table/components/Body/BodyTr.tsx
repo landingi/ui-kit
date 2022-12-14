@@ -16,7 +16,9 @@ export const BodyTr = <Item extends ItemBase>({
   columns,
   item,
   rowActions,
-  hasSelect
+  hasSelect,
+  isSelected,
+  select
 }: BodyTrProps<Item>) => {
   const [hoverProps, isHover] = useHover()
 
@@ -31,7 +33,10 @@ export const BodyTr = <Item extends ItemBase>({
         <td className={styles.td}>
           {/*
           // @ts-ignore */}
-          <Checkbox checked onChange={() => {}} />
+          <Checkbox
+            checked={isSelected(item.identifier)}
+            onChange={() => select(item.identifier)}
+          />
         </td>
       )}
 

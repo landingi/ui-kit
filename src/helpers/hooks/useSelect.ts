@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 export const useSelect = <Identifier>(
   values: Identifier[],
-  initial: Identifier[],
-  handleSelect: (identifiers: Identifier[]) => void
+  initial: Identifier[] = [],
+  handleSelect?: (identifiers: Identifier[]) => void
 ) => {
   const [selected, setSelected] = useState(initial || [])
 
@@ -13,6 +13,8 @@ export const useSelect = <Identifier>(
 
   const isSelectedAll =
     !checkAllDisabled && selected && selected.length === values.length
+
+  const isSelectedAny = selected.length > 0
 
   const select = (identifier: Identifier) => {
     if (!selected.includes(identifier)) {
@@ -40,6 +42,7 @@ export const useSelect = <Identifier>(
     selected,
     isSelected,
     isSelectedAll,
+    isSelectedAny,
     select,
     selectAll
   }

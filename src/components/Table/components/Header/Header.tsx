@@ -5,9 +5,21 @@ import styles from './Header.module.scss'
 
 export const Header = <Item extends ItemBase>({
   columns,
-  selectOptions
+  selectOptions,
+  selectAll,
+  isSelectedAll,
+  isSelectedAny,
+  selected
 }: HeaderProps<Item>) => {
   const optionsAriaColspan = columns.length - 1
+
+  const columnsMap = columns.map(({ header, identifier }) => {
+    return (
+      <th className={styles.th} key={identifier}>
+        {header}
+      </th>
+    )
+  })
 
   if (selectOptions) {
     return (
@@ -16,15 +28,16 @@ export const Header = <Item extends ItemBase>({
           <th className={styles.th} aria-colspan={1}>
             {/*
           // @ts-ignore */}
-            <Checkbox checked onChange={() => {}} />
+            <Checkbox checked={isSelectedAll} onChange={selectAll} />
           </th>
 
-          <th className={styles.th} aria-colspan={optionsAriaColspan}>
-            {selectOptions([
-              '5c4de8fa-ae5d-4b5d-b15f-15a694a7da7b',
-              'b44ca633-1631-4f9f-852c-f3c9ce7c25d9'
-            ])}
-          </th>
+          {isSelectedAny && (
+            <th className={styles.th} aria-colspan={optionsAriaColspan}>
+              {selectOptions(selected)}
+            </th>
+          )}
+
+          {!isSelectedAny && columnsMap}
         </tr>
       </thead>
     )
@@ -32,15 +45,7 @@ export const Header = <Item extends ItemBase>({
 
   return (
     <thead className={styles.thead}>
-      <tr>
-        {columns.map(({ header, identifier }) => {
-          return (
-            <th className={styles.th} key={identifier}>
-              {header}
-            </th>
-          )
-        })}
-      </tr>
+      <tr>{columnsMap}</tr>
     </thead>
   )
 }

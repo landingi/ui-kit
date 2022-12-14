@@ -23,12 +23,16 @@ export interface TableProps<Item> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
-  selectOptions?: (ids: string[] | number[]) => ReactNode
+  selectOptions?: (identifiers: Item['identifier'][]) => ReactNode
 }
 
 export interface HeaderProps<Item> {
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
-  selectOptions?: (ids: string[] | number[]) => ReactNode
+  selectAll: () => void
+  isSelectedAll: boolean
+  isSelectedAny: boolean
+  selectOptions?: (identifiers: Item['identifier'][]) => ReactNode
+  selected: Item['identifier'][]
 }
 
 export interface BodyProps<Item> {
@@ -36,6 +40,8 @@ export interface BodyProps<Item> {
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
   hasSelect?: boolean
+  isSelected: (identifier: Item['identifier']) => boolean
+  select: (identifier: Item['identifier']) => void
 }
 
 export interface BodyTrProps<Item> {
@@ -43,6 +49,8 @@ export interface BodyTrProps<Item> {
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
   hasSelect?: boolean
+  isSelected: (identifier: Item['identifier']) => boolean
+  select: (identifier: Item['identifier']) => void
 }
 
 export interface RowActionsProps {

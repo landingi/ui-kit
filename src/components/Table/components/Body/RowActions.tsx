@@ -13,7 +13,7 @@ export const RowActions: FC<RowActionsProps> = ({ height, children }) => {
   })
 
   return (
-    <div
+    <span
       className={trRowActionsStyles}
       style={{
         // special fix ONLY for safari
@@ -21,6 +21,6 @@ export const RowActions: FC<RowActionsProps> = ({ height, children }) => {
       }}
     >
       {children}
-    </div>
+    </span>
   )
 }
