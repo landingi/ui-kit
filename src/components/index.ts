@@ -84,7 +84,7 @@ export {
 export * from './Spacer'
 export { default as Spinner } from './Spinner'
 export { default as Spreader } from './Spreader'
-export { default as StatsBadge } from './StatsBadge'
+export * from './StatsBadge'
 export { default as StatusDropdown } from './StatusDropdown'
 export * from './StatusIcon'
 export * from './StepNumber'
