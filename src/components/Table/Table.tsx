@@ -6,13 +6,21 @@ export const Table = <Item extends ItemBase>({
   name,
   data,
   columns,
-  rowActions
+  rowActions,
+  selectOptions
 }: TableProps<Item>) => {
+  const hasSelect = Boolean(selectOptions)
+
   return (
     <table className={styles.table}>
-      <Header columns={columns} />
+      <Header columns={columns} selectOptions={selectOptions} />
 
-      <Body data={data} columns={columns} rowActions={rowActions} />
+      <Body
+        data={data}
+        columns={columns}
+        rowActions={rowActions}
+        hasSelect={hasSelect}
+      />
     </table>
   )
 }

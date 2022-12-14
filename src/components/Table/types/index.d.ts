@@ -23,20 +23,29 @@ export interface TableProps<Item> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
+  selectOptions?: (ids: string[] | number[]) => ReactNode
 }
 
 export interface HeaderProps<Item> {
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
+  selectOptions?: (ids: string[] | number[]) => ReactNode
 }
 
 export interface BodyProps<Item> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
+  hasSelect?: boolean
 }
 
-export interface TrProps<Item> {
+export interface BodyTrProps<Item> {
   item: Item
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
   rowActions?: (item: Item) => ReactNode
+  hasSelect?: boolean
+}
+
+export interface RowActionsProps {
+  height?: number
+  children: ReactNode
 }

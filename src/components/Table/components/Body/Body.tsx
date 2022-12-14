@@ -4,7 +4,8 @@ import { BodyTr } from './BodyTr'
 export const Body = <Item extends ItemBase>({
   data,
   columns,
-  rowActions
+  rowActions,
+  hasSelect
 }: BodyProps<Item>) => (
   <tbody>
     {data.map(item => (
@@ -13,6 +14,7 @@ export const Body = <Item extends ItemBase>({
         item={item}
         rowActions={rowActions}
         key={item.identifier}
+        hasSelect={hasSelect}
       />
     ))}
   </tbody>
