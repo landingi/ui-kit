@@ -28,6 +28,8 @@ export interface UseTableProps<Item extends ItemBase> {
   columns: Column<Item>[]
   i18n: {
     selected: string
+    first: string
+    last: string
   }
   rowActions?: (item: Item) => ReactNode
   options?: (identifiers: Item['identifier'][]) => ReactNode
@@ -41,6 +43,7 @@ export interface UseTableProps<Item extends ItemBase> {
       total: number
     }
   }
+  constantPageLimit?: number
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -51,6 +54,11 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   isSelectedAny: boolean
   select: (identifier: Item['identifier']) => void
   selectAll: () => void
+  pageCount: number
+  pageIndex: number
+  pageLimit: number
+  setPageIndex: (page: number) => void
+  setPageLimit: (page: number) => void
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -88,4 +96,24 @@ export interface BodyTrProps<Item extends ItemBase> {
 export interface RowActionsProps {
   height?: number
   children: ReactNode
+}
+
+export interface PaginationProps {
+  pageIndex: number
+  pageCount: number
+  i18n: {
+    first: string
+    last: string
+  }
+  onChange: (number) => void
+}
+
+export interface PageLimitProps {
+  pageLimit: number
+  name: string
+  i18n: {
+    first: string
+    last: string
+  }
+  onChange: (number) => void
 }

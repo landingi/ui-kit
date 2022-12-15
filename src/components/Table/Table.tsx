@@ -1,8 +1,12 @@
-import { Body, EmptyMessage, Header, Loader } from './components'
+import { Spacer } from '@components/Spacer'
+import { Row } from 'simple-flexbox'
+import { Body, EmptyMessage, Header, Loader, PageLimit } from './components'
+import { Pagination } from './components'
 import styles from './Table.module.scss'
 import type { ItemBase, TableProps } from './types'
 
 export const Table = <Item extends ItemBase>({
+  name,
   data,
   columns,
   rowActions,
@@ -18,13 +22,17 @@ export const Table = <Item extends ItemBase>({
   filtersAndSorters,
   hasHeader = true,
   isLoading,
-  emptyMessage
+  emptyMessage,
+  pageCount,
+  pageIndex,
+  setPageIndex,
+  setPageLimit,
+  pageLimit,
+  constantPageLimit
 }: TableProps<Item>) => {
   const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
-  const dataIsEmpty = Boolean(data.length === 0)
-
-  console.log('@@ -> in table', { dataIsEmpty, data })
+  const dataIsNotEmpty = Boolean(data.length)
 
   return (
     <div className={styles.wrapper}>
@@ -48,11 +56,11 @@ export const Table = <Item extends ItemBase>({
 
         {isLoading && <Loader colSpan={columnsCount} />}
 
-        {!isLoading && dataIsEmpty && emptyMessage && (
+        {!isLoading && !dataIsNotEmpty && emptyMessage && (
           <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
         )}
 
-        {!isLoading && !dataIsEmpty && (
+        {!isLoading && dataIsNotEmpty && (
           <Body
             data={data}
             columns={columns}
@@ -63,6 +71,30 @@ export const Table = <Item extends ItemBase>({
           />
         )}
       </table>
+
+      <Spacer />
+
+      <Row justifyContent='space-between'>
+        <div />
+
+        {pageCount > 1 ? (
+          <Pagination
+            i18n={i18n}
+            pageIndex={pageIndex}
+            pageCount={pageCount}
+            onChange={setPageIndex}
+          />
+        ) : null}
+
+        {constantPageLimit ? null : (
+          <PageLimit
+            pageLimit={pageLimit}
+            onChange={setPageLimit}
+            name={name}
+            i18n={i18n}
+          />
+        )}
+      </Row>
     </div>
   )
 }
