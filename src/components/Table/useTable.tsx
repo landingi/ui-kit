@@ -20,6 +20,8 @@ export const useTable = <Item extends ItemBase>({
     ...selectProps
   }
 
+  console.log('@@ -> in hook', { data })
+
   return {
     Table: () => (
       <Table

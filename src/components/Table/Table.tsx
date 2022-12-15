@@ -22,9 +22,9 @@ export const Table = <Item extends ItemBase>({
 }: TableProps<Item>) => {
   const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
-  const dataIsNotEmpty = Boolean(data.length)
+  const dataIsEmpty = Boolean(data.length === 0)
 
-  console.log({ dataIsNotEmpty })
+  console.log('@@ -> in table', { dataIsEmpty, data })
 
   return (
     <div className={styles.wrapper}>
@@ -48,11 +48,11 @@ export const Table = <Item extends ItemBase>({
 
         {isLoading && <Loader colSpan={columnsCount} />}
 
-        {!isLoading && !dataIsNotEmpty && emptyMessage && (
+        {!isLoading && dataIsEmpty && emptyMessage && (
           <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
         )}
 
-        {!isLoading && dataIsNotEmpty && (
+        {!isLoading && !dataIsEmpty && (
           <Body
             data={data}
             columns={columns}
