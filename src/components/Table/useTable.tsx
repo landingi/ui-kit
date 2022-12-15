@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { getLocalStorage } from '@helpers/storage'
 import { useSelect } from '@helpers/hooks/useSelect'
+import { getLocalStorage } from '@helpers/storage'
+import { useState } from 'react'
 
 import { Table } from './Table'
 import { ItemBase, UseTableProps } from './types'

@@ -1,7 +1,14 @@
 import { Spacer } from '@components/Spacer'
 import { Row } from 'simple-flexbox'
-import { Body, EmptyMessage, Header, Loader, PageLimit } from './components'
-import { Pagination } from './components'
+
+import {
+  Body,
+  EmptyMessage,
+  Header,
+  Loader,
+  PageLimit,
+  Pagination
+} from './components'
 import styles from './Table.module.scss'
 import type { ItemBase, TableProps } from './types'
 
@@ -74,7 +81,7 @@ export const Table = <Item extends ItemBase>({
 
       <Spacer />
 
-      <Row justifyContent='space-between'>
+      <Row justifyContent='space-between' className={styles.table__pagination}>
         <div />
 
         {pageCount > 1 ? (

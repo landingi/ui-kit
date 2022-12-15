@@ -10,4 +10,8 @@
   width: 100%;
   padding: 0 $padding-medium;
   border-collapse: collapse;
+
+  &__pagination {
+    padding: 0 $padding-x-large;
+  }
 }
