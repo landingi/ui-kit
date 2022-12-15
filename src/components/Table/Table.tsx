@@ -24,6 +24,8 @@ export const Table = <Item extends ItemBase>({
 
   const dataIsNotEmpty = Boolean(data.length)
 
+  console.log({ dataIsNotEmpty })
+
   return (
     <div className={styles.wrapper}>
       {/* render filters and sorters above table when header is visible */}
