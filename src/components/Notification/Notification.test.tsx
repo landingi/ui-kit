@@ -50,7 +50,7 @@ describe('<Notification/> mount', () => {
     const notificationComponent = screen.getByTestId('notification')
     const icon = screen.getByTestId('notification-icon')
 
-    expect(icon).toHaveClass('icon-remove')
+    expect(icon).toHaveClass('icon-exclamation-triangle')
     expect(notificationComponent).toHaveClass('notification--alert')
   })
 
