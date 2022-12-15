@@ -1,48 +1,66 @@
-import { useSelect } from '@helpers/hooks/useSelect'
-
-import { Body, Header } from './components'
+import { Body, EmptyMessage, Header, Loader } from './components'
 import styles from './Table.module.scss'
 import type { ItemBase, TableProps } from './types'
 
 export const Table = <Item extends ItemBase>({
-  name,
   data,
   columns,
   rowActions,
-  selectOptions
+  options,
+  selectAll,
+  isSelectedAll,
+  isSelectedAny,
+  hasSelect,
+  isSelected,
+  select,
+  selected,
+  i18n,
+  filtersAndSorters,
+  hasHeader = true,
+  isLoading,
+  emptyMessage
 }: TableProps<Item>) => {
-  const hasSelect = Boolean(selectOptions)
+  const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
-  const values = data.map(({ identifier }) => identifier)
-
-  const {
-    selected,
-    isSelected,
-    isSelectedAll,
-    isSelectedAny,
-    select,
-    selectAll
-  } = useSelect<Item['identifier']>(values)
+  const dataIsNotEmpty = Boolean(data.length)
 
   return (
-    <table className={styles.table}>
-      <Header
-        columns={columns}
-        selectOptions={selectOptions}
-        selectAll={selectAll}
-        isSelectedAll={isSelectedAll}
-        isSelectedAny={isSelectedAny}
-        selected={selected}
-      />
+    <div className={styles.wrapper}>
+      {/* render filters and sorters above table when header is visible */}
+      {hasHeader && filtersAndSorters && (
+        <div className={styles['filters-sorters']}>{filtersAndSorters()}</div>
+      )}
 
-      <Body
-        data={data}
-        columns={columns}
-        rowActions={rowActions}
-        hasSelect={hasSelect}
-        isSelected={isSelected}
-        select={select}
-      />
-    </table>
+      <table className={styles.table}>
+        <Header
+          columns={columns}
+          options={options}
+          selectAll={selectAll}
+          isSelectedAll={isSelectedAll}
+          isSelectedAny={isSelectedAny}
+          i18n={i18n}
+          selected={selected}
+          filtersAndSorters={filtersAndSorters}
+          hasHeader={hasHeader}
+        />
+
+        {isLoading && <Loader colSpan={columnsCount} />}
+
+        {!isLoading && !dataIsNotEmpty && emptyMessage && (
+          <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
+        )}
+
+        {!isLoading && dataIsNotEmpty && (
+          <Body
+            data={data}
+            columns={columns}
+            rowActions={rowActions}
+            hasSelect={hasSelect}
+            isSelected={isSelected}
+            select={select}
+          />
+        )}
+      </table>
+    </div>
   )
 }

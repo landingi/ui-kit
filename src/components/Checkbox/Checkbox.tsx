@@ -9,6 +9,7 @@ interface CheckboxProps {
   checked: boolean
   disabled?: boolean
   formikKey?: string
+  tableDeselect?: boolean
   'data-testid'?: string
 }
 
@@ -18,10 +19,14 @@ export const Checkbox: FC<CheckboxProps> = ({
   checked,
   disabled = false,
   formikKey,
+  tableDeselect = false,
   'data-testid': dataTestId = 'checkbox'
 }) => {
   const checkboxStyles = useStyles(
-    { [styles.input__checkbox]: true },
+    {
+      [styles.input__checkbox]: true,
+      [styles['input__checkbox--table-deselect']]: tableDeselect
+    },
     className
   )
 

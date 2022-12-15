@@ -15,4 +15,14 @@
   &:last-of-type {
     padding-right: $padding-x-large;
   }
+
+  &--options {
+    color: $color-1;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &--checkbox {
+    width: 60px;
+  }
 }

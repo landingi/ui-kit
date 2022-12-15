@@ -1,43 +1,71 @@
 import { Checkbox } from '@components/Checkbox'
+import Spreader from '@components/Spreader'
+import type { HeaderProps, ItemBase } from '@components/Table/types'
+import { useStyles } from '@helpers/hooks/useStyles'
+import { Row } from 'simple-flexbox'
 
-import type { HeaderProps, ItemBase } from '../../types'
 import styles from './Header.module.scss'
 
 export const Header = <Item extends ItemBase>({
   columns,
-  selectOptions,
+  options,
   selectAll,
   isSelectedAll,
   isSelectedAny,
-  selected
+  i18n,
+  selected,
+  filtersAndSorters,
+  hasHeader
 }: HeaderProps<Item>) => {
-  const optionsAriaColspan = columns.length - 1
+  // depends on columns length and special case when columns with checkbox exists(options props)
+  const optionsAriaColSpan = columns.length - (options ? 0 : 1)
 
-  const columnsMap = columns.map(({ header, identifier }) => {
-    return (
-      <th className={styles.th} key={identifier}>
-        {header}
-      </th>
-    )
+  const columnsMap = columns.map(({ header, identifier, width }) => (
+    <th className={styles.th} key={identifier} style={{ width }}>
+      {header}
+    </th>
+  ))
+
+  const thCheckboxStyles = useStyles({
+    [styles.th]: true,
+    [styles['th--checkbox']]: true
   })
 
-  if (selectOptions) {
+  if (options) {
     return (
       <thead className={styles.thead}>
         <tr>
-          <th className={styles.th} aria-colspan={1}>
-            {/*
-          // @ts-ignore */}
-            <Checkbox checked={isSelectedAll} onChange={selectAll} />
+          <th className={thCheckboxStyles} colSpan={1}>
+            <Checkbox
+              checked={isSelectedAny}
+              onChange={selectAll}
+              tableDeselect={!isSelectedAll}
+            />
           </th>
 
           {isSelectedAny && (
-            <th className={styles.th} aria-colspan={optionsAriaColspan}>
-              {selectOptions(selected)}
+            <th className={styles['th--options']} colSpan={optionsAriaColSpan}>
+              <Row alignItems='center'>
+                <span>
+                  {i18n.selected}
+
+                  <Spreader spread='tiny' />
+
+                  {selected.length}
+                </span>
+
+                <Spreader />
+
+                {options(selected)}
+              </Row>
             </th>
           )}
 
-          {!isSelectedAny && columnsMap}
+          {!isSelectedAny && hasHeader && columnsMap}
+
+          {!isSelectedAny && !hasHeader && filtersAndSorters && (
+            <th colSpan={optionsAriaColSpan}>{filtersAndSorters()}</th>
+          )}
         </tr>
       </thead>
     )

@@ -141,4 +141,15 @@
       }
     }
   }
+
+  &--table-deselect {
+    div {
+      &::after {
+        border-right: none;
+        border-left: none;
+        border-top: none;
+        transform: translate(4px, 4px);
+      }
+    }
+  }
 }
