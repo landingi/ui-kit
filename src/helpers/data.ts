@@ -8,7 +8,7 @@ export const isEmpty = (value?: string) =>
   (value.constructor === Object && Object.keys(value).length === 0)
 
 const fontIcons = {
-  alert: 'icon-remove',
+  alert: 'icon-exclamation-triangle',
   info: 'icon-info',
   success: 'icon-ok',
   warning: 'icon-exclamation'

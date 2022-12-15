@@ -28,7 +28,7 @@ describe('<Alert /> mount', () => {
     const alertComponent = screen.getByTestId('alert')
     const icon = screen.getByTestId('alert-icon')
 
-    expect(icon).toHaveClass('icon-remove')
+    expect(icon).toHaveClass('icon-exclamation-triangle')
     expect(alertComponent).toHaveClass('alert-message--alert')
   })
 
