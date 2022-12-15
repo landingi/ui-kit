@@ -4,6 +4,4 @@ export declare const useTable: <Item extends ItemBase>({ data, options, ...rest 
     Table: () => JSX.Element;
     selected: Item["identifier"][];
     page: number;
-    filters: never[];
-    sort: never[];
 };
