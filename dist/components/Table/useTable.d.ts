@@ -1,7 +1,8 @@
 /// <reference types="react" />
 import { ItemBase, UseTableProps } from './types';
-export declare const useTable: <Item extends ItemBase>({ data, options, ...rest }: UseTableProps<Item>) => {
+export declare const useTable: <Item extends ItemBase>({ data, options, pagination, name, constantPageLimit, ...rest }: UseTableProps<Item>) => {
     Table: () => JSX.Element;
     selected: Item["identifier"][];
-    page: number;
+    pageIndex: number;
+    pageLimit: number;
 };
