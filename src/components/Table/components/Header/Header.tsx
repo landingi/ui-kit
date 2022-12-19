@@ -74,7 +74,11 @@ export const Header = <Item extends ItemBase>({
 
   return (
     <thead className={styles.thead}>
-      <tr>{columnsMap}</tr>
+      {!hasHeader && filtersAndSorters ? (
+        <th colSpan={optionsAriaColSpan}>{filtersAndSorters()}</th>
+      ) : (
+        <tr>{columnsMap}</tr>
+      )}
     </thead>
   )
 }
