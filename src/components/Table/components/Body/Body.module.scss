@@ -17,7 +17,7 @@
       $color-bg 10%,
       $color-bg
     );
-    z-index: 5;
+    z-index: $z-index-table;
     max-width: 100%;
     transition: opacity 0.25s ease;
     opacity: 0;

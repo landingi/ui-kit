@@ -1,4 +1,5 @@
-import type { BodyProps, ItemBase } from '../../types'
+import type { BodyProps, ItemBase } from '@components/Table/types'
+
 import { BodyTr } from './BodyTr'
 
 export const Body = <Item extends ItemBase>({

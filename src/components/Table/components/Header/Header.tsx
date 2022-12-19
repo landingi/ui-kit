@@ -1,9 +1,9 @@
 import { Checkbox } from '@components/Checkbox'
 import Spreader from '@components/Spreader'
+import type { HeaderProps, ItemBase } from '@components/Table/types'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { Row } from 'simple-flexbox'
 
-import type { HeaderProps, ItemBase } from '../../types'
 import styles from './Header.module.scss'
 
 export const Header = <Item extends ItemBase>({
