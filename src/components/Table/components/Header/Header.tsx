@@ -42,6 +42,7 @@ export const Header = <Item extends ItemBase>({
               tableDeselect={!isSelectedAll}
             />
           </th>
+
           {isSelectedAny && (
             <th className={styles['th--options']} colSpan={optionsAriaColSpan}>
               <Row alignItems='center'>
@@ -72,7 +73,15 @@ export const Header = <Item extends ItemBase>({
 
   return (
     <thead className={styles.thead}>
-      <tr>{columnsMap}</tr>
+      <tr>
+        {hasHeader && columnsMap}
+
+        {!hasHeader && filtersAndSorters && (
+          <th className={styles.th} colSpan={optionsAriaColSpan}>
+            {filtersAndSorters()}
+          </th>
+        )}
+      </tr>
     </thead>
   )
 }
