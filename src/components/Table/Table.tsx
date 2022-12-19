@@ -61,13 +61,13 @@ export const Table = <Item extends ItemBase>({
           hasHeader={hasHeader}
         />
 
-        {!isLoading && <Loader colSpan={columnsCount} />}
+        {isLoading && <Loader colSpan={columnsCount} />}
 
         {!isLoading && !dataIsNotEmpty && emptyMessage && (
           <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
         )}
 
-        {/* {!isLoading && dataIsNotEmpty && (
+        {!isLoading && dataIsNotEmpty && (
           <Body
             data={data}
             columns={columns}
@@ -76,7 +76,7 @@ export const Table = <Item extends ItemBase>({
             isSelected={isSelected}
             select={select}
           />
-        )} */}
+        )}
       </table>
 
       <Spacer />
