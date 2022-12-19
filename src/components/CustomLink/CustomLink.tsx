@@ -12,6 +12,7 @@ interface CustomLinkProps {
   size?: 10 | 12 | 14 | 16
   underlined?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
+  color?: string
 }
 
 export const CustomLink: FC<CustomLinkProps> = ({
@@ -22,7 +23,8 @@ export const CustomLink: FC<CustomLinkProps> = ({
   target = '_self',
   size = 14,
   underlined = false,
-  onClick = () => null
+  onClick = () => null,
+  color = undefined
 }) => {
   const customLinkStyles = useStyles(
     {
@@ -41,6 +43,7 @@ export const CustomLink: FC<CustomLinkProps> = ({
       href={href}
       onClick={onClick}
       target={target}
+      style={{ color }}
     >
       {label}
     </a>
