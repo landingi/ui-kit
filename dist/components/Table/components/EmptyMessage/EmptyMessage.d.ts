@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 interface EmptyMessageProps {
     colSpan: number;
-    emptyMessage?: ReactNode;
+    emptyMessage: () => ReactNode;
 }
 export declare const EmptyMessage: FC<EmptyMessageProps>;
 export {};

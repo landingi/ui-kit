@@ -36,7 +36,7 @@ export interface UseTableProps<Item extends ItemBase> {
   filtersAndSorters?: () => ReactNode
   hasHeader?: boolean
   isLoading?: boolean
-  emptyMessage?: ReactNode
+  emptyMessage?: () => ReactNode
   pagination?: {
     counter: {
       current: number

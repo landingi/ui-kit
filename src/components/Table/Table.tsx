@@ -64,7 +64,7 @@ export const Table = <Item extends ItemBase>({
         {isLoading && <Loader colSpan={columnsCount} />}
 
         {!isLoading && !dataIsNotEmpty && emptyMessage && (
-          <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
+          <EmptyMessage emptyMessage={emptyMessage()} colSpan={columnsCount} />
         )}
 
         {!isLoading && dataIsNotEmpty && (
