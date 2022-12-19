@@ -1,4 +1,5 @@
 import { useSelect } from '@helpers/hooks/useSelect'
+import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import { getLocalStorage } from '@helpers/storage'
 import { useState } from 'react'
 
@@ -35,7 +36,12 @@ export const useTable = <Item extends ItemBase>({
 
   const values = data.map(({ identifier }) => identifier)
 
-  const selectProps = useSelect<Item['identifier']>(values)
+  const { deselectAll, ...selectProps } = useSelect<Item['identifier']>(values)
+
+  useUpdateEffect(() => {
+    // deselect all items when params is changed
+    deselectAll()
+  }, [refresh, pageIndex, pageLimit])
 
   const pageCount = Math.ceil(pagination.counter.total / pageLimit)
 

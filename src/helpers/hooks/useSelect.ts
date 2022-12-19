@@ -32,6 +32,10 @@ export const useSelect = <Identifier>(
     }
   }
 
+  const deselectAll = () => {
+    setSelected([])
+  }
+
   useEffect(() => {
     if (handleSelect) {
       handleSelect(selected)
@@ -44,6 +48,7 @@ export const useSelect = <Identifier>(
     isSelectedAll,
     isSelectedAny,
     select,
-    selectAll
+    selectAll,
+    deselectAll
   }
 }

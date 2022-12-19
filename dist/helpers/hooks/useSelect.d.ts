@@ -5,4 +5,5 @@ export declare const useSelect: <Identifier>(values: Identifier[], initial?: Ide
     isSelectedAny: boolean;
     select: (identifier: Identifier) => void;
     selectAll: () => void;
+    deselectAll: () => void;
 };
