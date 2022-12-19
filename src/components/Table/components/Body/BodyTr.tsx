@@ -23,6 +23,7 @@ export const BodyTr = <Item extends ItemBase>({
   const trRef =
     useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
 
+  // safari fix for height of row actions
   const [hoverProps] = useHover()
 
   return (
