@@ -105,7 +105,7 @@
     &::before {
       content: '';
       display: inline-block;
-      box-sizing: content-box;
+      box-sizing: border-box;
       margin: 3px 11px 3px 1px;
       background-color: $color-white;
       border: solid 2px;
@@ -121,8 +121,8 @@
       content: '';
       display: block;
       position: absolute;
-      top: 4px;
-      left: 2px;
+      top: 6px;
+      left: 3px;
       width: 8px;
       height: 3px;
       border: solid 2px transparent;
@@ -149,6 +149,7 @@
         border-left: none;
         border-top: none;
         transform: translate(4px, 4px);
+        left: 2;
       }
     }
   }
