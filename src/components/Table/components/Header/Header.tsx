@@ -31,6 +31,8 @@ export const Header = <Item extends ItemBase>({
     [styles['th--checkbox']]: true
   })
 
+  console.log({ isSelectedAny, hasHeader, filtersAndSorters })
+
   if (options) {
     return (
       <thead className={styles.thead}>
@@ -42,7 +44,6 @@ export const Header = <Item extends ItemBase>({
               tableDeselect={!isSelectedAll}
             />
           </th>
-
           {isSelectedAny && (
             <th className={styles['th--options']} colSpan={optionsAriaColSpan}>
               <Row alignItems='center'>
