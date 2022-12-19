@@ -31,8 +31,6 @@ export const Header = <Item extends ItemBase>({
     [styles['th--checkbox']]: true
   })
 
-  console.log({ isSelectedAny, hasHeader, filtersAndSorters })
-
   if (options) {
     return (
       <thead className={styles.thead}>
@@ -74,11 +72,7 @@ export const Header = <Item extends ItemBase>({
 
   return (
     <thead className={styles.thead}>
-      {!hasHeader && filtersAndSorters ? (
-        <th colSpan={optionsAriaColSpan}>{filtersAndSorters()}</th>
-      ) : (
-        <tr>{columnsMap}</tr>
-      )}
+      <tr>{columnsMap}</tr>
     </thead>
   )
 }

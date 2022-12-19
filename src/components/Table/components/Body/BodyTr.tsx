@@ -6,7 +6,6 @@ import type {
   ItemBase
 } from '@components/Table/types'
 import { isSafari } from '@helpers/browser'
-import { useHover } from '@helpers/hooks/useHover'
 import { MutableRefObject, ReactNode, useRef } from 'react'
 
 import styles from './Body.module.scss'
@@ -23,11 +22,8 @@ export const BodyTr = <Item extends ItemBase>({
   const trRef =
     useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
 
-  // safari fix for height of row actions
-  const [hoverProps] = useHover()
-
   return (
-    <tr className={styles.tr} ref={trRef} {...hoverProps}>
+    <tr className={styles.tr} ref={trRef}>
       {hasSelect && (
         <td className={styles.td}>
           <Checkbox
