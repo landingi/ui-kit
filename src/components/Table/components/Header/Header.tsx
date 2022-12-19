@@ -57,7 +57,7 @@ export const Header = <Item extends ItemBase>({
 
                 <Spreader />
 
-                {options(selected)}
+                {options(selected, handleRefresh)}
               </Row>
             </th>
           )}

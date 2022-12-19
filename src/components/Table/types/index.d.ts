@@ -32,7 +32,10 @@ export interface UseTableProps<Item extends ItemBase> {
     last: string
   }
   rowActions?: (item: Item) => ReactNode
-  options?: (identifiers: Item['identifier'][]) => ReactNode
+  options?: (
+    identifiers: Item['identifier'][],
+    handleRefresh: () => void
+  ) => ReactNode
   filtersAndSorters?: (handleRefresh: () => void) => ReactNode
   hasHeader?: boolean
   isLoading?: boolean
@@ -67,7 +70,10 @@ export interface HeaderProps<Item extends ItemBase> {
   selectAll: () => void
   isSelectedAll: boolean
   isSelectedAny: boolean
-  options?: (identifiers: Item['identifier'][]) => ReactNode
+  options?: (
+    identifiers: Item['identifier'][],
+    handleRefresh: () => void
+  ) => ReactNode
   i18n: {
     selected: string
   }
