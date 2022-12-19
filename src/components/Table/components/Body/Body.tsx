@@ -8,7 +8,8 @@ export const Body = <Item extends ItemBase>({
   rowActions,
   hasSelect,
   isSelected,
-  select
+  select,
+  handleRefresh
 }: BodyProps<Item>) => (
   <tbody>
     {data.map(item => (
@@ -20,6 +21,7 @@ export const Body = <Item extends ItemBase>({
         hasSelect={hasSelect}
         isSelected={isSelected}
         select={select}
+        handleRefresh={handleRefresh}
       />
     ))}
   </tbody>

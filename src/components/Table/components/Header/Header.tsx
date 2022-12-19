@@ -15,7 +15,8 @@ export const Header = <Item extends ItemBase>({
   i18n,
   selected,
   filtersAndSorters,
-  hasHeader
+  hasHeader,
+  handleRefresh
 }: HeaderProps<Item>) => {
   // depends on columns length and special case when columns with checkbox exists(options props)
   const optionsAriaColSpan = columns.length - (options ? 0 : 1)
@@ -64,7 +65,9 @@ export const Header = <Item extends ItemBase>({
           {!isSelectedAny && hasHeader && columnsMap}
 
           {!isSelectedAny && !hasHeader && filtersAndSorters && (
-            <th colSpan={optionsAriaColSpan}>{filtersAndSorters()}</th>
+            <th colSpan={optionsAriaColSpan}>
+              {filtersAndSorters(handleRefresh)}
+            </th>
           )}
         </tr>
       </thead>
@@ -78,7 +81,7 @@ export const Header = <Item extends ItemBase>({
 
         {!hasHeader && filtersAndSorters && (
           <th className={styles.th} colSpan={optionsAriaColSpan}>
-            {filtersAndSorters()}
+            {filtersAndSorters(handleRefresh)}
           </th>
         )}
       </tr>

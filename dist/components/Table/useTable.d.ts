@@ -5,4 +5,5 @@ export declare const useTable: <Item extends ItemBase>({ data, options, paginati
     selected: Item["identifier"][];
     pageIndex: number;
     pageLimit: number;
+    refresh: boolean;
 };

@@ -35,7 +35,8 @@ export const Table = <Item extends ItemBase>({
   setPageIndex,
   setPageLimit,
   pageLimit,
-  constantPageLimit
+  constantPageLimit,
+  handleRefresh
 }: TableProps<Item>) => {
   const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
@@ -45,7 +46,9 @@ export const Table = <Item extends ItemBase>({
     <div className={styles.wrapper}>
       {/* render filters and sorters above table when header is visible */}
       {hasHeader && filtersAndSorters && (
-        <div className={styles['filters-sorters']}>{filtersAndSorters()}</div>
+        <div className={styles['filters-sorters']}>
+          {filtersAndSorters(handleRefresh)}
+        </div>
       )}
 
       <table className={styles.table}>
@@ -59,6 +62,7 @@ export const Table = <Item extends ItemBase>({
           selected={selected}
           filtersAndSorters={filtersAndSorters}
           hasHeader={hasHeader}
+          handleRefresh={handleRefresh}
         />
 
         {isLoading && <Loader colSpan={columnsCount} />}
@@ -75,6 +79,7 @@ export const Table = <Item extends ItemBase>({
             hasSelect={hasSelect}
             isSelected={isSelected}
             select={select}
+            handleRefresh={handleRefresh}
           />
         )}
       </table>

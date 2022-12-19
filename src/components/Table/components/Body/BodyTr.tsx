@@ -17,7 +17,8 @@ export const BodyTr = <Item extends ItemBase>({
   rowActions,
   hasSelect,
   isSelected,
-  select
+  select,
+  handleRefresh
 }: BodyTrProps<Item>) => {
   const trRef =
     useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
@@ -52,7 +53,7 @@ export const BodyTr = <Item extends ItemBase>({
             key={column.identifier}
             style={{ width: column.width }}
           >
-            {(column as CustomColumn<Item>).render(item)}
+            {(column as CustomColumn<Item>).render(item, handleRefresh)}
           </td>
         )
       })}

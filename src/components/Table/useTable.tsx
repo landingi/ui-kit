@@ -13,6 +13,10 @@ export const useTable = <Item extends ItemBase>({
   constantPageLimit,
   ...rest
 }: UseTableProps<Item>) => {
+  const [refresh, setRefresh] = useState<boolean>(false)
+
+  const handleRefresh = () => setRefresh(!refresh)
+
   // get page limit from local storage, default limit is 10
   const defaultPageLimit =
     constantPageLimit ||
@@ -53,11 +57,13 @@ export const useTable = <Item extends ItemBase>({
         setPageIndex={setPageIndex}
         setPageLimit={setPageLimit}
         constantPageLimit={constantPageLimit}
+        handleRefresh={handleRefresh}
         {...tableProps}
       />
     ),
     selected: selectProps.selected,
     pageIndex,
-    pageLimit
+    pageLimit,
+    refresh
   }
 }

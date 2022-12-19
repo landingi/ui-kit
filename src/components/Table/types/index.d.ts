@@ -11,7 +11,7 @@ export interface ColumnAccessor<Item> {
 
 export interface CustomColumn<Item> {
   identifier: string
-  render: (item: Item) => ReactNode
+  render: (item: Item, handleRefresh: () => void) => ReactNode
   width?: Width
   header?: string
 }
@@ -33,7 +33,7 @@ export interface UseTableProps<Item extends ItemBase> {
   }
   rowActions?: (item: Item) => ReactNode
   options?: (identifiers: Item['identifier'][]) => ReactNode
-  filtersAndSorters?: () => ReactNode
+  filtersAndSorters?: (handleRefresh: () => void) => ReactNode
   hasHeader?: boolean
   isLoading?: boolean
   emptyMessage?: () => ReactNode
@@ -59,6 +59,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   pageLimit: number
   setPageIndex: (page: number) => void
   setPageLimit: (page: number) => void
+  handleRefresh: () => void
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -71,8 +72,9 @@ export interface HeaderProps<Item extends ItemBase> {
     selected: string
   }
   selected: Item['identifier'][]
-  filtersAndSorters?: () => ReactNode
+  filtersAndSorters?: (handleRefresh: () => void) => ReactNode
   hasHeader?: boolean
+  handleRefresh: () => void
 }
 
 export interface BodyProps<Item extends ItemBase> {
@@ -82,6 +84,7 @@ export interface BodyProps<Item extends ItemBase> {
   hasSelect?: boolean
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
+  handleRefresh: () => void
 }
 
 export interface BodyTrProps<Item extends ItemBase> {
@@ -91,6 +94,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   hasSelect?: boolean
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
+  handleRefresh: () => void
 }
 
 export interface RowActionsProps {
