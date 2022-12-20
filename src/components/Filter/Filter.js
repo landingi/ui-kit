@@ -25,7 +25,8 @@ const Filter = ({
   localStorageKey,
   customLabel,
   'data-testid': dataTestId,
-  dropdownPlacement
+  dropdownPlacement,
+  isDisabled
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
@@ -50,6 +51,7 @@ const Filter = ({
       size='medium'
       data-testid={dataTestId}
       dropdownPlacement={dropdownPlacement}
+      isOpenDisabled={isDisabled}
     >
       <List>
         {values.map(({ value, label }) => (
@@ -85,7 +87,8 @@ Filter.propTypes = {
   ).isRequired,
   customLabel: PropTypes.func,
   'data-testid': PropTypes.string,
-  dropdownPlacement: PropTypes.string
+  dropdownPlacement: PropTypes.string,
+  isDisabled: PropTypes.bool
 }
 
 Filter.defaultProps = {
@@ -94,7 +97,8 @@ Filter.defaultProps = {
   setValue: () => null,
   customLabel: null,
   'data-testid': 'filter-component',
-  dropdownPlacement: 'right'
+  dropdownPlacement: 'right',
+  isDisabled: false
 }
 
 export default Filter
