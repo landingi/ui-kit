@@ -1,0 +1,54 @@
+.tr {
+  border-bottom: 1px solid $color-7;
+  position: relative;
+  transform: scale(1, 1);
+
+  &__row-actions {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    padding: 0 $padding-x-large;
+    background: linear-gradient(
+      90deg,
+      hsla(0deg, 0%, 96.1%, 0) 0,
+      $color-bg 10%,
+      $color-bg
+    );
+    z-index: $z-index-table;
+    max-width: 100%;
+    transition: opacity 0.25s ease;
+    opacity: 0;
+    visibility: hidden;
+
+    &--safari {
+      right: -30px;
+      bottom: auto;
+    }
+  }
+
+  &:hover {
+    background-color: $color-bg;
+
+    .tr__row-actions {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.td {
+  padding: $padding-medium;
+  font-size: 14px;
+  color: $color-1;
+
+  &:first-of-type {
+    padding-left: $padding-x-large;
+  }
+
+  &:last-of-type {
+    padding-right: $padding-x-large;
+  }
+}

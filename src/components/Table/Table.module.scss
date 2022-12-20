@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100%;
+}
+
+.filters-sorters {
+  margin: $padding-small $padding-x-large 0 $padding-regular;
+}
+
+.table {
+  width: 100%;
+  padding: 0 $padding-medium;
+  border-collapse: collapse;
+
+  &__pagination {
+    padding: 0 $padding-x-large;
+  }
+}

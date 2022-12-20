@@ -121,8 +121,8 @@
       content: '';
       display: block;
       position: absolute;
-      top: 4px;
-      left: 2px;
+      top: 6px;
+      left: 3px;
       width: 8px;
       height: 3px;
       border: solid 2px transparent;
@@ -138,6 +138,18 @@
 
       &:focus {
         opacity: 0.16;
+      }
+    }
+  }
+
+  &--table-deselect {
+    div {
+      &::after {
+        border-right: none;
+        border-left: none;
+        border-top: none;
+        transform: translate(4px, 4px);
+        left: 2px;
       }
     }
   }
