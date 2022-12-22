@@ -42,8 +42,7 @@ const Search = ({
   tag: Tag,
   onProtectedSubmit,
   submitEmptyOnBlur,
-  defaultValue,
-  isDisabled
+  defaultValue
 }) => {
   const elementClasses = useStyles(
     {
@@ -140,7 +139,7 @@ const Search = ({
                 variant='icon-transparent'
                 type={onProtectedSubmit ? 'button' : 'submit'}
                 size='input'
-                isDisabled={!isClearActive || isDisabled}
+                isDisabled={!isClearActive}
                 onClick={handleProtectedSubmit}
               >
                 <Icon icon='icon-search' />
@@ -160,7 +159,6 @@ const Search = ({
             onChange={onChange}
             onKeyDown={onKeyDown}
             autoFocus={autoFocus}
-            disabled={isDisabled}
           />
         )}
 
@@ -178,7 +176,6 @@ const Search = ({
             onKeyUp={handleOnKeyUp}
             defaultValue={defaultValue}
             data-testid='search-input'
-            disabled={isDisabled}
           />
         )}
 
@@ -188,7 +185,6 @@ const Search = ({
               variant='icon-transparent'
               size='input'
               onClick={handleCleanOnClick}
-              isDisabled={isDisabled}
             >
               <Icon icon='icon-remove' />
             </Button>
@@ -220,8 +216,7 @@ Search.propTypes = {
   tag: PropTypes.string,
   onProtectedSubmit: PropTypes.func,
   submitEmptyOnBlur: PropTypes.bool,
-  defaultValue: PropTypes.string,
-  isDisabled: PropTypes.bool
+  defaultValue: PropTypes.string
 }
 
 Search.defaultProps = {
@@ -241,8 +236,7 @@ Search.defaultProps = {
   onChange: () => null,
   onKeyDown: () => null,
   submitEmptyOnBlur: false,
-  defaultValue: '',
-  isDisabled: false
+  defaultValue: ''
 }
 
 export default Search

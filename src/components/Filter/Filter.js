@@ -3,7 +3,6 @@ import { List } from '@components/List'
 import { ListItem } from '@components/List/Item'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import { emitCloseDropdown } from '@events/dropdown'
-import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
@@ -26,8 +25,7 @@ const Filter = ({
   localStorageKey,
   customLabel,
   'data-testid': dataTestId,
-  dropdownPlacement,
-  isDisabled
+  dropdownPlacement
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
@@ -52,7 +50,6 @@ const Filter = ({
       size='medium'
       data-testid={dataTestId}
       dropdownPlacement={dropdownPlacement}
-      isOpenDisabled={isDisabled}
     >
       <List>
         {values.map(({ value, label }) => (
@@ -88,8 +85,7 @@ Filter.propTypes = {
   ).isRequired,
   customLabel: PropTypes.func,
   'data-testid': PropTypes.string,
-  dropdownPlacement: PropTypes.string,
-  isDisabled: PropTypes.bool
+  dropdownPlacement: PropTypes.string
 }
 
 Filter.defaultProps = {
@@ -98,8 +94,7 @@ Filter.defaultProps = {
   setValue: () => null,
   customLabel: null,
   'data-testid': 'filter-component',
-  dropdownPlacement: 'right',
-  isDisabled: false
+  dropdownPlacement: 'right'
 }
 
 export default Filter
