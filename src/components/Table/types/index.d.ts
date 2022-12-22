@@ -51,12 +51,6 @@ export interface UseTableProps<Item extends ItemBase> {
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   hasSelect: boolean
-  selected: Item['identifier'][]
-  isSelected: (identifier: Item['identifier']) => boolean
-  isSelectedAll: boolean
-  isSelectedAny: boolean
-  select: (identifier: Item['identifier']) => void
-  selectAll: () => void
   pageCount: number
   pageIndex: number
   pageLimit: number

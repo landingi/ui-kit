@@ -1,4 +1,5 @@
 import { Spacer } from '@components/Spacer'
+import { useSelect } from '@helpers/hooks/useSelect'
 import { Row } from 'simple-flexbox'
 
 import {
@@ -18,13 +19,7 @@ export const Table = <Item extends ItemBase>({
   columns,
   rowActions,
   options,
-  selectAll,
-  isSelectedAll,
-  isSelectedAny,
   hasSelect,
-  isSelected,
-  select,
-  selected,
   i18n,
   filtersAndSorters,
   hasHeader = true,
@@ -41,6 +36,17 @@ export const Table = <Item extends ItemBase>({
   const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
   const dataIsNotEmpty = Boolean(data.length)
+
+  const values = data.map(({ identifier }) => identifier)
+
+  const {
+    selectAll,
+    isSelectedAll,
+    isSelectedAny,
+    selected,
+    isSelected,
+    select
+  } = useSelect<Item['identifier']>(values)
 
   return (
     <div className={styles.wrapper}>
