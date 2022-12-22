@@ -3,6 +3,7 @@ import { List } from '@components/List'
 import { ListItem } from '@components/List/Item'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import { emitCloseDropdown } from '@events/dropdown'
+import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import { setLocalStorage } from '@helpers/storage'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
@@ -44,6 +45,12 @@ const Filter = ({
   }
 
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel
+
+  useUpdateEffect(() => {
+    if (customLabel) {
+      setLabel(customLabel(filterLabel))
+    }
+  }, [customLabel])
 
   return (
     <PerfectDropdown
