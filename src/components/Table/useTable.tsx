@@ -1,5 +1,3 @@
-import { useSelect } from '@helpers/hooks/useSelect'
-import { useUpdateEffect } from '@helpers/hooks/useUpdateEffect'
 import { getLocalStorage } from '@helpers/storage'
 import { useState } from 'react'
 
@@ -34,21 +32,7 @@ export const useTable = <Item extends ItemBase>({
   // for optimazation purposes to not provide whole options comonent to Body
   const hasSelect = Boolean(options)
 
-  const values = data.map(({ identifier }) => identifier)
-
-  const { deselectAll, ...selectProps } = useSelect<Item['identifier']>(values)
-
-  useUpdateEffect(() => {
-    // deselect all items when params is changed
-    deselectAll()
-  }, [refresh, pageIndex, pageLimit])
-
   const pageCount = Math.ceil(pagination.counter.total / pageLimit)
-
-  const tableProps = {
-    ...rest,
-    ...selectProps
-  }
 
   return {
     Table: () => (
@@ -64,10 +48,9 @@ export const useTable = <Item extends ItemBase>({
         setPageLimit={setPageLimit}
         constantPageLimit={constantPageLimit}
         handleRefresh={handleRefresh}
-        {...tableProps}
+        {...rest}
       />
     ),
-    selected: selectProps.selected,
     pageIndex,
     pageLimit,
     refresh
