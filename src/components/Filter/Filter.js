@@ -25,6 +25,7 @@ const Filter = ({
   initialValue,
   localStorageKey,
   customLabel,
+  customValue,
   'data-testid': dataTestId,
   dropdownPlacement,
   isDisabled
@@ -47,10 +48,10 @@ const Filter = ({
   const dropdownLabel = customLabel ? customLabel(filterLabel) : filterLabel
 
   useUpdateEffect(() => {
-    if (customLabel) {
-      setLabel(customLabel(filterLabel))
+    if (customValue) {
+      setLabel(customValue)
     }
-  }, [customLabel])
+  }, [customValue])
 
   return (
     <PerfectDropdown
@@ -95,7 +96,8 @@ Filter.propTypes = {
   customLabel: PropTypes.func,
   'data-testid': PropTypes.string,
   dropdownPlacement: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  customValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 Filter.defaultProps = {
@@ -105,7 +107,8 @@ Filter.defaultProps = {
   customLabel: null,
   'data-testid': 'filter-component',
   dropdownPlacement: 'right',
-  isDisabled: false
+  isDisabled: false,
+  customValue: null
 }
 
 export default Filter
