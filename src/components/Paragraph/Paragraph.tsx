@@ -19,7 +19,7 @@ interface ParagraphProps {
     | 'color-8'
     | 'success'
   size?: 10 | 12 | 14 | 16 | 18
-  align?: 'left' | 'center' | 'right'
+  align?: 'left' | 'center' | 'right' | 'justify'
   padding?: 'small' | 'medium' | 'none'
   weight?: 300 | 400 | 700
   uppercase?: boolean
