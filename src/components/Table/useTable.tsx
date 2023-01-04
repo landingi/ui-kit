@@ -51,6 +51,7 @@ export const useTable = <Item extends ItemBase>({
         {...rest}
       />
     ),
+    setPageIndex,
     pageIndex,
     pageLimit,
     refresh
