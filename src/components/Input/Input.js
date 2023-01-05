@@ -16,6 +16,7 @@ import styles from './Input.module.scss'
  * @param {function} props.onChange - click handler
  * @param {function} props.onKeyDown - key down handler
  * @param {function} props.onBlur - blur handler
+ * @param {function} props.onFocus - focus handler
  * @param {string} props.type - type
  * @param {string} props.name - name
  * @param {boolean} props.disabled - disabled
@@ -43,6 +44,7 @@ const Input = forwardRef(
       onChange,
       onKeyDown,
       onBlur,
+      onFocus,
       type,
       name,
       disabled,
@@ -99,6 +101,7 @@ const Input = forwardRef(
           onBlur={onBlur}
           onChange={onChange}
           onKeyDown={onKeyDown}
+          onFocus={onFocus}
           type={type}
           placeholder={i18n.placeholder}
           name={name}
@@ -149,6 +152,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
   onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   type: PropTypes.string,
   name: PropTypes.string,
   disabled: PropTypes.bool,
@@ -208,6 +212,7 @@ Input.defaultProps = {
   onChange: () => null,
   onKeyDown: () => null,
   onBlur: () => null,
+  onFocus: () => null,
   defaultValue: null,
   alwaysShowLabel: false,
   variant: '',
