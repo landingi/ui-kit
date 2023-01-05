@@ -7,7 +7,7 @@ import { ItemBase, UseTableProps } from './types'
 export const useTable = <Item extends ItemBase>({
   data,
   options,
-  pagination = { counter: { current: 0, total: 0 } },
+  pagination = { total: 1, current: 1 },
   name,
   constantPageLimit,
   ...rest
@@ -23,16 +23,10 @@ export const useTable = <Item extends ItemBase>({
 
   const [pageLimit, setPageLimit] = useState<number>(defaultPageLimit)
 
-  // calculate page index based on current counter and page limit(if current === pageLimit then defaultPageIndex = 1)
-  const defaultPageIndex =
-    Math.ceil(pagination.counter.current / pageLimit) || 1
-
-  const [pageIndex, setPageIndex] = useState<number>(defaultPageIndex)
-
   // for optimazation purposes to not provide whole options comonent to Body
   const hasSelect = Boolean(options)
 
-  const pageCount = Math.ceil(pagination.counter.total / pageLimit)
+  const pageCount = Math.ceil(pagination.total / pageLimit)
 
   return {
     Table: () => (
@@ -42,16 +36,14 @@ export const useTable = <Item extends ItemBase>({
         hasSelect={hasSelect}
         options={options}
         pageCount={pageCount}
-        pageIndex={pageIndex}
         pageLimit={pageLimit}
-        setPageIndex={setPageIndex}
         setPageLimit={setPageLimit}
         constantPageLimit={constantPageLimit}
         handleRefresh={handleRefresh}
+        pagination={pagination}
         {...rest}
       />
     ),
-    pageIndex,
     pageLimit,
     refresh
   }

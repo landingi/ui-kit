@@ -41,10 +41,9 @@ export interface UseTableProps<Item extends ItemBase> {
   isLoading?: boolean
   emptyMessage?: () => ReactNode
   pagination?: {
-    counter: {
-      current: number
-      total: number
-    }
+    current: number
+    total: number
+    handlePageChange?: (page: number) => void
   }
   constantPageLimit?: number
 }
@@ -52,9 +51,7 @@ export interface UseTableProps<Item extends ItemBase> {
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   hasSelect: boolean
   pageCount: number
-  pageIndex: number
   pageLimit: number
-  setPageIndex: (page: number) => void
   setPageLimit: (page: number) => void
   handleRefresh: () => void
 }
@@ -103,13 +100,16 @@ export interface RowActionsProps {
 }
 
 export interface PaginationProps {
-  pageIndex: number
   pageCount: number
   i18n: {
     first: string
     last: string
   }
-  onChange: (number) => void
+  pagination?: {
+    current: number
+    total: number
+    handlePageChange?: (page: number) => void
+  }
 }
 
 export interface PageLimitProps {

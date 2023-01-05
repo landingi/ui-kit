@@ -8,12 +8,17 @@ import { FC } from 'react'
 import styles from './Pagination.module.scss'
 
 export const Pagination: FC<PaginationProps> = ({
-  pageIndex,
   pageCount,
   i18n,
-  onChange
+  pagination = { current: 1, total: 1 }
 }) => {
-  const handleChangePage = (page: number) => () => onChange(page)
+  const { current, handlePageChange } = pagination
+
+  const handleChangePage = (page: number) => () => {
+    if (handlePageChange) {
+      handlePageChange(page)
+    }
+  }
 
   return (
     <div className={styles.pagination__links}>
@@ -22,15 +27,15 @@ export const Pagination: FC<PaginationProps> = ({
           onClick={handleChangePage(1)}
           size='small'
           variant='icon'
-          isDisabled={pageIndex === 1}
+          isDisabled={current === 1}
         >
           {i18n.first}
         </Button>
       </span>
 
       <Button
-        isDisabled={pageIndex === 1}
-        onClick={handleChangePage(pageIndex - 1)}
+        isDisabled={current === 1}
+        onClick={handleChangePage(current - 1)}
         size='small'
         variant='icon'
       >
@@ -40,66 +45,66 @@ export const Pagination: FC<PaginationProps> = ({
       <List variant='inline'>
         <ListItem>
           <Button
-            onClick={handleChangePage(pageIndex - 2)}
-            hide={pageIndex - 2 <= 0}
+            onClick={handleChangePage(current - 2)}
+            hide={current - 2 <= 0}
             size='small'
             variant='icon'
           >
-            {pageIndex - 2}
+            {current - 2}
           </Button>
         </ListItem>
 
         <ListItem>
           <Button
-            onClick={handleChangePage(pageIndex - 1)}
-            hide={pageIndex - 1 <= 0}
+            onClick={handleChangePage(current - 1)}
+            hide={current - 1 <= 0}
             size='small'
             variant='icon'
           >
-            {pageIndex - 1}
+            {current - 1}
           </Button>
         </ListItem>
 
         <ListItem className={styles.pagination__links__current}>
           <Button size='small' variant='icon'>
-            {pageIndex}
+            {current}
           </Button>
         </ListItem>
 
         <ListItem>
           <Button
-            hide={pageIndex + 1 > pageCount}
-            onClick={handleChangePage(pageIndex + 1)}
+            hide={current + 1 > pageCount}
+            onClick={handleChangePage(current + 1)}
             size='small'
             variant='icon'
           >
-            {pageIndex + 1}
+            {current + 1}
           </Button>
         </ListItem>
 
         <ListItem>
           <Button
-            onClick={handleChangePage(pageIndex + 2)}
-            hide={pageIndex + 2 >= pageCount}
+            onClick={handleChangePage(current + 2)}
+            hide={current + 2 >= pageCount}
             size='small'
             variant='icon'
           >
-            {pageIndex + 2}
+            {current + 2}
           </Button>
         </ListItem>
 
         <ListItem>
           <Button
-            onClick={handleChangePage(pageIndex + 3)}
-            hide={pageIndex + 4 !== pageCount}
+            onClick={handleChangePage(current + 3)}
+            hide={current + 4 !== pageCount}
             size='small'
             variant='icon'
           >
-            {pageIndex + 3}
+            {current + 3}
           </Button>
         </ListItem>
 
-        {pageIndex + 4 < pageCount && (
+        {current + 4 < pageCount && (
           <ListItem>
             <span>...</span>
           </ListItem>
@@ -108,7 +113,7 @@ export const Pagination: FC<PaginationProps> = ({
         <ListItem>
           <Button
             onClick={handleChangePage(pageCount)}
-            hide={pageIndex >= pageCount - 1}
+            hide={current >= pageCount - 1}
             size='small'
             variant='icon'
           >
@@ -118,10 +123,10 @@ export const Pagination: FC<PaginationProps> = ({
       </List>
 
       <Button
-        onClick={handleChangePage(pageIndex + 1)}
+        onClick={handleChangePage(current + 1)}
         size='small'
         variant='icon'
-        isDisabled={pageIndex === pageCount}
+        isDisabled={current === pageCount}
       >
         <Icon icon='icon-caret-right' />
       </Button>
@@ -131,7 +136,7 @@ export const Pagination: FC<PaginationProps> = ({
           onClick={handleChangePage(pageCount)}
           size='small'
           variant='icon'
-          isDisabled={pageIndex === pageCount}
+          isDisabled={current === pageCount}
         >
           {i18n.last}
         </Button>

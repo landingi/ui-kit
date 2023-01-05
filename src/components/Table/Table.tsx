@@ -26,12 +26,11 @@ export const Table = <Item extends ItemBase>({
   isLoading,
   emptyMessage,
   pageCount,
-  pageIndex,
-  setPageIndex,
   setPageLimit,
   pageLimit,
   constantPageLimit,
-  handleRefresh
+  handleRefresh,
+  pagination
 }: TableProps<Item>) => {
   const columnsCount = columns.length + (hasSelect ? 1 : 0)
 
@@ -98,9 +97,8 @@ export const Table = <Item extends ItemBase>({
         {pageCount > 1 ? (
           <Pagination
             i18n={i18n}
-            pageIndex={pageIndex}
             pageCount={pageCount}
-            onChange={setPageIndex}
+            pagination={pagination}
           />
         ) : null}
 
