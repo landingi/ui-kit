@@ -31,7 +31,7 @@ export interface UseTableProps<Item extends ItemBase> {
     first: string
     last: string
   }
-  rowActions?: (item: Item) => ReactNode
+  rowActions?: (item: Item, handleRefresh: () => void) => ReactNode
   options?: (
     identifiers: Item['identifier'][],
     handleRefresh: () => void
@@ -77,7 +77,7 @@ export interface HeaderProps<Item extends ItemBase> {
 export interface BodyProps<Item extends ItemBase> {
   data: Item[]
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
-  rowActions?: (item: Item) => ReactNode
+  rowActions?: (item: Item, handleRefresh: () => void) => ReactNode
   hasSelect?: boolean
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
@@ -87,7 +87,7 @@ export interface BodyProps<Item extends ItemBase> {
 export interface BodyTrProps<Item extends ItemBase> {
   item: Item
   columns: (ColumnAccessor<Item> | CustomColumn<Item>)[]
-  rowActions?: (item: Item) => ReactNode
+  rowActions?: (item: Item, handleRefresh: () => void) => ReactNode
   hasSelect?: boolean
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
