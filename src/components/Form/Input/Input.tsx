@@ -6,9 +6,9 @@ import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import {
   ChangeEventHandler,
+  FC,
   FocusEventHandler,
-  KeyboardEventHandler,
-  FC
+  KeyboardEventHandler
 } from 'react'
 
 interface InputProps {
