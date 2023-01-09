@@ -66,7 +66,7 @@ export const BodyTr = <Item extends ItemBase>({
         <RowActions
           height={isSafari ? trRef?.current?.offsetHeight : undefined}
         >
-          {rowActions(item)}
+          {rowActions(item, handleRefresh)}
         </RowActions>
       )}
     </tr>
