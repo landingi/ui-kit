@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FocusEventHandler, KeyboardEventHandler, FC } from 'react';
+import { ChangeEventHandler, FC, FocusEventHandler, KeyboardEventHandler } from 'react';
 interface InputProps {
     className?: string | string[];
     field: {
