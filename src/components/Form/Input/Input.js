@@ -28,6 +28,7 @@ import React from 'react'
  * @param {object} props.i18n - object of translation
  * @param {string} props.variant - input variant, default ''
  * @param {function} props.onKeyDown - key down handler
+ * @param {function} props.onFocus - focus handler
  * @param {boolean} props.hideArrows - Hide arrows inc/dec value from type number input
  * @return {object} An object of children element
  */
@@ -48,6 +49,7 @@ const Input = ({
   alwaysShowLabel,
   variant,
   onKeyDown,
+  onFocus,
   'data-testid': dataTestId,
   hideArrows
 }) => {
@@ -73,6 +75,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
+        onFocus={onFocus}
         i18n={i18n}
         disabled={disabled}
         maxLength={maxLength}
@@ -136,6 +139,7 @@ Input.propTypes = {
   }),
   variant: PropTypes.string,
   onKeyDown: PropTypes.func,
+  onFocus: PropTypes.func,
   'data-testid': PropTypes.string,
   hideArrows: PropTypes.bool
 }
@@ -159,6 +163,8 @@ Input.defaultProps = {
     description: null
   },
   variant: '',
+  onKeyDown: () => null,
+  onFocus: () => null,
   form: { errors: {}, touched: {} },
   field: {},
   'data-testid': 'input-component',
