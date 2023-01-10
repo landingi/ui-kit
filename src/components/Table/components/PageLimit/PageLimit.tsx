@@ -44,6 +44,7 @@ export const PageLimit: FC<PageLimitProps> = ({
         data={pageLimits}
         onChange={handleChange}
         value={pageLimit}
+        data-testid='page-limit-selector'
         /* @ts-ignore */
         name='test'
       />

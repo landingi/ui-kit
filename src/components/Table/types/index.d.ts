@@ -54,6 +54,11 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   pageLimit: number
   setPageLimit: (page: number) => void
   handleRefresh: () => void
+  pagination: {
+    current: number
+    total: number
+    handlePageChange?: (page: number) => void
+  }
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -105,7 +110,7 @@ export interface PaginationProps {
     first: string
     last: string
   }
-  pagination?: {
+  pagination: {
     current: number
     total: number
     handlePageChange?: (page: number) => void
