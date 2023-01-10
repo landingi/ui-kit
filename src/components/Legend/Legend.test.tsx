@@ -2,9 +2,10 @@ import '@testing-library/jest-dom'
 
 import Legend from '@components/Legend'
 import { render } from '@testing-library/react'
-import React from 'react'
 
-const props = {
+import { LegendProps } from './Legend'
+
+const props: LegendProps = {
   data: [
     { range: '0 - 20', variant: 'success' },
     { range: '20 - 59', variant: 'warning' },
@@ -32,7 +33,7 @@ describe('<Legend/> mount', () => {
   })
 
   it('should be rendered with horizontal alignment', () => {
-    const newProps = {
+    const newProps: LegendProps = {
       ...props,
       alignment: 'horizontal'
     }
