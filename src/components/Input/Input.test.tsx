@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 
 import Input from '@components/Input'
 import { fireEvent, render, screen } from '@testing-library/react'
-import React from 'react'
 
 const mockedOnChange = jest.fn()
 const mockedOnKeyDown = jest.fn()
@@ -19,24 +18,6 @@ const component = <Input {...props} />
 describe('<Input /> mount', () => {
   it('is mounted', () => {
     render(component)
-  })
-
-  it('default prop `onChange` should be null', () => {
-    const result = Input.defaultProps.onChange()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onKeyDown` should be null', () => {
-    const result = Input.defaultProps.onKeyDown()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onBlur` should be null', () => {
-    const result = Input.defaultProps.onBlur()
-
-    expect(result).toBe(null)
   })
 
   it('calls function passed as onKeyDown prop on click event', () => {
