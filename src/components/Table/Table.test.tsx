@@ -182,9 +182,44 @@ describe('useTable hook tests', () => {
         i18n,
         data: mockData,
         columns,
-        options: (identifiers, handleRefresh) => {
-          return <div>options</div>
+        options: () => {
+          return <div>options-component</div>
         }
+      })
+    )
+
+    const { Table } = result.current
+
+    const { rerender } = render(<Table />)
+
+    expect(screen.queryByTestId('header-options-variant')).toBeInTheDocument()
+    expect(
+      screen.queryByTestId('header-default-variant')
+    ).not.toBeInTheDocument()
+
+    const checkboxes = screen.getAllByTestId('checkbox')
+
+    expect(screen.queryByText('options-component')).not.toBeInTheDocument()
+
+    act(() => {
+      fireEvent.click(checkboxes[0])
+    })
+
+    rerender(<Table />)
+
+    expect(screen.getByText('options-component')).toBeInTheDocument()
+  })
+
+  it('renders properly without header with options and filters-selectors enabled', () => {
+    const { result } = renderHook(() =>
+      useTable<Item>({
+        name: 'test-table',
+        i18n,
+        data: mockData,
+        columns,
+        options: () => <div>options-component</div>,
+        filtersAndSorters: () => <div>filters-and-sorters</div>,
+        hasHeader: false
       })
     )
 
@@ -192,10 +227,10 @@ describe('useTable hook tests', () => {
 
     render(<Table />)
 
-    expect(screen.queryByTestId('header-options-variant')).toBeInTheDocument()
     expect(
-      screen.queryByTestId('header-default-variant')
-    ).not.toBeInTheDocument()
+      screen.getByTestId('filters-and-selectors-in-header')
+    ).toBeInTheDocument()
+    expect(screen.getByText('filters-and-sorters')).toBeInTheDocument()
   })
 
   // screen.debug(undefined, Infinity)

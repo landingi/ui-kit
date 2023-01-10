@@ -65,7 +65,10 @@ export const Header = <Item extends ItemBase>({
           {!isSelectedAny && hasHeader && columnsMap}
 
           {!isSelectedAny && !hasHeader && filtersAndSorters && (
-            <th colSpan={optionsAriaColSpan}>
+            <th
+              colSpan={optionsAriaColSpan}
+              data-testid='filters-and-selectors-in-header'
+            >
               {filtersAndSorters(handleRefresh)}
             </th>
           )}
