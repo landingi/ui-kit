@@ -46,43 +46,43 @@ Podstawowy przykład użycia w kodzie:
    }
 ```
 
-Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdziale.
+Poszczególne parametry hooka useTable będą wytłumaczone w następnym rozdziale.
 
 ## Propsy
 
-- `name(wymagany)` - nazwa tabeli, wykorzystywane do zapamiętywania paramatru
+- `name(wymagany)` - Nazwa tabeli, wykorzystywane do zapamiętywania parametru
   page size w localstorage
-- `data(wymagany)` - tablica z danymi do wylistowania, każdy element składa się
-  z obiektu w którym klucz `identifier` jest wymagany, reszta parametrów jest
-  dowolna i ich definicję(jeśli korzystamy z typescripta) podajemy jako paramatr
-  do typu generycznego tzn. `useTable<TypPojedynczegoItemu>()` przykład
-  poprawnego formatu itemu:
+- `data(wymagany)` - Tablica z danymi do wylistowania, każdy element składa się
+  z obiektu, w którym klucz `identifier` jest wymagany, reszta parametrów jest
+  dowolna i ich definicję (jeśli korzystamy z typescripta) podajemy jako
+  parametr do typu generycznego tzn. `useTable()` przykład poprawnego formatu
+  itemu:
   ```
   {
       identifier: string | number; <- ten klucz jest wymagany, reszta tego obiektu to pola potrzebne przy dalszych etapach
-      name: string; <- (przykład)na jego podstawie renderowana będzie wartość komórki, więcej info w następnym podpunkcie
+      name: string; <- (przykład) na jego podstawie renderowana będzie wartość komórki, więcej info w następnym podpunkcie
       url: string;
       ...rest
   }[]
   ```
-- `columns(wymagany)` - tablica z obiektami, które definiują z jakich kolumn
+- `columns(wymagany)` - Tablica z obiektami, które definiują, z jakich kolumn
   będzie się składać wyrenderowana tabelka, w tym miejscu do tablicy możemy
   wprowadzić dwa rodzaje komumn: bazującą na `accessor key` oraz na customowym
-  ranerowaniu komórki, przykład
+  renderowaniu komórki, przykład
 
   ```
   type Width = number | `${number}%`
 
   export interface ColumnAccessor<Item> {
     identifier: string
-    accessor: keyof Item <- weryfikuje czy klucz który podamy faktycznie istnieje w pojedynczym elemencie w tablicy data
-    width?: Width <- opcjonalne, customowa szerokośc pola podawana w px lub %
-    header?: string <- nazwa wyświetlana w headerze
+    accessor: keyof Item <- Weryfikuje czy klucz, który podamy faktycznie istnieje w pojedynczym elemencie w tablicy data
+    width?: Width <- Opcjonalne, customowa szerokość pola podawana w px lub %
+    header?: string <- Nazwa wyświetlana w headerze
   }
 
   export interface CustomColumn<Item> {
     identifier: string
-    render: (item: Item, handleRefresh: () => void) => ReactNode <- funkcja w której wyrenderować możemy customową komórkę, udostępnia nam wszystkie dane pojedynczego elementu w tablicy data i callback do odświeżenia tablicy
+    render: (item: Item, handleRefresh: () => void) => ReactNode <- funkcja, w której wyrenderować możemy customową komórkę, udostępnia nam wszystkie dane pojedynczego elementu w tablicy data i callback do odświeżenia tablicy
     width?: Width
     header?: string
   }
@@ -91,8 +91,8 @@ Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdzial
           {
               header: 'column based on accessor key',
               identifier: 'accessor-column-identifier',
-              accessor: 'name', <-tutaj możemy wprowadzić tylko i wyłącznie klucz który istnieje na pojedynczym elemencie w tabeli data, w tym przypadku jest to klucz 'name', który podałem wyżej ts będzie to weryfikował
-              width: '100%' <- wartość liczbowa(px) lub procentowa, type Width = number | `${number}%`
+              accessor: 'name', <- Tutaj możemy wprowadzić tylko i wyłącznie klucz, który istnieje na pojedynczym elemencie w tabeli data, w tym przypadku jest to klucz 'name', który podałem wyżej ts będzie to weryfikował
+              width: '100%' <- Wartość liczbowa (px) lub procentowa, type Width = number | `${number}%`
           },
           {
               header: 'info',
@@ -103,26 +103,27 @@ Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdzial
       ]
   ```
 
-  Nie możemy mieszać ze sobą typów kolumn i zdefiniować jednocześnie accessor i
-  render w jednym obiekcie, ts rzuci błędem.
+  Możemy mieszać ze sobą typy kolumn na poziomie tablicy, natomiast nie możemy
+  zdefiniować jednocześnie accessor i render w jednym obiekcie, ts rzuci błędem.
 
-- `i18n(wymagany)` - props wymagany składa się z 3 kluczy z tłumaczeniami
+- `i18n(wymagany)` - props wymagany składa się z 3 kluczy z tłumaczeniami,
+  wykorzystywane w paginacji i headerze
   ```
   {
-      selected: string
-      first: string
-      last: string
+      selected: string <- selected/wybrano
+      first: string <- First/Pierwsza
+      last: string <- Last/Ostatnia
   }
   ```
-- `rowActions` - funkcja renderująca na hoverze wiersza panel z dowolnym
-  komponentem(krzyciska z akcjami w przypadku listy landingów)
+- `rowActions` - Funkcja renderująca na hoverze wiersza panel z dowolnym
+  komponentem (przyciski z akcjami w przypadku listy landingów)
   ```
       rowActions?: (item: Item, handleRefresh: () => void) => ReactNode
   ```
-  funkcja w której wyrenderować możemy dowolny komponent, udostępnia nam
+  funkcja, w której wyrenderować możemy dowolny komponent, udostępnia nam
   wszystkie dane pojedynczego elementu w tablicy data i callback do odświeżenia
   tablicy
-- `options` - po podaniu tego argumentu renderują się po lewej stronie tabelki w
+- `options` - Po podaniu tego argumentu renderują się po lewej stronie tabelki w
   osobnej kolumnie renderują się checkboxy, dzięki którym możemy zaznaczyć
   wybrane elementy w tabelce, w przypadku listy landingów renderowany jest tu
   dropdown move oraz przycisk do archiwizacji
@@ -132,30 +133,40 @@ Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdzial
   handleRefresh: () => void <- callback do odświeżania tablicy
   ) => ReactNode
   ```
-- `filtersAndSorters` - jak nazwa wskazuje filtry i sortery danych, **domyślnie
+- `filtersAndSorters` - Jak nazwa wskazuje filtry i sortery danych, **domyślnie
   renderuje się nad tabelką**, jesli chcemy wyrenderować ten komponent w miejscu
   headera(np, tak jak na liście landingów), należy wyłączyć renderowanie
   headera(info w opisie następnego hooka)
-  `filtersAndSorters?: (handleRefresh: () => void) => ReactNode` ponownie jak we
-  wczesniejszych przypadkach, props udostępnia nam callback do triggerowania
-  odświeżenia tabelki -`hasHeader` - definiuje czy header z nazwami kolumn ma
-  się renderować, jeżeli tak to filtry będą renderować się nad nim, jezeli nie
-  to filtry będa w miejscu headera, domyślnie ustawione jest na
-  **true** -`isLoading` - przekazujemy stan ładowania, jezeli true w miejscu
-  danych renderuje się loader -`emptyMessage` - funkcja renderująca komponent
-  informujący o braku danych, renderuje się jeżeli `isLoading` jest **true** i
-  `data.length` jest równe **zero**
-- `pagination` - podanie tego argumentu spowoduje wyrenderowanie paginacji jeśli
-  spełnione będą odpowiednie wymagania tzn. `pagination.total > pageLimit`
 
-      ```
-      pagination?: {
-          current: number <- obecna ostona paginacji 1,2,3,4...
-          total: number <- liczba wszystkich elementów w kolekcji
-          handlePageChange?: (page: number) => void <- tę funkcję możemy wykorzystać do triggerowania fetchowania nowych danych, wywoływana jest poprzez kilnięcie na aktywny button w paginacji
-      }
-      ```
+  ```
+    filtersAndSorters?: (handleRefresh: () => void) => ReactNode
+  ```
 
-- `constantPageLimit` - selector limitu elementów na stronie w prawym dolnym
-  roku nie będzie renderowany a page limit będzie ustawiony na stałą wartość
+  Ponownie jak we wcześniejszych przypadkach, props udostępnia nam callback do
+  triggerowania odświeżenia tabelki
+
+- `hasHeader` - Definiuje czy header z nazwami kolumn ma się renderować, jeżeli
+  tak to filtry będą renderować się nad nim, jeżeli nie to filtry będą w miejscu
+  headera, domyślnie ustawione jest na **true**
+
+- `isLoading` - Przekazujemy stan ładowania, jeżeli true w miejscu danych
+  renderuje się loader
+
+- `emptyMessage` - Funkcja renderująca komponent informujący o braku danych,
+  renderuje się jeżeli `isLoading` jest **true** i `data.length` jest równe
+  **zero**
+
+- `pagination` - Podanie tego argumentu spowoduje wyrenderowanie paginacji,
+  jeśli spełnione będą odpowiednie wymagania tzn. `pagination.total > pageLimit
+
+  ```
+   pagination?: {
+       current: number <- obecna ostona paginacji 1,2,3,4...
+       total: number <- liczba wszystkich elementów w kolekcji
+       handlePageChange?: (page: number) => void <- tę funkcję możemy wykorzystać do triggerowania fetchowania nowych danych, wywoływana jest poprzez kilnięcie na aktywny button w paginacji
+   }
+  ```
+
+- `constantPageLimit` - Selector limitu elementów na stronie w prawym dolnym
+  roku nie będzie renderowany, a page limit będzie ustawiony na stałą wartość
   podaną w tym propsie
