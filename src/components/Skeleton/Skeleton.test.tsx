@@ -7,7 +7,6 @@ import {
   SkeletonSidebar
 } from '@components/Skeleton'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 describe('<SkeletonCircle/> mount', () => {
   it('should be displayed', () => {

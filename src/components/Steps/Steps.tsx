@@ -1,25 +1,21 @@
 import { StepNumber } from '@components/StepNumber'
-import { stepsShape } from '@shapes'
-import PropTypes from 'prop-types'
-import React from 'react'
-import uuid from 'react-uuid'
+import { generateFakeUuid } from '@helpers/data'
+import { FC } from 'react'
 
 import styles from './Steps.module.scss'
 
-/**
- * Steps - stateless presentational component
- * @param {object} props - props
- * @param {object[]} props.data - data
- * @return {object} An object of children element
- */
-const Steps = ({ data }) => (
+export interface StepsProps {
+  data: { variant: 'completed' | 'current' | 'next'; description: string }[]
+}
+
+const Steps: FC<StepsProps> = ({ data }) => (
   <div className={styles.container}>
     {data.map((item, index) => {
       const step = index + 1
       const { variant, description } = item
 
       return (
-        <div className={styles.step} key={uuid()}>
+        <div className={styles.step} key={generateFakeUuid()}>
           <StepNumber step={step} variant={variant} />
 
           <span className={styles[`step__description--${variant}`]}>
@@ -32,9 +28,5 @@ const Steps = ({ data }) => (
 )
 
 Steps.displayName = 'Steps'
-
-Steps.propTypes = {
-  data: PropTypes.arrayOf(stepsShape).isRequired
-}
 
 export default Steps

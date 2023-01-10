@@ -2,9 +2,10 @@ import '@testing-library/jest-dom'
 
 import Steps from '@components/Steps'
 import { render } from '@testing-library/react'
-import React from 'react'
 
-const props = {
+import { StepsProps } from './Steps'
+
+const props: StepsProps = {
   data: [
     {
       variant: 'completed',

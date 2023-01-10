@@ -1,5 +1,3 @@
 export { default as errorPageShape } from './errorPageShape'
-export { default as legendShape } from './legendShape'
 export { default as paginationShape } from './paginationShape'
 export { default as scrollSpyShape } from './scrollSpyShape'
-export { default as stepsShape } from './stepsShape'
