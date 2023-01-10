@@ -136,17 +136,17 @@ Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdzial
   renderuje się nad tabelką**, jesli chcemy wyrenderować ten komponent w miejscu
   headera(np, tak jak na liście landingów), należy wyłączyć renderowanie
   headera(info w opisie następnego hooka)
-  ` filtersAndSorters?: (handleRefresh: () => void) => ReactNode ` ponownie jak
-  we wczesniejszych przypadkach, props udostępnia nam callback do triggerowania
+  `filtersAndSorters?: (handleRefresh: () => void) => ReactNode` ponownie jak we
+  wczesniejszych przypadkach, props udostępnia nam callback do triggerowania
   odświeżenia tabelki -`hasHeader` - definiuje czy header z nazwami kolumn ma
   się renderować, jeżeli tak to filtry będą renderować się nad nim, jezeli nie
   to filtry będa w miejscu headera, domyślnie ustawione jest na
   **true** -`isLoading` - przekazujemy stan ładowania, jezeli true w miejscu
   danych renderuje się loader -`emptyMessage` - funkcja renderująca komponent
   informujący o braku danych, renderuje się jeżeli `isLoading` jest **true** i
-  `data.length` jest równe **zero** -`pagination` - podanie tego argumentu
-  spowoduje wyrenderowanie paginacji jeśli spełnione będą odpowiednie wymagania
-  tzn. `pagination.total > pageLimit`
+  `data.length` jest równe **zero**
+- `pagination` - podanie tego argumentu spowoduje wyrenderowanie paginacji jeśli
+  spełnione będą odpowiednie wymagania tzn. `pagination.total > pageLimit`
 
       ```
       pagination?: {
