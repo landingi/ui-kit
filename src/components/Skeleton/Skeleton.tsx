@@ -1,11 +1,5 @@
-import React from 'react'
-
 import styles from './Skeleton.module.scss'
 
-/**
- * Skeleton sidebar - stateless presentational component
- * @return {object} An object of children element
- */
 export function SkeletonSidebar() {
   return (
     <div data-testid='skeleton-sidebar' className={styles.sidebarSkeleton}>
@@ -42,10 +36,6 @@ export function SkeletonSidebar() {
   )
 }
 
-/**
- * Skeleton drawer - stateless presentational component
- * @return {object} An object of children element
- */
 export function SkeletonDrawer() {
   return (
     <div data-testid='skeleton-drawer' className={styles.drawerSkeleton}>
@@ -82,10 +72,6 @@ export function SkeletonDrawer() {
   )
 }
 
-/**
- * Skeleton line - stateless presentational component
- * @return {object} An object of children element
- */
 export function SkeletonLine() {
   return (
     <div data-testid='skeleton-line' className={styles.skeleton}>
@@ -94,10 +80,6 @@ export function SkeletonLine() {
   )
 }
 
-/**
- * Skeleton circle - stateless presentational component
- * @return {object} An object of children element
- */
 export function SkeletonCircle() {
   return (
     <div data-testid='skeleton-circle' className={styles.skeleton}>
