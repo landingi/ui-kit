@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 
+import * as browser from '@helpers/browser'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react-hooks'
 
@@ -114,6 +115,27 @@ describe('useTable hook tests', () => {
     expect(screen.getByText('custom-column-content-test-page')).toHaveClass(
       'test-class'
     )
+  })
+
+  it('renders properly with default data on safari', () => {
+    // @ts-ignore
+    browser.isSafari = true
+
+    const { result } = renderHook(() =>
+      useTable<Item>({ name: 'test-table', i18n, data: mockData, columns })
+    )
+
+    const { Table } = result.current
+
+    render(<Table />)
+
+    expect(screen.getByText('Name')).toBeInTheDocument()
+    expect(screen.getByText('custom-column-content-test-page')).toHaveClass(
+      'test-class'
+    )
+
+    // @ts-ignore
+    browser.isSafari = false
   })
 
   it('renders loader when isLoading is set on true', () => {
@@ -259,6 +281,10 @@ describe('useTable hook tests', () => {
       fireEvent.click(checkboxes[0])
     })
 
+    act(() => {
+      fireEvent.click(checkboxes[1])
+    })
+
     rerender(<Table />)
 
     expect(screen.getByText('options-component')).toBeInTheDocument()
@@ -342,6 +368,48 @@ describe('useTable hook tests', () => {
     act(() => {
       fireEvent.click(screen.getByTestId('pagination-next'))
     })
+  })
+
+  it('renders properly with rowActions props on safari', () => {
+    const { result } = renderHook(() =>
+      useTable<Item>({
+        name: 'test-table',
+        i18n,
+        data: mockData,
+        columns,
+        rowActions: item => <div>row-actions-{item.name}</div>
+      })
+    )
+
+    const { Table } = result.current
+
+    render(<Table />)
+
+    expect(screen.getByText('row-actions-test-page')).toBeInTheDocument()
+  })
+
+  it('renders properly with rowActions props on safari', () => {
+    // @ts-ignore
+    browser.isSafari = true
+
+    const { result } = renderHook(() =>
+      useTable<Item>({
+        name: 'test-table',
+        i18n,
+        data: mockData,
+        columns,
+        rowActions: item => <div>row-actions-{item.name}</div>
+      })
+    )
+
+    const { Table } = result.current
+
+    render(<Table />)
+
+    expect(screen.getByText('row-actions-test-page')).toBeInTheDocument()
+
+    // @ts-ignore
+    browser.isSafari = false
   })
 
   // screen.debug(undefined, Infinity)
