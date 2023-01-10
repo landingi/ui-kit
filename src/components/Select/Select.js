@@ -15,7 +15,7 @@ import styles from './Select.module.scss'
  * @param {function} props.onChange - on change handler
  * @return {object} An object of children element
  */
-const Select = ({ value, data, name, onChange }) => {
+const Select = ({ value, data, name, onChange, 'data-testid': dataTestId }) => {
   const selectStyles = useStyles({ [styles.select]: true })
 
   return (
@@ -24,6 +24,7 @@ const Select = ({ value, data, name, onChange }) => {
       name={name}
       onChange={onChange}
       value={value}
+      data-testid={dataTestId}
     >
       {data.map(item => (
         <Option key={uuid()} label={item.label} value={item.value} />
@@ -38,11 +39,13 @@ Select.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  'data-testid': PropTypes.string
 }
 
 Select.defaultProps = {
   onChange: () => null,
+  'data-testid': 'default-select',
   value: undefined
 }
 

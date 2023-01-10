@@ -34,7 +34,7 @@ export const Header = <Item extends ItemBase>({
 
   if (options) {
     return (
-      <thead className={styles.thead}>
+      <thead className={styles.thead} data-testid='header-options-variant'>
         <tr>
           <th className={thCheckboxStyles} colSpan={1}>
             <Checkbox
@@ -65,7 +65,10 @@ export const Header = <Item extends ItemBase>({
           {!isSelectedAny && hasHeader && columnsMap}
 
           {!isSelectedAny && !hasHeader && filtersAndSorters && (
-            <th colSpan={optionsAriaColSpan}>
+            <th
+              colSpan={optionsAriaColSpan}
+              data-testid='filters-and-selectors-in-header'
+            >
               {filtersAndSorters(handleRefresh)}
             </th>
           )}
@@ -75,12 +78,16 @@ export const Header = <Item extends ItemBase>({
   }
 
   return (
-    <thead className={styles.thead}>
+    <thead className={styles.thead} data-testid='header-default-variant'>
       <tr>
         {hasHeader && columnsMap}
 
         {!hasHeader && filtersAndSorters && (
-          <th className={styles.th} colSpan={optionsAriaColSpan}>
+          <th
+            className={styles.th}
+            colSpan={optionsAriaColSpan}
+            data-testid='filters-and-sorters-no-header'
+          >
             {filtersAndSorters(handleRefresh)}
           </th>
         )}

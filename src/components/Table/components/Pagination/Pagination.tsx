@@ -10,7 +10,7 @@ import styles from './Pagination.module.scss'
 export const Pagination: FC<PaginationProps> = ({
   pageCount,
   i18n,
-  pagination = { current: 1, total: 1 }
+  pagination
 }) => {
   const { current, handlePageChange } = pagination
 
@@ -21,7 +21,10 @@ export const Pagination: FC<PaginationProps> = ({
   }
 
   return (
-    <div className={styles.pagination__links}>
+    <div
+      className={styles.pagination__links}
+      data-testid='pagination-component'
+    >
       <span className={styles.pagination__first}>
         <Button
           onClick={handleChangePage(1)}
@@ -127,6 +130,7 @@ export const Pagination: FC<PaginationProps> = ({
         size='small'
         variant='icon'
         isDisabled={current === pageCount}
+        data-testid='pagination-next'
       >
         <Icon icon='icon-caret-right' />
       </Button>

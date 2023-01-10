@@ -51,7 +51,10 @@ export const Table = <Item extends ItemBase>({
     <div className={styles.wrapper}>
       {/* render filters and sorters above table when header is visible */}
       {hasHeader && filtersAndSorters && (
-        <div className={styles['filters-sorters']}>
+        <div
+          className={styles['filters-sorters']}
+          data-testid='filters-and-sorters-header-enabled'
+        >
           {filtersAndSorters(handleRefresh)}
         </div>
       )}
