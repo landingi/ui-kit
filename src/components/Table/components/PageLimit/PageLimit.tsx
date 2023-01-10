@@ -38,12 +38,13 @@ export const PageLimit: FC<PageLimitProps> = ({
   }
 
   return (
-    <div className={styles['page-size']} data-testid='page-limit-selector'>
+    <div className={styles['page-size']}>
       {/* @ts-ignore */}
       <Select
         data={pageLimits}
         onChange={handleChange}
         value={pageLimit}
+        data-testid='page-limit-selector'
         /* @ts-ignore */
         name='test'
       />
