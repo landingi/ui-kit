@@ -1,6 +1,6 @@
 # Komponent Table - dokumentacja
 
-## Renderowanie komponentu
+## Renderowanie
 
 Tablicę renderujemy poprzez użycie hooka `useTable` importowanego z ui-kit.
 Podstawowy przykład użycia w kodzie:
