@@ -147,7 +147,15 @@ Poszczególne paramatry hooka useTable będa wytłumaczone w następnym rozdzial
   `data.length` jest równe **zero** -`pagination` - podanie tego argumentu
   spowoduje wyrenderowanie paginacji jeśli spełnione będą odpowiednie wymagania
   tzn. `pagination.total > pageLimit`
-  ` pagination?: { current: number <- obecna ostona paginacji 1,2,3,4... total: number <- liczba wszystkich elementów w kolekcji handlePageChange?: (page: number) => void <- tę funkcję możemy wykorzystać do triggerowania fetchowania nowych danych, wywoływana jest poprzez kilnięcie na aktywny button w paginacji } ` -`constantPageLimit` -
-  selector limitu elementów na stronie w prawym dolnym roku nie będzie
-  renderowany a page limit będzie ustawiony na stałą wartość podaną w tym
-  propsie
+
+      ```
+      pagination?: {
+          current: number <- obecna ostona paginacji 1,2,3,4...
+          total: number <- liczba wszystkich elementów w kolekcji
+          handlePageChange?: (page: number) => void <- tę funkcję możemy wykorzystać do triggerowania fetchowania nowych danych, wywoływana jest poprzez kilnięcie na aktywny button w paginacji
+      }
+      ```
+
+- `constantPageLimit` - selector limitu elementów na stronie w prawym dolnym
+  roku nie będzie renderowany a page limit będzie ustawiony na stałą wartość
+  podaną w tym propsie
