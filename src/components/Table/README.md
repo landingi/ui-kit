@@ -1,4 +1,4 @@
-# Komponent <Table /> dokumentacja
+# Komponent Table - dokumentacja
 
 ## Renderowanie komponentu
 
