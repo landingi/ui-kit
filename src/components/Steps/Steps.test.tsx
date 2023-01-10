@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 
 import Steps from '@components/Steps'
 import { render } from '@testing-library/react'
+
 import { StepsProps } from './Steps'
 
 const props: StepsProps = {
