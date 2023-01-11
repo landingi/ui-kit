@@ -106,13 +106,13 @@ Poszczególne parametry hooka useTable będą wytłumaczone w następnym rozdzia
   Możemy mieszać ze sobą typy kolumn na poziomie tablicy, natomiast nie możemy
   zdefiniować jednocześnie accessor i render w jednym obiekcie, ts rzuci błędem.
 
-- `i18n(wymagany)` - props wymagany składa się z 3 kluczy z tłumaczeniami,
-  wykorzystywane w paginacji i headerze
+- `i18n` - props składa się z 3 kluczy z tłumaczeniami, wykorzystywane w
+  paginacji i headerze, nie jest wymagany, domyślne wartości w kodzie poniżej
   ```
   {
-      selected: string <- selected/wybrano
-      first: string <- First/Pierwsza
-      last: string <- Last/Ostatnia
+      selected: string <- selected/wybrano [default = word.selected]
+      first: string <- First/Pierwsza [default = word.first]
+      last: string <- Last/Ostatnia [default = word.last]
   }
   ```
 - `rowActions` - Funkcja renderująca na hoverze wiersza panel z dowolnym
