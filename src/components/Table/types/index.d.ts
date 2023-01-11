@@ -26,7 +26,7 @@ export interface UseTableProps<Item extends ItemBase> {
   name: string
   data: Item[]
   columns: Column<Item>[]
-  i18n: {
+  i18n?: {
     selected: string
     first: string
     last: string
@@ -58,6 +58,11 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
     current: number
     total: number
     handlePageChange?: (page: number) => void
+  }
+  i18n: {
+    selected: string
+    first: string
+    last: string
   }
 }
 

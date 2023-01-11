@@ -10,6 +10,7 @@ export const useTable = <Item extends ItemBase>({
   pagination = { total: 1, current: 1 },
   name,
   constantPageLimit,
+  i18n = { selected: 'word.selected', first: 'word.first', last: 'word.last' },
   ...rest
 }: UseTableProps<Item>) => {
   const [refresh, setRefresh] = useState<boolean>(false)
@@ -41,6 +42,7 @@ export const useTable = <Item extends ItemBase>({
         constantPageLimit={constantPageLimit}
         handleRefresh={handleRefresh}
         pagination={pagination}
+        i18n={i18n}
         {...rest}
       />
     ),

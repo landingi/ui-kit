@@ -121,8 +121,8 @@
       content: '';
       display: block;
       position: absolute;
-      top: 6px;
-      left: 3px;
+      top: 4px;
+      left: 2px;
       width: 8px;
       height: 3px;
       border: solid 2px transparent;
@@ -142,6 +142,15 @@
     }
   }
 
+  &--table {
+    div {
+      &::after {
+        top: 6px;
+        left: 3px;
+      }
+    }
+  }
+
   &--table-deselect {
     div {
       &::after {
@@ -149,6 +158,7 @@
         border-left: none;
         border-top: none;
         transform: translate(4px, 4px);
+        top: 6px;
         left: 2px;
       }
     }

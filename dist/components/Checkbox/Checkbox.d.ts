@@ -5,6 +5,7 @@ interface CheckboxProps {
     checked: boolean;
     disabled?: boolean;
     formikKey?: string;
+    table?: boolean;
     tableDeselect?: boolean;
     'data-testid'?: string;
 }
