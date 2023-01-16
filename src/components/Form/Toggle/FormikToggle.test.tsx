@@ -1,6 +1,5 @@
 import FormikToggle from '@components/Form/Toggle/FormikToggle'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 const props = {
   id: 'jestem-id',
@@ -13,7 +12,8 @@ const props = {
   form: {
     errors: {},
     touched: {}
-  }
+  },
+  label: ''
 }
 
 describe('<FormikToggle /> mount', () => {
@@ -27,7 +27,7 @@ describe('<FormikToggle /> mount', () => {
     expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('properly renders error label when error exist', async done => {
+  it('properly renders error label when error exist', done => {
     const errorsProps = {
       id: 'jestem-id',
       field: {
