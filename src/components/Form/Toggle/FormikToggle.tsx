@@ -37,7 +37,7 @@ interface FormikCheckboxProps {
  * @return {object} An object of children element
  */
 const FormikToggle: FC<FormikCheckboxProps> = ({
-  field: { name, value, onChange, onBlur },
+  field: { name, value, onChange, onBlur = () => null },
   form: { errors, touched },
   id,
   label,
