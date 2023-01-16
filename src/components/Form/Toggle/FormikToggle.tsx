@@ -42,7 +42,7 @@ const FormikToggle: FC<FormikCheckboxProps> = ({
   id,
   label,
   className,
-  type
+  type = 'checkbox'
 }) => {
   const wrapperStyles = useStyles(
     { [styles['toggle-container']]: true },
