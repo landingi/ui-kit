@@ -1,9 +1,29 @@
 import Error from '@components/Form/Error'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { ChangeEventHandler, FC, FocusEventHandler, ReactNode } from 'react'
 
 import styles from './Toggle.module.scss'
+
+interface FormikCheckboxProps {
+  className?: string | string[]
+  field: {
+    name: string
+    value: boolean
+    onChange: ChangeEventHandler<HTMLInputElement>
+    onBlur: FocusEventHandler<HTMLInputElement>
+  }
+  form: {
+    errors: {
+      [key: string]: string
+    }
+    touched: {
+      [key: string]: boolean
+    }
+  }
+  id: string
+  label: ReactNode
+  type?: 'text' | 'number' | 'password'
+}
 
 /**
  * Formik toggle - stateless presentational component
@@ -16,13 +36,13 @@ import styles from './Toggle.module.scss'
  * @param {string} props.label
  * @return {object} An object of children element
  */
-const FormikToggle = ({
-  field: { name, value, onChange, onBlur },
+const FormikToggle: FC<FormikCheckboxProps> = ({
+  field: { name, value, onChange, onBlur = () => null },
   form: { errors, touched },
   id,
-  label,
-  className,
-  type
+  label = '',
+  className = '',
+  type = 'checkbox'
 }) => {
   const wrapperStyles = useStyles(
     { [styles['toggle-container']]: true },
@@ -62,29 +82,5 @@ const FormikToggle = ({
 }
 
 FormikToggle.displayName = 'FormikToggle'
-
-FormikToggle.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  type: PropTypes.string,
-  field: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.bool,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func
-  }).isRequired,
-  form: PropTypes.shape({
-    errors: PropTypes.instanceOf(Object),
-    touched: PropTypes.instanceOf(Object),
-    setFieldValue: PropTypes.func
-  }).isRequired,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-}
-
-FormikToggle.defaultProps = {
-  className: '',
-  type: 'checkbox',
-  label: ''
-}
 
 export default FormikToggle

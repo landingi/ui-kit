@@ -19,7 +19,7 @@ interface InputProps {
     onChange: ChangeEventHandler<HTMLInputElement>
     onBlur: FocusEventHandler<HTMLInputElement>
   }
-  form: {
+  form?: {
     errors: {
       [key: string]: string
     }
@@ -50,7 +50,7 @@ interface InputProps {
 const Input: FC<InputProps> = ({
   className,
   field: { name, value, onChange, onBlur },
-  form: { errors, touched },
+  form: { errors, touched } = {},
   i18n,
   type = 'text',
   disabled = false,

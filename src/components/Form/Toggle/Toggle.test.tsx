@@ -6,20 +6,14 @@ const props = {
   id: 'jestem-id',
   name: 'field-name',
   onChange: jest.fn(),
-  checked: false
+  checked: false,
+  label: 'label',
+  onBlur: () => null
 }
 
 describe('<Toggle /> tests', () => {
   it('properly renders with props', () => {
     render(<Toggle {...props} />)
-  })
-
-  it('default prop `onBlur` should be undefined', async done => {
-    const result = Toggle.defaultProps.onBlur()
-
-    expect(result).toBe(null)
-
-    done()
   })
 
   it('properly renders with label', () => {
@@ -28,12 +22,14 @@ describe('<Toggle /> tests', () => {
     expect(screen.findByText('test label')).toBeTruthy()
   })
 
-  it('has properly classes when checked is enabled', async done => {
+  it('has properly classes when checked is enabled', done => {
     const checkedProps = {
       id: 'jestem-id',
       name: 'field-name',
       onChange: jest.fn(),
-      checked: true
+      checked: true,
+      label: 'label',
+      onBlur: () => null
     }
 
     const { container } = render(<Toggle {...checkedProps} />)
