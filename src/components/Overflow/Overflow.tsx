@@ -1,8 +1,13 @@
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './Overflow.module.scss'
+
+interface OverflowProps {
+  children: ReactNode
+  className?: string | string[]
+}
 
 /**
  * Overflow - stateless presentational component
@@ -11,7 +16,7 @@ import styles from './Overflow.module.scss'
  * @param {string|array} props.className - list of class names
  * @return {object} An object of children element
  */
-const Overflow = ({ children, className }) => {
+export const Overflow: FC<OverflowProps> = ({ children, className = '' }) => {
   const elementClasses = useStyles(
     {
       [styles.overflow]: true
@@ -23,15 +28,3 @@ const Overflow = ({ children, className }) => {
 }
 
 Overflow.displayName = 'Overflow'
-
-Overflow.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
-}
-
-Overflow.defaultProps = {
-  children: null,
-  className: ''
-}
-
-export default Overflow
