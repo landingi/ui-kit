@@ -2,21 +2,22 @@ import { Notification } from '@components/Notification'
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
 import emitter from '@lib/emitter'
-import PropTypes from 'prop-types'
-import React, { useCallback, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
 import styles from './TimingToast.module.scss'
 
-/**
- * TimingToast - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names
- * @return {object} An object of children element
- */
-const TimingToast = ({ className }) => {
+type Type = 'info' | 'success' | 'warning' | 'alert'
+
+interface TimingToastProps {
+  className?: string | string[]
+}
+
+export const TimingToast: FC<TimingToastProps> = ({ className }) => {
   const [isActive, setActive] = useState(false)
   const [message, setMessage] = useState('')
-  const [type, setType] = useState('info')
+  const [type, setType] = useState<Type>('info')
+
+  const autoHideTimer = useRef<NodeJS.Timeout | null>(null)
 
   const toastStyles = useStyles(
     {
@@ -26,25 +27,26 @@ const TimingToast = ({ className }) => {
     className
   )
 
-  let autoHideTimer
-
-  const setAutoHideTimer = () =>
-    (autoHideTimer = setTimeout(() => setActive(false), 5000))
-
   const handleToastToggle = useCallback(
-    (message, type) => {
+    (newMessage: string, newType: Type) => {
       setActive(!isActive)
 
-      message && setMessage(message)
+      if (newMessage) {
+        setMessage(newMessage)
+      }
 
-      type && setType(type)
+      if (newType) {
+        setType(newType)
+      }
 
-      setAutoHideTimer()
+      autoHideTimer.current = setTimeout(() => {
+        setActive(false)
+      }, 5000)
     },
-    [isActive, message, type, autoHideTimer]
+    [isActive, setActive, autoHideTimer]
   )
 
-  const closeToast = useCallback(() => setActive(false), [isActive])
+  const closeToast = useCallback(() => setActive(false), [setActive])
 
   useEffect(() => {
     emitter.on(TOGGLE_TIMING_TOAST, handleToastToggle)
@@ -52,9 +54,9 @@ const TimingToast = ({ className }) => {
     return () => {
       emitter.off(TOGGLE_TIMING_TOAST, handleToastToggle)
 
-      clearTimeout(autoHideTimer)
+      clearTimeout(autoHideTimer.current as NodeJS.Timeout)
     }
-  }, [])
+  }, [handleToastToggle, autoHideTimer])
 
   return isActive ? (
     <div className={toastStyles} data-testid='toast-component'>
@@ -71,14 +73,3 @@ const TimingToast = ({ className }) => {
 }
 
 TimingToast.displayName = 'TimingToast'
-
-TimingToast.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
-}
-
-TimingToast.defaultProps = {
-  className: null,
-  type: 'info'
-}
-
-export default TimingToast
