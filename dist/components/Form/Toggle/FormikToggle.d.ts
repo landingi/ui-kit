@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, FocusEventHandler } from 'react';
+import { ChangeEventHandler, FC, FocusEventHandler, ReactNode } from 'react';
 interface FormikCheckboxProps {
     className?: string | string[];
     field: {
@@ -16,7 +16,7 @@ interface FormikCheckboxProps {
         };
     };
     id: string;
-    label: string;
+    label: ReactNode;
     type?: 'text' | 'number' | 'password';
 }
 /**

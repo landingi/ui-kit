@@ -1,6 +1,6 @@
 import Error from '@components/Form/Error'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { ChangeEventHandler, FC, FocusEventHandler } from 'react'
+import { ChangeEventHandler, FC, FocusEventHandler, ReactNode } from 'react'
 
 import styles from './Toggle.module.scss'
 
@@ -21,7 +21,7 @@ interface FormikCheckboxProps {
     }
   }
   id: string
-  label: string
+  label: ReactNode
   type?: 'text' | 'number' | 'password'
 }
 
@@ -40,8 +40,8 @@ const FormikToggle: FC<FormikCheckboxProps> = ({
   field: { name, value, onChange, onBlur = () => null },
   form: { errors, touched },
   id,
-  label,
-  className,
+  label = '',
+  className = '',
   type = 'checkbox'
 }) => {
   const wrapperStyles = useStyles(

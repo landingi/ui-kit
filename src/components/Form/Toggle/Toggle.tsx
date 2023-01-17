@@ -1,6 +1,6 @@
 import Html from '@components/Html'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, FocusEventHandler, ReactEventHandler } from 'react'
+import { FC, FocusEventHandler, ReactEventHandler, ReactNode } from 'react'
 
 import styles from './Toggle.module.scss'
 
@@ -8,7 +8,7 @@ interface ToggleProps {
   name?: string
   onChange?: ReactEventHandler<HTMLInputElement>
   onBlur: FocusEventHandler<HTMLInputElement>
-  label: string
+  label: ReactNode
   id: string
   className?: string | string[]
   checked: boolean
