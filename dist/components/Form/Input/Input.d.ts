@@ -7,7 +7,7 @@ interface InputProps {
         onChange: ChangeEventHandler<HTMLInputElement>;
         onBlur: FocusEventHandler<HTMLInputElement>;
     };
-    form: {
+    form?: {
         errors: {
             [key: string]: string;
         };
