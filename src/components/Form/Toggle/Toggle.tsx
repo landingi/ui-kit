@@ -1,32 +1,32 @@
 import Html from '@components/Html'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC, FocusEventHandler, ReactEventHandler, ReactNode } from 'react'
 
 import styles from './Toggle.module.scss'
 
-/**
- * Toggle - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: ''
- * @param {string} props.name - name
- * @param {bool} props.checked - checked
- * @param {string} props.type
- * @param {func} props.onChange - onChange
- * @param {func} props.onBlur - onBlur
- * @param {string} props.id - id
- * @param {string} props.label - label, default: ''
- * @param {bool} props.disabled - disabled, default: false
- * @return {object} An object of children element
- */
-const Toggle = ({
+interface ToggleProps {
+  name?: string
+  onChange?: ReactEventHandler<HTMLInputElement>
+  onBlur: FocusEventHandler<HTMLInputElement>
+  label: ReactNode
+  id: string
+  className?: string | string[]
+  checked: boolean
+  disabled?: boolean
+  formikKey?: string
+  table?: boolean
+  tableDeselect?: boolean
+  'data-testid'?: string
+}
+
+const Toggle: FC<ToggleProps> = ({
   name,
   checked,
   onChange,
-  onBlur,
+  onBlur = () => null,
   id,
-  label,
-  className,
+  label = '',
+  className = '',
   disabled,
   'data-testid': dataTestId
 }) => {
@@ -70,25 +70,5 @@ const Toggle = ({
 }
 
 Toggle.displayName = 'Toggle'
-
-Toggle.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  name: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.objectOf]),
-  disabled: PropTypes.bool,
-  'data-testid': PropTypes.string
-}
-
-Toggle.defaultProps = {
-  className: '',
-  label: '',
-  onBlur: () => null,
-  disabled: false,
-  'data-testid': null
-}
 
 export default Toggle
