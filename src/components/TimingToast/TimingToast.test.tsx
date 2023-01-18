@@ -1,11 +1,9 @@
 import '@testing-library/jest-dom'
 
 import { emitTimingToastToggle } from '@events/toast'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import React from 'react'
-import { act } from 'react-dom/test-utils'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 
-import TimingToast from './TimingToast'
+import { TimingToast } from './TimingToast'
 
 jest.setTimeout(10000)
 
@@ -19,7 +17,16 @@ describe('TimingToast tests', () => {
       expect(screen.queryByTestId('toast-component')).toBeInTheDocument()
     )
 
-    await act(async () => new Promise(r => setTimeout(r, 5001)))
+    await act(
+      async () =>
+        new Promise(r => {
+          setTimeout(r, 5001)
+        })
+    )
+
+    await waitFor(() =>
+      expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
+    )
 
     expect(screen.queryByTestId('toast-component')).not.toBeInTheDocument()
   })
