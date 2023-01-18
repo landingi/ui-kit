@@ -2,7 +2,7 @@ import { Notification } from '@components/Notification'
 import { TOGGLE_TIMING_TOAST } from '@constants/eventTypes'
 import { useStyles } from '@helpers/hooks/useStyles'
 import emitter from '@lib/emitter'
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 import styles from './TimingToast.module.scss'
 
