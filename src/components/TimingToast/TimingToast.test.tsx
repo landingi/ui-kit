@@ -8,7 +8,7 @@ import { TimingToast } from './TimingToast'
 jest.setTimeout(10000)
 
 describe('TimingToast tests', () => {
-  it.skip('renders, opens and closes properly', async () => {
+  it('renders, opens and closes properly', async () => {
     render(<TimingToast />)
 
     await act(async () => emitTimingToastToggle())

@@ -56,7 +56,7 @@ export const TimingToast: FC<TimingToastProps> = ({ className }) => {
 
       clearTimeout(autoHideTimer.current as NodeJS.Timeout)
     }
-  }, [handleToastToggle, autoHideTimer])
+  }, [])
 
   return isActive ? (
     <div className={toastStyles} data-testid='toast-component'>
