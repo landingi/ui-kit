@@ -17,7 +17,7 @@ export const TimingToast: FC<TimingToastProps> = ({ className }) => {
   const [message, setMessage] = useState('')
   const [type, setType] = useState<Type>('info')
 
-  const autoHideTimer = useRef<NodeJS.Timeout | null>(null)
+  let autoHideTimer: NodeJS.Timeout | null = null
 
   const toastStyles = useStyles(
     {
@@ -39,7 +39,9 @@ export const TimingToast: FC<TimingToastProps> = ({ className }) => {
         setType(newType)
       }
 
-      autoHideTimer.current = setTimeout(() => {
+      // we want to reset the timer every time we open the toast
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      autoHideTimer = setTimeout(() => {
         setActive(false)
       }, 5000)
     },
@@ -54,8 +56,10 @@ export const TimingToast: FC<TimingToastProps> = ({ className }) => {
     return () => {
       emitter.off(TOGGLE_TIMING_TOAST, handleToastToggle)
 
-      clearTimeout(autoHideTimer.current as NodeJS.Timeout)
+      clearTimeout(autoHideTimer as NodeJS.Timeout)
     }
+    // we want to run this effect only once, in other case we will have an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return isActive ? (
