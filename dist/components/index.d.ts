@@ -93,5 +93,5 @@ export { default as Textarea } from './Textarea';
 export { default as TextOverflow } from './TextOverflow';
 export { default as TimeSelect } from './TimeSelect';
 export * from './TimingToast';
-export { default as Toast } from './Toast';
+export * from './Toast';
 export * from './Tooltip';
