@@ -1,9 +1,17 @@
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './OverflowTooltip.module.scss'
+
+interface OverflowTooltipProps {
+  content: string
+  placement?: 'top' | 'left' | 'right' | 'bottom'
+  length?: number
+  children?: ReactNode
+  className?: string | string[]
+}
 
 /**
  * OverflowTooltip - stateless presentational component
@@ -14,12 +22,12 @@ import styles from './OverflowTooltip.module.scss'
  * @param {string|array} props.className - list of class names out of component
  * @return {object} An object of children element
  */
-const OverflowTooltip = ({
+export const OverflowTooltip: FC<OverflowTooltipProps> = ({
   content,
-  placement,
-  length,
-  children,
-  className
+  placement = 'right',
+  length = 20,
+  children = null,
+  className = ''
 }) => {
   const elementClasses = useStyles(
     {
@@ -50,20 +58,3 @@ const OverflowTooltip = ({
 }
 
 OverflowTooltip.displayName = 'OverflowTooltip'
-
-OverflowTooltip.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  content: PropTypes.string.isRequired,
-  length: PropTypes.number,
-  placement: PropTypes.string
-}
-
-OverflowTooltip.defaultProps = {
-  children: null,
-  className: '',
-  length: 20,
-  placement: 'right'
-}
-
-export default OverflowTooltip

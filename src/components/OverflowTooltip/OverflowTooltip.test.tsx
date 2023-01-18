@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import OverflowTooltip from '@components/OverflowTooltip'
+import { OverflowTooltip } from '@components/OverflowTooltip'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 describe('<OverflowTooltip/> mount', () => {
   const props = {
@@ -13,7 +12,9 @@ describe('<OverflowTooltip/> mount', () => {
   }
 
   it('is mounted and displays whole content', () => {
-    const { getByText } = render(<OverflowTooltip {...props} />)
+    const { getByText } = render(
+      <OverflowTooltip {...props} placement='left' />
+    )
 
     const contentNode = getByText(props.content)
 
@@ -27,7 +28,9 @@ describe('<OverflowTooltip/> mount', () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
     }
-    const { getByTestId } = render(<OverflowTooltip {...newProps} />)
+    const { getByTestId } = render(
+      <OverflowTooltip {...newProps} placement='left' />
+    )
 
     const overflowTooltipNode = getByTestId('overflow-tooltip')
 
@@ -41,7 +44,9 @@ describe('<OverflowTooltip/> mount', () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
     }
-    const { getByText } = render(<OverflowTooltip {...newProps} />)
+    const { getByText } = render(
+      <OverflowTooltip {...newProps} placement='left' />
+    )
 
     const trimedContentNode = getByText('Lor...')
 
@@ -59,7 +64,9 @@ describe('<OverflowTooltip/> mount', () => {
       children: null
     }
 
-    const { getByText } = render(<OverflowTooltip {...newProps} />)
+    const { getByText } = render(
+      <OverflowTooltip {...newProps} placement='left' />
+    )
 
     const trimedContentNode = getByText('foo...')
 
