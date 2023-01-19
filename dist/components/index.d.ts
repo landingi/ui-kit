@@ -90,7 +90,7 @@ export { default as TabList } from './Tabs/TabList';
 export { default as TabPanel } from './Tabs/TabPanel';
 export { default as Tabs } from './Tabs/Tabs';
 export { default as Textarea } from './Textarea';
-export { default as TextOverflow } from './TextOverflow';
+export * from './TextOverflow';
 export { default as TimeSelect } from './TimeSelect';
 export * from './TimingToast';
 export * from './Toast';
