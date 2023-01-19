@@ -5,7 +5,6 @@ import { TabList } from '@components/Tabs/TabList'
 import { TabPanel } from '@components/Tabs/TabPanel'
 import { Tabs } from '@components/Tabs/Tabs'
 import { fireEvent, render } from '@testing-library/react'
-import PropTypes from 'prop-types'
 import { FC } from 'react'
 
 const props = {
