@@ -8,7 +8,7 @@ interface ToggleProps {
   name?: string
   onChange?: ReactEventHandler<HTMLInputElement>
   onBlur: FocusEventHandler<HTMLInputElement>
-  label: Node
+  label: Node | string
   id: string
   className?: string | string[]
   checked: boolean

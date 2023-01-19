@@ -1,9 +1,9 @@
-import { FC, FocusEventHandler, ReactEventHandler, ReactNode } from 'react';
+import { FC, FocusEventHandler, ReactEventHandler } from 'react';
 interface ToggleProps {
     name?: string;
     onChange?: ReactEventHandler<HTMLInputElement>;
     onBlur: FocusEventHandler<HTMLInputElement>;
-    label: ReactNode;
+    label: Node | string;
     id: string;
     className?: string | string[];
     checked: boolean;
