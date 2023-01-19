@@ -20,7 +20,7 @@
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build",
-    "build": "rm -rf ./dist && rollup -c"
+    "build": "tsc && rm -rf ./dist && rollup -c"
   },
   "devDependencies": {
     "@babel/preset-typescript": "7.18.6",
