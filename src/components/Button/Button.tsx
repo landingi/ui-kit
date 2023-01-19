@@ -48,6 +48,7 @@ export interface ButtonProps {
   }
   activeColor?: string
   'data-testid'?: string
+  isActive?: boolean
 }
 
 const Button: FC<ButtonProps> = ({
@@ -71,13 +72,15 @@ const Button: FC<ButtonProps> = ({
   fitWidth = false,
   customStyle,
   activeColor,
-  'data-testid': dataTestId
+  'data-testid': dataTestId,
+  isActive = false
 }) => {
   const elementClassesButton = useStyles(
     {
       [styles.button]: true,
       [styles[`button--${variant}`]]: variant,
       [styles[`button--${variant}--loading`]]: variant && isLoading,
+      [styles[`button-${variant}--active`]]: variant && isActive,
       [styles[`button--${size}`]]: size,
       [styles[`button--${align}`]]: align,
       [styles['button--svg']]: hasIcon === true,

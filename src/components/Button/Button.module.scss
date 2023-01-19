@@ -321,6 +321,15 @@
       i {
         color: $color-brand;
       }
+
+      &--active {
+        color: $color-1;
+
+        svg,
+        i {
+          color: $color-1;
+        }
+      }
     }
 
     &:hover {

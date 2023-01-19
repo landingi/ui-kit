@@ -24,6 +24,7 @@ export interface ButtonProps {
     };
     activeColor?: string;
     'data-testid'?: string;
+    isActive?: boolean;
 }
 declare const Button: FC<ButtonProps>;
 export default Button;
