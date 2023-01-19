@@ -5,12 +5,12 @@ import styles from './TextOverflow.module.scss'
 
 interface TextOverflowProps {
   className?: string | string[]
-  children?: ReactNode
+  children: ReactNode
 }
 
 export const TextOverflow: FC<TextOverflowProps> = ({
   className = '',
-  children = null
+  children
 }) => {
   const textOverflowStyles = useStyles(
     {
