@@ -1,4 +1,4 @@
-export declare type ClockType = 'AM' | 'PM' | null;
+export type ClockType = 'AM' | 'PM' | null;
 /**
  * convert am/pm to 0-23 and vice versa
  */
@@ -11,4 +11,4 @@ export declare const convertTimeFrom24to12: (time24: string) => string;
 /**
  * check if current time is am or pm if clock time is am/pm
  */
-export declare const isAmOrPm: (time: string, isAmPmType: boolean) => "PM" | "AM" | null;
+export declare const isAmOrPm: (time: string, isAmPmType: boolean) => "AM" | "PM" | null;

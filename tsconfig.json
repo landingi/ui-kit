@@ -25,5 +25,14 @@
       "@shapes/*": ["./src/shapes/*"]
     }
   },
-  "exclude": ["node_modules", "cypress", "dev", "jest-report", "local"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "cypress",
+    "dev",
+    "jest-report",
+    "local",
+    "dist",
+    "types"
+  ]
 }
