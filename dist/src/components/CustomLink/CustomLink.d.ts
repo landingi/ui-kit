@@ -1,0 +1,14 @@
+import { FC, MouseEventHandler, ReactNode } from 'react';
+interface CustomLinkProps {
+    className?: string | string[];
+    variant?: 'active' | 'inactive' | 'dark';
+    label: ReactNode;
+    href?: string;
+    target?: string;
+    size?: 10 | 12 | 14 | 16;
+    underlined?: boolean;
+    onClick?: MouseEventHandler<HTMLAnchorElement>;
+    color?: string;
+}
+export declare const CustomLink: FC<CustomLinkProps>;
+export {};
