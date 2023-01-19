@@ -1,24 +1,24 @@
 import '@testing-library/jest-dom'
 
-import Tab from '@components/Tabs/Tab'
-import TabList from '@components/Tabs/TabList'
-import TabPanel from '@components/Tabs/TabPanel'
-import Tabs from '@components/Tabs/Tabs'
+import { Tab } from '@components/Tabs/Tab'
+import { TabList } from '@components/Tabs/TabList'
+import { TabPanel } from '@components/Tabs/TabPanel'
+import { Tabs } from '@components/Tabs/Tabs'
 import { fireEvent, render } from '@testing-library/react'
 import PropTypes from 'prop-types'
-import React from 'react'
+import { FC } from 'react'
 
 const props = {
   initialValue: 'predefined'
 }
 
-const Component = ({ isDisabled }) => (
+const Component: FC<{ isDisabled?: boolean }> = ({ isDisabled = false }) => (
   <Tabs {...props}>
     <TabList>
-      <Tab name='predefined'>
+      <Tab name='predefined' onClick={() => {}}>
         <span>Some text</span>
       </Tab>
-      <Tab name='addittional' isDisabled={isDisabled}>
+      <Tab name='addittional' isDisabled={isDisabled} onClick={() => {}}>
         <span>Some text</span>
       </Tab>
     </TabList>
@@ -27,14 +27,6 @@ const Component = ({ isDisabled }) => (
     <TabPanel name='addittional'>Tab Panel addittional</TabPanel>
   </Tabs>
 )
-
-Component.propTypes = {
-  isDisabled: PropTypes.bool
-}
-
-Component.defaultProps = {
-  isDisabled: false
-}
 
 describe('<Tabs/> tests', () => {
   it('renders properly', () => {
