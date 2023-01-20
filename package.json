@@ -17,7 +17,7 @@
     "cd:ui": "echo cd:ui",
     "cd:docs": "echo cd:dosc",
     "release-it": "yarn version --patch && pnpm test:badges && pnpm build",
-    "build": "tsc && rm -rf ./dist && rollup -c",
+    "build": "rm -rf ./dist && tsc --project tsconfig.build.json && rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

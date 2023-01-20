@@ -24,14 +24,5 @@
       "@shapes/*": ["./src/shapes/*"]
     }
   },
-  "exclude": [
-    "src/**/*.stories.*",
-    "node_modules",
-    "cypress",
-    "dev",
-    "jest-report",
-    "local",
-    "dist",
-    "types"
-  ]
+  "include": ["src/**/*"]
 }

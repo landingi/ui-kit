@@ -24,7 +24,7 @@ export default [
     ],
     plugins: [
       externals({ react: 'react', 'react-dom': 'react-dom' }),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({ tsconfig: './tsconfig.build.json' }),
       babel({ extensions }),
       external(),
       resolve({ extensions }),
