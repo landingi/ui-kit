@@ -1,5 +1,4 @@
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -49,17 +48,6 @@ module.exports = {
       ],
       include: path.resolve(__dirname, '../')
     })
-
-    /*  config.plugins.push(
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: path.resolve(__dirname, '../src/fonts'),
-            to: 'fonts'
-          }
-        ]
-      })
-    ) */
 
     return config
   }

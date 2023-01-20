@@ -10,4 +10,147 @@
     font-weight: normal;
     font-style: normal;
   }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: auto;
+    src: local('fonts/Inter-Bold'),
+      url('fonts/Inter-Bold.woff2') format('truetype');
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: auto;
+    src: local('fonts/Inter-Italic'),
+      url('fonts/Inter-Italic.woff2') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: auto;
+    src: local('fonts/Inter-Light'),
+      url('fonts/Inter-Light.woff2') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: auto;
+    src: local('fonts/Inter-Medium'),
+      url('fonts/Inter-Medium.woff2') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-display: auto;
+    src: local('fonts/Inter-Regular'),
+      url('fonts/Inter-Regular.woff2') format('truetype');
+  }
+
+  :root {
+    --doc-height: 100%;
+  }
+
+  html,
+  body,
+  div,
+  span,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  q,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  caption,
+  th,
+  td {
+    text-align: left;
+    font-weight: normal;
+  }
+
+  table,
+  td,
+  th {
+    vertical-align: middle;
+  }
+
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: '';
+  }
+
+  blockquote,
+  q {
+    quotes: '' '';
+  }
+
+  a img {
+    border: none;
+  }
+
+  a {
+    color: #2550aa;
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 </style>
