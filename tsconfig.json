@@ -25,6 +25,7 @@
     }
   },
   "exclude": [
+    "src/**/*.stories.*",
     "node_modules",
     "cypress",
     "dev",
