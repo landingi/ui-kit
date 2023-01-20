@@ -17,7 +17,7 @@
     "cd:ui": "echo cd:ui",
     "cd:docs": "echo cd:dosc",
     "release-it": "yarn version --patch && pnpm test:badges && pnpm build",
-    "build": "rm -rf ./dist && tsc --project tsconfig.build.json && rollup -c",
+    "build": "rm -rf ./dist && rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -45,6 +45,7 @@
     "@testing-library/user-event": "14.2.0",
     "@types/dompurify": "2.4.0",
     "@types/jest": "27.5.1",
+    "@types/node": "^18.11.18",
     "@types/react": "18.0.27",
     "@types/testing-library__jest-dom": "5.14.5",
     "@types/uuid": "8.3.4",

@@ -22,7 +22,16 @@
       "@helpers/*": ["./src/helpers/*"],
       "@lib/*": ["./src/lib/*"],
       "@shapes/*": ["./src/shapes/*"]
-    }
+    },
+    "types": ["node"]
   },
-  "include": ["src/**/*"]
+  "exclude": [
+    "node_modules",
+    "cypress",
+    "dev",
+    "jest-report",
+    "local",
+    "dist",
+    "types"
+  ]
 }

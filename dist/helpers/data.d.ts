@@ -1,7 +1,7 @@
 import { Dict } from 'src/types/mapped-types.type';
 export declare const isEmpty: (value?: string) => boolean;
 export declare const mapIconToClass: (value: 'alert' | 'info' | 'success' | 'warning') => "icon-exclamation-triangle" | "icon-info" | "icon-ok" | "icon-exclamation";
-export declare const queryString: (data: Dict<string>) => any;
+export declare const queryString: (data: Dict<string>) => string;
 export declare const isLastPage: (count: number, page: number, limit: number) => boolean;
 export declare const getTodayDate: () => Date;
 export declare const getAgoDate: (days: number) => Date;
