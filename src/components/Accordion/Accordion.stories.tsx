@@ -31,7 +31,42 @@ NoPadding.args = {
   padding: 'none'
 }
 
-/* export const Secondary = Template.bind({})
-Secondary.args = {
-  label: 'Button'
-} */
+export const PaddingSmall = Template.bind({})
+
+PaddingSmall.args = {
+  data,
+  padding: 'small'
+}
+
+export const PaddingMedium = Template.bind({})
+
+PaddingMedium.args = {
+  data,
+  padding: 'medium'
+}
+
+export const WithDescription = Template.bind({})
+
+WithDescription.args = {
+  data: [
+    {
+      title: 'Lorem ipsum dolor sit amet.',
+      description: 'Nulla condimentum arcu id consectetur vestibulum.',
+      content:
+        'Integer et neque efficitur, lobortis nulla eget, porttitor augue. Integer eget tortor sed libero tincidunt semper vitae id mi.'
+    },
+    {
+      title: 'Lorem ipsum dolor sit amet.',
+      description: 'Nulla condimentum arcu id consectetur vestibulum.',
+      content:
+        'Integer et neque efficitur, lobortis nulla eget, porttitor augue. Integer eget tortor sed libero tincidunt semper vitae id mi.'
+    }
+  ]
+}
+
+export const IsBox = Template.bind({})
+
+IsBox.args = {
+  data,
+  isBox: true
+}
