@@ -24,8 +24,9 @@ specifiers:
   '@testing-library/user-event': 14.2.0
   '@types/dompurify': 2.4.0
   '@types/jest': 27.5.1
-  '@types/node': ^18.11.18
+  '@types/node': 18.11.18
   '@types/react': 18.0.27
+  '@types/react-text-mask': 5.4.11
   '@types/testing-library__jest-dom': 5.14.5
   '@types/uuid': 8.3.4
   '@typescript-eslint/eslint-plugin': 5.13.0
@@ -139,6 +140,7 @@ devDependencies:
   '@types/jest': 27.5.1
   '@types/node': 18.11.18
   '@types/react': 18.0.27
+  '@types/react-text-mask': 5.4.11
   '@types/testing-library__jest-dom': 5.14.5
   '@types/uuid': 8.3.4
   '@typescript-eslint/eslint-plugin': 5.13.0_zwyvxd5yhi3ahuhudwke6q34ym
@@ -4218,6 +4220,12 @@ packages:
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
+    dev: true
+
+  /@types/react-text-mask/5.4.11:
+    resolution: {integrity: sha512-DIJ3/dS4jd7NK3lEgsOwcgpp+ZlVrNJEiUDRayZRE/PNMbV/nLWmOKGdL0BUS29hnx0CDgITgPudKx0BgbF5fA==}
+    dependencies:
+      '@types/react': 18.0.27
     dev: true
 
   /@types/react/18.0.27:

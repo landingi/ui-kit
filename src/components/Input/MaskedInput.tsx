@@ -1,36 +1,10 @@
 import { Label } from '@components/Label'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
 import MaskedInputComponent from 'react-text-mask'
 
 import styles from './Input.module.scss'
 
-/**
- * Masked Input - stateless presentational component
- * @param {object} props - props
- * @param {string|array} props.className - list of class names, default: input
- * @param {function} props.onChange - click handler
- * @param {function} props.onKeyDown - key down handler
- * @param {function} props.onBlur - blur handler
- * @param {string} props.type - type
- * @param {string|object} props.placeholder - placeholder
- * @param {string} props.name - name
- * @param {boolean} props.disabled - disabled
- * @param {boolean} props.readonly - readonly
- * @param {string} props.label - label
- * @param {bool} props.autoFocus - autoFocus
- * @param {string} props.mask - mask applied to input
- * @param {number} props.maxLength - max length of input
- * @param {object} props.field - formik field
- * @param {bool}  props.guide - if it is true underscores will be displayed to represent mask format
- * @param {string} props.focused - focused, keep label by default on top
- * @param {string|number} props.value - value
- * @param {object} props.i18n - translations
- * @param {bool} props.alwaysShowLabel - when true label is shown even when input is empty
- * @return {object} An object of children element
- */
-const MaskedInput = ({
+export const MaskedInput = ({
   className,
   onChange,
   onKeyDown,
@@ -144,5 +118,3 @@ MaskedInput.defaultProps = {
   },
   alwaysShowLabel: false
 }
-
-export default MaskedInput
