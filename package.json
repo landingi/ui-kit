@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.0.99",
+  "version": "3.0.100",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -20,7 +20,7 @@
     "cd:ui": "node ./config/packages/package.builder.js production && yarn build",
     "cd:docs": "node ./config/packages/package.builder.js documentation && yarn install && yarn docz:build",
     "release-it": "yarn version --patch && yarn test:badges && yarn build",
-    "build": "rm -rf ./dist && rollup -c"
+    "build": "tsc && rm -rf ./dist && rollup -c"
   },
   "devDependencies": {
     "@babel/preset-typescript": "7.18.6",
@@ -34,7 +34,7 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "8.0.0",
     "@testing-library/user-event": "14.2.0",
-    "@types/dompurify": "2.4.0",
+    "@types/dompurify": "^2.4.0",
     "@types/jest": "27.5.1",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.13.0",
