@@ -3,7 +3,7 @@ import { FC, memo, ReactNode } from 'react'
 
 import { AccordionItem } from './AccordionItem'
 
-interface AccordionProps {
+export interface AccordionProps {
   data: {
     title: ReactNode
     description?: ReactNode
