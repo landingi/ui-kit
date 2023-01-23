@@ -82,7 +82,7 @@ const Button: FC<ButtonProps> = ({
       [styles.button]: true,
       [styles[`button--${variant}`]]: variant,
       [styles[`button--${variant}--loading`]]: variant && isLoading,
-      [styles[`button-${variant}--active`]]: variant && isActive,
+      [styles[`button--${variant}--active`]]: variant && isActive,
       [styles[`button--${size}`]]: size,
       [styles[`button--${align}`]]: align,
       [styles['button--svg']]: hasIcon === true,
