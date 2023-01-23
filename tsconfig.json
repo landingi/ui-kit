@@ -22,7 +22,8 @@
       "@helpers/*": ["./src/helpers/*"],
       "@lib/*": ["./src/lib/*"],
       "@shapes/*": ["./src/shapes/*"]
-    }
+    },
+    "types": ["node"]
   },
   "exclude": [
     "node_modules",
