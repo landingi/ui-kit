@@ -76,6 +76,7 @@ const Button: FC<ButtonProps> = ({
   isActive = false
 }) => {
   console.log(`${children} ${isActive} ${variant}`)
+  console.log(variant && isActive)
   const elementClassesButton = useStyles(
     {
       [styles.button]: true,
