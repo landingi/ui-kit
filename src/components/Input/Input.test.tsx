@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Input from '@components/Input'
+import { Input } from '@components/Input'
 import { fireEvent, render, screen } from '@testing-library/react'
 
 const mockedOnChange = jest.fn()
