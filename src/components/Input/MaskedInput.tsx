@@ -1,31 +1,54 @@
 import { Label } from '@components/Label'
 import { useStyles } from '@helpers/hooks/useStyles'
-import MaskedInputComponent from 'react-text-mask'
+import { FC } from 'react'
+import MaskedInputComponent, { Mask } from 'react-text-mask'
 
 import styles from './Input.module.scss'
 
-export const MaskedInput = ({
+export interface MaskedInputProps {
+  className?: string | string[]
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>
+  onBlur?: React.FocusEventHandler<HTMLInputElement>
+  type?: React.HTMLInputTypeAttribute
+  name?: string
+  disabled?: boolean
+  readonly?: boolean
+  value?: string | number
+  autoFocus?: boolean
+  maxLength?: number
+  mask: Mask | ((value: string) => Mask)
+  guide?: boolean
+  focused?: string | boolean
+  i18n?: {
+    placeholder?: string
+    label?: string
+  }
+  alwaysShowLabel?: boolean
+}
+
+export const MaskedInput: FC<MaskedInputProps> = ({
   className,
   onChange,
   onKeyDown,
   onBlur,
-  type,
+  type = 'text',
   name,
   disabled,
   readonly,
-  value,
+  value = '',
   autoFocus,
   maxLength,
   mask,
   guide,
   focused,
-  i18n: { placeholder, label },
+  i18n: { placeholder, label } = { placeholder: '', label: '' },
   alwaysShowLabel
 }) => {
   const elementClasses = useStyles(
     {
       [styles.input__wrapper]: true,
-      [styles['input__wrapper--focused']]: focused === 'true',
+      [styles['input__wrapper--focused']]: focused || focused === 'true',
       [styles['input__wrapper--show-label']]: alwaysShowLabel
     },
     className
@@ -50,7 +73,6 @@ export const MaskedInput = ({
         maxLength={maxLength}
         required
         guide={guide}
-        focused={focused}
         data-testid='masked-input'
       />
 
@@ -68,53 +90,3 @@ export const MaskedInput = ({
 }
 
 MaskedInput.displayName = 'Masked'
-
-MaskedInput.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onBlur: PropTypes.func,
-  type: PropTypes.string,
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  readonly: PropTypes.bool,
-  label: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  autoFocus: PropTypes.bool,
-  maxLength: PropTypes.number,
-  mask: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
-  ),
-  guide: PropTypes.bool,
-  focused: PropTypes.string,
-  i18n: PropTypes.shape({
-    placeholder: PropTypes.string,
-    label: PropTypes.string
-  }),
-  alwaysShowLabel: PropTypes.bool
-}
-
-MaskedInput.defaultProps = {
-  className: '',
-  onChange: () => null,
-  onKeyDown: () => null,
-  onBlur: () => null,
-  type: 'text',
-  placeholder: '',
-  name: null,
-  disabled: false,
-  readonly: false,
-  label: null,
-  value: null,
-  autoFocus: false,
-  maxLength: 524288,
-  mask: [],
-  guide: false,
-  focused: 'false',
-  i18n: {
-    placeholder: '',
-    label: ''
-  },
-  alwaysShowLabel: false
-}
