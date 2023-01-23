@@ -303,6 +303,15 @@
       color: $color-3;
     }
 
+    &--active {
+      color: $color-1;
+
+      svg,
+      i {
+        color: $color-1;
+      }
+    }
+
     &-blue {
       background: transparent;
       color: $color-brand;
