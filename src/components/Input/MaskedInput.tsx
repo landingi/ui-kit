@@ -89,4 +89,4 @@ export const MaskedInput: FC<MaskedInputProps> = ({
   )
 }
 
-MaskedInput.displayName = 'Masked'
+MaskedInput.displayName = 'MaskedInput'
