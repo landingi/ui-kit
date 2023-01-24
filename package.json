@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.1.1",
+  "version": "3.1.4",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -45,8 +45,9 @@
     "@testing-library/user-event": "14.2.0",
     "@types/dompurify": "2.4.0",
     "@types/jest": "27.5.1",
-    "@types/node": "^18.11.18",
+    "@types/node": "18.11.18",
     "@types/react": "18.0.27",
+    "@types/react-text-mask": "5.4.11",
     "@types/testing-library__jest-dom": "5.14.5",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.13.0",

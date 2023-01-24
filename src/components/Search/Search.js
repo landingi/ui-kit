@@ -1,9 +1,9 @@
 import Button from '@components/Button'
 import { Icon } from '@components/Icon'
-import Input from '@components/Input'
+import { Input } from '@components/Input'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import styles from './Search.module.scss'
 

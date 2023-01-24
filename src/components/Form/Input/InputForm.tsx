@@ -1,5 +1,5 @@
 import Error from '@components/Form/Error'
-import InputComponent from '@components/Input'
+import { Input as InputComponent } from '@components/Input'
 import styles from '@components/Input/Input.module.scss'
 import { Paragraph } from '@components/Paragraph'
 import { getDeepValue } from '@helpers/data'
@@ -47,7 +47,7 @@ interface InputProps {
   variant?: 'table'
   ['data-testid']?: string
 }
-const Input: FC<InputProps> = ({
+export const InputForm: FC<InputProps> = ({
   className,
   field: { name, value, onChange, onBlur },
   form: { errors, touched } = {},
@@ -115,6 +115,4 @@ const Input: FC<InputProps> = ({
   )
 }
 
-Input.displayName = 'Input'
-
-export default Input
+InputForm.displayName = 'InputForm'

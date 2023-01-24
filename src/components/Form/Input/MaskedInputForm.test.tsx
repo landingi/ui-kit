@@ -1,32 +1,29 @@
 import '@testing-library/jest-dom'
 
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
-import MaskedInput from './MaskedInput'
+import { MaskedInputForm } from './MaskedInputForm'
 
 const props = {
   field: {
     name: 'input',
-    value: 'value'
+    value: 'value',
+    onChange: jest.fn(),
+    onBlur: jest.fn()
   },
-  form: {
-    errors: {},
-    touched: {}
-  },
-  id: 'id'
+  mask: false as const
 }
 
-describe('<MaskedInput/> mount', () => {
-  it('is mounted', () => {
-    render(<MaskedInput {...props} />)
+describe('<MaskedInput/> tests', () => {
+  it('renders properly', () => {
+    render(<MaskedInputForm {...props} />)
 
     const component = screen.getByTestId('form-masked-input-wrapper')
 
     expect(component).not.toHaveClass('form--has-error')
   })
 
-  it('is mounted', () => {
+  it('shows error properly', () => {
     const propsWithError = {
       ...props,
       form: {
@@ -39,7 +36,7 @@ describe('<MaskedInput/> mount', () => {
       }
     }
 
-    render(<MaskedInput {...propsWithError} />)
+    render(<MaskedInputForm {...propsWithError} />)
 
     const component = screen.getByTestId('form-masked-input-wrapper')
 

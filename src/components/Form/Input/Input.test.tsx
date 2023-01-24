@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Input from './Input'
+import { InputForm } from './InputForm'
 
 describe('Input tests', () => {
   const props = {
@@ -17,7 +17,7 @@ describe('Input tests', () => {
     id: 'input-id'
   }
   it('properly renders', () => {
-    render(<Input {...props} />)
+    render(<InputForm {...props} />)
   })
   it('properly renders error label when is touched', () => {
     const isTouchedProps = {
@@ -33,7 +33,7 @@ describe('Input tests', () => {
       },
       id: 'input-id'
     }
-    render(<Input {...isTouchedProps} />)
+    render(<InputForm {...isTouchedProps} />)
     expect(screen.findByText('error-name')).toBeTruthy()
   })
 })
