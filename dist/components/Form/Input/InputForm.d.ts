@@ -35,5 +35,5 @@ interface InputProps {
     variant?: 'table';
     ['data-testid']?: string;
 }
-declare const Input: FC<InputProps>;
-export default Input;
+export declare const InputForm: FC<InputProps>;
+export {};
