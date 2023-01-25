@@ -14,8 +14,8 @@ export interface SectionTileProps {
 export const SectionTile: FC<SectionTileProps> = ({
   children,
   thumbnailUrl = '',
-  onClick = () => {},
-  onDoubleClick = () => {},
+  onClick,
+  onDoubleClick,
   isActive = false
 }) => (
   <BoxOutline

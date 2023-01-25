@@ -6,12 +6,13 @@ export default {
   component: Section
 } as ComponentMeta<typeof Section>
 
-const Template: ComponentStory<typeof Section> = args => <Section {...args}>children here</Section>
+const Template: ComponentStory<typeof Section> = args => (
+  <Section {...args}>children here</Section>
+)
 
 export const Default = Template.bind({})
 
-Default.args = {
-}
+Default.args = {}
 
 export const WhiteBackground = Template.bind({})
 
@@ -24,5 +25,3 @@ export const HugeSpace = Template.bind({})
 HugeSpace.args = {
   space: 'huge'
 }
-
-

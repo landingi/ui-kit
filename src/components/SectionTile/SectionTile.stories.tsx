@@ -6,21 +6,22 @@ export default {
   component: SectionTile
 } as ComponentMeta<typeof SectionTile>
 
-const Template: ComponentStory<typeof SectionTile> = args => <SectionTile {...args}></SectionTile>
+const Template: ComponentStory<typeof SectionTile> = args => (
+  <SectionTile {...args} />
+)
 
 export const Inactive = Template.bind({})
 
 Inactive.args = {
-  thumbnailUrl: 'https://images.assets-landingi.com/images/section_placeholder.svg',
+  thumbnailUrl:
+    'https://images.assets-landingi.com/images/section_placeholder.svg',
   isActive: false
 }
 
 export const Active = Template.bind({})
 
 Active.args = {
-  thumbnailUrl: 'https://images.assets-landingi.com/images/section_placeholder.svg',
+  thumbnailUrl:
+    'https://images.assets-landingi.com/images/section_placeholder.svg',
   isActive: true
 }
-
-
-
