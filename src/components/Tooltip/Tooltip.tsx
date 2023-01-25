@@ -36,29 +36,6 @@ export const Tooltip: FC<TooltipProps> = ({
     triggerOffset: 8
   })
 
-  let trigger
-
-  if (isReactText(children)) {
-    trigger = (
-      <span
-        className='tooltip-text-wrapper'
-        {...(disabled ? {} : { ...triggerProps, ...hoverProps })}
-      >
-        {children}
-      </span>
-    )
-  } else {
-    trigger = cloneElement(
-      children as React.ReactElement<any>,
-      disabled
-        ? {}
-        : {
-            ...triggerProps,
-            ...hoverProps
-          }
-    )
-  }
-
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
     [styles[`react-tooltip-${align}`]]: align
@@ -66,7 +43,13 @@ export const Tooltip: FC<TooltipProps> = ({
 
   return (
     <Fragment>
-      <span className={className}>{trigger}</span>
+      {disabled && children}
+
+      {!disabled && (
+        <span className={className} {...triggerProps} {...hoverProps}>
+          {children}
+        </span>
+      )}
 
       {renderLayer(
         isOver && (
