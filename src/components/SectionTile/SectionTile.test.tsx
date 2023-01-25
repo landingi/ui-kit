@@ -1,11 +1,10 @@
 import '@testing-library/jest-dom'
 
-import SectionTile from '@components/SectionTile'
+import { SectionTile } from '@components/SectionTile'
 import { fireEvent, render } from '@testing-library/react'
 import PropTypes from 'prop-types'
-import React from 'react'
 
-const Component = ({ isActive }) => (
+const Component = ({ isActive }: { isActive: boolean }) => (
   <SectionTile isActive={isActive}>CHILDREN</SectionTile>
 )
 
