@@ -47,3 +47,27 @@ Top.args = {
   content: 'Top tooltip',
   placement: 'top'
 }
+
+export const ShowOnClick = Template.bind({})
+
+ShowOnClick.args = {
+  content: 'Top tooltip',
+  placement: 'top',
+  showOnClick: true
+}
+
+export const EffectFloat = Template.bind({})
+
+EffectFloat.args = {
+  content: 'EffectFloat',
+  placement: 'top',
+  effect: 'float'
+}
+
+export const Disabled = Template.bind({})
+
+Disabled.args = {
+  content: 'Disabled',
+  placement: 'top',
+  disabled: true
+}

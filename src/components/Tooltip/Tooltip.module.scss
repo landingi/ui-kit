@@ -1,24 +1,27 @@
 .react-tooltip {
-    border-radius: 0 !important;
-    opacity: 1 !important;
-    max-width: 250px;
-    word-break: break-word;
-    white-space: normal;
-    overflow: visible !important;
-    font-weight: 400;
-    line-height: normal;
-    font-size: 12px;
-    font-family: 'Inter';
+  border-radius: 0 !important;
+  opacity: 1 !important;
+  max-width: 250px;
+  word-break: break-word;
+  white-space: normal;
+  overflow: visible !important;
+  font-weight: 400;
+  line-height: normal;
+  font-size: 12px;
+  font-family: 'Inter';
+  background: #222;
+  color: $color-white;
+  padding: 8px 21px;
 
-    &-left {
-      text-align: left;
-    }
-
-    &-right {
-      text-align: right;
-    }
-
-    &-center {
-      text-align: center;
-    }
+  &-left {
+    text-align: left;
   }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-center {
+    text-align: center;
+  }
+}

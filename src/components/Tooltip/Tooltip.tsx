@@ -1,9 +1,11 @@
-import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, Fragment, ReactNode } from 'react'
-import ReactTooltip from 'react-tooltip'
+import { cloneElement, FC, Fragment, ReactNode } from 'react'
+import { Arrow, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
+
+const isReactText = (children: ReactNode) =>
+  ['string', 'number'].includes(typeof children)
 
 export interface TooltipProps {
   className?: string
@@ -26,15 +28,36 @@ export const Tooltip: FC<TooltipProps> = ({
   placement = 'bottom',
   align = 'left'
 }) => {
-  const tooltipUUID = generateFakeUuid()
+  const [isOver, hoverProps] = useHover()
 
-  const onClickProps = {
-    delayHide: 1000,
-    event: 'click',
-    afterShow: () => ReactTooltip.hide()
+  const { triggerProps, layerProps, arrowProps, renderLayer } = useLayer({
+    isOpen: isOver,
+    placement: `${placement}-center`,
+    triggerOffset: 8
+  })
+
+  let trigger
+
+  if (isReactText(children)) {
+    trigger = (
+      <span
+        className='tooltip-text-wrapper'
+        {...(disabled ? {} : { ...triggerProps, ...hoverProps })}
+      >
+        {children}
+      </span>
+    )
+  } else {
+    trigger = cloneElement(
+      children as React.ReactElement<any>,
+      disabled
+        ? {}
+        : {
+            ...triggerProps,
+            ...hoverProps
+          }
+    )
   }
-
-  const showOnClickProps = showOnClick ? onClickProps : {}
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
@@ -43,21 +66,16 @@ export const Tooltip: FC<TooltipProps> = ({
 
   return (
     <Fragment>
-      <span className={className} data-tip data-for={tooltipUUID}>
-        {children}
-      </span>
+      <span className={className}>{trigger}</span>
 
-      <ReactTooltip
-        className={tooltipStyles}
-        effect={effect}
-        id={tooltipUUID}
-        disable={disabled}
-        isCapture
-        place={placement}
-        {...showOnClickProps}
-      >
-        {content}
-      </ReactTooltip>
+      {renderLayer(
+        isOver && (
+          <div className={tooltipStyles} {...layerProps}>
+            {content}
+            <Arrow {...arrowProps} backgroundColor='#222' size={6} />
+          </div>
+        )
+      )}
     </Fragment>
   )
 }
