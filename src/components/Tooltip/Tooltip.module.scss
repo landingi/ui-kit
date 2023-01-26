@@ -1,15 +1,15 @@
 .react-tooltip {
-  border-radius: 0 !important;
-  opacity: 1 !important;
+  border-radius: 0;
+  opacity: 1;
   max-width: 250px;
   word-break: break-word;
   white-space: normal;
-  overflow: visible !important;
+  overflow: visible;
   font-weight: 400;
   line-height: normal;
   font-size: 12px;
   font-family: 'Inter';
-  background: #222;
+  background: $color-tooltip;
   color: $color-white;
   padding: 8px 21px;
   z-index: $z-index-new-dropdown;

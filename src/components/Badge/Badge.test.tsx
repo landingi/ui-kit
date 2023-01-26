@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import { Badge } from '@components/Badge'
-import { fireEvent, getByTestId, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 const initialProps = {
   children: 'Mocked badge'
@@ -9,9 +9,9 @@ const initialProps = {
 
 describe('<Badge/> mount', () => {
   it('is mounted', () => {
-    const { getByTestId } = render(<Badge {...initialProps} />)
+    render(<Badge {...initialProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toBeVisible()
   })
@@ -22,9 +22,9 @@ describe('<Badge/> mount', () => {
       type: 'alert' as const
     }
 
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--alert')
   })
@@ -34,9 +34,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'info' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--info')
   })
@@ -46,9 +46,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'success' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--success')
   })
@@ -58,9 +58,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'pending' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--pending')
   })
@@ -70,9 +70,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'warning' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--warning')
   })
@@ -82,9 +82,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'accent-1' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--accent-1')
   })
@@ -94,9 +94,9 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       type: 'accent-2' as const
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--accent-2')
   })
@@ -106,17 +106,17 @@ describe('<Badge/> mount', () => {
       ...initialProps,
       isIndicator: true
     }
-    const { getByTestId } = render(<Badge {...newProps} />)
+    render(<Badge {...newProps} />)
 
-    const badgeNode = getByTestId('badge')
+    const badgeNode = screen.getByTestId('badge')
 
     expect(badgeNode).toHaveClass('badge--indicator')
   })
 
   it('when the tooltip prop has not value the children span should not have badge-tooltip class', () => {
-    const { getByText } = render(<Badge {...initialProps} />)
+    render(<Badge {...initialProps} />)
 
-    const childSpanNode = getByText('Mocked badge')
+    const childSpanNode = screen.getByText('Mocked badge')
 
     expect(childSpanNode).not.toHaveClass('badge__tooltip')
   })
