@@ -52,7 +52,7 @@
     "simple-import-sort/exports": "error",
     "no-use-before-define": "warn",
     "react-hooks/exhaustive-deps": "warn",
-    "multiline-ternary": "warn",
+    "multiline-ternary": ["warn", "always-multiline"],
     "no-param-reassign": "warn",
     "no-restricted-globals": "warn",
     "@typescript-eslint/no-unused-expressions": "warn",

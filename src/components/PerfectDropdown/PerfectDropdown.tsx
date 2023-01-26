@@ -1,5 +1,4 @@
 import { Icon } from '@components/Icon'
-import Spreader from '@components/Spreader'
 import { CLOSE_DROPDOWN } from '@constants/eventTypes'
 import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'

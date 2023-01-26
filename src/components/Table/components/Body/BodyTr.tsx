@@ -5,7 +5,6 @@ import type {
   CustomColumn,
   ItemBase
 } from '@components/Table/types'
-import { isSafari } from '@helpers/browser'
 import { useHover } from '@helpers/hooks/useHover'
 import { MutableRefObject, ReactNode, useRef } from 'react'
 
@@ -24,11 +23,10 @@ export const BodyTr = <Item extends ItemBase>({
   const trRef =
     useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
 
-  // safari fix - set RowActions height using js
   const [hoverProps] = useHover()
 
   return (
-    <tr className={styles.tr} ref={trRef} {...(isSafari ? hoverProps : {})}>
+    <tr className={styles.tr} ref={trRef} {...hoverProps}>
       {hasSelect && (
         <td className={styles.td}>
           <Checkbox
@@ -64,9 +62,7 @@ export const BodyTr = <Item extends ItemBase>({
       })}
 
       {rowActions && (
-        <RowActions
-          height={isSafari ? trRef?.current?.offsetHeight : undefined}
-        >
+        <RowActions height={trRef?.current?.offsetHeight}>
           {rowActions(item, handleRefresh)}
         </RowActions>
       )}

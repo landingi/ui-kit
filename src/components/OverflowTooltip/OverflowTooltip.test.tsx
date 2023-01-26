@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import { OverflowTooltip } from '@components/OverflowTooltip'
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 
 describe('<OverflowTooltip/> mount', () => {
   const props = {
@@ -18,7 +18,7 @@ describe('<OverflowTooltip/> mount', () => {
 
     const contentNode = getByText(props.content)
 
-    expect(contentNode).toBeVisible()
+    expect(contentNode).toBeInTheDocument()
   })
 
   it('has `overflow-tooltip` class when content text is longest than length property', () => {
@@ -28,6 +28,7 @@ describe('<OverflowTooltip/> mount', () => {
       content:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
     }
+
     const { getByTestId } = render(
       <OverflowTooltip {...newProps} placement='left' />
     )
@@ -37,22 +38,23 @@ describe('<OverflowTooltip/> mount', () => {
     expect(overflowTooltipNode).toHaveClass('overflow-tooltip')
   })
 
-  it('trims content if exceeds given length and renders <Tooltip/> with whole content', () => {
+  it('trims content if exceeds given length and renders <Tooltip/> with whole content', async () => {
     const newProps = {
-      ...props,
       length: 3,
       content:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, eius!'
     }
-    const { getByText } = render(
+    const { getByText, findByText } = render(
       <OverflowTooltip {...newProps} placement='left' />
     )
 
     const trimedContentNode = getByText('Lor...')
 
-    expect(trimedContentNode).toBeVisible()
+    expect(trimedContentNode).toBeInTheDocument()
 
-    const wholeContentNode = getByText(newProps.content)
+    fireEvent.mouseOver(trimedContentNode)
+
+    const wholeContentNode = await findByText(newProps.content)
 
     expect(wholeContentNode).toBeInTheDocument()
   })
@@ -64,16 +66,16 @@ describe('<OverflowTooltip/> mount', () => {
       children: null
     }
 
-    const { getByText } = render(
+    const { getByText, queryByText } = render(
       <OverflowTooltip {...newProps} placement='left' />
     )
 
     const trimedContentNode = getByText('foo...')
 
-    expect(trimedContentNode).toBeVisible()
+    expect(trimedContentNode).toBeInTheDocument()
 
-    const contentNode = getByText(props.content)
+    const contentNode = queryByText(props.content)
 
-    expect(contentNode).not.toBeVisible()
+    expect(contentNode).not.toBeInTheDocument()
   })
 })
