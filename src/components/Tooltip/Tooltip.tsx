@@ -1,5 +1,5 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import { cloneElement, FC, Fragment, ReactNode } from 'react'
+import { cloneElement, FC, Fragment, ReactNode, useState } from 'react'
 import { Arrow, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
@@ -28,12 +28,20 @@ export const Tooltip: FC<TooltipProps> = ({
   placement = 'bottom',
   align = 'left'
 }) => {
-  const [isOver, hoverProps] = useHover()
+  const [isOver, hoverProps] = useHover() // for hover
+  const [isOpenOnClick, setOpenOnClick] = useState(false) // for click
+
+  const isOpen = showOnClick ? isOpenOnClick : isOver
+
+  const close = () => {
+    setOpenOnClick(false)
+  }
 
   const { triggerProps, layerProps, arrowProps, renderLayer } = useLayer({
-    isOpen: isOver,
+    isOpen,
     placement: `${placement}-center`,
-    triggerOffset: 8
+    triggerOffset: 8,
+    onOutsideClick: close
   })
 
   const tooltipStyles = useStyles({
@@ -41,18 +49,22 @@ export const Tooltip: FC<TooltipProps> = ({
     [styles[`react-tooltip-${align}`]]: align
   })
 
+  const stateProps = showOnClick
+    ? { onClick: () => setOpenOnClick(prev => !prev) }
+    : hoverProps
+
   return (
     <Fragment>
       {disabled && children}
 
       {!disabled && (
-        <span className={className} {...triggerProps} {...hoverProps}>
+        <span className={className} {...triggerProps} {...stateProps}>
           {children}
         </span>
       )}
 
       {renderLayer(
-        isOver && (
+        isOpen && (
           <div className={tooltipStyles} {...layerProps}>
             {content}
             <Arrow {...arrowProps} backgroundColor='#222' size={6} />
