@@ -22,7 +22,7 @@ export interface ButtonProps {
         borderRadius: string;
         boxShadow: string;
     };
-    enabledColor?: string;
+    customEnabledBackgroundColor?: string;
     'data-testid'?: string;
     isActive?: boolean;
 }
