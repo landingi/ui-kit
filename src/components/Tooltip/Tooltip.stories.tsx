@@ -56,14 +56,6 @@ ShowOnClick.args = {
   showOnClick: true
 }
 
-export const EffectFloat = Template.bind({})
-
-EffectFloat.args = {
-  content: 'EffectFloat',
-  placement: 'top',
-  effect: 'float'
-}
-
 export const Disabled = Template.bind({})
 
 Disabled.args = {

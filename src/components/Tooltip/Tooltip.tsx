@@ -1,16 +1,12 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import { cloneElement, FC, Fragment, ReactNode, useState } from 'react'
+import { FC, Fragment, ReactNode, useState } from 'react'
 import { Arrow, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
 
-const isReactText = (children: ReactNode) =>
-  ['string', 'number'].includes(typeof children)
-
 export interface TooltipProps {
   className?: string
   children: ReactNode
-  effect?: 'solid' | 'float'
   content?: ReactNode
   disabled?: boolean
   showOnClick?: boolean
@@ -21,7 +17,6 @@ export interface TooltipProps {
 export const Tooltip: FC<TooltipProps> = ({
   className = '',
   children,
-  effect = 'solid',
   content = '',
   disabled = false,
   showOnClick = false,
