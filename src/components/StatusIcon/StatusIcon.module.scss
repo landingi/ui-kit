@@ -1,6 +1,7 @@
 .status-icon {
   display: flex;
   border-radius: 50%;
+  position: relative;
 
   &--active {
     padding: 0;
@@ -26,8 +27,10 @@
     i {
       color: $color-white;
       font-size: 7px;
-      margin: auto;
-      margin-top: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -40,7 +43,10 @@
     i {
       color: $color-white;
       font-size: 0.75em;
-      margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -53,7 +59,10 @@
     i {
       color: $color-white;
       font-size: 0.75em;
-      margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
