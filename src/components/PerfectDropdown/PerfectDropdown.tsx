@@ -217,7 +217,7 @@ export const PerfectDropdown = forwardRef<
           {!hasInput && <Ink />}
         </Fragment>
       )
-    console.log(dataTestId, isOpen)
+
     return (
       <Fragment>
         <span
