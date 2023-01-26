@@ -12,7 +12,7 @@
   background: #222;
   color: $color-white;
   padding: 8px 21px;
-  z-index: 1100;
+  z-index: $z-index-new-dropdown;
 
   &-left {
     text-align: left;
