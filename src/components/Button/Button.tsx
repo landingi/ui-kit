@@ -46,7 +46,7 @@ export interface ButtonProps {
     borderRadius: string
     boxShadow: string
   }
-  activeColor?: string
+  enabledColor?: string
   'data-testid'?: string
   isActive?: boolean
 }
@@ -71,7 +71,7 @@ const Button: FC<ButtonProps> = ({
   buttonStyle,
   fitWidth = false,
   customStyle,
-  activeColor,
+  enabledColor,
   'data-testid': dataTestId,
   isActive = false
 }) => {
@@ -104,7 +104,7 @@ const Button: FC<ButtonProps> = ({
       style={{
         borderRadius: customStyle?.borderRadius,
         boxShadow: customStyle?.boxShadow,
-        backgroundColor: isDisabled ? undefined : activeColor
+        backgroundColor: isDisabled ? undefined : enabledColor
       }}
     >
       {isLoading && <Spinner />}
