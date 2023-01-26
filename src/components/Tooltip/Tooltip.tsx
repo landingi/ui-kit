@@ -12,6 +12,7 @@ export interface TooltipProps {
   showOnClick?: boolean
   placement?: 'top' | 'left' | 'right' | 'bottom'
   align?: 'center' | 'left' | 'right'
+  'data-testid'?: string | undefined
 }
 
 export const Tooltip: FC<TooltipProps> = ({
@@ -21,7 +22,8 @@ export const Tooltip: FC<TooltipProps> = ({
   disabled = false,
   showOnClick = false,
   placement = 'bottom',
-  align = 'left'
+  align = 'left',
+  'data-testid': dataTestId
 }) => {
   const [isOver, hoverProps] = useHover() // for hover
   const [isOpenOnClick, setOpenOnClick] = useState(false) // for click
@@ -53,7 +55,12 @@ export const Tooltip: FC<TooltipProps> = ({
       {disabled && children}
 
       {!disabled && (
-        <span className={className} {...triggerProps} {...stateProps}>
+        <span
+          className={className}
+          data-testid={dataTestId}
+          {...triggerProps}
+          {...stateProps}
+        >
           {children}
         </span>
       )}

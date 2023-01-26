@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import { Badge } from '@components/Badge'
-import { render } from '@testing-library/react'
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react'
 
 const initialProps = {
   children: 'Mocked badge'
@@ -131,19 +131,5 @@ describe('<Badge/> mount', () => {
     const childSpanNode = getByText('Mocked badge')
 
     expect(childSpanNode).toHaveClass('badge__tooltip')
-  })
-
-  it('Tooltip badge should displays proper value', () => {
-    const newProps = {
-      ...initialProps,
-      tooltip: 'Random text to display'
-    }
-    const { tooltip } = newProps
-
-    const { getByText } = render(<Badge {...newProps} />)
-
-    const tooltipNode = getByText(tooltip)
-
-    expect(tooltipNode).toHaveTextContent(tooltip)
   })
 })

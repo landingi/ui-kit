@@ -144,6 +144,7 @@ export const Input = forwardRef(
             className={tooltopStyles}
             placement='bottom'
             content={tooltip}
+            data-testid='input-tooltip'
           >
             <Icon color='color-3' icon='icon-exclamation-circle' />
           </Tooltip>
