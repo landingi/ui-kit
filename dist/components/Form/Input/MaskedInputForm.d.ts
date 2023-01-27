@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Mask } from 'react-text-mask';
-export interface MaskedInputProps {
+export interface MaskedInputFormProps {
     field: {
         name: string;
         value: string | number;
@@ -27,4 +27,4 @@ export interface MaskedInputProps {
     };
     alwaysShowLabel?: boolean;
 }
-export declare const MaskedInputForm: FC<MaskedInputProps>;
+export declare const MaskedInputForm: FC<MaskedInputFormProps>;
