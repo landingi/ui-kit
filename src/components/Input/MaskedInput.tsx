@@ -40,7 +40,7 @@ export const MaskedInput: FC<MaskedInputProps> = ({
   autoFocus,
   maxLength,
   mask,
-  guide,
+  guide = false,
   focused,
   i18n: { placeholder, label } = { placeholder: '', label: '' },
   alwaysShowLabel
