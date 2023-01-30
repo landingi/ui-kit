@@ -43,7 +43,11 @@ export const Filter: FC<FilterProps> = ({
   const setFilter = (label: string, value: string | number) => {
     setLabel(label)
     setValue?.(value)
-    localStorageKey && setLocalStorage(localStorageKey, value.toString())
+
+    if (localStorageKey) {
+      setLocalStorage(localStorageKey, value.toString())
+    }
+
     emitCloseDropdown()
   }
 
