@@ -1,40 +1,37 @@
 import { Filter } from '@components/Filter'
 import { Spacer } from '@components/Spacer'
-import { Row, Column } from 'simple-flexbox'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Fragment } from 'react'
+import { Column, Row } from 'simple-flexbox'
 
 export default {
   title: 'Filter',
   component: Filter
 } as ComponentMeta<typeof Filter>
 
-const Template: ComponentStory<typeof Filter> =
-    args =>
-        <Column>
-            <Row>
-                Filter in 200px wide Row, adjusts its width to parent
-            </Row>
+const Template: ComponentStory<typeof Filter> = args => (
+  <Column>
+    <Row>Filter in 200px wide Row, adjusts its width to parent</Row>
 
-            <Spacer space='small' />
+    <Spacer space='small' />
 
-            <Row style={{width: '200px'}}>
-                <Filter {...args} />
-            </Row>
-        </Column>
+    <Row style={{ width: '200px' }}>
+      <Filter {...args} />
+    </Row>
+  </Column>
+)
 
 export const Default = Template.bind({})
 
 Default.args = {
-    values: [{
-        label: 'Ascending',
-        value: 'ASC'
+  values: [
+    {
+      label: 'Ascending',
+      value: 'ASC'
     },
     {
-        label: 'Descending',
-        value: 'DESC'
+      label: 'Descending',
+      value: 'DESC'
     }
-    ],
-    initialValue: 'DESC'
+  ],
+  initialValue: 'DESC'
 }
-
