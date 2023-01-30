@@ -10,14 +10,39 @@ const Template: ComponentStory<typeof MaskedInput> = args => (
   <MaskedInput {...args} />
 )
 
-export const Default = Template.bind({})
+export const WithGuide = Template.bind({})
 
-Default.args = {
+WithGuide.args = {
   i18n: {
     placeholder: 'e.x. (222) 222-2222',
     label: 'e.x. (222) 222-2222'
   },
   guide: true,
+  mask: [
+    '(',
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ')',
+    ' ',
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/
+  ]
+}
+
+export const WithoutGuide = Template.bind({})
+
+WithoutGuide.args = {
+  i18n: {
+    placeholder: 'e.x. (222) 222-2222',
+    label: 'e.x. (222) 222-2222'
+  },
   mask: [
     '(',
     /[1-9]/,

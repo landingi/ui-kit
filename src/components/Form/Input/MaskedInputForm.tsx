@@ -3,7 +3,7 @@ import { MaskedInput } from '@components/Input/MaskedInput'
 import { FC } from 'react'
 import { Mask } from 'react-text-mask'
 
-export interface MasekdInputProps {
+export interface MaskedInputFormProps {
   field: {
     name: string
     value: string | number
@@ -31,7 +31,7 @@ export interface MasekdInputProps {
   alwaysShowLabel?: boolean
 }
 
-export const MaskedInputForm: FC<MasekdInputProps> = ({
+export const MaskedInputForm: FC<MaskedInputFormProps> = ({
   field,
   form = { errors: {}, touched: {} },
   type,
