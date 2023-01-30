@@ -518,12 +518,29 @@
     display: flex;
     align-items: center;
     line-height: 18px;
+    padding: $padding-small $padding-medium;
+    color: $color-3;
+    background: transparent;
 
     span {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 220px;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 0 $padding-medium 0 $padding-small;
+      color: $color-1;
+    }
+
+    &:hover {
+      background: $color-button-hover;
+      color: $color-1;
+
+      svg,
+      i {
+        color: $color-1;
+      }
     }
   }
 
