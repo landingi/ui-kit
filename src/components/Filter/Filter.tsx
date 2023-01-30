@@ -30,7 +30,7 @@ export const Filter: FC<FilterProps> = ({
   localStorageKey,
   customLabel,
   'data-testid': dataTestId = 'filter-component',
-  dropdownPlacement
+  dropdownPlacement = 'bottom-end'
 }) => {
   const findInitialValue = () => {
     const find = values.find(({ value }) => value === initialValue)
