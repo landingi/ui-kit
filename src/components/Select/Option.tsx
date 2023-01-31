@@ -1,32 +1,21 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC } from 'react'
 
-// TODO Select => Option css
-/**
- * Select option - stateless presentational component
- * @param {object} props - props
- * @param {string} props.className - list of class names, default: select__option
- * @param {string|number} props.value - click handler
- * @param {string} props.label
- * @return {object} An object of children element
- */
+interface OptionProps {
+  className?: string
+  value?: string | number
+  label: string
+}
 
-const Option = ({ className, value, label }) => (
+const Option: FC<OptionProps> = ({
+  className = 'select__option',
+  value,
+  label
+}) => (
   <option className={className} value={value}>
     {label}
   </option>
 )
 
 Option.displayName = 'select.option'
-
-Option.propTypes = {
-  className: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-}
-
-Option.defaultProps = {
-  className: 'select__option'
-}
 
 export default Option

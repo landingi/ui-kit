@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import Select from '@components/Select'
+import { Select } from '@components/Select'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 describe('<Select/> mount', () => {
   const props = {

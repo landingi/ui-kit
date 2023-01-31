@@ -1,4 +1,4 @@
-import Select from '@components/Select'
+import { Select } from '@components/Select'
 import { PageLimitProps } from '@components/Table/types'
 import { setLocalStorage } from '@helpers/storage'
 import { ChangeEvent, FC } from 'react'
