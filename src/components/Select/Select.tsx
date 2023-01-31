@@ -1,10 +1,17 @@
+import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
-import uuid from 'react-uuid'
+import { FC, ReactEventHandler } from 'react'
 
 import Option from './Option'
 import styles from './Select.module.scss'
+
+interface SelectProps {
+  value: number | string
+  data: { label: string; value: number | string }[]
+  name: string
+  onChange: ReactEventHandler<HTMLSelectElement>
+  'data-testid': string
+}
 
 /**
  * Select - stateless presentational component
@@ -15,7 +22,13 @@ import styles from './Select.module.scss'
  * @param {function} props.onChange - on change handler
  * @return {object} An object of children element
  */
-const Select = ({ value, data, name, onChange, 'data-testid': dataTestId }) => {
+const Select: FC<SelectProps> = ({
+  value,
+  data,
+  name,
+  onChange,
+  'data-testid': dataTestId = 'default-select'
+}) => {
   const selectStyles = useStyles({ [styles.select]: true })
 
   return (
@@ -27,26 +40,16 @@ const Select = ({ value, data, name, onChange, 'data-testid': dataTestId }) => {
       data-testid={dataTestId}
     >
       {data.map(item => (
-        <Option key={uuid()} label={item.label} value={item.value} />
+        <Option
+          key={generateFakeUuid()}
+          label={item.label}
+          value={item.value}
+        />
       ))}
     </select>
   )
 }
 
 Select.displayName = 'Select'
-
-Select.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  'data-testid': PropTypes.string
-}
-
-Select.defaultProps = {
-  onChange: () => null,
-  'data-testid': 'default-select',
-  value: undefined
-}
 
 export default Select
