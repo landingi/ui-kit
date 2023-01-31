@@ -71,7 +71,7 @@ export { default as Search } from './Search';
 export { default as Searcher } from './Searcher';
 export * from './Section';
 export * from './SectionTile';
-export { default as Select } from './Select';
+export * from './Select';
 export { default as Separator } from './Separator';
 export { default as ShowMore } from './ShowMore';
 export { default as ShowPassword } from './ShowPassword';
