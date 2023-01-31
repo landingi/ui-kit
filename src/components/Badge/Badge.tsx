@@ -56,7 +56,11 @@ export const Badge: FC<BadgeProps> = ({
   })
 
   return (
-    <Tooltip content={tooltip} disabled={!tooltip || width < 105}>
+    <Tooltip
+      content={tooltip}
+      disabled={!tooltip || width < 105}
+      data-testid='badge-tooltip'
+    >
       <span data-testid='badge' ref={badgeRef} className={badgeStyles}>
         <span className={tooltipStyles}>{children}</span>
       </span>

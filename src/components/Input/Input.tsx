@@ -7,12 +7,13 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
-  KeyboardEventHandler
+  KeyboardEventHandler,
+  Ref
 } from 'react'
 
 import styles from './Input.module.scss'
 
-interface InputProps {
+export interface InputProps {
   className?: string | string[]
   onChange?: ChangeEventHandler<HTMLInputElement>
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>
@@ -44,7 +45,7 @@ interface InputProps {
   ['data-testid']?: string
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef(
   (
     {
       className,
@@ -72,8 +73,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       variant,
       form = false,
       'data-testid': dataTestId = 'input-component'
-    },
-    ref
+    }: InputProps,
+    ref: Ref<HTMLInputElement>
   ) => {
     const wrapperStyles = useStyles(
       {
@@ -143,6 +144,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={tooltopStyles}
             placement='bottom'
             content={tooltip}
+            data-testid='input-tooltip'
           >
             <Icon color='color-3' icon='icon-exclamation-circle' />
           </Tooltip>
@@ -153,5 +155,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 )
 
 Input.displayName = 'Input'
-
-export default Input

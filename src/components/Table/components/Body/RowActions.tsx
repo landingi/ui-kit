@@ -8,7 +8,6 @@ import styles from './Body.module.scss'
 export const RowActions: FC<RowActionsProps> = ({ height, children }) => {
   const trRowActionsStyles = useStyles({
     [styles['tr__row-actions']]: true,
-    // special fix ONLY for safari
     [styles['tr__row-actions--safari']]: isSafari
   })
 
@@ -16,7 +15,6 @@ export const RowActions: FC<RowActionsProps> = ({ height, children }) => {
     <th
       className={trRowActionsStyles}
       style={{
-        // special fix ONLY for safari
         height
       }}
     >

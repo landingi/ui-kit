@@ -46,8 +46,9 @@ export interface ButtonProps {
     borderRadius: string
     boxShadow: string
   }
-  activeColor?: string
+  customEnabledBackgroundColor?: string
   'data-testid'?: string
+  isActive?: boolean
 }
 
 const Button: FC<ButtonProps> = ({
@@ -70,14 +71,16 @@ const Button: FC<ButtonProps> = ({
   buttonStyle,
   fitWidth = false,
   customStyle,
-  activeColor,
-  'data-testid': dataTestId
+  customEnabledBackgroundColor,
+  'data-testid': dataTestId,
+  isActive = false
 }) => {
   const elementClassesButton = useStyles(
     {
       [styles.button]: true,
       [styles[`button--${variant}`]]: variant,
       [styles[`button--${variant}--loading`]]: variant && isLoading,
+      [styles[`button--${variant}--active`]]: variant && isActive,
       [styles[`button--${size}`]]: size,
       [styles[`button--${align}`]]: align,
       [styles['button--svg']]: hasIcon === true,
@@ -101,7 +104,7 @@ const Button: FC<ButtonProps> = ({
       style={{
         borderRadius: customStyle?.borderRadius,
         boxShadow: customStyle?.boxShadow,
-        backgroundColor: isDisabled ? undefined : activeColor
+        backgroundColor: isDisabled ? undefined : customEnabledBackgroundColor
       }}
     >
       {isLoading && <Spinner />}

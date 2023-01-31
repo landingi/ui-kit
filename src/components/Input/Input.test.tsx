@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Input from '@components/Input'
+import { Input } from '@components/Input'
 import { fireEvent, render, screen } from '@testing-library/react'
 
 const mockedOnChange = jest.fn()
@@ -30,10 +30,14 @@ describe('<Input /> mount', () => {
     expect(mockedOnKeyDown).toHaveBeenCalled()
   })
 
-  it('has tooltip and exclamation icon', () => {
+  it('has tooltip and exclamation icon', async () => {
     render(<Input {...props} tooltip='some tooltip content' />)
 
-    const tooltip = screen.getByText('some tooltip content')
+    const tooltipTrigger = screen.getByTestId('input-tooltip')
+
+    fireEvent.mouseOver(tooltipTrigger)
+
+    const tooltip = await screen.findByText('some tooltip content')
 
     expect(tooltip).toBeInTheDocument()
   })

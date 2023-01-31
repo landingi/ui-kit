@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler, KeyboardEventHandler } from 'react';
-interface InputProps {
+export interface InputProps {
     className?: string | string[];
     onChange?: ChangeEventHandler<HTMLInputElement>;
     onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
@@ -30,5 +30,4 @@ interface InputProps {
     form?: boolean;
     ['data-testid']?: string;
 }
-declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;
-export default Input;
+export declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;

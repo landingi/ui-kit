@@ -1,63 +1,78 @@
-import { generateFakeUuid } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, Fragment, ReactNode } from 'react'
-import ReactTooltip from 'react-tooltip'
+import { FC, Fragment, ReactNode, useState } from 'react'
+import { Arrow, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
 
 export interface TooltipProps {
   className?: string
   children: ReactNode
-  effect?: 'solid' | 'float'
   content?: ReactNode
   disabled?: boolean
   showOnClick?: boolean
   placement?: 'top' | 'left' | 'right' | 'bottom'
   align?: 'center' | 'left' | 'right'
+  'data-testid'?: string | undefined
 }
 
 export const Tooltip: FC<TooltipProps> = ({
   className = '',
   children,
-  effect = 'solid',
   content = '',
   disabled = false,
   showOnClick = false,
   placement = 'bottom',
-  align = 'left'
+  align = 'left',
+  'data-testid': dataTestId
 }) => {
-  const tooltipUUID = generateFakeUuid()
+  const [isOver, hoverProps] = useHover() // for hover
+  const [isOpenOnClick, setOpenOnClick] = useState(false) // for click
 
-  const onClickProps = {
-    delayHide: 1000,
-    event: 'click',
-    afterShow: () => ReactTooltip.hide()
+  const isOpen = showOnClick ? isOpenOnClick : isOver
+
+  const close = () => {
+    setOpenOnClick(false)
   }
 
-  const showOnClickProps = showOnClick ? onClickProps : {}
+  const { triggerProps, layerProps, arrowProps, renderLayer } = useLayer({
+    isOpen,
+    placement: `${placement}-center`,
+    triggerOffset: 8,
+    onOutsideClick: close
+  })
 
   const tooltipStyles = useStyles({
     [styles['react-tooltip']]: true,
     [styles[`react-tooltip-${align}`]]: align
   })
 
+  const stateProps = showOnClick
+    ? { onClick: () => setOpenOnClick(prev => !prev) }
+    : hoverProps
+
   return (
     <Fragment>
-      <span className={className} data-tip data-for={tooltipUUID}>
-        {children}
-      </span>
+      {disabled && children}
 
-      <ReactTooltip
-        className={tooltipStyles}
-        effect={effect}
-        id={tooltipUUID}
-        disable={disabled}
-        isCapture
-        place={placement}
-        {...showOnClickProps}
-      >
-        {content}
-      </ReactTooltip>
+      {!disabled && (
+        <span
+          className={className}
+          data-testid={dataTestId}
+          {...triggerProps}
+          {...stateProps}
+        >
+          {children}
+        </span>
+      )}
+
+      {renderLayer(
+        isOpen && (
+          <div className={tooltipStyles} {...layerProps}>
+            {content}
+            <Arrow {...arrowProps} backgroundColor='#222' size={6} />
+          </div>
+        )
+      )}
     </Fragment>
   )
 }

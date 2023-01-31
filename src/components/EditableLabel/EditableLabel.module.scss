@@ -24,15 +24,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  display: block;
   width: 100%;
-
-  > span {
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &--small {
     font-size: 14px;

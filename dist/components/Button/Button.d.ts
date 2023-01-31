@@ -22,8 +22,9 @@ export interface ButtonProps {
         borderRadius: string;
         boxShadow: string;
     };
-    activeColor?: string;
+    customEnabledBackgroundColor?: string;
     'data-testid'?: string;
+    isActive?: boolean;
 }
 declare const Button: FC<ButtonProps>;
 export default Button;

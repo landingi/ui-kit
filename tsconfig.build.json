@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "cypress",
+    "dev",
+    "jest-report",
+    "local",
+    "dist",
+    "types",
+    "src/**/*.stories.*",
+    "src/**/*.test.*"
+  ]
+}

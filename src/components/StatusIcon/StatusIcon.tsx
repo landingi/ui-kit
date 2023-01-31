@@ -5,7 +5,7 @@ import { FC } from 'react'
 
 import styles from './StatusIcon.module.scss'
 
-interface StatusIconProps {
+export interface StatusIconProps {
   className?: string | string[]
   variant?: 'active' | 'inactive' | 'warning'
   size?: 'tiny' | 'medium' | 'big'

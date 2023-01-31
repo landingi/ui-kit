@@ -9,7 +9,7 @@ interface PerfectDropdownProps {
     alignment?: 'center' | 'spaced' | 'end';
     children: ReactNode;
     icon?: string;
-    label?: string;
+    label?: ReactNode;
     hasInput?: boolean;
     hasFullInputStyle?: boolean;
     asPlaceholder?: boolean;

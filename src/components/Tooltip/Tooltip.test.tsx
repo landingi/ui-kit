@@ -9,11 +9,7 @@ const props = {
 
 describe('<Tooltip/> test', () => {
   it('renders properly', () => {
-    render(
-      <Tooltip showOnClick={false} {...props}>
-        children
-      </Tooltip>
-    )
+    render(<Tooltip {...props}>children</Tooltip>)
   })
 
   it('shows tooltip on hover', async () => {
@@ -23,7 +19,7 @@ describe('<Tooltip/> test', () => {
 
     const children = getByText('test-children')
 
-    fireEvent.mouseEnter(children)
+    fireEvent.mouseOver(children)
 
     const tooltip = await findByText('Tooltip content')
 

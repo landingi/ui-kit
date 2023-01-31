@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 
 import { Back } from '@components/Back'
-import { render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 describe('<Back/> mount', () => {
   const props = {
@@ -10,34 +10,38 @@ describe('<Back/> mount', () => {
     url: '/payments/subscription/cancel'
   }
 
-  it('should display proper text', () => {
-    const { getByText } = render(<Back {...props} />)
+  it('should display proper text', async () => {
+    render(<Back {...props} />)
 
-    const tooltip = getByText('Content')
+    const tooltipTrigger = screen.getByTestId('tooltip-back')
+
+    fireEvent.mouseOver(tooltipTrigger)
+
+    const tooltip = await screen.findByText('Content')
 
     expect(tooltip).toBeTruthy()
   })
 
   it('should have class class-name', () => {
-    const { getByTestId } = render(<Back {...props} />)
+    render(<Back {...props} />)
 
-    const back = getByTestId('back')
+    const back = screen.getByTestId('back')
 
     expect(back).toHaveClass('class-name')
   })
 
   it('button should have class button--icon', () => {
-    const { getByTestId } = render(<Back {...props} />)
+    render(<Back {...props} />)
 
-    const button = getByTestId('button')
+    const button = screen.getByTestId('button')
 
     expect(button).toHaveClass('button--icon')
   })
 
   it('button should have class button--transparent', () => {
-    const { getByTestId } = render(<Back {...props} label='Back' />)
+    render(<Back {...props} label='Back' />)
 
-    const button = getByTestId('button')
+    const button = screen.getByTestId('button')
 
     expect(button).toHaveClass('button--transparent')
   })

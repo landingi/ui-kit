@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-interface AccordionProps {
+export interface AccordionProps {
     data: {
         title: ReactNode;
         description?: ReactNode;
@@ -9,4 +9,3 @@ interface AccordionProps {
     isBox?: boolean;
 }
 export declare const Accordion: FC<AccordionProps>;
-export {};

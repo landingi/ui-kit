@@ -7,10 +7,7 @@
     "color": "magenta"
   },
   "errorOnDeprecated": true,
-  "setupFiles": [
-    "<rootDir>/config/tests/jest/setup/setupTests.js",
-    "<rootDir>/config/tests/jest/setup/mocks/matchMedia.mock"
-  ],
+  "setupFilesAfterEnv": ["<rootDir>/config/tests/jest/setup/setupTests.js"],
   "testPathIgnorePatterns": [
     "<rootDir>/config/tests/jest/setup/",
     "jest-prop-type-error"
