@@ -12,7 +12,7 @@ import { Row } from 'simple-flexbox'
 
 import styles from './EditableLabel.module.scss'
 
-interface EditableLabelProps {
+export interface EditableLabelProps {
   initialName: string
   placeholder?: string
   size?: 'small' | 'big'
@@ -130,13 +130,13 @@ export const EditableLabel: FC<EditableLabelProps> = ({
             content={name}
             placement='top'
             align='center'
-            className={labelStyles}
             disabled={shouldTooltipBeDisabled()}
           >
             <span
               ref={labelRef}
               onClick={isClickable ? handleFocus : () => null}
               data-testid='editable-label'
+              className={labelStyles}
             >
               {name}
             </span>
