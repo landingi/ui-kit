@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 
-import Filter from '@components/Filter'
+import { Filter } from '@components/Filter'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 
 const props = {
   values: [
