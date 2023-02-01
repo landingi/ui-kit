@@ -2,10 +2,48 @@ import { Icon } from '@components/Icon'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { FC, ReactNode } from 'react'
 
 import styles from './StatusDropdown.module.scss'
+
+export interface StatusDropdownProps {
+  children: ReactNode
+  label: string
+  dropdownPlacement:
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'bottom-center'
+    | 'top-start'
+    | 'top-center'
+    | 'top-end'
+  className?: string | string[]
+  status?: 'alert' | 'warning' | 'success' | 'info'
+}
+
+const customTrigger =
+  ({
+    triggerClasses,
+    labelClasses,
+    label
+  }: {
+    triggerClasses: string
+    labelClasses: string
+    label: string
+  }) =>
+  ({ isOpen }: { isOpen: boolean }) => {
+    const renderArrow = () =>
+      isOpen ? <Icon icon='icon-caret-up' /> : <Icon icon='icon-caret-down' />
+
+    return (
+      <span className={triggerClasses}>
+        <span className={labelClasses}>{label}</span>
+
+        <Spreader spread='mini' />
+
+        {renderArrow()}
+      </span>
+    )
+  }
 
 /**
  * StatusDropdown - dropdown component that uses custom trigger whose color depends on status prop given
@@ -16,12 +54,12 @@ import styles from './StatusDropdown.module.scss'
  * @param {string} status - changes color of dropdown
  * @return an object of children
  */
-const StatusDropdown = ({
+export const StatusDropdown: FC<StatusDropdownProps> = ({
   children,
   label,
-  dropdownPlacement,
+  dropdownPlacement = 'bottom-end',
   className,
-  status
+  status = 'success'
 }) => {
   const labelClasses = useStyles({
     [styles.trigger__label]: true
@@ -35,43 +73,16 @@ const StatusDropdown = ({
     className
   )
 
-  const renderArrow = isOpen =>
-    isOpen ? <Icon icon='icon-caret-up' /> : <Icon icon='icon-caret-down' />
-
   return (
     <PerfectDropdown
       dropdownPlacement={dropdownPlacement}
       hasArrow={false}
       size='small'
-      customTrigger={({ isOpen }) => (
-        <span className={triggerClasses}>
-          <span className={labelClasses}>{label}</span>
-
-          <Spreader spread='mini' />
-
-          {renderArrow(isOpen)}
-        </span>
-      )}
+      customTrigger={customTrigger({ label, labelClasses, triggerClasses })}
     >
       {children}
     </PerfectDropdown>
   )
 }
 
-StatusDropdown.propTypes = {
-  dropdownPlacement: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  status: PropTypes.oneOf(['alert', 'warning', 'success', 'info'])
-}
-
-StatusDropdown.defaultProps = {
-  dropdownPlacement: 'bottom-end',
-  label: null,
-  className: ''
-}
-
 StatusDropdown.displayName = 'StatusDropdown'
-
-export default StatusDropdown
