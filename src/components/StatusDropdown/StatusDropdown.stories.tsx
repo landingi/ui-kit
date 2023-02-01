@@ -10,10 +10,6 @@ export default {
 
 const Template: ComponentStory<typeof StatusDropdown> = args => (
   <Column>
-    <Row>StatusDropdown in 200px wide Row, adjusts its width to parent</Row>
-
-    <Spacer space='small' />
-
     <Row style={{ width: '200px' }}>
       <StatusDropdown {...args} />
     </Row>
