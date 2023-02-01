@@ -1,11 +1,10 @@
 import Loader from '@components/Loader'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import { FC, useEffect, useRef, useState, ReactNode } from 'react'
+import { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import styles from './InfinityScroll.module.scss'
 
-interface InfinityScrollProps {
+export interface InfinityScrollProps {
   className?: string | string[]
   children: ReactNode
   loadMore: () => void
