@@ -14,8 +14,6 @@
     "test:watch": "jest --watch",
     "format": "prettier --write {,src/**/}*.js",
     "pretty-quick": "pretty-quick --staged",
-    "cd:ui": "echo cd:ui",
-    "cd:docs": "echo cd:dosc",
     "release-it": "yarn version --patch && pnpm test:badges && pnpm build",
     "build": "rm -rf ./dist && rollup -c",
     "storybook": "start-storybook -p 6006",

@@ -1,0 +1,46 @@
+name: Deploy styleguide to S3
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::084824767965:role/github-ui-kit
+          role-duration-seconds: 3600
+          aws-region: eu-west-1
+          role-session-name: github-ui-kit
+
+      - run: aws sts get-caller-identity
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.x
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build and export Storybook
+        run: pnpm build-storybook
+
+      - name: Deploy to S3
+        run:
+          aws s3 sync ./storybook-static/ s3://styleguide.landingi.com --delete
