@@ -6,16 +6,12 @@ interface OptionProps {
   label: string
 }
 
-const Option: FC<OptionProps> = ({
-  className = 'select__option',
-  value,
-  label
-}) => (
+const Option: FC<OptionProps> = ({ className, value, label }) => (
   <option className={className} value={value}>
     {label}
   </option>
 )
 
-Option.displayName = 'select.option'
+Option.displayName = 'SelectOption'
 
 export default Option
