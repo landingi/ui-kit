@@ -17,87 +17,62 @@ to your dependencies in `package.json`.
 
 ### Requirements
 
-- [npm](https://www.npmjs.com/get-npm) >=7.0.0
+- [pnpm](https://pnpm.io/) >=7.0.0
 - [Node.js](https://nodejs.org/en/download/) 18.0.0
 
 ### Quick Start
 
 If you don't have installed Yarn execute:
 
-`npm install --global yarn`
+`npm install --global pnpm`
 
 then to install project pacakges run in the project root:
 
-`yarn`
+`pnpm install`
 
 #### Add a New component
 
 1. Create a folder inside `src/components/*`
-2. Create `*.mdx` file and rest of the `js` files
-3. In the `*.mdx` file add the following code:
+2. Create `*.stories.tsx` file and rest of the `ts / tsx` files
+3. In the `\*.stories.tsx`` file add the following code:
 
 ```
-import { Playground, Props } from 'docz'
-import YourComponent from '@components/YourComponent'
+import { YourComponent } from '@components/YourComponent'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-# YourComponent
+export default {
+  title: 'YourComponent',
+  component: YourComponent
+} as ComponentMeta<typeof YourComponent>
 
-<Props of={YourComponent} />
+const Template: ComponentStory<typeof YourComponent> = args => <YourComponent {...args} />
 
-## Basic usage
+export const NameOfVariant = Template.bind({})
 
-<Playground>
-  <YourComponent />
-</Playground>
+NameOfVariant.args = {
+  // your props
+}
 ```
 
-4. Export your component in `src/index.js`
+4. Export your component in `src/index.ts`
 
 ```
-export { default as YourComponent } from '@components/YourComponent'
+export * from '@components/YourComponent'
 ```
 
-5. Run `yarn docz:dev` and open `http://localhost:3000`. Check if your component
-   works as expected.
+5. Run `pnpm storybook` and open `http://localhost:6006`. Check if your
+   component works as expected.
 
-6. Run `yarn release-it`, stage all files
+6. Run `pnpm release-it`, stage all files
 
 7. Push it
 
 ### Development
 
-- `yarn docz:dev` - development and watch
-- `yarn docz:build` - build
-- `yarn docz:serve` - build and serve local server
-
-### Recommended Development flow
-
-- install this two vsc extensions: "MDX", "VSCode MDX"
-- add this line to your settings.json
-
-```
-"eslint.options": {
-    "extensions": [".js", ".jsx", ".mdx", ".ts", ".tsx"]
-  },
-  "eslint.validate": [
-    "mdx",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ]
-```
+- `pnpm storybook` - development and watch
+- `pnpm build` - build
 
 #### CI
 
 Every push triggers CI pipeline. For more information please check
 `.github/workflows/ci.yml`
-
-#### CD Documentation
-
-In order to deploy you have to add `[docs]` tag to your commit message, an
-example: `[FRONT-123][deploy][docs]I am just a fancy commit message`. Once you
-push it, `Buddy` will execute the CI, CD and the CD related to documentation
-
-For more information please have a look at Project UI-kit in the Buddy website
-or check `.buddy/cd_docs.yml`
