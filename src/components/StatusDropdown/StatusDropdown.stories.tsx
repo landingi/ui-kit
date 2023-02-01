@@ -1,4 +1,3 @@
-import { Spacer } from '@components/Spacer'
 import { StatusDropdown } from '@components/StatusDropdown'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Column, Row } from 'simple-flexbox'
