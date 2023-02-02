@@ -74,7 +74,7 @@ export * from './SectionTile'
 export * from './Select'
 export { default as Separator } from './Separator'
 export { default as ShowMore } from './ShowMore'
-export { default as ShowPassword } from './ShowPassword'
+export * from './ShowPassword'
 export {
   SkeletonCircle,
   SkeletonDrawer,
