@@ -7,7 +7,7 @@ import { enUS, pl, pt } from 'date-fns/locale'
 import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 import { Calendar, DateRange, RangeKeyDict } from 'react-date-range'
 
-interface DateTimePickerProps {
+export interface DateTimePickerProps {
   setDate: (startDate?: Date, endDate?: Date) => void
   minDate?: string | Date
   maxDate?: string | Date
