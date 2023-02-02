@@ -3,34 +3,38 @@ import './DateTimePicker.scss'
 import Button from '@components/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { getLanguage } from '@helpers/i18n'
-import { enUS, pl } from 'date-fns/locale'
-import PropTypes from 'prop-types'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import { Calendar, DateRange } from 'react-date-range'
+import { enUS, pl, pt } from 'date-fns/locale'
+import { FC, Fragment, useCallback, useEffect, useState } from 'react'
+import { Calendar, DateRange, RangeKeyDict } from 'react-date-range'
 
-/**
- * Date Time Picker - stateless presentational component
- * this component is a wrapper for react-date-range calendar
- * we modify ui and add handler to confirm date pick
- * @param {object} props - props
- * @param {function} props.setDate - date handler
- * @param {string} props.minDate - defines minimum date - disabled earlier dates
- * @param {object} props.i18n
- * @param {date} props.maxDate - defines maximum date - disabled later dates (Calendar)
- * @param {bool} props.oneDatePicker - should render picker for one date - disabled date ranges
- * @param {date} props.selectedDateCalendar - defines selected date for calendar
- * @param {bool} props.showMonthAndYearPickers - should render select list for month and year
- */
-const DateTimePicker = ({
+interface DateTimePickerProps {
+  setDate: (startDate?: Date, endDate?: Date) => void
+  minDate?: string | Date
+  maxDate?: string | Date
+  oneDatePicker?: boolean
+  selectedDateCalendar?: Date
+  showMonthAndYearPickers?: boolean
+  i18n: {
+    apply: string
+  }
+}
+
+export const DateTimePicker: FC<DateTimePickerProps> = ({
   setDate,
   minDate,
   maxDate,
   oneDatePicker,
   selectedDateCalendar,
-  showMonthAndYearPickers,
+  showMonthAndYearPickers = true,
   i18n
 }) => {
-  const [state, setState] = useState([
+  const [state, setState] = useState<
+    {
+      startDate?: Date
+      endDate?: Date
+      key: string
+    }[]
+  >([
     {
       startDate: getAgoDate(7),
       endDate: getTodayDate(),
@@ -38,18 +42,19 @@ const DateTimePicker = ({
     }
   ])
 
-  const addElements = () => {
+  const addElements = useCallback(() => {
     document
       .querySelector('.rdrNextButton i')
-      .classList.add(
+      ?.classList.add(
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-arrow-right',
         'Icon-module__icon--color-3'
       )
+
     document
       .querySelector('.rdrPprevButton i')
-      .classList.add(
+      ?.classList.add(
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-arrow-left',
@@ -59,50 +64,70 @@ const DateTimePicker = ({
     if (showMonthAndYearPickers) {
       const monthArrow = document.createElement('i')
       const yearArrow = document.createElement('i')
+
       monthArrow.classList.add(
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-caret-down',
         'Icon-module__icon--color-3'
       )
+
       yearArrow.classList.add(
         'editor-icons-module__editor-icon',
         'editor-icons-module__editor-icon--12',
         'editor-icons-module__icon-caret-down',
         'Icon-module__icon--color-3'
       )
-      document.querySelector('.rdrMonthPicker').append(monthArrow)
-      document.querySelector('.rdrYearPicker').append(yearArrow)
+
+      document.querySelector('.rdrMonthPicker')?.append(monthArrow)
+      document.querySelector('.rdrYearPicker')?.append(yearArrow)
     }
-  }
+  }, [showMonthAndYearPickers])
 
   useEffect(() => {
     addElements()
-  }, [])
+  }, [addElements])
 
-  const handleApply = useCallback(() => setDate(...state))
+  const handleApply = useCallback(() => {
+    const { startDate, endDate } = state[0]
 
-  const handleChange = item => setState([item.selection])
+    setDate(startDate, endDate)
+  }, [setDate, state])
+
+  const handleChange = (item: RangeKeyDict) =>
+    setState([
+      {
+        ...item.selection,
+        key: 'selection'
+      }
+    ])
+
+  const locale = {
+    pl,
+    pt,
+    en: enUS
+  }
 
   return (
     <div className='react-datetimepicker'>
-      {oneDatePicker ? (
+      {oneDatePicker && (
         <Calendar
           date={selectedDateCalendar || new Date()}
           onChange={setDate}
-          locale={getLanguage === 'pl' ? pl : enUS}
+          locale={locale[getLanguage] ?? enUS}
           minDate={minDate ? new Date(minDate) : undefined}
-          maxDate={maxDate}
+          maxDate={maxDate ? new Date(maxDate) : undefined}
           color='#EDECEC'
           showMonthAndYearPickers={showMonthAndYearPickers}
           direction='horizontal'
         />
-      ) : (
+      )}
+
+      {!oneDatePicker && (
         <Fragment>
           <DateRange
-            locale={getLanguage === 'pl' ? pl : enUS}
+            locale={locale[getLanguage] ?? enUS}
             onChange={handleChange}
-            showSelectionPreview
             moveRangeOnFirstSelection={false}
             rangeColors={['#EDECEC']}
             months={1}
@@ -114,6 +139,7 @@ const DateTimePicker = ({
             minDate={minDate ? new Date(minDate) : undefined}
             showMonthAndYearPickers={showMonthAndYearPickers}
           />
+
           <Button onClick={handleApply} size='tiny' data-testid='apply-button'>
             {i18n.apply}
           </Button>
@@ -124,25 +150,3 @@ const DateTimePicker = ({
 }
 
 DateTimePicker.displayName = 'DateTimePicker'
-
-DateTimePicker.propTypes = {
-  setDate: PropTypes.func.isRequired,
-  minDate: PropTypes.string,
-  maxDate: PropTypes.instanceOf(Date),
-  oneDatePicker: PropTypes.bool,
-  selectedDateCalendar: PropTypes.instanceOf(Date),
-  showMonthAndYearPickers: PropTypes.bool,
-  i18n: PropTypes.shape({
-    apply: PropTypes.string
-  })
-}
-
-DateTimePicker.defaultProps = {
-  minDate: null,
-  maxDate: undefined,
-  oneDatePicker: false,
-  showMonthAndYearPickers: true,
-  i18n: {}
-}
-
-export default DateTimePicker
