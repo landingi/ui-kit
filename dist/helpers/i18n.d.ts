@@ -1,1 +1,1 @@
-export declare const getLanguage: string;
+export declare const getLanguage: "pl" | "en" | "pt";

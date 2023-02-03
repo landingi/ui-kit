@@ -73,7 +73,6 @@ export * from './Section'
 export * from './SectionTile'
 export * from './Select'
 export { default as Separator } from './Separator'
-export { default as ShowMore } from './ShowMore'
 export * from './ShowPassword'
 export {
   SkeletonCircle,
