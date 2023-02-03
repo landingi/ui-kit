@@ -72,7 +72,7 @@ export { default as Searcher } from './Searcher';
 export * from './Section';
 export * from './SectionTile';
 export * from './Select';
-export { default as Separator } from './Separator';
+export * from './Separator';
 export * from './ShowPassword';
 export { SkeletonCircle, SkeletonDrawer, SkeletonLine, SkeletonSidebar } from './Skeleton';
 export * from './Spacer';
