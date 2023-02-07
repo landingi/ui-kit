@@ -44,6 +44,7 @@ export const InfinityScroll: FC<InfinityScrollProps> = ({
     }
 
     const observer = new IntersectionObserver(handleObserver, options)
+
     if (loaderRef.current) {
       observer.observe(loaderRef.current)
     }
