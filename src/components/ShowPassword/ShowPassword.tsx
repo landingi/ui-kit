@@ -9,9 +9,9 @@ export interface ShowPasswordProps {
   className?: string | string[]
   hasLabel?: boolean
   setHidden?: (value?: string) => void
-  i18n: {
-    show: string
-    hide: string
+  i18n?: {
+    show?: string
+    hide?: string
   }
 }
 
@@ -19,7 +19,10 @@ export const ShowPassword: FC<ShowPasswordProps> = ({
   className,
   setHidden = () => {},
   hasLabel,
-  i18n
+  i18n = {
+    show: '',
+    hide: ''
+  }
 }) => {
   const [icon, setIcon] = useState('icon-eye-close')
   const [label, setLabel] = useState(i18n.show)
