@@ -1,9 +1,15 @@
 import Loader from '@components/Loader'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, { useEffect, useRef, useState } from 'react'
+import { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import styles from './InfinityScroll.module.scss'
+
+export interface InfinityScrollProps {
+  className?: string | string[]
+  children: ReactNode
+  loadMore: () => void
+  isLastPage?: boolean
+}
 
 /**
  * InfinityScroll - stateless presentational component
@@ -13,11 +19,16 @@ import styles from './InfinityScroll.module.scss'
  * @param {func} props.isLastPage - hide loader
  * @return {object} An object of children element
  */
-const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
+export const InfinityScroll: FC<InfinityScrollProps> = ({
+  className = '',
+  children,
+  loadMore,
+  isLastPage = false
+}) => {
   const loaderRef = useRef(null)
   const [shouldFetch, setShouldFetch] = useState(false)
 
-  const handleObserver = entities => {
+  const handleObserver: IntersectionObserverCallback = entities => {
     const target = entities[0]
 
     if (target.isIntersecting) {
@@ -33,6 +44,7 @@ const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
     }
 
     const observer = new IntersectionObserver(handleObserver, options)
+
     if (loaderRef.current) {
       observer.observe(loaderRef.current)
     }
@@ -72,18 +84,3 @@ const InfinityScroll = ({ className, children, loadMore, isLastPage }) => {
 }
 
 InfinityScroll.displayName = 'InfinityScroll'
-
-InfinityScroll.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  loadMore: PropTypes.func,
-  isLastPage: PropTypes.bool
-}
-
-InfinityScroll.defaultProps = {
-  className: '',
-  isLastPage: false,
-  loadMore: () => null
-}
-
-export default InfinityScroll
