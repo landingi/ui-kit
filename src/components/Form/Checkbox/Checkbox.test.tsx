@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
-import Checkbox from './Checkbox'
+import { Checkbox } from './Checkbox'
 
 describe('Checkbox tests', () => {
   const props = {
@@ -36,14 +35,14 @@ describe('Checkbox tests', () => {
         onBlur: jest.fn()
       },
       form: {
-        errors: {},
-        touched: { 'checkbox-test': 'error-name' },
+        errors: { 'checkbox-test': 'error-name' },
+        touched: { 'checkbox-test': true },
         setFieldValue: jest.fn()
       },
       id: 'checkbox-test'
     }
 
-    render(<Checkbox {...touchedProps} label='test label' />)
+    render(<Checkbox {...touchedProps} />)
 
     expect(screen.findByText('error-name')).toBeTruthy()
   })
