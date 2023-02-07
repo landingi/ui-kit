@@ -13,3 +13,4 @@ logs
 .eslintcache
 build
 .DS_Store
+storybook-static

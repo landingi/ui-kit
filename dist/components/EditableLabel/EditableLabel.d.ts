@@ -1,5 +1,5 @@
 import { FC } from 'react';
-interface EditableLabelProps {
+export interface EditableLabelProps {
     initialName: string;
     placeholder?: string;
     size?: 'small' | 'big';
@@ -13,4 +13,3 @@ interface EditableLabelProps {
     };
 }
 export declare const EditableLabel: FC<EditableLabelProps>;
-export {};
