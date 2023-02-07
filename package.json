@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.1.26",
+  "version": "3.1.27",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -100,6 +100,7 @@
     "sass": "1.51.0",
     "sass-loader": "13.0.0",
     "style-loader": "3.3.1",
+    "tslib": "2.5.0",
     "typescript": "4.8.4"
   },
   "dependencies": {
