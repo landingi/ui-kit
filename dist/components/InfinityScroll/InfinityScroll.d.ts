@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-interface InfinityScrollProps {
+export interface InfinityScrollProps {
     className?: string | string[];
     children: ReactNode;
     loadMore: () => void;
@@ -14,4 +14,3 @@ interface InfinityScrollProps {
  * @return {object} An object of children element
  */
 export declare const InfinityScroll: FC<InfinityScrollProps>;
-export {};
