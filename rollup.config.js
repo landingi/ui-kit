@@ -23,7 +23,9 @@ export default [
       }
     ],
     onwarn(warning, warn) {
-      if (warning.code === 'THIS_IS_UNDEFINED') return
+      if (warning.code === 'THIS_IS_UNDEFINED') {
+        return
+      }
 
       warn(warning)
     },
