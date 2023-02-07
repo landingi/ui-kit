@@ -9,19 +9,13 @@ import { ListItem } from '@components/List/Item'
 import Loader from '@components/Loader'
 import { Overflow } from '@components/Overflow'
 import { Paragraph } from '@components/Paragraph'
-import Searcher from '@components/Searcher'
+import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
 import { getDeepValue, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import PropTypes from 'prop-types'
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 
 import styles from './DropdownSelect.module.scss'
 

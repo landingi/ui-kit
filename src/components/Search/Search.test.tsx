@@ -1,19 +1,18 @@
-import Search from '@components/Search'
+import { Search } from '@components/Search'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 const mockOnSubmit = jest.fn()
 const mockOnProtectedSubmit = jest.fn()
 
 const props = {
   className: 'search',
-  size: 'medium',
+  size: 'medium' as const,
   autoFocus: true,
   onChange: () => null,
   onsubmit: mockOnSubmit(),
   onProtectedSubmit: mockOnProtectedSubmit(),
   children: 'children',
-  variant: 'input',
+  variant: 'input' as const,
   label: null
 }
 
@@ -22,31 +21,19 @@ describe('<Search/> tests', () => {
     render(<Search {...props} />)
   })
 
-  it('default prop `onChange` should be undefined', () => {
-    const result = Search.defaultProps.onChange()
-
-    expect(result).toBe(null)
-  })
-
-  it('default prop `onKeyDown` should be undefined', () => {
-    const result = Search.defaultProps.onKeyDown()
-
-    expect(result).toBe(null)
-  })
-
   it('renders properly button variant', () => {
-    const props = {
+    const variantProps = {
       className: 'search',
-      size: 'medium',
+      size: 'medium' as const,
       autoFocus: true,
       onChange: () => null,
       onsubmit: mockOnSubmit(),
       onProtectedSubmit: mockOnProtectedSubmit(),
       children: 'children',
-      variant: 'button',
+      variant: 'button' as const,
       label: null
     }
 
-    render(<Search {...props} />)
+    render(<Search {...variantProps} />)
   })
 })
