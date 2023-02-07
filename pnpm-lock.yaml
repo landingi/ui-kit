@@ -95,6 +95,7 @@ specifiers:
   simple-flexbox: 2.3.3
   style-loader: 3.3.1
   tiny-emitter: 2.1.0
+  tslib: ^2.5.0
   typescript: 4.8.4
 
 dependencies:
@@ -120,7 +121,7 @@ devDependencies:
   '@rollup/plugin-babel': 5.3.1_26nsthto5jesrfo77gyljodrmi
   '@rollup/plugin-commonjs': 22.0.0_rollup@2.75.6
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.6
-  '@rollup/plugin-typescript': 9.0.2_gmqy3ybotxdm4nbudwrtswpjbi
+  '@rollup/plugin-typescript': 9.0.2_q7cuobrm4bl7gdqabz3jbifwhu
   '@storybook/addon-actions': 6.5.15_sfoxds7t5ydpegc3knd667wn6m
   '@storybook/addon-essentials': 6.5.15_fjddqxminbnsits6ryc77a2p54
   '@storybook/addon-interactions': 6.5.15_f7t4mfswiir4sq5oqj2u7qwqym
@@ -194,6 +195,7 @@ devDependencies:
   sass: 1.51.0
   sass-loader: 13.0.0_getxptida4e3i3ufnd55iozi7q
   style-loader: 3.3.1
+  tslib: 2.5.0
   typescript: 4.8.4
 
 packages:
@@ -2380,7 +2382,7 @@ packages:
       rollup: 2.75.6
     dev: true
 
-  /@rollup/plugin-typescript/9.0.2_gmqy3ybotxdm4nbudwrtswpjbi:
+  /@rollup/plugin-typescript/9.0.2_q7cuobrm4bl7gdqabz3jbifwhu:
     resolution: {integrity: sha512-/sS93vmHUMjzDUsl5scNQr1mUlNE1QjBBvOhmRwJCH8k2RRhDIm3c977B3wdu3t3Ap17W6dDeXP3hj1P1Un1bA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2396,6 +2398,7 @@ packages:
       '@rollup/pluginutils': 5.0.2_rollup@2.75.6
       resolve: 1.22.1
       rollup: 2.75.6
+      tslib: 2.5.0
       typescript: 4.8.4
     dev: true
 
@@ -3633,7 +3636,7 @@ packages:
       flat-cache: 3.0.4
       micromatch: 4.0.5
       react-docgen-typescript: 2.2.2_typescript@4.8.4
-      tslib: 2.4.1
+      tslib: 2.5.0
       typescript: 4.8.4
       webpack: 5.75.0
     transitivePeerDependencies:
@@ -5319,7 +5322,7 @@ packages:
     resolution: {integrity: sha512-O0yuUDnZeQDL+ncNGlJ78BiO4jnYI3bvMsD5prT0/nsgijG/LpNBIr63gTjVTNsiGkgQhiyCShTgxt8oXOrklA==}
     engines: {node: '>=4'}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /async-each/1.0.3:
@@ -6005,7 +6008,7 @@ packages:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /camelcase-css/2.0.1:
@@ -7173,7 +7176,7 @@ packages:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /dotenv-expand/5.1.0:
@@ -10871,7 +10874,7 @@ packages:
   /lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /lru-cache/5.1.1:
@@ -11489,7 +11492,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /node-dir/0.1.17:
@@ -11990,7 +11993,7 @@ packages:
     resolution: {integrity: sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A==}
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /parent-module/1.0.1:
@@ -12051,7 +12054,7 @@ packages:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: true
 
   /pascalcase/0.1.1:
@@ -15073,8 +15076,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tslib/2.4.1:
-    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
+  /tslib/2.5.0:
+    resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: true
 
   /tsutils/3.21.0_typescript@4.8.4:

@@ -22,6 +22,11 @@ export default [
         format: 'cjs'
       }
     ],
+    onwarn(warning, warn) {
+      if (warning.code === 'THIS_IS_UNDEFINED') return
+
+      warn(warning)
+    },
     plugins: [
       externals({ react: 'react', 'react-dom': 'react-dom' }),
       typescript({ tsconfig: './tsconfig.build.json' }),
