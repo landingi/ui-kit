@@ -1,12 +1,16 @@
 .thead {
   border-bottom: 1px solid $color-7;
+  display: grid;
 }
 
 .th {
+  display: flex;
+  align-items: center;
   padding: $padding-medium;
   font-size: 12px;
   font-weight: 600;
   color: $color-8;
+  min-height: 68px;
 
   &:first-of-type {
     padding-left: $padding-x-large;
@@ -20,9 +24,5 @@
     color: $color-1;
     font-size: 14px;
     font-weight: 500;
-  }
-
-  &--checkbox {
-    width: 60px;
   }
 }

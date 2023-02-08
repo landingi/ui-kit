@@ -12,13 +12,13 @@ export const RowActions: FC<RowActionsProps> = ({ height, children }) => {
   })
 
   return (
-    <th
+    <div
       className={trRowActionsStyles}
       style={{
         height
       }}
     >
       {children}
-    </th>
+    </div>
   )
 }

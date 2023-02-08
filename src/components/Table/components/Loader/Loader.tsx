@@ -6,11 +6,11 @@ interface LoaderProps {
 }
 
 export const Loader: FC<LoaderProps> = ({ colSpan }) => (
-  <tbody>
-    <tr>
-      <td colSpan={colSpan}>
+  <div>
+    <div>
+      <div /* colSpan={colSpan} */>
         <LoaderDefault />
-      </td>
-    </tr>
-  </tbody>
+      </div>
+    </div>
+  </div>
 )

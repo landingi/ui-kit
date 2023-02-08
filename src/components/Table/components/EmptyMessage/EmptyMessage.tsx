@@ -10,11 +10,11 @@ export const EmptyMessage: FC<EmptyMessageProps> = ({
   colSpan,
   emptyMessage
 }) => (
-  <tbody>
-    <tr>
-      <td colSpan={colSpan}>
+  <div>
+    <div>
+      <div /* colSpan={colSpan} */>
         <Row justifyContent='center'>{emptyMessage()}</Row>
-      </td>
-    </tr>
-  </tbody>
+      </div>
+    </div>
+  </div>
 )

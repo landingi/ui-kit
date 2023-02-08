@@ -20,52 +20,45 @@ export const BodyTr = <Item extends ItemBase>({
   select,
   handleRefresh
 }: BodyTrProps<Item>) => {
-  const trRef =
-    useRef<HTMLTableRowElement>() as MutableRefObject<HTMLTableRowElement>
-
-  const [hoverProps] = useHover()
+  const gridTemplateColumns = hasSelect ? `65px 1fr` : ``
 
   return (
-    <tr className={styles.tr} ref={trRef} {...hoverProps}>
+    <div className={styles.tr} style={{ gridTemplateColumns }}>
       {hasSelect && (
-        <td className={styles.td}>
+        <div className={styles.td}>
           <Checkbox
             checked={isSelected(item.identifier)}
             onChange={() => select(item.identifier)}
             table
           />
-        </td>
+        </div>
       )}
 
       {columns.map(column => {
         if ((column as ColumnAccessor<Item>).accessor) {
           return (
-            <td
+            <div
               className={styles.td}
               key={column.identifier}
               style={{ width: column.width }}
             >
               {item[(column as ColumnAccessor<Item>).accessor] as ReactNode}
-            </td>
+            </div>
           )
         }
 
         return (
-          <td
+          <div
             className={styles.td}
             key={column.identifier}
             style={{ width: column.width }}
           >
             {(column as CustomColumn<Item>).render(item, handleRefresh)}
-          </td>
+          </div>
         )
       })}
 
-      {rowActions && (
-        <RowActions height={trRef?.current?.offsetHeight}>
-          {rowActions(item, handleRefresh)}
-        </RowActions>
-      )}
-    </tr>
+      {rowActions && <RowActions>{rowActions(item, handleRefresh)}</RowActions>}
+    </div>
   )
 }

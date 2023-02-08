@@ -59,7 +59,7 @@ export const Table = <Item extends ItemBase>({
         </div>
       )}
 
-      <table className={styles.table}>
+      <div className={styles.table}>
         <Header
           columns={columns}
           options={options}
@@ -90,7 +90,7 @@ export const Table = <Item extends ItemBase>({
             handleRefresh={handleRefresh}
           />
         )}
-      </table>
+      </div>
 
       <Spacer />
 
