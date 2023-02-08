@@ -12,6 +12,7 @@
   font-weight: 600;
   transition: background 0.5s, box-shadow 0.5s;
   text-decoration: none;
+  -moz-osx-font-smmothing: grayscale;
 
   &:hover {
     text-decoration: none;
