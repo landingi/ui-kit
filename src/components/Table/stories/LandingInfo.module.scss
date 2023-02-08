@@ -1,0 +1,49 @@
+.landing-info {
+  display: flex;
+  justify-content: flex-start;
+
+  &--text {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 400px;
+  }
+
+  &--domains {
+    span {
+      display: inline-flex;
+    }
+  }
+
+  &--picture {
+    margin-right: 8px;
+    align-self: flex-start;
+    height: 75px;
+    min-width: 125px;
+    float: left;
+    background-size: cover;
+    background-position: center top;
+  }
+
+  .Paragraph__paragraph {
+    padding-bottom: 0;
+  }
+
+  .Heading__h4 {
+    margin-bottom: 4px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &--badges {
+    margin-top: 4px;
+
+    a:hover,
+    a:active,
+    a:focus {
+      text-decoration: none;
+    }
+  }
+}
