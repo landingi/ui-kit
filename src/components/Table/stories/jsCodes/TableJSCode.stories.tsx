@@ -41,6 +41,5 @@ JsCodesDefault.args = {
     selected: 'selected',
     first: 'first',
     last: 'last'
-  },
-  options: () => <div>Options</div>
+  }
 }
