@@ -24,9 +24,14 @@ export const Header = <Item extends ItemBase>({
     </div>
   ))
 
+  const columnsReducer = columns.reduce(
+    (acc, { width }) => `${acc} ${width || '1fr'}`,
+    ''
+  )
+
   const gridTemplateColumns = options
-    ? `65px 1fr`
-    : columns.reduce((acc, { width }) => `${acc} ${width || '1fr'}`, '')
+    ? `65px ${hasHeader && !isSelectedAny ? columnsReducer : '1fr'}`
+    : columnsReducer
 
   const thOptionsVariantStyle = useStyles({
     [styles.th]: true,
@@ -35,7 +40,7 @@ export const Header = <Item extends ItemBase>({
 
   const thOptionsStyle = useStyles({
     [styles.th]: true,
-    [styles.th__options]: true
+    [styles.th__options]: options
   })
 
   if (options) {

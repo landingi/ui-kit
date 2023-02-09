@@ -19,9 +19,14 @@ export const BodyTr = <Item extends ItemBase>({
   select,
   handleRefresh
 }: BodyTrProps<Item>) => {
+  const columnsReducer = columns.reduce(
+    (acc, { width }) => `${acc} ${width || '1fr'}`,
+    ''
+  )
+
   const gridTemplateColumns = hasSelect
-    ? `65px 1fr`
-    : columns.reduce((acc, { width }) => `${acc} ${width || '1fr'}`, '')
+    ? `65px ${columnsReducer}`
+    : columnsReducer
 
   return (
     <div className={styles.tr} style={{ gridTemplateColumns }}>
