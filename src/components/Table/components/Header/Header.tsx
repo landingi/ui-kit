@@ -24,11 +24,18 @@ export const Header = <Item extends ItemBase>({
     </div>
   ))
 
-  const gridTemplateColumns = options ? `65px 1fr` : ``
+  const gridTemplateColumns = options
+    ? `65px 1fr`
+    : columns.reduce((acc, { width }) => `${acc} ${width || '1fr'}`, '')
+
+  const thOptionsVariantStyle = useStyles({
+    [styles.th]: true,
+    [styles['th--options']]: true
+  })
 
   const thOptionsStyle = useStyles({
     [styles.th]: true,
-    [styles['th--options']]: true
+    [styles.th__options]: true
   })
 
   if (options) {
@@ -40,7 +47,7 @@ export const Header = <Item extends ItemBase>({
         }}
         data-testid='header-options-variant'
       >
-        <div className={styles.th}>
+        <div className={thOptionsVariantStyle}>
           <Checkbox
             checked={isSelectedAny}
             onChange={selectAll}
@@ -82,19 +89,20 @@ export const Header = <Item extends ItemBase>({
   }
 
   return (
-    <div className={styles.thead} data-testid='header-default-variant'>
-      <div>
-        {hasHeader && columnsMap}
+    <div
+      className={styles.thead}
+      style={{
+        gridTemplateColumns
+      }}
+      data-testid='header-default-variant'
+    >
+      {hasHeader && columnsMap}
 
-        {!hasHeader && filtersAndSorters && (
-          <div
-            className={styles.th}
-            data-testid='filters-and-sorters-no-header'
-          >
-            {filtersAndSorters(handleRefresh)}
-          </div>
-        )}
-      </div>
+      {!hasHeader && filtersAndSorters && (
+        <div className={styles.th} data-testid='filters-and-sorters-no-header'>
+          {filtersAndSorters(handleRefresh)}
+        </div>
+      )}
     </div>
   )
 }

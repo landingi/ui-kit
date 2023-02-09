@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-type Width = number | `${number}%`
+type Width = `${number}px` | `${number}%`
 
 type Identifier = string | number
 

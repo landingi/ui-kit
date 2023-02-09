@@ -10,7 +10,6 @@
   font-size: 12px;
   font-weight: 600;
   color: $color-8;
-  min-height: 68px;
 
   &:first-of-type {
     padding-left: $padding-x-large;
@@ -21,6 +20,10 @@
   }
 
   &--options {
+    min-height: 68px;
+  }
+
+  &__options {
     color: $color-1;
     font-size: 14px;
     font-weight: 500;

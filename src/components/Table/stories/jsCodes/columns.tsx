@@ -8,24 +8,24 @@ export const columns = [
       <Status {...data} jsCodeIdentifier={data.identifier} />
     ),
     identifier: 'enabled',
-    width: 155
+    width: '155px' as const
   },
   {
     header: 'Name',
     accessor: 'name' as const,
     identifier: 'name',
-    width: 280
+    width: '280px' as const
   },
   {
     header: 'Position',
     accessor: 'position' as const,
     identifier: 'position',
-    width: 220
+    width: '220px' as const
   },
   {
     header: 'Page',
     accessor: 'page' as const,
     identifier: 'page',
-    width: 170
+    width: '170px' as const
   }
 ]
