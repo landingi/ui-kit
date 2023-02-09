@@ -5,8 +5,7 @@ import type {
   CustomColumn,
   ItemBase
 } from '@components/Table/types'
-import { useHover } from '@helpers/hooks/useHover'
-import { MutableRefObject, ReactNode, useRef } from 'react'
+import { ReactNode } from 'react'
 
 import styles from './Body.module.scss'
 import { RowActions } from './RowActions'
