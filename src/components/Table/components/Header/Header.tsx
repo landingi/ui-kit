@@ -56,7 +56,6 @@ export const Header = <Item extends ItemBase>({
           <Checkbox
             checked={isSelectedAny}
             onChange={selectAll}
-            table={isSelectedAll}
             tableDeselect={!isSelectedAll}
           />
         </div>

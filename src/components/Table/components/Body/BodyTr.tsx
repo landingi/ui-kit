@@ -35,7 +35,6 @@ export const BodyTr = <Item extends ItemBase>({
           <Checkbox
             checked={isSelected(item.identifier)}
             onChange={() => select(item.identifier)}
-            table
           />
         </div>
       )}
