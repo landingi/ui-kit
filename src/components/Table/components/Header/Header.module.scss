@@ -6,7 +6,7 @@
 .th {
   display: flex;
   align-items: center;
-  padding: $padding-medium;
+  padding: $padding-small;
   font-size: 12px;
   font-weight: 600;
   color: $color-8;
@@ -20,7 +20,7 @@
   }
 
   &--options {
-    min-height: 68px;
+    min-height: 58px;
   }
 
   &__options {
