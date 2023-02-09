@@ -22,11 +22,6 @@
     transition: opacity 0.25s ease;
     opacity: 0;
     visibility: hidden;
-
-    &--safari {
-      right: -30px;
-      bottom: auto;
-    }
   }
 
   &:hover {
