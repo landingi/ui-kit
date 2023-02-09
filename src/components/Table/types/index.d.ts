@@ -2,15 +2,17 @@ import { ReactNode } from 'react'
 
 type Width = number | `${number}%`
 
+type Identifier = string | number
+
 export interface ColumnAccessor<Item> {
-  identifier: string
+  identifier: Identifier
   accessor: keyof Item
   width?: Width
   header?: string
 }
 
 export interface CustomColumn<Item> {
-  identifier: string
+  identifier: Identifier
   render: (item: Item, handleRefresh: () => void) => ReactNode
   width?: Width
   header?: string
@@ -19,7 +21,7 @@ export interface CustomColumn<Item> {
 export type Column<Item> = ColumnAccessor<Item> | CustomColumn<Item>
 
 export interface ItemBase {
-  identifier: string | number
+  identifier: Identifier
 }
 
 export interface UseTableProps<Item extends ItemBase> {

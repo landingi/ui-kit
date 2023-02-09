@@ -1,4 +1,4 @@
-import { Item } from '../stories/Item'
+import { Item } from '../stories/landings/Item'
 
 const data: {
   collection: Item[]
