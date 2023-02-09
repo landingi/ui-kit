@@ -1,6 +1,6 @@
 import { Tooltip } from '@components/Tooltip'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, ReactNode, useRef } from 'react'
+import { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import styles from './Badge.module.scss'
 
@@ -40,7 +40,11 @@ export const Badge: FC<BadgeProps> = ({
   isIndicator = false
 }) => {
   const badgeRef = useRef<HTMLSpanElement>(null)
-  const width = badgeRef.current ? badgeRef.current.offsetWidth : 0
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    setWidth(badgeRef.current ? badgeRef.current.offsetWidth : 0)
+  }, [])
 
   const badgeStyles = useStyles(
     {
