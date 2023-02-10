@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Loader from '@components/Loader'
+import { Loader } from '@components/Loader'
 import { render } from '@testing-library/react'
 
 describe('<Loader /> mount', () => {
