@@ -1,15 +1,9 @@
+import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
 import { useSelect } from '@helpers/hooks/useSelect'
 import { Row } from 'simple-flexbox'
 
-import {
-  Body,
-  EmptyMessage,
-  Header,
-  Loader,
-  PageLimit,
-  Pagination
-} from './components'
+import { Body, Header, PageLimit, Pagination } from './components'
 import styles from './Table.module.scss'
 import type { ItemBase, TableProps } from './types'
 
@@ -73,10 +67,10 @@ export const Table = <Item extends ItemBase>({
           handleRefresh={handleRefresh}
         />
 
-        {isLoading && <Loader colSpan={columnsCount} />}
+        {isLoading && <Loader />}
 
         {!isLoading && !dataIsNotEmpty && emptyMessage && (
-          <EmptyMessage emptyMessage={emptyMessage} colSpan={columnsCount} />
+          <Row justifyContent='center'>{emptyMessage()}</Row>
         )}
 
         {!isLoading && dataIsNotEmpty && (
