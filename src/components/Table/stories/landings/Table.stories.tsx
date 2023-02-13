@@ -1,9 +1,9 @@
 import { Message } from '@components/Message'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import data from '../mocks/landings'
-import { UseTableProps } from '../types'
-import { useTable } from '../useTable'
+import data from '../../mocks/landings'
+import { UseTableProps } from '../../types'
+import { useTable } from '../../useTable'
 import { columns } from './columns'
 import { FiltersAndSorters } from './FiltersAndSorters'
 import { Item } from './Item'

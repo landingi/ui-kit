@@ -18,81 +18,95 @@ export const Header = <Item extends ItemBase>({
   hasHeader,
   handleRefresh
 }: HeaderProps<Item>) => {
-  // depends on columns length and special case when columns with checkbox exists(options props)
-  const optionsAriaColSpan = columns.length - (options ? 0 : 1)
-
   const columnsMap = columns.map(({ header, identifier, width }) => (
-    <th className={styles.th} key={identifier} style={{ width }}>
+    <div className={styles.th} key={identifier} style={{ width }}>
       {header}
-    </th>
+    </div>
   ))
 
-  const thCheckboxStyles = useStyles({
+  const columnsReducer = columns.reduce(
+    (acc, { width }) => `${acc} ${width || '1fr'}`,
+    ''
+  )
+
+  const gridTemplateColumns = options
+    ? `65px ${hasHeader && !isSelectedAny ? columnsReducer : '1fr'}`
+    : columnsReducer
+
+  const thOptionsVariantStyle = useStyles({
     [styles.th]: true,
-    [styles['th--checkbox']]: true
+    [styles['th--options']]: true
+  })
+
+  const thOptionsStyle = useStyles({
+    [styles.th]: true,
+    [styles.th__options]: options
   })
 
   if (options) {
     return (
-      <thead className={styles.thead} data-testid='header-options-variant'>
-        <tr>
-          <th className={thCheckboxStyles} colSpan={1}>
-            <Checkbox
-              checked={isSelectedAny}
-              onChange={selectAll}
-              table={isSelectedAll}
-              tableDeselect={!isSelectedAll}
-            />
-          </th>
+      <div
+        className={styles.thead}
+        style={{
+          gridTemplateColumns
+        }}
+        data-testid='header-options-variant'
+      >
+        <div className={thOptionsVariantStyle}>
+          <Checkbox
+            checked={isSelectedAny}
+            onChange={selectAll}
+            tableDeselect={!isSelectedAll}
+          />
+        </div>
 
-          {isSelectedAny && (
-            <th className={styles['th--options']} colSpan={optionsAriaColSpan}>
-              <Row alignItems='center'>
-                <span>
-                  {i18n.selected}
+        {isSelectedAny && (
+          <div className={thOptionsStyle}>
+            <Row alignItems='center'>
+              <span>
+                {i18n.selected}
 
-                  <Spreader spread='tiny' />
+                <Spreader spread='tiny' />
 
-                  {selected.length}
-                </span>
+                {selected.length}
+              </span>
 
-                <Spreader />
+              <Spreader />
 
-                {options(selected, handleRefresh)}
-              </Row>
-            </th>
-          )}
+              {options(selected, handleRefresh)}
+            </Row>
+          </div>
+        )}
 
-          {!isSelectedAny && hasHeader && columnsMap}
+        {!isSelectedAny && hasHeader && columnsMap}
 
-          {!isSelectedAny && !hasHeader && filtersAndSorters && (
-            <th
-              colSpan={optionsAriaColSpan}
-              data-testid='filters-and-selectors-in-header'
-            >
-              {filtersAndSorters(handleRefresh)}
-            </th>
-          )}
-        </tr>
-      </thead>
+        {!isSelectedAny && !hasHeader && filtersAndSorters && (
+          <div
+            className={styles.th}
+            data-testid='filters-and-selectors-in-header'
+          >
+            {filtersAndSorters(handleRefresh)}
+          </div>
+        )}
+      </div>
     )
   }
 
   return (
-    <thead className={styles.thead} data-testid='header-default-variant'>
-      <tr>
-        {hasHeader && columnsMap}
+    <div
+      className={styles.thead}
+      style={{
+        gridTemplateColumns
+      }}
+      data-testid='header-default-variant'
+    >
+      {hasHeader && columnsMap}
 
-        {!hasHeader && filtersAndSorters && (
-          <th
-            className={styles.th}
-            colSpan={optionsAriaColSpan}
-            data-testid='filters-and-sorters-no-header'
-          >
-            {filtersAndSorters(handleRefresh)}
-          </th>
-        )}
-      </tr>
-    </thead>
+      {!hasHeader && filtersAndSorters && (
+        <div className={styles.th} data-testid='filters-and-sorters-no-header'>
+          {filtersAndSorters(handleRefresh)}
+        </div>
+      )}
+    </div>
   )
 }

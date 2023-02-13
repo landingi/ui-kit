@@ -108,7 +108,7 @@
       box-sizing: border-box;
       margin: 3px 11px 3px 1px;
       background-color: $color-white;
-      border: solid 2px;
+      border: 2px solid;
       border-color: $color-8;
       border-radius: 2px;
       width: 18px;
@@ -125,10 +125,11 @@
       left: 2px;
       width: 8px;
       height: 3px;
-      border: solid 2px transparent;
+      border: 2px solid transparent;
       border-right: none;
       border-top: none;
       transform: translate(3px, 4px) rotate(-45deg);
+      box-sizing: content-box;
     }
   }
 
@@ -142,15 +143,6 @@
     }
   }
 
-  &--table {
-    div {
-      &::after {
-        top: 6px;
-        left: 3px;
-      }
-    }
-  }
-
   &--table-deselect {
     div {
       &::after {
@@ -158,8 +150,7 @@
         border-left: none;
         border-top: none;
         transform: translate(4px, 4px);
-        top: 6px;
-        left: 2px;
+        top: 4px;
       }
     }
   }

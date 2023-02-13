@@ -91,7 +91,7 @@ const renderShapesLoader = ({ dataTestId }: LoaderVariantType) => (
   </div>
 )
 
-const Loader: FC<LoaderProps> = ({
+export const Loader: FC<LoaderProps> = ({
   variant = 'default',
   'data-testid': dataTestId
 }) => {
@@ -104,5 +104,3 @@ const Loader: FC<LoaderProps> = ({
 }
 
 Loader.displayName = 'Loader'
-
-export default Loader
