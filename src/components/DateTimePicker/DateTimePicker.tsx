@@ -8,7 +8,13 @@ import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 import { Calendar, DateRange, RangeKeyDict } from 'react-date-range'
 
 export interface DateTimePickerProps {
-  setDate: (startDate?: Date, endDate?: Date) => void
+  setDate: ({
+    startDate,
+    endDate
+  }: {
+    startDate?: Date
+    endDate?: Date
+  }) => void
   minDate?: string | Date
   maxDate?: string | Date
   oneDatePicker?: boolean
@@ -91,7 +97,7 @@ export const DateTimePicker: FC<DateTimePickerProps> = ({
   const handleApply = useCallback(() => {
     const { startDate, endDate } = state[0]
 
-    setDate(startDate, endDate)
+    setDate({ startDate, endDate })
   }, [setDate, state])
 
   const handleChange = (item: RangeKeyDict) =>
@@ -108,12 +114,21 @@ export const DateTimePicker: FC<DateTimePickerProps> = ({
     en: enUS
   }
 
+  const handleCallendarChange = (startDate: Date) => {
+    setState([
+      {
+        startDate,
+        key: 'selection'
+      }
+    ])
+  }
+
   return (
     <div className='react-datetimepicker'>
       {oneDatePicker && (
         <Calendar
           date={selectedDateCalendar || new Date()}
-          onChange={setDate}
+          onChange={handleCallendarChange}
           locale={locale[getLanguage] ?? enUS}
           minDate={minDate ? new Date(minDate) : undefined}
           maxDate={maxDate ? new Date(maxDate) : undefined}
