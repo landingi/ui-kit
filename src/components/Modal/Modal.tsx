@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable multiline-ternary */
 import { Backdrop } from '@components/Backdrop'
 import Button from '@components/Button'
 import { Close } from '@components/Close'
@@ -222,11 +219,13 @@ export const Modal = forwardRef(
         {isActive && (
           <div className={styles.dialog}>
             <div className={modalStyles} ref={ref}>
-              {isLoading ? (
+              {isLoading
+? (
                 <div className={styles.modal__body}>
                   <Loader />
                 </div>
-              ) : (
+              )
+: (
                 <Fragment>
                   {(isClosable || i18n.title || image || isEditable) &&
                     (!isComponent ? renderTitle() : renderComponent())}
@@ -237,9 +236,11 @@ export const Modal = forwardRef(
                     </Fragment>
                   )}
                   <div className={bodyStyles}>
-                    {disableOverflow ? (
+                    {disableOverflow
+? (
                       children
-                    ) : (
+                    )
+: (
                       <div style={overflowStyle}>{children}</div>
                     )}
                   </div>
@@ -253,7 +254,8 @@ export const Modal = forwardRef(
                       <Spacer space='small' />
 
                       <ModalFooter align={footerAlign}>
-                        {hasCustomButton ? (
+                        {hasCustomButton
+? (
                           <Button
                             data-testid='modal-custom-button'
                             variant='secondary'
@@ -263,7 +265,9 @@ export const Modal = forwardRef(
                           >
                             {i18n.cancel}
                           </Button>
-                        ) : i18n.cancel ? (
+                        )
+: i18n.cancel
+? (
                           <Button
                             variant='secondary'
                             size='medium'
@@ -271,7 +275,8 @@ export const Modal = forwardRef(
                           >
                             {i18n.cancel}
                           </Button>
-                        ) : null}
+                        )
+: null}
                         <Button
                           type={isSubmit ? 'submit' : 'button'}
                           variant={actionVariant}
