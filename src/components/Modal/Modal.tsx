@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable multiline-ternary */
 import { Backdrop } from '@components/Backdrop'
 import Button from '@components/Button'
 import { Close } from '@components/Close'
@@ -9,61 +12,91 @@ import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
 import { useKeyPress } from '@helpers/hooks/useKeyPress'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, { forwardRef, Fragment, useCallback } from 'react'
+import {
+  forwardRef,
+  Fragment,
+  MouseEvent,
+  ReactNode,
+  Ref,
+  useCallback
+} from 'react'
 
-import ModalFooter from './Footer'
-import ModalHeader from './Header'
+import { ModalFooter } from './Footer'
+import { ModalHeader } from './Header'
 import styles from './Modal.module.scss'
 
-/**
- * Modal - stateless presentational component
- * @param {object} props - props
- * @param {object} props.children - children
- * @param {string|array} props.className - list of class names, default: modal
- * @param {function} props.onClick - onClick handler
- * @param {function} props.onAction - onAction click handler
- * @param {boolean} props.isActive - active state
- * @param {boolean} props.isClosable - close state
- * @param {boolean} props.isButtonDisabled - is action button in footer disabled
- * @param {boolean} props.isButtonLoading - is action button in footer has loading state
- * @param {boolean} props.isMarkAsSpamVisible - is "mark as spam" button visible
- * @param {object} props.image - image in header
- * @param {boolean} props.hasFooter - has footer
- * @param {boolean} props.hasHeaderDivider - has header divider
- * @param {boolean} props.hasFooterDivider - has footer divider
- * @param {string} props.actionVariant - button action variant
- * @param {bool} props.isLoading - is loading
- * @param {string} props.actionIcon - footer action button icon
- * @param {object} props.overflowStyle - overflowStyle
- * @param {bool} props.isCentered - makes text in modal centered
- * @param {bool} props.isEditable - isEditable
- * @param {func} props.onEdit - onEdit
- * @param {bool} props.hasCustomButton - secondary button
- * @param {func} props.onClickCustomButton - secondary button with custom callback
- * @param {bool} props.isCustomButtonDisabled - is cunstom button in footer disabled
- * @param {func} props.onMarkAsSpam - handle "mark as spam" click
- * @param {bool} props.isPage - is page
- * @param {string} props.size - modal size, one of: small(default, 780px), medium(880px), big(1080px), fullscreen
- * @param {string} props.i18n - objest of translations
- * @param {bool} props.isComponent - component instead of title
- * @param {object} props.component - component
- * @param {bool} props.isSubmit - modal button is submit type
- * @param {string} props.isBodyPadding - modal body padding
- * @param {string} props.headingAlign - align text in title, default: left
- * @param {string} props.footerAlign - modal footer alignment, default: right
- * @param {string} props.hasEnterKeyDown - has confirmed by enter key, default false
- * @return {object} An object of children element
- */
-const Modal = forwardRef(
+export interface ModalProps {
+  children?: ReactNode
+  className?: string | string[]
+  onClick?: () => void
+  onAction?: () => void
+  isActive: boolean
+  isClosable?: boolean
+  isButtonDisabled?: boolean
+  isButtonLoading?: boolean
+  image?: string
+  hasFooter?: boolean
+  hasHeaderDivider?: boolean
+  hasFooterDivider?: boolean
+  actionVariant?:
+    | 'primary'
+    | 'secondary'
+    | 'secondary-outlined'
+    | 'dropdown'
+    | 'transparent'
+    | 'icon'
+    | 'icon-transparent'
+    | 'icon-transparent-hover'
+    | 'alert'
+    | 'clean'
+    | 'tabs'
+    | 'transparent-blue'
+    | 'dropdown-element'
+    | 'action'
+    | 'white'
+    | 'black'
+    | 'publish'
+    | 'switcher-brand'
+  isLoading?: boolean
+  actionIcon?: string
+  overflowStyle?: object
+  isCentered?: boolean
+  onEdit?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+  onMarkAsSpam?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+  isEditable?: boolean
+  hasCustomButton?: boolean
+  isCustomButtonDisabled?: boolean
+  isMarkAsSpamVisible?: boolean
+  size?: 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
+  isPage?: boolean
+  i18n?: {
+    title?: string
+    action?: string
+    cancel?: string
+    markSpam?: string
+  }
+  isComponent?: boolean
+  component?: ReactNode
+  isSubmit?: boolean
+  onClickCustomButton?: (
+    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => void
+  disableOverflow?: boolean
+  isBodyPadding?: string
+  headingAlign?: 'right' | 'center' | 'left'
+  footerAlign?: 'right' | 'center' | 'left'
+  hasEnterKeyDown?: boolean
+}
+
+export const Modal = forwardRef(
   (
     {
       children,
       className,
-      onClick,
-      onAction,
+      onClick = () => null,
+      onAction = () => null,
       isActive,
-      isClosable,
+      isClosable = true,
       isButtonDisabled,
       isButtonLoading,
       isMarkAsSpamVisible,
@@ -71,10 +104,14 @@ const Modal = forwardRef(
       hasFooter,
       hasHeaderDivider,
       hasFooterDivider,
-      actionVariant,
+      actionVariant = 'primary',
       isLoading,
       actionIcon,
-      overflowStyle,
+      overflowStyle = {
+        maxHeight: '80vh',
+        overflowY: 'auto',
+        overflowX: 'hidden'
+      },
       isCentered,
       isEditable,
       onEdit,
@@ -85,16 +122,21 @@ const Modal = forwardRef(
       size,
       isPage,
       disableOverflow,
-      i18n,
+      i18n = {
+        title: '',
+        action: '',
+        cancel: '',
+        markSpam: ''
+      },
       isComponent,
       component,
       isSubmit,
       isBodyPadding,
-      headingAlign,
-      footerAlign,
+      headingAlign = 'left',
+      footerAlign = 'right',
       hasEnterKeyDown
-    },
-    ref
+    }: ModalProps,
+    ref: Ref<HTMLDivElement>
   ) => {
     const headerStyles = useStyles({
       [styles.modal__header]: true,
@@ -257,99 +299,3 @@ const Modal = forwardRef(
 )
 
 Modal.displayName = 'Modal'
-
-Modal.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  onClick: PropTypes.func,
-  onAction: PropTypes.func,
-  isActive: PropTypes.bool.isRequired,
-  isClosable: PropTypes.bool,
-  isButtonDisabled: PropTypes.bool,
-  isButtonLoading: PropTypes.bool,
-  image: PropTypes.string,
-  hasFooter: PropTypes.bool,
-  hasHeaderDivider: PropTypes.bool,
-  hasFooterDivider: PropTypes.bool,
-  actionVariant: PropTypes.string,
-  isLoading: PropTypes.bool,
-  actionIcon: PropTypes.string,
-  overflowStyle: PropTypes.instanceOf(Object),
-  isCentered: PropTypes.bool,
-  onEdit: PropTypes.func,
-  onMarkAsSpam: PropTypes.func,
-  isEditable: PropTypes.bool,
-  hasCustomButton: PropTypes.bool,
-  isCustomButtonDisabled: PropTypes.bool,
-  isMarkAsSpamVisible: PropTypes.bool,
-  size: PropTypes.oneOf([
-    'small',
-    'medium',
-    'big',
-    'fullscreen',
-    'huge-responsive'
-  ]),
-  isPage: PropTypes.bool,
-  i18n: PropTypes.shape({
-    title: PropTypes.string,
-    action: PropTypes.string,
-    cancel: PropTypes.string,
-    markSpam: PropTypes.string
-  }),
-  isComponent: PropTypes.bool,
-  component: PropTypes.node,
-  isSubmit: PropTypes.bool,
-  onClickCustomButton: PropTypes.func,
-  disableOverflow: PropTypes.bool,
-  isBodyPadding: PropTypes.string,
-  headingAlign: PropTypes.oneOf(['right', 'center', 'left']),
-  footerAlign: PropTypes.oneOf(['right', 'center', 'left']),
-  hasEnterKeyDown: PropTypes.bool
-}
-
-Modal.defaultProps = {
-  className: '',
-  children: null,
-  isClosable: true,
-  isButtonDisabled: false,
-  isButtonLoading: false,
-  onClick: () => null,
-  onAction: () => null,
-  image: '',
-  hasFooter: false,
-  hasHeaderDivider: false,
-  hasFooterDivider: false,
-  isLoading: false,
-  actionVariant: 'primary',
-  actionIcon: '',
-  overflowStyle: {
-    maxHeight: '80vh',
-    overflowY: 'auto',
-    overflowX: 'hidden'
-  },
-  isCentered: false,
-  isEditable: false,
-  hasCustomButton: false,
-  isCustomButtonDisabled: false,
-  isMarkAsSpamVisible: false,
-  size: null,
-  isPage: false,
-  i18n: {
-    title: '',
-    action: '',
-    cancel: '',
-    markSpam: ''
-  },
-  onEdit: () => null,
-  isComponent: false,
-  component: null,
-  isSubmit: false,
-  onClickCustomButton: null,
-  disableOverflow: false,
-  isBodyPadding: '',
-  headingAlign: 'left',
-  footerAlign: 'right',
-  hasEnterKeyDown: false
-}
-
-export default Modal
