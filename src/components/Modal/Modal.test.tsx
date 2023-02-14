@@ -1,16 +1,15 @@
 import '@testing-library/jest-dom'
 
 import Button from '@components/Button'
-import Modal from '@components/Modal'
+import { Modal } from '@components/Modal'
 import { fireEvent, render, screen } from '@testing-library/react'
-import React from 'react'
 
 const onClick = jest.fn()
 
 const props = {
   isActive: true,
   onClick,
-  children: <Button> Jestem przyciskiem</Button>,
+  children: <Button>Jestem przyciskiem</Button>,
   i18n: {
     cancel: 'cancel'
   }
