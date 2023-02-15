@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom'
 
-import MonthRangePickerLayout from '@components/MonthRangePicker'
 import { fireEvent, render } from '@testing-library/react'
-import React, { useState as useStateMock } from 'react'
+import { useState as useStateMock } from 'react'
+
+import { Picker } from './Picker'
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -31,7 +32,7 @@ describe('<MonthRangePickerLayout/> mount', () => {
   })
 
   it('is mounted', () => {
-    const { getByTestId } = render(<MonthRangePickerLayout {...props} />)
+    const { getByTestId } = render(<Picker {...props} />)
 
     const monthRangePickerLayout = getByTestId('layoutMonthRangePicker')
 
@@ -39,7 +40,7 @@ describe('<MonthRangePickerLayout/> mount', () => {
   })
 
   it('should render button with text from i18n props', () => {
-    const { getByRole } = render(<MonthRangePickerLayout {...props} />)
+    const { getByRole } = render(<Picker {...props} />)
 
     const {
       i18n: { apply }
@@ -51,7 +52,7 @@ describe('<MonthRangePickerLayout/> mount', () => {
   })
 
   it('should displays <MonthRangePicker/>', () => {
-    const { getByTestId } = render(<MonthRangePickerLayout {...props} />)
+    const { getByTestId } = render(<Picker {...props} />)
 
     const monthRangePickerNode = getByTestId('month-range-picker')
 
@@ -59,7 +60,7 @@ describe('<MonthRangePickerLayout/> mount', () => {
   })
 
   it('onChange callback should be called with selected range when button apply was pressed', async () => {
-    const { getByRole } = render(<MonthRangePickerLayout {...props} />)
+    const { getByRole } = render(<Picker {...props} />)
 
     const {
       onChange,

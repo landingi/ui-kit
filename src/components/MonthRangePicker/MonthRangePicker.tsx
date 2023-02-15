@@ -29,27 +29,29 @@ export const MonthRangePicker: FC<MonthRangePickerProps> = ({
   const minimalDate = parseDateToMonthID(minDate)
   const maximalDate = parseDateToMonthID(maxDate)
   const [isSelecting, setSelecting] = useState(false)
-  const [startMonth, setStartMonth] = useState<number>(null)
-  const [endMonth, setEndMonth] = useState<number>(null)
+  const [startMonth, setStartMonth] = useState<number | null>(null)
+  const [endMonth, setEndMonth] = useState<number | null>(null)
   const [year, setYear] = useState(2021)
-  const [confirmedEndMonth, setConfirmedEndMonth] = useState<number>(null)
+  const [confirmedEndMonth, setConfirmedEndMonth] = useState<number | null>(
+    null
+  )
 
   useEffect(() => {
     if (confirmedEndMonth) {
       onChange({
         endDate: endOfMonth(
-          confirmedEndMonth > startMonth
+          confirmedEndMonth > (startMonth as number)
             ? transformMonthToDate(confirmedEndMonth)
-            : transformMonthToDate(startMonth)
+            : transformMonthToDate(startMonth as number)
         ),
         startDate: startOfMonth(
-          confirmedEndMonth > startMonth
-            ? transformMonthToDate(startMonth)
+          confirmedEndMonth > (startMonth as number)
+            ? transformMonthToDate(startMonth as number)
             : transformMonthToDate(confirmedEndMonth)
         )
       })
     }
-  }, [confirmedEndMonth])
+  }, [confirmedEndMonth, onChange, startMonth])
 
   const handleSelect = (monthID: number) => {
     if (isSelecting) {
@@ -89,9 +91,9 @@ export const MonthRangePicker: FC<MonthRangePickerProps> = ({
   }
 
   const handleLastMarker = (monthID: number) => {
-    const currentEndMonth = confirmedEndMonth || endMonth
+    const currentEndMonth = (confirmedEndMonth || endMonth) as number
 
-    return currentEndMonth < startMonth
+    return currentEndMonth < (startMonth as number)
       ? startMonth === monthID
       : currentEndMonth === monthID
   }
@@ -106,13 +108,13 @@ export const MonthRangePicker: FC<MonthRangePickerProps> = ({
         [styles['button_month--not-selecting']]: !isSelecting,
         [styles['button_month--selecting']]: handleRangeMarker(
           monthID,
-          endMonth,
-          startMonth
+          endMonth as number,
+          startMonth as number
         ),
         [styles['button_month--selected']]: handleRangeMarker(
           monthID,
-          confirmedEndMonth,
-          startMonth
+          confirmedEndMonth as number,
+          startMonth as number
         ),
         [styles['button_month--disabled']]:
           monthID < minimalDate || monthID > maximalDate,
