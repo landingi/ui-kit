@@ -3,8 +3,7 @@ import { Icon } from '@components/Icon'
 import { Spacer } from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { endOfMonth, startOfMonth } from 'date-fns'
-import PropTypes from 'prop-types'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 
 import {
   handleRangeMarker,
@@ -14,23 +13,26 @@ import {
 } from './helpers'
 import styles from './MonthRangePicker.module.scss'
 
-/**
- * MonthRangePicker - stateful component
- * @param {object} props - props
- * @param {func} props.onChange - called on date confirm
- * @param {date} props.minDate - minimal date
- * @param {date} props.maxDate - maximal date
- * @param {func} props.i18nHandler - callback function to translate keys
- * @return {object} An object of children element
- */
-const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
+export interface MonthRangePickerProps {
+  onChange: (range: { startDate: Date; endDate: Date }) => void
+  minDate: Date
+  maxDate: Date
+  i18nHandler: (translation: string) => string
+}
+
+export const MonthRangePicker: FC<MonthRangePickerProps> = ({
+  onChange,
+  minDate,
+  maxDate,
+  i18nHandler
+}) => {
   const minimalDate = parseDateToMonthID(minDate)
   const maximalDate = parseDateToMonthID(maxDate)
   const [isSelecting, setSelecting] = useState(false)
-  const [startMonth, setStartMonth] = useState(null)
-  const [endMonth, setEndMonth] = useState(null)
+  const [startMonth, setStartMonth] = useState<number>(null)
+  const [endMonth, setEndMonth] = useState<number>(null)
   const [year, setYear] = useState(2021)
-  const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+  const [confirmedEndMonth, setConfirmedEndMonth] = useState<number>(null)
 
   useEffect(() => {
     if (confirmedEndMonth) {
@@ -49,7 +51,7 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     }
   }, [confirmedEndMonth])
 
-  const handleSelect = monthID => {
+  const handleSelect = (monthID: number) => {
     if (isSelecting) {
       setSelecting(false)
       setConfirmedEndMonth(monthID)
@@ -61,11 +63,38 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     }
   }
 
-  const handleHover = monthID => {
-    isSelecting && setEndMonth(monthID)
+  const handleHover = (monthID: number) => {
+    if (isSelecting) {
+      setEndMonth(monthID)
+    }
   }
 
-  const constructMonthID = monthIndex => parseInt(`${year}${monthIndex}`)
+  const constructMonthID = (monthIndex: string) =>
+    Number(`${year}${monthIndex}`)
+
+  const handleFirstMarker = (monthID: number) => {
+    const currentEndMonth = confirmedEndMonth || endMonth
+
+    if (!startMonth) {
+      return false
+    }
+
+    if (!currentEndMonth) {
+      return startMonth === monthID
+    }
+
+    return currentEndMonth > startMonth
+      ? startMonth === monthID
+      : currentEndMonth === monthID
+  }
+
+  const handleLastMarker = (monthID: number) => {
+    const currentEndMonth = confirmedEndMonth || endMonth
+
+    return currentEndMonth < startMonth
+      ? startMonth === monthID
+      : currentEndMonth === monthID
+  }
 
   const renderMonths = () =>
     monthsArray.map(({ code, name }) => {
@@ -109,30 +138,6 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
       )
     })
 
-  const handleFirstMarker = monthID => {
-    const currentEndMonth = confirmedEndMonth || endMonth
-
-    if (!startMonth) {
-      return false
-    }
-
-    if (!currentEndMonth) {
-      return startMonth === monthID
-    }
-
-    return currentEndMonth > startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
-  }
-
-  const handleLastMarker = monthID => {
-    const currentEndMonth = confirmedEndMonth || endMonth
-
-    return currentEndMonth < startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
-  }
-
   return (
     <Fragment>
       <div
@@ -164,12 +169,3 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     </Fragment>
   )
 }
-
-MonthRangePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  minDate: PropTypes.instanceOf(Date).isRequired,
-  maxDate: PropTypes.instanceOf(Date).isRequired,
-  i18nHandler: PropTypes.func.isRequired
-}
-
-export default MonthRangePicker
