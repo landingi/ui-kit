@@ -1,12 +1,32 @@
 import Button from '@components/Button'
 import { Spacer } from '@components/Spacer'
-import { useCallback, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 
 import { MonthRangePicker } from './MonthRangePicker'
 import styles from './MonthRangePicker.module.scss'
 
-export const Picker = ({ minDate, maxDate, onChange, i18n, i18nHandler }) => {
-  const [range, setRange] = useState(null)
+interface PickerProps {
+  minDate: Date
+  maxDate: Date
+  onChange?: (range: { startDate: Date; endDate: Date } | null) => void
+  i18n?: {
+    apply: string
+  }
+  i18nHandler: (translation: string) => string
+}
+
+export const Picker: FC<PickerProps> = ({
+  minDate,
+  maxDate,
+  onChange = () => {},
+  i18n = { apply: 'apply' },
+  i18nHandler
+}) => {
+  const [range, setRange] = useState<{ startDate: Date; endDate: Date } | null>(
+    null
+  )
+
+  const handleApply = useCallback(() => onChange(range), [range, onChange])
 
   return (
     <div
@@ -24,7 +44,7 @@ export const Picker = ({ minDate, maxDate, onChange, i18n, i18nHandler }) => {
 
       <Spacer space='tiny' />
 
-      <Button onClick={useCallback(() => onChange(range), [range])} size='tiny'>
+      <Button onClick={handleApply} size='tiny'>
         {i18n.apply}
       </Button>
     </div>
@@ -32,16 +52,3 @@ export const Picker = ({ minDate, maxDate, onChange, i18n, i18nHandler }) => {
 }
 
 Picker.displayName = 'Month Picker Layout Wrapper'
-
-Picker.propTypes = {
-  minDate: PropTypes.instanceOf(Date).isRequired,
-  maxDate: PropTypes.instanceOf(Date).isRequired,
-  onChange: PropTypes.func,
-  i18n: PropTypes.shape({ apply: PropTypes.string }),
-  i18nHandler: PropTypes.func.isRequired
-}
-
-Picker.defaultProps = {
-  onChange: () => null,
-  i18n: {}
-}

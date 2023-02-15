@@ -14,7 +14,7 @@ import {
 import styles from './MonthRangePicker.module.scss'
 
 export interface MonthRangePickerProps {
-  onChange: (range: { startDate: Date; endDate: Date }) => void
+  onChange: (range: { startDate: Date; endDate: Date } | null) => void
   minDate: Date
   maxDate: Date
   i18nHandler: (translation: string) => string
