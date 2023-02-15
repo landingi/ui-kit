@@ -5,14 +5,14 @@ import { FC, useCallback, useState } from 'react'
 import { MonthRangePicker } from './MonthRangePicker'
 import styles from './MonthRangePicker.module.scss'
 
-interface PickerProps {
+export interface PickerProps {
   minDate: Date
   maxDate: Date
   onChange?: (range: { startDate: Date; endDate: Date } | null) => void
   i18n?: {
     apply: string
   }
-  i18nHandler: (translation: string) => string
+  i18nHandler?: (translation: string) => string
 }
 
 export const Picker: FC<PickerProps> = ({
@@ -20,7 +20,7 @@ export const Picker: FC<PickerProps> = ({
   maxDate,
   onChange = () => {},
   i18n = { apply: 'apply' },
-  i18nHandler
+  i18nHandler = translation => translation
 }) => {
   const [range, setRange] = useState<{ startDate: Date; endDate: Date } | null>(
     null
@@ -51,4 +51,4 @@ export const Picker: FC<PickerProps> = ({
   )
 }
 
-Picker.displayName = 'Month Picker Layout Wrapper'
+Picker.displayName = 'MonthPickerLayoutWrapper'

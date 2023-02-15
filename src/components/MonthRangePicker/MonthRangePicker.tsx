@@ -31,7 +31,7 @@ export const MonthRangePicker: FC<MonthRangePickerProps> = ({
   const [isSelecting, setSelecting] = useState(false)
   const [startMonth, setStartMonth] = useState<number | null>(null)
   const [endMonth, setEndMonth] = useState<number | null>(null)
-  const [year, setYear] = useState(2021)
+  const [year, setYear] = useState(new Date().getFullYear())
   const [confirmedEndMonth, setConfirmedEndMonth] = useState<number | null>(
     null
   )

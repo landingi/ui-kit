@@ -1,9 +1,11 @@
 import '@testing-library/jest-dom'
 
 import { fireEvent, render } from '@testing-library/react'
-import { useState as useStateMock } from 'react'
+import { useState } from 'react'
 
 import { Picker } from './Picker'
+
+const useStateMock = useState as jest.MockedFunction<typeof useState>
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
