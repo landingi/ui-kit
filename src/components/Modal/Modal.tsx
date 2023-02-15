@@ -1,5 +1,6 @@
 import { Backdrop } from '@components/Backdrop'
 import Button from '@components/Button'
+import { ButtonVariant } from '@components/Button/Button'
 import { Close } from '@components/Close'
 import Divider from '@components/Divider'
 import { Icon } from '@components/Icon'
@@ -35,25 +36,7 @@ export interface ModalProps {
   hasFooter?: boolean
   hasHeaderDivider?: boolean
   hasFooterDivider?: boolean
-  actionVariant?:
-    | 'primary'
-    | 'secondary'
-    | 'secondary-outlined'
-    | 'dropdown'
-    | 'transparent'
-    | 'icon'
-    | 'icon-transparent'
-    | 'icon-transparent-hover'
-    | 'alert'
-    | 'clean'
-    | 'tabs'
-    | 'transparent-blue'
-    | 'dropdown-element'
-    | 'action'
-    | 'white'
-    | 'black'
-    | 'publish'
-    | 'switcher-brand'
+  actionVariant?: ButtonVariant
   isLoading?: boolean
   actionIcon?: string
   overflowStyle?: object
