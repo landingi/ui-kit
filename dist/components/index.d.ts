@@ -58,7 +58,7 @@ export { LongLogo } from './Logo';
 export { ShortLogo } from './Logo';
 export * from './Message';
 export { default as Modal } from './Modal';
-export { default as MonthRangePicker } from './MonthRangePicker';
+export { Picker as MonthRangePicker } from './MonthRangePicker';
 export * from './Notification';
 export * from './Overflow';
 export * from './OverflowTooltip';
