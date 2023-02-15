@@ -1,3 +1,4 @@
+import { ButtonVariant } from '@components/Button/Button';
 import { MouseEvent, ReactNode } from 'react';
 export interface ModalProps {
     children?: ReactNode;
@@ -12,7 +13,7 @@ export interface ModalProps {
     hasFooter?: boolean;
     hasHeaderDivider?: boolean;
     hasFooterDivider?: boolean;
-    actionVariant?: 'primary' | 'secondary' | 'secondary-outlined' | 'dropdown' | 'transparent' | 'icon' | 'icon-transparent' | 'icon-transparent-hover' | 'alert' | 'clean' | 'tabs' | 'transparent-blue' | 'dropdown-element' | 'action' | 'white' | 'black' | 'publish' | 'switcher-brand';
+    actionVariant?: ButtonVariant;
     isLoading?: boolean;
     actionIcon?: string;
     overflowStyle?: object;
