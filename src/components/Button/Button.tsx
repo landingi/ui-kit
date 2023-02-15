@@ -5,6 +5,26 @@ import Ink from 'react-ink'
 
 import styles from './Button.module.scss'
 
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'secondary-outlined'
+  | 'dropdown'
+  | 'transparent'
+  | 'icon'
+  | 'icon-transparent'
+  | 'icon-transparent-hover'
+  | 'alert'
+  | 'clean'
+  | 'tabs'
+  | 'transparent-blue'
+  | 'dropdown-element'
+  | 'action'
+  | 'white'
+  | 'black'
+  | 'publish'
+  | 'switcher-brand'
+
 export interface ButtonProps {
   className?: string | string[]
   tag?: 'button' | 'a'
@@ -12,25 +32,7 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   href?: string
   size?: 'mini' | 'tiny' | 'small' | 'medium' | 'large' | 'input'
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'secondary-outlined'
-    | 'dropdown'
-    | 'transparent'
-    | 'icon'
-    | 'icon-transparent'
-    | 'icon-transparent-hover'
-    | 'alert'
-    | 'clean'
-    | 'tabs'
-    | 'transparent-blue'
-    | 'dropdown-element'
-    | 'action'
-    | 'white'
-    | 'black'
-    | 'publish'
-    | 'switcher-brand'
+  variant?: ButtonVariant
   align?: 'left' | 'center' | 'right'
   target?: '_self' | '_blank' | '_parent' | '_top'
   children: ReactNode
