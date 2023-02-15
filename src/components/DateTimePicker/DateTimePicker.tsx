@@ -7,14 +7,15 @@ import { enUS, pl, pt } from 'date-fns/locale'
 import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 import { Calendar, DateRange, RangeKeyDict } from 'react-date-range'
 
+type SetDateArgs =
+  | {
+      startDate?: Date
+      endDate?: Date
+    }
+  | Date
+
 export interface DateTimePickerProps {
-  setDate: ({
-    startDate,
-    endDate
-  }: {
-    startDate?: Date
-    endDate?: Date
-  }) => void
+  setDate: (setDateArgs: SetDateArgs) => void
   minDate?: string | Date
   maxDate?: string | Date
   oneDatePicker?: boolean
@@ -114,21 +115,12 @@ export const DateTimePicker: FC<DateTimePickerProps> = ({
     en: enUS
   }
 
-  const handleCallendarChange = (startDate: Date) => {
-    setState([
-      {
-        startDate,
-        key: 'selection'
-      }
-    ])
-  }
-
   return (
     <div className='react-datetimepicker'>
       {oneDatePicker && (
         <Calendar
           date={selectedDateCalendar || new Date()}
-          onChange={handleCallendarChange}
+          onChange={setDate}
           locale={locale[getLanguage] ?? enUS}
           minDate={minDate ? new Date(minDate) : undefined}
           maxDate={maxDate ? new Date(maxDate) : undefined}
