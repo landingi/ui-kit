@@ -7,7 +7,7 @@ interface ImageProps {
   src: string
   alt?: string
   className?: string | string[]
-  size?: number
+  size?: number | 'auto'
   height?: number
   auto?: boolean
   small?: boolean
