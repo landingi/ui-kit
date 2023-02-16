@@ -29,6 +29,8 @@ describe('FieldGroup tests', () => {
       }
     }
 
+    expect(screen.queryByText('error-name')).toBeFalsy()
+
     render(<FieldGroup {...touchedProps} label='test label' />)
 
     expect(screen.findByText('error-name')).toBeTruthy()
