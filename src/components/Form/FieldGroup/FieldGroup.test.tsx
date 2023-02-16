@@ -21,7 +21,9 @@ describe('FieldGroup tests', () => {
     const touchedProps = {
       name: 'field-name',
       children: 'children',
-      errors: {},
+      errors: {
+        'field-name': 'error-name'
+      },
       touched: {
         'field-name': true
       }
