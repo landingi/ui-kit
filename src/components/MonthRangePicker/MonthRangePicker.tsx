@@ -3,8 +3,7 @@ import { Icon } from '@components/Icon'
 import { Spacer } from '@components/Spacer'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { endOfMonth, startOfMonth } from 'date-fns'
-import PropTypes from 'prop-types'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 
 import {
   handleRangeMarker,
@@ -14,42 +13,47 @@ import {
 } from './helpers'
 import styles from './MonthRangePicker.module.scss'
 
-/**
- * MonthRangePicker - stateful component
- * @param {object} props - props
- * @param {func} props.onChange - called on date confirm
- * @param {date} props.minDate - minimal date
- * @param {date} props.maxDate - maximal date
- * @param {func} props.i18nHandler - callback function to translate keys
- * @return {object} An object of children element
- */
-const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
+export interface MonthRangePickerProps {
+  onChange: (range: { startDate: Date; endDate: Date } | null) => void
+  minDate: Date
+  maxDate: Date
+  i18nHandler: (translation: string) => string
+}
+
+export const MonthRangePicker: FC<MonthRangePickerProps> = ({
+  onChange,
+  minDate,
+  maxDate,
+  i18nHandler
+}) => {
   const minimalDate = parseDateToMonthID(minDate)
   const maximalDate = parseDateToMonthID(maxDate)
   const [isSelecting, setSelecting] = useState(false)
-  const [startMonth, setStartMonth] = useState(null)
-  const [endMonth, setEndMonth] = useState(null)
-  const [year, setYear] = useState(2021)
-  const [confirmedEndMonth, setConfirmedEndMonth] = useState(null)
+  const [startMonth, setStartMonth] = useState<number | null>(null)
+  const [endMonth, setEndMonth] = useState<number | null>(null)
+  const [year, setYear] = useState(new Date().getFullYear())
+  const [confirmedEndMonth, setConfirmedEndMonth] = useState<number | null>(
+    null
+  )
 
   useEffect(() => {
     if (confirmedEndMonth) {
       onChange({
         endDate: endOfMonth(
-          confirmedEndMonth > startMonth
+          confirmedEndMonth > (startMonth as number)
             ? transformMonthToDate(confirmedEndMonth)
-            : transformMonthToDate(startMonth)
+            : transformMonthToDate(startMonth as number)
         ),
         startDate: startOfMonth(
-          confirmedEndMonth > startMonth
-            ? transformMonthToDate(startMonth)
+          confirmedEndMonth > (startMonth as number)
+            ? transformMonthToDate(startMonth as number)
             : transformMonthToDate(confirmedEndMonth)
         )
       })
     }
-  }, [confirmedEndMonth])
+  }, [confirmedEndMonth, onChange, startMonth])
 
-  const handleSelect = monthID => {
+  const handleSelect = (monthID: number) => {
     if (isSelecting) {
       setSelecting(false)
       setConfirmedEndMonth(monthID)
@@ -61,11 +65,38 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     }
   }
 
-  const handleHover = monthID => {
-    isSelecting && setEndMonth(monthID)
+  const handleHover = (monthID: number) => {
+    if (isSelecting) {
+      setEndMonth(monthID)
+    }
   }
 
-  const constructMonthID = monthIndex => parseInt(`${year}${monthIndex}`)
+  const constructMonthID = (monthIndex: string) =>
+    Number(`${year}${monthIndex}`)
+
+  const handleFirstMarker = (monthID: number) => {
+    const currentEndMonth = confirmedEndMonth || endMonth
+
+    if (!startMonth) {
+      return false
+    }
+
+    if (!currentEndMonth) {
+      return startMonth === monthID
+    }
+
+    return currentEndMonth > startMonth
+      ? startMonth === monthID
+      : currentEndMonth === monthID
+  }
+
+  const handleLastMarker = (monthID: number) => {
+    const currentEndMonth = (confirmedEndMonth || endMonth) as number
+
+    return currentEndMonth < (startMonth as number)
+      ? startMonth === monthID
+      : currentEndMonth === monthID
+  }
 
   const renderMonths = () =>
     monthsArray.map(({ code, name }) => {
@@ -77,13 +108,13 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
         [styles['button_month--not-selecting']]: !isSelecting,
         [styles['button_month--selecting']]: handleRangeMarker(
           monthID,
-          endMonth,
-          startMonth
+          endMonth as number,
+          startMonth as number
         ),
         [styles['button_month--selected']]: handleRangeMarker(
           monthID,
-          confirmedEndMonth,
-          startMonth
+          confirmedEndMonth as number,
+          startMonth as number
         ),
         [styles['button_month--disabled']]:
           monthID < minimalDate || monthID > maximalDate,
@@ -108,30 +139,6 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
         </button>
       )
     })
-
-  const handleFirstMarker = monthID => {
-    const currentEndMonth = confirmedEndMonth || endMonth
-
-    if (!startMonth) {
-      return false
-    }
-
-    if (!currentEndMonth) {
-      return startMonth === monthID
-    }
-
-    return currentEndMonth > startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
-  }
-
-  const handleLastMarker = monthID => {
-    const currentEndMonth = confirmedEndMonth || endMonth
-
-    return currentEndMonth < startMonth
-      ? startMonth === monthID
-      : currentEndMonth === monthID
-  }
 
   return (
     <Fragment>
@@ -164,12 +171,3 @@ const MonthRangePicker = ({ onChange, minDate, maxDate, i18nHandler }) => {
     </Fragment>
   )
 }
-
-MonthRangePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  minDate: PropTypes.instanceOf(Date).isRequired,
-  maxDate: PropTypes.instanceOf(Date).isRequired,
-  i18nHandler: PropTypes.func.isRequired
-}
-
-export default MonthRangePicker

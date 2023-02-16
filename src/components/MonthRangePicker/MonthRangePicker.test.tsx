@@ -1,10 +1,13 @@
 import '@testing-library/jest-dom'
 
-import MonthRangePicker from '@components/MonthRangePicker/MonthRangePicker'
+import { MonthRangePicker } from '@components/MonthRangePicker/MonthRangePicker'
 import { fireEvent, render } from '@testing-library/react'
-import React, { useCallback as useCallbackMock, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import { monthsArray } from './helpers'
+
+const useCallbackMock = useCallback as jest.MockedFunction<typeof useCallback>
+const useEffectMock = useEffect as jest.MockedFunction<typeof useEffect>
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -26,8 +29,7 @@ describe('<MonthRangePicker/> mount', () => {
     jest.clearAllMocks()
 
     useCallbackMock.mockImplementation(() => setYearMock)
-
-    useEffect.mockImplementation(() => props.onChange)
+    useEffectMock.mockImplementation(() => props.onChange)
   })
 
   it('should be displayed', () => {

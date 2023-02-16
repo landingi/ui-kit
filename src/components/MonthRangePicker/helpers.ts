@@ -14,17 +14,21 @@ export const monthsArray = [
   { code: '09', name: 'month.october' },
   { code: '10', name: 'month.november' },
   { code: '11', name: 'month.december' }
-]
+] as const
 
 /**
  * Check if value is between start and end month
  * @function handleRangeMarker
- * @param {string} monthID
+ * @param {number} monthID
  * @param {string} endMonth
  * @param {string} startMonth
  * @return {bool} Returns bool
  */
-export const handleRangeMarker = (monthID, endMonth, startMonth) => {
+export const handleRangeMarker = (
+  monthID: number,
+  endMonth: number,
+  startMonth: number
+) => {
   const handleMarkerWithBiggerStartMonth = () =>
     endMonth <= monthID && startMonth >= monthID
   const handleMarkerWithBiggerEndMonth = () =>
@@ -32,8 +36,8 @@ export const handleRangeMarker = (monthID, endMonth, startMonth) => {
   const handleMarkerWithEqualStartEndMonth = () => monthID === startMonth
 
   switch (true) {
-    case startMonth === null || endMonth === null:
-      return null
+    case !startMonth || !endMonth:
+      return false
     case startMonth > endMonth:
       return handleMarkerWithBiggerStartMonth()
     case startMonth < endMonth:
@@ -51,14 +55,17 @@ export const handleRangeMarker = (monthID, endMonth, startMonth) => {
  * @param {date} date
  * @return {string} Returns string
  */
-export const parseDateToMonthID = date =>
-  `${date.getFullYear()}${monthsArray[date.getMonth()].code}`
+export const parseDateToMonthID = (date: Date) =>
+  Number(`${date.getFullYear()}${monthsArray[date.getMonth()].code}`)
 
 /**
  * Parse monthID to date object eg. 202103 => 2021-03-01
  * @function parseDateToMonthID
- * @param {string} monthID
+ * @param {number} monthID
  * @return {date} Returns date object
  */
-export const transformMonthToDate = monthID =>
-  new Date(`${monthID}`.substring(0, 4), `${monthID}`.substring(4, 6))
+export const transformMonthToDate = (monthID: number): Date =>
+  new Date(
+    Number(String(monthID).substring(0, 4)),
+    Number(String(monthID).substring(4, 6))
+  )
