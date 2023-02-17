@@ -27,7 +27,7 @@ export * from './Filter';
 export { default as Checkbox } from './Form/Checkbox';
 export { default as DropdownSelectForm } from './Form/DropdownSelect';
 export { default as Error } from './Form/Error';
-export { default as FieldGroup } from './Form/FieldGroup';
+export * from './Form/FieldGroup';
 export * from './Form/Input';
 export * from './Form/Input/MaskedInputForm';
 export * from './Form/Radio';
