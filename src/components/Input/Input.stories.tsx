@@ -3,7 +3,14 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {
   title: 'Input',
-  component: Input
+  component: Input,
+  argTypes: {
+    alwaysShowLabel: {
+      control: {
+        type: 'boolean'
+      }
+    }
+  }
 } as ComponentMeta<typeof Input>
 
 const Template: ComponentStory<typeof Input> = args => <Input {...args} />
