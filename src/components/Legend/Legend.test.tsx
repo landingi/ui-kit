@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Legend from '@components/Legend'
+import { Legend } from '@components/Legend'
 import { render } from '@testing-library/react'
 
 import { LegendProps } from './Legend'
