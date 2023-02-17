@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
-import FieldGroup from './FieldGroup'
+import { FieldGroup } from './FieldGroup'
 
 describe('FieldGroup tests', () => {
   const props = {
@@ -22,11 +21,15 @@ describe('FieldGroup tests', () => {
     const touchedProps = {
       name: 'field-name',
       children: 'children',
-      errors: {},
-      touched: {
+      errors: {
         'field-name': 'error-name'
+      },
+      touched: {
+        'field-name': true
       }
     }
+
+    expect(screen.queryByText('error-name')).toBeFalsy()
 
     render(<FieldGroup {...touchedProps} label='test label' />)
 
