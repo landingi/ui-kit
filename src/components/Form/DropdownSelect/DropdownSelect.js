@@ -1,6 +1,5 @@
 import Button from '@components/Button'
 import Divider from '@components/Divider'
-import Dropdown from '@components/Dropdown'
 import Error from '@components/Form/Error'
 import { Heading } from '@components/Heading'
 import { Icon } from '@components/Icon'
@@ -11,6 +10,7 @@ import { Loader } from '@components/Loader'
 import { Message } from '@components/Message'
 import { Overflow } from '@components/Overflow'
 import { Paragraph } from '@components/Paragraph'
+import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
@@ -156,7 +156,7 @@ const DropdownSelectForm = ({
         </Label>
       )}
 
-      <Dropdown
+      <PerfectDropdown
         hasInput
         hasFullInputStyle
         asPlaceholder={!value[name]?.label}
@@ -209,7 +209,7 @@ const DropdownSelectForm = ({
         </Overflow>
 
         {optionalContent}
-      </Dropdown>
+      </PerfectDropdown>
 
       <Error error={errors[name]} />
     </div>

@@ -1,5 +1,5 @@
-import DropdownSelect2 from '@components/DropdownSelect'
 import { Icon } from '@components/Icon'
+import PerfectDropdownSelect from '@components/PerfectDropdownSelect'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getLanguage } from '@helpers/i18n'
@@ -109,12 +109,12 @@ export const TimeSelect: FC<TimeSelectProps> = ({
   return (
     <Row vertical='end'>
       {/* @ts-ignore */}
-      <DropdownSelect2
+      <PerfectDropdownSelect
         className={timeSelectDropdownClasses}
         overflowStyle={{ maxHeight: 180 }}
-        inModalName={inModalName}
         alwaysShowLabel
         label={label}
+        // @ts-ignore
         dropdownLabel={renderDropdownLabel}
         options={isAmPmType ? TIME_FORMAT_EN : TIME_FORMAT_PL}
         value={isAmPmType ? convertTimeFrom24to12(value) : value}
@@ -128,7 +128,7 @@ export const TimeSelect: FC<TimeSelectProps> = ({
           <Spreader spread='small' />
 
           {/* @ts-ignore */}
-          <DropdownSelect2
+          <PerfectDropdownSelect
             inModalName={inModalName}
             options={CLOCK_OPTIONS}
             // @ts-ignore
