@@ -18,7 +18,7 @@ import type { ClockType } from './helpers'
 import { convertTimeFrom24to12, isAmOrPm, processTime } from './helpers'
 import styles from './TimeSelect.module.scss'
 
-interface TimeSelectProps {
+export interface TimeSelectProps {
   inModalName?: string
   value?: string
   onChange: (arg1: string, arg2?: string) => void
@@ -92,17 +92,19 @@ export const TimeSelect: FC<TimeSelectProps> = ({
    * render label with custom time input
    */
   const renderDropdownLabel = useCallback(
-    (selectedValue: { value: string }) => (
-      <Row className={timeSelectLabelClasses} vertical='center'>
-        <Icon icon='icon-time' color='color-1' />
+    (selectedValue: { value: string }) => {
+      return (
+        <Row className={timeSelectLabelClasses} vertical='center'>
+          <Icon icon='icon-time' color='color-1' />
 
-        <TimeInput
-          onChange={handleTimeInputChange}
-          value={selectedValue?.value}
-          maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
-        />
-      </Row>
-    ),
+          <TimeInput
+            onChange={handleTimeInputChange}
+            value={selectedValue?.value}
+            maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
+          />
+        </Row>
+      )
+    },
     [isAmPmType, handleTimeInputChange, timeSelectLabelClasses]
   )
 
@@ -123,7 +125,7 @@ export const TimeSelect: FC<TimeSelectProps> = ({
         isOpenDisabled={disabled}
       />
 
-      {isAmPmType ? (
+      {Boolean(isAmPmType) && (
         <Fragment>
           <Spreader spread='small' />
 
@@ -136,9 +138,10 @@ export const TimeSelect: FC<TimeSelectProps> = ({
             onChange={handleClockChange}
             className={styles['time-select__clock-type-select']}
             isOpenDisabled={disabled}
+            size='auto'
           />
         </Fragment>
-      ) : null}
+      )}
     </Row>
   )
 }
