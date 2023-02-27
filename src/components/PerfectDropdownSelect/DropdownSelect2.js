@@ -78,6 +78,7 @@ const PerfectDropdownSelect = ({
   dropdownLabel,
   customValue,
   size = 'fixed',
+  dropdownPlacement,
   'data-testid': dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
@@ -245,6 +246,7 @@ const PerfectDropdownSelect = ({
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
         className={dropdownStyles}
+        dropdownPlacement={dropdownPlacement}
         data-testid={dataTestId}
       >
         {hasSearcher && (
@@ -342,6 +344,14 @@ PerfectDropdownSelect.propTypes = {
     'extra-huge',
     'auto',
     'fixed'
+  ]),
+  dropdownPlacement: PropTypes.oneOf([
+    'bottom-start',
+    'bottom-end',
+    'bottom-center',
+    'top-start',
+    'top-center',
+    'top-end'
   ])
 }
 
@@ -373,6 +383,7 @@ PerfectDropdownSelect.defaultProps = {
   loadMoreEvent: null,
   liveChanges: false,
   size: 'fixed',
+  dropdownPlacement: 'bottom-end',
   'data-testid': 'trigger-dropdown'
 }
 

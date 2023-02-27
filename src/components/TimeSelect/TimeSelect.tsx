@@ -136,6 +136,7 @@ export const TimeSelect: FC<TimeSelectProps> = ({
             className={styles['time-select__clock-type-select']}
             isOpenDisabled={disabled}
             size='auto'
+            dropdownPlacement='bottom-start'
           />
         </Fragment>
       )}
