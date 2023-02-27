@@ -19,26 +19,24 @@ import { convertTimeFrom24to12, isAmOrPm, processTime } from './helpers'
 import styles from './TimeSelect.module.scss'
 
 export interface TimeSelectProps {
-  inModalName?: string
   value?: string
   onChange: (arg1: string, arg2?: string) => void
   formikKey?: string
   label: string
   disabled?: boolean
   size?: 'small' | 'default'
+  isAmPmType?: boolean
 }
 
 export const TimeSelect: FC<TimeSelectProps> = ({
-  inModalName = '',
   value = '12:00',
   onChange,
   formikKey = null,
   label,
   disabled = false,
-  size = 'default'
+  size = 'default',
+  isAmPmType = getLanguage !== 'pl'
 }) => {
-  const isAmPmType = getLanguage !== 'pl'
-
   const timeSelectLabelClasses = useStyles({
     [styles['time-select__label']]: true,
     [styles['time-select__label--disabled']]: disabled
@@ -131,7 +129,6 @@ export const TimeSelect: FC<TimeSelectProps> = ({
 
           {/* @ts-ignore */}
           <PerfectDropdownSelect
-            inModalName={inModalName}
             options={CLOCK_OPTIONS}
             // @ts-ignore
             value={clockType}

@@ -14,6 +14,14 @@ const Template: ComponentStory<typeof TimeSelect> = args => {
   return <TimeSelect {...args} value={value} onChange={setValue} />
 }
 
-export const Default = Template.bind({})
+export const AmPmType = Template.bind({})
 
-Default.args = {}
+AmPmType.args = {
+  isAmPmType: true
+}
+
+export const DefaultType = Template.bind({})
+
+DefaultType.args = {
+  isAmPmType: false
+}
