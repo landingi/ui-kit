@@ -181,6 +181,7 @@ export const PerfectDropdownSelect: FC<PerfectDropdownSelectProps> = ({
     const labelWidth = containerRef.current?.clientWidth
 
     if (labelWidth) setDropdownWidth(labelWidth)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef.current])
 
   const renderOption = (item: Item) =>
