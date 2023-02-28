@@ -11,7 +11,7 @@ export interface LegendProps {
   alignment?: 'vertical' | 'horizontal'
 }
 
-const Legend: FC<LegendProps> = ({
+export const Legend: FC<LegendProps> = ({
   className,
   data,
   alignment = 'vertical'

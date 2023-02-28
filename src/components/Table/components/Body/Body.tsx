@@ -11,7 +11,7 @@ export const Body = <Item extends ItemBase>({
   select,
   handleRefresh
 }: BodyProps<Item>) => (
-  <tbody>
+  <div>
     {data.map(item => (
       <BodyTr
         columns={columns}
@@ -24,5 +24,5 @@ export const Body = <Item extends ItemBase>({
         handleRefresh={handleRefresh}
       />
     ))}
-  </tbody>
+  </div>
 )

@@ -1,9 +1,12 @@
 .thead {
   border-bottom: 1px solid $color-7;
+  display: grid;
 }
 
 .th {
-  padding: $padding-medium;
+  display: flex;
+  align-items: center;
+  padding: $padding-small;
   font-size: 12px;
   font-weight: 600;
   color: $color-8;
@@ -17,12 +20,12 @@
   }
 
   &--options {
+    min-height: 58px;
+  }
+
+  &__options {
     color: $color-1;
     font-size: 14px;
     font-weight: 500;
-  }
-
-  &--checkbox {
-    width: 60px;
   }
 }

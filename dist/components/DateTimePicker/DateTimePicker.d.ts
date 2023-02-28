@@ -1,7 +1,11 @@
 import './DateTimePicker.scss';
 import { FC } from 'react';
+declare type SetDateArgs = {
+    startDate?: Date;
+    endDate?: Date;
+} | Date;
 export interface DateTimePickerProps {
-    setDate: (startDate?: Date, endDate?: Date) => void;
+    setDate: (setDateArgs: SetDateArgs) => void;
     minDate?: string | Date;
     maxDate?: string | Date;
     oneDatePicker?: boolean;
@@ -12,3 +16,4 @@ export interface DateTimePickerProps {
     };
 }
 export declare const DateTimePicker: FC<DateTimePickerProps>;
+export {};
