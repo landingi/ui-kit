@@ -16,7 +16,6 @@ import { emitCloseDropdown } from '@events/dropdown'
 import { generateFakeUuid, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import {
-  FC,
   Fragment,
   ReactNode,
   useCallback,
@@ -27,18 +26,18 @@ import {
 
 import styles from './PerfectDropdownSelect.module.scss'
 
-type Value = string | number
+type Value = string | number | null
 
-type Item = {
+type ItemBase = {
   value: Value
   label: string
   description?: string
 }
 
-export interface PerfectDropdownSelectProps {
+export interface PerfectDropdownSelectProps<Item extends ItemBase> {
   className?: string
   value?: Value
-  onChange?: (key: string | number, value?: Value) => void
+  onChange?: (key: Value, value?: Value) => void
   errors?: Record<string, string>
   touched?: Record<string, boolean>
   label?: string
@@ -83,7 +82,7 @@ export interface PerfectDropdownSelectProps {
   'data-testid'?: string
 }
 
-export const PerfectDropdownSelect: FC<PerfectDropdownSelectProps> = ({
+export const PerfectDropdownSelect = <Item extends ItemBase>({
   className,
   value = null,
   onChange = () => {},
@@ -114,7 +113,7 @@ export const PerfectDropdownSelect: FC<PerfectDropdownSelectProps> = ({
   size = 'fixed',
   dropdownPlacement,
   'data-testid': dataTestId
-}) => {
+}: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
 
   const labelStyles = useStyles({
