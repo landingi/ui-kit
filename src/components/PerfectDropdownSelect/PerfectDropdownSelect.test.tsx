@@ -1,22 +1,20 @@
 import '@testing-library/jest-dom'
 
-import DropdownSelect from '@components/PerfectDropdownSelect/DropdownSelect2'
+import { PerfectDropdownSelect } from '@components/PerfectDropdownSelect'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import React from 'react'
 
 describe('<DropdownSelect /> mount', () => {
   it('should render', () => {
-    const props = {
-      children: 'children',
-      options: [
-        {
-          label: 'jestem label',
-          value: 'jestem value'
-        }
-      ]
-    }
-
-    const { getByTestId } = render(<DropdownSelect {...props} />)
+    const { getByTestId } = render(
+      <PerfectDropdownSelect
+        options={[
+          {
+            label: 'jestem label',
+            value: 'jestem value'
+          }
+        ]}
+      />
+    )
 
     const dropdownSelect = getByTestId('dropdown-select')
 
@@ -25,7 +23,6 @@ describe('<DropdownSelect /> mount', () => {
 
   it('display options', async () => {
     const props = {
-      children: 'children',
       options: [
         {
           label: 'label 1',
@@ -38,9 +35,9 @@ describe('<DropdownSelect /> mount', () => {
       ]
     }
 
-    const { getByText } = render(<DropdownSelect {...props} />)
+    const { getByText } = render(<PerfectDropdownSelect {...props} />)
 
-    const dropdown = screen.queryByTestId('trigger-dropdown')
+    const dropdown = screen.getByTestId('trigger-dropdown')
 
     await waitFor(() => fireEvent.click(dropdown))
 
@@ -50,14 +47,13 @@ describe('<DropdownSelect /> mount', () => {
 
   it('display searcher', async () => {
     const props = {
-      children: 'children',
       options: [],
       hasSearcher: true
     }
 
-    const { getByTestId } = render(<DropdownSelect {...props} />)
+    const { getByTestId } = render(<PerfectDropdownSelect {...props} />)
 
-    const dropdown = screen.queryByTestId('trigger-dropdown')
+    const dropdown = screen.getByTestId('trigger-dropdown')
 
     await waitFor(() => fireEvent.click(dropdown))
 
@@ -66,14 +62,13 @@ describe('<DropdownSelect /> mount', () => {
 
   it('display empty message', async () => {
     const props = {
-      children: 'children',
       options: [],
       emptyMessage: 'empty'
     }
 
-    const { getByText } = render(<DropdownSelect {...props} />)
+    const { getByText } = render(<PerfectDropdownSelect {...props} />)
 
-    const dropdown = screen.queryByTestId('trigger-dropdown')
+    const dropdown = screen.getByTestId('trigger-dropdown')
 
     await waitFor(() => fireEvent.click(dropdown))
 
@@ -82,15 +77,14 @@ describe('<DropdownSelect /> mount', () => {
 
   it('display loader', async () => {
     const props = {
-      children: 'children',
       options: [],
       emptyMessage: 'empty',
       isLoading: true
     }
 
-    const { getByTestId } = render(<DropdownSelect {...props} />)
+    const { getByTestId } = render(<PerfectDropdownSelect {...props} />)
 
-    const dropdown = screen.queryByTestId('trigger-dropdown')
+    const dropdown = screen.getByTestId('trigger-dropdown')
 
     await waitFor(() => fireEvent.click(dropdown))
 
