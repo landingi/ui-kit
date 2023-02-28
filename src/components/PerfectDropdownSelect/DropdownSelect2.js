@@ -75,6 +75,10 @@ const PerfectDropdownSelect = ({
   hasLoadMoreButton,
   loadMoreEvent,
   liveChanges,
+  dropdownLabel,
+  customValue,
+  size = 'fixed',
+  dropdownPlacement,
   'data-testid': dataTestId
 }) => {
   const hasLabel = value || alwaysShowLabel
@@ -101,6 +105,9 @@ const PerfectDropdownSelect = ({
 
     if (currentItem) {
       return currentItem
+    }
+    if (customValue && !currentItem) {
+      return { value, label: value }
     }
     return null
   }
@@ -227,16 +234,19 @@ const PerfectDropdownSelect = ({
       )}
 
       <PerfectDropdown
-        label={selectedItem?.label}
+        label={
+          dropdownLabel ? dropdownLabel(selectedItem) : selectedItem?.label
+        }
         hasInput
         hasFullInputStyle
         asPlaceholder={!selectedItem?.label}
-        size='fixed'
+        size={size}
         alignment={hasLabel ? 'spaced' : 'end'}
         ref={dropdownRef}
         isOpenDisabled={isOpenDisabled}
         handleOnClose={clearSearchValue}
         className={dropdownStyles}
+        dropdownPlacement={dropdownPlacement}
         data-testid={dataTestId}
       >
         {hasSearcher && (
@@ -321,7 +331,28 @@ PerfectDropdownSelect.propTypes = {
   hasLoadMoreButton: PropTypes.bool,
   loadMoreEvent: PropTypes.func,
   liveChanges: PropTypes.bool,
-  'data-testid': PropTypes.string
+  dropdownLabel: PropTypes.func,
+  customValue: PropTypes.bool,
+  'data-testid': PropTypes.string,
+  size: PropTypes.oneOf([
+    'mini',
+    'small',
+    'medium',
+    'big',
+    'large',
+    'huge',
+    'extra-huge',
+    'auto',
+    'fixed'
+  ]),
+  dropdownPlacement: PropTypes.oneOf([
+    'bottom-start',
+    'bottom-end',
+    'bottom-center',
+    'top-start',
+    'top-center',
+    'top-end'
+  ])
 }
 
 PerfectDropdownSelect.defaultProps = {
@@ -342,7 +373,8 @@ PerfectDropdownSelect.defaultProps = {
   alwaysShowLabel: false,
   overflowStyle: {},
   formikKey: '',
-  searchPlaceholder: '',
+  dropdownLabel: null,
+  customValue: false,
   i18n: {
     placeholder: '',
     loadmore: ''
@@ -350,6 +382,8 @@ PerfectDropdownSelect.defaultProps = {
   hasLoadMoreButton: null,
   loadMoreEvent: null,
   liveChanges: false,
+  size: 'fixed',
+  dropdownPlacement: 'bottom-end',
   'data-testid': 'trigger-dropdown'
 }
 

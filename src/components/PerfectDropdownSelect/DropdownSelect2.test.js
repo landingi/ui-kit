@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import DropdownSelect from '@components/DropdownSelect2'
+import DropdownSelect from '@components/PerfectDropdownSelect/DropdownSelect2'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 

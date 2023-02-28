@@ -1,5 +1,5 @@
-import DropdownSelect2 from '@components/DropdownSelect'
 import { Icon } from '@components/Icon'
+import PerfectDropdownSelect from '@components/PerfectDropdownSelect'
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getLanguage } from '@helpers/i18n'
@@ -18,27 +18,25 @@ import type { ClockType } from './helpers'
 import { convertTimeFrom24to12, isAmOrPm, processTime } from './helpers'
 import styles from './TimeSelect.module.scss'
 
-interface TimeSelectProps {
-  inModalName?: string
+export interface TimeSelectProps {
   value?: string
   onChange: (arg1: string, arg2?: string) => void
   formikKey?: string
   label: string
   disabled?: boolean
   size?: 'small' | 'default'
+  isAmPmType?: boolean
 }
 
 export const TimeSelect: FC<TimeSelectProps> = ({
-  inModalName = '',
   value = '12:00',
   onChange,
   formikKey = null,
   label,
   disabled = false,
-  size = 'default'
+  size = 'default',
+  isAmPmType = getLanguage !== 'pl'
 }) => {
-  const isAmPmType = getLanguage !== 'pl'
-
   const timeSelectLabelClasses = useStyles({
     [styles['time-select__label']]: true,
     [styles['time-select__label--disabled']]: disabled
@@ -92,29 +90,31 @@ export const TimeSelect: FC<TimeSelectProps> = ({
    * render label with custom time input
    */
   const renderDropdownLabel = useCallback(
-    (selectedValue: { value: string }) => (
-      <Row className={timeSelectLabelClasses} vertical='center'>
-        <Icon icon='icon-time' color='color-1' />
+    (selectedValue: { value: string }) => {
+      return (
+        <Row className={timeSelectLabelClasses} vertical='center'>
+          <Icon icon='icon-time' color='color-1' />
 
-        <TimeInput
-          onChange={handleTimeInputChange}
-          value={selectedValue?.value}
-          maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
-        />
-      </Row>
-    ),
+          <TimeInput
+            onChange={handleTimeInputChange}
+            value={selectedValue?.value}
+            maxHours={isAmPmType ? MAX_HOUR_EN : MAX_HOUR_PL}
+          />
+        </Row>
+      )
+    },
     [isAmPmType, handleTimeInputChange, timeSelectLabelClasses]
   )
 
   return (
     <Row vertical='end'>
       {/* @ts-ignore */}
-      <DropdownSelect2
+      <PerfectDropdownSelect
         className={timeSelectDropdownClasses}
         overflowStyle={{ maxHeight: 180 }}
-        inModalName={inModalName}
         alwaysShowLabel
         label={label}
+        // @ts-ignore
         dropdownLabel={renderDropdownLabel}
         options={isAmPmType ? TIME_FORMAT_EN : TIME_FORMAT_PL}
         value={isAmPmType ? convertTimeFrom24to12(value) : value}
@@ -123,22 +123,23 @@ export const TimeSelect: FC<TimeSelectProps> = ({
         isOpenDisabled={disabled}
       />
 
-      {isAmPmType ? (
+      {Boolean(isAmPmType) && (
         <Fragment>
           <Spreader spread='small' />
 
           {/* @ts-ignore */}
-          <DropdownSelect2
-            inModalName={inModalName}
+          <PerfectDropdownSelect
             options={CLOCK_OPTIONS}
             // @ts-ignore
             value={clockType}
             onChange={handleClockChange}
             className={styles['time-select__clock-type-select']}
             isOpenDisabled={disabled}
+            size='auto'
+            dropdownPlacement='bottom-start'
           />
         </Fragment>
-      ) : null}
+      )}
     </Row>
   )
 }
