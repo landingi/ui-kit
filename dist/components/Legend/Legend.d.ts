@@ -7,5 +7,5 @@ export interface LegendProps {
     }[];
     alignment?: 'vertical' | 'horizontal';
 }
-declare const Legend: FC<LegendProps>;
+export declare const Legend: FC<LegendProps>;
 export default Legend;
