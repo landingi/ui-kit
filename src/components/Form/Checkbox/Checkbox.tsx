@@ -28,7 +28,7 @@ export interface FormikCheckboxProps {
 
 export const Checkbox: FC<FormikCheckboxProps> = ({
   field: { name, value, onChange, onBlur },
-  form: { errors, touched /* setFieldValue  [UNUSED_VARIABLE] */ },
+  form: { errors, touched },
   id,
   label = '',
   className = '',
