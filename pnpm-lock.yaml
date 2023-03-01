@@ -68,7 +68,6 @@ specifiers:
   prettier: 2.6.2
   prettier-eslint-cli: 6.0.1
   pretty-quick: 3.1.3
-  prop-types: 15.8.1
   qs: 6.10.3
   query-string: 7.1.1
   react: 17.0.2
@@ -95,6 +94,7 @@ specifiers:
   simple-flexbox: 2.3.3
   style-loader: 3.3.1
   tiny-emitter: 2.1.0
+  tiny-typed-emitter: ^2.1.0
   tslib: 2.5.0
   typescript: 4.8.4
 
@@ -102,17 +102,17 @@ dependencies:
   classnames: 2.3.1
   date-fns: 2.28.0
   dompurify: 2.3.8
-  prop-types: 15.8.1
   query-string: 7.1.1
-  react-advanced-time-input: 1.2.0_fabn7f3b6ke5nrqpl3e5ctn2ke
+  react-advanced-time-input: 1.2.0_hqkokgpdwzgp34ycopvr7u3xiq
   react-date-range: 1.4.0_2hazvn3wkvbvuxsyj5ejib6eci
   react-ink: 6.5.1
   react-laag: 2.0.4_sfoxds7t5ydpegc3knd667wn6m
   react-text-mask: 5.4.3_react@17.0.2
   react-uuid: 1.0.2
   resize-observer-polyfill: 1.5.1
-  simple-flexbox: 2.3.3_at7mkepldmzoo6silmqc5bca74
+  simple-flexbox: 2.3.3_react@17.0.2
   tiny-emitter: 2.1.0
+  tiny-typed-emitter: 2.1.0
 
 devDependencies:
   '@babel/core': 7.20.12
@@ -13196,7 +13196,7 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /react-advanced-time-input/1.2.0_fabn7f3b6ke5nrqpl3e5ctn2ke:
+  /react-advanced-time-input/1.2.0_hqkokgpdwzgp34ycopvr7u3xiq:
     resolution: {integrity: sha512-NkUKRXf8yRRKWuWpXCa+iyafoiaiU/jYdMmc/cBxbsUYB9PVWud7vEgPsP7P5I1/+cr+/+tfbu4998pgYamh8w==}
     peerDependencies:
       prop-types: ^15
@@ -13205,7 +13205,6 @@ packages:
     dependencies:
       '@types/enzyme-adapter-react-16': 1.0.5
       eslint-plugin-react-hooks: 4.3.0_eslint@8.2.0
-      prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     transitivePeerDependencies:
@@ -14292,14 +14291,13 @@ packages:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
 
-  /simple-flexbox/2.3.3_at7mkepldmzoo6silmqc5bca74:
+  /simple-flexbox/2.3.3_react@17.0.2:
     resolution: {integrity: sha512-5INKo4u1m5LDWBeEZXcAesIRxamrMCbcYInLg9Dz0A/7lwLMbIBKIon+71qVw91m3ivSB/5fA5KDObrt+VT6vg==}
     peerDependencies:
       prop-types: ^15.7.2
       react: ^17.0.2
       webpack-cli: ^4.7.2
     dependencies:
-      prop-types: 15.8.1
       react: 17.0.2
     dev: false
 
@@ -15050,6 +15048,10 @@ packages:
 
   /tiny-emitter/2.1.0:
     resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
+    dev: false
+
+  /tiny-typed-emitter/2.1.0:
+    resolution: {integrity: sha512-qVtvMxeXbVej0cQWKqVSSAHmKZEHAvxdF8HEUBFWts8h+xEo5m/lEiPakuyZ3BnCBjOD8i24kzNOiOLLgsSxhA==}
     dev: false
 
   /tiny-warning/1.0.3:
