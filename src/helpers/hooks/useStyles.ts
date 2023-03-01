@@ -8,7 +8,7 @@
  * @returns {string} An string with extracted class names
  */
 export const useStyles = (
-  styles: Record<string, boolean>,
+  styles: Record<string, unknown>,
   classNames: string | string[] = ''
 ) => {
   let classes = ''

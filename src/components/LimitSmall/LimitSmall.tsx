@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import styles from './LimitSmall.module.scss'
 
-interface LimitSmallProps {
+export interface LimitSmallProps {
   className?: string | string[]
   padding?: 'none' | 'tiny' | 'small' | 'medium'
   limit: number

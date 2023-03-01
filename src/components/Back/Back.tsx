@@ -6,7 +6,7 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Back.module.scss'
 
-interface BackProps {
+export interface BackProps {
   className?: string | string[]
   url?: string
   content?: ReactNode

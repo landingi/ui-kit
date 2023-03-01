@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import styles from './LimitQuantity.module.scss'
 
-interface LimitQuantityProps {
+export interface LimitQuantityProps {
   limit: number
   quantity: number
 }
