@@ -1,5 +1,5 @@
 import { FC } from 'react';
-interface LimitSmallProps {
+export interface LimitSmallProps {
     className?: string | string[];
     padding?: 'none' | 'tiny' | 'small' | 'medium';
     limit: number;
@@ -7,4 +7,3 @@ interface LimitSmallProps {
     limitText: string;
 }
 export declare const LimitSmall: FC<LimitSmallProps>;
-export {};

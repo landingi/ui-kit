@@ -4,4 +4,4 @@
  * @param {string | array} classNames - custom classes from outside of component
  * @returns {string} An string with extracted class names
  */
-export declare const useStyles: (styles: Record<string, boolean | string | null | undefined>, classNames?: string | string[]) => string;
+export declare const useStyles: (styles: Record<string, unknown>, classNames?: string | string[]) => string;
