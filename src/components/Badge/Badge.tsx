@@ -4,7 +4,7 @@ import { FC, ReactNode, useEffect, useRef, useState } from 'react'
 
 import styles from './Badge.module.scss'
 
-interface BadgeProps {
+export interface BadgeProps {
   children: ReactNode
   className?: string | string[]
   type?:

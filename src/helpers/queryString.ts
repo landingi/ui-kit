@@ -17,7 +17,7 @@ export const getQueryStringValue = (
 
 export const setQueryStringValue = (
   key: string,
-  value: string,
+  value: string | number,
   queryString = window.location.search
 ) => {
   const values = qs.parse(queryString)

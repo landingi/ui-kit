@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import styles from './Backdrop.module.scss'
 
-interface BackdropProps {
+export interface BackdropProps {
   className?: string | string[]
   onClick?: () => void
   zIndex?: '4' | '6' | '8'

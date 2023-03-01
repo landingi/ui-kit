@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import useQueryString from '@helpers/hooks/useQueryString'
+import { useQueryString } from '@helpers/hooks/useQueryString'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 

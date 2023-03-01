@@ -7,7 +7,7 @@ import styles from './Avatar.module.scss'
 const renderVariant = (variant: string, src: string, name: string) =>
   variant === 'image' ? <Image src={src} /> : <p>{name}</p>
 
-interface AvatarProps {
+export interface AvatarProps {
   className?: string | string[]
   size?: 'tiny' | 'medium'
   variant?: 'image' | 'blank'

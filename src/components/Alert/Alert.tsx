@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Alert.module.scss'
 
-interface AlertProps {
+export interface AlertProps {
   children: ReactNode
   className?: string | string[]
   type?: 'info' | 'success' | 'warning' | 'alert'

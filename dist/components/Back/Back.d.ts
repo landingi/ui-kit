@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-interface BackProps {
+export interface BackProps {
     className?: string | string[];
     url?: string;
     content?: ReactNode;
@@ -7,4 +7,3 @@ interface BackProps {
     onClick?: () => void;
 }
 export declare const Back: FC<BackProps>;
-export {};
