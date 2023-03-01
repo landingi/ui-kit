@@ -1,5 +1,6 @@
 import { FC } from 'react';
 interface LoaderProps {
+    className?: string | string[];
     variant?: 'default' | 'shapes';
     ['data-testid']?: string;
 }
