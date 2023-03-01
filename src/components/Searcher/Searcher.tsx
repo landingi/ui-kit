@@ -1,8 +1,8 @@
-import { Search } from '@components/Search'
+import { Search, SearchProps } from '@components/Search'
 import { NO_VALUE } from '@constants/helpers'
-import { ChangeEvent, FC, memo, useCallback } from 'react'
+import { ChangeEvent, FC, useCallback } from 'react'
 
-interface SearcherProps {
+interface SearcherProps extends SearchProps {
   setSearchResult?: (value?: unknown) => void
   searchFunction?: (value?: string) => Promise<unknown>
   setSearchPhrase?: (value?: string) => void

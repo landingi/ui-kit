@@ -1,5 +1,5 @@
 import { Dict } from 'src/types/mapped-types.type';
-export declare const isEmpty: (value?: string) => boolean;
+export declare const isEmpty: (value?: unknown) => boolean;
 export declare const mapIconToClass: (value: 'alert' | 'info' | 'success' | 'warning') => "icon-exclamation-triangle" | "icon-info" | "icon-ok" | "icon-exclamation";
 export declare const queryString: (data: Dict<string>) => string;
 export declare const isLastPage: (count: number, page: number, limit: number) => boolean;

@@ -13,74 +13,107 @@ import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
 import { emitCloseDropdown } from '@events/dropdown'
-import { isEmpty } from '@helpers/data'
+import { generateFakeUuid, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
-import PropTypes from 'prop-types'
-import React, {
+import {
   Fragment,
+  ReactNode,
   useCallback,
   useEffect,
   useRef,
   useState
 } from 'react'
 
-import styles from './DropdownSelect.module.scss'
+import styles from './PerfectDropdownSelect.module.scss'
 
-/**
- * DropdownSelect - stateless presentational component
- * @param {object} props - props
- * @param {func} props.className - wrapper custom styles
- * @param {string} props.value - field value
- * @param {func} props.onChange - on Change handler
- * @param {object} props.errors - element errors list
- * @param {object} props.touched - element touched list
- * @param {string} props.label - label
- * @param {array} props.options - list of options
- * @param {array} props.emphasisedOptions - list of emphasised options, displayed on top
- * @param {array} props.hasDescription - render description in options
- * @param {string} props.hasSearcher - show Searcher
- * @param {func} props.handleOnSearchChange - on search input change handler
- * @param {bool} props.isLoading - list loading spinner
- * @param {object} props.emptyMessage - empty message component
- * @param {bool} props.isOpenDisabled - when its true dropdown can't be open, default: false
- * @param {bool} props.optionalContent - optional content to render on bottom
- * @param {bool} props.alwaysShowLabel - always show label on top
- * @param {object} props.overflowStyle - overflow styles
- * @param {func} props.formikKey - name on formik 'nasted' keys
- * @param {object} props.i18n - object of translations
- * @param {bool} props.hasLoadMoreButton - conditional render load more button
- * @param {func} props.loadMoreEvent - handleClickCloadMore
- * @return {object} An object of children element
- */
-const PerfectDropdownSelect = ({
+type Value = string | number | null
+
+type ItemBase = {
+  value: Value
+  label: string
+  description?: string
+}
+
+export interface PerfectDropdownSelectProps<Item extends ItemBase> {
+  className?: string
+  value?: Value
+  onChange?: (key: Value, value?: Value) => void
+  errors?: Record<string, string>
+  touched?: Record<string, boolean>
+  label?: string
+  options: Item[]
+  emphasisedOptions?: Item[]
+  hasDescription?: boolean
+  hasSearcher?: boolean
+  handleOnSearchChange?: (value?: string) => void
+  isLoading?: boolean
+  emptyMessage?: ReactNode
+  isOpenDisabled?: boolean
+  optionalContent?: ReactNode
+  alwaysShowLabel?: boolean
+  overflowStyle?: object
+  formikKey?: string
+  i18n?: {
+    placeholder?: string
+    loadmore?: string
+  }
+  hasLoadMoreButton?: boolean
+  loadMoreEvent?: () => void
+  liveChanges?: boolean
+  dropdownLabel?: (item: Item) => ReactNode
+  customValue?: boolean
+  size?:
+    | 'mini'
+    | 'small'
+    | 'medium'
+    | 'big'
+    | 'large'
+    | 'huge'
+    | 'extra-huge'
+    | 'auto'
+    | 'fixed'
+  dropdownPlacement?:
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'bottom-center'
+    | 'top-start'
+    | 'top-center'
+    | 'top-end'
+  'data-testid'?: string
+}
+
+export const PerfectDropdownSelect = <Item extends ItemBase>({
   className,
-  value,
-  onChange,
-  errors,
-  touched,
+  value = null,
+  onChange = () => {},
+  errors = {},
+  touched = {},
   label,
   options,
-  emphasisedOptions,
-  hasDescription,
-  hasSearcher,
-  handleOnSearchChange,
-  isLoading,
-  emptyMessage,
-  isOpenDisabled,
-  optionalContent,
-  alwaysShowLabel,
-  overflowStyle,
-  formikKey,
-  i18n,
-  hasLoadMoreButton,
-  loadMoreEvent,
-  liveChanges,
+  emphasisedOptions = [],
+  hasDescription = false,
+  hasSearcher = false,
+  handleOnSearchChange = () => {},
+  isLoading = false,
+  emptyMessage = null,
+  isOpenDisabled = false,
+  optionalContent = null,
+  alwaysShowLabel = false,
+  overflowStyle = {},
+  formikKey = '',
+  i18n = {
+    placeholder: '',
+    loadmore: ''
+  },
+  hasLoadMoreButton = false,
+  loadMoreEvent = () => {},
+  liveChanges = false,
   dropdownLabel,
-  customValue,
+  customValue = false,
   size = 'fixed',
   dropdownPlacement,
   'data-testid': dataTestId
-}) => {
+}: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
 
   const labelStyles = useStyles({
@@ -114,10 +147,16 @@ const PerfectDropdownSelect = ({
 
   const selectedItem = getSelectedItem()
 
+  const [searchValue, setSearchValue] = useState<string | null | undefined>(
+    null
+  )
+
+  const clearSearchValue = useCallback(() => setSearchValue(''), [])
+
   /**
    * checks if user want to use formik or not
    */
-  const handleChange = useCallback(value => {
+  const handleChange = (value: Value) => {
     if (formikKey) {
       onChange(formikKey, value)
     } else {
@@ -125,23 +164,26 @@ const PerfectDropdownSelect = ({
     }
 
     clearSearchValue()
+
     emitCloseDropdown()
-  })
+  }
 
   const dropdownRef = useRef(null)
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
   /**
    * autosize width for dropdown
    */
-  const [dropdownWidth, setDropdownWidth] = useState(null)
+  const [dropdownWidth, setDropdownWidth] = useState<number | null>(null)
 
   useEffect(() => {
     const labelWidth = containerRef.current?.clientWidth
 
     if (labelWidth) setDropdownWidth(labelWidth)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef.current])
 
-  const renderOption = item =>
+  const renderOption = (item: Item) =>
     hasDescription ? (
       <Fragment>
         <Button
@@ -166,17 +208,13 @@ const PerfectDropdownSelect = ({
       </Button>
     )
 
-  const [searchValue, setSearchValue] = useState(null)
-
-  const handleSearchOptionsChange = value =>
-    handleOnSearchChange() === null
-      ? setSearchValue(value)
-      : handleOnSearchChange(value)
-
-  /**
-   * Clear value in search / searcher
-   */
-  const clearSearchValue = useCallback(() => setSearchValue(''), [])
+  const handleSearchOptionsChange = (value: string | undefined) => {
+    if (handleOnSearchChange() === null) {
+      setSearchValue(value)
+    } else {
+      handleOnSearchChange(value)
+    }
+  }
 
   const filterOptions = () =>
     options.filter(({ label }) => {
@@ -192,16 +230,16 @@ const PerfectDropdownSelect = ({
 
   const renderOptions = () => (
     <Fragment>
-      {emphasisedOptions.map((item, index) => (
-        <ListItem variant='dropdown' key={index}>
+      {emphasisedOptions.map(item => (
+        <ListItem variant='dropdown' key={generateFakeUuid()}>
           {renderOption(item)}
         </ListItem>
       ))}
 
       {!isEmpty(emphasisedOptions) && <Divider />}
 
-      {filterOptions().map((item, index) => (
-        <ListItem variant='dropdown' key={index}>
+      {filterOptions().map(item => (
+        <ListItem variant='dropdown' key={generateFakeUuid()}>
           {renderOption(item)}
         </ListItem>
       ))}
@@ -235,7 +273,9 @@ const PerfectDropdownSelect = ({
 
       <PerfectDropdown
         label={
-          dropdownLabel ? dropdownLabel(selectedItem) : selectedItem?.label
+          dropdownLabel
+            ? dropdownLabel(selectedItem as Item)
+            : selectedItem?.label
         }
         hasInput
         hasFullInputStyle
@@ -268,7 +308,7 @@ const PerfectDropdownSelect = ({
         <Overflow>
           <div
             style={{
-              minWidth: dropdownWidth,
+              minWidth: dropdownWidth as number,
               ...overflowStyle
             }}
           >
@@ -292,99 +332,3 @@ const PerfectDropdownSelect = ({
 }
 
 PerfectDropdownSelect.displayName = 'PerfectDropdownSelect'
-
-PerfectDropdownSelect.propTypes = {
-  className: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
-  errors: PropTypes.objectOf(PropTypes.string),
-  touched: PropTypes.instanceOf(Object),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-        .isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired
-    })
-  ).isRequired,
-  emphasisedOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    })
-  ),
-  hasDescription: PropTypes.bool,
-  hasSearcher: PropTypes.bool,
-  handleOnSearchChange: PropTypes.func,
-  isLoading: PropTypes.bool,
-  emptyMessage: PropTypes.node,
-  isOpenDisabled: PropTypes.bool,
-  optionalContent: PropTypes.node,
-  alwaysShowLabel: PropTypes.bool,
-  overflowStyle: PropTypes.instanceOf(Object),
-  formikKey: PropTypes.string,
-  i18n: PropTypes.shape({
-    placeholder: PropTypes.string,
-    loadmore: PropTypes.string
-  }),
-  hasLoadMoreButton: PropTypes.bool,
-  loadMoreEvent: PropTypes.func,
-  liveChanges: PropTypes.bool,
-  dropdownLabel: PropTypes.func,
-  customValue: PropTypes.bool,
-  'data-testid': PropTypes.string,
-  size: PropTypes.oneOf([
-    'mini',
-    'small',
-    'medium',
-    'big',
-    'large',
-    'huge',
-    'extra-huge',
-    'auto',
-    'fixed'
-  ]),
-  dropdownPlacement: PropTypes.oneOf([
-    'bottom-start',
-    'bottom-end',
-    'bottom-center',
-    'top-start',
-    'top-center',
-    'top-end'
-  ])
-}
-
-PerfectDropdownSelect.defaultProps = {
-  className: '',
-  value: null,
-  onChange: () => null,
-  errors: {},
-  touched: {},
-  label: '',
-  emphasisedOptions: [],
-  hasDescription: false,
-  hasSearcher: false,
-  handleOnSearchChange: () => null,
-  isLoading: false,
-  emptyMessage: null,
-  isOpenDisabled: false,
-  optionalContent: null,
-  alwaysShowLabel: false,
-  overflowStyle: {},
-  formikKey: '',
-  dropdownLabel: null,
-  customValue: false,
-  i18n: {
-    placeholder: '',
-    loadmore: ''
-  },
-  hasLoadMoreButton: null,
-  loadMoreEvent: null,
-  liveChanges: false,
-  size: 'fixed',
-  dropdownPlacement: 'bottom-end',
-  'data-testid': 'trigger-dropdown'
-}
-
-export default PerfectDropdownSelect

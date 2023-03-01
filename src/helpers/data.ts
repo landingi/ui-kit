@@ -1,10 +1,10 @@
 import { Dict } from 'src/types/mapped-types.type'
 
-export const isEmpty = (value?: string) =>
+export const isEmpty = (value?: unknown) =>
   value === null ||
   value === undefined ||
   // eslint-disable-next-line no-prototype-builtins
-  (value.hasOwnProperty('length') && value.length === 0) ||
+  (value.hasOwnProperty('length') && (value as string).length === 0) ||
   (value.constructor === Object && Object.keys(value).length === 0)
 
 const fontIcons = {

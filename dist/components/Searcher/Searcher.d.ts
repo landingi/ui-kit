@@ -1,5 +1,6 @@
+import { SearchProps } from '@components/Search';
 import { FC } from 'react';
-interface SearcherProps {
+interface SearcherProps extends SearchProps {
     setSearchResult?: (value?: unknown) => void;
     searchFunction?: (value?: string) => Promise<unknown>;
     setSearchPhrase?: (value?: string) => void;
