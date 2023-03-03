@@ -112,7 +112,8 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   customValue = false,
   size = 'fixed',
   dropdownPlacement,
-  'data-testid': dataTestId
+  'data-testid': dataTestId,
+  ...rest
 }: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
 
@@ -288,6 +289,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
         className={dropdownStyles}
         dropdownPlacement={dropdownPlacement}
         data-testid={dataTestId}
+        {...rest}
       >
         {hasSearcher && (
           <Fragment>
