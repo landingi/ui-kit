@@ -1,4 +1,4 @@
-import useQueryString from '@helpers/hooks/useQueryString'
+import { useQueryString } from '@helpers/hooks/useQueryString'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 test('should use useQueryString', () => {

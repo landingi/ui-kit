@@ -3,6 +3,6 @@
  * @see {@link https://github.com/scottcorgan/tiny-emitter} for further information.
  * @return {object}
  */
-import Emitter from 'tiny-emitter'
+import { TypedEmitter } from 'tiny-typed-emitter'
 
-export default new Emitter()
+export default new TypedEmitter()
