@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.1.54",
+  "version": "3.1.57",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -116,7 +116,7 @@
     "react-uuid": "1.0.2",
     "resize-observer-polyfill": "1.5.1",
     "simple-flexbox": "2.3.3",
-    "tiny-typed-emitter": "2.1.0"
+    "tiny-emitter": "2.1.0"
   },
   "engines": {
     "node": ">=14.18.0"

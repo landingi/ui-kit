@@ -1,1 +1,1 @@
-export declare const emitCloseDropdown: (...args: unknown[]) => boolean;
+export declare const emitCloseDropdown: (...args: unknown[]) => any;
