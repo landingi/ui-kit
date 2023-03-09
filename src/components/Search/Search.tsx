@@ -35,6 +35,7 @@ export interface SearchProps {
   onProtectedSubmit?: (value?: string) => void
   submitEmptyOnBlur?: boolean
   defaultValue?: string
+  searchIcon: string | null
 }
 
 export const Search: FC<SearchProps> = ({
@@ -54,7 +55,8 @@ export const Search: FC<SearchProps> = ({
   tag: Tag = 'form',
   onProtectedSubmit,
   submitEmptyOnBlur,
-  defaultValue = ''
+  defaultValue = '',
+  searchIcon = 'icon-search'
 }) => {
   const elementClasses = useStyles(
     {
@@ -136,7 +138,7 @@ export const Search: FC<SearchProps> = ({
       <div className={elementClasses}>
         {variant === 'input' && (
           <Fragment>
-            {!!(onSubmit || onProtectedSubmit) && (
+            {!!(onSubmit || onProtectedSubmit) && searchIcon && (
               <div className={styles['search__icon-button']}>
                 <Button
                   data-testid='search-button'
@@ -146,14 +148,14 @@ export const Search: FC<SearchProps> = ({
                   isDisabled={!isClearActive}
                   onClick={handleProtectedSubmit}
                 >
-                  <Icon icon='icon-search' />
+                  <Icon icon={searchIcon} />
                 </Button>
               </div>
             )}
 
-            {!(onSubmit || onProtectedSubmit) && (
+            {!(onSubmit || onProtectedSubmit) && searchIcon && (
               <div className={styles.search__icon}>
-                <Icon icon='icon-search' />
+                <Icon icon={searchIcon} />
               </div>
             )}
           </Fragment>
