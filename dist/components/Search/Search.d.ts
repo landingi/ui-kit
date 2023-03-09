@@ -17,5 +17,6 @@ export interface SearchProps {
     onProtectedSubmit?: (value?: string) => void;
     submitEmptyOnBlur?: boolean;
     defaultValue?: string;
+    searchIcon?: string | null;
 }
 export declare const Search: FC<SearchProps>;
