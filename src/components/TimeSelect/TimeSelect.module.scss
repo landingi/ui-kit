@@ -42,14 +42,15 @@
         color: $color-input-border;
         -webkit-text-fill-color: $color-input-border;
         cursor: not-allowed;
+        pointer-events: none;
       }
 
       svg[data-icon='clock'] {
-        color: $color-input-border;
+        color: $color-3;
       }
 
       i {
-        color: $color-input-border;
+        color: $color-3;
       }
     }
   }
