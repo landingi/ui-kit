@@ -170,3 +170,5 @@ Poszczególne parametry hooka useTable będą wytłumaczone w następnym rozdzia
 - `constantPageLimit` - Selector limitu elementów na stronie w prawym dolnym
   roku nie będzie renderowany, a page limit będzie ustawiony na stałą wartość
   podaną w tym propsie
+- `externalBorder` - Border na zewnętrznych krawędziech tabelki, domyślnie
+  ustawione na **false**

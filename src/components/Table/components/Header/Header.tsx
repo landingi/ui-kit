@@ -16,7 +16,8 @@ export const Header = <Item extends ItemBase>({
   selected,
   filtersAndSorters,
   hasHeader,
-  handleRefresh
+  handleRefresh,
+  externalBorder
 }: HeaderProps<Item>) => {
   const columnsMap = columns.map(({ header, identifier, width }) => (
     <div className={styles.th} key={identifier} style={{ width }}>
@@ -41,6 +42,11 @@ export const Header = <Item extends ItemBase>({
   const thOptionsStyle = useStyles({
     [styles.th]: true,
     [styles.th__options]: options
+  })
+
+  const theadStyle = useStyles({
+    [styles.thead]: true,
+    [styles['thead--externalBorder']]: externalBorder
   })
 
   if (options) {
@@ -94,7 +100,7 @@ export const Header = <Item extends ItemBase>({
 
   return (
     <div
-      className={styles.thead}
+      className={theadStyle}
       style={{
         gridTemplateColumns
       }}

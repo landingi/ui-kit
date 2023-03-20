@@ -24,10 +24,9 @@ export const Table = <Item extends ItemBase>({
   pageLimit,
   constantPageLimit,
   handleRefresh,
-  pagination
+  pagination,
+  externalBorder
 }: TableProps<Item>) => {
-  const columnsCount = columns.length + (hasSelect ? 1 : 0)
-
   const dataIsNotEmpty = Boolean(data.length)
 
   const values = data.map(({ identifier }) => identifier)
@@ -65,6 +64,7 @@ export const Table = <Item extends ItemBase>({
           filtersAndSorters={filtersAndSorters}
           hasHeader={hasHeader}
           handleRefresh={handleRefresh}
+          externalBorder={externalBorder}
         />
 
         {isLoading && <Loader />}
@@ -82,6 +82,7 @@ export const Table = <Item extends ItemBase>({
             isSelected={isSelected}
             select={select}
             handleRefresh={handleRefresh}
+            externalBorder={externalBorder}
           />
         )}
       </div>
