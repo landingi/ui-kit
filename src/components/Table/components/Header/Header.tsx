@@ -63,7 +63,7 @@ export const Header = <Item extends ItemBase>({
   if (options) {
     return (
       <div
-        className={styles.thead}
+        className={theadStyle}
         style={{
           gridTemplateColumns
         }}
