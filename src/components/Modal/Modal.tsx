@@ -136,7 +136,6 @@ export const Modal = forwardRef(
 
     const handleClose = useCallback(() => {
       setClosing(true)
-      blockScroll()
 
       setTimeout(() => {
         onClick()
@@ -144,7 +143,7 @@ export const Modal = forwardRef(
         setClosing(false)
         allowScroll()
       }, 1600)
-    }, [onClick, allowScroll, blockScroll])
+    }, [onClick, allowScroll])
 
     const renderTitle = () => (
       <div className={headerStyles}>
@@ -234,14 +233,14 @@ export const Modal = forwardRef(
     useKeyPress('Escape', handleCloseOnEscape)
 
     useEffect(() => {
-      if (isActive) {
+      if (isActive && hasAnimation) {
         blockScroll()
 
         return
       }
 
       allowScroll()
-    }, [isActive, allowScroll, blockScroll])
+    }, [isActive, hasAnimation, allowScroll, blockScroll])
 
     return (
       <Fragment>
