@@ -9,6 +9,7 @@ import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
 import { useKeyPress } from '@helpers/hooks/useKeyPress'
+import { useScrollBlock } from '@helpers/hooks/useScrollBlock'
 import { useStyles } from '@helpers/hooks/useStyles'
 import {
   forwardRef,
@@ -17,6 +18,7 @@ import {
   ReactNode,
   Ref,
   useCallback,
+  useEffect,
   useState
 } from 'react'
 
@@ -123,6 +125,8 @@ export const Modal = forwardRef(
   ) => {
     const [isClosing, setClosing] = useState(false)
 
+    const [blockScroll, allowScroll] = useScrollBlock()
+
     const headerStyles = useStyles({
       [styles.modal__header]: true,
       [styles['modal__header--close-only']]: !i18n.title && !image,
@@ -137,8 +141,9 @@ export const Modal = forwardRef(
         onClick()
 
         setClosing(false)
+        allowScroll()
       }, 1600)
-    }, [onClick])
+    }, [onClick, allowScroll])
 
     const renderTitle = () => (
       <div className={headerStyles}>
@@ -226,6 +231,16 @@ export const Modal = forwardRef(
 
     useKeyPress('Enter', handleActionOnEnter)
     useKeyPress('Escape', handleCloseOnEscape)
+
+    useEffect(() => {
+      if (isActive) {
+        blockScroll()
+
+        return
+      }
+
+      allowScroll()
+    }, [isActive, allowScroll, blockScroll])
 
     return (
       <Fragment>
