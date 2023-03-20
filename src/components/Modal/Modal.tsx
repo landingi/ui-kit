@@ -136,6 +136,7 @@ export const Modal = forwardRef(
 
     const handleClose = useCallback(() => {
       setClosing(true)
+      blockScroll()
 
       setTimeout(() => {
         onClick()
@@ -143,7 +144,7 @@ export const Modal = forwardRef(
         setClosing(false)
         allowScroll()
       }, 1600)
-    }, [onClick, allowScroll])
+    }, [onClick, allowScroll, blockScroll])
 
     const renderTitle = () => (
       <div className={headerStyles}>
