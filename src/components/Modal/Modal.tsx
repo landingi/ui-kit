@@ -219,7 +219,7 @@ export const Modal = forwardRef(
 
     const handleCloseOnEscape = useCallback(
       () =>
-        isClosable && isActive && hasAnimation ? handleClose() : onClick(),
+        isClosable && isActive && (hasAnimation ? handleClose() : onClick()),
 
       [onClick, isClosable, isActive, hasAnimation, handleClose]
     )
