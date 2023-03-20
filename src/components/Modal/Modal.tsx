@@ -16,7 +16,8 @@ import {
   MouseEvent,
   ReactNode,
   Ref,
-  useCallback
+  useCallback,
+  useState
 } from 'react'
 
 import { ModalFooter } from './Footer'
@@ -66,6 +67,7 @@ export interface ModalProps {
   headingAlign?: 'right' | 'center' | 'left'
   footerAlign?: 'right' | 'center' | 'left'
   hasEnterKeyDown?: boolean
+  hasAnimation?: boolean
 }
 
 export const Modal = forwardRef(
@@ -114,14 +116,29 @@ export const Modal = forwardRef(
       isBodyPadding,
       headingAlign = 'left',
       footerAlign = 'right',
-      hasEnterKeyDown
+      hasEnterKeyDown,
+      hasAnimation = false
     }: ModalProps,
     ref: Ref<HTMLDivElement>
   ) => {
+    const [isClosing, setClosing] = useState(false)
+
     const headerStyles = useStyles({
       [styles.modal__header]: true,
-      [styles['modal__header--close-only']]: !i18n.title && !image
+      [styles['modal__header--close-only']]: !i18n.title && !image,
+      [styles['modal__header--animation-open']]: hasAnimation,
+      [styles['modal__header--animation-close']]: hasAnimation && isClosing
     })
+
+    const handleClose = useCallback(() => {
+      setClosing(true)
+
+      setTimeout(() => {
+        onClick()
+
+        setClosing(false)
+      }, 1600)
+    }, [onClick])
 
     const renderTitle = () => (
       <div className={headerStyles}>
@@ -151,16 +168,24 @@ export const Modal = forwardRef(
 
           {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}
 
-          {isClosable && <Close onClick={onClick} />}
+          {isClosable && (
+            <Close onClick={hasAnimation ? handleClose : onClick} />
+          )}
         </div>
       </div>
     )
 
+    const componentStyles = useStyles({
+      [styles.modal__component]: true,
+      [styles['modal__component--animation-open']]: hasAnimation,
+      [styles['modal__component--animation-close']]: hasAnimation && isClosing
+    })
+
     const renderComponent = () => (
-      <div className={styles.modal__component} data-testid='modal-component'>
+      <div className={componentStyles} data-testid='modal-component'>
         <div className={styles['modal__component--child']}>{component}</div>
 
-        {isClosable && <Close onClick={onClick} />}
+        {isClosable && <Close onClick={hasAnimation ? handleClose : onClick} />}
       </div>
     )
 
@@ -173,7 +198,9 @@ export const Modal = forwardRef(
         [styles['modal--medium']]: size === 'medium',
         [styles['modal--small']]: size === 'small',
         [styles['modal--center']]: isCentered,
-        [styles['modal--page']]: isPage
+        [styles['modal--page']]: isPage,
+        [styles['modal--animation-open']]: hasAnimation,
+        [styles['modal--animation-close']]: hasAnimation && isClosing
       },
       className
     )
@@ -181,7 +208,9 @@ export const Modal = forwardRef(
     const bodyStyles = useStyles({
       [styles.modal__body]: true,
       [styles['modal__body--has-footer']]: hasFooter,
-      [styles['modal__body--no-padding']]: isBodyPadding === 'none'
+      [styles['modal__body--no-padding']]: isBodyPadding === 'none',
+      [styles['modal__body--animation-open']]: hasAnimation,
+      [styles['modal__body--animation-close']]: hasAnimation && isClosing
     })
 
     const handleActionOnEnter = useCallback(() => {
@@ -189,9 +218,10 @@ export const Modal = forwardRef(
     }, [onAction, isActive, isButtonDisabled, hasEnterKeyDown])
 
     const handleCloseOnEscape = useCallback(
-      () => isClosable && isActive && onClick(),
+      () =>
+        isClosable && isActive && hasAnimation ? handleClose() : onClick(),
 
-      [onClick, isClosable, isActive]
+      [onClick, isClosable, isActive, hasAnimation, handleClose]
     )
 
     useKeyPress('Enter', handleActionOnEnter)
