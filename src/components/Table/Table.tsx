@@ -26,7 +26,8 @@ export const Table = <Item extends ItemBase>({
   constantPageLimit,
   handleRefresh,
   pagination,
-  externalBorder
+  externalBorder,
+  extraHeaderContent
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
 
@@ -70,6 +71,7 @@ export const Table = <Item extends ItemBase>({
           hasHeader={hasHeader}
           handleRefresh={handleRefresh}
           externalBorder={externalBorder}
+          extraHeaderContent={extraHeaderContent}
         />
 
         {isLoading && (

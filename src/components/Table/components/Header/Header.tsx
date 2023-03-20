@@ -2,6 +2,7 @@ import { Checkbox } from '@components/Checkbox'
 import Spreader from '@components/Spreader'
 import type { HeaderProps, ItemBase } from '@components/Table/types'
 import { useStyles } from '@helpers/hooks/useStyles'
+import { Fragment } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './Header.module.scss'
@@ -17,13 +18,22 @@ export const Header = <Item extends ItemBase>({
   filtersAndSorters,
   hasHeader,
   handleRefresh,
-  externalBorder
+  externalBorder,
+  extraHeaderContent
 }: HeaderProps<Item>) => {
-  const columnsMap = columns.map(({ header, identifier, width }) => (
-    <div className={styles.th} key={identifier} style={{ width }}>
-      {header}
-    </div>
-  ))
+  const columnsMap = (
+    <Fragment>
+      {columns.map(({ header, identifier, width }) => (
+        <div className={styles.th} key={identifier} style={{ width }}>
+          {header}
+        </div>
+      ))}
+
+      {extraHeaderContent && (
+        <div className={styles.th}>{extraHeaderContent(handleRefresh)}</div>
+      )}
+    </Fragment>
+  )
 
   const columnsReducer = columns.reduce(
     (acc, { width }) => `${acc} ${width || '1fr'}`,

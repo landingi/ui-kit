@@ -49,6 +49,7 @@ export interface UseTableProps<Item extends ItemBase> {
   }
   constantPageLimit?: number
   externalBorder?: boolean
+  extraHeaderContent?: (handleRefresh: () => void) => ReactNode
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -86,6 +87,7 @@ export interface HeaderProps<Item extends ItemBase> {
   hasHeader?: boolean
   handleRefresh: () => void
   externalBorder?: boolean
+  extraHeaderContent?: (handleRefresh: () => void) => ReactNode
 }
 
 export interface BodyProps<Item extends ItemBase> {
