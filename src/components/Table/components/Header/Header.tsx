@@ -41,6 +41,7 @@ export const Header = <Item extends ItemBase>({
 
   const thOptionsStyle = useStyles({
     [styles.th]: true,
+    [styles['th--options']]: true,
     [styles.th__options]: options
   })
 
@@ -88,7 +89,7 @@ export const Header = <Item extends ItemBase>({
 
         {!isSelectedAny && !hasHeader && filtersAndSorters && (
           <div
-            className={styles.th}
+            className={thOptionsVariantStyle}
             data-testid='filters-and-selectors-in-header'
           >
             {filtersAndSorters(handleRefresh)}
