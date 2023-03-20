@@ -35,10 +35,10 @@ export const Header = <Item extends ItemBase>({
     </Fragment>
   )
 
-  const columnsReducer = columns.reduce(
+  const columnsReducer = `${columns.reduce(
     (acc, { width }) => `${acc} ${width || '1fr'}`,
     ''
-  )
+  )} ${extraHeaderContent ? 'max-content' : ''}`
 
   const gridTemplateColumns = options
     ? `65px ${hasHeader && !isSelectedAny ? columnsReducer : '1fr'}`
