@@ -1,6 +1,7 @@
 import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
 import { useSelect } from '@helpers/hooks/useSelect'
+import { useStyles } from '@helpers/hooks/useStyles'
 import { Row } from 'simple-flexbox'
 
 import { Body, Header, PageLimit, Pagination } from './components'
@@ -40,6 +41,10 @@ export const Table = <Item extends ItemBase>({
     select
   } = useSelect<Item['identifier']>(values)
 
+  const loaderWrapperStyles = useStyles({
+    [styles['loaderWrapper--externalBorder']]: externalBorder
+  })
+
   return (
     <div className={styles.wrapper}>
       {/* render filters and sorters above table when header is visible */}
@@ -67,7 +72,11 @@ export const Table = <Item extends ItemBase>({
           externalBorder={externalBorder}
         />
 
-        {isLoading && <Loader />}
+        {isLoading && (
+          <div className={loaderWrapperStyles}>
+            <Loader />
+          </div>
+        )}
 
         {!isLoading && !dataIsNotEmpty && emptyMessage && (
           <Row justifyContent='center'>{emptyMessage()}</Row>
