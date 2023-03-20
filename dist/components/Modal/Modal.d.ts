@@ -41,5 +41,6 @@ export interface ModalProps {
     headingAlign?: 'right' | 'center' | 'left';
     footerAlign?: 'right' | 'center' | 'left';
     hasEnterKeyDown?: boolean;
+    hasAnimation?: boolean;
 }
 export declare const Modal: import("react").ForwardRefExoticComponent<ModalProps & import("react").RefAttributes<HTMLDivElement>>;
