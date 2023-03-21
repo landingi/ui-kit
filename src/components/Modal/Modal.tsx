@@ -9,6 +9,7 @@ import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
 import { useKeyPress } from '@helpers/hooks/useKeyPress'
+import { useScrollBlock } from '@helpers/hooks/useScrollBlock'
 import { useStyles } from '@helpers/hooks/useStyles'
 import {
   forwardRef,
@@ -16,14 +17,18 @@ import {
   MouseEvent,
   ReactNode,
   Ref,
-  useCallback
+  useCallback,
+  useEffect,
+  useState
 } from 'react'
 
 import { ModalFooter } from './Footer'
 import { ModalHeader } from './Header'
 import styles from './Modal.module.scss'
 
-export interface ModalProps {
+type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
+
+export interface ModalCommonProps {
   children?: ReactNode
   className?: string | string[]
   onClick?: () => void
@@ -47,7 +52,6 @@ export interface ModalProps {
   hasCustomButton?: boolean
   isCustomButtonDisabled?: boolean
   isMarkAsSpamVisible?: boolean
-  size?: 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
   isPage?: boolean
   i18n?: {
     title?: string
@@ -66,6 +70,16 @@ export interface ModalProps {
   headingAlign?: 'right' | 'center' | 'left'
   footerAlign?: 'right' | 'center' | 'left'
   hasEnterKeyDown?: boolean
+}
+
+export interface ModalWithAnimation extends ModalCommonProps {
+  size?: 'fullscreen'
+  hasAnimation?: boolean
+}
+
+export interface ModalWithoutAnimation extends ModalCommonProps {
+  size?: Size
+  hasAnimation?: undefined
 }
 
 export const Modal = forwardRef(
@@ -114,14 +128,32 @@ export const Modal = forwardRef(
       isBodyPadding,
       headingAlign = 'left',
       footerAlign = 'right',
-      hasEnterKeyDown
-    }: ModalProps,
+      hasEnterKeyDown,
+      hasAnimation
+    }: ModalWithAnimation | ModalWithoutAnimation,
     ref: Ref<HTMLDivElement>
   ) => {
+    const [isClosing, setClosing] = useState(false)
+
+    const [blockScroll, allowScroll] = useScrollBlock()
+
     const headerStyles = useStyles({
       [styles.modal__header]: true,
-      [styles['modal__header--close-only']]: !i18n.title && !image
+      [styles['modal__header--close-only']]: !i18n.title && !image,
+      [styles['modal__header--animation-open']]: hasAnimation,
+      [styles['modal__header--animation-close']]: hasAnimation && isClosing
     })
+
+    const handleClose = useCallback(() => {
+      setClosing(true)
+
+      setTimeout(() => {
+        onClick()
+
+        setClosing(false)
+        allowScroll()
+      }, 1600)
+    }, [onClick, allowScroll])
 
     const renderTitle = () => (
       <div className={headerStyles}>
@@ -151,16 +183,24 @@ export const Modal = forwardRef(
 
           {(isMarkAsSpamVisible || isEditable) && <Spreader spread='tiny' />}
 
-          {isClosable && <Close onClick={onClick} />}
+          {isClosable && (
+            <Close onClick={hasAnimation ? handleClose : onClick} />
+          )}
         </div>
       </div>
     )
 
+    const componentStyles = useStyles({
+      [styles.modal__component]: true,
+      [styles['modal__component--animation-open']]: hasAnimation,
+      [styles['modal__component--animation-close']]: hasAnimation && isClosing
+    })
+
     const renderComponent = () => (
-      <div className={styles.modal__component} data-testid='modal-component'>
+      <div className={componentStyles} data-testid='modal-component'>
         <div className={styles['modal__component--child']}>{component}</div>
 
-        {isClosable && <Close onClick={onClick} />}
+        {isClosable && <Close onClick={hasAnimation ? handleClose : onClick} />}
       </div>
     )
 
@@ -173,7 +213,9 @@ export const Modal = forwardRef(
         [styles['modal--medium']]: size === 'medium',
         [styles['modal--small']]: size === 'small',
         [styles['modal--center']]: isCentered,
-        [styles['modal--page']]: isPage
+        [styles['modal--page']]: isPage,
+        [styles['modal--animation-open']]: hasAnimation,
+        [styles['modal--animation-close']]: hasAnimation && isClosing
       },
       className
     )
@@ -181,7 +223,9 @@ export const Modal = forwardRef(
     const bodyStyles = useStyles({
       [styles.modal__body]: true,
       [styles['modal__body--has-footer']]: hasFooter,
-      [styles['modal__body--no-padding']]: isBodyPadding === 'none'
+      [styles['modal__body--no-padding']]: isBodyPadding === 'none',
+      [styles['modal__body--animation-open']]: hasAnimation,
+      [styles['modal__body--animation-close']]: hasAnimation && isClosing
     })
 
     const handleActionOnEnter = useCallback(() => {
@@ -189,13 +233,24 @@ export const Modal = forwardRef(
     }, [onAction, isActive, isButtonDisabled, hasEnterKeyDown])
 
     const handleCloseOnEscape = useCallback(
-      () => isClosable && isActive && onClick(),
+      () =>
+        isClosable && isActive && (hasAnimation ? handleClose() : onClick()),
 
-      [onClick, isClosable, isActive]
+      [onClick, isClosable, isActive, hasAnimation, handleClose]
     )
 
     useKeyPress('Enter', handleActionOnEnter)
     useKeyPress('Escape', handleCloseOnEscape)
+
+    useEffect(() => {
+      if (isActive && hasAnimation) {
+        blockScroll()
+
+        return
+      }
+
+      allowScroll()
+    }, [isActive, hasAnimation, allowScroll, blockScroll])
 
     return (
       <Fragment>
