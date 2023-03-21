@@ -1,6 +1,7 @@
 import { ButtonVariant } from '@components/Button/Button';
 import { MouseEvent, ReactNode } from 'react';
-export interface ModalProps {
+declare type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive';
+export interface ModalCommonProps {
     children?: ReactNode;
     className?: string | string[];
     onClick?: () => void;
@@ -24,7 +25,6 @@ export interface ModalProps {
     hasCustomButton?: boolean;
     isCustomButtonDisabled?: boolean;
     isMarkAsSpamVisible?: boolean;
-    size?: 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive';
     isPage?: boolean;
     i18n?: {
         title?: string;
@@ -41,6 +41,14 @@ export interface ModalProps {
     headingAlign?: 'right' | 'center' | 'left';
     footerAlign?: 'right' | 'center' | 'left';
     hasEnterKeyDown?: boolean;
+}
+export interface ModalWithAnimation extends ModalCommonProps {
+    size?: 'fullscreen';
     hasAnimation?: boolean;
 }
-export declare const Modal: import("react").ForwardRefExoticComponent<ModalProps & import("react").RefAttributes<HTMLDivElement>>;
+export interface ModalWithoutAnimation extends ModalCommonProps {
+    size?: Size;
+    hasAnimation?: undefined;
+}
+export declare const Modal: import("react").ForwardRefExoticComponent<(ModalWithAnimation | ModalWithoutAnimation) & import("react").RefAttributes<HTMLDivElement>>;
+export {};
