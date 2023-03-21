@@ -1,6 +1,7 @@
 import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
 import { useSelect } from '@helpers/hooks/useSelect'
+import { useStyles } from '@helpers/hooks/useStyles'
 import { Row } from 'simple-flexbox'
 
 import { Body, Header, PageLimit, Pagination } from './components'
@@ -24,10 +25,10 @@ export const Table = <Item extends ItemBase>({
   pageLimit,
   constantPageLimit,
   handleRefresh,
-  pagination
+  pagination,
+  externalBorder,
+  extraHeaderContent
 }: TableProps<Item>) => {
-  const columnsCount = columns.length + (hasSelect ? 1 : 0)
-
   const dataIsNotEmpty = Boolean(data.length)
 
   const values = data.map(({ identifier }) => identifier)
@@ -40,6 +41,10 @@ export const Table = <Item extends ItemBase>({
     isSelected,
     select
   } = useSelect<Item['identifier']>(values)
+
+  const loaderWrapperStyles = useStyles({
+    [styles['loaderWrapper--externalBorder']]: externalBorder
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -65,9 +70,15 @@ export const Table = <Item extends ItemBase>({
           filtersAndSorters={filtersAndSorters}
           hasHeader={hasHeader}
           handleRefresh={handleRefresh}
+          externalBorder={externalBorder}
+          extraHeaderContent={extraHeaderContent}
         />
 
-        {isLoading && <Loader />}
+        {isLoading && (
+          <div className={loaderWrapperStyles}>
+            <Loader />
+          </div>
+        )}
 
         {!isLoading && !dataIsNotEmpty && emptyMessage && (
           <Row justifyContent='center'>{emptyMessage()}</Row>
@@ -82,6 +93,7 @@ export const Table = <Item extends ItemBase>({
             isSelected={isSelected}
             select={select}
             handleRefresh={handleRefresh}
+            externalBorder={externalBorder}
           />
         )}
       </div>

@@ -61,7 +61,8 @@ LandingsLoading.args = {
   isLoading: true,
   filtersAndSorters: () => <FiltersAndSorters />,
   options: () => <Options />,
-  hasHeader: false
+  hasHeader: false,
+  externalBorder: false
 }
 
 export const LandingsEmpty = Template.bind({})
