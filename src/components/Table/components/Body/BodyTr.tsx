@@ -5,6 +5,7 @@ import type {
   CustomColumn,
   ItemBase
 } from '@components/Table/types'
+import { useStyles } from '@helpers/hooks/useStyles'
 import { ReactNode } from 'react'
 
 import styles from './Body.module.scss'
@@ -17,7 +18,8 @@ export const BodyTr = <Item extends ItemBase>({
   hasSelect,
   isSelected,
   select,
-  handleRefresh
+  handleRefresh,
+  externalBorder
 }: BodyTrProps<Item>) => {
   const columnsReducer = columns.reduce(
     (acc, { width }) => `${acc} ${width || '1fr'}`,
@@ -28,8 +30,13 @@ export const BodyTr = <Item extends ItemBase>({
     ? `65px ${columnsReducer}`
     : columnsReducer
 
+  const trStyles = useStyles({
+    [styles.tr]: true,
+    [styles['tr--externalBorder']]: externalBorder
+  })
+
   return (
-    <div className={styles.tr} style={{ gridTemplateColumns }}>
+    <div className={trStyles} style={{ gridTemplateColumns }}>
       {hasSelect && (
         <div className={styles.td}>
           <Checkbox

@@ -48,6 +48,8 @@ export interface UseTableProps<Item extends ItemBase> {
     handlePageChange?: (page: number) => void
   }
   constantPageLimit?: number
+  externalBorder?: boolean
+  extraHeaderContent?: (handleRefresh: () => void) => ReactNode
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -84,6 +86,8 @@ export interface HeaderProps<Item extends ItemBase> {
   filtersAndSorters?: (handleRefresh: () => void) => ReactNode
   hasHeader?: boolean
   handleRefresh: () => void
+  externalBorder?: boolean
+  extraHeaderContent?: (handleRefresh: () => void) => ReactNode
 }
 
 export interface BodyProps<Item extends ItemBase> {
@@ -94,6 +98,7 @@ export interface BodyProps<Item extends ItemBase> {
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
+  externalBorder?: boolean
 }
 
 export interface BodyTrProps<Item extends ItemBase> {
@@ -104,6 +109,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
+  externalBorder?: boolean
 }
 
 export interface RowActionsProps {

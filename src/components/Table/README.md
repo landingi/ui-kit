@@ -170,3 +170,14 @@ Poszczególne parametry hooka useTable będą wytłumaczone w następnym rozdzia
 - `constantPageLimit` - Selector limitu elementów na stronie w prawym dolnym
   roku nie będzie renderowany, a page limit będzie ustawiony na stałą wartość
   podaną w tym propsie
+- `externalBorder` - Border na zewnętrznych krawędziech tabelki, domyślnie
+  ustawione na **false**
+- `extraHeaderContent` - Funkcja renderująca dowolny komponent na **ostatnim
+  miejscu w headerze**, nie wpływa na renderowanie kolumn w body tabelki
+
+  ```
+    extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  ```
+
+  Ponownie jak we wcześniejszych przypadkach, props udostępnia nam callback do
+  triggerowania odświeżenia tabelki
