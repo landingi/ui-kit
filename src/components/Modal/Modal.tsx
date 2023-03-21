@@ -26,7 +26,9 @@ import { ModalFooter } from './Footer'
 import { ModalHeader } from './Header'
 import styles from './Modal.module.scss'
 
-export interface ModalProps {
+type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
+
+export interface ModalCommonProps {
   children?: ReactNode
   className?: string | string[]
   onClick?: () => void
@@ -50,7 +52,6 @@ export interface ModalProps {
   hasCustomButton?: boolean
   isCustomButtonDisabled?: boolean
   isMarkAsSpamVisible?: boolean
-  size?: 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
   isPage?: boolean
   i18n?: {
     title?: string
@@ -69,7 +70,16 @@ export interface ModalProps {
   headingAlign?: 'right' | 'center' | 'left'
   footerAlign?: 'right' | 'center' | 'left'
   hasEnterKeyDown?: boolean
+}
+
+export interface ModalWithAnimation extends ModalCommonProps {
+  size?: 'fullscreen'
   hasAnimation?: boolean
+}
+
+export interface ModalWithoutAnimation extends ModalCommonProps {
+  size?: Size
+  hasAnimation?: undefined
 }
 
 export const Modal = forwardRef(
@@ -119,8 +129,8 @@ export const Modal = forwardRef(
       headingAlign = 'left',
       footerAlign = 'right',
       hasEnterKeyDown,
-      hasAnimation = false
-    }: ModalProps,
+      hasAnimation
+    }: ModalWithAnimation | ModalWithoutAnimation,
     ref: Ref<HTMLDivElement>
   ) => {
     const [isClosing, setClosing] = useState(false)

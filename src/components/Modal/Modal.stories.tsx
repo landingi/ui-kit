@@ -46,3 +46,14 @@ WithCustomButton.args = {
   hasFooter: true,
   hasCustomButton: true
 }
+
+export const WithAnimation = Template.bind({})
+
+WithAnimation.args = {
+  i18n,
+  children,
+  isActive: true,
+  isClosable: true,
+  size: 'fullscreen',
+  hasAnimation: true
+}
