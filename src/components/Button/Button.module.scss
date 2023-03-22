@@ -482,6 +482,12 @@
       &[disabled] {
         cursor: not-allowed;
         background-color: transparent;
+        color: $color-3;
+
+        svg,
+        i {
+          color: $color-3;
+        }
       }
     }
 
