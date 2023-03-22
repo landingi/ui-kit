@@ -93,7 +93,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   emphasisedOptions = [],
   hasDescription = false,
   hasSearcher = false,
-  handleOnSearchChange = () => {},
+  handleOnSearchChange = () => null,
   isLoading = false,
   emptyMessage = null,
   isOpenDisabled = false,
@@ -222,6 +222,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
       if (!searchValue) {
         return true
       }
+
       const items = label
         .toLowerCase()
         .match(new RegExp(searchValue.toLowerCase()))
