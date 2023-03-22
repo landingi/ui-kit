@@ -16,6 +16,12 @@
       font-size: 14px;
     }
   }
+
+  &--32 {
+    &::before {
+      font-size: 32px;
+    }
+  }
 }
 .editor-icon:before {
   font-family: 'react-editor-icons';

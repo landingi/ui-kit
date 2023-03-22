@@ -43,6 +43,10 @@
     color: $color-info;
   }
 
+  &--color-accent-5 {
+    color: $color-accent-5;
+  }
+
   &--spin {
     display: inline-block;
     animation: spinIcon 1s linear infinite;
