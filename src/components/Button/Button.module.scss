@@ -462,7 +462,7 @@
 
     &-hover {
       padding: 0;
-      background: transparent;
+      background-color: transparent;
 
       svg,
       i {
@@ -476,6 +476,12 @@
         i {
           color: $color-1;
         }
+      }
+
+      &:disabled,
+      &[disabled] {
+        cursor: not-allowed;
+        background-color: transparent;
       }
     }
 
