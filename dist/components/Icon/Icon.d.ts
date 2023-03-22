@@ -4,7 +4,7 @@ interface IconProps {
     color?: string;
     className?: string | string[];
     spin?: boolean;
-    size?: 10 | 12 | 14;
+    size?: 10 | 12 | 14 | 32;
     autoSize?: boolean;
     'data-testid'?: string;
 }
