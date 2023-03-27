@@ -1,4 +1,5 @@
 import Html from '@components/Html'
+import Spinner from '@components/Spinner'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, FocusEventHandler, ReactEventHandler } from 'react'
 
@@ -12,6 +13,7 @@ interface ToggleProps {
   id: string
   className?: string | string[]
   checked: boolean
+  isLoading?: boolean
   disabled?: boolean
   formikKey?: string
   table?: boolean
@@ -27,6 +29,7 @@ const Toggle: FC<ToggleProps> = ({
   id,
   label = '',
   className = '',
+  isLoading,
   disabled,
   'data-testid': dataTestId
 }) => {
@@ -57,7 +60,9 @@ const Toggle: FC<ToggleProps> = ({
           {...(dataTestId ? { 'data-testid': dataTestId } : {})}
         />
 
-        <span className={styles.toggle__button} />
+        <span className={styles.toggle__button}>
+          {isLoading && <Spinner />}
+        </span>
       </label>
 
       {label && (
