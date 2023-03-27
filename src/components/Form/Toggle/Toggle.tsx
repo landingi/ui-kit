@@ -61,7 +61,9 @@ const Toggle: FC<ToggleProps> = ({
         />
 
         <span className={styles.toggle__button}>
-          {isLoading && <Spinner />}
+          {isLoading && (
+            <Spinner className={styles['toggle__button-spinner']} />
+          )}
         </span>
       </label>
 
