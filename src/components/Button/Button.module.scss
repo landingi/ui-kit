@@ -342,6 +342,27 @@
         color: $color-1;
       }
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: transparent;
+      color: $color-4;
+
+      svg,
+      i {
+        color: $color-4;
+      }
+
+      &:hover {
+        background-color: transparent;
+        color: $color-4;
+
+        svg,
+        i {
+          color: $color-4;
+        }
+      }
+    }
   }
 
   &--white {
