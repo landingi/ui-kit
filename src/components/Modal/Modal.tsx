@@ -75,11 +75,17 @@ export interface ModalCommonProps {
 export interface ModalWithAnimation extends ModalCommonProps {
   size?: 'fullscreen'
   hasAnimation?: boolean
+  customZIndex?: undefined
 }
 
 export interface ModalWithoutAnimation extends ModalCommonProps {
   size?: Size
   hasAnimation?: undefined
+  customZIndex?: {
+    backdrop?: number
+    modal?: number
+    dialog?: number
+  }
 }
 
 export const Modal = forwardRef(
@@ -129,7 +135,8 @@ export const Modal = forwardRef(
       headingAlign = 'left',
       footerAlign = 'right',
       hasEnterKeyDown,
-      hasAnimation
+      hasAnimation,
+      customZIndex
     }: ModalWithAnimation | ModalWithoutAnimation,
     ref: Ref<HTMLDivElement>
   ) => {
@@ -255,8 +262,17 @@ export const Modal = forwardRef(
     return (
       <Fragment>
         {isActive && (
-          <div className={styles.dialog}>
-            <div className={modalStyles} ref={ref}>
+          <div
+            className={styles.dialog}
+            style={{ zIndex: customZIndex?.dialog }}
+            data-testid='dialog'
+          >
+            <div
+              className={modalStyles}
+              style={{ zIndex: customZIndex?.modal }}
+              data-testid='modal'
+              ref={ref}
+            >
               {isLoading ? (
                 <div className={styles.modal__body}>
                   <Loader />
@@ -327,7 +343,9 @@ export const Modal = forwardRef(
             </div>
           </div>
         )}
-        {isActive && size !== 'fullscreen' && <Backdrop onClick={onClick} />}
+        {isActive && size !== 'fullscreen' && (
+          <Backdrop onClick={onClick} customZIndex={customZIndex?.backdrop} />
+        )}
       </Fragment>
     )
   }
