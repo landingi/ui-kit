@@ -265,10 +265,12 @@ export const Modal = forwardRef(
           <div
             className={styles.dialog}
             style={{ zIndex: customZIndex?.dialog }}
+            data-testid='dialog'
           >
             <div
               className={modalStyles}
               style={{ zIndex: customZIndex?.modal }}
+              data-testid='modal'
               ref={ref}
             >
               {isLoading ? (
