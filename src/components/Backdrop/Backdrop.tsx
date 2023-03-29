@@ -7,12 +7,14 @@ export interface BackdropProps {
   className?: string | string[]
   onClick?: () => void
   zIndex?: '4' | '6' | '8'
+  customZIndex?: number
 }
 
 export const Backdrop: FC<BackdropProps> = ({
   className = '',
   onClick = () => {},
-  zIndex = null
+  zIndex = null,
+  customZIndex
 }) => {
   const backdropStyles = useStyles(
     {
@@ -25,7 +27,12 @@ export const Backdrop: FC<BackdropProps> = ({
   )
 
   return (
-    <div className={backdropStyles} onClick={onClick} data-testid='backdrop' />
+    <div
+      className={backdropStyles}
+      onClick={onClick}
+      style={{ zIndex: customZIndex }}
+      data-testid='backdrop'
+    />
   )
 }
 
