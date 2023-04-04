@@ -4,6 +4,8 @@ declare type ItemBase = {
     value: Value;
     label: string;
     description?: string;
+    disabled?: boolean;
+    tooltip?: string;
 };
 export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     className?: string;
