@@ -12,6 +12,7 @@ import { Paragraph } from '@components/Paragraph'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
+import { Tooltip } from '@components/Tooltip'
 import { emitCloseDropdown } from '@events/dropdown'
 import { generateFakeUuid, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -32,6 +33,8 @@ type ItemBase = {
   value: Value
   label: string
   description?: string
+  disabled?: boolean
+  tooltip?: string
 }
 
 export interface PerfectDropdownSelectProps<Item extends ItemBase> {
@@ -186,10 +189,16 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
 
   const renderOption = (item: Item) =>
     hasDescription ? (
-      <Fragment>
+      <Tooltip
+        content={item.tooltip}
+        align='center'
+        placement='top'
+        disabled={!item.tooltip}
+      >
         <Button
           variant='dropdown-element'
           onClick={() => handleChange(item.value)}
+          isDisabled={item.disabled}
         >
           <Heading level={5}>{item?.label}</Heading>
 
@@ -199,14 +208,22 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
         </Button>
 
         <Divider />
-      </Fragment>
+      </Tooltip>
     ) : (
-      <Button
-        variant='dropdown-element'
-        onClick={() => handleChange(item.value)}
+      <Tooltip
+        content={item.tooltip}
+        align='center'
+        placement='top'
+        disabled={!item.tooltip}
       >
-        {item?.label}
-      </Button>
+        <Button
+          variant='dropdown-element'
+          onClick={() => handleChange(item.value)}
+          isDisabled={item.disabled}
+        >
+          {item?.label}
+        </Button>
+      </Tooltip>
     )
 
   const handleSearchOptionsChange = (value: string | undefined) => {
