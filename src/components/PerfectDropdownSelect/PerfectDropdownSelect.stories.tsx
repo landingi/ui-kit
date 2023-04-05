@@ -123,7 +123,7 @@ ListItemWithTooltip.args = {
   formikKey: 'test-dropdown',
   value: 'test1',
   options: [
-    { label: 'label1', value: 'test1', tooltip: 'Tooltipem content' },
+    { label: 'label1', value: 'test1', tooltip: 'Tooltip content' },
     { label: 'label2', value: 'test2' }
   ],
   label: 'Custom label for dropdown',
@@ -142,7 +142,7 @@ DisaledListItem.args = {
       label: 'label2',
       value: 'test2',
       disabled: true,
-      tooltip: 'Tooltipem content'
+      tooltip: 'Tooltip content'
     }
   ],
   label: 'Custom label for dropdown',
