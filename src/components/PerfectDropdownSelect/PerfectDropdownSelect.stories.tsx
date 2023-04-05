@@ -116,3 +116,35 @@ WithLoader.args = {
   },
   isLoading: true
 }
+
+export const ListItemWithTooltip = Template.bind({})
+
+ListItemWithTooltip.args = {
+  formikKey: 'test-dropdown',
+  value: 'test1',
+  options: [
+    { label: 'label1', value: 'test1', tooltip: 'Tooltipem content' },
+    { label: 'label2', value: 'test2' }
+  ],
+  label: 'Custom label for dropdown',
+  onChange: () => {}
+}
+
+export const DisaledListItem = Template.bind({})
+
+DisaledListItem.args = {
+  formikKey: 'test-dropdown',
+  value: 'test1',
+  options: [
+    { label: 'label1', value: 'test1' },
+    { label: 'label2', value: 'test2', disabled: true },
+    {
+      label: 'label2',
+      value: 'test2',
+      disabled: true,
+      tooltip: 'Tooltipem content'
+    }
+  ],
+  label: 'Custom label for dropdown',
+  onChange: () => {}
+}
