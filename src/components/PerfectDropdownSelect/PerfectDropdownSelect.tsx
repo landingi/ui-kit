@@ -187,44 +187,34 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef.current])
 
-  const renderOption = (item: Item) =>
-    hasDescription ? (
-      <Tooltip
-        content={item.tooltip}
-        align='center'
-        placement='top'
-        disabled={!item.tooltip}
+  const renderOption = (item: Item) => (
+    <Tooltip
+      content={item.tooltip}
+      align='center'
+      placement='top'
+      disabled={!item.tooltip}
+    >
+      <Button
+        variant='dropdown-element'
+        onClick={() => handleChange(item.value)}
+        isDisabled={item.disabled}
       >
-        <Button
-          variant='dropdown-element'
-          onClick={() => handleChange(item.value)}
-          isDisabled={item.disabled}
-        >
-          <Heading level={5}>{item?.label}</Heading>
+        {hasDescription ? (
+          <Fragment>
+            <Heading level={5}>{item?.label}</Heading>
 
-          <Paragraph color='accent-2' size={12}>
-            {item?.description}
-          </Paragraph>
-        </Button>
+            <Paragraph color='accent-2' size={12}>
+              {item?.description}
+            </Paragraph>
+          </Fragment>
+        ) : (
+          item?.label
+        )}
+      </Button>
 
-        <Divider />
-      </Tooltip>
-    ) : (
-      <Tooltip
-        content={item.tooltip}
-        align='center'
-        placement='top'
-        disabled={!item.tooltip}
-      >
-        <Button
-          variant='dropdown-element'
-          onClick={() => handleChange(item.value)}
-          isDisabled={item.disabled}
-        >
-          {item?.label}
-        </Button>
-      </Tooltip>
-    )
+      <Divider />
+    </Tooltip>
+  )
 
   const handleSearchOptionsChange = (value: string | undefined) => {
     if (handleOnSearchChange() === null) {
