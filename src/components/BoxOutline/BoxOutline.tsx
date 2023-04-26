@@ -31,7 +31,8 @@ export const BoxOutline: FC<BoxOutlineProps> = ({
   disabled = false,
   noCheckmark = false,
   onMouseOver,
-  onMouseLeave
+  onMouseLeave,
+  ...rest
 }) => {
   const elementClasses = useStyles(
     {
@@ -60,6 +61,7 @@ export const BoxOutline: FC<BoxOutlineProps> = ({
       onDoubleClick={onDoubleClickHandler}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
+      {...rest}
     >
       {isSelected && !noCheckmark && (
         <span className={checkmarkStatusClasses}>
