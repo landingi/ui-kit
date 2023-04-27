@@ -6,11 +6,11 @@ import { fireEvent, render } from '@testing-library/react'
 describe('<CustomLink/> tests', () => {
   const props = { label: 'Custom link' }
 
-  it('mout', () => {
+  it('mount', () => {
     render(<CustomLink {...props} />)
   })
 
-  it('mout & simulate click', () => {
+  it('mount & simulate click', () => {
     const { getByTestId } = render(<CustomLink {...props} />)
 
     const customLink = getByTestId('custom-link')
