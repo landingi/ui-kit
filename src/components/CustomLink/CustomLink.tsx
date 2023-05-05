@@ -13,6 +13,7 @@ interface CustomLinkProps {
   underlined?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
   color?: string
+  bold?: boolean
 }
 
 export const CustomLink: FC<CustomLinkProps> = ({
@@ -24,14 +25,16 @@ export const CustomLink: FC<CustomLinkProps> = ({
   size = 14,
   underlined = false,
   onClick = () => null,
-  color = undefined
+  color = undefined,
+  bold = false
 }) => {
   const customLinkStyles = useStyles(
     {
       [styles['custom-link']]: true,
       [styles[`custom-link--${variant}`]]: variant,
       [styles[`custom-link--${size}`]]: size,
-      [styles['custom-link--underlined']]: underlined
+      [styles['custom-link--underlined']]: underlined,
+      [styles['custom-link--bold']]: bold
     },
     className
   )

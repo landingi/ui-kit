@@ -45,10 +45,16 @@ export interface ModalCommonProps {
 export interface ModalWithAnimation extends ModalCommonProps {
     size?: 'fullscreen';
     hasAnimation?: boolean;
+    customZIndex?: undefined;
 }
 export interface ModalWithoutAnimation extends ModalCommonProps {
     size?: Size;
     hasAnimation?: undefined;
+    customZIndex?: {
+        backdrop?: number;
+        modal?: number;
+        dialog?: number;
+    };
 }
 export declare const Modal: import("react").ForwardRefExoticComponent<(ModalWithAnimation | ModalWithoutAnimation) & import("react").RefAttributes<HTMLDivElement>>;
 export {};

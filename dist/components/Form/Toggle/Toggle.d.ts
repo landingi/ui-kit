@@ -7,6 +7,7 @@ interface ToggleProps {
     id: string;
     className?: string | string[];
     checked: boolean;
+    isLoading?: boolean;
     disabled?: boolean;
     formikKey?: string;
     table?: boolean;

@@ -26,7 +26,12 @@ export const Alert: FC<AlertProps> = ({
 
   return (
     <div data-testid='alert' className={alertStyles}>
-      <Icon icon={mapIconToClass(type)} color={type} data-testid='alert-icon' />
+      <Icon
+        icon={mapIconToClass(type)}
+        color={type}
+        size={12}
+        data-testid='alert-icon'
+      />
 
       <div className={styles.alert__message}>{children}</div>
     </div>

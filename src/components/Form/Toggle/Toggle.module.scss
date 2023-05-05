@@ -47,6 +47,16 @@
     transition: 0.2s;
     background: #fff;
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+
+    &-spinner {
+      width: 18px;
+      height: 18px;
+
+      svg,
+      i {
+        color: $color-4;
+      }
+    }
   }
 
   &__label {

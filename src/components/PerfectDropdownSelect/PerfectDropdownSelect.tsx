@@ -12,6 +12,7 @@ import { Paragraph } from '@components/Paragraph'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
+import { Tooltip } from '@components/Tooltip'
 import { emitCloseDropdown } from '@events/dropdown'
 import { generateFakeUuid, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -32,6 +33,8 @@ type ItemBase = {
   value: Value
   label: string
   description?: string
+  disabled?: boolean
+  tooltip?: string
 }
 
 export interface PerfectDropdownSelectProps<Item extends ItemBase> {
@@ -93,7 +96,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   emphasisedOptions = [],
   hasDescription = false,
   hasSearcher = false,
-  handleOnSearchChange = () => {},
+  handleOnSearchChange = () => null,
   isLoading = false,
   emptyMessage = null,
   isOpenDisabled = false,
@@ -184,30 +187,34 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef.current])
 
-  const renderOption = (item: Item) =>
-    hasDescription ? (
-      <Fragment>
-        <Button
-          variant='dropdown-element'
-          onClick={() => handleChange(item.value)}
-        >
-          <Heading level={5}>{item?.label}</Heading>
-
-          <Paragraph color='accent-2' size={12}>
-            {item?.description}
-          </Paragraph>
-        </Button>
-
-        <Divider />
-      </Fragment>
-    ) : (
+  const renderOption = (item: Item) => (
+    <Tooltip
+      content={item.tooltip}
+      align='center'
+      placement='top'
+      disabled={!item.tooltip}
+    >
       <Button
         variant='dropdown-element'
         onClick={() => handleChange(item.value)}
+        isDisabled={item.disabled}
       >
-        {item?.label}
+        {hasDescription ? (
+          <Fragment>
+            <Heading level={5}>{item?.label}</Heading>
+
+            <Paragraph color='accent-2' size={12}>
+              {item?.description}
+            </Paragraph>
+          </Fragment>
+        ) : (
+          item?.label
+        )}
       </Button>
-    )
+
+      <Divider />
+    </Tooltip>
+  )
 
   const handleSearchOptionsChange = (value: string | undefined) => {
     if (handleOnSearchChange() === null) {
@@ -222,6 +229,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
       if (!searchValue) {
         return true
       }
+
       const items = label
         .toLowerCase()
         .match(new RegExp(searchValue.toLowerCase()))

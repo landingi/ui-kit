@@ -125,4 +125,25 @@ describe('<Modal /> global mount', () => {
 
     expect(customButton).toBeInTheDocument()
   })
+
+  it('has custom z-index', () => {
+    const updatedProps = {
+      ...props,
+      customZIndex: {
+        backdrop: 100,
+        modal: 200,
+        dialog: 300
+      }
+    }
+
+    render(<Modal {...updatedProps} />)
+
+    const backdrop = screen.getByTestId('backdrop')
+    const modal = screen.getByTestId('modal')
+    const dialog = screen.getByTestId('dialog')
+
+    expect(backdrop).toHaveStyle('z-index: 100')
+    expect(modal).toHaveStyle('z-index: 200')
+    expect(dialog).toHaveStyle('z-index: 300')
+  })
 })

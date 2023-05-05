@@ -9,6 +9,7 @@ interface CustomLinkProps {
     underlined?: boolean;
     onClick?: MouseEventHandler<HTMLAnchorElement>;
     color?: string;
+    bold?: boolean;
 }
 export declare const CustomLink: FC<CustomLinkProps>;
 export {};
