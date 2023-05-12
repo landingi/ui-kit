@@ -9,7 +9,7 @@ export const getLocalStorage = (data: string) => {
   try {
     return localStorage.getItem(data)
   } catch {
-    return ''
+    return undefined
   }
 }
 
