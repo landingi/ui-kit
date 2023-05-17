@@ -12,17 +12,17 @@ jobs:
       contents: read
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::084824767965:role/github-ui-kit
+          role-to-assume: arn:aws:iam::084824767965:role/gha-ui-kit
           role-duration-seconds: 3600
           aws-region: eu-west-1
-          role-session-name: github-ui-kit
+          role-session-name: gha-ui-kit
 
       - run: aws sts get-caller-identity
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Nodejs
         uses: actions/setup-node@v2
