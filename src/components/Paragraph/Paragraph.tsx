@@ -18,12 +18,14 @@ interface ParagraphProps {
     | 'white'
     | 'color-8'
     | 'success'
+    | 'brand'
   size?: 10 | 12 | 14 | 16 | 18
   align?: 'left' | 'center' | 'right' | 'justify'
   padding?: 'small' | 'medium' | 'none'
   weight?: 300 | 400 | 700
   uppercase?: boolean
   line?: 18 | 20 | 22 | 24 | 28
+  decoration?: 'line-through'
 }
 
 export const Paragraph: FC<ParagraphProps> = ({
@@ -35,7 +37,8 @@ export const Paragraph: FC<ParagraphProps> = ({
   padding = 'medium',
   weight = 300,
   uppercase = false,
-  line = 18
+  line = 18,
+  decoration
 }) => {
   const paragraphStyles = useStyles(
     {
@@ -46,7 +49,8 @@ export const Paragraph: FC<ParagraphProps> = ({
       [styles[`paragraph-align--${align}`]]: align,
       [styles[`paragraph-weight--${weight}`]]: weight,
       [styles['paragraph-uppercase']]: uppercase,
-      [styles[`paragraph-line--${line}`]]: line
+      [styles[`paragraph-line--${line}`]]: line,
+      [styles[`paragraph-decoration--${decoration}`]]: decoration
     },
     className
   )

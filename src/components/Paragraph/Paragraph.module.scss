@@ -5,6 +5,10 @@
     text-transform: uppercase;
   }
 
+  &-decoration--line-through {
+    text-decoration: line-through ;
+  }
+
   &-padding {
     &--medium {
       padding: 0 0 $padding-medium;
@@ -83,6 +87,10 @@
 
     &--success {
       color: $color-success;
+    }
+
+    &--brand {
+      color: $color-brand;
     }
   }
 
