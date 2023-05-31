@@ -16,15 +16,15 @@ describe('<Feedback /> mount', () => {
   it('is mounted', () => {
     render(<Feedback {...props} />)
 
-    screen.getByText('Alert content')
+    screen.getByText('Feedback content.')
   })
 
-  it('has `info-message` class', () => {
+  it('has `alert-message--info` class', () => {
     render(<Feedback {...props} />)
 
     const alertComponent = screen.getByTestId('alert')
 
-    expect(alertComponent).toHaveClass('info-message')
+    expect(alertComponent).toHaveClass('alert-message--info')
   })
 
   it('has `info` icon', () => {
