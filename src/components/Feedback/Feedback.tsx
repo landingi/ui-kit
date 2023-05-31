@@ -46,8 +46,6 @@ export const Feedback: FC<FeedbackProps> = ({
             {i18n.button}
           </Button>
 
-          <Spreader spread='tiny' />
-
           <Close
             className={styles.icon}
             onClick={handleCloseFeedback}
