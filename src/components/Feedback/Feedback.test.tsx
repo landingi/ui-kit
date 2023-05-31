@@ -22,7 +22,7 @@ describe('<Feedback /> mount', () => {
   it('has `info-message` class', () => {
     render(<Feedback {...props} />)
 
-    const alertComponent = screen.getByTestId('info')
+    const alertComponent = screen.getByTestId('alert')
 
     expect(alertComponent).toHaveClass('info-message')
   })
@@ -30,7 +30,7 @@ describe('<Feedback /> mount', () => {
   it('has `info` icon', () => {
     render(<Feedback {...props} />)
 
-    const alertComponent = screen.getByTestId('info')
+    const alertComponent = screen.getByTestId('alert')
     const icon = screen.getByTestId('alert-icon')
 
     expect(icon).toHaveClass('icon-info')
@@ -40,7 +40,7 @@ describe('<Feedback /> mount', () => {
   it('has custom icon', () => {
     render(<Feedback {...props} customIcon='icon-lightbulb' />)
 
-    const alertComponent = screen.getByTestId('info')
+    const alertComponent = screen.getByTestId('alert')
     const icon = screen.getByTestId('alert-icon')
 
     expect(icon).toHaveClass('icon-lightbulb')
