@@ -1,9 +1,12 @@
 import { Alert } from '@components/Alert'
 import Button from '@components/Button'
 import { Close } from '@components/Close'
+import Spreader from '@components/Spreader'
 import { getLocalStorage, setLocalStorage } from '@helpers/storage'
 import { FC, useState } from 'react'
 import { Row } from 'simple-flexbox'
+
+import styles from './Feedback.module.scss'
 
 export interface FeedbackProps {
   className?: string | string[]
@@ -36,12 +39,21 @@ export const Feedback: FC<FeedbackProps> = ({
       <Row justifyContent='space-between' alignItems='center'>
         {i18n.content}
 
+        <Spreader spread='small' />
+
         <Row>
-          <Button variant='secondary' onClick={handleFeedback}>
+          <Button variant='secondary' size='tiny' onClick={handleFeedback}>
             {i18n.button}
           </Button>
 
-          <Close onClick={handleCloseFeedback} iconColor='info' />
+          <Spreader spread='tiny' />
+
+          <Close
+            className={styles.icon}
+            onClick={handleCloseFeedback}
+            size={12}
+            iconColor='info'
+          />
         </Row>
       </Row>
     </Alert>

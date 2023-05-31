@@ -9,6 +9,7 @@ interface CloseProps {
   className?: string | string[]
   onClick?: MouseEventHandler<HTMLSpanElement>
   iconName?: string
+  size?: 10 | 12 | 14 | 32
   iconColor?: string
 }
 
@@ -16,6 +17,7 @@ export const Close: FC<CloseProps> = ({
   className = '',
   onClick = () => null,
   iconName = 'icon-remove',
+  size,
   iconColor
 }) => {
   const elementStyles = useStyles(
@@ -31,7 +33,7 @@ export const Close: FC<CloseProps> = ({
         variant='icon-transparent-hover'
         data-testid='close-component-button'
       >
-        <Icon icon={iconName} color={iconColor} />
+        <Icon icon={iconName} size={size} color={iconColor} />
       </Button>
     </span>
   )
