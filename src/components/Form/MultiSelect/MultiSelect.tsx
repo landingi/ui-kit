@@ -35,7 +35,7 @@ interface MultiSelectProps {
   'data-testid'?: string
   initialOptions: Option[]
   values: Value[]
-  placeholder: string
+  searcher: { i18n: { placeholder: string } }
   emptySearchResultsComponent: FC<EmptySearchResultsComponentProps>
 }
 
@@ -46,7 +46,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   formikKey,
   onChange,
   values = [],
-  placeholder,
+  searcher: {
+    i18n: { placeholder = '' }
+  },
   emptySearchResultsComponent: EmptySearchResultsComponent,
   'data-testid': dataTestId = 'multi-select'
 }) => {
