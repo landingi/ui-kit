@@ -18,7 +18,11 @@ interface MultiSelectProps {
     'data-testid'?: string;
     initialOptions: Option[];
     values: Value[];
-    placeholder: string;
+    searcher: {
+        i18n: {
+            placeholder: string;
+        };
+    };
     emptySearchResultsComponent: FC<EmptySearchResultsComponentProps>;
 }
 export declare const MultiSelect: FC<MultiSelectProps>;
