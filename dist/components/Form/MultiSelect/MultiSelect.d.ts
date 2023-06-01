@@ -6,7 +6,7 @@ interface Option {
     icon?: string;
     selected?: boolean;
 }
-interface EmptySearchResultsComponentProps {
+export interface EmptySearchResultsComponentProps {
     addCustomOption: (option: Option) => void;
     searchPhrase: string;
 }
