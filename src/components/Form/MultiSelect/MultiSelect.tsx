@@ -5,8 +5,10 @@ import Image from '@components/Image'
 import { Search } from '@components/Search'
 import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
+import { isEmpty } from '@helpers/data'
+import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, useState } from 'react'
+import { FC, Fragment, useState } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './MultiSelect.module.scss'
@@ -16,8 +18,13 @@ type Value = string | number | null
 interface Option {
   label: string
   value: Value
-  icon: string
+  icon?: string
   selected?: boolean
+}
+
+interface EmptySearchResultsComponentProps {
+  addCustomOption: (option: Option) => void
+  searchPhrase: string
 }
 
 interface MultiSelectProps {
@@ -27,6 +34,9 @@ interface MultiSelectProps {
   formikKey: string
   'data-testid'?: string
   initialOptions: Option[]
+  values: Value[]
+  placeholder: string
+  emptySearchResultsComponent: FC<EmptySearchResultsComponentProps>
 }
 
 export const MultiSelect: FC<MultiSelectProps> = ({
@@ -35,24 +45,89 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   initialOptions,
   formikKey,
   onChange,
-  'data-testid': dataTestId
+  values = [],
+  placeholder,
+  emptySearchResultsComponent: EmptySearchResultsComponent,
+  'data-testid': dataTestId = 'multi-select'
 }) => {
   const wrapperStyles = useStyles({}, className)
   const optionStyles = useStyles({ [styles.options]: true })
   const optionBoxStyles = useStyles({ [styles['option-box']]: true })
+  const selectedOptionsStyles = useStyles({
+    [styles['options__selected-options']]: true
+  })
 
-  const [options, setOptions] = useState<Option[]>(
-    initialOptions.map(option => ({ ...option, selected: false }))
+  const initializeOptions = () =>
+    initialOptions.map(option => ({
+      ...option,
+      selected: values.includes(option.value)
+    }))
+
+  const initializeSelectedOptions = () => {
+    const initialOptionsValues = initialOptions.map(option => option.value)
+    const customValues = values.filter(
+      value => !initialOptionsValues.includes(value)
+    )
+    const customSelectedOptions = customValues.map(customValue => ({
+      value: customValue,
+      label: customValue as string,
+      selected: true
+    }))
+
+    return [
+      ...initializeOptions().filter(option => option.selected),
+      ...customSelectedOptions
+    ]
+  }
+
+  const [options, setOptions] = useState<Option[]>(initializeOptions())
+  const [filteredOptions, setFilteredOptions] = useState<Option[]>(options)
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>(
+    initializeSelectedOptions()
   )
-  const [selectedOptions, setSelectedOptions] = useState<Option[]>([])
+  const [searchPhrase, setSearchPhrase] = useState('')
 
-  const updateOptions = (options: Option[]) => {
-    setOptions(options)
+  const filterOptions = (value: string, options: Option[]) => {
+    if (value.length < 3) {
+      setFilteredOptions(options)
 
+      return
+    }
+
+    const lowerCaseSearch = value.toLowerCase()
+    const filteredResults = options.filter(
+      item =>
+        item.label.toLowerCase().search(lowerCaseSearch) !== -1 || item.selected
+    )
+
+    setFilteredOptions(filteredResults)
+  }
+
+  const handleSearch = debounce(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = !event ? '' : event.target.value
+
+      setSearchPhrase(value)
+      filterOptions(value, options)
+    },
+    300
+  )
+
+  const updateFormik = (options: Option[]) =>
     onChange(
       formikKey,
       options.filter(({ selected }) => selected).map(({ value }) => value)
     )
+
+  const updateOptions = (options: Option[]) => {
+    setOptions(options)
+  }
+
+  const addCustomOption = (option: Option) => {
+    const selectedOption = { ...option, selected: true }
+
+    updateFormik([...selectedOptions, selectedOption])
+    setSelectedOptions([...selectedOptions, selectedOption])
   }
 
   const toggleOption = (option: Option, value: Value) => {
@@ -66,6 +141,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   const toggleOptions = (value: Value) => {
     const mappedOptions = options.map(option => toggleOption(option, value))
 
+    filterOptions(searchPhrase, mappedOptions)
     updateOptions(mappedOptions)
   }
 
@@ -85,6 +161,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     }
 
     setSelectedOptions(tmpSelectedOptions)
+    updateFormik(tmpSelectedOptions)
   }
 
   const handleChange = (value: Value) => {
@@ -93,23 +170,28 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const removeValue = (value: Value) => {
-    setSelectedOptions(
-      selectedOptions.filter((option: Option) => option.value !== value)
+    const tmpSelectedOptions = selectedOptions.filter(
+      option => option.value !== value
     )
-    setOptions(
-      options.map(option => {
-        if (option.value === value) {
-          return { ...option, selected: false }
-        }
 
-        return option
-      })
-    )
+    setSelectedOptions(tmpSelectedOptions)
+    updateFormik(tmpSelectedOptions)
+
+    const mappedOptions = options.map(option => {
+      if (option.value === value) {
+        return { ...option, selected: false }
+      }
+
+      return option
+    })
+
+    updateOptions(mappedOptions)
+    filterOptions(searchPhrase, mappedOptions)
   }
 
   return (
-    <div data-testid={dataTestId} className={wrapperStyles}>
-      <Search />
+    <div className={wrapperStyles} data-testid={dataTestId}>
+      <Search i18n={{ placeholder }} onChange={handleSearch} tag='div' />
 
       <Spacer space='mini' />
 
@@ -117,7 +199,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
       <label id={id}>
         <div className={optionStyles}>
-          {options.map(({ label, icon, value, selected }) => (
+          {filteredOptions.map(({ label, icon, value, selected }) => (
             <BoxOutline
               padding='none'
               className={optionBoxStyles}
@@ -126,27 +208,39 @@ export const MultiSelect: FC<MultiSelectProps> = ({
               isSelected={selected}
               noCheckmark
             >
-              <Image src={icon} size={17} />
-              <Spreader spread='tiny' />
+              {icon && (
+                <Fragment>
+                  <Image src={icon} size={17} /> <Spreader spread='tiny' />
+                </Fragment>
+              )}
+
               {label}
             </BoxOutline>
           ))}
         </div>
+        {isEmpty(filteredOptions) && (
+          <EmptySearchResultsComponent
+            addCustomOption={addCustomOption}
+            searchPhrase={searchPhrase}
+          />
+        )}
       </label>
 
       <Spacer space='mini' />
 
       <Spacer space='tiny' />
 
-      <div>
+      <div className={selectedOptionsStyles}>
         {selectedOptions
           .filter(({ selected }) => selected)
           .map(({ label, value }) => (
-            <Badge className={styles['icon-pack-badge']} type='accent-8'>
+            <Badge
+              className={styles['icon-pack-badge']}
+              type='accent-8'
+              key={value}
+            >
               <Row alignItems='center'>
                 <span className={styles['icon-pack-badge__text']}>{label}</span>
-
-                <Spreader spread='tiny' />
 
                 <span
                   className={styles['icon-pack-badge__close']}
