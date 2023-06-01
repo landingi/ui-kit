@@ -20,6 +20,7 @@ export * from './DateTimePicker';
 export { default as Divider } from './Divider';
 export * from './Dot';
 export * from './EditableLabel';
+export * from './Feedback';
 export * from './Filter';
 export * from './Form/Checkbox';
 export { default as Error } from './Form/Error';

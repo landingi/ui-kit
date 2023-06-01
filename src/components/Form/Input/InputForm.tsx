@@ -45,6 +45,8 @@ interface InputProps {
   hideArrows?: boolean
   alwaysShowLabel?: boolean
   variant?: 'table'
+  min?: number
+  max?: number
   ['data-testid']?: string
 }
 export const InputForm: FC<InputProps> = ({
@@ -65,7 +67,9 @@ export const InputForm: FC<InputProps> = ({
   onKeyDown,
   onFocus,
   'data-testid': dataTestId = 'input-component',
-  hideArrows = false
+  hideArrows = false,
+  min,
+  max
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -101,6 +105,8 @@ export const InputForm: FC<InputProps> = ({
         variant={variant}
         data-testid={dataTestId}
         hideArrows={hideArrows}
+        min={min}
+        max={max}
         form
       />
 

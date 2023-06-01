@@ -33,6 +33,8 @@ interface InputProps {
     hideArrows?: boolean;
     alwaysShowLabel?: boolean;
     variant?: 'table';
+    min?: number;
+    max?: number;
     ['data-testid']?: string;
 }
 export declare const InputForm: FC<InputProps>;

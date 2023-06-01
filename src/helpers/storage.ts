@@ -1,6 +1,20 @@
-export const setLocalStorage = (key: string, value: string) =>
-  localStorage.setItem(key, value)
+/* eslint-disable no-empty */
+export const setLocalStorage = (key: string, value: string) => {
+  try {
+    localStorage.setItem(key, value)
+  } catch {}
+}
 
-export const getLocalStorage = (data: string) => localStorage.getItem(data)
+export const getLocalStorage = (data: string) => {
+  try {
+    return localStorage.getItem(data)
+  } catch {
+    return null
+  }
+}
 
-export const removeLocalStorage = (key: string) => localStorage.removeItem(key)
+export const removeLocalStorage = (key: string) => {
+  try {
+    localStorage.removeItem(key)
+  } catch {}
+}
