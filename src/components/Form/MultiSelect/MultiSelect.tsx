@@ -22,7 +22,7 @@ interface Option {
   selected?: boolean
 }
 
-interface EmptySearchResultsComponentProps {
+export interface EmptySearchResultsComponentProps {
   addCustomOption: (option: Option) => void
   searchPhrase: string
 }
@@ -59,33 +59,41 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     [styles['options__selected-options']]: true
   })
 
-  const initializeOptions = () =>
+  /**
+   * initializes options depending on values that were already selected earlier
+   */
+  const getInitialOptions = () =>
     initialOptions.map(option => ({
       ...option,
       selected: values.includes(option.value)
     }))
 
-  const initializeSelectedOptions = () => {
+  /**
+   * creates selected options used to display badges by merging options that were selected
+   * by user and options added by them
+   */
+  const getSelectedOptions = () => {
     const initialOptionsValues = initialOptions.map(option => option.value)
     const customValues = values.filter(
       value => !initialOptionsValues.includes(value)
     )
     const customSelectedOptions = customValues.map(customValue => ({
       value: customValue,
+      // label is equal to value when user adds option by itself
       label: customValue as string,
       selected: true
     }))
 
     return [
-      ...initializeOptions().filter(option => option.selected),
+      ...getInitialOptions().filter(option => option.selected),
       ...customSelectedOptions
     ]
   }
 
-  const [options, setOptions] = useState<Option[]>(initializeOptions())
+  const [options, setOptions] = useState<Option[]>(getInitialOptions())
   const [filteredOptions, setFilteredOptions] = useState<Option[]>(options)
   const [selectedOptions, setSelectedOptions] = useState<Option[]>(
-    initializeSelectedOptions()
+    getSelectedOptions()
   )
   const [searchPhrase, setSearchPhrase] = useState('')
 
@@ -115,15 +123,14 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     300
   )
 
+  /**
+   * updates formik values, should be called any time selectedOptions are changed
+   */
   const updateFormik = (options: Option[]) =>
     onChange(
       formikKey,
       options.filter(({ selected }) => selected).map(({ value }) => value)
     )
-
-  const updateOptions = (options: Option[]) => {
-    setOptions(options)
-  }
 
   const addCustomOption = (option: Option) => {
     const selectedOption = { ...option, selected: true }
@@ -144,7 +151,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     const mappedOptions = options.map(option => toggleOption(option, value))
 
     filterOptions(searchPhrase, mappedOptions)
-    updateOptions(mappedOptions)
+    setOptions(mappedOptions)
   }
 
   const toggleSelectedOptions = (value: Value) => {
@@ -187,7 +194,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       return option
     })
 
-    updateOptions(mappedOptions)
+    setOptions(mappedOptions)
     filterOptions(searchPhrase, mappedOptions)
   }
 
