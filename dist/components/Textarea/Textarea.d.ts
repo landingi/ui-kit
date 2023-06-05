@@ -11,6 +11,7 @@ export interface TextareaProps {
     i18n?: {
         placeholder?: string;
         label?: string;
+        description?: string;
     };
     hasResize?: boolean;
     maxHeight?: number;

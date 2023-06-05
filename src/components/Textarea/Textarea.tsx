@@ -1,5 +1,6 @@
 import Error from '@components/Form/Error'
 import { Label } from '@components/Label'
+import { Paragraph } from '@components/Paragraph'
 import { Spacer } from '@components/Spacer'
 import { getDeepValue } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
@@ -19,6 +20,7 @@ export interface TextareaProps {
   i18n?: {
     placeholder?: string
     label?: string
+    description?: string
   }
   hasResize?: boolean
   maxHeight?: number
@@ -86,7 +88,13 @@ export const Textarea: FC<TextareaProps> = ({
         disabled={disabled}
       />
 
-      {hasErrorToShow && <Error error={error} />}
+      {hasErrorToShow ? (
+        <Error error={error} />
+      ) : i18n?.description ? (
+        <Paragraph size={12} color='color-8' padding='none'>
+          {i18n?.description}
+        </Paragraph>
+      ) : null}
     </Fragment>
   )
 }
