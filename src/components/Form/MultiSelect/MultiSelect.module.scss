@@ -1,0 +1,43 @@
+.option-box {
+    padding: 10px;
+    border: 1px solid $color-input-border;
+    width: fit-content;
+}
+  
+.options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-height: 250px;
+    overflow-y: auto;
+  
+    &__selected-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      height: 20px;
+    }
+  }
+  
+  .badge-button {
+    min-height: 0;
+    min-width: 0;
+  }
+  
+  .icon-pack-badge {
+    max-width: 240px;
+    cursor: default;
+    text-transform: none;
+    font-size: 14px;
+  
+    &__text {
+      max-width: 213px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  
+    &__close {
+      cursor: pointer;
+    }
+  }
