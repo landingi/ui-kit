@@ -206,13 +206,13 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
             <Paragraph color='accent-2' size={12}>
               {item?.description}
             </Paragraph>
+
+            <Divider />
           </Fragment>
         ) : (
           item?.label
         )}
       </Button>
-
-      <Divider />
     </Tooltip>
   )
 
