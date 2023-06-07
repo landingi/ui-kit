@@ -27,6 +27,7 @@ export { default as Error } from './Form/Error';
 export * from './Form/FieldGroup';
 export * from './Form/Input';
 export * from './Form/Input/MaskedInputForm';
+export * from './Form/MultiSelect';
 export * from './Form/Radio';
 export { default as FormikToggle } from './Form/Toggle/FormikToggle';
 export { default as Toggle } from './Form/Toggle/Toggle';
