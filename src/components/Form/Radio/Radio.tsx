@@ -27,15 +27,25 @@ export const Radio: FC<RadioProps> = ({
 }) => {
   const radioStyles = useStyles(
     {
-      [styles.radio]: true,
-      [styles['radio--disabled']]: disabled
+      [styles.radio]: true
+    },
+    className
+  )
+
+  const labelStyles = useStyles(
+    {
+      [styles['label--disabled']]: disabled
     },
     className
   )
 
   return (
     <label className={radioStyles}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label className={labelStyles} htmlFor={id}>
+          {label}
+        </label>
+      )}
 
       <input
         name={name}
