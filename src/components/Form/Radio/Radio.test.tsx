@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 
 import { Radio } from '@components/Form/Radio'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 
 const props = {
   id: 'jestem-id',

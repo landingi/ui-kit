@@ -21,6 +21,10 @@
     cursor: default;
   }
 
+  &--disabled label{
+    color: $color-7;
+  }
+
   &:checked {
     & ~ .radio__overlay {
       &:after {

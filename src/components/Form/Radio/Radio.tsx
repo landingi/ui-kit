@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 
 import styles from './Radio.module.scss'
 
-interface RadioProps {
+export interface RadioProps {
   field: {
     name: string
     value: string
@@ -27,7 +27,8 @@ export const Radio: FC<RadioProps> = ({
 }) => {
   const radioStyles = useStyles(
     {
-      [styles.radio]: true
+      [styles.radio]: true,
+      [styles['radio--disabled']]: disabled
     },
     className
   )
