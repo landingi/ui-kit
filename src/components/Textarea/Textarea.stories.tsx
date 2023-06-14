@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof Textarea> = args => <Textarea {...args} />
 export const Default = Template.bind({})
 
 Default.args = {
-  i18n: { placeholder: 'Textarea placeholder' },
+  i18n: { placeholder: 'Textarea placeholder', label: 'Label' },
   name: 'textarea',
   id: 'textarea',
   onChange: () => {}

@@ -50,6 +50,7 @@ export const Textarea: FC<TextareaProps> = ({
   const hasErrorToShow = error && isTouched
 
   const labelStyles = useStyles({
+    [styles['textarea__label--disabled']]: disabled,
     [styles['textarea__label--error']]: hasErrorToShow
   })
 
