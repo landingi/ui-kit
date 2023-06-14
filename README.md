@@ -11,8 +11,7 @@ Unit tests
 
 ## Getting Started
 
-Landingi UI-kit is a set of react components used in the `landingi-app` and
-`application`. Getting started is simple. Just add a `@landingi/landingi-ui-kit`
+Landingi UI-kit is a set of react components. Getting started is simple. Just add a `@landingi/landingi-ui-kit`
 to your dependencies in `package.json`.
 
 ### Requirements
