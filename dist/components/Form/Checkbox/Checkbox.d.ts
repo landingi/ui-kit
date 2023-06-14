@@ -17,6 +17,6 @@ export interface FormikCheckboxProps {
     };
     id: string;
     label?: ReactNode;
-    type?: 'text' | 'number' | 'password';
+    disabled?: boolean;
 }
 export declare const Checkbox: FC<FormikCheckboxProps>;

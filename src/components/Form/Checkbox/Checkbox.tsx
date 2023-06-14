@@ -23,7 +23,7 @@ export interface FormikCheckboxProps {
   }
   id: string
   label?: ReactNode
-  type?: 'text' | 'number' | 'password'
+  disabled?: boolean
 }
 
 export const Checkbox: FC<FormikCheckboxProps> = ({
@@ -32,7 +32,7 @@ export const Checkbox: FC<FormikCheckboxProps> = ({
   id,
   label = '',
   className = '',
-  type = 'checkbox'
+  disabled = false
 }) => {
   const error = getDeepValue(errors, name)
 
@@ -50,7 +50,8 @@ export const Checkbox: FC<FormikCheckboxProps> = ({
   })
 
   const labelStyles = useStyles({
-    [styles.checkbox__label]: true
+    [styles.checkbox__label]: true,
+    [styles['checkbox__label--disabled']]: disabled
   })
 
   return (
@@ -58,11 +59,12 @@ export const Checkbox: FC<FormikCheckboxProps> = ({
       <label className={inputStyles}>
         <input
           name={name}
+          type='checkbox'
           checked={value}
           onChange={onChange}
           onBlur={onBlur}
-          type={type}
           id={id}
+          disabled={disabled}
         />
         <div />
       </label>
