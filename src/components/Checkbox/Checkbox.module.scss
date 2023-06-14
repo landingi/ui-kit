@@ -82,8 +82,7 @@
     &:disabled {
       opacity: 0;
       + div {
-        color: $color-brand;
-        opacity: 0.38;
+        color: $color-5;
         cursor: initial;
 
         &::before {
