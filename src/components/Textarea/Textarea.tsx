@@ -27,6 +27,7 @@ export interface TextareaProps {
   disabled?: boolean
   errors?: Record<string, string>
   touched?: Record<string, boolean>
+  maxLength?: number
 }
 
 export const Textarea: FC<TextareaProps> = ({
@@ -43,7 +44,8 @@ export const Textarea: FC<TextareaProps> = ({
   maxHeight,
   disabled,
   errors = {},
-  touched = {}
+  touched = {},
+  maxLength = 524288
 }) => {
   const error = getDeepValue(errors, name)
   const isTouched = getDeepValue(touched, name)
@@ -87,6 +89,7 @@ export const Textarea: FC<TextareaProps> = ({
         value={value}
         style={{ maxHeight }}
         disabled={disabled}
+        maxLength={maxLength}
       />
 
       {hasErrorToShow ? (
