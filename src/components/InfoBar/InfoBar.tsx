@@ -8,24 +8,28 @@ export interface InfoBarProps {
   children: ReactNode
   className?: string | string[]
   type?: 'warning' | 'info' | 'alert'
+  adjustHeight?: boolean
 }
 
 const InfoBar: FC<InfoBarProps> = ({
   children,
   className = '',
-  type = 'info'
+  type = 'info',
+  adjustHeight = false
 }) => {
   const elementClasses = useStyles(
     {
       [styles[`info-bar`]]: true,
-      [styles[`info-bar--${type}`]]: type
+      [styles[`info-bar--${type}`]]: type,
+      [styles[`info-bar--adjustable-height`]]: adjustHeight
     },
     className
   )
 
   const boxClasses = useStyles({
     [styles[`info-bar--box`]]: true,
-    [styles[`info-bar--${type}-box`]]: type
+    [styles[`info-bar--${type}-box`]]: type,
+    [styles[`info-bar--adjustable-height-box`]]: adjustHeight
   })
 
   const icon = {
