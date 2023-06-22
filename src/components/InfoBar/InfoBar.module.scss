@@ -36,6 +36,14 @@
     }
   }
   
+  &--adjustable-height {
+    height: 100%;
+
+    &-box {
+      height: 100%;
+    }
+  }
+
   &--alert {
     background: $color-alert-light;
 
