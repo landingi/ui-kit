@@ -4,4 +4,5 @@ export declare const useTable: <Item extends ItemBase>({ data, options, paginati
     Table: () => JSX.Element;
     pageLimit: number;
     refresh: boolean;
+    selected: Item["identifier"][];
 };
