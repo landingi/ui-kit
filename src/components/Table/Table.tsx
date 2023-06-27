@@ -1,6 +1,5 @@
 import { Loader } from '@components/Loader'
 import { Spacer } from '@components/Spacer'
-import { useSelect } from '@helpers/hooks/useSelect'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { Row } from 'simple-flexbox'
 
@@ -27,20 +26,15 @@ export const Table = <Item extends ItemBase>({
   handleRefresh,
   pagination,
   externalBorder,
-  extraHeaderContent
+  extraHeaderContent,
+  selectAll,
+  isSelectedAll,
+  isSelectedAny,
+  selected,
+  isSelected,
+  select
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
-
-  const values = data.map(({ identifier }) => identifier)
-
-  const {
-    selectAll,
-    isSelectedAll,
-    isSelectedAny,
-    selected,
-    isSelected,
-    select
-  } = useSelect<Item['identifier']>(values)
 
   const loaderWrapperStyles = useStyles({
     [styles['loaderWrapper--externalBorder']]: externalBorder
