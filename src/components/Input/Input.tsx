@@ -8,6 +8,7 @@ import {
   FocusEventHandler,
   forwardRef,
   KeyboardEventHandler,
+  ReactNode,
   Ref
 } from 'react'
 
@@ -26,7 +27,7 @@ export interface InputProps {
   i18n?: {
     label?: string
     placeholder?: string
-    description?: string
+    description?: string | ReactNode
   }
   value?: string | number
   autoFocus?: boolean
