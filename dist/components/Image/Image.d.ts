@@ -3,7 +3,7 @@ interface ImageProps {
     src: string;
     alt?: string;
     className?: string | string[];
-    size?: number | 'auto';
+    size?: `${number}px` | `${string}%` | 'auto';
     height?: number;
     auto?: boolean;
     small?: boolean;
