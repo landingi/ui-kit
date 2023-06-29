@@ -7,8 +7,8 @@ import React from 'react'
 const initialProps = {
   src: 'http://www.laningi.com',
   alt: 'Landing Page Builder for non-programmers',
-  size: 100
-}
+  size: '100px'
+} as const
 
 describe('<Image/> mount', () => {
   it('Image should be rendered with proper attributes', () => {
