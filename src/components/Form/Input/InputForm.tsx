@@ -8,7 +8,8 @@ import {
   ChangeEventHandler,
   FC,
   FocusEventHandler,
-  KeyboardEventHandler
+  KeyboardEventHandler,
+  ReactNode
 } from 'react'
 
 interface InputProps {
@@ -34,7 +35,7 @@ interface InputProps {
   i18n?: {
     label?: string
     placeholder?: string
-    description?: string
+    description?: string | ReactNode
   }
   autoFocus?: boolean
   maxLength?: number
