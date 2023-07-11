@@ -74,7 +74,7 @@ export const LimitBar: FC<LimitBarProps> = ({
         <b>{formatNumeric(quantity)}</b>
         {limit === -1 ? <span> / &#8734;</span> : `/${formatNumeric(limit)} `}
         {shouldShowRegularLimit && (
-          <>
+          <Fragment>
             <span className={styles['regular-limit']}>({regularLimit})</span>
             {tooltipInQuantity && (
               <Fragment>
@@ -85,7 +85,7 @@ export const LimitBar: FC<LimitBarProps> = ({
                 </Tooltip>
               </Fragment>
             )}
-          </>
+          </Fragment>
         )}
       </span>
     </div>
