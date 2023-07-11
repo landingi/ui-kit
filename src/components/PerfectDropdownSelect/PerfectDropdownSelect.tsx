@@ -31,7 +31,7 @@ type Value = string | number | null
 
 type ItemBase = {
   value: Value
-  label: string
+  label: string | ReactNode
   description?: string
   disabled?: boolean
   tooltip?: string
@@ -226,7 +226,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
 
   const filterOptions = () =>
     options.filter(({ label }) => {
-      if (!searchValue) {
+      if (!searchValue || typeof label !== 'string') {
         return true
       }
 

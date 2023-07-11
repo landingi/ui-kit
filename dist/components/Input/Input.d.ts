@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FocusEventHandler, KeyboardEventHandler } from 'react';
+import { ChangeEventHandler, FocusEventHandler, KeyboardEventHandler, ReactNode } from 'react';
 export interface InputProps {
     className?: string | string[];
     onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -12,7 +12,7 @@ export interface InputProps {
     i18n?: {
         label?: string;
         placeholder?: string;
-        description?: string;
+        description?: string | ReactNode;
     };
     value?: string | number;
     autoFocus?: boolean;

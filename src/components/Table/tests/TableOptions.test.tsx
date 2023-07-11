@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { useTable } from '@components/Table'
 import type { Item } from '@components/Table/mocks'
 import { columns, i18n, mockData } from '@components/Table/mocks'
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
 
 describe('Table options', () => {
@@ -43,6 +43,16 @@ describe('Table options', () => {
 
     rerender(<Table />)
 
-    expect(screen.getByText('options-component')).toBeInTheDocument()
+    waitFor(() =>
+      expect(screen.getByText('options-component')).toBeInTheDocument()
+    )
+
+    const { selected } = result.current
+
+    expect(selected).toEqual([
+      'b9e739e2-b31d-4cd3-b1ff-a82b7b91d86b',
+      'ab904c1b-3077-43ce-958f-2ade367d787e',
+      'b9e739e2-b31d-4cd3-b1ff-a82b7b91d86b'
+    ])
   })
 })

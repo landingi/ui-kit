@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, FocusEventHandler, KeyboardEventHandler } from 'react';
+import { ChangeEventHandler, FC, FocusEventHandler, KeyboardEventHandler, ReactNode } from 'react';
 interface InputProps {
     className?: string | string[];
     field: {
@@ -22,7 +22,7 @@ interface InputProps {
     i18n?: {
         label?: string;
         placeholder?: string;
-        description?: string;
+        description?: string | ReactNode;
     };
     autoFocus?: boolean;
     maxLength?: number;

@@ -21,8 +21,8 @@ export interface EditableLabelProps {
   isDisabled?: boolean
   isClickable?: boolean
   tooltip?: {
-    focused: 'string'
-    notFocused: 'string'
+    focused: string
+    notFocused: string
   }
 }
 

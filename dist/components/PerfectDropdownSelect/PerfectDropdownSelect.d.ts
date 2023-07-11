@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 declare type Value = string | number | null;
 declare type ItemBase = {
     value: Value;
-    label: string;
+    label: string | ReactNode;
     description?: string;
     disabled?: boolean;
     tooltip?: string;

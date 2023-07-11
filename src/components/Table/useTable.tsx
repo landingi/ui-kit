@@ -1,3 +1,4 @@
+import { useSelect } from '@helpers/hooks/useSelect'
 import { getLocalStorage } from '@helpers/storage'
 import { useState } from 'react'
 
@@ -29,6 +30,17 @@ export const useTable = <Item extends ItemBase>({
 
   const pageCount = Math.ceil(pagination.total / pageLimit)
 
+  const values = data.map(({ identifier }) => identifier)
+
+  const {
+    selectAll,
+    isSelectedAll,
+    isSelectedAny,
+    selected,
+    isSelected,
+    select
+  } = useSelect<Item['identifier']>(values)
+
   return {
     Table: () => (
       <Table
@@ -43,10 +55,17 @@ export const useTable = <Item extends ItemBase>({
         handleRefresh={handleRefresh}
         pagination={pagination}
         i18n={i18n}
+        selectAll={selectAll}
+        isSelectedAll={isSelectedAll}
+        isSelectedAny={isSelectedAny}
+        isSelected={isSelected}
+        select={select}
+        selected={selected}
         {...rest}
       />
     ),
     pageLimit,
-    refresh
+    refresh,
+    selected
   }
 }

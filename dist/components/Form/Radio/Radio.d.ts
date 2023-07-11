@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-interface RadioProps {
+export interface RadioProps {
     field: {
         name: string;
         value: string;
@@ -13,4 +13,3 @@ interface RadioProps {
     disabled?: boolean;
 }
 export declare const Radio: FC<RadioProps>;
-export {};

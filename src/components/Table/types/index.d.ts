@@ -68,6 +68,12 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
     first: string
     last: string
   }
+  selectAll: () => void
+  isSelectedAll: boolean
+  isSelectedAny: boolean
+  isSelected: (identifier: Item['identifier']) => boolean
+  select: (identifier: Item['identifier']) => void
+  selected: Item['identifier'][]
 }
 
 export interface HeaderProps<Item extends ItemBase> {
