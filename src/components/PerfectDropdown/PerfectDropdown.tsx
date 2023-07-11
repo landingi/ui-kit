@@ -40,6 +40,9 @@ interface PerfectDropdownProps {
     | 'top-start'
     | 'top-center'
     | 'top-end'
+  fontColor?: 'color-1' | 'color-3'
+  fontWeight?: 400 | 600
+  hasHoverLabel?: boolean
   handleOnOpen?: () => void
   handleOnClose?: () => void
   alignment?: 'center' | 'spaced' | 'end'
@@ -69,6 +72,9 @@ export const PerfectDropdown = forwardRef<
       icon,
       label,
       size = 'medium',
+      fontColor = 'color-1',
+      fontWeight = 400,
+      hasHoverLabel = false,
       arrowType = 'caret',
       hasArrow = true,
       dropdownPlacement = 'bottom-end',
@@ -100,6 +106,8 @@ export const PerfectDropdown = forwardRef<
     const labelClasses = useStyles({
       [styles.trigger__label]: true,
       [styles['trigger__label--icon']]: icon,
+      [styles[`trigger__label--${fontColor}`]]: fontColor,
+      [styles[`trigger__label--${fontWeight}`]]: fontWeight,
       [styles['trigger__label--as-input']]: hasInput,
       [styles['trigger__label--placeholder']]: asPlaceholder,
       [styles['trigger__label--disabled']]: isOpenDisabled
@@ -111,6 +119,7 @@ export const PerfectDropdown = forwardRef<
         [styles['trigger--spaced']]: alignment === 'spaced',
         [styles['trigger--end']]: alignment === 'end',
         [styles['trigger--input']]: hasInput,
+        [styles['trigger--hover-label']]: hasHoverLabel,
         [styles['trigger--as-input']]: hasFullInputStyle,
         [styles['trigger--disabled']]: isOpenDisabled
       },
