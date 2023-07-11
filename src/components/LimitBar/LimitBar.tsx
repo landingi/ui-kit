@@ -36,7 +36,7 @@ export const LimitBar: FC<LimitBarProps> = ({
   const elementClasses = useStyles(
     {
       [styles['limit-bar']]: true,
-      [styles[`padding__${padding}`]]: padding
+      [styles[`padding-${padding}`]]: padding
     },
     className
   )

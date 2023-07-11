@@ -6,22 +6,6 @@
   color: $color-2;
   font-size: 12px;
 
-  &--padding-none {
-    padding: 0;
-  }
-
-  &--padding-tiny {
-    padding-top: $padding-tiny;
-  }
-
-  &--padding-small {
-    padding-top: $padding-small;
-  }
-
-  &--padding-medium {
-    padding-top: $padding-medium;
-  }
-
   .progressbar__wrapper {
     width: 100%;
     padding: 4px 0 9px;
@@ -30,5 +14,21 @@
   .regular-limit {
     color: #7B7B7B;
   }
+}
+
+.padding-none {
+  padding: 0;
+}
+
+.padding-tiny {
+  padding-top: $padding-tiny;
+}
+
+.padding-small {
+  padding-top: $padding-small;
+}
+
+.padding-medium {
+  padding-top: $padding-medium;
 }
 

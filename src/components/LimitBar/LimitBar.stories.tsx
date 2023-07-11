@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof LimitBar> = args => (
   <div>
     <Column style={{ width: 300, border: '1px solid' }}>
       <LimitBar {...args} />
+      <LimitBar {...args} />
     </Column>
   </div>
 )
@@ -23,7 +24,8 @@ export const Basic = Template.bind({})
 Basic.args = {
   limit: 20000,
   quantity: 10000,
-  limitText: 'Limit'
+  limitText: 'Limit',
+  padding: 'medium'
 }
 
 export const Unlimited = Template.bind({})
