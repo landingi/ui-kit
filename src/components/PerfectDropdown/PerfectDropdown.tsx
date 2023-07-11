@@ -197,9 +197,9 @@ export const PerfectDropdown = forwardRef<
       switch (arrowType) {
         case 'caret':
           return isOpen ? (
-            <Icon icon='icon-caret-up' />
+            <Icon icon='icon-caret-up' color={fontColor} />
           ) : (
-            <Icon icon='icon-caret-down' />
+            <Icon icon='icon-caret-down' color={fontColor} />
           )
         default:
           return <Icon icon='icon-ellipsis-v' />

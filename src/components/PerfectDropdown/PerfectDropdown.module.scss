@@ -86,11 +86,11 @@
       cursor: not-allowed;
     }
 
-    &--accent-1 {
+    &--color-1 {
       color: $color-1;
     }
 
-    &--accent-3 {
+    &--color-3 {
       color: $color-3;
     }
 
@@ -111,6 +111,11 @@
   &--hover-label {
     &:hover {
       color: $color-1;
+
+      i,
+      svg {
+        color: $color-1;
+      }
     }
   }
 
