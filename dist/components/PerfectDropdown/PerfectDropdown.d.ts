@@ -4,6 +4,9 @@ interface PerfectDropdownProps {
     arrowType?: 'caret' | 'dots';
     size?: 'mini' | 'small' | 'medium' | 'big' | 'large' | 'huge' | 'extra-huge' | 'auto' | 'fixed';
     dropdownPlacement?: 'bottom-start' | 'bottom-end' | 'bottom-center' | 'top-start' | 'top-center' | 'top-end';
+    fontColor?: 'color-1' | 'color-3';
+    fontWeight?: 400 | 600;
+    hasHoverLabel?: boolean;
     handleOnOpen?: () => void;
     handleOnClose?: () => void;
     alignment?: 'center' | 'spaced' | 'end';
