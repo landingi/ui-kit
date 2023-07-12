@@ -109,7 +109,6 @@ export const PerfectDropdown = forwardRef<
       [styles[`trigger__label--${fontColor}`]]: fontColor,
       [styles[`trigger__label--${fontWeight}`]]: fontWeight,
       [styles['trigger__label--as-input']]: hasInput,
-      [styles['trigger__label--hover']]: hasHoverLabel,
       [styles['trigger__label--placeholder']]: asPlaceholder,
       [styles['trigger__label--disabled']]: isOpenDisabled
     })
