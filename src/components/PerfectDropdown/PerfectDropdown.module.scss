@@ -68,6 +68,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     line-height: normal;
+    
+    &--hover {
+      &:hover {
+        color: $color-1;
+    }
 
     &--placeholder {
       color: $color-8;
@@ -109,9 +114,6 @@
   }
 
   &--hover-label {
-    &:hover {
-      color: $color-1;
-
       i,
       svg {
         color: $color-1;
