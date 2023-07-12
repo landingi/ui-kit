@@ -10,8 +10,9 @@ import { FC, Fragment } from 'react'
 
 import styles from './LimitBar.module.scss'
 
+type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium'
 export interface LimitBarProps {
-  padding: string
+  padding: LimitBarPadding
   limit: number
   quantity: number
   regularLimit: number
@@ -46,7 +47,7 @@ export const LimitBar: FC<LimitBarProps> = ({
       <span>
         {limitText}
 
-        {tooltip && (
+        {tooltip ? (
           <Fragment>
             <Spreader spread='mini' />
 
@@ -54,7 +55,7 @@ export const LimitBar: FC<LimitBarProps> = ({
               <Icon icon='icon-exclamation-circle' />
             </Tooltip>
           </Fragment>
-        )}
+        ) : null}
       </span>
 
       {!isUnlimited(limit) ? (
@@ -72,11 +73,15 @@ export const LimitBar: FC<LimitBarProps> = ({
 
       <span>
         <b>{formatNumeric(quantity)}</b>
-        {limit === -1 ? <span> / &#8734;</span> : `/${formatNumeric(limit)} `}
+        {isUnlimited(limit) ? (
+          <span> / &#8734;</span>
+        ) : (
+          `/${formatNumeric(limit)} `
+        )}
         {shouldShowRegularLimit && (
           <Fragment>
             <span className={styles['regular-limit']}>({regularLimit})</span>
-            {tooltipInQuantity && (
+            {tooltipInQuantity ? (
               <Fragment>
                 <Spreader spread='mini' />
 
@@ -84,7 +89,7 @@ export const LimitBar: FC<LimitBarProps> = ({
                   <Icon icon='icon-exclamation-circle' />
                 </Tooltip>
               </Fragment>
-            )}
+            ) : null}
           </Fragment>
         )}
       </span>

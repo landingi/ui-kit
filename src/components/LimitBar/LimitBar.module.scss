@@ -16,19 +16,20 @@
   }
 }
 
-.padding-none {
-  padding: 0;
-}
+.padding {
+  &-none {
+    padding: 0;
+  }
 
-.padding-tiny {
-  padding-top: $padding-tiny;
-}
+  &-tiny {
+    padding-top: $padding-tiny;
+  }
 
-.padding-small {
-  padding-top: $padding-small;
+  &-small {
+    padding-top: $padding-small;
+  }
+  
+  &-medium {
+    padding-top: $padding-medium;
+  }
 }
-
-.padding-medium {
-  padding-top: $padding-medium;
-}
-
