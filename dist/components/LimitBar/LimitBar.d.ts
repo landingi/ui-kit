@@ -1,6 +1,7 @@
 import { FC } from 'react';
+declare type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium';
 export interface LimitBarProps {
-    padding: string;
+    padding: LimitBarPadding;
     limit: number;
     quantity: number;
     regularLimit: number;
@@ -11,3 +12,4 @@ export interface LimitBarProps {
     className: string;
 }
 export declare const LimitBar: FC<LimitBarProps>;
+export {};
