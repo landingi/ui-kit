@@ -11,28 +11,27 @@ import { FC, Fragment } from 'react'
 
 import styles from './LimitBar.module.scss'
 
-type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium'
+type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium' | 'regular'
+
 export interface LimitBarProps {
-  padding: LimitBarPadding
+  padding?: LimitBarPadding
   limit: number
   quantity: number
-  regularLimit: number
+  regularLimit?: number
   limitText: string
-  tooltip: string
-  tooltipInQuantity: string
-  shouldShowRegularLimit: boolean
-  className: string
+  tooltip?: string
+  tooltipInQuantity?: string
+  className?: string
 }
 
 export const LimitBar: FC<LimitBarProps> = ({
-  padding,
+  padding = 'small',
   limit,
   quantity,
-  regularLimit,
+  regularLimit = null,
   limitText,
   tooltip,
   tooltipInQuantity,
-  shouldShowRegularLimit,
   className
 }) => {
   const elementClasses = useStyles(
@@ -53,7 +52,7 @@ export const LimitBar: FC<LimitBarProps> = ({
             <Spreader spread='mini' />
 
             <Tooltip content={tooltip}>
-              <Icon icon='icon-info-circle' />
+              <Icon icon='icon-info-circle' size={10} />
             </Tooltip>
           </Fragment>
         ) : null}
@@ -75,26 +74,26 @@ export const LimitBar: FC<LimitBarProps> = ({
       <span>
         <b>{formatNumeric(quantity)}</b>
         {isUnlimited(limit) ? (
-          <span> / &#8734;</span>
+          <span> / &#8734; </span>
         ) : (
           `/${formatNumeric(limit)} `
         )}
-        {shouldShowRegularLimit && (
-          <Fragment>
-            <span className={styles['regular-limit']}>
-              ({formatNumberWithSpaces(regularLimit)})
-            </span>
-            {tooltipInQuantity ? (
-              <Fragment>
-                <Spreader spread='mini' />
 
-                <Tooltip content={tooltipInQuantity}>
-                  <Icon icon='icon-info-circle' />
-                </Tooltip>
-              </Fragment>
-            ) : null}
+        {regularLimit ? (
+          <span className={styles['regular-limit']}>
+            ({formatNumberWithSpaces(regularLimit)})
+          </span>
+        ) : null}
+
+        {tooltipInQuantity ? (
+          <Fragment>
+            <Spreader spread='mini' />
+
+            <Tooltip content={tooltipInQuantity}>
+              <Icon icon='icon-info-circle' size={10} />
+            </Tooltip>
           </Fragment>
-        )}
+        ) : null}
       </span>
     </div>
   )

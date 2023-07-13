@@ -6,7 +6,12 @@ export default {
   title: 'LimitBar',
   component: LimitBar,
   argTypes: {
-    className: { control: 'text' }
+    className: { control: 'text' },
+    limit: { control: 'number' },
+    quantity: { control: 'number' },
+    regularLimit: { control: 'number' },
+    tooltip: { control: 'text' },
+    tooltipInQuantity: { control: 'text' }
   }
 } as ComponentMeta<typeof LimitBar>
 
