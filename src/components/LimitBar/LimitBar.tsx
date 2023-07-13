@@ -28,7 +28,7 @@ export const LimitBar: FC<LimitBarProps> = ({
   padding = 'small',
   limit,
   quantity,
-  regularLimit = null,
+  regularLimit,
   limitText,
   tooltip,
   tooltipInQuantity,
