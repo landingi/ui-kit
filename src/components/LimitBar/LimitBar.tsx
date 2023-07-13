@@ -3,6 +3,7 @@ import ProgressBar from '@components/ProgressBar'
 import Spreader from '@components/Spreader'
 import { Tooltip } from '@components/Tooltip'
 import { formatNumeric } from '@helpers/data'
+import { formatNumberWithSpaces } from '@helpers/formatNumberWithSpaces'
 import { getVariant } from '@helpers/getVariant'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { isUnlimited } from '@helpers/isUnlimited'
@@ -80,7 +81,9 @@ export const LimitBar: FC<LimitBarProps> = ({
         )}
         {shouldShowRegularLimit && (
           <Fragment>
-            <span className={styles['regular-limit']}>({regularLimit})</span>
+            <span className={styles['regular-limit']}>
+              ({formatNumberWithSpaces(regularLimit)})
+            </span>
             {tooltipInQuantity ? (
               <Fragment>
                 <Spreader spread='mini' />
