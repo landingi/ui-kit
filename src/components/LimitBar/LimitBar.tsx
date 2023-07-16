@@ -12,8 +12,7 @@ import { FC, Fragment } from 'react'
 import styles from './LimitBar.module.scss'
 
 type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium' | 'regular'
-
-export interface LimitBarProps {
+export interface CommonLimitBarProps {
   padding?: LimitBarPadding
   limit: number
   quantity: number
@@ -21,17 +20,27 @@ export interface LimitBarProps {
   limitText: string
   tooltip?: string
   tooltipInQuantity?: string
+  shouldShowRegularLimit?: boolean
   className?: string
 }
 
+type ShowRegulatLimitProps = {
+  regulatLimit: number
+  tooltipInQuantity: string
+  shouldShowRegularLimit: true
+}
+
+export type LimitBarProps = ShowRegulatLimitProps & CommonLimitBarProps
+
 export const LimitBar: FC<LimitBarProps> = ({
-  padding = 'small',
+  padding,
   limit,
   quantity,
   regularLimit,
   limitText,
   tooltip,
   tooltipInQuantity,
+  shouldShowRegularLimit,
   className
 }) => {
   const elementClasses = useStyles(
@@ -52,7 +61,7 @@ export const LimitBar: FC<LimitBarProps> = ({
             <Spreader spread='mini' />
 
             <Tooltip content={tooltip}>
-              <Icon icon='icon-info-circle' size={10} />
+              <Icon icon='icon-info-circle' />
             </Tooltip>
           </Fragment>
         ) : null}
@@ -73,27 +82,32 @@ export const LimitBar: FC<LimitBarProps> = ({
 
       <span>
         <b>{formatNumeric(quantity)}</b>
+
         {isUnlimited(limit) ? (
-          <span> / &#8734; </span>
+          <span> / &#8734;</span>
         ) : (
           `/${formatNumeric(limit)} `
         )}
 
-        {regularLimit ? (
-          <span className={styles['regular-limit']}>
-            ({formatNumberWithSpaces(regularLimit)})
-          </span>
-        ) : null}
-
-        {tooltipInQuantity ? (
+        {shouldShowRegularLimit && (
           <Fragment>
-            <Spreader spread='mini' />
+            {regularLimit ? (
+              <span className={styles['regular-limit']}>
+                ({formatNumberWithSpaces(regularLimit)})
+              </span>
+            ) : null}
 
-            <Tooltip content={tooltipInQuantity}>
-              <Icon icon='icon-info-circle' size={10} />
-            </Tooltip>
+            {tooltipInQuantity ? (
+              <Fragment>
+                <Spreader spread='mini' />
+
+                <Tooltip content={tooltipInQuantity}>
+                  <Icon icon='icon-info-circle' />
+                </Tooltip>
+              </Fragment>
+            ) : null}
           </Fragment>
-        ) : null}
+        )}
       </span>
     </div>
   )

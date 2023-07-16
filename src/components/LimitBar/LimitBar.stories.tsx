@@ -40,3 +40,14 @@ Unlimited.args = {
   quantity: 10000,
   limitText: 'Unlimited'
 }
+
+export const RegularLimit = Template.bind({})
+
+RegularLimit.args = {
+  limit: 20000,
+  quantity: 10000,
+  limitText: 'Regular Limit',
+  regulatLimit: 30000,
+  tooltipInQuantity: 'Tooltip',
+  shouldShowRegularLimit: true
+}
