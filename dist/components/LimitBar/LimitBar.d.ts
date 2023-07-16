@@ -12,7 +12,7 @@ export interface CommonLimitBarProps {
     className?: string;
 }
 declare type ShowRegulatLimitProps = {
-    regulatLimit: number;
+    regularLimit: number;
     tooltipInQuantity: string;
     shouldShowRegularLimit: boolean;
 };
