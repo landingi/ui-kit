@@ -27,7 +27,7 @@ export interface CommonLimitBarProps {
 type ShowRegulatLimitProps = {
   regulatLimit: number
   tooltipInQuantity: string
-  shouldShowRegularLimit: true
+  shouldShowRegularLimit: boolean
 }
 
 export type LimitBarProps = ShowRegulatLimitProps & CommonLimitBarProps
