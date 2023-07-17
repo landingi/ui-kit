@@ -47,7 +47,6 @@ RegularLimit.args = {
   limit: 20000,
   quantity: 10000,
   limitText: 'Regular Limit',
-  regulatLimit: 30000,
-  tooltipInQuantity: 'Tooltip',
-  shouldShowRegularLimit: true
+  regularLimit: 30000,
+  tooltipInQuantity: 'Tooltip'
 }

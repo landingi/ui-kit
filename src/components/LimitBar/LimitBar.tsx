@@ -12,36 +12,26 @@ import { FC, Fragment } from 'react'
 import styles from './LimitBar.module.scss'
 
 type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium' | 'regular'
-export interface CommonLimitBarProps {
+export interface LimitBarProps {
+  className?: string
   padding?: LimitBarPadding
   limit: number
   quantity: number
-  regularLimit?: number
   limitText: string
   tooltip?: string
+  regularLimit?: number
   tooltipInQuantity?: string
-  shouldShowRegularLimit?: boolean
-  className?: string
 }
-
-type ShowRegulatLimitProps = {
-  regularLimit: number
-  tooltipInQuantity: string
-  shouldShowRegularLimit: boolean
-}
-
-export type LimitBarProps = ShowRegulatLimitProps & CommonLimitBarProps
 
 export const LimitBar: FC<LimitBarProps> = ({
-  padding,
+  className = '',
+  padding = 'medium',
   limit,
   quantity,
-  regularLimit,
   limitText,
   tooltip,
-  tooltipInQuantity,
-  shouldShowRegularLimit,
-  className
+  regularLimit,
+  tooltipInQuantity
 }) => {
   const elementClasses = useStyles(
     {
@@ -89,25 +79,19 @@ export const LimitBar: FC<LimitBarProps> = ({
           `/${formatNumeric(limit)} `
         )}
 
-        {shouldShowRegularLimit && (
+        {regularLimit && tooltipInQuantity ? (
           <Fragment>
-            {regularLimit ? (
-              <span className={styles['regular-limit']}>
-                ({formatNumberWithSpaces(regularLimit)})
-              </span>
-            ) : null}
+            <span className={styles['regular-limit']}>
+              ({formatNumberWithSpaces(regularLimit)})
+            </span>
 
-            {tooltipInQuantity ? (
-              <Fragment>
-                <Spreader spread='mini' />
+            <Spreader spread='mini' />
 
-                <Tooltip content={tooltipInQuantity}>
-                  <Icon icon='icon-info-circle' />
-                </Tooltip>
-              </Fragment>
-            ) : null}
+            <Tooltip content={tooltipInQuantity}>
+              <Icon icon='icon-info-circle' />
+            </Tooltip>
           </Fragment>
-        )}
+        ) : null}
       </span>
     </div>
   )
