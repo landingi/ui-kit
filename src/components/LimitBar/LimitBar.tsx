@@ -51,7 +51,7 @@ export const LimitBar: FC<LimitBarProps> = ({
             <Spreader spread='mini' />
 
             <Tooltip content={tooltip}>
-              <Icon icon='icon-info-circle' />
+              <Icon icon='icon-info-circle' size={10} />
             </Tooltip>
           </Fragment>
         ) : null}
@@ -90,7 +90,7 @@ export const LimitBar: FC<LimitBarProps> = ({
             <Spreader spread='mini' />
 
             <Tooltip content={tooltipInQuantity}>
-              <Icon icon='icon-info-circle' />
+              <Icon icon='icon-info-circle' size={10} />
             </Tooltip>
           </Fragment>
         ) : null}
