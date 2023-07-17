@@ -79,12 +79,14 @@ export const LimitBar: FC<LimitBarProps> = ({
           `/${formatNumeric(limit)} `
         )}
 
-        {regularLimit && tooltipInQuantity ? (
-          <Fragment>
-            <span className={styles['regular-limit']}>
-              ({formatNumberWithSpaces(regularLimit)})
-            </span>
+        {regularLimit ? (
+          <span className={styles['regular-limit']}>
+            ({formatNumberWithSpaces(regularLimit)})
+          </span>
+        ) : null}
 
+        {tooltipInQuantity ? (
+          <Fragment>
             <Spreader spread='mini' />
 
             <Tooltip content={tooltipInQuantity}>
