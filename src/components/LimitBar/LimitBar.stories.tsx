@@ -6,7 +6,12 @@ export default {
   title: 'LimitBar',
   component: LimitBar,
   argTypes: {
-    className: { control: 'text' }
+    className: { control: 'text' },
+    limit: { control: 'number' },
+    quantity: { control: 'number' },
+    regularLimit: { control: 'number' },
+    tooltip: { control: 'text' },
+    tooltipInQuantity: { control: 'text' }
   }
 } as ComponentMeta<typeof LimitBar>
 
@@ -34,4 +39,14 @@ Unlimited.args = {
   limit: -1,
   quantity: 10000,
   limitText: 'Unlimited'
+}
+
+export const RegularLimit = Template.bind({})
+
+RegularLimit.args = {
+  limit: 20000,
+  quantity: 10000,
+  limitText: 'Regular Limit',
+  regularLimit: 30000,
+  tooltipInQuantity: 'Tooltip'
 }
