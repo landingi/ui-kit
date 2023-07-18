@@ -79,7 +79,7 @@ export const LimitBar: FC<LimitBarProps> = ({
           `/${formatNumeric(limit)} `
         )}
 
-        {regularLimit === -1 ? (
+        {regularLimit && isUnlimited(regularLimit) ? (
           <span className={styles['regular-limit']}>(∞)</span>
         ) : (
           regularLimit && (
