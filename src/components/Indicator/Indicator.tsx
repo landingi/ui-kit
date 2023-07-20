@@ -9,12 +9,6 @@ export interface IndicatorProps {
   content?: string
   isAlert?: boolean
   variant?: 'warning' | 'alert'
-  position?: {
-    top?: number | string
-    right?: number | string
-    bottom?: number | string
-    left?: number | string
-  }
   onClick?: MouseEventHandler<HTMLSpanElement>
 }
 
@@ -24,7 +18,6 @@ export const Indicator: FC<IndicatorProps> = ({
   content,
   isAlert = false,
   variant = 'alert',
-  position = { top: 0, right: 6 },
   onClick = () => {}
 }) => {
   const elementStyles = useStyles(
@@ -45,9 +38,7 @@ export const Indicator: FC<IndicatorProps> = ({
 
   return (
     <span className={elementStyles} onClick={onClick}>
-      <span className={indicatorStyles} style={{ ...position }}>
-        {content}
-      </span>
+      <span className={indicatorStyles}>{content}</span>
 
       {children}
     </span>
