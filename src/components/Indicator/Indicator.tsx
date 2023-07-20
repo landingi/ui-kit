@@ -3,11 +3,12 @@ import { FC, MouseEventHandler, ReactNode } from 'react'
 
 import styles from './Indicator.module.scss'
 
-interface IndicatorProps {
+export interface IndicatorProps {
   children: ReactNode
   className?: string | string[]
   content?: string
   isAlert?: boolean
+  variant?: 'warning' | 'alert'
   onClick?: MouseEventHandler<HTMLSpanElement>
 }
 
@@ -16,6 +17,7 @@ export const Indicator: FC<IndicatorProps> = ({
   className = '',
   content,
   isAlert = false,
+  variant = 'alert',
   onClick = () => {}
 }) => {
   const elementStyles = useStyles(
@@ -28,7 +30,8 @@ export const Indicator: FC<IndicatorProps> = ({
   const indicatorStyles = useStyles(
     {
       [styles.indicator__element]: true,
-      [styles['indicator__element--isAlert']]: isAlert
+      [styles['indicator__element--isAlert']]: isAlert,
+      [styles[`indicator__element--${variant}`]]: variant
     },
     className
   )

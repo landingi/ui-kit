@@ -11,9 +11,18 @@
     z-index: $z-index-indicator;
     min-width: 10px;
     min-height: 10px;
+    opacity: 0;
 
     &--isAlert {
+      opacity: 1;
+    }
+
+    &--alert {
       background: $color-alert;
+    }
+
+    &--warning {
+      background: $color-warning;
     }
   }
 }
