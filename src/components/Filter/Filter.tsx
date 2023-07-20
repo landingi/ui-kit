@@ -8,7 +8,7 @@ import { setLocalStorage } from '@helpers/storage'
 import { FC, ReactNode, useState } from 'react'
 
 export interface FilterProps {
-  values: { label: string; value: string | number }[]
+  values: { label: ReactNode; value: string }[]
   setValue?: (value: string | number) => void
   initialValue: string | number
   localStorageKey?: string
@@ -40,7 +40,7 @@ export const Filter: FC<FilterProps> = ({
 
   const [filterLabel, setLabel] = useState(findInitialValue())
 
-  const setFilter = (label: string, value: string | number) => {
+  const setFilter = (label: ReactNode, value: string | number) => {
     setLabel(label)
     setValue?.(value)
 
