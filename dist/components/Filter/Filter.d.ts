@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 export interface FilterProps {
     values: {
-        label: string;
-        value: string | number;
+        label: ReactNode;
+        value: string;
     }[];
     setValue?: (value: string | number) => void;
     initialValue: string | number;
