@@ -80,7 +80,7 @@ export const Message: FC<MessageProps> = ({
         <Fragment>
           <Spacer space='tiny' />
 
-          <Heading align='center' level={messageLevel}>
+          <Heading color='gray' align='center' level={messageLevel}>
             {message}
           </Heading>
         </Fragment>

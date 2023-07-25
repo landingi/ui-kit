@@ -10,7 +10,7 @@ interface HeadingProps {
   align?: 'left' | 'center' | 'right'
   margin?: 'none'
   bold?: boolean
-  color?: 'white' | 'brand'
+  color?: 'white' | 'brand' | 'gray'
 }
 
 export const Heading: FC<HeadingProps> = ({

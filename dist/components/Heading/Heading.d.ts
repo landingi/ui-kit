@@ -6,7 +6,7 @@ interface HeadingProps {
     align?: 'left' | 'center' | 'right';
     margin?: 'none';
     bold?: boolean;
-    color?: 'white' | 'brand';
+    color?: 'white' | 'brand' | 'gray';
 }
 export declare const Heading: FC<HeadingProps>;
 export {};
