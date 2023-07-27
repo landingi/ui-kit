@@ -235,7 +235,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
         )}
       </label>
 
-      <Spacer space='tiny' />
+      <Spacer space='small' />
 
       {!isEmpty(selectedOptions) && (
         <div className={selectedOptionsStyles}>
