@@ -236,38 +236,40 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       </label>
 
       {!isEmpty(selectedOptions) && (
-        <div className={selectedOptionsStyles}>
+        <Fragment>
           <Spacer space='mini' />
 
           <Spacer space='tiny' />
 
-          {selectedOptions
-            .filter(({ selected }) => selected)
-            .map(({ label, value }) => (
-              <Badge
-                className={styles['icon-pack-badge']}
-                type='accent-8'
-                key={value}
-              >
-                <Row alignItems='center'>
-                  <span className={styles['icon-pack-badge__text']}>
-                    {label}
-                  </span>
+          <div className={selectedOptionsStyles}>
+            {selectedOptions
+              .filter(({ selected }) => selected)
+              .map(({ label, value }) => (
+                <Badge
+                  className={styles['icon-pack-badge']}
+                  type='accent-8'
+                  key={value}
+                >
+                  <Row alignItems='center'>
+                    <span className={styles['icon-pack-badge__text']}>
+                      {label}
+                    </span>
 
-                  <span
-                    className={styles['icon-pack-badge__close']}
-                    onClick={() => removeValue(value)}
-                  >
-                    <Icon icon='icon-remove' color='white' />
-                  </span>
-                </Row>
-              </Badge>
-            ))}
+                    <span
+                      className={styles['icon-pack-badge__close']}
+                      onClick={() => removeValue(value)}
+                    >
+                      <Icon icon='icon-remove' color='white' />
+                    </span>
+                  </Row>
+                </Badge>
+              ))}
+          </div>
 
           <Spacer space='medium' />
 
           <Spacer space='mini' />
-        </div>
+        </Fragment>
       )}
     </div>
   )
