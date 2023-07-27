@@ -266,11 +266,11 @@ export const MultiSelect: FC<MultiSelectProps> = ({
               ))}
           </div>
 
-          <Spacer space='medium' />
-
-          <Spacer space='mini' />
+          <Spacer space='small' />
         </Fragment>
       )}
+
+      <Spacer space='mini' />
     </div>
   )
 }
