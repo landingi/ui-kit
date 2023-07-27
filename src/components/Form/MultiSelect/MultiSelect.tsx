@@ -235,6 +235,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
         )}
       </label>
 
+      <Spacer space='mini' />
+
+      <Spacer space='tiny' />
+
       <div className={selectedOptionsStyles}>
         {selectedOptions
           .filter(({ selected }) => selected)
