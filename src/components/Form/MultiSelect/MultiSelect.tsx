@@ -236,9 +236,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       </label>
 
       {!isEmpty(selectedOptions) && (
-        <Fragment>
-          <Spacer space='tiny' />
-
+        <div>
           <div className={selectedOptionsStyles}>
             {selectedOptions
               .filter(({ selected }) => selected)
@@ -263,10 +261,8 @@ export const MultiSelect: FC<MultiSelectProps> = ({
                 </Badge>
               ))}
           </div>
-        </Fragment>
+        </div>
       )}
-
-      <Spacer space='tiny' />
     </div>
   )
 }
