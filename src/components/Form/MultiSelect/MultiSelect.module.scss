@@ -8,14 +8,14 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    max-height: 250px;
+    max-height: 230px;
     overflow-y: auto;
   
     &__selected-options {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
-      height: 20px;
+      min-height: 20px;
     }
   }
   
