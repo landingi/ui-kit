@@ -20,6 +20,7 @@ interface Option {
   value: Value
   icon?: string
   selected?: boolean
+  matchesSearchPhrase?: boolean
 }
 
 export interface EmptySearchResultsComponentProps {
@@ -99,18 +100,30 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
   const filterOptions = (value: string, options: Option[]) => {
     if (value.length < 3) {
-      setFilteredOptions(options)
+      const filteredResults = options.map(option => ({
+        ...option,
+        matchesSearchPhrase: false
+      }))
+
+      setFilteredOptions(filteredResults)
 
       return
     }
 
     const lowerCaseSearch = value.toLowerCase()
-    const filteredResults = options.filter(
-      item =>
-        item.label.toLowerCase().search(lowerCaseSearch) !== -1 || item.selected
-    )
+    const searchResults = options
+      .filter(
+        option =>
+          option.label.toLowerCase().search(lowerCaseSearch) !== -1 ||
+          option.selected
+      )
+      .map(option => ({
+        ...option,
+        matchesSearchPhrase:
+          option.label.toLowerCase().search(lowerCaseSearch) !== -1
+      }))
 
-    setFilteredOptions(filteredResults)
+    setFilteredOptions(searchResults)
   }
 
   const handleSearch = debounce(
@@ -199,8 +212,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const shouldShowEmptySearchResultsComponent = () =>
-    (searchPhrase && isEmpty(filteredOptions)) ||
-    filteredOptions.every(option => option.selected)
+    !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
@@ -231,6 +243,8 @@ export const MultiSelect: FC<MultiSelectProps> = ({
             </BoxOutline>
           ))}
         </div>
+
+        <Spacer space='tiny' />
 
         {shouldShowEmptySearchResultsComponent() && (
           <EmptySearchResultsComponent
