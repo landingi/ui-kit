@@ -198,6 +198,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     filterOptions(searchPhrase, mappedOptions)
   }
 
+  const shouldShowEmptySearchResultsComponent = () =>
+    (searchPhrase && isEmpty(filteredOptions)) ||
+    filteredOptions.every(option => option.selected)
+
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
       <Search i18n={{ placeholder }} onChange={handleSearch} tag='div' />
@@ -219,7 +223,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
             >
               {icon && (
                 <Fragment>
-                  <Image src={icon} size={17} /> <Spreader spread='tiny' />
+                  <Image src={icon} size='17px' /> <Spreader spread='tiny' />
                 </Fragment>
               )}
 
@@ -227,7 +231,8 @@ export const MultiSelect: FC<MultiSelectProps> = ({
             </BoxOutline>
           ))}
         </div>
-        {isEmpty(filteredOptions) && (
+
+        {shouldShowEmptySearchResultsComponent() && (
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}
             searchPhrase={searchPhrase}
