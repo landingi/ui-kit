@@ -212,7 +212,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const shouldShowEmptySearchResultsComponent = () =>
-    !filteredOptions.some(option => option.matchesSearchPhrase)
+    searchPhrase && !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
