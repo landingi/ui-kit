@@ -211,7 +211,6 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const shouldShowEmptySearchResultsComponent = () =>
-    searchPhrase.length >= 3 &&
     !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
