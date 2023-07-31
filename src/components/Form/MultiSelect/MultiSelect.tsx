@@ -111,16 +111,12 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
     const lowerCaseSearch = value.toLowerCase()
     const searchResults = options
-      .filter(
-        option =>
-          option.label.toLowerCase().search(lowerCaseSearch) !== -1 ||
-          option.selected
-      )
       .map(option => ({
         ...option,
         matchesSearchPhrase:
           option.label.toLowerCase().search(lowerCaseSearch) !== -1
       }))
+      .filter(option => option.matchesSearchPhrase || option.selected)
 
     setFilteredOptions(searchResults)
   }
