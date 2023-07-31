@@ -5,7 +5,6 @@ import Image from '@components/Image'
 import { Search } from '@components/Search'
 import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
-import { isEmpty } from '@helpers/data'
 import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, Fragment, useState } from 'react'
@@ -20,6 +19,7 @@ interface Option {
   value: Value
   icon?: string
   selected?: boolean
+  matchesSearchPhrase?: boolean
 }
 
 export interface EmptySearchResultsComponentProps {
@@ -99,18 +99,26 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
   const filterOptions = (value: string, options: Option[]) => {
     if (value.length < 3) {
-      setFilteredOptions(options)
+      const filteredResults = options.map(option => ({
+        ...option,
+        matchesSearchPhrase: false
+      }))
+
+      setFilteredOptions(filteredResults)
 
       return
     }
 
     const lowerCaseSearch = value.toLowerCase()
-    const filteredResults = options.filter(
-      item =>
-        item.label.toLowerCase().search(lowerCaseSearch) !== -1 || item.selected
-    )
+    const searchResults = options
+      .map(option => ({
+        ...option,
+        matchesSearchPhrase:
+          option.label.toLowerCase().search(lowerCaseSearch) !== -1
+      }))
+      .filter(option => option.matchesSearchPhrase || option.selected)
 
-    setFilteredOptions(filteredResults)
+    setFilteredOptions(searchResults)
   }
 
   const handleSearch = debounce(
@@ -198,6 +206,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     filterOptions(searchPhrase, mappedOptions)
   }
 
+  const shouldShowEmptySearchResultsComponent = () =>
+    searchPhrase.length >= 3 &&
+    !filteredOptions.some(option => option.matchesSearchPhrase)
+
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
       <Search i18n={{ placeholder }} onChange={handleSearch} tag='div' />
@@ -219,7 +231,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
             >
               {icon && (
                 <Fragment>
-                  <Image src={icon} size={17} /> <Spreader spread='tiny' />
+                  <Image src={icon} size='17px' /> <Spreader spread='tiny' />
                 </Fragment>
               )}
 
@@ -227,7 +239,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
             </BoxOutline>
           ))}
         </div>
-        {isEmpty(filteredOptions) && (
+
+        <Spacer space='tiny' />
+
+        {shouldShowEmptySearchResultsComponent() && (
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}
             searchPhrase={searchPhrase}
