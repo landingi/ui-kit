@@ -97,10 +97,8 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   )
   const [searchPhrase, setSearchPhrase] = useState('')
 
-  const isSearchPhraseLongEnough = () => searchPhrase.length > 3
-
   const filterOptions = (value: string, options: Option[]) => {
-    if (!isSearchPhraseLongEnough()) {
+    if (searchPhrase.length < 3) {
       const filteredResults = options.map(option => ({
         ...option,
         matchesSearchPhrase: false
@@ -213,7 +211,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const shouldShowEmptySearchResultsComponent = () =>
-    isSearchPhraseLongEnough() &&
+    searchPhrase.length >= 3 &&
     !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
