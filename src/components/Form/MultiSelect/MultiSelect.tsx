@@ -5,7 +5,6 @@ import Image from '@components/Image'
 import { Search } from '@components/Search'
 import { Spacer } from '@components/Spacer'
 import Spreader from '@components/Spreader'
-import { isEmpty } from '@helpers/data'
 import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, Fragment, useState } from 'react'
@@ -98,8 +97,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   )
   const [searchPhrase, setSearchPhrase] = useState('')
 
+  const isSearchPhraseLongEnough = () => searchPhrase.length > 3
+
   const filterOptions = (value: string, options: Option[]) => {
-    if (value.length < 3) {
+    if (!isSearchPhraseLongEnough()) {
       const filteredResults = options.map(option => ({
         ...option,
         matchesSearchPhrase: false
@@ -212,7 +213,8 @@ export const MultiSelect: FC<MultiSelectProps> = ({
   }
 
   const shouldShowEmptySearchResultsComponent = () =>
-    searchPhrase && !filteredOptions.some(option => option.matchesSearchPhrase)
+    isSearchPhraseLongEnough() &&
+    !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
