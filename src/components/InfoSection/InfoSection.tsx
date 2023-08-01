@@ -56,7 +56,7 @@ export const InfoSection: FC<InfoSectionProps> = ({
       <div>
         {image && (
           <Fragment>
-            <Image src={image.src} size={image.size} />
+            <Image src={image.src} size={`${image.size}px`} />
 
             <Spacer space='medium' />
           </Fragment>
@@ -75,7 +75,7 @@ export const InfoSection: FC<InfoSectionProps> = ({
       </div>
 
       <div>
-        <Image size={526} src={url} />
+        <Image size='526px' src={url} />
       </div>
     </div>
   )
