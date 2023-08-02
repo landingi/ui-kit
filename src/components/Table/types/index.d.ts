@@ -75,6 +75,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
+  hasLimitOfSelect?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
