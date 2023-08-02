@@ -23,7 +23,7 @@ export const Toast = () => {
   const handleToastData = (
     newMessage: string,
     newType: Type,
-    timeout: number = 5000
+    timeout: number = 99999999
   ) => {
     setMessage(newMessage)
     setType(newType)
