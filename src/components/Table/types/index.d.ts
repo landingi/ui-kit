@@ -51,6 +51,7 @@ export interface UseTableProps<Item extends ItemBase> {
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
   hasLimitOfSelect?: boolean
+  hideOptions?: boolean
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -76,6 +77,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
   hasLimitOfSelect?: boolean
+  hideOptions?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -96,6 +98,7 @@ export interface HeaderProps<Item extends ItemBase> {
   handleRefresh: () => void
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  hideOptions?: boolean
 }
 
 export interface BodyProps<Item extends ItemBase> {

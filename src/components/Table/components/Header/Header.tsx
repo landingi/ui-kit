@@ -19,7 +19,8 @@ export const Header = <Item extends ItemBase>({
   hasHeader,
   handleRefresh,
   externalBorder,
-  extraHeaderContent
+  extraHeaderContent,
+  hideOptions
 }: HeaderProps<Item>) => {
   const columnsMap = (
     <Fragment>
@@ -60,7 +61,7 @@ export const Header = <Item extends ItemBase>({
     [styles['thead--externalBorder']]: externalBorder
   })
 
-  if (options) {
+  if (options && !hideOptions) {
     return (
       <div
         className={theadStyle}
