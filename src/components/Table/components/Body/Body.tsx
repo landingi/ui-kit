@@ -10,7 +10,8 @@ export const Body = <Item extends ItemBase>({
   isSelected,
   select,
   handleRefresh,
-  externalBorder
+  externalBorder,
+  hasLimitOfSelect
 }: BodyProps<Item>) => (
   <div>
     {data.map(item => (
@@ -24,6 +25,7 @@ export const Body = <Item extends ItemBase>({
         select={select}
         handleRefresh={handleRefresh}
         externalBorder={externalBorder}
+        hasLimitOfSelect={hasLimitOfSelect}
       />
     ))}
   </div>

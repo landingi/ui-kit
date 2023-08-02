@@ -19,7 +19,8 @@ export const BodyTr = <Item extends ItemBase>({
   isSelected,
   select,
   handleRefresh,
-  externalBorder
+  externalBorder,
+  hasLimitOfSelect
 }: BodyTrProps<Item>) => {
   const columnsReducer = columns.reduce(
     (acc, { width }) => `${acc} ${width || '1fr'}`,
@@ -42,6 +43,7 @@ export const BodyTr = <Item extends ItemBase>({
           <Checkbox
             checked={isSelected(item.identifier)}
             onChange={() => select(item.identifier)}
+            disabled={hasLimitOfSelect}
           />
         </div>
       )}

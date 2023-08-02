@@ -32,7 +32,8 @@ export const Table = <Item extends ItemBase>({
   isSelectedAny,
   selected,
   isSelected,
-  select
+  select,
+  hasLimitOfSelect
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
 
@@ -85,6 +86,7 @@ export const Table = <Item extends ItemBase>({
             rowActions={rowActions}
             hasSelect={hasSelect}
             isSelected={isSelected}
+            hasLimitOfSelect={hasLimitOfSelect}
             select={select}
             handleRefresh={handleRefresh}
             externalBorder={externalBorder}

@@ -50,6 +50,7 @@ export interface UseTableProps<Item extends ItemBase> {
   constantPageLimit?: number
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  hasLimitOfSelect?: boolean
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -105,6 +106,7 @@ export interface BodyProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  hasLimitOfSelect?: boolean
 }
 
 export interface BodyTrProps<Item extends ItemBase> {
@@ -116,6 +118,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  hasLimitOfSelect?: boolean
 }
 
 export interface RowActionsProps {
