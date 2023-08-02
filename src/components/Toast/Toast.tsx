@@ -12,7 +12,7 @@ export const Toast = () => {
   const [isActive, setActive] = useState<boolean>(false)
   const [message, setMessage] = useState<string>('')
   const [type, setType] = useState<Type>('success')
-  const [hideTimeout, setHideTimeout] = useState(5000)
+  const [hideTimeout, setHideTimeout] = useState(99999999)
 
   let autoHideTimer: NodeJS.Timeout | null = null
 
