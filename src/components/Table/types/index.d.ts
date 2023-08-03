@@ -50,6 +50,7 @@ export interface UseTableProps<Item extends ItemBase> {
   constantPageLimit?: number
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  isTableForEvents?: boolean
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -74,6 +75,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
+  isTableForEvents?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -94,6 +96,7 @@ export interface HeaderProps<Item extends ItemBase> {
   handleRefresh: () => void
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  isTableForEvents?: boolean
 }
 
 export interface BodyProps<Item extends ItemBase> {

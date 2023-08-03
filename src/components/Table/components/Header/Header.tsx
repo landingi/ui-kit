@@ -19,7 +19,8 @@ export const Header = <Item extends ItemBase>({
   hasHeader,
   handleRefresh,
   externalBorder,
-  extraHeaderContent
+  extraHeaderContent,
+  isTableForEvents
 }: HeaderProps<Item>) => {
   const columnsMap = (
     <Fragment>
@@ -57,7 +58,8 @@ export const Header = <Item extends ItemBase>({
 
   const theadStyle = useStyles({
     [styles.thead]: true,
-    [styles['thead--externalBorder']]: externalBorder
+    [styles['thead--externalBorder']]: externalBorder,
+    [styles['th__padding-for-events']]: isTableForEvents
   })
 
   if (options) {
