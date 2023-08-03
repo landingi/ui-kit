@@ -49,7 +49,9 @@ LandingsDefault.args = {
   hasHeader: false,
   filtersAndSorters: () => <FiltersAndSorters />,
   options: () => <Options />,
-  rowActions: () => <RowActions />
+  rowActions: () => <RowActions />,
+  hasLimitOfSelect: false,
+  hideOptions: false
 }
 
 export const LandingsLoading = Template.bind({})

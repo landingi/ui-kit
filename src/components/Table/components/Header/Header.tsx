@@ -41,9 +41,10 @@ export const Header = <Item extends ItemBase>({
     ''
   )} ${extraHeaderContent ? 'max-content' : ''}`
 
-  const gridTemplateColumns = options
-    ? `65px ${hasHeader && !isSelectedAny ? columnsReducer : '1fr'}`
-    : columnsReducer
+  const gridTemplateColumns =
+    options && !hideOptions
+      ? `65px ${hasHeader && !isSelectedAny ? columnsReducer : '1fr'}`
+      : columnsReducer
 
   const thOptionsVariantStyle = useStyles({
     [styles.th]: true,
@@ -61,7 +62,7 @@ export const Header = <Item extends ItemBase>({
     [styles['thead--externalBorder']]: externalBorder
   })
 
-  if (options && !hideOptions) {
+  if (options) {
     return (
       <div
         className={theadStyle}
@@ -70,15 +71,16 @@ export const Header = <Item extends ItemBase>({
         }}
         data-testid='header-options-variant'
       >
-        <div className={thOptionsVariantStyle}>
-          <Checkbox
-            checked={isSelectedAny}
-            onChange={selectAll}
-            tableDeselect={!isSelectedAll}
-          />
-        </div>
-
-        {isSelectedAny && (
+        {!hideOptions && (
+          <div className={thOptionsVariantStyle}>
+            <Checkbox
+              checked={isSelectedAny}
+              onChange={selectAll}
+              tableDeselect={!isSelectedAll}
+            />
+          </div>
+        )}
+        {isSelectedAny && !hideOptions && (
           <div className={thOptionsStyle}>
             <Row alignItems='center'>
               <span>
@@ -95,8 +97,11 @@ export const Header = <Item extends ItemBase>({
             </Row>
           </div>
         )}
+        {hideOptions && options(selected, handleRefresh)}
 
-        {!isSelectedAny && hasHeader && columnsMap}
+        {hideOptions
+          ? hasHeader && columnsMap
+          : !isSelectedAny && hasHeader && columnsMap}
 
         {!isSelectedAny && !hasHeader && filtersAndSorters && (
           <div
