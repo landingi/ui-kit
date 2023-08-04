@@ -20,7 +20,7 @@ export const Header = <Item extends ItemBase>({
   handleRefresh,
   externalBorder,
   extraHeaderContent,
-  isTableForEvents
+  hasHeaderPaddingTopBottom
 }: HeaderProps<Item>) => {
   const columnsMap = (
     <Fragment>
@@ -59,7 +59,7 @@ export const Header = <Item extends ItemBase>({
   const theadStyle = useStyles({
     [styles.thead]: true,
     [styles['thead--externalBorder']]: externalBorder,
-    [styles['th__padding-for-events']]: isTableForEvents
+    [styles['thead--padding-top-bottom']]: hasHeaderPaddingTopBottom
   })
 
   if (options) {

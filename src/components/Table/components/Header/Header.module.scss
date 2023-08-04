@@ -5,6 +5,10 @@
   &--externalBorder {
     border: 1px solid $color-7;
   }
+
+  &--padding-top-bottom {
+    padding: 15px 0;
+  }
 }
 
 .th {
@@ -32,9 +36,5 @@
     color: $color-1;
     font-size: 14px;
     font-weight: 500;
-  }
-
-  &__padding-for-events {
-    padding: 15px 0;
   }
 }

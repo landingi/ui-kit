@@ -46,10 +46,11 @@ LandingsDefault.args = {
     first: 'first',
     last: 'last'
   },
-  hasHeader: false,
   filtersAndSorters: () => <FiltersAndSorters />,
   options: () => <Options />,
-  rowActions: () => <RowActions />
+  rowActions: () => <RowActions />,
+  hasHeaderPaddingTopBottom: true,
+  hasStyledFirstRow: true
 }
 
 export const LandingsLoading = Template.bind({})
