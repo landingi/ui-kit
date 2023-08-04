@@ -51,6 +51,7 @@ export interface UseTableProps<Item extends ItemBase> {
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
   isTableForEvents?: boolean
+  isStyledFirstRow?: boolean
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -76,6 +77,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
   isTableForEvents?: boolean
+  isStyledFirstRow?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -108,6 +110,7 @@ export interface BodyProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  isStyledFirstRow?: boolean
 }
 
 export interface BodyTrProps<Item extends ItemBase> {
@@ -119,6 +122,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  isStyledFirstRow?: boolean
 }
 
 export interface RowActionsProps {

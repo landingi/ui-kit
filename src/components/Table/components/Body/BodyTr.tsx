@@ -19,7 +19,8 @@ export const BodyTr = <Item extends ItemBase>({
   isSelected,
   select,
   handleRefresh,
-  externalBorder
+  externalBorder,
+  isStyledFirstRow
 }: BodyTrProps<Item>) => {
   const columnsReducer = columns.reduce(
     (acc, { width }) => `${acc} ${width || '1fr'}`,
@@ -32,7 +33,8 @@ export const BodyTr = <Item extends ItemBase>({
 
   const trStyles = useStyles({
     [styles.tr]: true,
-    [styles['tr--externalBorder']]: externalBorder
+    [styles['tr--externalBorder']]: externalBorder,
+    [styles['tr--firstRowStyled']]: isStyledFirstRow
   })
 
   return (
