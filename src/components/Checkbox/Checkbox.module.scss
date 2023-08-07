@@ -153,4 +153,82 @@
       }
     }
   }
+
+  &--special-background-color {
+    &--color-1 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #5d92fc;
+
+          + div {
+            &::before {
+              border-color: #5d92fc;
+              background-color: #5d92fc;
+            }
+          }
+        }
+      }
+    }
+    &--color-2 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #f27589;
+
+          + div {
+            &::before {
+              border-color: #f27589;
+              background-color: #f27589;
+            }
+          }
+        }
+      }
+    }
+    &--color-3 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #2550aa;
+
+          + div {
+            &::before {
+              border-color: #2550aa;
+              background-color: #2550aa;
+            }
+          }
+        }
+      }
+    }
+    &--color-4 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #ffb000;
+
+          + div {
+            &::before {
+              border-color: #ffb000;
+              background-color: #ffb000;
+            }
+          }
+        }
+      }
+    }
+    &--color-5 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #00bd9e;
+
+          + div {
+            &::before {
+              border-color: #00bd9e;
+              background-color: #00bd9e;
+            }
+          }
+        }
+      }
+    }
+  }
 }

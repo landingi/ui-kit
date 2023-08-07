@@ -7,6 +7,7 @@ interface CheckboxProps {
     formikKey?: string;
     tableDeselect?: boolean;
     'data-testid'?: string;
+    checkboxBackgroundColor?: string;
 }
 export declare const Checkbox: FC<CheckboxProps>;
 export {};
