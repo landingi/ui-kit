@@ -19,8 +19,7 @@ export const Header = <Item extends ItemBase>({
   hasHeader,
   handleRefresh,
   externalBorder,
-  extraHeaderContent,
-  hasHeaderPaddingTopBottom
+  extraHeaderContent
 }: HeaderProps<Item>) => {
   const columnsMap = (
     <Fragment>
@@ -58,8 +57,7 @@ export const Header = <Item extends ItemBase>({
 
   const theadStyle = useStyles({
     [styles.thead]: true,
-    [styles['thead--externalBorder']]: externalBorder,
-    [styles['thead--padding-top-bottom']]: hasHeaderPaddingTopBottom
+    [styles['thead--externalBorder']]: externalBorder
   })
 
   if (options) {
