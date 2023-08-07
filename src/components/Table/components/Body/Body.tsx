@@ -10,10 +10,11 @@ export const Body = <Item extends ItemBase>({
   isSelected,
   select,
   handleRefresh,
-  externalBorder
+  externalBorder,
+  hasStyledFirstRow
 }: BodyProps<Item>) => (
   <div>
-    {data.map(item => (
+    {data.map((item, index) => (
       <BodyTr
         columns={columns}
         item={item}
@@ -24,6 +25,7 @@ export const Body = <Item extends ItemBase>({
         select={select}
         handleRefresh={handleRefresh}
         externalBorder={externalBorder}
+        hasSpecialStyles={index === 0 && hasStyledFirstRow}
       />
     ))}
   </div>
