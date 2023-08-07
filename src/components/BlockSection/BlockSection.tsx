@@ -77,7 +77,7 @@ export const BlockSection: FC<BlockSectionProps> = ({
             {button && <Button onClick={onClick}>{button}</Button>}
           </div>
 
-          <Image size={527} src={url} />
+          <Image size='527px' src={url} />
         </div>
       </Panel>
     </div>

@@ -6,6 +6,11 @@
   min-width: 300px;
   visibility: hidden;
 
+  @media (max-width: $breakpoint-tablet) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
   &--active {
     visibility: visible;
     animation: fadein 0.5s, 3s 1s, fadeout 0.5s 4.6s;
