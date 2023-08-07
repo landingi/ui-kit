@@ -119,7 +119,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
-  hasStyledFirstRow?: boolean
+  hasSpecialStyles?: boolean
 }
 
 export interface RowActionsProps {

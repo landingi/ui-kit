@@ -25,7 +25,7 @@ export const Body = <Item extends ItemBase>({
         select={select}
         handleRefresh={handleRefresh}
         externalBorder={externalBorder}
-        hasStyledFirstRow={index === 0 && hasStyledFirstRow}
+        hasSpecialStyles={index === 0 && hasStyledFirstRow}
       />
     ))}
   </div>
