@@ -49,7 +49,6 @@ LandingsDefault.args = {
   filtersAndSorters: () => <FiltersAndSorters />,
   options: () => <Options />,
   rowActions: () => <RowActions />,
-  hasHeaderPaddingTopBottom: true,
   hasStyledFirstRow: true
 }
 
