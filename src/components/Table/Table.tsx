@@ -32,7 +32,8 @@ export const Table = <Item extends ItemBase>({
   isSelectedAny,
   selected,
   isSelected,
-  select
+  select,
+  hasStyledFirstRow
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
 
@@ -88,6 +89,7 @@ export const Table = <Item extends ItemBase>({
             select={select}
             handleRefresh={handleRefresh}
             externalBorder={externalBorder}
+            hasStyledFirstRow={hasStyledFirstRow}
           />
         )}
       </div>

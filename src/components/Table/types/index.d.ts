@@ -50,6 +50,7 @@ export interface UseTableProps<Item extends ItemBase> {
   constantPageLimit?: number
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  hasStyledFirstRow?: boolean
 }
 
 export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
@@ -74,6 +75,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   isSelected: (identifier: Item['identifier']) => boolean
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
+  hasStyledFirstRow?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -105,6 +107,7 @@ export interface BodyProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  hasStyledFirstRow?: boolean
 }
 
 export interface BodyTrProps<Item extends ItemBase> {
@@ -116,6 +119,7 @@ export interface BodyTrProps<Item extends ItemBase> {
   select: (identifier: Item['identifier']) => void
   handleRefresh: () => void
   externalBorder?: boolean
+  hasSpecialStyles?: boolean
 }
 
 export interface RowActionsProps {
