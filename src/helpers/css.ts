@@ -1,4 +1,4 @@
-import classnames, { Argument } from 'classnames/bind'
+import classnames, { Argument } from 'classnames'
 
 export const styles = (
   css: Record<string, string>

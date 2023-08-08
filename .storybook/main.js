@@ -1,5 +1,4 @@
 const path = require('path')
-
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -7,11 +6,16 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions'
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5'
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
   },
-  staticDirs: [{ from: '../src/fonts', to: '/fonts' }],
+  staticDirs: [
+    {
+      from: '../src/fonts',
+      to: '/fonts'
+    }
+  ],
   typescript: {
     check: false,
     checkOptions: {},
@@ -48,7 +52,6 @@ module.exports = {
       ],
       include: path.resolve(__dirname, '../')
     })
-
     config.module.rules.push({
       test: /\.(png|woff|woff2|eot|ttf|svg)$/,
       use: [
@@ -58,7 +61,6 @@ module.exports = {
       ],
       include: path.resolve(__dirname, '../')
     })
-
     return config
   }
 }
