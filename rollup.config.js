@@ -29,7 +29,9 @@ export default [
       warn(warning)
     },
     plugins: [
-      externals(),
+      externals({
+        deps: false
+      }),
       typescript({ tsconfig: './tsconfig.build.json' }),
       babel({ extensions }),
       resolve({ extensions }),
