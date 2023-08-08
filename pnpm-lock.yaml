@@ -79,7 +79,8 @@ specifiers:
   resize-observer-polyfill: 1.5.1
   rollup: 3.27.2
   rollup-plugin-copy: 3.4.0
-  rollup-plugin-node-externals: 6.1.1
+  rollup-plugin-node-externals: 4.0.0
+  rollup-plugin-peer-deps-external: 2.2.4
   rollup-plugin-postcss: 4.0.2
   rollup-plugin-terser: 7.0.2
   sass: 1.64.2
@@ -174,7 +175,8 @@ devDependencies:
   regenerator-runtime: 0.14.0
   rollup: 3.27.2
   rollup-plugin-copy: 3.4.0
-  rollup-plugin-node-externals: 6.1.1_rollup@3.27.2
+  rollup-plugin-node-externals: 4.0.0_rollup@3.27.2
+  rollup-plugin-peer-deps-external: 2.2.4_rollup@3.27.2
   rollup-plugin-postcss: 4.0.2_postcss@8.4.27
   rollup-plugin-terser: 7.0.2_rollup@3.27.2
   sass: 1.64.2
@@ -11742,11 +11744,20 @@ packages:
       is-plain-object: 3.0.1
     dev: true
 
-  /rollup-plugin-node-externals/6.1.1_rollup@3.27.2:
-    resolution: {integrity: sha512-127OFMkpH5rBVlRHRBDUMk1m1sGuzbGy7so5aj/IkpUb2r3+wOWjR/erUzd2ChEQWPsxsyQG6xpYYvPBAdcBRA==}
-    engines: {node: '>=16.0.0'}
+  /rollup-plugin-node-externals/4.0.0_rollup@3.27.2:
+    resolution: {integrity: sha512-7L0lqN+AEJqS13x240F5zyArHn2tNpHC7Ju8vtS893DkutIU89k5v3A7jhnOqLvOXAzjm9Ha7UZdwHOPyqiPDQ==}
+    engines: {node: '>=14.0.0', rollup: '>=2.60.0'}
     peerDependencies:
-      rollup: ^3.0.0
+      rollup: ^2.60.0
+    dependencies:
+      find-up: 5.0.0
+      rollup: 3.27.2
+    dev: true
+
+  /rollup-plugin-peer-deps-external/2.2.4_rollup@3.27.2:
+    resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
+    peerDependencies:
+      rollup: '*'
     dependencies:
       rollup: 3.27.2
     dev: true
