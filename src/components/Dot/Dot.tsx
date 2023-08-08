@@ -1,6 +1,6 @@
 import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Row } from 'simple-flexbox'
 
 import styles from './Dot.module.scss'
@@ -20,7 +20,7 @@ interface DotProps {
     | 'accent-5'
     | 'accent-6'
     | 'accent-7'
-  label?: string
+  label?: ReactNode | string
   className?: string | string[]
 }
 
