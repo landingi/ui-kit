@@ -15,7 +15,6 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx']
 export default [
   {
     input: 'src/index.ts',
-    external: [id => /^react$|^react-dom$|^@babel\/runtime/.test(id)],
     output: [
       {
         sourcemap: false,
@@ -31,7 +30,8 @@ export default [
       warn(warning)
     },
     plugins: [
-      externals({ react: 'react', 'react-dom': 'react-dom' }),
+      // externals({ react: 'react', 'react-dom': 'react-dom' }),
+      externals({ include: ['react', 'react-dom'] }),
       typescript({ tsconfig: './tsconfig.build.json' }),
       babel({ extensions }),
       external(),
