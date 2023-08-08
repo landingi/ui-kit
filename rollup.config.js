@@ -7,6 +7,7 @@ import externals from 'rollup-plugin-node-externals'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
+
 import packageJson from './package.json' assert { type: 'json' }
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
@@ -14,6 +15,7 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx']
 export default [
   {
     input: 'src/index.ts',
+    external: [id => /^react$|^react-dom$|^@babel\/runtime/.test(id)],
     output: [
       {
         sourcemap: false,
