@@ -19,12 +19,5 @@ jobs:
 
       - run: pnpm install
       - run: pnpm lint
-      - run: pnpm test:coverage
+      - run: pnpm test
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.1.0
-        with:
-          directory: ./coverage
-          files: coverage-summary.json
-          verbose: true
-          token: ${{ secrets.CODECOV_TOKEN }}

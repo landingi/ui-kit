@@ -1,9 +1,6 @@
 # ui-kit
 
 ## Coverage
-
-[![codecov](https://codecov.io/gh/landingi/ui-kit/branch/master/graph/badge.svg?token=CZteQ5htwH)](https://codecov.io/gh/landingi/ui-kit)
-
 Unit tests
 
 ![img](coverage/badge-branches.svg) ![img](coverage/badge-functions.svg)
