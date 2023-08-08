@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
 import copy from 'rollup-plugin-copy'
 import externals from 'rollup-plugin-node-externals'
-import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 
@@ -30,11 +29,9 @@ export default [
       warn(warning)
     },
     plugins: [
-      // externals({ react: 'react', 'react-dom': 'react-dom' }),
       externals(),
       typescript({ tsconfig: './tsconfig.build.json' }),
       babel({ extensions }),
-      external(),
       resolve({ extensions }),
       commonjs({ extensions }),
       postcss({
