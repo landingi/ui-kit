@@ -31,7 +31,7 @@ export default [
     },
     plugins: [
       // externals({ react: 'react', 'react-dom': 'react-dom' }),
-      externals({ include: ['react', 'react-dom'] }),
+      externals({ deps: false, include: ['react', 'react-dom'] }),
       typescript({ tsconfig: './tsconfig.build.json' }),
       babel({ extensions }),
       external(),
