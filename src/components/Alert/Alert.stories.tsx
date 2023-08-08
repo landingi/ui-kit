@@ -1,32 +1,25 @@
-import { Alert } from '@components/Alert'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Alert as AlertComponent } from '@components/Alert'
+import { Meta, StoryObj } from '@storybook/react'
 
-export default {
-  title: 'Alert',
-  component: Alert
-} as ComponentMeta<typeof Alert>
-
-const Template: ComponentStory<typeof Alert> = args => (
-  <Alert {...args}> Lorem ipsum dolor sit amet </Alert>
-)
-
-export const Info = Template.bind({})
-export const Warning = Template.bind({})
-export const AlertT = Template.bind({})
-export const Success = Template.bind({})
-
-Info.args = {
-  type: 'info'
+const meta: Meta<typeof AlertComponent> = {
+  component: AlertComponent
 }
 
-Warning.args = {
-  type: 'warning'
+export default meta
+type Story = StoryObj<typeof AlertComponent>
+
+export const Info: Story = {
+  render: () => <AlertComponent type='info'>info</AlertComponent>
 }
 
-AlertT.args = {
-  type: 'alert'
+export const Warning: Story = {
+  render: () => <AlertComponent type='warning'>warning</AlertComponent>
 }
 
-Success.args = {
-  type: 'success'
+export const Alert: Story = {
+  render: () => <AlertComponent type='alert'>alert</AlertComponent>
+}
+
+export const Success: Story = {
+  render: () => <AlertComponent type='success'>success</AlertComponent>
 }
