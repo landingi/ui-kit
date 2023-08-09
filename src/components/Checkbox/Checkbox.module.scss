@@ -19,7 +19,9 @@
     opacity: 0;
     transform: scale(1);
     pointer-events: none;
-    transition: opacity 0.3s, transform 0.2s;
+    transition:
+      opacity 0.3s,
+      transform 0.2s;
 
     &:checked,
     &:indeterminate {
@@ -56,7 +58,9 @@
     &:active {
       opacity: 1;
       transform: scale(0);
-      transition: transform 0s, opacity 0s;
+      transition:
+        transform 0s,
+        opacity 0s;
 
       + div {
         &::before {
@@ -68,7 +72,9 @@
     &:checked:active {
       opacity: 1;
       transform: scale(0);
-      transition: transform 0s, opacity 0s;
+      transition:
+        transform 0s,
+        opacity 0s;
 
       + div {
         &::before {
@@ -113,7 +119,9 @@
       width: 18px;
       height: 18px;
       vertical-align: top;
-      transition: border-color 0.2s, background-color 0.2s;
+      transition:
+        border-color 0.2s,
+        background-color 0.2s;
     }
 
     &::after {
@@ -150,6 +158,84 @@
         border-top: none;
         transform: translate(4px, 4px);
         top: 4px;
+      }
+    }
+  }
+
+  &--special-background-color {
+    &--color-1 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #5d92fc;
+
+          + div {
+            &::before {
+              border-color: #5d92fc;
+              background-color: #5d92fc;
+            }
+          }
+        }
+      }
+    }
+    &--color-2 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #f27589;
+
+          + div {
+            &::before {
+              border-color: #f27589;
+              background-color: #f27589;
+            }
+          }
+        }
+      }
+    }
+    &--color-3 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #2550aa;
+
+          + div {
+            &::before {
+              border-color: #2550aa;
+              background-color: #2550aa;
+            }
+          }
+        }
+      }
+    }
+    &--color-4 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #ffb000;
+
+          + div {
+            &::before {
+              border-color: #ffb000;
+              background-color: #ffb000;
+            }
+          }
+        }
+      }
+    }
+    &--color-5 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: #00bd9e;
+
+          + div {
+            &::before {
+              border-color: #00bd9e;
+              background-color: #00bd9e;
+            }
+          }
+        }
       }
     }
   }
