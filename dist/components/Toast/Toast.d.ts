@@ -1,5 +1,4 @@
-/// <reference types="react" />
 export declare const Toast: {
-    (): JSX.Element | null;
+    (): import("react/jsx-runtime").JSX.Element | null;
     displayName: string;
 };

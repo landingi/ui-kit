@@ -1,18 +1,19 @@
-import babel from '@rollup/plugin-babel'
-import commonjs from '@rollup/plugin-commonjs'
-import resolve from '@rollup/plugin-node-resolve'
-import typescript from '@rollup/plugin-typescript'
-import copy from 'rollup-plugin-copy'
-import externals from 'rollup-plugin-node-externals'
-import external from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss'
-import { terser } from 'rollup-plugin-terser'
+const commonjs = require('@rollup/plugin-commonjs')
+const resolve = require('@rollup/plugin-node-resolve')
+const typescript = require('@rollup/plugin-typescript')
+const copy = require('rollup-plugin-copy')
+const { externals } = require('rollup-plugin-node-externals')
+const external = require('rollup-plugin-peer-deps-external')
+const postcss = require('rollup-plugin-postcss')
+const { terser } = require('rollup-plugin-terser')
 
 const packageJson = require('./package.json')
 
+const { babel } = require('@rollup/plugin-babel')
+
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
-export default [
+module.exports = [
   {
     input: 'src/index.ts',
     output: [

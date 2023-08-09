@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 
 import { Accordion } from '@components/Accordion'
 import { AccordionItem } from '@components/Accordion/AccordionItem'
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 
 const propsAccordion = {
   data: [
@@ -50,7 +50,7 @@ describe('<AccordionItem /> mount', () => {
     const accordionItemTitle = getByTestId('accordion-item-title')
     const accordionItemContent = getByTestId('accordion-item-content')
 
-    accordionItemTitle.click()
+    fireEvent.click(accordionItemTitle)
 
     expect(accordionItemContent).toHaveClass('accordion__item--content-close')
   })
