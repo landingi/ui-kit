@@ -81,7 +81,8 @@
     "react/button-has-type": "warn",
     "react/jsx-no-useless-fragment": "warn",
     "react/forbid-prop-types": "warn",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "import/order": "off"
   },
   "overrides": [
     {

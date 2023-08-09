@@ -1,9 +1,8 @@
-/// <reference types="react" />
 export declare const LongLogo: {
-    (): JSX.Element;
+    (): import("react/jsx-runtime").JSX.Element;
     displayName: string;
 };
 export declare const ShortLogo: {
-    (): JSX.Element;
+    (): import("react/jsx-runtime").JSX.Element;
     displayName: string;
 };

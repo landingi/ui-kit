@@ -1,5 +1,3 @@
-import qs from 'query-string'
-
 const setQueryStringWithoutPageReload = (qsValue: string) => {
   const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}${qsValue}`
 
@@ -10,9 +8,9 @@ export const getQueryStringValue = (
   key: string,
   queryString = window.location.search
 ) => {
-  const values = qs.parse(queryString)
+  const values = new URLSearchParams(queryString)
 
-  return values[key]
+  return values.get(key)
 }
 
 export const setQueryStringValue = (
@@ -20,10 +18,9 @@ export const setQueryStringValue = (
   value: string | number,
   queryString = window.location.search
 ) => {
-  const values = qs.parse(queryString)
-  const newQsValue = qs.stringify({
-    ...values,
-    [key]: value
-  })
-  setQueryStringWithoutPageReload(`?${newQsValue}`)
+  const values = new URLSearchParams(queryString)
+
+  values.append(key, value.toString())
+
+  setQueryStringWithoutPageReload(`?${values}`)
 }
