@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.2.14",
+  "version": "3.2.15",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -90,7 +90,7 @@
     "react-redux": "8.0.1",
     "react-time-picker": "4.5.0",
     "regenerator-runtime": "0.13.9",
-    "rollup": "2.75.6",
+    "rollup": "3.27.2",
     "rollup-plugin-copy": "3.4.0",
     "rollup-plugin-node-externals": "4.0.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
