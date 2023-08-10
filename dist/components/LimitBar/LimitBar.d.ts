@@ -1,5 +1,5 @@
 import { FC } from 'react';
-type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium' | 'regular';
+declare type LimitBarPadding = 'none' | 'tiny' | 'small' | 'medium' | 'regular';
 export interface LimitBarProps {
     className?: string;
     padding?: LimitBarPadding;

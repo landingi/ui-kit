@@ -1,4 +1,5 @@
+/// <reference types="react" />
 export declare const Options: {
-    (): import("react/jsx-runtime").JSX.Element;
+    (): JSX.Element;
     displayName: string;
 };

@@ -1,1 +1,2 @@
-export declare const RowActions: () => import("react/jsx-runtime").JSX.Element;
+/// <reference types="react" />
+export declare const RowActions: () => JSX.Element;
