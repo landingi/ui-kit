@@ -15,12 +15,20 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 module.exports = [
   {
+    makeAbsoluteExternalsRelative: true,
+    preserveEntrySignatures: 'strict',
     input: 'src/index.ts',
     output: [
       {
         sourcemap: false,
         file: packageJson.main,
-        format: 'cjs'
+        format: 'cjs',
+        esModule: true,
+        generatedCode: {
+          reservedNamesAsProps: false
+        },
+        interop: 'compat',
+        systemNullSetters: false
       }
     ],
     onwarn(warning, warn) {
