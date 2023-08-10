@@ -167,12 +167,12 @@
       input {
         &:checked,
         &:indeterminate {
-          background-color: #5d92fc;
+          background-color: $color-checkbox-background;
 
           + div {
             &::before {
-              border-color: #5d92fc;
-              background-color: #5d92fc;
+              border-color: $color-checkbox-background;
+              background-color: $color-checkbox-background;
             }
           }
         }
@@ -182,12 +182,12 @@
       input {
         &:checked,
         &:indeterminate {
-          background-color: #f27589;
+          background-color: $color-accent-7;
 
           + div {
             &::before {
-              border-color: #f27589;
-              background-color: #f27589;
+              border-color: $color-accent-7;
+              background-color: $color-accent-7;
             }
           }
         }
@@ -197,12 +197,12 @@
       input {
         &:checked,
         &:indeterminate {
-          background-color: #2550aa;
+          background-color: $color-brand;
 
           + div {
             &::before {
-              border-color: #2550aa;
-              background-color: #2550aa;
+              border-color: $color-brand;
+              background-color: $color-brand;
             }
           }
         }
@@ -212,12 +212,12 @@
       input {
         &:checked,
         &:indeterminate {
-          background-color: #ffb000;
+          background-color: $color-warning;
 
           + div {
             &::before {
-              border-color: #ffb000;
-              background-color: #ffb000;
+              border-color: $color-warning;
+              background-color: $color-warning;
             }
           }
         }
@@ -227,12 +227,12 @@
       input {
         &:checked,
         &:indeterminate {
-          background-color: #00bd9e;
+          background-color: $color-accent-2;
 
           + div {
             &::before {
-              border-color: #00bd9e;
-              background-color: #00bd9e;
+              border-color: $color-accent-2;
+              background-color: $color-accent-2;
             }
           }
         }
