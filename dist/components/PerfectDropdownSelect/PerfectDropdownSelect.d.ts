@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-declare type Value = string | number | null;
-declare type ItemBase = {
+type Value = string | number | null;
+type ItemBase = {
     value: Value;
     label: string | ReactNode;
     description?: string;
