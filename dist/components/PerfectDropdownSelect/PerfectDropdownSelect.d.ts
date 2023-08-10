@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-type Value = string | number | null;
-type ItemBase = {
+declare type Value = string | number | null;
+declare type ItemBase = {
     value: Value;
     label: string | ReactNode;
     description?: string;
@@ -40,7 +40,7 @@ export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     'data-testid'?: string;
 }
 export declare const PerfectDropdownSelect: {
-    <Item extends ItemBase>({ className, value, onChange, errors, touched, label, options, emphasisedOptions, hasDescription, hasSearcher, handleOnSearchChange, isLoading, emptyMessage, isOpenDisabled, optionalContent, alwaysShowLabel, overflowStyle, formikKey, i18n, hasLoadMoreButton, loadMoreEvent, liveChanges, dropdownLabel, customValue, size, dropdownPlacement, "data-testid": dataTestId, ...rest }: PerfectDropdownSelectProps<Item>): import("react/jsx-runtime").JSX.Element;
+    <Item extends ItemBase>({ className, value, onChange, errors, touched, label, options, emphasisedOptions, hasDescription, hasSearcher, handleOnSearchChange, isLoading, emptyMessage, isOpenDisabled, optionalContent, alwaysShowLabel, overflowStyle, formikKey, i18n, hasLoadMoreButton, loadMoreEvent, liveChanges, dropdownLabel, customValue, size, dropdownPlacement, "data-testid": dataTestId, ...rest }: PerfectDropdownSelectProps<Item>): JSX.Element;
     displayName: string;
 };
 export {};

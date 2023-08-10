@@ -4,6 +4,6 @@ import { ButtonGroupProps as ButtonGroupComponentProps } from './ButtonGroup';
 interface IButtonGroupComposition {
     Button: FC<ButtonProps>;
 }
-type ButtonGroupProps = FC<ButtonGroupComponentProps> & IButtonGroupComposition;
+declare type ButtonGroupProps = FC<ButtonGroupComponentProps> & IButtonGroupComposition;
 declare const ButtonGroup: ButtonGroupProps;
 export { ButtonGroup };

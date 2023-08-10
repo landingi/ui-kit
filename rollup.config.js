@@ -1,5 +1,5 @@
 const commonjs = require('@rollup/plugin-commonjs')
-const resolve = require('@rollup/plugin-node-resolve')
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
 const typescript = require('@rollup/plugin-typescript')
 const copy = require('rollup-plugin-copy')
 const { externals } = require('rollup-plugin-node-externals')

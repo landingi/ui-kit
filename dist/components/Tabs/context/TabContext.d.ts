@@ -1,5 +1,5 @@
 import { FC } from 'react';
-type ProviderProps = {
+declare type ProviderProps = {
     children: React.ReactNode;
     initialValue: string;
 };

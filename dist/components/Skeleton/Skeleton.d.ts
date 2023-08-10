@@ -1,4 +1,5 @@
-export declare function SkeletonSidebar(): import("react/jsx-runtime").JSX.Element;
-export declare function SkeletonDrawer(): import("react/jsx-runtime").JSX.Element;
-export declare function SkeletonLine(): import("react/jsx-runtime").JSX.Element;
-export declare function SkeletonCircle(): import("react/jsx-runtime").JSX.Element;
+/// <reference types="react" />
+export declare function SkeletonSidebar(): JSX.Element;
+export declare function SkeletonDrawer(): JSX.Element;
+export declare function SkeletonLine(): JSX.Element;
+export declare function SkeletonCircle(): JSX.Element;
