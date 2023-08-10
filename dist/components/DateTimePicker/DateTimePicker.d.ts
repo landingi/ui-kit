@@ -1,6 +1,6 @@
 import './DateTimePicker.scss';
 import { FC } from 'react';
-declare type SetDateArgs = {
+type SetDateArgs = {
     startDate?: Date;
     endDate?: Date;
 } | Date;
