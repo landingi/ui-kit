@@ -2176,7 +2176,7 @@ packages:
     peerDependencies:
       react: '>=16'
     dependencies:
-      '@types/mdx': 2.0.5
+      '@types/mdx': 2.0.6
       '@types/react': 18.2.19
       react: 18.2.0
     dev: true
@@ -3287,7 +3287,7 @@ packages:
       '@storybook/store': 7.2.1
       '@storybook/theming': 7.2.1_biqbaboplfbrettd7655fr4n2y
       '@swc/core': 1.3.75
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       '@types/semver': 7.5.0
       babel-loader: 9.1.0_a7bz5yhgcoab2comip4bcc2pf4
       babel-plugin-named-exports-order: 0.0.2
@@ -3433,7 +3433,7 @@ packages:
       '@storybook/client-logger': 7.2.1
       '@storybook/csf': 0.1.1
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.1.5_biqbaboplfbrettd7655fr4n2y
+      '@storybook/icons': 1.1.6_biqbaboplfbrettd7655fr4n2y
       '@storybook/theming': 7.2.1_biqbaboplfbrettd7655fr4n2y
       '@storybook/types': 7.2.1
       memoizerific: 1.11.3
@@ -3459,7 +3459,7 @@ packages:
       '@storybook/node-logger': 7.2.1
       '@storybook/types': 7.2.1
       '@types/find-cache-dir': 3.2.1
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       '@types/node-fetch': 2.6.4
       '@types/pretty-hrtime': 1.0.1
       chalk: 4.1.2
@@ -3506,7 +3506,7 @@ packages:
       '@storybook/telemetry': 7.2.1
       '@storybook/types': 7.2.1
       '@types/detect-port': 1.3.3
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       '@types/pretty-hrtime': 1.0.1
       '@types/semver': 7.5.0
       better-opn: 3.0.2
@@ -3545,7 +3545,7 @@ packages:
       '@storybook/core-common': 7.2.1
       '@storybook/node-logger': 7.2.1
       '@storybook/types': 7.2.1
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - encoding
@@ -3606,8 +3606,8 @@ packages:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==}
     dev: true
 
-  /@storybook/icons/1.1.5_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-PWJIaa/NtOu2VSWnj07evF1OI5+6H7ZTAvy0LO38RheW4W8iS+xoYsh2cr/nxLBblfhbw533uJrhdqpxCytxfA==}
+  /@storybook/icons/1.1.6_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-co5gDCYPojRAc5lRMnWxbjrR1V37/rTmAo9Vok4a1hDpHZIwkGTWesdzvYivSQXYFxZTpxdM1b5K3W87brnahw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3691,7 +3691,7 @@ packages:
       '@storybook/node-logger': 7.2.1
       '@storybook/react': 7.2.1_i4rjfizg7pnsmg7p6yi76gfzdq
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0_wlox7xpecxj4rvkt6b6o7frtlu
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       '@types/semver': 7.5.0
       babel-plugin-add-react-displayname: 0.0.5
       babel-plugin-react-docgen: 4.2.1
@@ -3799,7 +3799,7 @@ packages:
       '@storybook/builder-webpack5': 7.2.1_tkotf5whapy6es3bfyh2fhmn7e
       '@storybook/preset-react-webpack': 7.2.1_3pqa5zxzbfvsxkpqoyhcrplqbe
       '@storybook/react': 7.2.1_i4rjfizg7pnsmg7p6yi76gfzdq
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       typescript: 5.1.6
@@ -3841,7 +3841,7 @@ packages:
       '@storybook/types': 7.2.1
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
-      '@types/node': 16.18.39
+      '@types/node': 16.18.40
       acorn: 7.4.1
       acorn-jsx: 5.3.2_acorn@7.4.1
       acorn-walk: 7.2.0
@@ -4341,8 +4341,8 @@ packages:
     resolution: {integrity: sha512-22y3o88f4a94mKljsZcanlNWPzO0uBsBdzLAngf2tp533LzZcQzb6+eZPJ+vCTt+bqF2XnvT9gejTLsAcJAJyQ==}
     dev: true
 
-  /@types/mdx/2.0.5:
-    resolution: {integrity: sha512-76CqzuD6Q7LC+AtbPqrvD9AqsN0k8bsYo2bM2J8pmNldP1aIPAbzUQ7QbobyXL4eLr1wK5x8FZFe8eF/ubRuBg==}
+  /@types/mdx/2.0.6:
+    resolution: {integrity: sha512-sVcwEG10aFU2KcM7cIA0M410UPv/DesOPyG8zMVk0QUDexHA3lYmGucpEpZ2dtWWhi2ip3CG+5g/iH0PwoW4Fw==}
     dev: true
 
   /@types/mime-types/2.1.1:
@@ -4376,8 +4376,8 @@ packages:
       form-data: 3.0.1
     dev: true
 
-  /@types/node/16.18.39:
-    resolution: {integrity: sha512-8q9ZexmdYYyc5/cfujaXb4YOucpQxAV4RMG0himLyDUOEr8Mr79VrqsFI+cQ2M2h89YIuy95lbxuYjxT4Hk4kQ==}
+  /@types/node/16.18.40:
+    resolution: {integrity: sha512-+yno3ItTEwGxXiS/75Q/aHaa5srkpnJaH+kdkTVJ3DtJEwv92itpKbxU+FjPoh2m/5G9zmUQfrL4A4C13c+iGA==}
     dev: true
 
   /@types/node/20.4.8:
@@ -5593,7 +5593,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001519
-      electron-to-chromium: 1.4.487
+      electron-to-chromium: 1.4.488
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11_browserslist@4.21.10
     dev: true
@@ -6657,8 +6657,8 @@ packages:
       jake: 10.8.7
     dev: true
 
-  /electron-to-chromium/1.4.487:
-    resolution: {integrity: sha512-XbCRs/34l31np/p33m+5tdBrdXu9jJkZxSbNxj5I0H1KtV2ZMSB+i/HYqDiRzHaFx2T5EdytjoBRe8QRJE2vQg==}
+  /electron-to-chromium/1.4.488:
+    resolution: {integrity: sha512-Dv4sTjiW7t/UWGL+H8ZkgIjtUAVZDgb/PwGWvMsCT7jipzUV/u5skbLXPFKb6iV0tiddVi/bcS2/kUrczeWgIQ==}
     dev: true
 
   /emittery/0.13.1:
