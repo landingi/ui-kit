@@ -1,5 +1,5 @@
 import { Column } from '@components/Table/types';
-export type Item = {
+export declare type Item = {
     identifier: string;
     name: string;
     url: string;

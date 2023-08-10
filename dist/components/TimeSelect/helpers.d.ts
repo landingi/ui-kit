@@ -1,4 +1,4 @@
-export type ClockType = 'AM' | 'PM' | null;
+export declare type ClockType = 'AM' | 'PM' | null;
 /**
  * convert am/pm to 0-23 and vice versa
  */

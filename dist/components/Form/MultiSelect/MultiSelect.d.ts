@@ -1,5 +1,5 @@
 import { FC } from 'react';
-type Value = string | number | null;
+declare type Value = string | number | null;
 interface Option {
     label: string;
     value: Value;
