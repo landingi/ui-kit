@@ -1,6 +1,6 @@
 {
   "name": "@landingi/landingi-ui-kit",
-  "version": "3.2.8",
+  "version": "3.2.9",
   "description": "Landingi UI-Kit",
   "private": true,
   "license": "proprietary",
@@ -100,15 +100,16 @@
     "typescript": "5.1.6"
   },
   "dependencies": {
-    "classnames": "2.3.2",
-    "date-fns": "2.30.0",
-    "dompurify": "3.0.5",
+    "classnames": "2.3.1",
+    "date-fns": "2.28.0",
+    "dompurify": "2.3.8",
+    "query-string": "7.1.1",
     "react-advanced-time-input": "1.2.0",
     "react-date-range": "1.4.0",
-    "react-ink": "6.5.4",
-    "react-laag": "2.0.5",
+    "react-ink": "6.5.1",
+    "react-laag": "2.0.4",
     "react-text-mask": "5.4.3",
-    "react-uuid": "2.0.0",
+    "react-uuid": "1.0.2",
     "resize-observer-polyfill": "1.5.1",
     "simple-flexbox": "2.3.3",
     "tiny-emitter": "2.1.0"
