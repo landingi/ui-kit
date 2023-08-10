@@ -73,7 +73,7 @@ specifiers:
   react-dom: 18.2.0
   react-ink: 6.5.4
   react-laag: 2.0.5
-  react-text-mask: 5.5.0
+  react-text-mask: 5.4.3
   react-uuid: 2.0.0
   regenerator-runtime: 0.14.0
   resize-observer-polyfill: 1.5.1
@@ -100,7 +100,7 @@ dependencies:
   react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
   react-ink: 6.5.4
   react-laag: 2.0.5_biqbaboplfbrettd7655fr4n2y
-  react-text-mask: 5.5.0_react@18.2.0
+  react-text-mask: 5.4.3_react@18.2.0
   react-uuid: 2.0.0
   resize-observer-polyfill: 1.5.1
   simple-flexbox: 2.3.3_react@18.2.0
@@ -11443,10 +11443,10 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /react-text-mask/5.5.0_react@18.2.0:
-    resolution: {integrity: sha512-SLJlJQxa0uonMXsnXRpv5abIepGmHz77ylQcra0GNd7Jtk4Wj2Mtp85uGQHv1avba2uI8ZvRpIEQPpJKsqRGYw==}
+  /react-text-mask/5.4.3_react@18.2.0:
+    resolution: {integrity: sha512-IQ26CO6YMhc2FBRxLVnckBEDkuMvBQOiHBeAxWdZzoqMMOQvGG6vrVW1Rv6RtqOYsqVQaQd+6zYDW2tEM8VXxA==}
     peerDependencies:
-      react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0
     dependencies:
       prop-types: 15.8.1
       react: 18.2.0
