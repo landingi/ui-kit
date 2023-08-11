@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': 7.22.10
-  '@babel/preset-env': ^7.22.10
+  '@babel/preset-env': 7.22.10
   '@babel/preset-react': 7.22.5
   '@babel/preset-typescript': 7.22.5
   '@emotion/core': 11.0.0
