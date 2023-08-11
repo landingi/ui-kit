@@ -1,8 +1,7 @@
-/// <reference types="react" />
 import { Item } from './Item';
 export declare const columns: ({
     header: string;
-    render: (data: Item) => JSX.Element;
+    render: (data: Item) => import("react/jsx-runtime").JSX.Element;
     identifier: string;
     width: "155px";
     accessor?: undefined;
