@@ -214,71 +214,68 @@ export const MultiSelect: FC<MultiSelectProps> = ({
     <div className={wrapperStyles} data-testid={dataTestId}>
       <Search i18n={{ placeholder }} onChange={handleSearch} tag='div' />
 
-      <Column>
-        <label id={id}>
-          <Spacer space='mini' />
+      <Spacer space='mini' />
 
-          <Spacer space='tiny' />
-          <div className={optionStyles}>
-            {filteredOptions.map(({ label, icon, value, selected }) => (
-              <BoxOutline
-                padding='none'
-                className={optionBoxStyles}
-                key={value}
-                onClickHandler={() => handleChange(value)}
-                isSelected={selected}
-                noCheckmark
-              >
-                {icon && (
-                  <Fragment>
-                    <Image src={icon} size='17px' /> <Spreader spread='tiny' />
-                  </Fragment>
-                )}
+      <Spacer space='tiny' />
 
-                {label}
-              </BoxOutline>
-            ))}
-          </div>
+      <label id={id} className={styles['multi-select-label']}>
+        <div className={optionStyles}>
+          {filteredOptions.map(({ label, icon, value, selected }) => (
+            <BoxOutline
+              padding='none'
+              className={optionBoxStyles}
+              key={value}
+              onClickHandler={() => handleChange(value)}
+              isSelected={selected}
+              noCheckmark
+            >
+              {icon && (
+                <Fragment>
+                  <Image src={icon} size='17px' /> <Spreader spread='tiny' />
+                </Fragment>
+              )}
 
-          <Spacer space='tiny' />
-
-          {shouldShowEmptySearchResultsComponent() && (
-            <EmptySearchResultsComponent
-              addCustomOption={addCustomOption}
-              searchPhrase={searchPhrase}
-            />
-          )}
-        </label>
-
-        <div className={selectedOptionsStyles}>
-          <Spacer space='mini' />
-
-          <Spacer space='tiny' />
-
-          {selectedOptions
-            .filter(({ selected }) => selected)
-            .map(({ label, value }) => (
-              <Badge
-                className={styles['icon-pack-badge']}
-                type='accent-8'
-                key={value}
-              >
-                <Row alignItems='center'>
-                  <span className={styles['icon-pack-badge__text']}>
-                    {label}
-                  </span>
-
-                  <span
-                    className={styles['icon-pack-badge__close']}
-                    onClick={() => removeValue(value)}
-                  >
-                    <Icon icon='icon-remove' color='white' />
-                  </span>
-                </Row>
-              </Badge>
-            ))}
+              {label}
+            </BoxOutline>
+          ))}
         </div>
-      </Column>
+
+        <Spacer space='tiny' />
+
+        {shouldShowEmptySearchResultsComponent() && (
+          <EmptySearchResultsComponent
+            addCustomOption={addCustomOption}
+            searchPhrase={searchPhrase}
+          />
+        )}
+      </label>
+
+      <Spacer space='mini' />
+
+      <Spacer space='tiny' />
+
+      <div className={selectedOptionsStyles}>
+        {selectedOptions
+          .filter(({ selected }) => selected)
+          .map(({ label, value }) => (
+            <Badge
+              className={styles['icon-pack-badge']}
+              type='accent-8'
+              key={value}
+            >
+              <Row alignItems='center'>
+                <span className={styles['icon-pack-badge__text']}>{label}</span>
+
+                <span
+                  className={styles['icon-pack-badge__close']}
+                  onClick={() => removeValue(value)}
+                >
+                  <Icon icon='icon-remove' color='white' />
+                </span>
+              </Row>
+            </Badge>
+          ))}
+      </div>
     </div>
   )
 }
