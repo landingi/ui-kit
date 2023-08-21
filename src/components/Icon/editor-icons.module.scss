@@ -17,6 +17,12 @@
     }
   }
 
+  &--16 {
+    &::before {
+      font-size: 14px;
+    }
+  }
+
   &--32 {
     &::before {
       font-size: 32px;
