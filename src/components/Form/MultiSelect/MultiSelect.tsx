@@ -68,12 +68,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       selected: values.includes(option.value)
     }))
 
-  /**
-   * creates selected options used to display badges by merging options that were selected
-   * by user and options added by them
-   */
-  const getSelectedOptions = () => {
+  const getCustomSelectedOptions = () => {
     const initialOptionsValues = initialOptions.map(option => option.value)
+
     const customValues = values.filter(
       value => !initialOptionsValues.includes(value)
     )
@@ -83,6 +80,16 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       label: customValue as string,
       selected: true
     }))
+
+    return customSelectedOptions
+  }
+
+  /**
+   * creates selected options used to display badges by merging options that were selected
+   * by user and options added by them
+   */
+  const getSelectedOptions = () => {
+    const customSelectedOptions = getCustomSelectedOptions()
 
     return [
       ...getInitialOptions().filter(option => option.selected),
@@ -208,7 +215,10 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
   const shouldShowEmptySearchResultsComponent = () =>
     searchPhrase.length >= 3 &&
-    !filteredOptions.some(option => option.matchesSearchPhrase)
+    !filteredOptions.some(option => option.matchesSearchPhrase) &&
+    getCustomSelectedOptions().find(
+      (option: Option) => option.value === searchPhrase
+    )
 
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
