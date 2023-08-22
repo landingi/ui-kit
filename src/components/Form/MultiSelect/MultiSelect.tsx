@@ -25,7 +25,7 @@ interface Option {
 export interface EmptySearchResultsComponentProps {
   addCustomOption: (option: Option) => void
   searchPhrase: string
-  isButtonDisabled: boolean
+  addedOptions: Value[]
 }
 
 interface MultiSelectProps {
@@ -252,11 +252,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}
             searchPhrase={searchPhrase}
-            isButtonDisabled={
-              getCustomSelectedOptions().filter(
-                (option: Option) => option.value === searchPhrase
-              ).length > 0
-            }
+            addedOptions={getCustomSelectedOptions().map(
+              option => option.value
+            )}
           />
         )}
       </label>
