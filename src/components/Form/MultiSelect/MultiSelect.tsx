@@ -25,6 +25,7 @@ interface Option {
 export interface EmptySearchResultsComponentProps {
   addCustomOption: (option: Option) => void
   searchPhrase: string
+  isButtonDisabled: boolean
 }
 
 interface MultiSelectProps {
@@ -215,10 +216,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
   const shouldShowEmptySearchResultsComponent = () =>
     searchPhrase.length >= 3 &&
-    !filteredOptions.some(option => option.matchesSearchPhrase) &&
-    !getCustomSelectedOptions().find(
-      (option: Option) => option.value === searchPhrase
-    )
+    !filteredOptions.some(option => option.matchesSearchPhrase)
 
   return (
     <div className={wrapperStyles} data-testid={dataTestId}>
@@ -254,6 +252,11 @@ export const MultiSelect: FC<MultiSelectProps> = ({
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}
             searchPhrase={searchPhrase}
+            isButtonDisabled={
+              getCustomSelectedOptions().filter(
+                (option: Option) => option.value === searchPhrase
+              ).length > 0
+            }
           />
         )}
       </label>
