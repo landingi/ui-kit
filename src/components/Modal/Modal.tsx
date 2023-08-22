@@ -26,7 +26,13 @@ import { ModalFooter } from './Footer'
 import { ModalHeader } from './Header'
 import styles from './Modal.module.scss'
 
-type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive'
+type Size =
+  | 'small'
+  | 'medium'
+  | 'big'
+  | 'fullscreen'
+  | 'responsive'
+  | 'huge-responsive'
 
 export interface ModalCommonProps {
   children?: ReactNode
@@ -214,6 +220,7 @@ export const Modal = forwardRef(
     const modalStyles = useStyles(
       {
         [styles.modal]: true,
+        [styles['modal--responsive']]: size === 'responsive',
         [styles['modal--huge-responsive']]: size === 'huge-responsive',
         [styles['modal--fullscreen']]: size === 'fullscreen',
         [styles['modal--big']]: size === 'big',

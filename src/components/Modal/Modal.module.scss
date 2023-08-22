@@ -139,6 +139,11 @@
     width: 1080px;
   }
 
+  &--responsive {
+    width: 100vw;
+    max-width: 780px;
+  }
+
   &--huge-responsive {
     width: 85vw;
     max-width: 1280px;

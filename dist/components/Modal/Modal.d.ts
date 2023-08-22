@@ -1,6 +1,6 @@
 import { ButtonVariant } from '@components/Button/Button';
 import { MouseEvent, ReactNode } from 'react';
-type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'huge-responsive';
+type Size = 'small' | 'medium' | 'big' | 'fullscreen' | 'responsive' | 'huge-responsive';
 export interface ModalCommonProps {
     children?: ReactNode;
     className?: string | string[];
