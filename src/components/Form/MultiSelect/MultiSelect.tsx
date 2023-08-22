@@ -8,7 +8,7 @@ import Spreader from '@components/Spreader'
 import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, Fragment, useState } from 'react'
-import { Column, Row } from 'simple-flexbox'
+import { Row } from 'simple-flexbox'
 
 import styles from './MultiSelect.module.scss'
 
