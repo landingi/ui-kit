@@ -30,6 +30,16 @@
         }
     }
 
+    &--grey {
+        color: $color-3;
+
+        &:hover {
+            color: $color-3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
     &--bold {
         font-weight: 700;
       }

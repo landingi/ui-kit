@@ -1,5 +1,5 @@
 const commonjs = require('@rollup/plugin-commonjs')
-const resolve = require('@rollup/plugin-node-resolve')
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
 const typescript = require('@rollup/plugin-typescript')
 const copy = require('rollup-plugin-copy')
 const { externals } = require('rollup-plugin-node-externals')
@@ -15,12 +15,20 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 module.exports = [
   {
+    makeAbsoluteExternalsRelative: true,
+    preserveEntrySignatures: 'strict',
     input: 'src/index.ts',
     output: [
       {
         sourcemap: false,
         file: packageJson.main,
-        format: 'cjs'
+        format: 'cjs',
+        esModule: true,
+        generatedCode: {
+          reservedNamesAsProps: false
+        },
+        interop: 'compat',
+        systemNullSetters: false
       }
     ],
     onwarn(warning, warn) {

@@ -11,6 +11,7 @@ interface CheckboxProps {
   formikKey?: string
   tableDeselect?: boolean
   'data-testid'?: string
+  backgroundColor?: 'color-1' | 'color-2' | 'color-3' | 'color-4' | 'color-5'
 }
 
 export const Checkbox: FC<CheckboxProps> = ({
@@ -20,12 +21,15 @@ export const Checkbox: FC<CheckboxProps> = ({
   disabled = false,
   formikKey,
   tableDeselect = false,
-  'data-testid': dataTestId = 'checkbox'
+  'data-testid': dataTestId = 'checkbox',
+  backgroundColor
 }) => {
   const checkboxStyles = useStyles(
     {
       [styles.input__checkbox]: true,
-      [styles['input__checkbox--table-deselect']]: tableDeselect
+      [styles['input__checkbox--table-deselect']]: tableDeselect,
+      [styles[`input__checkbox--special-background-color--${backgroundColor}`]]:
+        backgroundColor
     },
     className
   )
