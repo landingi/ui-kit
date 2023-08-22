@@ -240,8 +240,6 @@ export const MultiSelect: FC<MultiSelectProps> = ({
           ))}
         </div>
 
-        <Spacer space='tiny' />
-
         {shouldShowEmptySearchResultsComponent() && (
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}

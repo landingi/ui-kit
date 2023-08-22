@@ -17,6 +17,10 @@
       gap: 5px;
       min-height: 20px;
     }
+
+    @media (max-width: $breakpoint-tablet) {
+      order: 2;
+    }
   }
   
   .badge-button {
