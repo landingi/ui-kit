@@ -10,6 +10,7 @@ interface Option {
 export interface EmptySearchResultsComponentProps {
     addCustomOption: (option: Option) => void;
     searchPhrase: string;
+    addedOptions: Value[];
 }
 interface MultiSelectProps {
     onChange: (formikKey: string, value: Value[]) => void;

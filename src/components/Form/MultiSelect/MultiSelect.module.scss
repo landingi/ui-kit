@@ -17,6 +17,10 @@
       gap: 5px;
       min-height: 20px;
     }
+
+    @media (max-width: $breakpoint-tablet) {
+      order: 2;
+    }
   }
   
   .badge-button {
@@ -41,3 +45,9 @@
       cursor: pointer;
     }
   }
+
+.multi-select-label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
