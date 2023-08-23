@@ -8,5 +8,6 @@ export interface FeedbackProps {
         button: string;
     };
     handleFeedback: () => void;
+    buttonVariant: 'primary' | 'secondary';
 }
 export declare const Feedback: FC<FeedbackProps>;

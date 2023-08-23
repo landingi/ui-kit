@@ -17,13 +17,15 @@ export interface FeedbackProps {
     button: string
   }
   handleFeedback: () => void
+  buttonVariant: 'primary' | 'secondary'
 }
 
 export const Feedback: FC<FeedbackProps> = ({
   className,
   customIcon,
   i18n,
-  handleFeedback
+  handleFeedback,
+  buttonVariant = 'secondary'
 }) => {
   const [feedbackIsClosed, setFeedbackIsClosed] = useState(
     !!getLocalStorage(`${i18n.name}-feedback`)
@@ -42,7 +44,7 @@ export const Feedback: FC<FeedbackProps> = ({
         <Spreader spread='small' />
 
         <Row>
-          <Button variant='secondary' size='tiny' onClick={handleFeedback}>
+          <Button variant={buttonVariant} size='tiny' onClick={handleFeedback}>
             {i18n.button}
           </Button>
 
