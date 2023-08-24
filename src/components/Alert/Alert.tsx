@@ -9,14 +9,16 @@ export interface AlertProps {
   children: ReactNode
   className?: string | string[]
   type?: 'info' | 'success' | 'warning' | 'alert'
-  customIcon?: string | 'no-icon'
+  customIcon?: string
+  hideIcon?: boolean
 }
 
 export const Alert: FC<AlertProps> = ({
   children,
   className = '',
   type = 'info',
-  customIcon
+  customIcon,
+  hideIcon = false
 }) => {
   const alertStyles = useStyles(
     {
@@ -28,7 +30,7 @@ export const Alert: FC<AlertProps> = ({
 
   return (
     <div data-testid='alert' className={alertStyles}>
-      {customIcon === 'no-icon' ? null : (
+      {hideIcon ? null : (
         <Icon
           icon={customIcon || mapIconToClass(type)}
           color={type}
