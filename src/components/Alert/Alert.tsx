@@ -10,13 +10,15 @@ export interface AlertProps {
   className?: string | string[]
   type?: 'info' | 'success' | 'warning' | 'alert'
   customIcon?: string
+  hideIcon?: boolean
 }
 
 export const Alert: FC<AlertProps> = ({
   children,
   className = '',
   type = 'info',
-  customIcon
+  customIcon,
+  hideIcon = false
 }) => {
   const alertStyles = useStyles(
     {
@@ -28,12 +30,14 @@ export const Alert: FC<AlertProps> = ({
 
   return (
     <div data-testid='alert' className={alertStyles}>
-      <Icon
-        icon={customIcon || mapIconToClass(type)}
-        color={type}
-        size={12}
-        data-testid='alert-icon'
-      />
+      {hideIcon ? null : (
+        <Icon
+          icon={customIcon || mapIconToClass(type)}
+          color={type}
+          size={12}
+          data-testid='alert-icon'
+        />
+      )}
 
       <div className={styles.alert__message}>{children}</div>
     </div>
