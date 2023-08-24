@@ -9,7 +9,7 @@ export interface AlertProps {
   children: ReactNode
   className?: string | string[]
   type?: 'info' | 'success' | 'warning' | 'alert'
-  customIcon?: string
+  customIcon?: string | 'no-icon'
 }
 
 export const Alert: FC<AlertProps> = ({
@@ -28,12 +28,14 @@ export const Alert: FC<AlertProps> = ({
 
   return (
     <div data-testid='alert' className={alertStyles}>
-      <Icon
-        icon={customIcon || mapIconToClass(type)}
-        color={type}
-        size={12}
-        data-testid='alert-icon'
-      />
+      {customIcon === 'no-icon' ? null : (
+        <Icon
+          icon={customIcon || mapIconToClass(type)}
+          color={type}
+          size={12}
+          data-testid='alert-icon'
+        />
+      )}
 
       <div className={styles.alert__message}>{children}</div>
     </div>
