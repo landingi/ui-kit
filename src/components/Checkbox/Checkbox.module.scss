@@ -88,8 +88,8 @@
     &:disabled {
       opacity: 0;
       + div {
-        color: $color-5;
-        cursor: initial;
+        color: $color-4;
+        cursor: not-allowed;
 
         &::before {
           border-color: currentColor;
