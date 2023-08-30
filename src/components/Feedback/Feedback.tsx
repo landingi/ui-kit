@@ -17,7 +17,7 @@ export interface FeedbackProps {
     button: string
   }
   handleFeedback: () => void
-  buttonVariant: 'primary' | 'secondary'
+  buttonVariant?: 'primary' | 'secondary'
 }
 
 export const Feedback: FC<FeedbackProps> = ({
