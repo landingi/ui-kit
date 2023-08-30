@@ -19,7 +19,9 @@
     opacity: 0;
     transform: scale(1);
     pointer-events: none;
-    transition: opacity 0.3s, transform 0.2s;
+    transition:
+      opacity 0.3s,
+      transform 0.2s;
 
     &:checked,
     &:indeterminate {
@@ -56,7 +58,9 @@
     &:active {
       opacity: 1;
       transform: scale(0);
-      transition: transform 0s, opacity 0s;
+      transition:
+        transform 0s,
+        opacity 0s;
 
       + div {
         &::before {
@@ -68,7 +72,9 @@
     &:checked:active {
       opacity: 1;
       transform: scale(0);
-      transition: transform 0s, opacity 0s;
+      transition:
+        transform 0s,
+        opacity 0s;
 
       + div {
         &::before {
@@ -82,8 +88,8 @@
     &:disabled {
       opacity: 0;
       + div {
-        color: $color-5;
-        cursor: initial;
+        color: $color-4;
+        cursor: not-allowed;
 
         &::before {
           border-color: currentColor;
@@ -113,7 +119,9 @@
       width: 18px;
       height: 18px;
       vertical-align: top;
-      transition: border-color 0.2s, background-color 0.2s;
+      transition:
+        border-color 0.2s,
+        background-color 0.2s;
     }
 
     &::after {
@@ -150,6 +158,84 @@
         border-top: none;
         transform: translate(4px, 4px);
         top: 4px;
+      }
+    }
+  }
+
+  &--special-background-color {
+    &--color-1 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: $color-checkbox-background;
+
+          + div {
+            &::before {
+              border-color: $color-checkbox-background;
+              background-color: $color-checkbox-background;
+            }
+          }
+        }
+      }
+    }
+    &--color-2 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: $color-accent-7;
+
+          + div {
+            &::before {
+              border-color: $color-accent-7;
+              background-color: $color-accent-7;
+            }
+          }
+        }
+      }
+    }
+    &--color-3 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: $color-brand;
+
+          + div {
+            &::before {
+              border-color: $color-brand;
+              background-color: $color-brand;
+            }
+          }
+        }
+      }
+    }
+    &--color-4 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: $color-warning;
+
+          + div {
+            &::before {
+              border-color: $color-warning;
+              background-color: $color-warning;
+            }
+          }
+        }
+      }
+    }
+    &--color-5 {
+      input {
+        &:checked,
+        &:indeterminate {
+          background-color: $color-accent-2;
+
+          + div {
+            &::before {
+              border-color: $color-accent-2;
+              background-color: $color-accent-2;
+            }
+          }
+        }
       }
     }
   }

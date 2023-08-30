@@ -5,7 +5,7 @@ import styles from './CustomLink.module.scss'
 
 interface CustomLinkProps {
   className?: string | string[]
-  variant?: 'active' | 'inactive' | 'dark'
+  variant?: 'active' | 'inactive' | 'dark' | 'grey'
   label: ReactNode
   href?: string
   target?: string

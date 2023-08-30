@@ -25,6 +25,7 @@ interface Option {
 export interface EmptySearchResultsComponentProps {
   addCustomOption: (option: Option) => void
   searchPhrase: string
+  addedOptions: Value[]
 }
 
 interface MultiSelectProps {
@@ -68,12 +69,9 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       selected: values.includes(option.value)
     }))
 
-  /**
-   * creates selected options used to display badges by merging options that were selected
-   * by user and options added by them
-   */
-  const getSelectedOptions = () => {
+  const getCustomSelectedOptions = () => {
     const initialOptionsValues = initialOptions.map(option => option.value)
+
     const customValues = values.filter(
       value => !initialOptionsValues.includes(value)
     )
@@ -83,6 +81,16 @@ export const MultiSelect: FC<MultiSelectProps> = ({
       label: customValue as string,
       selected: true
     }))
+
+    return customSelectedOptions
+  }
+
+  /**
+   * creates selected options used to display badges by merging options that were selected
+   * by user and options added by them
+   */
+  const getSelectedOptions = () => {
+    const customSelectedOptions = getCustomSelectedOptions()
 
     return [
       ...getInitialOptions().filter(option => option.selected),
@@ -218,7 +226,7 @@ export const MultiSelect: FC<MultiSelectProps> = ({
 
       <Spacer space='tiny' />
 
-      <label id={id}>
+      <label id={id} className={styles['multi-select-label']}>
         <div className={optionStyles}>
           {filteredOptions.map(({ label, icon, value, selected }) => (
             <BoxOutline
@@ -240,12 +248,13 @@ export const MultiSelect: FC<MultiSelectProps> = ({
           ))}
         </div>
 
-        <Spacer space='tiny' />
-
         {shouldShowEmptySearchResultsComponent() && (
           <EmptySearchResultsComponent
             addCustomOption={addCustomOption}
             searchPhrase={searchPhrase}
+            addedOptions={getCustomSelectedOptions().map(
+              option => option.value
+            )}
           />
         )}
       </label>
