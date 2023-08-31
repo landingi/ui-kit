@@ -2,6 +2,8 @@ import { Tooltip } from '@components/Tooltip'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Row } from 'simple-flexbox'
 
+import { Button, Icon, PerfectDropdown } from '..'
+
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip
 }
@@ -55,5 +57,18 @@ export const Disabled: Story = {
         <div>disabled</div>
       </Tooltip>
     </Row>
+  )
+}
+
+export const OnPerfectDropdown: Story = {
+  render: () => (
+    <Tooltip content='Bottom tooltip' placement='right'>
+      <PerfectDropdown
+        hasArrow={false}
+        customTrigger={() => <button>trigger</button>}
+      >
+        <div>test</div>
+      </PerfectDropdown>
+    </Tooltip>
   )
 }

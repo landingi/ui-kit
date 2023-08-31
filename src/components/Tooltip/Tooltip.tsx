@@ -1,7 +1,15 @@
 import { useStyles } from '@helpers/hooks/useStyles'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FC, Fragment, ReactElement, ReactNode, useState } from 'react'
-import { Arrow, useHover, useLayer } from 'react-laag'
+import {
+  FC,
+  Fragment,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState
+} from 'react'
+import { Arrow, mergeRefs, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
 
@@ -26,6 +34,8 @@ export const Tooltip: FC<TooltipProps> = ({
   align = 'left',
   'data-testid': dataTestId
 }) => {
+  const triggerRef = useRef<HTMLSpanElement>(null)
+
   const [isOver, hoverProps] = useHover({
     delayEnter: 200,
     delayLeave: 200
@@ -52,7 +62,14 @@ export const Tooltip: FC<TooltipProps> = ({
 
   const stateProps = showOnClick
     ? { onClick: () => setOpenOnClick(prev => !prev) }
-    : hoverProps
+    : {
+        ...hoverProps,
+        onMouseEnter: (e: MouseEvent<HTMLSpanElement>) => {
+          if (triggerRef.current?.contains(e.target as Node)) {
+            hoverProps.onMouseEnter(e)
+          }
+        }
+      }
 
   return (
     <Fragment>
@@ -64,6 +81,7 @@ export const Tooltip: FC<TooltipProps> = ({
           data-testid={dataTestId}
           {...triggerProps}
           {...stateProps}
+          ref={mergeRefs(triggerRef, triggerProps.ref)}
         >
           {children}
         </span>
