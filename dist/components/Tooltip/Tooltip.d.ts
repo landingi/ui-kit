@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactElement, ReactNode } from 'react';
 export interface TooltipProps {
     className?: string;
-    children: ReactNode;
+    children: ReactElement;
     content?: ReactNode;
     disabled?: boolean;
     showOnClick?: boolean;
