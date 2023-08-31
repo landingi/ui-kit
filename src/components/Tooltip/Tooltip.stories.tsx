@@ -1,65 +1,59 @@
 import { Tooltip } from '@components/Tooltip'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { Row } from 'simple-flexbox'
 
-export default {
-  title: 'Tooltip',
+const meta: Meta<typeof Tooltip> = {
   component: Tooltip
-} as ComponentMeta<typeof Tooltip>
-
-const Template: ComponentStory<typeof Tooltip> = args => (
-  <Row
-    justifyContent='center'
-    alignItems='center'
-    style={{
-      height: '300px'
-    }}
-  >
-    <Tooltip {...args}>
-      <div>trigger</div>
-    </Tooltip>
-  </Row>
-)
-
-export const Bottom = Template.bind({})
-
-Bottom.args = {
-  content: 'Bottom tooltip'
 }
 
-export const Left = Template.bind({})
+export default meta
 
-Left.args = {
-  content: 'Left tooltip',
-  placement: 'left'
+type Story = StoryObj<typeof Tooltip>
+
+export const Default: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='Bottom tooltip'>
+        <div>trigger</div>
+      </Tooltip>
+    </Row>
+  )
 }
 
-export const Right = Template.bind({})
-
-Right.args = {
-  content: 'right tooltip',
-  placement: 'right'
+export const ShowOnClick: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='ShowOnClick tooltip' showOnClick>
+        <div>ShowOnClick</div>
+      </Tooltip>
+    </Row>
+  )
 }
 
-export const Top = Template.bind({})
-
-Top.args = {
-  content: 'Top tooltip',
-  placement: 'top'
-}
-
-export const ShowOnClick = Template.bind({})
-
-ShowOnClick.args = {
-  content: 'Top tooltip',
-  placement: 'top',
-  showOnClick: true
-}
-
-export const Disabled = Template.bind({})
-
-Disabled.args = {
-  content: 'Disabled',
-  placement: 'top',
-  disabled: true
+export const Disabled: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='disabled tooltip' disabled>
+        <div>disabled</div>
+      </Tooltip>
+    </Row>
+  )
 }

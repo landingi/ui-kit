@@ -1,12 +1,24 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, Fragment, ReactNode, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  cloneElement,
+  FC,
+  Fragment,
+  ReactElement,
+  ReactNode,
+  useState
+} from 'react'
 import { Arrow, useHover, useLayer } from 'react-laag'
 
 import styles from './Tooltip.module.scss'
 
+const isReactText = (children: ReactElement) => {
+  return ['string', 'number'].includes(typeof children)
+}
+
 export interface TooltipProps {
   className?: string
-  children: ReactNode
+  children: ReactElement
   content?: ReactNode
   disabled?: boolean
   showOnClick?: boolean
@@ -50,28 +62,48 @@ export const Tooltip: FC<TooltipProps> = ({
     ? { onClick: () => setOpenOnClick(prev => !prev) }
     : hoverProps
 
+  let trigger
+
+  if (isReactText(children)) {
+    trigger = (
+      <span
+        className={className}
+        data-testid={dataTestId}
+        {...triggerProps}
+        {...stateProps}
+      >
+        {children}
+      </span>
+    )
+  } else {
+    trigger = cloneElement(children, {
+      ...triggerProps,
+      ...stateProps
+    })
+  }
+
   return (
     <Fragment>
       {disabled && children}
 
-      {!disabled && (
-        <span
-          className={className}
-          data-testid={dataTestId}
-          {...triggerProps}
-          {...stateProps}
-        >
-          {children}
-        </span>
-      )}
+      {!disabled && trigger}
 
       {renderLayer(
-        isOpen && (
-          <div className={tooltipStyles} {...layerProps}>
-            {content}
-            <Arrow {...arrowProps} backgroundColor='#222' size={6} />
-          </div>
-        )
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className={tooltipStyles}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.1 }}
+              {...layerProps}
+            >
+              {content}
+              <Arrow {...arrowProps} backgroundColor='#222' size={6} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
     </Fragment>
   )
