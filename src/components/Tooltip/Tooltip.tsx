@@ -26,7 +26,10 @@ export const Tooltip: FC<TooltipProps> = ({
   align = 'left',
   'data-testid': dataTestId
 }) => {
-  const [isOver, hoverProps] = useHover() // for hover
+  const [isOver, hoverProps] = useHover({
+    delayEnter: 200,
+    delayLeave: 200
+  }) // for hover
   const [isOpenOnClick, setOpenOnClick] = useState(false) // for click
 
   const isOpen = showOnClick ? isOpenOnClick : isOver
@@ -38,7 +41,7 @@ export const Tooltip: FC<TooltipProps> = ({
   const { triggerProps, layerProps, arrowProps, renderLayer } = useLayer({
     isOpen,
     placement: `${placement}-center`,
-    triggerOffset: 8,
+    triggerOffset: 12,
     onOutsideClick: close
   })
 
