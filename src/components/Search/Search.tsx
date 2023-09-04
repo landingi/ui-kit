@@ -36,6 +36,7 @@ export interface SearchProps {
   submitEmptyOnBlur?: boolean
   defaultValue?: string
   searchIcon?: string | null
+  isDisabled?: boolean
 }
 
 export const Search: FC<SearchProps> = ({
@@ -56,13 +57,15 @@ export const Search: FC<SearchProps> = ({
   onProtectedSubmit,
   submitEmptyOnBlur,
   defaultValue = '',
-  searchIcon = 'icon-search'
+  searchIcon = 'icon-search',
+  isDisabled = false
 }) => {
   const elementClasses = useStyles(
     {
       [styles.search]: true,
       [styles[`search--${variant}`]]: variant,
-      [styles[`search--${size}`]]: true
+      [styles[`search--${size}`]]: true,
+      [styles['search--disabled']]: isDisabled
     },
     className
   )
