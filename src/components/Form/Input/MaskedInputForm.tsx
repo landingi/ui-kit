@@ -7,6 +7,7 @@ import { FC } from 'react'
 import { Mask } from 'react-text-mask'
 
 export interface MaskedInputFormProps {
+  className?: string | string[]
   field: {
     name: string
     value: string | number
@@ -35,6 +36,7 @@ export interface MaskedInputFormProps {
 }
 
 export const MaskedInputForm: FC<MaskedInputFormProps> = ({
+  className,
   field,
   form = { errors: {}, touched: {} },
   type,
@@ -62,6 +64,7 @@ export const MaskedInputForm: FC<MaskedInputFormProps> = ({
   return (
     <div className={wrapperStyles} data-testid='form-masked-input-wrapper'>
       <MaskedInput
+        className={className}
         mask={mask}
         type={type}
         name={name}
