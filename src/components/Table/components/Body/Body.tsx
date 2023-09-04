@@ -18,7 +18,7 @@ export const Body = <Item extends ItemBase>({
       <BodyTr
         columns={columns}
         item={item}
-        rowActions={rowActions}
+        rowActions={index === 0 && hasStyledFirstRow ? undefined : rowActions}
         key={item.identifier}
         hasSelect={hasSelect}
         isSelected={isSelected}
