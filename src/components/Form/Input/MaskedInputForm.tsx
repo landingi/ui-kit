@@ -1,9 +1,13 @@
 import Error from '@components/Form/Error'
+import styles from '@components/Input/Input.module.scss'
 import { MaskedInput } from '@components/Input/MaskedInput'
+import { getDeepValue } from '@helpers/data'
+import { useStyles } from '@helpers/hooks/useStyles'
 import { FC } from 'react'
 import { Mask } from 'react-text-mask'
 
 export interface MaskedInputFormProps {
+  className?: string | string[]
   field: {
     name: string
     value: string | number
@@ -32,6 +36,7 @@ export interface MaskedInputFormProps {
 }
 
 export const MaskedInputForm: FC<MaskedInputFormProps> = ({
+  className = '',
   field,
   form = { errors: {}, touched: {} },
   type,
@@ -45,13 +50,22 @@ export const MaskedInputForm: FC<MaskedInputFormProps> = ({
 }) => {
   const { name, value, onChange, onBlur } = field
   const { errors, touched } = form
-  const errorClass = errors[name] && touched[name] ? 'form--has-error' : ''
+
+  const error = getDeepValue(errors, name)
+  const isTouched = getDeepValue(touched, name)
+
+  const hasErrorToShow = error && isTouched
+
+  const wrapperStyles = useStyles(
+    {
+      [styles['form-field']]: true,
+      [styles['form--has-error']]: hasErrorToShow
+    },
+    className
+  )
 
   return (
-    <div
-      className={`form-field ${errorClass}`}
-      data-testid='form-masked-input-wrapper'
-    >
+    <div className={wrapperStyles} data-testid='form-masked-input-wrapper'>
       <MaskedInput
         mask={mask}
         type={type}
