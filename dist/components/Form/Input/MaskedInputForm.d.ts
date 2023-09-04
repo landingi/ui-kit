@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Mask } from 'react-text-mask';
 export interface MaskedInputFormProps {
+    className?: string | string[];
     field: {
         name: string;
         value: string | number;
