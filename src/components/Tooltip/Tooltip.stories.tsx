@@ -1,65 +1,74 @@
 import { Tooltip } from '@components/Tooltip'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import { Row } from 'simple-flexbox'
 
-export default {
-  title: 'Tooltip',
+import { Button, Icon, PerfectDropdown } from '..'
+
+const meta: Meta<typeof Tooltip> = {
   component: Tooltip
-} as ComponentMeta<typeof Tooltip>
+}
 
-const Template: ComponentStory<typeof Tooltip> = args => (
-  <Row
-    justifyContent='center'
-    alignItems='center'
-    style={{
-      height: '300px'
-    }}
-  >
-    <Tooltip {...args}>
-      <div>trigger</div>
+export default meta
+
+type Story = StoryObj<typeof Tooltip>
+
+export const Default: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='Bottom tooltip'>
+        <div>trigger</div>
+      </Tooltip>
+    </Row>
+  )
+}
+
+export const ShowOnClick: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='ShowOnClick tooltip' showOnClick>
+        <div>ShowOnClick</div>
+      </Tooltip>
+    </Row>
+  )
+}
+
+export const Disabled: Story = {
+  render: () => (
+    <Row
+      justifyContent='center'
+      alignItems='center'
+      style={{
+        height: '300px'
+      }}
+    >
+      <Tooltip content='disabled tooltip' disabled>
+        <div>disabled</div>
+      </Tooltip>
+    </Row>
+  )
+}
+
+export const OnPerfectDropdown: Story = {
+  render: () => (
+    <Tooltip content='Bottom tooltip' placement='right'>
+      <PerfectDropdown
+        hasArrow={false}
+        customTrigger={() => <button>trigger</button>}
+      >
+        <div>test</div>
+      </PerfectDropdown>
     </Tooltip>
-  </Row>
-)
-
-export const Bottom = Template.bind({})
-
-Bottom.args = {
-  content: 'Bottom tooltip'
-}
-
-export const Left = Template.bind({})
-
-Left.args = {
-  content: 'Left tooltip',
-  placement: 'left'
-}
-
-export const Right = Template.bind({})
-
-Right.args = {
-  content: 'right tooltip',
-  placement: 'right'
-}
-
-export const Top = Template.bind({})
-
-Top.args = {
-  content: 'Top tooltip',
-  placement: 'top'
-}
-
-export const ShowOnClick = Template.bind({})
-
-ShowOnClick.args = {
-  content: 'Top tooltip',
-  placement: 'top',
-  showOnClick: true
-}
-
-export const Disabled = Template.bind({})
-
-Disabled.args = {
-  content: 'Disabled',
-  placement: 'top',
-  disabled: true
+  )
 }
