@@ -36,7 +36,7 @@ export interface MaskedInputFormProps {
 }
 
 export const MaskedInputForm: FC<MaskedInputFormProps> = ({
-  className,
+  className = '',
   field,
   form = { errors: {}, touched: {} },
   type,
@@ -56,15 +56,17 @@ export const MaskedInputForm: FC<MaskedInputFormProps> = ({
 
   const hasErrorToShow = error && isTouched
 
-  const wrapperStyles = useStyles({
-    [styles['form-field']]: true,
-    [styles['form--has-error']]: hasErrorToShow
-  })
+  const wrapperStyles = useStyles(
+    {
+      [styles['form-field']]: true,
+      [styles['form--has-error']]: hasErrorToShow
+    },
+    className
+  )
 
   return (
     <div className={wrapperStyles} data-testid='form-masked-input-wrapper'>
       <MaskedInput
-        className={className}
         mask={mask}
         type={type}
         name={name}
