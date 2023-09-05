@@ -1,5 +1,4 @@
 import { useStyles } from '@helpers/hooks/useStyles'
-import { AnimatePresence, motion } from 'framer-motion'
 import {
   FC,
   Fragment,
@@ -15,7 +14,7 @@ import styles from './Tooltip.module.scss'
 
 export interface TooltipProps {
   className?: string
-  children: ReactElement
+  children: ReactNode
   content?: ReactNode
   disabled?: boolean
   showOnClick?: boolean
@@ -88,21 +87,12 @@ export const Tooltip: FC<TooltipProps> = ({
       )}
 
       {renderLayer(
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className={tooltipStyles}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.1 }}
-              {...layerProps}
-            >
-              {content}
-              <Arrow {...arrowProps} backgroundColor='#222' size={6} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        isOpen && (
+          <div className={tooltipStyles} {...layerProps}>
+            {content}
+            <Arrow {...arrowProps} backgroundColor='#222' size={6} />
+          </div>
+        )
       )}
     </Fragment>
   )
