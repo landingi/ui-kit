@@ -82,11 +82,11 @@
     }
 
     input {
-      background-color: #f9f9f9;
+      background-color: $color-background-search-disabled;
       pointer-events: none;
 
       &::placeholder {
-        color: #d8d8d8;
+        color: $color-4;
       }
     }
   }
