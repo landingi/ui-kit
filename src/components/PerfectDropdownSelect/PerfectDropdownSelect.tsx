@@ -275,7 +275,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   return (
     <div className={className} ref={containerRef} data-testid='dropdown-select'>
       {label && (
-        <Label id={label} className={labelStyles}>
+        <Label id={label} className={labelStyles} padding='top'>
           {label}
         </Label>
       )}
