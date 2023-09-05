@@ -9,7 +9,7 @@ interface LabelProps {
   id?: string
   isToggle?: boolean
   toggle?: boolean
-  padding?: 'default' | 'none'
+  padding?: 'default' | 'none' | 'top'
 }
 
 export const Label: FC<LabelProps> = ({
