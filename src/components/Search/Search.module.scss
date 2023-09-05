@@ -75,4 +75,19 @@
     border: 1px solid $color-input-border;
     position: relative;
   }
+
+  &--disabled {
+    &:hover {
+      cursor: not-allowed;
+    }
+
+    input {
+      background-color: $color-background-search-disabled;
+      pointer-events: none;
+
+      &::placeholder {
+        color: $color-4;
+      }
+    }
+  }
 }

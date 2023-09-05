@@ -1,37 +1,51 @@
-import { Search } from '@components/Search'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-export default {
-  title: 'Search',
+import { Search } from './Search'
+
+const meta: Meta<typeof Search> = {
   component: Search
-} as ComponentMeta<typeof Search>
-
-const Template: ComponentStory<typeof Search> = args => (
-  <div style={{ maxWidth: '400px' }}>
-    <Search {...args} />
-  </div>
-)
-
-export const Small = Template.bind({})
-
-Small.args = {
-  size: 'small'
 }
 
-export const Medium = Template.bind({})
+export default meta
+type Story = StoryObj<typeof Search>
 
-Small.args = {
-  size: 'medium'
+export const Small: Story = {
+  render: () => (
+    <Search
+      size='small'
+      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
+    />
+  )
 }
 
-export const Large = Template.bind({})
-
-Small.args = {
-  size: 'large'
+export const Medium: Story = {
+  render: () => (
+    <Search
+      size='medium'
+      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
+    />
+  )
 }
 
-export const WithLabelAndPlaceholder = Template.bind({})
+export const Large: Story = {
+  render: () => (
+    <Search
+      size='large'
+      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
+    />
+  )
+}
 
-WithLabelAndPlaceholder.args = {
-  i18n: { label: 'Label test', placeholder: 'Placeholder test' }
+export const Disabled: Story = {
+  render: () => (
+    <Search
+      size='large'
+      isDisabled
+      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
+    />
+  )
+}
+
+export const WithoutLabelAndPlaceholder: Story = {
+  render: () => <Search size='large' />
 }

@@ -18,5 +18,6 @@ export interface SearchProps {
     submitEmptyOnBlur?: boolean;
     defaultValue?: string;
     searchIcon?: string | null;
+    isDisabled?: boolean;
 }
 export declare const Search: FC<SearchProps>;
