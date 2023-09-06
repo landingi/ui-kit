@@ -14,6 +14,7 @@ import styles from './Tooltip.module.scss'
 
 export interface TooltipProps {
   className?: string
+  tooltipClassName?: string
   children: ReactNode
   content?: ReactNode
   disabled?: boolean
@@ -25,6 +26,7 @@ export interface TooltipProps {
 
 export const Tooltip: FC<TooltipProps> = ({
   className = '',
+  tooltipClassName = '',
   children,
   content = '',
   disabled = false,
@@ -54,10 +56,13 @@ export const Tooltip: FC<TooltipProps> = ({
     onOutsideClick: close
   })
 
-  const tooltipStyles = useStyles({
-    [styles['react-tooltip']]: true,
-    [styles[`react-tooltip-${align}`]]: align
-  })
+  const tooltipStyles = useStyles(
+    {
+      [styles['react-tooltip']]: true,
+      [styles[`react-tooltip-${align}`]]: align
+    },
+    tooltipClassName
+  )
 
   const stateProps = showOnClick
     ? { onClick: () => setOpenOnClick(prev => !prev) }
