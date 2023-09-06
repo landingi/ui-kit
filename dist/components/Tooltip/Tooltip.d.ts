@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 export interface TooltipProps {
     className?: string;
+    tooltipClassName?: string;
     children: ReactNode;
     content?: ReactNode;
     disabled?: boolean;
