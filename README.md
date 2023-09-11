@@ -1,6 +1,7 @@
 # ui-kit
 
 ## Coverage
+
 Unit tests
 
 ![img](coverage/badge-branches.svg) ![img](coverage/badge-functions.svg)
@@ -8,12 +9,12 @@ Unit tests
 
 ## Getting Started
 
-Landingi UI-kit is a set of react components. Getting started is simple. Just add a `@landingi/landingi-ui-kit`
-to your dependencies in `package.json`.
+Landingi UI-kit is a set of react components. Getting started is simple. Just
+add a `@landingi/landingi-ui-kit` to your dependencies in `package.json`.
 
 ### Requirements
 
-- [pnpm](https://pnpm.io/) >=7.0.0
+- [pnpm](https://pnpm.io/) >=8.6.12
 - [Node.js](https://nodejs.org/en/download/) 18.0.0
 
 ### Quick Start

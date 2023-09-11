@@ -15,9 +15,8 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
-          version: 7.x
+          version: 8.6.12
 
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test
-
