@@ -26,6 +26,7 @@ export type ButtonVariant =
   | 'switcher-brand'
 
 export interface ButtonProps {
+  id?: string
   className?: string | string[]
   tag?: 'button' | 'a'
   title?: string
@@ -54,6 +55,7 @@ export interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({
+  id,
   className = '',
   tag: Tag = 'button',
   title,
@@ -95,6 +97,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <Tag
+      id={id}
       type={Tag === 'button' ? type : undefined}
       disabled={isDisabled}
       href={Tag === 'a' ? href : undefined}
