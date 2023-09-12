@@ -1,6 +1,7 @@
 import { FC, MouseEvent, ReactNode } from 'react';
 export type ButtonVariant = 'primary' | 'secondary' | 'secondary-outlined' | 'dropdown' | 'transparent' | 'icon' | 'icon-transparent' | 'icon-transparent-hover' | 'alert' | 'clean' | 'tabs' | 'transparent-blue' | 'dropdown-element' | 'action' | 'white' | 'black' | 'publish' | 'switcher-brand';
 export interface ButtonProps {
+    id?: string;
     className?: string | string[];
     tag?: 'button' | 'a';
     title?: string;
