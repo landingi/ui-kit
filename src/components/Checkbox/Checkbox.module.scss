@@ -140,12 +140,14 @@
     }
   }
 
-  &:hover {
-    input {
-      opacity: 0.04;
+  @media (hover) {
+    &:hover {
+      input {
+        opacity: 0.04;
 
-      &:focus {
-        opacity: 0.16;
+        &:focus {
+          opacity: 0.16;
+        }
       }
     }
   }
