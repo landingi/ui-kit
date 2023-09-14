@@ -23,7 +23,8 @@
       "@lib/*": ["./src/lib/*"],
       "@shapes/*": ["./src/shapes/*"]
     },
-    "types": ["node"]
+    "types": ["node"],
+    "preserveSymlinks": true
   },
   "exclude": [
     "node_modules",
