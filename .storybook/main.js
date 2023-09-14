@@ -10,9 +10,6 @@ module.exports = {
     name: '@storybook/react-webpack5',
     options: {}
   },
-  docs : {
-    autodocs: 'tag'
-  },
   staticDirs: [
     {
       from: '../src/fonts',
