@@ -1,23 +1,28 @@
-import { Back } from '@components/Back'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Back, BackProps } from '@components/Back'
+import { Meta, StoryFn } from '@storybook/react'
 
 export default {
   title: 'Back',
   component: Back
-} as ComponentMeta<typeof Back>
+} as Meta<typeof Back>
 
-const Template: ComponentStory<typeof Back> = args => <Back {...args} />
+const Template: StoryFn<typeof Back> = (args: BackProps) => <Back {...args} />
 
 export const Basic = Template.bind({})
 export const WithTooltip = Template.bind({})
 export const WithLabel = Template.bind({})
 
-Basic.args = {}
+Basic.args = {
+  content: '',
+  label: ''
+}
 
 WithTooltip.args = {
+  label: '',
   content: 'tooltip'
 }
 
 WithLabel.args = {
-  label: 'Label'
+  label: 'Label',
+  content: ''
 }
