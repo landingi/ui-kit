@@ -1,48 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Badge } from '@components/Badge'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Badge, BadgeProps } from '@components/Badge'
+import { Meta, StoryFn } from '@storybook/react'
 
 export default {
   title: 'Badge',
   component: Badge
-} as ComponentMeta<typeof Badge>
+} as Meta<typeof Badge>
 
-const Template: ComponentStory<typeof Badge> = args => (
+const Template: StoryFn<typeof Badge> = (args: BadgeProps) => (
   <div>
     <Badge {...args}>
-      {' '}
-      <a href='#'>I am just a link</a>{' '}
+      <a href='#'>I am just a link</a>
     </Badge>
     <br />
-    <Badge {...args}>
-      {' '}
-      <a href='#'>I am text</a>{' '}
-    </Badge>
+    <Badge {...args}>Text</Badge>
   </div>
 )
 
-export const Pending = Template.bind({})
-export const Warning = Template.bind({})
-export const Alert = Template.bind({})
-export const Success = Template.bind({})
-export const Info = Template.bind({})
+export const Basic = Template.bind({})
+export const WithTooltip = Template.bind({})
 
-Pending.args = {
-  type: 'pending'
+Basic.args = {
+  type: 'warning',
+  isIndicator: false
 }
 
-Warning.args = {
-  type: 'warning'
-}
-
-Alert.args = {
-  type: 'alert'
-}
-
-Success.args = {
-  type: 'success'
-}
-
-Info.args = {
-  type: 'success'
+WithTooltip.args = {
+  type: 'ai',
+  isIndicator: false,
+  tooltip: 'I am a tooltip'
 }
