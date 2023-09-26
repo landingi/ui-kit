@@ -36,7 +36,7 @@ export const Panel: FC<PanelProps> = ({
       [styles.panel]: true,
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
-      [styles['panel--background']]: !hasShadow,
+      [styles['panel--shadow-none']]: !hasShadow,
       [styles[`panel--${variant}`]]: variant
     },
     className
