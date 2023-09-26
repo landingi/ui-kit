@@ -19,6 +19,7 @@ interface ParagraphProps {
     | 'color-8'
     | 'success'
     | 'brand'
+    | 'warning'
   size?: 10 | 12 | 14 | 16 | 18
   align?: 'left' | 'center' | 'right' | 'justify'
   padding?: 'small' | 'medium' | 'none'
