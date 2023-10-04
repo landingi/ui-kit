@@ -10,13 +10,18 @@
       font-weight: 400;
 
       .close-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
+        min-height: 25px;
+        min-width: 25px;
         margin-right: 2px;
         opacity: 0;
-        transition: opacity 0.25s ease;
+        transition: all 0.25s ease;
         visibility: hidden;
         z-index: $z-index-table;
         background: linear-gradient(
@@ -26,18 +31,16 @@
           $color-bg
         );
 
-        button {
-          min-height: 25px;
-          min-width: 25px;
-          background: linear-gradient(
-            90deg,
-            hsla(0deg, 0%, 96.1%, 0) 0,
-            $color-bg 10%,
-            $color-bg
-          );
+        i {
+          margin-left: 2px;
+          transition: color 0.25s ease;
+          color: $color-3;
+        }
 
+        &:hover {
           i {
             transition: color 0.25s ease;
+            color: $color-2;
           }
         }
       }
@@ -84,36 +87,32 @@
       min-height: 28px;
       font-size: 14px;
       font-weight: 400;
+      transition: all 0.25s ease;
 
       .close-button {
         margin-left: 10px;
         z-index: $z-index-table;
+        min-height: fit-content;
+        min-width: fit-content;
 
-        button {
-          min-height: fit-content;
-          min-width: fit-content;
-
-          i {
-            transition: color 0.25s ease;
-
-            color: $color-13;
-          }
+        i {
+          transition: color 0.25s ease;
+          color: $color-13;
         }
 
         &:hover {
-          button {
-            background-color: $color-2;
-            i {
-              transition: color 0.25s ease;
+          transition: all 0.25s ease;
+          background-color: $color-2;
 
-              color: $color-white;
-            }
+          i {
+            color: $color-white;
           }
         }
       }
 
       &:hover {
         background-color: $color-2;
+        transition: all 0.25s ease;
         border: 1px solid $color-2;
 
         .close-button {

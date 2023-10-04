@@ -1,5 +1,5 @@
 import Button from '@components/Button'
-import { Close } from '@components/Close'
+import { Icon } from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, ReactNode } from 'react'
 
@@ -40,7 +40,10 @@ export const FilterTag: FC<FilterTagProps> = ({
         data-testid='FilterTag'
       >
         <span>{children}</span>
-        <Close className={styles['close-button']} onClick={handleClose} />
+
+        <span onClick={handleClose} className={styles['close-button']}>
+          <Icon icon='icon-remove' />
+        </span>
       </Button>
     </span>
   )
