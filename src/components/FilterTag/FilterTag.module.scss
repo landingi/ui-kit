@@ -1,124 +1,116 @@
 .filterTag {
-  &--primary {
-    .filterTag-button {
-      border: 1px solid $color-3;
-      border-radius: 2px;
-      color: $color-3;
-      padding: 0px 10px;
-      min-height: 28px;
-      font-size: 12px;
-      font-weight: 400;
+  .filterTag-button {
+    border: 1px solid $color-3;
+    border-radius: 2px;
+    color: $color-3;
+    padding: 0 10px;
+    min-height: 30px;
+    font-size: 12px;
+    font-weight: 400;
 
-      .close-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        min-height: 25px;
-        min-width: 25px;
-        margin-right: 2px;
-        opacity: 0;
-        transition: all 0.25s ease;
-        visibility: hidden;
-        z-index: $z-index-table;
-        background: linear-gradient(
-          90deg,
-          hsla(0deg, 0%, 96.1%, 0) 0,
-          $color-bg 10%,
-          $color-bg
-        );
-
-        i {
-          margin-left: 2px;
-          transition: color 0.25s ease;
-          color: $color-3;
-        }
-
-        &:hover {
-          i {
-            transition: color 0.25s ease;
-            color: $color-2;
-          }
-        }
-      }
-
-      &:hover {
-        background-color: $color-bg;
-        transition: all 0.25s ease;
-
-        .close-button {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-    }
-  }
-
-  &--disabled {
-    .filterTag-button {
-      border: 1px solid $color-4;
-      color: $color-4;
-      cursor: not-allowed;
-
-      &:hover {
-        background-color: unset;
-
-        .close-button {
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
-    }
-  }
-
-  &--secondary {
-    .filterTag-button {
+    .close-button {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      color: $color-white;
-      background-color: $color-3;
-      border: 1px solid $color-3;
-      border-radius: 2px;
-      padding: 0px 10px;
-      min-height: 28px;
-      font-size: 14px;
-      font-weight: 400;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 25px;
+      min-width: 25px;
+      margin-right: 2px;
+      opacity: 0;
+      transition: all 0.25s ease;
+      visibility: hidden;
+      z-index: $z-index-table;
+      background: linear-gradient(
+        90deg,
+        hsla(0deg, 0%, 96.1%, 0) 0,
+        $color-bg 10%,
+        $color-bg
+      );
+
+      i {
+        margin-left: 2px;
+        transition: color 0.25s ease;
+        color: $color-3;
+      }
+    }
+  }
+
+  &--primary .filterTag-button {
+    &:hover {
+      background-color: $color-bg;
       transition: all 0.25s ease;
 
       .close-button {
-        margin-left: 10px;
-        z-index: $z-index-table;
-        min-height: fit-content;
-        min-width: fit-content;
+        opacity: 1;
+        visibility: visible;
 
-        i {
-          transition: color 0.25s ease;
-          color: $color-13;
-        }
-
-        &:hover {
-          transition: all 0.25s ease;
-          background-color: $color-2;
-
-          i {
-            color: $color-white;
-          }
+        i:hover {
+          color: $color-2;
         }
       }
+    }
+  }
 
-      &:hover {
-        background-color: $color-2;
+  &--disabled .filterTag-button {
+    border: 1px solid $color-4;
+    color: $color-4;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: unset;
+
+      .close-button {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  &--secondary .filterTag-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-white;
+    background-color: $color-3;
+    border: 1px solid $color-3;
+    border-radius: 2px;
+    padding: 0 10px;
+    min-height: 27px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.25s ease;
+
+    .close-button {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      background: $color-3;
+      margin-left: 10px;
+      margin-right: 0;
+      min-height: fit-content;
+      min-width: fit-content;
+
+      i {
+        transition: color 0.25s ease;
+        color: $color-13;
+      }
+
+      &:hover i {
+        color: $color-white;
+      }
+    }
+
+    &:hover {
+      background-color: $color-2;
+      transition: all 0.25s ease;
+      border: 1px solid $color-2;
+
+      .close-button {
         transition: all 0.25s ease;
-        border: 1px solid $color-2;
-
-        .close-button {
-          opacity: 1;
-          visibility: visible;
-        }
+        background: $color-2;
       }
     }
   }
