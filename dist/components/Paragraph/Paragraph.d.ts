@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-interface ParagraphProps {
+export interface ParagraphProps {
     className?: string | string[];
     children: ReactNode;
     color?: 'accent-1' | 'accent-2' | 'accent-3' | 'accent-4' | 'accent-5' | 'accent-6' | 'accent-7' | 'info' | 'white' | 'color-8' | 'success' | 'brand' | 'warning';
@@ -12,4 +12,3 @@ interface ParagraphProps {
     decoration?: 'line-through';
 }
 export declare const Paragraph: FC<ParagraphProps>;
-export {};
