@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Paragraph.module.scss'
 
-interface ParagraphProps {
+export interface ParagraphProps {
   className?: string | string[]
   children: ReactNode
   color?:
