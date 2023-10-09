@@ -96,6 +96,12 @@
     background: $color-ai;
   }
 
+  &--green-with-border {
+    background-color: $color-light-green;
+    color: $color-success;
+    border: 1px solid $color-success;
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
