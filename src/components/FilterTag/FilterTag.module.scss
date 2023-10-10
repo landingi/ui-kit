@@ -3,10 +3,11 @@
     border: 1px solid $color-3;
     border-radius: 2px;
     color: $color-3;
-    padding: 0 10px;
+    padding: 0 $padding-small;
     min-height: 30px;
     font-size: 12px;
     font-weight: 400;
+    transition: all 0.25s ease;
 
     .close-button {
       display: flex;
@@ -36,12 +37,15 @@
         color: $color-3;
       }
     }
+
+    &:hover {
+      transition: all 0.25s ease;
+    }
   }
 
   &--primary .filterTag-button {
     &:hover {
       background-color: $color-bg;
-      transition: all 0.25s ease;
 
       .close-button {
         opacity: 1;
@@ -81,7 +85,6 @@
     min-height: 27px;
     font-size: 14px;
     font-weight: 400;
-    transition: all 0.25s ease;
 
     .close-button {
       opacity: 1;
@@ -94,7 +97,6 @@
       min-width: fit-content;
 
       i {
-        transition: color 0.25s ease;
         color: $color-13;
       }
 
@@ -105,11 +107,9 @@
 
     &:hover {
       background-color: $color-2;
-      transition: all 0.25s ease;
       border: 1px solid $color-2;
 
       .close-button {
-        transition: all 0.25s ease;
         background: $color-2;
       }
     }
