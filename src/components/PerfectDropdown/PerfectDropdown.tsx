@@ -130,10 +130,10 @@ export const PerfectDropdown = forwardRef<
 
     const triggerRef = useRef<HTMLSpanElement>(null!)
 
-    const close = useCallback(() => {
+    const close = () => {
       setOpen(false)
       handleOnClose?.()
-    }, [handleOnClose])
+    }
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
