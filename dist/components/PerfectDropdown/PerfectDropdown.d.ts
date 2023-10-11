@@ -24,6 +24,7 @@ interface PerfectDropdownProps {
     padding?: 'none';
     ['data-testid']?: string;
     isOpenDisabled?: boolean;
+    initialState?: boolean;
 }
 export declare const PerfectDropdown: import("react").ForwardRefExoticComponent<PerfectDropdownProps & import("react").RefAttributes<HTMLSpanElement>>;
 export {};
