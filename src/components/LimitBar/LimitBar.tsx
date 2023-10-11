@@ -1,5 +1,5 @@
 import { Icon } from '@components/Icon'
-import ProgressBar from '@components/ProgressBar'
+import { ProgressBar } from '@components/ProgressBar'
 import Spreader from '@components/Spreader'
 import { Tooltip } from '@components/Tooltip'
 import { formatNumeric } from '@helpers/data'
