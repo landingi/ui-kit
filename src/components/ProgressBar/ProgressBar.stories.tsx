@@ -3,7 +3,13 @@ import { Meta, StoryFn } from '@storybook/react'
 
 export default {
   title: 'ProgressBar',
-  component: ProgressBar
+  component: ProgressBar,
+  argTypes: {
+    border: {
+      options: [undefined, 'white', 'grey'],
+      control: { type: 'select' }
+    }
+  }
 } as Meta<typeof ProgressBar>
 
 const Template: StoryFn<typeof ProgressBar> = (args: ProgressBarProps) => (
@@ -19,6 +25,5 @@ Basic.args = {
   limit: 100,
   showValue: true,
   valueSize: 16,
-  withoutAnimation: false,
-  border: 'white'
+  withoutAnimation: false
 }
