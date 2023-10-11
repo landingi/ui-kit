@@ -131,7 +131,7 @@ export const PerfectDropdown = forwardRef<
     const close = useCallback(() => {
       setOpen(false)
       handleOnClose?.()
-    }, [])
+    }, [handleOnClose])
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
