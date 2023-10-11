@@ -5,9 +5,9 @@ interface PanelProps {
     variant?: 'padding-default' | 'padding-nolr' | 'padding-tiny' | 'padding-none' | 'padding-bottom-tiny' | 'padding-input' | 'padding-huge';
     adjustHeight?: boolean;
     isBackground?: boolean;
-    hasShadow?: boolean;
     borderRadius?: string;
     customBoxShadow?: string;
+    hasBorder?: boolean;
 }
 export declare const Panel: FC<PanelProps>;
 export {};
