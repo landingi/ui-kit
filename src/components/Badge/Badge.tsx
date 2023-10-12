@@ -8,14 +8,11 @@ export interface BadgeProps {
   children: ReactNode
   className?: string | string[]
   type?:
-    | 'primary'
-    | 'secondary'
     | 'warning'
     | 'alert'
     | 'pending'
     | 'success'
     | 'info'
-    | 'indicator'
     | 'paid'
     | 'open'
     | 'canceled'
@@ -28,6 +25,7 @@ export interface BadgeProps {
     | 'accent-6'
     | 'accent-7'
     | 'accent-8'
+    | 'green-with-border'
   tooltip?: ReactNode
   isIndicator?: boolean
 }
@@ -35,7 +33,7 @@ export interface BadgeProps {
 export const Badge: FC<BadgeProps> = ({
   children,
   className = '',
-  type = 'primary',
+  type = 'info',
   tooltip = null,
   isIndicator = false
 }) => {
