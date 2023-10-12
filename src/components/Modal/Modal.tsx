@@ -1,5 +1,5 @@
 import { Backdrop } from '@components/Backdrop'
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { ButtonVariant } from '@components/Button/Button'
 import { Close } from '@components/Close'
 import Divider from '@components/Divider'

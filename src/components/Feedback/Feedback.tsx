@@ -1,5 +1,5 @@
 import { Alert } from '@components/Alert'
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Close } from '@components/Close'
 import Spreader from '@components/Spreader'
 import { getLocalStorage, setLocalStorage } from '@helpers/storage'

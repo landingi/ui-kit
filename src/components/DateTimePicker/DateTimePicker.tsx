@@ -1,6 +1,6 @@
 import './DateTimePicker.scss'
 
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { getAgoDate, getTodayDate } from '@helpers/data'
 import { getLanguage } from '@helpers/i18n'
 import { enUS, pl, pt } from 'date-fns/locale'

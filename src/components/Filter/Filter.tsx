@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { List } from '@components/List'
 import { ListItem } from '@components/List/Item'
 import { PerfectDropdown } from '@components/PerfectDropdown'

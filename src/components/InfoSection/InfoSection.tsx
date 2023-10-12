@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Heading } from '@components/Heading'
 import Image from '@components/Image'
 import { List } from '@components/List'
