@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler } from 'react';
-interface NotificationProps {
+export interface NotificationProps {
     children: React.ReactNode;
     className?: string | string[];
     hasTime?: boolean;
@@ -8,4 +8,3 @@ interface NotificationProps {
     onClick?: MouseEventHandler<HTMLSpanElement>;
 }
 export declare const Notification: FC<NotificationProps>;
-export {};
