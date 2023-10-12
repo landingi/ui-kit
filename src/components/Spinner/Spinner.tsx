@@ -4,10 +4,11 @@ import { FC } from 'react'
 
 import styles from './Spinner.module.scss'
 
-interface SpinnerProps {
+export interface SpinnerProps {
   className?: string | string[]
 }
-const Spinner: FC<SpinnerProps> = ({ className = '' }) => {
+
+export const Spinner: FC<SpinnerProps> = ({ className = '' }) => {
   const elementClasses = useStyles(
     {
       [styles.spinner]: true
@@ -23,5 +24,3 @@ const Spinner: FC<SpinnerProps> = ({ className = '' }) => {
 }
 
 Spinner.displayName = 'Spinner'
-
-export default Spinner

@@ -81,7 +81,7 @@ export {
   SkeletonSidebar
 } from './Skeleton'
 export * from './Spacer'
-export { default as Spinner } from './Spinner'
+export * from './Spinner'
 export { default as Spreader } from './Spreader'
 export * from './StatsBadge'
 export * from './StatusDropdown'
