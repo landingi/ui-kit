@@ -7,6 +7,7 @@ import styles from './Spinner.module.scss'
 export interface SpinnerProps {
   className?: string | string[]
 }
+
 export const Spinner: FC<SpinnerProps> = ({ className = '' }) => {
   const elementClasses = useStyles(
     {
