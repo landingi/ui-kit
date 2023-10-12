@@ -66,7 +66,7 @@ export * from './Panel';
 export * from './Paragraph';
 export * from './PerfectDropdown';
 export * from './PerfectDropdownSelect';
-export { default as ProgressBar } from './ProgressBar';
+export * from './ProgressBar';
 export * from './Search';
 export * from './Searcher';
 export * from './Section';
