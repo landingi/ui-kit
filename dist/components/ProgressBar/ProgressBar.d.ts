@@ -12,5 +12,4 @@ export interface ProgressBarProps {
     valueSize?: 10 | 12 | 16 | 18 | 32 | 44 | 62;
     withoutAnimation?: boolean;
 }
-declare const ProgressBar: FC<ProgressBarProps>;
-export default ProgressBar;
+export declare const ProgressBar: FC<ProgressBarProps>;
