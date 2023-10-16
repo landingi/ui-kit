@@ -33,7 +33,8 @@ export const Table = <Item extends ItemBase>({
   selected,
   isSelected,
   select,
-  hasStyledFirstRow
+  hasStyledFirstRow,
+  hasCustomPageLimit = false
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
 
@@ -113,6 +114,7 @@ export const Table = <Item extends ItemBase>({
             onChange={setPageLimit}
             name={name}
             i18n={i18n}
+            hasCustomPageLimit={hasCustomPageLimit}
           />
         )}
       </Row>

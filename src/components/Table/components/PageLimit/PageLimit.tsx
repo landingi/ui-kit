@@ -24,10 +24,22 @@ const pageLimits = [
   }
 ]
 
+const customPageLimits = [
+  {
+    label: '10',
+    value: 10
+  },
+  {
+    label: '25',
+    value: 25
+  }
+]
+
 export const PageLimit: FC<PageLimitProps> = ({
   pageLimit,
   onChange,
-  name
+  name,
+  hasCustomPageLimit
 }) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = Number(event.target.value || 10)
@@ -41,7 +53,7 @@ export const PageLimit: FC<PageLimitProps> = ({
     <div className={styles['page-size']}>
       {/* @ts-ignore */}
       <Select
-        data={pageLimits}
+        data={hasCustomPageLimit ? customPageLimits : pageLimits}
         onChange={handleChange}
         value={pageLimit}
         data-testid='page-limit-selector'

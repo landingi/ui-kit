@@ -76,6 +76,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
   hasStyledFirstRow?: boolean
+  hasCustomPageLimit?: boolean
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -148,4 +149,5 @@ export interface PageLimitProps {
     last: string
   }
   onChange: (number) => void
+  hasCustomPageLimit?: boolean
 }
