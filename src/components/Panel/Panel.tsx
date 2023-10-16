@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Panel.module.scss'
 
-interface PanelProps {
+export interface PanelProps {
   className?: string | string[]
   children: ReactNode
   variant?:
@@ -36,7 +36,7 @@ export const Panel: FC<PanelProps> = ({
       [styles.panel]: true,
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
-      [styles['panel--background']]: !hasShadow,
+      [styles['panel--shadow-none']]: !hasShadow,
       [styles[`panel--${variant}`]]: variant
     },
     className
