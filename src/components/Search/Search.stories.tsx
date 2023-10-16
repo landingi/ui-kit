@@ -1,51 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { Search, SearchProps } from '@components/Search'
+import { Meta, StoryFn } from '@storybook/react'
 
-import { Search } from './Search'
-
-const meta: Meta<typeof Search> = {
+export default {
+  title: 'Search',
   component: Search
+} as Meta<typeof Search>
+
+const Template: StoryFn<typeof Search> = (args: SearchProps) => (
+  <Search {...args} />
+)
+
+export const Input = Template.bind({})
+
+export const IsDisabled = Template.bind({})
+
+export const DefaultValue = Template.bind({})
+
+export const OtherIcon = Template.bind({})
+
+export const WithoutIcon = Template.bind({})
+
+Input.args = {
+  variant: 'input',
+  i18n: {
+    placeholder: 'Placeholder',
+    label: 'Label'
+  }
 }
 
-export default meta
-type Story = StoryObj<typeof Search>
+IsDisabled.args = { variant: 'input', isDisabled: true }
 
-export const Small: Story = {
-  render: () => (
-    <Search
-      size='small'
-      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
-    />
-  )
+DefaultValue.args = { variant: 'input', defaultValue: 'some default value' }
+
+OtherIcon.args = {
+  variant: 'input',
+  searchIcon: 'icon-arrow-left'
 }
 
-export const Medium: Story = {
-  render: () => (
-    <Search
-      size='medium'
-      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
-    />
-  )
-}
-
-export const Large: Story = {
-  render: () => (
-    <Search
-      size='large'
-      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
-    />
-  )
-}
-
-export const Disabled: Story = {
-  render: () => (
-    <Search
-      size='large'
-      isDisabled
-      i18n={{ label: 'Label test', placeholder: 'Placeholder test' }}
-    />
-  )
-}
-
-export const WithoutLabelAndPlaceholder: Story = {
-  render: () => <Search size='large' />
-}
+WithoutIcon.args = { variant: 'input', searchIcon: null }

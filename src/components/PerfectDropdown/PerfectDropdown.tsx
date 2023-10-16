@@ -58,6 +58,7 @@ interface PerfectDropdownProps {
   padding?: 'none'
   ['data-testid']?: string
   isOpenDisabled?: boolean
+  initialState?: boolean
 }
 
 type PerfectDropdownRef = HTMLSpanElement
@@ -89,11 +90,12 @@ export const PerfectDropdown = forwardRef<
       className = '',
       padding,
       isOpenDisabled = false,
-      'data-testid': dataTestId = 'trigger-dropdown'
+      'data-testid': dataTestId = 'trigger-dropdown',
+      initialState = false
     },
     ref
   ) => {
-    const [isOpen, setOpen] = useState(false)
+    const [isOpen, setOpen] = useState(initialState)
 
     const [style, setStyle] = useState({})
 
@@ -129,9 +131,9 @@ export const PerfectDropdown = forwardRef<
     const triggerRef = useRef<HTMLSpanElement>(null!)
 
     const close = useCallback(() => {
-      setOpen(false)
       handleOnClose?.()
-    }, [])
+      setOpen(false)
+    }, [handleOnClose])
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,

@@ -1,5 +1,5 @@
 import Html from '@components/Html'
-import Spinner from '@components/Spinner'
+import { Spinner } from '@components/Spinner'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, FocusEventHandler, ReactEventHandler } from 'react'
 
