@@ -7,6 +7,7 @@ export interface PanelProps {
     isBackground?: boolean;
     borderRadius?: string;
     customBoxShadow?: string;
+    hasShadow?: boolean;
     hasBorder?: boolean;
 }
 export declare const Panel: FC<PanelProps>;
