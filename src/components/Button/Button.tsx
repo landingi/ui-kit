@@ -1,4 +1,4 @@
-import Spinner from '@components/Spinner'
+import { Spinner } from '@components/Spinner'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, MouseEvent, ReactNode } from 'react'
 import Ink from 'react-ink'
