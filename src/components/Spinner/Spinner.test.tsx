@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Spinner from '@components/Spinner'
+import { Spinner } from '@components/Spinner'
 import { render, screen } from '@testing-library/react'
 
 describe('<Spinner/> mount', () => {

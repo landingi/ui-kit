@@ -1,6 +1,5 @@
 import { FC } from 'react';
-interface SpinnerProps {
+export interface SpinnerProps {
     className?: string | string[];
 }
-declare const Spinner: FC<SpinnerProps>;
-export default Spinner;
+export declare const Spinner: FC<SpinnerProps>;

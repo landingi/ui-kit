@@ -1,4 +1,4 @@
-import Spinner from '@components/Spinner'
+import { Spinner } from '@components/Spinner'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, MouseEvent, ReactNode } from 'react'
 import Ink from 'react-ink'
@@ -54,7 +54,7 @@ export interface ButtonProps {
   isActive?: boolean
 }
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   id,
   className = '',
   tag: Tag = 'button',
@@ -122,5 +122,3 @@ const Button: FC<ButtonProps> = ({
 }
 
 Button.displayName = 'Button'
-
-export default Button

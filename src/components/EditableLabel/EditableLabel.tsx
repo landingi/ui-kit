@@ -1,6 +1,6 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Icon } from '@components/Icon'
-import Spinner from '@components/Spinner'
+import { Spinner } from '@components/Spinner'
 import Spreader from '@components/Spreader'
 import { Tooltip } from '@components/Tooltip'
 import { useDetectOutsideClick } from '@helpers/hooks/useDetectOutsideClick'

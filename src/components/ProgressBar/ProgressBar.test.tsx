@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import ProgressBar from '@components/ProgressBar'
+import { ProgressBar } from '@components/ProgressBar'
 import { render, screen } from '@testing-library/react'
 
 import { ProgressBarProps } from './ProgressBar'

@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Icon } from '@components/Icon'
 import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Row } from 'simple-flexbox'

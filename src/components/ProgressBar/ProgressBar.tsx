@@ -18,7 +18,7 @@ export interface ProgressBarProps {
   withoutAnimation?: boolean
 }
 
-const ProgressBar: FC<ProgressBarProps> = ({
+export const ProgressBar: FC<ProgressBarProps> = ({
   size = 'medium',
   variant,
   limit = 100,
@@ -84,5 +84,3 @@ const ProgressBar: FC<ProgressBarProps> = ({
 }
 
 ProgressBar.displayName = 'ProgressBar'
-
-export default ProgressBar

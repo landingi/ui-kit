@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Icon } from '@components/Icon'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { FC, useState } from 'react'

@@ -6,7 +6,7 @@ import { FC, MouseEventHandler } from 'react'
 
 import styles from './Notification.module.scss'
 
-interface NotificationProps {
+export interface NotificationProps {
   children: React.ReactNode
   className?: string | string[]
   hasTime?: boolean

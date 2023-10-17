@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { fireEvent, render } from '@testing-library/react'
 
 import { ButtonProps } from './Button'

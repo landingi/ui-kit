@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react'
 
 import styles from './Panel.module.scss'
 
-interface PanelProps {
+export interface PanelProps {
   className?: string | string[]
   children: ReactNode
   variant?:

@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import { Button } from '@components/Button'
 import { Spacer } from '@components/Spacer'
 import { FC, useCallback, useState } from 'react'
 
