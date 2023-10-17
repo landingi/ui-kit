@@ -18,6 +18,7 @@ export interface PanelProps {
   isBackground?: boolean
   borderRadius?: string
   customBoxShadow?: string
+  hasShadow?: boolean
   hasBorder?: boolean
 }
 
@@ -29,6 +30,7 @@ export const Panel: FC<PanelProps> = ({
   isBackground = false,
   borderRadius = undefined,
   customBoxShadow = undefined,
+  hasShadow = true,
   hasBorder = false
 }) => {
   const elementClasses = useStyles(
@@ -36,6 +38,7 @@ export const Panel: FC<PanelProps> = ({
       [styles.panel]: true,
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
+      [styles['panel--shadow-none']]: !hasShadow,
       [styles[`panel--${variant}`]]: variant,
       [styles[`panel--bordered`]]: hasBorder
     },
