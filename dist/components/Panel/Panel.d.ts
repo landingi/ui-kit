@@ -8,6 +8,6 @@ export interface PanelProps {
     borderRadius?: string;
     customBoxShadow?: string;
     hasShadow?: boolean;
-    hasBorder?: boolean;
+    border?: 'grey' | 'none';
 }
 export declare const Panel: FC<PanelProps>;
