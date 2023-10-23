@@ -7,6 +7,7 @@ export interface AccordionProps {
     }[];
     padding?: 'none' | 'small' | 'medium';
     isBox?: boolean;
+    isOpenByDefault?: boolean;
     className?: string | string[];
 }
 export declare const Accordion: FC<AccordionProps>;

@@ -10,6 +10,7 @@ interface AccordionItemProps {
   content: ReactNode
   padding?: 'none' | 'small' | 'medium'
   isBox?: boolean
+  isOpenByDefault: boolean
 }
 
 export const AccordionItem: FC<AccordionItemProps> = ({
@@ -18,9 +19,10 @@ export const AccordionItem: FC<AccordionItemProps> = ({
   description = null,
   content,
   padding = 'none',
-  isBox = false
+  isBox = false,
+  isOpenByDefault = true
 }) => {
-  const [isOpen, setOpen] = useState(true)
+  const [isOpen, setOpen] = useState(isOpenByDefault)
 
   const handleOpen = useCallback(() => setOpen(!isOpen), [isOpen])
 

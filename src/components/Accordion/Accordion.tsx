@@ -12,11 +12,18 @@ export interface AccordionProps {
   }[]
   padding?: 'none' | 'small' | 'medium'
   isBox?: boolean
+  isOpenByDefault?: boolean
   className?: string | string[]
 }
 
 export const Accordion: FC<AccordionProps> = memo<AccordionProps>(
-  ({ data, padding = 'medium', isBox = false, className }: AccordionProps) => {
+  ({
+    data,
+    padding = 'medium',
+    isBox = false,
+    isOpenByDefault = true,
+    className
+  }: AccordionProps) => {
     const styles = useStyles({}, className)
 
     return (
@@ -29,6 +36,7 @@ export const Accordion: FC<AccordionProps> = memo<AccordionProps>(
             content={content}
             padding={padding}
             isBox={isBox}
+            isOpenByDefault={isOpenByDefault}
           />
         ))}
       </div>
