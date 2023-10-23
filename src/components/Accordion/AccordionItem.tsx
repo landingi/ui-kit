@@ -10,7 +10,7 @@ interface AccordionItemProps {
   content: ReactNode
   padding?: 'none' | 'small' | 'medium'
   isBox?: boolean
-  isOpenByDefault: boolean
+  isOpenByDefault?: boolean
 }
 
 export const AccordionItem: FC<AccordionItemProps> = ({
