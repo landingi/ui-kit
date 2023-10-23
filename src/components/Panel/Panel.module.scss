@@ -42,4 +42,8 @@
   &--shadow-none {
     box-shadow: none;
   }
+
+  &--border-grey {
+    border: 1px solid $color-6;
+  }
 }

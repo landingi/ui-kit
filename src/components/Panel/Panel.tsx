@@ -16,9 +16,10 @@ export interface PanelProps {
     | 'padding-huge'
   adjustHeight?: boolean
   isBackground?: boolean
-  hasShadow?: boolean
   borderRadius?: string
   customBoxShadow?: string
+  hasShadow?: boolean
+  border?: 'grey' | 'none'
 }
 
 export const Panel: FC<PanelProps> = ({
@@ -27,9 +28,10 @@ export const Panel: FC<PanelProps> = ({
   variant = 'padding-default',
   adjustHeight = false,
   isBackground = false,
-  hasShadow = true,
   borderRadius = undefined,
-  customBoxShadow = undefined
+  customBoxShadow = undefined,
+  hasShadow = true,
+  border = 'none'
 }) => {
   const elementClasses = useStyles(
     {
@@ -37,7 +39,8 @@ export const Panel: FC<PanelProps> = ({
       [styles['panel--adjust-height']]: adjustHeight,
       [styles['panel--background']]: isBackground,
       [styles['panel--shadow-none']]: !hasShadow,
-      [styles[`panel--${variant}`]]: variant
+      [styles[`panel--${variant}`]]: variant,
+      [styles[`panel--border-${border}`]]: border !== 'none'
     },
     className
   )
