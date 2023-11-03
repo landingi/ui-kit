@@ -40,6 +40,10 @@
     font-weight: 600;
     max-width: 490px;
   }
+
+  &--disabled {
+    cursor: text;
+  }
 }
 
 .input {
