@@ -25,6 +25,7 @@ interface PerfectDropdownProps {
     ['data-testid']?: string;
     isOpenDisabled?: boolean;
     initialState?: boolean;
+    innerDropdown?: boolean;
 }
 export declare const PerfectDropdown: import("react").ForwardRefExoticComponent<PerfectDropdownProps & import("react").RefAttributes<HTMLSpanElement>>;
 export {};

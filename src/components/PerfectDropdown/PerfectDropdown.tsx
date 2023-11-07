@@ -1,5 +1,5 @@
 import { Icon } from '@components/Icon'
-import { CLOSE_DROPDOWN } from '@constants/eventTypes'
+import { CLOSE_DROPDOWN, CLOSE_INNER_DROPDOWN } from '@constants/eventTypes'
 import { debounce } from '@helpers/events'
 import { useStyles } from '@helpers/hooks/useStyles'
 import { getBoundings } from '@helpers/position'
@@ -59,6 +59,7 @@ interface PerfectDropdownProps {
   ['data-testid']?: string
   isOpenDisabled?: boolean
   initialState?: boolean
+  innerDropdown?: boolean
 }
 
 type PerfectDropdownRef = HTMLSpanElement
@@ -91,7 +92,8 @@ export const PerfectDropdown = forwardRef<
       padding,
       isOpenDisabled = false,
       'data-testid': dataTestId = 'trigger-dropdown',
-      initialState = false
+      initialState = false,
+      innerDropdown = false
     },
     ref
   ) => {
@@ -134,6 +136,12 @@ export const PerfectDropdown = forwardRef<
       handleOnClose?.()
       setOpen(false)
     }, [handleOnClose])
+
+    const closeInnerDropdown = () => {
+      if (innerDropdown) {
+        close()
+      }
+    }
 
     const { renderLayer, triggerProps, layerProps } = useLayer({
       isOpen,
@@ -184,10 +192,12 @@ export const PerfectDropdown = forwardRef<
 
     useEffect(() => {
       emitter.on(CLOSE_DROPDOWN, close)
+      emitter.on(CLOSE_INNER_DROPDOWN, closeInnerDropdown)
       window.addEventListener('resize', debouncedHandleResize as EventListener)
 
       return () => {
         emitter.off(CLOSE_DROPDOWN, close)
+        emitter.off(CLOSE_INNER_DROPDOWN, closeInnerDropdown)
         window.removeEventListener(
           'resize',
           debouncedHandleResize as EventListener
