@@ -60,7 +60,6 @@ interface PerfectDropdownProps {
   isOpenDisabled?: boolean
   initialState?: boolean
   innerDropdown?: boolean
-  isEnableOutsideClick?: boolean
 }
 
 type PerfectDropdownRef = HTMLSpanElement
@@ -94,8 +93,7 @@ export const PerfectDropdown = forwardRef<
       isOpenDisabled = false,
       'data-testid': dataTestId = 'trigger-dropdown',
       initialState = false,
-      innerDropdown = false,
-      isEnableOutsideClick = true
+      innerDropdown = false
     },
     ref
   ) => {
@@ -159,9 +157,7 @@ export const PerfectDropdown = forwardRef<
         'top-center',
         'top-end'
       ],
-      onOutsideClick: isEnableOutsideClick
-        ? close
-        : () => console.log('nie jest dostepny siema')
+      onOutsideClick: close
     })
 
     const handleResize = () => {
