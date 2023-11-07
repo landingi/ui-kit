@@ -6,6 +6,7 @@ interface AccordionItemProps {
     content: ReactNode;
     padding?: 'none' | 'small' | 'medium';
     isBox?: boolean;
+    isOpenByDefault?: boolean;
 }
 export declare const AccordionItem: FC<AccordionItemProps>;
 export {};
