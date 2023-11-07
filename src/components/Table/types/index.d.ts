@@ -36,7 +36,10 @@ export interface UseTableProps<Item extends ItemBase> {
   rowActions?: (item: Item, handleRefresh: () => void) => ReactNode
   options?: (
     identifiers: Item['identifier'][],
-    handleRefresh: () => void
+    actions: {
+      handleRefresh: () => void
+      deselectAll: () => void
+    }
   ) => ReactNode
   filtersAndSorters?: (handleRefresh: () => void) => ReactNode
   hasHeader?: boolean
@@ -76,6 +79,7 @@ export interface TableProps<Item extends ItemBase> extends UseTableProps<Item> {
   select: (identifier: Item['identifier']) => void
   selected: Item['identifier'][]
   hasStyledFirstRow?: boolean
+  deselectAll: () => void
 }
 
 export interface HeaderProps<Item extends ItemBase> {
@@ -85,7 +89,10 @@ export interface HeaderProps<Item extends ItemBase> {
   isSelectedAny: boolean
   options?: (
     identifiers: Item['identifier'][],
-    handleRefresh: () => void
+    actions: {
+      handleRefresh: () => void
+      deselectAll: () => void
+    }
   ) => ReactNode
   i18n: {
     selected: string
@@ -96,6 +103,7 @@ export interface HeaderProps<Item extends ItemBase> {
   handleRefresh: () => void
   externalBorder?: boolean
   extraHeaderContent?: (handleRefresh: () => void) => ReactNode
+  deselectAll: () => void
 }
 
 export interface BodyProps<Item extends ItemBase> {
