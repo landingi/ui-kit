@@ -19,7 +19,8 @@ export const Header = <Item extends ItemBase>({
   hasHeader,
   handleRefresh,
   externalBorder,
-  extraHeaderContent
+  extraHeaderContent,
+  deselectAll
 }: HeaderProps<Item>) => {
   const columnsMap = (
     <Fragment>
@@ -90,7 +91,10 @@ export const Header = <Item extends ItemBase>({
 
               <Spreader />
 
-              {options(selected, handleRefresh)}
+              {options(selected, {
+                handleRefresh,
+                deselectAll
+              })}
             </Row>
           </div>
         )}
