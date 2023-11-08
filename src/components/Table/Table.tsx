@@ -33,6 +33,7 @@ export const Table = <Item extends ItemBase>({
   selected,
   isSelected,
   select,
+  deselectAll,
   hasStyledFirstRow
 }: TableProps<Item>) => {
   const dataIsNotEmpty = Boolean(data.length)
@@ -67,6 +68,7 @@ export const Table = <Item extends ItemBase>({
           handleRefresh={handleRefresh}
           externalBorder={externalBorder}
           extraHeaderContent={extraHeaderContent}
+          deselectAll={deselectAll}
         />
 
         {isLoading && (
