@@ -68,6 +68,7 @@ export const useTable = <Item extends ItemBase>({
     ),
     pageLimit,
     refresh,
-    selected
+    selected,
+    deselectAll
   }
 }
