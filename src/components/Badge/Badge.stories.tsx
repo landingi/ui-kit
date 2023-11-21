@@ -19,6 +19,7 @@ const Template: StoryFn<typeof Badge> = (args: BadgeProps) => (
 
 export const Basic = Template.bind({})
 export const WithTooltip = Template.bind({})
+export const TextUppercaseNone = Template.bind({})
 
 Basic.args = {
   type: 'warning',
@@ -29,4 +30,9 @@ WithTooltip.args = {
   type: 'ai',
   isIndicator: false,
   tooltip: 'I am a tooltip'
+}
+
+TextUppercaseNone.args = {
+  type: 'success',
+  isTextUppercase: false
 }

@@ -102,6 +102,10 @@
     border: 1px solid $color-success;
   }
 
+  &--text-uppercase-none {
+    text-transform: none;
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
