@@ -6,5 +6,6 @@ export interface BadgeProps {
     tooltip?: ReactNode;
     isIndicator?: boolean;
     isTextUppercase?: boolean;
+    weight?: '300' | '400' | '700';
 }
 export declare const Badge: FC<BadgeProps>;
