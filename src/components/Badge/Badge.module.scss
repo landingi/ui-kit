@@ -11,6 +11,10 @@
   height: 20px;
   margin-right: 5px;
 
+  &--lowercase {
+    text-transform: lowercase;
+  }
+
   a {
     font-weight: 400;
     color: $color-white;
