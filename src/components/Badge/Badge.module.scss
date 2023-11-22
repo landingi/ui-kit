@@ -102,6 +102,12 @@
     border: 1px solid $color-success;
   }
 
+  &--info-with-border {
+    background-color: $color-info;
+    color: $color-brand;
+    border: 1px solid $color-brand;
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
