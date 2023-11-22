@@ -28,6 +28,8 @@ export interface BadgeProps {
     | 'green-with-border'
   tooltip?: ReactNode
   isIndicator?: boolean
+  isTextUppercase?: boolean
+  weight?: '300' | '400' | '700'
 }
 
 export const Badge: FC<BadgeProps> = ({
@@ -35,7 +37,9 @@ export const Badge: FC<BadgeProps> = ({
   className = '',
   type = 'info',
   tooltip = null,
-  isIndicator = false
+  isIndicator = false,
+  isTextUppercase = true,
+  weight
 }) => {
   const badgeRef = useRef<HTMLSpanElement>(null)
   const [width, setWidth] = useState(0)
@@ -48,7 +52,9 @@ export const Badge: FC<BadgeProps> = ({
     {
       [styles.badge]: true,
       [styles[`badge--${type}`]]: type,
-      [styles['badge--indicator']]: isIndicator
+      [styles['badge--indicator']]: isIndicator,
+      [styles[`badge--text-uppercase-none`]]: !isTextUppercase,
+      [styles[`badge-weight--${weight}`]]: weight
     },
     className
   )

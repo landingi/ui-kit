@@ -102,6 +102,24 @@
     border: 1px solid $color-success;
   }
 
+  &--text-uppercase-none {
+    text-transform: none;
+  }
+
+  &-weight {
+    &--300 {
+      font-weight: 300;
+    }
+
+    &--400 {
+      font-weight: 400;
+    }
+
+    &--700 {
+      font-weight: 700;
+    }
+  }
+
   svg {
     vertical-align: -1px;
     margin-right: $margin-tiny;
