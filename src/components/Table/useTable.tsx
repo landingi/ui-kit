@@ -38,7 +38,8 @@ export const useTable = <Item extends ItemBase>({
     isSelectedAny,
     selected,
     isSelected,
-    select
+    select,
+    deselectAll
   } = useSelect<Item['identifier']>(values)
 
   return {
@@ -61,6 +62,7 @@ export const useTable = <Item extends ItemBase>({
         isSelected={isSelected}
         select={select}
         selected={selected}
+        deselectAll={deselectAll}
         {...rest}
       />
     ),

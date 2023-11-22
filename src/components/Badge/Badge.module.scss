@@ -10,10 +10,6 @@
   height: 20px;
   margin-right: 5px;
 
-  &--uppercase {
-    text-transform: uppercase;
-  }
-
   a {
     font-weight: 400;
     color: $color-white;
@@ -109,6 +105,24 @@
     background-color: $color-light-blue;
     color: $color-brand;
     border: 1px solid $color-brand;
+  }
+
+  &--text-uppercase-none {
+    text-transform: none;
+  }
+
+  &-weight {
+    &--300 {
+      font-weight: 300;
+    }
+
+    &--400 {
+      font-weight: 400;
+    }
+
+    &--700 {
+      font-weight: 700;
+    }
   }
 
   svg {

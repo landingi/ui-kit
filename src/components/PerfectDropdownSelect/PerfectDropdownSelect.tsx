@@ -13,7 +13,7 @@ import { PerfectDropdown } from '@components/PerfectDropdown'
 import { Searcher } from '@components/Searcher'
 import { Spacer } from '@components/Spacer'
 import { Tooltip } from '@components/Tooltip'
-import { emitCloseDropdown } from '@events/dropdown'
+import { emitCloseDropdown, emitCloseInnerDropdown } from '@events/dropdown'
 import { generateFakeUuid, isEmpty } from '@helpers/data'
 import { useStyles } from '@helpers/hooks/useStyles'
 import {
@@ -83,6 +83,7 @@ export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     | 'top-center'
     | 'top-end'
   'data-testid'?: string
+  innerDropdown?: boolean
 }
 
 export const PerfectDropdownSelect = <Item extends ItemBase>({
@@ -116,6 +117,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   size = 'fixed',
   dropdownPlacement,
   'data-testid': dataTestId,
+  innerDropdown = false,
   ...rest
 }: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
@@ -169,7 +171,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
 
     clearSearchValue()
 
-    emitCloseDropdown()
+    innerDropdown ? emitCloseInnerDropdown() : emitCloseDropdown()
   }
 
   const dropdownRef = useRef(null)
@@ -297,6 +299,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
         className={dropdownStyles}
         dropdownPlacement={dropdownPlacement}
         data-testid={dataTestId}
+        innerDropdown={innerDropdown}
         {...rest}
       >
         {hasSearcher && (

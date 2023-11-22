@@ -62,7 +62,8 @@ export const EditableLabel: FC<EditableLabelProps> = ({
 
   const labelStyles = useStyles({
     [styles.label]: true,
-    [styles[`label--${size}`]]: size
+    [styles[`label--${size}`]]: size,
+    [styles['label--disabled']]: isDisabled
   })
 
   const buttonStyles = useStyles({
