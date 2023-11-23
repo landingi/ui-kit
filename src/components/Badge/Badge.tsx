@@ -26,6 +26,7 @@ export interface BadgeProps {
     | 'accent-7'
     | 'accent-8'
     | 'green-with-border'
+    | 'info-with-border'
   tooltip?: ReactNode
   isIndicator?: boolean
   isTextUppercase?: boolean

@@ -1,8 +1,8 @@
 .badge {
   position: relative;
   padding: 0 $padding-tiny;
-  text-transform: uppercase;
   font-size: 12px;
+  text-transform: uppercase;
   color: $color-white;
   border-radius: $radius-micro;
   line-height: 20px;
@@ -100,6 +100,12 @@
     background-color: $color-light-green;
     color: $color-success;
     border: 1px solid $color-success;
+  }
+
+  &--info-with-border {
+    background-color: $color-light-blue;
+    color: $color-brand;
+    border: 1px solid $color-brand;
   }
 
   &--text-uppercase-none {

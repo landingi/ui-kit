@@ -20,6 +20,7 @@ export interface ParagraphProps {
     | 'success'
     | 'brand'
     | 'warning'
+    | 'success-light'
   size?: 10 | 12 | 14 | 16 | 18
   align?: 'left' | 'center' | 'right' | 'justify'
   padding?: 'small' | 'medium' | 'none'
