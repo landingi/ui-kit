@@ -31,3 +31,11 @@
     }
   }
 }
+
+.list {
+  li > div {
+    span {
+      padding: 0;
+    }
+  }
+}
