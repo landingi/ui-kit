@@ -84,7 +84,7 @@ export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     | 'top-end'
   'data-testid'?: string
   innerDropdown?: boolean
-  hasStyledList?: boolean
+  hasBadgeInList?: boolean
 }
 
 export const PerfectDropdownSelect = <Item extends ItemBase>({
@@ -119,7 +119,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   dropdownPlacement,
   'data-testid': dataTestId,
   innerDropdown = false,
-  hasStyledList = false,
+  hasBadgeInList = false,
   ...rest
 }: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
@@ -138,7 +138,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   })
 
   const listStyles = useStyles({
-    [styles.list]: hasStyledList
+    [styles.list]: hasBadgeInList
   })
 
   const getSelectedItem = () => {
