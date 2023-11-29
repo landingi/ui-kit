@@ -39,9 +39,10 @@ export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     dropdownPlacement?: 'bottom-start' | 'bottom-end' | 'bottom-center' | 'top-start' | 'top-center' | 'top-end';
     'data-testid'?: string;
     innerDropdown?: boolean;
+    hasBadgeInList?: boolean;
 }
 export declare const PerfectDropdownSelect: {
-    <Item extends ItemBase>({ className, value, onChange, errors, touched, label, options, emphasisedOptions, hasDescription, hasSearcher, handleOnSearchChange, isLoading, emptyMessage, isOpenDisabled, optionalContent, alwaysShowLabel, overflowStyle, formikKey, i18n, hasLoadMoreButton, loadMoreEvent, liveChanges, dropdownLabel, customValue, size, dropdownPlacement, "data-testid": dataTestId, innerDropdown, ...rest }: PerfectDropdownSelectProps<Item>): import("react/jsx-runtime").JSX.Element;
+    <Item extends ItemBase>({ className, value, onChange, errors, touched, label, options, emphasisedOptions, hasDescription, hasSearcher, handleOnSearchChange, isLoading, emptyMessage, isOpenDisabled, optionalContent, alwaysShowLabel, overflowStyle, formikKey, i18n, hasLoadMoreButton, loadMoreEvent, liveChanges, dropdownLabel, customValue, size, dropdownPlacement, "data-testid": dataTestId, innerDropdown, hasBadgeInList, ...rest }: PerfectDropdownSelectProps<Item>): import("react/jsx-runtime").JSX.Element;
     displayName: string;
 };
 export {};

@@ -84,6 +84,7 @@ export interface PerfectDropdownSelectProps<Item extends ItemBase> {
     | 'top-end'
   'data-testid'?: string
   innerDropdown?: boolean
+  hasBadgeInList?: boolean
 }
 
 export const PerfectDropdownSelect = <Item extends ItemBase>({
@@ -118,6 +119,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   dropdownPlacement,
   'data-testid': dataTestId,
   innerDropdown = false,
+  hasBadgeInList = false,
   ...rest
 }: PerfectDropdownSelectProps<Item>) => {
   const hasLabel = value || alwaysShowLabel
@@ -133,6 +135,10 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
   const dropdownStyles = useStyles({
     [styles['form-field__dropdown--has-error']]:
       errors[formikKey] || touched[formikKey]
+  })
+
+  const listStyles = useStyles({
+    [styles.list]: hasBadgeInList
   })
 
   const getSelectedItem = () => {
@@ -325,7 +331,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
               ...overflowStyle
             }}
           >
-            <List>
+            <List className={listStyles}>
               {renderOptions()}
               {isLoading && <Loader />}
               {renderEmptyMessage()}
