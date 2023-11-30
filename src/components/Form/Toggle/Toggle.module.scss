@@ -16,13 +16,17 @@
   position: relative;
   transition: background-color 0.2s;
 
-  &--checked {
+  &--checked-success {
     background: $color-success;
+  }
 
-    &-disabled {
-      background: #a0d9b9;
-      cursor: not-allowed;
-    }
+  &--checked-brand {
+    background: $color-brand;
+  }
+
+  &--checked-disabled {
+    background: #a0d9b9;
+    cursor: not-allowed;
   }
 
   &__checkbox {
@@ -78,4 +82,16 @@
 .label {
   margin: 0 0 $padding-tiny $padding-small;
   font-weight: 400;
+}
+
+.toggle-container--small {
+  .toggle {
+    min-width: 40px;
+    height: 20px;
+
+    &__button {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }

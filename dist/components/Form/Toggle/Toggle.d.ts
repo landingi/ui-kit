@@ -13,6 +13,8 @@ interface ToggleProps {
     table?: boolean;
     tableDeselect?: boolean;
     'data-testid'?: string;
+    variant?: 'small';
+    color?: 'success' | 'brand';
 }
 declare const Toggle: FC<ToggleProps>;
 export default Toggle;
