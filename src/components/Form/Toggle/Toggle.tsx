@@ -19,6 +19,8 @@ interface ToggleProps {
   table?: boolean
   tableDeselect?: boolean
   'data-testid'?: string
+  variant?: 'small'
+  color?: 'success' | 'brand'
 }
 
 const Toggle: FC<ToggleProps> = ({
@@ -31,16 +33,22 @@ const Toggle: FC<ToggleProps> = ({
   className = '',
   isLoading,
   disabled,
-  'data-testid': dataTestId
+  'data-testid': dataTestId,
+  variant,
+  color = 'success'
 }) => {
   const wrapperStyles = useStyles(
-    { [styles['toggle-container']]: true },
+    {
+      [styles['toggle-container']]: true,
+      [styles[`toggle-container--${variant}`]]: variant
+    },
     className
   )
 
   const toggleStyles = useStyles({
     [styles.toggle]: true,
-    [styles['toggle--checked']]: checked,
+    [styles['toggle--checked-success']]: checked && color === 'success',
+    [styles['toggle--checked-brand']]: checked && color === 'brand',
     [styles['toggle--checked-disabled']]: checked && disabled,
     [styles['toggle--disabled']]: !checked && disabled
   })
