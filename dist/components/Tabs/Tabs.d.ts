@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 interface TabsProps {
     initialValue: string;
+    changeTabValue?: string;
     className?: string | string[];
     children: ReactNode;
 }
