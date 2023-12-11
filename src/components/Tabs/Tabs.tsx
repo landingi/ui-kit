@@ -15,7 +15,7 @@ export const Tabs: FC<TabsProps> = ({
   initialValue,
   className = '',
   children,
-  changeTabValue = initialValue,
+  changeTabValue = '',
   ...restProps
 }) => {
   const tabsStyles = useStyles({ [styles.tabs__wrapper]: true }, className)

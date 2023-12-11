@@ -11,7 +11,7 @@ const useTab = ({
   const [activeTab, changeTab] = useState(initialValue)
 
   useUpdateEffect(() => {
-    if (changeTabValue !== initialValue) {
+    if (changeTabValue !== '') {
       changeTab(changeTabValue)
     }
   }, [changeTabValue])
