@@ -11,6 +11,7 @@ export interface AlertProps {
   type?: 'info' | 'success' | 'warning' | 'alert'
   customIcon?: string
   hideIcon?: boolean
+  oneSideMessagePadding?: boolean
 }
 
 export const Alert: FC<AlertProps> = ({
@@ -18,7 +19,8 @@ export const Alert: FC<AlertProps> = ({
   className = '',
   type = 'info',
   customIcon,
-  hideIcon = false
+  hideIcon = false,
+  oneSideMessagePadding = false
 }) => {
   const alertStyles = useStyles(
     {
@@ -27,6 +29,11 @@ export const Alert: FC<AlertProps> = ({
     },
     className
   )
+
+  const messageStyles = useStyles({
+    [styles.alert__message]: true,
+    [styles['alert__message--one-side-padding']]: oneSideMessagePadding
+  })
 
   return (
     <div data-testid='alert' className={alertStyles}>
@@ -39,7 +46,7 @@ export const Alert: FC<AlertProps> = ({
         />
       )}
 
-      <div className={styles.alert__message}>{children}</div>
+      <div className={messageStyles}>{children}</div>
     </div>
   )
 }
