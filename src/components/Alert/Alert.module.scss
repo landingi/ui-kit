@@ -15,6 +15,10 @@
     font-size: 12px;
     line-height: 16px;
     width: 210px;
+
+    &--one-side-padding {
+      padding: 0 0 0 $padding-medium;
+    }
   }
 
   &--alert {
