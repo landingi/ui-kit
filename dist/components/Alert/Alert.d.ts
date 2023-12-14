@@ -5,5 +5,6 @@ export interface AlertProps {
     type?: 'info' | 'success' | 'warning' | 'alert';
     customIcon?: string;
     hideIcon?: boolean;
+    oneSideMessagePadding?: boolean;
 }
 export declare const Alert: FC<AlertProps>;
