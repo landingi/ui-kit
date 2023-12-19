@@ -2,6 +2,7 @@ import { FC } from 'react';
 type ProviderProps = {
     children: React.ReactNode;
     initialValue: string;
+    changeTabValue: string;
 };
 export declare const TabProvider: FC<ProviderProps>;
 export declare const useTabContext: () => {
