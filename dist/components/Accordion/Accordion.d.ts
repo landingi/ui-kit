@@ -8,6 +8,8 @@ export interface AccordionProps {
     padding?: 'none' | 'small' | 'medium';
     isBox?: boolean;
     isOpenByDefault?: boolean;
+    spaceBetweenItems?: 20;
+    height?: 68;
     className?: string | string[];
 }
 export declare const Accordion: FC<AccordionProps>;

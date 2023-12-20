@@ -7,6 +7,8 @@ interface AccordionItemProps {
     padding?: 'none' | 'small' | 'medium';
     isBox?: boolean;
     isOpenByDefault?: boolean;
+    spaceBetweenItems?: 20;
+    height?: 68;
 }
 export declare const AccordionItem: FC<AccordionItemProps>;
 export {};
