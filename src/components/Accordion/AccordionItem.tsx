@@ -11,6 +11,8 @@ interface AccordionItemProps {
   padding?: 'none' | 'small' | 'medium'
   isBox?: boolean
   isOpenByDefault?: boolean
+  spaceBetweenItems?: 20
+  height?: 68
 }
 
 export const AccordionItem: FC<AccordionItemProps> = ({
@@ -20,7 +22,9 @@ export const AccordionItem: FC<AccordionItemProps> = ({
   content,
   padding = 'none',
   isBox = false,
-  isOpenByDefault = true
+  isOpenByDefault = true,
+  spaceBetweenItems,
+  height
 }) => {
   const [isOpen, setOpen] = useState(isOpenByDefault)
 
@@ -29,14 +33,16 @@ export const AccordionItem: FC<AccordionItemProps> = ({
   const itemStyles = useStyles(
     {
       [styles.accordion__item]: true,
-      [styles['accordion__item--box']]: isBox
+      [styles['accordion__item--box']]: isBox,
+      [styles[`accordion__item--box-${spaceBetweenItems}`]]: spaceBetweenItems
     },
     className
   )
 
   const titleStyles = useStyles({
     [styles['accordion__item--title']]: true,
-    [styles[`accordion__item--title-padding-${padding}`]]: padding
+    [styles[`accordion__item--title-padding-${padding}`]]: padding,
+    [styles[`accordion__item--title-h${height}`]]: height
   })
 
   const descriptionStyles = useStyles({
