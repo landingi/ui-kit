@@ -16,13 +16,9 @@
   position: relative;
   transition: background-color 0.2s;
 
-  &--checked {
+  &--checked-success {
     background: $color-success;
   }
-
-  // &--checked-success {
-  //   background: $color-success;
-  // }
 
   &--checked-brand {
     background: $color-brand;
@@ -98,4 +94,9 @@
       height: 14px;
     }
   }
+}
+
+
+.toggle--checked {
+  background: $color-success;
 }
