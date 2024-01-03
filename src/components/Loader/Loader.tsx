@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import styles from './Loader.module.scss'
 
-interface LoaderProps {
+export interface LoaderProps {
   className?: string | string[]
   variant?: 'default' | 'shapes'
   ['data-testid']?: string

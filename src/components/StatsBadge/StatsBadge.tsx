@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import styles from './StatsBadge.module.scss'
 
-interface StatsBadgeProps {
+export interface StatsBadgeProps {
   className?: string | string[]
   color?: 'green' | 'yellow' | 'pink'
   quantity?: number
