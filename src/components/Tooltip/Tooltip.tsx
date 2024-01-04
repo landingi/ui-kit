@@ -21,6 +21,8 @@ export interface TooltipProps {
   showOnClick?: boolean
   placement?: 'top' | 'left' | 'right' | 'bottom'
   align?: 'center' | 'left' | 'right'
+  autoPlacement?: boolean
+  overflowContainer?: boolean
   'data-testid'?: string | undefined
 }
 
@@ -32,6 +34,8 @@ export const Tooltip: FC<TooltipProps> = ({
   disabled = false,
   showOnClick = false,
   placement = 'bottom',
+  autoPlacement = false,
+  overflowContainer = true,
   align = 'left',
   'data-testid': dataTestId
 }) => {
@@ -53,7 +57,9 @@ export const Tooltip: FC<TooltipProps> = ({
     isOpen,
     placement: `${placement}-center`,
     triggerOffset: 12,
-    onOutsideClick: close
+    onOutsideClick: close,
+    auto: autoPlacement,
+    overflowContainer
   })
 
   const tooltipStyles = useStyles(

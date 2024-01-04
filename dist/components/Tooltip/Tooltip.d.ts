@@ -8,6 +8,8 @@ export interface TooltipProps {
     showOnClick?: boolean;
     placement?: 'top' | 'left' | 'right' | 'bottom';
     align?: 'center' | 'left' | 'right';
+    autoPlacement?: boolean;
+    overflowContainer?: boolean;
     'data-testid'?: string | undefined;
 }
 export declare const Tooltip: FC<TooltipProps>;
