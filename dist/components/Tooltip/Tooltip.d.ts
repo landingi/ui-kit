@@ -7,6 +7,7 @@ export interface TooltipProps {
     disabled?: boolean;
     showOnClick?: boolean;
     placement?: 'top' | 'left' | 'right' | 'bottom';
+    diagonalPlacement?: 'center' | 'start' | 'end';
     align?: 'center' | 'left' | 'right';
     autoPlacement?: boolean;
     overflowContainer?: boolean;

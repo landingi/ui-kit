@@ -20,6 +20,7 @@ export interface TooltipProps {
   disabled?: boolean
   showOnClick?: boolean
   placement?: 'top' | 'left' | 'right' | 'bottom'
+  diagonalPlacement?: 'center' | 'start' | 'end'
   align?: 'center' | 'left' | 'right'
   autoPlacement?: boolean
   overflowContainer?: boolean
@@ -34,6 +35,7 @@ export const Tooltip: FC<TooltipProps> = ({
   disabled = false,
   showOnClick = false,
   placement = 'bottom',
+  diagonalPlacement = 'center',
   autoPlacement = false,
   overflowContainer = true,
   align = 'left',
@@ -55,7 +57,7 @@ export const Tooltip: FC<TooltipProps> = ({
 
   const { triggerProps, layerProps, arrowProps, renderLayer } = useLayer({
     isOpen,
-    placement: `${placement}-center`,
+    placement: `${placement}-${diagonalPlacement}`,
     triggerOffset: 12,
     onOutsideClick: close,
     auto: autoPlacement,
