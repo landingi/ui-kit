@@ -134,13 +134,14 @@
             transform: translate(3px, 4px) rotate(-45deg);
           }
         }
+        @media (hover) {
+          &:hover {
+            input {
+              opacity: 0.04;
 
-        &:hover {
-          input {
-            opacity: 0.04;
-
-            &:focus {
-              opacity: 0.16;
+              &:focus {
+                opacity: 0.16;
+              }
             }
           }
         }
