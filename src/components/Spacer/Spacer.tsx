@@ -3,7 +3,7 @@ import { FC } from 'react'
 
 import styles from './Spacer.module.scss'
 
-interface SpacerProps {
+export interface SpacerProps {
   className?: string | string[]
   space?:
     | 'mini'

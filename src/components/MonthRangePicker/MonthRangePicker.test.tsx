@@ -19,7 +19,7 @@ describe('<MonthRangePicker/> mount', () => {
   const props = {
     onChange: jest.fn(),
     minDate: new Date(2018, 3, 11),
-    maxDate: new Date(2024, 10, 11),
+    maxDate: new Date(2100, 10, 11),
     i18nHandler: jest.fn(translation => translation)
   }
 
