@@ -17,11 +17,12 @@
     box-shadow: none;
     outline: none;
     opacity: 0;
-    transform: scale(1);
     pointer-events: none;
-    transition:
-      opacity 0.3s,
-      transform 0.2s;
+
+    @media (hover) {
+      transform: scale(1);
+      transition: opacity 0.3s, transform 0.2s;
+    }
 
     &:checked,
     &:indeterminate {

@@ -21,8 +21,12 @@
         box-shadow: none;
         outline: none;
         opacity: 0;
-        transform: scale(1);
-        pointer-events: none;
+
+        @media (hover) {
+          transform: scale(1);
+          pointer-events: none;
+        }
+
         transition: opacity 0.3s, transform 0.2s;
 
           &:checked,
@@ -135,12 +139,14 @@
           }
         }
 
-        &:hover {
-          input {
-            opacity: 0.04;
+        @media (hover) {
+          &:hover {
+            input {
+              opacity: 0.04;
 
-            &:focus {
-              opacity: 0.16;
+              &:focus {
+                opacity: 0.16;
+              }
             }
           }
         }
