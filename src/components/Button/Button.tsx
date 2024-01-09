@@ -100,7 +100,7 @@ export const Button: FC<ButtonProps> = ({
       id={id}
       type={Tag === 'button' ? type : undefined}
       disabled={isDisabled}
-      href={Tag === 'a' ? href : undefined}
+      href={Tag === 'a' && !isDisabled ? href : undefined}
       title={Tag === 'a' ? title : undefined}
       target={Tag === 'a' ? target : undefined}
       className={elementClassesButton}
