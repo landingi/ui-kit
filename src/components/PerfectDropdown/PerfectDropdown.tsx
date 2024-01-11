@@ -157,7 +157,8 @@ export const PerfectDropdown = forwardRef<
         'top-center',
         'top-end'
       ],
-      onOutsideClick: close
+      onOutsideClick: close,
+      onParentClose: close
     })
 
     const handleResize = () => {
