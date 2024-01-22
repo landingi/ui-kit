@@ -37,7 +37,7 @@ export const Paragraph: FC<ParagraphProps> = ({
   size = 14,
   align = 'left',
   padding = 'medium',
-  weight = 300,
+  weight = 400,
   uppercase = false,
   line = 18,
   decoration

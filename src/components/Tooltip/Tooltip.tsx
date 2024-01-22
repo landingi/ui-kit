@@ -56,6 +56,13 @@ export const Tooltip: FC<TooltipProps> = ({
     onOutsideClick: close
   })
 
+  const triggerStyles = useStyles(
+    {
+      [styles.trigger]: true
+    },
+    className
+  )
+
   const tooltipStyles = useStyles(
     {
       [styles['react-tooltip']]: true,
@@ -81,7 +88,7 @@ export const Tooltip: FC<TooltipProps> = ({
 
       {!disabled && (
         <span
-          className={className}
+          className={triggerStyles}
           data-testid={dataTestId}
           {...triggerProps}
           {...stateProps}
