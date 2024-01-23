@@ -66,7 +66,7 @@ export const AccordionItem: FC<AccordionItemProps> = ({
       >
         <div>{title}</div>
 
-        <Icon icon={isOpen ? 'icon-angle-down' : 'icon-angle-up'} />
+        <Icon icon={isOpen ? 'icon-angle-up' : 'icon-angle-down'} />
       </div>
 
       {description && (
