@@ -19,5 +19,6 @@ export interface TextareaProps {
     errors?: Record<string, string>;
     touched?: Record<string, boolean>;
     maxLength?: number;
+    dir?: 'rtl' | 'ltr' | 'auto';
 }
 export declare const Textarea: FC<TextareaProps>;
