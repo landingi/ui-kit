@@ -43,6 +43,7 @@ export interface InputProps {
   defaultValue?: string
   variant?: 'table'
   form?: boolean
+  dir?: 'rtl' | 'ltr' | 'auto'
   ['data-testid']?: string
 }
 
@@ -73,6 +74,7 @@ export const Input = forwardRef(
       defaultValue,
       variant,
       form = false,
+      dir,
       'data-testid': dataTestId = 'input-component'
     }: InputProps,
     ref: Ref<HTMLInputElement>
@@ -121,6 +123,7 @@ export const Input = forwardRef(
           autoFocus={autoFocus}
           maxLength={maxLength}
           required={required}
+          {...(dir ? { dir } : {})}
           {...(type === 'number' ? { min, max } : {})}
           {...(renderDefault ? { defaultValue } : {})}
         />

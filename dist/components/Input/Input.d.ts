@@ -28,6 +28,7 @@ export interface InputProps {
     defaultValue?: string;
     variant?: 'table';
     form?: boolean;
+    dir?: 'rtl' | 'ltr' | 'auto';
     ['data-testid']?: string;
 }
 export declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;
