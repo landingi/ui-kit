@@ -2,8 +2,7 @@ name: Deploy styleguide to S3
 on:
   push:
     branches:
-#      - master
-      - OP-1123-GHA-bump-deprecated-gha
+      - master
 
 jobs:
   build-and-deploy:
