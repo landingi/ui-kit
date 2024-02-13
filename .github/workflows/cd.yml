@@ -42,6 +42,6 @@ jobs:
       - name: Build and export Storybook
         run: pnpm build-storybook
 
-      # - name: Deploy to S3
-      #   run:
-      #     aws s3 sync ./storybook-static/ s3://styleguide.landingi.com --delete
+      - name: Deploy to S3
+        run:
+          aws s3 sync ./storybook-static/ s3://styleguide.landingi.com --delete
