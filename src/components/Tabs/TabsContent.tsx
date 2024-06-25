@@ -1,15 +1,15 @@
-import { Dispatch, FC, Fragment, SetStateAction } from 'react'
+import { cloneElement, FC, ReactElement } from 'react'
 
 import { useTabContext } from './context'
 
 interface TabsContentProps {
-  children: FC<{ changeTab?: Dispatch<SetStateAction<string>> }>
+  children: ReactElement
 }
 
 export const TabsContent: FC<TabsContentProps> = ({ children }) => {
   const { changeTab } = useTabContext()
 
-  return <Fragment>{children({ changeTab })}</Fragment>
+  return cloneElement(children, { changeTab })
 }
 
 TabsContent.displayName = 'TabsContent'

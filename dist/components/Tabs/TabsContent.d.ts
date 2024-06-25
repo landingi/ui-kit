@@ -1,8 +1,6 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC, ReactElement } from 'react';
 interface TabsContentProps {
-    children: FC<{
-        changeTab?: Dispatch<SetStateAction<string>>;
-    }>;
+    children: ReactElement;
 }
 export declare const TabsContent: FC<TabsContentProps>;
 export {};
