@@ -1,7 +1,9 @@
 import { Spinner } from '@components/Spinner'
+import Spreader from '@components/Spreader'
 import { useStyles } from '@helpers/hooks/useStyles'
-import { FC, MouseEvent, ReactNode } from 'react'
+import { FC, Fragment, MouseEvent, ReactNode } from 'react'
 import Ink from 'react-ink'
+import { Row } from 'simple-flexbox'
 
 import styles from './Button.module.scss'
 
@@ -52,6 +54,7 @@ export interface ButtonProps {
   customEnabledBackgroundColor?: string
   'data-testid'?: string
   isActive?: boolean
+  loadingLabel?: string
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -77,7 +80,8 @@ export const Button: FC<ButtonProps> = ({
   customStyle,
   customEnabledBackgroundColor,
   'data-testid': dataTestId,
-  isActive = false
+  isActive = false,
+  loadingLabel = false
 }) => {
   const elementClassesButton = useStyles(
     {
@@ -112,7 +116,15 @@ export const Button: FC<ButtonProps> = ({
         backgroundColor: isDisabled ? undefined : customEnabledBackgroundColor
       }}
     >
-      {isLoading && <Spinner />}
+      <Row justifyContent='center'>
+        {isLoading && <Spinner />}
+
+        {loadingLabel && isLoading && (
+          <Fragment>
+            <Spreader spread='small' /> {loadingLabel}
+          </Fragment>
+        )}
+      </Row>
 
       {!isLoading && children}
 
