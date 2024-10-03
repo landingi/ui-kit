@@ -81,7 +81,7 @@ export const Button: FC<ButtonProps> = ({
   customEnabledBackgroundColor,
   'data-testid': dataTestId,
   isActive = false,
-  loadingLabel = false
+  loadingLabel
 }) => {
   const elementClassesButton = useStyles(
     {
@@ -123,7 +123,9 @@ export const Button: FC<ButtonProps> = ({
 
             {loadingLabel && (
               <Fragment>
-                <Spreader spread='tiny' /> {loadingLabel}
+                <Spreader spread='tiny' />
+
+                {loadingLabel}
               </Fragment>
             )}
           </Fragment>
