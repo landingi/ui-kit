@@ -117,11 +117,15 @@ export const Button: FC<ButtonProps> = ({
       }}
     >
       <Row justifyContent='center'>
-        {isLoading && <Spinner />}
-
-        {loadingLabel && isLoading && (
+        {isLoading && (
           <Fragment>
-            <Spreader spread='small' /> {loadingLabel}
+            <Spinner />
+
+            {loadingLabel && (
+              <Fragment>
+                <Spreader spread='tiny' /> {loadingLabel}
+              </Fragment>
+            )}
           </Fragment>
         )}
       </Row>
