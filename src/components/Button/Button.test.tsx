@@ -33,9 +33,11 @@ describe('<Button /> mount', () => {
 
     const { getByTestId } = render(<Button {...props} />)
 
-    const button = getByTestId('button').querySelector('div')
+    const button = getByTestId('button')
 
-    expect(button).toHaveClass('spinner')
+    const innerDiv = button.querySelector('div > div')
+
+    expect(innerDiv).toHaveClass('spinner')
   })
 })
 
