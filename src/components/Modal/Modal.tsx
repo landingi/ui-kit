@@ -70,6 +70,7 @@ export interface ModalCommonProps {
   headingAlign?: 'right' | 'center' | 'left'
   footerAlign?: 'right' | 'center' | 'left'
   hasEnterKeyDown?: boolean
+  shouldCloseOnOutsideClick: boolean
 }
 
 export interface ModalWithAnimation extends ModalCommonProps {
@@ -136,7 +137,8 @@ export const Modal = forwardRef(
       footerAlign = 'right',
       hasEnterKeyDown,
       hasAnimation,
-      customZIndex
+      customZIndex,
+      shouldCloseOnOutsideClick = true
     }: ModalWithAnimation | ModalWithoutAnimation,
     ref: Ref<HTMLDivElement>
   ) => {
@@ -344,7 +346,10 @@ export const Modal = forwardRef(
           </div>
         )}
         {isActive && size !== 'fullscreen' && (
-          <Backdrop onClick={onClick} customZIndex={customZIndex?.backdrop} />
+          <Backdrop
+            onClick={shouldCloseOnOutsideClick ? onClick : undefined}
+            customZIndex={customZIndex?.backdrop}
+          />
         )}
       </Fragment>
     )
