@@ -27,5 +27,6 @@ export interface ButtonProps {
     customEnabledBackgroundColor?: string;
     'data-testid'?: string;
     isActive?: boolean;
+    download: boolean;
 }
 export declare const Button: FC<ButtonProps>;

@@ -52,6 +52,7 @@ export interface ButtonProps {
   customEnabledBackgroundColor?: string
   'data-testid'?: string
   isActive?: boolean
+  download: boolean
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -77,7 +78,8 @@ export const Button: FC<ButtonProps> = ({
   customStyle,
   customEnabledBackgroundColor,
   'data-testid': dataTestId,
-  isActive = false
+  isActive = false,
+  download = false
 }) => {
   const elementClassesButton = useStyles(
     {
@@ -111,6 +113,7 @@ export const Button: FC<ButtonProps> = ({
         boxShadow: customStyle?.boxShadow,
         backgroundColor: isDisabled ? undefined : customEnabledBackgroundColor
       }}
+      download={download}
     >
       {isLoading && <Spinner />}
 
