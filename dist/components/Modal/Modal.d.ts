@@ -41,7 +41,7 @@ export interface ModalCommonProps {
     headingAlign?: 'right' | 'center' | 'left';
     footerAlign?: 'right' | 'center' | 'left';
     hasEnterKeyDown?: boolean;
-    shouldCloseOnOutsideClick: boolean;
+    shouldCloseOnOutsideClick?: boolean;
 }
 export interface ModalWithAnimation extends ModalCommonProps {
     size?: 'fullscreen';
