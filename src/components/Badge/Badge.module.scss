@@ -108,6 +108,12 @@
     border: 1px solid $color-brand;
   }
 
+  &--neutral-filled {
+    background: $color-1;
+    color: $color-white;
+    border: 1px solid $color-1;
+  }
+
   &--text-uppercase-none {
     text-transform: none;
   }
