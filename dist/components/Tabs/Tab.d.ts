@@ -5,6 +5,7 @@ interface TabProps {
     className?: string | string[];
     children: ReactNode;
     isDisabled?: boolean;
+    disableQueryString?: boolean;
 }
 export declare const Tab: FC<TabProps>;
 export {};
