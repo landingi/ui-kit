@@ -12,6 +12,7 @@ interface TabProps {
   className?: string | string[]
   children: ReactNode
   isDisabled?: boolean
+  disableQueryString?: boolean
 }
 
 export const Tab: FC<TabProps> = ({
@@ -20,6 +21,7 @@ export const Tab: FC<TabProps> = ({
   onClick = () => {},
   children,
   isDisabled = false,
+  disableQueryString = false,
   ...restProps
 }) => {
   const { activeTab, changeTab } = useTabContext()
@@ -35,11 +37,13 @@ export const Tab: FC<TabProps> = ({
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLSpanElement>) => {
-      setTabValue(name)
+      if (!disableQueryString) {
+        setTabValue(name)
+      }
       changeTab(name)
       onClick(event)
     },
-    [onClick, name, changeTab, setTabValue]
+    [onClick, name, changeTab, setTabValue, disableQueryString]
   )
 
   const handleDisabledTabClick = useCallback(
