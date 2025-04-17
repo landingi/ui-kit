@@ -34,12 +34,12 @@
     }
 
     &--animation-open {
-      animation: fade-in 1.6s; 
+      animation: fade-in 1.6s;
     }
 
     &--animation-close {
       opacity: 0;
-      animation: fade-out 0.8s; 
+      animation: fade-out 0.8s;
     }
   }
 
@@ -59,12 +59,12 @@
     }
 
     &--animation-open {
-      animation: fade-in 1.6s; 
+      animation: fade-in 1.6s;
     }
 
     &--animation-close {
       opacity: 0;
-      animation: fade-out 0.8s; 
+      animation: fade-out 0.8s;
     }
   }
 
@@ -80,12 +80,12 @@
     }
 
     &--animation-open {
-      animation: fade-in 1.6s; 
+      animation: fade-in 1.6s;
     }
 
     &--animation-close {
       opacity: 0;
-      animation: fade-out 0.8s; 
+      animation: fade-out 0.8s;
     }
   }
 
@@ -125,6 +125,10 @@
     flex-direction: column;
     align-items: stretch;
     border-radius: 0;
+  }
+
+  &--x-small {
+    width: 530px;
   }
 
   &--small {
