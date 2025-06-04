@@ -238,9 +238,7 @@ export const PerfectDropdownSelect = <Item extends ItemBase>({
         return true
       }
 
-      const items = label
-        .toLowerCase()
-        .match(new RegExp(searchValue.toLowerCase()))
+      const items = label.toLowerCase().includes(searchValue.toLowerCase())
 
       return items
     })
