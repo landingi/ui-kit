@@ -25,6 +25,7 @@ export interface MaskedInputProps {
     label?: string
   }
   alwaysShowLabel?: boolean
+  required?: boolean
 }
 
 export const MaskedInput: FC<MaskedInputProps> = ({
@@ -43,7 +44,8 @@ export const MaskedInput: FC<MaskedInputProps> = ({
   guide = false,
   focused,
   i18n: { placeholder, label } = { placeholder: '', label: '' },
-  alwaysShowLabel
+  alwaysShowLabel,
+  required = true
 }) => {
   const elementClasses = useStyles(
     {
@@ -71,7 +73,7 @@ export const MaskedInput: FC<MaskedInputProps> = ({
         disabled={!disabled ? undefined : disabled}
         autoFocus={autoFocus}
         maxLength={maxLength}
-        required
+        required={required}
         guide={guide}
         data-testid='masked-input'
       />
