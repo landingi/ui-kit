@@ -33,6 +33,7 @@ export interface MaskedInputFormProps {
     label?: string
   }
   alwaysShowLabel?: boolean
+  required?: boolean
 }
 
 export const MaskedInputForm: FC<MaskedInputFormProps> = ({
@@ -46,7 +47,8 @@ export const MaskedInputForm: FC<MaskedInputFormProps> = ({
   guide,
   focused,
   i18n,
-  alwaysShowLabel
+  alwaysShowLabel,
+  required = true
 }) => {
   const { name, value, onChange, onBlur } = field
   const { errors, touched } = form
@@ -79,6 +81,7 @@ export const MaskedInputForm: FC<MaskedInputFormProps> = ({
         guide={guide}
         focused={focused}
         alwaysShowLabel={alwaysShowLabel}
+        required={required}
       />
 
       {touched[name] && <Error error={errors[name]} />}
