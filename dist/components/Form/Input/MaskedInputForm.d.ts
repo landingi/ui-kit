@@ -27,5 +27,6 @@ export interface MaskedInputFormProps {
         label?: string;
     };
     alwaysShowLabel?: boolean;
+    required?: boolean;
 }
 export declare const MaskedInputForm: FC<MaskedInputFormProps>;
