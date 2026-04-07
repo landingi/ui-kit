@@ -2,7 +2,8 @@ name: Deploy styleguide to S3
 on:
   push:
     branches:
-      - master
+#      - master
+      - OP-2168-bump-gha-actions
 
 jobs:
   build-and-deploy:
@@ -12,7 +13,7 @@ jobs:
       contents: read
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::084824767965:role/gha-ui-kit
           role-duration-seconds: 3600
@@ -22,25 +23,25 @@ jobs:
       - run: aws sts get-caller-identity
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Nodejs
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 18.x
           cache-dependency-path: pnpm-lock.yaml
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v5
         with:
           version: 8.6.12
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build and export Storybook
-        run: pnpm build-storybook
+      # - name: Build and export Storybook
+      #   run: pnpm build-storybook
 
-      - name: Deploy to S3
-        run:
-          aws s3 sync ./storybook-static/ s3://styleguide.landingi.com --delete
+      # - name: Deploy to S3
+      #   run:
+      #     aws s3 sync ./storybook-static/ s3://styleguide.landingi.com --delete
