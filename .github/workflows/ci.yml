@@ -1,8 +1,4 @@
-#on: 'pull_request'
-on:
-  push:
-    branches:
-      - OP-2168-bump-gha-actions
+on: 'pull_request'
 
 jobs:
   CI:
